@@ -50,7 +50,6 @@ emerge bc
 emerge flex
 emerge gettext 
 emerge gperf 
-emerge less
 emerge samurai
 emerge util-linux
 
