@@ -1,5 +1,7 @@
 #!/bin/rc
 
+. /usr/firepkg/make.conf
+
 *=(firefox)
 src='https://download.mozilla.org/?product=firefox-latest-ssl&os=linux64&lang=en-US'
 destdir=/usr/firepkg/packages/$1

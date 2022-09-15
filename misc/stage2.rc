@@ -33,6 +33,9 @@ dirflags=( \
     --sbindir=/usr/sbin \
 )
 
+# robust echo
+fn echo { /usr/bin/printf '%s\n' $"* }
+
 fn _reformat {
     umount -l $1
     mkfs.ext4 $1

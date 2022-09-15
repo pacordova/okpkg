@@ -132,7 +132,7 @@ fn _build {
 }
 
 # create uninstaller
-fn rmtool {
+fn _rmtool {
     echo '#!/bin/rc'
     echo rm -r /usr/firepkg/sources/$basename
     echo rm -r /usr/firepkg/packages/$basename
@@ -160,7 +160,7 @@ fn _makepkg {
         LC_ALL=C sort -r \
     >$pwd/.index
 
-    rmtool $pwd/.index >> /usr/firepkg/uninstall/rm-$basename.rc
+    _rmtool $pwd/.index >> /usr/firepkg/uninstall/rm-$basename.rc
     chmod +x /usr/firepkg/uninstall/rm-$basename.rc
 
     # set mtime
