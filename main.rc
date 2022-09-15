@@ -1,0 +1,32 @@
+#!/bin/rc
+
+. /usr/firepkg/functions.rc
+
+λ=$1 && shift
+
+if(~ $#1 0)
+switch($λ){
+    case timesync
+        _timesync
+    case backup
+        /usr/firepkg/misc/backup.rc
+    case -h *
+        echo 'Usage: firepkg [-S|-i|-h|uninstall|download|build|makepkg|timesync|backup] arg ...'
+}
+
+while(~ $#1 1)
+switch($λ){
+    case uninstall download build makepkg
+        _$λ $1 && shift || exit
+    case -i
+        bsdtar -C / -P -xf $1 &&
+            shift || exit
+    case -S
+        _uninstall $1 &&
+        _download $1 &&
+        _build $1 &&
+        bsdtar -C / -P -xf /usr/firepkg/packages/$1.tar.xz &&
+            shift || exit
+    case chroot
+        _chroot $1
+}

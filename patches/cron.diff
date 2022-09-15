@@ -1,0 +1,147 @@
+--- a/Makefile
++++ b/Makefile
+@@ -110,6 +110,7 @@
+ 			$(CC) $(LDFLAGS) -o crontab $(CRONTAB_OBJ) $(LIBS)
+ 
+ install		:	all
++			mkdir -p $(DESTSBIN) $(DESTBIN) $(DESTMAN)
+ 			$(INSTALL) -c -m  111 -o root -s cron    $(DESTSBIN)/
+ 			$(INSTALL) -c -m 4111 -o root -s crontab $(DESTBIN)/
+ #			$(INSTALL) -c -m  111 -o root -g crontab -s cron $(DESTSBIN)/
+--- a/crontab.5	2004-02-19 20:40:04.954132624 +0000
++++ b/crontab.5	2004-02-19 20:45:27.033169168 +0000
+@@ -153,6 +153,32 @@
+ ``30 4 1,15 * 5''
+ would cause a command to be run at 4:30 am on the 1st and 15th of each
+ month, plus every Friday.
++.PP
++Instead of the first five fields, one of eight special strings may
++appear:
++.IP
++.ta 1.5i
++string	   meaning
++.br
++------	   -------
++.br
++@reboot	   Run once, at startup.
++.br
++@yearly	   Run once a year, "0 0 1 1 *".
++.br
++@annually	   (same as @yearly)
++.br
++@monthly	   Run once a month, "0 0 1 * *".
++.br
++@weekly	   Run once a week, "0 0 * * 0".
++.br
++@daily	   Run once a day, "0 0 * * *".
++.br
++@midnight	   (same as @daily)
++.br
++@hourly	   Run once an hour, "0 * * * *".
++.br
++.fi
+ .SH EXAMPLE CRON FILE
+ .nf
+ 
+diff --exclude='*~' -urN vixie-cron-4.1.orig/cron.c vixie-cron-4.1/cron.c
+--- a/cron.c	2005-02-23 02:05:30.730975808 -0500
++++ b/cron.c	2005-02-23 02:07:13.233393072 -0500
+@@ -25,6 +25,7 @@
+ 
+ #define	MAIN_PROGRAM
+ 
++#include <libgen.h>
+ #include "cron.h"
+ 
+ enum timejump { negative, small, medium, large };
+@@ -61,7 +62,7 @@
+ 	cron_db	database;
+ 	int fd;
+ 
+-	ProgramName = argv[0];
++	ProgramName = basename(argv[0]);
+ 
+ 	setlocale(LC_ALL, "");
+ 
+--- a/entry.c  2004-08-27 20:09:34.000000000 +0200
++++ b/entry.c  2004-12-01 22:16:10.992268200 +0100
+@@ -336,7 +336,9 @@
+ 
+ 	/* If the first character of the command is '-' it is a cron option.
+ 	 */
+-	while ((ch = get_char(file)) == '-') {
++	ch = get_char(file);
++	Skip_Blanks(ch, file)
++	while (ch == '-') {
+ 		switch (ch = get_char(file)) {
+ 		case 'q':
+ 			e->flags |= DONT_LOG;
+--- a/crontab.c
++++ b/crontab.c
+@@ -314,8 +314,6 @@
+ 		perror("fstat");
+ 		goto fatal;
+ 	}
+-	utimebuf.actime = statbuf.st_atime;
+-	utimebuf.modtime = statbuf.st_mtime;
+ 
+ 	/* Turn off signals. */
+ 	(void)signal(SIGHUP, SIG_IGN);
+@@ -374,6 +372,17 @@
+ 		perror(Filename);
+ 		exit(ERROR_EXIT);
+ 	}
++	if (swap_uids() < OK) {
++		perror("swapping uids");
++		exit(ERROR_EXIT);
++	}
++	utimebuf.actime = statbuf.st_atime;
++	utimebuf.modtime = statbuf.st_mtime;
++	utime(Filename, &utimebuf);
++	if (swap_uids_back() < OK) {
++		perror("swapping uids back");
++		exit(ERROR_EXIT);
++	}
+ 	utime(Filename, &utimebuf);
+  again:
+ 	rewind(NewCrontab);
+--- a/database.c	2007-04-08 21:06:16.913019387 +0200
++++ b/database.c	2007-04-08 21:06:29.489736093 +0200
+@@ -251,7 +251,7 @@
+ 		log_it(fname, getpid(), "WRONG FILE OWNER", tabname);
+ 		goto next_crontab;
+ 	}
+-	if (statbuf->st_nlink != 1) {
++	if (statbuf->st_nlink != 1 && pw != NULL) {
+ 		log_it(fname, getpid(), "BAD LINK COUNT", tabname);
+ 		goto next_crontab;
+ 	}
+--- a/do_command.c	2006-05-25 16:44:26.000000000 +0400
++++ b/do_command.c	2006-05-25 16:42:25.000000000 +0400
+@@ -240,12 +240,23 @@
+ 			}
+ 		}
+ #else
+-		setgid(e->pwd->pw_gid);
++		
+ 		initgroups(usernm, e->pwd->pw_gid);
+ #if (defined(BSD)) && (BSD >= 199103)
+ 		setlogin(usernm);
+ #endif /* BSD */
+-		setuid(e->pwd->pw_uid);	/* we aren't root after this... */
++		// setuid(e->pwd->pw_uid);	/* we aren't root after this... */
++		
++	if ( setgid(e->pwd->pw_gid) == -1 ) {
++		fprintf(stderr,"can't set gid for %s\n", e->pwd->pw_name);
++		_exit(1);
++	}
++		
++	if ( setuid(e->pwd->pw_uid) == -1 ) {
++		fprintf(stderr,"can't set uid for %s\n", e->pwd->pw_name);
++		_exit(1);
++	}
++		
+ 
+ #endif /* LOGIN_CAP */
+ 		chdir(env_get("HOME", e->envp));
+

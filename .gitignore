@@ -1,0 +1,7 @@
+uninstall
+packages
+sources
+*~
+*.xz
+*.tar
+*.swp

@@ -1,0 +1,39 @@
+#!/bin/rc
+
+date=`{date +'%Y%m%d'}
+
+echo deleting pycache files...
+>[2=] find / -name '*.pyc' -delete
+
+echo deleting empty directories...
+>[2=] find / -empty -type d -delete
+
+echo cleaning other...
+>[2=] rm /root/.xauth*
+>[2=] rm /root/.python_history
+>[2=] rm -r /root/.cache
+>[2=] rm -r /root/.cargo
+>[2=] rm -r /var/log
+>[2=] rm -r /var/cache
+>[2=] rm -r /usr/firepkg/sources
+
+echo recreating dirs...
+mkdir /usr/firepkg/sources
+mkdir /var/log
+mkdir /var/lock
+
+echo rebuilding cache...
+fc-cache
+ldconfig
+
+echo relinking slackware packages...
+ln -sf /var/lib/pkgtools/packages /var/log/packages
+
+echo backing up...
+
+bsdtar \
+  -cf /home/backup-$date.tar \
+  --one-file-system \
+  --strip-components 1 \
+  --exclude /usr/firepkg/packages \
+  /

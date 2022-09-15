@@ -1,0 +1,3 @@
+#!/bin/rc
+
+efibootmgr -c -d /dev/nvme0n1 -p 1 -L 'slackware' -l '\vmlinuz' -u 'root=/dev/nvme0n1p2 rw'

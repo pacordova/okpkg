@@ -1,0 +1,15 @@
+--- a/Makefile
++++ b/Makefile
+@@ -109,3 +109,12 @@
+ 
+ clean:
+ 	@rm -f *.o pigz unpigz pigzj pigzn pigzt pigz.c.gz pigz.c.zz pigz.c.zip
++
++install:
++	ln -s pigz gzip
++	ln -s pigz.1 gzip.1
++	mkdir -p $(DESTDIR)$(PREFIX)/bin
++	mkdir -p $(DESTDIR)$(PREFIX)/share/man/man1
++	cp pigz gzip $(DESTDIR)$(PREFIX)/bin
++	cp pigz.1 gzip.1 $(DESTDIR)$(PREFIX)/share/man/man1
++

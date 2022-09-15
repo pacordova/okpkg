@@ -1,0 +1,35 @@
+#!/bin/rc
+
+cd /usr/firepkg/sources
+
+*=(libreoffice7.3)
+src=https://download.documentfoundation.org/libreoffice/stable/7.3.5/rpm/x86_64/LibreOffice_7.3.5_Linux_x86-64_rpm.tar.gz
+destdir=/usr/firepkg/packages/$1
+
+mkdir -p /usr/firepkg/sources/$1
+mkdir -p /usr/firepkg/packages/$1
+
+curl -Lko $1.tar.gz $src &&
+  bsdtar -C $1 -xf $1.tar.gz --strip-components 1
+
+echo extracting...
+find $1/RPMS/*.rpm -exec bsdtar -C $destdir -xf '{}' ';'
+
+echo making symlinks...
+join \
+    <{find $destdir/usr -type l -exec readlink '{}' ';' | nl} \
+    <{find $destdir/usr -type l -print | nl} |
+awk '{ gsub(/opt/, "usr/lib64"); print "ln -sf " $2 " " $3}' |
+rc
+
+echo moving opt to usr/lib64...
+mv $destdir/opt $destdir/usr/lib64
+
+echo makepkg...
+firepkg makepkg $destdir
+firepkg -i $destdir.tar.xz
+
+echo cleanup
+rm -r /usr/firepkg/sources/$1
+rm -r /usr/firepkg/packages/$1
+rm -d /usr/firepkg/sources/$1.tar.gz

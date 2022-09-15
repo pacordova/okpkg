@@ -1,0 +1,22 @@
+#!/bin/rc
+
+# appends new package to testing.db
+# example:
+#     ./addpkg.rc PKGNAME https://tarball.url CONFIGURE ARG1 ARG2 
+
+
+. /usr/firepkg/make.conf
+
+pkgname=$1 &&
+url=$2 &&
+shift 2
+
+sha256sum=`{
+    >[2=] curl -L $url |
+    sha256sum |
+    sed 's|-|'$url'|' |
+    tee -a /usr/firepkg/db/url.db |
+    awk '{print substr($1,0,10)}'
+}
+
+echo $pkgname='('$sha256sum $"*')'

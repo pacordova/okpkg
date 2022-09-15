@@ -1,0 +1,47 @@
+#!/bin/rc
+
+# download stage
+
+rm -r /usr/firepkg/sources >[2=]
+mkdir /usr/firepkg/sources
+cd    /usr/firepkg/sources
+
+firepkg download \
+    acpid2 bash bc binutils bison \
+    bsdtar coreutils curl dhcpcd diffutils \
+    dosfstools e2fsprogs efibootmgr efivar eudev \
+    file findutils flex gawk gcc \
+    gettext glibc gmp gperf grep \
+    iproute2 iputils kbd kmod less \
+    libcap2 libcheck libexpat libffi libmpc \
+    libpipeline libpsl libressl libusb m4 \
+    make mandoc mpfr ncurses patch \
+    pciutils perl pigz pkgconf popt \
+    procps-ng psmisc python3 rc readline \
+    samurai sed shadow-utils sudo texinfo \
+    tzdata usbutils util-linux xz zlib \
+
+# cron is a shar
+mkdir cron
+cd cron
+    curl -LO https://ftp.isc.org/isc/cron/cron_4.1.shar
+    sh cron_4.1.shar
+    patch -p1 < ../../patches/cron.diff
+cd ..
+
+# download libs for gcc
+cd gcc
+    ./contrib/download_prerequisites
+cd ..
+
+# symlink for perl
+cd perl
+    ln -s configure.gnu configure
+cd ..
+
+# symlink for libstdc++
+ln -sf gcc libstdc++
+
+# create archive
+cd ..
+bsdtar -cf sources.tar sources

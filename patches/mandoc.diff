@@ -1,0 +1,26 @@
+--- a/configure
++++ b/configure
+@@ -102,12 +102,12 @@
+ MANDOC_COBJS=
+ SOELIM_COBJS=
+
+-PREFIX="/usr/local"
++PREFIX="/usr"
+ BINDIR=
+ SBINDIR=
+ BIN_FROM_SBIN=
+ INCLUDEDIR=
+-LIBDIR=
++LIBDIR=/usr/lib64
+ MANDIR=
+ READ_ALLOWED_PATH=
+
+@@ -611,7 +611,7 @@
+ [ -z "${SBINDIR}"         ] && SBINDIR="${PREFIX}/sbin"
+ [ -z "${BIN_FROM_SBIN}"   ] && BIN_FROM_SBIN="../bin"
+ [ -z "${INCLUDEDIR}"      ] && INCLUDEDIR="${PREFIX}/include/mandoc"
+-[ -z "${LIBDIR}"          ] && LIBDIR="${PREFIX}/lib/mandoc"
++[ -z "${LIBDIR}"          ] && LIBDIR="/usr/lib64/mandoc"
+ [ -z "${MANDIR}"          ] && MANDIR="${PREFIX}/man"
+
+ [ -z "${HTDOCDIR}"        ] && HTDOCDIR="${WWWPREFIX}/htdocs"

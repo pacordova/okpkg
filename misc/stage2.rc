@@ -1,0 +1,190 @@
+#!/bin/rc
+
+# This script is cross compilation of GNU tools.
+# It follows LFS[1] closely, but not exactly.
+#   [1] https://www.linuxfromscratch.org/lfs/view/stable/index.html
+
+# cflags
+CFLAGS='-O2 -fstack-protector-strong -fcommon -pipe'
+CXXFLAGS=$CFLAGS
+
+# reproducibility
+LC_ALL=C
+SOURCE_DATE_EPOCH=1000000000
+KBUILD_BUILD_TIMESTAMP=1000000000
+
+# cross-compile
+build=x86_64-pc-linux-gnu
+host=x86_64-lfs-linux-gnu
+target=x86_64-lfs-linux-gnu
+
+# versions
+cc=11.3.0
+libc=2.35
+
+# paths
+destdir=/mnt/target
+path=($destdir/tools/bin /usr/sbin /usr/bin /sbin /bin)
+dirflags=( \
+    --localstatedir=/var \
+    --sysconfdir=/etc \
+    --libdir=/usr/lib64 \
+    --bindir=/usr/bin \
+    --sbindir=/usr/sbin \
+)
+
+fn _reformat {
+    umount -l $1
+    mkfs.ext4 $1
+    mount $1 $destdir
+}
+
+fn _clean {
+    cd /usr/firepkg
+    rm -r sources
+    bsdtar -xf sources.tar
+}
+
+fn emerge {
+    *=($* --prefix=$PREFIX --disable-werror --disable-nls $crossflags)
+
+    if(~ $1 libstdc++)
+        CONFIGURE=../libstdc++-v3/configure
+    if not
+        CONFIGURE=../configure
+
+    cd /usr/firepkg/sources/$1 && shift
+
+    mkdir build || true
+    cd build 
+
+    if(test -f $(CONFIGURE))
+        $(CONFIGURE) $* 
+    if not
+        cd ..
+
+    make -j5 PREFIX=$PREFIX 
+    make install PREFIX=$PREFIX DESTDIR=$destdir 
+    
+    # delete libtool archive files
+    >[2=] rm $destdir/usr/lib64/*.la
+}
+
+
+# init
+_reformat /dev/nvme0n1p4
+_clean
+
+
+##################################
+# 5. Compiling a Cross-Toolchain #
+##################################
+CC=/usr/bin/gcc \
+CXX=/usr/bin/g++ \
+PREFIX=/tools \
+crossflags=(--target=$target --with-sysroot=$destdir) {
+    emerge binutils --enable-deterministic-archives
+    emerge gcc \
+        --disable-bootstrap \
+        --with-glibc-version=$libc \
+        --with-newlib \
+        --without-headers \
+        --enable-initfini-array \
+        --disable-shared \
+        --disable-multilib \
+        --disable-decimal-float \
+        --disable-threads \
+        --disable-libatomic \
+        --disable-libgomp \
+        --disable-libquadmath \
+        --disable-libssp \
+        --disable-libvtv \
+        --disable-libstdcxx \
+        --enable-languages=c,c++ 
+}
+
+# install headers, create base system
+bsdtar -C $destdir -Pxf /usr/firepkg/packages/linux-headers.tar.xz
+bsdtar -C $destdir -Pxf /usr/firepkg/packages/etc.tar.xz
+
+
+######################################
+# 6. Cross Compiling Temporary Tools #
+######################################
+CC=$destdir/tools/bin/$target-gcc \
+CXX=$destdir/tools/bin/$target-g++ \
+PREFIX=/usr \
+crossflags=(--host=$host --build=$build $dirflags) {
+    # glibc fixes
+    cd /usr/firepkg/sources/glibc
+    ln -sf ld-linux-x86-64.so.2 $destdir/usr/lib64/ld-lsb-x86-64.so.3
+    mkdir build
+    echo "rootsbindir=/usr/sbin" > build/configparms
+
+    emerge glibc \
+        --enable-stack-protector=strong \
+        --enable-kernel=3.2 \
+        --with-headers=$destdir/usr/include \
+        libc_cv_slibdir=/usr/lib64 
+
+    emerge libstdc++ \
+        --disable-bootstrap \
+        --enable-cxx-flags='-nostdinc++' \
+        --disable-multilib \
+        --disable-libstdcxx-pch \
+        --with-gxx-include-dir=/tools/$target/include/c++/$cc 
+
+    # limits.h after libstdc++
+    cd /usr/firepkg/sources/gcc/gcc
+    cat limitx.h glimits.h limity.h > limits.h
+    mv limits.h $destdir/tools/lib/gcc/$target/$cc/install-tools/include
+    $destdir/tools/libexec/gcc/$target/$cc/install-tools/mkheaders $destdir/tools
+
+    emerge m4
+    emerge bash \
+        --without-curses \
+        --without-bash-malloc 
+    emerge coreutils \
+        --enable-install-program=hostname \
+        --enable-no-install-program=kill,uptime 
+    emerge diffutils
+    emerge findutils
+    emerge gawk
+    emerge grep
+    emerge make --without-guile
+    emerge patch
+    emerge sed
+    emerge bsdtar --without-xml2
+    emerge xz
+    emerge rc
+    
+    _clean 
+
+    emerge binutils --enable-deterministic-archives
+
+    # enable-threads
+    sed '/thread_header =/s/@.*@/gthr-posix.h/' \
+        -i libgcc/Makefile.in libstdc++-v3/include/Makefile.in
+
+    emerge gcc \
+        --disable-bootstrap \
+        --target=$target \
+        --with-build-sysroot=$destdir \
+        --enable-initfini-array \
+        --disable-multilib \
+        --disable-decimal-float \
+        --disable-libatomic \
+        --disable-libgomp \
+        --disable-libquadmath \
+        --disable-libssp \
+        --disable-libvtv \
+        --enable-languages=c,c++ \
+        CC_FOR_TARGET=$target-gcc \
+        LDFLAGS_FOR_TARGET=-L/usr/firepkg/sources/gcc/build/$target/libgcc
+}
+
+# copy over firepkg
+rm -r $destdir/usr/firepkg
+rm -r $destdir/tools
+git clone /usr/firepkg $destdir/usr/firepkg
+bsdtar -C $destdir/usr/firepkg -xf /usr/firepkg/sources.tar

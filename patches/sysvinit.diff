@@ -1,0 +1,93 @@
+--- a/src/Makefile~
++++ b/src/Makefile
+@@ -23,19 +23,22 @@
+
+ # For some known distributions we do not build all programs, otherwise we do.
+ BIN	=
+-SBIN	= init halt shutdown runlevel killall5 fstab-decode logsave
+-USRBIN	= last mesg readbootlog
++SBIN	= init halt shutdown runlevel killall5 fstab-decode
++#USRBIN	= last mesg readbootlog
+
+-MAN1	= last.1 lastb.1 mesg.1 readbootlog.1
++#MAN1	= last.1 lastb.1 mesg.1 readbootlog.1
+ MAN5	= initscript.5 inittab.5 initctl.5
+-MAN8	= halt.8 init.8 killall5.8 pidof.8 poweroff.8 reboot.8 runlevel.8
+-MAN8	+= shutdown.8 telinit.8 fstab-decode.8 logsave.8
++#MAN8	= halt.8 init.8 killall5.8 pidof.8 poweroff.8 reboot.8 runlevel.8
++MAN8	= halt.8 init.8 killall5.8         poweroff.8 reboot.8 runlevel.8
++MAN8	+= shutdown.8 telinit.8 fstab-decode.8
+
+ ifeq ($(DISTRO),)
+-SBIN	+= sulogin bootlogd
+-USRBIN	+= utmpdump wall
+-MAN1	+= utmpdump.1 wall.1
+-MAN8	+= sulogin.8 bootlogd.8
++#SBIN	+= sulogin bootlogd
++SBIN	+= bootlogd
++#USRBIN	+= utmpdump wall
++#MAN1	+= utmpdump.1 wall.1
++#MAN8	+= sulogin.8 bootlogd.8
++MAN8	+= bootlogd.8
+ endif
+
+ ifeq ($(DISTRO),Debian)
+@@ -61,7 +64,7 @@
+ endif
+
+ ifeq ($(MNTPOINT),yes)
+-BIN	+= mountpoint
++USRBIN	+= mountpoint
+ MAN1	+= mountpoint.1
+ endif
+
+@@ -191,13 +194,10 @@
+ distclean:	clobber
+
+ install:	all
+-		$(INSTALL_DIR) $(ROOT)/bin/ $(ROOT)/sbin/
++		$(INSTALL_DIR) $(ROOT)/usr/sbin/
+ 		$(INSTALL_DIR) $(ROOT)/usr/bin/
+-		for i in $(BIN); do \
+-			$(INSTALL_EXEC) $$i $(ROOT)/bin/ ; \
+-		done
+ 		for i in $(SBIN); do \
+-			$(INSTALL_EXEC) $$i $(ROOT)/sbin/ ; \
++			$(INSTALL_EXEC) $$i $(ROOT)/usr/sbin/ ; \
+ 		done
+ 		for i in $(USRBIN); do \
+ 			$(INSTALL_EXEC) $$i $(ROOT)/usr/bin/ ; \
+@@ -205,13 +205,13 @@
+ 		# $(INSTALL_DIR) $(ROOT)/etc/
+ 		$(INSTALL_DIR) $(ROOT)/etc/inittab.d
+ 		# $(INSTALL_EXEC) ../doc/initscript.sample $(ROOT)/etc/
+-		ln -sf halt $(ROOT)/sbin/reboot
+-		ln -sf halt $(ROOT)/sbin/poweroff
+-		ln -sf init $(ROOT)/sbin/telinit
+-		ln -sf /sbin/killall5 $(ROOT)/bin/pidof
+-		if [ ! -f $(ROOT)/usr/bin/lastb ]; then \
+-			ln -sf last $(ROOT)/usr/bin/lastb; \
+-		fi
++		ln -sf halt $(ROOT)/usr/sbin/reboot
++		ln -sf halt $(ROOT)/usr/sbin/poweroff
++		ln -sf init $(ROOT)/usr/sbin/telinit
++		#ln -sf /sbin/killall5 $(ROOT)/bin/pidof
++		#if [ ! -f $(ROOT)/usr/bin/lastb ]; then \
++		#	ln -sf last $(ROOT)/usr/bin/lastb; \
++		#fi
+ 		$(INSTALL_DIR) $(ROOT)/usr/include/
+ 		$(INSTALL_DATA) initreq.h $(ROOT)/usr/include/
+ 		$(INSTALL_DIR) $(ROOT)$(MANDIR)/man1/
+@@ -233,8 +233,8 @@
+ 		#
+ 		# This part is skipped on Debian systems, the
+ 		# debian.preinst script takes care of it.
+-		@if [ ! -p /run/initctl ]; then \
+-		 echo "Creating /run/initctl"; \
+-		 rm -f /run/initctl; \
+-		 mknod -m 600 /run/initctl p; fi
++		#@if [ ! -p /run/initctl ]; then \
++		#echo "Creating /run/initctl"; \
++		#rm -f /run/initctl; \
++		#mknod -m 600 /run/initctl p; fi
+ endif

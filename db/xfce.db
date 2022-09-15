@@ -1,0 +1,37 @@
+# tools
+itstool=(6b9a7cd29a CONFIGURE)
+
+# xfce
+libxfce4util=(876bdefa2e CONFIGURE)
+xfconf=(35f48564e5 CONFIGURE)
+libxfce4ui=(3d619811bf CONFIGURE)
+exo=(5215814811 CONFIGURE)
+garcon=(787dc85971 CONFIGURE)
+thunar=(ea09e097d4 CONFIGURE)
+thunar-volman=(5a08bb5ce3 CONFIGURE)
+tumbler=(e02cc1ef29 CONFIGURE)
+xfce4-appfinder=(2ad4a58019 CONFIGURE)
+xfce4-panel=(42058abb81 CONFIGURE)
+xfce4-power-manager=(c50ec8aa7e CONFIGURE)
+xfce4-settings=(e2a04cad48 CONFIGURE)
+xfdesktop=(3f2426ac28 CONFIGURE)
+xfwm4=(7775c02216 CONFIGURE)
+xfce4-session=(97d7f2a2d0 CONFIGURE)
+
+# goodies
+xfce4-battery-plugin=(f659b1af40 CONFIGURE)
+ristretto=(0b4c90c585 CONFIGURE)
+xfce4-screenshooter=(9dce2ddfaa CONFIGURE)
+thunar-archive-plugin=(9ad559b0c1 CONFIGURE)
+greybird=(d7e6b94f95 MESON)
+
+# picom
+libconfig=(545166d6ca CONFIGURE)
+libev=(507eb7b8d1 AUTORECONF)
+picom=(8700ac71bd MESON -Dregex=false)
+
+# wip
+#catfish=(cefc43d091 PYTHON)
+xfce4-pulseaudio-plugin=(40d89abf23 CONFIGURE)
+mousepad=(84c02adfca CONFIGURE)
+xfce4-i3-workspaces-plugin=(dc0b9991d7 CONFIGURE)

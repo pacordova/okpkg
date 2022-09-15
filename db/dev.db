@@ -1,0 +1,73 @@
+# build-systems
+autoconf=(64ebcec9f8 CONFIGURE)
+automake=(af6ba39142 CONFIGURE)
+cmake=(4931e277a4 CONFIGURE); dirflags=()
+
+# libs
+elfutils=(e70b0dfbe6 CONFIGURE --disable-debuginfod --disable-libdebuginfod)
+json-c=(b8d80a1ddb CMAKE)
+libaio=(f69e580042 MAKE libdir=$LIBDIR)
+lvm2=(935283a51e CONFIGURE --with-usrlibdir=$LIBDIR)
+pcre2=(0f03caf57f CONFIGURE --enable-unicode --enable-pcre2-16 --enable-pcre2-32)
+pcre=(4dae6fdcd2 CONFIGURE --enable-unicode-properties --enable-pcre16 --enable-pcre32)
+
+# langs
+lua=(164c784965 MAKE INSTALL_TOP=$destdir$PREFIX INSTALL_LIB=$destdir$LIBDIR INSTALL_CMOD=$destdir$LIBDIR/lua MYCFLAGS=$CFLAGS)
+ruby=(3586861cb2 CONFIGURE)
+
+# compression
+bzip2=(ab5a03176e MAKE PREFIX=$destdir/usr)
+lzo=(c0f8929432 CONFIGURE --enable-shared)
+unzip=(036d969916 MAKE --file=unix/Makefile prefix=$destdir/$PREFIX generic)
+zip=(f0e8bb1f9b MAKE --file=unix/Makefile prefix=$destdir/$PREFIX generic_gcc)
+zstd=(7c42d56fac MAKE)
+
+# network
+openssh=(0397430216 CONFIGURE)
+wget=(e6d4c76be8 CONFIGURE --with-ssl=openssl)
+
+# linux
+alsa-lib=(8a35b7218e CONFIGURE)
+alsa-utils=(e906bf2404 CONFIGURE --disable-^(alsaconf bat xmlto) --with-curses=ncursesw)
+btrfsprogs=(9e9b303a1d CONFIGURE --disable-documentation)
+cryptsetup=(fc0df94518 CONFIGURE --disable-ssh-token)
+lm-sensors=(0591f9fa03 MAKE LIBDIR=$LIBDIR)
+man-pages=(614dae3efe MAKE)
+
+# acl+attr
+acl=(c0234042e1 CONFIGURE)
+attr=(bae1c6949b CONFIGURE)
+
+# r
+openblas=(f36ba3d7a6 CMAKE -DBUILD_SHARED_LIBS=ON)
+r=(4d52db486d CONFIGURE --disable-java --without-recommended-packages --without-x --with-blas=openblas --with-lapack)
+
+# xfsprogs
+libinih=(01b0366fdf MESON)
+liburcu=(3213f33d2b CONFIGURE)
+xfsprogs=(01ccd3ef9d MAKE)
+
+# connman
+glib2=(ab3d176f31 MESON -Dtests=false)
+dbus=(f77620140e CONFIGURE --enable-user-session --without-systemduserunitdir --without-systemdsystemunitdir --with-console-auth-dir=/run/console --with-system-pid-file=/run/dbus/pid --with-system-socket=/run/dbus/system_bus_socket)
+libmnl=(171f89699f CONFIGURE)
+libnftnl=(7508a5c414 CONFIGURE)
+iptables=(c109c96bb0 CONFIGURE --enable-shared)
+iwd=(71533fe3b8 CONFIGURE --disable-systemd-service LIBS=-lncursesw)
+connman=(79fb40f4fd CONFIGURE --without-systemdunitdir --disable-wispr LIBS=-lncursesw)
+
+# tmux
+libevent=(92e6de1be9 CONFIGURE)
+tmux=(e4fd347843 CONFIGURE)
+
+# misc
+git=(d768528e64 CONFIGURE)
+gnupg1=(c9462f17e6 CONFIGURE --enable-noexecstack)
+htop=(5a17121cf1 CONFIGURE)
+nano=(eb532da498 CONFIGURE)
+parted=(4938dd5c1c CONFIGURE)
+rsync=(becc3c504c CONFIGURE --disable-lz4 --disable-xxhash --disable-md2man)
+tcsh=(60be2c504b CONFIGURE)
+vim=(a6456bc154 CONFIGURE) 
+which=(f4a245b941 CONFIGURE)
+xorriso=(3ac155f0ca CONFIGURE)

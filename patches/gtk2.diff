@@ -1,0 +1,22 @@
+--- ./docs/faq/Makefile.am.orig	2014-09-29 15:02:16.000000000 -0500
++++ ./docs/faq/Makefile.am	2015-03-18 22:11:42.692413132 -0500
+@@ -7,7 +7,7 @@
+ html:
+ 	if test -w $(srcdir); then \
+ 	  (cd $(srcdir); \
+-	   db2html gtk-faq.sgml; \
++	   db2html -o gtk-faq gtk-faq.sgml; \
+ 	   test -d html && rm -r html; \
+ 	   mv gtk-faq html); \
+ 	fi
+--- ./docs/tutorial/Makefile.am.orig	2014-09-29 15:02:16.000000000 -0500
++++ ./docs/tutorial/Makefile.am	2015-03-18 22:04:36.171382357 -0500
+@@ -40,7 +40,7 @@
+ html: gtk-tut.sgml
+ 	if test -w $(srcdir); then \
+ 	  (cd $(srcdir); \
+-	   db2html gtk-tut.sgml; \
++	   db2html -o gtk-tut gtk-tut.sgml; \
+ 	   test -d html && rm -r html; \
+ 	   mv gtk-tut html; \
+ 	   mkdir html/images; \

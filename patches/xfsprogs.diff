@@ -1,0 +1,21 @@
+--- a/configure
++++ b/configure
+@@ -12455,16 +12455,8 @@
+ # case.  If the user chooses a different prefix assume they just want
+ # a local install for testing and not a system install.
+ #
+-case $exec_prefix:$prefix in
+-NONE:NONE | NONE:/usr | /usr:*)
+-  root_sbindir='/sbin'
+-  root_libdir="/${base_libdir}"
+-  ;;
+-*)
+-  root_sbindir="${sbindir}"
+-  root_libdir="${libdir}"
+-  ;;
+-esac
++root_sbindir="${sbindir}"
++root_libdir="${libdir}"
+
+
+

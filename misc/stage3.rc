@@ -1,0 +1,92 @@
+#!/bin/rc
+
+. /usr/firepkg/make.conf
+
+fn emerge {
+    for(i in $*) {
+        firepkg build $i
+        firepkg -i /usr/firepkg/packages/$i.tar.xz
+    }
+}
+
+make -C /usr/firepkg
+
+# track libraries
+emerge pkgconf
+
+# gzip
+emerge zlib pigz
+
+# python3
+emerge libressl python3
+
+# python3-modules
+python3 -m ensurepip 
+python3 -m pip install meson 
+
+# self-host glibc
+emerge bison glibc
+
+# perl
+emerge perl
+
+# self-host gcc
+emerge texinfo binutils 
+emerge gmp mpfr libmpc gcc
+
+# ncurses
+emerge ncurses
+for (lib in (ncurses form panel menu)) {
+    rm /usr/lib64/lib$lib.so
+    echo 'INPUT(-l'^$lib^'w)' > /usr/lib64/lib$lib.so
+    ln -sf $lib^w.pc /usr/lib64/pkgconfig/$lib.pc
+}
+rm /usr/lib64/libcursesw.so
+echo 'INPUT(-lncursesw)' > /usr/lib64/libcursesw.so
+ln -sf libncurses.so /usr/lib64/libcurses.so
+
+# more utils
+emerge bc
+emerge flex
+emerge gettext 
+emerge gperf 
+emerge less
+emerge samurai
+emerge util-linux
+
+# libraries
+emerge eudev file popt readline
+emerge libcap2 libcheck libexpat libffi 
+emerge libpipeline libpsl libusb 
+
+# system
+emerge acpid2
+emerge cron
+emerge e2fsprogs dosfstools
+emerge mandoc efivar efibootmgr 
+emerge kbd kmod 
+emerge pciutils usbutils
+emerge procps-ng psmisc
+emerge shadow-utils
+emerge sudo
+emerge tzdata
+
+# networking
+emerge curl
+emerge iproute2 iputils
+emerge dhcpcd
+
+# rebuild
+emerge m4
+emerge bash
+emerge coreutils 
+emerge diffutils
+emerge findutils 
+emerge gawk 
+emerge grep 
+emerge make 
+emerge patch
+emerge sed 
+emerge bsdtar
+emerge xz
+emerge rc

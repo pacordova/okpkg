@@ -1,0 +1,42 @@
+#!/bin/rc
+
+. /usr/firepkg/make.conf
+
+src='https://github.com/rstudio/tinytex-releases/releases/download/v2022.08/TinyTeX-1-v2022.08.tar.gz'
+
+destdir=/usr/firepkg/packages/tinytex
+basename=`{basename $src}
+
+>[2=] rm -r $destdir 
+>[2=] rm -r tinytex
+
+mkdir $destdir
+mkdir tinytex
+
+curl -LO $src 
+
+echo extracting...
+bsdtar \
+    --directory tinytex \
+    --strip-components 1 \
+    --extract \
+    --file $basename
+
+rm $basename
+
+mkdir $destdir/usr
+mkdir $destdir/usr/bin
+mkdir $destdir/usr/lib64
+
+mv tinytex $destdir/usr/lib64
+
+echo making symlinks...
+for(f in $destdir/usr/lib64/tinytex/bin/x86_64-linux/*) {
+    basename=`{basename $f}    
+    ln -sf /usr/lib64/tinytex/bin/x86_64-linux/$basename $destdir/usr/bin/$basename
+}
+
+echo makepkg...
+firepkg makepkg $destdir
+echo installing...
+firepkg -i $destdir.tar.xz

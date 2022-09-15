@@ -1,0 +1,16 @@
+#!/bin/rc
+
+. /usr/firepkg/make.conf
+
+cd /usr/src/linux
+
+echo cleaning for reproducibility...
+echo make sure config is at kernel.config
+make clean &&
+make mrproper &&
+cp kernel.config .config
+
+make -j5 bzImage modules
+make modules_install
+
+cp arch/x86/boot/bzImage /boot/vmlinuz

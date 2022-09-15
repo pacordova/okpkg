@@ -1,0 +1,43 @@
+# fonts
+ttf-liberation=(9a823ccb33 MAKE)
+
+# qt
+qtbase=(18b2b00d55 CONFIGURE --extprefix=$destdir$PREFIX --libdir=$LIBDIR --archdatadir=$LIBDIR/qt --datadir=$PREFIX/share/qt --docdir=$PREFIX/share/doc/qt --opensource --confirm-license --optimize-size --nomake=examples --nomake=tests)
+qtsvg=(b27c4a2736 QMAKE)
+qttools=(f21241fa7c QMAKE)
+qtx11extras=(b3f867e3a2 QMAKE)
+qtdeclarative=(1c31dd0776 QMAKE)
+libbotan=(3af5f17615 CONFIGURE)
+libqrencode=(e455d9732f CONFIGURE)
+keepassxc=(6001ba626c CMAKE -DWITH_XC_DOCS=OFF -DWITH_APP_BUNDLE=OFF)
+
+# gtk
+murrine=(e9c68ae001 CONFIGURE)
+ahoviewer=(a14e32b4a8 AUTORECONF)
+file-roller=(4a2886a396 MESON)
+leafpad=(24553979dc AUTOTOOLS)
+pavucontrol=(ce2b72c3b5 CONFIGURE)
+transmission=(9144652fe7 CMAKE -DENABLE_QT=OFF)
+
+# evince
+poppler-data=(2cec05cd1b CMAKE)
+poppler=(e390c8b806 CMAKE -DENABLE_QT5=OFF -DENABLE_BOOST=OFF)
+evince=(3346b01f9b MESON -Dsystemuserunitdir=no -Dnautilus=false -Duser_doc=false -Dgtk_doc=false -Dpdf=enabled)
+
+# ffmpeg
+libx264=(876383c0bc CONFIGURE --enable-shared --disable-cli --bit-depth=10)
+ffmpeg=(55eb6aab5e CONFIGURE --enable-shared --enable-libvpx --enable-gpl --enable-libx264); dirflags=(--libdir=$LIBDIR --disable-static)
+
+# mpv
+libass=(1be2df9c44 CONFIGURE)
+mpv=(32ded8c13b WAF)
+
+# feh
+imlib2=(8925cf2a87 CONFIGURE)
+feh=(7f3c34552b MAKE)
+
+# misc 
+firejail=(b77b67a4db CONFIGURE)
+bspwm=(0d0f5e465b MAKE)
+dmenu=(1f4d709ebb MAKE)
+sxhkd=(1edc8b1a8b MAKE)

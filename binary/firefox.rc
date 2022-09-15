@@ -1,0 +1,24 @@
+#!/bin/rc
+
+*=(firefox)
+src='https://download.mozilla.org/?product=firefox-latest-ssl&os=linux64&lang=en-US'
+destdir=/usr/firepkg/packages/$1
+
+cd /usr/firepkg/sources
+mkdir -p $destdir/usr/lib64
+mkdir -p $destdir/usr/bin
+
+curl -Lko $1.tar.bz2 $src
+
+echo extracting ...
+bsdtar -C $destdir/usr/lib64 -xf $1.tar.bz2
+
+echo making symlinks...
+ln -sf /usr/lib64/firefox/firefox-bin $destdir/usr/bin/firefox
+
+echo makepkg...
+firepkg makepkg $destdir
+firepkg -i $destdir.tar.xz
+
+echo cleanup
+rm $1.tar.bz2

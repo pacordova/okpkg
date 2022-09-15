@@ -1,0 +1,121 @@
+Neuter security level things until LibreSSL supports them.
+
+Index: Modules/_ssl.c
+--- a/Modules/_ssl.c.orig
++++ b/Modules/_ssl.c
+@@ -169,7 +169,7 @@ extern const SSL_METHOD *TLSv1_2_method(void);
+  * Based on Hynek's excellent blog post (update 2021-02-11)
+  * https://hynek.me/articles/hardening-your-web-servers-ssl-ciphers/
+  */
+-  #define PY_SSL_DEFAULT_CIPHER_STRING "@SECLEVEL=2:ECDH+AESGCM:ECDH+CHACHA20:ECDH+AES:DHE+AES:!aNULL:!eNULL:!aDSS:!SHA1:!AESCCM"
++  #define PY_SSL_DEFAULT_CIPHER_STRING "ECDH+AESGCM:ECDH+CHACHA20:ECDH+AES:DHE+AES:!aNULL:!eNULL:!aDSS:!SHA1:!AESCCM"
+   #ifndef PY_SSL_MIN_PROTOCOL
+     #define PY_SSL_MIN_PROTOCOL TLS1_2_VERSION
+   #endif
+@@ -3579,6 +3579,12 @@ set_num_tickets(PySSLContext *self, PyObject *arg, voi
+ PyDoc_STRVAR(PySSLContext_num_tickets_doc,
+ "Control the number of TLSv1.3 session tickets");
+ #endif /* TLS1_3_VERSION */
++
++int
++SSL_CTX_get_security_level(const SSL_CTX *ctx)
++{
++    return 1;
++}
+ 
+ static PyObject *
+ get_security_level(PySSLContext *self, void *c)
+Index: Modules/_hashopenssl.c
+--- a/Modules/_hashopenssl.c.orig
++++ b/Modules/_hashopenssl.c
+@@ -45,11 +45,6 @@
+ 
+ #define MUNCH_SIZE INT_MAX
+ 
+-#define PY_OPENSSL_HAS_SCRYPT 1
+-#define PY_OPENSSL_HAS_SHA3 1
+-#define PY_OPENSSL_HAS_SHAKE 1
+-#define PY_OPENSSL_HAS_BLAKE2 1
+-
+ #if OPENSSL_VERSION_NUMBER >= 0x30000000L
+ #define PY_EVP_MD EVP_MD
+ #define PY_EVP_MD_fetch(algorithm, properties) EVP_MD_fetch(NULL, algorithm, properties)
+@@ -119,6 +114,7 @@ static const py_hashentry_t py_hashes[] = {
+     PY_HASH_ENTRY(Py_hash_sha256, "SHA256", SN_sha256, NID_sha256),
+     PY_HASH_ENTRY(Py_hash_sha384, "SHA384", SN_sha384, NID_sha384),
+     PY_HASH_ENTRY(Py_hash_sha512, "SHA512", SN_sha512, NID_sha512),
++#if !defined(LIBRESSL_VERSION_NUMBER)
+     /* truncated sha2 */
+     PY_HASH_ENTRY(Py_hash_sha512_224, "SHA512_224", SN_sha512_224, NID_sha512_224),
+     PY_HASH_ENTRY(Py_hash_sha512_256, "SHA512_256", SN_sha512_256, NID_sha512_256),
+@@ -133,6 +129,7 @@ static const py_hashentry_t py_hashes[] = {
+     /* blake2 digest */
+     PY_HASH_ENTRY(Py_hash_blake2s, "blake2s256", SN_blake2s256, NID_blake2s256),
+     PY_HASH_ENTRY(Py_hash_blake2b, "blake2b512", SN_blake2b512, NID_blake2b512),
++#endif
+     PY_HASH_ENTRY(NULL, NULL, NULL, 0),
+ };
+ 
+@@ -873,11 +870,15 @@ py_evp_fromname(PyObject *module, const char *digestna
+         goto exit;
+     }
+ 
++#if defined(LIBRESSL_VERSION_NUMBER)
++    type = get_hashlib_state(module)->EVPtype;
++#else
+     if ((EVP_MD_flags(digest) & EVP_MD_FLAG_XOF) == EVP_MD_FLAG_XOF) {
+         type = get_hashlib_state(module)->EVPXOFtype;
+     } else {
+         type = get_hashlib_state(module)->EVPtype;
+     }
++#endif
+ 
+     self = newEVPobject(type);
+     if (self == NULL) {
+
+--- ./Lib/sysconfig.py.orig	2020-10-05 10:07:58.000000000 -0500
++++ ./Lib/sysconfig.py	2020-10-24 17:23:51.323197869 -0500
+@@ -22,7 +22,7 @@
+     'posix_prefix': {
+         'stdlib': '{installed_base}/{platlibdir}/python{py_version_short}',
+         'platstdlib': '{platbase}/{platlibdir}/python{py_version_short}',
+-        'purelib': '{base}/lib/python{py_version_short}/site-packages',
++        'purelib': '{base}/lib64/python{py_version_short}/site-packages',
+         'platlib': '{platbase}/{platlibdir}/python{py_version_short}/site-packages',
+         'include':
+             '{installed_base}/include/python{py_version_short}{abiflags}',
+@@ -33,9 +33,9 @@
+         },
+     'posix_home': {
+         'stdlib': '{installed_base}/lib/python',
+-        'platstdlib': '{base}/lib/python',
+-        'purelib': '{base}/lib/python',
+-        'platlib': '{base}/lib/python',
++        'platstdlib': '{base}/lib64/python',
++        'purelib': '{base}/lib64/python',
++        'platlib': '{base}/lib64/python',
+         'include': '{installed_base}/include/python',
+         'platinclude': '{installed_base}/include/python',
+         'scripts': '{base}/bin',
+--- ./Lib/distutils/sysconfig.py.orig	2020-10-05 10:07:58.000000000 -0500
++++ ./Lib/distutils/sysconfig.py	2020-10-24 17:31:20.860207925 -0500
+@@ -151,7 +151,7 @@
+             libdir = sys.platlibdir
+         else:
+             # Pure Python
+-            libdir = "lib"
++            libdir = "lib64"
+         libpython = os.path.join(prefix, libdir,
+                                  "python" + get_python_version())
+         if standard_lib:
+--- ./setup.py.orig	2020-10-05 10:07:58.000000000 -0500
++++ ./setup.py	2020-10-24 17:35:07.299212991 -0500
+@@ -744,7 +744,7 @@
+         # directories (i.e. '.' and 'Include') must be first.  See issue
+         # 10520.
+         if not CROSS_COMPILING:
+-            add_dir_to_list(self.compiler.library_dirs, '/usr/local/lib')
++            add_dir_to_list(self.compiler.library_dirs, '/usr/local/lib64')
+             add_dir_to_list(self.compiler.include_dirs, '/usr/local/include')
+         # only change this for cross builds for 3.3, issues on Mageia
+         if CROSS_COMPILING:
