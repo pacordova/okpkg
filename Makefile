@@ -1,5 +1,5 @@
 PREFIX=/usr
 
 install:
-	mkdir uninstall packages sources || true
+	>[2=] mkdir uninstall packages sources || true
 	install -D main.rc ${PREFIX}/bin/firepkg
