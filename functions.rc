@@ -160,7 +160,7 @@ fn _makepkg {
         LC_ALL=C sort -r \
     >$pwd/.index
 
-    _rmtool $pwd/.index >> /usr/firepkg/uninstall/rm-$basename.rc
+    _rmtool $pwd/.index > /usr/firepkg/uninstall/rm-$basename.rc
     chmod +x /usr/firepkg/uninstall/rm-$basename.rc
 
     # set mtime
