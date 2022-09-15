@@ -129,7 +129,7 @@ f36ba3d7a60e7c8bcc54cd9aaa9b1223dd42eaf02c811791c37e8ca707c241ca  https://github
 545166d6cac037744381d1e9cc5a5405094e7bfad16a411699bcff40bbb31ee7  https://github.com/hyperrealm/libconfig/releases/download/v1.7.3/libconfig-1.7.3.tar.gz
 6001ba626c35c316dbda6de35736f012a2264f95139fcb4a094b8eb49b15d3e7  https://github.com/keepassxreboot/keepassxc/releases/download/2.7.1/keepassxc-2.7.1-src.tar.xz
 9144652fe742f7f7dd6657716e378da60b751aaeda8bef8344b3eefc4db255f2  https://github.com/transmission/transmission/releases/download/3.00/transmission-3.00.tar.xz
-a14e32b4a8095c9f8b4b607c090a50cc8ac1076550e57b5a9303c54089068152  https://github.com/ahodesuka/ahoviewer/archive/refs/tags/1.6.5.tar.gz
+afd8fab9237c797af488491a56d00a76395ce44be65e1f6a1a9804a3cea9122e  https://github.com/ahodesuka/ahoviewer/archive/refs/tags/nightly.tar.gz
 e10382ab75518bad8319eb922ad04f907cb20cccb451a3aa980c9d005e661acc  https://github.com/troydhanson/uthash/archive/refs/tags/v2.3.0.tar.gz
 46632b2785ff4a231dcf241eeb0dcb5fc0c7d4da8ee49cf5687722cdbe8b2024  https://github.com/rsyslog/libestr/archive/refs/tags/v0.1.11.tar.gz
 a1377218b26c0767a7a3f67d166d5338af7c24b455d35ec99974e18e6845ba27  https://github.com/rsyslog/rsyslog/archive/refs/tags/v8.2208.0.tar.gz

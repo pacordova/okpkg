@@ -13,7 +13,7 @@ keepassxc=(6001ba626c CMAKE -DWITH_XC_DOCS=OFF -DWITH_APP_BUNDLE=OFF)
 
 # gtk
 murrine=(e9c68ae001 CONFIGURE)
-ahoviewer=(a14e32b4a8 AUTORECONF)
+ahoviewer=(afd8fab923 MESON)
 file-roller=(4a2886a396 MESON)
 leafpad=(24553979dc AUTOTOOLS)
 pavucontrol=(ce2b72c3b5 CONFIGURE)
