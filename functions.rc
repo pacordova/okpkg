@@ -137,7 +137,7 @@ fn rmtool {
     echo rm -r /usr/firepkg/sources/$basename
     echo rm -r /usr/firepkg/packages/$basename
 
-    sed 's|^|rm -d /|g' $1
+    sed 's|^|rm -d ''/|g;s|$|''|g' $1
 }
 
 fn _makepkg {
