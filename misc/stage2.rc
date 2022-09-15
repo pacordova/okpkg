@@ -45,7 +45,7 @@ fn _reformat {
 fn _clean {
     cd /usr/firepkg
     rm -r sources
-    bsdtar -xf sources.tar
+    >[2=] bsdtar -xf sources.tar
 }
 
 fn emerge {
@@ -106,9 +106,8 @@ crossflags=(--target=$target --with-sysroot=$destdir) {
         --enable-languages=c,c++ 
 }
 
-# install headers, create base system
-bsdtar -C $destdir -Pxf /usr/firepkg/packages/linux-headers.tar.xz
-bsdtar -C $destdir -Pxf /usr/firepkg/packages/etc.tar.xz
+>[2=] bsdtar -C $destdir -Pxf /usr/firepkg/packages/linux-headers.tar.xz
+>[2=] bsdtar -C $destdir -Pxf /usr/firepkg/packages/etc.tar.xz
 
 
 ######################################
@@ -186,8 +185,7 @@ crossflags=(--host=$host --build=$build $dirflags) {
         LDFLAGS_FOR_TARGET=-L/usr/firepkg/sources/gcc/build/$target/libgcc
 }
 
-# copy over firepkg
 rm -r $destdir/usr/firepkg
 rm -r $destdir/tools
 git clone /usr/firepkg $destdir/usr/firepkg
-bsdtar -C $destdir/usr/firepkg -xf /usr/firepkg/sources.tar
+>[2=] bsdtar -C $destdir/usr/firepkg -xf /usr/firepkg/sources.tar
