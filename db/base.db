@@ -84,5 +84,6 @@ usbutils=(3a079cfad6 CONFIGURE)
 # network
 curl=(2d118b43f5 CONFIGURE --with-openssl --enable-threaded-resolver --with-ca-path=/etc/ssl/certs --with-ca-bundle=/etc/ssl/certs/ca-certificates.crt)
 dhcpcd=(819357634e CONFIGURE --libexecdir=/usr/lib64/dhcpcd --dbdir=/var/lib/dhcpcd)
+iwd=(71533fe3b8 CONFIGURE --disable-systemd-service --disable-dbus-policy LIBS=-lncursesw)
 iproute2=(c064b66f6b MAKE LIBDIR=$LIBDIR)
 iputils=(b6f67fc705 MESON -DBUILD_MANS=false)
