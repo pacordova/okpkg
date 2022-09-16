@@ -49,7 +49,7 @@ xfsprogs=(01ccd3ef9d MAKE)
 
 # connman
 glib2=(ab3d176f31 MESON -Dtests=false)
-dbus=(f77620140e CONFIGURE --enable-user-session --without-systemduserunitdir --without-systemdsystemunitdir --with-console-auth-dir=/run/console --with-system-pid-file=/run/dbus/pid --with-system-socket=/run/dbus/system_bus_socket)
+#dbus=(f77620140e CONFIGURE --enable-user-session --without-systemduserunitdir --without-systemdsystemunitdir --with-console-auth-dir=/run/console --with-system-pid-file=/run/dbus/pid --with-system-socket=/run/dbus/system_bus_socket)
 libmnl=(171f89699f CONFIGURE)
 libnftnl=(7508a5c414 CONFIGURE)
 iptables=(c109c96bb0 CONFIGURE --enable-shared)
