@@ -12,7 +12,7 @@ firepkg download \
     dosfstools e2fsprogs efibootmgr efivar eudev \
     file findutils flex gawk gcc \
     gettext glibc gmp gperf grep \
-    iproute2 iputils kbd kmod less \
+    iproute2 iputils iwd kbd kmod less \
     libcap2 libcheck libexpat libffi libmpc \
     libpipeline libpsl libressl libusb m4 \
     make mandoc mpfr ncurses patch \

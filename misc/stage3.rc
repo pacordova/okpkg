@@ -73,7 +73,7 @@ emerge tzdata
 # networking
 emerge curl
 emerge iproute2 iputils
-emerge dhcpcd
+emerge dhcpcd iwd
 
 # rebuild
 emerge m4
