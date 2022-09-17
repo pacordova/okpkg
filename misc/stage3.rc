@@ -54,11 +54,12 @@ emerge samurai
 emerge util-linux
 
 # libraries
-emerge dbus eudev file popt readline
-emerge libcap2 libcheck libexpat libffi
+emerge libcap2 libcheck libffi
 emerge libpipeline libpsl libusb 
+emerge file popt readline
+emerge eudev libusb usbutils
+emerge libexpat dbus
 emerge libaio lvm2
-
 
 # linux
 emerge acpid2
@@ -66,7 +67,7 @@ emerge e2fsprogs dosfstools
 emerge mandoc man-pages
 emerge efivar efibootmgr 
 emerge kbd kmod 
-emerge pciutils usbutils
+emerge pciutils
 emerge procps-ng psmisc
 emerge shadow-utils
 emerge sudo
