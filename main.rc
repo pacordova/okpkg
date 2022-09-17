@@ -10,7 +10,7 @@ switch($λ){
         _timesync
     case backup
         /usr/firepkg/misc/backup.rc
-    case -h *
+    case --help *
         echo 'Usage: firepkg [-S|-i|-h|uninstall|download|build|makepkg|timesync|backup] arg ...'
 }
 
@@ -18,10 +18,10 @@ while(~ $#1 1)
 switch($λ){
     case uninstall download build makepkg
         _$λ $1 && shift || exit
-    case -i
+    case install
         bsdtar -C / -P -xf $1 &&
             shift || exit
-    case -S
+    case --sync
         _uninstall $1 &&
         _download $1 &&
         _build $1 &&
