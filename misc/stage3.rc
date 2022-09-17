@@ -54,9 +54,10 @@ emerge samurai
 emerge util-linux
 
 # libraries
-emerge libaio libcap2 libcheck libexpat
-emerge libffi libpipeline libpsl libusb 
-emerge dbus eudev file lvm2 popt readline
+emerge dbus eudev file popt readline
+emerge libcap2 libcheck libexpat libffi
+emerge libpipeline libpsl libusb 
+emerge libaio lvm2
 
 
 # linux
