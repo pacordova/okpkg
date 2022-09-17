@@ -56,7 +56,7 @@ emerge util-linux
 # libraries
 emerge libaio libcap2 libcheck libexpat
 emerge libffi libpipeline libpsl libusb 
-emerge eudev file lvm2 popt readline
+emerge dbus eudev file lvm2 popt readline
 
 
 # linux
