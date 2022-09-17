@@ -54,15 +54,16 @@ emerge samurai
 emerge util-linux
 
 # libraries
-emerge eudev file popt readline
-emerge libcap2 libcheck libexpat libffi 
-emerge libpipeline libpsl libusb 
+emerge libaio libcap2 libcheck libexpat
+emerge libffi libpipeline libpsl libusb 
+emerge eudev file lvm2 popt readline
 
-# system
+
+# linux
 emerge acpid2
-emerge cron
 emerge e2fsprogs dosfstools
-emerge mandoc efivar efibootmgr 
+emerge mandoc man-pages
+emerge efivar efibootmgr 
 emerge kbd kmod 
 emerge pciutils usbutils
 emerge procps-ng psmisc
@@ -71,9 +72,13 @@ emerge sudo
 emerge tzdata
 
 # networking
-emerge curl
 emerge iproute2 iputils
 emerge dhcpcd iwd
+emerge curl
+
+# extra
+emerge bzip2 cron less parted
+emerge tcsh vim which zstd
 
 # rebuild
 emerge m4

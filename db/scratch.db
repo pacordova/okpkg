@@ -239,3 +239,14 @@ ntbtls=(8922181fef CONFIGURE)
 npth=(1393abd9ad CONFIGURE)
 pinentry=(10072045a3 CONFIGURE)
 gnupg=(21f7fe2fc5 CONFIGURE)
+
+# acl+attr
+acl=(c0234042e1 CONFIGURE)
+attr=(bae1c6949b CONFIGURE)
+
+# connman
+libmnl=(171f89699f CONFIGURE)
+libnftnl=(7508a5c414 CONFIGURE)
+iptables=(c109c96bb0 CONFIGURE --enable-shared)
+connman=(79fb40f4fd CONFIGURE --without-systemdunitdir --disable-wispr LIBS=-lncursesw)
+
