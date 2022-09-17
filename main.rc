@@ -17,7 +17,8 @@ switch($λ){
 while(~ $#1 1)
 switch($λ){
     case uninstall download build makepkg
-        _$λ $1 && shift || exit
+        _$λ $1 &&
+            shift || exit
     case install
         bsdtar -C / -P -xf $1 &&
             shift || exit
