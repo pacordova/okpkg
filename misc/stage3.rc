@@ -5,7 +5,7 @@
 fn emerge {
     for(i in $*) {
         firepkg build $i
-        firepkg -i /usr/firepkg/packages/$i.tar.xz
+        firepkg install /usr/firepkg/packages/$i.tar.xz
     }
 }
 

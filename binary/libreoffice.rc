@@ -29,7 +29,7 @@ mv $destdir/opt $destdir/usr/lib64
 
 echo makepkg...
 firepkg makepkg $destdir
-firepkg -i $destdir.tar.xz
+firepkg install $destdir.tar.xz
 
 echo cleanup
 rm -r /usr/firepkg/sources/$1
