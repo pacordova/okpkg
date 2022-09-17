@@ -11,7 +11,7 @@ switch($λ){
     case backup
         /usr/firepkg/misc/backup.rc
     case --help *
-        echo 'Usage: firepkg [-S|-i|-h|uninstall|download|build|makepkg|timesync|backup] arg ...'
+        echo 'Usage: firepkg [--help|--sync|install|uninstall|download|build|makepkg|timesync|backup] [arg ...]'
 }
 
 while(~ $#1 1)
