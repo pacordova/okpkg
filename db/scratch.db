@@ -242,7 +242,10 @@ libnftnl=(7508a5c414 CONFIGURE)
 iptables=(c109c96bb0 CONFIGURE --enable-shared)
 connman=(79fb40f4fd CONFIGURE --without-systemdunitdir --disable-wispr LIBS=-lncursesw)
 
-# flatpak extra 
+# flatpak
+ostree=(914c4d993b CONFIGURE)
+appstream=(829b8e62a4 MESON -Dstemming=false)
+flatpak=(8e27697377 CONFIGURE)
 bwrap=(16fdaf3379 CONFIGURE)
 libportal=(d8c8cb18a3 MESON)
 ostree=(914c4d993b CONFIGURE)

@@ -36,11 +36,6 @@ mpv=(32ded8c13b WAF)
 imlib2=(8925cf2a87 CONFIGURE)
 feh=(7f3c34552b MAKE)
 
-# flatpak
-ostree=(914c4d993b CONFIGURE)
-appstream=(829b8e62a4 MESON -Dstemming=false)
-flatpak=(8e27697377 CONFIGURE)
-
 # misc 
 firejail=(b77b67a4db CONFIGURE)
 bspwm=(0d0f5e465b MAKE)
