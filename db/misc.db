@@ -41,4 +41,4 @@ firejail=(b77b67a4db CONFIGURE)
 bspwm=(0d0f5e465b MAKE)
 dmenu=(1f4d709ebb MAKE)
 sxhkd=(1edc8b1a8b MAKE)
-elvis=(1f6402daec CONFIGURE --without-x LIBS='-lncursesw')
+elvis=(1f6402daec CONFIGURE --without-x); PREFIX=$destdir/usr
