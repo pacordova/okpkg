@@ -149,8 +149,9 @@ b3e77a1ca954d68f074cfad08ec65db12a56a80460e3c031c41d9f900f0314e3  https://github
 060309d7a333d38d951bc27598c677af1796934dbd98e1024e7ad8de798fedda  https://github.com/lathiat/avahi/releases/download/v0.8/avahi-0.8.tar.gz
 8d70170a91ecba73746c1d83f95d54eee8ca71d0c3521926f05ed830d8b5a84e  https://github.com/PipeWire/pipewire/archive/0.3.47/pipewire-0.3.47.tar.gz
 16fdaf33799d63104e347e0133f909196fe90d0c50515d010bcb422eb5a00818  https://github.com/projectatomic/bubblewrap/releases/download/v0.5.0/bubblewrap-0.5.0.tar.xz
-6db52a531ce278282ac7ebfb99f66a0bb3eccaf44e864844c2c95c1ee5ba9316  https://github.com/flatpak/flatpak/releases/download/1.12.7/flatpak-1.12.7.tar.xz
+8e276973770ea24ddf2597ad4aecd36b98393e6bde91e48e1743aaca67f27815  https://github.com/flatpak/flatpak/releases/download/1.14.0/flatpak-1.14.0.tar.xz
 d8c8cb18a34e5eeb26a39c94044c955995b01de0e139caac5e18c076cf821b3b  https://github.com/flatpak/libportal/releases/download/0.5/libportal-0.5.tar.xz
+829b8e62a4c857ff37948b089ee1524a86e9ae8cf963d2204cca0b204deb2060  https://github.com/ximion/appstream/archive/refs/tags/v0.15.5.tar.gz
 914c4d993bc111d7dd30ae9721b6ffe8ab56eb1fd6e81b097b09f400cc1b053f  https://github.com/ostreedev/ostree/releases/download/v2022.5/libostree-2022.5.tar.xz
 f621210716a9cf821d969eecb1df1e3e46fc687b87f7add83300d35321594954  https://github.com/flatpak/xdg-desktop-portal-gtk/releases/download/1.14.0/xdg-desktop-portal-gtk-1.14.0.tar.xz
 f2e589972c0af78f2ba92ac222ebc9b9e1499bc9017aaa00041567caed950de0  https://github.com/flatpak/xdg-desktop-portal/releases/download/1.14.6/xdg-desktop-portal-1.14.6.tar.xz

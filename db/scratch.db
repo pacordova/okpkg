@@ -121,14 +121,6 @@ bamf=(4fcd00f23c CONFIGURE)
 libdbusmenu=(9be5dc0f26 AUTOTOOLS)
 libtimezonemap=(0d634cc247 AUTOTOOLS)
 
-# flatpak
-bwrap=(16fdaf3379 CONFIGURE)
-flatpak=(6db52a531c CONFIGURE)
-libportal=(d8c8cb18a3 MESON)
-ostree=(914c4d993b CONFIGURE)
-portal-gtk=(f621210716 CONFIGURE)
-portal=(f2e589972c CONFIGURE)
-
 # qt
 okular=(69c39e8b5f CMAKE)
 qbittorrent=(b64559ca50 CMAKE)
@@ -250,3 +242,9 @@ libnftnl=(7508a5c414 CONFIGURE)
 iptables=(c109c96bb0 CONFIGURE --enable-shared)
 connman=(79fb40f4fd CONFIGURE --without-systemdunitdir --disable-wispr LIBS=-lncursesw)
 
+# flatpak extra 
+bwrap=(16fdaf3379 CONFIGURE)
+libportal=(d8c8cb18a3 MESON)
+ostree=(914c4d993b CONFIGURE)
+portal-gtk=(f621210716 CONFIGURE)
+portal=(f2e589972c CONFIGURE)
