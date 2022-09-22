@@ -6,6 +6,9 @@
 src='https://updates.signal.org/desktop/apt/pool/main/s/signal-desktop/signal-desktop_5.60.0_amd64.deb'
 destdir=/usr/firepkg/packages/$1
 
+rm -rf $destdir
+mkdir -p $destdir/usr
+cd $destdir/usr
 curl -Lko signal-desktop.deb $src
 
 echo extracting...
@@ -14,9 +17,6 @@ bsdtar -xf data.tar.xz
 
 echo copying files...
 rm -rf usr/share/doc
-rm -rf $destdir
-mkdir -p $destdir/usr
-cd $destdir/usr
 mkdir bin lib64
 mkdir -p $destdir/usr/bin
 sed -i usr/share/applications/signal-desktop.desktop -e 's|/opt/Signal|/usr/bin|'
