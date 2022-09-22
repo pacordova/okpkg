@@ -22,7 +22,8 @@ transmission=(9144652fe7 CONFIGURE)
 # evince
 poppler-data=(2cec05cd1b CMAKE)
 poppler=(e390c8b806 CMAKE -DENABLE_QT5=OFF -DENABLE_BOOST=OFF)
-evince=(3346b01f9b MESON -Dsystemuserunitdir=no -Dnautilus=false -Duser_doc=false -Dgtk_doc=false -Dpdf=enabled)
+libhandy=(3381fe8250 MESON -Dexamples=false -Dtests=false -Dvapi=false)
+evince=(23b8075fd4 MESON -Dsystemduserunitdir=no -Dnautilus=false -Duser_doc=false -Dgtk_doc=false -Dpdf=enabled)
 
 # ffmpeg
 libx264=(876383c0bc CONFIGURE --enable-shared --disable-cli --bit-depth=10)
