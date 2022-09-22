@@ -17,7 +17,7 @@ ahoviewer=(afd8fab923 MESON)
 file-roller=(4a2886a396 MESON)
 leafpad=(24553979dc AUTOTOOLS)
 pavucontrol=(ce2b72c3b5 CONFIGURE)
-transmission=(9144652fe7 CMAKE -DENABLE_QT=OFF)
+transmission=(9144652fe7 CONFIGURE)
 
 # evince
 poppler-data=(2cec05cd1b CMAKE)
