@@ -128,6 +128,7 @@ strawberry=(c2d242f091 CMAKE)
 vlc=(ffae35fc64 CONFIGURE)
 
 # misc
+elvis=(1f6402daec CONFIGURE --without-x); PREFIX=$destdir/usr
 crosstool-ng=(68162f3422 CONFIGURE)
 logrotate=(ddd5274d68 CONFIGURE)
 azpainter=(85f3f935e7 CONFIGURE)
