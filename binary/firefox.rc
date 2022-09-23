@@ -3,7 +3,7 @@
 . /usr/firepkg/make.conf
 
 # vars
-src=https://download.mozilla.org/?product=firefox-latest-ssl&os=linux64&lang=en-US
+src='https://download.mozilla.org/?product=firefox-latest-ssl&os=linux64&lang=en-US'
 destdir=/usr/firepkg/packages/firefox
 
 # setup destdir
