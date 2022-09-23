@@ -4,7 +4,7 @@
 
 # vars
 src=https://download.documentfoundation.org/libreoffice/stable/7.4.1/rpm/x86_64/LibreOffice_7.4.1_Linux_x86-64_rpm.tar.gz
-basename=`{basename $src}
+basename=`{basename $src .tar.gz}
 destdir=/usr/firepkg/packages/libreoffice7.4
 
 # setup destdir
@@ -14,14 +14,14 @@ cd $destdir/usr
 
 # download
 curl -LO $src
-bsdtar -xf $basename */RPMS
-rm $basename
+bsdtar -xf $basename.tar.gz
+rm $basename.tar.gz
 
 echo Copying files...
-find RPMS/*.rpm -exec bsdtar -C $destdir -xf '{}' ';'
-rm -rf RPMS
+mv * $basename
+find $basename/RPMS -name '*.rpm' -exec bsdtar -C $destdir -xf '{}' ';'
+rm -rf $basename
 mv ../opt lib64
-mkdir bin 
 
 cd bin
 ln -sf /usr/lib64/libreoffice7.4/program/soffice libreoffice7.4

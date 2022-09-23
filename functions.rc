@@ -179,7 +179,7 @@ fn _makepkg {
 
     xz -T0 -f $1.tar &&
         rm -r $1 &&
-        rm .index
+    >[2=] rm .index
 }
 
 fn _chroot {
