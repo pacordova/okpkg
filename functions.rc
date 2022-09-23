@@ -72,17 +72,18 @@ fn QMAKE {
 fn _install {
     basename=`{basename $1 .tar.xz}
 
-    uninstall=/usr/firepkg/uninstall/rm-$basename.rc
+    _=/usr/firepkg/uninstall/rm-$basename.rc
     
-     >$uninstall echo '#!/bin/rc'
-    >>$uninstall echo '>[2=]' rm -r ''/usr/firepkg/sources/$basename''
-    >>$uninstall echo '>[2=]' rm -r ''/usr/firepkg/packages/$basename''
-    >>$uninstall echo '>[2=]' rm -d ''/usr/firepkg/uninstall/rm-$basename.rc''
+     >$_ echo '#!/bin/rc'
+    >>$_ echo '>[2=]' rm -r ''/usr/firepkg/sources/$basename''
+    >>$_ echo '>[2=]' rm -r ''/usr/firepkg/packages/$basename''
+    >>$_ echo '>[2=]' rm -d ''/usr/firepkg/uninstall/rm-$basename.rc''
 
     >[1=] bsdtar -C / -xvPf $1 |[2]
-    >>$uninstall sed 's|^x |>[2=] rm -d ''/|g;s|$|''|g'
+    sed 's|^x |>[2=] rm -d ''/|g;s|$|''|g' |
+    >>$_ sort -r
 
-    chmod +x $uninstall
+    chmod +x $_
 }
 
 fn _uninstall {
@@ -111,8 +112,7 @@ fn _download {
     bsdtar -C $destdir --strip-components 1 -xf $basename
 
     if(test -f $diff)
-        patch -d $destdir -p1 \
-            <$diff
+        patch -d $destdir -p1 <$diff
 
     rm $basename >[2=]
 
