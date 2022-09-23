@@ -2,39 +2,30 @@
 
 . /usr/firepkg/make.conf
 
-src='https://static.rust-lang.org/dist/rust-1.63.0-x86_64-unknown-linux-gnu.tar.gz'
-
+# vars
+src=https://static.rust-lang.org/dist/rust-1.63.0-x86_64-unknown-linux-gnu.tar.gz
+basename=`{basename $src .tar.gz}
 destdir=/usr/firepkg/packages/rust
-basename=`{basename $src}
 
->[2=] rm -r $destdir 
->[2=] rm -r rust 
+# setup destdir
+rm -rf $destdir
+mkdir -p $destdir/usr
+cd $destdir/usr
 
-mkdir $destdir
-mkdir rust
+# download
+curl -LO $src
+bsdtar -xf $basename.tar.gz
+rm $basename.tar.gz
 
-curl -LO $src 
+echo Copying files...
+./$basename/install.sh --destdir=$destdir
+mv local/* .
+mv lib lib64
+rm -rf $basename
+rm -d local
 
-echo extracting...
-bsdtar \
-    --directory rust \
-    --strip-components 1 \
-    --extract \
-    --file $basename
-
-./rust/install.sh --destdir=$destdir 
-
-echo fixing directories...
-mv $destdir/usr/local/* $destdir/usr
-mv $destdir/usr/lib $destdir/usr/lib64
-rm -d $destdir/usr/local
-
-echo making package...
+echo Running makepkg...
 firepkg makepkg $destdir
 
-echo installing...
+echo Installing...
 firepkg install $destdir.tar.xz
-
-echo cleaning up...
-rm $basename
-rm -r rust

@@ -1,0 +1,42 @@
+#!/bin/rc
+
+. /usr/firepkg/make.conf
+
+# vars
+src=https://dl.discordapp.net/apps/linux/0.0.20/discord-0.0.20.tar.gz
+basename=`{basename $src}
+destdir=/usr/firepkg/packages/discord
+
+# setup destdir
+rm -rf $destdir
+mkdir -p $destdir/usr
+cd $destdir/usr
+
+# download
+curl -LO $src
+bsdtar -xf $basename
+rm $basename
+
+echo Copying files...
+mkdir lib64 bin share
+
+cd share
+mkdir -p applications icons/hicolor
+cd ..
+
+cd lib64
+mv ../Discord discord
+sed -i discord/discord.desktop -e 's|^Exec=.*$|Exec=/usr/bin/discord|'
+mv discord/discord.desktop ../share/applications
+mv discord/discord.png ../share/icons/hicolor
+cd ..
+
+cd bin
+ln -s /usr/lib64/discord/Discord discord
+cd ..
+
+echo Running makepkg...
+firepkg makepkg $destdir
+
+echo Installing...
+firepkg install $destdir.tar.xz

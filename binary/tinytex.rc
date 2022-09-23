@@ -2,41 +2,35 @@
 
 . /usr/firepkg/make.conf
 
-src='https://github.com/rstudio/tinytex-releases/releases/download/v2022.08/TinyTeX-1-v2022.08.tar.gz'
-
-destdir=/usr/firepkg/packages/tinytex
+# vars
+src=https://github.com/rstudio/tinytex-releases/releases/download/v2022.08/TinyTeX-1-v2022.08.tar.gz
 basename=`{basename $src}
+destdir=/usr/firepkg/packages/tinytex
 
->[2=] rm -r $destdir 
->[2=] rm -r tinytex
+# setup destdir
+rm -rf $destdir
+mkdir -p $destdir/usr
+cd $destdir/usr
 
-mkdir $destdir
-mkdir tinytex
-
-curl -LO $src 
-
-echo extracting...
-bsdtar \
-    --directory tinytex \
-    --strip-components 1 \
-    --extract \
-    --file $basename
-
+# download
+curl -LO $src
+bsdtar -xf $basename
 rm $basename
 
-mkdir $destdir/usr
-mkdir $destdir/usr/bin
-mkdir $destdir/usr/lib64
+echo Copying files...
+mkdir bin lib64
 
-mv tinytex $destdir/usr/lib64
+cd lib64
+mv ../.TinyTeX tinytex
+cd ..
 
-echo making symlinks...
-for(f in $destdir/usr/lib64/tinytex/bin/x86_64-linux/*) {
-    basename=`{basename $f}    
-    ln -sf /usr/lib64/tinytex/bin/x86_64-linux/$basename $destdir/usr/bin/$basename
-}
+cd bin
+for(f in ../lib64/tinytex/bin/x86_64-linux/*) 
+    ln -s `{echo $f | sed 's|^..|/usr|'} `{basename $f}
+cd ..
 
-echo makepkg...
+echo Running makepkg...
 firepkg makepkg $destdir
-echo installing...
+
+echo Installing...
 firepkg install $destdir.tar.xz

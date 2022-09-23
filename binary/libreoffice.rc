@@ -2,36 +2,37 @@
 
 . /usr/firepkg/make.conf
 
-cd /usr/firepkg/sources
-
-*=(libreoffice7.4)
+# vars
 src=https://download.documentfoundation.org/libreoffice/stable/7.4.1/rpm/x86_64/LibreOffice_7.4.1_Linux_x86-64_rpm.tar.gz
-destdir=/usr/firepkg/packages/$1
+basename=`{basename $src}
+destdir=/usr/firepkg/packages/libreoffice7.4
 
-mkdir -p /usr/firepkg/sources/$1
-mkdir -p /usr/firepkg/packages/$1
+# setup destdir
+rm -rf $destdir
+mkdir -p $destdir/usr
+cd $destdir/usr
 
-curl -Lko $1.tar.gz $src &&
-  bsdtar -C $1 -xf $1.tar.gz --strip-components 1
+# download
+curl -LO $src
+bsdtar -xf $basename */RPMS
+rm $basename
 
-echo extracting...
-find $1/RPMS/*.rpm -exec bsdtar -C $destdir -xf '{}' ';'
+echo Copying files...
+find RPMS/*.rpm -exec bsdtar -C $destdir -xf '{}' ';'
+rm -rf RPMS
+mv ../opt lib64
+mkdir bin 
 
-echo making symlinks...
-join \
-    <{find $destdir/usr -type l -exec readlink '{}' ';' | nl} \
-    <{find $destdir/usr -type l -print | nl} |
-awk '{ gsub(/opt/, "usr/lib64"); print "ln -sf " $2 " " $3}' |
-rc
+cd bin
+ln -sf /usr/lib64/libreoffice7.4/program/soffice libreoffice7.4
+cd ..
 
-echo moving opt to usr/lib64...
-mv $destdir/opt $destdir/usr/lib64
+cd lib64
+mv libreoffice7.4/share/xdg/*.desktop ../share/applications
+cd ..
 
-echo makepkg...
+echo Running makepkg...
 firepkg makepkg $destdir
-firepkg install $destdir.tar.xz
 
-echo cleanup
-rm -r /usr/firepkg/sources/$1
-rm -r /usr/firepkg/packages/$1
-rm -d /usr/firepkg/sources/$1.tar.gz
+echo Installing...
+firepkg install $destdir.tar.xz

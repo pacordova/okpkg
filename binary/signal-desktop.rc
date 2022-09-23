@@ -2,32 +2,35 @@
 
 . /usr/firepkg/make.conf
 
-*=(signal-desktop)
-src='https://updates.signal.org/desktop/apt/pool/main/s/signal-desktop/signal-desktop_5.60.0_amd64.deb'
-destdir=/usr/firepkg/packages/$1
+# vars
+src=https://updates.signal.org/desktop/apt/pool/main/s/signal-desktop/signal-desktop_5.60.0_amd64.deb
+basename=`{basename $src}
+destdir=/usr/firepkg/packages/signal-desktop
 
+# prepare destdir
 rm -rf $destdir
-mkdir -p $destdir/usr
-cd $destdir/usr
-curl -Lko signal-desktop.deb $src
+mkdir -p $destdir
+cd $destdir
 
-echo extracting...
-bsdtar -xf signal-desktop.deb data.tar.xz 
+# download
+curl -LO $src
+bsdtar -xf $basename data.tar.xz
+rm $basename
+
+echo Copying files...
 bsdtar -xf data.tar.xz
-
-echo copying files...
 rm -rf usr/share/doc
-mkdir bin lib64
-mkdir -p $destdir/usr/bin
+mkdir usr/bin usr/lib64
 sed -i usr/share/applications/signal-desktop.desktop -e 's|/opt/Signal|/usr/bin|'
-mv opt/Signal $destdir/usr/lib64/signal-desktop
-mv usr/share $destdir/usr
-rm -d opt usr
-cd bin
-ln -sf /usr/lib64/signal-desktop/signal-desktop signal-desktop
+mv opt/Signal usr/lib64/signal-desktop
+rm -d opt
 
-echo makepkg...
+cd usr/bin
+ln -sf /usr/lib64/signal-desktop/signal-desktop signal-desktop
+cd ../..
+
+echo Running makepkg...
 firepkg makepkg $destdir
 
-echo installing...
+echo Installing...
 firepkg install $destdir.tar.xz

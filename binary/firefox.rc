@@ -2,25 +2,33 @@
 
 . /usr/firepkg/make.conf
 
-*=(firefox)
-src='https://download.mozilla.org/?product=firefox-latest-ssl&os=linux64&lang=en-US'
-destdir=/usr/firepkg/packages/$1
+# vars
+src=https://download.mozilla.org/?product=firefox-latest-ssl&os=linux64&lang=en-US
+destdir=/usr/firepkg/packages/firefox
 
-cd /usr/firepkg/sources
-mkdir -p $destdir/usr/lib64
-mkdir -p $destdir/usr/bin
+# setup destdir
+rm -rf $destdir
+mkdir -p $destdir/usr
+cd $destdir/usr
 
-curl -Lko $1.tar.bz2 $src
+# download
+curl -Lo firefox.tar.bz2 $src
+bsdtar -xf firefox.tar.bz2
+rm firefox.tar.bz2
 
-echo extracting ...
-bsdtar -C $destdir/usr/lib64 -xf $1.tar.bz2
+echo Copying files...
+mkdir lib64 bin
 
-echo making symlinks...
-ln -sf /usr/lib64/firefox/firefox-bin $destdir/usr/bin/firefox
+cd lib64
+mv ../firefox .
+cd ..
 
-echo makepkg...
+cd bin
+ln -s /usr/lib64/firefox/firefox-bin firefox
+cd ..
+
+echo Running makepkg...
 firepkg makepkg $destdir
-firepkg install $destdir.tar.xz
 
-echo cleanup
-rm $1.tar.bz2
+echo Installing...
+firepkg install $destdir.tar.xz
