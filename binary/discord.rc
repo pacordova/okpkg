@@ -3,7 +3,7 @@
 . /usr/firepkg/make.conf
 
 # vars
-src=https://dl.discordapp.net/apps/linux/0.0.20/discord-0.0.20.tar.gz
+src='https://dl.discordapp.net/apps/linux/0.0.20/discord-0.0.20.tar.gz'
 basename=`{basename $src}
 destdir=/usr/firepkg/packages/discord
 

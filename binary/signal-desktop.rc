@@ -3,7 +3,7 @@
 . /usr/firepkg/make.conf
 
 # vars
-src=https://updates.signal.org/desktop/apt/pool/main/s/signal-desktop/signal-desktop_5.60.0_amd64.deb
+src='https://updates.signal.org/desktop/apt/pool/main/s/signal-desktop/signal-desktop_5.60.0_amd64.deb'
 basename=`{basename $src}
 destdir=/usr/firepkg/packages/signal-desktop
 

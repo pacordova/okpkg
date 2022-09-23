@@ -3,7 +3,7 @@
 . /usr/firepkg/make.conf
 
 # vars
-src=https://github.com/rstudio/tinytex-releases/releases/download/v2022.08/TinyTeX-1-v2022.08.tar.gz
+src='https://github.com/rstudio/tinytex-releases/releases/download/v2022.08/TinyTeX-1-v2022.08.tar.gz'
 basename=`{basename $src}
 destdir=/usr/firepkg/packages/tinytex
 
