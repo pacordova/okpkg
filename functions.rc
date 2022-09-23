@@ -69,9 +69,24 @@ fn QMAKE {
         MAKE $*
 }
 
+fn _install {
+    basename=`{basename $1 .tar.xz}
+
+    uninstall=/usr/firepkg/uninstall/rm-$basename.rc
+    
+     >$uninstall echo '#!/bin/rc'
+    >>$uninstall echo '>[2=]' rm -r ''/usr/firepkg/sources/$basename''
+    >>$uninstall echo '>[2=]' rm -r ''/usr/firepkg/packages/$basename''
+    >>$uninstall echo '>[2=]' rm -d ''/usr/firepkg/uninstall/rm-$basename.rc''
+
+    >[1=] bsdtar -C / -xvPf $1 |[2]
+    >>$uninstall sed 's|^x |>[2=] rm -d ''/|g;s|$|''|g'
+
+    chmod +x $uninstall
+}
+
 fn _uninstall {
-    /usr/firepkg/uninstall/rm-$1.rc >[2=] &&
-    rm /usr/firepkg/uninstall/rm-$1.rc ||
+    /usr/firepkg/uninstall/rm-$1.rc ||
         true
 }
 
@@ -93,11 +108,7 @@ fn _download {
     echo $1 $basename |
         sha256sum -c || exit
 
-    bsdtar \
-        --directory $destdir \
-        --extract \
-        --strip-components 1 \
-        --file $basename \
+    bsdtar -C $destdir --strip-components 1 -xf $basename
 
     if(test -f $diff)
         patch -d $destdir -p1 \
@@ -131,19 +142,7 @@ fn _build {
     _makepkg $destdir
 }
 
-# create uninstaller
-fn _rmtool {
-    echo '#!/bin/rc'
-    echo rm -r /usr/firepkg/sources/$basename
-    echo rm -r /usr/firepkg/packages/$basename
-
-    sed 's|^|rm -d ''/|g;s|$|''|g' $1
-}
-
 fn _makepkg {
-    basename=`{basename $1}
-    pwd=`{pwd}
-
     cd $1
 
     # cleaning
@@ -155,31 +154,15 @@ fn _makepkg {
     >[2=] rm -r    usr/share/info
     >[2=] find . -name '*.pyc' -delete
 
-    # index
-    find * -print |
-        LC_ALL=C sort -r \
-    >$pwd/.index
-
-    _rmtool $pwd/.index > /usr/firepkg/uninstall/rm-$basename.rc
-    chmod +x /usr/firepkg/uninstall/rm-$basename.rc
-
     # set mtime
     find . -exec touch -hd @$SOURCE_DATE_EPOCH '{}' ';'
 
-    cd $pwd
-
-    bsdtar \
-        --directory $1 \
-        --uid 0 \
-        --gid 0 \
-        --create \
-        --no-recursion \
-        --file $1.tar \
-        --files-from .index \
+    find . -print |
+    sort -r | 
+    bsdtar -C $1 --uid 0 --gid 0 --strip-components 1 -cnf $1.tar -T -
 
     xz -T0 -f $1.tar &&
-        rm -r $1 &&
-    >[2=] rm .index
+        rm -r $1
 }
 
 fn _chroot {
