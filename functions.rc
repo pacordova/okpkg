@@ -143,26 +143,27 @@ fn _build {
 }
 
 fn _makepkg {
-    cd $1
+    basename=`{basename $1}
+    cd `{dirname $1}
 
     # cleaning
-    >[2=] strip -S usr/lib64/*
-    >[2=] strip -s usr/bin/*
-    >[2=] strip -s bin/*
-    >[2=] rm -r    usr/share/doc
-    >[2=] rm -r    usr/doc
-    >[2=] rm -r    usr/share/info
-    >[2=] find . -name '*.pyc' -delete
+    >[2=] strip -S $basename/usr/lib64/*
+    >[2=] strip -s $basename/usr/bin/*
+    >[2=] strip -s $basename/bin/*
+    >[2=] rm -r    $basename/usr/share/doc
+    >[2=] rm -r    $basename/usr/doc
+    >[2=] rm -r    $basename/usr/share/info
+    >[2=] find $basename -name '*.pyc' -delete
 
     # set mtime
-    find . -exec touch -hd @$SOURCE_DATE_EPOCH '{}' ';'
+    find $basename -exec touch -hd @$SOURCE_DATE_EPOCH '{}' ';'
 
-    find . -print |
+    find $basename -print |
     sort -r | 
-    bsdtar -C $1 --uid 0 --gid 0 --strip-components 1 -cnf $1.tar -T -
+    bsdtar --uid 0 --gid 0 --strip-components 1 -cnf $basename.tar -T -
 
-    xz -T0 -f $1.tar &&
-        rm -r $1
+    xz -T0 -f $basename.tar &&
+        rm -r $basename
 }
 
 fn _chroot {
