@@ -8,14 +8,14 @@ cd    /usr/firepkg/sources
 
 firepkg download \
     acpid2 bash bc binutils bison \
-    bsdtar bzip2 coreutils curl dbus dhcpcd \
+    bsdtar btrfsprogs bzip2 coreutils curl dbus dhcpcd \
     diffutils dosfstools e2fsprogs efibootmgr efivar \
     eudev file findutils flex gawk \
     gcc gettext glibc gmp gperf \
     grep iproute2 iputils iwd kbd \
     kmod less libaio libcap2 \
     libcheck libexpat libffi libmpc libpipeline \
-    libpsl libressl libusb lvm2 m4 \
+    libpsl libressl libusb lvm2 lzo m4 \
     make mandoc man-pages mpfr ncurses \
     parted patch pciutils perl pigz \
     pkgconf popt procps-ng psmisc python3 \
