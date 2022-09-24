@@ -20,7 +20,7 @@ switch($λ){
         _$λ $1 &&
             shift || exit
     case install
-        _install &&
+        _install $1 &&
             shift || exit
     case -S
         _uninstall $1 &&
