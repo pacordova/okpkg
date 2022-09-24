@@ -52,7 +52,6 @@ emerge gettext
 emerge gperf 
 emerge samurai
 emerge util-linux
-emerge lzo
 
 # libraries
 emerge libcap2 libcheck libffi
@@ -64,7 +63,7 @@ emerge libaio lvm2
 
 # linux
 emerge acpid2
-emerge e2fsprogs dosfstools btrfsprogs
+emerge e2fsprogs dosfstools
 emerge mandoc man-pages
 emerge efivar efibootmgr 
 emerge kbd kmod 
