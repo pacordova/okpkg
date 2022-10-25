@@ -7,22 +7,37 @@ mkdir /usr/firepkg/sources
 cd    /usr/firepkg/sources
 
 firepkg download \
-    acpid2 bash bc binutils bison \
-    bsdtar bzip2 coreutils curl dbus dhcpcd \
-    diffutils dosfstools e2fsprogs efibootmgr efivar \
-    eudev file findutils flex gawk \
-    gcc gettext glibc gmp gperf \
-    grep iproute2 iputils iwd kbd \
-    kmod less libaio libcap2 \
-    libcheck libexpat libffi libmpc libpipeline \
-    libpsl libressl libusb lvm2 m4 \
-    make mandoc man-pages mpfr ncurses \
-    parted patch pciutils perl pigz \
-    pkgconf popt procps-ng psmisc python3 \
-    rc readline samurai sed shadow-utils \
-    sudo tcsh texinfo tzdata usbutils \
-    util-linux vim which xz zlib zstd \
-
+    m4 bash coreutils diffutils findutils \
+    gawk grep make patch sed \
+    bsdtar xz rc \
+    pkgconf \
+    zlib pigz libressl python3 \
+    bison glibc \
+    perl texinfo binutils \
+    gmp mpfr libmpc gcc \
+    ncurses bc flex gettext gperf \
+    samurai util-linux \
+    dbus eudev file libaio libcap2 \
+    libcheck libexpat libevent libffi libpipeline \
+    libpsl libusb lvm2 pcre2 pcre \
+    popt readline \
+    e2fsprogs \
+    kbd kmod \
+    man-pages mandoc \
+    procps-ng psmisc \
+    tzdata \
+    shadow-utils \
+    vim less \
+    tcsh which openssh parted xorriso \
+    curl dhcpcd iproute2 wget \
+    glib2 libmnl libnftnl iptables connman \
+    bzip2 lzo zstd \
+    autoconf automake cmake git \
+    gnupg1 json-c lua sudo tmux \
+    alsa-lib alsa-utils \
+    acpid2 lm-sensors pciutils usbutils \
+    efivar efibootmgr \
+    dosfstools btrfsprogs cryptsetup \
 
 # cron is a shar
 mkdir cron
