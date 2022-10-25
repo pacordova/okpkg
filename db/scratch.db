@@ -236,12 +236,6 @@ gnupg=(21f7fe2fc5 CONFIGURE)
 acl=(c0234042e1 CONFIGURE)
 attr=(bae1c6949b CONFIGURE)
 
-# connman
-libmnl=(171f89699f CONFIGURE)
-libnftnl=(7508a5c414 CONFIGURE)
-iptables=(c109c96bb0 CONFIGURE --enable-shared)
-connman=(79fb40f4fd CONFIGURE --without-systemdunitdir --disable-wispr LIBS=-lncursesw)
-
 # flatpak
 ostree=(914c4d993b CONFIGURE)
 appstream=(829b8e62a4 MESON -Dstemming=false)
@@ -251,3 +245,7 @@ libportal=(d8c8cb18a3 MESON)
 ostree=(914c4d993b CONFIGURE)
 portal-gtk=(f621210716 CONFIGURE)
 portal=(f2e589972c CONFIGURE)
+
+# iwd
+iwd=(71533fe3b8 CONFIGURE --disable-systemd-service LIBS=-lncursesw)
+
