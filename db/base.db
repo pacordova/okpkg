@@ -113,11 +113,11 @@ zstd=(7c42d56fac MAKE)
 autoconf=(64ebcec9f8 CONFIGURE)
 automake=(af6ba39142 CONFIGURE)
 cmake=(4931e277a4 CONFIGURE); dirflags=()
+doas=(4e98828056 )
 git=(d768528e64 CONFIGURE)
 gnupg1=(c9462f17e6 CONFIGURE --enable-noexecstack)
 json-c=(b8d80a1ddb CMAKE)
 lua=(164c784965 MAKE INSTALL_TOP=$destdir$PREFIX INSTALL_LIB=$destdir$LIBDIR INSTALL_CMOD=$destdir$LIBDIR/lua MYCFLAGS=$CFLAGS)
-sudo=(6d6ee863a3 CONFIGURE)
 tmux=(e4fd347843 CONFIGURE)
 
 # linux
