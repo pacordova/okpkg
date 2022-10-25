@@ -19,7 +19,7 @@ switch($λ){
     case uninstall download build makepkg
         _$λ $1 &&
             shift || exit
-    case install
+    case -i
         _install $1 &&
             shift || exit
     case -S
