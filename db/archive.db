@@ -248,5 +248,6 @@ portal=(f2e589972c CONFIGURE)
 
 # base
 iwd=(71533fe3b8 CONFIGURE --disable-systemd-service LIBS=-lncursesw)
-sudo=(6d6ee863a3 CONFIGURE)
+doas=(4e98828056 )
+
 
