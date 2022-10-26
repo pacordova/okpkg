@@ -159,7 +159,7 @@ fn _makepkg {
     find $basename -exec touch -hd @$SOURCE_DATE_EPOCH '{}' ';'
 
     tar --sort=name \
-        --mtime="@${SOURCE_DATE_EPOCH}" \
+        --mtime=@$SOURCE_DATE_EPOCH \
         --owner=0 --group=0 --numeric-owner \
         --strip-components=1 \
         -cf $basename.tar $basename
