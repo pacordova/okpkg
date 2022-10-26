@@ -9,7 +9,7 @@ grep=(5c10da3124 CONFIGURE)
 make=(e05fdde47c CONFIGURE)
 patch=(ac610bda97 CONFIGURE)
 sed=(f79b0cfea7 CONFIGURE)
-bsdtar=(df28391779 CONFIGURE)
+tar=(63bebd2687 CONFIGURE)
 xz=(f6f4910fd0 CONFIGURE)
 rc=(7e2c4ad70f MAKE)
 

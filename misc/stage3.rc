@@ -93,6 +93,6 @@ emerge grep
 emerge make 
 emerge patch
 emerge sed 
-emerge bsdtar
+emerge tar
 emerge xz
 emerge rc

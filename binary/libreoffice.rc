@@ -3,7 +3,7 @@
 . /usr/firepkg/make.conf
 
 # vars
-src='https://download.documentfoundation.org/libreoffice/stable/7.4.1/rpm/x86_64/LibreOffice_7.4.1_Linux_x86-64_rpm.tar.gz'
+src='https://download.documentfoundation.org/libreoffice/stable/7.4.2/deb/x86_64/LibreOffice_7.4.2_Linux_x86-64_deb.tar.gz'
 basename=`{basename $src .tar.gz}
 destdir=/usr/firepkg/packages/libreoffice7.4
 
@@ -14,12 +14,12 @@ cd $destdir/usr
 
 # download
 curl -LO $src
-bsdtar -xf $basename.tar.gz
+tar -xf $basename.tar.gz
 rm $basename.tar.gz
 
 echo Copying files...
 mv * $basename
-find $basename/RPMS -name '*.rpm' -exec bsdtar -C $destdir -xf '{}' ';'
+find $basename/DEBS -name '*.deb' -exec ar x --output $destdir '{}' ';'
 rm -rf $basename
 mv ../opt lib64
 

@@ -14,11 +14,11 @@ cd $destdir
 
 # download
 curl -LO $src
-bsdtar -xf $basename data.tar.xz
+ar x $basename data.tar.xz
 rm $basename
 
 echo Copying files...
-bsdtar -xf data.tar.xz
+tar -xf data.tar.xz
 rm -rf usr/share/doc
 mkdir usr/bin usr/lib64
 sed -i usr/share/applications/signal-desktop.desktop -e 's|/opt/Signal|/usr/bin|'

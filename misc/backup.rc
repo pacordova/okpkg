@@ -33,9 +33,8 @@ ln -sf /var/lib/pkgtools/packages /var/log/packages
 
 echo backing up...
 
-bsdtar \
-  -cf /home/backup-$date.tar \
+tar \
   --one-file-system \
-  --strip-components 1 \
-  --exclude /usr/firepkg/packages \
-  /
+  --strip-components=1 \
+  --exclude=/usr/firepkg/packages \
+  -cf /home/backup-$date.tar / 

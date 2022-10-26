@@ -14,7 +14,7 @@ cd $destdir/usr
 
 # download
 curl -LO $src
-bsdtar -xf $basename
+tar -xf $basename
 rm $basename
 
 echo Copying files...

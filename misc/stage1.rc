@@ -9,7 +9,7 @@ cd    /usr/firepkg/sources
 firepkg download \
     m4 bash coreutils diffutils findutils \
     gawk grep make patch sed \
-    bsdtar xz rc \
+    tar xz rc \
     pkgconf \
     zlib pigz libressl python3 \
     bison glibc \
@@ -62,4 +62,4 @@ ln -sf gcc libstdc++
 
 # create archive
 cd ..
-bsdtar -cf sources.tar sources
+tar -cf sources.tar sources

@@ -13,7 +13,7 @@ cd $destdir/usr
 
 # download
 curl -Lo firefox.tar.bz2 $src
-bsdtar -xf firefox.tar.bz2
+tar -xf firefox.tar.bz2
 rm firefox.tar.bz2
 
 echo Copying files...

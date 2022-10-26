@@ -14,7 +14,6 @@ libunwind=(4a6aec6669 CONFIGURE)
 nettle=(661f5eb03f CONFIGURE --enable-shared)
 octave=(b48f33d4fc CONFIGURE)
 sharutils=(2b05cff7de CONFIGURE)
-tar=(63bebd2687 CONFIGURE)
 time=(fbacf0c81e CONFIGURE)
 
 # gimp
@@ -249,5 +248,5 @@ portal=(f2e589972c CONFIGURE)
 # base
 iwd=(71533fe3b8 CONFIGURE --disable-systemd-service LIBS=-lncursesw)
 doas=(4e98828056 )
-
+bsdtar=(df28391779 CONFIGURE)
 

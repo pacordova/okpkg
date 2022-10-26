@@ -45,7 +45,7 @@ fn _reformat {
 fn _clean {
     cd /usr/firepkg
     rm -r sources
-    >[2=] bsdtar -xf sources.tar
+    >[2=] tar -xf sources.tar
 }
 
 fn emerge {
@@ -106,8 +106,8 @@ crossflags=(--target=$target --with-sysroot=$destdir) {
         --enable-languages=c,c++ 
 }
 
->[2=] bsdtar -C $destdir -Pxf /usr/firepkg/packages/linux-headers.tar.xz
->[2=] bsdtar -C $destdir -Pxf /usr/firepkg/packages/etc.tar.xz
+>[2=] tar -C $destdir -xf /usr/firepkg/packages/linux-headers.tar.xz
+>[2=] tar -C $destdir -xf /usr/firepkg/packages/etc.tar.xz
 
 
 ######################################
@@ -156,7 +156,7 @@ crossflags=(--host=$host --build=$build $dirflags) {
     emerge make --without-guile
     emerge patch
     emerge sed
-    emerge bsdtar --without-xml2
+    emerge tar
     emerge xz
     emerge rc
     
@@ -188,4 +188,4 @@ crossflags=(--host=$host --build=$build $dirflags) {
 rm -r $destdir/usr/firepkg
 rm -r $destdir/tools
 git clone /usr/firepkg $destdir/usr/firepkg
->[2=] bsdtar -C $destdir/usr/firepkg -xf /usr/firepkg/sources.tar
+>[2=] tar -C $destdir/usr/firepkg -xf /usr/firepkg/sources.tar

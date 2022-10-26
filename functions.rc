@@ -79,7 +79,7 @@ fn _install {
     >>$_ echo '>[2=]' rm -r ''/usr/firepkg/packages/$basename''
     >>$_ echo '>[2=]' rm -d ''/usr/firepkg/uninstall/rm-$basename.rc''
 
-    >[1=] bsdtar -C / -xvPf $1 |[2]
+    >[1=] tar -C / -xvf $1 |[2]
     sed 's|^x |>[2=] rm -d ''/|g;s|$|''|g' |
     >>$_ sort -r
 
@@ -109,7 +109,7 @@ fn _download {
     echo $1 $basename |
         sha256sum -c || exit
 
-    bsdtar -C $destdir --strip-components 1 -xf $basename
+    tar -C $destdir --strip-components=1 -xf $basename
 
     if(test -f $diff)
         patch -d $destdir -p1 <$diff
@@ -158,9 +158,11 @@ fn _makepkg {
     # set mtime
     find $basename -exec touch -hd @$SOURCE_DATE_EPOCH '{}' ';'
 
-    find $basename -print |
-    sort -r | 
-    bsdtar --uid 0 --gid 0 --strip-components 1 -cnf $basename.tar -T -
+    tar --sort=name \
+        --mtime="@${SOURCE_DATE_EPOCH}" \
+        --owner=0 --group=0 --numeric-owner \
+        --strip-components=1 \
+        -cf $basename.tar $basename
 
     xz -T0 -f $basename.tar &&
         rm -r $basename
