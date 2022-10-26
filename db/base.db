@@ -84,7 +84,7 @@ psmisc=(7f0cceeace CONFIGURE)
 shadow-utils=(41f093ce58 CONFIGURE --with-group-name-max-length=32)
 tcsh=(60be2c504b CONFIGURE)
 tzdata=(067f0f4bee MAKE)
-vim=(a6456bc154 CONFIGURE --with-features=tiny)
+vim=(a6456bc154 CONFIGURE)
 which=(f4a245b941 CONFIGURE)
 xorriso=(3ac155f0ca CONFIGURE)
 
