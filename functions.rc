@@ -96,7 +96,7 @@ fn _download {
     destdir=/usr/firepkg/sources/$1
 
     rm -r $destdir >[2=]
-    mkdir -p $destdir/usr
+    mkdir -p $destdir$PREFIX
 
     eval `{cat $db | grep '^'$1=} &&
         *=$$1 &&
