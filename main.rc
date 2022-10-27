@@ -29,7 +29,7 @@ switch($λ){
         _install $1 &&
             shift || exit
     case makepkg
-        makepkg $1 &&
+        _makepkg $1 &&
             shift || exit
     case chroot
         _chroot $1
