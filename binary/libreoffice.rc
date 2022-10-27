@@ -19,14 +19,17 @@ rm $basename.tar.gz
 
 echo Copying files...
 find DEBS -name '*.deb' -exec ar x '{}' data.tar.xz ';' -exec tar -xf data.tar.xz ';'
-rm -rf DEBS readmes data.tar.xz
 mv opt usr/lib64
+ln -sf /usr/lib64/libreoffice7.4/program/soffice usr/bin/libreoffice7.4
+rm -r usr/share/applications 
+mv usr/lib64/libreoffice7.4/share/xdg usr/share/applications
 
-cd usr/bin
-ln -sf /usr/lib64/libreoffice7.4/program/soffice libreoffice7.4
-
-cd ../lib64
-mv libreoffice7.4/share/xdg/*.desktop ../share/applications
+echo cleanup...
+rm -r DEBS 
+rm -r readmes 
+rm -r data.tar.xz
+rm -r usr/local
+rm -r usr/lib
 
 echo Running makepkg...
 firepkg makepkg $destdir
