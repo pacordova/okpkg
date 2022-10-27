@@ -8,8 +8,8 @@ basename=`{basename $src .tar.gz}
 destdir=/usr/firepkg/packages/libreoffice7.4
 
 # setup destdir
-rm -rf $destdir
-mkdir -p $destdir/usr/bin
+rm -r $destdir >[2=]
+mkdir $destdir
 cd $destdir
 
 # download
@@ -17,12 +17,16 @@ curl -LO $src
 tar --strip-components=1 -xf $basename.tar.gz
 rm $basename.tar.gz
 
-echo Copying files...
+# skeleton
+mkdir usr
+mkdir usr/bin
+
+echo copying files...
 find DEBS -name '*.deb' -exec ar x '{}' data.tar.xz ';' -exec tar -xf data.tar.xz ';'
 mv opt usr/lib64
 ln -sf /usr/lib64/libreoffice7.4/program/soffice usr/bin/libreoffice7.4
-rm -r usr/share/applications 
-mv usr/lib64/libreoffice7.4/share/xdg usr/share/applications
+rm -r usr/share/applications &&
+    mv usr/lib64/libreoffice7.4/share/xdg usr/share/applications
 
 echo cleanup...
 rm -r DEBS 
@@ -31,8 +35,8 @@ rm -r data.tar.xz
 rm -r usr/local
 rm -r usr/lib
 
-echo Running makepkg...
+echo makepkg...
 firepkg makepkg $destdir
 
-echo Installing...
+echo installing...
 firepkg -i $destdir.tar.xz

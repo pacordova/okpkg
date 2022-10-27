@@ -8,35 +8,33 @@ basename=`{basename $src}
 destdir=/usr/firepkg/packages/discord
 
 # setup destdir
-rm -rf $destdir
-mkdir -p $destdir/usr
-cd $destdir/usr
+rm -r $destdir >[2=]
+mkdir $destdir
+cd $destdir
 
 # download
 curl -LO $src
 tar -xf $basename
 rm $basename
 
-echo Copying files...
-mkdir lib64 bin share
+# spooky skeleton
+mkdir usr
+mkdir usr/lib64 
+mkdir usr/bin 
+mkdir usr/share
+mkdir usr/share/applications
+mkdir usr/share/icons
+mkdir usr/share/icons/hicolor
 
-cd share
-mkdir -p applications icons/hicolor
-cd ..
+echo copying files...
+mv Discord usr/lib64/discord
+mv usr/lib64/discord/discord.desktop usr/share/applications
+mv usr/lib64/discord/discord.png usr/share/icons/hicolor
+ln -s /usr/lib64/discord/Discord usr/bin/discord
+sed -i usr/share/applications/discord.desktop -e 's|^Exec=.*$|Exec=/usr/bin/discord|'
 
-cd lib64
-mv ../Discord discord
-sed -i discord/discord.desktop -e 's|^Exec=.*$|Exec=/usr/bin/discord|'
-mv discord/discord.desktop ../share/applications
-mv discord/discord.png ../share/icons/hicolor
-cd ..
-
-cd bin
-ln -s /usr/lib64/discord/Discord discord
-cd ..
-
-echo Running makepkg...
+echo makepkg...
 firepkg makepkg $destdir
 
-echo Installing...
+echo installing...
 firepkg -i $destdir.tar.xz
