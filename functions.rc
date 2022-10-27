@@ -79,9 +79,9 @@ fn _install {
     >>$_ echo '>[2=]' rm -r ''/usr/firepkg/packages/$basename''
     >>$_ echo '>[2=]' rm -d ''/usr/firepkg/uninstall/rm-$basename.rc''
 
-    >[1=] tar -C / -xvf $1 |[2]
-    sed 's|^x |>[2=] rm -d ''/|g;s|$|''|g' |
-    >>$_ sort -r
+    tar -C / -xvf $1 |
+    sed 's|^|>[2=] rm -d ''/|g;s|$|''|g' |
+    sort -r >>$_
 
     chmod +x $_
 }
@@ -144,25 +144,22 @@ fn _build {
 
 fn _makepkg {
     basename=`{basename $1}
-    cd `{dirname $1}
 
-    # cleaning
-    >[2=] strip -S $basename/usr/lib64/*
-    >[2=] strip -s $basename/usr/bin/*
-    >[2=] strip -s $basename/bin/*
-    >[2=] rm -r    $basename/usr/share/doc
-    >[2=] rm -r    $basename/usr/doc
-    >[2=] rm -r    $basename/usr/share/info
-    >[2=] find $basename -name '*.pyc' -delete
-
-    # set mtime
-    find $basename -exec touch -hd @$SOURCE_DATE_EPOCH '{}' ';'
+    cd $1
+    # strip debugging, delete unneeded files, etc.
+    >[2=] strip -S usr/lib64/*
+    >[2=] strip -s usr/bin/*
+    >[2=] strip -s bin/*
+    >[2=] rm -r    usr/share/doc
+    >[2=] rm -r    usr/doc
+    >[2=] rm -r    usr/share/info
+    >[2=] find . -name '*.pyc' -delete
 
     tar --sort=name \
         --mtime=@$SOURCE_DATE_EPOCH \
         --owner=0 --group=0 --numeric-owner \
-        --strip-components=1 \
-        -cf $basename.tar $basename
+        -cf ../$basename.tar *
+    cd ..
 
     xz -T0 -f $basename.tar &&
         rm -r $basename
