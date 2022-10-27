@@ -24,6 +24,7 @@ mkdir usr/bin usr/lib64
 sed -i usr/share/applications/signal-desktop.desktop -e 's|/opt/Signal|/usr/bin|'
 mv opt/Signal usr/lib64/signal-desktop
 rm -d opt
+rm data.tar.xz
 
 cd usr/bin
 ln -sf /usr/lib64/signal-desktop/signal-desktop signal-desktop
@@ -33,4 +34,4 @@ echo Running makepkg...
 firepkg makepkg $destdir
 
 echo Installing...
-firepkg install $destdir.tar.xz
+firepkg -i $destdir.tar.xz

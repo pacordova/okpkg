@@ -9,30 +9,27 @@ destdir=/usr/firepkg/packages/libreoffice7.4
 
 # setup destdir
 rm -rf $destdir
-mkdir -p $destdir/usr
-cd $destdir/usr
+mkdir -p $destdir/usr/bin
+cd $destdir
 
 # download
 curl -LO $src
-tar -xf $basename.tar.gz
+tar --strip-components=1 -xf $basename.tar.gz
 rm $basename.tar.gz
 
 echo Copying files...
-mv * $basename
-find $basename/DEBS -name '*.deb' -exec ar x --output $destdir '{}' ';'
-rm -rf $basename
-mv ../opt lib64
+find DEBS -name '*.deb' -exec ar x '{}' data.tar.xz ';' -exec tar -xf data.tar.xz ';'
+rm -rf DEBS readmes data.tar.xz
+mv opt usr/lib64
 
-cd bin
+cd usr/bin
 ln -sf /usr/lib64/libreoffice7.4/program/soffice libreoffice7.4
-cd ..
 
-cd lib64
+cd ../lib64
 mv libreoffice7.4/share/xdg/*.desktop ../share/applications
-cd ..
 
 echo Running makepkg...
 firepkg makepkg $destdir
 
 echo Installing...
-firepkg install $destdir.tar.xz
+firepkg -i $destdir.tar.xz
