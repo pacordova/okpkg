@@ -17,18 +17,18 @@ curl -LO $src
 ar x $basename data.tar.xz
 rm $basename
 
-echo Copying files...
+echo copying files...
 tar -xf data.tar.xz
 rm -rf usr/share/doc
-mkdir usr/bin usr/lib64
+mkdir usr/bin 
+mkdir usr/lib64
 sed -i usr/share/applications/signal-desktop.desktop -e 's|/opt/Signal|/usr/bin|'
 mv opt/Signal usr/lib64/signal-desktop
+ln -sf /usr/lib64/signal-desktop/signal-desktop usr/bin/signal-desktop
+
+echo cleanup...
 rm -d opt
 rm data.tar.xz
-
-cd usr/bin
-ln -sf /usr/lib64/signal-desktop/signal-desktop signal-desktop
-cd ../..
 
 echo Running makepkg...
 firepkg makepkg $destdir
