@@ -207,7 +207,7 @@ b900899589c4c1f83e6671a2383a3437cfa70c3a275cb266bddbbc6c4eaf71a2  https://github
 
 # sourceforge
 0856f71b3eb34a1b663d0a8e6363dfcbc519e63d847330498898658e2972dbe8  https://downloads.sourceforge.net/acpid2/acpid-2.0.33.tar.xz
-6e8c0728fe5c7cd3f93a6acce43046c5e4736c7b4b68e032e9350daa0efc0354  https://prdownloads.sourceforge.net/expat/expat-2.4.9.tar.xz
+ef2420f0232c087801abf705e89ae65f6257df6b7931d37846a193ef2e8cdcbe  https://prdownloads.sourceforge.net/expat/expat-2.5.0.tar.xz
 4dae6fdcd2bb0bb6c37b5f97c33c2be954da743985369cddac3546e3218bffb8  https://sourceforge.net/projects/pcre/files/pcre/8.45/pcre-8.45.tar.bz2
 4518b3e7aafd34ec07d0063d250fd474999b20b200218c3ae56f5d2113f141b4  https://sourceforge.net/projects/procps-ng/files/Production/procps-ng-3.3.17.tar.xz
 7f0cceeace2050c525f3ebb35f3ba01d618b8d690620580bdb8cd8269a0c1679  https://sourceforge.net/projects/psmisc/files/psmisc/psmisc-23.4.tar.xz
@@ -550,3 +550,4 @@ c445837756fb988f2c95db8dc55d7937d14bca0cdfa292de81322ca2556ec39a  https://ftp.is
 1f6402daec5a68288ff9321d23f74839d671fb1ca099fb879e8a7ffb318d502f  https://mirrors.slackware.com/slackware/slackware64-current/source/a/elvis/elvis-2.2_0.tar.bz2
 20df7ae5154b3830355f8ab4269123a87affdea59fe74fe9292a91d0d7e17b2f  https://w1.fi/releases/wpa_supplicant-2.10.tar.gz
 4e98828056d6266bd8f2c93e6ecf12a63a71dbfd70a5ea99ccd4ab6d0745adf0  https://github.com/Duncaen/OpenDoas/releases/download/v6.8.2/opendoas-6.8.2.tar.xz
+

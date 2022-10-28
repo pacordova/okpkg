@@ -6,7 +6,12 @@ rm -r $srcdir >[2=]
 mkdir $srcdir
 cd    $srcdir
 
-firepkg download \
+fn download {
+    for(i in $*)
+        firepkg download $i >[2=1] | grep -e 'OK' -e 'FAILED'
+}
+
+download \
     m4 bash coreutils diffutils findutils \
     gawk grep make patch sed \
     tar xz rc \
