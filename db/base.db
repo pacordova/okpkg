@@ -44,16 +44,18 @@ ncurses=(97fc51ac2b CONFIGURE --with-shared --without-cxx --enable-pc-files --en
 
 # more utils
 bc=(a37df8b9a1 CONFIGURE --disable-generated-tests); dirflags=(--libdir=$LIBDIR)
+cmake=(4931e277a4 CONFIGURE); dirflags=()
 flex=(e87aae032b CONFIGURE)
 gettext=(d20fcbb537 CONFIGURE)
 gperf=(588546b945 CONFIGURE)
-samurai=(3b8cf51548 MAKE)
+ninja=(ce35865411 CMAKE)
 util-linux=(634e6916ad CONFIGURE --disable-^(chfn-chsh login nologin su setpriv runuser pylibmount) --without-^(python systemd systemdsystemunitdir))
 
 # libraries
 dbus=(f77620140e CONFIGURE --enable-user-session --with-systemduserunitdir=no --with-systemdsystemunitdir=no --with-system-socket=/run/dbus/system_bus_socket)
 eudev=(19847cafec CONFIGURE)
 file=(c076fb4d02 CONFIGURE)
+json-c=(b8d80a1ddb CMAKE)
 libaio=(f69e580042 MAKE libdir=$LIBDIR)
 libcap2=(0c637b8f44 MAKE LIBDIR=$LIBDIR)
 libcheck=(a8de4e0bac CONFIGURE)
@@ -70,7 +72,6 @@ popt=(5159bc03a2 CONFIGURE)
 readline=(7589a2381a CONFIGURE --with-curses)
 
 # system
-cron=(c445837756 MAKE)
 e2fsprogs=(2f16c91767 CONFIGURE --enable-elf-shlibs --disable-^(libblkid libuuid uuidd fsck))
 kbd=(55f0740458 CONFIGURE --disable-vlock --disable-tests)
 kmod=(f897dd7269 CONFIGURE)
@@ -78,14 +79,23 @@ less=(6aadf54be8 CONFIGURE)
 man-pages=(614dae3efe MAKE)
 mandoc=(8bf0d570f0 CONFIGURE)
 openssh=(0397430216 CONFIGURE)
-parted=(4938dd5c1c CONFIGURE)
 procps-ng=(4518b3e7aa CONFIGURE --disable-kill)
 psmisc=(7f0cceeace CONFIGURE)
 shadow-utils=(41f093ce58 CONFIGURE --with-group-name-max-length=32)
-tcsh=(60be2c504b CONFIGURE)
 tzdata=(067f0f4bee MAKE)
 vim=(a6456bc154 CONFIGURE)
 which=(f4a245b941 CONFIGURE)
+
+# system-dev 
+autoconf=(64ebcec9f8 CONFIGURE)
+automake=(af6ba39142 CONFIGURE)
+cron=(c445837756 MAKE)
+git=(d768528e64 CONFIGURE)
+gnupg1=(c9462f17e6 CONFIGURE --enable-noexecstack)
+parted=(4938dd5c1c CONFIGURE)
+sudo=(6d6ee863a3 CONFIGURE)
+tcsh=(60be2c504b CONFIGURE)
+tmux=(e4fd347843 CONFIGURE)
 xorriso=(3ac155f0ca CONFIGURE)
 
 # network
@@ -107,18 +117,6 @@ connman=(79fb40f4fd CONFIGURE --without-systemdunitdir --disable-wispr LIBS=-lnc
 bzip2=(ab5a03176e MAKE PREFIX=$destdir/usr)
 lzo=(c0f8929432 CONFIGURE --enable-shared)
 zstd=(7c42d56fac MAKE)
-
-# devtools
-autoconf=(64ebcec9f8 CONFIGURE)
-automake=(af6ba39142 CONFIGURE)
-cmake=(4931e277a4 CONFIGURE); dirflags=()
-ninja=(ce35865411 CMAKE)
-git=(d768528e64 CONFIGURE)
-gnupg1=(c9462f17e6 CONFIGURE --enable-noexecstack)
-json-c=(b8d80a1ddb CMAKE)
-lua=(164c784965 MAKE INSTALL_TOP=$destdir$PREFIX INSTALL_LIB=$destdir$LIBDIR INSTALL_CMOD=$destdir$LIBDIR/lua MYCFLAGS=$CFLAGS)
-sudo=(6d6ee863a3 CONFIGURE)
-tmux=(e4fd347843 CONFIGURE)
 
 # linux
 acpid2=(0856f71b3e CONFIGURE)

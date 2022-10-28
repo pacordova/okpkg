@@ -13,14 +13,16 @@ firepkg download \
     pkgconf \
     zlib pigz libressl python3 \
     bison glibc \
-    perl texinfo binutils \
+    perl \
+    texinfo binutils \
     gmp mpfr libmpc gcc \
-    ncurses bc flex gettext gperf \
-    samurai util-linux \
-    dbus eudev file libaio libcap2 \
-    libcheck libexpat libevent libffi libpipeline \
-    libpsl libusb lvm2 pcre2 pcre \
-    popt readline \
+    ncurses \
+    cmake ninja \
+    bc flex gettext gperf util-linux \
+    dbus eudev file json-c libaio \
+    libcap2 libcheck libexpat libevent libffi \
+    libpipeline libpsl libusb lvm2 pcre2 \
+    pcre popt readline \
     e2fsprogs \
     kbd kmod \
     man-pages mandoc \
@@ -28,12 +30,12 @@ firepkg download \
     tzdata \
     shadow-utils \
     vim less \
-    tcsh which openssh parted xorriso \
+    which openssh \
     curl dhcpcd iproute2 wget \
     glib2 libmnl libnftnl iptables connman \
     bzip2 lzo zstd \
-    autoconf automake cmake git \
-    gnupg1 json-c lua sudo tmux \
+    autoconf automake git gnupg1 \
+    parted sudo tcsh tmux xorriso \
     alsa-lib alsa-utils \
     acpid2 lm-sensors pciutils usbutils \
     efivar efibootmgr \

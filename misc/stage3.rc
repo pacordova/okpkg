@@ -45,42 +45,63 @@ rm /usr/lib64/libcursesw.so
 echo 'INPUT(-lncursesw)' > /usr/lib64/libcursesw.so
 ln -sf libncurses.so /usr/lib64/libcurses.so
 
+# build utils
+emerge cmake ninja
+
 # more utils
 emerge bc
 emerge flex
 emerge gettext 
 emerge gperf 
-emerge samurai
 emerge util-linux
 
 # libraries
 emerge libcap2 libcheck libffi
 emerge libpipeline libpsl libusb 
-emerge file popt readline
+emerge file json-c popt readline
 emerge eudev libusb usbutils
 emerge libexpat dbus
 emerge libaio lvm2
 
-# linux
-emerge acpid2
-emerge e2fsprogs dosfstools
-emerge mandoc man-pages
-emerge efivar efibootmgr 
+# system
+emerge e2fsprogs 
 emerge kbd kmod 
-emerge pciutils
+emerge less
+emerge mandoc man-pages
 emerge procps-ng psmisc
 emerge shadow-utils
-emerge sudo
 emerge tzdata
+emerge vim
+emerge openssh which 
+
+# system-dev
+emerge autoconf automake
+emerge cron
+emerge git
+emerge gnupg1
+emerge parted
+emerge sudo
+emerge tcsh
+emerge tmux
+emerge xorriso
 
 # networking
 emerge iproute2 iputils
-emerge dhcpcd iwd
-emerge curl
+emerge curl dhcpcd wget
 
-# extra
-emerge bzip2 cron less parted
-emerge tcsh vim which zstd
+# compression
+emerge bzip2 lzo zstd
+
+# linux
+emerge acpid2
+emerge alsa-lib alsa-utils
+emerge btrfsprogs
+emerge cryptsetup
+emerge dosfstools
+emerge efivar efibootmgr 
+emerge lm-sensors
+emerge pciutils
+emerge usbutils
 
 # rebuild
 emerge m4

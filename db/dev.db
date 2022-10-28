@@ -10,6 +10,7 @@ liburcu=(3213f33d2b CONFIGURE)
 openblas=(f36ba3d7a6 CMAKE -DBUILD_SHARED_LIBS=ON)
 
 # languages
+lua=(164c784965 MAKE INSTALL_TOP=$destdir$PREFIX INSTALL_LIB=$destdir$LIBDIR INSTALL_CMOD=$destdir$LIBDIR/lua MYCFLAGS=$CFLAGS)
 r=(4d52db486d CONFIGURE --disable-java --without-recommended-packages --without-x --with-blas=openblas --with-lapack)
 ruby=(3586861cb2 CONFIGURE)
 
