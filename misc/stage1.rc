@@ -1,10 +1,10 @@
 #!/bin/rc
 
 # download stage
-
-rm -r /usr/firepkg/sources >[2=]
-mkdir /usr/firepkg/sources
-cd    /usr/firepkg/sources
+srcdir=/usr/firepkg/sources
+rm -r $srcdir >[2=]
+mkdir $srcdir
+cd    $srcdir
 
 firepkg download \
     m4 bash coreutils diffutils findutils \
@@ -41,27 +41,23 @@ firepkg download \
     efivar efibootmgr \
     dosfstools btrfsprogs cryptsetup \
 
-# cron is a shar
-mkdir cron
-cd cron
-    curl -LO https://ftp.isc.org/isc/cron/cron_4.1.shar
-    sh cron_4.1.shar
-    patch -p1 < ../../patches/cron.diff
-cd ..
-
-# download libs for gcc
-cd gcc
-    ./contrib/download_prerequisites
-cd ..
 
 # symlink for perl
-cd perl
-    ln -s configure.gnu configure
-cd ..
+ln -s configure.gnu $srcdir/perl/configure
 
 # symlink for libstdc++
 ln -sf gcc libstdc++
 
+# cron is a shar
+mkdir $srcdir/cron
+cd $srcdir/cron
+curl -LO https://ftp.isc.org/isc/cron/cron_4.1.shar
+sh cron_4.1.shar
+patch -p1 < ../../patches/cron.diff
+
+# download libs for gcc
+cd $srcdir/gcc
+./contrib/download_prerequisites
+
 # create archive
-cd ..
-tar -cf sources.tar sources
+tar -cf $srcdir.tar $srcdir
