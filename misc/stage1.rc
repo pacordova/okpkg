@@ -6,7 +6,7 @@ rm -r /usr/firepkg/sources >[2=]
 mkdir /usr/firepkg/sources
 cd    /usr/firepkg/sources
 
-firepkg _download \
+firepkg download \
     m4 bash coreutils diffutils findutils \
     gawk grep make patch sed \
     tar xz rc \
