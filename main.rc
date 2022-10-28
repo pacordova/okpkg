@@ -11,7 +11,7 @@ switch($λ){
     case backup
         /usr/firepkg/misc/backup.rc
     case -h *
-        echo 'Usage: firepkg [-SRih|makepkg|chroot|timesync|backup] [arg ...]'
+        echo 'Usage: firepkg [-SRih|makepkg|chroot|download|build|timesync|backup] [arg ...]'
 }
 
 while(~ $#1 1)
@@ -28,12 +28,9 @@ switch($λ){
     case -i
         _install $1 &&
             shift || exit
-    case makepkg
-        _makepkg $1 &&
+    case makepkg download build
+        _$λ $1 &&
             shift || exit
     case chroot
         _chroot $1
-    case _download _build 
-        $λ $1 &&
-            shift || exit
 }
