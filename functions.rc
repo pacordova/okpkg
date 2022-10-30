@@ -37,8 +37,10 @@ fn AUTORECONF {
 fn CMAKE {
     *=(-DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_BUILD_TYPE=Release $*)
 
-    cmake . -G Ninja -B build $* &&
-        DESTDIR=$destdir ninja -C build install
+    mkdir build && cd build
+    	cmake .. $* && 
+	MAKE
+    cd ..
 }
 
 fn MESON {
