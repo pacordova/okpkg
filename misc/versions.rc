@@ -1,0 +1,12 @@
+#!/bin/rc
+
+# current db versions
+{ for(p in `{awk '{gsub(/.*=\(/, ""); print $1}' /usr/firepkg/db/base.db | grep -v '#' | grep -v '^$' | grep -v 'libdir' | grep -v ')'}) 
+    awk '/'$p'/ {print $2}' /usr/firepkg/db/url.db } | sort | uniq > current.txt
+
+# distrowatch urls
+curl https://distrowatch.com/packages.php | grep '<td><a href=' | awk -F'"' '{print $2}' | sed 's/ftp.gnu.org.gnu/ftpmirror.gnu.org/' | sort | uniq > distrowatch.txt
+
+diff current.txt distrowatch.txt | awk '/</ {print $2}' > pass1.txt
+
+# check with Arch Linux
