@@ -1,35 +1,36 @@
-Note, sed:
-     Python->python3
-     lvm->lvm2
+# manually check bc, eudev, xorriso
+# toolchain is separate (gcc, binutils, glibc)
+# gmp, mpc, mpfr should match gcc
+# gnupg1 is held back
 
-PKGNAME     ARCHPKG     REPO
--------     -------     ----
-==== DISTROWATCH ===========
-alsa-lib    alsa-lib    extra
-autoconf    autoconf    core
-automake    automake    core
-bash        bash        core
-bison       bison       core
-bzip2       bzip2       core
-cmake       cmake       extra 
-coreutils   coreutils   core
-curl        curl        core
-diffutils   diffutils   core
-efibootmgr  efibootmgr  core
-file        file        core
-findutils   findutils   core
-flex        flex        core
-gawk        gawk        core
-gettext     gettext     core 
-e2fsprogs   e2fsprogs   core
-git         git         extra
-grep        grep        core
-iptables    iptables    core
-kmod        kmod        core
-less        less        core
+###############
+# DISTROWATCH #
+###############
+alsa-lib
+autoconf
+automake
+bash
+bison
+bzip2
+cmake 
+coreutils
+curl
+diffutils
+efibootmgr
+file
+findutils
+flex
+gawk
+gettext 
+e2fsprogs
+git
+grep
+iptables
+kmod
+less
 libressl
-lua         lua         extra
-lvm2        lvm2        core
+lua
+lvm2
 m4
 make
 man-pages
@@ -49,8 +50,11 @@ wget
 xz
 zlib
 
-ffmpeg      ffmpeg      extra
-firejail    firejail    community
+#####################
+# DISTROWATCH EXTRA #
+#####################
+ffmpeg  
+firejail
 freetype
 ghostscript
 gimp
@@ -66,6 +70,9 @@ xfdesktop
 xorg-server
 ruby
 
+#####################
+# DISTROWATCH MAYBE #
+#####################
 libtool
 wireshark
 wine
@@ -91,13 +98,12 @@ cups
 cdrkit
 bitcoin
 bind
-============================
-==== ARCH ==================
-manually check bc, eudev, xorriso
-toolchain is separate (gcc, binutils, glibc)
-gmp, mpc, mpfr should match gcc
-gnupg1 is held back
-============================
+
+########
+# ARCH #
+########
+PKGNAME           ARCH-PACKAGE
+-------           ------------
 acpid2            community::acpid
 alsa-utils        extra::alsa-utils
 btrfs-progs       core::btrfs-progs
