@@ -92,3 +92,57 @@ cdrkit
 bitcoin
 bind
 ============================
+==== ARCH ==================
+manually check bc, eudev, xorriso
+toolchain is separate (gcc, binutils, glibc)
+gmp, mpc, mpfr should match gcc
+gnupg1 is held back
+============================
+acpid2            community::acpid
+alsa-utils        extra::alsa-utils
+btrfs-progs       core::btrfs-progs
+cryptsetup        core::cryptsetup
+dbus              core::dbus
+dhcpcd            core::dhcpcd
+dosfstools        core::dosfstools
+efivar            core::efivar
+glib2             core::glib2
+gperf             extra::gperf
+iproute2          core::iproute2
+iputils           core::iputils
+json-c            core::json-c
+kbd               core::kbd
+libaio            core::libaio
+libcap2           core::libcap
+libcheck          extra::check
+libevent          core::libevent
+libexpat          core::expat
+libffi            core::libffi
+libmnl            core::libmnl
+libnftnl          core::libnftnl
+libpipeline       core::libpipeline
+libpsl            core::libpsl
+libusb            core::libusb
+lm-sensors        extra::lm_sensors
+lzo               core::lzo
+mandoc            community::mandoc
+ninja             community::ninja
+patch             core::patch
+pciutils          core::pciutils
+pcre              core::pcre
+pcre2             core::pcre2
+popt              core::popt
+connman           community::connman
+pigz              community::pigz
+pkgconf           core::pkgconf
+procps-ng         core::procps-ng
+psmisc            core::psmisc
+readline          core::readline
+shadow-utils      core::shadow
+sudo              core::sudo
+tcsh              community::tcsh
+tzdata            core::tzdata
+usbutils          core::usbutils
+which             core::which
+zstd              core::zstd
+wpa_supplicant
