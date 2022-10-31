@@ -10,3 +10,34 @@ curl https://distrowatch.com/packages.php | grep '<td><a href=' | awk -F'"' '{pr
 diff current.txt distrowatch.txt | awk '/</ {print $2}' > pass1.txt
 
 # check with Arch Linux
+
+
+# download distrowatch
+curl https://distrowatch.com/packages.php | 
+sed '
+    s/Python/python3/g;
+    s/lvm/lvm2/g' >distrowatch.html
+
+fn dw {
+    grep $1 distrowatch.html | 
+    awk '/<td><a href=/ {
+            gsub(/>/, " "); 
+            gsub(/</, " "); 
+            print $4;
+        }'
+}
+
+fn archlinux {
+    # L=(pkgname archpkg repo)
+    L=`{vlook $1}
+    curl https://archlinux.org/packages/$L(3)/x86_64/$L(2)/ >[2=] | 
+        awk -F'"' '/meta itemprop="version"/{print $4}'
+}
+
+fn vlook {
+    grep '^'$1 metadata.db
+}
+
+fn clean {
+    rm distrowatch.html
+}

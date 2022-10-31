@@ -1,0 +1,94 @@
+Note, sed:
+     Python->python3
+     lvm->lvm2
+
+PKGNAME     ARCHPKG     REPO
+-------     -------     ----
+==== DISTROWATCH ===========
+alsa-lib    alsa-lib    extra
+autoconf    autoconf    core
+automake    automake    core
+bash        bash        core
+bison       bison       core
+bzip2       bzip2       core
+cmake       cmake       extra 
+coreutils   coreutils   core
+curl        curl        core
+diffutils   diffutils   core
+efibootmgr  efibootmgr  core
+file        file        core
+findutils   findutils   core
+flex        flex        core
+gawk        gawk        core
+gettext     gettext     core 
+e2fsprogs   e2fsprogs   core
+git         git         extra
+grep        grep        core
+iptables    iptables    core
+kmod        kmod        core
+less        less        core
+libressl
+lua         lua         extra
+lvm2        lvm2        core
+m4
+make
+man-pages
+ncurses
+openssh
+parted
+perl
+python3 
+sed
+sysvinit
+tar
+texinfo
+tmux
+util-linux
+vim
+wget
+xz
+zlib
+
+ffmpeg      ffmpeg      extra
+firejail    firejail    community
+freetype
+ghostscript
+gimp
+mesa
+pipewire
+pulseaudio
+qemu
+rsync
+sqlite
+transmission
+wayland
+xfdesktop
+xorg-server
+ruby
+
+libtool
+wireshark
+wine
+xfsprogs
+reiserfsprogs
+vlc
+shim
+php
+ntfs-3g
+nmap
+nginx
+httpd
+nano
+mutt
+gstreamer
+groff
+flatpak
+emacs
+doxygen
+docker
+db
+cups
+cdrkit
+bitcoin
+bind
+============================
