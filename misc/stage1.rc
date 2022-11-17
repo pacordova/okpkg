@@ -38,13 +38,13 @@ download \
     which openssh \
     curl dhcpcd iproute2 wget \
     glib2 libmnl libnftnl iptables connman \
-    bzip2 lzo zstd \
+    bzip2 zstd \
     autoconf automake git gnupg1 \
     parted sudo tcsh tmux xorriso \
     alsa-lib alsa-utils \
     acpid2 lm-sensors pciutils usbutils \
     efivar efibootmgr \
-    dosfstools btrfsprogs cryptsetup \
+    dosfstools cryptsetup \
 
 
 # symlink for perl
