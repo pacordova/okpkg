@@ -90,12 +90,11 @@ emerge iproute2 iputils
 emerge curl dhcpcd wget
 
 # compression
-emerge bzip2 lzo zstd
+emerge bzip2 zstd
 
 # linux
 emerge acpid2
 emerge alsa-lib alsa-utils
-emerge btrfsprogs
 emerge cryptsetup
 emerge dosfstools
 emerge efivar efibootmgr 
