@@ -30,8 +30,10 @@ emerge bison glibc
 # perl
 emerge perl
 
-# self-host gcc
+# binutils
 emerge texinfo binutils 
+
+# self-host gcc
 emerge gmp mpfr libmpc gcc
 
 # ncurses
@@ -45,23 +47,17 @@ rm /usr/lib64/libcursesw.so
 echo 'INPUT(-lncursesw)' > /usr/lib64/libcursesw.so
 ln -sf libncurses.so /usr/lib64/libcurses.so
 
-# build utils
-emerge cmake ninja
+# buildtools
+emerge autoconf automake cmake ninja
 
-# more utils
-emerge bc
-emerge flex
-emerge gettext 
-emerge gperf 
-emerge util-linux
+# more tools
+emerge bc flex gettext gperf util-linux
 
 # libraries
-emerge libcap2 libcheck libffi
+emerge eudev file popt readline
+emerge libaio libcap2 libcheck libexpat libffi
 emerge libpipeline libpsl libusb 
-emerge file json-c popt readline
-emerge eudev libusb usbutils
-emerge libexpat dbus
-emerge libaio lvm2
+emerge dbus json-c lvm2 pcre2 pcre
 
 # system
 emerge e2fsprogs 
@@ -72,47 +68,29 @@ emerge procps-ng psmisc
 emerge shadow-utils
 emerge tzdata
 emerge vim
-emerge openssh which 
+emerge which 
 
-# system-dev
-emerge autoconf automake
-emerge cron
-emerge git
-emerge gnupg1
-emerge parted
-emerge sudo
-emerge tcsh
-emerge tmux
-emerge xorriso
+# uefi
+emerge efivar efibootmgr dosfstools
 
 # networking
 emerge iproute2 iputils
-emerge curl dhcpcd wget
+emerge curl wget
+
+# connman
+emerge glib2 libmnl libnftnl iptables connman 
 
 # compression
 emerge bzip2 zstd
 
 # linux
-emerge acpid2
-emerge alsa-lib alsa-utils
-emerge cryptsetup
-emerge dosfstools
-emerge efivar efibootmgr 
-emerge lm-sensors
-emerge pciutils
-emerge usbutils
+emerge alsa-lib alsa-utils \
+    acpid2 cryptsetup lm-sensors pciutils usbutils
 
-# rebuild
-emerge m4
-emerge bash
-emerge coreutils 
-emerge diffutils
-emerge findutils 
-emerge gawk 
-emerge grep 
-emerge make 
-emerge patch
-emerge sed 
-emerge tar
-emerge xz
-emerge rc
+# extra
+emerge cron git openssh sudo tcsh tmux \
+    gnupg1 parted xorriso
+
+# rebuild toolchain
+emerge m4 bash coreutils diffutils findutils \
+    gawk grep make patch sed tar xz rc

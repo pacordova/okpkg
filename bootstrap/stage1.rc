@@ -13,39 +13,38 @@ fn download {
 
 download \
     m4 bash coreutils diffutils findutils \
-    gawk grep make patch sed \
-    tar xz rc \
+    gawk grep make patch sed tar xz rc \
     pkgconf \
-    zlib pigz libressl python3 \
+    zlib pigz \
+    libressl python3 \
     bison glibc \
     perl \
     texinfo binutils \
     gmp mpfr libmpc gcc \
     ncurses \
-    cmake ninja \
+    autoconf automake cmake ninja \
     bc flex gettext gperf util-linux \
-    dbus eudev file json-c libaio \
-    libcap2 libcheck libexpat libevent libffi \
-    libpipeline libpsl libusb lvm2 pcre2 \
-    pcre popt readline \
+    eudev file popt \
+    libaio libcap2 libcheck libexpat libevent \
+    libffi libpipeline libpsl libusb \
+    json-c lvm2 dbus pcre2 pcre \
+    readline \
     e2fsprogs \
+    shadow \
     kbd kmod \
-    man-pages mandoc \
     procps-ng psmisc \
+    man-pages mandoc \
     tzdata \
-    shadow-utils \
-    vim less \
-    which openssh \
-    curl dhcpcd iproute2 wget \
-    glib2 libmnl libnftnl iptables connman \
     bzip2 zstd \
-    autoconf automake git gnupg1 \
-    parted sudo tcsh tmux xorriso \
+    iproute2 iputils \
+    curl wget \
+    vim less which \
+    efivar efibootmgr dosfstools \
+    glib2 libmnl libnftnl iptables connman \
     alsa-lib alsa-utils \
-    acpid2 lm-sensors pciutils usbutils \
-    efivar efibootmgr \
-    dosfstools cryptsetup \
-
+    acpid2 cryptsetup lm-sensors pciutils usbutils \
+    git sudo openssh tmux tcsh \
+    gnupg1 parted xorriso \
 
 # symlink for perl
 ln -s configure.gnu $srcdir/perl/configure
