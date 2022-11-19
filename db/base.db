@@ -9,7 +9,7 @@ grep=(5c10da3124 CONFIGURE)
 make=(e05fdde47c CONFIGURE)
 patch=(ac610bda97 CONFIGURE)
 sed=(f79b0cfea7 CONFIGURE)
-tar=(63bebd2687 CONFIGURE)
+tar=(63bebd2687 CONFIGURE FORCE_UNSAFE_CONFIGURE=1)
 xz=(f6f4910fd0 CONFIGURE)
 rc=(7e2c4ad70f MAKE)
 
@@ -22,6 +22,7 @@ pigz=(b4c9e60344 MAKE)
 
 # python3 
 libressl=(3ab5e5eaef CONFIGURE --enable-nc)
+libffi=(540fb72161 CONFIGURE --with-gcc-arch=x86-64)
 python3=(848cb06a5c CONFIGURE --with-platlibdir=lib64 --enable-shared --without-ensurepip)
 
 # glibc
@@ -62,7 +63,6 @@ libaio=(f69e580042 MAKE libdir=$LIBDIR)
 libcap2=(0c637b8f44 MAKE LIBDIR=$LIBDIR)
 libcheck=(a8de4e0bac CONFIGURE)
 libevent=(92e6de1be9 CONFIGURE)
-libffi=(540fb72161 CONFIGURE --with-gcc-arch=x86-64)
 libpipeline=(0c8367f8b8 CONFIGURE)
 libpsl=(ac6ce1e1fb CONFIGURE)
 libusb=(12ce7a61fc CONFIGURE)

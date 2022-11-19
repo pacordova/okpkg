@@ -18,7 +18,7 @@ emerge pkgconf
 emerge zlib pigz
 
 # python3
-emerge libressl python3
+emerge libressl libffi python3
 
 # python3-modules
 python3 -m ensurepip 
@@ -56,7 +56,7 @@ emerge bc flex gettext gperf util-linux
 # libraries
 emerge eudev expat file popt readline
 emerge libaio libcap2 libcheck libevent
-emerge libffi libpipeline libpsl libusb 
+emerge libpipeline libpsl libusb 
 emerge dbus json-c lvm2 pcre2 pcre
 
 # system
@@ -65,7 +65,7 @@ emerge kbd kmod
 emerge less
 emerge mandoc man-pages
 emerge procps-ng psmisc
-emerge shadow-utils
+emerge shadow
 emerge tzdata
 emerge vim
 emerge which 

@@ -15,7 +15,7 @@ download \
     gawk grep make patch sed tar xz rc \
     pkgconf \
     zlib pigz \
-    libressl python3 \
+    libressl libffi python3 \
     bison glibc \
     perl \
     texinfo binutils \
@@ -25,7 +25,7 @@ download \
     bc flex gettext gperf util-linux \
     eudev expat file popt readline \
     libaio libcap2 libcheck libevent \
-    libffi libpipeline libpsl libusb \
+    libpipeline libpsl libusb \
     json-c lvm2 dbus pcre2 pcre \
     e2fsprogs \
     shadow \
