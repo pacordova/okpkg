@@ -23,11 +23,10 @@ download \
     ncurses \
     autoconf automake cmake ninja \
     bc flex gettext gperf util-linux \
-    eudev file popt \
-    libaio libcap2 libcheck libexpat libevent \
+    eudev expat file popt readline \
+    libaio libcap2 libcheck libevent \
     libffi libpipeline libpsl libusb \
     json-c lvm2 dbus pcre2 pcre \
-    readline \
     e2fsprogs \
     shadow \
     kbd kmod \

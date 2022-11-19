@@ -54,9 +54,9 @@ emerge autoconf automake cmake ninja
 emerge bc flex gettext gperf util-linux
 
 # libraries
-emerge eudev file popt readline
-emerge libaio libcap2 libcheck libexpat libffi
-emerge libpipeline libpsl libusb 
+emerge eudev expat file popt readline
+emerge libaio libcap2 libcheck libevent
+emerge libffi libpipeline libpsl libusb 
 emerge dbus json-c lvm2 pcre2 pcre
 
 # system
