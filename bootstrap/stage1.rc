@@ -1,10 +1,9 @@
 #!/bin/rc
 
-# download stage
 srcdir=/usr/firepkg/sources
+
 rm -r $srcdir >[2=]
 mkdir $srcdir
-cd    $srcdir
 
 fn download {
     for(i in $*)
@@ -50,11 +49,10 @@ download \
 ln -s configure.gnu $srcdir/perl/configure
 
 # symlink for libstdc++
-ln -sf gcc libstdc++
+ln -sf gcc $srcdir/libstdc++
 
 # cron is a shar
-mkdir $srcdir/cron
-cd $srcdir/cron
+mkdir $srcdir/cron && cd $srcdir/cron
 curl -LO https://ftp.isc.org/isc/cron/cron_4.1.shar
 sh cron_4.1.shar
 patch -p1 < ../../patches/cron.diff
@@ -64,4 +62,5 @@ cd $srcdir/gcc
 ./contrib/download_prerequisites
 
 # create archive
-tar -cf $srcdir.tar $srcdir
+cd $srcdir/..
+tar -cf sources.tar sources
