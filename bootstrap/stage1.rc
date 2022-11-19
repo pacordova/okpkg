@@ -26,19 +26,19 @@ download \
     eudev expat file popt readline \
     libaio libcap2 libcheck libevent \
     libpipeline libpsl libusb \
-    json-c lvm2 dbus pcre2 pcre \
+    json-c lvm2 pcre2 pcre \
     e2fsprogs \
     shadow \
     kbd kmod \
     procps-ng psmisc \
     man-pages mandoc \
     tzdata \
+    vim less which \
     bzip2 zstd \
     iproute2 iputils \
-    curl wget \
-    vim less which \
+    curl wget dhcpcd \
     efivar efibootmgr dosfstools \
-    glib2 libmnl libnftnl iptables connman \
+    dbus iwd \
     alsa-lib alsa-utils \
     acpid2 cryptsetup lm-sensors pciutils usbutils \
     git sudo openssh tmux tcsh \

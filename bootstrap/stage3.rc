@@ -75,10 +75,10 @@ emerge efivar efibootmgr dosfstools
 
 # networking
 emerge iproute2 iputils
-emerge curl wget
+emerge curl wget dhcpcd
 
 # connman
-emerge glib2 libmnl libnftnl iptables connman 
+emerge dbus iwd
 
 # compression
 emerge bzip2 zstd
