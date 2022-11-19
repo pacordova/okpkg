@@ -137,6 +137,7 @@ fn _build {
     destdir=/usr/firepkg/packages/$1
 
     rm -r $destdir >[2=]
+    mkdir -p $destdir
 
     eval `{cat $db | grep '^'$1=} &&
         *=$$1 && shift && $*
