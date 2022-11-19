@@ -54,7 +54,6 @@ gperf=(588546b945 CONFIGURE)
 util-linux=(634e6916ad CONFIGURE --disable-^(chfn-chsh login nologin su setpriv runuser pylibmount) --without-^(python systemd systemdsystemunitdir))
 
 # libraries
-dbus=(f77620140e CONFIGURE --enable-user-session --with-systemduserunitdir=no --with-systemdsystemunitdir=no --with-system-socket=/run/dbus/system_bus_socket)
 eudev=(19847cafec CONFIGURE)
 expat=(ef2420f023 CONFIGURE)
 file=(c076fb4d02 CONFIGURE)
@@ -99,13 +98,9 @@ iproute2=(c064b66f6b MAKE LIBDIR=$LIBDIR)
 iputils=(b6f67fc705 MESON -DBUILD_MANS=false)
 wget=(e6d4c76be8 CONFIGURE --with-ssl=openssl)
 
-# connman
-glib2=(ab3d176f31 MESON -Dtests=false)
-libmnl=(171f89699f CONFIGURE)
-libnftnl=(7508a5c414 CONFIGURE)
-iptables=(c109c96bb0 CONFIGURE --enable-shared)
-wpa=(20df7ae515 )
-connman=(79fb40f4fd CONFIGURE --without-systemdunitdir --disable-wispr LIBS=-lncursesw)
+# iwd
+dbus=(f77620140e CONFIGURE --enable-user-session --with-systemduserunitdir=no --with-systemdsystemunitdir=no --with-system-socket=/run/dbus/system_bus_socket)
+iwd=(71533fe3b8 CONFIGURE --disable-systemd-service LIBS=-lncursesw)
 
 # linux
 acpid2=(0856f71b3e CONFIGURE)
