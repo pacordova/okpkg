@@ -36,7 +36,9 @@ download \
     iproute2 iputils \
     curl wget dhcpcd \
     libmnl libnftnl iptables \
-    dbus glib2 libnl3 connman \
+    dbus glib2 \
+    libnl3 wpasupplicant \
+    connman \
 
 # symlink for perl
 ln -s configure.gnu $srcdir/perl/configure
