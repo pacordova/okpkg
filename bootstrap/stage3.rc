@@ -11,16 +11,17 @@ fn emerge {
 
 make -C /usr/firepkg
 
-# track libraries
+# pkg-config
 emerge pkgconf
 
-# gzip
+# compression
+##############
 emerge zlib pigz
+emerge bzip2 zstd
 
 # python3
+##########
 emerge libressl libffi python3
-
-# python3-modules
 python3 -m ensurepip 
 python3 -m pip install meson 
 
@@ -36,6 +37,16 @@ emerge texinfo binutils
 # self-host gcc
 emerge gmp mpfr libmpc gcc
 
+
+# buildtools
+emerge autoconf automake cmake ninja
+
+# additional tools
+###################
+emerge bc flex gettext gperf util-linux
+emerge e2fsprogs 
+emerge shadow
+
 # ncurses
 emerge ncurses
 for (lib in (ncurses form panel menu)) {
@@ -47,50 +58,39 @@ rm /usr/lib64/libcursesw.so
 echo 'INPUT(-lncursesw)' > /usr/lib64/libcursesw.so
 ln -sf libncurses.so /usr/lib64/libcurses.so
 
-# buildtools
-emerge autoconf automake cmake ninja
-
-# more tools
-emerge bc flex gettext gperf util-linux
-
 # libraries
-emerge eudev expat file popt readline
-emerge libaio libcap2 libcheck libevent
-emerge libpipeline libpsl libusb 
-emerge dbus json-c lvm2 pcre2 pcre
+############
+emerge attr acl
+emerge eudev expat file json-c popt readline 
+emerge libaio libcap2 libcheck libevent libpipeline libpsl libusb
+emerge pcre2 pcre
+emerge lvm2
 
-# system
-emerge e2fsprogs 
+# system-software
+##################
 emerge kbd kmod 
-emerge less
 emerge mandoc man-pages
 emerge procps-ng psmisc
-emerge shadow
-emerge tzdata
-emerge vim
-emerge which 
-
-# uefi
-emerge efivar efibootmgr dosfstools
+emerge efivar efibootmgr dosfstools 
+emerge alsa-lib alsa-utils
+emerge acpid2 cryptsetup lm-sensors pciutils usbutils 
+emerge cron git opesnssh sudo tcsh tmux tzdata vim
+# gnu
+emerge gnupg1 less parted which xorriso
 
 # networking
+#############
 emerge iproute2 iputils
 emerge curl wget dhcpcd
 
 # connman
-emerge dbus iwd
+##########
+emerge libmnl libnftnl iptables
+emerge dbus glib2 libnl3
+/usr/firepkg/binary/wpa_supplicant.rc
+emerge connman
 
-# compression
-emerge bzip2 zstd
-
-# linux
-emerge alsa-lib alsa-utils \
-    acpid2 cryptsetup lm-sensors pciutils usbutils
-
-# extra
-emerge cron git openssh sudo tcsh tmux \
-    gnupg1 parted xorriso
-
-# rebuild toolchain
-emerge m4 bash coreutils diffutils findutils \
-    gawk grep make patch sed tar xz rc
+# toolchain
+############
+emerge m4 bash coreutils diffutils findutils
+emerge gawk grep make patch sed tar xz rc
