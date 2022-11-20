@@ -103,6 +103,7 @@ glib2=(ab3d176f31 MESON -Dtests=false)
 libmnl=(171f89699f CONFIGURE)
 libnftnl=(7508a5c414 CONFIGURE)
 iptables=(c109c96bb0 CONFIGURE --enable-shared)
+libnl3=(9fe43ccbee CONFIGURE)
 connman=(79fb40f4fd CONFIGURE --without-systemdunitdir --disable-wispr LIBS=-lncursesw)
 
 # linux
