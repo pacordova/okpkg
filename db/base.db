@@ -16,9 +16,11 @@ rc=(7e2c4ad70f MAKE)
 # pkg-config
 pkgconf=(5fb355b487 CONFIGURE)
 
-# gzip
+# compression
 zlib=(c3e5e9fdd5 CONFIGURE); dirflags=(--libdir=$LIBDIR)
 pigz=(b4c9e60344 MAKE)
+bzip2=(ab5a03176e MAKE PREFIX=$destdir/usr)
+zstd=(7c42d56fac MAKE)
 
 # python3 
 libressl=(3ab5e5eaef CONFIGURE --enable-nc)
@@ -46,14 +48,17 @@ automake=(af6ba39142 CONFIGURE)
 cmake=(4931e277a4 CONFIGURE); dirflags=()
 ninja=(ce35865411 CMAKE)
 
-# other tools
+# additional tools
 bc=(a37df8b9a1 CONFIGURE --disable-generated-tests); dirflags=(--libdir=$LIBDIR)
+e2fsprogs=(2f16c91767 CONFIGURE --enable-elf-shlibs --disable-^(libblkid libuuid uuidd fsck))
 flex=(e87aae032b CONFIGURE)
 gettext=(d20fcbb537 CONFIGURE)
 gperf=(588546b945 CONFIGURE)
 util-linux=(634e6916ad CONFIGURE --disable-^(chfn-chsh login nologin su setpriv runuser pylibmount) --without-^(python systemd systemdsystemunitdir))
 
 # libraries
+acl=(c0234042e1 CONFIGURE)
+attr=(bae1c6949b CONFIGURE)
 eudev=(19847cafec CONFIGURE)
 expat=(ef2420f023 CONFIGURE)
 file=(c076fb4d02 CONFIGURE)
@@ -72,24 +77,37 @@ pcre=(4dae6fdcd2 CONFIGURE --enable-unicode-properties --enable-pcre16 --enable-
 popt=(5159bc03a2 CONFIGURE)
 readline=(7589a2381a CONFIGURE --with-curses)
 
-# system
-e2fsprogs=(2f16c91767 CONFIGURE --enable-elf-shlibs --disable-^(libblkid libuuid uuidd fsck))
+# system-software
+acpid2=(0856f71b3e CONFIGURE)
+alsa-lib=(8a35b7218e CONFIGURE)
+alsa-utils=(e906bf2404 CONFIGURE --disable-^(alsaconf bat xmlto) --with-curses=ncursesw)
+cron=(c445837756 MAKE)
+cryptsetup=(fc0df94518 CONFIGURE --disable-ssh-token)
+dosfstools=(64926eebf9 CONFIGURE --enable-compat-symlinks)
+efibootmgr=(442867d12f MAKE EFIDIR=/boot)
+efivar=(f018ed6e49 MAKE)
+git=(d768528e64 CONFIGURE)
+gnupg1=(c9462f17e6 CONFIGURE --enable-noexecstack)
 kbd=(55f0740458 CONFIGURE --disable-vlock --disable-tests)
 kmod=(f897dd7269 CONFIGURE)
 less=(6aadf54be8 CONFIGURE)
+lm-sensors=(0591f9fa03 MAKE LIBDIR=$LIBDIR)
 man-pages=(614dae3efe MAKE)
 mandoc=(8bf0d570f0 CONFIGURE)
 openssh=(0397430216 CONFIGURE)
+parted=(4938dd5c1c CONFIGURE)
+pciutils=(9d40b97be8 MAKE)
 procps-ng=(4518b3e7aa CONFIGURE --disable-kill)
 psmisc=(7f0cceeace CONFIGURE)
 shadow=(41f093ce58 CONFIGURE --with-group-name-max-length=32)
+sudo=(6d6ee863a3 CONFIGURE)
+tcsh=(60be2c504b CONFIGURE)
+tmux=(e4fd347843 CONFIGURE)
 tzdata=(067f0f4bee MAKE)
+usbutils=(3a079cfad6 CONFIGURE)
 vim=(a6456bc154 CONFIGURE)
 which=(f4a245b941 CONFIGURE)
-
-# compression
-bzip2=(ab5a03176e MAKE PREFIX=$destdir/usr)
-zstd=(7c42d56fac MAKE)
+xorriso=(3ac155f0ca CONFIGURE)
 
 # network
 curl=(2d118b43f5 CONFIGURE --with-openssl --enable-threaded-resolver --with-ca-path=/etc/ssl/certs --with-ca-bundle=/etc/ssl/certs/ca-certificates.crt)
@@ -103,31 +121,6 @@ glib2=(ab3d176f31 MESON -Dtests=false)
 libmnl=(171f89699f CONFIGURE)
 libnftnl=(7508a5c414 CONFIGURE)
 iptables=(c109c96bb0 CONFIGURE --enable-shared)
+dbus=(f77620140e CONFIGURE --enable-user-session --with-systemduserunitdir=no --with-systemdsystemunitdir=no --with-system-socket=/run/dbus/system_bus_socket)
 libnl3=(9fe43ccbee CONFIGURE)
 connman=(79fb40f4fd CONFIGURE --without-systemdunitdir --disable-wispr LIBS=-lncursesw)
-
-# linux
-acpid2=(0856f71b3e CONFIGURE)
-alsa-lib=(8a35b7218e CONFIGURE)
-alsa-utils=(e906bf2404 CONFIGURE --disable-^(alsaconf bat xmlto) --with-curses=ncursesw)
-cryptsetup=(fc0df94518 CONFIGURE --disable-ssh-token)
-dosfstools=(64926eebf9 CONFIGURE --enable-compat-symlinks)
-efibootmgr=(442867d12f MAKE EFIDIR=/boot)
-efivar=(f018ed6e49 MAKE)
-lm-sensors=(0591f9fa03 MAKE LIBDIR=$LIBDIR)
-pciutils=(9d40b97be8 MAKE)
-usbutils=(3a079cfad6 CONFIGURE)
-
-# extra
-cron=(c445837756 MAKE)
-git=(d768528e64 CONFIGURE)
-gnupg1=(c9462f17e6 CONFIGURE --enable-noexecstack)
-parted=(4938dd5c1c CONFIGURE)
-sudo=(6d6ee863a3 CONFIGURE)
-tcsh=(60be2c504b CONFIGURE)
-tmux=(e4fd347843 CONFIGURE)
-xorriso=(3ac155f0ca CONFIGURE)
-
-# btrfs
-lzo=(c0f8929432 CONFIGURE --enable-shared)
-btrfs-progs=(9e9b303a1d CONFIGURE --disable-documentation)
