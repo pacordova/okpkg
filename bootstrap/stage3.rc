@@ -84,8 +84,8 @@ emerge curl wget dhcpcd
 # connman
 ##########
 emerge libmnl libnftnl iptables
-emerge dbus glib2 libnl3
-/usr/firepkg/binary/wpa_supplicant.rc
+emerge dbus glib2 
+emerge libnl3 wpasupplicant
 emerge connman
 
 # toolchain
