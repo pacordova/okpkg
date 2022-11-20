@@ -5,7 +5,7 @@
 src=https://w1.fi/releases/wpa_supplicant-2.10.tar.gz
 basename=`{basename $src}
 md5sum=d26797fcb002898d4ee989179346e1cc
-destdir=/usr/firepkg/packages/wpa_supplicant
+destdir=/usr/firepkg/packages/wpasupplicant
 
 cd /usr/firepkg/sources
 
