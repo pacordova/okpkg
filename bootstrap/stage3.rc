@@ -43,9 +43,8 @@ emerge autoconf automake cmake ninja
 
 # additional tools
 ###################
-emerge bc flex gettext gperf util-linux
-emerge e2fsprogs 
-emerge shadow
+emerge bc flex gettext gperf which
+emerge util-linux e2fsprogs shadow
 
 # ncurses
 emerge ncurses
@@ -72,11 +71,10 @@ emerge kbd kmod
 emerge mandoc man-pages
 emerge procps-ng psmisc
 emerge efivar efibootmgr dosfstools 
-emerge cron git openssh sudo tcsh tmux tzdata vim
 emerge alsa-lib alsa-utils
 emerge acpid2 cryptsetup lm-sensors pciutils usbutils 
-# gnu
-emerge gnupg1 less parted which xorriso
+emerge cron git openssh sudo tcsh tmux tzdata vim
+emerge gnupg1 less parted xorriso
 
 # networking
 #############
