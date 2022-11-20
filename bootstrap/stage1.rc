@@ -21,7 +21,8 @@ download \
     texinfo binutils \
     gmp mpfr libmpc gcc \
     autoconf automake cmake ninja \
-    bc flex gettext gperf util-linux e2fsprogs shadow \
+    bc flex gettext gperf which \
+    util-linux e2fsprogs shadow \
     acl attr eudev expat file ncurses popt readline \
     libaio libcap2 libcheck libevent \
     libpipeline libpsl libusb \
@@ -31,7 +32,7 @@ download \
     man-pages mandoc \
     efivar efibootmgr dosfstools \
     acpid2 cryptsetup git gnupg1 less lm-sensors openssh parted pciutils \
-    sudo tcsh tmux tzdata usbutils vim which xorriso \
+    sudo tcsh tmux tzdata usbutils vim xorriso \
     alsa-lib alsa-utils \
     iproute2 iputils \
     curl wget dhcpcd \
