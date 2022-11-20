@@ -73,8 +73,8 @@ emerge mandoc man-pages
 emerge procps-ng psmisc
 emerge efivar efibootmgr dosfstools 
 emerge alsa-lib alsa-utils
+emerge cron git openssh sudo tcsh tmux tzdata vim
 emerge acpid2 cryptsetup lm-sensors pciutils usbutils 
-emerge cron git opesnssh sudo tcsh tmux tzdata vim
 # gnu
 emerge gnupg1 less parted which xorriso
 
