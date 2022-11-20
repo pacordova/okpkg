@@ -60,9 +60,9 @@ mkdir -p $destdir/etc/dbus-1/system.d
 
 cp wpa_cli wpa_passphrase wpa_supplicant $destdir/usr/sbin
 cp doc/docbook/wpa_supplicant.conf.5 $destdir/usr/share/man/man5
-cp doc/docbook/wpa_cli $destdir/usr/share/man/man8
-cp doc/docbook/wpa_passphrase $destdir/usr/share/man/man8
-cp doc/docbook/wpa_supplicant $destdir/usr/share/man/man8
+cp doc/docbook/wpa_cli.8 $destdir/usr/share/man/man8
+cp doc/docbook/wpa_passphrase.8 $destdir/usr/share/man/man8
+cp doc/docbook/wpa_supplicant.8 $destdir/usr/share/man/man8
 cp dbus/dbus-wpa_supplicant.conf $destdir/etc/dbus-1/system.d
 
 firepkg makepkg $destdir
