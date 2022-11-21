@@ -170,7 +170,7 @@ fn _makepkg {
     tar --sort=name \
         --mtime=@$SOURCE_DATE_EPOCH \
         --owner=0 --group=0 --numeric-owner \
-        -cf ../$1.tar *
+        -cf $1.tar *
     cd ..
 
     xz -T0 -f $1.tar &&
