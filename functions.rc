@@ -94,20 +94,20 @@ fn _uninstall {
 }
 
 fn _download {
+    destdir=/usr/firepkg/sources/$1
+    rm -r $destdir >[2=]
+    mkdir -p $destdir$PREFIX
+
     eval `{cat $db | grep '^'$1=} &&
         *=`{grep $($1)(1) /usr/firepkg/db/url.db}
 
     basename=`{basename $2}
-    version=`{echo $basename | grep -oP '(?<=[./-])[.0-9]*[0-9][a-z]?'}
 
     curl -LO $2
 
     echo $1 $basename |
         sha256sum -c || exit
 
-    destdir=/usr/firepkg/sources/$1-$version-x86_64
-    rm -r $destdir >[2=]
-    mkdir -p $destdir$PREFIX
 
     tar -C $destdir --strip-components=1 -xf $basename
 
@@ -132,13 +132,19 @@ fn _build {
         --sbindir=$PREFIX/sbin \
     )
 
-    destdir=/usr/firepkg/packages/$1
+    eval `{cat $db | grep '^'$1=} &&
+    version=`{ 
+        awk '/'^$($1)(1)^'/ {print $2}' /usr/firepkg/db/url.db |
+        grep -oP '(?<=[./-])[.0-9]*[0-9][a-z]?' 
+    }   
 
+    destdir=/usr/firepkg/packages/$1-$version-x86_64
     rm -r $destdir >[2=]
     mkdir -p $destdir
 
+    # reeval for destdir
     eval `{cat $db | grep '^'$1=} &&
-        *=$$1 && shift && $*
+    *=$$1 && shift && $*
 
     _makepkg $destdir
 }
