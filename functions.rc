@@ -94,26 +94,25 @@ fn _uninstall {
 }
 
 fn _download {
-    diff=/usr/firepkg/patches/$1.diff
-    destdir=/usr/firepkg/sources/$1
-
-    rm -r $destdir >[2=]
-    mkdir -p $destdir$PREFIX
-
     eval `{cat $db | grep '^'$1=} &&
         *=`{grep $($1)(1) /usr/firepkg/db/url.db}
 
     basename=`{basename $2}
+    version=`{echo $basename | grep -oP '(?<=[./-])[.0-9]*[0-9][a-z]?'}
 
     curl -LO $2
 
     echo $1 $basename |
         sha256sum -c || exit
 
+    destdir=/usr/firepkg/sources/$1-$version-x86_64
+    rm -r $destdir >[2=]
+    mkdir -p $destdir$PREFIX
+
     tar -C $destdir --strip-components=1 -xf $basename
 
-    if(test -f $diff)
-        patch -d $destdir -p1 <$diff
+    if(test -f /usr/firepkg/patches/$1.diff)
+        patch -d $destdir -p1 </usr/firepkg/patches/$1.diff
 
     rm $basename >[2=]
 
