@@ -20,7 +20,7 @@ switch($λ){
         _uninstall $1 &&
         _download $1 &&
         _build $1 &&
-        _install /usr/firepkg/packages/$1.tar.xz &&
+        _install /usr/firepkg/packages/$1-$version-x86_64.tar.xz &&
             shift || exit
     case -R
         _uninstall $1 &&
