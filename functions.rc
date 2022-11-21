@@ -101,8 +101,7 @@ fn _download {
     mkdir -p $destdir$PREFIX
 
     eval `{cat $db | grep '^'$1=} &&
-        *=$$1 &&
-            *=`{grep $1 /usr/firepkg/db/url.db}
+        *=`{grep $($1)(1) /usr/firepkg/db/url.db}
 
     basename=`{basename $2}
 
