@@ -73,6 +73,7 @@ fn QMAKE {
 
 fn _install {
     destdir=/usr/firepkg/uninstall
+    pkgname=`{basename $1 `{echo $1 | awk -F- '{print $(NF-1) "-" $(NF)}'}}
 
     >$destdir/rm-$pkgname.rc {
         echo '#!/bin/rc'
