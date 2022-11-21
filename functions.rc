@@ -141,8 +141,8 @@ fn _build {
 
     version=`{ 
         awk '/'^$($1)(1)^'/ {print $2}' /usr/firepkg/db/url.db |
-        grep -oE '[./-][.0-9]*[0-9][a-z]?' |
-        sed -n 's/^.//g;$p'
+        grep -oE '[./-][.0-9-]*[0-9][a-z]?' |
+        sed -n 's/^.//g;s/-/./g;$p'
     }
 
     *=$$1 && shift && $*
