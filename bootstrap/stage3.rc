@@ -87,6 +87,7 @@ emerge gnupg1 less parted xorriso
 #############
 emerge iproute2 iputils
 emerge curl wget dhcpcd
+/usr/sbin/update-ca-certificates
 
 # connman
 ##########
