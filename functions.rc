@@ -73,7 +73,10 @@ fn QMAKE {
 
 fn _install {
     destdir=/usr/firepkg/uninstall
-    pkgname=`{basename $1 `{echo $1 | awk -F- '{print $(NF-1) "-" $(NF)}'}}
+    pkgname=`{
+        basename $1 .tar.xz | 
+        sed 's/[._/-][.0-9-]*[0-9][a-z]\?.*$//g'
+    }
 
     >$destdir/rm-$pkgname.rc {
         echo '#!/bin/rc'
@@ -90,17 +93,19 @@ fn _install {
 }
 
 fn _uninstall {
-    /usr/firepkg/uninstall/rm-$pkgname.rc ||
+    /usr/firepkg/uninstall/rm-$1.rc ||
         true
 }
 
 fn _download {
-    destdir=/usr/firepkg/sources/$pkgname
+    destdir=/usr/firepkg/sources/$1
+    pkgname=$1
+
     rm -r $destdir >[2=]
     mkdir -p $destdir$PREFIX
 
-    eval `{cat $db | grep '^'$pkgname=} &&
-        *=`{grep $($pkgname)(1) /usr/firepkg/db/url.db}
+    eval `{cat $db | grep '^'$1=} &&
+        *=`{grep $($1)(1) /usr/firepkg/db/url.db}
 
     basename=`{basename $2}
 
@@ -121,7 +126,7 @@ fn _download {
 }
 
 fn _build {
-    cd /usr/firepkg/sources/$pkgname
+    cd /usr/firepkg/sources/$1
 
     LIBS=()
 
@@ -133,19 +138,19 @@ fn _build {
         --sbindir=$PREFIX/sbin \
     )
 
-    destdir=/usr/firepkg/packages/$pkgname
+    destdir=/usr/firepkg/packages/$1
     rm -r $destdir >[2=]
     mkdir -p $destdir
 
-    eval `{cat $db | grep '^'$pkgname=} 
+    eval `{cat $db | grep '^'$1=} 
 
     version=`{ 
-        awk '/'^$($pkgname)(1)^'/ {print $2}' /usr/firepkg/db/url.db |
+        awk '/'^$($1)(1)^'/ {print $2}' /usr/firepkg/db/url.db |
         grep -oE '[._/-][.0-9-]*[0-9][a-z]?' |
         sed -n 's/^.//g;s/-/./g;$p'
     }
 
-    *=$$pkgname && shift && $*
+    *=$$1 && shift && $*
 
     _makepkg $destdir
     mv $destdir.tar.xz $destdir-$version-x86_64.tar.xz
@@ -165,11 +170,11 @@ fn _makepkg {
     tar --sort=name \
         --mtime=@$SOURCE_DATE_EPOCH \
         --owner=0 --group=0 --numeric-owner \
-        -cf ../$pkgname.tar *
+        -cf ../$1.tar *
     cd ..
 
-    xz -T0 -f $pkgname.tar &&
-        rm -r $pkgname
+    xz -T0 -f $1.tar &&
+        rm -r $1
 }
 
 fn _chroot {

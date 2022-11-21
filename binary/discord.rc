@@ -3,6 +3,7 @@
 . /usr/firepkg/make.conf
 
 # vars
+version=0.0.21
 src='https://dl.discordapp.net/apps/linux/0.0.21/discord-0.0.21.tar.gz'
 basename=`{basename $src}
 destdir=/usr/firepkg/packages/discord
@@ -35,6 +36,7 @@ sed -i usr/share/applications/discord.desktop -e 's|^Exec=.*$|Exec=/usr/bin/disc
 
 echo makepkg...
 firepkg makepkg $destdir
+mv $destdir.tar.xz $destdir-$version-x86_64.tar.xz
 
 echo installing...
-firepkg -i $destdir.tar.xz
+firepkg -i $destdir-$version-x86_64.tar.xz
