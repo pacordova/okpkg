@@ -142,7 +142,7 @@ fn _build {
     rm -r $destdir >[2=]
     mkdir -p $destdir
 
-    # reeval for destdir
+    # build command
     eval `{cat $db | grep '^'$1=} &&
     *=$$1 && shift && $*
 
