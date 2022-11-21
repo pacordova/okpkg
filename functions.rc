@@ -72,35 +72,34 @@ fn QMAKE {
 }
 
 fn _install {
-    basename=`{basename $1 .tar.xz}
+    destdir=/usr/firepkg/uninstall
 
-    _=/usr/firepkg/uninstall/rm-$basename.rc
-    
-     >$_ echo '#!/bin/rc'
-    >>$_ echo '>[2=]' rm -r ''/usr/firepkg/sources/$basename''
-    >>$_ echo '>[2=]' rm -r ''/usr/firepkg/packages/$basename''
-    >>$_ echo '>[2=]' rm -d ''/usr/firepkg/uninstall/rm-$basename.rc''
+    >$destdir/rm-$pkgname.rc {
+        echo '#!/bin/rc'
+        echo '>[2=]' rm -r ''/usr/firepkg/sources/$pkgname''
+        echo '>[2=]' rm -r ''/usr/firepkg/packages/$pkgname''
+        echo '>[2=]' rm -d ''$destdir/rm-$pkgname.rc''
+    }
 
     tar -C / -xvf $1 |
     sed 's|^|>[2=] rm -d ''/|g;s|$|''|g' |
-    sort -r >>$_
+    sort -r >>$destdir/rm-$pkgname.rc
 
-    chmod +x $_
+    chmod +x $destdir/rm-$pkgname.rc
 }
 
 fn _uninstall {
-    /usr/firepkg/uninstall/rm-$1.rc ||
+    /usr/firepkg/uninstall/rm-$pkgname.rc ||
         true
 }
 
 fn _download {
-    pkgname=$1
-    destdir=/usr/firepkg/sources/$1
+    destdir=/usr/firepkg/sources/$pkgname
     rm -r $destdir >[2=]
     mkdir -p $destdir$PREFIX
 
-    eval `{cat $db | grep '^'$1=} &&
-        *=`{grep $($1)(1) /usr/firepkg/db/url.db}
+    eval `{cat $db | grep '^'$pkgname=} &&
+        *=`{grep $($pkgname)(1) /usr/firepkg/db/url.db}
 
     basename=`{basename $2}
 
@@ -121,7 +120,7 @@ fn _download {
 }
 
 fn _build {
-    cd /usr/firepkg/sources/$1
+    cd /usr/firepkg/sources/$pkgname
 
     LIBS=()
 
@@ -133,27 +132,25 @@ fn _build {
         --sbindir=$PREFIX/sbin \
     )
 
-    destdir=/usr/firepkg/packages/$1
+    destdir=/usr/firepkg/packages/$pkgname
     rm -r $destdir >[2=]
     mkdir -p $destdir
 
-    eval `{cat $db | grep '^'$1=} 
+    eval `{cat $db | grep '^'$pkgname=} 
 
     version=`{ 
-        awk '/'^$($1)(1)^'/ {print $2}' /usr/firepkg/db/url.db |
+        awk '/'^$($pkgname)(1)^'/ {print $2}' /usr/firepkg/db/url.db |
         grep -oE '[._/-][.0-9-]*[0-9][a-z]?' |
         sed -n 's/^.//g;s/-/./g;$p'
     }
 
-    *=$$1 && shift && $*
+    *=$$pkgname && shift && $*
 
     _makepkg $destdir
     mv $destdir.tar.xz $destdir-$version-x86_64.tar.xz
 }
 
 fn _makepkg {
-    pkgname=`{basename $1}
-
     cd $1
     # strip debugging, delete unneeded files, etc.
     >[2=] strip -S usr/lib64/*

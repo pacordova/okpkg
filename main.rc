@@ -15,12 +15,13 @@ switch($λ){
 }
 
 while(~ $#1 1)
+pkgname=$1 &&
 switch($λ){
     case -S
-        _uninstall $1 &&
-        _download $1 &&
-        _build $1 &&
-        _install /usr/firepkg/packages/$1-$version-x86_64.tar.xz &&
+        _uninstall $pkgname &&
+        _download $pkgname &&
+        _build $pkgname &&
+        _install /usr/firepkg/packages/$pkgname-$version-x86_64.tar.xz &&
             shift || exit
     case -R
         _uninstall $1 &&
