@@ -11,6 +11,10 @@ fn emerge {
 
 make -C /usr/firepkg
 
+# copy iana-etc
+cp /usr/firepkg/sources/iana-etc/protocols /etc/protocols
+cp /usr/firepkg/sources/iana-etc/services  /etc/services
+
 # pkg-config
 emerge pkgconf
 
@@ -27,6 +31,9 @@ python3 -m pip install meson
 
 # self-host glibc
 emerge bison glibc
+
+# create locales after glibc
+/usr/sbin/locale-gen
 
 # perl
 emerge perl

@@ -107,7 +107,7 @@ crossflags=(--target=$target --with-sysroot=$destdir) {
 }
 
 >[2=] tar -C $destdir -xf /usr/firepkg/packages/linux-headers.tar.xz
->[2=] tar -C $destdir -xf /usr/firepkg/packages/etc.tar.xz
+>[2=] tar -C $destdir -xf /usr/firepkg/packages/aaa-base.tar.xz
 
 
 ######################################

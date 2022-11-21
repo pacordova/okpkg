@@ -152,7 +152,7 @@ fn _build {
 }
 
 fn _makepkg {
-    basename=`{basename $1}
+    pkgname=`{basename $1}
 
     cd $1
     # strip debugging, delete unneeded files, etc.
@@ -167,11 +167,11 @@ fn _makepkg {
     tar --sort=name \
         --mtime=@$SOURCE_DATE_EPOCH \
         --owner=0 --group=0 --numeric-owner \
-        -cf ../$basename.tar *
+        -cf ../$pkgname.tar *
     cd ..
 
-    xz -T0 -f $basename.tar &&
-        rm -r $basename
+    xz -T0 -f $pkgname.tar &&
+        rm -r $pkgname
 }
 
 fn _chroot {

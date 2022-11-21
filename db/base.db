@@ -54,8 +54,9 @@ e2fsprogs=(2f16c91767 CONFIGURE --enable-elf-shlibs --disable-^(libblkid libuuid
 flex=(e87aae032b CONFIGURE)
 gettext=(d20fcbb537 CONFIGURE)
 gperf=(588546b945 CONFIGURE)
-util-linux=(634e6916ad CONFIGURE --disable-^(chfn-chsh login nologin su setpriv runuser pylibmount) --without-^(python systemd systemdsystemunitdir))
+iana-etc=(16ef96809e)
 shadow=(41f093ce58 CONFIGURE --with-group-name-max-length=32)
+util-linux=(634e6916ad CONFIGURE --disable-^(chfn-chsh login nologin su setpriv runuser pylibmount) --without-^(python systemd systemdsystemunitdir))
 
 # libraries
 acl=(c0234042e1 CONFIGURE)
