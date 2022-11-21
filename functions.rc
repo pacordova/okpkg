@@ -94,6 +94,7 @@ fn _uninstall {
 }
 
 fn _download {
+    pkgname=$1
     destdir=/usr/firepkg/sources/$1
     rm -r $destdir >[2=]
     mkdir -p $destdir$PREFIX
@@ -111,8 +112,8 @@ fn _download {
 
     tar -C $destdir --strip-components=1 -xf $basename
 
-    if(test -f /usr/firepkg/patches/$1.diff)
-        patch -d $destdir -p1 </usr/firepkg/patches/$1.diff
+    if(test -f /usr/firepkg/patches/$pkgname.diff)
+        patch -d $destdir -p1 </usr/firepkg/patches/$pkgname.diff
 
     rm $basename >[2=]
 
