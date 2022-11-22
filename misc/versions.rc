@@ -1,43 +1,79 @@
 #!/bin/rc
 
-# current db versions
-{ for(p in `{awk '{gsub(/.*=\(/, ""); print $1}' /usr/firepkg/db/base.db | grep -v '#' | grep -v '^$' | grep -v 'libdir' | grep -v ')'}) 
-    awk '/'$p'/ {print $2}' /usr/firepkg/db/url.db } | sort | uniq > current.txt
-
-# distrowatch urls
-curl https://distrowatch.com/packages.php | grep '<td><a href=' | awk -F'"' '{print $2}' | sed 's/ftp.gnu.org.gnu/ftpmirror.gnu.org/' | sort | uniq > distrowatch.txt
-
-diff current.txt distrowatch.txt | awk '/</ {print $2}' > pass1.txt
-
-# check with Arch Linux
-
-
-# download distrowatch
+###############
+# DISTROWATCH #
+###############
 curl https://distrowatch.com/packages.php | 
 sed '
     s/Python/python3/g;
-    s/lvm/lvm2/g' >distrowatch.html
+    s/lvm/lvm2/g' |
+grep href | 
+grep -oE '"http.*[._/-][.0-9-]*[0-9][a-z]?.*"' >distrowatch.txt
 
-fn dw {
-    grep $1 distrowatch.html | 
-    awk '/<td><a href=/ {
-            gsub(/>/, " "); 
-            gsub(/</, " "); 
-            print $4;
-        }'
+fn distrowatch {
+    cat distrowatch.txt |
+    grep $1 |
+    grep -oE '[._/-][.0-9-]*[0-9][a-z]?' |
+    sed -n 's/^.//g;s/-/./g;$p'
 }
 
-fn archlinux {
-    # L=(pkgname archpkg repo)
-    L=`{vlook $1}
-    curl https://archlinux.org/packages/$L(3)/x86_64/$L(2)/ >[2=] | 
-        awk -F'"' '/meta itemprop="version"/{print $4}'
+
+########
+# ARCH #
+########
+curl https://mirror.math.princeton.edu/pub/archlinux/core/os/x86_64/ > core.txt 
+curl https://mirror.math.princeton.edu/pub/archlinux/extra/os/x86_64/ > extra.txt
+curl https://mirror.math.princeton.edu/pub/archlinux/community/os/x86_64/ > community.txt
+
+cat core.txt extra.txt community.txt |
+grep -oE href=.*[.0-9-]*[0-9][a-z]?.*sig\" > arch.txt
+
+fn arch-stable {
+    cat arch.txt | 
+    grep href="$1 |  
+    grep -oE '[._/-][.0-9-]*[0-9][a-z]?' | 
+    sed  's/^.//g;s/-/./g;1q'
 }
 
-fn vlook {
-    grep '^'$1 metadata.db
+    
+
+#############
+# SLACKWARE #
+#############
+curl -L https://mirrors.slackware.com/slackware/slackware64-current/FILELIST.TXT |
+awk '/asc$/{print $8}' | 
+grep '^./slackware64' |
+awk -F/ '{print $4}' > slackware.txt
+
+fn slackware-current {
+    cat slackware.txt | 
+    grep $1 |  
+    grep -oE '[._/-][.0-9-]*[0-9][a-z]?' | 
+    sed  's/^.//g;s/-/./g;1q'
 }
 
-fn clean {
-    rm distrowatch.html
+
+###########
+# FIREPKG #
+###########
+fn firepkg-version {
+  cat /usr/firepkg/db/url.db |
+  grep /$1 |
+  grep -oE '[._/-][.0-9-]*[0-9][a-z]?' |
+  sed -n 's/^.//g;s/-/./g;$p'
 }
+
+
+packages=(grep gawk sed gcc)
+
+echo package,distrowatch,slackware-current,arch,local
+for(p in $packages) {
+    dw=`{distrowatch $p}
+    sl=`{slackware-current $p}
+    arch=`{arch-stable $p}
+    local=`{firepkg-version $p}
+    echo $p,$dw,$sl,$arch,$local
+}
+
+rm arch.txt community.txt core.txt extra.txt distrowatch.txt slackware.txt
+
