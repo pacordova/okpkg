@@ -16,7 +16,7 @@ function paste(arr)
 end
 
 function ls(dir)
-    cmd = {
+    local cmd = {
         "/usr/bin/ls",
         dir,
         "2>/dev/null"
@@ -33,7 +33,7 @@ end
 function strip(dir, ...)
     local arr = ls(dir)
     for _, file in ipairs(arr) do     
-        cmd = {
+        local cmd = {
             "/usr/bin/strip",
             ...,
             file
@@ -43,7 +43,7 @@ function strip(dir, ...)
 end
 
 function rm(file)
-    cmd = {
+    local cmd = {
         "/usr/bin/rm",
         "--recursive",
         file,
@@ -53,7 +53,7 @@ function rm(file)
 end
 
 function compress(file)
-    cmd = {
+    local cmd = {
         "/usr/bin/xz",
         "--threads=0",
         "--force",
@@ -73,7 +73,7 @@ function makepkg(dir)
     rm(dir .. "/usr/share/info")
 
     --delete pyc files for reproducibility
-    cmd = {
+    local cmd = {
         "/usr/bin/find",
         ".",
         "-name",
@@ -83,7 +83,7 @@ function makepkg(dir)
     os.execute(paste(cmd))
 
     --make tarball
-    cmd = {
+    local cmd = {
         "/usr/bin/tar",
         "--directory",
         dir,
@@ -104,7 +104,7 @@ function makepkg(dir)
 end
 
 function download(url)
-    cmd = {
+    local cmd = {
         "/usr/bin/curl",
         "--location",
         "--remote-name",
