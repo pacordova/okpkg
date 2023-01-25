@@ -1,5 +1,6 @@
-unpack = table.unpack
+local sha2 = require 'sha2'
 
+unpack = table.unpack
 source_date_epoch = 1000000000
 
 env = {
@@ -15,7 +16,7 @@ function paste(arr)
 end
 
 function ls(dir)
-    local cmd = {
+    cmd = {
         "/usr/bin/ls",
         dir,
         "2>/dev/null"
@@ -32,7 +33,7 @@ end
 function strip(dir, ...)
     local arr = ls(dir)
     for _, file in ipairs(arr) do     
-        local cmd = {
+        cmd = {
             "/usr/bin/strip",
             ...,
             file
@@ -42,7 +43,7 @@ function strip(dir, ...)
 end
 
 function rm(file)
-    local cmd = {
+    cmd = {
         "/usr/bin/rm",
         "--recursive",
         file,
@@ -52,7 +53,7 @@ function rm(file)
 end
 
 function compress(file)
-    local cmd = {
+    cmd = {
         "/usr/bin/xz",
         "--threads=0",
         "--force",
@@ -72,7 +73,7 @@ function makepkg(dir)
     rm(dir .. "/usr/share/info")
 
     --delete pyc files for reproducibility
-    local cmd = {
+    cmd = {
         "/usr/bin/find",
         ".",
         "-name",
@@ -82,7 +83,7 @@ function makepkg(dir)
     os.execute(paste(cmd))
 
     --make tarball
-    local cmd = {
+    cmd = {
         "/usr/bin/tar",
         "--directory",
         dir,
@@ -102,13 +103,39 @@ function makepkg(dir)
     compress(dir .. ".tar")
 end
 
-makepkg("/home/pac/Downloads/test")
+function download(url)
+    cmd = {
+        "/usr/bin/curl",
+        "--location",
+        "--remote-name",
+        url
+    }
+    os.execute(paste(cmd))
+end
 
-extract = {
-    "/usr/bin/tar",
-    "--directory", "/",
-    "--extract",
-    "--verbose",
-    "--file"
-}
+function checksum(file)
+    local fd = io.open(file)
+    local x = sha2.new256()
+    for b in fd:lines(2^12) do
+        x:add(b)
+    end
+    fd:close()
+    return x:close()
+end
+
+function vlook(pkgname)
+    local key = "^" .. pkgname .. " = "
+    local fd = io.open("example.lua", "r")
+    for line in fd:lines() do
+        if line:find(key) then
+            load("arr = " .. line:gsub(key, ""))()
+            break
+        end
+    end
+    fd:close()
+    return arr
+end
+
+bash = vlook("bash")
+print(bash.build)
 
