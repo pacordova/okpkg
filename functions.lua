@@ -1,5 +1,6 @@
-local sha2 = require 'sha2'
-local sys  = require 'unix'
+local sha2  = require 'sha2'
+local sys   = require 'unix'
+local build = require 'build'
 
 unpack = table.unpack
 
@@ -109,6 +110,10 @@ function makepkg(dir)
 end
 
 function build(pkgname)
+    local pkg       = vlook(pkgname)
+    local basename  = pkg.url:gsub("^.*/", "") 
+    local suffix    = "-x86_64.tar.xz"
+
     local dirflags = {
         "--localstatedir=/var",
         "--sysconfdir=/etc",
@@ -116,12 +121,17 @@ function build(pkgname)
         "--bindir=" .. prefix .. "/bin"
         "--sbindir=" .. prefix .. "/sbin"
     }
+
     destdir = "/usr/firepkg/packages/" .. pkgname
 
     sys.mkdir(destdir)
 
-    pkg = vlook(pkgname)
-    --version=
+    version = basename:match("[._/-][.0-9-]*[0-9][a-z]?")
+    version = version:gsub("-", "."):gsub("^.", "-")
+
+    build[pkg.build]
+    sys.makepkg(destdir)
+    sys.rename(destdir .. ".tar.xz", destdir .. version .. suffix)
 end
 
 

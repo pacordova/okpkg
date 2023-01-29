@@ -90,6 +90,15 @@ local function patch(file, directory)
     end
 end
 
+local function rename(old, new)
+    local cmd = {
+        "/usr/bin/mv",
+        old,
+        new
+    }
+    os.execute(paste(cmd))
+end
+
 return {
     paste    = paste,
     ls       = ls,
@@ -98,5 +107,6 @@ return {
     mkdir    = mkdir,
     compress = compress,
     extract  = extract,
-    patch    = patch
+    patch    = patch,
+    rename   = rename
 }
