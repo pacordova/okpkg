@@ -19,6 +19,14 @@ local function make(env, flags)
 end
 
 local function configure(env, flags)
+    local flags = {
+        "--localstatedir=" .. env.localstatedir,
+        "--sysconfdir"     .. env.sysconfdir,
+        "--libdir="        .. env.libdir,
+        "--bindir="        .. env.bindir,
+        "--sbindir="       .. env.sbindir,
+        unpack(flags)
+    }
     local cmd = {
         "cd", env.srcdir, "&&",
         "./configure", unpack(flags)
@@ -28,6 +36,14 @@ end
 
 local function configure2(env, flags)
     local builddir = env.srcdir .. "/build"
+    local flags = {
+        "--localstatedir=" .. env.localstatedir,
+        "--sysconfdir"     .. env.sysconfdir,
+        "--libdir="        .. env.libdir,
+        "--bindir="        .. env.bindir,
+        "--sbindir="       .. env.sbindir,
+        unpack(flags)
+    }
     local cmd = {
         "/usr/bin/mkdir", builddir, "&&",
         "cd", builddir, "&&",

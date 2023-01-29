@@ -8,12 +8,22 @@ local patches = "/usr/firepkg/patches"
 local sources = "/usr/firepkg/sources"
 local paste  = sys.paste
 
-local libdir = "/usr/lib64"
-local prefix = "/usr"
-
-env = {
-    "SOURCE_DATE_EPOCH=" .. source_date_epoch
-}
+local function env(pkgname) 
+    if pkgname == nil then
+        pkgname = ""
+    end
+    return {
+        source_date_epoch = 1000000000
+        libdir            = "/usr/lib64",
+        prefix            = "/usr",
+        srcdir            = "/usr/firepkg/sources/" .. pkgname,
+        destdir           = "/usr/firepkg/packages/" .. pkgname,
+        bindir            = "/usr/bin",
+        sbindir           = "/usr/sbin",
+        sysconfdir        = "/etc",
+        localstatedir     = "/var"
+    }
+end
 
 
 local function checksum(file, hash)
@@ -77,10 +87,12 @@ local function download(pkgname)
 end
 
 local function makepkg(dir)
+    local env = env()
+
     --cleanup
-    sys.strip(dir .. "/usr/lib64", "--strip-debug") 
-    sys.strip(dir .. "/usr/bin",   "--strip-all")
-    sys.strip(dir .. "/bin",       "--strip-all")
+    sys.strip(dir .. env.libdir, "--strip-debug") 
+    sys.strip(dir .. env.bindir, "--strip-all")
+    sys.strip(dir .. "/bin",     "--strip-all")
     sys.rm(dir .. "/usr/share/doc")
     sys.rm(dir .. "/usr/doc")
     sys.rm(dir .. "/usr/share/info")
@@ -98,7 +110,7 @@ local function makepkg(dir)
         "/usr/bin/tar",
         "--directory=" .. dir,
         "--sort=name",
-        "--mtime=@" .. source_date_epoch,
+        "--mtime=@" .. env.source_date_epoch,
         "--owner=0",
         "--group=0",
         "--numeric-owner",
@@ -118,24 +130,16 @@ local function build(pkgname)
     local basename  = pkg.url:gsub("^.*/", "") 
     local suffix    = "-x86_64.tar.xz"
 
-    local dirflags = {
-        "--localstatedir=/var",
-        "--sysconfdir=/etc",
-        "--libdir=" .. libdir,
-        "--bindir=" .. prefix .. "/bin",
-        "--sbindir=" .. prefix .. "/sbin"
-    }
+    local env = env(pkgname)
 
-    destdir = "/usr/firepkg/packages/" .. pkgname
+    sys.mkdir(env.destdir)
 
-    sys.mkdir(destdir)
+    local version = basename:match("[._/-][.0-9-]*[0-9][a-z]?")
+    local version = version:gsub("-", "."):gsub("^.", "-")
 
-    version = basename:match("[._/-][.0-9-]*[0-9][a-z]?")
-    version = version:gsub("-", "."):gsub("^.", "-")
-
-    build[pkg.build]()
-    makepkg(destdir)
-    sys.rename(destdir .. ".tar.xz", destdir .. version .. suffix)
+    build[pkg.build](env, pkg.flags)
+    makepkg(env.destdir)
+    sys.rename(env.destdir .. ".tar.xz", env.destdir .. version .. suffix)
 end
 
 
