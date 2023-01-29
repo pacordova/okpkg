@@ -6,7 +6,6 @@ source_date_epoch = 1000000000
 
 local patches = "/usr/firepkg/patches"
 local sources = "/usr/firepkg/sources"
-local paste   = unix.paste
 
 env = {
   "SOURCE_DATE_EPOCH=" .. source_date_epoch
@@ -56,7 +55,7 @@ function download(pkgname)
     "--remote-name",
     pkg.url
   }
-  os.execute(paste(cmd))
+  os.execute(sys.paste(cmd))
 
   if not checksum(basename, pkg.hash) then
     return -1
@@ -85,7 +84,7 @@ function makepkg(dir)
     "'.pyc'",
     "-delete"
   }
-  os.execute(paste(cmd))
+  os.execute(sys.paste(cmd))
 
   --make tarball
   local cmd = {
@@ -102,7 +101,7 @@ function makepkg(dir)
     dir .. ".tar",
     unpack(sys.ls(dir))
   }
-  os.execute(paste(cmd))
+  os.execute(sys.paste(cmd))
 
   --compress
   sys.compress(dir .. ".tar")
