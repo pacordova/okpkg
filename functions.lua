@@ -13,7 +13,7 @@ local function env(pkgname)
         pkgname = ""
     end
     return {
-        source_date_epoch = 1000000000
+        source_date_epoch = 1000000000,
         libdir            = "/usr/lib64",
         prefix            = "/usr",
         srcdir            = "/usr/firepkg/sources/" .. pkgname,
