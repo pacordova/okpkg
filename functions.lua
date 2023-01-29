@@ -8,6 +8,8 @@ local patches = "/usr/firepkg/patches"
 local sources = "/usr/firepkg/sources"
 local paste  = sys.paste
 
+local libdir = "/usr/lib64"
+local prefix = "/usr"
 
 env = {
     "SOURCE_DATE_EPOCH=" .. source_date_epoch
@@ -99,6 +101,22 @@ function makepkg(dir)
 
     --compress
     sys.compress(dir .. ".tar")
+end
+
+function build(pkgname)
+    local dirflags = {
+        "--localstatedir=/var",
+        "--sysconfdir=/etc",
+        "--libdir=" .. libdir,
+        "--bindir=" .. prefix .. "/bin"
+        "--sbindir=" .. prefix .. "/sbin"
+    }
+    destdir = "/usr/firepkg/packages/" .. pkgname
+
+    sys.mkdir(destdir)
+
+    pkg = vlook(pkgname)
+    --version=
 end
 
 
