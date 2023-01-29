@@ -81,7 +81,12 @@ function makepkg(dir)
     sys.rm(dir .. "/usr/share/info")
 
     --delete pyc files for reproducibility
-    os.execute("/usr/bin/find . -name '.pyc' -delete")
+    local cmd = {
+        "/usr/bin/find",
+        dir,
+        "-name '.pyc' -delete"
+    }
+    os.execute(paste(cmd))
 
     --make tarball
     local cmd = {
