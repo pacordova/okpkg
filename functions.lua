@@ -133,7 +133,7 @@ local function build(pkgname)
     version = basename:match("[._/-][.0-9-]*[0-9][a-z]?")
     version = version:gsub("-", "."):gsub("^.", "-")
 
-    build[pkg.build]
+    build[pkg.build]()
     makepkg(destdir)
     sys.rename(destdir .. ".tar.xz", destdir .. version .. suffix)
 end
