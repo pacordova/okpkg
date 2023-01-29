@@ -2,10 +2,12 @@ local sha2 = require 'sha2'
 local sys  = require 'unix'
 
 unpack = table.unpack
-source_date_epoch = 1000000000
 
+local source_date_epoch = 1000000000
 local patches = "/usr/firepkg/patches"
 local sources = "/usr/firepkg/sources"
+local paste  = sys.paste
+
 
 env = {
     "SOURCE_DATE_EPOCH=" .. source_date_epoch
@@ -55,7 +57,7 @@ function download(pkgname)
         "--remote-name",
         pkg.url
     }
-    os.execute(sys.paste(cmd))
+    os.execute(paste(cmd))
 
     if not checksum(basename, pkg.hash) then
         return -1
@@ -77,20 +79,12 @@ function makepkg(dir)
     sys.rm(dir .. "/usr/share/info")
 
     --delete pyc files for reproducibility
-    local cmd = {
-        "/usr/bin/find",
-        ".",
-        "-name",
-        "'.pyc'",
-        "-delete"
-    }
-    os.execute(sys.paste(cmd))
+    os.execute("/usr/bin/find . -name '.pyc' -delete")
 
     --make tarball
     local cmd = {
         "/usr/bin/tar",
-        "--directory",
-        dir,
+        "--directory=" .. dir,
         "--sort=name",
         "--mtime=@" .. source_date_epoch,
         "--owner=0",
@@ -101,7 +95,7 @@ function makepkg(dir)
         dir .. ".tar",
         unpack(sys.ls(dir))
     }
-    os.execute(sys.paste(cmd))
+    os.execute(paste(cmd))
 
     --compress
     sys.compress(dir .. ".tar")
