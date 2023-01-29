@@ -121,3 +121,15 @@ local function qmake(env, flags)
     }
     make(env, flags)
 end
+
+return {
+    make       = make,
+    configure  = configure,
+    configure2 = configure2,
+    autoreconf = autoreconf,
+    cmake      = cmake,
+    meson      = meson,
+    scons      = scons,
+    waf        = waf,
+    qmake      = qmake
+}
