@@ -1,82 +1,16 @@
 local sha2 = require 'sha2'
+local sys  = require 'unix'
 
 unpack = table.unpack
 source_date_epoch = 1000000000
 
 local patches = "/usr/firepkg/patches"
-local sources  = "/usr/firepkg/sources"
+local sources = "/usr/firepkg/sources"
+local paste   = unix.paste
 
 env = {
   "SOURCE_DATE_EPOCH=" .. source_date_epoch
 }
-
-function paste(arr)
-  local s = ""
-  for i, v in ipairs(arr) do
-    s = s .. " " .. v
-  end
-  return s
-end
-
-function ls(dir)
-  local cmd = {
-    "/usr/bin/ls",
-    dir,
-    "2>/dev/null"
-  }
-  local fd = io.popen(paste(cmd))
-  local arr = {}
-  for line in fd:lines() do
-    table.insert(arr, line)	
-  end
-  fd:close()
-  return arr
-end
-
-function strip(dir, ...)
-  local arr = ls(dir)
-  for _, file in ipairs(arr) do     
-    local cmd = {
-      "/usr/bin/strip",
-      ...,
-      file
-    }  
-    os.execute(paste(cmd))
-  end
-end
-
-function rm(file)
-  local cmd = {
-    "/usr/bin/rm",
-    "--recursive",
-    file,
-    "2>/dev/null"
-  }
-  os.execute(paste(cmd))
-end
-
-function clean(directory)
-  rm(directory)
-  local cmd = {
-    "/usr/bin/mkdir",
-    "--parents",
-    directory
-  }
-  os.execute(paste(cmd))
-end
-
-function compress(file)
-  local cmd = {
-    "/usr/bin/xz",
-    "--threads=0",
-    "--force",
-    file
-  }
-  os.execute(paste(cmd))
-  rm(file)
-end
-
-
 
 function checksum(file, hash)
   local fd = io.open(file)
@@ -110,32 +44,6 @@ function vlook(pkgname)
   return arr
 end
 
-function extract(file, directory)
-  local cmd = {
-    "/usr/bin/tar",
-    "--directory=" .. directory,
-    "--strip-components=1",
-    "--extract",
-    "--file",
-    file
-  }
-  os.execute(paste(cmd))
-end
-
-function patch(patchfile, directory)
-  local fd = io.open(patchfile)
-  if (fd ~= nil) then
-    fd:close()
-    local cmd = {
-      "/usr/bin/patch",
-      "--directory=" .. directory,
-      "--strip=1",
-      "<" .. patchfile
-    }
-    os.execute(paste(cmd))
-  end
-end
-
 function download(pkgname)
   local pkg       = vlook(pkgname)
   local basename  = pkg.url:gsub("^.*/", "") 
@@ -154,20 +62,20 @@ function download(pkgname)
     return -1
   end
 
-  clean(srcdir)
-  extract(basename, srcdir)    
-  patch(pkgname, srcdir)
-  rm(basename)
+  sys.mkdir(srcdir)
+  sys.extract(basename, srcdir)    
+  sys.patch(patchfile, srcdir)
+  sys.rm(basename)
 end
 
 function makepkg(dir)
   --cleanup
-  strip(dir .. "/usr/lib64", "--strip-debug") 
-  strip(dir .. "/usr/bin",   "--strip-all")
-  strip(dir .. "/bin",       "--strip-all")
-  rm(dir .. "/usr/share/doc")
-  rm(dir .. "/usr/doc")
-  rm(dir .. "/usr/share/info")
+  sys.strip(dir .. "/usr/lib64", "--strip-debug") 
+  sys.strip(dir .. "/usr/bin",   "--strip-all")
+  sys.strip(dir .. "/bin",       "--strip-all")
+  sys.rm(dir .. "/usr/share/doc")
+  sys.rm(dir .. "/usr/doc")
+  sys.rm(dir .. "/usr/share/info")
 
   --delete pyc files for reproducibility
   local cmd = {
@@ -192,12 +100,12 @@ function makepkg(dir)
     "--create",
     "--file",
     dir .. ".tar",
-    unpack(ls(dir))
+    unpack(sys.ls(dir))
   }
   os.execute(paste(cmd))
 
   --compress
-  compress(dir .. ".tar")
+  sys.compress(dir .. ".tar")
 end
 
 
