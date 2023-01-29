@@ -102,7 +102,7 @@ end
 local function waf(env, flags)
     local cmd = {
         "cd", env.srcdir, "&&",
-        "/usr/bin/python3", "bootstrap.py" "&&",
+        "/usr/bin/python3", "bootstrap.py", "&&",
         "/usr/bin/python3", "waf", "configure", "--prefix=" .. env.prefix, "&&",
         "/usr/bin/python3", "waf", "&&",
         "/usr/bin/python3", "waf", "install", "--destdir=" .. env.destdir
@@ -116,7 +116,7 @@ local function qmake(env, flags)
         unpack(flags)
     }
     local cmd = {
-        "cd", env.srcdir, "&&"
+        "cd", env.srcdir, "&&",
         "/usr/bin/qmake -makefile"
     }
     make(env, flags)

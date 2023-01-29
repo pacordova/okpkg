@@ -1,6 +1,5 @@
-local sha2  = require 'sha2'
-local sys   = require 'unix'
-local build = require 'build'
+local sys   = require "unix"
+local build = require "build"
 
 unpack = table.unpack
 
@@ -16,15 +15,20 @@ env = {
     "SOURCE_DATE_EPOCH=" .. source_date_epoch
 }
 
-function checksum(file, hash)
-    local fd = io.open(file)
-    local x = sha2.new256()
-    for b in fd:lines(2^12) do
-        x:add(b)
+
+local function checksum(file, hash)
+    local cmd = {
+        "/usr/bin/sha256sum",
+        file,
+    }
+    local fd = io.popen(paste(cmd))
+    local arr = {}
+    for line in fd:lines() do
+        table.insert(arr, line)	
     end
     fd:close()
 
-    verify = x:close() == hash
+    verify = arr[1]:gsub(" .*$", "") == hash
 
     if (verify) then
         io.stderr:write("sha256sum: OK")
@@ -35,7 +39,7 @@ function checksum(file, hash)
     return verify
 end
 
-function vlook(pkgname)
+local function vlook(pkgname)
     local key = "^" .. pkgname
     local fd = io.open("example.db", "r")
     for line in fd:lines() do
@@ -48,7 +52,7 @@ function vlook(pkgname)
     return arr
 end
 
-function download(pkgname)
+local function download(pkgname)
     local pkg       = vlook(pkgname)
     local basename  = pkg.url:gsub("^.*/", "") 
     local patchfile = "/usr/firepkg/patches/" .. pkgname .. ".diff"
@@ -72,7 +76,7 @@ function download(pkgname)
     sys.rm(basename)
 end
 
-function makepkg(dir)
+local function makepkg(dir)
     --cleanup
     sys.strip(dir .. "/usr/lib64", "--strip-debug") 
     sys.strip(dir .. "/usr/bin",   "--strip-all")
@@ -109,7 +113,7 @@ function makepkg(dir)
     sys.compress(dir .. ".tar")
 end
 
-function build(pkgname)
+local function build(pkgname)
     local pkg       = vlook(pkgname)
     local basename  = pkg.url:gsub("^.*/", "") 
     local suffix    = "-x86_64.tar.xz"
@@ -118,7 +122,7 @@ function build(pkgname)
         "--localstatedir=/var",
         "--sysconfdir=/etc",
         "--libdir=" .. libdir,
-        "--bindir=" .. prefix .. "/bin"
+        "--bindir=" .. prefix .. "/bin",
         "--sbindir=" .. prefix .. "/sbin"
     }
 
@@ -129,8 +133,8 @@ function build(pkgname)
     version = basename:match("[._/-][.0-9-]*[0-9][a-z]?")
     version = version:gsub("-", "."):gsub("^.", "-")
 
-    build[pkg.build]
-    sys.makepkg(destdir)
+    --build[pkg.build]
+    makepkg(destdir)
     sys.rename(destdir .. ".tar.xz", destdir .. version .. suffix)
 end
 
