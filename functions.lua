@@ -186,6 +186,13 @@ local function uninstall(pkgname)
     end
 end
 
+local function emerge(pkgname)
+    uninstall(pkgname)
+    download(pkgname)
+    install(build(pkgname))
+end
+
+
 return {
     download  = download,
     build     = build,

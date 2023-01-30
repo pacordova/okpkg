@@ -6,29 +6,22 @@ local args = {...}
 
 local flag = table.remove(args, 1)
 
+local flags = {
+    ["-R"] = firepkg.remove,
+    ["-i"] = firepkg.install,
+    ["-S"] = firepkg.emerge,
+    ["makepkg"]  = firepkg.makepkg,
+    ["download"] = firepkg.download,
+    ["build"]    = firepkg.build,
+    --["timesync"] = firepkg.timesync,
+    --["backup"]   = firepkg.backup,
+    --["chroot"]   = firepkg.chroot,
+}
+
 if #args == 0 then 
     print("zero args")
 else
-    for i, pkgname in ipairs(args) do
-        if flag == "-S" then
-            firepkg.uninstall(pkgname)
-            firepkg.download(pkgname)
-            firepkg.install(firepkg.build(pkgname))
-        end
-        if flag == "-R" then
-            firepkg.uninstall(pkgname)
-        end
-        if flag == "-i" then
-            firepkg.install(pkgname)
-        end
-        if flag == "makepkg" then
-            firepkg.makepkg(pkgname)
-        end
-        if flag == "download" then
-            firepkg.download(pkgname)
-        end
-        if flag == "build" then
-            firepkg.build(pkgname)
-        end
+    for i, arg in ipairs(args) do
+        flags[flag](arg)     
     end
 end
