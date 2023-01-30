@@ -168,7 +168,7 @@ local function install(file)
     fd:write("rm -d '" .. uninstaller .. "'\n")
 
     for i, line in ipairs(sys.extract(file, root)) do
-        fd:write("rm -d '" .. line .. "'\n")
+        fd:write("rm -d '" .. root .. line .. "'\n")
     end
 
     fd:close()
@@ -176,12 +176,20 @@ local function install(file)
     os.execute("/usr/bin/chmod +x " .. uninstaller)
 end
 
+local function uninstall(pkgname)
+    local uninstaller = "/usr/firepkg/uninstall/uninstall-" .. pkgname .. ".sh"
 
------------------------------------------
+    local fd = io.open(uninstaller)
+    if (fd ~= nil) then
+        fd:close()
+        os.execute("/bin/sh " .. uninstaller)
+    end
+end
 
-nano = vlook("nano")
-print(nano.build)
-
-download("nano")
---file = build("nano")
-install("/usr/firepkg/packages/nano-6.3-x86_64.tar.xz")
+return {
+    download  = download,
+    build     = build,
+    install   = install,
+    uninstall = uninstall,
+    makepkg   = makepkg
+}
