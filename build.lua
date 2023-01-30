@@ -4,14 +4,15 @@ unpack = table.unpack
 local paste = sys.paste
 
 local function make(env, flags)
+    local flags = {
+        "--directory=" .. env.srcdir,
+        unpack(flags)
+    }
     local cmd = {
         "/usr/bin/make",
-        "--directory=" .. env.srcdir,
         unpack(flags),
         "&&",
-        "/usr/bin/make",
-        "--directory=" .. env.srcdir,
-        "install",
+        "/usr/bin/make install",
         unpack(flags),
         "DESTDIR=" .. env.destdir
     }
@@ -21,16 +22,19 @@ end
 local function configure(env, flags)
     local flags = {
         "--localstatedir=" .. env.localstatedir,
-        "--sysconfdir"     .. env.sysconfdir,
+        "--sysconfdir="     .. env.sysconfdir,
         "--libdir="        .. env.libdir,
         "--bindir="        .. env.bindir,
         "--sbindir="       .. env.sbindir,
         unpack(flags)
     }
+
     local cmd = {
         "cd", env.srcdir, "&&",
         "./configure", unpack(flags)
     }
+    os.execute(paste(cmd))
+
     make(env, {})
 end
 
@@ -44,11 +48,14 @@ local function configure2(env, flags)
         "--sbindir="       .. env.sbindir,
         unpack(flags)
     }
+
     local cmd = {
         "/usr/bin/mkdir", builddir, "&&",
         "cd", builddir, "&&",
         "../configure", unpack(flags)
     }
+    os.execute(paste(cmd))
+
     make(env, {})
 end
 
@@ -131,10 +138,13 @@ local function qmake(env, flags)
         "INSTALL_ROOT=" .. env.destdir,
         unpack(flags)
     }
+
     local cmd = {
         "cd", env.srcdir, "&&",
         "/usr/bin/qmake -makefile"
     }
+
+    os.execute(paste(cmd))
     make(env, flags)
 end
 

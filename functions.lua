@@ -1,5 +1,5 @@
-local sys   = require "unix"
-local build = require "build"
+local sys = require "unix"
+local bld = require "build"
 
 unpack = table.unpack
 
@@ -137,7 +137,7 @@ local function build(pkgname)
     local version = basename:match("[._/-][.0-9-]*[0-9][a-z]?")
     local version = version:gsub("-", "."):gsub("^.", "-")
 
-    build[pkg.build](env, pkg.flags)
+    bld[pkg.build](env, pkg.flags)
     makepkg(env.destdir)
     sys.rename(env.destdir .. ".tar.xz", env.destdir .. version .. suffix)
 end
@@ -149,3 +149,4 @@ bash = vlook("bash")
 print(bash.build)
 
 download("bash")
+build("bash")
