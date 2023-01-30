@@ -70,10 +70,17 @@ local function extract(file, directory)
         "--directory=" .. directory,
         "--strip-components=1",
         "--extract",
+        "--verbose",
         "--file",
         file
     }
-    os.execute(paste(cmd))
+    local fd = io.popen(paste(cmd))
+    local arr = {}
+    for line in fd:lines() do
+        table.insert(arr, line)	
+    end
+    fd:close()
+    return arr
 end
 
 local function patch(file, directory)
