@@ -1,4 +1,4 @@
-local sys   = require 'unix'
+local sys = require "unix"
 
 unpack = table.unpack
 local paste = sys.paste
