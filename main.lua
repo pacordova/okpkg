@@ -7,7 +7,7 @@ local args = {...}
 local cmd = table.remove(args, 1)
 
 local flags = {
-    ["-R"] = firepkg.remove,
+    ["-R"] = firepkg.uninstall,
     ["-i"] = firepkg.install,
     ["-S"] = firepkg.emerge,
     ["makepkg"]  = firepkg.makepkg,
