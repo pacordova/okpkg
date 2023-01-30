@@ -4,7 +4,7 @@ local firepkg = require "functions"
 
 local args = {...}
 
-local flag = table.remove(args, 1)
+local cmd = table.remove(args, 1)
 
 local flags = {
     ["-R"] = firepkg.remove,
@@ -22,6 +22,6 @@ if #args == 0 then
     print("zero args")
 else
     for i, arg in ipairs(args) do
-        flags[flag](arg)     
+        flags[cmd](arg)     
     end
 end

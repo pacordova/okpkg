@@ -163,12 +163,12 @@ local function install(file)
 
     fd = io.open(uninstaller, "w+")
     fd:write("#!/bin/sh\n")
-    fd:write("rm -r '/usr/firepkg/sources/" .. pkgname .. "'\n")
-    fd:write("rm -r '/usr/firepkg/packages/" .. pkgname .. "'\n")
-    fd:write("rm -d '" .. uninstaller .. "'\n")
+    fd:write("rm -r '/usr/firepkg/sources/" .. pkgname .. "' 2>/dev/null\n")
+    fd:write("rm -r '/usr/firepkg/packages/" .. pkgname .. "' 2>/dev/null\n")
+    fd:write("rm -d '" .. uninstaller .. "' 2>/dev/null\n")
 
     for i, line in ipairs(sys.extract(file, root)) do
-        fd:write("rm -d '" .. root .. line .. "'\n")
+        fd:write("rm -d '" .. root .. line .. "' 2>/dev/null\n")
     end
 
     fd:close()
@@ -198,5 +198,6 @@ return {
     build     = build,
     install   = install,
     uninstall = uninstall,
-    makepkg   = makepkg
+    makepkg   = makepkg,
+    emerge    = emerge
 }
