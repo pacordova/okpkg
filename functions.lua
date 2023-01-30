@@ -4,9 +4,9 @@ local bld = require "build"
 unpack = table.unpack
 
 local source_date_epoch = 1000000000
-local patches = "/usr/firepkg/patches"
-local sources = "/usr/firepkg/sources"
 local paste  = sys.paste
+local root   = "/"
+local arch   = "-x86_64.tar.xz"
 
 local function env(pkgname) 
     if pkgname == nil then
@@ -21,12 +21,15 @@ local function env(pkgname)
         bindir            = "/usr/bin",
         sbindir           = "/usr/sbin",
         sysconfdir        = "/etc",
-        localstatedir     = "/var"
+        localstatedir     = "/var",
+        root              = "/"
     }
 end
 
 
 local function checksum(file, hash)
+    local basename  = file:gsub("^.*/", "") 
+
     local cmd = {
         "/usr/bin/sha256sum",
         file,
@@ -41,9 +44,9 @@ local function checksum(file, hash)
     verify = arr[1]:gsub(" .*$", "") == hash
 
     if (verify) then
-        io.stderr:write("sha256sum: OK")
+        io.stderr:write(basename.. ": OK\n")
     else
-        io.stderr:write("ERROR: checksum failed")
+        io.stderr:write("ERROR: checksum failed for " .. basename)
     end
 
     return verify
@@ -59,6 +62,11 @@ local function vlook(pkgname)
         end
     end
     fd:close()
+
+    if arr.flags == nil then
+        arr.flags = {}
+    end 
+
     return arr
 end
 
@@ -84,6 +92,7 @@ local function download(pkgname)
     sys.extract(basename, srcdir)    
     sys.patch(patchfile, srcdir)
     sys.rm(basename)
+    return x
 end
 
 local function makepkg(dir)
@@ -128,25 +137,51 @@ end
 local function build(pkgname)
     local pkg       = vlook(pkgname)
     local basename  = pkg.url:gsub("^.*/", "") 
-    local suffix    = "-x86_64.tar.xz"
 
     local env = env(pkgname)
 
     sys.mkdir(env.destdir)
 
-    local version = basename:match("[._/-][.0-9-]*[0-9][a-z]?")
-    local version = version:gsub("-", "."):gsub("^.", "-")
+    local version = 
+        basename:match("[._/-][.0-9-]*[0-9][a-z]?"):gsub("-", "."):gsub("^.", "-")
+
+    pkgfile = env.destdir .. version .. arch
 
     bld[pkg.build](env, pkg.flags)
     makepkg(env.destdir)
-    sys.rename(env.destdir .. ".tar.xz", env.destdir .. version .. suffix)
+    sys.rename(env.destdir .. ".tar.xz", pkgfile)
+
+    return pkgfile
+end
+
+local function install(file)
+    local basename = file:gsub("^.*/", "")
+    local version  = basename:match("[._/-][.0-9-]*[0-9][a-z]?")
+    local pkgname  = basename:gsub(version, ""):gsub(arch, "")
+
+    local uninstaller = "/usr/firepkg/uninstall/uninstall-" .. pkgname .. ".sh"
+
+    fd = io.open(uninstaller, "w+")
+    fd:write("#!/bin/sh\n")
+    fd:write("rm -r '/usr/firepkg/sources/" .. pkgname .. "'\n")
+    fd:write("rm -r '/usr/firepkg/packages/" .. pkgname .. "'\n")
+    fd:write("rm -d '" .. uninstaller .. "'\n")
+
+    for i, line in ipairs(sys.extract(file, root)) do
+        fd:write("rm -d '" .. line .. "'\n")
+    end
+
+    fd:close()
+
+    os.execute("/usr/bin/chmod +x " .. uninstaller)
 end
 
 
 -----------------------------------------
 
-bash = vlook("bash")
-print(bash.build)
+nano = vlook("nano")
+print(nano.build)
 
-download("bash")
-build("bash")
+download("nano")
+--file = build("nano")
+install("/usr/firepkg/packages/nano-6.3-x86_64.tar.xz")
