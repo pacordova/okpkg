@@ -1,3 +1,0 @@
--- toolchain
-bash = { hash="5bac17218d3911834520dad13cd1f85ab944e1c09ae1aba55906be1f8192f558", url="https://ftp.gnu.org/gnu/bash/bash-5.1.16.tar.gz", build="configure", flags={"--without-bash-malloc"} }
-nano = { hash="eb532da4985672730b500f685dbaab885a466d08fbbf7415832b95805e6f8687", url="https://ftp.gnu.org/gnu/nano/nano-6.3.tar.xz", build="configure" }
