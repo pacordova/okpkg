@@ -1,10 +1,8 @@
-local sys = require "unix"
 local bld = require "build"
 
 unpack = table.unpack
 
 local source_date_epoch = 1000000000
-local paste  = sys.paste
 local root   = "/"
 local arch   = "-x86_64.tar.xz"
 
@@ -26,15 +24,28 @@ local function env(pkgname)
     }
 end
 
+local function extract(file, directory)
+    local fd = io.popen("tar -C " .. directory .. " --strip-components=1 -xvf " .. file)
+    local arr = {}
+    for line in fd:lines() do
+        table.insert(arr, line)	
+    end
+    fd:close()
+    return arr
+end
+
+local function patch(file, directory)
+    local fd = io.open(file)
+    if (fd ~= nil) then
+        fd:close()
+        os.execute("patch -d " .. directory .. " -p1 <" .. file)
+    end
+end
 
 local function checksum(file, hash)
     local basename  = file:gsub("^.*/", "") 
 
-    local cmd = {
-        "/usr/bin/sha256sum",
-        file,
-    }
-    local fd = io.popen(paste(cmd))
+    local fd = io.popen("sha256sum " .. file)
     local arr = {}
     for line in fd:lines() do
         table.insert(arr, line)	
@@ -44,7 +55,7 @@ local function checksum(file, hash)
     verify = arr[1]:gsub(" .*$", "") == hash
 
     if (verify) then
-        io.stderr:write(basename.. ": OK\n")
+        io.stderr:write(basename .. ": OK\n")
     else
         io.stderr:write("ERROR: checksum failed for " .. basename)
     end
@@ -76,62 +87,19 @@ local function download(pkgname)
     local patchfile = "/usr/firepkg/patches/" .. pkgname .. ".diff"
     local srcdir    = "/usr/firepkg/sources/" .. pkgname
 
-    local cmd = {
-        "/usr/bin/curl",
-        "--location",
-        "--remote-name",
-        pkg.url
-    }
-    os.execute(paste(cmd))
+    os.execute("curl -LO " .. pkg.url)
 
     if not checksum(basename, pkg.hash) then
         return -1
     end
 
-    sys.mkdir(srcdir)
-    sys.extract(basename, srcdir)    
-    sys.patch(patchfile, srcdir)
-    sys.rm(basename)
-    return x
-end
+    os.execute("rm -r " .. srcdir .. " 2>/dev/null")
+    os.execute("mkdir -p " .. srcdir)
 
-local function makepkg(dir)
-    local env = env()
+    extract(basename, srcdir)    
+    patch(patchfile, srcdir)
+    os.execute("rm -r " .. basename .. " 2>/dev/null")
 
-    --cleanup
-    sys.strip(dir .. env.libdir, "--strip-debug") 
-    sys.strip(dir .. env.bindir, "--strip-all")
-    sys.strip(dir .. "/bin",     "--strip-all")
-    sys.rm(dir .. "/usr/share/doc")
-    sys.rm(dir .. "/usr/doc")
-    sys.rm(dir .. "/usr/share/info")
-
-    --delete pyc files for reproducibility
-    local cmd = {
-        "/usr/bin/find",
-        dir,
-        "-name '.pyc' -delete"
-    }
-    os.execute(paste(cmd))
-
-    --make tarball
-    local cmd = {
-        "/usr/bin/tar",
-        "--directory=" .. dir,
-        "--sort=name",
-        "--mtime=@" .. env.source_date_epoch,
-        "--owner=0",
-        "--group=0",
-        "--numeric-owner",
-        "--create",
-        "--file",
-        dir .. ".tar",
-        unpack(sys.ls(dir))
-    }
-    os.execute(paste(cmd))
-
-    --compress
-    sys.compress(dir .. ".tar")
 end
 
 local function build(pkgname)
@@ -140,16 +108,18 @@ local function build(pkgname)
 
     local env = env(pkgname)
 
-    sys.mkdir(env.destdir)
+    os.execute("rm -r " .. env.destdir .. " 2>/dev/null")
+    os.execute("mkdir -p " .. env.destdir)
+
 
     local version = 
         basename:match("[._/-][.0-9-]*[0-9][a-z]?"):gsub("-", "."):gsub("^.", "-")
 
-    pkgfile = env.destdir .. version .. arch
+    local pkgname = env.destdir .. version .. arch
 
     bld[pkg.build](env, pkg.flags)
-    makepkg(env.destdir)
-    sys.rename(env.destdir .. ".tar.xz", pkgfile)
+    os.execute("/usr/firepkg/scripts/makepkg " .. env.destdir)
+    os.execute("mv " .. env.destdir .. ".tar.xz " .. pkgname)
 
     return pkgfile
 end
@@ -182,7 +152,7 @@ local function uninstall(pkgname)
     local fd = io.open(uninstaller)
     if (fd ~= nil) then
         fd:close()
-        os.execute("/bin/sh " .. uninstaller)
+        os.execute("sh " .. uninstaller)
     end
 end
 
@@ -192,12 +162,10 @@ local function emerge(pkgname)
     install(build(pkgname))
 end
 
-
 return {
     download  = download,
     build     = build,
     install   = install,
     uninstall = uninstall,
-    makepkg   = makepkg,
     emerge    = emerge
 }
