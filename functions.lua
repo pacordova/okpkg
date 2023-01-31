@@ -141,7 +141,7 @@ local function install(file)
 
     fd:close()
 
-    os.execute("/usr/bin/chmod +x " .. uninstaller)
+    os.execute("chmod +x " .. uninstaller)
 end
 
 local function uninstall(pkgname)
