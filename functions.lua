@@ -63,7 +63,7 @@ end
 
 local function vlook(pkgname)
     local key = "^" .. pkgname
-    local fd = io.open("example.db", "r")
+    local fd = io.open("/usr/firepkg/example.db", "r")
     for line in fd:lines() do
         if line:find(key) then
             load(line:gsub(key, "arr"))()
