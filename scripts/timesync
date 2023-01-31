@@ -1,0 +1,4 @@
+#!/bin/sh
+
+DATE = `nc time.nist.gov 13 | awk 'NR>1 {print $2 " " $3}'`
+date +'%y-%m-%d %H:%M:%S' -u -s $DATE && hwclock --systohc

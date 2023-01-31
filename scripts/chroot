@@ -1,0 +1,9 @@
+#!/bin/sh
+
+mkdir $1/proc $1/sys $1/dev 2>/dev/null
+
+mount -t proc -o ro /proc $1/proc
+mount -t sysfs -o ro /sys $1/sys
+mount -o ro,bind /dev $1/dev
+
+PS1='(chroot)# ' chroot --user=root $1 || exit
