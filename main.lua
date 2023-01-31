@@ -1,5 +1,7 @@
 #!/usr/bin/env lua
 
+LUA_PATH = "/usr/firepkg"
+
 local firepkg = require "functions"
 
 local args = {...}
