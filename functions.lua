@@ -25,8 +25,12 @@ local function env(pkgname)
     }
 end
 
-local function extract(file, directory)
-    local fd = io.popen("tar -C " .. directory .. " --strip-components=1 -xvf " .. file)
+local function extract(directory, strip, file)
+    local fd = io.popen(
+        "tar -C " .. directory .. " " ..
+        "--strip-components=" .. strip .. " " ..
+        "-xvf " .. file
+    )
     local arr = {}
     for line in fd:lines() do
         table.insert(arr, line)	
@@ -94,7 +98,7 @@ local function download(pkgname)
     os.execute("rm -r " .. srcdir .. " 2>/dev/null")
     os.execute("mkdir -p " .. srcdir)
 
-    extract(basename, srcdir)    
+    extract(srcdir, 1, basename)    
     patch(patchfile, srcdir)
     os.execute("rm -r " .. basename .. " 2>/dev/null")
 
@@ -135,7 +139,7 @@ local function install(file)
     fd:write("rm -r '/usr/firepkg/packages/" .. pkgname .. "' 2>/dev/null\n")
     fd:write("rm -d '" .. uninstaller .. "' 2>/dev/null\n")
 
-    for i, line in ipairs(extract(file, root)) do
+    for i, line in ipairs(extract(root, 0, file)) do
         fd:write("rm -d '" .. root .. line .. "' 2>/dev/null\n")
     end
 
