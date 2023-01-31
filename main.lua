@@ -1,6 +1,6 @@
 #!/usr/bin/env lua
 
-LUA_PATH = "/usr/firepkg/?.lua"
+package.path = "/usr/firepkg/?.lua;" .. package.path
 
 local firepkg = require "functions"
 
