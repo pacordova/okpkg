@@ -12,10 +12,10 @@ local flags = {
     ["-S"] = firepkg.emerge,
     ["download"] = firepkg.download,
     ["build"]    = firepkg.build,
-    ["makepkg"]  = function(arg) os.execute("/usr/firepkg/scripts/makepkg " .. arg),
-    ["timesync"] = function() os.execute("/usr/firepkg/scripts/timesync"),
-    ["backup"]   = function() os.execute("/usr/firepkg/scripts/backup.rc"),
-    ["chroot"]   = function(arg) os.execute("/usr/firepkg/scripts/chroot " .. arg),
+    ["makepkg"]  = function(arg) os.execute("/usr/firepkg/scripts/makepkg " .. arg); end,
+    ["timesync"] = function() os.execute("/usr/firepkg/scripts/timesync"); end,
+    ["backup"]   = function() os.execute("/usr/firepkg/scripts/backup.rc"); end,
+    ["chroot"]   = function(arg) os.execute("/usr/firepkg/scripts/chroot " .. arg); end,
 }
 
 if #args == 0 then 
