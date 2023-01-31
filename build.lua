@@ -1,22 +1,12 @@
-local sys = require "unix"
-
 unpack = table.unpack
-local paste = sys.paste
+concat = table.concat
 
 local function make(env, flags)
-    local flags = {
-        "--directory=" .. env.srcdir,
-        unpack(flags)
-    }
-    local cmd = {
-        "/usr/bin/make",
-        unpack(flags),
-        "&&",
-        "/usr/bin/make install",
-        unpack(flags),
-        "DESTDIR=" .. env.destdir
-    }
-    os.execute(paste(cmd))
+    os.execute(
+        "make -C " .. env.srcdir .. " " .. concat(flags, " ") .. " && " ..
+        "make install -C " .. env.srcdir .. " " .. concat(flags, " ") ..
+            " DESTDIR=" .. env.destdir
+    )
 end
 
 local function configure(env, flags)
@@ -28,13 +18,7 @@ local function configure(env, flags)
         "--sbindir="       .. env.sbindir,
         unpack(flags)
     }
-
-    local cmd = {
-        "cd", env.srcdir, "&&",
-        "./configure", unpack(flags)
-    }
-    os.execute(paste(cmd))
-
+    os.execute("cd " .. env.srcdir .. " && ./configure " .. concat(flags, " "))
     make(env, {})
 end
 
@@ -48,14 +32,8 @@ local function configure2(env, flags)
         "--sbindir="       .. env.sbindir,
         unpack(flags)
     }
-
-    local cmd = {
-        "/usr/bin/mkdir", builddir, "&&",
-        "cd", builddir, "&&",
-        "../configure", unpack(flags)
-    }
-    os.execute(paste(cmd))
-
+    os.execute("mkdir " .. builddir)
+    os.execute("cd " .. builddir .. " && " .. "../configure " .. concat(flags, " "))
     make(env, {})
 end
 
@@ -64,18 +42,11 @@ local function autoreconf(env, flags)
     local fd   = io.open(file)
     if (fd ~= nil) then
         fd:close()
-        local cmd = {
-            "cd", env.srcdir, "&&",
-            "./autogen.sh"
-        }
+        local cmd = "./autogen.sh"
     else
-        local cmd = {
-            "cd", env.srcdir, "&&",
-            "autoreconf -fi -I m4"
-        }
+        local cmd = "autoreconf -fi -I m4"
     end
-
-    os.execute(paste(cmd))
+    os.execute("cd " .. env.srcdir .. " && " .. cmd)
     configure(env, flags)
 end
 
@@ -86,12 +57,11 @@ local function cmake(env, flags)
         "-DCMAKE_BUILD_TYPE=Release",
         unpack(flags)
     }
-    local cmd = {
-        "/usr/bin/mkdir", builddir, "&&",
-        "cd", builddir, "&&",
-        "/usr/bin/cmake", "..", unpack(flags)
-    }
-    os.execute(paste(cmd))
+    os.execute("mkdir " .. builddir)
+    os.execute(
+        "cd " .. builddir " && " ..
+        "cmake .. " .. concat(flags, " ")
+    )
     make(env, {})
 end
 
@@ -101,13 +71,11 @@ local function meson(env, flags)
         "-Dbuildtype=release",
         unpack(flags)
     }
-    local cmd = {
-        "cd", env.srcdir, "&&",
-        "/usr/bin/meson", "build", unpack(flags), "&&",
-        "DESTDIR=" .. env.destdir,
-        "/usr/bin/ninja -C build install"
-    }
-    os.execute(paste(cmd))
+    os.execute(
+        "cd " .. env.srcdir .. " && " ..
+        "meson build " .. concat(flags, " ") .. " && " ..
+        "DESTDIR=" .. env.destdir .. " ninja -C build install"
+    )
 end
 
 local function scons(env, flags)
@@ -116,21 +84,17 @@ local function scons(env, flags)
         "DESTDIR=" .. env.destdir,
         unpack(flags)
     }
-    local cmd = {
-        "/usr/bin/scons", unpack(flags), "install"
-    }
-    os.execute(paste(cmd))
+    os.execute("scons " .. concat(flags, " ") .. " install")
 end
 
 local function waf(env, flags)
-    local cmd = {
-        "cd", env.srcdir, "&&",
-        "/usr/bin/python3", "bootstrap.py", "&&",
-        "/usr/bin/python3", "waf", "configure", "--prefix=" .. env.prefix, "&&",
-        "/usr/bin/python3", "waf", "&&",
-        "/usr/bin/python3", "waf", "install", "--destdir=" .. env.destdir
-    }
-    os.execute(paste(cmd))
+    os.execute(
+        "cd " .. env.srcdir .. " && " ..
+        "python3 boostrap.py && " ..
+        "python3 waf configure --prefix=" .. env.prefix .. " && " ..
+        "python3 waf && " ..
+        "python3 waf install --destdir=" .. env.destdir
+    )
 end
 
 local function qmake(env, flags)
@@ -138,13 +102,10 @@ local function qmake(env, flags)
         "INSTALL_ROOT=" .. env.destdir,
         unpack(flags)
     }
-
-    local cmd = {
-        "cd", env.srcdir, "&&",
-        "/usr/bin/qmake -makefile"
-    }
-
-    os.execute(paste(cmd))
+    os.execute(
+        "cd " .. env.srcdir .. " && " ..
+        "qmake -makefile"
+    )
     make(env, flags)
 end
 

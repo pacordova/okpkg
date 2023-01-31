@@ -1,7 +1,5 @@
 local bld = require "build"
 
-unpack = table.unpack
-
 local source_date_epoch = 1000000000
 local root   = "/"
 local arch   = "-x86_64.tar.xz"
