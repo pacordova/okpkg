@@ -3,6 +3,9 @@ local bld = require "build"
 local source_date_epoch = 1000000000
 local root   = "/"
 local arch   = "-x86_64.tar.xz"
+local databases = {
+    "/usr/firepkg/db/example.db"
+}
 
 local function env(pkgname) 
     if pkgname == nil then
@@ -63,20 +66,17 @@ end
 
 local function vlook(pkgname)
     local key = "^" .. pkgname
-    local fd = io.open("/usr/firepkg/example.db", "r")
-    for line in fd:lines() do
-        if line:find(key) then
-            load(line:gsub(key, "arr"))()
-            break
+    for i, db in ipairs(databases) do
+        local fd = io.open(db, "r")
+        for line in fd:lines() do
+            if line:find(key) then
+                load(line:gsub(key, "arr"))()
+                fd:close()
+                if arr.flags == nil then arr.flags = {}; end
+                return arr
+            end
         end
     end
-    fd:close()
-
-    if arr.flags == nil then
-        arr.flags = {}
-    end 
-
-    return arr
 end
 
 local function download(pkgname)
