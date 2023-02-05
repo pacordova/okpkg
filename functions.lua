@@ -69,6 +69,7 @@ local function checksum(file, hash)
 end
 
 local function vlook(pkgname)
+    local env = env(pkgname)
     local key = "^" .. pkgname
     for i, db in ipairs(databases) do
         local fd = io.open(db, "r")
@@ -129,6 +130,11 @@ end
 local function install(file)
     local basename = file:gsub("^.*/", "")
     local version  = basename:match("[._/-][.0-9-]*[0-9][a-z]?")
+
+    if version == nil then 
+        version = "" 
+    end
+
     local pkgname  = basename:gsub(version, ""):gsub(arch, "")
 
     local uninstaller = "/usr/firepkg/uninstall/uninstall-" .. pkgname .. ".sh"

@@ -9,14 +9,19 @@ local function make(env, flags)
     )
 end
 
-local function configure(env, flags)
+local function configure(env, pkg)
+    if pkg.dirflags == nil then
+        local pkg.dirflags = {
+            "--localstatedir=" .. env.localstatedir,
+            "--sysconfdir="    .. env.sysconfdir,
+            "--libdir="        .. env.libdir,
+            "--bindir="        .. env.bindir,
+            "--sbindir="       .. env.sbindir
+        }
+    end
     local flags = {
-        "--localstatedir=" .. env.localstatedir,
-        "--sysconfdir="     .. env.sysconfdir,
-        "--libdir="        .. env.libdir,
-        "--bindir="        .. env.bindir,
-        "--sbindir="       .. env.sbindir,
-        unpack(flags)
+        unpack(pkg.dirflags),
+        unpack(pkg.flags)
     }
     os.execute("cd " .. env.srcdir .. " && ./configure " .. concat(flags, " "))
     make(env, {})
