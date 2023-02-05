@@ -11,12 +11,12 @@ patch= {hash="ac610bda97abe0d9f6b7c963255a11dcb196c25e337c61f94e4778d632f1d8fd",
 sed={hash="f79b0cfea71b37a8eeec8490db6c5f7ae7719c35587f21edb0617f370eeff633",url="https://ftp.gnu.org/gnu/sed/sed-4.8.tar.xz" build="configure"}
 tar={hash="63bebd26879c5e1eea4352f0d03c991f966aeb3ddeb3c7445c902568d5411d28",url="https://ftp.gnu.org/gnu/tar/tar-1.34.tar.xz",build="configure",flags={"FORCE_UNSAFE_CONFIGURE=1"}}
 xz={hash="f6f4910fd033078738bd82bfba4f49219d03b17eb0794eb91efbae419f4aba10",url="https://tukaani.org/xz/xz-5.2.5.tar.gz",build="configure"}
-lua={hash="164c7849653b80ae67bec4b7473b884bf5cc8d2dca05653475ec2ed27b9ebf61",url="http://lua.org/ftp/lua-5.4.4.tar.gz",build="make",flags={"INSTALL_TOP=" .. destdir .. "/usr","INSTALL_LIB=" .. destdir .. "/usr/lib64","INSTALL_CMOD=" .. destdir .. "/usr/lib64/lua","MYCFLAGS="}}
+lua={hash="164c7849653b80ae67bec4b7473b884bf5cc8d2dca05653475ec2ed27b9ebf61",url="http://lua.org/ftp/lua-5.4.4.tar.gz",build="make",flags={"INSTALL_TOP="..destdir.."/usr","INSTALL_LIB="..destdir.."/usr/lib64","INSTALL_CMOD="..destdir.."/usr/lib64/lua","MYCFLAGS="}}
 
 -- compression
 zlib={hash="c3e5e9fdd5004dcb542feda5ee4f0ff0744628baf8ed2dd5d66f8ca1197cb1a1",url="https://zlib.net/fossils/zlib-1.2.11.tar.gz",build="configure",dirflags={"--libdir=/usr/lib64"}}
 pigz={hash="b4c9e60344a08d5db37ca7ad00a5b2c76ccb9556354b722d56d55ca7e8b1c707",url="https://zlib.net/pigz/pigz-2.7.tar.gz",build="make"}
-bzip2={hash="ab5a03176ee106d3f0fa90e381da478ddae405918153cca248e682cd0c4a2269",url="https://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz",build="make",flags={"PREFIX=" .. destdir .. "/usr"}}
+bzip2={hash="ab5a03176ee106d3f0fa90e381da478ddae405918153cca248e682cd0c4a2269",url="https://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz",build="make",flags={"PREFIX="..destdir.."/usr"}}
 zstd={hash="7c42d56fac126929a6a85dbc73ff1db2411d04f104fae9bdea51305663a83fd0",url="https://github.com/facebook/zstd/releases/download/v1.5.2/zstd-1.5.2.tar.gz",build="make"}
 
 -- python
