@@ -2,12 +2,12 @@
 m4={hash="63aede5c6d33b6d9b13511cd0be2cac046f2e70fd0a07aa9573a04a82783af96",url="https://ftp.gnu.org/gnu/m4/m4-1.4.19.tar.xz",build="configure"}
 bash={hash="5bac17218d3911834520dad13cd1f85ab944e1c09ae1aba55906be1f8192f558",url="https://ftp.gnu.org/gnu/bash/bash-5.1.16.tar.gz",build="configure",flags={"--without-bash-malloc"}}
 coreutils={hash="61a1f410d78ba7e7f37a5a4f50e6d1320aca33375484a3255eddf17a38580423",url="https://ftp.gnu.org/gnu/coreutils/coreutils-9.1.tar.xz",build="configure",flags={"--enable-no-install-program=kill,uptime","FORCE_UNSAFE_CONFIGURE=1"}}
-diffutils= {hash="a6bdd7d1b31266d11c4f4de6c1b748d4607ab0231af5188fc2533d0ae2438fec",url="https://ftp.gnu.org/gnu/diffutils/diffutils-3.8.tar.xz",build="configure"}
-findutils= {hash="a2bfb8c09d436770edc59f50fa483e785b161a3b7b9d547573cb08065fd462fe",url="https://ftp.gnu.org/gnu/findutils/findutils-4.9.0.tar.xz",build="configure"}
-gawk= {hash="d87629386e894bbea11a5e00515fc909dc9b7249529dad9e6a3a2c77085f7ea2",url="https://ftp.gnu.org/gnu/gawk/gawk-5.1.1.tar.xz",build="configure"}
-grep= {hash="5c10da312460aec721984d5d83246d24520ec438dd48d7ab5a05dbc0d6d6823c",url="https://ftp.gnu.org/gnu/grep/grep-3.7.tar.xz",build="configure"}
-make= {hash="e05fdde47c5f7ca45cb697e973894ff4f5d79e13b750ed57d7b66d8defc78e19",url="https://ftp.gnu.org/gnu/make/make-4.3.tar.gz",build="configure"}
-patch= {hash="ac610bda97abe0d9f6b7c963255a11dcb196c25e337c61f94e4778d632f1d8fd",url="https://ftp.gnu.org/gnu/patch/patch-2.7.6.tar.xz",build="configure"}
+diffutils={hash="a6bdd7d1b31266d11c4f4de6c1b748d4607ab0231af5188fc2533d0ae2438fec",url="https://ftp.gnu.org/gnu/diffutils/diffutils-3.8.tar.xz",build="configure"}
+findutils={hash="a2bfb8c09d436770edc59f50fa483e785b161a3b7b9d547573cb08065fd462fe",url="https://ftp.gnu.org/gnu/findutils/findutils-4.9.0.tar.xz",build="configure"}
+gawk={hash="d87629386e894bbea11a5e00515fc909dc9b7249529dad9e6a3a2c77085f7ea2",url="https://ftp.gnu.org/gnu/gawk/gawk-5.1.1.tar.xz",build="configure"}
+grep={hash="5c10da312460aec721984d5d83246d24520ec438dd48d7ab5a05dbc0d6d6823c",url="https://ftp.gnu.org/gnu/grep/grep-3.7.tar.xz",build="configure"}
+make={hash="e05fdde47c5f7ca45cb697e973894ff4f5d79e13b750ed57d7b66d8defc78e19",url="https://ftp.gnu.org/gnu/make/make-4.3.tar.gz",build="configure"}
+patch={hash="ac610bda97abe0d9f6b7c963255a11dcb196c25e337c61f94e4778d632f1d8fd",url="https://ftp.gnu.org/gnu/patch/patch-2.7.6.tar.xz",build="configure"}
 sed={hash="f79b0cfea71b37a8eeec8490db6c5f7ae7719c35587f21edb0617f370eeff633",url="https://ftp.gnu.org/gnu/sed/sed-4.8.tar.xz" build="configure"}
 tar={hash="63bebd26879c5e1eea4352f0d03c991f966aeb3ddeb3c7445c902568d5411d28",url="https://ftp.gnu.org/gnu/tar/tar-1.34.tar.xz",build="configure",flags={"FORCE_UNSAFE_CONFIGURE=1"}}
 xz={hash="f6f4910fd033078738bd82bfba4f49219d03b17eb0794eb91efbae419f4aba10",url="https://tukaani.org/xz/xz-5.2.5.tar.gz",build="configure"}
