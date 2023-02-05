@@ -1,3 +1,4 @@
+-- toolchain
 m4 = { hash="63aede5c6d33b6d9b13511cd0be2cac046f2e70fd0a07aa9573a04a82783af96", url="https://ftp.gnu.org/gnu/m4/m4-1.4.19.tar.xz", build="configure" }
 bash = { hash="5bac17218d3911834520dad13cd1f85ab944e1c09ae1aba55906be1f8192f558", url="https://ftp.gnu.org/gnu/bash/bash-5.1.16.tar.gz", build="configure", flags={"--without-bash-malloc"} }
 coreutils = { hash="61a1f410d78ba7e7f37a5a4f50e6d1320aca33375484a3255eddf17a38580423", url="https://ftp.gnu.org/gnu/coreutils/coreutils-9.1.tar.xz", build="configure", flags={"--enable-no-install-program=kill,uptime", "FORCE_UNSAFE_CONFIGURE=1"} }
@@ -5,7 +6,6 @@ diffutils = { hash="a6bdd7d1b31266d11c4f4de6c1b748d4607ab0231af5188fc2533d0ae243
 findutils = { hash="a2bfb8c09d436770edc59f50fa483e785b161a3b7b9d547573cb08065fd462fe", url="https://ftp.gnu.org/gnu/findutils/findutils-4.9.0.tar.xz", build="configure" }
 gawk = { hash="d87629386e894bbea11a5e00515fc909dc9b7249529dad9e6a3a2c77085f7ea2", url="https://ftp.gnu.org/gnu/gawk/gawk-5.1.1.tar.xz", build="configure" }
 grep = { hash="5c10da312460aec721984d5d83246d24520ec438dd48d7ab5a05dbc0d6d6823c", url="https://ftp.gnu.org/gnu/grep/grep-3.7.tar.xz", build="configure" }
-
 make = { hash="e05fdde47c5f7ca45cb697e973894ff4f5d79e13b750ed57d7b66d8defc78e19", url="https://ftp.gnu.org/gnu/make/make-4.3.tar.gz", build="configure" }
 patch = { hash="ac610bda97abe0d9f6b7c963255a11dcb196c25e337c61f94e4778d632f1d8fd", url="https://ftp.gnu.org/gnu/patch/patch-2.7.6.tar.xz", build="configure" }
 sed = { hash="f79b0cfea71b37a8eeec8490db6c5f7ae7719c35587f21edb0617f370eeff633", url="https://ftp.gnu.org/gnu/sed/sed-4.8.tar.xz" build="configure" }
@@ -13,184 +13,115 @@ tar = { hash="63bebd26879c5e1eea4352f0d03c991f966aeb3ddeb3c7445c902568d5411d28",
 xz = { hash="f6f4910fd033078738bd82bfba4f49219d03b17eb0794eb91efbae419f4aba10", url="https://tukaani.org/xz/xz-5.2.5.tar.gz", build="configure" }
 lua = { hash="164c7849653b80ae67bec4b7473b884bf5cc8d2dca05653475ec2ed27b9ebf61", url="http://lua.org/ftp/lua-5.4.4.tar.gz", build="make", flags={ "INSTALL_TOP=" .. env.destdir .. env.prefix, "INSTALL_LIB=" .. env.destdir .. env.libdir, "INSTALL_CMOD=" .. env.destdir .. env.libdir .. "/lua", "MYCFLAGS=" .. env.cflags } }
 
-pkgconf = { hash="5fb355b487d54fb6d341e4f18d4e2f7e813a6622cf03a9e87affa6a40565699d", url="https://distfiles.dereferenced.org/pkgconf/pkgconf-1.9.3.tar.xz", build="configure" }
 
+-- compression
 zlib = { hash="c3e5e9fdd5004dcb542feda5ee4f0ff0744628baf8ed2dd5d66f8ca1197cb1a1", url="https://zlib.net/fossils/zlib-1.2.11.tar.gz", build="configure", dirflags={"--libdir=/usr/lib64"} }
-
 pigz = { hash="b4c9e60344a08d5db37ca7ad00a5b2c76ccb9556354b722d56d55ca7e8b1c707", url="https://zlib.net/pigz/pigz-2.7.tar.gz", build="make" }
-
 bzip2 = { hash="ab5a03176ee106d3f0fa90e381da478ddae405918153cca248e682cd0c4a2269", url="https://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz", build="make", flags={"PREFIX=" .. env.destdir .. env.prefix} }
-
 zstd = { hash="7c42d56fac126929a6a85dbc73ff1db2411d04f104fae9bdea51305663a83fd0", url="https://github.com/facebook/zstd/releases/download/v1.5.2/zstd-1.5.2.tar.gz", build="make" }
 
-
+-- python
 libressl = { hash="3ab5e5eaef69ce20c6b170ee64d785b42235f48f2e62b095fca5d7b6672b8b28", url"https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-3.5.3.tar.gz", build="configure", flags={"--enable-nc"} } 
-
 libffi = { hash="540fb721619a6aba3bdeef7d940d8e9e0e6d2c193595bc243241b77ff9e93620", url="https://github.com/libffi/libffi/releases/download/v3.4.2/libffi-3.4.2.tar.gz", build="configure", flags={"--with-gcc-arch=x86-64"} }
 python3 = { hash="848cb06a5caa85da5c45bd7a9221bb821e33fc2bdcba088c127c58fad44e6343", url="https://python.org/ftp/python/3.10.6/Python-3.10.6.tgz", build="configure", flags={"--with-platlibdir=lib64", "--enable-shared", "--without-ensurepip"} }
 
-
+-- glibc
 bison = { hash="9bba0214ccf7f1079c5d59210045227bcf619519840ebfa80cd3849cff5a5bf2", url="https://ftp.gnu.org/gnu/bison/bison-3.8.2.tar.xz", build="configure" }
 glibc = { hash="5123732f6b67ccd319305efd399971d58592122bcc2a6518a1bd2510dd0cf52e", url="https://ftp.gnu.org/gnu/glibc/glibc-2.35.tar.xz", build="configure2", flags={"--disable-werror", "--enable-kernel=3.2", "--enable-stack-protector=strong", "--with-headers=/usr/include", "libc_cv_slibdir=/usr/lib64"} }
 
+-- binutils
 perl = { hash="74d42f0a4c2369eeb01819291c03e200370d5dfae47410a7f06af878568706e6", url="https://github.com/Perl/perl5/archive/refs/tags/v5.36.0.tar.gz", build="configure", dirflags={}, flags={"--prefix=/usr", "-Dinstallstyle=lib64/perl5", "-Dman1dir=/usr/share/man/man1", "-Dman3dir=/usr/share/man/man3", "-Dusethreads"} }
-
 texinfo = { hash="8eb753ed28bca21f8f56c1a180362aed789229bd62fff58bf8368e9beb59fec4", url="https://ftp.gnu.org/gnu/texinfo/texinfo-6.8.tar.xz", build="configure" }
-
 binutils = { hash="645c25f563b8adc0a81dbd6a41cffbf4d37083a382e02d5d3df4f65c09516d00", url="https://ftp.gnu.org/gnu/binutils/binutils-2.39.tar.xz", build="configure", flags={"--enable-deterministic-archives"} }
 
+-- gcc
 gmp = { hash="fd4829912cddd12f84181c3451cc752be224643e87fac497b69edddadc49b4f2", url="https://ftp.gnu.org/gnu/gmp/gmp-6.2.1.tar.xz", build="configure", flags={"--enable-cxx"} }
-
 mpfr = { hash="0c98a3f1732ff6ca4ea690552079da9c597872d30e96ec28414ee23c95558a7f", url="https://ftp.gnu.org/gnu/mpfr/mpfr-4.1.0.tar.xz", build="configure", flags={"--enable-thread-safe"} }
-
 libmpc = { hash="17503d2c395dfcf106b622dc142683c1199431d095367c6aacba6eec30340459", url="https://ftp.gnu.org/gnu/mpc/mpc-1.2.1.tar.gz", build="configure" }
-
 gcc = { hash="b47cf2818691f5b1e21df2bb38c795fac2cfbd640ede2d0a5e1c89e338a3ac39", url="https://ftp.gnu.org/gnu/gcc/gcc-11.3.0/gcc-11.3.0.tar.xz", build="configure", flags={"--disable multilib", "--disable-bootstrap", "--enable-languages=c,c++,fortran"} }
 
+-- build tools
+pkgconf = { hash="5fb355b487d54fb6d341e4f18d4e2f7e813a6622cf03a9e87affa6a40565699d", url="https://distfiles.dereferenced.org/pkgconf/pkgconf-1.9.3.tar.xz", build="configure" }
 autoconf = { hash="64ebcec9f8ac5b2487125a86a7760d2591ac9e1d3dbd59489633f9de62a57684", url="https://ftp.gnu.org/gnu/autoconf/autoconf-2.69.tar.xz", build="configure" }
-
 automake = { hash="af6ba39142220687c500f79b4aa2f181d9b24e4f8d8ec497cea4ba26c64bedaf", url="https://ftp.gnu.org/gnu/automake/automake-1.15.1.tar.xz", build="configure" }
+--cmake = { hash="4931e277a4db1a805f13baa7013a7757a0cbfe5b7932882925c7061d9d1fa82b", url="https://github.com/Kitware/CMake/releases/download/v3.24.1/cmake-3.24.1.tar.gz", build="configure", dirflags={} }
+--ninja = { hash="ce35865411f0490368a8fc383f29071de6690cbadc27704734978221f25e2bed", url="https://github.com/ninja-build/ninja/archive/v1.10.2/ninja-1.10.2.tar.gz", build="cmake" }
 
-cmake = { hash="4931e277a4db1a805f13baa7013a7757a0cbfe5b7932882925c7061d9d1fa82b", url="https://github.com/Kitware/CMake/releases/download/v3.24.1/cmake-3.24.1.tar.gz", build="configure", dirflags={} }
-
-ninja = { hash="ce35865411f0490368a8fc383f29071de6690cbadc27704734978221f25e2bed", url="https://github.com/ninja-build/ninja/archive/v1.10.2/ninja-1.10.2.tar.gz", build="cmake" }
-
+-- misc
 bc = { hash="a37df8b9a199f6a370367432101ed6f2cc02a5521696ce3c624acb150320c453", url="https://github.com/gavinhoward/bc/releases/download/6.0.1/bc-6.0.1.tar.xz", build="configure", dirflags={"--libdir=/usr/lib64"}, flags={"--disable-generated-tests"} }
-
 e2fsprogs = { hash="2f16c9176704cf645dc69d5b15ff704ae722d665df38b2ed3cfc249757d8d81e", url="https://kernel.org/pub/linux/kernel/people/tytso/e2fsprogs/v1.46.5/e2fsprogs-1.46.5.tar.xz", build="configure", flags={"--enable-elf-shlibs", "--disable-libblkid", "--disable-libuuid", "--disable-uuid", "disable-fsck"} }
-
 flex = { hash="e87aae032bf07c26f85ac0ed3250998c37621d95f8bd748b31f15b33c45ee995", url="https://github.com/westes/flex/releases/download/v2.6.4/flex-2.6.4.tar.gz", build="configure" }
-
 gettext = { hash="d20fcbb537e02dcf1383197ba05bd0734ef7bf5db06bdb241eb69b7d16b73192", url="https://ftp.gnu.org/gnu/gettext/gettext-0.21.tar.xz", build="configure" }
-
 gperf = { hash="588546b945bba4b70b6a3a616e80b4ab466e3f33024a352fc2198112cdbb3ae2", url="https://ftp.gnu.org/gnu/gperf/gperf-3.1.tar.gz", build="configure" }
+shadow = { hash="41f093ce58b2ae5f389a1c5553e0c18bc73e6fe27f66273891991198a7707c95", url="https://github.com/shadow-maint/shadow/releases/download/v4.11.1/shadow-4.11.1.tar.xz", build="configure", flags={"--with-group-name-max-length=32"} }
+util-linux = { hash="634e6916ad913366c3536b6468e7844769549b99a7b2bf80314de78ab5655b83", url="https://kernel.org/pub/linux/utils/util-linux/v2.37/util-linux-2.37.4.tar.xz", build="configure", flags={"--disable-chfn-chsh", "--disable-login", "--disable-nologin", "--disable-su", "--disable-setpriv", "--disable-runuser", "--disable-pylibmount", "--without-python", "--without-systemd", "--without-systemdsystemunitdir"} }
 
 --???
 iana-etc = { hash="16ef96809e18241752199476629eb8d51e36a56c90dff4b407d27ee5488fafee", url="https://github.com/Mic92/iana-etc/releases/download/20220812/iana-etc-20220812.tar.gz", }
 
-shadow = { hash="41f093ce58b2ae5f389a1c5553e0c18bc73e6fe27f66273891991198a7707c95", url="https://github.com/shadow-maint/shadow/releases/download/v4.11.1/shadow-4.11.1.tar.xz", build="configure", flags={"--with-group-name-max-length=32"} }
-
-util-linux = { hash="634e6916ad913366c3536b6468e7844769549b99a7b2bf80314de78ab5655b83", url="https://kernel.org/pub/linux/utils/util-linux/v2.37/util-linux-2.37.4.tar.xz", build="configure", flags={"--disable-chfn-chsh", "--disable-login", "--disable-nologin", "--disable-su", "--disable-setpriv", "--disable-runuser", "--disable-pylibmount", "--without-python", "--without-systemd", "--without-systemdsystemunitdir"} }
-
-
+-- libraries
 acl = { hash="c0234042e17f11306c23c038b08e5e070edb7be44bef6697fb8734dcff1c66b1", url="https://download.savannah.gnu.org/releases/acl/acl-2.3.1.tar.xz", build="configure" }
-
 attr = { hash="bae1c6949b258a0d68001367ce0c741cebdacdd3b62965d17e5eb23cd78adaf8", url="https://download.savannah.gnu.org/releases/attr/attr-2.5.1.tar.gz", build="configure" }
-
 eudev = { hash="19847cafec67897da855fde56f9dc7d92e21c50e450aa79068a7e704ed44558b", url="https://github.com/eudev-project/eudev/releases/download/v3.2.11/eudev-3.2.11.tar.gz", build="configure" }
-
 expat = { hash="ef2420f0232c087801abf705e89ae65f6257df6b7931d37846a193ef2e8cdcbe", url="https://prdownloads.sourceforge.net/expat/expat-2.5.0.tar.xz", build="configure" }
-
 file = { hash="c076fb4d029c74073f15c43361ef572cfb868407d347190ba834af3b1639b0e4", url="https://astron.com/pub/file/file-5.42.tar.gz", build="configure" }
-
 json-c = { hash="b8d80a1ddb718b3ba7492916237bbf86609e9709fb007e7f7d4322f02341a4c6", url="https://s3.amazonaws.com/json-c_releases/releases/json-c-0.15.tar.gz", build="cmake" }
-
 libaio = { hash="f69e5800425f4ea957426693ac09f9896bb993db5490fa021644454adcc72a32", url="https://ftp.debian.org/debian/pool/main/liba/libaio/libaio_0.3.112.orig.tar.xz", build="make", flags={"libdir=/usr/lib64"} }
-
 libcap2 = { hash="0c637b8f44fc7d8627787e9cf57f15ac06c1ddccb53e41feec5496be3466f77f", url="https://kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-2.63.tar.xz", build="make", flags={"LIBDIR=/usr/lib64"} }
-
 libcheck = { hash="a8de4e0bacfb4d76dd1c618ded263523b53b85d92a146d8835eb1a52932fa20a", url="https://github.com/libcheck/check/releases/download/0.15.2/check-0.15.2.tar.gz", build="configure" }
-
 libevent = { hash="92e6de1be9ec176428fd2367677e61ceffc2ee1cb119035037a27d346b0403bb", url="https://github.com/libevent/libevent/releases/download/release-2.1.12-stable/libevent-2.1.12-stable.tar.gz", build="configure" }
-
-libpipeline = { hash="0c8367f8b82bb721b50647a647115b6e62a37e3b2e954a9685e4d933f30c00cc", url="https://download.savannah.gnu.org/releases/libpipeline/libpipeline-1.5.5.tar.gz", build="configure" }
-
 libpsl = { hash="ac6ce1e1fbd4d0254c4ddb9d37f1fa99dec83619c1253328155206b896210d4c", url="https://github.com/rockdaboot/libpsl/releases/download/0.21.1/libpsl-0.21.1.tar.gz", build="configure" }
-
 libusb = { hash="8a28ef197a797ebac2702f095e81975e2b02b2eeff2774fa909c78a74ef50849", url="https://github.com/libusb/libusb/releases/download/v1.0.25/libusb-1.0.25.tar.bz2", build="configure" }
-
 lvm2 = { hash="935283a51ee17abd752a545a0ed1cf4edc993359265bc9e562edf81500edc99e", url="https://sourceware.org/ftp/lvm2/LVM2.2.03.15.tgz", build="configure", flags={"--with-usrlibdir=/usr/lib64"} }
-
 ncurses = { hash="97fc51ac2b085d4cde31ef4d2c3122c21abc217e9090a43a30fc5ec21684e059", url="https://invisible-island.net/archives/ncurses/ncurses-6.3.tar.gz", build="configure", flags={"--with-shared", "--without-cxx", "--enable-pc-files", "--enable-widec"} }
-
 pcre2 = { hash="0f03caf57f81d9ff362ac28cd389c055ec2bf0678d277349a1a4bee00ad6d440", url="https://github.com/PhilipHazel/pcre2/releases/download/pcre2-10.39/pcre2-10.39.tar.bz2", build="configure", flags={"--enable-unicode", "--enable-pcre2-16", "--enable-pcre2-32"} }
-
 pcre = { hash="4dae6fdcd2bb0bb6c37b5f97c33c2be954da743985369cddac3546e3218bffb8", url="https://sourceforge.net/projects/pcre/files/pcre/8.45/pcre-8.45.tar.bz2", build="configure", flags={"--enable-unicode-properties", "--enable-pcre16", "--enable-pcre32"} }
-
 popt = { hash="5159bc03a20b28ce363aa96765f37df99ea4d8850b1ece17d1e6ad5c24fdc5d1", url="http://ftp.rpm.org/popt/releases/popt-1.x/popt-1.18.tar.gz", build="configure" }
-
 readline = { hash="7589a2381a8419e68654a47623ce7dfcb756815c8fee726b98f90bf668af7bc6", url="https://ftp.gnu.org/gnu/readline/readline-8.1.2.tar.gz", build="configure" flags={"--with-curses"} }
 
+-- system
 acpid2 = { hash="0856f71b3eb34a1b663d0a8e6363dfcbc519e63d847330498898658e2972dbe8", url="https://downloads.sourceforge.net/acpid2/acpid-2.0.33.tar.xz", build="configure" }
-
 alsa-lib = { hash="8a35b7218e50f2a2c79342d0de98ded81439ce19e12809385ec9be9596de7c2f", url="https://alsa-project.org/files/pub/lib/alsa-lib-1.2.7.2.tar.bz2", build="configure" }
-
 alsa-utils = { hash="e906bf2404ff04c448eaa3d226d283a62b9a283f12e4fd8457fb24bac274e678", url="https://alsa-project.org/files/pub/utils/alsa-utils-1.2.7.tar.bz2", build="configure", flags={"--disable-alsaconf", "--disable-bat", "--disable-xmlto", "--with-curses=ncursesw"} }
-
 cron = { hash="c445837756fb988f2c95db8dc55d7937d14bca0cdfa292de81322ca2556ec39a", url="https://ftp.isc.org/isc/cron/cron_4.1.shar", build="make" }
-
 cryptsetup = { hash="fc0df945188172264ec5bf1d0bda08264fadc8a3f856d47eba91f31fe354b507", url="https://kernel.org/pub/linux/utils/cryptsetup/v2.4/cryptsetup-2.4.3.tar.xz", build="configure", flags={"--disable-ssh-token"} }
-
 dosfstools = { hash="64926eebf90092dca21b14259a5301b7b98e7b1943e8a201c7d726084809b527", url="https://github.com/dosfstools/dosfstools/releases/download/v4.2/dosfstools-4.2.tar.gz", build="configure", flags={"--enable-compat-symlinks"} }
-
 efibootmgr = { hash="442867d12f8525034a404fc8af3036dba8e1fc970998af2486c3b940dfad0874", url="https://github.com/rhboot/efibootmgr/archive/18/efibootmgr-18.tar.gz", build="make", flags={"EFIDIR=/boot"} }
-
 efivar = { hash="f018ed6e49c5f1c16d336d9fd7687ce87023276591921db1e49a314ad6515349", url="https://github.com/rhboot/efivar/releases/download/38/efivar-38.tar.bz2", build="make" }
-
 git = { hash="d768528e6443f65a203036266f1ca50f9d127ba89751e32ead37117ed9191080", url="https://kernel.org/pub/software/scm/git/git-2.35.1.tar.xz", build="configure" }
-
 gnupg1 = { hash="c9462f17e651b6507848c08c430c791287cd75491f8b5a8b50c6ed46b12678ba", url="https://gnupg.org/ftp/gcrypt/gnupg/gnupg-1.4.23.tar.bz2", build="configure", flags={"--enable-noexecstack"} }
-
-kbd = { hash="55f0740458cfd3a84e775e50d7e8b92dc01846db1edad8e2411ccc293ece9b9f", url="https://kernel.org/pub/linux/utils/kbd/kbd-2.4.0.tar.xz", build="configure", flags={"--disable-vlock", "--disable-tests"} }
-
+--kbd = { hash="55f0740458cfd3a84e775e50d7e8b92dc01846db1edad8e2411ccc293ece9b9f", url="https://kernel.org/pub/linux/utils/kbd/kbd-2.4.0.tar.xz", build="configure", flags={"--disable-vlock", "--disable-tests"} }
 kmod = { hash="f897dd72698dc6ac1ef03255cd0a5734ad932318e4adbaebc7338ef2f5202f9f", url="https://kernel.org/pub/linux/utils/kernel/kmod/kmod-30.tar.xz", build="configure" }
-
 less = { hash="6aadf54be8bf57d0e2999a3c5d67b1de63808bb90deb8f77b028eafae3a08e10", url="https://ftp.gnu.org/gnu/less/less-590.tar.gz", build="configure" }
-
-lm-sensors = { hash="0591f9fa0339f0d15e75326d0365871c2d4e2ed8aa1ff759b3a55d3734b7d197", url="https://github.com/lm-sensors/lm-sensors/archive/V3-6-0/lm-sensors-3-6-0.tar.gz", build="make", flags={"LIBDIR=/usr/lib64"} }
-
 man-pages = { hash="614dae3efe7dfd480986763a2a2a8179215032a5a4526c0be5e899a25f096b8b", url="https://kernel.org/pub/linux/docs/man-pages/man-pages-5.13.tar.xz", build="make" }
-
 mandoc = { hash="8bf0d570f01e70a6e124884088870cbed7537f36328d512909eb10cd53179d9c", url="https://mandoc.bsd.lv/snapshots/mandoc-1.14.6.tar.gz", build="configure" }
-
 openssh = { hash="03974302161e9ecce32153cfa10012f1e65c8f3750f573a73ab1befd5972a28a", url="https://ftp3.usa.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-9.0p1.tar.gz", build="configure" }
-
-parted = { hash="4938dd5c1c125f6c78b1f4b3e297526f18ee74aa43d45c248578b1d2470c05a2", url="https://ftp.gnu.org/gnu/parted/parted-3.5.tar.xz", build="configure" }
-
+--parted = { hash="4938dd5c1c125f6c78b1f4b3e297526f18ee74aa43d45c248578b1d2470c05a2", url="https://ftp.gnu.org/gnu/parted/parted-3.5.tar.xz", build="configure" }
 pciutils = { hash="9d40b97be8b6a2cdf96aead5a61881d1f7e4e0da9544a9bac4fba1ae9dcd40eb", url="https://kernel.org/pub/software/utils/pciutils/pciutils-3.7.0.tar.xz", build="make" }
-
 procps-ng = { hash="4518b3e7aafd34ec07d0063d250fd474999b20b200218c3ae56f5d2113f141b4", url="https://sourceforge.net/projects/procps-ng/files/Production/procps-ng-3.3.17.tar.xz", build="configure", flags={"--disable-kill"} }
-
 psmisc = { hash="7f0cceeace2050c525f3ebb35f3ba01d618b8d690620580bdb8cd8269a0c1679", url="https://sourceforge.net/projects/psmisc/files/psmisc/psmisc-23.4.tar.xz", build="configure" }
-
 sudo = { hash="6d6ee863a3bc26c87661093a74ec63e10fd031ceba714642d21636dfe25e3e00", url="https://sudo.ws/dist/sudo-1.9.9.tar.gz", build="configure" }
-
 tcsh = { hash="60be2c504bd8f1fa6e424b1956495d7e7ced52a2ac94db5fd27f4b6bfc8f74f0", url="https://astron.com/pub/tcsh/tcsh-6.24.00.tar.gz", build="configure" }
-
 tmux = { hash="e4fd347843bd0772c4f48d6dde625b0b109b7a380ff15db21e97c11a4dcdf93f", url="https://github.com/tmux/tmux/releases/download/3.3a/tmux-3.3a.tar.gz", build="make" }
-
 tzdata = { hash="067f0f4bee8e509b3eca502c5bd7c8f98073ab49b6c05654a157cbffd07aa3a4", url="https://github.com/eggert/tz/archive/refs/tags/2022c.tar.gz", build="configure" }
-
 usbutils = { hash="3a079cfad60560227b67192482d7813bf96326fcbb66c04254839715f276fc69", url="https://www.kernel.org/pub/linux/utils/usb/usbutils/usbutils-014.tar.xz", build="configure" }
-
 vim = { hash="a6456bc154999d83d0c20d968ac7ba6e7df0d02f3cb6427fb248660bacfb336e", url="http://ftp.vim.org/pub/vim/unix/vim-9.0.tar.bz2", build="configure" }
-
 which = { hash="f4a245b94124b377d8b49646bf421f9155d36aa7614b6ebf83705d3ffc76eaad", url="https://ftp.gnu.org/gnu/which/which-2.21.tar.gz", build="configure" }
+--xorriso = { hash="3ac155f0ca53e8dbeefacc7f32205a98f4f27d2d348de39ee0183ba8a4c9e392", url="https://ftp.gnu.org/gnu/xorriso/xorriso-1.5.4.tar.gz", build="configure" }
 
-xorriso = { hash="3ac155f0ca53e8dbeefacc7f32205a98f4f27d2d348de39ee0183ba8a4c9e392", url="https://ftp.gnu.org/gnu/xorriso/xorriso-1.5.4.tar.gz", build="configure" }
-
+-- networking
 curl = { hash="2d118b43f547bfe5bae806d8d47b4e596ea5b25a6c1f080aef49fbcd817c5db8", url="https://github.com/curl/curl/releases/download/curl-7_84_0/curl-7.84.0.tar.xz", build="configure", flags={"--with-openssl", "--enable-threaded-resolver", "--with-ca-path=/etc/ssl/certs", "--with-ca-bundle=/etc/ssl/certs/ca-certificates.crt"} }
-
 dhcpcd = { hash="819357634efed1ea5cf44ec01b24d3d3f8852fec8b4249925dcc5667c54e376c", url="https://roy.marples.name/downloads/dhcpcd/dhcpcd-9.4.1.tar.xz", build="configure", flags={"--libexecdir=/usr/lib64/dhcpcd", "--dbdir=/var/lib/dhcpcd"} }
-
 iproute2 = { hash="c064b66f6b001c2a35aa5224b5b1ac8aa4bee104d7dce30d6f10a84cb8b01e2f", url="https://kernel.org/pub/linux/utils/net/iproute2/iproute2-5.16.0.tar.xz", build="make", flags={"LIBDIR=/usr/lib64"} }
-
 iputils = { hash="b6f67fc705490673ff4471d006221b4a2f1b1180b929d9fefd771352621ccedf", url="https://github.com/iputils/iputils/archive/refs/tags/20211215.tar.gz", build="meson", flags={"-DBUILD_MANS=false"} }
-
 wget = { hash="e6d4c76be82c676dd7e8c61a29b2ac8510ae108a810b5d1d18fc9a1d2c9a2497", url="https://ftp.gnu.org/gnu/wget/wget-1.21.2.tar.gz", build="configure", flags={"--with-ssl=openssl"} }
 
+-- connman
 libmnl = { hash="171f89699f286a5854b72b91d06e8f8e3683064c5901fb09d954a9ab6f551f81", url="https://netfilter.org/pub/libmnl/libmnl-1.0.4.tar.bz2", build="configure" }
-
 libnftnl = { hash="7508a5c414fab13e3cb3ce8262d0ce4f02c1590a8e4f8628ab497b5b4585937c", url="https://netfilter.org/pub/libnftnl/libnftnl-1.2.1.tar.bz2", build="configure" }
-
 iptables = { hash="c109c96bb04998cd44156622d36f8e04b140701ec60531a10668cfdff5e8d8f0", url="https://netfilter.org/pub/iptables/iptables-1.8.7.tar.bz2", build="configure", flags={"--enable-shared"} }
-
 dbus = { hash="f77620140ecb4cdc67f37fb444f8a6bea70b5b6461f12f1cbe2cec60fa7de5fe", url="https://dbus.freedesktop.org/releases/dbus/dbus-1.12.20.tar.gz", build="configure", flags={"--enable-user-session", "--with-systemduserunitdir=no", "--with-systemdsystemunitdir=no", "--with-system-socket=/run/dbus/system_bus_socket"} }
-
 glib2 = { hash="ab3d176f3115dcc4e5d02db795984e04e4f4b48d836252e23e8c468e9d423c33", url="https://download.gnome.org/sources/glib/2.70/glib-2.70.4.tar.xz", build="meson", flags={"-Dtests=false"} }
-
 libnl3 = { hash="9fe43ccbeeea72c653bdcf8c93332583135cda46a79507bfd0a483bb57f65939", url="https://github.com/thom311/libnl/releases/download/libnl3_7_0/libnl-3.7.0.tar.gz", build="configure" }
-
 wpasupplicant = { hash="20df7ae5154b3830355f8ab4269123a87affdea59fe74fe9292a91d0d7e17b2f", url="https://w1.fi/releases/wpa_supplicant-2.10.tar.gz", build="make", flags={"-C wpa_supplicant"} }
-
 connman = { hash="79fb40f4fdd5530c45aa8e592fb16ba23d3674f3a98cf10b89a6576f198de589", url="https://kernel.org/pub/linux/network/connman/connman-1.41.tar.xz", build="configure", flags={"--without-systemdunitdir", "--disable-wispr", "LIBS=-lncursesw"} }
