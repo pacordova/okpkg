@@ -59,12 +59,12 @@ end
 
 local function vlook(pkgname)
     srcdir, destdir = tempdir(pkgname)
-    local key = "^" .. pkgname
+    local key = "^" .. pkgname .. "="
     for i, db in ipairs(databases) do
         local fd = io.open(db, "r")
         for line in fd:lines() do
             if line:find(key) then
-                load(line:gsub(key, "arr"))()
+                load(line:gsub(key, "arr="))()
                 fd:close()
                 if arr.flags == nil then arr.flags = {}; end
                 return arr
