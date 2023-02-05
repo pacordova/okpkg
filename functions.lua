@@ -4,25 +4,14 @@ local source_date_epoch = 1000000000
 local root   = "/"
 local arch   = "-x86_64.tar.xz"
 local databases = {
-    "/usr/firepkg/db/example.db"
+    "/usr/firepkg/db/base.db"
 }
 
-local function env(pkgname) 
+function tempdir(pkgname) 
     if pkgname == nil then
         pkgname = ""
     end
-    return {
-        source_date_epoch = 1000000000,
-        libdir            = "/usr/lib64",
-        prefix            = "/usr",
-        srcdir            = "/usr/firepkg/sources/" .. pkgname,
-        destdir           = "/usr/firepkg/packages/" .. pkgname,
-        bindir            = "/usr/bin",
-        sbindir           = "/usr/sbin",
-        sysconfdir        = "/etc",
-        localstatedir     = "/var",
-        root              = "/"
-    }
+    return "/usr/firepkg/sources/" .. pkgname, "/usr/firepkg/packages/" .. pkgname
 end
 
 local function extract(directory, strip, file)
@@ -69,7 +58,7 @@ local function checksum(file, hash)
 end
 
 local function vlook(pkgname)
-    local env = env(pkgname)
+    srcdir, destdir = tempdir(pkgname)
     local key = "^" .. pkgname
     for i, db in ipairs(databases) do
         local fd = io.open(db, "r")
@@ -106,23 +95,23 @@ local function download(pkgname)
 end
 
 local function build(pkgname)
+    srcdir, destdir = tempdir(pkgname)
     local pkg       = vlook(pkgname)
     local basename  = pkg.url:gsub("^.*/", "") 
 
-    local env = env(pkgname)
-
-    os.execute("rm -r " .. env.destdir .. " 2>/dev/null")
-    os.execute("mkdir -p " .. env.destdir)
+    
+    os.execute("rm -r " .. destdir .. " 2>/dev/null")
+    os.execute("mkdir -p " .. destdir)
 
 
     local version = 
         basename:match("[._/-][.0-9-]*[0-9][a-z]?"):gsub("-", "."):gsub("^.", "-")
 
-    local pkgname = env.destdir .. version .. arch
+    local pkgname = destdir .. version .. arch
 
-    bld[pkg.build](env, pkg.flags)
-    os.execute("/usr/firepkg/scripts/makepkg " .. env.destdir)
-    os.execute("mv " .. env.destdir .. ".tar.xz " .. pkgname)
+    bld[pkg.build]({srcdir, destdir}, pkg)
+    os.execute("/usr/firepkg/scripts/makepkg " .. destdir)
+    os.execute("mv " .. destdir .. ".tar.xz " .. pkgname)
 
     return pkgname
 end
