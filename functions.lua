@@ -16,12 +16,13 @@ unpack = table.unpack
 
 function execute(cmd)
     local fd = io.popen(table.concat(cmd, " "))
-    local stdout = {}
+    local output = {}
     for line in fd:lines() do
-        table.insert(stdout, line)
+        print(line)
+        table.insert(output, line)
     end
     fd:close()
-    return stdout 
+    return output
 end
 
 -- clean and recreate dir
