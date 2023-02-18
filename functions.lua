@@ -27,12 +27,10 @@ end
 local function checksum(file, hash)
     local basename  = file:gsub("^.*/", "") 
 
-    local fd = io.popen("sha256sum " .. file)
-    local arr = {}
-    for line in fd:lines() do
-        table.insert(arr, line)	
-    end
-    fd:close()
+    local arr = execute {
+        "/usr/bin/sha256sum",
+        file
+    }
 
     verify = arr[1]:gsub(" .*$", "") == hash
 
