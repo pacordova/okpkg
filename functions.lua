@@ -19,11 +19,18 @@ local function execute(cmd)
     return stdout 
 end
 
-local function tmp(pkgname) 
-    if pkgname == nil then
-        pkgname = ""
-    end
-    return "/usr/firepkg/sources/" .. pkgname, "/usr/firepkg/packages/" .. pkgname
+-- clean and recreate dir
+local function cleandir(dir)
+    execute {
+        "/usr/bin/rm",
+        "--recursive",
+        dir
+    }
+    execute {
+        "/usr/bin/mkdir",
+        "--parents",
+        dir
+    }
 end
 
 local function checksum(file, hash)
@@ -46,7 +53,6 @@ local function checksum(file, hash)
 end
 
 local function vlook(pkgname)
-    srcdir, destdir = tmp(pkgname)
     local key = "^" .. pkgname .. "="
     for i, db in ipairs(databases) do
         local fd = io.open(db, "r")
@@ -79,16 +85,7 @@ local function download(pkgname)
     end
 
     -- clean and recreate srcdir
-    execute {
-        "/usr/bin/rm",
-        "--recursive",
-        srcdir
-    }
-    execute {
-        "/usr/bin/mkdir",
-        "--parents",
-        srcdir,
-    }
+    cleandir(srcdir)
 
     -- extract downloaded source to srcdir 
     execute {
@@ -121,23 +118,14 @@ local function download(pkgname)
 end
 
 local function build(pkgname)
-    srcdir, destdir = tmp(pkgname)
+    local srcdir    = "/usr/firepkg/sources/" .. pkgname
+    local destdir   = "/usr/firepkg/packages" .. pkgname
     local pkg       = vlook(pkgname)
     local basename  = pkg.url:gsub("^.*/", "") 
 
     
     -- clean and recreate destdir
-    execute {
-        "/usr/bin/rm",
-        "--recursive",
-        destdir,
-        "2>/dev/null"
-    }
-    execute {
-        "/usr/bin/mkdir",
-        "--parents",
-        destdir
-    }
+    cleandir(destdir)
 
 
     local version = 
