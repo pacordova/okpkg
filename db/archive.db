@@ -1,253 +1,211 @@
-# gtk wip
-harfbuzz=(7158a87c4d MESON)
-gtk3=(423c3e7fdb MESON -Dtests=false -Ddemos=false -Dexamples=false -Dwin32_backend=false -Dquartz_backend=false -Dwayland_backend=false)
-
-# gnu
-autobuild=(c12984db9a CONFIGURE)
-gdb=(1497c36a71 CONFIGURE --without-guile --with-system-readline --without-python)
-gnutls=(1b79b381ac CONFIGURE --with-included-libtasn1 --without-p11-kit --enable-shared)
-guile=(daa7060a56 CONFIGURE)
-inetutils=(d547f69172 CONFIGURE)
-libsigsegv=(cdac394180 CONFIGURE --enable-shared)
-libunistring=(5bab55b49f CONFIGURE)
-libunwind=(4a6aec6669 CONFIGURE)
-nettle=(661f5eb03f CONFIGURE --enable-shared)
-octave=(b48f33d4fc CONFIGURE)
-sharutils=(2b05cff7de CONFIGURE)
-time=(fbacf0c81e CONFIGURE)
-
-# gimp
-appstream-glib=(22deb41db6 MESON -Drpm=false -Dstemmer=false -Dman=false)
-babl=(4f0d7f4aaa MESON)
-gegl=(ef63f0bca5 MESON)
-gimp=(3f15c70554 CONFIGURE --disable-python --disable-glibtest)
-libmypaint=(741754f293 CONFIGURE)
-paintbrush=(fef66ffc24 CONFIGURE)
-
-# gnome
-adwaita=(ef5339d8c3 CONFIGURE)
-at-spi2-atk(cfa008a5af MESON)
-at-spi2-core=(4b5da10e94 MESON)
-atk=(fb76247e36 MESON)
-caribou=(9c43d9f4bd CONFIGURE)
-clutter-gtk=(521493ec03 CONFIGURE)
-clutter=(8b48fac159 CONFIGURE --enable-egl-backend --enable-evdev-input)
-cogl=(a805b2b019 CONFIGURE --enable-xlib-egl-platform)
-fragments=(a3f32771e8 MESON)
-gdk-pixbuf=(c4a6b75b7e MESON -Dgio_sniffing=false -Dinstalled_tests=false)
-gedit=(7a9b18b158 MESON -Dspell=disabled -Duser_documentation=false -Dplugin_externaltools=false)
-geocode-glib=(01fe84cfa0 MESON)
-gjs=(bbdc0eec7c MESON)
-glib-networking=(2a16bfc2d2 MESON)
-glibmm=(b2a4cd7b9a MESON -Dbuild-documentation=false -Dbuild-examples=false)
-gnome-autoar=(7bdf078955 MESON)
-gnome-backgrounds=(1da1ac0d26 MESON)
-gnome-color-manager=(9ddb9e6b64 MESON -Dsystemd_session=disable -Dsystemd=false -Dsystemd_journal=false)
-gnome-common=(22569e370a CONFIGURE)
-gnome-desktop=(8cd1caab93 MESON)
-gnome-menus=(d9348f38bd CONFIGURE)
-gnome-session=(ee4a229053 MESON -Dsystemd_session=disable -Dsystemd=false -Dsystemd_journal=false)
-gnome-settings-daemon=(e6ca6361fb MESON -Dsystemd=false)
-gnome-tweak-tool=(f95f3fe031 MESON)
-gsettings-desktop-schemas=(77289972e5 MESON)
-gtk-doc=(cc1b709a20 MESON)
-gtk2=(ac2ac757f5 CONFIGURE --disable-gtk-doc --disable-gtk-doc-html --disable-glibtest)
-gtksourceview=(842de7e5cb MESON)
-introspection=(902b4906e3 MESON)
-json-glib=(96ec98be7a MESON)
-libcroco=(767ec234ae CONFIGURE)
-libgee=(31863a8957 MESON)
-libgnomekbd=(f7ca026315 AUTOTOOLS)
-libgtop=(78f3274c0c CONFIGURE)
-libgweather=(ca4e8f2a4b MESON)
-libgxps=(6d27867256 MESON)
-libnotify=(66c0517ed1 MESON -Dgtk_doc=false -Dman=false -Dtests=false)
-libpeas=(0bf5562e9b MESON)
-librsvg=(1dc6a02df3 CONFIGURE)
-libwnck=(83f732d207 CONFIGURE)
-libwnck3=(03134fa114 MESON)
-libxml2=(276130602d CONFIGURE --with-python)
-libxslt=(8247f33e9a CONFIGURE)
-metacity=(19c3c5d79d CONFIGURE)
-mm-common=(e954c09b43 MESON -Duse-network=true)
-mutter=(5588269506 MESON -Dtests=false)
-nautilus=(872285b1c4 MESON)
-networkmanager=(819795d089 MESON -Dqt=false -Dnmtui=false -Dmodem_manager=false -Dsession_tracking=no -Dsystemd_journal=false -Dlibaudit=no -Dselinux=false -Dsystemdsystemunitdir=no)
-pango=(f4ad63e87d MESON)
-pangox-compat=(552092b3b6 AUTORECONF)
-secrets=(c912ca55d3 MESON)
-tracker=(1847e08b39 MESON -Dsystemd_user_services=false)
-vala=(884de74531 CONFIGURE)
-zenity=(e786e73356 CONFIGURE)
-
-# cinnamon
-cinnamon-control-center=(49d0db765f MESON)
-cinnamon-desktop=(a3523abd4e MESON)
-cinnamon-menus=(a1dbd0d567 MESON)
-cinnamon-screensaver=(99a36bbbf8 MESON)
-cinnamon-session=(4f931acb33 MESON)
-cinnamon-settings-daemon=(95b41aea50 MESON)
-cinnamon-translations=(44f1ca7a54 MAKE)
-cinnamon=(b38f93780b MESON)
-cjs=(e6686d8e07 MESON)
-muffin=(3401fc972b MESON)
-nemo=(967491f749 MESON)
-xapp=(8b09a766e3 MESON)
-
-# elementary
-elementary-dock=(cd6a9a98fe MESON)
-elementary-stylesheet=(3856dbfa9f MESON)
-gala=(f2aad3c51d MESON -Dsystemd=false)
-granite=(b3e77a1ca9 MESON)
-torrential=(319f3c89cb MESON)
-
-# freedesktop
-accountsservice=(21d449c0de MESON)
-avahi=(060309d7a3 CONFIGURE --disable-mono --disable-monodoc --without-systemdsystemunitdir)
-colord=(7407631a27 MESON -Dsystemd=false -Dbash_completion=false)
-dbus-glib=(7d550dccdf CONFIGURE)
-geoclue=(cdc9efcb98 MESON)
-gstreamer=(edf4bffff8 MESON)
-libgusb=(0eb0b9ab0f MESON -Dtests=false -Dvapi=false -Ddocs=false)
-libspectre=(cf60b2a80f CONFIGURE)
-pipewire=(8d70170a91 MESON)
-shared-mime-info=(3aeeee25ad MESON)
-upower=(5cad70f915 MESON -Dsystemdsystemunitdir=no -Dgtk-doc=false -Dman=false)
-
-# canonical
-bamf=(4fcd00f23c CONFIGURE)
-libdbusmenu=(9be5dc0f26 AUTOTOOLS)
-libtimezonemap=(0d634cc247 AUTOTOOLS)
-
-# qt
-okular=(69c39e8b5f CMAKE)
-qbittorrent=(b64559ca50 CMAKE)
-qtpass=(79f79d3b20 QMAKE)
-strawberry=(c2d242f091 CMAKE)
-vlc=(ffae35fc64 CONFIGURE)
-
-# misc
-elvis=(1f6402daec CONFIGURE --without-x); PREFIX=$destdir/usr
-crosstool-ng=(68162f3422 CONFIGURE)
-logrotate=(ddd5274d68 CONFIGURE)
-azpainter=(85f3f935e7 CONFIGURE)
-bcachefs-tools=(bb69264c32 MAKE)
-compiz=(f748b3a3c5 CONFIGURE)
-optipng=(4f32f233ce CONFIGURE)
-deadbeef=(_ CONFIGURE --disable-psf)
-deluge=(768dd31980 PYTHON)
-dupeguru=(f0ad021fe8 MAKE)
-dynare=(557bc7d8d7 CONFIGURE --disable-doc --disable-dynare++ --disable-matlab --disable-mex-dynare++ --disable-mex-ms-sbvar --disable-mex-kalman-steady-state)
-elogind=(c490dc158c MESON)
-fontforge=(68bcba8f60 CMAKE -DENABLE_DOCS=OFF -DENABLE_LIBSPIRO=OFF)
-gs=(6ee3057773 CONFIGURE)
-i3wm=(23e1ecaf20 MESON)
-inkscape=(76fa1fb661 CMAKE)
-jfsutils=(244a15f640 CONFIGURE)
-kbd=(ccdf452387 CONFIGURE --disable-vlock --disable-tests --disable-nls)
-libkeccak=(c17df59e03 MAKE)
-lz4=(030644df46 MAKE)
-lzop=(7e72b62a8a CONFIGURE)
-magick=(80c3fe2ae1 CONFIGURE --enable-hdri --with-modules)
-nitrogen=(f40213707b CONFIGURE)
-nvim=(ccab8ca02a CMAKE)
-openresolv=(42b30508e8 CONFIGURE)
-optipng=(4f32f233ce CONFIGURE)
-pass=(cfa9faf659 MAKE)
-pnmixer=(851c7f82aa CMAKE)
-qemu=(68e15d8e45 CONFIGURE)
-sdl-image=(460da7fcee CONFIGURE)
-sdl2=(c56aba1d7b CONFIGURE)
-sha3sum=(57cfda5d9d MAKE)
-tinyproxy=(d663884482 CONFIGURE)
-ucl=(b865299ffd CONFIGURE)
-upx=(47774df5c9 MAKE)
-wine=(5b43e27d5c CONFIGURE --enable-win64)
-wireguard=(97ff314892 MAKE)
-xarchiver=(fec755ffbd CONFIGURE)
-xcb-util-xrm=(0129f74c32 CONFIGURE)
-xcursor-themes=(ee1ec57474 CONFIGURE)
-
-# libs
-boost=(8681f175d4 CMAKE)
-extra-cmake-modules=(9717885e30 CMAKE)
-faad2=(0c6d9636c9 CONFIGURE)
-graphviz=(262b428553 CMAKE)
-lib2geom=(f649d0c20c CMAKE -D2GEOM_TESTING=FALSE -D2GEOM_BUILD_SHARED=ON)
-libargon2=(daf972a895 MAKE LIBRARY_REL=lib64)
-libcares=(1a7d52a8a8 CONFIGURE)
-libdaemon=(fd23eb5f6f CONFIGURE)
-libdouble-conversion=(3dbcdf186a CMAKE -DBUILD_SHARED_LIBS=ON)
-libexif=(d47564c433 CONFIGURE)
-libfuse=(b2e283485d MESON)
-libjpeg=(09b96cb8cb CMAKE)
-libndp=(88ffb66ee2 CONFIGURE)
-libpng=(505e70834d CONFIGURE)
-libpotrace=(be8248a17d CONFIGURE --with-libpotrace)
-libscrypt=(a2d30ea16e MAKE)
-libseccomp=(59065c8733 CONFIGURE)
-libsodium=(56d862e848 CONFIGURE)
-libtiff=(0e46e5acb0 CMAKE)
-libtorrent=(3850a27aac CMAKE)
-libusb=(8a28ef197a CONFIGURE)
-libuv=(90d72bb7ae CONFIGURE)
-openssl=(c311ad8533 CONFIGURE)
-ppp=(f938b35ecc CONFIGURE)
-yajl=(3fb73364a5 CMAKE)
-
-# readline
-libedit=(df223b3333 CONFIGURE)
-libedit=(6792a6a992 CONFIGURE)
-
-# infectious libs
-libiconv=(1b47c0dc50 CONFIGURE --without-pic --enable-static --disable-shared --disable-relocatable)
-libnsl=(2da075ef18 CONFIGURE)
-
-
-# old base
-ed=(db36da85ee CONFIGURE)
-help2man=(9e2e0e213a CONFIGURE)
-groff=(e78e7b4cb7 CONFIGURE PAGE=letter)
-libtool=(7c87a8c2c8 CONFIGURE)
-intltool=(67c74d9419 CONFIGURE)
-sysvinit=(68b11a4772 MAKE ROOT=$destdir)
-gzip=(5b4fb14d38 CONFIGURE)
-#fcron=(6114d0a39a CONFIGURE --without-sendmail)
-#mold=(394036d299 MAKE)
-#ccache
-
-# databases
-#db=(e0a992d740 CONFIGURE --enable-compat185 --enable-dbm --enable-cxx)
-#gdbm=(74b1081d21 CONFIGURE)
-#sqlite=(1935751066 CONFIGURE)
-
-# gnupg
-libgpg-error=(570f8ee4fb CONFIGURE)
-libgcrypt=(ef14ae546b CONFIGURE)
-libksba=(dad683e6f2 CONFIGURE)
-libassuan=(8e8c2fcc98 CONFIGURE)
-ntbtls=(8922181fef CONFIGURE)
-npth=(1393abd9ad CONFIGURE)
-pinentry=(10072045a3 CONFIGURE)
-gnupg=(21f7fe2fc5 CONFIGURE)
-
-# flatpak
-ostree=(914c4d993b CONFIGURE)
-appstream=(829b8e62a4 MESON -Dstemming=false)
-flatpak=(8e27697377 CONFIGURE)
-bwrap=(16fdaf3379 CONFIGURE)
-libportal=(d8c8cb18a3 MESON)
-ostree=(914c4d993b CONFIGURE)
-portal-gtk=(f621210716 CONFIGURE)
-portal=(f2e589972c CONFIGURE)
-
-# base
-doas=(4e98828056 )
-bsdtar=(df28391779 CONFIGURE)
-
-# iwd
-iwd=(71533fe3b8 CONFIGURE --disable-systemd-service LIBS=-lncursesw)
-
-# btrfs
-lzo=(c0f8929432 CONFIGURE --enable-shared)
-btrfs-progs=(9e9b303a1d CONFIGURE --disable-documentation)
+harfbuzz={hash="7158a87c4db82521fc506711f0c8864115f0292d95f7136c8812c11811cdf952",url="https://github.com/harfbuzz/harfbuzz/releases/download/3.4.0/harfbuzz-3.4.0.tar.xz"}
+gtk3={hash="423c3e7fdb4c459ee889e35fd4d71fd2623562541c1041b11c07e5ad1ff10bf9",url="https://download.gnome.org/sources/gtk+/3.24/gtk+-3.24.31.tar.xz",flags={"-Dtests=false","-Ddemos=false","-Dexamples=false","-Dwin32_backend=false","-Dquartz_backend=false","-Dwayland_backend=false"}}
+autobuild={hash="c12984db9a47652cda59dab846d6c13378ceb1d5648251c3fb0927258379673f",url="https://download.savannah.gnu.org/releases/autobuild/autobuild-5.3.tar.gz"}
+gdb={hash="1497c36a71881b8671a9a84a0ee40faab788ca30d7ba19d8463c3cc787152e32",url="https://ftp.gnu.org/gnu/gdb/gdb-11.2.tar.xz",flags={"--without-guile","--with-system-readline","--without-python"}}
+gnutls={hash="1b79b381ac283d8b054368b335c408fedcb9b7144e0c07f531e3537d4328f3b3",url="https://gnupg.org/ftp/gcrypt/gnutls/v3.6/gnutls-3.6.16.tar.xz",flags={"--with-included-libtasn1","--without-p11-kit","--enable-shared"}}
+guile={hash="daa7060a56f2804e9b74c8d7e7fe8beed12b43aab2789a38585183fcc17b8a13",url="https://ftp.gnu.org/gnu/guile/guile-3.0.8.tar.xz"}
+inetutils={hash="d547f69172df73afef691a0f7886280fd781acea28def4ff4b4b212086a89d80",url="https://ftp.gnu.org/gnu/inetutils/inetutils-2.2.tar.xz"}
+libsigsegv={hash="cdac3941803364cf81a908499beb79c200ead60b6b5b40cad124fd1e06caa295",url="https://ftp.gnu.org/gnu/libsigsegv/libsigsegv-2.14.tar.gz",flags={"--enable-shared"}}
+libunistring={hash="5bab55b49f75d77ed26b257997e919b693f29fd4a1bc22e0e6e024c246c72741",url="https://ftp.gnu.org/gnu/libunistring/libunistring-1.0.tar.xz"}
+libunwind={hash="4a6aec666991fb45d0889c44aede8ad6eb108071c3554fcdff671f9c94794976",url="https://download.savannah.gnu.org/releases/libunwind/libunwind-1.6.2.tar.gz"}
+nettle={hash="661f5eb03f048a3b924c3a8ad2515d4068e40f67e774e8a26827658007e3bcf0",url="https://ftp.gnu.org/gnu/gnu/nettle/nettle-3.7.3.tar.gz",flags={"--enable-shared"}}
+octave={hash="b48f33d4fceaf394cfbea73a8c850000936d83a41739a24f7568b5b0a7b39acd",url="https://ftp.gnu.org/gnu/octave/octave-6.4.0.tar.gz"}
+sharutils={hash="2b05cff7de5d7b646dc1669bc36c35fdac02ac6ae4b6c19cb3340d87ec553a9a",url="https://ftp.gnu.org/gnu/sharutils/sharutils-4.15.2.tar.xz"}
+time={hash="fbacf0c81e62429df3e33bda4cee38756604f18e01d977338e23306a3e3b521e",url="https://ftp.gnu.org/gnu/time/time-1.9.tar.gz"}
+appstream-glib={hash="22deb41db6552263f9b641d193d3ba715cd08ba03d60168210737a4f209c7020",url="https://github.com/hughsie/appstream-glib/archive/refs/tags/appstream_glib_0_8_0.tar.gz",flags={"-Drpm=false","-Dstemmer=false","-Dman=false"}}
+babl={hash="4f0d7f4aaa0bb2e725f349adf7b351a957d9fb26d555d9895a7af816b4167039",url="https://download.gimp.org/pub/babl/0.1/babl-0.1.88.tar.xz"}
+gegl={hash="ef63f0bca5b431c6119addd834ca7fbb507c900c4861c57b3667b6f4ccfcaaaa",url="https://download.gimp.org/pub/gegl/0.4/gegl-0.4.34.tar.xz"}
+gimp={hash="3f15c70554af5dcc1b46e6dc68f3d8f0a6cc9fe56b6d78ac08c0fd859ab89a25",url="https://download.gimp.org/mirror/pub/gimp/v2.10/gimp-2.10.32.tar.bz2",flags={"--disable-python","--disable-glibtest"}}
+libmypaint={hash="741754f293f6b7668f941506da07cd7725629a793108bb31633fb6c3eae5315f",url="https://github.com/mypaint/libmypaint/releases/download/v1.6.1/libmypaint-1.6.1.tar.xz"}
+paintbrush={hash="fef66ffc241b7c5cd29e9c518e933c739618cb51c4ed4d745bf648a1afc3fe70",url="https://github.com/mypaint/mypaint-brushes/releases/download/v1.3.1/mypaint-brushes-1.3.1.tar.xz"}
+adwaita={hash="ef5339d8c35fcad5d10481b70480803f0fa20b3d3cbc339238fcaceeaee01eba",url="https://download.gnome.org/sources/adwaita-icon-theme/41/adwaita-icon-theme-41.0.tar.xz"}
+at-spi2-atk={hash="cfa008a5af822b36ae6287f18182c40c91dd699c55faa38605881ed175ca464f",url="https://download.gnome.org/sources/at-spi2-atk/2.38/at-spi2-atk-2.38.0.tar.xz"}
+at-spi2-core={hash="4b5da10e94fa3c6195f95222438f63a0234b99ef9df772c7640e82baeaa6e386",url="https://download.gnome.org/sources/at-spi2-core/2.42/at-spi2-core-2.42.0.tar.xz"}
+atk={hash="fb76247e369402be23f1f5c65d38a9639c1164d934e40f6a9cf3c9e96b652788",url="https://download.gnome.org/sources/atk/2.36/atk-2.36.0.tar.xz"}
+caribou={hash="9c43d9f4bd30f4fea7f780d4e8b14f7589107c52e9cb6bd202bd0d1c2064de55",url="https://download.gnome.org/sources/caribou/0.4/caribou-0.4.21.tar.xz"}
+clutter-gtk={hash="521493ec038973c77edcb8bc5eac23eed41645117894aaee7300b2487cb42b06",url="https://download.gnome.org/sources/clutter-gtk/1.8/clutter-gtk-1.8.4.tar.xz"}
+clutter={hash="8b48fac159843f556d0a6be3dbfc6b083fc6d9c58a20a49a6b4919ab4263c4e6",url="https://download.gnome.org/sources/clutter/1.26/clutter-1.26.4.tar.xz",flags={"--enable-egl-backend","--enable-evdev-input"}}
+cogl={hash="a805b2b019184710ff53d0496f9f0ce6dcca420c141a0f4f6fcc02131581d759",url="https://download.gnome.org/sources/cogl/1.22/cogl-1.22.8.tar.xz",flags={"--enable-xlib-egl-platform"}}
+fragments={hash="a3f32771e82aaac33ce1fbe40f83204fb6fade20d5cbffbd862b30ce9d8dedcf",url="https://gitlab.gnome.org/World/Fragments/-/archive/2.0.2/Fragments-2.0.2.tar.gz"}
+gdk-pixbuf={hash="c4a6b75b7ed8f58ca48da830b9fa00ed96d668d3ab4b1f723dcf902f78bde77f",url="https://download.gnome.org/sources/gdk-pixbuf/2.42/gdk-pixbuf-2.42.6.tar.xz",flags={"-Dgio_sniffing=false","-Dinstalled_tests=false"}}
+gedit={hash="7a9b18b158808d1892989165f3706c4f1a282979079ab7458a79d3c24ad4deb5",url="https://download.gnome.org/sources/gedit/41/gedit-41.0.tar.xz",flags={"-Dspell=disabled","-Duser_documentation=false","-Dplugin_externaltools=false"}}
+geocode-glib={hash="01fe84cfa0be50c6e401147a2bc5e2f1574326e2293b55c69879be3e82030fd1",url="https://download.gnome.org/sources/geocode-glib/3.26/geocode-glib-3.26.2.tar.xz"}
+gjs={hash="bbdc0eec7cf25fbc534769f6a1fb2c7a18e17b871efdb0ca58e9abf08b28003f",url="https://download.gnome.org/sources/gjs/1.70/gjs-1.70.1.tar.xz"}
+glib-networking={hash="2a16bfc2d271ccd3266e3fb462bc8a4103c02e81bbb339aa92d6fb060592d7bc",url="https://download.gnome.org/sources/glib-networking/2.70/glib-networking-2.70.1.tar.xz"}
+glibmm={hash="b2a4cd7b9ae987794cbb5a1becc10cecb65182b9bb841868625d6bbb123edb1d",url="https://download.gnome.org/sources/glibmm/2.66/glibmm-2.66.2.tar.xz",flags={"-Dbuild-documentation=false","-Dbuild-examples=false"}}
+gnome-autoar={hash="7bdf0789553496abddc3c963b0ce7363805c0c02c025feddebcaacc787249e88",url="https://download.gnome.org/sources/gnome-autoar/0.4/gnome-autoar-0.4.3.tar.xz"}
+gnome-backgrounds={hash="1da1ac0d261bedf0fcd2c85b480bc65505e23cf51f1143126c0d37717e693145",url="https://download.gnome.org/sources/gnome-backgrounds/41/gnome-backgrounds-41.0.tar.xz"}
+gnome-color-manager={hash="9ddb9e6b6472e119801381f90905332ec1d4258981721bba831ca246ceb3ad3b",url="https://download.gnome.org/sources/gnome-color-manager/3.36/gnome-color-manager-3.36.0.tar.xz",flags={"-Dsystemd_session=disable","-Dsystemd=false","-Dsystemd_journal=false"}}
+gnome-common={hash="22569e370ae755e04527b76328befc4c73b62bfd4a572499fde116b8318af8cf",url="https://download.gnome.org/sources/gnome-common/3.18/gnome-common-3.18.0.tar.xz"}
+gnome-desktop={hash="8cd1caab9311828c0452468c6a5067a9bc4463835b23a14be44e8fd9b03001c6",url="https://download.gnome.org/sources/gnome-desktop/41/gnome-desktop-41.3.tar.xz"}
+gnome-menus={hash="d9348f38bde956fc32753b28c1cde19c175bfdbf1f4d5b06003b3aa09153bb1f",url="https://download.gnome.org/sources/gnome-menus/3.36/gnome-menus-3.36.0.tar.xz"}
+gnome-session={hash="ee4a229053f522624054889609335b885287cf67bbde0dc9fd882b01ec9b5b39",url="https://download.gnome.org/sources/gnome-session/41/gnome-session-41.3.tar.xz",flags={"-Dsystemd_session=disable","-Dsystemd=false","-Dsystemd_journal=false"}}
+gnome-settings-daemon={hash="e6ca6361fbd1deab2de1a1e390d4f14167cf47b1c547dbb8b65a5d89e9663884",url="https://download.gnome.org/sources/gnome-settings-daemon/41/gnome-settings-daemon-41.0.tar.xz",flags={"-Dsystemd=false"}}
+gnome-tweak-tool={hash="f95f3fe031b0b01c02f79a1659f889152d3772ae3e44df8403d1460ba5eec36a",url="https://download.gnome.org/sources/gnome-tweaks/40/gnome-tweaks-40.0.tar.xz"}
+gsettings-desktop-schemas={hash="77289972e596d044583f0c056306d8f1dbd8adcf912910a50da0a663e65332ed",url="https://download.gnome.org/sources/gsettings-desktop-schemas/41/gsettings-desktop-schemas-41.0.tar.xz"}
+gtk-doc={hash="cc1b709a20eb030a278a1f9842a362e00402b7f834ae1df4c1998a723152bf43",url="https://download.gnome.org/sources/gtk-doc/1.33/gtk-doc-1.33.2.tar.xz"}
+gtk2={hash="ac2ac757f5942d318a311a54b0c80b5ef295f299c2a73c632f6bfb1ff49cc6da",url="https://download.gnome.org/sources/gtk+/2.24/gtk+-2.24.33.tar.xz",flags={"--disable-gtk-doc","--disable-gtk-doc-html","--disable-glibtest"}}
+gtksourceview={hash="842de7e5cb52000fd810e4be39cd9fe29ffa87477f15da85c18f7b82d45637cc",url="https://download.gnome.org/sources/gtksourceview/4.8/gtksourceview-4.8.2.tar.xz"}
+introspection={hash="902b4906e3102d17aa2fcb6dad1c19971c70f2a82a159ddc4a94df73a3cafc4a",url="https://download.gnome.org/sources/gobject-introspection/1.70/gobject-introspection-1.70.0.tar.xz"}
+json-glib={hash="96ec98be7a91f6dde33636720e3da2ff6ecbb90e76ccaa49497f31a6855a490e",url="https://download.gnome.org/sources/json-glib/1.6/json-glib-1.6.6.tar.xz"}
+libcroco={hash="767ec234ae7aa684695b3a735548224888132e063f92db585759b422570621d4",url="https://download.gnome.org/sources/libcroco/0.6/libcroco-0.6.13.tar.xz"}
+libgee={hash="31863a8957d5a727f9067495cabf0a0889fa5d3d44626e54094331188d5c1518",url="https://download.gnome.org/sources/libgee/0.20/libgee-0.20.5.tar.xz"}
+libgnomekbd={hash="f7ca02631576e9b88aee1b1bae37ac1488b80ee7975f20a97f29e761a7172679",url="https://download.gnome.org/sources/libgnomekbd/3.26/libgnomekbd-3.26.1.tar.xz"}
+libgtop={hash="78f3274c0c79c434c03655c1b35edf7b95ec0421430897fb1345a98a265ed2d4",url="https://download.gnome.org/sources/libgtop/2.40/libgtop-2.40.0.tar.xz"}
+libgweather={hash="ca4e8f2a4baaa9fc6d75d8856adb57056ef1cd6e55c775ba878ae141b6276ee6",url="https://download.gnome.org/sources/libgweather/40/libgweather-40.0.tar.xz"}
+libgxps={hash="6d27867256a35ccf9b69253eb2a88a32baca3b97d5f4ef7f82e3667fa435251c",url="https://download.gnome.org/sources/libgxps/0.3/libgxps-0.3.2.tar.xz"}
+libnotify={hash="66c0517ed16df7af258e83208faaf5069727dfd66995c4bbc51c16954d674761",url="https://download.gnome.org/sources/libnotify/0.7/libnotify-0.7.9.tar.xz",flags={"-Dgtk_doc=false","-Dman=false","-Dtests=false"}}
+libpeas={hash="0bf5562e9bfc0382a9dcb81f64340787542568762a3a367d9d90f6185898b9a3",url="https://download.gnome.org/sources/libpeas/1.30/libpeas-1.30.0.tar.xz"}
+librsvg={hash="1dc6a02df36eedc2d9f4a24cd8f9bc9d5f2874824f152e28ab4417103a6903e0",url="https://download.gnome.org/sources/librsvg/2.52/librsvg-2.52.9.tar.xz"}
+libwnck={hash="83f732d20781fc88b22cdc6aaf2d4f388db6d3d4ff28d1a8fd45be9fb7743a9e",url="https://download.gnome.org/sources/libwnck/2.31/libwnck-2.31.0.tar.xz"}
+libwnck3={hash="03134fa114ef3fbe34075aa83678f58aa2debe9fcef4ea23c0779e28601d6611",url="https://download.gnome.org/sources/libwnck/40/libwnck-40.1.tar.xz"}
+libxml2={hash="276130602d12fe484ecc03447ee5e759d0465558fbc9d6bd144e3745306ebf0e",url="https://download.gnome.org/sources/libxml2/2.9/libxml2-2.9.13.tar.xz",flags={"--with-python"}}
+libxslt={hash="8247f33e9a872c6ac859aa45018bc4c4d00b97e2feac9eebc10c93ce1f34dd79",url="https://download.gnome.org/sources/libxslt/1.1/libxslt-1.1.35.tar.xz"}
+metacity={hash="19c3c5d79d2171f45baa0f632cc8995f8607bf1231a16014439bac9ba165a7c0",url="https://download.gnome.org/sources/metacity/3.44/metacity-3.44.0.tar.xz"}
+mm-common={hash="e954c09b4309a7ef93e13b69260acdc5738c907477eb381b78bb1e414ee6dbd8",url="https://download.gnome.org/sources/mm-common/1.0/mm-common-1.0.4.tar.xz",flags={"-Duse-network=true"}}
+mutter={hash="55882695064aa6f0385cd1f7f7fab2c2a2ed2c9aec78f578faa07f5209ca529c",url="https://download.gnome.org/sources/mutter/41/mutter-41.4.tar.xz",flags={"-Dtests=false"}}
+nautilus={hash="872285b1c40a6ee418ce295ed115f5427da70907d822d95bcf51675d5498822b",url="https://download.gnome.org/sources/nautilus/41/nautilus-41.2.tar.xz"}
+networkmanager={hash="819795d0899076204f5672421a58f1b1d9e393536ee87bb844b911e6243bf0bd",url="https://download.gnome.org/sources/NetworkManager/1.34/NetworkManager-1.34.0.tar.xz",flags={"-Dqt=false","-Dnmtui=false","-Dmodem_manager=false","-Dsession_tracking=no","-Dsystemd_journal=false","-Dlibaudit=no","-Dselinux=false","-Dsystemdsystemunitdir=no"}}
+pango={hash="f4ad63e87dc2b145300542a4fb004d07a9f91b34152fae0ddbe50ecdd851c162",url="https://download.gnome.org/sources/pango/1.50/pango-1.50.4.tar.xz"}
+pangox-compat={hash="552092b3b6c23f47f4beee05495d0f9a153781f62a1c4b7ec53857a37dfce046",url="https://download.gnome.org/sources/pangox-compat/0.0/pangox-compat-0.0.2.tar.xz"}
+secrets={hash="c912ca55d3e77a7689d1901e0b71faaea2a6d289eb9114b3500480ec4a4eeb24",url="https://gitlab.gnome.org/World/secrets/-/archive/6.5/secrets-6.5.tar.gz"}
+tracker={hash="1847e08b39e6e61d848735aa1f97f7d96c038201653fa0d7cb9e81b37eb9c03a",url="https://download.gnome.org/sources/tracker/3.2/tracker-3.2.1.tar.xz",flags={"-Dsystemd_user_services=false"}}
+vala={hash="884de745317d4d56e4e8cede993dc8f04d50cfca36cf60d2f2f278c30c2b1311",url="https://download.gnome.org/sources/vala/0.54/vala-0.54.2.tar.xz"}
+zenity={hash="e786e733569c97372c3ef1776e71be7e7599ebe87e11e8ad67dcc2e63a82cd95",url="https://download.gnome.org/sources/zenity/3.32/zenity-3.32.0.tar.xz"}
+cinnamon-control-center={hash="49d0db765fbeb350af30161f537e0c45de88979aa11a04e17f4d04c9ee60b73a",url="https://github.com/linuxmint/cinnamon-control-center/archive/refs/tags/master.mint21.tar.gz"}
+cinnamon-desktop={hash="a3523abd4efd44ca206cabdf9b0fb974687ae76ede4959a91defcf65b232346e",url="https://github.com/linuxmint/cinnamon-desktop/archive/refs/tags/master.mint21.tar.gz"}
+cinnamon-menus={hash="a1dbd0d567cceab91d7b8068044ff0230912a52615d46f53b12dd473eaf2c95d",url="https://github.com/linuxmint/cinnamon-menus/archive/refs/tags/master.mint21.tar.gz"}
+cinnamon-screensaver={hash="99a36bbbf8edc7e45e8e252761f5e4ba1cb4a1fb6ea8fc099b5ff3c8422dedde",url="https://github.com/linuxmint/cinnamon-screensaver/archive/refs/tags/master.mint21.tar.gz"}
+cinnamon-session={hash="4f931acb335d6192755315d55b790c15d94124fde0b2fdeb04fb10fc3b62d0d9",url="https://github.com/linuxmint/cinnamon-session/archive/refs/tags/master.mint21.tar.gz"}
+cinnamon-settings-daemon={hash="95b41aea50ebfef218a94e35a125e35be3e21137a38df605faf2e6cec3a76ade",url="https://github.com/linuxmint/cinnamon-settings-daemon/archive/refs/tags/master.mint21.tar.gz"}
+cinnamon-translations={hash="44f1ca7a54c7913325ca399327aaa510a26f3cb3798ed6f983748671077fbb09",url="https://github.com/linuxmint/cinnamon-translations/archive/refs/tags/master.mint21.tar.gz"}
+cinnamon={hash="b38f93780b5152a31940b6699d9c0758c2809b510b690669e6b05277f336492d",url="https://github.com/linuxmint/cinnamon/archive/refs/tags/master.mint21.tar.gz"}
+cjs={hash="e6686d8e07d880145f7d1ebfc1ce00ce770eb301f9df3180895d548c0beef110",url="https://github.com/linuxmint/cjs/archive/refs/tags/master.mint21.tar.gz"}
+muffin={hash="3401fc972b6e351da799a73a8ece56071a5389ea80f544e1a0a99458dd535e4d",url="https://github.com/linuxmint/muffin/archive/refs/tags/master.mint21.tar.gz"}
+nemo={hash="967491f749f6c4dce92294c2b6f865bd39b2a2dfbd1f48e0f58cd658afc3f114",url="https://github.com/linuxmint/nemo/archive/refs/tags/master.mint21.tar.gz"}
+xapp={hash="8b09a766e3b86b0136bec808118f4c7d495181dda3983a05a180eaee2281fd08",url="https://github.com/linuxmint/xapp/archive/refs/tags/master.mint21.tar.gz"}
+elementary-dock={hash="cd6a9a98fe9d171d8a02f26bc37cb7736d2165142e6a5eac7e80603158633b82",url="https://github.com/elementary/dock/archive/master.tar.gz"}
+elementary-stylesheet={hash="3856dbfa9f11a837c299dd53b0e4f8941f1ddafc9f0ec3d2d57e0deed8f2e7e3",url="https://github.com/elementary/stylesheet/archive/refs/tags/7.0.0.tar.gz"}
+gala={hash="f2aad3c51d576baa2f5dd0c5ec790ba3344d7a80add5bfb91ccb86eb28424635",url="https://github.com/elementary/gala/archive/refs/tags/6.3.1.tar.gz",flags={"-Dsystemd=false"}}
+granite={hash="b3e77a1ca954d68f074cfad08ec65db12a56a80460e3c031c41d9f900f0314e3",url="https://github.com/elementary/granite/archive/refs/tags/7.0.0.tar.gz"}
+torrential={hash="319f3c89cbd6a037f597578006130c50f1fbb12959722a5d08498b679fd05690",url="https://github.com/davidmhewitt/torrential/archive/refs/tags/2.0.1.tar.gz"}
+accountsservice={hash="21d449c0dead8a543cea8f11e71eb0496c035d730ea48393397a302b3a4c7c1a",url="https://freedesktop.org/software/accountsservice/accountsservice-22.07.5.tar.xz"}
+avahi={hash="060309d7a333d38d951bc27598c677af1796934dbd98e1024e7ad8de798fedda",url="https://github.com/lathiat/avahi/releases/download/v0.8/avahi-0.8.tar.gz",flags={"--disable-mono","--disable-monodoc","--without-systemdsystemunitdir"}}
+colord={hash="7407631a27bfe5d1b672e7ae42777001c105d860b7b7392283c8c6300de88e6f",url="https://freedesktop.org/software/colord/releases/colord-1.4.6.tar.xz",flags={"-Dsystemd=false","-Dbash_completion=false"}}
+dbus-glib={hash="7d550dccdfcd286e33895501829ed971eeb65c614e73aadb4a08aeef719b143a",url="https://dbus.freedesktop.org/releases/dbus-glib/dbus-glib-0.112.tar.gz"}
+geoclue={hash="cdc9efcb98ce81284d7a6c3c899330481ffdca44bba3c18b9e530618298aa4a0",url="https://gitlab.freedesktop.org/geoclue/geoclue/-/archive/2.6.0/geoclue-2.6.0.tar.bz2"}
+gstreamer={hash="edf4bffff85591d4fff7b21bb9ed7f0feabc123ac4a4eff29e73cbce454f9db7",url="https://gstreamer.freedesktop.org/src/gstreamer/gstreamer-1.20.0.tar.xz"}
+libgusb={hash="0eb0b9ab0f8bba0c59631c809c37b616ef34eb3c8e000b0b9b71cf11e4931bdc",url="https://people.freedesktop.org/~hughsient/releases/libgusb-0.3.10.tar.xz",flags={"-Dtests=false","-Dvapi=false","-Ddocs=false"}}
+libspectre={hash="cf60b2a80f6bfc9a6b110e18f08309040ceaa755210bf94c465a969da7524d07",url="http://libspectre.freedesktop.org/releases/libspectre-0.2.10.tar.gz"}
+pipewire={hash="8d70170a91ecba73746c1d83f95d54eee8ca71d0c3521926f05ed830d8b5a84e",url="https://github.com/PipeWire/pipewire/archive/0.3.47/pipewire-0.3.47.tar.gz"}
+shared-mime-info={hash="3aeeee25ad445f257f614ed53837dee79fab70524b56e59b767f0d69e11fdff9",url="https://gitlab.freedesktop.org/xdg/shared-mime-info/-/archive/2.1/shared-mime-info-2.1.tar.gz"}
+upower={hash="5cad70f91540cc7dc121cb17e0ad645e5e663c8682f60a7be42ee38cd7b23d7a",url="https://gitlab.freedesktop.org/upower/upower/uploads/177df5b9f9b76f25a2ad9da41aa0c1fa/upower-0.99.13.tar.xz",flags={"-Dsystemdsystemunitdir=no","-Dgtk-doc=false","-Dman=false"}}
+bamf={hash="4fcd00f23c542f3b79f35e10e322b67eacb399cac83f48db261cd8e8ea709478",url="https://launchpad.net/bamf/0.5/0.5.6/+download/bamf-0.5.6.tar.gz"}
+libdbusmenu={hash="9be5dc0f2657a9eb76b02d2cdfafa4490652c70bcdfafba5574c505afd2bbe79",url="https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/libdbusmenu/16.04.1+18.10.20180917-0ubuntu8/libdbusmenu_16.04.1+18.10.20180917.orig.tar.gz"}
+libtimezonemap={hash="0d634cc2476d8f57d1ee1864bd4f442180ae4bf040a9ae4bf73b66bbd85d7195",url="https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/libtimezonemap/0.4.6-3/libtimezonemap_0.4.6.orig.tar.gz"}
+okular={hash="69c39e8b5f9a1c24bfe57dc27a4073d3a72a3cbdd548e00e83fa8d33a1e70bcc",url="https://download.kde.org/stable/release-service/21.12.2/src/okular-21.12.2.tar.xz"}
+qbittorrent={hash="b64559ca50b54bc6c5be17302e69f34fba8433059842aa4093865dc2c00d24c8",url="https://sourceforge.net/projects/qbittorrent/files/qbittorrent/qbittorrent-4.4.3.1/qbittorrent-4.4.3.1.tar.xz"}
+qtpass={hash="79f79d3b205f7dab6f5b084e1bbc2270b0bb7a702d50496767cf35a1978e67bd",url="https://github.com/IJHack/QtPass/archive/refs/tags/1.4.0-rc1.tar.gz"}
+strawberry={hash="c2d242f091eaeb5bf6c83e8b3b0405e3c5ea89a23845843541726fc81643bd06",url="https://files.strawberrymusicplayer.org/strawberry-1.0.7.tar.xz"}
+vlc={hash="ffae35fc64f625c175571d2346bc5f6207be99762517f15423e74f18399410f6",url="https://download.videolan.org/vlc/3.0.16/vlc-3.0.16.tar.xz"}
+elvis={hash="1f6402daec5a68288ff9321d23f74839d671fb1ca099fb879e8a7ffb318d502f",url="https://mirrors.slackware.com/slackware/slackware64-current/source/a/elvis/elvis-2.2_0.tar.bz2",flags={"--without-x;","PREFIX=$destdir/usr"}}
+crosstool-ng={hash="68162f342243cd4189ed7c1f4e3bb1302caa3f2cbbf8331879bd01fe06c60cd3",url="http://crosstool-ng.org/download/crosstool-ng/crosstool-ng-1.25.0.tar.xz"}
+logrotate={hash="ddd5274d684c5c99ca724e8069329f343ebe376e07493d537d9effdc501214ba",url="https://github.com/logrotate/logrotate/releases/download/3.19.0/logrotate-3.19.0.tar.xz"}
+azpainter={hash="85f3f935e76b420f2e5e272514368fdfbe4c25c01daa1e161ac28a6e1edb0d2c",url="https://github.com/Symbian9/azpainter/releases/download/v2.1.6/azpainter-2.1.6.tar.xz"}
+bcachefs-tools={hash="bb69264c3239969679e0d7285a43aff6bd7dfd74e19934c1f188b7d042ac2ffe",url="https://github.com/koverstreet/bcachefs-tools/archive/master.tar.gz"}
+compiz={hash="f748b3a3c5a746d509925af72fd0cae6b69f880944ea6c1fa6e2eaf9425459b6",url="https://github.com/compiz-reloaded/compiz/releases/download/v0.8.14/compiz-0.8.14.tar.xz"}
+optipng={hash="4f32f233cef870b3f95d3ad6428bfe4224ef34908f1b42b0badf858216654452",url="http://prdownloads.sourceforge.net/optipng/optipng-0.7.7.tar.gz"}
+deadbeef={hash="9fe43ccbeeea72c653bdcf8c93332583135cda46a79507bfd0a483bb57f65939",url="https://github.com/thom311/libnl/releases/download/libnl3_7_0/libnl-3.7.0.tar.gz",flags={"--disable-psf"}}
+deluge={hash="768dd319802e42437ab3794ebe75b497142e08ed5b0fb2503bad62cef442dff7",url="https://ftp.osuosl.org/pub/deluge/source/2.1/deluge-2.1.1.tar.xz"}
+dupeguru={hash="f0ad021fe828ceb5363b65e12cf27758def07d9e2e7eeceb395a9fe9af664a76",url="https://github.com/arsenetar/dupeguru/archive/4.3.1.tar.gz"}
+dynare={hash="557bc7d8d7bbbf7d4746dd1e015b273eeeb0b53dc66b9d4004d2efef8f4fe16e",url="https://dynare.org/release/source/dynare-5.0.tar.xz",flags={"--disable-doc","--disable-dynare++","--disable-matlab","--disable-mex-dynare++","--disable-mex-ms-sbvar","--disable-mex-kalman-steady-state"}}
+elogind={hash="c490dc158c8f5bca8d00ecfcc7ad5af24d1c7b9e59990a0b3b1323996221a922",url="https://github.com/elogind/elogind/archive/v246.10/elogind-246.10.tar.gz"}
+fontforge={hash="68bcba8f602819eddc29cd356ee13fafbad7a80d19b652d354c6791343476c78",url="https://github.com/fontforge/fontforge/releases/download/20201107/fontforge-20201107.tar.xz",flags={"-DENABLE_DOCS=OFF","-DENABLE_LIBSPIRO=OFF"}}
+gs={hash="6ee3057773646d6a2c6d117eb53a17d6752feadc513828e4322f68b7b7789ff6",url="https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs9550/ghostscript-9.55.0.tar.xz"}
+i3wm={hash="23e1ecaf208c1d162a0c8c66c4590b301a424ee5c011227eabb96e36fd6bfce6",url="https://i3wm.org/downloads/i3-4.20.1.tar.xz"}
+inkscape={hash="76fa1fb6613c78f60f2be85be3b6e55354871bec66ade399a361274c45c0cd52",url="https://inkscape.org/gallery/item/33449/inkscape-1.2_2022-05-15_dc2aedaf03.tar.xz"}
+jfsutils={hash="244a15f64015ce3ea17e49bdf6e1a0fb4f9af92b82fa9e05aa64cb30b5f07a4d",url="http://jfs.sourceforge.net/project/pub/jfsutils-1.1.15.tar.gz"}
+kbd={hash="ccdf452387a6380973d2927363e9cbb939fa2068915a6f937ff9d24522024683",url="https://mirrors.edge.kernel.org/pub/linux/utils/kbd/kbd-2.5.1.tar.xz",flags={"--disable-vlock","--disable-tests","--disable-nls"}}
+libkeccak={hash="c17df59e038f9f1b0f09aa79944ba572f5c4efcbfe8bc6bc7aae1b40f035abe9",url="https://github.com/maandree/libkeccak/archive/refs/tags/1.3.1.2.tar.gz"}
+lz4={hash="030644df4611007ff7dc962d981f390361e6c97a34e5cbc393ddfbe019ffe2c1",url="https://github.com/lz4/lz4/archive/refs/tags/v1.9.3.tar.gz"}
+lzop={hash="7e72b62a8a60aff5200a047eea0773a8fb205caf7acbe1774d95147f305a2f41",url="https://lzop.org/download/lzop-1.04.tar.gz"}
+magick={hash="80c3fe2ae1062abf56456f52518bd670f9ec3917b7f85e152b347ac6b6faf880",url="https://imagemagick.org/download/releases/ImageMagick-7.1.0-25.tar.xz",flags={"--enable-hdri","--with-modules"}}
+nitrogen={hash="f40213707b7a3be87e556f65521cef8795bd91afda13dfac8f00c3550375837d",url="https://github.com/l3ib/nitrogen/releases/download/1.6.1/nitrogen-1.6.1.tar.gz"}
+nvim={hash="ccab8ca02a0c292de9ea14b39f84f90b635a69282de38a6b4ccc8565bc65d096",url="https://github.com/neovim/neovim/archive/refs/tags/v0.7.2.tar.gz"}
+openresolv={hash="42b30508e857a228535c631eaac936862d86eca68c14b5c0bf387ba176b91b97",url="https://roy.marples.name/downloads/openresolv/openresolv-3.12.0.tar.xz"}
+optipng={hash="4f32f233cef870b3f95d3ad6428bfe4224ef34908f1b42b0badf858216654452",url="http://prdownloads.sourceforge.net/optipng/optipng-0.7.7.tar.gz"}
+pass={hash="cfa9faf659f2ed6b38e7a7c3fb43e177d00edbacc6265e6e32215ff40e3793c0",url="https://git.zx2c4.com/password-store/snapshot/password-store-1.7.4.tar.xz"}
+pnmixer={hash="851c7f82aa420636f7360bed1748520ad46230287435ee38d5325ba5519198d7",url="https://github.com/nicklan/pnmixer/releases/download/v0.7.2/pnmixer-v0.7.2.tar.gz"}
+qemu={hash="68e15d8e45ac56326e0b9a4afa8b49a3dfe8aba3488221d098c84698bca65b45",url="https://download.qemu-project.org/qemu-6.2.0.tar.xz"}
+sdl-image={hash="460da7fcee5302fdcc20ee0c26ad1c8d48810d2e368e73d564daf267344780f9",url="https://github.com/libsdl-org/SDL_image/archive/refs/tags/release-2.6.1.tar.gz"}
+sdl2={hash="c56aba1d7b5b0e7e999e4a7698c70b63a3394ff9704b5f6e1c57e0c16f04dd06",url="https://libsdl.org/release/SDL2-2.0.20.tar.gz"}
+sha3sum={hash="57cfda5d9d16aa14c78d278b1c14fd9f3504424ee62bc18137ce6435c1364d12",url="https://github.com/maandree/sha3sum/archive/refs/tags/1.2.2.tar.gz"}
+tinyproxy={hash="d66388448215d0aeb90d0afdd58ed00386fb81abc23ebac9d80e194fceb40f7c",url="https://github.com/tinyproxy/tinyproxy/releases/download/1.11.1/tinyproxy-1.11.1.tar.xz"}
+ucl={hash="b865299ffd45d73412293369c9754b07637680e5c826915f097577cd27350348",url="https://oberhumer.com/opensource/ucl/download/ucl-1.03.tar.gz"}
+upx={hash="47774df5c958f2868ef550fb258b97c73272cb1f44fe776b798e393465993714",url="https://github.com/upx/upx/releases/download/v3.96/upx-3.96-src.tar.xz"}
+wine={hash="5b43e27d5c085cb18f97394e46180310d5eef7c1d91c6895432a3889b2de086b",url="https://dl.winehq.org/wine/source/7.0/wine-7.0.tar.xz",flags={"--enable-win64"}}
+wireguard={hash="97ff31489217bb265b7ae850d3d0f335ab07d2652ba1feec88b734bc96bd05ac",url="https://git.zx2c4.com/wireguard-tools/snapshot/wireguard-tools-1.0.20210914.tar.xz"}
+xarchiver={hash="fec755ffbd50e3575bd2497c755e9fe93265c5735f20de03328485f57d1123e2",url="https://github.com/ib/xarchiver/archive/0.5.4.17/xarchiver-0.5.4.17.tar.gz"}
+xcb-util-xrm={hash="0129f74c327ae65e2f4ad4002f300b4f02c9aff78c00997f1f1c5a430f922f34",url="https://github.com/Airblader/xcb-util-xrm/releases/download/v1.3/xcb-util-xrm-1.3.tar.gz"}
+xcursor-themes={hash="ee1ec574741293abcf66ac14ce7e74add7ac6be7deb8b38179ef010d22354999",url="https://x.org/pub/individual/data/xcursor-themes-1.0.6.tar.bz2"}
+boost={hash="8681f175d4bdb26c52222665793eef08490d7758529330f98d3b29dd0735bccc",url="https://boostorg.jfrog.io/artifactory/main/release/1.78.0/source/boost_1_78_0.tar.bz2"}
+extra-cmake-modules={hash="9717885e30aadf184fa71511930409cabbf08eb6627ea8b051de8804fbcec54c",url="https://download.kde.org/stable/frameworks/5.91/extra-cmake-modules-5.91.0.tar.xz"}
+faad2={hash="0c6d9636c96f95c7d736f097d418829ced8ec6dbd899cc6cc82b728480a84bfb",url="https://github.com/knik0/faad2/archive/refs/tags/2_10_0.tar.gz"}
+graphviz={hash="262b4285530f5804f656e643bfccf0e910fcfc483639921209e16fd7a04bebe0",url="https://gitlab.com/graphviz/graphviz/-/archive/2.50.0/graphviz-2.50.0.tar.bz2"}
+libargon2={hash="daf972a89577f8772602bf2eb38b6a3dd3d922bf5724d45e7f9589b5e830442c",url="https://github.com/P-H-C/phc-winner-argon2/archive/refs/tags/20190702.tar.gz",flags={"LIBRARY_REL=lib64"}}
+libcares={hash="1a7d52a8a84a9fbffb1be9133c0f6e17217d91ea5a6fa61f6b4729cda78ebbcf",url="https://c-ares.haxx.se/download/c-ares-1.18.1.tar.gz"}
+libdaemon={hash="fd23eb5f6f986dcc7e708307355ba3289abe03cc381fc47a80bca4a50aa6b834",url="http://0pointer.de/lennart/projects/libdaemon/libdaemon-0.14.tar.gz"}
+libdouble-conversion={hash="3dbcdf186ad092a8b71228a5962009b5c96abde9a315257a3452eb988414ea3b",url="https://github.com/google/double-conversion/archive/v3.2.0/double-conversion-3.2.0.tar.gz",flags={"-DBUILD_SHARED_LIBS=ON"}}
+libexif={hash="d47564c433b733d83b6704c70477e0a4067811d184ec565258ac563d8223f6ae",url="https://github.com/libexif/libexif/releases/download/v0.6.24/libexif-0.6.24.tar.bz2"}
+libfuse={hash="b2e283485d47404ac896dd0bb7f7ba81e1470838e677e45f659804c3a3b69666",url="https://github.com/libfuse/libfuse/releases/download/fuse-3.10.5/fuse-3.10.5.tar.xz"}
+libjpeg={hash="09b96cb8cbff9ea556a9c2d173485fd19488844d55276ed4f42240e1e2073ce5",url="https://downloads.sourceforge.net/libjpeg-turbo/libjpeg-turbo-2.1.2.tar.gz"}
+libndp={hash="88ffb66ee2eb527f146f5c02f5ccbc38ba97d2b0d57eb46bfba488821ab0c02b",url="http://libndp.org/files/libndp-1.8.tar.gz"}
+libpng={hash="505e70834d35383537b6491e7ae8641f1a4bed1876dbfe361201fc80868d88ca",url="https://downloads.sourceforge.net/libpng/libpng-1.6.37.tar.xz"}
+libpotrace={hash="be8248a17dedd6ccbaab2fcc45835bb0502d062e40fbded3bc56028ce5eb7acc",url="https://downloads.sourceforge.net/potrace/potrace-1.16.tar.gz",flags={"--with-libpotrace"}}
+libscrypt={hash="a2d30ea16e6d288772791de68be56153965fe4fd4bcd787777618b8048708936",url="https://github.com/technion/libscrypt/archive/refs/tags/v1.22.tar.gz"}
+libseccomp={hash="59065c8733364725e9721ba48c3a99bbc52af921daf48df4b1e012fbc7b10a76",url="https://github.com/seccomp/libseccomp/releases/download/v2.5.3/libseccomp-2.5.3.tar.gz"}
+libsodium={hash="56d862e8484e8a140d05860f7f1940cb19cb8ec1da1b1c33a9a93288d1e247fc",url="https://download.libsodium.org/libsodium/releases/libsodium-1.0.18-stable.tar.gz"}
+libtiff={hash="0e46e5acb087ce7d1ac53cf4f56a09b221537fc86dfc5daaad1c2e89e1b37ac8",url="https://download.osgeo.org/libtiff/tiff-4.3.0.tar.gz"}
+libtorrent={hash="3850a27aacb79fcc4d352c1f02a7a59e0e8322afdaa1f5d58d676c02edfcfa36",url="https://github.com/arvidn/libtorrent/releases/download/v2.0.7/libtorrent-rasterbar-2.0.7.tar.gz"}
+libusb={hash="8a28ef197a797ebac2702f095e81975e2b02b2eeff2774fa909c78a74ef50849",url="https://github.com/libusb/libusb/releases/download/v1.0.25/libusb-1.0.25.tar.bz2"}
+libuv={hash="90d72bb7ae18de2519d0cac70eb89c319351146b90cd3f91303a492707e693a4",url="https://dist.libuv.org/dist/v1.43.0/libuv-v1.43.0.tar.gz"}
+openssl={hash="c311ad853353bce796edad01a862c50a8a587f62e7e2100ef465ab53ec9b06d1",url="https://openssl.org/source/openssl-3.0.1.tar.gz"}
+ppp={hash="f938b35eccde533ea800b15a7445b2f1137da7f88e32a16898d02dee8adc058d",url="https://samba.org/ftp/ppp/ppp-2.4.9.tar.gz"}
+yajl={hash="3fb73364a5a30efe615046d07e6db9d09fd2b41c763c5f7d3bfb121cd5c5ac5a",url="https://github.com/lloyd/yajl/archive/refs/tags/2.1.0.tar.gz"}
+libedit={hash="df223b3333a545fddbc67b49ded3d242c66fadf7a04beb3ada20957fcd1ffc0e",url="https://github.com/troglobit/editline/releases/download/1.17.1/editline-1.17.1.tar.xz"}
+libedit={hash="6792a6a992050762edcca28ff3318cdb7de37dccf7bc30db59fcd7017eed13c5",url="https://thrysoee.dk/editline/libedit-20210910-3.1.tar.gz"}
+libiconv={hash="1b47c0dc50d20d7239392e8e3917cf1340aa2acf53b7e6a84ee56714471e26f4",url="https://ftp.gnu.org/gnu/pub/gnu/libiconv/libiconv-1.17.tar.gz",flags={"--without-pic","--enable-static","--disable-shared","--disable-relocatable"}}
+libnsl={hash="2da075ef1893ebdfc5f074f83ac811873dc06fd5c62bc9a4729fd2e27a40341a",url="https://github.com/thkukuk/libnsl/releases/download/v2.0.0/libnsl-2.0.0.tar.xz"}
+ed={hash="db36da85ee1a9d8bafb4b041bd4c8c11becba0c43ec446353b67045de1634fda",url="https://ftp.gnu.org/gnu/ed/ed-1.4.tar.gz"}
+help2man={hash="9e2e0e213a7e0a36244eed6204d902b6504602a578b6ecd15268b1454deadd36",url="https://ftp.gnu.org/gnu/help2man/help2man-1.49.2.tar.xz"}
+groff={hash="e78e7b4cb7dec310849004fa88847c44701e8d133b5d4c13057d876c1bad0293",url="https://ftp.gnu.org/gnu/groff/groff-1.22.4.tar.gz",flags={"PAGE=letter"}}
+libtool={hash="7c87a8c2c8c0fc9cd5019e402bed4292462d00a718a7cd5f11218153bf28b26f",url="https://ftp.gnu.org/gnu/libtool/libtool-2.4.6.tar.xz"}
+intltool={hash="67c74d94196b153b774ab9f89b2fa6c6ba79352407037c8c14d5aeb334e959cd",url="https://launchpad.net/intltool/trunk/0.51.0/+download/intltool-0.51.0.tar.gz"}
+sysvinit={hash="68b11a4772cdacce5fb65a4cbead324a2ce3999d138b4ff61dc2d59e57ef5793",url="https://download.savannah.gnu.org/releases/sysvinit/sysvinit-3.01.tar.xz",flags={"ROOT=$destdir"}}
+gzip={hash="5b4fb14d38314e09f2fc8a1c510e7cd540a3ea0e3eb9b0420046b82c3bf41085",url="https://ftp.gnu.org/gnu/gzip/gzip-1.12.tar.gz"}
+fcron={hash="6114d0a39a32853669c0c0ba0f96d92920e7cabca3ff1edf37d25750403e5f6a",url="http://fcron.free.fr/archives/fcron-3.2.1.src.tar.gz",flags={"--without-sendmail"}}
+mold={hash="394036d299c50f936ff77ce9c6cf44a5b24bfcabf65ae7db9679f89c11a70b3f",url="https://github.com/rui314/mold/archive/refs/tags/v1.4.1.tar.gz"}
+db={hash="e0a992d740709892e81f9d93f06daf305cf73fb81b545afe72478043172c3628",url="https://download.oracle.com/berkeley-db/db-5.3.28.tar.gz",flags={"--enable-compat185","--enable-dbm","--enable-cxx"}}
+gdbm={hash="74b1081d21fff13ae4bd7c16e5d6e504a4c26f7cde1dca0d963a484174bbcacd",url="https://ftp.gnu.org/gnu/gdbm/gdbm-1.23.tar.gz"}
+sqlite={hash="1935751066c2fd447404caa78cfb8b2b701fad3f6b1cf40b3d658440f6cc7563",url="https://sqlite.org/2022/sqlite-autoconf-3380400.tar.gz"}
+libgpg-error={hash="570f8ee4fb4bff7b7495cff920c275002aea2147e9a1d220c068213267f80a26",url="https://gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-1.45.tar.bz2"}
+libgcrypt={hash="ef14ae546b0084cd84259f61a55e07a38c3b53afc0f546bffcef2f01baffe9de",url="https://gnupg.org/ftp/gcrypt/libgcrypt/libgcrypt-1.10.1.tar.bz2"}
+libksba={hash="dad683e6f2d915d880aa4bed5cea9a115690b8935b78a1bbe01669189307a48b",url="https://gnupg.org/ftp/gcrypt/libksba/libksba-1.6.0.tar.bz2"}
+libassuan={hash="8e8c2fcc982f9ca67dcbb1d95e2dc746b1739a4668bc20b3a3c5be632edb34e4",url="https://gnupg.org/ftp/gcrypt/libassuan/libassuan-2.5.5.tar.bz2"}
+ntbtls={hash="8922181fef523b77b71625e562e4d69532278eabbd18bc74579dbe14135729ba",url="https://gnupg.org/ftp/gcrypt/ntbtls/ntbtls-0.3.1.tar.bz2"}
+npth={hash="1393abd9adcf0762d34798dc34fdcf4d0d22a8410721e76f1e3afcd1daa4e2d1",url="https://gnupg.org/ftp/gcrypt/npth/npth-1.6.tar.bz2"}
+pinentry={hash="10072045a3e043d0581f91cd5676fcac7ffee957a16636adedaa4f583a616470",url="https://gnupg.org/ftp/gcrypt/pinentry/pinentry-1.2.0.tar.bz2"}
+gnupg={hash="21f7fe2fc5c2f214184ab050977ec7a8e304e58bfae2ab098fec69f8fabda9c1",url="https://gnupg.org/ftp/gcrypt/gnupg/gnupg-2.3.6.tar.bz2"}
+ostree={hash="914c4d993bc111d7dd30ae9721b6ffe8ab56eb1fd6e81b097b09f400cc1b053f",url="https://github.com/ostreedev/ostree/releases/download/v2022.5/libostree-2022.5.tar.xz"}
+appstream={hash="829b8e62a4c857ff37948b089ee1524a86e9ae8cf963d2204cca0b204deb2060",url="https://github.com/ximion/appstream/archive/refs/tags/v0.15.5.tar.gz",flags={"-Dstemming=false"}}
+flatpak={hash="8e276973770ea24ddf2597ad4aecd36b98393e6bde91e48e1743aaca67f27815",url="https://github.com/flatpak/flatpak/releases/download/1.14.0/flatpak-1.14.0.tar.xz"}
+bwrap={hash="16fdaf33799d63104e347e0133f909196fe90d0c50515d010bcb422eb5a00818",url="https://github.com/projectatomic/bubblewrap/releases/download/v0.5.0/bubblewrap-0.5.0.tar.xz"}
+libportal={hash="d8c8cb18a34e5eeb26a39c94044c955995b01de0e139caac5e18c076cf821b3b",url="https://github.com/flatpak/libportal/releases/download/0.5/libportal-0.5.tar.xz"}
+ostree={hash="914c4d993bc111d7dd30ae9721b6ffe8ab56eb1fd6e81b097b09f400cc1b053f",url="https://github.com/ostreedev/ostree/releases/download/v2022.5/libostree-2022.5.tar.xz"}
+portal-gtk={hash="f621210716a9cf821d969eecb1df1e3e46fc687b87f7add83300d35321594954",url="https://github.com/flatpak/xdg-desktop-portal-gtk/releases/download/1.14.0/xdg-desktop-portal-gtk-1.14.0.tar.xz"}
+portal={hash="f2e589972c0af78f2ba92ac222ebc9b9e1499bc9017aaa00041567caed950de0",url="https://github.com/flatpak/xdg-desktop-portal/releases/download/1.14.6/xdg-desktop-portal-1.14.6.tar.xz"}
+doas={hash="4e98828056d6266bd8f2c93e6ecf12a63a71dbfd70a5ea99ccd4ab6d0745adf0",url="https://github.com/Duncaen/OpenDoas/releases/download/v6.8.2/opendoas-6.8.2.tar.xz"}
+bsdtar={hash="df283917799cb88659a5b33c0a598f04352d61936abcd8a48fe7b64e74950de7",url="https://github.com/libarchive/libarchive/releases/download/v3.6.0/libarchive-3.6.0.tar.xz"}
+iwd={hash="71533fe3b8f6381f24832198ba11d00f04a361454770c173b3b66bc3cdf272bd",url="https://mirrors.edge.kernel.org/pub/linux/network/wireless/iwd-1.29.tar.xz",flags={"--disable-systemd-service","LIBS=-lncursesw"}}
+lzo={hash="c0f892943208266f9b6543b3ae308fab6284c5c90e627931446fb49b4221a072",url="https://oberhumer.com/opensource/lzo/download/lzo-2.10.tar.gz",flags={"--enable-shared"}}
+btrfs-progs={hash="9e9b303a1d0fd9ceaaf204ee74c1c8fa1fd55794e223d9fe2bc62875ecbd53d2",url="https://kernel.org/pub/linux/kernel/people/kdave/btrfs-progs/btrfs-progs-v5.16.2.tar.xz",flags={"--disable-documentation"}}

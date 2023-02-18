@@ -1,122 +1,111 @@
-# python modules:
-# mako, libevdev, pyudev
-
-# libs
-freetype2=(4766f20157 CONFIGURE)
-fontconfig=(f655dd2a98 CONFIGURE)
-libdrm=(eecee4c4b4 MESON)
-libpng=(505e70834d CONFIGURE)
-pixman=(6d200dec37 MESON)
-cairo=(74b24c1ed4 MESON -Dspectre=disabled)
-libtirpc=(e24eb88b8c CONFIGURE --disable-gssapi)
-libepoxy=(d168a19a6e MESON)
-mtdev=(15d7b28da8 CONFIGURE)
-
-libgudev=(0d06b21170 MESON)
-libwacom=(b900899589 MESON)
-
-# xorg
-util-macros=(0f812e6e9d CONFIGURE)
-xorgproto=(aa2f663b8d MESON)
-libxau=(ccf8cbf0db CONFIGURE)
-libxdmcp=(20523b44aa CONFIGURE)
-xcbproto=(f04add9a97 CONFIGURE)
-libxcb=(a55ed6db98 CONFIGURE)
-xtrans=(377c449159 CONFIGURE)
-libx11=(2ffd417266 CONFIGURE)
-libxext=(59ad6fcce9 CONFIGURE)
-libfs=(c8e1372714 CONFIGURE)
-libice=(6f86dce12c CONFIGURE)
-libsm=(2d264499dc CONFIGURE)
-libxscrnsaver=(f917075a1b CONFIGURE)
-libxt=(679cc08f16 CONFIGURE)
-libxmu=(9c343225e7 CONFIGURE)
-libxpm=(9cd1da5758 CONFIGURE)
-libxaw=(76aef98ea3 CONFIGURE)
-libxfixes=(a7c1a24da5 CONFIGURE)
-libxcomposite=(b3218a2c15 CONFIGURE)
-libxrender=(c06d5979f8 CONFIGURE)
-libxcursor=(3ad3e9f825 CONFIGURE)
-libxdamage=(b734068643 CONFIGURE)
-libfontenc=(2cfcce810d CONFIGURE)
-libxfont2=(aa7c6f211c CONFIGURE)
-libxft=(57dedaab20 CONFIGURE)
-libxi=(2ed181446a CONFIGURE)
-libxinerama=(0008dbd7ec CONFIGURE)
-libxrandr=(8aea0ebe40 CONFIGURE)
-libxres=(b6e6fb1ebb CONFIGURE)
-libxtst=(4655498a1b CONFIGURE)
-libxv=(d26c13eac9 CONFIGURE)
-libxvmc=(6b3da7977b CONFIGURE)
-libxxf86dga=(2b98bc5f50 CONFIGURE)
-libxxf86vm=(afee27f93c CONFIGURE)
-libdmx=(253f90005d CONFIGURE)
-libpciaccess=(214c9d0d88 CONFIGURE)
-libxkbfile=(758dbdaa20 CONFIGURE)
-libxshmfence=(b884300d26 CONFIGURE)
-libxcvt=(27ebce180d MESON)
-xcb-util=(46e49469cb CONFIGURE)
-xcb-util-image=(2db96a37d7 CONFIGURE)
-xcb-util-keysyms=(0ef8490ff1 CONFIGURE)
-xcb-util-renderutil=(c6e97e48fb CONFIGURE)
-xcb-util-wm=(28bf817964 CONFIGURE)
-xcb-util-cursor=(05a10a0706 CONFIGURE)
-mesa=(da838eb2cf MESON -Ddri-drivers=i965 -Dgallium-drivers=crocus,iris,r600,svga,virgl -Dgallium-nine=false -Dglx=dri -Dvalgrind=disabled -Dlibunwind=disabled -Dvulkan-drivers=amd,intel -Dplatforms=x11 -Dllvm=disabled)
-xbitmaps=(b9f0c71563 CONFIGURE)
-iceauth=(e6ee213a21 CONFIGURE)
-luit=(30b0e787cb CONFIGURE)
-mkfontscale=(ca0495eb97 CONFIGURE)
-sessreg=(dfcb9e9542 CONFIGURE)
-setxkbmap=(8ff2748644 CONFIGURE)
-smproxy=(6cf19155a2 CONFIGURE)
-x11perf=(1c7e0b8ffc CONFIGURE)
-xauth=(164ea0a291 CONFIGURE)
-xbacklight=(3a27f32477 CONFIGURE)
-xcmsdb=(e5585361bb CONFIGURE)
-xcursorgen=(35b6f844b2 CONFIGURE)
-xdpyinfo=(30238ed915 CONFIGURE)
-xdriinfo=(d9ccd2c3e8 CONFIGURE)
-xev=(d700e08bfe CONFIGURE)
-xgamma=(0ef1c35b5c CONFIGURE)
-xhost=(a2dc3c579e CONFIGURE)
-xinput=(35a281dd3b CONFIGURE)
-xkbcomp=(6851086c42 CONFIGURE)
-xkbevd=(2430a2e530 CONFIGURE)
-xkbutils=(d2a18ab902 CONFIGURE)
-xkill=(c5f0bb6a95 CONFIGURE)
-xlsatoms=(57868f958c CONFIGURE)
-xlsclients=(773f2af49c CONFIGURE)
-xmessage=(373dfb81e7 CONFIGURE)
-xmodmap=(473f0941d7 CONFIGURE)
-xpr=(b936e0f1f8 CONFIGURE)
-xprop=(9b92ed0316 CONFIGURE)
-xrandr=(7bc76daf9d CONFIGURE)
-xrdb=(4f5d031c21 CONFIGURE)
-xrefresh=(287dfb9bb7 CONFIGURE)
-xset=(e4fd95280d CONFIGURE)
-xsetroot=(10c442ba23 CONFIGURE)
-xvinfo=(0353220d66 CONFIGURE)
-xwd=(fbaa2b3416 CONFIGURE)
-xwininfo=(7a405441df CONFIGURE)
-xwud=(99997051f8 CONFIGURE)
-xorg-font-util=(3ad8804441 CONFIGURE)
-xorg-fonts-encodings=(bd96e16143 CONFIGURE)
-xorg-fonts-alias=(f3111ae8bf CONFIGURE)
-xkeyboard-config=(18ce50ff0c MESON)
-xorg-server=(5cc4be8ee4 MESON)
-xinit=(de9b8f617b CONFIGURE)
-
-# drivers
-libevdev=(2f729e3480 CONFIGURE)
-xf86-input-evdev=(8726073e81 CONFIGURE)
-libinput=(3cae78ccde MESON -Ddebug-gui=false -Dtests=false)
-xf86-input-libinput=(8151db5b9d CONFIGURE)
-xf86-input-synaptics=(7af83526ef CONFIGURE)
-xf86-input-wacom=(14c9262bb0 CONFIGURE)
-libva=(fad383f39f CONFIGURE)
-intel-vaapi-driver=(e3b0c44298 CONFIGURE)
-libvdpau=(e3b0c44298 MESON)
-libvdpau-va-gl=(26d66bc1d9 CMAKE)
-
-# misc
-libxkbcommon=(106cec5263 MESON -Denable-wayland=false)
+freetype2={hash="4766f20157cc4cf0cd292f80bf917f92d1c439b243ac3018debf6b9140c41a7f",url="http://downloads.sourceforge.net/freetype/freetype-2.12.1.tar.xz"}
+fontconfig={hash="f655dd2a986d7aa97e052261b36aa67b0a64989496361eca8d604e6414006741",url="https://freedesktop.org/software/fontconfig/release/fontconfig-2.13.1.tar.bz2"}
+libdrm={hash="eecee4c4b47ed6d6ce1a9be3d6d92102548ea35e442282216d47d05293cf9737",url="https://dri.freedesktop.org/libdrm/libdrm-2.4.110.tar.xz"}
+libpng={hash="505e70834d35383537b6491e7ae8641f1a4bed1876dbfe361201fc80868d88ca",url="https://downloads.sourceforge.net/libpng/libpng-1.6.37.tar.xz"}
+pixman={hash="6d200dec3740d9ec4ec8d1180e25779c00bc749f94278c8b9021f5534db223fc",url="https://cairographics.org/releases/pixman-0.40.0.tar.gz"}
+cairo={hash="74b24c1ed436bbe87499179a3b27c43f4143b8676d8ad237a6fa787401959705",url="https://cairographics.org/snapshots/cairo-1.17.4.tar.xz",flags={"-Dspectre=disabled"}}
+libtirpc={hash="e24eb88b8ce7db3b7ca6eb80115dd1284abc5ec32a8deccfed2224fc2532b9fd",url="https://downloads.sourceforge.net/libtirpc/libtirpc-1.3.2.tar.bz2",flags={"--disable-gssapi"}}
+libepoxy={hash="d168a19a6edfdd9977fef1308ccf516079856a4275cf876de688fb7927e365e4",url="https://github.com/anholt/libepoxy/releases/download/1.5.9/libepoxy-1.5.9.tar.xz"}
+mtdev={hash="15d7b28da8ac71d8bc8c9287c2045fd174267bc740bec10cfda332dc1204e0e0",url="https://bitmath.org/code/mtdev/mtdev-1.1.6.tar.bz2"}
+libgudev={hash="0d06b21170d20c93e4f0534dbb9b0a8b4f1119ffb00b4031aaeb5b9148b686aa",url="https://download.gnome.org/sources/libgudev/237/libgudev-237.tar.xz"}
+libwacom={hash="b900899589c4c1f83e6671a2383a3437cfa70c3a275cb266bddbbc6c4eaf71a2",url="https://github.com/linuxwacom/libwacom/releases/download/libwacom-2.1.0/libwacom-2.1.0.tar.xz"}
+util-macros={hash="0f812e6e9d2786ba8f54b960ee563c0663ddbe2434bf24ff193f5feab1f31971",url="https://x.org/pub/individual/util/util-macros-1.19.3.tar.bz2"}
+xorgproto={hash="aa2f663b8dbd632960b24f7477aa07d901210057f6ab1a1db5158732569ca015",url="https://xorg.freedesktop.org/archive/individual/proto/xorgproto-2021.5.tar.bz2"}
+libxau={hash="ccf8cbf0dbf676faa2ea0a6d64bcc3b6746064722b606c8c52917ed00dcb73ec",url="https://x.org/pub/individual/lib/libXau-1.0.9.tar.bz2"}
+libxdmcp={hash="20523b44aaa513e17c009e873ad7bbc301507a3224c232610ce2e099011c6529",url="https://x.org/pub/individual/lib/libXdmcp-1.1.3.tar.bz2"}
+xcbproto={hash="f04add9a972ac334ea11d9d7eb4fc7f8883835da3e4859c9afa971efdf57fcc3",url="https://xorg.freedesktop.org/archive/individual/proto/xcb-proto-1.14.1.tar.xz"}
+libxcb={hash="a55ed6db98d43469801262d81dc2572ed124edc3db31059d4e9916eb9f844c34",url="https://xorg.freedesktop.org/archive/individual/lib/libxcb-1.14.tar.xz"}
+xtrans={hash="377c4491593c417946efcd2c7600d1e62639f7a8bbca391887e2c4679807d773",url="https://x.org/pub/individual/lib/xtrans-1.4.0.tar.bz2"}
+libx11={hash="2ffd417266fb875028fdc0ef349694f63dbcd76d0b0cfacfb52e6151f4b60989",url="https://x.org/pub/individual/lib/libX11-1.7.3.1.tar.xz"}
+libxext={hash="59ad6fcce98deaecc14d39a672cf218ca37aba617c9a0f691cac3bcd28edf82b",url="https://x.org/pub/individual/lib/libXext-1.3.4.tar.bz2"}
+libfs={hash="c8e13727149b2ddfe40912027459b2522042e3844c5cd228c3300fe5eef6bd0f",url="https://x.org/pub/individual/lib/libFS-1.0.8.tar.bz2"}
+libice={hash="6f86dce12cf4bcaf5c37dddd8b1b64ed2ddf1ef7b218f22b9942595fb747c348",url="https://x.org/pub/individual/lib/libICE-1.0.10.tar.bz2"}
+libsm={hash="2d264499dcb05f56438dee12a1b4b71d76736ce7ba7aa6efbf15ebb113769cbb",url="https://x.org/pub/individual/lib/libSM-1.2.3.tar.bz2"}
+libxscrnsaver={hash="f917075a1b7b5a38d67a8b0238eaab14acd2557679835b154cf2bca576e89bf8",url="https://x.org/pub/individual/lib/libXScrnSaver-1.2.3.tar.bz2"}
+libxt={hash="679cc08f1646dbd27f5e48ffe8dd49406102937109130caab02ca32c083a3d60",url="https://x.org/pub/individual/lib/libXt-1.2.1.tar.bz2"}
+libxmu={hash="9c343225e7c3dc0904f2122b562278da5fed639b1b5e880d25111561bac5b731",url="https://x.org/pub/individual/lib/libXmu-1.1.3.tar.bz2"}
+libxpm={hash="9cd1da57588b6cb71450eff2273ef6b657537a9ac4d02d0014228845b935ac25",url="https://x.org/pub/individual/lib/libXpm-3.5.13.tar.bz2"}
+libxaw={hash="76aef98ea3df92615faec28004b5ce4e5c6855e716fa16de40c32030722a6f8e",url="https://x.org/pub/individual/lib/libXaw-1.0.14.tar.bz2"}
+libxfixes={hash="a7c1a24da53e0b46cac5aea79094b4b2257321c621b258729bc3139149245b4c",url="https://x.org/pub/individual/lib/libXfixes-6.0.0.tar.bz2"}
+libxcomposite={hash="b3218a2c15bab8035d16810df5b8251ffc7132ff3aa70651a1fba0bfe9634e8f",url="https://x.org/pub/individual/lib/libXcomposite-0.4.5.tar.bz2"}
+libxrender={hash="c06d5979f86e64cabbde57c223938db0b939dff49fdb5a793a1d3d0396650949",url="https://x.org/pub/individual/lib/libXrender-0.9.10.tar.bz2"}
+libxcursor={hash="3ad3e9f8251094af6fe8cb4afcf63e28df504d46bfa5a5529db74a505d628782",url="https://x.org/pub/individual/lib/libXcursor-1.2.0.tar.bz2"}
+libxdamage={hash="b734068643cac3b5f3d2c8279dd366b5bf28c7219d9e9d8717e1383995e0ea45",url="https://x.org/pub/individual/lib/libXdamage-1.1.5.tar.bz2"}
+libfontenc={hash="2cfcce810ddd48f2e5dc658d28c1808e86dcf303eaff16728b9aa3dbc0092079",url="https://x.org/pub/individual/lib/libfontenc-1.1.4.tar.bz2"}
+libxfont2={hash="aa7c6f211cf7215c0ab4819ed893dc98034363d7b930b844bb43603c2e10b53e",url="https://x.org/pub/individual/lib/libXfont2-2.0.5.tar.bz2"}
+libxft={hash="57dedaab20914002146bdae0cb0c769ba3f75214c4c91bd2613d6ef79fc9abdd",url="https://x.org/pub/individual/lib/libXft-2.3.4.tar.bz2"}
+libxi={hash="2ed181446a61c7337576467870bc5336fc9e222a281122d96c4d39a3298bba00",url="https://x.org/pub/individual/lib/libXi-1.8.tar.bz2"}
+libxinerama={hash="0008dbd7ecf717e1e507eed1856ab0d9cf946d03201b85d5dcf61489bb02d720",url="https://x.org/pub/individual/lib/libXinerama-1.1.4.tar.bz2"}
+libxrandr={hash="8aea0ebe403d62330bb741ed595b53741acf45033d3bda1792f1d4cc3daee023",url="https://x.org/pub/individual/lib/libXrandr-1.5.2.tar.bz2"}
+libxres={hash="b6e6fb1ebb61610e56017edd928fb89a5f53b3f4f990078309877468663b2b11",url="https://x.org/pub/individual/lib/libXres-1.2.1.tar.bz2"}
+libxtst={hash="4655498a1b8e844e3d6f21f3b2c4e2b571effb5fd83199d428a6ba7ea4bf5204",url="https://x.org/pub/individual/lib/libXtst-1.2.3.tar.bz2"}
+libxv={hash="d26c13eac99ac4504c532e8e76a1c8e4bd526471eb8a0a4ff2a88db60cb0b088",url="https://x.org/pub/individual/lib/libXv-1.0.11.tar.bz2"}
+libxvmc={hash="6b3da7977b3f7eaf4f0ac6470ab1e562298d82c4e79077765787963ab7966dcd",url="https://x.org/pub/individual/lib/libXvMC-1.0.12.tar.bz2"}
+libxxf86dga={hash="2b98bc5f506c6140d4eddd3990842d30f5dae733b64f198a504f07461bdb7203",url="https://x.org/pub/individual/lib/libXxf86dga-1.1.5.tar.bz2"}
+libxxf86vm={hash="afee27f93c5f31c0ad582852c0fb36d50e4de7cd585fcf655e278a633d85cd57",url="https://x.org/pub/individual/lib/libXxf86vm-1.1.4.tar.bz2"}
+libdmx={hash="253f90005d134fa7a209fbcbc5a3024335367c930adf0f3203e754cf32747243",url="https://x.org/pub/individual/lib/libdmx-1.1.4.tar.bz2"}
+libpciaccess={hash="214c9d0d884fdd7375ec8da8dcb91a8d3169f263294c9a90c575bf1938b9f489",url="https://x.org/pub/individual/lib/libpciaccess-0.16.tar.bz2"}
+libxkbfile={hash="758dbdaa20add2db4902df0b1b7c936564b7376c02a0acd1f2a331bd334b38c7",url="https://x.org/pub/individual/lib/libxkbfile-1.1.0.tar.bz2"}
+libxshmfence={hash="b884300d26a14961a076fbebc762a39831cb75f92bed5ccf9836345b459220c7",url="https://x.org/pub/individual/lib/libxshmfence-1.3.tar.bz2"}
+libxcvt={hash="27ebce180d355f94c1992930bedb40a36f6d7312ee50bf7f0acbcd22f33e8c29",url="https://x.org/pub/individual/lib/libxcvt-0.1.1.tar.xz"}
+xcb-util={hash="46e49469cb3b594af1d33176cd7565def2be3fa8be4371d62271fabb5eae50e9",url="https://xcb.freedesktop.org/dist/xcb-util-0.4.0.tar.bz2"}
+xcb-util-image={hash="2db96a37d78831d643538dd1b595d7d712e04bdccf8896a5e18ce0f398ea2ffc",url="https://xcb.freedesktop.org/dist/xcb-util-image-0.4.0.tar.bz2"}
+xcb-util-keysyms={hash="0ef8490ff1dede52b7de533158547f8b454b241aa3e4dcca369507f66f216dd9",url="https://xcb.freedesktop.org/dist/xcb-util-keysyms-0.4.0.tar.bz2"}
+xcb-util-renderutil={hash="c6e97e48fb1286d6394dddb1c1732f00227c70bd1bedb7d1acabefdd340bea5b",url="https://xcb.freedesktop.org/dist/xcb-util-renderutil-0.3.9.tar.bz2"}
+xcb-util-wm={hash="28bf8179640eaa89276d2b0f1ce4285103d136be6c98262b6151aaee1d3c2a3f",url="https://xcb.freedesktop.org/dist/xcb-util-wm-0.4.1.tar.bz2"}
+xcb-util-cursor={hash="05a10a0706a1a789a078be297b5fb663f66a71fb7f7f1b99658264c35926394f",url="https://xcb.freedesktop.org/dist/xcb-util-cursor-0.1.3.tar.bz2"}
+mesa={hash="da838eb2cf11d0e08d0e9944f6bd4d96987fdc59ea2856f8c70a31a82b355d89",url="https://mesa.freedesktop.org/archive/mesa-22.1.7.tar.xz",flags={"-Ddri-drivers=i965","-Dgallium-drivers=crocus,iris,r600,svga,virgl","-Dgallium-nine=false","-Dglx=dri","-Dvalgrind=disabled","-Dlibunwind=disabled","-Dvulkan-drivers=amd,intel","-Dplatforms=x11","-Dllvm=disabled"}}
+xbitmaps={hash="b9f0c71563125937776c8f1f25174ae9685314cbd130fb4c2efce811981e07ee",url="https://x.org/pub/individual/data/xbitmaps-1.1.2.tar.bz2"}
+iceauth={hash="e6ee213a217265cc76050e4293ea70b98c32dce6505c6421227efbda62ab60c6",url="https://x.org/pub/individual/app/iceauth-1.0.8.tar.bz2"}
+luit={hash="30b0e787cb07a0f504b70f1d6123930522111ce9d4276f6683a69b322b49c636",url="https://x.org/pub/individual/app/luit-1.1.1.tar.bz2"}
+mkfontscale={hash="ca0495eb974a179dd742bfa6199d561bda1c8da4a0c5a667f21fd82aaab6bac7",url="https://x.org/pub/individual/app/mkfontscale-1.2.1.tar.bz2"}
+sessreg={hash="dfcb9e954273ace63879aec053c7880466f8755752a35aa9ced3fa5f04fd2c33",url="https://x.org/pub/individual/app/sessreg-1.1.2.tar.bz2"}
+setxkbmap={hash="8ff27486442725e50b02d7049152f51d125ecad71b7ce503cfa09d5d8ceeb9f5",url="https://x.org/pub/individual/app/setxkbmap-1.3.2.tar.bz2"}
+smproxy={hash="6cf19155a2752237f36dbf8bc4184465ea190d2652f887faccb4e2a6ebf77266",url="https://x.org/pub/individual/app/smproxy-1.0.6.tar.bz2"}
+x11perf={hash="1c7e0b8ffc2794b4ccf11e04d551823abe0ea47b4f7db0637390db6fbe817c34",url="https://x.org/pub/individual/app/x11perf-1.6.1.tar.bz2"}
+xauth={hash="164ea0a29137b284a47b886ef2affcb0a74733bf3aad04f9b106b1a6c82ebd92",url="https://x.org/pub/individual/app/xauth-1.1.1.tar.bz2"}
+xbacklight={hash="3a27f324777ae99fee476cfb2f064576fb8cba4eb77f97cda37adda1c1d39ade",url="https://x.org/pub/individual/app/xbacklight-1.2.3.tar.bz2"}
+xcmsdb={hash="e5585361bb8b6a05bb814a8d0e444ee93e0f00180881d3070aff4571e97f67c6",url="https://x.org/pub/individual/app/xcmsdb-1.0.5.tar.bz2"}
+xcursorgen={hash="35b6f844b24f1776e9006c880a745728800764dbe3b327a128772b4610d8eb3d",url="https://x.org/pub/individual/app/xcursorgen-1.0.7.tar.bz2"}
+xdpyinfo={hash="30238ed915619e06ceb41721e5f747d67320555cc38d459e954839c189ccaf51",url="https://x.org/pub/individual/app/xdpyinfo-1.3.2.tar.bz2"}
+xdriinfo={hash="d9ccd2c3e87899417acc9ea1f3e319a4198112babe1dc711273584f607449d51",url="https://x.org/pub/individual/app/xdriinfo-1.0.6.tar.bz2"}
+xev={hash="d700e08bfe751ed2dbf802baa204b056d0e49348b6eb3c6f9cb035d8ae4885e2",url="https://x.org/pub/individual/app/xev-1.2.4.tar.bz2"}
+xgamma={hash="0ef1c35b5c18b1b22317f455c8df13c0a471a8efad63c89c98ae3ce8c2b222d3",url="https://x.org/pub/individual/app/xgamma-1.0.6.tar.bz2"}
+xhost={hash="a2dc3c579e13674947395ef8ccc1b3763f89012a216c2cc6277096489aadc396",url="https://x.org/pub/individual/app/xhost-1.0.8.tar.bz2"}
+xinput={hash="35a281dd3b9b22ea85e39869bb7670ba78955d5fec17c6ef7165d61e5aeb66ed",url="https://x.org/pub/individual/app/xinput-1.6.3.tar.bz2"}
+xkbcomp={hash="6851086c4244b6fd0cc562880d8ff193fb2bbf1e141c73632e10731b31d4b05e",url="https://x.org/pub/individual/app/xkbcomp-1.4.5.tar.bz2"}
+xkbevd={hash="2430a2e5302a4cb4a5530c1df8cb3721a149bbf8eb377a2898921a145197f96a",url="https://x.org/pub/individual/app/xkbevd-1.1.4.tar.bz2"}
+xkbutils={hash="d2a18ab90275e8bca028773c44264d2266dab70853db4321bdbc18da75148130",url="https://x.org/pub/individual/app/xkbutils-1.0.4.tar.bz2"}
+xkill={hash="c5f0bb6a95e1ac7c4def8a657496d5d2f21ccd41eb47ef2c9ccb03fb6d6aff6b",url="https://x.org/pub/individual/app/xkill-1.0.5.tar.bz2"}
+xlsatoms={hash="57868f958c263976727881f3078e55b86b4a109dc578d2b92f5c6d690850a382",url="https://x.org/pub/individual/app/xlsatoms-1.1.3.tar.bz2"}
+xlsclients={hash="773f2af49c7ea2c44fba4213bee64325875c1b3c9bc4bbcd8dac9261751809c1",url="https://x.org/pub/individual/app/xlsclients-1.1.4.tar.bz2"}
+xmessage={hash="373dfb81e7a6f06d3d22485a12fcde6e255d58c6dee1bbaeb00c7d0caa9b2029",url="https://x.org/pub/individual/app/xmessage-1.0.5.tar.bz2"}
+xmodmap={hash="473f0941d7439d501bb895ff358832b936ec34c749b9704c37a15e11c318487c",url="https://x.org/pub/individual/app/xmodmap-1.0.10.tar.bz2"}
+xpr={hash="b936e0f1f8d63f5ad097a0bbdce2e67c34f5d49b7263f32a832ff62d394d1e1f",url="https://x.org/pub/individual/app/xpr-1.0.5.tar.bz2"}
+xprop={hash="9b92ed0316bf2486121d8bac88bd1878f16b43bd335f18009b1f941f1eca93a1",url="https://x.org/pub/individual/app/xprop-1.2.5.tar.bz2"}
+xrandr={hash="7bc76daf9d72f8aff885efad04ce06b90488a1a169d118dea8a2b661832e8762",url="https://x.org/pub/individual/app/xrandr-1.5.1.tar.xz"}
+xrdb={hash="4f5d031c214ffb88a42ae7528492abde1178f5146351ceb3c05f3b8d5abee8b4",url="https://x.org/pub/individual/app/xrdb-1.2.1.tar.bz2"}
+xrefresh={hash="287dfb9bb7e8d780d07e672e3252150850869cb550958ed5f8401f0835cd6353",url="https://x.org/pub/individual/app/xrefresh-1.0.6.tar.bz2"}
+xset={hash="e4fd95280df52a88e9b0abc1fee11dcf0f34fc24041b9f45a247e52df941c957",url="https://x.org/pub/individual/app/xset-1.2.4.tar.bz2"}
+xsetroot={hash="10c442ba23591fb5470cea477a0aa5f679371f4f879c8387a1d9d05637ae417c",url="https://x.org/pub/individual/app/xsetroot-1.1.2.tar.bz2"}
+xvinfo={hash="0353220d6606077ba42363db65f50410759f9815352f77adc799e2adfa76e73f",url="https://x.org/pub/individual/app/xvinfo-1.1.4.tar.bz2"}
+xwd={hash="fbaa2b34163714fe7be22b60920ea4683f63b355babb1781aec2e452a033031b",url="https://x.org/pub/individual/app/xwd-1.0.8.tar.bz2"}
+xwininfo={hash="7a405441dfc476666c744f5fcd1bc8a75abf8b5b1d85db7b88b370982365080e",url="https://x.org/pub/individual/app/xwininfo-1.1.5.tar.bz2"}
+xwud={hash="99997051f8a892313f22edf41dab45864e86e7062ee9012d5dbb6a40fc6b10a9",url="https://x.org/pub/individual/app/xwud-1.0.5.tar.bz2"}
+xorg-font-util={hash="3ad880444123ac06a7238546fa38a2a6ad7f7e0cc3614de7e103863616522282",url="https://x.org/pub/individual/font/font-util-1.3.2.tar.bz2"}
+xorg-fonts-encodings={hash="bd96e16143a044b19e87f217cf6a3763a70c561d1076aad6f6d862ec41774a31",url="https://x.org/pub/individual/font/encodings-1.0.5.tar.bz2"}
+xorg-fonts-alias={hash="f3111ae8bf2e980f5f56af400e8eefe5fc9f4207f4a412ea79637fd66c945276",url="https://x.org/pub/individual/font/font-alias-1.0.4.tar.bz2"}
+xkeyboard-config={hash="18ce50ff0c74ae6093062bce1aeab3d363913ea35162fe271f8a0ce399de85cc",url="https://x.org/pub/individual/data/xkeyboard-config/xkeyboard-config-2.35.1.tar.xz"}
+xorg-server={hash="5cc4be8ee47edb58d4a90e603a59d56b40291ad38371b0bd2471fc3cbee1c587",url="https://x.org/archive/individual/xserver/xorg-server-21.1.4.tar.xz"}
+xinit={hash="de9b8f617b68a70f6caf87da01fcf0ebd2b75690cdcba9c921d0ef54fa54abb9",url="https://x.org/pub/individual/app/xinit-1.4.1.tar.bz2"}
+libevdev={hash="2f729e3480695791f9482e8388bd723402b89f0eaf118057bbdea3cecee9b237",url="https://freedesktop.org/software/libevdev/libevdev-1.12.0.tar.xz"}
+xf86-input-evdev={hash="8726073e81861bc7b2321e76272cbdbd33c7e1a121535a9827977265b9033ec0",url="https://x.org/pub/individual/driver/xf86-input-evdev-2.10.6.tar.bz2"}
+libinput={hash="3cae78ccde19d7d0f387e58bc734d4d17ab5f6426f54a9e8b728c90b17baa068",url="https://freedesktop.org/software/libinput/libinput-1.19.3.tar.xz",flags={"-Ddebug-gui=false","-Dtests=false"}}
+xf86-input-libinput={hash="8151db5b9ddb317c0ce92dcb62da9a8db5079e5b8a95b60abc854da21e7e971b",url="https://x.org/pub/individual/driver/xf86-input-libinput-1.2.1.tar.xz"}
+xf86-input-synaptics={hash="7af83526eff1c76e8b9e1553b34245c203d029028d8044dd9dcf71eef1001576",url="https://x.org/pub/individual/driver/xf86-input-synaptics-1.9.1.tar.bz2"}
+xf86-input-wacom={hash="14c9262bb090ee92ff73d3447b4ae85a06564a15f44e01962473708636def252",url="https://github.com/linuxwacom/xf86-input-wacom/releases/download/xf86-input-wacom-1.0.0/xf86-input-wacom-1.0.0.tar.bz2"}
+libva={hash="fad383f39f36115814bd0eda1496a4cc01761643bd962635400df2d4470ad460",url="https://github.com/intel/libva/releases/download/2.13.0/libva-2.13.0.tar.bz2"}
+intel-vaapi-driver={hash="0081fce08eb3a83f7d99c3b853c8fdfa0af437b8f5b0fb7c66faeb83bcbe0c19",url="https://github.com/intel/intel-vaapi-driver/releases/download/2.4.1/intel-vaapi-driver-2.4.1.tar.bz2"}
+-- libvdpau={build="meson"}
+libvdpau-va-gl={hash="26d66bc1d91bcef5030c1284815c7336e6fdb1845f79e9b6c4a28d56eb4714e9",url="https://github.com/i-rinat/libvdpau-va-gl/archive/v0.4.0/libvdpau-va-gl-0.4.0.tar.gz"}
+-- libxkbcommon={build="meson", flags={"-Denable-wayland=false"}}
