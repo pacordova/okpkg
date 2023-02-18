@@ -1,13 +1,16 @@
 local bld = require "build"
 
-local source_date_epoch = 1000000000
-local arch   = "-x86_64.tar.xz"
-local databases = {
+source_date_epoch = 1000000000
+arch   = "-x86_64.tar.xz"
+srcdir   = "/usr/firepkg/sources"
+destdir  = "/usr/firepkg/packages"
+patchdir = "/usr/firepkg/patches"
+
+databases = {
     "/usr/firepkg/db/base.db",
     "/usr/firepkg/db/misc.db",
-    "/usr/firepkg/db/xfce.db"
+    "/usr/firepkg/db/xfce.db",
 }
-
 
 local function execute(cmd)
     local fd = io.popen(table.concat(cmd, " "))
@@ -61,6 +64,7 @@ local function vlook(pkgname)
                 load(line:gsub(key, "arr="))()
                 fd:close()
                 if arr.flags == nil then arr.flags = {}; end
+                arr.name = pkgname
                 return arr
             end
         end
@@ -69,9 +73,9 @@ end
 
 local function download(pkgname)
     local pkg       = vlook(pkgname)
-    local archive  =  pkg.url:gsub("^.*/", "") 
-    local patchfile = "/usr/firepkg/patches/" .. pkgname .. ".diff"
-    local srcdir    = "/usr/firepkg/sources/" .. pkgname
+    local archive   = pkg.url:gsub("^.*/", "") 
+    local patchfile = patchdir .. "/" .. pkgname .. ".diff"
+    local srcdir    = srcdir .. "/" .. pkgname
 
     execute {
         "/usr/bin/curl",
@@ -118,10 +122,10 @@ local function download(pkgname)
 end
 
 local function build(pkgname)
-    local srcdir    = "/usr/firepkg/sources/" .. pkgname
-    local destdir   = "/usr/firepkg/packages" .. pkgname
-    local pkg       = vlook(pkgname)
-    local basename  = pkg.url:gsub("^.*/", "") 
+    local pkg      = vlook(pkgname)
+    local srcdir   = srcdir  .. "/" .. pkgname
+    local destdir  = destdir .. "/" .. pkgname
+    local basename = pkg.url:gsub("^.*/", "") 
 
     
     -- clean and recreate destdir
@@ -133,7 +137,7 @@ local function build(pkgname)
 
     local pkgname = destdir .. version .. arch
 
-    bld[pkg.build]({srcdir, destdir}, pkg)
+    bld[pkg.build](pkg)
     execute {
         "/usr/firepkg/scripts/makepkg",
         destdir
@@ -148,7 +152,7 @@ local function build(pkgname)
 end
 
 local function install(pkg)
-    local basename = file:gsub("^.*/", "")
+    local basename = pkg:gsub("^.*/", "")
     local version  = basename:match("[._/-][.0-9-]*[0-9][a-z]?")
 
     if version == nil then 
