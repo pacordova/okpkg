@@ -1,13 +1,23 @@
 local bld = require "build"
 
 local source_date_epoch = 1000000000
-local root   = "/"
 local arch   = "-x86_64.tar.xz"
 local databases = {
     "/usr/firepkg/db/base.db"
 }
 
-function tempdir(pkgname) 
+
+local function execute(cmd)
+    local fd = io.popen(table.concat(cmd, " "))
+    local stdout = {}
+    for line in fd:lines() do
+        table.insert(stdout, line)
+    end
+    fd:close()
+    return stdout 
+end
+
+local function tmp(pkgname) 
     if pkgname == nil then
         pkgname = ""
     end
@@ -26,14 +36,6 @@ local function extract(directory, strip, file)
     end
     fd:close()
     return arr
-end
-
-local function patch(file, directory)
-    local fd = io.open(file)
-    if (fd ~= nil) then
-        fd:close()
-        os.execute("patch -d " .. directory .. " -p1 <" .. file)
-    end
 end
 
 local function checksum(file, hash)
@@ -58,7 +60,7 @@ local function checksum(file, hash)
 end
 
 local function vlook(pkgname)
-    srcdir, destdir = tempdir(pkgname)
+    srcdir, destdir = tmp(pkgname)
     local key = "^" .. pkgname .. "="
     for i, db in ipairs(databases) do
         local fd = io.open(db, "r")
@@ -75,33 +77,81 @@ end
 
 local function download(pkgname)
     local pkg       = vlook(pkgname)
-    local basename  = pkg.url:gsub("^.*/", "") 
+    local archive  = pkg.url:gsub("^.*/", "") 
     local patchfile = "/usr/firepkg/patches/" .. pkgname .. ".diff"
     local srcdir    = "/usr/firepkg/sources/" .. pkgname
 
-    os.execute("curl -LO " .. pkg.url)
+    execute {
+        "/usr/bin/curl",
+        "--location",
+        "--remote-name",
+        pkg.url
+    }
 
-    if not checksum(basename, pkg.hash) then
+    if not checksum(archive, pkg.hash) then
         return -1
     end
 
-    os.execute("rm -r " .. srcdir .. " 2>/dev/null")
-    os.execute("mkdir -p " .. srcdir)
+    -- clean and recreate srcdir
+    execute {
+        "/usr/bin/rm",
+        "--recursive",
+        srcdir
+    }
+    execute {
+        "/usr/bin/mkdir",
+        "--parents",
+        srcdir,
+    }
 
-    extract(srcdir, 1, basename)    
-    patch(patchfile, srcdir)
-    os.execute("rm -r " .. basename .. " 2>/dev/null")
+    -- extract downloaded source to srcdir 
+    execute {
+        "/usr/bin/tar",
+        "--directory=" .. srcdir,
+        "--strip-components=1",
+        "--extract",
+        "--file=" .. archive 
+    }
 
+    -- if there is a patch, patch it up
+    local fd = io.open(patchfile)
+    if (fd ~= nil) then
+        fd:close()
+        execute {
+            "/usr/bin/patch",
+            "--directory=" .. dir,
+            "--strip=1",
+            "--input=" .. patchfile
+        }
+    end
+
+    -- remove the downloaded archive
+    execute {
+        "/usr/bin/rm",
+        "--recursive",
+        archive,
+        "2>/dev/null"
+    }
 end
 
 local function build(pkgname)
-    srcdir, destdir = tempdir(pkgname)
+    srcdir, destdir = tmp(pkgname)
     local pkg       = vlook(pkgname)
     local basename  = pkg.url:gsub("^.*/", "") 
 
     
-    os.execute("rm -r " .. destdir .. " 2>/dev/null")
-    os.execute("mkdir -p " .. destdir)
+    -- clean and recreate destdir
+    execute {
+        "/usr/bin/rm",
+        "--recursive",
+        destdir,
+        "2>/dev/null"
+    }
+    execute {
+        "/usr/bin/mkdir",
+        "--parents",
+        destdir
+    }
 
 
     local version = 
@@ -110,13 +160,20 @@ local function build(pkgname)
     local pkgname = destdir .. version .. arch
 
     bld[pkg.build]({srcdir, destdir}, pkg)
-    os.execute("/usr/firepkg/scripts/makepkg " .. destdir)
-    os.execute("mv " .. destdir .. ".tar.xz " .. pkgname)
+    execute {
+        "/usr/firepkg/scripts/makepkg",
+        destdir
+    }
+    execute {
+        "/usr/bin/mv",
+        destdir .. ".tar.xz",
+        pkgname
+    }
 
     return pkgname
 end
 
-local function install(file)
+local function install(pkg)
     local basename = file:gsub("^.*/", "")
     local version  = basename:match("[._/-][.0-9-]*[0-9][a-z]?")
 
@@ -134,8 +191,19 @@ local function install(file)
     fd:write("rm -r '/usr/firepkg/packages/" .. pkgname .. "' 2>/dev/null\n")
     fd:write("rm -d '" .. uninstaller .. "' 2>/dev/null\n")
 
-    for i, line in ipairs(extract(root, 0, file)) do
-        fd:write("rm -d '" .. root .. line .. "' 2>/dev/null\n")
+    -- install to root
+    local index = execute {
+        "/usr/bin/tar",
+        "--directory=/",
+        "--strip-components=0",
+        "--extract",
+        "--verbose",
+        "--file=" .. pkg
+    }
+
+    -- write the uninstall script
+    for i, line in ipairs(index) do
+        fd:write("rm -d '/" .. line .. "' 2>/dev/null\n")
     end
 
     fd:close()
