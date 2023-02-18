@@ -118,12 +118,16 @@ local function meson(pkg)
     local pkgname = pkg.name
     local srcdir  = srcdir  .. "/" .. pkgname
     local destdir = destdir .. "/" .. pkgname
+    local builddir = srcdir .. "/" .. "build"
 
     local flags = {
         "-Dprefix=/usr",
         "-Dbuildtype=release",
         unpack(pkg.flags)
     }
+
+    cleandir(builddir)
+
 
     -- run meson
     execute {

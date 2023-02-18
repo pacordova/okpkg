@@ -27,7 +27,7 @@ end
 -- clean and recreate dir
 function cleandir(dir)
     execute {
-        "rm -r " .. dir .. " 2>/dev/null &&",
+        "rm -r " .. dir .. " 2>/dev/null;",
         "mkdir -p " .. dir
     }
 end
