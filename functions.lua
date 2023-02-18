@@ -3,7 +3,9 @@ local bld = require "build"
 local source_date_epoch = 1000000000
 local arch   = "-x86_64.tar.xz"
 local databases = {
-    "/usr/firepkg/db/base.db"
+    "/usr/firepkg/db/base.db",
+    "/usr/firepkg/db/misc.db",
+    "/usr/firepkg/db/xfce.db"
 }
 
 
@@ -61,7 +63,7 @@ end
 
 local function download(pkgname)
     local pkg       = vlook(pkgname)
-    local archive  = pkg.url:gsub("^.*/", "") 
+    local archive  =  pkg.url:gsub("^.*/", "") 
     local patchfile = "/usr/firepkg/patches/" .. pkgname .. ".diff"
     local srcdir    = "/usr/firepkg/sources/" .. pkgname
 
