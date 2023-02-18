@@ -12,7 +12,9 @@ databases = {
     "/usr/firepkg/db/xfce.db",
 }
 
-local function execute(cmd)
+unpack = table.unpack
+
+function execute(cmd)
     local fd = io.popen(table.concat(cmd, " "))
     local stdout = {}
     for line in fd:lines() do
@@ -23,26 +25,21 @@ local function execute(cmd)
 end
 
 -- clean and recreate dir
-local function cleandir(dir)
+function cleandir(dir)
     execute {
-        "/usr/bin/rm",
-        "--recursive",
-        dir
+        "rm -r " .. dir .. " 2>/dev/null &&",
+        "mkdir -p " .. dir
     }
-    execute {
-        "/usr/bin/mkdir",
-        "--parents",
-        dir
-    }
+end
+
+function chdir(dir)       
+    return "cd " .. dir .. " && "
 end
 
 local function checksum(file, hash)
     local basename  = file:gsub("^.*/", "") 
 
-    local arr = execute {
-        "/usr/bin/sha256sum",
-        file
-    }
+    local arr = execute{"sha256sum " .. file}
 
     verify = arr[1]:gsub(" .*$", "") == hash
 
@@ -101,9 +98,9 @@ local function download(pkgname)
     }
 
     -- if there is a patch, patch it up
-    local fd = io.open(patchfile)
-    if (fd ~= nil) then
-        fd:close()
+    local patch = io.open(patchfile)
+    if (patch ~= nil) then
+        patch:close()
         execute {
             "/usr/bin/patch",
             "--directory=" .. dir,
@@ -113,12 +110,7 @@ local function download(pkgname)
     end
 
     -- remove the downloaded archive
-    execute {
-        "/usr/bin/rm",
-        "--recursive",
-        archive,
-        "2>/dev/null"
-    }
+    execute{"rm -r "..archive.." 2>/dev/null"}
 end
 
 local function build(pkgname)
@@ -126,7 +118,6 @@ local function build(pkgname)
     local srcdir   = srcdir  .. "/" .. pkgname
     local destdir  = destdir .. "/" .. pkgname
     local basename = pkg.url:gsub("^.*/", "") 
-
     
     -- clean and recreate destdir
     cleandir(destdir)
@@ -138,16 +129,8 @@ local function build(pkgname)
     local pkgname = destdir .. version .. arch
 
     bld[pkg.build](pkg)
-    execute {
-        "/usr/firepkg/scripts/makepkg",
-        destdir
-    }
-    execute {
-        "/usr/bin/mv",
-        destdir .. ".tar.xz",
-        pkgname
-    }
-
+    execute{"/usr/firepkg/scripts/makepkg "..destdir}
+    execute{"mv "..destdir..".tar.xz "..pkgname}
     return pkgname
 end
 
@@ -186,7 +169,7 @@ local function install(pkg)
 
     fd:close()
 
-    os.execute("chmod +x " .. uninstaller)
+    execute{"chmod +x " .. uninstaller}
 end
 
 local function uninstall(pkgname)
@@ -195,7 +178,7 @@ local function uninstall(pkgname)
     local fd = io.open(uninstaller)
     if (fd ~= nil) then
         fd:close()
-        os.execute("sh " .. uninstaller)
+        execute{"sh " .. uninstaller}
     end
 end
 

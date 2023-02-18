@@ -1,39 +1,3 @@
-unpack = table.unpack
-concat = table.concat
-
-source_date_epoch = 1000000000
-arch   = "-x86_64.tar.xz"
-srcdir   = "/usr/firepkg/sources"
-destdir  = "/usr/firepkg/packages"
-patchdir = "/usr/firepkg/patches"
-
-local function execute(cmd)
-    local fd = io.popen(table.concat(cmd, " "))
-    local stdout = {}
-    for line in fd:lines() do
-        table.insert(stdout, line)
-    end
-    fd:close()
-    return stdout 
-end
-
-local function cleandir(dir)
-    execute {
-        "/usr/bin/rm",
-        "--recursive",
-        dir
-    }
-    execute {
-        "/usr/bin/mkdir",
-        "--parents",
-        dir
-    }
-end
-
-local function chdir(dir)       
-    return "cd " .. dir .. " && "
-end
-
 local function make(pkg)
     local pkgname = pkg.name
     local srcdir  = srcdir   .. "/" .. pkgname
