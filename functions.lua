@@ -24,20 +24,6 @@ local function tmp(pkgname)
     return "/usr/firepkg/sources/" .. pkgname, "/usr/firepkg/packages/" .. pkgname
 end
 
-local function extract(directory, strip, file)
-    local fd = io.popen(
-        "tar -C " .. directory .. " " ..
-        "--strip-components=" .. strip .. " " ..
-        "-xvf " .. file
-    )
-    local arr = {}
-    for line in fd:lines() do
-        table.insert(arr, line)	
-    end
-    fd:close()
-    return arr
-end
-
 local function checksum(file, hash)
     local basename  = file:gsub("^.*/", "") 
 
