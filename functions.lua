@@ -1,20 +1,38 @@
 local bld = require "build"
 
-source_date_epoch = 1000000000
+unpack = table.unpack
+
 arch   = "-x86_64.tar.xz"
 srcdir   = "/usr/firepkg/sources"
 destdir  = "/usr/firepkg/packages"
 patchdir = "/usr/firepkg/patches"
 
-databases = {
-    "/usr/firepkg/db/base.db",
+source_date_epoch = os.time(os.date("!*t")) % 100000 * 100000
+
+databases = { "/usr/firepkg/db/base.db",
     "/usr/firepkg/db/misc.db",
     "/usr/firepkg/db/xfce.db",
 }
 
-unpack = table.unpack
+env = {
+    CC="/usr/bin/gcc"
+    CXX="/usr/bin/g++"
+    CFLAGS="-march=x86-64 -mavx -Os -fstack-protector-strong -fcommon -pipe",
+    CXXFLAGS="-march=x86-64 -mavx -Os -fstack-protector-strong -fcommon -pipe",
+    SOURCE_DATE_EPOCH=source_date_epoch,
+    KBUILD_BUILD_TIMESTAMP=source_date_epoch,
+    LC_ALL="en_US.UTF-8",
+}
 
-function execute(cmd)
+function printenv()
+    str = ""
+    for k,v in pairs(env) do
+        str = str..k.."=".."'"..v.."' "
+    end
+    return str
+end
+        
+function exec(cmd)
     local fd = io.popen(table.concat(cmd, " "))
     local output = {}
     for line in fd:lines() do
@@ -27,7 +45,7 @@ end
 
 -- clean and recreate dir
 function cleandir(dir)
-    execute {
+    exec {
         "rm -r " .. dir .. " 2>/dev/null;",
         "mkdir -p " .. dir
     }
@@ -40,7 +58,7 @@ end
 local function checksum(file, hash)
     local basename  = file:gsub("^.*/", "") 
 
-    local arr = execute{"sha256sum " .. file}
+    local arr = exec{"sha256sum " .. file}
 
     verify = arr[1]:gsub(" .*$", "") == hash
 
@@ -75,7 +93,7 @@ local function download(pkgname)
     local patchfile = patchdir .. "/" .. pkgname .. ".diff"
     local srcdir    = srcdir .. "/" .. pkgname
 
-    execute {
+    exec {
         "/usr/bin/curl",
         "--location",
         "--remote-name",
@@ -90,7 +108,7 @@ local function download(pkgname)
     cleandir(srcdir)
 
     -- extract downloaded source to srcdir 
-    execute {
+    exec {
         "/usr/bin/tar",
         "--directory=" .. srcdir,
         "--strip-components=1",
@@ -102,7 +120,7 @@ local function download(pkgname)
     local patch = io.open(patchfile)
     if (patch ~= nil) then
         patch:close()
-        execute {
+        exec {
             "/usr/bin/patch",
             "--directory=" .. dir,
             "--strip=1",
@@ -111,7 +129,7 @@ local function download(pkgname)
     end
 
     -- remove the downloaded archive
-    execute{"rm -r "..archive.." 2>/dev/null"}
+    exec{"rm -r "..archive.." 2>/dev/null"}
 end
 
 local function build(pkgname)
@@ -130,8 +148,8 @@ local function build(pkgname)
     local pkgname = destdir .. version .. arch
 
     bld[pkg.build](pkg)
-    execute{"/usr/firepkg/scripts/makepkg "..destdir}
-    execute{"mv "..destdir..".tar.xz "..pkgname}
+    exec{"/usr/firepkg/scripts/makepkg "..destdir}
+    exec{"mv "..destdir..".tar.xz "..pkgname}
     return pkgname
 end
 
@@ -154,7 +172,7 @@ local function install(pkg)
     fd:write("rm -d '" .. uninstaller .. "' 2>/dev/null\n")
 
     -- install to root
-    local index = execute {
+    local index = exec {
         "/usr/bin/tar",
         "--directory=/",
         "--strip-components=0",
@@ -165,12 +183,12 @@ local function install(pkg)
 
     -- write the uninstall script
     for i, line in ipairs(index) do
-        fd:write("rm -d '/" .. line .. "' 2>/dev/null\n")
+        fd:write("rm -d '" .. line:gsub("^.", "") .. "' 2>/dev/null\n")
     end
 
     fd:close()
 
-    execute{"chmod +x " .. uninstaller}
+    exec{"chmod +x " .. uninstaller}
 end
 
 local function uninstall(pkgname)
@@ -179,7 +197,7 @@ local function uninstall(pkgname)
     local fd = io.open(uninstaller)
     if (fd ~= nil) then
         fd:close()
-        execute{"sh " .. uninstaller}
+        exec{"sh " .. uninstaller}
     end
 end
 

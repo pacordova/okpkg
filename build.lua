@@ -4,7 +4,7 @@ local function make(pkg)
     local destdir = destdir  .. "/" .. pkgname
     local flags = { unpack(pkg.flags) }
 
-    execute {
+    exec {
         "/usr/bin/make",
         "--directory=" .. srcdir,
         unpack(flags),
@@ -37,7 +37,7 @@ local function configure(pkg)
         unpack(pkg.flags)
     }
 
-    execute {
+    exec {
         chdir(srcdir),
         "./configure",
         unpack(flags)
@@ -68,8 +68,9 @@ local function configure2(pkg)
 
     cleandir(builddir)
 
-    execute {
+    exec {
         chdir(builddir),
+        printenv(),
         "../configure",
         unpack(flags)
     }
@@ -88,7 +89,7 @@ local function autoreconf(pkg)
         local cmd = "autoreconf -fi -I m4"
     end
 
-    execute{chdir(srcdir),cmd}
+    exec{chdir(srcdir),cmd}
 
     configure(pkg)
 end
@@ -106,8 +107,9 @@ local function cmake(pkg)
 
     cleandir(builddir)
 
-    execute {
+    exec {
         chdir(builddir),
+        printenv(),
         "/usr/bin/cmake",
         unpack(flags)
     }
@@ -130,7 +132,7 @@ local function meson(pkg)
 
 
     -- run meson
-    execute {
+    exec {
         chdir(srcdir),
         "/usr/bin/meson",
         "build",
@@ -138,8 +140,9 @@ local function meson(pkg)
     }
 
     -- run ninja
-    execute {
+    exec {
         chdir(srcdir),
+        printenv(),
         "DESTDIR=" .. destdir,
         "/usr/bin/ninja",
         "-C build",
@@ -155,7 +158,9 @@ local function scons(pkg)
         "DESTDIR=" .. destdir,
         unpack(pkg.flags)
     }
-    execute {
+    exec {
+        chdir(srcdir),
+        printenv(),
         "scons",
         unpack(flags),
         "install"
@@ -166,8 +171,9 @@ local function waf(pkg)
     local pkgname = pkg.name
     local srcdir  = srcdir   .. "/" .. pkgname
     local destdir = destdir  .. "/" .. pkgname
-    execute {
+    exec {
         chdir(srcdir),
+        printenv(),
         "python3 bootstrap.py &&",
         "python3 waf configure --prefix=/usr &&",
         "python3 waf &&",
@@ -183,8 +189,9 @@ local function qmake(pkg)
         "INSTALL_ROOT=" .. destdir,
         unpack(pkg.flags)
     }
-    execute {
+    exec {
         chdir(srcdir),
+        printenv(),
         "/usr/bin/qmake",
         "-makefile"
     }
