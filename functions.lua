@@ -15,9 +15,9 @@ databases = { "/usr/firepkg/db/base.db",
 }
 
 env = {
-    CC="/usr/bin/gcc"
-    CXX="/usr/bin/g++"
-    CFLAGS="-march=x86-64 -mavx -Os -fstack-protector-strong -fcommon -pipe",
+    cc="/usr/bin/gcc",
+    cxx="/usr/bin/g++",
+    cflags="-march=x86-64 -mavx -Os -fstack-protector-strong -fcommon -pipe",
     CXXFLAGS="-march=x86-64 -mavx -Os -fstack-protector-strong -fcommon -pipe",
     SOURCE_DATE_EPOCH=source_date_epoch,
     KBUILD_BUILD_TIMESTAMP=source_date_epoch,

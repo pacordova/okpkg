@@ -5,12 +5,11 @@ local function make(pkg)
     local flags = { unpack(pkg.flags) }
 
     exec {
-        "/usr/bin/make",
+        "make",
         "--directory=" .. srcdir,
         unpack(flags),
         "&&",
-        "/usr/bin/make",
-        "install",
+        "make install",
         "--directory=" .. srcdir,
         unpack(flags),
         "DESTDIR=" .. destdir
@@ -40,10 +39,11 @@ local function configure(pkg)
     exec {
         chdir(srcdir),
         "./configure",
-        unpack(flags)
+        unpack(flags),
+        "CFLAGS='" .. env.cflags .. "'",
     }
 
-    make{}
+    make{name=pkgname, flags={""}}
 end
 
 local function configure2(pkg)
