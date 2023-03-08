@@ -185,7 +185,7 @@ local function install(pkg)
 
     -- write the uninstall script
     for i, line in ipairs(index) do
-        fd:write("rm -d '" .. line:gsub("^.", "") .. "' 2>/dev/null\n")
+        fd:write("rm -d '" .. line .. "' 2>/dev/null\n")
     end
 
     fd:close()
