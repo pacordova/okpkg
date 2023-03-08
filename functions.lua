@@ -9,8 +9,10 @@ patchdir = "/usr/firepkg/patches"
 
 source_date_epoch = os.time(os.date("!*t")) % 100000 * 100000
 
-databases = { "/usr/firepkg/db/base.db",
+databases = { 
+    "/usr/firepkg/db/base.db",
     "/usr/firepkg/db/misc.db",
+    "/usr/firepkg/db/dev.db",
     "/usr/firepkg/db/xfce.db",
 }
 
