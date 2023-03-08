@@ -3,9 +3,9 @@
 . /usr/firepkg/make.conf
 
 # vars
-src='https://download.documentfoundation.org/libreoffice/stable/7.4.2/deb/x86_64/LibreOffice_7.4.2_Linux_x86-64_deb.tar.gz'
+src='https://download.documentfoundation.org/libreoffice/stable/7.5.1/deb/x86_64/LibreOffice_7.5.1_Linux_x86-64_deb.tar.gz'
 basename=`{basename $src .tar.gz}
-destdir=/usr/firepkg/packages/libreoffice7.4
+destdir=/usr/firepkg/packages/libreoffice7.5
 
 # setup destdir
 rm -r $destdir >[2=]
@@ -24,9 +24,9 @@ mkdir usr/bin
 echo copying files...
 find DEBS -name '*.deb' -exec ar x '{}' data.tar.xz ';' -exec tar -xf data.tar.xz ';'
 mv opt usr/lib64
-ln -sf /usr/lib64/libreoffice7.4/program/soffice usr/bin/libreoffice7.4
+ln -sf /usr/lib64/libreoffice7.5/program/soffice usr/bin/libreoffice7.5
 rm -r usr/share/applications &&
-    mv usr/lib64/libreoffice7.4/share/xdg usr/share/applications
+    mv usr/lib64/libreoffice7.5/share/xdg usr/share/applications
 
 echo cleanup...
 rm -r DEBS 
