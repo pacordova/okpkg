@@ -5,8 +5,7 @@ install: linux.so
 	install -D main.lua ${PREFIX}/bin/firepkg
 
 linux.so: linux.c
-	gcc -shared -fPIC -fcommon -c linux.c -llua
-	gcc -shared -o linux.so linux.o
+	gcc -shared -o linux.so -fPIC -fcommon -llua linux.c
 
 clean:
 	rm linux.o linux.so ${PREFIX}/bin/firepkg
