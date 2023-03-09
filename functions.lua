@@ -1,13 +1,23 @@
-local bld = require "build"
+local build = require "build"
+local linux = require "linux"
 
 unpack = table.unpack
+chdir = linux.chdir
+setenv = linux.setenv
+
+source_date_epoch = os.time(os.date("!*t")) % 100000 * 100000
+setenv("CC", "/usr/bin/gcc", 1)
+setenv("CXX", "/usr/bin/g++", 1)
+setenv("CFLAGS", "-march=x86-64 -mavx -Os -fstack-protector-strong -fcommon -pipe", 1)
+setenv("CXXFLAGS", "-march=x86-64 -mavx -Os -fstack-protector-strong -fcommon -pipe", 1)
+setenv("SOURCE_DATE_EPOCH", source_date_epoch, 1)
+setenv("KBUILD_BUILD_TIMESTAMP", source_date_epoch, 1)
+setenv("LC_ALL", "en_US.UTF-8", 1)
 
 arch   = "-x86_64.tar.xz"
 srcdir   = "/usr/firepkg/sources"
 destdir  = "/usr/firepkg/packages"
 patchdir = "/usr/firepkg/patches"
-
-source_date_epoch = os.time(os.date("!*t")) % 100000 * 100000
 
 databases = { 
     "/usr/firepkg/db/base.db",
@@ -15,24 +25,6 @@ databases = {
     "/usr/firepkg/db/dev.db",
     "/usr/firepkg/db/xfce.db",
 }
-
-env = {
-    cc="/usr/bin/gcc",
-    cxx="/usr/bin/g++",
-    cflags="-march=x86-64 -mavx -Os -fstack-protector-strong -fcommon -pipe",
-    CXXFLAGS="-march=x86-64 -mavx -Os -fstack-protector-strong -fcommon -pipe",
-    SOURCE_DATE_EPOCH=source_date_epoch,
-    KBUILD_BUILD_TIMESTAMP=source_date_epoch,
-    LC_ALL="en_US.UTF-8",
-}
-
-function printenv()
-    str = ""
-    for k,v in pairs(env) do
-        str = str..k.."=".."'"..v.."' "
-    end
-    return str
-end
         
 function exec(cmd)
     local fd = io.popen(table.concat(cmd, " "))
@@ -46,15 +38,11 @@ function exec(cmd)
 end
 
 -- clean and recreate dir
-function cleandir(dir)
+function makedir(dir)
     exec {
         "rm -r " .. dir .. " 2>/dev/null;",
         "mkdir -p " .. dir
     }
-end
-
-function chdir(dir)       
-    return "cd " .. dir .. " && "
 end
 
 local function checksum(file, hash)
@@ -107,7 +95,7 @@ local function download(pkgname)
     end
 
     -- clean and recreate srcdir
-    cleandir(srcdir)
+    makedir(srcdir)
 
     -- extract downloaded source to srcdir 
     exec {
@@ -141,7 +129,7 @@ local function build(pkgname)
     local basename = pkg.url:gsub("^.*/", "") 
     
     -- clean and recreate destdir
-    cleandir(destdir)
+    makedir(destdir)
 
 
     local version = 
@@ -149,7 +137,8 @@ local function build(pkgname)
 
     local pkgname = destdir .. version .. arch
 
-    bld[pkg.build](pkg)
+    chdir(srcdir)
+    build[pkg.build](pkg)
     exec{"/usr/firepkg/scripts/makepkg "..destdir}
     exec{"mv "..destdir..".tar.xz "..pkgname}
     return pkgname

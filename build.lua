@@ -38,7 +38,6 @@ local function configure(pkg)
     }
 
     exec {
-        chdir(srcdir),
         "./configure",
         unpack(flags),
         "CFLAGS='" .. env.cflags .. "'",
@@ -50,7 +49,6 @@ end
 local function configure2(pkg)
     local pkgname =  pkg.name
     local srcdir  =  srcdir  .. "/" .. pkgname
-    local builddir = srcdir  .. "/" .. "build"
     local dirflags = pkg.dirflags
 
     if dirflags == nil then
@@ -67,11 +65,10 @@ local function configure2(pkg)
         unpack(pkg.flags)
     }
 
-    cleandir(builddir)
+    makedir("build")
+    chdir("build")
 
     exec {
-        chdir(builddir),
-        printenv(),
         "../configure",
         unpack(flags)
     }
@@ -85,12 +82,17 @@ local function autoreconf(pkg)
 
     if (autogen ~= nil) then
         fd:close()
-        local cmd = "./autogen.sh"
+        exec {
+            "./autogen.sh"
+        }
     else
-        local cmd = "autoreconf -fi -I m4"
+        exec { 
+            "/usr/bin/autoreconf",
+            "--force",
+            "--install",
+            "--include=m4" 
+        }
     end
-
-    exec{chdir(srcdir),cmd}
 
     configure(pkg)
 end
@@ -98,7 +100,6 @@ end
 local function cmake(pkg)
     local pkgname = pkg.name
     local srcdir   = srcdir .. "/" .. pkgname
-    local builddir = srcdir .. "/" .. "build"
 
     local flags = {
         "-DCMAKE_INSTALL_PREFIX=/usr",
@@ -106,12 +107,11 @@ local function cmake(pkg)
         unpack(pkg.flags)
     }
 
-    cleandir(builddir)
+    makedir("build")
 
     exec {
-        chdir(builddir),
-        printenv(),
         "/usr/bin/cmake",
+        "-B build"
         unpack(flags)
     }
     make{}
@@ -121,7 +121,6 @@ local function meson(pkg)
     local pkgname = pkg.name
     local srcdir  = srcdir  .. "/" .. pkgname
     local destdir = destdir .. "/" .. pkgname
-    local builddir = srcdir .. "/" .. "build"
 
     local flags = {
         "-Dprefix=/usr",
@@ -129,12 +128,11 @@ local function meson(pkg)
         unpack(pkg.flags)
     }
 
-    cleandir(builddir)
+    makedir("build")
 
 
     -- run meson
     exec {
-        chdir(srcdir),
         "/usr/bin/meson",
         "build",
         unpack(flags)
@@ -142,8 +140,6 @@ local function meson(pkg)
 
     -- run ninja
     exec {
-        chdir(srcdir),
-        printenv(),
         "DESTDIR=" .. destdir,
         "/usr/bin/ninja",
         "-C build",
@@ -160,8 +156,6 @@ local function scons(pkg)
         unpack(pkg.flags)
     }
     exec {
-        chdir(srcdir),
-        printenv(),
         "scons",
         unpack(flags),
         "install"
@@ -173,8 +167,6 @@ local function waf(pkg)
     local srcdir  = srcdir   .. "/" .. pkgname
     local destdir = destdir  .. "/" .. pkgname
     exec {
-        chdir(srcdir),
-        printenv(),
         "python3 bootstrap.py &&",
         "python3 waf configure --prefix=/usr &&",
         "python3 waf &&",
@@ -191,8 +183,6 @@ local function qmake(pkg)
         unpack(pkg.flags)
     }
     exec {
-        chdir(srcdir),
-        printenv(),
         "/usr/bin/qmake",
         "-makefile"
     }
