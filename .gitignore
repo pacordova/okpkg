@@ -5,3 +5,5 @@ sources
 *.xz
 *.tar
 *.swp
+*.o
+*.so
