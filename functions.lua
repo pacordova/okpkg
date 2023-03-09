@@ -1,4 +1,4 @@
-local build = require "build"
+local B = require "build"
 local linux = require "linux"
 
 unpack = table.unpack
@@ -138,7 +138,7 @@ local function build(pkgname)
     local pkgname = destdir .. version .. arch
 
     chdir(srcdir)
-    build[pkg.build](pkg)
+    B[pkg.build](pkg)
     exec{"/usr/firepkg/scripts/makepkg "..destdir}
     exec{"mv "..destdir..".tar.xz "..pkgname}
     return pkgname

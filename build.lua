@@ -108,10 +108,10 @@ local function cmake(pkg)
     }
 
     makedir("build")
+    chdir("build")
 
     exec {
         "/usr/bin/cmake",
-        "-B build"
         unpack(flags)
     }
     make{}
