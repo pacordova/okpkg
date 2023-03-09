@@ -8,4 +8,4 @@ linux.so: linux.c
 	gcc -shared -o linux.so -fPIC -fcommon -llua linux.c
 
 clean:
-	rm linux.o linux.so ${PREFIX}/bin/firepkg
+	rm linux.so ${PREFIX}/bin/firepkg

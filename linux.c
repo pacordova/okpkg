@@ -33,8 +33,6 @@ static const struct luaL_Reg lua_linux [] = {
 int 
 luaopen_linux (lua_State *L) 
 {
-    lua_newtable(L);
-    luaL_setfuncs(L, lua_linux, 0);
-    lua_setglobal(L, "linux");
+    luaL_newlib(L, lua_linux);
     return 1;
 }
