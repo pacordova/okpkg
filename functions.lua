@@ -26,6 +26,7 @@ databases = {
     "/usr/firepkg/db/xfce.db",
 }
         
+-- exec wrapper
 function exec(cmd)
     local fd = io.popen(table.concat(cmd, " "))
     local output = {}
@@ -139,8 +140,20 @@ local function build(pkgname)
 
     chdir(srcdir)
     B[pkg.build](pkg)
-    exec{"/usr/firepkg/scripts/makepkg "..destdir}
-    exec{"mv "..destdir..".tar.xz "..pkgname}
+
+    -- makepkg
+    exec {
+        "/usr/firepkg/scripts/makepkg.lua", 
+        destdir
+    } 
+
+    -- rename
+    exec {
+        "/usr/bin/mv",
+        destdir .. ".tar.xz",
+        pkgname
+    }
+
     return pkgname
 end
 
@@ -174,7 +187,7 @@ local function install(pkg)
 
     -- write the uninstall script
     for i, line in ipairs(index) do
-        fd:write("rm -d '" .. line .. "' 2>/dev/null\n")
+        fd:write("rm -d '/" .. line .. "' 2>/dev/null\n")
     end
 
     fd:close()

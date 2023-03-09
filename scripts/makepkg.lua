@@ -1,60 +1,68 @@
 #!/usr/bin/env lua
 
-package.path = "/usr/firepkg/?.lua;" .. package.path
+current_time = os.time(os.date("!*t"))
+source_date_epoch = current_time - (current_time % 100000)
 
-local firepkg = require "functions"
+directory = arg[1]
 
-local dir = ...
+-- exec wrapper
+function exec(cmd)
+    local fd = io.popen(table.concat(cmd, " "))
+    local output = {}
+    for line in fd:lines() do
+        print(line)
+        table.insert(output, line)
+    end
+    fd:close()
+    return output
+end
 
 -- strip libraries
 exec {
-    chdir(dir),
     "/usr/bin/strip",
     "--strip-debug",
-    "usr/lib64/*",
+    directory .. "/usr/lib64/*",
     "2>/dev/null"
 }
 
 -- strip binaries
 exec {
-    chdir(dir),
     "/usr/bin/strip",
     "--strip-all",
-    "usr/bin/*",
-    "bin/*",
+    directory .. "/usr/bin/*",
+    directory .. "/bin/*",
     "2>/dev/null"
 }
 
 -- delete unneeded directories
 exec {
-    chdir(dir),
     "/usr/bin/rm",
     "--recursive",
-    "usr/share/doc",
-    "usr/doc",
-    "usr/share/info",
+    directory .. "/usr/share/doc",
+    directory .. "/usr/doc",
+    directory .. "/usr/share/info",
     "2>/dev/null"
 }
 
 -- delete pyc files for reproducibility
 exec {
     "/usr/bin/find",
-    dir,
+    directory,
     "-name '*.pyc' -delete",
-    "2>/dev/null"
 }
 
 -- make tarball
 exec {
     "/usr/bin/tar",
-    "--directory="..directory
+    "--directory=" .. directory,
     "--sort=name",
-    "--mtime=@"..source_date_epoch, 
+    "--mtime=@" .. source_date_epoch, 
+    "--transform='s|^..||'",
     "--owner=0",
     "--group=0",
     "--numeric-owner", 
     "--create",
-    "--file="..dir..".tar",
+    "--file=" .. directory .. ".tar",
     "."
 }
 
@@ -63,5 +71,12 @@ exec {
     "/usr/bin/xz",
     "--threads=0",
     "--force",
-    dir..".tar"
+    directory .. ".tar"
+}
+
+-- delete target
+exec {
+    "/usr/bin/rm",
+    "--recursive",
+    directory
 }

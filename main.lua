@@ -1,6 +1,8 @@
 #!/usr/bin/env lua
 
 package.path = "/usr/firepkg/?.lua;" .. package.path
+package.cpath = "/usr/firepkg/?.so;" .. package.cpath
+
 
 local firepkg = require "functions"
 
@@ -14,7 +16,7 @@ local flags = {
     ["-S"] = firepkg.emerge,
     ["download"] = firepkg.download,
     ["build"]    = firepkg.build,
-    ["makepkg"]  = function(arg) os.execute("/usr/firepkg/scripts/makepkg " .. arg); end,
+    ["makepkg"]  = function(arg) os.execute("/usr/firepkg/scripts/makepkg.lua " .. arg); end,
     ["timesync"] = function() os.execute("/usr/firepkg/scripts/timesync"); end,
     ["backup"]   = function() os.execute("/usr/firepkg/scripts/backup.rc"); end,
     ["chroot"]   = function(arg) os.execute("/usr/firepkg/scripts/chroot " .. arg); end,
