@@ -40,7 +40,6 @@ local function configure(pkg)
     exec {
         "./configure",
         unpack(flags),
-        "CFLAGS='" .. env.cflags .. "'",
     }
 
     make{name=pkgname, flags={""}}
