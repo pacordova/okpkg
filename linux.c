@@ -9,7 +9,6 @@ lua_chdir(lua_State *L)
 {
     const char* path = luaL_checkstring(L, 1);
     chdir(path);
-    
     return 0;
 }
 
@@ -20,7 +19,6 @@ lua_setenv(lua_State *L)
     const char* value = luaL_checkstring(L, 2);
     int overwrite = (int) luaL_checknumber(L, 3);
     setenv(name, value, overwrite);
-    
     return 0;
 }
 
