@@ -23,7 +23,6 @@ local function configure(pkg)
 
     if dirflags == nil then
         dirflags = {
-            "--prefix=/usr",
             "--localstatedir=/var",
             "--sysconfdir=/etc",
             "--libdir=/usr/lib64",
@@ -33,6 +32,7 @@ local function configure(pkg)
     end
 
     local flags = {
+        "--prefix=/usr",
         unpack(dirflags),
         unpack(pkg.flags)
     }

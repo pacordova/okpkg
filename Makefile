@@ -1,5 +1,3 @@
-PREFIX=/usr
-
-install:
-	mkdir uninstall packages sources 2>/dev/null || true
-	install -D main.lua ${PREFIX}/bin/firepkg
+all:
+	gcc -shared -fPIC -fcommon -c linux.c -llua
+	gcc -shared -o linux.so linux.o
