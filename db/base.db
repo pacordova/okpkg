@@ -76,7 +76,7 @@ lvm2=(935283a51ee17abd752a545a0ed1cf4edc993359265bc9e562edf81500edc99e https://s
 ncurses=(97fc51ac2b085d4cde31ef4d2c3122c21abc217e9090a43a30fc5ec21684e059 https://invisible-island.net/archives/ncurses/ncurses-6.3.tar.gz CONFIGURE --with-shared --without-cxx --enable-pc-files --enable-widec)
 pcre2=(0f03caf57f81d9ff362ac28cd389c055ec2bf0678d277349a1a4bee00ad6d440 https://github.com/PhilipHazel/pcre2/releases/download/pcre2-10.39/pcre2-10.39.tar.bz2 CONFIGURE --enable-unicode --enable-pcre2-16 --enable-pcre2-32)
 pcre=(4dae6fdcd2bb0bb6c37b5f97c33c2be954da743985369cddac3546e3218bffb8 https://sourceforge.net/projects/pcre/files/pcre/8.45/pcre-8.45.tar.bz2 CONFIGURE --enable-unicode-properties --enable-pcre16 --enable-pcre32)
-popt=(5159bc03a20b28ce363aa96765f37df99ea4d8850b1ece17d1e6ad5c24fdc5d1 https://ftp.rpm.org/popt/releases/popt-1.x/popt-1.18.tar.gz CONFIGURE)
+popt=(5159bc03a20b28ce363aa96765f37df99ea4d8850b1ece17d1e6ad5c24fdc5d1 http://ftp.rpm.org/popt/releases/popt-1.x/popt-1.18.tar.gz CONFIGURE)
 readline=(7589a2381a8419e68654a47623ce7dfcb756815c8fee726b98f90bf668af7bc6 https://ftp.gnu.org/gnu/readline/readline-8.1.2.tar.gz CONFIGURE --with-curses)
 
 # system-software
