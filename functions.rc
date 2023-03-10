@@ -98,21 +98,19 @@ fn _uninstall {
 }
 
 fn _download {
-    srcdir=/usr/firepkg/sources/$1
-    destdir=/usr/firepkg/packages/$1
+    pkgname=$1
+    srcdir=/usr/firepkg/sources/$pkgname
+    destdir=/usr/firepkg/packages/$pkgname
 
-    eval `{cat $db | grep '^'$1=} &&
-        *=$$1
+    eval `{cat $db | grep '^'$1=} && *=$$1
 
-    basename=`{basename $2}
+    >[2=] mkdir -p $srcdir 
 
-    curl -LO $2
+    curl -L $1 |
+        tar -C $srcdir --strip-components=1 -xzf -
 
-    mkdir $srcdir
-    tar -C $srcdir --strip-components=1 -xf $basename 
-
-    if(test -f /usr/firepkg/patches/$1.diff)
-        patch -d $srcdir -p1 </usr/firepkg/patches/$1.diff
+    if(test -f /usr/firepkg/patches/$pkgname.diff)
+        patch -d $srcdir -p1 </usr/firepkg/patches/$pkgname.diff
 
     true
 }

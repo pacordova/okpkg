@@ -126,3 +126,14 @@ glib2=(https://download.gnome.org/sources/glib/2.70/glib-2.70.4.tar.xz MESON -Dt
 libnl3=(https://github.com/thom311/libnl/releases/download/libnl3_7_0/libnl-3.7.0.tar.gz CONFIGURE)
 wpasupplicant=(https://w1.fi/releases/wpa_supplicant-2.10.tar.gz MAKE -C wpa_supplicant)
 connman=(https://kernel.org/pub/linux/network/connman/connman-1.41.tar.xz CONFIGURE --without-systemdunitdir --disable-wispr LIBS=-lncursesw)
+
+# extra
+autoconf=(https://ftp.gnu.org/gnu/autoconf/autoconf-2.69.tar.xz CONFIGURE)
+automake=(https://ftp.gnu.org/gnu/automake/automake-1.15.1.tar.xz CONFIGURE)
+cmake=(https://github.com/Kitware/CMake/releases/download/v3.24.1/cmake-3.24.1.tar.gz CONFIGURE); dirflags=()
+lua=(https://lua.org/ftp/lua-5.4.4.tar.gz MAKE INSTALL_TOP=$destdir$PREFIX INSTALL_LIB=$destdir$LIBDIR INSTALL_CMOD=$destdir$LIBDIR/lua MYCFLAGS=$CFLAGS)
+unzip=(https://downloads.sourceforge.net/infozip/unzip60.tar.gz MAKE --file=unix/Makefile prefix=$destdir/$PREFIX generic)
+zip=(https://downloads.sourceforge.net/infozip/zip30.tar.gz MAKE --file=unix/Makefile prefix=$destdir/$PREFIX generic_gcc)
+htop=(https://github.com/htop-dev/htop/releases/download/3.2.1/htop-3.2.1.tar.xz CONFIGURE)
+nano=(https://ftp.gnu.org/gnu/nano/nano-6.3.tar.xz CONFIGURE)
+rsync=(https://samba.org/ftp/rsync/src/rsync-3.2.3.tar.gz CONFIGURE --disable-lz4 --disable-xxhash --disable-md2man)
