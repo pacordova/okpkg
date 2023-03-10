@@ -13,4 +13,4 @@ cp kernel.config .config
 make -j5 bzImage modules
 make modules_install
 
-cp arch/x86/boot/bzImage /boot/vmlinuz
+cp arch/x86/boot/bzImage /tmp/vmlinuz
