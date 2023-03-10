@@ -76,7 +76,7 @@ lvm2=(935283a51ee17abd752a545a0ed1cf4edc993359265bc9e562edf81500edc99e https://s
 ncurses=(97fc51ac2b085d4cde31ef4d2c3122c21abc217e9090a43a30fc5ec21684e059 https://invisible-island.net/archives/ncurses/ncurses-6.3.tar.gz CONFIGURE --with-shared --without-cxx --enable-pc-files --enable-widec)
 pcre2=(0f03caf57f81d9ff362ac28cd389c055ec2bf0678d277349a1a4bee00ad6d440 https://github.com/PhilipHazel/pcre2/releases/download/pcre2-10.39/pcre2-10.39.tar.bz2 CONFIGURE --enable-unicode --enable-pcre2-16 --enable-pcre2-32)
 pcre=(4dae6fdcd2bb0bb6c37b5f97c33c2be954da743985369cddac3546e3218bffb8 https://sourceforge.net/projects/pcre/files/pcre/8.45/pcre-8.45.tar.bz2 CONFIGURE --enable-unicode-properties --enable-pcre16 --enable-pcre32)
-popt=(5159bc03a20b28ce363aa96765f37df99ea4d8850b1ece17d1e6ad5c24fdc5d1 http://ftp.rpm.org/popt/releases/popt-1.x/popt-1.18.tar.gz CONFIGURE)
+popt=(5159bc03a20b28ce363aa96765f37df99ea4d8850b1ece17d1e6ad5c24fdc5d1 https://ftp.rpm.org/popt/releases/popt-1.x/popt-1.18.tar.gz CONFIGURE)
 readline=(7589a2381a8419e68654a47623ce7dfcb756815c8fee726b98f90bf668af7bc6 https://ftp.gnu.org/gnu/readline/readline-8.1.2.tar.gz CONFIGURE --with-curses)
 
 # system-software
@@ -106,7 +106,7 @@ tcsh=(60be2c504bd8f1fa6e424b1956495d7e7ced52a2ac94db5fd27f4b6bfc8f74f0 https://a
 tmux=(e4fd347843bd0772c4f48d6dde625b0b109b7a380ff15db21e97c11a4dcdf93f https://github.com/tmux/tmux/releases/download/3.3a/tmux-3.3a.tar.gz CONFIGURE)
 tzdata=(067f0f4bee8e509b3eca502c5bd7c8f98073ab49b6c05654a157cbffd07aa3a4 https://github.com/eggert/tz/archive/refs/tags/2022c.tar.gz MAKE)
 usbutils=(3a079cfad60560227b67192482d7813bf96326fcbb66c04254839715f276fc69 https://www.kernel.org/pub/linux/utils/usb/usbutils/usbutils-014.tar.xz 3a079cfad60560227b67192482d7813bf96326fcbb66c04254839715f276fc69 https://www.kernel.org/pub/linux/utils/usb/usbutils/usbutils-014.tar.xz CONFIGURE)
-vim=(a6456bc154999d83d0c20d968ac7ba6e7df0d02f3cb6427fb248660bacfb336e http://ftp.vim.org/pub/vim/unix/vim-9.0.tar.bz2 CONFIGURE)
+vim=(a6456bc154999d83d0c20d968ac7ba6e7df0d02f3cb6427fb248660bacfb336e https://anduin.linuxfromscratch.org/LFS/vim-9.0.1273.tar.xz CONFIGURE)
 which=(f4a245b94124b377d8b49646bf421f9155d36aa7614b6ebf83705d3ffc76eaad https://ftp.gnu.org/gnu/which/which-2.21.tar.gz CONFIGURE)
 xorriso=(3ac155f0ca53e8dbeefacc7f32205a98f4f27d2d348de39ee0183ba8a4c9e392 https://ftp.gnu.org/gnu/xorriso/xorriso-1.5.4.tar.gz CONFIGURE)
 

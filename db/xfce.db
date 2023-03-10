@@ -1,5 +1,5 @@
 # tools
-itstool=(6b9a7cd29a12bb95598f5750e8763cee78836a1a207f85b74d8b3275b27e87ca http://files.itstool.org/itstool/itstool-2.0.7.tar.bz2 CONFIGURE)
+itstool=(6b9a7cd29a12bb95598f5750e8763cee78836a1a207f85b74d8b3275b27e87ca https://files.itstool.org/itstool/itstool-2.0.7.tar.bz2 CONFIGURE)
 
 # xfce
 libxfce4util=(876bdefa2e13cbf68b626b2158892fb93e824e1ef59cf951123a96cefbc8881d https://archive.xfce.org/src/xfce/libxfce4util/4.12/libxfce4util-4.12.1.tar.bz2 CONFIGURE)

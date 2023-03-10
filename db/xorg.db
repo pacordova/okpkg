@@ -2,7 +2,7 @@
 # mako, libevdev, pyudev
 
 # libs
-freetype2=(4766f20157cc4cf0cd292f80bf917f92d1c439b243ac3018debf6b9140c41a7f http://downloads.sourceforge.net/freetype/freetype-2.12.1.tar.xz CONFIGURE)
+freetype2=(4766f20157cc4cf0cd292f80bf917f92d1c439b243ac3018debf6b9140c41a7f https://downloads.sourceforge.net/freetype/freetype-2.12.1.tar.xz CONFIGURE)
 fontconfig=(f655dd2a986d7aa97e052261b36aa67b0a64989496361eca8d604e6414006741 https://freedesktop.org/software/fontconfig/release/fontconfig-2.13.1.tar.bz2 CONFIGURE)
 libdrm=(eecee4c4b47ed6d6ce1a9be3d6d92102548ea35e442282216d47d05293cf9737 https://dri.freedesktop.org/libdrm/libdrm-2.4.110.tar.xz MESON)
 libpng=(505e70834d35383537b6491e7ae8641f1a4bed1876dbfe361201fc80868d88ca https://downloads.sourceforge.net/libpng/libpng-1.6.37.tar.xz CONFIGURE)

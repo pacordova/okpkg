@@ -99,6 +99,7 @@ fn _uninstall {
 
 fn _download {
     srcdir=/usr/firepkg/sources/$1
+    destdir=/usr/firepkg/packages/$1
 
     eval `{cat $db | grep '^'$1=} &&
         *=$$1
@@ -117,7 +118,10 @@ fn _download {
 }
 
 fn _build {
-    cd /usr/firepkg/sources/$1
+    srcdir=/usr/firepkg/sources/$1
+    destdir=/usr/firepkg/packages/$1
+
+    cd $srcdir
 
     LIBS=()
 
@@ -129,7 +133,6 @@ fn _build {
         --sbindir=$PREFIX/sbin \
     )
 
-    destdir=/usr/firepkg/packages/$1
     mkdir -p $destdir
 
     eval `{cat $db | grep '^'$1=} 
