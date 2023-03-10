@@ -1,44 +1,44 @@
 # fonts
-ttf-liberation=(9a823ccb33 MAKE)
+ttf-liberation=(9a823ccb33c8a8a865e84b982bcdc44d03ba4914adb91e6000df035dc0e55936 https://github.com/liberationfonts/liberation-fonts/archive/refs/tags/2.1.5.tar.gz MAKE)
 
 # qt
-qtbase=(18b2b00d55 CONFIGURE --extprefix=$destdir$PREFIX --libdir=$LIBDIR --archdatadir=$LIBDIR/qt --datadir=$PREFIX/share/qt --docdir=$PREFIX/share/doc/qt --opensource --confirm-license --optimize-size --nomake=examples --nomake=tests)
-qtsvg=(b27c4a2736 QMAKE)
-qttools=(f21241fa7c QMAKE)
-qtx11extras=(b3f867e3a2 QMAKE)
-qtdeclarative=(1c31dd0776 QMAKE)
-botan=(3af5f17615 CONFIGURE)
-libqrencode=(e455d9732f CONFIGURE)
-keepassxc=(6001ba626c CMAKE -DWITH_XC_DOCS=OFF -DWITH_APP_BUNDLE=OFF)
+qtbase=(18b2b00d5510c2e851d23a54ba7688df1ff465d3b7735ef1814f06ff7ce4ea32 https://invent.kde.org/qt/qt/qtbase/-/archive/v5.15.5-lts-lgpl/qtbase-v5.15.5-lts-lgpl.tar.gz CONFIGURE --extprefix=$destdir$PREFIX --libdir=$LIBDIR --archdatadir=$LIBDIR/qt --datadir=$PREFIX/share/qt --docdir=$PREFIX/share/doc/qt --opensource --confirm-license --optimize-size --nomake=examples --nomake=tests)
+qtsvg=(b27c4a2736e1e0a8c597166e4ce8a6d9d74058ab5eee16e7705e147ea0f9ae84 https://invent.kde.org/qt/qt/qtsvg/-/archive/v5.15.5-lts-lgpl/qtsvg-v5.15.5-lts-lgpl.tar.gz QMAKE)
+qttools=(f21241fa7c9040cc4e59e4e160a1b9efd3a524381fe212961ade6648601dc238 https://invent.kde.org/qt/qt/qttools/-/archive/v5.15.5-lts-lgpl/qttools-v5.15.5-lts-lgpl.tar.gz QMAKE)
+qtx11extras=(b3f867e3a21f65d58a1cf0e66f20e3e18c6ea2c36a87ac7dc91ca13f4be575eb https://invent.kde.org/qt/qt/qtx11extras/-/archive/v5.15.5-lts-lgpl/qtx11extras-v5.15.5-lts-lgpl.tar.gz QMAKE)
+qtdeclarative=(1c31dd07767bb004243a70c592c719b0e17839cc7f970d381a782d119aab2462 https://invent.kde.org/qt/qt/qtdeclarative/-/archive/v5.15.5-lts-lgpl/qtdeclarative-v5.15.5-lts-lgpl.tar.gz QMAKE)
+botan=(3af5f17615c6b5cd8b832d269fb6cb4d54ec64f9eb09ddbf1add5093941b4d75 https://botan.randombit.net/releases/Botan-2.19.2.tar.xz CONFIGURE)
+libqrencode=(e455d9732f8041cf5b9c388e345a641fd15707860f928e94507b1961256a6923 https://fukuchi.org/works/qrencode/qrencode-4.1.1.tar.bz2 CONFIGURE)
+keepassxc=(6001ba626c35c316dbda6de35736f012a2264f95139fcb4a094b8eb49b15d3e7 https://github.com/keepassxreboot/keepassxc/releases/download/2.7.1/keepassxc-2.7.1-src.tar.xz CMAKE -DWITH_XC_DOCS=OFF -DWITH_APP_BUNDLE=OFF)
 
 # gtk
-murrine=(e9c68ae001 CONFIGURE)
-ahoviewer=(afd8fab923 MESON)
-file-roller=(4a2886a396 MESON)
-leafpad=(24553979dc AUTOTOOLS)
-pavucontrol=(ce2b72c3b5 CONFIGURE)
-transmission=(9144652fe7 CONFIGURE)
+murrine=(e9c68ae001b9130d0f9d1b311e8121a94e5c134b82553ba03971088e57d12c89 https://download.gnome.org/sources/murrine/0.98/murrine-0.98.2.tar.xz CONFIGURE)
+ahoviewer=(afd8fab9237c797af488491a56d00a76395ce44be65e1f6a1a9804a3cea9122e https://github.com/ahodesuka/ahoviewer/archive/refs/tags/nightly.tar.gz MESON)
+file-roller=(4a2886a3966200fb0a9cbba4e2b79f8dad9d26556498aacdaed71775590b3c0d https://download.gnome.org/sources/file-roller/3.40/file-roller-3.40.0.tar.xz MESON)
+leafpad=(24553979dc478a371fa4d287f530ec84e33d95f3e30e585a6b63dfc29483edab https://github.com/tarot231/leafpad/archive/master.tar.gz AUTOTOOLS)
+pavucontrol=(ce2b72c3b5f1a70ad0df19dd81750f9455bd20870d1d3a36d20536af2e8f4e7a https://freedesktop.org/software/pulseaudio/pavucontrol/pavucontrol-5.0.tar.xz CONFIGURE)
+transmission=(9144652fe742f7f7dd6657716e378da60b751aaeda8bef8344b3eefc4db255f2 https://github.com/transmission/transmission/releases/download/3.00/transmission-3.00.tar.xz CONFIGURE)
 
 # evince
-poppler-data=(2cec05cd1b CMAKE)
-poppler=(e390c8b806 CMAKE -DENABLE_QT5=OFF -DENABLE_BOOST=OFF)
-libhandy=(3381fe8250 MESON -Dexamples=false -Dtests=false -Dvapi=false)
-evince=(23b8075fd4 MESON -Dsystemduserunitdir=no -Dnautilus=false -Duser_doc=false -Dgtk_doc=false -Dpdf=enabled)
+poppler-data=(2cec05cd1bb03af98a8b06a1e22f6e6e1a65b1e2f3816cb3069bb0874825f08c https://poppler.freedesktop.org/poppler-data-0.4.11.tar.gz CMAKE)
+poppler=(e390c8b806f6c9f0e35c8462033e0a738bb2460ebd660bdb8b6dca01556193e1 https://poppler.freedesktop.org/poppler-22.02.0.tar.xz CMAKE -DENABLE_QT5=OFF -DENABLE_BOOST=OFF)
+libhandy=(3381fe825085fe1a9d075a0dcccf6c49b02abd718f3d8db21f705f7d1896b613 https://download.gnome.org/sources/libhandy/1.7/libhandy-1.7.90.tar.xz MESON -Dexamples=false -Dtests=false -Dvapi=false)
+evince=(23b8075fd474944a39592c8a48d10c77fc18a9441f6a3ef7989ede9b83301d98 https://github.com/GNOME/evince/archive/refs/tags/43.0.tar.gz MESON -Dsystemduserunitdir=no -Dnautilus=false -Duser_doc=false -Dgtk_doc=false -Dpdf=enabled)
 
 # ffmpeg
-libx264=(876383c0bc CONFIGURE --enable-shared --disable-cli --bit-depth=10)
-ffmpeg=(55eb6aab5e CONFIGURE --enable-shared --enable-libvpx --enable-gpl --enable-libx264); dirflags=(--libdir=$LIBDIR --disable-static)
+libx264=(876383c0bcc7bde562d2db350c4754114e8c4c0ce1228018cad0cc5f4ce1253b https://code.videolan.org/videolan/x264/-/archive/master/x264-master.tar.bz2 CONFIGURE --enable-shared --disable-cli --bit-depth=10)
+ffmpeg=(55eb6aab5ee235550fa54a33eaf8bf1b4ec66c01453182b12f6a993d75698b03 https://ffmpeg.org/releases/ffmpeg-5.1.tar.xz CONFIGURE --enable-shared --enable-libvpx --enable-gpl --enable-libx264); dirflags=(--libdir=$LIBDIR --disable-static)
 
 # mpv
-libass=(1be2df9c44 CONFIGURE)
-mpv=(32ded8c13b WAF)
+libass=(1be2df9c4485a57d78bb18c0a8ed157bc87a5a8dd48c661961c625cb112832fd https://github.com/libass/libass/releases/download/0.15.2/libass-0.15.2.tar.xz CONFIGURE)
+mpv=(32ded8c13b6398310fa27767378193dc1db6d78b006b70dbcbd3123a1445e746 https://github.com/mpv-player/mpv/archive/refs/tags/v0.34.1.tar.gz WAF)
 
 # feh
-imlib2=(8925cf2a87 CONFIGURE)
-feh=(7f3c34552b MAKE)
+imlib2=(8925cf2a87f6f4971c1cd2073a7352446fe912d04ff41a05fd6ac20323cc086d https://downloads.sourceforge.net/enlightenment/imlib2-1.8.0.tar.xz CONFIGURE)
+feh=(7f3c34552b39336d7ebee2d7c4bf5697aaaa2c6c102c357f6e82ea240bd62ba9 https://feh.finalrewind.org/feh-3.8.tar.bz2 MAKE)
 
 # misc 
-firejail=(b77b67a4db CONFIGURE)
-bspwm=(0d0f5e465b MAKE)
-dmenu=(1f4d709ebb MAKE)
-sxhkd=(1edc8b1a8b MAKE)
+firejail=(b77b67a4db7c01d69cb033a50aa7b1132dfaeb2cd97ce6412285235265b71b17 https://sourceforge.net/projects/firejail/files/firejail/firejail-0.9.70.tar.xz/download CONFIGURE)
+bspwm=(0d0f5e465b9c27a5c2143c86189392fa297fad55253b9ed8f6854473d3928f8f https://github.com/baskerville/bspwm/archive/refs/tags/0.9.10.tar.gz MAKE)
+dmenu=(1f4d709ebba37eb7326eba0e665e0f13be4fa24ee35c95b0d79c30f14a348fd5 https://dl.suckless.org/tools/dmenu-5.1.tar.gz MAKE)
+sxhkd=(1edc8b1a8b3631c10ba9cb9df1181830dacbbdf77adb558e31d5dd2029637386 https://github.com/baskerville/sxhkd/archive/refs/tags/0.6.2.tar.gz MAKE)

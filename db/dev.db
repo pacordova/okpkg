@@ -1,27 +1,27 @@
 # build-systems
-autoconf=(64ebcec9f8 CONFIGURE)
-automake=(af6ba39142 CONFIGURE)
-cmake=(4931e277a4 CONFIGURE); dirflags=()
+autoconf=(64ebcec9f8ac5b2487125a86a7760d2591ac9e1d3dbd59489633f9de62a57684 https://ftp.gnu.org/gnu/autoconf/autoconf-2.69.tar.xz CONFIGURE)
+automake=(af6ba39142220687c500f79b4aa2f181d9b24e4f8d8ec497cea4ba26c64bedaf https://ftp.gnu.org/gnu/automake/automake-1.15.1.tar.xz CONFIGURE)
+cmake=(4931e277a4db1a805f13baa7013a7757a0cbfe5b7932882925c7061d9d1fa82b https://github.com/Kitware/CMake/releases/download/v3.24.1/cmake-3.24.1.tar.gz CONFIGURE); dirflags=()
 
 # libraries
-elfutils=(e70b0dfbe6 CONFIGURE --disable-debuginfod --disable-libdebuginfod)
-libinih=(01b0366fdf MESON)
-liburcu=(3213f33d2b CONFIGURE)
-openblas=(f36ba3d7a6 CMAKE -DBUILD_SHARED_LIBS=ON)
+elfutils=(e70b0dfbe610f90c4d1fe0d71af142a4e25c3c4ef9ebab8d2d72b65159d454c8 https://sourceware.org/ftp/elfutils/0.187/elfutils-0.187.tar.bz2 CONFIGURE --disable-debuginfod --disable-libdebuginfod)
+libinih=(01b0366fdfdf6363efc070c2f856f1afa33e7a6546548bada5456ad94a516241 https://github.com/benhoyt/inih/archive/r53/inih-r53.tar.gz MESON)
+liburcu=(3213f33d2b8f710eb920eb1abb279ec04bf8ae6361f44f2513c28c20d3363083 https://lttng.org/files/urcu/userspace-rcu-0.13.1.tar.bz2 CONFIGURE)
+openblas=(f36ba3d7a60e7c8bcc54cd9aaa9b1223dd42eaf02c811791c37e8ca707c241ca https://github.com/xianyi/OpenBLAS/releases/download/v0.3.21/OpenBLAS-0.3.21.tar.gz CMAKE -DBUILD_SHARED_LIBS=ON)
 
 # languages
-lua=(164c784965 MAKE INSTALL_TOP=$destdir$PREFIX INSTALL_LIB=$destdir$LIBDIR INSTALL_CMOD=$destdir$LIBDIR/lua MYCFLAGS=$CFLAGS)
-r=(4d52db486d CONFIGURE --disable-java --without-recommended-packages --without-x --with-blas=openblas --with-lapack)
-ruby=(3586861cb2 CONFIGURE)
+lua=(164c7849653b80ae67bec4b7473b884bf5cc8d2dca05653475ec2ed27b9ebf61 http://lua.org/ftp/lua-5.4.4.tar.gz MAKE INSTALL_TOP=$destdir$PREFIX INSTALL_LIB=$destdir$LIBDIR INSTALL_CMOD=$destdir$LIBDIR/lua MYCFLAGS=$CFLAGS)
+r=(4d52db486d27848e54613d4ee977ad952ec08ce17807e1b525b10cd4436c643f https://cran.r-project.org/src/base/R-4/R-4.2.1.tar.gz CONFIGURE --disable-java --without-recommended-packages --without-x --with-blas=openblas --with-lapack)
+ruby=(3586861cb2df56970287f0fd83f274bd92058872d830d15570b36def7f1a92ac http://cache.ruby-lang.org/pub/ruby/3.0/ruby-3.0.3.tar.gz CONFIGURE)
 
 # compression
-unzip=(036d969916 MAKE --file=unix/Makefile prefix=$destdir/$PREFIX generic)
-zip=(f0e8bb1f9b MAKE --file=unix/Makefile prefix=$destdir/$PREFIX generic_gcc)
+unzip=(036d96991646d0449ed0aa952e4fbe21b476ce994abc276e49d30e686708bd37 https://downloads.sourceforge.net/infozip/unzip60.tar.gz MAKE --file=unix/Makefile prefix=$destdir/$PREFIX generic)
+zip=(f0e8bb1f9b7eb0b01285495a2699df3a4b766784c1765a8f1aeedf63c0806369 https://downloads.sourceforge.net/infozip/zip30.tar.gz MAKE --file=unix/Makefile prefix=$destdir/$PREFIX generic_gcc)
 
 # linux
-xfsprogs=(01ccd3ef9d MAKE)
+xfsprogs=(01ccd3ef9df2837753a5d876b8da84ea957d13d7a461b8c46e8afa4eb09aabc8 https://kernel.org/pub/linux/utils/fs/xfs/xfsprogs/xfsprogs-5.14.2.tar.xz MAKE)
 
 # misc
-htop=(5a17121cf1 CONFIGURE)
-nano=(eb532da498 CONFIGURE)
-rsync=(becc3c504c CONFIGURE --disable-lz4 --disable-xxhash --disable-md2man)
+htop=(5a17121cf1c69d2f2e557c0b29d45a2c353ab983f644742e1c2e4ece15aa6cbb https://github.com/htop-dev/htop/releases/download/3.2.1/htop-3.2.1.tar.xz CONFIGURE)
+nano=(eb532da4985672730b500f685dbaab885a466d08fbbf7415832b95805e6f8687 https://ftp.gnu.org/gnu/nano/nano-6.3.tar.xz CONFIGURE)
+rsync=(becc3c504ceea499f4167a260040ccf4d9f2ef9499ad5683c179a697146ce50e https://samba.org/ftp/rsync/src/rsync-3.2.3.tar.gz CONFIGURE --disable-lz4 --disable-xxhash --disable-md2man)
