@@ -2,6 +2,11 @@
 
 . /usr/firepkg/make.conf
 
+# robust echo
+fn echo { 
+    printf '%s\n' $"* 
+}
+
 fn MAKE {
     *=($MAKEOPTS PREFIX=$PREFIX path= $*)
 
@@ -72,29 +77,24 @@ fn QMAKE {
 }
 
 fn _install {
-    destdir=/usr/firepkg/uninstall
     pkgname=`{
         basename $1 .tar.xz | 
         sed 's/[._/-][.0-9-]*[0-9][a-z]\?.*$//g'
     }
 
-    >$destdir/rm-$pkgname.rc {
-        echo '#!/bin/rc'
-        echo '>[2=]' rm -r ''/usr/firepkg/sources/$pkgname''
-        echo '>[2=]' rm -r ''/usr/firepkg/packages/$pkgname''
-        echo '>[2=]' rm -d ''$destdir/rm-$pkgname.rc''
-    }
+    {
+        echo '#!/bin/rc' 
+        echo 'rm $0'
+        tar -C / -xvf $1 |
+            sed 's|^|>[2=] rm -d ''/|g;s|$|''|g' |
+            sort -r
+    } >/usr/firepkg/uninstall/rm-$pkgname.rc
 
-    tar -C / -xvf $1 |
-    sed 's|^|>[2=] rm -d ''/|g;s|$|''|g' |
-    sort -r >>$destdir/rm-$pkgname.rc
-
-    chmod +x $destdir/rm-$pkgname.rc
+    chmod +x /usr/firepkg/uninstall/rm-$pkgname.rc
 }
 
 fn _uninstall {
-    /usr/firepkg/uninstall/rm-$1.rc ||
-        true
+    /usr/firepkg/uninstall/rm-$1.rc || true
 }
 
 fn _download {

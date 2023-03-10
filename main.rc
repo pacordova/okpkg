@@ -4,7 +4,30 @@
 
 λ=$1 && shift
 
-if(~ $#1 0)
+for(i) {
+    pkgname=$1
+    srcdir=/usr/firepkg/sources/$1
+    destdir=/usr/firepkg/packages/$1
+
+    switch($λ){
+        case -S
+            _uninstall $1 &&
+            _download $1 &&
+            _build $1 &&
+            _install /usr/firepkg/packages/$1-$version-x86_64.tar.xz
+        case -R
+            _uninstall $1
+        case -i
+            _install $1
+        case makepkg download build
+            _$λ $1
+         case chroot
+            _chroot $1
+    }
+
+    shift
+} && exit
+
 switch($λ){
     case timesync
         _timesync
@@ -12,25 +35,4 @@ switch($λ){
         /usr/firepkg/misc/backup.rc
     case -h *
         echo 'Usage: firepkg [-SRih|makepkg|chroot|download|build|timesync|backup] [arg ...]'
-}
-
-while(~ $#1 1)
-switch($λ){
-    case -S
-        _uninstall $1 &&
-        _download $1 &&
-        _build $1 &&
-        _install /usr/firepkg/packages/$1-$version-x86_64.tar.xz &&
-            shift || exit
-    case -R
-        _uninstall $1 &&
-            shift || exit
-    case -i
-        _install $1 &&
-            shift || exit
-    case makepkg download build
-        _$λ $1 &&
-            shift || exit
-    case chroot
-        _chroot $1
 }
