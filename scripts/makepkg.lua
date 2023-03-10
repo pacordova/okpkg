@@ -63,6 +63,7 @@ exec {
     "--numeric-owner", 
     "--create",
     "--file=" .. directory .. ".tar",
+    "--remove-files",
     "."
 }
 
@@ -72,11 +73,4 @@ exec {
     "--threads=0",
     "--force",
     directory .. ".tar"
-}
-
--- delete target
-exec {
-    "/usr/bin/rm",
-    "--recursive",
-    directory
 }

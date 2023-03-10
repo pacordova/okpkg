@@ -133,8 +133,12 @@ local function build(pkgname)
     makedir(destdir)
 
 
-    local version = 
-        basename:match("[._/-][.0-9-]*[0-9][a-z]?"):gsub("-", "."):gsub("^.", "-")
+    local version = basename:match("[._/-][.0-9-]*[0-9][a-z]?")
+    if version ~= nil then
+        version = version:gsub("-", "."):gsub("^.", "-")
+    else
+        version = basename
+    end
 
     local pkgname = destdir .. version .. arch
 
@@ -148,11 +152,7 @@ local function build(pkgname)
     } 
 
     -- rename
-    exec {
-        "/usr/bin/mv",
-        destdir .. ".tar.xz",
-        pkgname
-    }
+    rename(destdir .. ".tar.xz", pkgname)
 
     return pkgname
 end

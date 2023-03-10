@@ -7,7 +7,7 @@
 int 
 lua_chdir(lua_State *L)
 {
-    const char* path = luaL_checkstring(L, 1);
+    const char *path = luaL_checkstring(L, 1);
     chdir(path);
     return 0;
 }
@@ -15,16 +15,35 @@ lua_chdir(lua_State *L)
 int 
 lua_setenv(lua_State *L)
 {
-    const char* name = luaL_checkstring(L, 1);
-    const char* value = luaL_checkstring(L, 2);
+    const char *name = luaL_checkstring(L, 1);
+    const char *value = luaL_checkstring(L, 2);
     int overwrite = (int) luaL_checknumber(L, 3);
     setenv(name, value, overwrite);
+    return 0;
+}
+
+int
+lua_unlink(lua_State *L)
+{
+    const char* path = luaL_checkstring(L, 1);
+    unlink(path);
+    return 0;
+}
+
+int
+lua_rename(lua_State *L)
+{
+    const char *oldpath = luaL_checkstring(L, 1);
+    const char *newpath = luaL_checkstring(L, 2);
+    rename(oldpath, newpath);
     return 0;
 }
 
 static const struct luaL_Reg lua_linux [] = {
     {"chdir", lua_chdir},
     {"setenv", lua_setenv},
+    {"unlink", lua_unlink},
+    {"rename", lua_rename},
     {NULL, NULL} 
 };
 

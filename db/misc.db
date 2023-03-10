@@ -14,7 +14,7 @@ keepassxc={hash="6001ba626c35c316dbda6de35736f012a2264f95139fcb4a094b8eb49b15d3e
 
 -- gtk
 murrine={hash="e9c68ae001b9130d0f9d1b311e8121a94e5c134b82553ba03971088e57d12c89",url="https://download.gnome.org/sources/murrine/0.98/murrine-0.98.2.tar.xz",build="configure"}
-ahoviewer={hash="afd8fab9237c797af488491a56d00a76395ce44be65e1f6a1a9804a3cea9122e",url="https://github.com/ahodesuka/ahoviewer/archive/refs/tags/nightly.tar.gz",build="meson"}
+ahoviewer={hash="a14e32b4a8095c9f8b4b607c090a50cc8ac1076550e57b5a9303c54089068152",url="https://github.com/ahodesuka/ahoviewer/archive/refs/tags/1.6.5.tar.gz",build="autoreconf"}
 file-roller={hash="4a2886a3966200fb0a9cbba4e2b79f8dad9d26556498aacdaed71775590b3c0d",url="https://download.gnome.org/sources/file-roller/3.40/file-roller-3.40.0.tar.xz",build="meson"}
 leafpad={hash="24553979dc478a371fa4d287f530ec84e33d95f3e30e585a6b63dfc29483edab",url="https://github.com/tarot231/leafpad/archive/master.tar.gz",build="autoreconf"}
 pavucontrol={hash="ce2b72c3b5f1a70ad0df19dd81750f9455bd20870d1d3a36d20536af2e8f4e7a",url="https://freedesktop.org/software/pulseaudio/pavucontrol/pavucontrol-5.0.tar.xz",build="configure"}
