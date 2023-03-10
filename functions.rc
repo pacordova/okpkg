@@ -127,7 +127,7 @@ fn _makepkg {
     tar --directory=$1 \
         --sort=name \
         --mtime=@$SOURCE_DATE_EPOCH \
-        --transform='s|^..||' \
+        --transform='s|^\.\/||' \
         --owner=0 \
         --group=0 \
         --numeric-owner \

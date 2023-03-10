@@ -2,36 +2,37 @@
 
 . /usr/firepkg/functions.rc
 
+
 λ=$1 && shift
 
-for(i) {
-    pkgname=$1
-    srcdir=/usr/firepkg/sources/$1
-    destdir=/usr/firepkg/packages/$1
-
-    switch($λ){
-        case -S
-            _uninstall $1 &&
-            _download $1 &&
-            _build $1 &&
-            _install /usr/firepkg/packages/$1-$version-x86_64.tar.xz
-        case -R
-            _uninstall $1
-        case -i
-            _install $1
-        case makepkg download build
-            _$λ $1
-         case chroot
-            _chroot $1
-    }
-    shift
-} && exit
-
-switch($λ){
+if(~ $#* 0) {
+    switch($λ) {
     case timesync
         _timesync
     case backup
         /usr/firepkg/misc/backup.rc
     case -h *
         echo 'Usage: firepkg [-SRih|makepkg|chroot|download|build|timesync|backup] [arg ...]'
+    }
 }
+
+if not for(i) {
+    pkgname=$i
+    srcdir=/usr/firepkg/sources/$i
+    destdir=/usr/firepkg/packages/$i
+    switch($λ){
+    case -S
+        _uninstall $i &&
+        _download $i &&
+        _build $i &&
+        _install /usr/firepkg/packages/$i-$version-x86_64.tar.xz
+    case -R
+        _uninstall $i
+    case -i
+        _install $i
+    case makepkg download build
+        _$λ $i
+    case chroot
+        _chroot $i
+    }
+} 
