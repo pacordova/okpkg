@@ -9,21 +9,18 @@ fn echo {
 
 fn MAKE {
     *=($MAKEOPTS PREFIX=$PREFIX path= $*)
-
     make $* &&
         make install $* DESTDIR=$destdir
 }
 
 fn CONFIGURE {
     *=(--prefix=$PREFIX $dirflags $*)
-
     ./configure $* &&
         MAKE
 }
 
 fn CONFIGURE2 {
     *=(--prefix=$PREFIX $dirflags $*)
-
     mkdir build && cd build
         ../configure $* &&
             MAKE
@@ -35,13 +32,11 @@ fn AUTORECONF {
         ./autogen.sh
     if not
         autoreconf -fi -I m4
-
     CONFIGURE $*
 }
 
 fn CMAKE {
     *=(-DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_BUILD_TYPE=Release $*)
-
     mkdir build && cd build
     	cmake .. $* && 
 	MAKE
@@ -50,14 +45,12 @@ fn CMAKE {
 
 fn MESON {
     *=(-Dprefix=$PREFIX -Dbuildtype=release $*)
-
     meson build $* &&
         DESTDIR=$destdir ninja -C build install
 }
 
 fn SCONS {
     *=(prefix=$PREFIX DESTDIR=$destdir $*)
-
     scons -c &&
         scons $* install
 }
@@ -71,7 +64,6 @@ fn WAF {
 
 fn QMAKE {
     *=(INSTALL_ROOT=$destdir $*)
-
     qmake -makefile &&
         MAKE $*
 }
@@ -89,7 +81,6 @@ fn _install {
             sed 's|^|>[2=] rm -d ''/|g;s|$|''|g' |
             sort -r
     } >/usr/firepkg/uninstall/rm-$pkgname.rc
-
     chmod +x /usr/firepkg/uninstall/rm-$pkgname.rc
 }
 
@@ -98,67 +89,39 @@ fn _uninstall {
 }
 
 fn _download {
-    pkgname=$1
-    srcdir=/usr/firepkg/sources/$1
-    destdir=/usr/firepkg/packages/$1
-
     eval `{cat $db | grep '^'$1=} && *=$$1
-
     >[2=] mkdir -p $srcdir 
-
     curl -L $1 |
         tar -C $srcdir --strip-components=1 -xzf -
-
     if(test -f /usr/firepkg/patches/$pkgname.diff)
         patch -d $srcdir -p1 </usr/firepkg/patches/$pkgname.diff
-
     true
 }
 
 fn _build {
-    pkgname=$1
-    srcdir=/usr/firepkg/sources/$1
-    destdir=/usr/firepkg/packages/$1
-
     cd $srcdir
-
-    LIBS=()
-
-    dirflags=( \
-        --localstatedir=/var \
-        --sysconfdir=/etc \
-        --libdir=$LIBDIR \
-        --bindir=$PREFIX/bin \
-        --sbindir=$PREFIX/sbin \
-    )
-
-    mkdir -p $destdir
-
-    eval `{cat $db | grep '^'$1=} 
-
-    *=$$1
-
+    eval `{cat $db | grep '^'$1=} && *=$$1
     version=`{ 
         echo $1 |
         grep -oE '[._/-][.0-9-]*[0-9][a-z]?' |
         sed -n 's/^.//g;s/-/./g;$p'
     }
-
     shift && $*
-
     _makepkg $destdir
     mv $destdir.tar.xz $destdir-$version-x86_64.tar.xz
 }
 
 fn _makepkg {
     # strip debugging, delete unneeded files, etc.
-    >[2=] strip -S $1/usr/lib64/*
-    >[2=] strip -s $1/usr/bin/*
-    >[2=] strip -s $1/bin/*
-    >[2=] rm -r    $1/usr/share/doc
-    >[2=] rm -r    $1/usr/doc
-    >[2=] rm -r    $1/usr/share/info
-    >[2=] find $1 -name '*.pyc' -delete
+    {
+        strip -S $1/usr/lib64/*
+        strip -s $1/usr/bin/*
+        strip -s $1/bin/*
+        rm -r    $1/usr/share/doc
+        rm -r    $1/usr/doc
+        rm -r    $1/usr/share/info
+        find $1 -name '*.pyc' -delete
+    } >[2=]
 
     tar --directory=$1 \
         --sort=name \
@@ -171,7 +134,6 @@ fn _makepkg {
         --file $1.tar \
         --remove-files \
         .
-
     xz -T0 -f $1.tar
 }
 
@@ -182,9 +144,7 @@ fn _chroot {
     mount -t proc -o ro /proc $1/proc
     mount -t sysfs -o ro /sys $1/sys
     mount -o ro,bind /dev $1/dev
-
-    PS1='(chroot)# ' chroot --user=root $1 ||
-        exit
+    PS1='(chroot)# ' chroot --user=root $1 || exit
 }
 
 fn _timesync {
@@ -192,7 +152,6 @@ fn _timesync {
         nc time.nist.gov 13 |
         awk 'NR>1 {print $2 " " $3}'
     }
-
     date +'%y-%m-%d %H:%M:%S' -u -s $"date &&
         hwclock --systohc
 }
