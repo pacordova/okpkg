@@ -8,7 +8,6 @@ for(i) {
     pkgname=$1
     srcdir=/usr/firepkg/sources/$1
     destdir=/usr/firepkg/packages/$1
-
     switch($λ){
         case -S
             _uninstall $1 &&
@@ -24,7 +23,6 @@ for(i) {
          case chroot
             _chroot $1
     }
-
     shift
 } && exit
 
