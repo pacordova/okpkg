@@ -98,10 +98,7 @@ fn _uninstall {
 }
 
 fn _download {
-    destdir=/usr/firepkg/sources/$1
-    pkgname=$1
-
-    mkdir -p $destdir$PREFIX
+    srcdir=/usr/firepkg/sources/$1
 
     eval `{cat $db | grep '^'$1=} &&
         *=$$1
@@ -110,16 +107,11 @@ fn _download {
 
     curl -LO $2
 
-    echo $1 $basename |
-        sha256sum -c || exit
+    mkdir $srcdir
+    tar -C $srcdir --strip-components=1 -xf $basename 
 
-
-    tar -C $destdir --strip-components=1 -xf $basename && 
-
-    if(test -f /usr/firepkg/patches/$pkgname.diff)
-        patch -d $destdir -p1 </usr/firepkg/patches/$pkgname.diff
-
-    >[2=] rm $basename
+    if(test -f /usr/firepkg/patches/$1.diff)
+        patch -d $srcdir -p1 </usr/firepkg/patches/$1.diff
 
     true
 }
