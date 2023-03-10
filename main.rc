@@ -8,6 +8,7 @@ for(i) {
     pkgname=$1
     srcdir=/usr/firepkg/sources/$1
     destdir=/usr/firepkg/packages/$1
+
     switch($λ){
         case -S
             _uninstall $1 &&
