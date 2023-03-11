@@ -3,7 +3,7 @@
 . /usr/firepkg/make.conf
 
 fn emerge {
-    for(i in $*) {
+    for(i) {
         firepkg build $i
         firepkg -i /usr/firepkg/packages/$i-*-x86_64.tar.xz
     }
@@ -68,7 +68,7 @@ ln -sf libncurses.so /usr/lib64/libcurses.so
 ############
 emerge attr acl
 emerge eudev expat file json-c popt readline 
-emerge libaio libcap2 libcheck libevent libpipeline libpsl libusb
+emerge libaio libcap2 libcheck libevent libpsl libusb
 emerge pcre2 pcre
 emerge lvm2
 
@@ -79,22 +79,18 @@ emerge mandoc man-pages
 emerge procps-ng psmisc
 emerge efivar efibootmgr dosfstools 
 emerge alsa-lib alsa-utils
-emerge acpid2 cryptsetup lm-sensors pciutils usbutils 
-emerge cron git openssh sudo tcsh tmux tzdata vim
-emerge gnupg1 less parted xorriso
+emerge acpid2 cryptsetup pciutils usbutils 
+emerge cron git openssh sudo tmux tzdata vim
+emerge less parted 
+emerge lua
+emerge zip unzip
 
 # networking
 #############
 emerge iproute2 iputils
-emerge curl wget dhcpcd
+emerge curl dhcpcd
+emerge dbus iwd
 /usr/sbin/update-ca-certificates
-
-# connman
-##########
-emerge libmnl libnftnl iptables
-emerge dbus glib2 
-emerge libnl3 wpasupplicant
-emerge connman
 
 # toolchain
 ############

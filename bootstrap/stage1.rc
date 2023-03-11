@@ -35,7 +35,7 @@ download \
     alsa-lib alsa-utils \
     iproute2 iputils \
     curl dhcpcd \
-    dbus iwd
+    dbus iwd 
 
 # symlink for perl
 ln -s configure.gnu $srcdir/perl/configure

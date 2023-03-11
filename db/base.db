@@ -56,7 +56,7 @@ e2fsprogs=(https://kernel.org/pub/linux/kernel/people/tytso/e2fsprogs/v1.46.5/e2
 flex=(https://github.com/westes/flex/releases/download/v2.6.4/flex-2.6.4.tar.gz CONFIGURE)
 gettext=(https://ftp.gnu.org/gnu/gettext/gettext-0.21.1.tar.xz CONFIGURE)
 gperf=(https://ftp.gnu.org/gnu/gperf/gperf-3.1.tar.gz CONFIGURE)
-iana-etc=(
+iana-etc=(https://github.com/Mic92/iana-etc/releases/download/20230202/iana-etc-20230202.tar.gz)
 shadow=(https://github.com/shadow-maint/shadow/releases/download/4.13/shadow-4.13.tar.xz CONFIGURE --with-group-name-max-length=32)
 util-linux=(https://kernel.org/pub/linux/utils/util-linux/v2.38/util-linux-2.38.1.tar.xz CONFIGURE --disable-^(chfn-chsh login nologin su setpriv runuser pylibmount) --without-^(python systemd systemdsystemunitdir))
 
@@ -90,7 +90,6 @@ dosfstools=(https://github.com/dosfstools/dosfstools/releases/download/v4.2/dosf
 efibootmgr=(https://github.com/rhboot/efibootmgr/archive/18/efibootmgr-18.tar.gz MAKE EFIDIR=/boot)
 efivar=(https://github.com/rhboot/efivar/releases/download/38/efivar-38.tar.bz2 MAKE)
 git=(https://kernel.org/pub/software/scm/git/git-2.39.2.tar.xz CONFIGURE)
-htop=(https://github.com/htop-dev/htop/releases/download/3.2.2/htop-3.2.2.tar.xz CONFIGURE)
 kbd=(https://kernel.org/pub/linux/utils/kbd/kbd-2.5.1.tar.xz CONFIGURE --disable-vlock --disable-tests)
 kmod=(https://kernel.org/pub/linux/utils/kernel/kmod/kmod-30.tar.xz CONFIGURE)
 less=(https://ftp.gnu.org/gnu/less/less-608.tar.gz CONFIGURE)
@@ -118,6 +117,7 @@ dbus=(https://dbus.freedesktop.org/releases/dbus/dbus-1.15.4.tar.xz CONFIGURE --
 iwd=(https://mirrors.edge.kernel.org/pub/linux/network/wireless/iwd-2.3.tar.xz CONFIGURE --disable-systemd-service LIBS=-lncursesw)
 
 # extra
+htop=(https://github.com/htop-dev/htop/releases/download/3.2.2/htop-3.2.2.tar.xz CONFIGURE)
 gnupg1=(https://gnupg.org/ftp/gcrypt/gnupg/gnupg-1.4.23.tar.bz2 CONFIGURE --enable-noexecstack)
 libarchive=(https://github.com/libarchive/libarchive/releases/download/v3.6.0/libarchive-3.6.0.tar.xz CONFIGURE)
 tcsh=(https://astron.com/pub/tcsh/tcsh-6.24.07.tar.gz CONFIGURE)

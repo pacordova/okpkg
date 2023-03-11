@@ -75,7 +75,7 @@ fn emerge {
 
 
 # init
-_reformat /dev/nvme0n1p4
+_reformat /dev/sdb1
 _clean
 
 
