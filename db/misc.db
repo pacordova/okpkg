@@ -1,20 +1,9 @@
-# libraries
-elfutils=(https://sourceware.org/ftp/elfutils/0.187/elfutils-0.187.tar.bz2 CONFIGURE --disable-debuginfod --disable-libdebuginfod)
-libinih=(https://github.com/benhoyt/inih/archive/r53/inih-r53.tar.gz MESON)
-liburcu=(https://lttng.org/files/urcu/userspace-rcu-0.13.1.tar.bz2 CONFIGURE)
+# r
 openblas=(https://github.com/xianyi/OpenBLAS/releases/download/v0.3.21/OpenBLAS-0.3.21.tar.gz CMAKE -DBUILD_SHARED_LIBS=ON)
-
-# languages
 r=(https://cran.r-project.org/src/base/R-4/R-4.2.1.tar.gz CONFIGURE --disable-java --without-recommended-packages --without-x --with-blas=openblas --with-lapack)
-ruby=(https://cache.ruby-lang.org/pub/ruby/3.0/ruby-3.0.3.tar.gz CONFIGURE)
-
-# linux
-xfsprogs=(https://kernel.org/pub/linux/utils/fs/xfs/xfsprogs/xfsprogs-5.14.2.tar.xz MAKE)
 
 # fonts
 ttf-liberation=(https://github.com/liberationfonts/liberation-fonts/archive/refs/tags/2.1.5.tar.gz MAKE)
-
-#########
 
 # qt
 qtbase=(https://invent.kde.org/qt/qt/qtbase/-/archive/v5.15.5-lts-lgpl/qtbase-v5.15.5-lts-lgpl.tar.gz CONFIGURE --extprefix=$destdir$PREFIX --libdir=$LIBDIR --archdatadir=$LIBDIR/qt --datadir=$PREFIX/share/qt --docdir=$PREFIX/share/doc/qt --opensource --confirm-license --optimize-size --nomake=examples --nomake=tests)

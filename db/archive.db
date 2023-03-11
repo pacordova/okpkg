@@ -242,11 +242,32 @@ portal=(https://github.com/flatpak/xdg-desktop-portal/releases/download/1.14.6/x
 
 # base
 doas=(https://github.com/Duncaen/OpenDoas/releases/download/v6.8.2/opendoas-6.8.2.tar.xz )
-bsdtar=(https://github.com/libarchive/libarchive/releases/download/v3.6.0/libarchive-3.6.0.tar.xz CONFIGURE)
-
-# iwd
-iwd=(https://mirrors.edge.kernel.org/pub/linux/network/wireless/iwd-1.29.tar.xz https://mirrors.edge.kernel.org/pub/linux/network/wireless/iwd-1.29.tar.xz CONFIGURE --disable-systemd-service LIBS=-lncursesw)
 
 # btrfs
 lzo=(https://oberhumer.com/opensource/lzo/download/lzo-2.10.tar.gz CONFIGURE --enable-shared)
 btrfs-progs=(https://kernel.org/pub/linux/kernel/people/kdave/btrfs-progs/btrfs-progs-v5.16.2.tar.xz CONFIGURE --disable-documentation)
+
+# network
+wget=(https://ftp.gnu.org/gnu/wget/wget-1.21.3.tar.gz CONFIGURE --with-ssl=openssl)
+libmnl=(https://netfilter.org/pub/libmnl/libmnl-1.0.4.tar.bz2 CONFIGURE)
+libnftnl=(https://netfilter.org/pub/libnftnl/libnftnl-1.2.1.tar.bz2 CONFIGURE)
+iptables=(https://netfilter.org/pub/iptables/iptables-1.8.7.tar.bz2 CONFIGURE --enable-shared)
+glib2=(https://download.gnome.org/sources/glib/2.70/glib-2.70.4.tar.xz MESON -Dtests=false)
+libnl3=(https://github.com/thom311/libnl/releases/download/libnl3_7_0/libnl-3.7.0.tar.gz CONFIGURE)
+wpasupplicant=(https://w1.fi/releases/wpa_supplicant-2.10.tar.gz MAKE -C wpa_supplicant)
+connman=(https://kernel.org/pub/linux/network/connman/connman-1.41.tar.xz CONFIGURE --without-systemdunitdir --disable-wispr LIBS=-lncursesw)
+
+# misc
+nano=(https://ftp.gnu.org/gnu/nano/nano-7.2.tar.xz CONFIGURE)
+rsync=(https://samba.org/ftp/rsync/src/rsync-3.2.7.tar.gz CONFIGURE --disable-lz4 --disable-xxhash --disable-md2man)
+byacc=(https://invisible-island.net/archives/byacc/byacc-20230219.tgz CONFIGURE)
+ruby=(https://cache.ruby-lang.org/pub/ruby/3.0/ruby-3.0.3.tar.gz CONFIGURE)
+
+# xfs
+libinih=(https://github.com/benhoyt/inih/archive/r53/inih-r53.tar.gz MESON)
+liburcu=(https://lttng.org/files/urcu/userspace-rcu-0.13.1.tar.bz2 CONFIGURE)
+xfsprogs=(https://kernel.org/pub/linux/utils/fs/xfs/xfsprogs/xfsprogs-5.14.2.tar.xz MAKE)
+
+# only used by man-db
+libpipeline=(https://download.savannah.gnu.org/releases/libpipeline/libpipeline-1.5.7.tar.gz CONFIGURE)
+
