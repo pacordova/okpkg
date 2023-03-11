@@ -1,9 +1,13 @@
 uninstall
 packages
 sources
+downloads
 *~
 *.xz
 *.tar
 *.swp
 *.o
 *.so
+*.tar.gz
+*.tar.xz
+*.tar.bz2
