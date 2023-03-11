@@ -93,7 +93,7 @@ fn _download {
     >[2=] mkdir -p $srcdir 
     curl -LO $1 &&
         tar -C $srcdir --strip-components=1 -xf `{basename $1} &&
-        mv `{basename $1} /usr/firepkg/downloads/$i
+        rm `{basename $1}
     if(test -f /usr/firepkg/patches/$pkgname.diff)
         patch -d $srcdir -p1 </usr/firepkg/patches/$pkgname.diff
     true
