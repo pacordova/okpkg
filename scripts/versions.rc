@@ -57,7 +57,7 @@ fn slackware-current {
 # FIREPKG #
 ###########
 fn firepkg-version {
-  cat /usr/firepkg/db/url.db |
+  cat /usr/firepkg/db/*.db |
   grep /$1 |
   grep -oE '[._/-][.0-9-]*[0-9][a-z]?' |
   sed -n 's/^.//g;s/-/./g;$p'
