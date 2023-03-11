@@ -14,7 +14,7 @@ download \
     m4 bash coreutils diffutils findutils \
     gawk grep make patch sed tar xz rc \
     pkgconf \
-    zlib pigz bzip2 zstd \
+    zlib pigz bzip2 zstd zip unzip \
     libressl libffi python3 \
     bison glibc \
     perl \
@@ -24,21 +24,18 @@ download \
     bc flex gettext gperf util-linux which iana-etc e2fsprogs shadow \
     acl attr eudev expat file ncurses popt readline \
     libaio libcap2 libcheck libevent \
-    libpipeline libpsl libusb \
+    libpsl libusb \
     json-c lvm2 pcre2 pcre \
     kbd kmod \
     procps-ng psmisc \
     man-pages mandoc \
     efivar efibootmgr dosfstools \
-    acpid2 cryptsetup git gnupg1 less lm-sensors openssh parted pciutils \
-    sudo tcsh tmux tzdata usbutils vim xorriso \
+    acpid2 cryptsetup git less lua openssh parted pciutils \
+    sudo tmux tzdata usbutils vim \
     alsa-lib alsa-utils \
     iproute2 iputils \
-    curl wget dhcpcd \
-    libmnl libnftnl iptables \
-    dbus glib2 \
-    libnl3 wpasupplicant \
-    connman \
+    curl dhcpcd \
+    dbus iwd
 
 # symlink for perl
 ln -s configure.gnu $srcdir/perl/configure
@@ -51,39 +48,6 @@ mkdir $srcdir/cron && cd $srcdir/cron
 curl -LO https://ftp.isc.org/isc/cron/cron_4.1.shar
 sh cron_4.1.shar
 patch -p1 < ../../patches/cron.diff
-
-# config for wpa_supplicant
-cat > $srcdir/wpasupplicant/wpa_supplicant/.config << EOF
-CONFIG_BACKEND=file
-CONFIG_CTRL_IFACE=y
-CONFIG_DEBUG_FILE=y
-CONFIG_DEBUG_SYSLOG=y
-CONFIG_DEBUG_SYSLOG_FACILITY=LOG_DAEMON
-CONFIG_DRIVER_NL80211=y
-CONFIG_DRIVER_WEXT=y
-CONFIG_DRIVER_WIRED=y
-CONFIG_EAP_GTC=y
-CONFIG_EAP_LEAP=y
-CONFIG_EAP_MD5=y
-CONFIG_EAP_MSCHAPV2=y
-CONFIG_EAP_OTP=y
-CONFIG_EAP_PEAP=y
-CONFIG_EAP_TLS=y
-CONFIG_EAP_TTLS=y
-CONFIG_IEEE8021X_EAPOL=y
-CONFIG_IPV6=y
-CONFIG_LIBNL32=y
-CONFIG_PEERKEY=y
-CONFIG_PKCS12=y
-CONFIG_READLINE=y
-CONFIG_SMARTCARD=y
-CONFIG_WPS=y
-CFLAGS += -I/usr/include/libnl3
-CONFIG_CTRL_IFACE_DBUS=y
-CONFIG_CTRL_IFACE_DBUS_NEW=y
-CONFIG_CTRL_IFACE_DBUS_INTRO=y
-EOF
-
 
 # download libs for gcc
 cd $srcdir/gcc

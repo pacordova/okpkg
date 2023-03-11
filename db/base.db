@@ -84,6 +84,7 @@ readline=(https://ftp.gnu.org/gnu/readline/readline-8.2.tar.gz CONFIGURE --with-
 acpid2=(https://downloads.sourceforge.net/acpid2/acpid-2.0.34.tar.xz CONFIGURE)
 alsa-lib=(https://alsa-project.org/files/pub/lib/alsa-lib-1.2.8.tar.bz2 CONFIGURE)
 alsa-utils=(https://alsa-project.org/files/pub/utils/alsa-utils-1.2.8.tar.bz2 CONFIGURE --disable-^(alsaconf bat xmlto) --with-curses=ncursesw)
+cron=(https://ftp.isc.org/isc/cron/cron_4.1.shar MAKE)
 cryptsetup=(https://kernel.org/pub/linux/utils/cryptsetup/v2.6/cryptsetup-2.6.1.tar.xz CONFIGURE --disable-ssh-token)
 dosfstools=(https://github.com/dosfstools/dosfstools/releases/download/v4.2/dosfstools-4.2.tar.gz CONFIGURE --enable-compat-symlinks)
 efibootmgr=(https://github.com/rhboot/efibootmgr/archive/18/efibootmgr-18.tar.gz MAKE EFIDIR=/boot)
@@ -118,10 +119,9 @@ iwd=(https://mirrors.edge.kernel.org/pub/linux/network/wireless/iwd-2.3.tar.xz C
 
 # extra
 gnupg1=(https://gnupg.org/ftp/gcrypt/gnupg/gnupg-1.4.23.tar.bz2 CONFIGURE --enable-noexecstack)
-lm-sensors=(https://github.com/lm-sensors/lm-sensors/archive/V3-6-0/lm-sensors-3-6-0.tar.gz MAKE LIBDIR=$LIBDIR)
-cron=(https://ftp.isc.org/isc/cron/cron_4.1.shar MAKE)
-tcsh=(https://astron.com/pub/tcsh/tcsh-6.24.07.tar.gz CONFIGURE)
-xorriso=(https://ftp.gnu.org/gnu/xorriso/xorriso-1.5.4.tar.gz CONFIGURE)
 libarchive=(https://github.com/libarchive/libarchive/releases/download/v3.6.0/libarchive-3.6.0.tar.xz CONFIGURE)
+tcsh=(https://astron.com/pub/tcsh/tcsh-6.24.07.tar.gz CONFIGURE)
+lm-sensors=(https://github.com/lm-sensors/lm-sensors/archive/V3-6-0/lm-sensors-3-6-0.tar.gz MAKE LIBDIR=$LIBDIR)
+xorriso=(https://ftp.gnu.org/gnu/xorriso/xorriso-1.5.4.tar.gz CONFIGURE)
 elfutils=(https://sourceware.org/ftp/elfutils/0.189/elfutils-0.189.tar.bz2 CONFIGURE --disable-debuginfod --disable-libdebuginfod)
 time=(https://ftp.gnu.org/gnu/time/time-1.9.tar.gz CONFIGURE)
