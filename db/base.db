@@ -57,7 +57,7 @@ flex=(https://github.com/westes/flex/releases/download/v2.6.4/flex-2.6.4.tar.gz 
 gettext=(https://ftp.gnu.org/gnu/gettext/gettext-0.21.1.tar.xz CONFIGURE)
 gperf=(https://ftp.gnu.org/gnu/gperf/gperf-3.1.tar.gz CONFIGURE)
 iana-etc=(
-shadow=(https://github.com/shadow-maint/shadow/releases/download/v4.13.2/shadow-4.13.2.tar.xz CONFIGURE --with-group-name-max-length=32)
+shadow=(https://github.com/shadow-maint/shadow/releases/download/4.13/shadow-4.13.tar.xz CONFIGURE --with-group-name-max-length=32)
 util-linux=(https://kernel.org/pub/linux/utils/util-linux/v2.38/util-linux-2.38.1.tar.xz CONFIGURE --disable-^(chfn-chsh login nologin su setpriv runuser pylibmount) --without-^(python systemd systemdsystemunitdir))
 
 # libraries
@@ -67,7 +67,7 @@ eudev=(https://github.com/eudev-project/eudev/releases/download/v3.2.11/eudev-3.
 expat=(https://prdownloads.sourceforge.net/expat/expat-2.5.0.tar.xz CONFIGURE)
 file=(https://astron.com/pub/file/file-5.44.tar.gz CONFIGURE)
 json-c=(https://s3.amazonaws.com/json-c_releases/releases/json-c-0.16.tar.gz CMAKE)
-libaio=(https://ftp.debian.org/debian/pool/main/liba/libaio/libaio_0.3.113.orig.tar.xz MAKE libdir=$LIBDIR)
+libaio=(https://ftp.debian.org/debian/pool/main/liba/libaio/libaio_0.3.113.orig.tar.gz MAKE libdir=$LIBDIR)
 libcap2=(https://kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-2.67.tar.xz MAKE LIBDIR=$LIBDIR)
 libcheck=(https://github.com/libcheck/check/releases/download/0.15.2/check-0.15.2.tar.gz CONFIGURE)
 libevent=(https://github.com/libevent/libevent/releases/download/release-2.1.12-stable/libevent-2.1.12-stable.tar.gz CONFIGURE)
@@ -95,7 +95,7 @@ kbd=(https://kernel.org/pub/linux/utils/kbd/kbd-2.5.1.tar.xz CONFIGURE --disable
 kmod=(https://kernel.org/pub/linux/utils/kernel/kmod/kmod-30.tar.xz CONFIGURE)
 less=(https://ftp.gnu.org/gnu/less/less-608.tar.gz CONFIGURE)
 lua=(https://lua.org/ftp/lua-5.4.4.tar.gz MAKE INSTALL_TOP=$destdir$PREFIX INSTALL_LIB=$destdir$LIBDIR INSTALL_CMOD=$destdir$LIBDIR/lua MYCFLAGS=$CFLAGS)
-man-pages=(https://kernel.org/pub/linux/docs/man-pages/man-pages-5.15.tar.xz MAKE)
+man-pages=(https://kernel.org/pub/linux/docs/man-pages/man-pages-6.03.tar.xz MAKE)
 mandoc=(https://mandoc.bsd.lv/snapshots/mandoc-1.14.6.tar.gz CONFIGURE)
 openssh=(https://ftp3.usa.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-9.2p1.tar.gz CONFIGURE)
 parted=(https://ftp.gnu.org/gnu/parted/parted-3.5.tar.xz CONFIGURE)
@@ -114,7 +114,7 @@ curl=(https://github.com/curl/curl/releases/download/curl-7_88_1/curl-7.88.1.tar
 dhcpcd=(https://roy.marples.name/downloads/dhcpcd/dhcpcd-9.4.1.tar.xz CONFIGURE --libexecdir=/usr/lib64/dhcpcd --dbdir=/var/lib/dhcpcd)
 iproute2=(https://kernel.org/pub/linux/utils/net/iproute2/iproute2-6.2.0.tar.xz MAKE LIBDIR=$LIBDIR)
 iputils=(https://github.com/iputils/iputils/archive/refs/tags/20221126.tar.gz MESON -DBUILD_MANS=false)
-dbus=(https://dbus.freedesktop.org/releases/dbus/dbus-1.14.6.tar.gz CONFIGURE --enable-user-session --with-systemduserunitdir=no --with-systemdsystemunitdir=no --with-system-socket=/run/dbus/system_bus_socket)
+dbus=(https://dbus.freedesktop.org/releases/dbus/dbus-1.15.4.tar.xz CONFIGURE --enable-user-session --with-systemduserunitdir=no --with-systemdsystemunitdir=no --with-system-socket=/run/dbus/system_bus_socket)
 iwd=(https://mirrors.edge.kernel.org/pub/linux/network/wireless/iwd-2.3.tar.xz CONFIGURE --disable-systemd-service LIBS=-lncursesw)
 
 # extra
