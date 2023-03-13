@@ -17,7 +17,7 @@ rc=(https://github.com/pacordova/rc/archive/refs/tags/0.1.tar.gz MAKE)
 pkgconf=(https://distfiles.dereferenced.org/pkgconf/pkgconf-1.9.4.tar.xz CONFIGURE)
 
 # compression
-zlib=(https://zlib.net/fossils/zlib-1.2.13.tar.gz CONFIGURE); dirflags=(--libdir=$LIBDIR)
+zlib=(https://zlib.net/fossils/zlib-1.2.13.tar.gz CONFIGURE);dirflags=(--libdir=$LIBDIR)
 pigz=(https://zlib.net/pigz/pigz-2.7.tar.gz MAKE)
 bzip2=(https://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz MAKE PREFIX=$destdir/usr)
 zstd=(https://github.com/facebook/zstd/releases/download/v1.5.4/zstd-1.5.4.tar.gz MAKE)
@@ -31,10 +31,10 @@ python3=(https://python.org/ftp/python/3.10.6/Python-3.10.6.tgz CONFIGURE --with
 
 # glibc
 bison=(https://ftp.gnu.org/gnu/bison/bison-3.8.2.tar.xz CONFIGURE)
-glibc=(https://ftp.gnu.org/gnu/glibc/glibc-2.37.tar.xz CONFIGURE2 --disable-werror --enable-kernel=3.2 --enable-stack-protector=strong --with-headers=/usr/include libc_cv_slibdir=/usr/lib64)
+glibc=(https://ftp.gnu.org/gnu/glibc/glibc-2.35.tar.xz CONFIGURE2 --disable-werror --enable-kernel=3.2 --enable-stack-protector=strong --with-headers=/usr/include libc_cv_slibdir=/usr/lib64)
 
 # perl
-perl=(https://github.com/Perl/perl5/archive/refs/tags/v5.36.0.tar.gz CONFIGURE --prefix=/usr -Dinstallstyle=lib64/perl5 -Dman1dir=/usr/share/man/man1 -Dman3dir=/usr/share/man/man3 -Dusethreads); dirflags=()
+perl=(https://github.com/Perl/perl5/archive/refs/tags/v5.36.0.tar.gz CONFIGURE --prefix=/usr -Dinstallstyle=lib64/perl5 -Dman1dir=/usr/share/man/man1 -Dman3dir=/usr/share/man/man3 -Dusethreads);dirflags=()
 
 # gcc
 texinfo=(https://ftp.gnu.org/gnu/texinfo/texinfo-7.0.2.tar.xz CONFIGURE)
@@ -47,11 +47,11 @@ gcc=(https://ftp.gnu.org/gnu/gcc/gcc-11.3.0/gcc-11.3.0.tar.xz CONFIGURE --disabl
 # build tools
 autoconf=(https://ftp.gnu.org/gnu/autoconf/autoconf-2.71.tar.xz CONFIGURE)
 automake=(https://ftp.gnu.org/gnu/automake/automake-1.16.5.tar.xz CONFIGURE)
-cmake=(https://github.com/Kitware/CMake/releases/download/v3.25.3/cmake-3.25.3.tar.gz CONFIGURE); dirflags=()
+cmake=(https://github.com/Kitware/CMake/releases/download/v3.25.3/cmake-3.25.3.tar.gz CONFIGURE);dirflags=()
 ninja=(https://github.com/ninja-build/ninja/archive/v1.11.1/ninja-1.11.1.tar.gz CMAKE)
 
 # additional tools
-bc=(https://github.com/gavinhoward/bc/releases/download/6.4.0/bc-6.4.0.tar.xz CONFIGURE --disable-generated-tests); dirflags=(--libdir=$LIBDIR)
+bc=(https://github.com/gavinhoward/bc/releases/download/6.4.0/bc-6.4.0.tar.xz CONFIGURE --disable-generated-tests);dirflags=(--libdir=$LIBDIR)
 e2fsprogs=(https://kernel.org/pub/linux/kernel/people/tytso/e2fsprogs/v1.46.5/e2fsprogs-1.46.5.tar.xz CONFIGURE --enable-elf-shlibs --disable-^(libblkid libuuid uuidd fsck))
 flex=(https://github.com/westes/flex/releases/download/v2.6.4/flex-2.6.4.tar.gz CONFIGURE)
 gettext=(https://ftp.gnu.org/gnu/gettext/gettext-0.21.1.tar.xz CONFIGURE)
@@ -105,7 +105,7 @@ sudo=(https://sudo.ws/dist/sudo-1.9.13.tar.gz CONFIGURE)
 tmux=(https://github.com/tmux/tmux/releases/download/3.3a/tmux-3.3a.tar.gz CONFIGURE)
 tzdata=(https://github.com/eggert/tz/archive/refs/tags/2022g.tar.gz MAKE)
 usbutils=(https://www.kernel.org/pub/linux/utils/usb/usbutils/usbutils-015.tar.xz https://www.kernel.org/pub/linux/utils/usb/usbutils/usbutils-014.tar.xz CONFIGURE)
-vim=(https://anduin.linuxfromscratch.org/LFS/vim-9.0.1273.tar.xz CONFIGURE)
+vim=(https://anduin.linuxfromscratch.org/LFS/vim-9.0.1273.tar.xz CONFIGURE);srcdir=()
 which=(https://ftp.gnu.org/gnu/which/which-2.21.tar.gz CONFIGURE)
 
 # network

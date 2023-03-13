@@ -20,7 +20,8 @@ emerge pkgconf
 
 # compression
 ##############
-emerge zlib pigz
+emerge zlib 
+emerge pigz
 emerge bzip2 zstd
 
 # python3
@@ -46,11 +47,14 @@ emerge gmp mpfr libmpc gcc
 
 
 # buildtools
-emerge autoconf automake cmake ninja
+emerge autoconf automake 
+emerge cmake 
+emerge ninja
 
 # additional tools
 ###################
-emerge bc flex gettext gperf which
+emerge bc 
+emerge flex gettext gperf which
 emerge util-linux e2fsprogs shadow
 
 # ncurses
