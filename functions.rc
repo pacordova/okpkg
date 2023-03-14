@@ -85,17 +85,17 @@ fn _uninstall {
 
 fn _download {
     eval `{cat $db | grep '^'$1=} && *=$$1
-    >[2=] mkdir -p $srcdir 
+    >[2=] mkdir -p $src 
     curl -LO $1 &&
-        tar -C $srcdir --strip-components=1 -xf `{basename $1} &&
+        tar -C $src --strip-components=1 -xf `{basename $1} &&
         rm `{basename $1}
     if(test -f /usr/firepkg/patches/$pkgname.diff)
-        patch -d $srcdir -p1 </usr/firepkg/patches/$pkgname.diff
+        patch -d $src -p1 </usr/firepkg/patches/$pkgname.diff
     true
 }
 
 fn _build {
-    cd $srcdir
+    cd $src
     eval `{cat $db | grep '^'$1=} && *=$$1
     version=`{ 
         echo $1 |
