@@ -10,11 +10,11 @@ fn echo {
 fn MAKE {
     *=($MAKEOPTS PREFIX=$PREFIX path= $*)
     make $* &&
-        make install $* DESTDIR=$destdir
+    make install $* DESTDIR=$destdir
 }
 
 fn CONFIGURE {
-    *=(--prefix=$PREFIX --libdir=$LIBDIR $*)
+    *=(--prefix=$PREFIX $*)
     ./configure $* && MAKE
 }
 
@@ -23,10 +23,6 @@ fn CONFIGURE2 {
     mkdir build && cd build
         ../configure $* && MAKE
     cd ..
-}
-
-fn CONFIGURE3 {
-    ./configure --prefix=$PREFIX $* && MAKE
 }
 
 fn AUTORECONF {
@@ -40,34 +36,31 @@ fn AUTORECONF {
 fn CMAKE {
     *=(-DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_BUILD_TYPE=Release $*)
     mkdir build && cd build
-    	cmake .. $* && 
-	MAKE
+    	cmake .. $* && MAKE
     cd ..
 }
 
 fn MESON {
     *=(-Dprefix=$PREFIX -Dbuildtype=release $*)
     meson build $* &&
-        DESTDIR=$destdir ninja -C build install
+    DESTDIR=$destdir ninja -C build install
 }
 
 fn SCONS {
     *=(prefix=$PREFIX DESTDIR=$destdir $*)
-    scons -c &&
-        scons $* install
+    scons -c && scons $* install
 }
 
 fn WAF {
     python3 bootstrap.py &&
-        python3 waf configure --prefix=$PREFIX &&
-        python3 waf &&
-        python3 waf install --destdir=$destdir
+    python3 waf configure --prefix=$PREFIX &&
+    python3 waf &&
+    python3 waf install --destdir=$destdir
 }
 
 fn QMAKE {
     *=(INSTALL_ROOT=$destdir $*)
-    qmake -makefile &&
-        MAKE $*
+    qmake -makefile && MAKE $*
 }
 
 fn _install {
