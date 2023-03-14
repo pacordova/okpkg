@@ -10,8 +10,8 @@ CXXFLAGS=$CFLAGS
 
 # reproducibility
 LC_ALL=C
-SOURCE_DATE_EPOCH=1000000000
-KBUILD_BUILD_TIMESTAMP=1000000000
+SOURCE_DATE_EPOCH=`{date +%s | awk '{print substr($0, 0, 5) "00000"}'}
+KBUILD_BUILD_TIMESTAMP=$SOURCE_DATE_EPOCH
 
 # cross-compile
 build=x86_64-pc-linux-gnu
