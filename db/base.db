@@ -103,7 +103,7 @@ procps-ng=(https://sourceforge.net/projects/procps-ng/files/Production/procps-ng
 psmisc=(https://sourceforge.net/projects/psmisc/files/psmisc/psmisc-23.6.tar.xz CONFIGURE)
 sudo=(https://sudo.ws/dist/sudo-1.9.13.tar.gz CONFIGURE --sysconfdir=/etc --localstatedir=/var)
 tmux=(https://github.com/tmux/tmux/releases/download/3.3a/tmux-3.3a.tar.gz CONFIGURE)
-tzdata=(https://github.com/eggert/tz/archive/refs/tags/2022g.tar.gz MAKE)
+tzdata=(https://github.com/eggert/tz/archive/refs/tags/2022g.tar.gz MAKE LIBDIR=$LIBDIR)
 usbutils=(https://www.kernel.org/pub/linux/utils/usb/usbutils/usbutils-015.tar.xz CONFIGURE)
 vim=(https://anduin.linuxfromscratch.org/LFS/vim-9.0.1273.tar.xz CONFIGURE);srcdir=()
 which=(https://ftp.gnu.org/gnu/which/which-2.21.tar.gz CONFIGURE)
