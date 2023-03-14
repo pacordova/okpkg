@@ -14,17 +14,19 @@ fn MAKE {
 }
 
 fn CONFIGURE {
-    *=(--prefix=$PREFIX $dirflags $*)
-    ./configure $* &&
-        MAKE
+    *=(--prefix=$PREFIX --libdir=$LIBDIR $*)
+    ./configure $* && MAKE
 }
 
 fn CONFIGURE2 {
-    *=(--prefix=$PREFIX $dirflags $*)
+    *=(--prefix=$PREFIX $*)
     mkdir build && cd build
-        ../configure $* &&
-            MAKE
+        ../configure $* && MAKE
     cd ..
+}
+
+fn CONFIGURE3 {
+    ./configure --prefix=$PREFIX $* && MAKE
 }
 
 fn AUTORECONF {
