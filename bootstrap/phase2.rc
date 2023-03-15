@@ -9,7 +9,6 @@ CFLAGS='-O2 -fstack-protector-strong -fcommon -pipe'
 CXXFLAGS=$CFLAGS
 
 # reproducibility
-LC_ALL=C
 SOURCE_DATE_EPOCH=`{date +%s | awk '{print substr($0, 0, 5) "00000"}'}
 KBUILD_BUILD_TIMESTAMP=$SOURCE_DATE_EPOCH
 
