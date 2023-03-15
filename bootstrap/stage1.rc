@@ -7,7 +7,7 @@ mkdir $srcdir
 
 fn download {
     for(i in $*)
-        firepkg download $i >[2=1] | grep -e 'OK' -e 'FAILED'
+        firepkg download $i >[2=1]
 }
 
 download \
