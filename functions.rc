@@ -72,9 +72,13 @@ fn _install {
     {
         echo '#!/bin/rc' 
         echo 'rm $0'
-        tar -C / -xvf $1 |
-            sed 's|^|>[2=] rm -d ''/|g;s|$|''|g' |
-            sort -r
+        tar --directory / \
+            --dereference \
+            --extract \
+            --verbose \
+            --file $1 |
+        sed 's|^|>[2=] rm -d ''/|g;s|$|''|g' |
+        sort -r
     } >/usr/firepkg/uninstall/rm-$pkgname.rc
     chmod +x /usr/firepkg/uninstall/rm-$pkgname.rc
 }
