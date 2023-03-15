@@ -1,5 +1,7 @@
 #!/bin/rc
 
+# build phase
+
 . /usr/firepkg/make.conf
 
 fn emerge {

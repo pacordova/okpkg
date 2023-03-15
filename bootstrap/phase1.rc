@@ -1,5 +1,7 @@
 #!/bin/rc
 
+# download phase
+
 srcdir=/usr/firepkg/sources
 
 rm -r $srcdir >[2=]
