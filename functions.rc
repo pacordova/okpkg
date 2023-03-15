@@ -85,17 +85,28 @@ fn _uninstall {
 
 fn _download {
     eval `{cat $db | grep '^'$1=} && *=$$1
-    >[2=] mkdir -p $src 
-    curl -LO $1 &&
-        tar -C $src --strip-components=1 -xf `{basename $1} &&
-        rm `{basename $1}
-    if(test -f /usr/firepkg/patches/$pkgname.diff)
-        patch -d $src -p1 </usr/firepkg/patches/$pkgname.diff
+
+    mkdir -p /usr/firepkg/sources/$pkgname >[2=]
+
+    curl -LO $1
+
+    tar --directory /usr/firepkg/sources/$pkgname \
+        --strip-components=1 \
+        --extract \
+        --file `{basename $1}
+
+    rm `{basename $1}
+
+    if(test -f /usr/firepkg/patches/$pkgname.diff) 
+    patch --directory /usr/firpekg/sources/$pkgname \
+          --strip=1 \
+          --input=/usr/firepkg/patches/$pkgname.diff
+
     true
 }
 
 fn _build {
-    cd $src
+    cd /usr/firepkg/sources/$pkgname
     eval `{cat $db | grep '^'$1=} && *=$$1
     version=`{ 
         echo $1 |
@@ -130,13 +141,12 @@ fn _makepkg {
         --file $1.tar \
         --remove-files \
         .
+
     xz -T0 -f $1.tar
 }
 
 fn _chroot {
-    >[2=] mkdir $1/proc
-    >[2=] mkdir $1/sys
-    >[2=] mkdir $1/dev
+    mkdir $1/proc $1/sys $1/dev >[2=]
     mount -t proc -o ro /proc $1/proc
     mount -t sysfs -o ro /sys $1/sys
     mount -o ro,bind /dev $1/dev
@@ -148,6 +158,5 @@ fn _timesync {
         nc time.nist.gov 13 |
         awk 'NR>1 {print $2 " " $3}'
     }
-    date +'%y-%m-%d %H:%M:%S' -u -s $"date &&
-        hwclock --systohc
+    date +'%y-%m-%d %H:%M:%S' -u -s $"date && hwclock --systohc
 }

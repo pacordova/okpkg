@@ -17,9 +17,8 @@ if(~ $#* 0) {
 }
 
 if not for(i) {
-    pkgname=$i
-    src=/usr/firepkg/sources/$i
     destdir=/usr/firepkg/packages/$i
+    pkgname=$i
     switch($λ){
     case -S
         _uninstall $i &&
