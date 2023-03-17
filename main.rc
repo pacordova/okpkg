@@ -17,6 +17,7 @@ if(~ $#* 0) {
 }
 
 if not for(i) {
+    # set env
     destdir=/usr/firepkg/packages/$i
     patchfile=/usr/firepkg/patches/$i.diff
     uninstaller=/usr/firepkg/uninstall/rm-$i.rc
