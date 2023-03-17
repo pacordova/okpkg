@@ -90,7 +90,8 @@ fn _uninstall {
 fn _download {
     eval `{cat $db | grep '^'$1=} && *=$$1
 
-    mkdir -p /usr/firepkg/sources/$pkgname >[2=]
+    cd /usr/firepkg/sources
+    mkdir $pkgname >[2=]
 
     curl -LO $1
 
@@ -101,10 +102,8 @@ fn _download {
 
     rm `{basename $1}
 
-    if(test -f /usr/firepkg/patches/$pkgname.diff) 
-    patch --directory /usr/firpekg/sources/$pkgname \
-          --strip=1 \
-          --input=/usr/firepkg/patches/$pkgname.diff
+    if(test -f $patchfile) 
+    patch -d $pkgname -p1 <$patchfile
 
     true
 }

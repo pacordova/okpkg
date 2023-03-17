@@ -18,6 +18,7 @@ if(~ $#* 0) {
 
 if not for(i) {
     destdir=/usr/firepkg/packages/$i
+    patchfile=/usr/firepkg/patches/$i.diff
     pkgname=$i
     switch($λ){
     case -S
