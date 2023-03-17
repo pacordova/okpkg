@@ -95,7 +95,7 @@ fn _download {
 
     curl -LO $1
 
-    tar --directory /usr/firepkg/sources/$pkgname \
+    tar --directory $pkgname \
         --strip-components=1 \
         --extract \
         --file `{basename $1}
