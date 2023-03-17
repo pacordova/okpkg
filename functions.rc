@@ -2,10 +2,6 @@
 
 . /usr/firepkg/make.conf
 
-# robust echo
-fn echo { 
-    printf '%s\n' $"* 
-}
 
 fn MAKE {
     *=($MAKEOPTS PREFIX=$PREFIX path= $*)
@@ -79,12 +75,12 @@ fn _install {
             --file $1 |
         sed 's|^|>[2=] rm -d ''/|g;s|$|''|g' |
         sort -r
-    } >/usr/firepkg/uninstall/rm-$pkgname.rc
-    chmod +x /usr/firepkg/uninstall/rm-$pkgname.rc
+    } >$uninstaller
+    chmod +x $uninstaller
 }
 
 fn _uninstall {
-    /usr/firepkg/uninstall/rm-$1.rc || true
+    rc $uninstaller || true
 }
 
 fn _download {
