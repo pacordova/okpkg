@@ -18,23 +18,23 @@ if(~ $#* 0) {
 
 if not for(i) {
     # set env
-    destdir=/usr/firepkg/packages/$i
-    patchfile=/usr/firepkg/patches/$i.diff
-    uninstaller=/usr/firepkg/uninstall/rm-$i.rc
-    pkgname=$i
+    pkgname=`{basename $i}
+    destdir=/usr/firepkg/packages/$pkgname
+    patchfile=/usr/firepkg/patches/$pkgname.diff
+    uninstaller=/usr/firepkg/uninstall/rm-$pkgname.rc
 
     switch($λ){
     case -S
-        _uninstall $i &&
-        _download $i &&
-        _build $i &&
+        _uninstall $pkgname &&
+        _download $pkgname &&
+        _build $pkgname &&
         _install /usr/firepkg/packages/$i-$version-x86_64.tar.xz
     case -R
-        _uninstall $i
+        _uninstall $pkgname
     case -i
         _install $i
     case makepkg download build
-        _$λ $i
+        _$λ $pkgname
     case chroot
         _chroot $i
     }
