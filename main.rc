@@ -34,7 +34,7 @@ if not for(i) {
     case -i
         _install $i
     case makepkg download build
-        _$λ $pkgname
+        _$λ $i
     case chroot
         _chroot $i
     }
