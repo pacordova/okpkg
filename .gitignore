@@ -1,4 +1,4 @@
-uninstall
+index
 packages
 sources
 downloads
@@ -8,6 +8,7 @@ downloads
 *.swp
 *.o
 *.so
+*.txt
 *.tar.gz
 *.tar.xz
 *.tar.bz2

@@ -21,7 +21,7 @@ if not for(i) {
     pkgname=`{basename $i}
     destdir=/usr/firepkg/packages/$pkgname
     patchfile=/usr/firepkg/patches/$pkgname.diff
-    uninstaller=/usr/firepkg/uninstall/rm-$pkgname.rc
+    uninstaller=/usr/firepkg/index/rm-$pkgname.rc
 
     switch($λ){
     case -S
