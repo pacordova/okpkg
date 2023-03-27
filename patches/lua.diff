@@ -38,7 +38,7 @@
  
  CC= gcc -std=gnu99
 -CFLAGS= -O2 -Wall -Wextra -DLUA_COMPAT_5_3 $(SYSCFLAGS) $(MYCFLAGS)
-+CFLAGS+= -Wall -Wextra -DLUA_COMPAT_5_3
++CFLAGS+= -Wall -Wextra -DLUA_COMPAT_5_3 $(SYSCFLAGS)
  LDFLAGS= $(SYSLDFLAGS) $(MYLDFLAGS)
  LIBS= -lm $(SYSLIBS) $(MYLIBS)
  
