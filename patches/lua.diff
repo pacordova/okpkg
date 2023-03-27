@@ -1,0 +1,44 @@
+--- a/src/luaconf.h	2023-03-27 16:33:50.859648120 -0400
++++ b/src/luaconf.h	2023-03-27 16:34:18.319650235 -0400
+@@ -217,9 +217,9 @@
+ 
+ #else			/* }{ */
+ 
+-#define LUA_ROOT	"/usr/local/"
++#define LUA_ROOT	"/usr/"
+ #define LUA_LDIR	LUA_ROOT "share/lua/" LUA_VDIR "/"
+-#define LUA_CDIR	LUA_ROOT "lib/lua/" LUA_VDIR "/"
++#define LUA_CDIR	LUA_ROOT "lib64/lua/" LUA_VDIR "/"
+ 
+ #if !defined(LUA_PATH_DEFAULT)
+ #define LUA_PATH_DEFAULT  \
+--- a/Makefile	2023-03-27 16:31:32.706637481 -0400
++++ b/Makefile	2023-03-27 16:32:35.668642330 -0400
+@@ -10,13 +10,13 @@
+ # so take care if INSTALL_TOP is not an absolute path. See the local target.
+ # You may want to make INSTALL_LMOD and INSTALL_CMOD consistent with
+ # LUA_ROOT, LUA_LDIR, and LUA_CDIR in luaconf.h.
+-INSTALL_TOP= /usr/local
++INSTALL_TOP= $(DESTDIR)/usr
+ INSTALL_BIN= $(INSTALL_TOP)/bin
+ INSTALL_INC= $(INSTALL_TOP)/include
+-INSTALL_LIB= $(INSTALL_TOP)/lib
++INSTALL_LIB= $(INSTALL_TOP)/lib64
+ INSTALL_MAN= $(INSTALL_TOP)/man/man1
+ INSTALL_LMOD= $(INSTALL_TOP)/share/lua/$V
+-INSTALL_CMOD= $(INSTALL_TOP)/lib/lua/$V
++INSTALL_CMOD= $(INSTALL_TOP)/lib64/lua/$V
+ 
+ # How to install. If your install program does not support "-p", then
+ # you may have to run ranlib on the installed liblua.a.
+--- a/src/Makefile	2023-03-27 16:39:07.594672511 -0400
++++ b/src/Makefile	2023-03-27 16:39:27.234674024 -0400
+@@ -7,7 +7,7 @@
+ PLAT= guess
+ 
+ CC= gcc -std=gnu99
+-CFLAGS= -O2 -Wall -Wextra -DLUA_COMPAT_5_3 $(SYSCFLAGS) $(MYCFLAGS)
++CFLAGS+= -Wall -Wextra -DLUA_COMPAT_5_3
+ LDFLAGS= $(SYSLDFLAGS) $(MYLDFLAGS)
+ LIBS= -lm $(SYSLIBS) $(MYLIBS)
+ 
