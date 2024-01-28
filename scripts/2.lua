@@ -40,7 +40,7 @@ function build(pkgname)
     chdir("/usr/okpkg/sources")
 
     if pkgname:match("gcc") or pkgname:match("libstdc++") then
-        os.execute("cp -rp gcc " .. pkgname)
+        os.execute("cp -rp gcc13 " .. pkgname)
     end
 
     if pkgname:match("binutils") then

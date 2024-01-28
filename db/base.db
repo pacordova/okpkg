@@ -423,48 +423,6 @@ shadow = {
     ]]
 };
 
-gcc = {
-    sha256 = "e275e76442a6067341a27f04c5c6b83d8613144004c0413528863dc6b5c743da",
-    url = "https://mirrors.kernel.org/gnu/gcc/gcc-13.2.0/gcc-13.2.0.tar.xz",
-    build = "../configure",
-    flags = {
-        "--libdir=/usr/lib64",
-        "--with-linker-hash-style=gnu",
-        "--with-system-zlib",
-        "--enable-languages=c,c++",
-        "--enable-threads=posix",
-        "--enable-clocale=gnu",
-        "--enable-gnu-unique-object",
-        "--enable-__cxa_atexit",
-        "--enable-default-pie",
-        "--enable-default-ssp",
-        "--enable-shared",
-        "--enable-plugin",
-        "--disable-bootstrap",
-        "--disable-werror",
-        "--disable-fixincludes",
-        "--disable-multilib",
-        "--disable-nls",
-        "--disable-libstdcxx-pch",
-        "--disable-libssp",
-        "LD=ld"
-    },
-    post_install = [[
-        find ${DESTDIR} -name libgtkpeer.a  -exec rm -f '{}' +
-        find ${DESTDIR} -name libgjsmalsa.a -exec rm -f '{}' +
-        find ${DESTDIR} -name libgij.a      -exec rm -f '{}' +
-        ln -sr /usr/bin/cpp ${DESTDIR}/usr/lib64
-        mkdir -p ${DESTDIR}/usr/lib64/bfd-plugins
-        ln -sf ../../libexec/gcc/$(gcc -dumpmachine)/13.2.0/liblto_plugin.so \
-                ${DESTDIR}/usr/lib64/bfd-plugins/
-        mkdir -p ${DESTDIR}/usr/share/gdb/auto-load/usr/lib64
-        mv ${DESTDIR}/usr/lib64/*gdb.py \
-            ${DESTDIR}/usr/share/gdb/auto-load/usr/lib64
-        ln -s gcc ${DESTDIR}/usr/bin/cc
-        ln -s gcc ${DESTDIR}/usr/bin/c99
-    ]]
-};
-
 pkgconf = {
     sha256 = "266d5861ee51c52bc710293a1d36622ae16d048d71ec56034a02eb9cf9677761",
     url = "https://distfiles.ariadne.space/pkgconf/pkgconf-2.1.0.tar.xz",

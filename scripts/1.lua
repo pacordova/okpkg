@@ -21,6 +21,9 @@ for i in string.gmatch(buf, "([%w%-]-)={.-;") do
     download(i)
 end
 
+download("gcc13")
+download("gcc11")
+
 os.execute [[
     cd /usr/okpkg 
     rm sources.tar
