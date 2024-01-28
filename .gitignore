@@ -1,0 +1,15 @@
+main
+index
+packages
+sources
+downloads
+*~
+*.xz
+*.tar
+*.swp
+*.o
+*.so
+*.txt
+*.tar.gz
+*.tar.xz
+*.tar.bz2

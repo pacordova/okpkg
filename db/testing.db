@@ -1,0 +1,48 @@
+murrine = {
+    sha256 = _,
+    url = "https://download.gnome.org/sources/murrine/0.98/murrine-0.98.2.tar.xz",
+    build = "./configure",
+    flags = {
+    }
+};
+
+transmission = {
+    sha256 = _,
+    url = "https://github.com/transmission/transmission/releases/download/3.00/transmission-3.00.tar.xz",
+    build = "./configure",
+    flags = {
+    }
+};
+
+libx264 = {
+    sha256 = _,
+    url = "https://code.videolan.org/videolan/x264/-/archive/master/x264-master.tar.bz2",
+    build = "./configure",
+    flags = {
+        "--enable-shared",
+        "--disable-cli",
+        "--bit-depth=10"
+    }
+};
+
+ffmpeg = {
+    sha256 = _,
+    url = "https://ffmpeg.org/releases/ffmpeg-5.1.tar.xz",
+    build = "./configure",
+    flags = {
+        "--enable-shared",
+        "--enable-libvpx",
+        "--enable-gpl",
+        "--enable-libx264",
+        "--libdir=/usr/lib64"
+    }
+};
+
+libass = {
+    sha256 = _,
+    url = "https://github.com/libass/libass/releases/download/0.15.2/libass-0.15.2.tar.xz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64"
+    }
+};

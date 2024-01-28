@@ -1,0 +1,729 @@
+parted = {
+    sha256 = "3b43dbe33cca0f9a18601ebab56b7852b128ec1a3df3a9b30ccde5e73359e612", 
+    url = "https://mirrors.kernel.org/gnu/parted/parted-3.6.tar.xz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--disable-nls",
+        "--disable-static"
+    }
+};
+
+cmake = {
+    sha256 = "15e94f83e647f7d620a140a7a5da76349fc47a1bfed66d0f5cdee8e7344079ad",
+    url = "https://cmake.org/files/v3.28/cmake-3.28.1.tar.gz",
+    build = "./configure",
+    flags = {
+        "--system-curl",
+        "--system-expat",
+        "--system-zlib",
+        "--system-bzip2",
+        "--parallel=4"
+    },
+    post_install = [[
+        rm -r ${DESTDIR}/usr/share/cmake*/Help 
+        rm -r ${DESTDIR}/usr/share/bash-completion
+    ]]
+};
+
+ninja = {
+    sha256 = "31747ae633213f1eda3842686f83c2aa1412e0f5691d1c14dbbcc67fe7400cea",
+    url = "https://github.com/ninja-build/ninja/archive/v1.11.1/ninja-1.11.1.tar.gz",
+    build = "cmake"
+};
+
+meson = {
+    sha256 = "6020568bdede1643d4fb41e28215be38eff5d52da28ac7d125457c59e0032ad7",
+    url = "https://github.com/mesonbuild/meson/releases/download/1.3.1/meson-1.3.1.tar.gz",
+    build = _,
+    post_install = [[
+        mkdir -p ${DESTDIR}/usr/lib64/meson
+        cp -r * ${DESTDIR}/usr/lib64/meson
+        mkdir -p ${DESTDIR}/usr/bin
+        ln -sf /usr/lib64/meson/meson.py ${DESTDIR}/usr/bin/meson
+    ]]
+};
+
+glib2 = {
+    sha256 = "609801dd373796e515972bf95fc0b2daa44545481ee2f465c4f204d224b2bc21",
+    url = "https://download.gnome.org/sources/glib/2.78/glib-2.78.3.tar.xz",
+    build = "meson"
+};
+
+json-c = {
+    sha256 = "7550914d58fb63b2c3546f3ccfbe11f1c094147bd31a69dcd23714d7956159e6",
+    url = "https://s3.amazonaws.com/json-c_releases/releases/json-c-0.17.tar.gz",
+    build = "cmake",
+    flags = {
+        "-DCMAKE_INSTALL_PREFIX=/usr",
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DBUILD_STATIC_LIBS=OFF"
+    }
+};
+
+libfuse = {
+    sha256 = _,
+    url = "https://github.com/libfuse/libfuse/releases/download/fuse-3.13.1/fuse-3.13.1.tar.xz",
+    build = "meson",
+    pre_install = [[
+        sed -i '/^udev/,$ s/^/#/' util/meson.build 
+    ]]
+};
+
+libnl = {
+    sha256 = "aed507004d728a5cf11eab48ca4bf9e6e1874444e33939b9d3dfed25018ee9bb",
+    url = "https://github.com/thom311/libnl/releases/download/libnl3_9_0/libnl-3.9.0.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--sysconfdir=/etc",
+        "--disable-static",
+        "--disable-cli"    
+    }
+};
+
+libsigsegv = {
+    sha256 = "cdac3941803364cf81a908499beb79c200ead60b6b5b40cad124fd1e06caa295",
+    url = "https://mirrors.kernel.org/gnu/libsigsegv/libsigsegv-2.14.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--enable-shared",
+        "--disable-static"
+    }
+};
+
+libusb = {
+    sha256 = "12ce7a61fc9854d1d2a1ffe095f7b5fac19ddba095c259e6067a46500381b5a5",
+    url = "https://github.com/libusb/libusb/releases/download/v1.0.26/libusb-1.0.26.tar.bz2",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--disable-static"
+    }
+};
+
+psmisc = {
+    sha256 = "257dde06159a4c49223d06f1cccbeb68933a4514fc8f1d77c64b54f0d108822a",
+    url = "https://sourceforge.net/projects/psmisc/files/psmisc/psmisc-23.6.tar.xz",
+    build = "./configure"
+};
+
+cpio = {
+    sha256 = "145a340fd9d55f0b84779a44a12d5f79d77c99663967f8cfa168d7905ca52454",
+    url = "https://mirrors.kernel.org/gnu/cpio/cpio-2.14.tar.gz",
+    build = "./configure",
+    flags = {
+        "--disable-nls",
+        "--enable-mt",
+        "--with-rmt=/usr/libexec/rmt"
+    }
+};
+
+dcron = {
+    sha256 = "9e50edb6f5bd8153b16bad05087d985e5153ce45cc01ae77e7f842213fb4a824",
+    url = "http://www.jimpryor.net/linux/releases/dcron-4.5.tar.gz",
+    build = "make",
+    flags = {
+        "PREFIX=/usr"
+    }
+};
+
+dosfstools = {
+    sha256 = "64926eebf90092dca21b14259a5301b7b98e7b1943e8a201c7d726084809b527",
+    url = "https://github.com/dosfstools/dosfstools/releases/download/v4.2/dosfstools-4.2.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--enable-compat-symlinks",
+        "--mandir=/usr/share/man"
+    }
+};
+
+ed = {
+    sha256 = "ce2f2e5c424790aa96d09dacb93d9bbfdc0b7eb6249c9cb7538452e8ec77cd48",
+    url = "https://mirrors.kernel.org/gnu/ed/ed-1.19.tar.lz",
+    build = "./configure"
+};
+
+git = {
+    sha256 = "5446603e73d911781d259e565750dcd277a42836c8e392cac91cf137aa9b76ec",
+    url = "https://kernel.org/pub/software/scm/git/git-2.43.0.tar.xz",
+    build = "./configure",
+    flags = {
+        "--with-gitconfig=/etc/gitconfig",
+        "--libexecdir=/usr/lib64",
+    },
+    pre_install = [[
+        printf 'NO_GETTEXT=1\n' >> config.mak
+        printf 'NO_SVN_TESTS=1\n' >> config.mak
+        printf 'NO_TCLTK=1\n' >> config.mak
+        printf 'NO_PYTHON=1\n' >> config.mak
+        printf 'NO_PERL=1\n' >> config.mak
+        printf 'NO_SYS_POLL_H=1\n' >> config.mak
+        printf 'INSTALL_SYMLINKS=1\n' >> config.mak
+        printf 'USE_LIBPCRE2=1\n' >> config.mak
+    ]]
+};
+
+gnupg1 = {
+    sha256 = "c9462f17e651b6507848c08c430c791287cd75491f8b5a8b50c6ed46b12678ba",
+    url = "https://gnupg.org/ftp/gcrypt/gnupg/gnupg-1.4.23.tar.bz2",
+    build = "./configure",
+    flags = {
+        "--disable-nls"
+    },
+    post_install = [[
+        sed -i -e "s/$(date +'%Y-%m-%d')/$(date -d @$SOURCE_DATE_EPOCH +'%Y-%m-%d')/" \
+            ${DESTDIR}/usr/share/man/man1/gpg.1 ${DESTDIR}/usr/share/man/man1/gpgv.1
+    ]]
+};
+
+usbutils = {
+    sha256 = "a6a25ffdcf9103e38d7a44732aca17073f4e602b92e4ae55625231a82702e05b",
+    url = "https://mirrors.kernel.org/pub/linux/utils/usb/usbutils/usbutils-017.tar.xz",
+    build = "./configure",
+    flags = {
+        "--disable-static"
+    }
+};
+
+cryptsetup = {
+    sha256 = "410ded65a1072ab9c8e41added37b9729c087fef4d2db02bb4ef529ad6da4693",
+    url = "https://kernel.org/pub/linux/utils/cryptsetup/v2.6/cryptsetup-2.6.1.tar.xz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--disable-nls",
+        "--disable-ssh-token",
+        "--disable-asciidoc"
+    }
+};
+
+opendoas = {
+    sha256 = "4e98828056d6266bd8f2c93e6ecf12a63a71dbfd70a5ea99ccd4ab6d0745adf0",
+    url = "https://github.com/Duncaen/OpenDoas/releases/download/v6.8.2/opendoas-6.8.2.tar.xz",
+    build = "./configure",
+    flags = {
+    },
+    post_install = [[
+        ln -s doas ${DESTDIR}/usr/bin/sudo
+    ]]
+};
+
+which = {
+    sha256 = "f4a245b94124b377d8b49646bf421f9155d36aa7614b6ebf83705d3ffc76eaad",
+    url = "https://mirrors.kernel.org/gnu/which/which-2.21.tar.gz",
+    build = "./configure",
+};
+
+xorriso = {
+    sha256 = "d4b6b66bd04c49c6b358ee66475d806d6f6d7486e801106a47d331df1f2f8feb",
+    url = "http://mirrors.kernel.org/gnu/xorriso/xorriso-1.5.6.tar.gz",
+    build = "./configure"
+};
+
+pciutils = {
+    sha256 = "7deabe38ae5fa88a96a8c4947975cf31c591506db546e9665a10dddbf350ead0",
+    url = "https://mj.ucw.cz/download/linux/pci/pciutils-3.10.0.tar.gz",
+    build = "make",
+    flags = {
+        "PREFIX=/usr",
+        "LIBDIR=/usr/lib64",
+        "SHAREDIR=/usr/share/hwdata",
+        "SHARED=yes"
+    }
+};
+
+libevent = {
+    sha256 = "92e6de1be9ec176428fd2367677e61ceffc2ee1cb119035037a27d346b0403bb",
+    url = "https://github.com/libevent/libevent/releases/download/release-2.1.12-stable/libevent-2.1.12-stable.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64", 
+        "--disable-static"
+    }
+};
+
+tmux = {
+    sha256 = "e4fd347843bd0772c4f48d6dde625b0b109b7a380ff15db21e97c11a4dcdf93f",
+    url = "https://github.com/tmux/tmux/releases/download/3.3a/tmux-3.3a.tar.gz",
+    build = "./configure"
+};
+
+mawk = {
+    sha256 = "1ac1e106e2880d9f6579ad993217f4af3b6de9943f90099c8d00668cbecb4367",
+    url = "https://invisible-island.net/archives/mawk/mawk-1.3.4-20231126.tgz",
+    build = "./configure",
+};
+
+byacc = {
+    sha256 = "f2897779017189f1a94757705ef6f6e15dc9208ef079eea7f28abec577e08446",
+    url = "https://invisible-island.net/archives/byacc/byacc-20240109.tgz",
+    build = "./configure",
+};
+
+acpid2 = {
+    sha256 = "2d095c8cfcbc847caec746d62cdc8d0bff1ec1bc72ef7c674c721e04da6ab333",
+    url = "https://downloads.sourceforge.net/acpid2/acpid-2.0.34.tar.xz",
+    build = "./configure"
+};
+
+iptables = {
+    sha256 = _,
+    url = "https://www.netfilter.org/projects/iptables/files/iptables-1.8.9.tar.xz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--disable-nftables",
+        "--enable-libipq"
+    }
+};
+
+libmnl = {
+    sha256 = _,
+    url = "https://netfilter.org/projects/libmnl/files/libmnl-1.0.5.tar.bz2",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64"
+    }
+};
+
+connman = {
+    sha256 = _,
+    url = "https://mirrors.edge.kernel.org/pub/linux/network/connman/connman-1.41.tar.xz",
+    build = "./configure",
+    flags = {
+        "--sysconfdir=/etc",
+        "--localstatedir=/var",
+        "--libdir=/usr/lib64",
+        "--bindir=/usr/bin",
+        "--sbindir=/usr/bin",
+        "--with-systemdunitdir=no",
+        "--enable-pie",
+        "--disable-wispr",
+        "LIBS=-lncursesw" 
+    },
+    post_install = [[
+        rm -r ${DESTDIR}no 2>/dev/null
+    ]]
+};
+
+wpa_supplicant = {
+    sha256 = "20df7ae5154b3830355f8ab4269123a87affdea59fe74fe9292a91d0d7e17b2f",
+    url = "https://w1.fi/releases/wpa_supplicant-2.10.tar.gz",
+    build = "make",
+    flags = {
+        "--directory=wpa_supplicant",
+        "BINDIR=/usr/sbin",
+        "LIBDIR=/usr/lib64"
+    },
+    pre_install = [[
+    {
+        printf "CONFIG_BACKEND=file\n"
+            printf "CONFIG_CTRL_IFACE=y\n"
+            printf "CONFIG_DEBUG_FILE=y\n"
+            printf "CONFIG_DEBUG_SYSLOG=y\n"
+            printf "CONFIG_DEBUG_SYSLOG_FACILITY=LOG_DAEMON\n"
+            printf "CONFIG_DRIVER_NL80211=y\n"
+            printf "CONFIG_DRIVER_WEXT=y\n"
+            printf "CONFIG_DRIVER_WIRED=y\n"
+            printf "CONFIG_EAP_GTC=y\n"
+            printf "CONFIG_EAP_LEAP=y\n"
+            printf "CONFIG_EAP_MD5=y\n"
+            printf "CONFIG_EAP_MSCHAPV2=y\n"
+            printf "CONFIG_EAP_OTP=y\n"
+            printf "CONFIG_EAP_PEAP=y\n"
+            printf "CONFIG_EAP_TLS=y\n"
+            printf "CONFIG_EAP_TTLS=y\n"
+            printf "CONFIG_IEEE8021X_EAPOL=y\n"
+            printf "CONFIG_IPV6=y\n"
+            printf "CONFIG_LIBNL32=y\n"
+            printf "CONFIG_PEERKEY=y\n"
+            printf "CONFIG_PKCS12=y\n"
+            printf "CONFIG_READLINE=y\n"
+            printf "CONFIG_SMARTCARD=y\n"
+            printf "CONFIG_WPS=y\n"
+            printf "CFLAGS += -I/usr/include/libnl3\n"
+            printf "CONFIG_CTRL_IFACE_DBUS=y\n"
+            printf "CONFIG_CTRL_IFACE_DBUS_NEW=y\n"
+            printf "CONFIG_CTRL_IFACE_DBUS_INTRO=y\n"
+            printf "CONFIG_AP=y\n"
+            printf "CONFIG_BGSCAN_SIMPLE=y\n"
+    } >wpa_supplicant/.config 
+    ]],
+    post_install = [[
+        mkdir -p ${DESTDIR}/usr/sbin 
+            mkdir -p ${DESTDIR}/usr/share/man/man{5,8}
+    mkdir -p ${DESTDIR}/usr/share/dbus-1/{system-services,system.d}
+    cd wpa_supplicant
+        install -m644 doc/docbook/wpa_supplicant.conf.5 \
+        ${DESTDIR}/usr/share/man/man5/
+        install -m644 doc/docbook/wpa_{cli,passphrase,supplicant}.8 \
+        ${DESTDIR}/usr/share/man/man8/
+        install -m644 dbus/fi.w1.wpa_supplicant1.service \
+        ${DESTDIR}/usr/share/dbus-1/system-services/ 
+        install -d -m755 ${DESTDIR}/etc/dbus-1/system.d 
+        install -m644 dbus/dbus-wpa_supplicant.conf \
+        ${DESTDIR}/etc/dbus-1/system.d/wpa_supplicant.conf
+    ]]
+};
+
+libidn2 = {
+    sha256 = _,
+    url = "https://ftp.gnu.org/gnu/libidn/libidn2-2.3.4.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--disable-static"
+    }
+};
+
+libpsl = {
+    sha256 = _,
+    url = "https://github.com/rockdaboot/libpsl/releases/download/0.21.2/libpsl-0.21.2.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--disable-static"
+    }
+};
+
+samurai = {
+    sha256 = _,
+    url = "https://github.com/michaelforney/samurai/releases/download/1.2/samurai-1.2.tar.gz",
+    build = "make",
+    flags = {
+        "PREFIX=/usr"
+    },
+    post_install = [[
+        ln -sf samu ${DESTDIR}/usr/bin/ninja
+    ]]
+};
+
+libarchive = { 
+    sha256 = _,
+    url = "https://github.com/libarchive/libarchive/releases/download/v3.6.2/libarchive-3.6.2.tar.xz",
+    build = "./configure",
+    flags = { 
+        "--libdir=/usr/lib64",
+        "--disable-static",
+    } 
+};
+
+argon2 = {
+    sha256 = _, 
+    url = "https://github.com/P-H-C/phc-winner-argon2/archive/refs/tags/20190702.tar.gz", 
+    build = "make",
+    flags = {
+        "LIBRARY_REL=lib64"
+    }
+};
+
+man-pages = { 
+    sha256 = _, 
+    url = "https://kernel.org/pub/linux/docs/man-pages/man-pages-6.03.tar.xz", 
+    build = "make", 
+    flags = { 
+        "prefix=/usr" 
+    } 
+};
+
+autoconf = {
+    sha256 = _,
+    url = "https://mirrors.kernel.org/gnu/autoconf/autoconf-2.71.tar.xz",
+    build = "./configure"
+};
+
+automake = {
+    sha256 = _,
+    url = "https://mirrors.kernel.org/gnu/automake/automake-1.16.5.tar.xz",
+    build = "./configure"
+};
+
+lm-sensors = {
+    sha256 = _,
+    url = "https://github.com/lm-sensors/lm-sensors/archive/V3-6-0/lm-sensors-3-6-0.tar.gz",
+    build = "make",
+    flags = {
+        "LIBDIR=$LIBDIR"
+    }
+};
+
+lagrange = {
+    sha256 = _,
+    url = "https://git.skyjake.fi/gemini/lagrange/releases/download/v1.15.8/lagrange-1.15.8.tar.gz",
+    build = "cmake"
+};
+
+cmatrix = {
+    sha256 = _,
+    url = "https://www.asty.org/cmatrix2/dist/cmatrix-1.2a.tar.gz",
+    build = "./configure",
+};
+
+squashfs-tools = {
+    sha256 = _,
+    url = "https://github.com/plougher/squashfs-tools/archive/refs/tags/4.6.1.tar.gz",
+    build = "make",
+    flags = {
+        "--directory=squashfs-tools",
+        "INSTALL_PREFIX=${DESTDIR}/usr",
+        "XZ_SUPPORT=1"
+    }
+};
+
+zip = {
+    sha256 = _,
+    url = "https://downloads.sourceforge.net/infozip/zip30.tar.gz",
+    build = "make",
+    flags = {
+        "--file=unix/Makefile",
+        "prefix=${DESTDIR}/usr",
+        "generic_gcc"
+    }
+};
+
+unzip = {
+    sha256 = _,
+    url = "https://downloads.sourceforge.net/infozip/unzip60.tar.gz",
+    build = "make",
+    flags = {
+        "--file=unix/Makefile",
+        "prefix=${DESTDIR}/usr",
+        "generic"
+    }
+};
+
+libyaml = {
+    sha256 = _,
+    url = "https://github.com/yaml/libyaml/releases/download/0.2.5/yaml-0.2.5.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--disable-static"
+    }
+};
+
+ruby = {
+    sha256 = _,
+    url = "https://cache.ruby-lang.org/pub/ruby/3.2/ruby-3.2.1.tar.xz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--enable-shared",
+        "--without-valgrind",
+    }
+};
+
+gegl = {
+    sha256 = _,
+    url = "https://download.gimp.org/pub/gegl/0.4/gegl-0.4.40.tar.xz",
+    build = "meson"
+};
+
+
+gimp = {
+    sha256 = _,
+    url = "https://download.gimp.org/mirror/pub/gimp/v2.10/gimp-2.10.32.tar.bz2",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--sysconfdir=/etc",
+        "--disable-python" 
+    }
+};
+
+openblas = {
+    sha256 = _,
+    url = "https://github.com/xianyi/OpenBLAS/releases/download/v0.3.21/OpenBLAS-0.3.21.tar.gz",
+    build = "cmake",
+    flags = {
+        "-DCMAKE_INSTALL_PREFIX=/usr",
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DBUILD_SHARED_LIBS=ON"
+    }
+};
+
+r = {
+    sha256 = _,
+    url = "https://cran.r-project.org/src/base/R-4/R-4.3.1.tar.gz",
+    build = "./configure",
+    flags = {
+        "--disable-java",
+        "--without-recommended-packages",
+        "--without-x",
+        "--with-blas=openblas",
+        "--with-lapack"
+    }
+};
+
+libass = {
+    sha256 = _,
+    url = "https://github.com/libass/libass/releases/download/0.15.2/libass-0.15.2.tar.xz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64"
+    }
+};
+
+mpv = {
+    sha256 = _,
+    url = "https://github.com/mpv-player/mpv/archive/refs/tags/v0.35.1.tar.gz",
+    build = "meson",
+    flags = {
+        "-Dpipewire=disabled"
+    }
+};
+
+pavucontrol = {
+    sha256 = _,
+    url = "https://freedesktop.org/software/pulseaudio/pavucontrol/pavucontrol-5.0.tar.xz",
+    build = "./configure",
+};
+
+libconfig = {
+    sha256 = _,
+    url = "https://github.com/hyperrealm/libconfig/releases/download/v1.7.3/libconfig-1.7.3.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--sysconfdir=/etc"
+    }
+};
+
+ahoviewer = {
+    sha256 = _,
+    url = "https://github.com/ahodesuka/ahoviewer/archive/refs/tags/nightly.tar.gz",
+    build = "meson"
+};
+
+pwgen = {
+    sha256 = "dab03dd30ad5a58e578c5581241a6e87e184a18eb2c3b2e0fffa8a9cf105c97b",
+    url = "https://prdownloads.sourceforge.net/pwgen/pwgen-2.08.tar.gz",
+    build = "./configure"
+};
+
+flashrom = {
+    sha256 = _,
+    url = "https://download.flashrom.org/releases/flashrom-v1.3.0.tar.bz2",
+    build = "make",
+    flags = {
+        "PREFIX=/usr"
+    }
+};
+
+file-roller = {
+    sha256 = _,
+    url = "https://download.gnome.org/sources/file-roller/3.40/file-roller-3.40.0.tar.xz",
+    build = "meson"
+};
+
+libev = {
+    sha256 = _,
+    url = "http://dist.schmorp.de/libev/libev-4.33.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64"
+    }
+};
+
+picom = {
+    sha256 = _,
+    url = "https://github.com/yshui/picom/archive/refs/tags/v10.2.tar.gz",
+    build = "meson"
+};
+
+intltool = {
+    sha256 = _,
+    url = "https://launchpad.net/intltool/trunk/0.51.0/+download/intltool-0.51.0.tar.gz",
+    build = "./configure"
+};
+
+gcc11 = {
+    sha256 = "3f2db222b007e8a4a23cd5ba56726ef08e8b1f1eb2055ee72c1402cea73a8dd9",
+    url = "https://mirrors.kernel.org/gnu/gcc/gcc-11.4.0/gcc-11.4.0.tar.xz",
+    build = "../configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--with-linker-hash-style=gnu",
+        "--with-system-zlib",
+        "--enable-languages=ada,c,c++,d",
+        "--enable-threads=posix",
+        "--enable-clocale=gnu",
+        "--enable-gnu-unique-object",
+        "--enable-__cxa_atexit",
+        "--enable-default-pie",
+        "--enable-default-ssp",
+        "--enable-shared",
+        "--enable-plugin",
+        "--enable-bootstrap",
+        "--disable-werror",
+        "--disable-multilib",
+        "--disable-nls",
+        "--disable-libstdcxx-pch",
+        "--disable-libssp",
+        "LD=ld"
+    },
+    pre_install = [[
+        find /opt/gnat -name ld -exec mv -v {} {}.old \;
+        find /opt/gnat -name as -exec mv -v {} {}.old \;
+    ]],
+    post_install = [[
+        find ${DESTDIR} -name libgtkpeer.a  -exec rm -f '{}' +
+        find ${DESTDIR} -name libgjsmalsa.a -exec rm -f '{}' +
+        find ${DESTDIR} -name libgij.a      -exec rm -f '{}' +
+        ln -sr /usr/bin/cpp ${DESTDIR}/usr/lib64
+        mkdir -p ${DESTDIR}/usr/lib64/bfd-plugins
+        ln -sf ../../libexec/gcc/$(gcc -dumpmachine)/11.4.0/liblto_plugin.so \
+                ${DESTDIR}/usr/lib64/bfd-plugins/
+        mkdir -p ${DESTDIR}/usr/share/gdb/auto-load/usr/lib64
+        mv ${DESTDIR}/usr/lib64/*gdb.py \
+            ${DESTDIR}/usr/share/gdb/auto-load/usr/lib64
+        ln -s gcc ${DESTDIR}/usr/bin/cc
+        ln -s gcc ${DESTDIR}/usr/bin/c99
+    ]]
+};
+
+gcc13 = {
+    sha256 = "e275e76442a6067341a27f04c5c6b83d8613144004c0413528863dc6b5c743da",
+    url = "https://mirrors.kernel.org/gnu/gcc/gcc-13.2.0/gcc-13.2.0.tar.xz",
+    build = "../configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--with-linker-hash-style=gnu",
+        "--with-system-zlib",
+        "--enable-languages=ada,c,c++,d,fortran,go,lto,m2,objc,obj-c++",
+        "--enable-threads=posix",
+        "--enable-clocale=gnu",
+        "--enable-gnu-unique-object",
+        "--enable-__cxa_atexit",
+        "--enable-default-pie",
+        "--enable-default-ssp",
+        "--enable-shared",
+        "--enable-plugin",
+        "--enable-lto",
+        "--enable-bootstrap",
+        "--disable-werror",
+        "--disable-fixincludes",
+        "--disable-multilib",
+        "--disable-nls",
+        "--disable-libstdcxx-pch",
+        "--disable-libssp",
+        "LD=ld"
+    },
+    post_install = [[
+        find ${DESTDIR} -name libgtkpeer.a  -exec rm -f '{}' +
+        find ${DESTDIR} -name libgjsmalsa.a -exec rm -f '{}' +
+        find ${DESTDIR} -name libgij.a      -exec rm -f '{}' +
+        ln -sr /usr/bin/cpp ${DESTDIR}/usr/lib64
+        mkdir -p ${DESTDIR}/usr/lib64/bfd-plugins
+        ln -sf ../../libexec/gcc/$(gcc -dumpmachine)/13.2.0/liblto_plugin.so \
+                ${DESTDIR}/usr/lib64/bfd-plugins/
+        mkdir -p ${DESTDIR}/usr/share/gdb/auto-load/usr/lib64
+        mv ${DESTDIR}/usr/lib64/*gdb.py \
+            ${DESTDIR}/usr/share/gdb/auto-load/usr/lib64
+        ln -s gcc ${DESTDIR}/usr/bin/cc
+        ln -s gcc ${DESTDIR}/usr/bin/c99
+    ]]
+};

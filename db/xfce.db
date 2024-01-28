@@ -1,0 +1,248 @@
+itstool = {
+    sha256 = _,
+    url = "https://files.itstool.org/itstool/itstool-2.0.7.tar.bz2",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--sysconfdir=/etc"
+    }
+};
+
+libxfce4util = {
+    sha256 = _,
+    url = "https://archive.xfce.org/src/xfce/libxfce4util/4.12/libxfce4util-4.12.1.tar.bz2",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--sysconfdir=/etc"
+    }
+
+};
+
+xfconf = {
+    sha256 = _,
+    url = "https://archive.xfce.org/src/xfce/xfconf/4.12/xfconf-4.12.1.tar.bz2",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--sysconfdir=/etc"
+    }
+
+};
+
+libxfce4ui = {
+    sha256 = _,
+    url = "https://archive.xfce.org/src/xfce/libxfce4ui/4.12/libxfce4ui-4.12.1.tar.bz2",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--sysconfdir=/etc"
+    }
+};
+
+exo = {
+    sha256 = _,
+    url = "https://archive.xfce.org/src/xfce/exo/0.10/exo-0.10.7.tar.bz2",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--sysconfdir=/etc"
+    }
+};
+
+garcon = {
+    sha256 = _,
+    url = "https://archive.xfce.org/src/xfce/garcon/0.4/garcon-0.4.0.tar.bz2",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--sysconfdir=/etc"
+    }
+};
+
+thunar = {
+    sha256 = _,
+    url = "https://archive.xfce.org/src/xfce/thunar/1.6/Thunar-1.6.18.tar.bz2",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--sysconfdir=/etc"
+    }
+};
+
+thunar-volman = {
+    sha256 = _,
+    url = "https://archive.xfce.org/src/xfce/thunar-volman/0.8/thunar-volman-0.8.1.tar.bz2",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--sysconfdir=/etc"
+    }
+};
+
+tumbler = {
+    sha256 = _,
+    url = "https://archive.xfce.org/src/xfce/tumbler/0.1/tumbler-0.1.33.tar.bz2",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--sysconfdir=/etc"
+    }
+};
+
+xfce4-appfinder = {
+    sha256 = _,
+    url = "https://archive.xfce.org/src/xfce/xfce4-appfinder/4.12/xfce4-appfinder-4.12.0.tar.bz2",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--sysconfdir=/etc"
+    }
+};
+
+xfce4-panel = {
+    sha256 = _,
+    url = "https://archive.xfce.org/src/xfce/xfce4-panel/4.12/xfce4-panel-4.12.2.tar.bz2",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--sysconfdir=/etc"
+    }
+};
+
+xfce4-power-manager = {
+    sha256 = _,
+    url = "https://archive.xfce.org/src/xfce/xfce4-power-manager/1.4/xfce4-power-manager-1.4.4.tar.bz2",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--sysconfdir=/etc"
+    }
+};
+
+xfce4-settings = {
+    sha256 = _,
+    url = "https://archive.xfce.org/src/xfce/xfce4-settings/4.12/xfce4-settings-4.12.4.tar.bz2",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--sysconfdir=/etc"
+    }
+};
+
+xfdesktop = {
+    sha256 = _,
+    url = "https://archive.xfce.org/src/xfce/xfdesktop/4.12/xfdesktop-4.12.5.tar.bz2",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--sysconfdir=/etc"
+    }
+};
+
+xfwm4 = {
+    sha256 = _,
+    url = "https://archive.xfce.org/src/xfce/xfwm4/4.12/xfwm4-4.12.5.tar.bz2",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--sysconfdir=/etc"
+    }
+};
+
+xfce4-session = {
+    sha256 = _,
+    url = "https://archive.xfce.org/src/xfce/xfce4-session/4.12/xfce4-session-4.12.1.tar.bz2",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--sysconfdir=/etc"
+    }
+};
+
+xfce4-battery-plugin = {
+    sha256 = _,
+    url = "https://archive.xfce.org/src/panel-plugins/xfce4-battery-plugin/1.0/xfce4-battery-plugin-1.0.5.tar.bz2",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--sysconfdir=/etc"
+    }
+};
+
+ristretto = {
+    sha256 = _,
+    url = "https://archive.xfce.org/src/apps/ristretto/0.8/ristretto-0.8.1.tar.bz2",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--sysconfdir=/etc"
+    }
+};
+
+xfce4-screenshooter = {
+    sha256 = _,
+    url = "https://archive.xfce.org/src/apps/xfce4-screenshooter/1.8/xfce4-screenshooter-1.8.2.tar.bz2",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--sysconfdir=/etc"
+    }
+};
+
+thunar-archive-plugin = {
+    sha256 = _,
+    url = "https://archive.xfce.org/src/thunar-plugins/thunar-archive-plugin/0.3/thunar-archive-plugin-0.3.1.tar.bz2",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--sysconfdir=/etc"
+    }
+};
+
+greybird = {
+    sha256 = _,
+    url = "https://github.com/shimmerproject/Greybird/archive/refs/tags/v3.23.1.tar.gz",
+    build = "meson"
+};
+
+xfce4-pulseaudio-plugin = {
+    sha256 = _,
+    url = "https://archive.xfce.org/src/panel-plugins/xfce4-pulseaudio-plugin/0.1/xfce4-pulseaudio-plugin-0.1.0.tar.bz2",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--sysconfdir=/etc"
+    }
+};
+
+mousepad = {
+    sha256 = _,
+    url = "https://archive.xfce.org/src/apps/mousepad/0.4/mousepad-0.4.2.tar.bz2",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--sysconfdir=/etc"
+    }
+};
+
+xfce4-i3-workspaces-plugin = {
+    sha256 = _,
+    url = "https://github.com/denesb/xfce4-i3-workspaces-plugin/archive/refs/tags/1.4.1.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--sysconfdir=/etc"
+    }
+};
+
+xarchiver = {
+    sha256 = _,
+    url = "https://github.com/ib/xarchiver/archive/0.5.4.20/xarchiver-0.5.4.20.tar.gz",
+    build = "./configure","--libexecdir=/usr/lib64/xfce4"
+    flags = {
+        "--libdir=/usr/lib64",
+        "--sysconfdir=/etc",
+        "--libexecdir=/usr/lib64/xfce4"
+    }
+};

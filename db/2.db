@@ -1,0 +1,281 @@
+binutils-pass1 = {
+    build = "../configure",
+    flags = {
+        "--prefix=/tools",
+        "--with-sysroot=${DESTDIR}",
+        "--target=${TARGET}",
+        "--disable-nls",
+        "--enable-gprofng=no",
+        "--disable-werror"
+    }
+};
+
+gcc-pass1 = {
+    build = "../configure",
+    flags = {
+        "--target=${TARGET}",
+        "--prefix=/tools",
+        "--with-glibc-version=${glibc_version}",
+        "--with-sysroot=${DESTDIR}",
+        "--with-newlib",
+        "--without-headers",     
+        "--enable-initfini-array",
+        "--enable-default-pie",
+        "--enable-default-ssp",
+        "--disable-nls",             
+        "--disable-shared",          
+        "--disable-multilib",        
+        "--disable-threads",         
+        "--disable-libatomic",       
+        "--disable-libgomp",         
+        "--disable-libquadmath",     
+        "--disable-libssp",          
+        "--disable-libvtv",          
+        "--disable-libstdcxx",       
+        "--disable-werror",
+        "--enable-languages=c,c++"
+    },
+    post_install = [[
+        cd ..
+        cat gcc/limitx.h gcc/glimits.h gcc/limity.h > \
+          `dirname $(${TARGET}-gcc -print-libgcc-file-name)`/include/limits.h
+    ]]
+};
+
+glibc = {
+    build = "../configure",
+    flags = {
+        "--prefix=/usr",                      
+        "--libdir=/usr/lib64",
+        "--host=${HOST}",                    
+        "--build=$(../scripts/config.guess)", 
+        "--enable-kernel=4.14",                
+        "--enable-crypt",
+        "--with-headers=${DESTDIR}/usr/include",    
+        "libc_cv_slibdir=/usr/lib64"
+    },
+    pre_install = [[
+        mkdir build && cd build
+        echo "rootsbindir=/usr/sbin" > configparms
+    ]],
+    post_install = [[
+        #/mnt/tools/libexec/gcc/${TARGET}/${gcc_version}/install-tools/mkheaders
+    ]]
+};
+
+libstdc++ = {
+    build = "../libstdc++-v3/configure",
+    flags = {
+        "--host=${HOST}",
+        "--build=$(../config.guess)",
+        "--prefix=/usr",
+        "--libdir=/usr/lib64",
+        "--disable-multilib",
+        "--disable-nls",
+        "--disable-libstdcxx-pch",
+        "--with-gxx-include-dir=/tools/${TARGET}/include/c++/${gcc_version}"
+    },
+    post_install = [[
+        rm -f ${DESTDIR}/usr/lib64/lib{stdc++,stdc++fs,supc++}.la
+    ]]
+};
+
+m4 = {
+    build = "./configure",
+    flags = {
+        "--prefix=/usr",
+        "--disable-nls",
+        "--host=${HOST}",
+        "--build=$(build-aux/config.guess)"
+    }
+};
+
+bash = {
+    build = "./configure",
+    flags = {
+        "--prefix=/usr",
+        "--libdir=/usr/lib64",
+        "--disable-nls",
+        "--build=$(sh support/config.guess)",
+        "--host=${HOST}",
+        "--without-bash-malloc"
+    },
+    post_install = [[
+        ln -s bash ${DESTDIR}/bin/sh
+    ]]
+};
+
+coreutils = {
+    build = "./configure",
+    flags = {
+        "--prefix=/usr",
+        "--disable-nls",
+        "--host=${HOST}",
+        "--build=$(build-aux/config.guess)",
+        "--enable-install-program=hostname",
+        "--enable-no-install-program=kill,uptime"
+    },
+    post_install = [[
+        mv ${DESTDIR}/usr/bin/chroot ${DESTDIR}/usr/sbin
+        mkdir -p ${DESTDIR}/usr/share/man/man8
+        mv ${DESTDIR}/usr/share/man/man1/chroot.1 \
+            ${DESTDIR}/usr/share/man/man8/chroot.8
+        sed -i 's/"1"/"8"/' ${DESTDIR}/usr/share/man/man8/chroot.8
+    ]]
+};
+
+diffutils = {
+    build = "./configure",
+    flags = {
+        "--prefix=/usr",
+        "--disable-nls",
+        "--host=${HOST}"
+    }
+};
+
+findutils = {
+    build = "./configure",
+    flags = {
+        "--prefix=/usr",
+        "--disable-nls",
+        "--localstatedir=/var/lib/locate",
+        "--host=${HOST}",
+        "--build=$(build-aux/config.guess)"
+    }
+};
+
+gawk = {
+    build = "./configure",
+    flags = {
+        "--prefix=/usr",
+        "--disable-nls",
+        "--libdir=/usr/lib64",
+        "--sysconfdir=/etc",
+        "--host=${HOST}",
+        "--build=$(build-aux/config.guess)"
+    }
+};
+
+grep = {
+    build = "./configure",
+    flags = {
+        "--prefix=/usr",
+        "--disable-nls",
+        "--host=${HOST}"
+    }
+};
+
+make = {
+    build = "./configure",
+    flags = {
+        "--prefix=/usr",
+        "--disable-nls",
+        "--without-guile",
+        "--host=${HOST}",
+        "--build=$(build-aux/config.guess)"
+    },
+};
+
+patch = {
+    build = "./configure",
+    flags = {
+        "--prefix=/usr",
+        "--host=${HOST}",
+        "--build=$(build-aux/config.guess)"
+    }
+};
+
+sed = {
+    build = "./configure",
+    flags = {
+        "--prefix=/usr",
+        "--disable-nls",
+        "--host=${HOST}" 
+    }
+};
+
+tar = {
+    build = "./configure",
+    flags = {
+        "--prefix=/usr",
+        "--disable-nls",
+        "--host=${HOST}",
+        "--build=$(build-aux/config.guess)"
+    }
+};
+
+xz = {
+    build = "./configure",
+    flags = {
+        "--prefix=/usr",
+        "--libdir=/usr/lib64",
+        "--disable-nls",
+        "--host=${HOST}",
+        "--build=$(build-aux/config.guess)",
+        "--disable-static"
+    },
+    post_install = [[
+        rm ${DESTDIR}/usr/lib64/liblzma.la
+    ]]
+};
+
+lua = {
+    build = "make",
+    flags = {
+        "CC=x86_64-unknown-linux-gnu-gcc",
+    }   
+};
+
+binutils-pass2 = {
+    build = "../configure",
+    flags = {
+        "--prefix=/usr",
+        "--libdir=/usr/lib64",
+        "--build=$(../config.guess)",
+        "--host=${HOST}",
+        "--disable-nls",
+        "--enable-shared",
+        "--enable-gprofng=no",
+        "--disable-werror",
+        "--enable-64-bit-bfd",
+    },
+    pre_install = [[
+        sed '6009s/$add_dir//' -i ltmain.sh
+    ]],
+    post_install = [[
+        rm ${DESTDIR}/usr/lib64/lib{bfd,ctf,ctf-nobfd,opcodes}.{a,la}
+    ]]
+};
+
+gcc-pass2 = {
+    build = "../configure",
+    flags = {
+        "--build=$(../config.guess)",
+        "--host=${HOST}",
+        "--target=${TARGET}",
+        "LDFLAGS_FOR_TARGET=-L${PWD}/${TARGET}/libgcc",
+        "--prefix=/usr",
+        "--libdir=/usr/lib64",
+        "--with-build-sysroot=${DESTDIR}",
+        "--enable-initfini-array",
+        "--enable-default-pie",
+        "--enable-default-ssp",
+        "--disable-nls",
+        "--disable-multilib",
+        "--disable-libatomic",
+        "--disable-libgomp",
+        "--disable-libquadmath",
+        "--disable-libssp",
+        "--disable-libvtv",
+        "--disable-werror",
+        "--enable-languages=c,c++"
+    },
+    pre_install = [[
+        sed '/thread_header =/s/@.*@/gthr-posix.h/' \
+            -i libgcc/Makefile.in libstdc++-v3/include/Makefile.in
+    ]],
+    post_install = [[
+        ln -s gcc ${DESTDIR}/usr/bin/cc
+        ln -s gcc ${DESTDIR}/usr/bin/c99
+    ]] 
+};

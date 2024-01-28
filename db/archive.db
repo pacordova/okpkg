@@ -1,0 +1,1837 @@
+neovim = {
+    sha256 = _,
+    url = "https://github.com/neovim/neovim/archive/refs/tags/stable.tar.gz",
+    build = "cmake"
+};
+
+pam = {
+    sha256 = _,
+    url = "https://github.com/linux-pam/linux-pam/releases/download/v1.5.3/Linux-PAM-1.5.3.tar.xz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--sbindir=/usr/sbin",
+        "--sysconfdir=/etc",
+        "--disable-nls",
+        "--libdir=/usr/lib64",
+        "--enable-securedir=/usr/lib64/security"
+    },
+    post_install = [[
+        chmod 4755 ${DESTDIR}/usr/sbin/unix_chkpwd
+    ]]
+};
+
+gzip = {
+    sha256 = "7454eb6935db17c6655576c2e1b0fabefd38b4d0936e0f87f48cd062ce91a057",
+    url = "https://mirrors.kernel.org/gnu/gzip/gzip-1.13.tar.xz",
+    build = "./configure"
+};
+
+sysklogd = {
+    sha256 = "5166c185ae23c92e8b9feee66a6e3d0bc944bf673112f53e3ecf62e08ce7c201",
+    url = "https://www.infodrom.org/projects/sysklogd/download/sysklogd-1.5.1.tar.gz",
+    build = "make",
+    flags = {
+        "BINDIR=${DESTDIR}/usr/libexec",
+        "MANDIR=${DESTDIR}/usr/share/man",
+    },
+    pre_install = [[
+        sed -i '/Error loading kernel symbols/{n;n;d}' ksym_mod.c
+        sed -i 's/union wait/int/' syslogd.c
+        sed -i 's/syslogd.pid/syslog.pid/g' Makefile
+        mkdir -p ${DESTDIR}/usr/share/man/man5 
+        mkdir -p ${DESTDIR}/usr/share/man/man8 
+        mkdir -p ${DESTDIR}/usr/libexec
+    ]]
+};
+
+ell = {
+    sha256 = _,
+    url = "https://mirrors.edge.kernel.org/pub/linux/libs/ell/ell-0.57.tar.xz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64"
+    }
+};
+
+editline = {
+    sha256 = _,
+    url = "https://www.thrysoee.dk/editline/libedit-20221030-3.1.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--enable-widec"
+    },
+    post_install = [[
+        ln -sf libedit.a ${DESTDIR}/usr/lib64/libreadline.a
+        ln -sf libedit.so ${DESTDIR}/usr/lib64/libreadline.so
+        mkdir -p ${DESTDIR}/usr/include/readline
+        touch ${DESTDIR}/usr/include/readline/history.h
+        touch ${DESTDIR}/usr/include/readline/tilde.h
+        ln -sf ../editline/readline.h ${DESTDIR}/usr/include/readline/readline.h
+        ln -sf libedit.pc ${DESTDIR}/usr/lib64/pkgconfig/readline.pc
+    ]]
+};
+
+awk = {
+    sha256 = _,
+    url = "https://github.com/onetrueawk/awk/archive/refs/tags/20220122.tar.gz",
+    build = "make"
+};
+
+htop = {
+    sha256 = _,
+    url = "https://github.com/htop-dev/htop/releases/download/3.2.2/htop-3.2.2.tar.xz",
+    build = "./configure",
+    flags = {
+    }
+};
+
+libnl = {
+    sha256 = _,
+    url = "https://github.com/thom311/libnl/releases/download/libnl3_7_0/libnl-3.7.0.tar.gz",
+    build = "./configure",
+    flags = {
+        "--disable-psf"
+    }
+};
+
+rc = {
+    sha256 = _,
+    url = "https://github.com/pacordova/rc/archive/refs/heads/master.tar.gz",
+    build = "make"
+};
+
+sysvinit = {
+    sha256 = _,
+    url = "https://download.savannah.gnu.org/releases/sysvinit/sysvinit-3.01.tar.xz",
+    build = "make",
+    flags = {
+        "ROOT=${DESTDIR}"
+    }
+};
+
+time = {
+    sha256 = _,
+    url = "https://ftp.gnu.org/gnu/time/time-1.9.tar.gz",
+    build = "./configure"
+        flags = {
+        }
+};
+
+c-ares = {
+    sha256 = _,
+    url = "https://c-ares.haxx.se/download/c-ares-1.19.0.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64"
+    }
+};
+
+libcheck = {
+    sha256 = _,
+    url = "https://github.com/libcheck/check/releases/download/0.15.2/check-0.15.2.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64"
+    }
+};
+
+libnsl = {
+    sha256 = _,
+    url = "https://github.com/thkukuk/libnsl/releases/download/v2.0.0/libnsl-2.0.0.tar.xz",
+    build = "./configure",
+    flags = {
+    }
+};
+
+libpipeline = {
+    sha256 = _,
+    url = "https://download.savannah.gnu.org/releases/libpipeline/libpipeline-1.5.7.tar.gz",
+    build = "./configure",
+    flags = {
+    }
+};
+
+libuv = {
+    sha256 = _,
+    url = "https://dist.libuv.org/dist/v1.44.2/libuv-v1.44.2.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64"
+
+    }
+};
+
+pcre = {
+    sha256 = _,
+    url = "https://sourceforge.net/projects/pcre/files/pcre/8.45/pcre-8.45.tar.bz2",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--enable-unicode-properties",
+        "--enable-pcre16",
+        "--enable-pcre32"
+    }
+};
+
+
+-- libraries-2
+bamf = {
+    sha256 = _,
+    url = "https://launchpad.net/bamf/0.5/0.5.6/+download/bamf-0.5.6.tar.gz",
+    build = "./configure",
+    flags = {
+    }
+};
+
+extra-build = "cmake",-modules = {
+    sha256 = _,
+    url = "https://download.kde.org/stable/frameworks/5.91/extra-build = "cmake",-modules-5.91.0.tar.xz",
+    build = "cmake",
+};
+
+graphviz = {
+    sha256 = _,
+    url = "https://gitlab.com/graphviz/graphviz/-/archive/2.50.0/graphviz-2.50.0.tar.bz2",
+    build = "cmake",
+};
+
+lib2geom = {
+    sha256 = _,
+    "",
+    build = "cmake",,
+    "-D2GEOM_TESTING=FALSE",
+    "-D2GEOM_BUILD_SHARED=ON"
+};
+
+libdouble-conversion = {
+    sha256 = _,
+    url = "https://github.com/google/double-conversion/archive/v3.2.0/double-conversion-3.2.0.tar.gz",
+    build = "cmake",,
+    "-DBUILD_SHARED_LIBS=ON"
+};
+
+libiconv = {
+    sha256 = _,
+    url = "https://ftp.gnu.org/gnu/pub/gnu/libiconv/libiconv-1.17.tar.gz",
+    build = "./configure",
+    flags = {
+        "--without-pic",
+        "--enable-static",
+        "--disable-shared",
+        "--disable-relocatable"
+    }
+};
+
+libndp = {
+    sha256 = _,
+    url = "http://libndp.org/files/libndp-1.8.tar.gz",
+    build = "./configure",
+    flags = {
+    }
+};
+
+libpotrace = {
+    sha256 = _,
+    url = "https://downloads.sourceforge.net/potrace/potrace-1.16.tar.gz",
+    build = "./configure",
+    flags = {
+        "--with-libpotrace"
+    }
+};
+
+librsvg = {
+    sha256 = _,
+    url = "https://download.gnome.org/sources/librsvg/2.52/librsvg-2.52.9.tar.xz",
+    build = "./configure",
+    flags = {
+    }
+};
+
+libsodium = {
+    sha256 = _,
+    url = "https://download.libsodium.org/libsodium/releases/libsodium-1.0.18-stable.tar.gz",
+    build = "./configure",
+    flags = {
+    }
+};
+
+libtimezonemap = {
+    sha256 = _,
+    url = "https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/libtimezonemap/0.4.6-3/libtimezonemap_0.4.6.orig.tar.gz",
+    build = "autoreconf"
+};
+
+libtool = {
+    sha256 = _,
+    url = "https://ftp.gnu.org/gnu/libtool/libtool-2.4.6.tar.xz",
+    build = "./configure"
+};
+
+libwnck3 = {
+    sha256 = _,
+    url = "https://download.gnome.org/sources/libwnck/40/libwnck-40.1.tar.xz",
+    build = "meson",
+    flags = {
+        "-Dprefix=/usr",
+        "-Dbuildtype=release"
+    }
+};
+
+libwnck = {
+    sha256 = _,
+    url = "https://download.gnome.org/sources/libwnck/2.31/libwnck-2.31.0.tar.xz",
+    build = "./configure"
+};
+
+libxslt = {
+    sha256 = _,
+    url = "https://download.gnome.org/sources/libxslt/1.1/libxslt-1.1.35.tar.xz",
+    build = "./configure"
+};
+
+ostree = {
+    sha256 = _,
+    url = "https://github.com/ostreedev/ostree/releases/download/v2022.5/libostree-2022.5.tar.xz",
+    build = "./configure"
+};
+
+yajl = {
+    sha256 = _,
+    url = "https://github.com/lloyd/yajl/archive/refs/tags/2.1.0.tar.gz",
+    build = "cmake",
+};
+
+libnl-tiny = {
+    sha256 = _,
+    url = "https://github.com/sabotage-linux/libnl-tiny/archive/refs/tags/v1.0.1.tar.gz",
+    build = "make"
+};
+
+
+-- development
+guile = {
+    sha256 = _,
+    url = "https://ftp.gnu.org/gnu/guile/guile-3.0.8.tar.xz",
+    build = "./configure"
+};
+
+help2man = {
+    sha256 = _,
+    url = "https://ftp.gnu.org/gnu/help2man/help2man-1.49.2.tar.xz",
+    build = "./configure"
+};
+
+autobuild = {
+    sha256 = _,
+    url = "https://download.savannah.gnu.org/releases/autobuild/autobuild-5.3.tar.gz",
+    build = "./configure"
+};
+
+octave = {
+    sha256 = _,
+    url = "https://ftp.gnu.org/gnu/octave/octave-6.4.0.tar.gz",
+    build = "./configure"
+};
+
+dynare = {
+    sha256 = _,
+    url = "https://dynare.org/release/source/dynare-5.0.tar.xz",
+    build = "./configure",
+    "--disable-doc",
+    "--disable-dynare++",
+    "--disable-matlab",
+    "--disable-mex-dynare++",
+    "--disable-mex-ms-sbvar",
+    "--disable-mex-kalman-steady-state"
+};
+
+gdb = {
+    sha256 = _,
+    url = "https://ftp.gnu.org/gnu/gdb/gdb-11.2.tar.xz",
+    build = "./configure",
+    "--without-guile",
+    "--with-system-readline",
+    "--without-python"
+};
+
+
+
+
+-- security
+qtpass = {
+    sha256 = _,
+    url = "https://github.com/IJHack/QtPass/archive/refs/tags/1.4.0-rc1.tar.gz",
+    qmake
+};
+
+libscrypt = {
+    sha256 = _,
+    url = "https://github.com/technion/libscrypt/archive/refs/tags/v1.22.tar.gz",
+    build = "make"
+};
+
+libseccomp = {
+    sha256 = _,
+    url = "https://github.com/seccomp/libseccomp/releases/download/v2.5.3/libseccomp-2.5.3.tar.gz",
+    build = "./configure"
+};
+
+sha3sum = {
+    sha256 = _,
+    url = "https://github.com/maandree/sha3sum/archive/refs/tags/1.2.2.tar.gz",
+    build = "make"
+};
+
+libkeccak = {
+    sha256 = _,
+    url = "https://github.com/maandree/libkeccak/archive/refs/tags/1.3.1.2.tar.gz",
+    build = "make"
+};
+
+pass = {
+    sha256 = _,
+    url = "https://git.zx2c4.com/password-store/snapshot/password-store-1.7.4.tar.xz",
+    build = "make"
+};
+
+
+-- compression
+lzo = {
+    sha256 = _,
+    url = "https://oberhumer.com/opensource/lzo/download/lzo-2.10.tar.gz",
+    build = "./configure",
+    "--enable-shared"
+};
+
+lz4 = {
+    sha256 = _,
+    url = "https://github.com/lz4/lz4/archive/refs/tags/v1.9.3.tar.gz",
+    build = "make"
+};
+
+lzop = {
+    sha256 = _,
+    url = "https://lzop.org/download/lzop-1.04.tar.gz",
+    build = "./configure"
+};
+
+ucl = {
+    sha256 = _,
+    url = "https://oberhumer.com/opensource/ucl/download/ucl-1.03.tar.gz",
+    build = "./configure"
+};
+
+upx = {
+    sha256 = _,
+    url = "https://github.com/upx/upx/releases/download/v3.96/upx-3.96-src.tar.xz",
+    build = "make"
+};
+
+
+-- filesystem
+jfsutils = {
+    sha256 = _,
+    url = "https://jfs.sourceforge.net/project/pub/jfsutils-1.1.15.tar.gz",
+    build = "./configure"
+};
+
+bcachefs-tools = {
+    sha256 = _,
+    url = "https://github.com/koverstreet/bcachefs-tools/archive/master.tar.gz",
+    build = "make"
+};
+
+btrfs-progs = {
+    sha256 = _,
+    url = "https://kernel.org/pub/linux/kernel/people/kdave/btrfs-progs/btrfs-progs-v5.16.2.tar.xz",
+    build = "./configure",
+    "--disable-documentation"
+};
+
+
+-- network
+qbittorrent = {
+    sha256 = _,
+    url = "https://sourceforge.net/projects/qbittorrent/files/qbittorrent/qbittorrent-4.4.3.1/qbittorrent-4.4.3.1.tar.xz",
+    build = "cmake",
+};
+
+gnutls = {
+    sha256 = _,
+    url = "https://gnupg.org/ftp/gcrypt/gnutls/v3.6/gnutls-3.6.16.tar.xz",
+    build = "./configure",
+    "--with-included-libtasn1",
+    "--without-p11-kit",
+    "--enable-shared"
+};
+
+nettle = {
+    sha256 = _,
+    url = "https://ftp.gnu.org/gnu/gnu/nettle/nettle-3.7.3.tar.gz",
+    build = "./configure",
+    "--enable-shared"
+};
+
+sharutils = {
+    sha256 = _,
+    url = "https://ftp.gnu.org/gnu/sharutils/sharutils-4.15.2.tar.xz",
+    build = "./configure"
+};
+
+torrential = {
+    sha256 = _,
+    url = "https://github.com/davidmhewitt/torrential/archive/refs/tags/2.0.1.tar.gz",
+    build = "meson",
+    flags = {
+        "-Dprefix=/usr",
+        "-Dbuildtype=release"
+    }
+};
+
+openresolv = {
+    sha256 = _,
+    url = "https://roy.marples.name/downloads/openresolv/openresolv-3.12.0.tar.xz",
+    build = "./configure"
+};
+
+deluge = {
+    sha256 = _,
+    url = "https://ftp.osuosl.org/pub/deluge/source/2.1/deluge-2.1.1.tar.xz",
+    "PYTHON"
+};
+
+rsync = {
+    sha256 = _,
+    url = "https://samba.org/ftp/rsync/src/rsync-3.2.7.tar.gz",
+    build = "./configure",
+    "--disable-lz4",
+    "--disable-xxhash",
+    "--disable-md2man"
+};
+
+libtorrent = {
+    sha256 = _,
+    url = "https://github.com/arvidn/libtorrent/releases/download/v2.0.7/libtorrent-rasterbar-2.0.7.tar.gz",
+    build = "cmake",
+};
+
+ppp = {
+    sha256 = _,
+    url = "https://samba.org/ftp/ppp/ppp-2.4.9.tar.gz",
+    build = "./configure"
+};
+
+wget = {
+    sha256 = _,
+    url = "https://ftp.gnu.org/gnu/wget/wget-1.21.3.tar.gz",
+    build = "./configure",
+    "--with-ssl=openssl"
+};
+
+wireguard = {
+    sha256 = _,
+    url = "https://git.zx2c4.com/wireguard-tools/snapshot/wireguard-tools-1.0.20210914.tar.xz",
+    build = "make"
+};
+
+tinyproxy = {
+    sha256 = _,
+    url = "https://github.com/tinyproxy/tinyproxy/releases/download/1.11.1/tinyproxy-1.11.1.tar.xz",
+    build = "./configure"
+};
+
+iwd = {
+    sha256 = _,
+    url = "https://mirrors.edge.kernel.org/pub/linux/network/wireless/iwd-2.3.tar.xz",
+    build = "./configure",
+    "--localstatedir=/var",
+    "--disable-systemd-service",
+    "LIBS=-lncursesw"
+};
+
+
+-- system
+ag = {
+    sha256 = _,
+    url = "https://geoff.greer.fm/ag/releases/the_silver_searcher-2.2.0.tar.gz",
+    build = "./configure"
+};
+
+xorriso = {
+    sha256 = _,
+    url = "https://ftp.gnu.org/gnu/xorriso/xorriso-1.5.4.tar.gz",
+    build = "./configure"
+};
+
+crosstool-ng = {
+    sha256 = _,
+    url = "http://crosstool-ng.org/download/crosstool-ng/crosstool-ng-1.25.0.tar.xz",
+    build = "./configure"
+};
+
+fontforge = {
+    sha256 = _,
+    url = "https://github.com/fontforge/fontforge/releases/download/20201107/fontforge-20201107.tar.xz",
+    build = "cmake",,
+    "-DENABLE_DOCS=OFF",
+    "-DENABLE_LIBSPIRO=OFF"
+};
+
+wine = {
+    sha256 = _,
+    url = "https://dl.winehq.org/wine/source/7.0/wine-7.0.tar.xz",
+    build = "./configure",
+    "--enable-win64"
+};
+
+logrotate = {
+    sha256 = _,
+    url = "https://github.com/logrotate/logrotate/releases/download/3.19.0/logrotate-3.19.0.tar.xz",
+    build = "./configure"
+};
+
+qemu = {
+    sha256 = _,
+    url = "https://download.qemu-project.org/qemu-6.2.0.tar.xz",
+    build = "./configure"
+};
+
+upower = {
+    sha256 = _,
+    url = "https://gitlab.freedesktop.org/upower/upower/uploads/177df5b9f9b76f25a2ad9da41aa0c1fa/upower-0.99.13.tar.xz",
+    build = "meson",
+    flags = {
+        "-Dprefix=/usr",
+        "-Dbuildtype=release",
+        "-Dsystemdsystemunitdir=no",
+        "-Dgtk-doc=false",
+        "-Dman=false"
+    }
+};
+
+libgusb = {
+    sha256 = _,
+    url = "https://people.freedesktop.org/~hughsient/releases/libgusb-0.3.10.tar.xz",
+    build = "meson",
+    flags = {
+        "-Dprefix=/usr",
+        "-Dbuildtype=release",
+        "-Dtests=false",
+        "-Dvapi=false",
+        "-Ddocs=false"
+    }
+};
+
+shared-mime-info = {
+    sha256 = _,
+    url = "https://gitlab.freedesktop.org/xdg/shared-mime-info/-/archive/2.1/shared-mime-info-2.1.tar.gz",
+    build = "meson",
+    flags = {
+        "-Dprefix=/usr",
+        "-Dbuildtype=release"
+    }
+};
+
+
+-- databases
+sqlite = {
+    sha256 = _,
+    url = "https://sqlite.org/2022/sqlite-autoconf-3380400.tar.gz",
+    build = "./configure"
+};
+
+
+-- misc
+fcron = {
+    sha256 = _,
+    url = "https://fcron.free.fr/archives/fcron-3.2.1.src.tar.gz",
+    build = "./configure",
+    flags = {
+        "--without-sendmail"
+    }
+};
+
+nano = {
+    sha256 = _,
+    url = "https://ftp.gnu.org/gnu/nano/nano-7.2.tar.xz",
+    build = "./configure"
+};
+
+ed = {
+    sha256 = _,
+    url = "https://ftp.gnu.org/gnu/ed/ed-1.4.tar.gz",
+    build = "./configure"
+};
+
+libedit = {
+    sha256 = _,
+    url = "https://github.com/troglobit/editline/releases/download/1.17.1/editline-1.17.1.tar.xz",
+    build = "./configure"
+};
+
+sudo = {
+    sha256 = _,
+    url = "https://www.sudo.ws/dist/sudo-1.9.13p1.tar.gz",
+    build = "./configure",
+    flags = {
+        "--sysconfdir=/etc",
+        "--localstatedir=/var"
+    }
+};
+
+elvis = {
+    sha256 = _,
+    url = "https://mirrors.slackware.com/slackware/slackware64-current/source/a/elvis/elvis-2.2_0.tar.bz2",
+    build = "./configure",
+    flags = {
+        "--without-x",
+        "PREFIX=$destdir/usr"
+    }
+};
+
+nvim = {
+    sha256 = _,
+    url = "https://github.com/neovim/neovim/archive/refs/tags/v0.7.2.tar.gz",
+    build = "cmake",
+};
+
+openssl = {
+    sha256 = _,
+    url = "https://openssl.org/source/openssl-3.0.1.tar.gz",
+    build = "./configure"
+};
+
+tcsh = {
+    sha256 = _,
+    url = "https://astron.com/pub/tcsh/tcsh-6.24.07.tar.gz",
+    build = "./configure"
+};
+
+
+xarchiver = {
+    sha256 = _,
+    url = "https://github.com/ib/xarchiver/archive/0.5.4.17/xarchiver-0.5.4.17.tar.gz",
+    build = "./configure"
+};
+
+xcb-util-xrm = {
+    sha256 = _,
+    url = "https://github.com/Airblader/xcb-util-xrm/releases/download/v1.3/xcb-util-xrm-1.3.tar.gz",
+    build = "./configure"
+};
+
+pnmixer = {
+    sha256 = _,
+    url = "https://github.com/nicklan/pnmixer/releases/download/v0.7.2/pnmixer-v0.7.2.tar.gz",
+    build = "cmake"
+};
+
+nitrogen = {
+    sha256 = _,
+    url = "https://github.com/l3ib/nitrogen/releases/download/1.6.1/nitrogen-1.6.1.tar.gz",
+    build = "./configure"
+};
+
+compiz = {
+    sha256 = _,
+    url = "https://github.com/compiz-reloaded/compiz/releases/download/v0.8.14/compiz-0.8.14.tar.xz",
+    build = "./configure"
+};
+
+xcursor-themes = {
+    sha256 = _,
+    url = "https://x.org/pub/individual/data/xcursor-themes-1.0.6.tar.bz2",
+    build = "./configure"
+};
+
+i3wm = {
+    sha256 = _,
+    url = "https://i3wm.org/downloads/i3-4.20.1.tar.xz",
+    build = "meson",
+    flags = {
+        "-Dprefix=/usr",
+        "-Dbuildtype=release"
+    }
+};
+
+-- multimedia
+strawberry = {
+    sha256 = _,
+    url = "https://files.strawberrymusicplayer.org/strawberry-1.0.7.tar.xz",
+    build = "cmake"
+};
+
+vlc = {
+    sha256 = _,
+    url = "https://download.videolan.org/vlc/3.0.16/vlc-3.0.16.tar.xz",
+    build = "./configure"
+};
+
+inkscape = {
+    sha256 = _,
+    url = "https://inkscape.org/gallery/item/33449/inkscape-1.2_2022-05-15_dc2aedaf03.tar.xz",
+    build = "cmake"
+};
+
+dupeguru = {
+    sha256 = _,
+    url = "https://github.com/arsenetar/dupeguru/archive/4.3.1.tar.gz",
+    build = "make"
+};
+
+optipng = {
+    sha256 = _,
+    url = "https://prdownloads.sourceforge.net/optipng/optipng-0.7.7.tar.gz",
+    build = "./configure"
+};
+
+azpainter = {
+    sha256 = _,
+    url = "https://github.com/Symbian9/azpainter/releases/download/v2.1.6/azpainter-2.1.6.tar.xz",
+    build = "./configure"
+};
+
+faad2 = {
+    sha256 = _,
+    url = "https://github.com/knik0/faad2/archive/refs/tags/2_10_0.tar.gz",
+    build = "./configure"
+};
+
+libjpeg = {
+    sha256 = _,
+    url = "https://downloads.sourceforge.net/libjpeg-turbo/libjpeg-turbo-2.1.2.tar.gz",
+    build = "cmake",
+};
+
+libexif = {
+    sha256 = _,
+    url = "https://github.com/libexif/libexif/releases/download/v0.6.24/libexif-0.6.24.tar.bz2",
+    build = "./configure"
+};
+
+libpng = {
+    sha256 = _,
+    url = "https://downloads.sourceforge.net/libpng/libpng-1.6.37.tar.xz",
+    build = "./configure"
+};
+
+libtiff = {
+    sha256 = _,
+    url = "https://download.osgeo.org/libtiff/tiff-4.3.0.tar.gz",
+    build = "cmake",
+};
+
+alsa-lib = {
+    sha256 = _,
+    url = "https://alsa-project.org/files/pub/lib/alsa-lib-1.2.8.tar.bz2",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64"
+    }
+};
+
+alsa-utils = {
+    sha256 = _,
+    url = "https://alsa-project.org/files/pub/utils/alsa-utils-1.2.8.tar.bz2",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--localstatedir=/var",
+        "--disable-alsaconf",
+        "--disable-bat",
+        "--disable-xmlto",
+        "--with-curses=ncursesw"
+    }
+};
+
+sdl-image = {
+    sha256 = _,
+    url = "https://github.com/libsdl-org/SDL_image/archive/refs/tags/release-2.6.1.tar.gz",
+    build = "./configure"
+};
+
+sdl2 = {
+    sha256 = _,
+    url = "https://libsdl.org/release/SDL2-2.0.20.tar.gz",
+    build = "./configure"
+};
+
+magick = {
+    sha256 = _,
+    url = "https://imagemagick.org/download/releases/ImageMagick-7.1.0-25.tar.xz",
+    build = "./configure",
+    flags = {
+        "--enable-hdri",
+        "--with-modules"
+    }
+};
+
+gstreamer = {
+    sha256 = _,
+    url = "https://gstreamer.freedesktop.org/src/gstreamer/gstreamer-1.20.0.tar.xz",
+    build = "meson"
+};
+
+pipewire = {
+    sha256 = _,
+    url = "https://github.com/PipeWire/pipewire/archive/0.3.47/pipewire-0.3.47.tar.gz",
+    build = "meson"
+};
+
+
+-- xfs
+libinih = {
+    sha256 = _,
+    url = "https://github.com/benhoyt/inih/archive/r53/inih-r53.tar.gz",
+    build = "meson"
+};
+
+liburcu = {
+    sha256 = _,
+    url = "https://lttng.org/files/urcu/userspace-rcu-0.13.1.tar.bz2",
+    build = "./configure"
+};
+
+xfsprogs = {
+    sha256 = _,
+    url = "https://kernel.org/pub/linux/utils/fs/xfs/xfsprogs/xfsprogs-5.14.2.tar.xz",
+    build = "make"
+};
+
+libnftnl = {
+    sha256 = _,
+    url = "https://netfilter.org/pub/libnftnl/libnftnl-1.2.1.tar.bz2",
+    build = "./configure"
+};
+
+appstream-glib = {
+    sha256 = _,
+    url = "https://github.com/hughsie/appstream-glib/archive/refs/tags/appstream_glib_0_8_0.tar.gz",
+    build = "meson",
+    flags = {
+        "-Drpm=false",
+        "-Dstemmer=false",
+        "-Dman=false"
+    }
+};
+
+babl = {
+    sha256 = _,
+    url = "https://download.gimp.org/pub/babl/0.1/babl-0.1.88.tar.xz",
+    build = "meson"
+};
+
+gegl = {
+    sha256 = _,
+    url = "https://download.gimp.org/pub/gegl/0.4/gegl-0.4.34.tar.xz",
+    build = "meson"
+};
+
+libmypaint = {
+    sha256 = _,
+    url = "https://github.com/mypaint/libmypaint/releases/download/v1.6.1/libmypaint-1.6.1.tar.xz",
+    build = "./configure"
+};
+
+paintbrush = {
+    sha256 = _,
+    url = "https://github.com/mypaint/mypaint-brushes/releases/download/v1.3.1/mypaint-brushes-1.3.1.tar.xz",
+    build = "./configure"
+};
+
+libgpg-error = {
+    sha256 = _,
+    url = "https://gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-1.45.tar.bz2",
+    build = "./configure"
+};
+
+libgcrypt = {
+    sha256 = _,
+    url = "https://gnupg.org/ftp/gcrypt/libgcrypt/libgcrypt-1.10.1.tar.bz2",
+    build = "./configure"
+};
+
+libksba = {
+    sha256 = _,
+    url = "https://gnupg.org/ftp/gcrypt/libksba/libksba-1.6.0.tar.bz2",
+    build = "./configure"
+};
+
+libassuan = {
+    sha256 = _,
+    url = "https://gnupg.org/ftp/gcrypt/libassuan/libassuan-2.5.5.tar.bz2",
+    build = "./configure"
+};
+
+ntbtls = {
+    sha256 = _,
+    url = "https://gnupg.org/ftp/gcrypt/ntbtls/ntbtls-0.3.1.tar.bz2",
+    build = "./configure"
+};
+
+npth = {
+    sha256 = _,
+    url = "https://gnupg.org/ftp/gcrypt/npth/npth-1.6.tar.bz2",
+    build = "./configure"
+};
+
+pinentry = {
+    sha256 = _,
+    url = "https://gnupg.org/ftp/gcrypt/pinentry/pinentry-1.2.0.tar.bz2",
+    build = "./configure"
+};
+
+gnupg = {
+    sha256 = _,
+    url = "https://gnupg.org/ftp/gcrypt/gnupg/gnupg-2.3.6.tar.bz2",
+    build = "./configure"
+};
+
+
+
+-- documents
+okular = {
+    sha256 = _,
+    url = "https://download.kde.org/stable/release-service/21.12.2/src/okular-21.12.2.tar.xz",
+    build = "cmake",
+    flags = {
+        "-DCMAKE_INSTALL_PREFIX=/usr",
+        "-DCMAKE_BUILD_TYPE=Release",
+    }
+};
+
+groff = {
+    sha256 = _,
+    url = "https://ftp.gnu.org/gnu/groff/groff-1.22.4.tar.gz",
+    build = "./configure",
+    flags = {
+        "PAGE=letter"
+    }
+};
+
+gs = {
+    sha256 = _,
+    url = "https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs9550/ghostscript-9.55.0.tar.xz",
+    build = "./configure"
+};
+
+libspectre = {
+    sha256 = _,
+    url = "https://libspectre.freedesktop.org/releases/libspectre-0.2.10.tar.gz",
+    build = "./configure"
+};
+
+
+-- gnome
+harfbuzz = {
+    sha256 = _,
+    url = "https://github.com/harfbuzz/harfbuzz/releases/download/3.4.0/harfbuzz-3.4.0.tar.xz",
+    build = "meson"
+};
+
+gtk3 = {
+    sha256 = _,
+    url = "https://download.gnome.org/sources/gtk+/3.24/gtk+-3.24.31.tar.xz",
+    build = "meson",
+    flags = {
+        "-Dtests=false",
+        "-Ddemos=false",
+        "-Dexamples=false",
+        "-Dwin32_backend=false",
+        "-Dquartz_backend=false",
+        "-Dwayland_backend=false"
+    }
+};
+
+adwaita = {
+    sha256 = _,
+    url = "https://download.gnome.org/sources/adwaita-icon-theme/41/adwaita-icon-theme-41.0.tar.xz",
+    build = "./configure"
+};
+
+at-spi2-atk = {
+    sha256 = _,
+    url = "https://download.gnome.org/sources/at-spi2-atk/2.38/at-spi2-atk-2.38.0.tar.xz",
+    build = "meson"
+};
+
+at-spi2-core = {
+    sha256 = _,
+    url = "https://download.gnome.org/sources/at-spi2-core/2.42/at-spi2-core-2.42.0.tar.xz",
+    build = "meson"
+};
+
+atk = {
+    sha256 = _,
+    url = "https://download.gnome.org/sources/atk/2.36/atk-2.36.0.tar.xz",
+    build = "meson"
+};
+
+caribou = {
+    sha256 = _,
+    url = "https://download.gnome.org/sources/caribou/0.4/caribou-0.4.21.tar.xz",
+    build = "./configure"
+};
+
+clutter-gtk = {
+    sha256 = _,
+    url = "https://download.gnome.org/sources/clutter-gtk/1.8/clutter-gtk-1.8.4.tar.xz",
+    build = "./configure"
+};
+
+clutter = {
+    sha256 = _,
+    url = "https://download.gnome.org/sources/clutter/1.26/clutter-1.26.4.tar.xz",
+    build = "./configure",
+    flags = {
+        "--enable-egl-backend",
+        "--enable-evdev-input"
+    }
+};
+
+cogl = {
+    sha256 = _,
+    url = "https://download.gnome.org/sources/cogl/1.22/cogl-1.22.8.tar.xz",
+    build = "./configure",
+    flags = {
+        "--enable-xlib-egl-platform"
+    }
+};
+
+fragments = {
+    sha256 = _,
+    url = "https://gitlab.gnome.org/World/Fragments/-/archive/2.0.2/Fragments-2.0.2.tar.gz",
+    build = "meson"
+};
+
+gdk-pixbuf = {
+    sha256 = _,
+    url = "https://download.gnome.org/sources/gdk-pixbuf/2.42/gdk-pixbuf-2.42.6.tar.xz",
+    build = "meson",
+    flags = {
+        "-Dgio_sniffing=false",
+        "-Dinstalled_tests=false"
+    }
+};
+
+gedit = {
+    sha256 = _,
+    url = "https://download.gnome.org/sources/gedit/41/gedit-41.0.tar.xz",
+    build = "meson",
+    flags = {
+        "-Dspell=disabled",
+        "-Duser_documentation=false",
+        "-Dplugin_externaltools=false"
+    }
+};
+
+geocode-glib = {
+    sha256 = _,
+    url = "https://download.gnome.org/sources/geocode-glib/3.26/geocode-glib-3.26.2.tar.xz",
+    build = "meson"
+};
+
+gjs = {
+    sha256 = _,
+    url = "https://download.gnome.org/sources/gjs/1.70/gjs-1.70.1.tar.xz",
+    build = "meson"
+};
+
+glib-networking = {
+    sha256 = _,
+    url = "https://download.gnome.org/sources/glib-networking/2.70/glib-networking-2.70.1.tar.xz",
+    build = "meson"
+};
+
+glibmm = {
+    sha256 = _,
+    url = "https://download.gnome.org/sources/glibmm/2.66/glibmm-2.66.2.tar.xz",
+    build = "meson",
+    flags = {
+        "-Dbuild-documentation=false",
+        "-Dbuild-examples=false"
+    }
+};
+
+gnome-autoar = {
+    sha256 = _,
+    url = "https://download.gnome.org/sources/gnome-autoar/0.4/gnome-autoar-0.4.3.tar.xz",
+    build = "meson"
+};
+
+gnome-backgrounds = {
+    sha256 = _,
+    url = "https://download.gnome.org/sources/gnome-backgrounds/41/gnome-backgrounds-41.0.tar.xz",
+    build = "meson"
+};
+
+gnome-color-manager = {
+    sha256 = _,
+    url = "https://download.gnome.org/sources/gnome-color-manager/3.36/gnome-color-manager-3.36.0.tar.xz",
+    build = "meson",
+    flags = {
+        "-Dsystemd_session=disable",
+        "-Dsystemd=false",
+        "-Dsystemd_journal=false"
+    }
+};
+
+gnome-common = {
+    sha256 = _,
+    url = "https://download.gnome.org/sources/gnome-common/3.18/gnome-common-3.18.0.tar.xz",
+    build = "./configure"
+};
+
+gnome-desktop = {
+    sha256 = _,
+    url = "https://download.gnome.org/sources/gnome-desktop/41/gnome-desktop-41.3.tar.xz",
+    build = "meson"
+};
+
+gnome-menus = {
+    sha256 = _,
+    url = "https://download.gnome.org/sources/gnome-menus/3.36/gnome-menus-3.36.0.tar.xz",
+    build = "./configure"
+};
+
+gnome-session = {
+    sha256 = _,
+    url = "https://download.gnome.org/sources/gnome-session/41/gnome-session-41.3.tar.xz",
+    build = "meson",
+    flags = {
+        "-Dsystemd_session=disable",
+        "-Dsystemd=false",
+        "-Dsystemd_journal=false"
+    }
+};
+
+gnome-settings-daemon = {
+    sha256 = _,
+    url = "https://download.gnome.org/sources/gnome-settings-daemon/41/gnome-settings-daemon-41.0.tar.xz",
+    build = "meson",
+    flags = { 
+        "-Dsystemd=false"
+    }
+};
+
+gnome-tweak-tool = {
+    sha256 = _,
+    url = "https://download.gnome.org/sources/gnome-tweaks/40/gnome-tweaks-40.0.tar.xz",
+    build = "meson",
+};
+
+gsettings-desktop-schemas = {
+    sha256 = _,
+    url = "https://download.gnome.org/sources/gsettings-desktop-schemas/41/gsettings-desktop-schemas-41.0.tar.xz",
+    build = "meson",
+};
+
+gtk-doc = {
+    sha256 = _,
+    url = "https://download.gnome.org/sources/gtk-doc/1.33/gtk-doc-1.33.2.tar.xz",
+    build = "meson",
+};
+
+gtk2 = {
+    sha256 = _,
+    url = "https://download.gnome.org/sources/gtk+/2.24/gtk+-2.24.33.tar.xz",
+    build = "./configure",
+    "--disable-gtk-doc",
+    "--disable-gtk-doc-html",
+    "--disable-glibtest"
+};
+
+gtksourceview = {
+    sha256 = _,
+    url = "https://download.gnome.org/sources/gtksourceview/4.8/gtksourceview-4.8.2.tar.xz",
+    build = "meson",
+};
+
+introspection = {
+    sha256 = _,
+    url = "https://download.gnome.org/sources/gobject-introspection/1.70/gobject-introspection-1.70.0.tar.xz",
+    build = "meson",
+};
+
+json-glib = {
+    sha256 = _,
+    url = "https://download.gnome.org/sources/json-glib/1.6/json-glib-1.6.6.tar.xz",
+    build = "meson",
+};
+
+libcroco = {
+    sha256 = _,
+    url = "https://download.gnome.org/sources/libcroco/0.6/libcroco-0.6.13.tar.xz",
+    build = "./configure"
+};
+
+libgee = {
+    sha256 = _,
+    url = "https://download.gnome.org/sources/libgee/0.20/libgee-0.20.5.tar.xz",
+    build = "meson",
+};
+
+libgnomekbd = {
+    sha256 = _,
+    url = "https://download.gnome.org/sources/libgnomekbd/3.26/libgnomekbd-3.26.1.tar.xz",
+    build = "autoreconf"
+};
+
+libgtop = {
+    sha256 = _,
+    url = "https://download.gnome.org/sources/libgtop/2.40/libgtop-2.40.0.tar.xz",
+    build = "./configure"
+};
+
+libgweather = {
+    sha256 = _,
+    url = "https://download.gnome.org/sources/libgweather/40/libgweather-40.0.tar.xz",
+    build = "meson",
+};
+
+libgxps = {
+    sha256 = _,
+    url = "https://download.gnome.org/sources/libgxps/0.3/libgxps-0.3.2.tar.xz",
+    build = "meson",
+};
+
+libnotify = {
+    sha256 = _,
+    url = "https://download.gnome.org/sources/libnotify/0.7/libnotify-0.7.9.tar.xz",
+    build = "meson",,
+    "-Dgtk_doc=false",
+    "-Dman=false",
+    "-Dtests=false"
+};
+
+libpeas = {
+    sha256 = _,
+    url = "https://download.gnome.org/sources/libpeas/1.30/libpeas-1.30.0.tar.xz",
+    build = "meson",
+};
+
+metacity = {
+    sha256 = _,
+    url = "https://download.gnome.org/sources/metacity/3.44/metacity-3.44.0.tar.xz",
+    build = "./configure"
+};
+
+mm-common = {
+    sha256 = _,
+    url = "https://download.gnome.org/sources/mm-common/1.0/mm-common-1.0.4.tar.xz",
+    build = "meson",,
+    "-Duse-network=true"
+};
+
+mutter = {
+    sha256 = _,
+    url = "https://download.gnome.org/sources/mutter/41/mutter-41.4.tar.xz",
+    build = "meson",,
+    "-Dtests=false"
+};
+
+nautilus = {
+    sha256 = _,
+    url = "https://download.gnome.org/sources/nautilus/41/nautilus-41.2.tar.xz",
+    build = "meson",
+};
+
+networkmanager = {
+    sha256 = _,
+    url = "https://download.gnome.org/sources/NetworkManager/1.34/NetworkManager-1.34.0.tar.xz",
+    build = "meson",,
+    "-Dqt=false",
+    "-Dnmtui=false",
+    "-Dmodem_manager=false",
+    "-Dsession_tracking=no",
+    "-Dsystemd_journal=false",
+    "-Dlibaudit=no",
+    "-Dselinux=false",
+    "-Dsystemdsystemunitdir=no"
+};
+
+pango = {
+    sha256 = _,
+    url = "https://download.gnome.org/sources/pango/1.50/pango-1.50.4.tar.xz",
+    build = "meson",
+};
+
+pangox-compat = {
+    sha256 = _,
+    url = "https://download.gnome.org/sources/pangox-compat/0.0/pangox-compat-0.0.2.tar.xz",
+    build = "autoreconf"
+};
+
+secrets = {
+    sha256 = _,
+    url = "https://gitlab.gnome.org/World/secrets/-/archive/6.5/secrets-6.5.tar.gz",
+    build = "meson",
+};
+
+tracker = {
+    sha256 = _,
+    url = "https://download.gnome.org/sources/tracker/3.2/tracker-3.2.1.tar.xz",
+    build = "meson",,
+    "-Dsystemd_user_services=false"
+};
+
+vala = {
+    sha256 = _,
+    url = "https://download.gnome.org/sources/vala/0.54/vala-0.54.2.tar.xz",
+    build = "./configure"
+};
+
+zenity = {
+    sha256 = _,
+    url = "https://download.gnome.org/sources/zenity/3.32/zenity-3.32.0.tar.xz",
+    build = "./configure"
+};
+
+cinnamon-control-center = {
+    sha256 = _,
+    url = "https://github.com/linuxmint/cinnamon-control-center/archive/refs/tags/master.mint21.tar.gz",
+    build = "meson",
+};
+
+cinnamon-desktop = {
+    sha256 = _,
+    url = "https://github.com/linuxmint/cinnamon-desktop/archive/refs/tags/master.mint21.tar.gz",
+    build = "meson",
+};
+
+cinnamon-menus = {
+    sha256 = _,
+    url = "https://github.com/linuxmint/cinnamon-menus/archive/refs/tags/master.mint21.tar.gz",
+    build = "meson",
+};
+
+cinnamon-screensaver = {
+    sha256 = _,
+    url = "https://github.com/linuxmint/cinnamon-screensaver/archive/refs/tags/master.mint21.tar.gz",
+    build = "meson",
+};
+
+cinnamon-session = {
+    sha256 = _,
+    url = "https://github.com/linuxmint/cinnamon-session/archive/refs/tags/master.mint21.tar.gz",
+    build = "meson",
+};
+
+cinnamon-settings-daemon = {
+    sha256 = _,
+    url = "https://github.com/linuxmint/cinnamon-settings-daemon/archive/refs/tags/master.mint21.tar.gz",
+    build = "meson",
+};
+
+cinnamon-translations = {
+    sha256 = _,
+    url = "https://github.com/linuxmint/cinnamon-translations/archive/refs/tags/master.mint21.tar.gz",
+    build = "make"
+};
+
+cinnamon = {
+    sha256 = _,
+    url = "https://github.com/linuxmint/cinnamon/archive/refs/tags/master.mint21.tar.gz",
+    build = "meson",
+};
+
+cjs = {
+    sha256 = _,
+    url = "https://github.com/linuxmint/cjs/archive/refs/tags/master.mint21.tar.gz",
+    build = "meson",
+};
+
+muffin = {
+    sha256 = _,
+    url = "https://github.com/linuxmint/muffin/archive/refs/tags/master.mint21.tar.gz",
+    build = "meson",
+};
+
+nemo = {
+    sha256 = _,
+    url = "https://github.com/linuxmint/nemo/archive/refs/tags/master.mint21.tar.gz",
+    build = "meson",
+};
+
+xapp = {
+    sha256 = _,
+    url = "https://github.com/linuxmint/xapp/archive/refs/tags/master.mint21.tar.gz",
+    build = "meson",
+};
+
+appstream = {
+    sha256 = _,
+    url = "https://github.com/ximion/appstream/archive/refs/tags/v0.15.5.tar.gz",
+    build = "meson",,
+    "-Dstemming=false"
+};
+
+flatpak = {
+    sha256 = _,
+    url = "https://github.com/flatpak/flatpak/releases/download/1.14.0/flatpak-1.14.0.tar.xz",
+    build = "./configure"
+};
+
+bwrap = {
+    sha256 = _,
+    url = "https://github.com/projectatomic/bubblewrap/releases/download/v0.5.0/bubblewrap-0.5.0.tar.xz",
+    build = "./configure"
+};
+
+libportal = {
+    sha256 = _,
+    url = "https://github.com/flatpak/libportal/releases/download/0.5/libportal-0.5.tar.xz",
+    build = "meson",
+};
+
+portal-gtk = {
+    sha256 = _,
+    url = "https://github.com/flatpak/xdg-desktop-portal-gtk/releases/download/1.14.0/xdg-desktop-portal-gtk-1.14.0.tar.xz",
+    build = "./configure"
+};
+
+portal = {
+    sha256 = _,
+    url = "https://github.com/flatpak/xdg-desktop-portal/releases/download/1.14.6/xdg-desktop-portal-1.14.6.tar.xz",
+    build = "./configure"
+};
+
+elogind = {
+    sha256 = _,
+    url = "https://github.com/elogind/elogind/archive/v246.10/elogind-246.10.tar.gz",
+    build = "meson",
+};
+
+avahi = {
+    sha256 = _,
+    url = "https://github.com/lathiat/avahi/releases/download/v0.8/avahi-0.8.tar.gz",
+    build = "./configure",
+    "--disable-mono",
+    "--disable-monodoc",
+    "--without-systemdsystemunitdir"
+};
+
+dbus-glib = {
+    sha256 = _,
+    url = "https://dbus.freedesktop.org/releases/dbus-glib/dbus-glib-0.112.tar.gz",
+    build = "./configure"
+};
+
+accountsservice = {
+    sha256 = _,
+    url = "https://freedesktop.org/software/accountsservice/accountsservice-22.07.5.tar.xz",
+    build = "meson",
+};
+
+colord = {
+    sha256 = _,
+    url = "https://freedesktop.org/software/colord/releases/colord-1.4.6.tar.xz",
+    build = "meson",
+    flags = {
+        "-Dsystemd=false",
+        "-Dbash_completion=false"
+    }
+};
+
+geoclue = {
+    sha256 = _,
+    url = "https://gitlab.freedesktop.org/geoclue/geoclue/-/archive/2.6.0/geoclue-2.6.0.tar.bz2",
+    build = "meson"
+};
+
+libdaemon = {
+    sha256 = _,
+    url = "https://0pointer.de/lennart/projects/libdaemon/libdaemon-0.14.tar.gz",
+    build = "./configure"
+};
+
+libdbusmenu = {
+    sha256 = _,
+    url = "https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/libdbusmenu/16.04.1+18.10.20180917-0ubuntu8/libdbusmenu_16.04.1+18.10.20180917.orig.tar.gz",
+    build = "autoreconf",
+};
+
+boost = {
+    sha256 = _,
+    url = "https://boostorg.jfrog.io/artifactory/main/release/1.78.0/source/boost_1_78_0.tar.bz2",
+    build = "cmake",
+    flags = {
+        "-DCMAKE_INSTALL_PREFIX=/usr",
+        "-DCMAKE_BUILD_TYPE=Release",
+    }
+};
+
+qtbase = {
+    sha256 = _,
+    url = "https://invent.kde.org/qt/qt/qtbase/-/archive/v5.15.5-lts-lgpl/qtbase-v5.15.5-lts-lgpl.tar.gz",
+    build = "./configure",
+    flags = {
+        "--extprefix=${DESTDIR}/usr",
+        "--libdir=/usr/lib64",
+        "--archdatadir=/usr/lib64/qt",
+        "--datadir=/usr/share/qt",
+        "--docdir=/usr/share/doc/qt",
+        "--opensource",
+        "--confirm-license",
+        "--optimize-size",
+        "--nobuild = "make"=examples",
+        "--nobuild = "make"=tests"
+    }
+};
+
+qtsvg = {
+    sha256 = _,
+    url = "https://invent.kde.org/qt/qt/qtsvg/-/archive/v5.15.5-lts-lgpl/qtsvg-v5.15.5-lts-lgpl.tar.gz",
+    build = "qmake"
+};
+
+qttools = {
+    sha256 = _,
+    url = "https://invent.kde.org/qt/qt/qttools/-/archive/v5.15.5-lts-lgpl/qttools-v5.15.5-lts-lgpl.tar.gz",
+    build = "qmake"
+};
+
+qtx11extras = {
+    sha256 = _,
+    url = "https://invent.kde.org/qt/qt/qtx11extras/-/archive/v5.15.5-lts-lgpl/qtx11extras-v5.15.5-lts-lgpl.tar.gz",
+    build = "qmake"
+};
+
+qtdeclarative = {
+    sha256 = _,
+    url = "https://invent.kde.org/qt/qt/qtdeclarative/-/archive/v5.15.5-lts-lgpl/qtdeclarative-v5.15.5-lts-lgpl.tar.gz",
+    build = "qmake"
+};
+
+botan = {
+    sha256 = _,
+    url = "https://botan.randombit.net/releases/Botan-2.19.2.tar.xz",
+    build = "./configure",
+    flags = {
+    }
+};
+
+qrencode = {
+    sha256 = _,
+    url = "https://fukuchi.org/works/qrencode/qrencode-4.1.1.tar.bz2",
+    build = "./configure",
+    flags = {
+    }
+};
+
+keepassxc = {
+    sha256 = _,
+    url = "https://github.com/keepassxreboot/keepassxc/releases/download/2.7.1/keepassxc-2.7.1-src.tar.xz",
+    build = "make",
+    flags = {
+        "-DWITH_XC_DOCS=OFF",
+        "-DWITH_APP_BUNDLE=OFF"
+    }
+};
+
+ttf-liberation = {
+    sha256 = _,
+    url = "https://github.com/liberationfonts/liberation-fonts/archive/refs/tags/2.1.5.tar.gz",
+    build = "make"
+};
+
+leafpad = {
+    sha256 = _,
+    url = "https://github.com/tarot231/leafpad/archive/master.tar.gz",
+    build = "autoreconf"
+};
+
+lxc = {
+    sha256 = _,
+    url = "https://linuxcontainers.org/downloads/lxc/lxc-5.0.2.tar.gz",
+    build = "meson",
+    flags = {
+        "-Dprefix=/usr",
+        "-Dbuildtype=release"
+    }
+};
+
+libunwind={ 
+    sha256 = _, 
+    url = "https://download.savannah.nongnu.org/releases/libunwind/libunwind-1.6.2.tar.gz", 
+    build = "./configure", 
+    flags = { 
+        "--libdir=/usr/lib64" 
+    } 
+};
+
+poppler-data = {
+    sha256 = _,
+    url = "https://poppler.freedesktop.org/poppler-data-0.4.11.tar.gz",
+    build = "make"
+};
+
+poppler = {
+    sha256 = _,
+    url = "https://poppler.freedesktop.org/poppler-22.02.0.tar.xz",
+    build = "make",
+    flags = {
+        "-DENABLE_QT5=OFF",
+        "-DENABLE_BOOST=OFF"
+    }
+};
+
+libhandy = {
+    sha256 = _,
+    url = "https://download.gnome.org/sources/libhandy/1.7/libhandy-1.7.90.tar.xz",
+    build = "meson",
+    flags = {
+        "-Dexamples=false",
+        "-Dtests=false",
+        "-Dvapi=false"
+    }
+};
+
+evince = {
+    sha256 = _,
+    url = "https://github.com/GNOME/evince/archive/refs/tags/43.0.tar.gz",
+    build = "meson",
+    flags = {
+        "-Dsystemduserunitdir=no",
+        "-Dnautilus=false",
+        "-Duser_doc=false",
+        "-Dgtk_doc=false",
+        "-Dpdf=enabled"
+    }
+};
+
+qbe = {
+    sha256 = _,
+    url = "https://c9x.me/compile/release/qbe-1.1.tar.xz",
+    build = "make",
+    flags = {
+        "PREFIX=/usr"
+    }
+};
+
+scdoc = {
+    sha256 = _,
+    url = "https://git.sr.ht/~sircmpwn/scdoc/archive/1.11.2.tar.gz",
+    build = "make",
+    flags = {
+        "PREFIX=/usr"
+    }
+};
+
+harec = {
+    sha256 = _,
+    url = "https://git.sr.ht/~sircmpwn/harec/archive/2384401c822af4cbad38b5144bae97d88076cac9.tar.gz",
+    build = "./configure",
+    flags = {
+    }
+};
+
+hare = {
+    sha256 = _,
+    url = "https://git.sr.ht/~sircmpwn/hare/archive/11db66bdb7574ee8f6d642dea0498907f9121b6b.tar.gz",
+    build = "make",
+    flags = {
+        "PREFIX=/usr"
+    }
+};
+
+bspwm = {
+    sha256 = _,
+    url = "https://github.com/baskerville/bspwm/archive/refs/tags/0.9.10.tar.gz",
+    build = "make"
+};
+
+dmenu = {
+    sha256 = _,
+    url = "https://dl.suckless.org/tools/dmenu-5.1.tar.gz",
+    build = "make"
+};
+
+sxhkd = {
+    sha256 = _,
+    url = "https://github.com/baskerville/sxhkd/archive/refs/tags/0.6.2.tar.gz",
+    build = "make"
+};
+
+firejail = {
+    sha256 = _,
+    url = "https://sourceforge.net/projects/firejail/files/firejail/firejail-0.9.70.tar.xz/download",
+    build = "./configure",
+    flags = {
+    }
+};
+
+feh = {
+    sha256 = _,
+    url = "https://feh.finalrewind.org/feh-3.8.tar.bz2",
+    build = "make"
+};
+
+imlib2 = {
+    sha256 = _,
+    url = "https://downloads.sourceforge.net/enlightenment/imlib2-1.8.0.tar.xz",
+    build = "./configure",
+    flags = {
+    }
+};
+
+iwd = {
+    sha256 = _,
+    url = "https://mirrors.edge.kernel.org/pub/linux/network/wireless/iwd-2.6.tar.xz",
+    build = "./configure",
+    flags = {
+        "--without-systemd-unitdir",
+        "--without-systemd-networkdir",
+        "--without-systemd-modloaddir"
+    },
+    post_install = [[
+        rm -r ${DESTDIR}no
+    ]]
+};
+
+jansson = {
+    sha256 = "fba956f27c6ae56ce6dfd52fbf9d20254aad42821f74fa52f83957625294afb9",
+    url = "https://github.com/akheron/jansson/releases/download/v2.14/jansson-2.14.tar.bz2"
+        build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--disable-static"
+    },
+    pre_install = [[
+        sed -e "/DT/s;| sort;| sed 's/@@libjansson.*//' &;" \
+            -i test/suites/api/check-exports
+    ]]
+};
+
+libndp = {
+    sha256 = "88ffb66ee2eb527f146f5c02f5ccbc38ba97d2b0d57eb46bfba488821ab0c02b",
+    url = "http://libndp.org/files/libndp-1.8.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--sysconfdir=/etc",
+        "--localstatedir=/var",
+        "--disable-static"
+    }
+};
+
+castor = {
+    sha256 = _,
+    url = "https://git.sr.ht/~julienxx/castor/archive/0.9.0.tar.gz",
+    build = "make"
+};
+
+dash = {
+    sha256 = "6a474ac46e8b0b32916c4c60df694c82058d3297d8b385b74508030ca4a8f28a",
+    url = "http://gondor.apana.org.au/~herbert/dash/files/dash-0.5.12.tar.gz",
+    build = "./configure",
+    flags = {
+        "--bindir=/bin",
+        "--mandir=/usr/share/man"
+    },
+    post_install = [[
+        ln -sf dash ${DESTDIR}/bin/sh
+    ]]
+};
