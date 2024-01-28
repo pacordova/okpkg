@@ -42,7 +42,7 @@ if [ -x "$(command -v udevadm)" ]; then
     udevadm hwdb --update
 fi
 
-if [ ! -f /etc/nscd.conf ] && [ -f /usr/okpkg/sources/glibc/nscd/nscd.conf]; then
+if [ ! -f /etc/nscd.conf ] && [ -f /usr/okpkg/sources/glibc/nscd/nscd.conf ]; then
     cp /usr/okpkg/sources/glibc/nscd/nscd.conf /etc/nscd.conf
 fi
 
