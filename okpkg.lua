@@ -213,7 +213,7 @@ function install(file)
     if version then
         pkgname = basename(file:sub(1, #file-#version-14))
     else
-        pkgname = basename(file)
+        pkgname = basename(file):sub(1, #file-14)
     end
 
     fp = io.popen(format("tar -P -C / -xhvf %s 2>&1", file))
