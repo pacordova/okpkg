@@ -218,7 +218,7 @@ function install(file)
     local fp, buf, pkgname, offset
 
     local version = get_version(file)
-    pkgname = basename(file:sub(1, #file-#version-7))
+    pkgname = basename(file:sub(1, #file-#version-8))
 
     fp = io.popen(format("tar -P -C / -xhvf %s 2>&1", file))
     buf = fp:read("*a")
