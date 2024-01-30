@@ -26,6 +26,13 @@ function sha256sum(file)
     return buf
 end
 
+function get_version(path)
+    local s, i, j
+    i = s:find("[.-]%d") or 0
+    j = s:find("%.t")
+    return s:sub(i+1, j-1)
+end
+
 function vlook(pkgname)
     local databases = {"base", "extra"}
     for i=1,#databases do
@@ -116,7 +123,7 @@ function build(pkgname)
 
     t = vlook(pkgname)
     t.flags = t.flags or {}
-    version = t.url:match("[./-]([0-9][.0-9]*[0-9][a-z]?)%.")
+    version = get_version(t.url)
     setenv("DESTDIR",format("/usr/okpkg/packages/%s-%s-x86_64",pkgname,version))
 
     if t.pre_install then
@@ -209,18 +216,8 @@ end
 function install(file)
     local fp, buf, pkgname, offset
 
-    if file:match("x86_64") then
-        offset = 14
-    else
-        offset = 7
-    end
-
-    local version = file:match("%-[0-9][.0-9]*[0-9][a-z]?")
-    if version then
-        pkgname = basename(file:sub(1, #file-#version-offset))
-    else
-        pkgname = basename(file)
-    end
+    local version = get_version(file)
+    pkgname = basename(file:sub(1, #file-#version-7))
 
     fp = io.popen(format("tar -P -C / -xhvf %s 2>&1", file))
     buf = fp:read("*a")
