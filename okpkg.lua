@@ -28,6 +28,7 @@ end
 
 function get_version(path)
     local s, i, j
+    s = basename(path)
     i = s:find("[.-]%d") or 0
     j = s:find("%.t")
     return s:sub(i+1, j-1)
