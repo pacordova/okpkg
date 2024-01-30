@@ -207,13 +207,19 @@ function purge(pkgname)
 end
 
 function install(file)
-    local fp, buf, pkgname
+    local fp, buf, pkgname, offset
+
+    if file:match("x86_64") then
+        offset = 14
+    else
+        offset = 7
+    end
 
     local version = file:match("%-[0-9][.0-9]*[0-9][a-z]?")
     if version then
-        pkgname = basename(file:sub(1, #file-#version-14))
+        pkgname = basename(file:sub(1, #file-#version-offset))
     else
-        pkgname = basename(file):sub(1, #file-14)
+        pkgname = basename(file)
     end
 
     fp = io.popen(format("tar -P -C / -xhvf %s 2>&1", file))
