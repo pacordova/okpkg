@@ -178,19 +178,6 @@ git = {
     ]]
 };
 
-gnupg1 = {
-    sha256 = "c9462f17e651b6507848c08c430c791287cd75491f8b5a8b50c6ed46b12678ba",
-    url = "https://gnupg.org/ftp/gcrypt/gnupg/gnupg-1.4.23.tar.bz2",
-    build = "./configure",
-    flags = {
-        "--disable-nls"
-    },
-    post_install = [[
-        sed -i -e "s/$(date +'%Y-%m-%d')/$(date -d @$SOURCE_DATE_EPOCH +'%Y-%m-%d')/" \
-            ${DESTDIR}/usr/share/man/man1/gpg.1 ${DESTDIR}/usr/share/man/man1/gpgv.1
-    ]]
-};
-
 usbutils = {
     sha256 = "a6a25ffdcf9103e38d7a44732aca17073f4e602b92e4ae55625231a82702e05b",
     url = "https://mirrors.kernel.org/pub/linux/utils/usb/usbutils/usbutils-017.tar.xz",
@@ -221,12 +208,6 @@ opendoas = {
     post_install = [[
         ln -s doas ${DESTDIR}/usr/bin/sudo
     ]]
-};
-
-which = {
-    sha256 = "f4a245b94124b377d8b49646bf421f9155d36aa7614b6ebf83705d3ffc76eaad",
-    url = "https://mirrors.kernel.org/gnu/which/which-2.21.tar.gz",
-    build = "./configure",
 };
 
 xorriso = {
@@ -439,18 +420,6 @@ man-pages = {
     flags = { 
         "prefix=/usr" 
     } 
-};
-
-autoconf = {
-    sha256 = _,
-    url = "https://mirrors.kernel.org/gnu/autoconf/autoconf-2.71.tar.xz",
-    build = "./configure"
-};
-
-automake = {
-    sha256 = _,
-    url = "https://mirrors.kernel.org/gnu/automake/automake-1.16.5.tar.xz",
-    build = "./configure"
 };
 
 lm-sensors = {
