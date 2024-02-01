@@ -55,6 +55,16 @@ ncurses = {
     ]]
 };
 
+libunistring = {
+    sha256 = "827c1eb9cb6e7c738b171745dac0888aa58c5924df2e59239318383de0729b98", 
+    url = "https://mirrors.kernel.org/gnu/libunistring/libunistring-1.1.tar.xz", 
+    build = "./configure", 
+    flags = { 
+        "--libdir=/usr/lib64",
+        "--disable-static" 
+    }   
+};
+
 gettext = {
     sha256 = "29217f1816ee2e777fa9a01f9956a14139c0c23cc1b20368f06b2888e8a34116",
     url = "https://mirrors.kernel.org/gnu/gettext/gettext-0.22.4.tar.xz",
@@ -434,6 +444,19 @@ sed = {
     }
 };
 
+pcre2 = {
+    sha256 = "8d36cd8cb6ea2a4c2bb358ff6411b0c788633a2a45dabbf1aeb4b701d1b5e840",
+    url = "https://github.com/PhilipHazel/pcre2/releases/download/pcre2-10.42/pcre2-10.42.tar.bz2",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--enable-unicode",
+        "--enable-pcre2-16",
+        "--enable-pcre2-32",
+        "--disable-static"
+    }
+};
+
 grep = {
     sha256 = "1db2aedde89d0dea42b16d9528f894c8d15dae4e190b59aecc78f5a951276eab",
     url = "https://mirrors.kernel.org/gnu/grep/grep-3.11.tar.xz",
@@ -621,6 +644,30 @@ efibootmgr = {
     build = "make",
     flags = {
         "EFIDIR=/boot/efi",
+    }
+};
+
+libaio = {
+    sha256 = "1c561c20670c5c09cc8437a622008c0693c6a7816c1f30332da3796953b2f454",
+    url = "https://pagure.io/libaio/archive/libaio-0.3.113/libaio-0.3.113.tar.gz",
+    build = "make",
+    flags = {
+        "libdir=/usr/lib64"
+    }
+};
+
+lvm2 = {
+    sha256 = "4c5a6923bd1ace7ce04474608a84937ce053ba91b1ace9f0b0017268e732dc7c",
+    url = "https://sourceware.org/ftp/lvm2/LVM2.2.03.22.tgz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--with-usrlibdir=/usr/lib64",
+        "--sysconfdir=/etc",
+        "--enable-cmdlib",
+        "--enable-pkgconfig",
+        "--enable-udev_sync",
+        "--with-udevdir=/usr/lib64/udev/rules.d"
     }
 };
 
@@ -867,5 +914,16 @@ curl = {
         "--enable-threaded-resolver",
         "--with-ca-path=/etc/ssl/certs",
         "--with-ca-bundle=/etc/ssl/certs/ca-certificates.crt"
+    }
+};
+
+parted = {
+    sha256 = "3b43dbe33cca0f9a18601ebab56b7852b128ec1a3df3a9b30ccde5e73359e612", 
+    url = "https://mirrors.kernel.org/gnu/parted/parted-3.6.tar.xz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--disable-nls",
+        "--disable-static"
     }
 };
