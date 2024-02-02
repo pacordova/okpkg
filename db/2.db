@@ -171,7 +171,7 @@ gzip = {
         "--prefix=/usr",
         "--host=${HOST}"
     }
-}
+};
 
 make = {
     build = "./configure",
