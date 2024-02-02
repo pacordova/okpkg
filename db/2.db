@@ -165,6 +165,14 @@ grep = {
     }
 };
 
+gzip = {
+    build = "./configure",
+    flags = {
+        "--prefix=/usr",
+        "--host=${HOST}"
+    }
+}
+
 make = {
     build = "./configure",
     flags = {

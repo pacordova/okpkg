@@ -1,60 +1,3 @@
-zlib = {
-    sha256 = "38ef96b8dfe510d42707d9c781877914792541133e1870841463bfa73f883e32",
-    url = "https://zlib.net/zlib-1.3.1.tar.xz",
-    build = "./configure",
-    flags = {
-        "--libdir=/usr/lib64"
-    },
-    post_install = [[
-        rm -f ${DESTDIR}/usr/lib64/libz.a
-    ]]
-};
-
-pigz = { 
-    sha256 = "eb872b4f0e1f0ebe59c9f7bd8c506c4204893ba6a8492de31df416f0d5170fd0", 
-    url = "https://zlib.net/pigz/pigz-2.8.tar.gz", 
-    build = _, 
-    post_install = [[ 
-        make
-        mkdir -p ${DESTDIR}/usr/bin
-        mkdir -p ${DESTDIR}/usr/share/man/man1
-        cp pigz unpigz ${DESTDIR}/usr/bin
-        ln -s pigz ${DESTDIR}/usr/bin/gzip 
-        ln -s unpigz ${DESTDIR}/usr/bin/gunzip 
-        cp pigz.1 ${DESTDIR}/usr/share/man/man1
-        ln -s pigz.1 ${DESTDIR}/usr/share/man/man1/gzip.1
-    ]] 
-};
-
-ncurses = {
-    sha256 = "6931283d9ac87c5073f30b6290c4c75f21632bb4fc3603ac8100812bed248159",
-    url = "https://invisible-island.net/archives/ncurses/ncurses-6.4.tar.gz",
-    build = "./configure",
-    flags = {
-        "--libdir=/usr/lib64", 
-        "--mandir=/usr/share/man",
-        "--with-shared", 
-        "--without-debug",
-        "--without-normal",
-        "--without-ada",
-        "--with-cxx-shared",
-        "--enable-pc-files", 
-        "--enable-widec",
-        "--with-pkg-config=/usr/lib64/pkgconfig"
-    },
-    post_install = [[
-        for lib in ncurses form panel menu 
-        do
-            rm -f ${DESTDIR}/usr/lib64/lib${lib}.so
-            echo "INPUT(-l${lib}w)" > ${DESTDIR}/usr/lib64/lib${lib}.so
-            ln -sf ${lib}w.pc ${DESTDIR}/usr/lib64/pkgconfig/${lib}.pc
-        done
-        rm -f ${DESTDIR}/usr/lib64/libcursesw.so
-        echo "INPUT(-lncursesw)" > ${DESTDIR}/usr/lib64/libcursesw.so
-        ln -sf libncurses.so ${DESTDIR}/usr/lib64/libcurses.so
-    ]]
-};
-
 libunistring = {
     sha256 = "827c1eb9cb6e7c738b171745dac0888aa58c5924df2e59239318383de0729b98", 
     url = "https://mirrors.kernel.org/gnu/libunistring/libunistring-1.1.tar.xz", 
@@ -109,26 +52,6 @@ texinfo = {
     build = "./configure",
     flags = {
         "--libdir=/usr/lib64"
-    }
-};
-
-libressl = {
-    sha256 = "6d4b8d5bbb25a1f8336639e56ec5088052d43a95256697a85c4ce91323c25954",
-    url = "https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-3.8.2.tar.gz",
-    build = "./configure",
-    flags = {
-        "--libdir=/usr/lib64", 
-        "--sysconfdir=/etc"
-    }
-};
-
-expat = {
-    sha256 = "ef2420f0232c087801abf705e89ae65f6257df6b7931d37846a193ef2e8cdcbe",
-    url = "https://prdownloads.sourceforge.net/expat/expat-2.5.0.tar.xz",
-    build = "./configure",
-    flags = {
-        "--libdir=/usr/lib64",
-        "--disable-static"
     }
 };
 
@@ -234,6 +157,18 @@ tzdata = {
     }
 };
 
+zlib = {
+    sha256 = "38ef96b8dfe510d42707d9c781877914792541133e1870841463bfa73f883e32",
+    url = "https://zlib.net/zlib-1.3.1.tar.xz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64"
+    },
+    post_install = [[
+        rm -f ${DESTDIR}/usr/lib64/libz.a
+    ]]
+};
+
 bzip2 = {
     sha256 = "ab5a03176ee106d3f0fa90e381da478ddae405918153cca248e682cd0c4a2269",
     url = "https://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz",
@@ -291,6 +226,35 @@ file = {
     flags = {
         "--libdir=/usr/lib64"
     }
+};
+
+ncurses = {
+    sha256 = "6931283d9ac87c5073f30b6290c4c75f21632bb4fc3603ac8100812bed248159",
+    url = "https://invisible-island.net/archives/ncurses/ncurses-6.4.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64", 
+        "--mandir=/usr/share/man",
+        "--with-shared", 
+        "--without-debug",
+        "--without-normal",
+        "--without-ada",
+        "--with-cxx-shared",
+        "--enable-pc-files", 
+        "--enable-widec",
+        "--with-pkg-config=/usr/lib64/pkgconfig"
+    },
+    post_install = [[
+        for lib in ncurses form panel menu 
+        do
+            rm -f ${DESTDIR}/usr/lib64/lib${lib}.so
+            echo "INPUT(-l${lib}w)" > ${DESTDIR}/usr/lib64/lib${lib}.so
+            ln -sf ${lib}w.pc ${DESTDIR}/usr/lib64/pkgconfig/${lib}.pc
+        done
+        rm -f ${DESTDIR}/usr/lib64/libcursesw.so
+        echo "INPUT(-lncursesw)" > ${DESTDIR}/usr/lib64/libcursesw.so
+        ln -sf libncurses.so ${DESTDIR}/usr/lib64/libcurses.so
+    ]]
 };
 
 readline = { 
@@ -423,6 +387,17 @@ shadow = {
     ]]
 };
 
+popt = {
+    sha256 = "c25a4838fc8e4c1c8aacb8bd620edb3084a3d63bf8987fdad3ca2758c63240f9",
+    url = "http://ftp.rpm.org/popt/releases/popt-1.x/popt-1.19.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--disable-nls",
+        "--disable-static"
+    }
+};
+
 pkgconf = {
     sha256 = "266d5861ee51c52bc710293a1d36622ae16d048d71ec56034a02eb9cf9677761",
     url = "https://distfiles.ariadne.space/pkgconf/pkgconf-2.1.0.tar.xz",
@@ -504,6 +479,22 @@ gdbm = {
     }
 };
 
+gperf = {
+    sha256 = "588546b945bba4b70b6a3a616e80b4ab466e3f33024a352fc2198112cdbb3ae2",
+    url = "https://mirrors.kernel.org/gnu/gperf/gperf-3.1.tar.gz",
+    build = "./configure"
+};
+
+expat = {
+    sha256 = "ef2420f0232c087801abf705e89ae65f6257df6b7931d37846a193ef2e8cdcbe",
+    url = "https://prdownloads.sourceforge.net/expat/expat-2.5.0.tar.xz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--disable-static"
+    }
+};
+
 inetutils = {
     sha256 = "87697d60a31e10b5cb86a9f0651e1ec7bee98320d048c0739431aac3d5764fb6",
     url = "https://mirrors.kernel.org/gnu/inetutils/inetutils-2.5.tar.xz",
@@ -541,6 +532,16 @@ automake = {
     sha256 = "f01d58cd6d9d77fbdca9eb4bbd5ead1988228fdb73d6f7a201f5f8d6b118b469",
     url = "https://mirrors.kernel.org/gnu/automake/automake-1.16.5.tar.xz",
     build = "./configure"
+};
+
+libressl = {
+    sha256 = "6d4b8d5bbb25a1f8336639e56ec5088052d43a95256697a85c4ce91323c25954",
+    url = "https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-3.8.2.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64", 
+        "--sysconfdir=/etc"
+    }
 };
 
 kmod = {
@@ -622,76 +623,6 @@ findutils = {
     }
 };
 
-popt = {
-    sha256 = "c25a4838fc8e4c1c8aacb8bd620edb3084a3d63bf8987fdad3ca2758c63240f9",
-    url = "http://ftp.rpm.org/popt/releases/popt-1.x/popt-1.19.tar.gz",
-    build = "./configure",
-    flags = {
-        "--libdir=/usr/lib64",
-        "--disable-nls",
-        "--disable-static"
-    }
-};
-
-mandoc = {
-    sha256 = "8bf0d570f01e70a6e124884088870cbed7537f36328d512909eb10cd53179d9c",
-    url = "https://mandoc.bsd.lv/snapshots/mandoc-1.14.6.tar.gz",
-    build = "./configure",
-    flags = {
-    },
-    pre_install = [[
-        echo PREFIX=/usr >> configure.local
-        echo LIBDIR=/usr/lib64 >> configure.local
-        echo MANDIR=/usr/share/man >> configure.local
-    ]]
-};
-
-efivar = {
-    sha256 = "f018ed6e49c5f1c16d336d9fd7687ce87023276591921db1e49a314ad6515349",
-    url = "https://github.com/rhboot/efivar/releases/download/38/efivar-38.tar.bz2",
-    build = "make",
-    flags = {
-        "LIBDIR=/usr/lib64",
-        "PREFIX=/usr"
-    },
-    pre_install = [[
-        sed '/prep :/a\\ttouch prep' -i src/Makefile
-    ]]
-};
-
-efibootmgr = {
-    sha256 = "442867d12f8525034a404fc8af3036dba8e1fc970998af2486c3b940dfad0874",
-    url = "https://github.com/rhboot/efibootmgr/archive/18/efibootmgr-18.tar.gz",
-    build = "make",
-    flags = {
-        "EFIDIR=/boot/efi",
-    }
-};
-
-libaio = {
-    sha256 = "1c561c20670c5c09cc8437a622008c0693c6a7816c1f30332da3796953b2f454",
-    url = "https://pagure.io/libaio/archive/libaio-0.3.113/libaio-0.3.113.tar.gz",
-    build = "make",
-    flags = {
-        "libdir=/usr/lib64"
-    }
-};
-
-lvm2 = {
-    sha256 = "4c5a6923bd1ace7ce04474608a84937ce053ba91b1ace9f0b0017268e732dc7c",
-    url = "https://sourceware.org/ftp/lvm2/LVM2.2.03.22.tgz",
-    build = "./configure",
-    flags = {
-        "--libdir=/usr/lib64",
-        "--with-usrlibdir=/usr/lib64",
-        "--sysconfdir=/etc",
-        "--enable-cmdlib",
-        "--enable-pkgconfig",
-        "--enable-udev_sync",
-        "--with-udevdir=/usr/lib64/udev/rules.d"
-    }
-};
-
 grub2 = {
     sha256 = "f3c97391f7c4eaa677a78e090c7e97e6dc47b16f655f04683ebd37bef7fe0faa", 
     url = "https://mirrors.kernel.org/gnu/grub/grub-2.12.tar.xz",
@@ -706,6 +637,12 @@ grub2 = {
     pre_install = [[
         echo depends bli part_gpt > grub-core/extra_deps.lst
     ]]
+};
+
+gzip = {
+    sha256 = "7454eb6935db17c6655576c2e1b0fabefd38b4d0936e0f87f48cd062ce91a057",
+    url = "https://mirrors.kernel.org/gnu/gzip/gzip-1.13.tar.xz",
+    build = "./configure"
 };
 
 iproute2 = {
@@ -786,12 +723,6 @@ vim = {
     ]]
 };
 
-gperf = {
-    sha256 = "588546b945bba4b70b6a3a616e80b4ab466e3f33024a352fc2198112cdbb3ae2",
-    url = "https://mirrors.kernel.org/gnu/gperf/gperf-3.1.tar.gz",
-    build = "./configure"
-};
-
 eudev = {
     sha256 = "8da4319102f24abbf7fff5ce9c416af848df163b29590e666d334cc1927f006f",
     url = "https://github.com/eudev-project/eudev/releases/download/v3.2.14/eudev-3.2.14.tar.gz",
@@ -806,6 +737,19 @@ eudev = {
         sed -i '/udevdir/a udev_dir=${udevdir}' src/udev/udev.pc.in
     ]]
 }; 
+
+mandoc = {
+    sha256 = "8bf0d570f01e70a6e124884088870cbed7537f36328d512909eb10cd53179d9c",
+    url = "https://mandoc.bsd.lv/snapshots/mandoc-1.14.6.tar.gz",
+    build = "./configure",
+    flags = {
+    },
+    pre_install = [[
+        echo PREFIX=/usr >> configure.local
+        echo LIBDIR=/usr/lib64 >> configure.local
+        echo MANDIR=/usr/share/man >> configure.local
+    ]]
+};
 
 procps-ng = {
     sha256 = "22870d6feb2478adb617ce4f09a787addaf2d260c5a8aa7b17d889a962c5e42e",
@@ -848,38 +792,30 @@ sysklogd = {
     }
 };
 
-dhcpcd = {
-    sha256 = "779d3ae514e8f24d7449503e1f0a20f5137c773bd04ca98c62386bf81e99f482",
-    url = "https://github.com/NetworkConfiguration/dhcpcd/releases/download/v10.0.6/dhcpcd-10.0.6.tar.xz",
-    build = "./configure",
-    flags = {
-        "--libdir=/usr/lib64",
-        "--sysconfdir=/etc",
-        "--localstatedir=/var",
-        "--libexecdir=/usr/lib64/dhcpcd",
-        "--runstatedir=/run",
-        "--disable-privsep",
-        "--dbdir=/var/lib/dhcpcd"
-    }
+dinit = {
+    sha256 = "0617956ed2e8cddae5e21f6034546a2f7338364111b99dcc6cd5f3c37080301c",
+    url = "https://github.com/davmac314/dinit/releases/download/v0.17.1/dinit-0.17.1.tar.xz",
+    build = "make",
+    post_install = [[
+        mkdir ${DESTDIR}/etc
+        sed -i 's/swapon/#swapon/' doc/linux/services/filesystems.sh
+        cp -rp doc/linux/services ${DESTDIR}/etc/dinit.d
+        ln -sf dinit ${DESTDIR}/sbin/init
+    ]]
 };
 
-openssh = {
-    sha256 = "910211c07255a8c5ad654391b40ee59800710dd8119dd5362de09385aa7a777c",
-    url = "https://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-9.6p1.tar.gz",
+curl = {
+    sha256 = "dd322f6bd0a20e6cebdfd388f69e98c3d183bed792cf4713c8a7ef498cba4894",
+    url = "https://curl.se/download/curl-8.2.1.tar.xz",
     build = "./configure",
     flags = {
         "--libdir=/usr/lib64",
-        "--localstatedir=/var",
-        "--sysconfdir=/etc/ssh",
-        "--with-privsep-path=/var/lib/sshd",
-        "--with-default-path=/usr/bin",
-        "--with-superuser-path=/usr/sbin:/usr/bin",
-        "--with-pid-dir=/run"
-    },
-    post_install = [[
-        install -D -m755 contrib/ssh-copy-id ${DESTDIR}/usr/bin
-            install -D -m644 contrib/ssh-copy-id.1 ${DESTDIR}/usr/share/man/man1
-    ]]
+        "--disable-static",
+        "--with-openssl",
+        "--enable-threaded-resolver",
+        "--with-ca-path=/etc/ssl/certs",
+        "--with-ca-bundle=/etc/ssl/certs/ca-certificates.crt"
+    }
 };
 
 dbus = {
@@ -906,46 +842,40 @@ dbus = {
     ]]
 };
 
-dinit = {
-    sha256 = "0617956ed2e8cddae5e21f6034546a2f7338364111b99dcc6cd5f3c37080301c",
-    url = "https://github.com/davmac314/dinit/releases/download/v0.17.1/dinit-0.17.1.tar.xz",
-    build = "make",
-    post_install = [[
-        mkdir ${DESTDIR}/etc
-        sed -i 's/swapon/#swapon/' doc/linux/services/filesystems.sh
-        cp -rp doc/linux/services ${DESTDIR}/etc/dinit.d
-        ln -sf dinit ${DESTDIR}/sbin/init
-    ]]
-};
-
-lua = {
-    sha256 = "7d5ea1b9cb6aa0b59ca3dde1c6adcb57ef83a1ba8e5432c0ecd06bf439b3ad88",
-    url = "https://lua.org/ftp/lua-5.4.6.tar.gz",
-    build = "make"
-};
-
-curl = {
-    sha256 = "dd322f6bd0a20e6cebdfd388f69e98c3d183bed792cf4713c8a7ef498cba4894",
-    url = "https://curl.se/download/curl-8.2.1.tar.xz",
+dhcpcd = {
+    sha256 = "779d3ae514e8f24d7449503e1f0a20f5137c773bd04ca98c62386bf81e99f482",
+    url = "https://github.com/NetworkConfiguration/dhcpcd/releases/download/v10.0.6/dhcpcd-10.0.6.tar.xz",
     build = "./configure",
     flags = {
         "--libdir=/usr/lib64",
-        "--disable-static",
-        "--with-openssl",
-        "--enable-threaded-resolver",
-        "--with-ca-path=/etc/ssl/certs",
-        "--with-ca-bundle=/etc/ssl/certs/ca-certificates.crt"
+        "--sysconfdir=/etc",
+        "--localstatedir=/var",
+        "--libexecdir=/usr/lib64/dhcpcd",
+        "--runstatedir=/run",
+        "--disable-privsep",
+        "--dbdir=/var/lib/dhcpcd"
     }
 };
 
-parted = {
-    sha256 = "3b43dbe33cca0f9a18601ebab56b7852b128ec1a3df3a9b30ccde5e73359e612", 
-    url = "https://mirrors.kernel.org/gnu/parted/parted-3.6.tar.xz",
-    build = "./configure",
+efivar = {
+    sha256 = "f018ed6e49c5f1c16d336d9fd7687ce87023276591921db1e49a314ad6515349",
+    url = "https://github.com/rhboot/efivar/releases/download/38/efivar-38.tar.bz2",
+    build = "make",
     flags = {
-        "--libdir=/usr/lib64",
-        "--disable-nls",
-        "--disable-static"
+        "LIBDIR=/usr/lib64",
+        "PREFIX=/usr"
+    },
+    pre_install = [[
+        sed '/prep :/a\\ttouch prep' -i src/Makefile
+    ]]
+};
+
+efibootmgr = {
+    sha256 = "442867d12f8525034a404fc8af3036dba8e1fc970998af2486c3b940dfad0874",
+    url = "https://github.com/rhboot/efibootmgr/archive/18/efibootmgr-18.tar.gz",
+    build = "make",
+    flags = {
+        "EFIDIR=/boot/efi",
     }
 };
 
@@ -960,6 +890,66 @@ gnupg1 = {
         sed -i -e "s/$(date +'%Y-%m-%d')/$(date -d @$SOURCE_DATE_EPOCH +'%Y-%m-%d')/" \
             ${DESTDIR}/usr/share/man/man1/gpg.1 ${DESTDIR}/usr/share/man/man1/gpgv.1
     ]]
+};
+
+libaio = {
+    sha256 = "1c561c20670c5c09cc8437a622008c0693c6a7816c1f30332da3796953b2f454",
+    url = "https://pagure.io/libaio/archive/libaio-0.3.113/libaio-0.3.113.tar.gz",
+    build = "make",
+    flags = {
+        "libdir=/usr/lib64"
+    }
+};
+
+lua = {
+    sha256 = "7d5ea1b9cb6aa0b59ca3dde1c6adcb57ef83a1ba8e5432c0ecd06bf439b3ad88",
+    url = "https://lua.org/ftp/lua-5.4.6.tar.gz",
+    build = "make"
+};
+
+lvm2 = {
+    sha256 = "4c5a6923bd1ace7ce04474608a84937ce053ba91b1ace9f0b0017268e732dc7c",
+    url = "https://sourceware.org/ftp/lvm2/LVM2.2.03.22.tgz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--with-usrlibdir=/usr/lib64",
+        "--sysconfdir=/etc",
+        "--enable-cmdlib",
+        "--enable-pkgconfig",
+        "--enable-udev_sync",
+        "--with-udevdir=/usr/lib64/udev/rules.d"
+    }
+};
+
+openssh = {
+    sha256 = "910211c07255a8c5ad654391b40ee59800710dd8119dd5362de09385aa7a777c",
+    url = "https://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-9.6p1.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--localstatedir=/var",
+        "--sysconfdir=/etc/ssh",
+        "--with-privsep-path=/var/lib/sshd",
+        "--with-default-path=/usr/bin",
+        "--with-superuser-path=/usr/sbin:/usr/bin",
+        "--with-pid-dir=/run"
+    },
+    post_install = [[
+        install -D -m755 contrib/ssh-copy-id ${DESTDIR}/usr/bin
+            install -D -m644 contrib/ssh-copy-id.1 ${DESTDIR}/usr/share/man/man1
+    ]]
+};
+
+parted = {
+    sha256 = "3b43dbe33cca0f9a18601ebab56b7852b128ec1a3df3a9b30ccde5e73359e612", 
+    url = "https://mirrors.kernel.org/gnu/parted/parted-3.6.tar.xz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--disable-nls",
+        "--disable-static"
+    }
 };
 
 which = {
