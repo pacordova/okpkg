@@ -716,8 +716,7 @@ vim = {
     ]],
     post_install = [[
         ln -s vim ${DESTDIR}/usr/bin/vi
-        for L in  ${DESTDIR}/usr/share/man/{,*/}man1/vim.1
-        do
+        for L in  ${DESTDIR}/usr/share/man/{,*/}man1/vim.1; do
             ln -s vim.1 $(dirname $L)/vi.1
         done
     ]]
