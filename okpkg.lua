@@ -6,7 +6,7 @@ local format, concat, unpack =
     string.format, table.concat, unpack or table.unpack
 
 -- environment
-setenv("SOURCE_DATE_EPOCH", "1706865659")
+setenv("SOURCE_DATE_EPOCH", "1706923901")
 setenv("MAKEOPTS", "-j5")
 setenv("CFLAGS", "-O2 -march=x86-64 -fstack-protector-strong -fstack-clash-protection -fcommon -pipe")
 setenv("CXXFLAGS", "-O2 -march=x86-64 -fstack-protector-strong -fstack-clash-protection -fcommon -pipe")
