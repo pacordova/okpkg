@@ -188,8 +188,8 @@ zlib = {
 };
 
 python3 = {
-    sha256 = "85cd12e9cf1d6d5a45f17f7afe1cebe7ee628d3282281c492e86adf636defa3f",
-    url = "https://www.python.org/ftp/python/3.11.5/Python-3.11.5.tar.xz",
+    sha256 = "8dfb8f426fcd226657f9e2bd5f1e96e53264965176fa17d32658e873591aeb21",
+    url = "https://www.python.org/ftp/python/3.12.1/Python-3.12.1.tar.xz",
     build = "./configure",
     flags = {
         "--libdir=/usr/lib64",
