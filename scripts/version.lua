@@ -7,6 +7,21 @@ require "okutils"
 pkgs = {
     "iana-etc", "glibc", "tzdata", "zlib", "bzip2", "xz", "zstd", "file", "m4", 
     "flex", "pkgconf", "binutils", "gmp", "mpfr", "libmpc", "attr", "acl", 
+    "libxcrypt", "gcc13", "binutils", "which", "gperf", "libcap", "libmd", 
+    "libbsd", "shadow", "ncurses", "readline", "sed", "bison", "pcre2", "grep", 
+    "bash", "expat", "inetutils", "less", "perl", "libressl", "kmod", "curl", 
+    "python3", "samurai", "meson", "coreutils", "check", "diffutils", "mawk", 
+    "findutils", "pigz", "iproute2", "kbd", "make", "lzip", "ed", "patch", 
+    "tar", "lua", "eudev", "mandoc", "procps-ng", "util-linux", "e2fsprogs", 
+    "libarchive", "sysklogd", "dbus", "openresolv", "dhcpcd", "dinit", "time", 
+    "libxml2", "libxslt", "iputils", "gzip", "gawk", "cmake", "vim", "libaio",
+    "lvm2", "parted", "popt", "efivar", "efibootmgr", "grub2", "logrotate",
+    "tcsh", "sharutils", "json-c", "cryptsetup"
+}
+
+pkgs = {
+    "iana-etc", "glibc", "tzdata", "zlib", "bzip2", "xz", "zstd", "file", "m4", 
+    "flex", "pkgconf", "binutils", "gmp", "mpfr", "libmpc", "attr", "acl", 
     "libxcrypt", "gcc", "which", "libcap", "libmd", "libbsd", "shadow", 
     "ncurses", "readline", "sed", "bison", "pcre2", "grep", "bash", "gperf", 
     "expat", "inetutils", "less", "perl", "libressl", "kmod", "curl", "libelf", 
