@@ -73,7 +73,7 @@ bzip2 = {
 };
 
 cmake = {
-    url = "https://cmake.org/files/v3.28/cmake-3.28.3.tar.gz",
+    url = "https://cmake.org/files/v3.29/cmake-3.29.0.tar.gz",
     build = "./configure",
     flags = { 
         "--parallel=$(/usr/bin/getconf _NPROCESSORS_ONLN)",
