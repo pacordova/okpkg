@@ -23,18 +23,31 @@ minimal = {
     "libmd", "libressl", "libxcrypt", "lua", "mawk", "ncurses", "openresolv", 
     "patch", "pcre2", "pigz", "procps-ng", "readline", "sed", "shadow", 
     "sysklogd", "tar", "time", "tzdata", "util-linux", "which", "xz", "zlib", 
-    "zstd"
+    "zstd", "db1", "nv1",
 }
 
 base = {
-    "binutils", "bison", "check", "diffutils", "flex", "gcc-13.2.0", "gperf", 
-    "libmpc", "libxml2", "libxslt", "linux-headers", "lzip", "m4", "make",
-    "mandoc", "meson", "mpfr", "perl", "pkgconf", "python3", "samurai", 
-    unpack(minimal)
+    "acl", "attr", "bash", "bzip2", "coreutils", "curl", "dbus", "dhcpcd", 
+    "dinit", "e2fsprogs", "ed", "eudev", "expat", "file", "findutils", 
+    "gcc-libs", "glibc", "gmp", "grep", "iana-etc", "inetutils", "iproute2", 
+    "iputils", "kbd", "kmod", "less", "libarchive", "libbsd", "libcap", 
+    "libmd", "libressl", "libxcrypt", "lua", "mawk", "ncurses", "openresolv", 
+    "patch", "pcre2", "pigz", "procps-ng", "readline", "sed", "shadow", 
+    "sysklogd", "tar", "time", "tzdata", "util-linux", "which", "xz", "zlib", 
+    "zstd", "binutils", "bison", "check", "diffutils", "flex", "gcc-13.2.0", 
+    "gperf", "libmpc", "libxml2", "libxslt", "linux-headers", "lzip", "m4", 
+    "make", "mandoc", "meson", "mpfr", "perl", "pkgconf", "python3", "samurai", 
 }
 
 devel = {
-    "cmake", "vim", unpack(base)
+    "cmake", "vim", "bc", "json-c", "argon2", "json-c", "popt", "logrotate",
+    "efivar", "efibootmgr", "grub2", "dosfstools", "openssh", "libaio", "lvm2",
+    "parted"
+}
+
+posix = {
+    "db1", "nv1", "dcron", "sharutils", "bc", "dma", "s-nail", "lprng", 
+    "diffutils", unpack(minimal)
 }
 
 -- for testing reproducibility
