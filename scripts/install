@@ -46,7 +46,7 @@ devel = {
 }
 
 posix = {
-    "db1", "nv1", "dcron", "sharutils", "bc", "dma", "s-nail", "lprng", 
+    "db1", "nv1", "dcron", "sharutils", "bc", "dma", "s-nail", "lprng", "pax",
     "diffutils", unpack(minimal)
 }
 
