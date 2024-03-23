@@ -322,6 +322,15 @@ libnsl = {
     }
 };
 
+libpcap = {
+    url = "https://www.tcpdump.org/release/libpcap-1.10.4.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--enable-ipv6"
+    }
+};
+
 libpipeline = {
     url = "https://download.savannah.gnu.org/releases/libpipeline/libpipeline-1.5.7.tar.gz",
     build = "./configure",
