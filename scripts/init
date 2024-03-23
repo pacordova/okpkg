@@ -1,0 +1,64 @@
+#!/usr/bin/env lua
+
+fp = io.open("/usr/bin/okpkg")
+if fp then
+    fp:close()
+else
+    fp = io.open("/usr/bin/make")
+    if fp then
+        os.execute [[ cd /usr/okpkg && make && make install ]]
+        os.execute [[ okpkg install /usr/okpkg/packages/linux-headers-*.tar.xz ]]
+        fp:close()
+    end
+end
+
+fp = io.open("/usr/bin/localedef")
+if fp then
+    os.execute [[
+        localedef -i POSIX -f UTF-8 C.UTF-8 2> /dev/null || true
+        localedef -i en_US -f UTF-8 en_US.UTF-8
+    ]]
+end
+
+fp = io.open("/usr/bin/passwd")
+if fp then
+    os.execute [[ 
+        passwd -d root
+        pwconv && grpconv
+        useradd -D --gid 999
+    ]]
+    fp:close()
+end
+
+fp = io.open("/usr/bin/makewhatis")
+if fp then
+    os.execute [[ makewhatis /usr/share/man ]]
+    fp:close()
+end
+
+fp = io.open("/usr/bin/udevadm")
+if fp then
+    os.execute [[ udevadm hwdb --update ]]
+    fp:close()
+end
+
+fp = io.open("/usr/bin/dbus-uuidgen")
+if fp then
+    os.execute [[ dbus-uuidgen --ensure ]]
+    fp:close()
+end
+
+fp = io.open("/etc/hostname")
+if fp then
+    fp:close()
+else
+    fp = io.open("/etc/hostname", 'w')
+    fp:write(os.getenv("HOSTNAME") .. '\n')    
+    fp:close()
+end
+
+fp = io.open("/usr/bin/hostname")
+if fp then
+    os.execute [[ hostname $HOSTNAME ]]
+    fp:close()
+end

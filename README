@@ -1,0 +1,98 @@
+okpkg
+-----
+This is a simple source-based package manager written in Lua.
+There is no dependency management.
+The metadata and configuration for each package is in the `db` directory.
+- db/system.db: contains base system packages
+- db/extra.db: contains random extra packages
+- db/gnu.db: contains gnu packages
+- db/lib.db: contains libraries
+- db/net.db: contains network tools
+- db/xorg.db: contains xorg libraries and utilities
+- db/xfce.db: contains xfce and complementary packages
+- db/archive.db: contains archived packages (warning: might not work)
+
+Usage
+-----
+`okpkg download [PACKAGE]`  - Downloads the source tarball into `sources`
+`okpkg build [PACKAGE]`     - Builds the sources into a .tar.xz in `packages`
+`okpkg install [ARCHIVE]`   - Installs a .tar.xz file to the system
+`okpkg chroot [DIRECTORY]`  - Chroots into a directory and sets up sys proc dev etc.
+`okpkg emerge [PACKAGE]`    - Downloads, builds, and installs a package in oneshot
+`okpkg purge [PACKAGE]`     - Uninstalls a package
+
+Install
+-------
+It is strongly recommended to clone this repository into `/usr/okpkg`.
+Then run: `make && make install`
+You need Lua, a C compiler and a standard Unix environment (with development
+tools, like find, patch, etc.)
+
+Because Lua targets an ANSI libc implementation, some additional filesystem
+functions and syscalls are added as a Lua library, see: `okutils.c`
+
+
+Patches
+-------
+Packages are kept as close to upstream as possible. However, some patches are
+included in the `patches` directory.
+When a package is downloaded using `okpkg download`, okpkg checks for a diff
+file with the name of the package, and patches it at *download* time. 
+
+Below is a non-exhaustive list for why okpkg patches certain packages:
+- The patch is recommended by LFS/BLFS
+- To force the libdir to be /usr/lib64
+- To force gcc-ada to respect SOURCE_DATE_EPOCH
+- To force python3 to use libressl instead of openssl
+
+
+Bootstrap
+---------
+This repository contains scripts to bootstrap a Linux From Scratch.
+You need the usual dependencies for LFS.
+See: <https://www.linuxfromscratch.org/>
+
+`scripts/download-all` downloads the source tarballs.
+`scripts/cross-compile` builds the cross-compiled environment, using 
+`db/cross.db`.
+`scripts/emerge` builds all the packages in the final system (from chroot)
+
+
+Some packages are added because okpkg needs them, like lua and curl.
+This system uses dinit. dinit needs dbus and dhcpcd.
+Additionally, some additional libraries (e.g. pcre2) not included in LFS are 
+included, while some packages are dropped (gettext, texinfo).
+
+Updating
+--------
+You should be able to just upgrade the packages by pointing to a newer version
+in the `db` directory. Build and install it. 
+Optionally remove the old version first.
+
+The exception is glibc. When updating glibc, tar will segfault on itself.
+You may need to use LD_LIBRARY_PATH.
+gawk is also needed instead of mawk to build glibc.
+
+
+Reproducible Builds
+-------------------
+Every package in `scripts/emerge` should be bit-for-bit reproducible in the 
+first pass! 
+
+The order has been slighly rearranged from LFS to avoid circular build 
+dependencies (currently untested for gcc with multiple languages).
+
+okpkg uses the SOURCE_DATE_EPOCH from the timestamp of the source
+tarball that is downloaded.
+
+Automatic archives for git tags posted on GitHub have a static checksum, but
+their timestamps are dynamic (releases do not have this issue).
+
+For three of these programs, we use FreeBSD's mirror instead (nvi, dma, argon2)
+
+For tzdata, vim, efivar, and a few others the SOURCE_DATE_EPOCH will be set 
+dynamically to the cached download, so you might see differences in the 
+timestamps in the archive, changing the checksum of the binary package.
+
+You can manually touch the files in `download` if you want a different
+SOURCE_DATE_EPOCH.

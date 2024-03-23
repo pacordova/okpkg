@@ -1,0 +1,359 @@
+-- not maintained
+libgusb = {
+    url = "https://people.freedesktop.org/~hughsient/releases/libgusb-0.3.10.tar.xz",
+    build = "meson",
+    flags = {
+        "-Dprefix=/usr",
+        "-Dbuildtype=release",
+        "-Dtests=false",
+        "-Dvapi=false",
+        "-Ddocs=false"
+    }
+};
+
+at-spi2-atk = {
+    url = "https://download.gnome.org/sources/at-spi2-atk/2.38/at-spi2-atk-2.38.0.tar.xz",
+    build = "meson"
+};
+
+at-spi2-core = {
+    url = "https://download.gnome.org/sources/at-spi2-core/2.42/at-spi2-core-2.42.0.tar.xz",
+    build = "meson"
+};
+
+atk = {
+    url = "https://download.gnome.org/sources/atk/2.36/atk-2.36.0.tar.xz",
+    build = "meson"
+};
+
+caribou = {
+    url = "https://download.gnome.org/sources/caribou/0.4/caribou-0.4.21.tar.xz",
+    build = "./configure"
+};
+
+cinnamon = {
+    url = "https://github.com/linuxmint/cinnamon/archive/refs/tags/master.mint21.tar.gz",
+    build = "meson",
+};
+
+cinnamon-control-center = {
+    url = "https://github.com/linuxmint/cinnamon-control-center/archive/refs/tags/master.mint21.tar.gz",
+    build = "meson",
+};
+
+cinnamon-desktop = {
+    url = "https://github.com/linuxmint/cinnamon-desktop/archive/refs/tags/master.mint21.tar.gz",
+    build = "meson",
+};
+
+cinnamon-menus = {
+    url = "https://github.com/linuxmint/cinnamon-menus/archive/refs/tags/master.mint21.tar.gz",
+    build = "meson",
+};
+
+cinnamon-screensaver = {
+    url = "https://github.com/linuxmint/cinnamon-screensaver/archive/refs/tags/master.mint21.tar.gz",
+    build = "meson",
+};
+
+cinnamon-session = {
+    url = "https://github.com/linuxmint/cinnamon-session/archive/refs/tags/master.mint21.tar.gz",
+    build = "meson",
+};
+
+cinnamon-settings-daemon = {
+    url = "https://github.com/linuxmint/cinnamon-settings-daemon/archive/refs/tags/master.mint21.tar.gz",
+    build = "meson",
+};
+
+cinnamon-translations = {
+    url = "https://github.com/linuxmint/cinnamon-translations/archive/refs/tags/master.mint21.tar.gz",
+    build = "make"
+};
+
+cjs = {
+    url = "https://github.com/linuxmint/cjs/archive/refs/tags/master.mint21.tar.gz",
+    build = "meson",
+};
+
+clutter = {
+    url = "https://download.gnome.org/sources/clutter/1.26/clutter-1.26.4.tar.xz",
+    build = "./configure",
+    flags = {
+        "--enable-egl-backend",
+        "--enable-evdev-input"
+    }
+};
+
+clutter-gtk = {
+    url = "https://download.gnome.org/sources/clutter-gtk/1.8/clutter-gtk-1.8.4.tar.xz",
+    build = "./configure"
+};
+
+cogl = {
+    url = "https://download.gnome.org/sources/cogl/1.22/cogl-1.22.8.tar.xz",
+    build = "./configure",
+    flags = {
+        "--enable-xlib-egl-platform"
+    }
+};
+
+fragments = {
+    url = "https://gitlab.gnome.org/World/Fragments/-/archive/2.0.2/Fragments-2.0.2.tar.gz",
+    build = "meson"
+};
+
+gdk-pixbuf = {
+    url = "https://download.gnome.org/sources/gdk-pixbuf/2.42/gdk-pixbuf-2.42.6.tar.xz",
+    build = "meson",
+    flags = {
+        "-Dgio_sniffing=false",
+        "-Dinstalled_tests=false"
+    }
+};
+
+gedit = {
+    url = "https://download.gnome.org/sources/gedit/41/gedit-41.0.tar.xz",
+    build = "meson",
+    flags = {
+        "-Dspell=disabled",
+        "-Duser_documentation=false",
+        "-Dplugin_externaltools=false"
+    }
+};
+
+geocode-glib = {
+    url = "https://download.gnome.org/sources/geocode-glib/3.26/geocode-glib-3.26.2.tar.xz",
+    build = "meson"
+};
+
+gjs = {
+    url = "https://download.gnome.org/sources/gjs/1.70/gjs-1.70.1.tar.xz",
+    build = "meson"
+};
+
+glib-networking = {
+    url = "https://download.gnome.org/sources/glib-networking/2.70/glib-networking-2.70.1.tar.xz",
+    build = "meson"
+};
+
+glibmm = {
+    url = "https://download.gnome.org/sources/glibmm/2.66/glibmm-2.66.2.tar.xz",
+    build = "meson",
+    flags = {
+        "-Dbuild-documentation=false",
+        "-Dbuild-examples=false"
+    }
+};
+
+gnome-autoar = {
+    url = "https://download.gnome.org/sources/gnome-autoar/0.4/gnome-autoar-0.4.3.tar.xz",
+    build = "meson"
+};
+
+gnome-backgrounds = {
+    url = "https://download.gnome.org/sources/gnome-backgrounds/41/gnome-backgrounds-41.0.tar.xz",
+    build = "meson"
+};
+
+gnome-color-manager = {
+    url = "https://download.gnome.org/sources/gnome-color-manager/3.36/gnome-color-manager-3.36.0.tar.xz",
+    build = "meson",
+    flags = {
+        "-Dsystemd_session=disable",
+        "-Dsystemd=false",
+        "-Dsystemd_journal=false"
+    }
+};
+
+gnome-common = {
+    url = "https://download.gnome.org/sources/gnome-common/3.18/gnome-common-3.18.0.tar.xz",
+    build = "./configure"
+};
+
+gnome-desktop = {
+    url = "https://download.gnome.org/sources/gnome-desktop/41/gnome-desktop-41.3.tar.xz",
+    build = "meson"
+};
+
+gnome-menus = {
+    url = "https://download.gnome.org/sources/gnome-menus/3.36/gnome-menus-3.36.0.tar.xz",
+    build = "./configure"
+};
+
+gnome-session = {
+    url = "https://download.gnome.org/sources/gnome-session/41/gnome-session-41.3.tar.xz",
+    build = "meson",
+    flags = {
+        "-Dsystemd_session=disable",
+        "-Dsystemd=false",
+        "-Dsystemd_journal=false"
+    }
+};
+
+gnome-settings-daemon = {
+    url = "https://download.gnome.org/sources/gnome-settings-daemon/41/gnome-settings-daemon-41.0.tar.xz",
+    build = "meson",
+    flags = { 
+        "-Dsystemd=false"
+    }
+};
+
+gnome-tweak-tool = {
+    url = "https://download.gnome.org/sources/gnome-tweaks/40/gnome-tweaks-40.0.tar.xz",
+    build = "meson",
+};
+
+gsettings-desktop-schemas = {
+    url = "https://download.gnome.org/sources/gsettings-desktop-schemas/41/gsettings-desktop-schemas-41.0.tar.xz",
+    build = "meson",
+};
+
+gtk-doc = {
+    url = "https://download.gnome.org/sources/gtk-doc/1.33/gtk-doc-1.33.2.tar.xz",
+    build = "meson",
+};
+
+gtk2 = {
+    url = "https://download.gnome.org/sources/gtk+/2.24/gtk+-2.24.33.tar.xz",
+    build = "./configure",
+    "--disable-gtk-doc",
+    "--disable-gtk-doc-html",
+    "--disable-glibtest"
+};
+
+gtksourceview = {
+    url = "https://download.gnome.org/sources/gtksourceview/4.8/gtksourceview-4.8.2.tar.xz",
+    build = "meson",
+};
+
+introspection = {
+    url = "https://download.gnome.org/sources/gobject-introspection/1.70/gobject-introspection-1.70.0.tar.xz",
+    build = "meson",
+};
+
+json-glib = {
+    url = "https://download.gnome.org/sources/json-glib/1.6/json-glib-1.6.6.tar.xz",
+    build = "meson",
+};
+
+libcroco = {
+    url = "https://download.gnome.org/sources/libcroco/0.6/libcroco-0.6.13.tar.xz",
+    build = "./configure"
+};
+
+libgee = {
+    url = "https://download.gnome.org/sources/libgee/0.20/libgee-0.20.5.tar.xz",
+    build = "meson",
+};
+
+libgnomekbd = {
+    url = "https://download.gnome.org/sources/libgnomekbd/3.26/libgnomekbd-3.26.1.tar.xz",
+    build = "autoreconf"
+};
+
+libgtop = {
+    url = "https://download.gnome.org/sources/libgtop/2.40/libgtop-2.40.0.tar.xz",
+    build = "./configure"
+};
+
+libgweather = {
+    url = "https://download.gnome.org/sources/libgweather/40/libgweather-40.0.tar.xz",
+    build = "meson",
+};
+
+libgxps = {
+    url = "https://download.gnome.org/sources/libgxps/0.3/libgxps-0.3.2.tar.xz",
+    build = "meson",
+};
+
+libnotify = {
+    url = "https://download.gnome.org/sources/libnotify/0.7/libnotify-0.7.9.tar.xz",
+    build = "meson",,
+    "-Dgtk_doc=false",
+    "-Dman=false",
+    "-Dtests=false"
+};
+
+libpeas = {
+    url = "https://download.gnome.org/sources/libpeas/1.30/libpeas-1.30.0.tar.xz",
+    build = "meson",
+};
+
+metacity = {
+    url = "https://download.gnome.org/sources/metacity/3.44/metacity-3.44.0.tar.xz",
+    build = "./configure"
+};
+
+mm-common = {
+    url = "https://download.gnome.org/sources/mm-common/1.0/mm-common-1.0.4.tar.xz",
+    build = "meson",,
+    "-Duse-network=true"
+};
+
+muffin = {
+    url = "https://github.com/linuxmint/muffin/archive/refs/tags/master.mint21.tar.gz",
+    build = "meson",
+};
+
+mutter = {
+    url = "https://download.gnome.org/sources/mutter/41/mutter-41.4.tar.xz",
+    build = "meson",,
+    "-Dtests=false"
+};
+
+nautilus = {
+    url = "https://download.gnome.org/sources/nautilus/41/nautilus-41.2.tar.xz",
+    build = "meson",
+};
+
+nemo = {
+    url = "https://github.com/linuxmint/nemo/archive/refs/tags/master.mint21.tar.gz",
+    build = "meson",
+};
+
+pango = {
+    url = "https://download.gnome.org/sources/pango/1.50/pango-1.50.4.tar.xz",
+    build = "meson",
+};
+
+pangox-compat = {
+    url = "https://download.gnome.org/sources/pangox-compat/0.0/pangox-compat-0.0.2.tar.xz",
+    build = "autoreconf"
+};
+
+secrets = {
+    url = "https://gitlab.gnome.org/World/secrets/-/archive/6.5/secrets-6.5.tar.gz",
+    build = "meson",
+};
+
+shared-mime-info = {
+    url = "https://gitlab.freedesktop.org/xdg/shared-mime-info/-/archive/2.1/shared-mime-info-2.1.tar.gz",
+    build = "meson",
+    flags = {
+        "-Dprefix=/usr",
+        "-Dbuildtype=release"
+    }
+};
+
+tracker = {
+    url = "https://download.gnome.org/sources/tracker/3.2/tracker-3.2.1.tar.xz",
+    build = "meson",,
+    "-Dsystemd_user_services=false"
+};
+
+vala = {
+    url = "https://download.gnome.org/sources/vala/0.54/vala-0.54.2.tar.xz",
+    build = "./configure"
+};
+
+xapp = {
+    url = "https://github.com/linuxmint/xapp/archive/refs/tags/master.mint21.tar.gz",
+    build = "meson",
+};
+
+zenity = {
+    url = "https://download.gnome.org/sources/zenity/3.32/zenity-3.32.0.tar.xz",
+    build = "./configure"
+};
+

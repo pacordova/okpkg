@@ -1,0 +1,27 @@
+#!/usr/bin/env lua
+
+dofile "/usr/okpkg/scripts/init"
+dofile "/usr/okpkg/okpkg.lua"
+
+tmp = {
+    "bison", "perl", "libxcrypt", "zlib", "pigz", "bzip2", "expat", "python3", 
+    "util-linux"
+}
+for i=1,#tmp do emerge(tmp[i]); end
+
+pkgs = {
+    "iana-etc", "glibc", "tzdata", "zlib", "bzip2", "xz", "zstd", "file", "m4", 
+    "flex", "pkgconf", "binutils", "gmp", "mpfr", "libmpc", "attr", "acl", 
+    "libxcrypt", "gcc13", "binutils", "which", "gperf", "libcap", "libmd", 
+    "libbsd", "shadow", "ncurses", "readline", "sed", "bison", "pcre2", "grep", 
+    "bash", "expat", "inetutils", "less", "perl", "libressl", "kmod", "curl", 
+    "python3", "samurai", "meson", "coreutils", "check", "diffutils", "mawk", 
+    "findutils", "pigz", "iproute2", "kbd", "make", "lzip", "ed", "patch", 
+    "tar", "lua", "eudev", "mandoc", "procps-ng", "util-linux", "e2fsprogs", 
+    "libarchive", "sysklogd", "dbus", "openresolv", "dhcpcd", "dinit", "time", 
+    "libxml2", "libxslt", "iputils"
+}
+for i=1,#pkgs do emerge(pkgs[i]); end
+
+-- split gcc13
+os.execute("/usr/okpkg/scripts/split-gcc.sh")

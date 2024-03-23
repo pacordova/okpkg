@@ -1,0 +1,57 @@
+#!/usr/bin/env lua
+
+package.cpath = package.cpath .. ";/usr/okpkg/?.so"
+
+require "okutils"
+
+local unpack = unpack or table.unpack
+
+setenv("DESTDIR", "/mnt")
+chdir("/usr/okpkg/packages/base")
+
+function install(pkgname)
+    local cmd = [[ bsdtar -P -C "$DESTDIR" -xf "%s"*.tar.xz ]]
+    os.execute(string.format(cmd, pkgname))
+end
+
+
+minimal = {
+    "acl", "attr", "bash", "bzip2", "coreutils", "curl", "dbus", "dhcpcd", 
+    "dinit", "e2fsprogs", "ed", "eudev", "expat", "file", "findutils", 
+    "gcc-libs", "glibc", "gmp", "grep", "iana-etc", "inetutils", "iproute2", 
+    "iputils", "kbd", "kmod", "less", "libarchive", "libbsd", "libcap", 
+    "libmd", "libressl", "libxcrypt", "lua", "mawk", "ncurses", "openresolv", 
+    "patch", "pcre2", "pigz", "procps-ng", "readline", "sed", "shadow", 
+    "sysklogd", "tar", "time", "tzdata", "util-linux", "which", "xz", "zlib", 
+    "zstd"
+}
+
+base = {
+    "binutils", "bison", "check", "diffutils", "flex", "gcc-13.2.0", "gperf", 
+    "libmpc", "libxml2", "libxslt", "linux-headers", "lzip", "m4", "make",
+    "mandoc", "meson", "mpfr", "perl", "pkgconf", "python3", "samurai", 
+    unpack(minimal)
+}
+
+devel = {
+    "cmake", "vim", unpack(base)
+}
+
+-- for testing reproducibility
+partial = {
+    "linux-headers",
+    "bison", "perl", "libxcrypt", "zlib", "pigz", "bzip2", "expat", "python3", 
+    "util-linux",
+    "iana-etc", "glibc", "tzdata", "zlib", "bzip2", "xz", "zstd", "file", "m4", 
+    "flex", "pkgconf", "binutils", "gmp", "mpfr", "libmpc", "attr", "acl", 
+    "libxcrypt", "gcc-libs", "gcc-13.2.0", "binutils", "which", "gperf", "libcap", "libmd", 
+    "libbsd", "shadow", "ncurses", "readline", "sed", "bison", "pcre2", "grep", 
+    "bash", "expat", "inetutils", "less", "perl", "libressl", "kmod", "curl", 
+}
+
+while #arg > 0 do
+    for i=1,#_G[arg[1]] do
+        install(_G[arg[1]][i])
+    end
+    table.remove(arg, 1)
+end

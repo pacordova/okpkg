@@ -1,0 +1,574 @@
+-- python modules:
+-- mako, libevdev, pyudev
+-- libs
+
+freetype2 = {
+    url = "https://downloads.sourceforge.net/freetype/freetype-2.12.1.tar.xz",
+    build = "./configure"
+};
+
+fontconfig = {
+    url = "https://freedesktop.org/software/fontconfig/release/fontconfig-2.13.1.tar.bz2",
+    build = "./configure"
+};
+
+libdrm = {
+    url = "https://dri.freedesktop.org/libdrm/libdrm-2.4.110.tar.xz",
+    build = "meson"
+};
+
+libpng = {
+    url = "https://downloads.sourceforge.net/libpng/libpng-1.6.37.tar.xz",
+    build = "./configure"
+};
+
+pixman = {
+    url = "https://cairographics.org/releases/pixman-0.40.0.tar.gz",
+    build = "meson"
+};
+
+cairo = {
+    url = "https://cairographics.org/snapshots/cairo-1.17.4.tar.xz",
+    build = "meson",
+    flags = {
+        "-Dspectre=disabled"
+    }
+};
+
+libtirpc = {
+    url = "https://downloads.sourceforge.net/libtirpc/libtirpc-1.3.2.tar.bz2",
+    build = "./configure",
+    flags = {
+        "--disable-gssapi"
+    }
+};
+
+libepoxy = {
+    url = "https://github.com/anholt/libepoxy/releases/download/1.5.9/libepoxy-1.5.9.tar.xz",
+    build = "meson"
+};
+
+mtdev = {
+    url = "https://bitmath.org/code/mtdev/mtdev-1.1.6.tar.bz2",
+    build = "./configure"
+};
+
+
+libgudev = {
+    url = "https://download.gnome.org/sources/libgudev/237/libgudev-237.tar.xz",
+    build = "meson"
+};
+
+libwacom = {
+    url = "https://github.com/linuxwacom/libwacom/releases/download/libwacom-2.1.0/libwacom-2.1.0.tar.xz",
+    build = "meson"
+};
+
+util-macros = {
+    url = "https://x.org/pub/individual/util/util-macros-1.19.3.tar.bz2",
+    build = "./configure"
+};
+
+xorgproto = {
+    url = "https://xorg.freedesktop.org/archive/individual/proto/xorgproto-2021.5.tar.bz2",
+    build = "meson"
+};
+
+libxau = {
+    url = "https://x.org/pub/individual/lib/libXau-1.0.9.tar.bz2",
+    build = "./configure"
+};
+
+libxdmcp = {
+    url = "https://x.org/pub/individual/lib/libXdmcp-1.1.3.tar.bz2",
+    build = "./configure"
+};
+
+xcbproto = {
+    url = "https://xorg.freedesktop.org/archive/individual/proto/xcb-proto-1.14.1.tar.xz",
+    build = "./configure"
+};
+
+libxcb = {
+    url = "https://xorg.freedesktop.org/archive/individual/lib/libxcb-1.14.tar.xz",
+    build = "./configure"
+};
+
+xtrans = {
+    url = "https://x.org/pub/individual/lib/xtrans-1.4.0.tar.bz2",
+    build = "./configure"
+};
+
+libx11 = {
+    url = "https://x.org/pub/individual/lib/libX11-1.7.3.1.tar.xz",
+    build = "./configure"
+};
+
+libxext = {
+    url = "https://x.org/pub/individual/lib/libXext-1.3.4.tar.bz2",
+    build = "./configure"
+};
+
+libfs = {
+    url = "https://x.org/pub/individual/lib/libFS-1.0.8.tar.bz2",
+    build = "./configure"
+};
+
+libice = {
+    url = "https://x.org/pub/individual/lib/libICE-1.0.10.tar.bz2",
+    build = "./configure"
+};
+
+libsm = {
+    url = "https://x.org/pub/individual/lib/libSM-1.2.3.tar.bz2",
+    build = "./configure"
+};
+
+libxscrnsaver = {
+    url = "https://x.org/pub/individual/lib/libXScrnSaver-1.2.3.tar.bz2",
+    build = "./configure"
+};
+
+libxt = {
+    url = "https://x.org/pub/individual/lib/libXt-1.2.1.tar.bz2",
+    build = "./configure"
+};
+
+libxmu = {
+    url = "https://x.org/pub/individual/lib/libXmu-1.1.3.tar.bz2",
+    build = "./configure"
+};
+
+libxpm = {
+    url = "https://x.org/pub/individual/lib/libXpm-3.5.13.tar.bz2",
+    build = "./configure"
+};
+
+libxaw = {
+    url = "https://x.org/pub/individual/lib/libXaw-1.0.14.tar.bz2",
+    build = "./configure"
+};
+
+libxfixes = {
+    url = "https://x.org/pub/individual/lib/libXfixes-6.0.0.tar.bz2",
+    build = "./configure"
+};
+
+libxcomposite = {
+    url = "https://x.org/pub/individual/lib/libXcomposite-0.4.5.tar.bz2",
+    build = "./configure"
+};
+
+libxrender = {
+    url = "https://x.org/pub/individual/lib/libXrender-0.9.10.tar.bz2",
+    build = "./configure"
+};
+
+libxcursor = {
+    url = "https://x.org/pub/individual/lib/libXcursor-1.2.0.tar.bz2",
+    build = "./configure"
+};
+
+libxdamage = {
+    url = "https://x.org/pub/individual/lib/libXdamage-1.1.5.tar.bz2",
+    build = "./configure"
+};
+
+libfontenc = {
+    url = "https://x.org/pub/individual/lib/libfontenc-1.1.4.tar.bz2",
+    build = "./configure"
+};
+
+libxfont2 = {
+    url = "https://x.org/pub/individual/lib/libXfont2-2.0.5.tar.bz2",
+    build = "./configure"
+};
+
+libxft = {
+    url = "https://x.org/pub/individual/lib/libXft-2.3.4.tar.bz2",
+    build = "./configure"
+};
+
+libxi = {
+    url = "https://x.org/pub/individual/lib/libXi-1.8.tar.bz2",
+    build = "./configure"
+};
+
+libxinerama = {
+    url = "https://x.org/pub/individual/lib/libXinerama-1.1.4.tar.bz2",
+    build = "./configure"
+};
+
+libxrandr = {
+    url = "https://x.org/pub/individual/lib/libXrandr-1.5.2.tar.bz2",
+    build = "./configure"
+};
+
+libxres = {
+    url = "https://x.org/pub/individual/lib/libXres-1.2.1.tar.bz2",
+    build = "./configure"
+};
+
+libxtst = {
+    url = "https://x.org/pub/individual/lib/libXtst-1.2.3.tar.bz2",
+    build = "./configure"
+};
+
+libxv = {
+    url = "https://x.org/pub/individual/lib/libXv-1.0.11.tar.bz2",
+    build = "./configure"
+};
+
+libxvmc = {
+    url = "https://x.org/pub/individual/lib/libXvMC-1.0.12.tar.bz2",
+    build = "./configure"
+};
+
+libxxf86dga = {
+    url = "https://x.org/pub/individual/lib/libXxf86dga-1.1.5.tar.bz2",
+    build = "./configure"
+};
+
+libxxf86vm = {
+    url = "https://x.org/pub/individual/lib/libXxf86vm-1.1.4.tar.bz2",
+    build = "./configure"
+};
+
+libdmx = {
+    url = "https://x.org/pub/individual/lib/libdmx-1.1.4.tar.bz2",
+    build = "./configure"
+};
+
+libpciaccess = {
+    url = "https://x.org/pub/individual/lib/libpciaccess-0.16.tar.bz2",
+    build = "./configure"
+};
+
+libxkbfile = {
+    url = "https://x.org/pub/individual/lib/libxkbfile-1.1.0.tar.bz2",
+    build = "./configure"
+};
+
+libxshmfence = {
+    url = "https://x.org/pub/individual/lib/libxshmfence-1.3.tar.bz2",
+    build = "./configure"
+};
+
+libxcvt = {
+    url = "https://x.org/pub/individual/lib/libxcvt-0.1.1.tar.xz",
+    build = "meson"
+};
+
+xcb-util = {
+    url = "https://xcb.freedesktop.org/dist/xcb-util-0.4.0.tar.bz2",
+    build = "./configure"
+};
+
+xcb-util-image = {
+    url = "https://xcb.freedesktop.org/dist/xcb-util-image-0.4.0.tar.bz2",
+    build = "./configure"
+};
+
+xcb-util-keysyms = {
+    url = "https://xcb.freedesktop.org/dist/xcb-util-keysyms-0.4.0.tar.bz2",
+    build = "./configure"
+};
+
+xcb-util-renderutil = {
+    url = "https://xcb.freedesktop.org/dist/xcb-util-renderutil-0.3.9.tar.bz2",
+    build = "./configure"
+};
+
+xcb-util-wm = {
+    url = "https://xcb.freedesktop.org/dist/xcb-util-wm-0.4.1.tar.bz2",
+    build = "./configure"
+};
+
+xcb-util-cursor = {
+    url = "https://xcb.freedesktop.org/dist/xcb-util-cursor-0.1.3.tar.bz2",
+    build = "./configure"
+};
+
+mesa = {
+    url = "https://mesa.freedesktop.org/archive/mesa-22.1.7.tar.xz",
+    build = "meson","-Ddri-drivers=i965",
+"-Dgallium-drivers=crocus,iris,r600,svga,virgl",
+"-Dgallium-nine=false",
+"-Dglx=dri",
+"-Dvalgrind=disabled",
+"-Dlibunwind=disabled",
+"-Dvulkan-drivers=amd,intel",
+"-Dplatforms=x11",
+"-Dllvm=disabled"
+};
+
+xbitmaps = {
+    url = "https://x.org/pub/individual/data/xbitmaps-1.1.2.tar.bz2",
+    build = "./configure"
+};
+
+iceauth = {
+    url = "https://x.org/pub/individual/app/iceauth-1.0.8.tar.bz2",
+    build = "./configure"
+};
+
+luit = {
+    url = "https://x.org/pub/individual/app/luit-1.1.1.tar.bz2",
+    build = "./configure"
+};
+
+mkfontscale = {
+    url = "https://x.org/pub/individual/app/mkfontscale-1.2.1.tar.bz2",
+    build = "./configure"
+};
+
+sessreg = {
+    url = "https://x.org/pub/individual/app/sessreg-1.1.2.tar.bz2",
+    build = "./configure"
+};
+
+setxkbmap = {
+    url = "https://x.org/pub/individual/app/setxkbmap-1.3.2.tar.bz2",
+    build = "./configure"
+};
+
+smproxy = {
+    url = "https://x.org/pub/individual/app/smproxy-1.0.6.tar.bz2",
+    build = "./configure"
+};
+
+x11perf = {
+    url = "https://x.org/pub/individual/app/x11perf-1.6.1.tar.bz2",
+    build = "./configure"
+};
+
+xauth = {
+    url = "https://x.org/pub/individual/app/xauth-1.1.1.tar.bz2",
+    build = "./configure"
+};
+
+xbacklight = {
+    url = "https://x.org/pub/individual/app/xbacklight-1.2.3.tar.bz2",
+    build = "./configure"
+};
+
+xcmsdb = {
+    url = "https://x.org/pub/individual/app/xcmsdb-1.0.5.tar.bz2",
+    build = "./configure"
+};
+
+xcursorgen = {
+    url = "https://x.org/pub/individual/app/xcursorgen-1.0.7.tar.bz2",
+    build = "./configure"
+};
+
+xdpyinfo = {
+    url = "https://x.org/pub/individual/app/xdpyinfo-1.3.2.tar.bz2",
+    build = "./configure"
+};
+
+xdriinfo = {
+    url = "https://x.org/pub/individual/app/xdriinfo-1.0.6.tar.bz2",
+    build = "./configure"
+};
+
+xev = {
+    url = "https://x.org/pub/individual/app/xev-1.2.4.tar.bz2",
+    build = "./configure"
+};
+
+xgamma = {
+    url = "https://x.org/pub/individual/app/xgamma-1.0.6.tar.bz2",
+    build = "./configure"
+};
+
+xhost = {
+    url = "https://x.org/pub/individual/app/xhost-1.0.8.tar.bz2",
+    build = "./configure"
+};
+
+xinput = {
+    url = "https://x.org/pub/individual/app/xinput-1.6.3.tar.bz2",
+    build = "./configure"
+};
+
+xkbcomp = {
+    url = "https://x.org/pub/individual/app/xkbcomp-1.4.5.tar.bz2",
+    build = "./configure"
+};
+
+xkbevd = {
+    url = "https://x.org/pub/individual/app/xkbevd-1.1.4.tar.bz2",
+    build = "./configure"
+};
+
+xkbutils = {
+    url = "https://x.org/pub/individual/app/xkbutils-1.0.4.tar.bz2",
+    build = "./configure"
+};
+
+xkill = {
+    url = "https://x.org/pub/individual/app/xkill-1.0.5.tar.bz2",
+    build = "./configure"
+};
+
+xlsatoms = {
+    url = "https://x.org/pub/individual/app/xlsatoms-1.1.3.tar.bz2",
+    build = "./configure"
+};
+
+xlsclients = {
+    url = "https://x.org/pub/individual/app/xlsclients-1.1.4.tar.bz2",
+    build = "./configure"
+};
+
+xmessage = {
+    url = "https://x.org/pub/individual/app/xmessage-1.0.5.tar.bz2",
+    build = "./configure"
+};
+
+xmodmap = {
+    url = "https://x.org/pub/individual/app/xmodmap-1.0.10.tar.bz2",
+    build = "./configure"
+};
+
+xpr = {
+    url = "https://x.org/pub/individual/app/xpr-1.0.5.tar.bz2",
+    build = "./configure"
+};
+
+xprop = {
+    url = "https://x.org/pub/individual/app/xprop-1.2.5.tar.bz2",
+    build = "./configure"
+};
+
+xrandr = {
+    url = "https://x.org/pub/individual/app/xrandr-1.5.1.tar.xz",
+    build = "./configure"
+};
+
+xrdb = {
+    url = "https://x.org/pub/individual/app/xrdb-1.2.1.tar.bz2",
+    build = "./configure"
+};
+
+xrefresh = {
+    url = "https://x.org/pub/individual/app/xrefresh-1.0.6.tar.bz2",
+    build = "./configure"
+};
+
+xset = {
+    url = "https://x.org/pub/individual/app/xset-1.2.4.tar.bz2",
+    build = "./configure"
+};
+
+xsetroot = {
+    url = "https://x.org/pub/individual/app/xsetroot-1.1.2.tar.bz2",
+    build = "./configure"
+};
+
+xvinfo = {
+    url = "https://x.org/pub/individual/app/xvinfo-1.1.4.tar.bz2",
+    build = "./configure"
+};
+
+xwd = {
+    url = "https://x.org/pub/individual/app/xwd-1.0.8.tar.bz2",
+    build = "./configure"
+};
+
+xwininfo = {
+    url = "https://x.org/pub/individual/app/xwininfo-1.1.5.tar.bz2",
+    build = "./configure"
+};
+
+xwud = {
+    url = "https://x.org/pub/individual/app/xwud-1.0.5.tar.bz2",
+    build = "./configure"
+};
+
+xorg-font-util = {
+    url = "https://x.org/pub/individual/font/font-util-1.3.2.tar.bz2",
+    build = "./configure"
+};
+
+xorg-fonts-encodings = {
+    url = "https://x.org/pub/individual/font/encodings-1.0.5.tar.bz2",
+    build = "./configure"
+};
+
+xorg-fonts-alias = {
+    url = "https://x.org/pub/individual/font/font-alias-1.0.4.tar.bz2",
+    build = "./configure"
+};
+
+xkeyboard-config = {
+    url = "https://x.org/pub/individual/data/xkeyboard-config/xkeyboard-config-2.35.1.tar.xz",
+    build = "meson"
+};
+
+xorg-server = {
+    url = "https://x.org/archive/individual/xserver/xorg-server-21.1.4.tar.xz",
+    build = "meson"
+};
+
+xinit = {
+    url = "https://x.org/pub/individual/app/xinit-1.4.1.tar.bz2",
+    build = "./configure"
+};
+
+libevdev = {
+    url = "https://freedesktop.org/software/libevdev/libevdev-1.12.0.tar.xz",
+    build = "./configure"
+};
+
+xf86-input-evdev = {
+    url = "https://x.org/pub/individual/driver/xf86-input-evdev-2.10.6.tar.bz2",
+    build = "./configure"
+};
+
+libinput = {
+    url = "https://freedesktop.org/software/libinput/libinput-1.19.3.tar.xz",
+    build = "meson","-Ddebug-gui=false",
+"-Dtests=false"
+};
+
+xf86-input-libinput = {
+    url = "https://x.org/pub/individual/driver/xf86-input-libinput-1.2.1.tar.xz",
+    build = "./configure"
+};
+
+xf86-input-synaptics = {
+    url = "https://x.org/pub/individual/driver/xf86-input-synaptics-1.9.1.tar.bz2",
+    build = "./configure"
+};
+
+xf86-input-wacom = {
+    url = "https://github.com/linuxwacom/xf86-input-wacom/releases/download/xf86-input-wacom-1.0.0/xf86-input-wacom-1.0.0.tar.bz2",
+    build = "./configure"
+};
+
+libva = {
+    url = "https://github.com/intel/libva/releases/download/2.13.0/libva-2.13.0.tar.bz2",
+    build = "./configure"
+};
+
+intel-vaapi-driver = {
+    url = "https://github.com/intel/intel-vaapi-driver/releases/download/2.4.1/intel-vaapi-driver-2.4.1.tar.bz2",
+    build = "./configure"
+};
+
+libvdpau = {
+,"",
+    build = "meson"
+};
+
+libvdpau-va-gl = {
+    url = "https://github.com/i-rinat/libvdpau-va-gl/archive/v0.4.0/libvdpau-va-gl-0.4.0.tar.gz",
+    build = "cmake"
+};
+
+libxkbcommon = {
+    url = "",
+    build = "meson","-Denable-wayland=false"
+};

@@ -1,0 +1,388 @@
+acpid2 = {
+    url = "https://downloads.sourceforge.net/acpid2/acpid-2.0.34.tar.xz",
+    build = "./configure"
+};
+
+ahoviewer = {
+    url = "https://github.com/ahodesuka/ahoviewer/archive/refs/tags/2.0.0-beta.tar.gz",
+    build = "meson"
+};
+
+castor = {
+    url = "https://git.sr.ht/~julienxx/castor/archive/0.9.0.tar.gz",
+    build = "make"
+};
+
+ccache = {
+    url = "https://github.com/ccache/ccache/releases/download/v4.9.1/ccache-4.9.1.tar.xz",
+    build = "cmake",
+    flags = {
+        "-DREDIS_STORAGE_BACKEND=OFF",
+        "-DENABLE_TESTING=OFF"
+    }
+};
+
+cmatrix = {
+    url = "https://www.asty.org/cmatrix2/dist/cmatrix-1.2a.tar.gz",
+    build = "./configure",
+};
+
+dmenu = {
+    url = "https://dl.suckless.org/tools/dmenu-5.1.tar.gz",
+    build = "make"
+};
+
+dynare = {
+    url = "https://dynare.org/release/source/dynare-6.0.tar.xz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--disable-doc",
+        "--disable-dynare++",
+        "--disable-matlab",
+        "--disable-mex-dynare++",
+        "--disable-mex-ms-sbvar",
+        "--disable-mex-kalman-steady-state"
+    }
+};
+
+evince = {
+    url = "https://download.gnome.org/sources/evince/45/evince-45.0.tar.xz",
+    build = "meson",
+    flags = {
+        "-Dsystemduserunitdir=no",
+        "-Dnautilus=false",
+        "-Dwrap_mode=nodownload",
+        "-Duser_doc=false",
+        "-Dgtk_doc=false",
+        "-Dpdf=enabled"
+    }
+};
+
+feh = {
+    url = "https://feh.finalrewind.org/feh-3.8.tar.bz2",
+    build = "make"
+};
+
+ffmpeg = {
+    url = "https://ffmpeg.org/releases/ffmpeg-5.1.tar.xz",
+    build = "./configure",
+    flags = {
+        "--enable-shared",
+        "--enable-libvpx",
+        "--enable-gpl",
+        "--enable-libx264",
+        "--libdir=/usr/lib64"
+    }
+};
+
+file-roller = {
+    url = "https://download.gnome.org/sources/file-roller/3.40/file-roller-3.40.0.tar.xz",
+    build = "meson"
+};
+
+firejail = {
+    url = "https://downloads.sourceforge.net/firejail/firejail-0.9.72.tar.xz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64"
+    }
+};
+
+flashrom = {
+    url = "https://download.flashrom.org/releases/flashrom-v1.3.0.tar.bz2",
+    build = "make",
+    flags = {
+        "PREFIX=/usr"
+    }
+};
+
+fontforge = {
+    url = "https://github.com/fontforge/fontforge/releases/download/20230101/fontforge-20230101.tar.xz",
+    build = "cmake",
+    flags = {
+        "-DENABLE_DOCS=OFF",
+        "-DENABLE_LIBSPIRO=OFF",
+        "-Wno-dev"
+    }
+};
+
+git = {
+    url = "https://kernel.org/pub/software/scm/git/git-2.44.0.tar.xz",
+    build = "./configure",
+    flags = {
+        "--with-gitconfig=/etc/gitconfig",
+        "--libexecdir=/usr/lib64",
+    },
+    prepare = [[
+        printf 'NO_GETTEXT=1\n' >> config.mak
+        printf 'NO_SVN_TESTS=1\n' >> config.mak
+        printf 'NO_TCLTK=1\n' >> config.mak
+        printf 'NO_PYTHON=1\n' >> config.mak
+        printf 'NO_PERL=1\n' >> config.mak
+        printf 'NO_SYS_POLL_H=1\n' >> config.mak
+        printf 'INSTALL_SYMLINKS=1\n' >> config.mak
+        printf 'USE_LIBPCRE2=1\n' >> config.mak
+    ]]
+};
+
+htop = {
+    url = "https://github.com/htop-dev/htop/releases/download/3.3.0/htop-3.3.0.tar.xz",
+    build = "./configure"
+};
+
+lagrange = {
+    url = "https://git.skyjake.fi/gemini/lagrange/releases/download/v1.15.8/lagrange-1.15.8.tar.gz",
+    build = "cmake"
+};
+
+leafpad = {
+    url = "https://download.savannah.gnu.org/releases/leafpad/leafpad-0.8.19.tar.gz",
+    build = "./configure"
+};
+
+liberation-fonts = {
+    url = "https://github.com/liberationfonts/liberation-fonts/files/7261483/liberation-fonts-2.1.5.tar.gz",
+    build = "make"
+};
+
+lm-sensors = {
+    url = "https://github.com/lm-sensors/lm-sensors/archive/V3-6-0/lm-sensors-3-6-0.tar.gz",
+    build = "make",
+    flags = {
+        "LIBDIR=$LIBDIR"
+    }
+};
+
+lprng = {
+    url = "https://prdownloads.sourceforge.net/lprng/lprng-3.9.0.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--disable-nls"
+    }
+};
+
+lzop = {
+    url = "https://lzop.org/download/lzop-1.04.tar.gz",
+    build = "./configure"
+};
+
+mpv = {
+    url = "https://github.com/mpv-player/mpv/archive/refs/tags/v0.35.1.tar.gz",
+    build = "meson",
+    flags = {
+        "-Dpipewire=disabled"
+    }
+};
+
+pavucontrol = {
+    url = "https://freedesktop.org/software/pulseaudio/pavucontrol/pavucontrol-5.0.tar.xz",
+    build = "./configure",
+};
+
+pciutils = {
+    url = "https://mj.ucw.cz/download/linux/pci/pciutils-3.11.1.tar.gz",
+    build = "make",
+    flags = {
+        "PREFIX=/usr",
+        "LIBDIR=/usr/lib64",
+        "SHAREDIR=/usr/share/hwdata",
+        "SHARED=yes"
+    },
+    post = [[
+        cd "$DESTDIR"
+        chmod 755 usr/lib64/libpci.so
+    ]]
+};
+
+poppler = {
+    url = "https://poppler.freedesktop.org/poppler-24.02.0.tar.xz",
+    build = "cmake",
+    flags = {
+        "-DENABLE_QT5=OFF",
+        "-DENABLE_QT6=OFF",
+        "-DENABLE_BOOST=OFF",
+        "-DENABLE_NSS3=OFF",
+        "-DENABLE_GPGME=OFF",
+        "-DENABLE_LIBTIFF=OFF",
+        "-DENABLE_GTK_DOC=OFF"
+    }
+};
+
+poppler-data = {
+    url = "https://poppler.freedesktop.org/poppler-data-0.4.12.tar.gz",
+    build = "make",
+    flags = {
+        "prefix=/usr"
+    } 
+};
+
+pwgen = {
+    url = "https://prdownloads.sourceforge.net/pwgen/pwgen-2.08.tar.gz",
+    build = "./configure"
+};
+
+rsync = {
+    url = "https://samba.org/ftp/rsync/src/rsync-3.2.7.tar.gz",
+    build = "./configure",
+    flags = {
+        "--disable-lz4",
+        "--disable-xxhash",
+        "--disable-md2man",
+        "--without-included-zlib"
+    }
+};
+
+ruby = {
+    url = "https://cache.ruby-lang.org/pub/ruby/3.3/ruby-3.3.0.tar.xz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--disable-rpath",
+        "--enable-shared",
+        "--without-valgrind",
+        "--without-baseruby",
+        "ac_cv_func_qsort_r=no"
+    }
+};
+
+tmux = {
+    url = "https://github.com/tmux/tmux/releases/download/3.4/tmux-3.4.tar.gz",
+    build = "./configure"
+};
+
+unzip = {
+    url = "https://downloads.sourceforge.net/infozip/unzip60.tar.gz",
+    build = "make",
+    flags = {
+        "--file=unix/Makefile",
+        "prefix=${DESTDIR}/usr",
+        "MANDIR=/usr/share/man/man1",
+        "generic"
+    }
+};
+
+zip = {
+    url = "https://downloads.sourceforge.net/infozip/zip30.tar.gz",
+    build = "make",
+    flags = {
+        "--file=unix/Makefile",
+        "prefix=${DESTDIR}/usr",
+        "generic_gcc"
+    }
+};
+
+connman = {
+    url = "https://mirrors.edge.kernel.org/pub/linux/network/connman/connman-1.41.tar.xz",
+    build = "./configure",
+    flags = {
+        "--sysconfdir=/etc",
+        "--localstatedir=/var",
+        "--libdir=/usr/lib64",
+        "--bindir=/usr/bin",
+        "--sbindir=/usr/bin",
+        "--with-systemdunitdir=no",
+        "--enable-pie",
+        "--disable-wispr",
+        "LIBS=-lncursesw" 
+    },
+    post = [[
+        rm -fr ${DESTDIR}no
+    ]]
+};
+
+iptables = {
+    url = "https://www.netfilter.org/projects/iptables/files/iptables-1.8.9.tar.xz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--disable-nftables",
+        "--enable-libipq"
+    }
+};
+
+networkmanager = {
+    url = "https://download.gnome.org/sources/NetworkManager/1.34/NetworkManager-1.34.0.tar.xz",
+    build = "meson",
+    flags = {
+        "-Dqt=false",
+        "-Dnmtui=false",
+        "-Dmodem_manager=false",
+        "-Dsession_tracking=no",
+        "-Dsystemd_journal=false",
+        "-Dlibaudit=no",
+        "-Dselinux=false",
+        "-Dsystemdsystemunitdir=no"
+    }
+};
+
+-- wip
+openbsd-netcat = {
+    url = "https://salsa.debian.org/debian/netcat-openbsd/-/archive/debian/1.226-1/netcat-openbsd-debian-1.226-1.tar.gz",
+    build = "make"
+};
+
+ppp = {
+    url = "https://samba.org/ftp/ppp/ppp-2.4.9.tar.gz",
+    build = "./configure"
+};
+
+wpa_supplicant = {
+    url = "https://w1.fi/releases/wpa_supplicant-2.10.tar.gz",
+    build = "make",
+    flags = {
+        "--directory=wpa_supplicant",
+        "BINDIR=/usr/sbin",
+        "LIBDIR=/usr/lib64"
+    },
+    prepare = [[
+    {
+        printf "CONFIG_BACKEND=file\n"
+        printf "CONFIG_CTRL_IFACE=y\n"
+        printf "CONFIG_DEBUG_FILE=y\n"
+        printf "CONFIG_DEBUG_SYSLOG=y\n"
+        printf "CONFIG_DEBUG_SYSLOG_FACILITY=LOG_DAEMON\n"
+        printf "CONFIG_DRIVER_NL80211=y\n"
+        printf "CONFIG_DRIVER_WEXT=y\n"
+        printf "CONFIG_DRIVER_WIRED=y\n"
+        printf "CONFIG_EAP_GTC=y\n"
+        printf "CONFIG_EAP_LEAP=y\n"
+        printf "CONFIG_EAP_MD5=y\n"
+        printf "CONFIG_EAP_MSCHAPV2=y\n"
+        printf "CONFIG_EAP_OTP=y\n"
+        printf "CONFIG_EAP_PEAP=y\n"
+        printf "CONFIG_EAP_TLS=y\n"
+        printf "CONFIG_EAP_TTLS=y\n"
+        printf "CONFIG_IEEE8021X_EAPOL=y\n"
+        printf "CONFIG_IPV6=y\n"
+        printf "CONFIG_LIBNL32=y\n"
+        printf "CONFIG_PEERKEY=y\n"
+        printf "CONFIG_PKCS12=y\n"
+        printf "CONFIG_READLINE=y\n"
+        printf "CONFIG_SMARTCARD=y\n"
+        printf "CONFIG_WPS=y\n"
+        printf "CFLAGS += -I/usr/include/libnl3\n"
+        printf "CONFIG_CTRL_IFACE_DBUS=y\n"
+        printf "CONFIG_CTRL_IFACE_DBUS_NEW=y\n"
+        printf "CONFIG_CTRL_IFACE_DBUS_INTRO=y\n"
+        printf "CONFIG_AP=y\n"
+        printf "CONFIG_BGSCAN_SIMPLE=y\n"
+    } >wpa_supplicant/.config 
+    ]],
+    post = [[
+        mkdir -p ${DESTDIR}/usr/sbin 
+            mkdir -p ${DESTDIR}/usr/share/man/man{5,8}
+    mkdir -p ${DESTDIR}/usr/share/dbus-1/{system-services,system.d}
+    cd wpa_supplicant
+        install -m644 doc/docbook/wpa_supplicant.conf.5 \
+        ${DESTDIR}/usr/share/man/man5/
+        install -m644 doc/docbook/wpa_{cli,passphrase,supplicant}.8 \
+        ${DESTDIR}/usr/share/man/man8/
+        install -m644 dbus/fi.w1.wpa_supplicant1.service \
+        ${DESTDIR}/usr/share/dbus-1/system-services/ 
+        install -d -m755 ${DESTDIR}/etc/dbus-1/system.d 
+        install -m644 dbus/dbus-wpa_supplicant.conf \
+        ${DESTDIR}/etc/dbus-1/system.d/wpa_supplicant.conf
+    ]]
+};

@@ -1,0 +1,591 @@
+acl = {
+    url = "https://download.savannah.gnu.org/releases/acl/acl-2.3.2.tar.xz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--libexecdir=/usr/lib64",
+        "--disable-nls",
+        "--disable-static"
+    }
+};
+
+argon2 = {
+    url = "http://distcache.freebsd.org/ports-distfiles/P-H-C-phc-winner-argon2-20190702_GH0.tar.gz",
+    build = "make",
+    flags = {
+        "LIBRARY_REL=lib64"
+    }
+};
+
+attr = {
+    url = "https://download.savannah.gnu.org/releases/attr/attr-2.5.2.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--libexecdir=/usr/lib64",
+        "--sysconfdir=/etc",
+        "--disable-nls",
+        "--disable-static"
+    }
+};
+
+c-ares = {
+    url = "https://c-ares.haxx.se/download/c-ares-1.26.0.tar.gz",
+    build = "cmake"
+};
+
+efivar = {
+    url = "https://github.com/rhboot/efivar/archive/39/efivar-39.tar.gz",
+    build = "make",
+    flags = {
+        "LIBDIR=/usr/lib64",
+        "PREFIX=/usr"
+    }
+};
+
+expat = {
+    url = "https://downloads.sourceforge.net/expat/expat-2.6.2.tar.bz2",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--disable-static",
+        "--without-xmlwf",
+        "--without-examples",
+        "--without-tests",
+        "--without-docbook"
+    }
+};
+
+isl = {
+    url = "https://libisl.sourceforge.io/isl-0.26.tar.xz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--disable-static"
+    }
+};
+
+jansson = {
+    url = "https://github.com/akheron/jansson/releases/download/v2.14/jansson-2.14.tar.bz2",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--disable-static"
+    },
+    prepare = [[
+        sed -e "/DT/s;| sort;| sed 's/@@libjansson.*//' &;" \
+            -i test/suites/api/check-exports
+    ]]
+};
+
+json-c = {
+    url = "https://s3.amazonaws.com/json-c_releases/releases/json-c-0.17.tar.gz",
+    build = "cmake",
+    flags = {
+        "-DBUILD_STATIC_LIBS=OFF",
+        "-DBUILD_TESTING=OFF",
+        "-DENABLE_THREADING=ON",
+        "-DENABLE_RDRAND=OFF"
+    }
+};
+
+libaio = {
+    url = "https://pagure.io/libaio/archive/libaio-0.3.113/libaio-0.3.113.tar.gz",
+    build = "make",
+    flags = {
+        "libdir=/usr/lib64"
+    },
+    post = [[
+        cd "$DESTDIR"
+        rm usr/lib64/libaio.a
+    ]]
+};
+
+libarchive = { 
+    url = "https://github.com/libarchive/libarchive/releases/download/v3.7.2/libarchive-3.7.2.tar.xz",
+    build = "./configure",
+    flags = { 
+        "--libdir=/usr/lib64",
+        "--without-xml2",
+        "--without-nettle",
+        "--disable-static",
+    } 
+};
+
+libbsd = {
+    url = "https://libbsd.freedesktop.org/releases/libbsd-0.12.2.tar.xz",
+    build = "./configure",
+    flags= {
+        "--libdir=/usr/lib64"
+    }
+};
+
+libcap = {
+    url = "https://kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-2.69.tar.xz",
+    build = "make",
+    flags = {
+        "LIBDIR=/usr/lib64",
+        "prefix=/usr",
+        "sbindir=bin"
+    },
+    prepare = [[
+        sed -i '/install -m.*STA/d' libcap/Makefile
+    ]]
+};
+
+check = {
+    url = "https://github.com/libcheck/check/releases/download/0.15.2/check-0.15.2.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--sysconfdir=/etc",
+        "--localstatedir=/var",
+        "--mandir=/usr/share/man",
+        "--disable-static"
+    }
+};
+
+libconfig = {
+    url = "https://github.com/hyperrealm/libconfig/releases/download/v1.7.3/libconfig-1.7.3.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--sysconfdir=/etc"
+    }
+};
+
+lvm2 = {
+    url = "https://sourceware.org/ftp/lvm2/LVM2.2.03.23.tgz",
+    build = "./configure",
+    flags = {
+        "--sbindir=/usr/bin",
+        "--libdir=/usr/lib64",
+        "--sysconfdir=/etc",
+        "--localstatedir=/var",
+        "--enable-pkgconfig",
+        "--disable-readline",
+        "--with-default-dm-run-dir=/run",
+        "--with-default-locking-dir=/run/lock/lvm",
+        "--with-default-pid-dir=/run",
+        "--with-default-run-dir=/run/lvm",
+        "--with-libexecdir=/usr/lib64/lvm2",
+        "--with-usrlibdir=/usr/lib64",
+        "--without-udev",
+        "--without-systemd"
+    }
+};
+
+elfutils = {
+    url = "https://sourceware.org/ftp/elfutils/0.191/elfutils-0.191.tar.bz2",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--sysconfdir=/etc",
+        "--disable-symbol-versioning",
+        "--disable-debuginfod",
+        "--disable-libdebuginfod",
+        "--disable-nls"
+    },
+};
+
+libev = {
+    url = "http://dist.schmorp.de/libev/libev-4.33.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64"
+    }
+};
+
+libevent = {
+    url = "https://github.com/libevent/libevent/releases/download/release-2.1.12-stable/libevent-2.1.12-stable.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64", 
+        "--disable-static"
+    },
+    prepare = [[
+        sed -i 's/python/&3/' event_rpcgen.py
+    ]]
+};
+
+libexif = {
+    url = "https://github.com/libexif/libexif/releases/download/v0.6.24/libexif-0.6.24.tar.bz2",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--disable-static"
+    }
+};
+
+libffi = {
+    url = "https://github.com/libffi/libffi/releases/download/v3.4.6/libffi-3.4.6.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--with-gcc-arch=x86-64",
+        "--disable-exec-static-tramp",
+        "--disable-static"
+    }
+};
+
+libfuse = {
+    url = "https://github.com/libfuse/libfuse/releases/download/fuse-3.16.2/fuse-3.16.2.tar.gz",
+    build = "meson",
+    flags = {
+        "-Dsbindir=bin",
+        "-Dexamples=false", 
+    },
+    prepare = [[
+        sed -i '/^udev/,$ s/^/#/' util/meson.build 
+    ]],
+    post = [[
+        chmod u+s "$DESTDIR"/usr/bin/fusermount3
+    ]]
+};
+
+libiconv = {
+    url = "https://ftp.gnu.org/gnu/libiconv/libiconv-1.17.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--enable-shared",
+        "--disable-static",
+        "--enable-extra-encodings"
+    }
+};
+
+libjpeg-turbo = {
+    url = "https://downloads.sourceforge.net/libjpeg-turbo/libjpeg-turbo-3.0.1.tar.gz",
+    build = "cmake",
+    flags = {
+        "-DENABLE_STATIC=FALSE",
+        "-DWITH_JPEG8=1"
+        "-DWITH_JAVA=OFF",
+    }
+};
+
+libmd = {
+    url = "https://libbsd.freedesktop.org/releases/libmd-1.1.0.tar.xz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64"
+    }
+};
+
+libmnl = {
+    url = "https://netfilter.org/projects/libmnl/files/libmnl-1.0.5.tar.bz2",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64"
+    }
+};
+
+libndp = {
+    url = "http://libndp.org/files/libndp-1.8.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--libexecdir=/usr/lib64",
+        "--sysconfdir=/etc",
+        "--localstatedir=/var",
+        "--disable-static"
+    }
+};
+
+libnftnl = {
+    url = "https://netfilter.org/pub/libnftnl/libnftnl-1.2.6.tar.xz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64"
+    }
+};
+
+libnl = {
+    url = "https://github.com/thom311/libnl/releases/download/libnl3_9_0/libnl-3.9.0.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--sysconfdir=/etc",
+        "--disable-static",
+        "--disable-cli"    
+    }
+};
+
+libnsl = {
+    url = "https://github.com/thkukuk/libnsl/releases/download/v2.0.1/libnsl-2.0.1.tar.xz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--sbindir=/usr/bin",
+        "--sysconfdir=/etc",
+        "--disable-static"
+    }
+};
+
+libpipeline = {
+    url = "https://download.savannah.gnu.org/releases/libpipeline/libpipeline-1.5.7.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64"
+    }
+};
+
+libpng = {
+    url = "https://downloads.sourceforge.net/libpng/libpng-1.6.42.tar.xz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--disable-static"
+    }
+};
+
+-- deps: libidn2 libunistring
+libpsl = {
+    url = "https://github.com/rockdaboot/libpsl/releases/download/0.21.5/libpsl-0.21.5.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--disable-dependency-tracking",
+        "--enable-man",
+        "--disable-static",
+        "--disable-nls"
+    },
+    post = [[ cd "$DESTDIR" && rm -fr usr/bin usr/share/man/man1 ]]
+};
+
+libressl = {
+    url = "https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-3.9.0.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64", 
+        "--sysconfdir=/etc",
+        "--disable-static"
+    },
+    post = [[
+        cd "$DESTDIR"
+        rm -r usr/share/man/man1
+        rm -r usr/share/man/man8
+        rm -r usr/bin
+    ]]
+};
+
+libseccomp = {
+    url = "https://github.com/seccomp/libseccomp/releases/download/v2.5.5/libseccomp-2.5.5.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--disable-static"
+    }
+};
+
+libsigsegv = {
+    url = "https://ftp.gnu.org/gnu/libsigsegv/libsigsegv-2.14.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--enable-shared",
+        "--disable-static"
+    }
+};
+
+libsodium = {
+    url = "https://download.libsodium.org/libsodium/releases/libsodium-1.0.19.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64"
+    }
+};
+
+libtasn1 = {
+    url = "https://ftp.gnu.org/gnu/libtasn1/libtasn1-4.19.0.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--disable-static"
+    }
+};
+
+libtiff = {
+    url = "https://download.osgeo.org/libtiff/tiff-4.6.0.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--sysconfdir=/etc",
+        "--mandir=/usr/share/man"
+    }
+};
+
+libtirpc = {
+    url = "https://downloads.sourceforge.net/libtirpc/libtirpc-1.3.4.tar.bz2",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--sysconfdir=/etc",
+        "--disable-static",
+        "--disable-gssapi"
+    }
+};
+
+libunistring = {
+    url = "https://ftp.gnu.org/gnu/libunistring/libunistring-1.1.tar.xz", 
+    build = "./configure", 
+    flags = { 
+        "--libdir=/usr/lib64",
+        "--disable-static"
+    }   
+};
+
+libunwind = { 
+    url = "https://download.savannah.nongnu.org/releases/libunwind/libunwind-1.6.2.tar.gz", 
+    build = "./configure", 
+    flags = { 
+        "--libdir=/usr/lib64",
+        "--sysconfdir=/etc",
+        "--localstatedir=/var",
+        "--disable-static"
+    } 
+};
+
+libusb = {
+    url = "https://github.com/libusb/libusb/releases/download/v1.0.27/libusb-1.0.27.tar.bz2",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--disable-static"
+    }
+};
+
+libuv = {
+    url = "https://dist.libuv.org/dist/v1.48.0/libuv-v1.48.0.tar.gz",
+    build = "./autogen.sh",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--disable-static"
+    }
+};
+
+libxcrypt = {
+    url = "https://github.com/besser82/libxcrypt/releases/download/v4.4.36/libxcrypt-4.4.36.tar.xz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--enable-hashes=strong,glibc",
+        "--enable-obsolete-api=no",
+        "--disable-static",
+        "--disable-failure-tokens"
+    }
+};
+
+libxml2 = {
+    url = "https://download.gnome.org/sources/libxml2/2.12/libxml2-2.12.6.tar.xz",
+    build = "./configure",
+    flags = {
+        "--sysconfdir=/etc",
+        "--libdir=/usr/lib64",
+        "--localstatedir=/var",
+        "--with-threads",
+        "--without-python",
+        "--disable-static"
+    },
+    post = [[
+        cd "$DESTDIR"
+        rm -f usr/lib64/libxml2.la
+        rm -fr usr/bin usr/share/man/man1
+    ]]
+};
+
+libxslt = {
+    url = "https://download.gnome.org/sources/libxslt/1.1/libxslt-1.1.39.tar.xz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--sysconfdir=/etc",
+        "--localstatedir=/var",
+        "--disable-static",
+        "--without-python"
+    }
+};
+
+libyaml = {
+    url = "https://github.com/yaml/libyaml/releases/download/0.2.5/yaml-0.2.5.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--disable-static"
+    }
+};
+
+lzo = {
+    url = "https://oberhumer.com/opensource/lzo/download/lzo-2.10.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--enable-shared",
+        "--disable-static"
+    }
+};
+
+nettle = {
+    url = "https://ftp.gnu.org/gnu/nettle/nettle-3.9.1.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--enable-shared",
+        "--disable-static"
+    },
+    post = [[
+        cd "$DESTDIR"
+        chmod 755 usr/lib64/libhogweed.so
+        chmod 755 usr/lib64/libnettle.so
+    ]]
+};
+
+openblas = {
+    url = "https://github.com/xianyi/OpenBLAS/releases/download/v0.3.26/OpenBLAS-0.3.26.tar.gz",
+    build = "cmake",
+    flags = {
+        "-DBUILD_SHARED_LIBS=ON",
+        "-DBUILD_TESTING=OFF",
+        "-DNO_AFFINITY=ON",
+        "-DNO_WARMUP=1",
+        "-DTARGET=CORE2",
+        "-DNUM_THREADS=$(/usr/bin/getconf _NPROCESSORS_ONLN)",
+        "-DINTERFACE64=1",
+    }
+};
+
+pcre2 = {
+    url = "https://github.com/PCRE2Project/pcre2/releases/download/pcre2-10.43/pcre2-10.43.tar.bz2",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--enable-unicode",
+        "--enable-pcre2-16",
+        "--enable-pcre2-32",
+        "--enable-jit",
+        "--disable-static"
+    }
+};
+
+popt = {
+    url = "http://ftp.rpm.org/popt/releases/popt-1.x/popt-1.19.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--disable-nls",
+        "--disable-static"
+    }
+};
+
+zlib = {
+    url = "https://zlib.net/zlib-1.3.1.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64"
+    },
+    post = [[
+        cd "$DESTDIR"
+        rm -f usr/lib64/libz.a
+    ]]
+};
+

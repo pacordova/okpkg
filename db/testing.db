@@ -1,0 +1,57 @@
+-- needs python modules: distutils
+glib2 = {
+    url = "https://download.gnome.org/sources/glib/2.78/glib-2.78.4.tar.xz",
+    build = "meson",
+    flags = {
+        "-Dman=false"
+    }
+};
+
+gegl = {
+    url = "https://download.gimp.org/pub/gegl/0.4/gegl-0.4.48.tar.xz",
+    build = "meson",
+    flags = {
+        "-Ddocs=false"
+    }
+};
+
+imlib2 = {
+    url = "https://downloads.sourceforge.net/enlightenment/imlib2-1.12.2.tar.xz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--disable-static"
+    }
+};
+
+libass = {
+    url = "https://github.com/libass/libass/releases/download/0.17.1/libass-0.17.1.tar.xz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--disable-static",
+        "--disable-fontconfig"
+    }
+};
+
+libhandy = {
+    url = "https://download.gnome.org/sources/libhandy/1.8/libhandy-1.8.3.tar.xz",
+    build = "meson",
+    flags = {
+        "-Dexamples=false",
+        "-Dtests=false",
+        "-Dvapi=false"
+    }
+};
+
+libx264 = {
+    url = "https://code.videolan.org/videolan/x264/-/archive/master/x264-master.tar.bz2",
+    build = "./configure",
+    flags = {
+        "--enable-shared",
+        "--disable-cli",
+        "--bit-depth=10"
+    }
+};
+
+

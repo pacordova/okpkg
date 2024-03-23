@@ -1,0 +1,784 @@
+autoconf = {
+    url = "https://ftp.gnu.org/gnu/autoconf/autoconf-2.72.tar.xz",
+    build = "./configure"
+};
+
+automake = {
+    url = "https://ftp.gnu.org/gnu/automake/automake-1.16.5.tar.xz",
+    build = "./configure"
+};
+
+bash = {
+    url = "https://ftp.gnu.org/gnu/bash/bash-5.2.21.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--mandir=/usr/share/man",
+        "--disable-nls",
+        "--with-curses",
+        "--enable-readline",
+        "--without-bash-malloc",
+        "--with-installed-readline"
+    },
+    post = [[
+        cd "$DESTDIR"
+        ln -sf bash usr/bin/sh
+        rm -f usr/bin/bashbug 
+        rm -f usr/share/man/man1/bashbug.1
+    ]]
+};
+
+binutils = {
+    url = "https://ftp.gnu.org/gnu/binutils/binutils-2.42.tar.xz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--with-lib-path=/usr/lib64",
+        "--enable-deterministic-archives",
+        "--sysconfdir=/etc",
+        "--enable-gold", 
+        "--enable-lto",
+        "--enable-ld=default",
+        "--enable-plugins",
+        "--enable-threads",
+        "--disable-multilib",
+        "--disable-werror",
+        "--disable-gdb",
+        "--disable-nls",
+        "--disable-readline",
+        "--disable-gprofng",
+        "--with-system-zlib",
+        "--enable-64-bit-bfd",
+        "--enable-shared",
+        "--enable-default-hash-style=gnu"
+    },
+    prepare = [[
+        sed -i 's/tooldir=.*/tooldir=\/usr/g' configure
+    ]],
+    post = [[
+        cd "$DESTDIR"
+        rm -r usr/lib
+        rm -f usr/lib64/libbfd.a
+        rm -f usr/lib64/libctf.a
+        rm -f usr/lib64/libctf-nobfd.a
+        rm -f usr/lib64/libsframe.a
+        rm -f usr/lib64/libopcodes.a
+        rm -f usr/share/man/man1/gprofng.1
+        rm -f usr/share/man/man1/gp-*.1
+    ]]
+
+};
+
+bison = {
+    url = "https://ftp.gnu.org/gnu/bison/bison-3.8.2.tar.xz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--datadir=/usr/share",
+        "--disable-nls"
+    }
+};
+
+coreutils = {
+    url = "https://ftp.gnu.org/gnu/coreutils/coreutils-9.4.tar.xz",
+    build = "./configure",
+    flags = {
+        "--libexecdir=/usr/lib64",
+        "--sbindir=/usr/bin",
+        "--disable-nls",
+        "--enable-no-install-program=kill,uptime",
+        "--without-openssl",
+        "FORCE_UNSAFE_CONFIGURE=1"
+    }
+};
+
+cpio = {
+    url = "https://ftp.gnu.org/gnu/cpio/cpio-2.15.tar.bz2",
+    build = "./configure",
+    flags = {
+        "--mandir=/usr/share/man",
+        "--disable-nls"
+    }
+};
+
+diffutils = {
+    url = "https://ftp.gnu.org/gnu/diffutils/diffutils-3.10.tar.xz",
+    build = "./configure",
+    flags = {
+        "--disable-nls"
+    }
+};
+
+ed = {
+    url = "https://ftp.gnu.org/gnu/ed/ed-1.20.1.tar.lz",
+    build = "./configure",
+    flags = {
+        "--bindir=/usr/bin",
+        "--mandir=/usr/share/man"
+    }
+};
+
+findutils = {
+    url = "https://ftp.gnu.org/gnu/findutils/findutils-4.9.0.tar.xz",
+    build = "./configure",
+    flags = {
+        "--localstatedir=/var",
+        "--disable-nls"
+    },
+    post = [[
+        rm -fr "$DESTDIR"/usr/libexec 
+        rm -fr "$DESTDIR"/usr/share/man/man5
+        rm -f "$DESTDIR"/usr/bin/locate
+        rm -f "$DESTDIR"/usr/bin/updatedb
+        rm -f "$DESTDIR"/usr/share/man/man1/locate.1
+        rm -f "$DESTDIR"/usr/share/man/man1/updatedb.1
+    ]]
+};
+
+gawk = {
+    url = "https://ftp.gnu.org/gnu/gawk/gawk-5.3.0.tar.xz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--libexecdir=/usr/lib64",
+        "--sysconfdir=/etc",
+        "--without-libsigsegv",
+        "--disable-nls"
+    }
+};
+
+gcc11 = {
+    url = "https://ftp.gnu.org/gnu/gcc/gcc-11.4.0/gcc-11.4.0.tar.xz",
+    build = "../configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--libexecdir=/usr/lib64",
+        "--mandir=/usr/share/man",
+        "--with-linker-hash-style=gnu",
+        "--with-system-zlib",
+        "--enable-languages=ada,c,c++,d",
+        "--enable-threads=posix",
+        "--enable-clocale=gnu",
+        "--enable-gnu-unique-object",
+        "--enable-__cxa_atexit",
+        "--enable-default-pie",
+        "--enable-default-ssp",
+        "--enable-shared",
+        "--enable-plugin",
+        "--enable-bootstrap",
+        "--disable-werror",
+        "--disable-multilib",
+        "--disable-nls",
+        "--disable-libstdcxx-pch",
+        "--disable-libssp",
+        "LD=ld"
+    },
+    prepare = [[
+        find /opt/gnat -name ld -exec mv -v {} {}.old \;
+        find /opt/gnat -name as -exec mv -v {} {}.old \;
+    ]],
+    post = [[
+        CHOST=$("$DESTDIR"/usr/bin/gcc -dumpmachine)
+        pkgver=$("$DESTDIR"/usr/bin/gcc -dumpversion)
+        find "$DESTDIR" -name libgtkpeer.a  -exec rm -f '{}' +
+        find "$DESTDIR" -name libgjsmalsa.a -exec rm -f '{}' +
+        find "$DESTDIR" -name libgij.a      -exec rm -f '{}' +
+        ln -sr /usr/bin/cpp "$DESTDIR"/usr/lib64
+        mkdir -p "$DESTDIR"/usr/lib64/bfd-plugins
+        ln -sf ../../lib64/gcc/$CHOST/$pkgver/liblto_plugin.so \
+            "$DESTDIR"/usr/lib64/bfd-plugins/
+        mkdir -p "$DESTDIR"/usr/share/gdb/auto-load/usr/lib64
+        mv "$DESTDIR"/usr/lib64/*gdb.py \
+            "$DESTDIR"/usr/share/gdb/auto-load/usr/lib64
+        ln -s gcc "$DESTDIR"/usr/bin/cc
+        ln -s gcc "$DESTDIR"/usr/bin/c99
+    ]]
+};
+
+gcc13 = {
+    url = "https://ftp.gnu.org/gnu/gcc/gcc-13.2.0/gcc-13.2.0.tar.xz",
+    build = "../configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--libexecdir=/usr/lib64",
+        "--mandir=/usr/share/man",
+        "--with-linker-hash-style=gnu",
+        "--with-system-zlib",
+        "--enable-languages=c,c++",
+        "--enable-threads=posix",
+        "--enable-clocale=gnu",
+        "--enable-gnu-unique-object",
+        "--enable-__cxa_atexit",
+        "--enable-default-pie",
+        "--enable-default-ssp",
+        "--enable-shared",
+        "--enable-plugin",
+        "--enable-lto",
+        "--enable-bootstrap",
+        "--disable-werror",
+        "--disable-fixincludes",
+        "--disable-multilib",
+        "--disable-nls",
+        "--disable-libstdcxx-pch",
+        "--disable-libssp",
+        "LD=ld"
+    },
+    post = [[
+        CHOST=$("$DESTDIR"/usr/bin/gcc -dumpmachine)
+        pkgver=$("$DESTDIR"/usr/bin/gcc -dumpversion)
+        find "$DESTDIR" -name libgtkpeer.a  -exec rm -f '{}' +
+        find "$DESTDIR" -name libgjsmalsa.a -exec rm -f '{}' +
+        find "$DESTDIR" -name libgij.a      -exec rm -f '{}' +
+        ln -sr /usr/bin/cpp "$DESTDIR"/usr/lib64
+        mkdir -p "$DESTDIR"/usr/lib64/bfd-plugins
+        ln -sf ../../lib64/gcc/$CHOST/$pkgver/liblto_plugin.so \
+            "$DESTDIR"/usr/lib64/bfd-plugins/
+        mkdir -p "$DESTDIR"/usr/share/gdb/auto-load/usr/lib64
+        mv "$DESTDIR"/usr/lib64/*gdb.py \
+            "$DESTDIR"/usr/share/gdb/auto-load/usr/lib64
+        ln -s gcc "$DESTDIR"/usr/bin/cc
+        ln -s gcc "$DESTDIR"/usr/bin/c99
+    ]]
+};
+
+gdb = {
+    url = "https://ftp.gnu.org/gnu/gdb/gdb-14.1.tar.xz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--without-guile",
+        "--with-system-readline",
+        "--without-python"
+    }
+};
+
+gdbm = {
+    url = "https://ftp.gnu.org/gnu/gdbm/gdbm-1.23.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--disable-static",
+        "--enable-libgdbm-compat"
+    }
+};
+
+gettext = {
+    url = "https://ftp.gnu.org/gnu/gettext/gettext-0.22.5.tar.xz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--with-xz",
+        "--disable-nls",
+        "--disable-shared",
+        "--disable-static"
+    }
+};
+
+gimp = {
+    url = "https://download.gimp.org/mirror/pub/gimp/v2.10/gimp-2.10.32.tar.bz2",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--libexecdir=/usr/bin",
+        "--sysconfdir=/etc",
+        "--enable-mp",
+        "--disable-python" 
+    }
+};
+
+glibc = {
+    url = "https://ftp.gnu.org/gnu/glibc/glibc-2.39.tar.xz",
+    build = "../configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--libexecdir=/usr/lib64",
+        "--sysconfdir=/etc",
+        "--localstatedir=/var",
+        "--enable-kernel=4.19",
+        "--enable-fortify-source",
+        "--enable-stack-protector=strong",
+        "--enable-bind-now",
+        "--enable-cet",
+        "--with-headers=/usr/include",
+        "--disable-build-nscd",
+        "--disable-nscd",
+        "--disable-profile",
+        "--disable-werror",
+        "libc_cv_slibdir=/lib64"
+    },
+    prepare = [[
+        mkdir build && cd build
+        echo "slibdir=/usr/lib64" >> configparms
+        echo "rtlddir=/usr/lib64" >> configparms
+        echo "sbindir=/usr/bin" >> configparms
+        echo "rootsbindir=/usr/bin" >> configparms
+    ]]
+};
+
+gmp = {
+    url = "https://ftp.gnu.org/gnu/gmp/gmp-6.3.0.tar.xz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--enable-cxx",
+        "--disable-static"
+    }
+};
+
+gnutls = {
+    url = "https://gnupg.org/ftp/gcrypt/gnutls/v3.8/gnutls-3.8.3.tar.xz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--without-p11-kit",
+        "--enable-shared",
+        "--without-idn",
+        "--without-brotli",
+        "--with-zstd",
+        "--enable-openssl-compatibility",
+        "--with-default-trust-store-file=/etc/pki/tls/certs/ca-bundle.crt"
+    }
+};
+
+gperf = {
+    url = "https://ftp.gnu.org/gnu/gperf/gperf-3.1.tar.gz",
+    build = "./configure",
+    flags = {
+        "--docdir=/usr/share/gperf/doc"
+    }
+};
+
+grep = {
+    url = "https://ftp.gnu.org/gnu/grep/grep-3.11.tar.xz",
+    build = "./configure",
+    flags = {
+        "--disable-nls"
+    },
+    prepare = [[
+        sed -i "s/echo/#echo/" src/egrep.sh
+    ]]
+};
+
+groff = {
+    url = "https://ftp.gnu.org/gnu/groff/groff-1.23.0.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--without-x",
+        "PAGE=letter"        
+    }
+};
+
+grub2 = {
+    url = "https://ftp.gnu.org/gnu/grub/grub-2.12.tar.xz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--mandir=/usr/share/man",
+        "--datarootdir=/usr/share",
+        "--sbindir=/usr/bin",
+        "--bindir=/usr/bin",
+        "--sysconfdir=/etc",
+        "--with-bootdir=/boot",
+        "--with-grubdir=grub",
+        "--enable-device-mapper",
+        "--disable-efiemu",
+        "--disable-werror",
+        "--disable-nls",
+        "--disable-silent-rules",
+        "--disable-grub-mkfont",
+        "--disable-grub-mount",
+        "{C,CPP,CXX,LD}FLAGS="
+    },
+    prepare = [[
+        echo depends bli part_gpt > grub-core/extra_deps.lst
+    ]],
+    post = [[
+        cd "$DESTDIR"
+        rm -f usr/lib64/grub/*/*.module
+        rm -f usr/lib64/grub/*/*.image
+        rm -f usr/lib64/grub/*/kernel.exec
+        rm -f usr/lib64/grub/*/gdb_grub
+    ]]
+};
+
+guile = {
+    url = "https://ftp.gnu.org/gnu/guile/guile-3.0.9.tar.xz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--disable-static"
+    }
+};
+
+gzip = {
+    url = "https://ftp.gnu.org/gnu/gzip/gzip-1.13.tar.xz",
+    build = "./configure"
+};
+
+help2man = {
+    url = "https://ftp.gnu.org/gnu/help2man/help2man-1.49.3.tar.xz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--mandir=/usr/share/man"
+    }
+};
+
+inetutils = {
+    url = "https://ftp.gnu.org/gnu/inetutils/inetutils-2.5.tar.xz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--libexec=/usr/bin",
+        "--localstatedir=/var",
+        "--without-wrap",
+        "--without-pam",
+        "--enable-ftp",
+        "--enable-ftpd",
+        "--enable-telnet",
+        "--enable-telnetd",
+        "--enable-talk",
+        "--enable-talkd",
+        "--enable-hostname",
+        "--enable-dnsdomainname",
+        "--disable-rexec",
+        "--disable-rexecd",
+        "--disable-tftp",
+        "--disable-tftpd",
+        "--disable-ping",
+        "--disable-ping6",
+        "--disable-logger",
+        "--disable-syslogd",
+        "--disable-inetd",
+        "--disable-whois",
+        "--disable-uucpd",
+        "--disable-ifconfig",
+        "--disable-traceroute",
+        "--disable-rcp",
+        "--disable-rexec",
+        "--disable-rlogin",
+        "--disable-rsh",
+        "--disable-servers",
+    }
+};
+
+less = {
+    url = "https://ftp.gnu.org/gnu/less/less-643.tar.gz",
+    build = "./configure",
+    flags = {
+        "--sysconfdir=/etc",
+        "--with-regex=pcre2"
+    }
+};
+
+libidn2 = {
+    url = "https://ftp.gnu.org/gnu/libidn/libidn2-2.3.7.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--disable-static",
+        "--disable-nls"
+    },
+    post = [[ cd "$DESTDIR" && rm -fr usr/bin usr/share/man/man1 ]]
+};
+
+libmpc = {
+    url = "https://ftp.gnu.org/gnu/mpc/mpc-1.3.1.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--disable-static"
+    }
+};
+
+libtool = {
+    url = "https://ftp.gnu.org/gnu/libtool/libtool-2.4.7.tar.xz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64"
+    },
+    post = [[
+        cd "$DESTDIR"
+        rm -f usr/lib64/libltdl.a
+    ]]
+};
+
+m4 = {
+    url = "https://ftp.gnu.org/gnu/m4/m4-1.4.19.tar.xz",
+    build = "./configure",
+    flags = {
+        "--disable-nls"
+    }
+};
+
+make = {
+    url = "https://ftp.gnu.org/gnu/make/make-4.4.1.tar.gz",
+    build = "./configure",
+    flags = {
+        "--disable-nls",
+        "--without-guile"
+    }
+};
+
+mpfr = {
+    url = "https://ftp.gnu.org/gnu/mpfr/mpfr-4.2.1.tar.xz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--enable-thread-safe",
+        "--enable-shared",
+        "--disable-static"
+    }
+};
+
+nano = {
+    url = "https://ftp.gnu.org/gnu/nano/nano-7.2.tar.xz",
+    build = "./configure",
+    flags = {
+        "--sysconfdir=/etc",
+        "--enable-color",
+        "--enable-nanorc",
+        "--enable-multibuffer"
+    }
+};
+
+ncurses = {
+    url = "https://invisible-island.net/archives/ncurses/current/ncurses-6.4-20240309.tgz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64", 
+        "--mandir=/usr/share/man",
+        "--disable-root-access",
+        "--disable-root-environ",
+        "--disable-setuid-environ",
+        "--enable-widec",
+        "--enable-pc-files", 
+        "--with-shared", 
+        "--without-debug",
+        "--without-normal",
+        "--with-cxx-shared",
+        "--with-pkg-config=/usr/bin/pkgconf",
+        "--with-pkg-config-libdir=/usr/lib64/pkgconfig",
+        "--enable-symlinks",
+        "--with-termlib=tinfo",
+        "--with-ticlib=tic",
+        "--without-ada"
+    },
+    post = [[
+        cd "$DESTDIR/usr/lib64"
+        rm -f libform.so libpanel.so libmenu.so libcurses.so libcursesw.so \
+            libncurses.so libncursesw.so libtermcap.so
+        echo "INPUT(-lformw)" > libform.so
+        echo "INPUT(-lpanelw)" > libpanel.so
+        echo "INPUT(-lmenuw)" > libmenu.so
+        echo "INPUT(-lncurses)"  > libcurses.so
+        echo "INPUT(-lncursesw)" > libcursesw.so
+        echo "INPUT(-lncursesw -ltinfo)" > libncurses.so
+        echo "INPUT(libncursesw.so.6 -ltinfo)" > libncursesw.so
+        echo "INPUT(-ltinfo)" > libtermcap.so
+        ln -s ncursesw.pc pkgconfig/ncurses.pc
+        ln -s formw.pc pkgconfig/form.pc
+        ln -s panelw.pc pkgconfig/panel.pc
+        ln -s menuw.pc pkgconfig/menu.pc
+    ]]
+};
+
+octave = {
+    url = "https://ftp.gnu.org/gnu/octave/octave-8.4.0.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--libexecdir=/usr/lib64",
+        "--enable-shared",
+        "--disable-static",
+        "--with-quantum-depth=16"
+    }
+};
+
+parted = {
+    url = "https://ftp.gnu.org/gnu/parted/parted-3.6.tar.xz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--sbindir=/usr/bin",
+        "--disable-nls",
+        "--disable-static",
+        "--disable-rpath"
+    }
+};
+
+patch = {
+    url = "https://ftp.gnu.org/gnu/patch/patch-2.7.6.tar.xz",
+    build = "./configure"
+};
+
+r = {
+    url = "https://cran.r-project.org/src/base/R-4/R-4.3.3.tar.xz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--sysconfdir=/etc/R",
+        "--datarootdir=/usr/share",
+        "rsharedir=/usr/share/R/",
+        "rincludedir=/usr/include/R/",
+        "rdocdir=/usr/share/doc/R",
+        "--enable-R-shlib",
+        "--disable-java",
+        "--without-recommended-packages",
+        "--without-x",
+        "--with-blas=openblas",
+        "--with-lapack",
+        "F77=gfortran",
+        "LIBnn=lib64"
+    }
+};
+
+readline = { 
+    url = "https://ftp.gnu.org/gnu/readline/readline-8.2.tar.gz",
+    build = "./configure",
+    flags = { 
+        "--libdir=/usr/lib64",
+        "--disable-static",
+        "--with-curses",
+        "SHLIB_LIBS=-ltinfo"
+    },
+    prepare = [[
+        sed -i 's/^SHLIB_LIBS=$/SHLIB_LIBS=-ltinfo/' support/shobj-conf
+    ]]
+};
+
+sed = {
+    url = "https://ftp.gnu.org/gnu/sed/sed-4.9.tar.xz",
+    build = "./configure",
+    flags = {
+        "--disable-nls"
+    }
+};
+
+sharutils = {
+    url = "https://ftp.gnu.org/gnu/sharutils/sharutils-4.15.2.tar.xz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--disable-nls"
+    },
+    prepare = [[
+        sed -i 's/BUFSIZ/rw_base_size/' src/unshar.c &&
+        sed -i '/program_name/s/^/extern /' src/*opts.h
+        sed -i 's/IO_ftrylockfile/IO_EOF_SEEN/' lib/*.c        &&
+        echo "#define _IO_IN_BACKUP 0x100" >> lib/stdio-impl.h 
+    ]]
+};
+
+tar = {
+    url = "https://ftp.gnu.org/gnu/tar/tar-1.35.tar.xz",
+    build = "./configure",
+    flags = {
+        "--sbindir=/usr/bin",
+        "--libexecdir=/usr/lib64/tar",
+        "--disable-nls",
+        "FORCE_UNSAFE_CONFIGURE=1"
+    }
+};
+
+texinfo = {
+    url = "https://ftp.gnu.org/gnu/texinfo/texinfo-7.1.tar.xz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--disable-nls"
+    }
+};
+
+time = {
+    url = "https://ftp.gnu.org/gnu/time/time-1.9.tar.gz",
+    build = "./configure"
+};
+
+wget = {
+    url = "https://ftp.gnu.org/gnu/wget/wget-1.21.4.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--sysconfdir=/etc",
+        "--with-ssl=openssl"
+    }
+};
+
+which = {
+    url = "https://ftp.gnu.org/gnu/which/which-2.21.tar.gz",
+    build = "./configure",
+};
+
+xorriso = {
+    url = "http://ftp.gnu.org/gnu/xorriso/xorriso-1.5.6.tar.gz",
+    build = "./configure"
+};
+
+--------------------------------------------------------------------------------
+
+libgpg-error = {
+    url = "https://gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-1.48.tar.bz2",
+    build = "./configure"
+};
+
+libgcrypt = {
+    url = "https://gnupg.org/ftp/gcrypt/libgcrypt/libgcrypt-1.10.3.tar.bz2",
+    build = "./configure",
+    flags = {
+        "--disable-static",
+        "--disable-padlock-support"
+    }
+};
+
+libksba = {
+    url = "https://gnupg.org/ftp/gcrypt/libksba/libksba-1.6.6.tar.bz2",
+    build = "./configure"
+};
+
+libassuan = {
+    url = "https://gnupg.org/ftp/gcrypt/libassuan/libassuan-2.5.6.tar.bz2",
+    build = "./configure"
+};
+
+ntbtls = {
+    url = "https://gnupg.org/ftp/gcrypt/ntbtls/ntbtls-0.3.1.tar.bz2",
+    build = "./configure"
+};
+
+npth = {
+    url = "https://gnupg.org/ftp/gcrypt/npth/npth-1.7.tar.bz2",
+    build = "./configure"
+};
+
+pinentry = {
+    url = "https://gnupg.org/ftp/gcrypt/pinentry/pinentry-1.2.1.tar.bz2",
+    build = "./configure",
+};
+
+gnupg = {
+    url = "https://gnupg.org/ftp/gcrypt/gnupg/gnupg-2.4.5.tar.bz2",
+    build = "./configure",
+    flags = {
+        "--libexecdir=/usr/lib64/gnupg",
+        "--enable-maintainer-mode",
+        "--sbindir=/usr/bin",
+        "--sysconfdir=/etc"
+    }
+};
+
+gnupg1 = {
+    url = "https://gnupg.org/ftp/gcrypt/gnupg/gnupg-1.4.23.tar.bz2",
+    build = "./configure",
+    flags = {
+        "--sysconfdir=/etc",
+        "--libexecdir=/usr/lib64",
+        "--enable-noexecstack",
+        "--disable-nls"
+    },
+    post = [[
+        sed -i -e "s/$(date +'%Y-%m-%d')/$(date -d @$SOURCE_DATE_EPOCH +'%Y-%m-%d')/" \
+            "$DESTDIR"/usr/share/man/man1/gpg.1 "$DESTDIR"/usr/share/man/man1/gpgv.1
+    ]]
+};

@@ -1,0 +1,119 @@
+#!/usr/bin/env lua
+
+-- This script is cross compilation of GNU and other tools.
+-- It follows LFS closely, but not exactly.
+-- https://www.linuxfromscratch.org/lfs/view/stable/index.html
+
+package.cpath = package.cpath .. ";/usr/okpkg/?.so"
+
+require "okutils"
+
+local unpack = unpack or table.unpack
+
+-- environment
+setenv("MAKEOPTS", "-j5")
+setenv("CFLAGS", "-O2 -fstack-protector-strong -fcommon -pipe")
+setenv("CXXFLAGS", "-O2 -fstack-protector-strong -fcommon -pipe")
+setenv("DESTDIR", "/mnt")
+setenv("TARGET", "x86_64-unknown-linux-gnu")
+setenv("HOST", "x86_64-unknown-linux-gnu")
+setenv("PATH", "/mnt/tools/bin:/usr/sbin:/usr/bin:/sbin:/bin")
+
+function vlook(pkgname)
+    local fp = io.open("/usr/okpkg/db/cross.db")
+    local buf = '\n' .. fp:read("*a")
+    fp:close()
+    local start = buf:find('\n' .. pkgname .. " = {", 1, true)
+    if start then
+        buf = buf:sub(start+3+#pkgname, buf:find(';', start+1, true)-1)
+        return load("return"..buf)()
+    end
+end
+
+function extract(pkgname)
+    local t = vlook(pkgname)
+
+    -- setup srcdir
+    local srcdir = string.format("/usr/okpkg/sources/%s", pkgname)
+    os.execute(string.format("rm -fr %s", srcdir))
+    mkdir(srcdir)
+
+    chdir("/usr/okpkg/download")
+    local fp = io.open(t.file)
+    if fp then
+        fp:close()
+    else
+        error("source tarball doesn't exist!")
+    end
+
+    -- extract
+    os.execute(
+        string.format("bsdtar -C %s --strip-components=1 -xf %s", srcdir, t.file))
+    chdir(srcdir)
+
+    if pkgname:sub(1,3) == "gcc" then
+        os.execute [[
+            okpkg download mpfr gmp libmpc
+            cp -rp ../mpfr mpfr
+            cp -rp ../gmp gmp
+            cp -rp ../libmpc mpc
+        ]]
+    end
+
+    return t
+end
+
+function emerge(pkgname)
+    local t = extract(pkgname)
+
+    chdir("/usr/okpkg/sources")
+    chdir(pkgname)
+    
+    if t.prepare then
+        os.execute(t.prepare)
+    end
+
+    if tostring(t.build):match("config") then
+        if t.build:sub(1, 2) == ".." then
+            mkdir("build")
+            chdir("build")
+        end
+        local make_flags = table.concat(t.make_flags or {}, ' ')
+        local install_flags = table.concat(t.install_flags or {}, ' ')
+        _ = os.execute(t.build .. ' ' .. table.concat(t.flags,' ')) and
+            os.execute("make $MAKEOPTS " .. make_flags) and
+            os.execute("make install DESTDIR=$DESTDIR " .. install_flags)
+    end
+
+    if t.build == "make" then
+        _ = os.execute("make $MAKEOPTS " .. table.concat(t.flags,' ')) and
+            os.execute("make install DESTDIR=$DESTDIR " ..
+                table.concat(t.flags,' '))
+    end
+
+    if not _ then
+        error("error: " .. pkgname)
+    end
+
+    if t.post then
+        os.execute(t.post)
+    end
+end
+
+-- prepare
+os.execute [[
+    /usr/okpkg/scripts/reformat
+    bsdtar -P -C "$DESTDIR" -xf /usr/okpkg/packages/linux-headers*.tar.xz
+]]
+
+fp = io.open("/usr/okpkg/db/cross.db")
+buf = "\n" .. fp:read("*a")
+fp:close()
+for i in buf:gmatch("\n([%w%-%+]-) = {.-;") do
+    emerge(i)
+end
+
+-- cleanup
+os.execute [[ 
+    rm -fr "$DESTDIR"/tools
+]]

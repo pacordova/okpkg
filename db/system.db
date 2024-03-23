@@ -1,0 +1,838 @@
+-- create /etc/asound.conf
+alsa-lib = {
+    url = "https://alsa-project.org/files/pub/lib/alsa-lib-1.2.11.tar.bz2",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--without-debug"
+    }
+};
+
+alsa-utils = {
+    url = "https://alsa-project.org/files/pub/utils/alsa-utils-1.2.11.tar.bz2",
+    build = "./configure",
+    flags = {
+        "--sbindir=/usr/bin",
+        "--libdir=/usr/lib64",
+        "--localstatedir=/var",
+        "--disable-alsaconf",
+        "--disable-bat",
+        "--disable-xmlto",
+        "--disable-nls",
+        "--with-curses=ncursesw"
+    }
+};
+
+at = {
+    url = "http://software.calhariz.com/at/at_3.2.5.orig.tar.gz",
+    build = "./configure",
+    flags = {
+        "--sbindir=/usr/bin",
+        "--with-daemon_username=atd",
+        "--with-daemon_groupname=atd",
+        "--with-jobdir=/var/spool/atd",   
+        "--with-atspool=/var/spool/atd",
+        "SENDMAIL=/usr/sbin/sendmail"
+    },
+    prepare = [[
+        useradd atd
+    ]]
+};
+
+bc = {
+    url = "https://github.com/gavinhoward/bc/releases/download/6.7.5/bc-6.7.5.tar.xz",
+    build = "./configure",
+    flags = {
+        "--disable-generated-tests", 
+        "--disable-nls"
+    }
+};
+
+bzip2 = {
+    url = "https://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz",
+    build = "make",
+    flags = {
+        '"PREFIX=$DESTDIR/usr"'
+    },
+    prepare = [[
+        sed -i 's@\(ln -s -f \)$(PREFIX)/bin/@\1@' Makefile
+        sed -i "s@(PREFIX)/man@(PREFIX)/share/man@g" Makefile
+        sed -i "s@(PREFIX)/lib@(PREFIX)/lib64@g" Makefile
+        make -f Makefile-libbz2_so
+        make clean
+    ]],
+    post = [[
+        cp -a libbz2.so.* "$DESTDIR/usr/lib64"
+        cp bzip2-shared "$DESTDIR/usr/bin/bzip2"
+        cd "$DESTDIR"
+        ln -s libbz2.so.1.0.8 usr/lib64/libbz2.so
+        ln -s bzip2 usr/bin/bzcat
+        ln -s bzip2 usr/bin/bunzip2
+        rm -f usr/lib64/libbz2.a
+    ]]
+};
+
+cmake = {
+    url = "https://cmake.org/files/v3.28/cmake-3.28.3.tar.gz",
+    build = "./configure",
+    flags = { 
+        "--parallel=$(/usr/bin/getconf _NPROCESSORS_ONLN)",
+        "--system-curl",
+        "--system-expat",
+        "--system-zlib",
+        "--system-bzip2"
+    },
+    post = [[
+        rm -r "$DESTDIR"/usr/share/cmake*/Help 
+        rm -r "$DESTDIR"/usr/share/bash-completion
+    ]]
+};
+
+cryptsetup = {
+    url = "https://kernel.org/pub/linux/utils/cryptsetup/v2.6/cryptsetup-2.6.1.tar.xz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--sbindir=/usr/bin",
+        "--enable-libargon2",
+        "--disable-ssh-token",
+        "--disable-asciidoc",
+        "--disable-static",
+        "--disable-nls"
+    }
+};
+
+curl = {
+    url = "https://curl.se/download/curl-8.6.0.tar.xz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--mandir=/usr/share/man",
+        "--enable-threaded-resolver",
+        "--enable-ipv6",
+        "--enable-unix-sockets",
+        "--disable-static",
+        "--disable-manual",
+        "--disable-ldap",
+        "--disable-ldaps",
+        "--disable-ares",
+        "--with-openssl",
+        "--without-librtmp",
+        "--without-icu",
+        "--without-libpsl",
+        "--without-idn",
+        "--without-idn2",
+        "--without-brotli",
+        "--without-zstd",
+        "--with-random=/dev/urandom",
+        "--with-ca-path=/etc/ssl/certs",
+        "--with-ca-bundle=/etc/ssl/certs/ca-certificates.crt"
+    }
+};
+
+db1 = {
+    url = "https://github.com/berkeleydb/libdb/releases/download/v1.85/db.1.85.tar.gz",
+    build = _,
+    prepare = [[
+        cd PORT/linux 
+        make "$MAKEOPTS" CC='gcc -fPIC'
+        gcc -shared -o libdb.so *.o
+        mkdir -p "$DESTDIR"/usr/lib64
+        mkdir -p "$DESTDIR"/usr/include/db1
+        cp -p libdb.so "$DESTDIR"/usr/lib64/libdb1.so
+        cp -p include/*.h "$DESTDIR"/usr/include/db1
+    ]]
+};
+
+dbus = {
+    url = "https://dbus.freedesktop.org/releases/dbus/dbus-1.14.10.tar.xz",
+    build = "./configure",
+    flags = {
+        "--sysconfdir=/etc",
+        "--libexecdir=/usr/lib64/dbus-1.0",
+        "--libdir=/usr/lib64",
+        "--localstatedir=/var",
+        "--runstatedir=/run",
+        "--enable-user-session",
+        "--disable-doxygen-docs",
+        "--disable-xml-docs",
+        "--disable-static",
+        "--without-systemduserunitdir",
+        "--without-systemdsystemunitdir",
+        "--with-system-socket=/run/dbus/system_bus_socket",
+        "--without-x"
+    },
+    post = [[
+        rm -r "$DESTDIR"no
+        cd "$DESTDIR"
+        chown root:messagebus usr/libexec/dbus-daemon-launch-helper
+        chmod 4750 usr/lib64/dbus-1.0/dbus-daemon-launch-helper
+    ]]
+};
+
+dcron = {
+    url = "http://www.jimpryor.net/linux/releases/dcron-4.5.tar.gz",
+    build = "make",
+    flags = {
+        "PREFIX=/usr",
+        "SBINDIR=/usr/bin",
+    }
+};
+
+dhcpcd = {
+    url = "https://github.com/NetworkConfiguration/dhcpcd/releases/download/v10.0.6/dhcpcd-10.0.6.tar.xz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--sbindir=/usr/bin",
+        "--sysconfdir=/etc",
+        "--localstatedir=/var",
+        "--libexecdir=/usr/lib64/dhcpcd",
+        "--runstatedir=/run",
+        "--rundir=/run",
+        "--disable-privsep",
+        "--dbdir=/var/lib/dhcpcd"
+    }
+};
+
+dinit = {
+    url = "https://github.com/davmac314/dinit/releases/download/v0.18.0/dinit-0.18.0.tar.xz",
+    build = "make",
+    flags = {
+        "SBINDIR=/usr/bin"
+    },
+    post = [[
+        cd "$DESTDIR"
+        mkdir -p usr/sbin
+        ln -sf ../bin/dinit usr/sbin/init
+    ]]
+};
+
+dma = {
+    url = "http://distcache.freebsd.org/ports-distfiles/corecode-dma-v0.13_GH0.tar.gz",
+    build = "make",
+    flags = {
+        "PREFIX=/usr",
+        "LIBEXEC=/usr/lib64/dma",
+    },
+    post = [[
+        ln -sf dma "$DESTDIR/usr/sbin/sendmail"
+        ln -sf dma "$DESTDIR/usr/sbin/mailq"
+        mkdir -p "$DESTDIR/etc"
+        chmod 644 dma.conf
+        chown root:mail dma.conf
+        mv dma.conf "$DESTDIR/etc"
+    ]]
+};
+
+dosfstools = {
+    url = "https://github.com/dosfstools/dosfstools/releases/download/v4.2/dosfstools-4.2.tar.gz",
+    build = "./configure",
+    flags = {
+        "--sbindir=/usr/bin",
+        "--libdir=/usr/lib64",
+        "--mandir=/usr/share/man",
+        "--enable-compat-symlinks",
+    }
+};
+
+e2fsprogs = {
+    url = "https://prdownloads.sourceforge.net/e2fsprogs/e2fsprogs-1.47.0.tar.gz",
+    build = "./configure",
+    flags = {
+        "--sbindir=/usr/bin",
+        "--with-root-prefix=''",
+        "--libdir=/usr/lib64",
+        "--sysconfdir=/etc", 
+        "--disable-elf-shlibs",
+        "--disable-libblkid",
+        "--disable-libuuid",
+        "--disable-uuid",
+        "--disable-fsck",
+        "--disable-nls"
+    },
+    post = [[
+        rm -f "$DESTDIR"/usr/lib64/*.a
+    ]]
+};
+
+efibootmgr = {
+    url = "https://github.com/rhboot/efibootmgr/releases/download/18/efibootmgr-18.tar.bz2",
+    build = "make",
+    flags = {
+        "EFIDIR=/boot/efi",
+    }
+};
+
+eudev = {
+    url = "https://github.com/eudev-project/eudev/releases/download/v3.2.14/eudev-3.2.14.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--sbindir=/usr/bin",
+        "--sysconfdir=/etc",
+        "--enable-manpages",
+        "--disable-static"
+    },
+    prepare = [[
+        sed -i '/udevdir/a udev_dir=${udevdir}' src/udev/udev.pc.in
+        sed -i 's/GROUP="sgx", //' rules/50-udev-default.rules
+    ]],
+    post = [[
+        cd "$DESTDIR"
+        mv $DESTDIR/usr/share/pkgconfig usr/lib64
+    ]]
+};
+
+file = {
+    url = "https://astron.com/pub/file/file-5.45.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--datadir=/usr/share/file",
+        "--enable-fsect-man5",
+        "--disable-libseccomp"
+    }
+};
+
+flex = {
+    url = "https://github.com/westes/flex/releases/download/v2.6.4/flex-2.6.4.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--disable-static",
+        "--disable-nls"
+    },
+    post = [[
+        cd "$DESTDIR"
+        ln -s flex usr/bin/lex
+    ]]
+};
+
+iana-etc = {
+    url = "https://github.com/Mic92/iana-etc/releases/download/20240305/iana-etc-20240305.tar.gz",
+    build = _,
+    post = [[
+        mkdir -p "$DESTDIR/etc"
+        mv protocols services "$DESTDIR/etc"
+    ]]
+};
+
+iproute2 = {
+    url = "https://kernel.org/pub/linux/utils/net/iproute2/iproute2-6.8.0.tar.xz",
+    build = "make",
+    flags = {
+        "PREFIX=/usr",
+        "LIBDIR=/usr/lib64",
+        "SBINDIR=/usr/bin",
+        "NETNS_RUN_DIR=/run/netns"
+    },
+    prepare = [[
+        sed -i /ARPD/d Makefile
+        rm -f man/man8/arpd.8
+    ]]
+};
+
+iputils = {
+    url = "https://github.com/iputils/iputils/releases/download/20240117/iputils-20240117.tar.xz",
+    build = "meson"
+};
+
+kbd = {
+    url = "https://kernel.org/pub/linux/utils/kbd/kbd-2.6.4.tar.xz",
+    build = "./configure",
+    flags = {
+        "--sysconfdir=/etc",
+        "--mandir=/usr/share/man",
+        "--datadir=/usr/share/kbd",
+        "--disable-nls",
+        "--disable-vlock",
+        "--disable-tests"
+    },
+    prepare = [[
+        sed -i '/RESIZECONS_PROGS=/s/yes/no/' configure
+        sed -i 's/resizecons.8 //' docs/man/man8/Makefile.in
+    ]]
+};
+
+kmod = {
+    url = "https://kernel.org/pub/linux/utils/kernel/kmod/kmod-32.tar.xz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--sysconfdir=/etc",
+        "--with-module-directory=/usr/lib/modules",
+        "--with-openssl",
+        "--with-xz",
+        "--with-zlib"
+    },
+    post = [[
+        cd "$DESTDIR/usr/bin"
+        ln -s kmod lsmod
+        ln -s kmod depmod
+        ln -s kmod insmod
+        ln -s kmod modinfo
+        ln -s kmod modprobe
+        ln -s kmod rmmod
+    ]]
+};
+
+logrotate = {
+    url = "https://github.com/logrotate/logrotate/releases/download/3.21.0/logrotate-3.21.0.tar.xz",
+    build = "./configure",
+    flags = {
+        "--sbindir=/usr/bin",
+        "--mandir=/usr/share/man",
+        "--with-compress-command=/usr/bin/gzip",
+        "--with-uncompress-command=/usr/bin/gunzip",
+        "--with-acl"
+    }
+};
+
+lua = {
+    url = "https://lua.org/ftp/lua-5.4.6.tar.gz",
+    build = "make"
+};
+
+lzip = {
+    url = "https://download.savannah.gnu.org/releases/lzip/lzip-1.24.1.tar.gz",
+    build = "./configure"
+};
+
+mandoc = {
+    url = "https://mandoc.bsd.lv/snapshots/mandoc-1.14.6.tar.gz",
+    build = "./configure",
+    prepare = [[
+        echo PREFIX=/usr >> configure.local
+        echo LIBDIR=/usr/lib64 >> configure.local
+        echo MANDIR=/usr/share/man >> configure.local
+        echo SBINDIR=/usr/bin >> configure.local
+    ]]
+};
+
+mawk = {
+    url = "https://invisible-island.net/archives/mawk/mawk-1.3.4-20240123.tgz",
+    build = "./configure",
+    post = [[
+        ln -s mawk "$DESTDIR"/usr/bin/awk
+        ln -s mawk.1 "$DESTDIR"/usr/share/man/man1/awk.1
+    ]]
+};
+
+meson = {
+    url = "https://github.com/mesonbuild/meson/releases/download/1.4.0/meson-1.4.0.tar.gz",
+    build = _,
+    post = [[
+        mkdir -p "$DESTDIR"/usr/lib64/meson
+        mv COPYING meson.py mesonbuild "$DESTDIR"/usr/lib64/meson
+        mkdir -p "$DESTDIR"/usr/share/man/man1
+        mv man/meson.1 "$DESTDIR"/usr/share/man/man1
+        mkdir -p "$DESTDIR"/usr/bin
+        ln -sf /usr/lib64/meson/meson.py "$DESTDIR"/usr/bin/meson
+    ]]
+};
+
+nvi = {
+    url = "http://distcache.freebsd.org/ports-distfiles/lichray-nvi2-v2.2.1_GH0.tar.gz",
+    build = _,
+    post = [[
+        cmake -B build \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DDB_INCLUDE_DIR=/usr/include/db1 \
+            -DUSE_ICONV=OFF
+        make -C build "$MAKEOPTS"
+        mkdir -p "$DESTDIR/usr/bin" "$DESTDIR/usr/share/man/man1"
+        mv build/nvi "$DESTDIR/usr/bin"
+        mv man/vi.1 "$DESTDIR/usr/share/man/man1/nvi.1"
+        mkdir -p "$DESTDIR"/var/tmp/vi.recover
+        ln -sf nvi "$DESTDIR"/usr/bin/vi
+        ln -sf nvi.1 "$DESTDIR"/usr/share/man/man1/vi.1
+    ]]
+};
+
+openresolv = {
+    url = "https://github.com/NetworkConfiguration/openresolv/releases/download/v3.13.2/openresolv-3.13.2.tar.xz",
+    build = "./configure",
+    flags = {
+        "--sbindir=/usr/bin",
+        "--sysconfdir=/etc",
+        "--libexecdir=/usr/lib64"
+    }
+};
+
+openssh = {
+    url = "https://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-9.7p1.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--datadir=/usr/share/openssh",
+        "--sysconfdir=/etc/ssh",
+        "--sbindir=/usr/bin",
+        "--libexecdir=/usr/lib64/openssh",
+        "--localstatedir=/var",
+        "--without-selinux",
+        "--with-privsep-user=nobody",
+        "--with-mantype=doc",
+        "--with-ssl-engine",
+        "--without-rpath",
+        "--disable-strip",
+        "--with-pid-dir=/run",
+        "--disable-wtmp",
+        "--disable-utmp"
+    },
+    post = [[
+        mkdir -p "$DESTDIR/usr/bin"
+        mkdir -p "$DESTDIR/usr/share/man/man1"
+        chmod 755 contrib/ssh-copy-id
+        chmod 644 contrib/ssh-copy-id.1
+        mv contrib/ssh-copy-id "$DESTDIR/usr/bin"
+        mv contrib/ssh-copy-id.1 "$DESTDIR/usr/share/man/man1"
+    ]]
+};
+
+pax = {
+    url = "http://www.mirbsd.org/MirOS/dist/mir/cpio/paxmirabilis-20201030.tgz",
+    build = _,
+    post = [[
+        bash Build.sh
+        mkdir -p "$DESTDIR/usr/bin"
+        mkdir -p "$DESTDIR/usr/share/man/man1"
+        mv pax "$DESTDIR/usr/bin"
+        chmod 644 pax.1
+        mv pax.1 "$DESTDIR/usr/share/man/man1"
+    ]]
+};
+
+perl = { 
+    url = "https://www.cpan.org/src/5.0/perl-5.38.2.tar.xz",
+    build = "./configure.gnu",
+    flags= {
+        "-Dinstallstyle=lib64/perl5",
+        "-Dman1dir=/usr/share/man/man1",
+        "-Dman3dir=/usr/share/man/man3",
+        "-Dusethreads"
+    }
+};
+
+pigz = {
+    url = "https://zlib.net/pigz/pigz-2.8.tar.gz",
+    build = _,
+    post = [[
+        make "$MAKEOPTS"
+        mkdir -p "$DESTDIR/usr/bin"
+        mkdir -p "$DESTDIR/usr/share/man/man1"
+        cp pigz unpigz "$DESTDIR/usr/bin"
+        cp pigz.1 "$DESTDIR/usr/share/man/man1"
+        cd "$DESTDIR"
+        ln -s pigz usr/bin/gzip
+        ln -s unpigz usr/bin/gunzip
+        ln -s pigz.1 usr/share/man/man1/gzip.1
+    ]]
+};
+
+pkgconf = {
+    url = "https://distfiles.ariadne.space/pkgconf/pkgconf-2.1.1.tar.xz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--sysconfdir=/etc",
+        "--disable-static"
+    },
+    post = [[
+        cd "$DESTDIR"
+        ln -s pkgconf usr/bin/pkg-config
+    ]]
+};
+
+procps-ng = {
+    url = "https://prdownloads.sourceforge.net/procps-ng/procps-ng-4.0.4.tar.xz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--sysconfdir=/etc",
+        "--bindir=/usr/bin",
+        "--sbindir=/usr/bin",
+        "--disable-nls",
+        "--disable-static",
+        "--disable-kill",
+        "--disable-modern-top"
+    }
+};
+
+psmisc = {
+    url = "https://sourceforge.net/projects/psmisc/files/psmisc/psmisc-23.7.tar.xz",
+    build = "./configure"
+};
+
+python3 = {
+    url = "https://www.python.org/ftp/python/3.12.2/Python-3.12.2.tar.xz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--with-platlibdir=lib64",
+        "--enable-shared",
+        "--with-computed-gotos",
+        "--enable-ipv6",
+        "--with-system-expat",
+        "--with-dbmliborder=gdbm:ndbm",
+        "--without-ensurepip",
+        "--with-tzpath=/usr/share/zoneinfo",
+        "--without-doc-strings",
+        'CFLAGS="$CFLAGS -fno-semantic-interposition -DTHREAD_STACK_SIZE=0x100000"',
+        'LDFLAGS="$LDFLAGS -fno-semantic-interposition"'
+    },
+    post = [[
+        cd "$DESTDIR/usr/lib64/python"*
+        rm -fr test ./*/test ./*/tests
+        rm -fr pydoc* idlelib turtle* config-*
+        cd "$DESTDIR/usr/bin"
+        rm -f pydoc* idle*
+    ]]
+};
+
+s-nail = {
+    url = "https://ftp.sdaoden.eu/s-nail-14.9.24.tar.xz",
+    build = "make",
+    flags = {
+        "build"
+    },
+    prepare = [[
+        make \
+            VAL_PREFIX=/usr \
+            VAL_SYSCONFDIR=/etc \
+            VAL_MANDIR=/usr/share/man \
+            VAL_LIBEXECDIR=/usr/lib64 \
+            VAL_MAIL=/var/spool/mail \
+            VAL_MTA=/usr/sbin/sendmail \
+            VAL_SID= \
+            VAL_MAILX=mailx \
+            OPT_AUTOCC=no \
+            OPT_DOTLOCK=no \
+            VAL_SYSCONFRC=nail.rc \
+            VAL_RANDOM="libgetrandom,sysgetrandom,urandom" \
+            config
+    ]]
+};
+
+samurai = {
+    url = "https://github.com/michaelforney/samurai/releases/download/1.2/samurai-1.2.tar.gz",
+    build = "make",
+    flags = {
+        "PREFIX=/usr"
+    },
+    post = [[
+        ln -sf samu "$DESTDIR"/usr/bin/ninja
+    ]]
+};
+
+shadow = {
+    url = "https://github.com/shadow-maint/shadow/releases/download/4.15.0/shadow-4.15.0.tar.xz",
+    build = "./configure",
+    flags = {
+        "--bindir=/usr/bin",
+        "--disable-account-tools-setuid",
+        "--libdir=/usr/lib64",
+        "--mandir=/usr/share/man",
+        "--sbindir=/usr/bin",
+        "--sysconfdir=/etc",
+        "--with-fcaps",
+        "--with-group-name-max-length=32",
+        "--without-libpam",
+        "--disable-nls",
+        "--disable-static",
+        "--with-yescrypt",
+        "--without-bcrypt",
+        "--with-libbsd",
+        "--without-nscd",
+        "--without-selinux",
+        "--with-su"
+    },
+    prepare = [[
+        sed -i 's/groups$(EXEEXT) //' src/Makefile.in
+        sed -i 's@usbindir = ${prefix}/sbin@usbindir = ${prefix}/bin@' src/Makefile.in
+        find man -name Makefile.in -exec sed -i 's/groups\.1 / /' {} +
+        sed -e 's:#ENCRYPT_METHOD DES:ENCRYPT_METHOD SHA512:' \
+            -e 's@#\(SHA_CRYPT_..._ROUNDS 5000\)@\100@'       \
+            -e 's:/var/spool/mail:/var/mail:'                 \
+            -i etc/login.defs
+        touch /usr/bin/passwd
+    ]]
+};
+
+sudo = {
+    url = "https://www.sudo.ws/dist/sudo-1.9.15p5.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--sbindir=/usr/bin",
+        "--libexecdir=/usr/lib64",
+        "--with-rundir=/run/sudo",
+        "--with-vardir=/var/db/sudo",
+        "--sysconfdir=/etc",
+        "--with-logfac=auth",
+        "--localstatedir=/var",
+        "--disable-pam-session",
+        "--without-pam",
+        "--with-insults",
+        "--with-all-insults",
+    }
+};
+
+sysklogd = {
+    url = "https://github.com/troglobit/sysklogd/releases/download/v2.5.2/sysklogd-2.5.2.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--sbindir=/usr/bin",
+        "--without-logger",
+        "--disable-static"
+    }
+};
+
+tcsh = {
+    url = "https://astron.com/pub/tcsh/tcsh-6.24.11.tar.gz",
+    build = "./configure",
+    flags = {
+        "--sysconfdir=/etc",
+        "--bindir=/usr/bin"
+    }
+};
+
+-- TOFU
+tzdata = {
+    url = "https://github.com/eggert/tz/archive/refs/tags/2024a.tar.gz",
+    build = "make",
+    flags = {
+        "LIBDIR=/usr/lib64"
+    },
+    prepare = [[
+        sed -i 's/sbin/bin/g' Makefile
+    ]],
+};
+
+usbutils = {
+    url = "https://mirrors.kernel.org/pub/linux/utils/usb/usbutils/usbutils-017.tar.xz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--disable-static",
+        "--datadir=/usr/share/hwdata"
+    },
+    post = [[
+        cd "$DESTDIR"
+        mkdir -p usr/share/hwdata
+        curl -L "https://www.linux-usb.org/usb.ids" -o usr/share/hwdata/usb.ids
+    ]]
+};
+
+util-linux = {
+    url = "https://kernel.org/pub/linux/utils/util-linux/v2.39/util-linux-2.39.3.tar.xz",
+    build = "./configure",
+    flags = {
+        "--bindir=/usr/bin",
+        "--libdir=/usr/lib64",
+        "--sbindir=/usr/bin",
+        "--runstatedir=/run",
+        "--localstatedir=/var",
+        "--mandir=/usr/share/man",
+        "--enable-libuuid",
+        "--enable-libblkid",
+        "--enable-libmount",
+        "--enable-libsmartcols",
+        "--enable-libfdisks",
+        "--enable-agetty",
+        "--enable-kill",
+        "--enable-mesg",
+        "--enable-schedutils",
+        "--enable-write",
+        "--enable-mount",
+        "--enable-fsck",
+        "--enable-logger",
+        "--enable-wall",
+        "--enable-use-tty-group",
+        "--disable-uuidd",
+        "--disable-line",
+        "--disable-chfn-chsh",
+        "--disable-login",
+        "--disable-nologin",
+        "--disable-su",
+        "--disable-setpriv",
+        "--disable-runuser",
+        "--disable-pylibmount",
+        "--disable-raw",
+        "--disable-last",
+        "--disable-nls",
+        "--disable-static",
+        "--without-user",
+        "--without-econf",
+        "--without-udev",
+        "--without-python",
+        "--without-systemd",
+        "--without-systemdsystemunitdir",
+        "--without-ncurses",
+        "--with-ncursesw",
+        "ADJTIME_PATH=/var/lib/hwclock/adjtime"
+    },
+    post = [[
+        cd "$DESTDIR"
+        mv usr/sbin/* usr/bin
+        rmdir usr/sbin
+    ]]
+};
+
+vim = {
+    url = "https://github.com/vim/vim/archive/v9.1.0161/vim-9.1.0161.tar.gz",
+    build = "./configure",
+    flags = {
+        "--with-features=huge",
+        "--enable-cscope",
+        "--enable-multibyte",
+        "--enable-acl",
+        "--disable-perlinterp",
+        "--disable-pythoninterp",
+        "--disable-rubyinterp",
+        "--disable-netbeans",
+        "--disable-canberra",
+        "--disable-gpm",
+        "--disable-xim",
+        "--disable-nls",
+        "--disable-gui",
+        "--without-x",
+    },
+    prepare = [[
+        echo '#define SYS_VIMRC_FILE "/etc/vimrc"' >> src/feature.h
+    ]],
+    post = [[
+        cd "$DESTDIR/usr/bin"
+        ln -s vim "$DESTDIR"/usr/bin/vi
+        ln -s vim.1 "$DESTDIR"/usr/share/man/man1/vi.1
+    ]]
+};
+
+xz = {
+    url = "https://github.com/tukaani-project/xz/releases/download/v5.6.1/xz-5.6.1.tar.gz",
+    build = "./configure",
+    flags = {
+        "--libdir=/usr/lib64",
+        "--disable-nls",
+        "--disable-doc",
+        "--disable-rpath",
+        "--disable-static"
+    }
+};
+
+zstd = {
+    url = "https://github.com/facebook/zstd/releases/download/v1.5.5/zstd-1.5.5.tar.gz",
+    build = "make",
+    flags = {
+        "prefix=/usr",
+        "LIBDIR=/usr/lib64",
+        "HAVE_LZMA=0",
+        "HAVE_ZLIB=0",
+        "HAVE_LZ4=0"
+    },
+    post = [[
+        cd "$DESTDIR"
+        rm -f usr/lib64/libzstd.a
+    ]]
+};
