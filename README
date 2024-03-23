@@ -57,11 +57,11 @@ See: <https://www.linuxfromscratch.org/>
 `db/cross.db`.
 `scripts/emerge` builds all the packages in the final system (from chroot)
 
-
 Some packages are added because okpkg needs them, like lua and curl.
 This system uses dinit. dinit needs dbus and dhcpcd.
 Additionally, some additional libraries (e.g. pcre2) not included in LFS are 
 included, while some packages are dropped (gettext, texinfo).
+
 
 Updating
 --------

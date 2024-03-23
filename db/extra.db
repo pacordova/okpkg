@@ -433,8 +433,5 @@ zsh = {
         "--enable-cap",
         "--enable-gdbm",
         "--enable-zsh-secure-free"                
-    },
-    prepare = [[
-        sed 's|/etc/z|/etc/zsh/z|g' -i Doc/*.*
-    ]]
+    }
 };

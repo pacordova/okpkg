@@ -23,7 +23,7 @@ minimal = {
     "libmd", "libressl", "libxcrypt", "lua", "mawk", "ncurses", "openresolv", 
     "patch", "pcre2", "pigz", "procps-ng", "readline", "sed", "shadow", 
     "sysklogd", "tar", "time", "tzdata", "util-linux", "which", "xz", "zlib", 
-    "zstd", "db1", "nv1",
+    "zstd", "db1", "nvi",
 }
 
 base = {
