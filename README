@@ -96,3 +96,11 @@ timestamps in the archive, changing the checksum of the binary package.
 
 You can manually touch the files in `download` if you want a different
 SOURCE_DATE_EPOCH.
+
+A few interesting observations: 
+
+libcap depends on gperf, but it also needs `which` to pick up gperf.
+
+pigz is 100% compatible with gzip, but it uses -9 by default. This can result
+in gzipped files generating a different hash if the build tools don't set the
+compression level (example: glibc will change checksums in the charmaps).
