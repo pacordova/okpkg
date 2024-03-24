@@ -10,7 +10,7 @@ setenv("DESTDIR", "/mnt")
 chdir("/usr/okpkg/packages/base")
 
 function install(pkgname)
-    local cmd = [[ bsdtar -P -C "$DESTDIR" -xf "%s"*.tar.xz ]]
+    local cmd = [[ bsdtar -P -C "$DESTDIR" -xf "%s"-*.tar.xz ]]
     os.execute(string.format(cmd, pkgname))
 end
 
@@ -29,18 +29,18 @@ minimal = {
 base = {
     "iana-etc", "glibc", "zlib", "bzip2", "xz", "zstd", "file", "m4", "bc", 
     "flex", "pkgconf", "binutils", "gmp", "mpfr", "libmpc", "attr", "acl", 
-    "libxcrypt", "gcc13", "binutils", "which", "gperf", "libcap", "libmd", 
-    "libbsd", "shadow", "ncurses", "readline", "sed", "psmisc", "bison", 
-    "pcre2", "grep", "bash", "expat", "inetutils", "less", "tcsh", "perl", 
-    "libressl", "kmod", "curl", "python3", "samurai", "meson", "coreutils", 
-    "check", "diffutils", "mawk", "tzdata", "findutils", "pigz", "iproute2", 
-    "kbd", "make", "lzip", "ed", "patch", "tar", "lua", "vim", "eudev", 
-    "mandoc", "procps-ng", "util-linux", "dcron", "e2fsprogs", "libarchive", 
-    "sysklogd", "dbus", "openresolv", "dhcpcd", "dinit", "libxml2", "libxslt", 
-    "iputils",  "acpid2", "cmake", "db1", "dma", "at", "dosfstools", "htop", 
-    "git", "gnupg1", "popt", "logrotate", "lzo", "lzop", "nano", "openssh", 
-    "pax", "rsync", "s-nail", "sharutils", "sudo", "time", "libevent", "tmux", 
-    "zsh"
+    "libxcrypt", "gcc-libs", "gcc-13.2.0", "binutils", "which", "gperf", 
+    "libcap", "libmd", "libbsd", "shadow", "ncurses", "readline", "sed", 
+    "psmisc", "bison", "pcre2", "grep", "bash", "expat", "inetutils", "less", 
+    "tcsh", "perl", "libressl", "kmod", "curl", "python3", "samurai", "meson", 
+    "coreutils", "check", "diffutils", "mawk", "tzdata", "findutils", "pigz", 
+    "iproute2", "kbd", "make", "lzip", "ed", "patch", "tar", "lua", "vim", 
+    "eudev", "mandoc", "procps-ng", "util-linux", "dcron", "e2fsprogs", 
+    "libarchive", "sysklogd", "dbus", "openresolv", "dhcpcd", "dinit", 
+    "libxml2", "libxslt", "iputils",  "acpid2", "cmake", "db1", "dma", "at", 
+    "dosfstools", "htop", "git", "gnupg1", "popt", "logrotate", "lzo", "lzop", 
+    "nano", "openssh", "pax", "rsync", "s-nail", "sharutils", "sudo", "time", 
+    "libevent", "tmux", "zsh"
 }
 
 devel = {
