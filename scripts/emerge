@@ -22,8 +22,9 @@ pkgs = {
     "make", "lzip", "ed", "patch", "tar", "lua", "vim", "eudev", "mandoc", 
     "procps-ng", "util-linux", "e2fsprogs", "libarchive", "sysklogd", "dbus", 
     "openresolv", "dhcpcd", "dinit", "libxml2", "libxslt", "iputils", "dcron", 
-    "dosfstools", "htop", "gnupg1", "nano", "sharutils", "sudo", "time", 
-    "libevent", "tmux",
+    "acpid2", "dma", "at", "dosfstools", "htop", "gnupg1", "popt", "logrotate",
+    "lzo", "lzop", "nano", "pax", "rsync", "s-nail", "sharutils", "sudo", 
+    "time", "tcsh", "libevent", "tmux", "zsh"
 }
 for i=1,#pkgs do emerge(pkgs[i]); end
 
@@ -36,12 +37,10 @@ os.exit()
 -- These are kept separate to the base system, to avoid circular dependencies,
 -- and keep the system minimal:
 pkgs = {
-    "tcsh", "pax", "dma", "at", "s-nail", "openssh", "zsh",
-    "acpid2", "git", "lzo", "lzop", "rsync",
-    "popt", "logrotate", "libaio", "lvm2", "parted", "popt", "efivar", 
-    "efibootmgr", "grub2", 
+    "openssh", "git", 
+    "libaio", "lvm2", "parted", "popt", "efivar", "efibootmgr", "grub2",
     "libmnl", "libnftnl", 
-    "cmake", "db1", "nvi", "json-c", "argon2", "cryptsetup", 
+    "cmake", "db1", "nvi", "json-c", "argon2", "cryptsetup",
     "libusb", "usbutils", "pciutils", 
     "libtirpc", "lsof",
     "libpcap", "iftop",
