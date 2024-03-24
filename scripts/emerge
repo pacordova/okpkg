@@ -6,7 +6,7 @@ dofile "/usr/okpkg/okpkg.lua"
 -- 7. Entering Chroot and Building Additional Temporary Tools 
 tmp = {
     "bison", "perl", "libxcrypt", "zlib", "pigz", "bzip2", "expat", "python3", 
-    "util-linux"
+    "gawk", "util-linux"
 }
 for i=1,#tmp do emerge(tmp[i]); end
 
