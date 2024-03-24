@@ -279,10 +279,6 @@ eudev = {
     prepare = [[
         sed -i '/udevdir/a udev_dir=${udevdir}' src/udev/udev.pc.in
         sed -i 's/GROUP="sgx", //' rules/50-udev-default.rules
-    ]],
-    post = [[
-        cd "$DESTDIR"
-        mv $DESTDIR/usr/share/pkgconfig usr/lib64
     ]]
 };
 
