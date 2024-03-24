@@ -106,3 +106,5 @@ in gzipped files generating a different hash if the build tools don't set the
 compression level (example: glibc will change checksums in the charmaps).
 
 perl depends on the kernel version and build times.
+
+The order of tzdata.zi is dependent on the version of awk you're using.

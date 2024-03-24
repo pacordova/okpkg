@@ -12,13 +12,13 @@ for i=1,#tmp do emerge(tmp[i]); end
 
 -- 8. Installing Basic System Software 
 pkgs = {
-    "iana-etc", "glibc", "tzdata", "zlib", "bzip2", "xz", "zstd", "file", "m4", 
-    "bc", "flex", "pkgconf", "binutils", "gmp", "mpfr", "libmpc", "attr", 
-    "acl", "libxcrypt", "gcc13", "binutils", "which", "gperf", "libcap", 
-    "libmd", "libbsd", "shadow", "ncurses", "readline", "sed", "psmisc", 
-    "bison", "pcre2", "grep", "bash", "expat", "inetutils", "less", "perl", 
-    "libressl", "kmod", "curl", "python3", "samurai", "meson", "coreutils", 
-    "check", "diffutils", "mawk", "findutils", "pigz", "iproute2", "kbd", 
+    "iana-etc", "glibc", "zlib", "bzip2", "xz", "zstd", "file", "m4", "bc", 
+    "flex", "pkgconf", "binutils", "gmp", "mpfr", "libmpc", "attr", "acl", 
+    "libxcrypt", "gcc13", "binutils", "which", "gperf", "libcap", "libmd", 
+    "libbsd", "shadow", "ncurses", "readline", "sed", "psmisc", "bison", 
+    "pcre2", "grep", "bash", "expat", "inetutils", "less", "perl", "libressl", 
+    "kmod", "curl", "python3", "samurai", "meson", "coreutils", "check", 
+    "diffutils", "mawk", "tzdata", "findutils", "pigz", "iproute2", "kbd", 
     "make", "lzip", "ed", "patch", "tar", "lua", "vim", "eudev", "mandoc", 
     "procps-ng", "util-linux", "e2fsprogs", "libarchive", "sysklogd", "dbus", 
     "openresolv", "dhcpcd", "dinit", "libxml2", "libxslt", "iputils", "dcron", 
