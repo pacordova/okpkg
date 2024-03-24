@@ -142,7 +142,10 @@ check = {
         "--localstatedir=/var",
         "--mandir=/usr/share/man",
         "--disable-static"
-    }
+    },
+    post = [[
+        sed -i 's|/usr/bin/.*awk|/usr/bin/awk|' "$DESTDIR"/usr/bin/checkmk
+    ]]
 };
 
 libconfig = {

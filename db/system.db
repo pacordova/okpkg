@@ -253,6 +253,8 @@ e2fsprogs = {
     },
     post = [[
         rm -f "$DESTDIR"/usr/lib64/*.a
+        sed -i 's/AWK=.*awk/AWK=awk/' "$DESTDIR"/usr/bin/compile_et
+        sed -i 's/AWK=.*awk/AWK=awk/' "$DESTDIR"/usr/bin/mk_cmds
     ]]
 };
 
