@@ -65,6 +65,7 @@ fp:write [[
 root:x:0:0:root:/root:/bin/bash
 bin:x:1:1:bin:/dev/null:/usr/bin/false
 daemon:x:6:6:Daemon User:/dev/null:/usr/bin/false
+atd:x:17:17:atd daemon:/dev/null:/bin/false
 messagebus:x:18:18:D-Bus Message Daemon User:/run/dbus:/usr/bin/false
 uuidd:x:80:80:UUID Generation Daemon User:/dev/null:/usr/bin/false
 nobody:x:99:99:Unprivileged User:/dev/null:/usr/bin/false
@@ -91,6 +92,7 @@ utmp:x:13:
 usb:x:14:
 cdrom:x:15:
 adm:x:16:
+atd:x:17:
 messagebus:x:18:
 input:x:24:
 mail:x:34:

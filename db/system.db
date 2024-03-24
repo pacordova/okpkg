@@ -33,10 +33,7 @@ at = {
         "--with-jobdir=/var/spool/atd",   
         "--with-atspool=/var/spool/atd",
         "SENDMAIL=/usr/sbin/sendmail"
-    },
-    prepare = [[
-        useradd atd
-    ]]
+    }
 };
 
 bc = {
