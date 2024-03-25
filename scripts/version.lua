@@ -15,7 +15,7 @@ pkgs = {
     "kbd", "make", "lzip", "ed", "patch", "tar", "lua", "vim", "eudev", 
     "mandoc", "procps-ng", "util-linux", "dcron", "e2fsprogs", "libarchive", 
     "sysklogd", "dbus", "openresolv", "dhcpcd", "libxml2", "libxslt", 
-    "iputils",  "acpid2", "cmake", "dma", "at", "dosfstools", "htop", 
+    "iputils",  "acpid", "cmake", "dma", "at", "dosfstools", "htop", 
     "gnupg1", "popt", "logrotate", "lzo", "lzop", "nano", "openssh", 
     "pax", "rsync", "s-nail", "sharutils", "sudo", "time", "libevent", "tmux", 
 }

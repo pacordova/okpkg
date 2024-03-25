@@ -24,6 +24,8 @@ os.execute [[
     cp -rp /usr/okpkg/download/* /mnt/usr/okpkg/download
 ]]
 
+os.exit()
+
 function install(pkgname)
     local cmd = [[ bsdtar -P -C "$DESTDIR" -xf "%s"-*.tar.xz ]]
     os.execute(string.format(cmd, pkgname))
