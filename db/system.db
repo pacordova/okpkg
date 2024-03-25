@@ -1,3 +1,11 @@
+acpid = {
+    url = "https://downloads.sourceforge.net/acpid2/acpid-2.0.34.tar.xz",
+    build = "./configure",
+    flags = {
+        "--sbindir=/usr/bin"
+    }
+};
+
 -- create /etc/asound.conf
 alsa-lib = {
     url = "https://alsa-project.org/files/pub/lib/alsa-lib-1.2.11.tar.bz2",
@@ -211,6 +219,7 @@ dma = {
     flags = {
         "PREFIX=/usr",
         "LIBEXEC=/usr/lib64/dma",
+        "SBIN=/usr/bin"
     },
     post = [[
         ln -sf dma "$DESTDIR/usr/sbin/sendmail"

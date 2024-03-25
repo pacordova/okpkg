@@ -1,8 +1,3 @@
-acpid = {
-    url = "https://downloads.sourceforge.net/acpid2/acpid-2.0.34.tar.xz",
-    build = "./configure"
-};
-
 ahoviewer = {
     url = "https://github.com/ahodesuka/ahoviewer/archive/refs/tags/2.0.0-beta.tar.gz",
     build = "meson"
