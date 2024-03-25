@@ -1,6 +1,6 @@
 #!/usr/bin/env lua
 
--- This file uses a cross.tar.xz archive of the system from 
+-- This script uses a cross.tar.xz archive of the system from 
 -- `scripts/cross-compile` to emulate a partial system to
 -- test reproducible builds (versus a complete base)
 
