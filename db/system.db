@@ -801,6 +801,7 @@ vim = {
         cd "$DESTDIR/usr/bin"
         ln -s vim "$DESTDIR"/usr/bin/vi
         ln -s vim.1 "$DESTDIR"/usr/share/man/man1/vi.1
+        sed -i 's|#!/usr/bin/.*awk|/usr/bin/awk|' "$DESTDIR"/usr/share/vim/vim91/tools/mve.awk
     ]]
 };
 

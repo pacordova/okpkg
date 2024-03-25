@@ -6,7 +6,7 @@ dofile "/usr/okpkg/okpkg.lua"
 -- 7. Entering Chroot and Building Additional Temporary Tools 
 tmp = {
     "bison", "perl", "libxcrypt", "zlib", "pigz", "bzip2", "expat", "python3", 
-    "gawk", "util-linux"
+    "util-linux"
 }
 for i=1,#tmp do emerge(tmp[i]); end
 
@@ -16,9 +16,10 @@ pkgs = {
     "flex", "pkgconf", "binutils", "gmp", "mpfr", "libmpc", "attr", "acl", 
     "libxcrypt", "gcc13", "binutils", "which", "gperf", "libcap", "libmd", 
     "libbsd", "shadow", "ncurses", "readline", "sed", "psmisc", "bison", 
-    "pcre2", "grep", "bash", "expat", "inetutils", "less", "tcsh", "perl", 
-    "libressl", "kmod", "curl", "python3", "samurai", "meson", "coreutils", 
-    "check", "diffutils", "mawk", "tzdata", "findutils", "pigz", "iproute2", 
+    "pcre2", "grep", "bash", "expat", "inetutils", "less", "tcsh", "mawk", 
+    "tzdata", "perl", "libressl", "kmod", "curl", "python3", "samurai", "meson", 
+    "coreutils", 
+    "check", "diffutils", "findutils", "pigz", "iproute2", 
     "kbd", "make", "lzip", "ed", "patch", "tar", "lua", "vim", "eudev", 
     "mandoc", "procps-ng", "util-linux", "dcron", "e2fsprogs", "libarchive", 
     "sysklogd", "dbus", "openresolv", "dhcpcd", "dinit", "libxml2", "libxslt", 

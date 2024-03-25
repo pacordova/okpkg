@@ -56,14 +56,16 @@ posix = {
 
 -- for testing reproducibility
 partial = {
-    "linux-headers",
+--    "bison", "perl", "libxcrypt", "zlib", "pigz", "bzip2", "expat", "python3", 
+--    "util-linux", "linux-headers", "lua", "mawk", "m4", "ncurses", "bash", 
+--    "coreutils", "gmp", "libcap", "diffutils", "file", "findutils", "grep", 
+--    "make", "patch", "sed", "tar", "pcre2", "xz", "libarchive", "glibc", 
+--    "binutils", "gcc-13.2.0", "gcc-libs", "libressl",
     "bison", "perl", "libxcrypt", "zlib", "pigz", "bzip2", "expat", "python3", 
-    "util-linux",
-    "iana-etc", "glibc", "tzdata", "zlib", "bzip2", "xz", "zstd", "file", "m4", 
+    "util-linux", "linux-headers", "lua",
+    "iana-etc", "glibc", "zlib", "bzip2", "xz", "zstd", "file", "m4", "bc", 
     "flex", "pkgconf", "binutils", "gmp", "mpfr", "libmpc", "attr", "acl", 
-    "libxcrypt", "gcc-libs", "gcc-13.2.0", "binutils", "which", "gperf", "libcap", "libmd", 
-    "libbsd", "shadow", "ncurses", "readline", "sed", "bison", "pcre2", "grep", 
-    "bash", "expat", "inetutils", "less", "perl", "libressl", "kmod", "curl", 
+    "libxcrypt", "gcc-libs", "gcc-13.2.0", "binutils",
 }
 
 while #arg > 0 do
