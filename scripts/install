@@ -14,7 +14,6 @@ function install(pkgname)
     os.execute(string.format(cmd, pkgname))
 end
 
-
 minimal = {
     "acl", "attr", "bash", "bzip2", "coreutils", "curl", "dbus", "dhcpcd", 
     "dinit", "dcron", "e2fsprogs", "ed", "eudev", "expat", "file", "findutils",
@@ -23,7 +22,7 @@ minimal = {
     "libmd", "libressl", "libxcrypt", "lua", "mawk", "ncurses", "openresolv", 
     "patch", "pcre2", "pigz", "procps-ng", "readline", "sed", "shadow", 
     "sysklogd", "tar", "time", "tzdata", "util-linux", "which", "xz", "zlib", 
-    "zstd", "db1", "nvi",
+    "zstd", "db1", "nvi", "sharutils",
 }
 
 base = {
@@ -38,34 +37,19 @@ base = {
     "vim", "eudev", "mandoc", "procps-ng", "util-linux", "dcron", "e2fsprogs", 
     "libarchive", "sysklogd", "dbus", "openresolv", "dhcpcd", "dinit", 
     "libxml2", "libxslt", "iputils",  "acpid2", "cmake", "db1", "dma", "at", 
-    "dosfstools", "htop", "git", "gnupg1", "popt", "logrotate", "lzo", "lzop", 
+    "dosfstools", "htop", "gnupg1", "popt", "logrotate", "lzo", "lzop", 
     "nano", "openssh", "pax", "rsync", "s-nail", "sharutils", "sudo", "time", 
-    "libevent", "tmux", "zsh"
+    "libevent", "tmux",
 }
 
 devel = {
-    "cmake", "vim", "bc", "json-c", "argon2", "json-c", "popt", "logrotate",
-    "efivar", "efibootmgr", "grub2", "dosfstools", "openssh", "libaio", "lvm2",
-    "parted"
+    "git", "zsh", "json-c", "argon2", 
+    "libaio", "lvm2", "parted"
+    "efivar", "efibootmgr", "grub2", 
 }
 
 posix = {
-    "db1", "nv1", "dcron", "sharutils", "bc", "dma", "s-nail", "lprng", "pax",
-    "diffutils", unpack(minimal)
-}
-
--- for testing reproducibility
-partial = {
---    "bison", "perl", "libxcrypt", "zlib", "pigz", "bzip2", "expat", "python3", 
---    "util-linux", "linux-headers", "lua", "mawk", "m4", "ncurses", "bash", 
---    "coreutils", "gmp", "libcap", "diffutils", "file", "findutils", "grep", 
---    "make", "patch", "sed", "tar", "pcre2", "xz", "libarchive", "glibc", 
---    "binutils", "gcc-13.2.0", "gcc-libs", "libressl",
-    "bison", "perl", "libxcrypt", "zlib", "pigz", "bzip2", "expat", "python3", 
-    "util-linux", "linux-headers", "lua",
-    "iana-etc", "glibc", "zlib", "bzip2", "xz", "zstd", "file", "m4", "bc", 
-    "flex", "pkgconf", "binutils", "gmp", "mpfr", "libmpc", "attr", "acl", 
-    "libxcrypt", "gcc-libs", "gcc-13.2.0", "binutils",
+    "bc", "dma", "s-nail", "lprng", "pax", "diffutils", unpack(minimal)
 }
 
 while #arg > 0 do

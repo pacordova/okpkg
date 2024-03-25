@@ -7,7 +7,6 @@ else
     fp = io.open("/usr/bin/make")
     if fp then
         os.execute [[ cd /usr/okpkg && make && make install ]]
-        os.execute [[ okpkg install /usr/okpkg/packages/linux-headers-*.tar.xz ]]
         fp:close()
     end
 end
