@@ -776,7 +776,7 @@ util-linux = {
 };
 
 vim = {
-    url = "https://github.com/vim/vim/archive/v9.1.0161/vim-9.1.0161.tar.gz",
+    url = "https://github.com/vim/vim/archive/v9.1.0199/vim-9.1.0199.tar.gz",
     build = "./configure",
     flags = {
         "--with-features=huge",
