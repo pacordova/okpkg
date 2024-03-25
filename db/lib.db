@@ -262,7 +262,7 @@ libjpeg-turbo = {
     build = "cmake",
     flags = {
         "-DENABLE_STATIC=FALSE",
-        "-DWITH_JPEG8=1"
+        "-DWITH_JPEG8=1",
         "-DWITH_JAVA=OFF",
     }
 };
