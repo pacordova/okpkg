@@ -17,16 +17,14 @@ pkgs = {
     "libxcrypt", "gcc13", "binutils", "which", "gperf", "libcap", "libmd", 
     "libbsd", "shadow", "ncurses", "readline", "sed", "psmisc", "bison", 
     "pcre2", "grep", "bash", "expat", "inetutils", "less", "tcsh", "mawk", 
-    "tzdata", "perl", "libressl", "kmod", "curl", "python3", "samurai", "meson", 
-    "coreutils", 
-    "check", "diffutils", "findutils", "pigz", "iproute2", 
+    "tzdata", "perl", "libressl", "kmod", "curl", "python3", "samurai", "meson",
+    "coreutils", "check", "diffutils", "findutils", "pigz", "iproute2", 
     "kbd", "make", "lzip", "ed", "patch", "tar", "lua", "vim", "eudev", 
     "mandoc", "procps-ng", "util-linux", "dcron", "e2fsprogs", "libarchive", 
     "sysklogd", "dbus", "openresolv", "dhcpcd", "dinit", "libxml2", "libxslt", 
     "iputils",  "acpid2", "cmake", "db1", "dma", "at", "dosfstools", "htop", 
-    "git", "gnupg1", "popt", "logrotate", "lzo", "lzop", "nano", "openssh", 
+    "gnupg1", "popt", "logrotate", "lzo", "lzop", "nano", "openssh", 
     "pax", "rsync", "s-nail", "sharutils", "sudo", "time", "libevent", "tmux", 
-    "zsh"
 }
 for i=1,#pkgs do emerge(pkgs[i]); end
 
@@ -39,6 +37,7 @@ os.exit()
 -- These are kept separate to the base system, to avoid circular dependencies,
 -- and keep the system minimal:
 pkgs = {
+    "git", "zsh",
     "libaio", "lvm2", "parted", "popt", "efivar", "efibootmgr", "grub2",
     "libmnl", "libnftnl", 
     "nvi", "json-c", "argon2", "cryptsetup",
