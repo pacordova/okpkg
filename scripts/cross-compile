@@ -103,7 +103,7 @@ end
 -- prepare
 os.execute [[
     /usr/okpkg/scripts/reformat
-    bsdtar -P -C "$DESTDIR" -xf /usr/okpkg/packages/linux-headers*.tar.xz
+    bsdtar -P -C "$DESTDIR" -xf /usr/okpkg/packages/base/linux-headers*.tar.xz
 ]]
 
 fp = io.open("/usr/okpkg/db/cross.db")
