@@ -9,14 +9,6 @@ mount "$PART" "$DESTDIR"
 
 lua /usr/okpkg/scripts/filesystem.lua "$DESTDIR"
 cp /etc/ssl/certs/ca-certificates.crt "$DESTDIR"/etc/ssl/certs
-git clone /usr/okpkg "$DESTDIR"/usr/okpkg
-git -C "$DESTDIR"/usr/okpkg repack -adf --depth=1
-mkdir -p "$DESTDIR"/usr/okpkg/packages
-mkdir -p "$DESTDIR"/usr/okpkg/download
-mount --bind -o ro /usr/okpkg/download "$DESTDIR"/usr/okpkg/download
-cp /usr/okpkg/packages/linux-headers*.tar.xz "$DESTDIR"/usr/okpkg/packages
-
-# to install everything in /usr/okpkg/packages/base, do something like:
-# for pkg in /usr/okpkg/packages/base/*; do 
-#   bsdtar -C "$DESTDIR" -xf "$pkg"; 
-# done
+git -C /usr/okpkg archive --prefix=okpkg/ master | 
+    bsdtar -C "$DESTDIR"/usr -xf -
+cp -rp /usr/okpkg/download/* /mnt/usr/okpkg/download
