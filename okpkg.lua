@@ -8,8 +8,8 @@ local unpack = unpack or table.unpack
 
 -- environment
 setenv("MAKEOPTS", "-j5")
-setenv("CFLAGS", "-O2 -march=x86-64 -fstack-protector-strong -fcommon -pipe")
-setenv("CXXFLAGS", "-O2 -march=x86-64 -fstack-protector-strong -fcommon -pipe")
+setenv("CFLAGS", "-O2 -march=x86-64 -fstack-protector -fcommon -pipe")
+setenv("CXXFLAGS", "-O2 -march=x86-64 -fstack-protector -fcommon -pipe")
 setenv("LC_ALL", "POSIX")
 
 local databases = { "system", "extra", "gnu", "lib", "xorg", "xfce" }

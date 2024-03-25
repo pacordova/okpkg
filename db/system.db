@@ -50,7 +50,11 @@ bc = {
     flags = {
         "--disable-generated-tests", 
         "--disable-nls"
-    }
+    },
+    prepare = [[
+        sed -i 's/%%CFLAGS%%/-O3/' Makefile.in
+        sed -i 's/%%HOSTCFLAGS%%/-O3/' Makefile.in
+    ]]
 };
 
 bzip2 = {
