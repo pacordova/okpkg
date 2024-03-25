@@ -40,7 +40,7 @@ at = {
         "--with-daemon_groupname=atd",
         "--with-jobdir=/var/spool/atd",   
         "--with-atspool=/var/spool/atd",
-        "SENDMAIL=/usr/sbin/sendmail"
+        "SENDMAIL=/usr/bin/sendmail"
     }
 };
 
@@ -226,8 +226,8 @@ dma = {
         "SBIN=/usr/bin"
     },
     post = [[
-        ln -sf dma "$DESTDIR/usr/sbin/sendmail"
-        ln -sf dma "$DESTDIR/usr/sbin/mailq"
+        ln -sf dma "$DESTDIR/usr/bin/sendmail"
+        ln -sf dma "$DESTDIR/usr/bin/mailq"
         mkdir -p "$DESTDIR/etc"
         chmod 644 dma.conf
         chown root:mail dma.conf
@@ -611,7 +611,7 @@ s-nail = {
             VAL_MANDIR=/usr/share/man \
             VAL_LIBEXECDIR=/usr/lib64 \
             VAL_MAIL=/var/spool/mail \
-            VAL_MTA=/usr/sbin/sendmail \
+            VAL_MTA=/usr/bin/sendmail \
             VAL_SID= \
             VAL_MAILX=mailx \
             OPT_AUTOCC=no \

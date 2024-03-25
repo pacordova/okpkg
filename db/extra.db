@@ -264,7 +264,7 @@ unzip = {
     build = "make",
     flags = {
         "--file=unix/Makefile",
-        "prefix=${DESTDIR}/usr",
+        "prefix="$DESTDIR"/usr",
         "MANDIR=/usr/share/man/man1",
         "generic"
     }
@@ -275,7 +275,7 @@ zip = {
     build = "make",
     flags = {
         "--file=unix/Makefile",
-        "prefix=${DESTDIR}/usr",
+        "prefix="$DESTDIR"/usr",
         "generic_gcc"
     }
 };
@@ -295,7 +295,7 @@ connman = {
         "LIBS=-lncursesw" 
     },
     post = [[
-        rm -fr ${DESTDIR}no
+        rm -fr "$DESTDIR"no
     ]]
 };
 
@@ -361,7 +361,7 @@ wpa_supplicant = {
     build = "make",
     flags = {
         "--directory=wpa_supplicant",
-        "BINDIR=/usr/sbin",
+        "BINDIR=/usr/bin",
         "LIBDIR=/usr/lib64"
     },
     prepare = [[
@@ -399,19 +399,19 @@ wpa_supplicant = {
     } >wpa_supplicant/.config 
     ]],
     post = [[
-        mkdir -p ${DESTDIR}/usr/sbin 
-            mkdir -p ${DESTDIR}/usr/share/man/man{5,8}
-    mkdir -p ${DESTDIR}/usr/share/dbus-1/{system-services,system.d}
-    cd wpa_supplicant
+        mkdir -p "$DESTDIR"/usr/bin 
+        mkdir -p "$DESTDIR"/usr/share/man/man{5,8}
+        mkdir -p "$DESTDIR"/usr/share/dbus-1/{system-services,system.d}
+        cd wpa_supplicant
         install -m644 doc/docbook/wpa_supplicant.conf.5 \
-        ${DESTDIR}/usr/share/man/man5/
+            "$DESTDIR"/usr/share/man/man5/
         install -m644 doc/docbook/wpa_{cli,passphrase,supplicant}.8 \
-        ${DESTDIR}/usr/share/man/man8/
+            "$DESTDIR"/usr/share/man/man8/
         install -m644 dbus/fi.w1.wpa_supplicant1.service \
-        ${DESTDIR}/usr/share/dbus-1/system-services/ 
-        install -d -m755 ${DESTDIR}/etc/dbus-1/system.d 
+            "$DESTDIR"/usr/share/dbus-1/system-services/ 
+        install -d -m755 "$DESTDIR"/etc/dbus-1/system.d 
         install -m644 dbus/dbus-wpa_supplicant.conf \
-        ${DESTDIR}/etc/dbus-1/system.d/wpa_supplicant.conf
+            "$DESTDIR"/etc/dbus-1/system.d/wpa_supplicant.conf
     ]]
 };
 
