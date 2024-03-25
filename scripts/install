@@ -44,7 +44,7 @@ base = {
 
 devel = {
     "git", "zsh", "json-c", "argon2", 
-    "libaio", "lvm2", "parted"
+    "libaio", "lvm2", "parted",
     "efivar", "efibootmgr", "grub2", 
 }
 
