@@ -4,7 +4,7 @@ LIBS += -I/usr/include/lua5.4
 #LIBS += -llua5.4  -I/usr/include/lua5.4
 #LIBS +=-I/usr/include/luajit-2.0
 
-CFLAGS += -O2 -fstack-protector-strong -fstack-clash-protection \
+CFLAGS += -O2 -fstack-protector -fstack-clash-protection \
 		  -fcommon -fPIC -shared -pipe
 
 all: okutils.so

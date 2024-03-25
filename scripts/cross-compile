@@ -12,8 +12,8 @@ local unpack = unpack or table.unpack
 
 -- environment
 setenv("MAKEOPTS", "-j5")
-setenv("CFLAGS", "-O2 -fstack-protector-strong -fcommon -pipe")
-setenv("CXXFLAGS", "-O2 -fstack-protector-strong -fcommon -pipe")
+setenv("CFLAGS", "-O2 -fstack-protector -fcommon -pipe")
+setenv("CXXFLAGS", "-O2 -fstack-protector -fcommon -pipe")
 setenv("DESTDIR", "/mnt")
 setenv("TARGET", "x86_64-unknown-linux-gnu")
 setenv("HOST", "x86_64-unknown-linux-gnu")
