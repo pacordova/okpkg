@@ -1,4 +1,4 @@
-acpid2 = {
+acpid = {
     url = "https://downloads.sourceforge.net/acpid2/acpid-2.0.34.tar.xz",
     build = "./configure"
 };
