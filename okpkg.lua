@@ -111,6 +111,7 @@ function makepkg(path)
         error(path .. " does not exist")
     end
 
+    source_date_epoch(".")
     path = basename(path)
 
     -- strip, delete-unneeded, timestamp, etc.
