@@ -195,6 +195,9 @@ gcc11 = {
         strip -s "$DESTDIR"/usr/lib64/$CHOST/$pkgver/cc1plus
         strip -s "$DESTDIR"/usr/lib64/$CHOST/$pkgver/lto1
         strip -s "$DESTDIR"/usr/lib64/$CHOST/$pkgver/cc1
+        strip -s "$DESTDIR"/usr/lib64/$CHOST/$pkgver/collect2
+        strip -s "$DESTDIR"/usr/lib64/$CHOST/$pkgver/lto-wrapper
+        strip -s "$DESTDIR"/usr/lib64/$CHOST/$pkgver/g++-mapper-server
     ]]
 };
 
@@ -244,6 +247,9 @@ gcc13 = {
         strip -s "$DESTDIR"/usr/lib64/$CHOST/$pkgver/cc1plus
         strip -s "$DESTDIR"/usr/lib64/$CHOST/$pkgver/lto1
         strip -s "$DESTDIR"/usr/lib64/$CHOST/$pkgver/cc1
+        strip -s "$DESTDIR"/usr/lib64/$CHOST/$pkgver/collect2
+        strip -s "$DESTDIR"/usr/lib64/$CHOST/$pkgver/lto-wrapper
+        strip -s "$DESTDIR"/usr/lib64/$CHOST/$pkgver/g++-mapper-server
     ]]
 };
 
