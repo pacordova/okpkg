@@ -232,6 +232,10 @@ function build(pkgname)
         os.execute(t.post)
     end
 
+    os.execute [[ 
+        find "$DESTDIR" -exec touch -hd "@$SOURCE_DATE_EPOCH" '{}' + 
+    ]]
+
     return makepkg(os.getenv("DESTDIR"))
 end
 
