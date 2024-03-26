@@ -343,7 +343,10 @@ iproute2 = {
 
 iputils = {
     url = "https://github.com/iputils/iputils/releases/download/20240117/iputils-20240117.tar.xz",
-    build = "meson"
+    build = "meson",
+    prepare = [[
+        sed -i 's/@VCS_TAG@/20240117/' git-version.h.meson
+    ]]
 };
 
 kbd = {
