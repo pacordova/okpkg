@@ -192,6 +192,9 @@ gcc11 = {
             "$DESTDIR"/usr/share/gdb/auto-load/usr/lib64
         ln -s gcc "$DESTDIR"/usr/bin/cc
         ln -s gcc "$DESTDIR"/usr/bin/c99
+        strip -s "$DESTDIR"/usr/lib64/$CHOST/$pkgver/cc1plus
+        strip -s "$DESTDIR"/usr/lib64/$CHOST/$pkgver/lto1
+        strip -s "$DESTDIR"/usr/lib64/$CHOST/$pkgver/cc1
     ]]
 };
 
@@ -238,6 +241,9 @@ gcc13 = {
             "$DESTDIR"/usr/share/gdb/auto-load/usr/lib64
         ln -s gcc "$DESTDIR"/usr/bin/cc
         ln -s gcc "$DESTDIR"/usr/bin/c99
+        strip -s "$DESTDIR"/usr/lib64/$CHOST/$pkgver/cc1plus
+        strip -s "$DESTDIR"/usr/lib64/$CHOST/$pkgver/lto1
+        strip -s "$DESTDIR"/usr/lib64/$CHOST/$pkgver/cc1
     ]]
 };
 
