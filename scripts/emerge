@@ -39,7 +39,7 @@ os.exit()
 -- and keep the system minimal:
 pkgs = {
     "libaio", "lvm2", "parted", "efivar", "efibootmgr", "grub",
-    "argon2", "json-c", "cryptsetup"
+    "argon2", "json-c", "cryptsetup",
     "db1", "nvi",
     "libmnl", "libnftnl", 
     "libusb", "usbutils", "pciutils", 
