@@ -15,10 +15,11 @@ pkgs = {
     "iproute2", "kbd", "make", "lzip", "ed", "patch", "tar", "lua", "vim", 
     "eudev", "mandoc", "procps-ng", "util-linux", "dcron", "e2fsprogs", 
     "libarchive", "sysklogd", "dbus", "openresolv", "dhcpcd",
-    "libxml2", "libxslt", "iputils", "acpid", "cmake", "dma", "at", 
-    "dosfstools", "htop", "git", "libpcap", "iftop", "popt", 
-    "logrotate", "lsof", "lzo", "lzop", "nano", "openssh", "pax", "rsync", 
-    "s-nail", "sharutils", "sudo", "time", "libevent", "tmux",
+    "libxml2", "libxslt", "iputils",  "acpid", "cmake", "dma", "at", 
+    "dosfstools", "htop", "git", "gnupg1", "libpcap", "iftop", "popt", 
+    "logrotate", "lsof", "lzo", "lzop", "nano", "openbsd-netcat", "openntpd", 
+    "openssh", "pax", "rsync", "s-nail", "sharutils", "sudo", "time",
+    "libevent", "tmux",
 }
 
 function curl(url)

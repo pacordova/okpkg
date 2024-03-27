@@ -24,8 +24,9 @@ pkgs = {
     "libarchive", "sysklogd", "dbus", "openresolv", "dhcpcd", "dinit", 
     "libxml2", "libxslt", "iputils",  "acpid", "cmake", "dma", "at", 
     "dosfstools", "htop", "git", "gnupg1", "libpcap", "iftop", "popt", 
-    "logrotate", "lsof", "lzo", "lzop", "nano", "openssh", "pax", "rsync", 
-    "s-nail", "sharutils", "sudo", "time", "libevent", "tmux",
+    "logrotate", "lsof", "lzo", "lzop", "nano", "openbsd-netcat", "openntpd", 
+    "openssh", "pax", "rsync", "s-nail", "sharutils", "sudo", "time",
+    "libevent", "tmux",
 }
 for i=1,#pkgs do emerge(pkgs[i]); end
 

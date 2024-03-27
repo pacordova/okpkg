@@ -28,7 +28,7 @@ minimal = {
 base = {
     "iana-etc", "glibc", "zlib", "bzip2", "xz", "zstd", "file", "m4", "bc", 
     "flex", "pkgconf", "binutils", "gmp", "mpfr", "libmpc", "attr", "acl", 
-    "libxcrypt", "isl", "binutils", "which", "gperf", "libcap", 
+    "libxcrypt", "isl", "which", "gperf", "libcap", 
     "libmd", "libbsd", "shadow", "ncurses", "readline", "sed", "psmisc", 
     "bison", "pcre2", "grep", "bash", "expat", "inetutils", "less", "tcsh", 
     "mawk", "tzdata", "perl", "libressl", "kmod", "curl", "python3", "samurai", 
@@ -38,8 +38,8 @@ base = {
     "libarchive", "sysklogd", "dbus", "openresolv", "dhcpcd", "dinit", 
     "libxml2", "libxslt", "iputils",  "acpid", "cmake", "dma", "at", 
     "dosfstools", "htop", "git", "gnupg1", "libpcap", "iftop", "popt", 
-    "logrotate", "lsof", "lzo", "lzop", "nano", "openssh", "pax", "rsync", 
-    "s-nail", "sharutils", "sudo", "time", "libevent", "tmux",
+    "logrotate", "lsof", "lzo", "lzop", "nano", "openbsd-netcat", "openntpd", 
+    "openssh", "pax", "rsync", "s-nail", "sharutils", "sudo", "time",
     "linux-headers", "gcc-libs", "gcc-13.2.0",
 }
 
