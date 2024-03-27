@@ -549,7 +549,7 @@ nano = {
 };
 
 ncurses = {
-    url = "https://invisible-island.net/archives/ncurses/current/ncurses-6.4-20240309.tgz",
+    url = "https://invisible-island.net/archives/ncurses/current/ncurses-6.4-20230520.tgz",
     build = "./configure",
     flags = {
         "--libdir=/usr/lib64", 

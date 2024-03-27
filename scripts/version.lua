@@ -10,7 +10,7 @@ pkgs = {
     "libxcrypt", "isl", "gcc", "binutils", "which", "gperf", "libcap", 
     "libmd", "libbsd", "shadow", "ncurses", "readline", "sed", "psmisc", 
     "bison", "pcre2", "grep", "bash", "expat", "inetutils", "less", "tcsh", 
-    "mawk", "tzdata", "perl", "libressl", "kmod", "curl", "python3", "samurai", 
+    "tzdata", "perl", "libressl", "kmod", "curl", "python3", "samurai", 
     "meson", "coreutils", "check", "diffutils", "findutils", "pigz", "libtirpc",
     "iproute2", "kbd", "make", "lzip", "ed", "patch", "tar", "lua", "vim", 
     "eudev", "mandoc", "procps-ng", "util-linux", "dcron", "e2fsprogs", 
@@ -97,6 +97,9 @@ fd = io.popen("ls /usr/okpkg/packages/base")
 buf = fd:read("*a")
 for w in string.gmatch(buf, '(.-\n)') do
     local s = w:gsub("%-x86_64.tar.xz\n", "")
+    s = s:gsub(".orig", "")
+    s = s:gsub("-stable", "")
+    s = s:gsub("_GH0", "")
     table.insert(okpkg, s)
 end
 io.close(fd)
