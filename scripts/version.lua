@@ -5,19 +5,21 @@ package.cpath = package.cpath .. ";/usr/okpkg/?.so"
 require "okutils"
 
 pkgs = {
-    "iana-etc", "glibc", "zlib", "bzip2", "xz", "zstd", "file", "m4", 
+    "iana-etc", "glibc", "zlib", "bzip2", "xz", "zstd", "file", "m4",
     "flex", "pkgconf", "binutils", "gmp", "mpfr", "libmpc", "attr", "acl", 
-    "libxcrypt", "gcc", "binutils", "which", "gperf", "libcap", "libmd", 
-    "libbsd", "shadow", "ncurses", "readline", "sed", "psmisc", "bison", 
-    "pcre2", "grep", "bash", "expat", "inetutils", "less", "tcsh",
-    "tzdata", "perl", "libressl", "kmod", "curl", "python3", "samurai", "meson",
-    "coreutils", "check", "diffutils", "findutils", "pigz", "iproute2", 
-    "kbd", "make", "lzip", "ed", "patch", "tar", "lua", "vim", "eudev", 
-    "mandoc", "procps-ng", "util-linux", "dcron", "e2fsprogs", "libarchive", 
-    "sysklogd", "dbus", "openresolv", "dhcpcd", "libxml2", "libxslt", 
-    "iputils",  "acpid", "cmake", "dma", "at", "dosfstools", "htop", 
-    "gnupg1", "popt", "logrotate", "lzo", "lzop", "nano", "openssh", 
-    "pax", "rsync", "s-nail", "sharutils", "sudo", "time", "libevent", "tmux", 
+    "libxcrypt", "isl", "gcc", "binutils", "which", "gperf", "libcap", 
+    "libmd", "libbsd", "shadow", "ncurses", "readline", "sed", "psmisc", 
+    "bison", "pcre2", "grep", "bash", "expat", "inetutils", "less", "tcsh", 
+    "mawk", "tzdata", "perl", "libressl", "kmod", "curl", "python3", "samurai", 
+    "meson", "coreutils", "check", "diffutils", "findutils", "pigz", "libtirpc",
+    "iproute2", "kbd", "make", "lzip", "ed", "patch", "tar", "lua", "vim", 
+    "eudev", "mandoc", "procps-ng", "util-linux", "dcron", "e2fsprogs", 
+    "libarchive", "sysklogd", "dbus", "openresolv", "dhcpcd",
+    "libxml2", "libxslt", "iputils", "acpid", "cmake", "dma", "at", 
+    "dosfstools", "htop", "git", "gnupg1", "libpcap", "iftop", "popt", 
+    "logrotate", "lsof", "lzo", "lzop", "nano", "openssh", "pax", "rsync", 
+    "s-nail", "sharutils", "sudo", "time", "libevent", "tmux",
+    "gawk", "gzip",
 }
 
 function curl(url)

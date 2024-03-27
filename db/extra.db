@@ -149,18 +149,6 @@ lm-sensors = {
     }
 };
 
-lsof = {
-    url = "https://github.com/lsof-org/lsof/releases/download/4.99.3/lsof-4.99.3.tar.gz",
-    build = "./configure",
-    flags = {
-        "--libdir=/usr/lib64",
-        "--enable-security",
-        "--enable-no-sock-security",
-        "--with-libtirpc",
-        "--disable-static",
-    }
-};
-
 lprng = {
     url = "https://prdownloads.sourceforge.net/lprng/lprng-3.9.0.tar.gz",
     build = "./configure",

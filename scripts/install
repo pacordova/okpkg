@@ -17,35 +17,36 @@ end
 minimal = {
     "acl", "attr", "bash", "bzip2", "coreutils", "curl", "dbus", "dhcpcd", 
     "dinit", "dcron", "e2fsprogs", "ed", "eudev", "expat", "file", "findutils",
-    "gcc-libs", "glibc", "gmp", "grep", "iana-etc", "inetutils", "iproute2", 
-    "iputils", "kbd", "kmod", "less", "libarchive", "libbsd", "libcap", 
-    "libmd", "libressl", "libxcrypt", "lua", "mawk", "ncurses", "openresolv", 
-    "patch", "pcre2", "pigz", "procps-ng", "readline", "sed", "shadow", 
-    "sysklogd", "tar", "time", "tzdata", "util-linux", "which", "xz", "zlib", 
-    "zstd", "db1", "nvi", "sharutils",
+    "gcc-libs", "glibc", "gmp", "grep", "iana-etc", "inetutils", "libtirpc", 
+    "iproute2", "iputils", "kbd", "kmod", "less", "libarchive", "libbsd", 
+    "libcap", "libmd", "libressl", "libxcrypt", "lua", "mawk", "ncurses", 
+    "openresolv", "patch", "pcre2", "pigz", "procps-ng", "readline", "sed", 
+    "shadow", "sysklogd", "tar", "time", "tzdata", "util-linux", "which", "xz", 
+    "zlib", "zstd", "db1", "nvi", "sharutils",
 }
 
 base = {
-    "linux-headers", "iana-etc", "glibc", "zlib", "bzip2", "xz", "zstd", 
-    "file", "m4", "bc", "flex", "pkgconf", "binutils", "gmp", "mpfr", "libmpc", 
-    "attr", "acl", "libxcrypt", "isl", "gcc-libs", "gcc-13.2.0", "binutils", 
-    "which", "gperf", "libcap", "libmd", "libbsd", "shadow", "ncurses", 
-    "readline", "sed", "psmisc", "bison", "pcre2", "grep", "bash", "expat", 
-    "inetutils", "less", "tcsh", "perl", "libressl", "kmod", "curl", "python3", 
-    "samurai", "meson", "coreutils", "check", "diffutils", "mawk", "tzdata", 
-    "findutils", "pigz", "iproute2", "kbd", "make", "lzip", "ed", "patch", 
-    "tar", "lua", "vim", "eudev", "mandoc", "procps-ng", "util-linux", "dcron", 
-    "e2fsprogs", "libarchive", "sysklogd", "dbus", "openresolv", "dhcpcd", 
-    "dinit", "libxml2", "libxslt", "iputils",  "acpid", "cmake", "db1", "dma", 
-    "at", "dosfstools", "htop", "git", "gnupg1", "popt", "logrotate", "lzo", 
-    "lzop", "nano", "openssh", "pax", "rsync", "s-nail", "sharutils", "sudo", 
-    "time", "libevent", "tmux", "zsh"
+    "iana-etc", "glibc", "zlib", "bzip2", "xz", "zstd", "file", "m4", "bc", 
+    "flex", "pkgconf", "binutils", "gmp", "mpfr", "libmpc", "attr", "acl", 
+    "libxcrypt", "isl", "binutils", "which", "gperf", "libcap", 
+    "libmd", "libbsd", "shadow", "ncurses", "readline", "sed", "psmisc", 
+    "bison", "pcre2", "grep", "bash", "expat", "inetutils", "less", "tcsh", 
+    "mawk", "tzdata", "perl", "libressl", "kmod", "curl", "python3", "samurai", 
+    "meson", "coreutils", "check", "diffutils", "findutils", "pigz", "libtirpc",
+    "iproute2", "kbd", "make", "lzip", "ed", "patch", "tar", "lua", "vim", 
+    "eudev", "mandoc", "procps-ng", "util-linux", "dcron", "e2fsprogs", 
+    "libarchive", "sysklogd", "dbus", "openresolv", "dhcpcd", "dinit", 
+    "libxml2", "libxslt", "iputils",  "acpid", "cmake", "dma", "at", 
+    "dosfstools", "htop", "git", "gnupg1", "libpcap", "iftop", "popt", 
+    "logrotate", "lsof", "lzo", "lzop", "nano", "openssh", "pax", "rsync", 
+    "s-nail", "sharutils", "sudo", "time", "libevent", "tmux",
+    "linux-headers", "gcc-libs", "gcc-13.2.0",
 }
 
 devel = {
-    "json-c", "argon2", 
     "libaio", "lvm2", "parted",
     "efivar", "efibootmgr", "grub", 
+    "json-c", "argon2", "cryptsetup",
 }
 
 posix = {
