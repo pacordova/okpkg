@@ -19,7 +19,6 @@ pkgs = {
     "dosfstools", "htop", "git", "gnupg1", "libpcap", "iftop", "popt", 
     "logrotate", "lsof", "lzo", "lzop", "nano", "openssh", "pax", "rsync", 
     "s-nail", "sharutils", "sudo", "time", "libevent", "tmux",
-    "gawk", "gzip",
 }
 
 function curl(url)
