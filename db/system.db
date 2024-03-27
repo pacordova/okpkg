@@ -326,6 +326,15 @@ iana-etc = {
     ]]
 };
 
+iftop = {
+    url = "https://pdw.ex-parrot.com/iftop/download/iftop-1.0pre4.tar.gz",
+    build = "./configure",
+    flags = {
+        "--sbindir=/usr/bin",
+        "--mandir=/usr/share/man",
+    }
+};
+
 iproute2 = {
     url = "https://kernel.org/pub/linux/utils/net/iproute2/iproute2-6.8.0.tar.xz",
     build = "make",

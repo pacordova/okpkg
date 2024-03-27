@@ -287,15 +287,6 @@ connman = {
     ]]
 };
 
-iftop = {
-    url = "https://pdw.ex-parrot.com/iftop/download/iftop-0.17.tar.gz",
-    build = "./configure",
-    flags = {
-        "--sbindir=/usr/bin",
-        "--mandir=/usr/share/man",
-    }
-};
-
 iptables = {
     url = "https://www.netfilter.org/projects/iptables/files/iptables-1.8.9.tar.xz",
     build = "./configure",
