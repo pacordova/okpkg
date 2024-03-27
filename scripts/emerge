@@ -22,11 +22,12 @@ pkgs = {
     "iproute2", "kbd", "make", "lzip", "ed", "patch", "tar", "lua", "vim", 
     "eudev", "mandoc", "procps-ng", "util-linux", "dcron", "e2fsprogs", 
     "libarchive", "sysklogd", "dbus", "openresolv", "openntpd", "dhcpcd", 
-    "dinit", "libxml2", "libxslt", "iputils",  "acpid", "cmake", "dma", "at",
-    "dosfstools", "htop", "git", "gnupg1", "libpcap", "iftop", "popt",
-    "logrotate", "lsof", "lzo", "lzop", "nano", "openbsd-netcat",  
-    "openssh", "pax", "rsync", "s-nail", "sharutils", "sudo", "time",
-    "libevent", "tmux",
+    "dinit", "libxml2", "libxslt", "iputils",  "acpid", "dma", "at", "cmake", 
+    "argon2", "json-c", "libaio", "lvm2", "cryptsetup", "dosfstools", "popt", 
+    "efivar", "efibootmgr", "htop", "git", "gnupg1", "libpcap", "iftop", 
+    "logrotate", "lsof", "lzo", "lzop", "nano", "openbsd-netcat", "openssh", 
+    "parted", "pax", "rsync", "s-nail", "sharutils", "sudo", "time", "libevent", 
+    "tmux",
 }
 for i=1,#pkgs do emerge(pkgs[i]); end
 
@@ -36,11 +37,9 @@ os.execute("/usr/okpkg/scripts/split-gcc.sh")
 -- If you want to rebuild everything, comment out below:
 os.exit()
 
--- These are kept separate to the base system, to avoid circular dependencies,
--- and keep the system minimal:
+-- wip
 pkgs = {
-    "libaio", "lvm2", "parted", "efivar", "efibootmgr", "grub",
-    "argon2", "json-c", "cryptsetup",
+    "grub",
     "db1", "nvi",
     "libmnl", "libnftnl", 
     "libusb", "usbutils", "pciutils", 
