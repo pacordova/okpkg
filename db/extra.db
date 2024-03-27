@@ -272,7 +272,7 @@ openbsd-netcat = {
     build = _,
     post = [[
         make $MAKEOPTS \
-            CFLAGS="$CFLAGS -DDEBIAN_VERSION=\"\\\"1.226-1\\\"\" -I/usr/include/bsd" \
+            CFLAGS="$CFLAGS -DDEBIAN_VERSION=\"\\\"1.226-1\\\"\"" \
             LDFLAGS="$LDFLAGS -lbsd"
         mkdir -p "$DESTDIR"/usr/bin
         mkdir -p "$DESTDIR"/usr/share/man/man1
