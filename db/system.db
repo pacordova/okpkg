@@ -317,6 +317,30 @@ flex = {
     ]]
 };
 
+git = {
+    url = "https://kernel.org/pub/software/scm/git/git-2.44.0.tar.xz",
+    build = "./configure",
+    flags = {
+        "--with-gitconfig=/etc/gitconfig",
+        "--libexecdir=/usr/lib64",
+    },
+    prepare = [[
+        printf 'NO_GETTEXT=1\n' >> config.mak
+        printf 'NO_SVN_TESTS=1\n' >> config.mak
+        printf 'NO_TCLTK=1\n' >> config.mak
+        printf 'NO_PYTHON=1\n' >> config.mak
+        printf 'NO_PERL=1\n' >> config.mak
+        printf 'NO_SYS_POLL_H=1\n' >> config.mak
+        printf 'INSTALL_SYMLINKS=1\n' >> config.mak
+        printf 'USE_LIBPCRE2=1\n' >> config.mak
+    ]]
+};
+
+htop = {
+    url = "https://github.com/htop-dev/htop/releases/download/3.3.0/htop-3.3.0.tar.xz",
+    build = "./configure"
+};
+
 iana-etc = {
     url = "https://github.com/Mic92/iana-etc/releases/download/20240305/iana-etc-20240305.tar.gz",
     build = _,
@@ -428,6 +452,11 @@ lua = {
 
 lzip = {
     url = "https://download.savannah.gnu.org/releases/lzip/lzip-1.24.1.tar.gz",
+    build = "./configure"
+};
+
+lzop = {
+    url = "https://lzop.org/download/lzop-1.04.tar.gz",
     build = "./configure"
 };
 
@@ -622,6 +651,17 @@ python3 = {
     ]]
 };
 
+rsync = {
+    url = "https://samba.org/ftp/rsync/src/rsync-3.2.7.tar.gz",
+    build = "./configure",
+    flags = {
+        "--disable-lz4",
+        "--disable-xxhash",
+        "--disable-md2man",
+        "--without-included-zlib"
+    }
+};
+
 s-nail = {
     url = "https://ftp.sdaoden.eu/s-nail-14.9.24.tar.xz",
     build = "make",
@@ -728,6 +768,11 @@ tcsh = {
         "--sysconfdir=/etc",
         "--bindir=/usr/bin"
     }
+};
+
+tmux = {
+    url = "https://github.com/tmux/tmux/releases/download/3.4/tmux-3.4.tar.gz",
+    build = "./configure"
 };
 
 -- TOFU

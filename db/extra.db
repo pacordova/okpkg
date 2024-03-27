@@ -102,30 +102,6 @@ fontforge = {
     }
 };
 
-git = {
-    url = "https://kernel.org/pub/software/scm/git/git-2.44.0.tar.xz",
-    build = "./configure",
-    flags = {
-        "--with-gitconfig=/etc/gitconfig",
-        "--libexecdir=/usr/lib64",
-    },
-    prepare = [[
-        printf 'NO_GETTEXT=1\n' >> config.mak
-        printf 'NO_SVN_TESTS=1\n' >> config.mak
-        printf 'NO_TCLTK=1\n' >> config.mak
-        printf 'NO_PYTHON=1\n' >> config.mak
-        printf 'NO_PERL=1\n' >> config.mak
-        printf 'NO_SYS_POLL_H=1\n' >> config.mak
-        printf 'INSTALL_SYMLINKS=1\n' >> config.mak
-        printf 'USE_LIBPCRE2=1\n' >> config.mak
-    ]]
-};
-
-htop = {
-    url = "https://github.com/htop-dev/htop/releases/download/3.3.0/htop-3.3.0.tar.xz",
-    build = "./configure"
-};
-
 lagrange = {
     url = "https://git.skyjake.fi/gemini/lagrange/releases/download/v1.15.8/lagrange-1.15.8.tar.gz",
     build = "cmake"
@@ -156,11 +132,6 @@ lprng = {
         "--libdir=/usr/lib64",
         "--disable-nls"
     }
-};
-
-lzop = {
-    url = "https://lzop.org/download/lzop-1.04.tar.gz",
-    build = "./configure"
 };
 
 mpv = {
@@ -218,17 +189,6 @@ pwgen = {
     build = "./configure"
 };
 
-rsync = {
-    url = "https://samba.org/ftp/rsync/src/rsync-3.2.7.tar.gz",
-    build = "./configure",
-    flags = {
-        "--disable-lz4",
-        "--disable-xxhash",
-        "--disable-md2man",
-        "--without-included-zlib"
-    }
-};
-
 ruby = {
     url = "https://cache.ruby-lang.org/pub/ruby/3.3/ruby-3.3.0.tar.xz",
     build = "./configure",
@@ -240,11 +200,6 @@ ruby = {
         "--without-baseruby",
         "ac_cv_func_qsort_r=no"
     }
-};
-
-tmux = {
-    url = "https://github.com/tmux/tmux/releases/download/3.4/tmux-3.4.tar.gz",
-    build = "./configure"
 };
 
 unzip = {
