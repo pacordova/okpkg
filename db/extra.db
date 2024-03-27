@@ -267,32 +267,6 @@ networkmanager = {
     }
 };
 
-openbsd-netcat = {
-    url = "https://salsa.debian.org/debian/netcat-openbsd/-/archive/debian/1.226-1/netcat-openbsd-debian-1.226-1.tar.gz",
-    build = _,
-    post = [[
-        make $MAKEOPTS \
-            CFLAGS="$CFLAGS -DDEBIAN_VERSION=\"\\\"1.226-1\\\"\"" \
-            LDFLAGS="$LDFLAGS -lbsd"
-        mkdir -p "$DESTDIR"/usr/bin
-        mkdir -p "$DESTDIR"/usr/share/man/man1
-        cp -p nc "$DESTDIR"/usr/bin
-        cp -p nc.1 "$DESTDIR"/usr/share/man/man1
-    ]]
-};
-
-openntpd = {
-    url = "https://ftp.openbsd.org/pub/OpenBSD/OpenNTPD/openntpd-6.8p1.tar.gz",
-    build = "./configure",
-    flags = {
-        "--sysconfdir=/etc",
-        "--libdir=/usr/lib64",
-        "--sbindir=/usr/bin",
-        "--with-privsep-user=ntp",
-        "--localstatedir=/var"
-    }
-};
-
 ppp = {
     url = "https://samba.org/ftp/ppp/ppp-2.4.9.tar.gz",
     build = "./configure"
