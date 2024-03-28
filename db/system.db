@@ -724,7 +724,7 @@ samurai = {
 };
 
 shadow = {
-    url = "https://github.com/shadow-maint/shadow/releases/download/4.15.0/shadow-4.15.0.tar.xz",
+    url = "https://github.com/shadow-maint/shadow/releases/download/4.15.1/shadow-4.15.1.tar.xz",
     build = "./configure",
     flags = {
         "--bindir=/usr/bin",
