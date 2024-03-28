@@ -16,7 +16,7 @@ pkgs = {
     "eudev", "mandoc", "procps-ng", "util-linux", "dcron", "e2fsprogs", 
     "libarchive", "sysklogd", "dbus", "openresolv", "dhcpcd",
     "libxml2", "libxslt", "iputils",  "acpid", "cmake", "dma", "at", 
-    "dosfstools", "htop", "git", "gnupg1", "libpcap", "iftop", "popt", 
+    "dosfstools", "htop", "git", "libpcap", "iftop", "popt", 
     "logrotate", "lsof", "lzo", "lzop", "nano", "openbsd-netcat", "openntpd", 
     "openssh", "pax", "rsync", "s-nail", "sharutils", "sudo", "time",
     "libevent", "tmux", "libaio", "lvm2", "parted", "cryptsetup", "argon2",
@@ -71,6 +71,8 @@ for w in string.gmatch(buf, 'href="(.-)"') do
         s = s:gsub("%-any", "")
         s = s:gsub("%-%d+$", "")
         s = s:gsub("1%%3A", "")
+        s = s:gsub("2%%3A", "")
+        s = s:gsub("%.p", "p")
         s = s:gsub("python%-", "python3-")
         s = s:gsub("libisl%-", "isl-")
         table.insert(archlinux , s)
