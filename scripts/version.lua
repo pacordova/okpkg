@@ -37,8 +37,8 @@ function vstr(path)
 
     if s:find("^%d") then 
         i = 0
-    elseif s:find("[v.-]%d") then
-        i = s:find("[v.-]%d") 
+    elseif s:find("[v._-]%d") then
+        i = s:find("[v._-]%d") 
     else
         return ""
     end
