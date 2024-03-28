@@ -24,7 +24,7 @@ pkgs = {
     "libarchive", "sysklogd", "dbus", "openresolv", "openntpd", "dhcpcd", 
     "dinit", "libxml2", "libxslt", "iputils",  "acpid", "dma", "at", "cmake", 
     "argon2", "json-c", "libaio", "lvm2", "cryptsetup", "dosfstools", "popt", 
-    "efivar", "efibootmgr", "htop", "git", "gnupg1", "libpcap", "iftop", 
+    "efivar", "efibootmgr", "htop", "git", "gnupg1", "grub", "libpcap", "iftop",
     "logrotate", "lsof", "lzo", "lzop", "nano", "openbsd-netcat", "openssh", 
     "parted", "pax", "rsync", "s-nail", "sharutils", "sudo", "time", "libevent", 
     "tmux",
@@ -39,7 +39,6 @@ os.exit()
 
 -- wip
 pkgs = {
-    "grub",
     "db1", "nvi",
     "libmnl", "libnftnl", 
     "libusb", "usbutils", "pciutils", 
