@@ -829,7 +829,7 @@ usbutils = {
 };
 
 util-linux = {
-    url = "https://kernel.org/pub/linux/utils/util-linux/v2.40/util-linux-2.40.tar.xz",
+    url = "https://kernel.org/pub/linux/utils/util-linux/v2.39/util-linux-2.39.3.tar.xz",
     build = "./configure",
     flags = {
         "--bindir=/usr/bin",
