@@ -23,7 +23,7 @@ pkgs = {
     "eudev", "mandoc", "procps-ng", "util-linux", "dcron", "e2fsprogs", 
     "libarchive", "sysklogd", "dbus", "openresolv", "openntpd", "dhcpcd", 
     "dinit", "libxml2", "libxslt", "iputils",  "acpid", "dma", "at", "cmake", 
-    "argon2", "json-c", "libaio", "lvm2", "cryptsetup", "dosfstools", "popt", 
+    "argon2", "json-c", "popt", "libaio", "lvm2", "cryptsetup", "dosfstools",
     "efivar", "efibootmgr", "htop", "git", "gnupg1", "grub", "libpcap", "iftop",
     "logrotate", "lsof", "lzo", "lzop", "nano", "openbsd-netcat", "openssh", 
     "parted", "pax", "rsync", "s-nail", "sharutils", "sudo", "time", "libevent", 
