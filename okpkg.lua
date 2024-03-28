@@ -24,7 +24,7 @@ function source_date_epoch(filename)
     setenv("SOURCE_DATE_EPOCH", tonumber(buf))
 end
 
-function _vstr(path)
+function vstr(path)
     local s, i, j
     s = basename(path)
 
@@ -146,7 +146,7 @@ function build(pkgname)
 
     t = _vlook(pkgname)
     t.flags = t.flags or {}
-    version = _vstr(t.url)
+    version = vstr(t.url)
     setenv("DESTDIR",
         string.format("/usr/okpkg/packages/%s-%s-x86_64",pkgname,version))
 
@@ -254,7 +254,7 @@ end
 function install(file)
     local fp, buf, pkgname, offset
 
-    local version = _vstr(file)
+    local version = vstr(file)
     if #version > 0 then
         pkgname = basename(file:sub(1, #file-#version-8))
     else    
