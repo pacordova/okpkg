@@ -19,9 +19,9 @@ os.execute [[
 
     bsdtar -C "$DESTDIR" -xf /usr/okpkg/packages/cross.tar.xz
     cp /etc/ssl/certs/ca-certificates.crt "$DESTDIR"/etc/ssl/certs
-    git -C /usr/okpkg archive --prefix=okpkg/ master | 
-        bsdtar -C "$DESTDIR"/usr -xf -
-    cp -rp /usr/okpkg/download/* /mnt/usr/okpkg/download
+    git clone /usr/okpkg "$DESTDIR"/usr/okpkg    
+    git -C "$DESTDIR"/usr/okpkg repack -adf --depth=1
+    cp -p /usr/okpkg/download/* /mnt/usr/okpkg/download
 ]]
 
 os.exit()
