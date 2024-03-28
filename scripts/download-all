@@ -19,7 +19,8 @@ pkgs = {
     "dosfstools", "htop", "git", "gnupg1", "libpcap", "iftop", "popt", 
     "logrotate", "lsof", "lzo", "lzop", "nano", "openbsd-netcat", "openntpd", 
     "openssh", "pax", "rsync", "s-nail", "sharutils", "sudo", "time",
-    "libevent", "tmux",
+    "libevent", "tmux", "libaio", "lvm2", "parted", "cryptsetup", "argon2",
+    "json-c", "efivar", "efibootmgr", "grub"
     "gzip", "gawk"
 }
 for i=1,#pkgs do download(pkgs[i]); end

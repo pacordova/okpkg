@@ -40,13 +40,9 @@ base = {
     "dosfstools", "htop", "git", "gnupg1", "libpcap", "iftop", "popt", 
     "logrotate", "lsof", "lzo", "lzop", "nano", "openbsd-netcat", "openntpd", 
     "openssh", "pax", "rsync", "s-nail", "sharutils", "sudo", "time",
+    "libaio", "lvm2", "parted", "efivar", "efibootmgr", "grub", "json-c", 
+    "argon2", "cryptsetup",
     "linux-headers", "gcc-libs", "gcc-13.2.0",
-}
-
-devel = {
-    "libaio", "lvm2", "parted",
-    "efivar", "efibootmgr", "grub", 
-    "json-c", "argon2", "cryptsetup",
 }
 
 posix = {
