@@ -31,7 +31,7 @@ function curl(url)
     return buf
 end
 
-function _vstr(path)
+function vstr(path)
     local s, i, j
     s = basename(path)
 
@@ -51,7 +51,7 @@ end
 function getv(t, pkg)
     for i=1,#t do
         if t[i]:match("^" .. pkg .. "%%-") then
-            return _vstr(t[i])
+            return vstr(t[i])
         end
     end
     return nil
