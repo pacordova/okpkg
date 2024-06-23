@@ -15,19 +15,26 @@ end
 
 -- minimalist package set
 minimal = {
-   "iana-etc", "glibc", "glibc", "zlib", "bzip2", "lzlib", "xz", "zstd",
-   "file", "gmp", "mpfr", "attr", "acl", "gcc-libs", "libcap", "libmd",
-   "libbsd", "shadow", "ncurses", "readline", "sed", "pcre2", "grep", "bash",
-   "expat", "inetutils", "less", "gawk", "tzdata", "libxcrypt", "libressl",
-   "kmod", "curl", "coreutils", "findutils", "pigz", "libtirpc", "libelf",
-   "libmnl", "dbus", "libnl3", "libpcap", "iptables", "iproute2", "kbd",
-   "tar", "lua", "plzip", "openvi", "eudev", "procps-ng", "util-linux",
-   "e2fsprogs", "sysklogd", "openresolv", "dhcpcd", "dinit", "iputils",
-   "dosfstools", "parted",
+   "iana-etc", "glibc", "zlib", "bzip2", "lzlib", "xz", "zstd",
+   "file", "gmp", "attr", "acl", "gcc-libs", "which", "libcap",
+   "shadow", "ncurses", "readline", "sed", "psmisc", "pcre2", "grep", "oksh",
+   "expat", "less", "mawk", "tzdata", "libxcrypt", "libressl",
+   "kmod", "curl", "libelf", "coreutils", "findutils", "pigz", "kbd", "ed",
+   "tar", "lua", "openvi", "eudev", "procps-ng", "util-linux", "e2fsprogs",
+   "dinit", "libaio", "device-mapper", "parted", "dcron", "time"
+}
+
+net = {
+   "libmnl", "libnl3", "libtirpc", "libusb", "glib2", "dbus",
+   "libpcap", "iptables", "connman", "inetutils", "iproute2", "iputils",
+   "netcat", "openntpd", "openssh", "wpa_supplicant", "gnupg1"
 }
 
 local function clean_minimal()
    os.execute [[
+      ln -sf /usr/bin/oksh /bin/sh
+      ln -sf /usr/bin/mawk /usr/bin/awk
+      rm -f /etc/dinit.d/boot.d/syslogd
       cp /usr/okpkg/okutils.so $destdir/usr/okpkg
       cp /usr/bin/okpkg $destdir/usr/bin
       cp /usr/okpkg/packages/a/locale-archive $destdir/usr/lib64/locale
