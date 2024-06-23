@@ -14,9 +14,11 @@
 #define BUFSIZE 4096
 #define MDSIZE 256/8
 
-const char*
-sha3_256(const char *path)
+int
+ok_sha3sum(lua_State *L)
 {
+	const char *path = luaL_checkstring(L, 1);
+
 	static char output[MDSIZE*2];
 	unsigned char buf[BUFSIZE], md[MDSIZE];
 	FILE *fp = fopen(path, "rb");
@@ -36,15 +38,7 @@ sha3_256(const char *path)
 	for(int i = 0; i<MDSIZE; ++i)
 		sprintf(output+2*i, "%.2x", md[i]);
 
-	return (const char*) output;
-}
-
-int
-ok_sha3sum(lua_State *L)
-{
-	const char *path = luaL_checkstring(L, 1);
-	lua_pushstring(L, sha3_256(path));
-
+	lua_pushstring(L, (const char*) output);
 	return 1;
 }
 
@@ -167,7 +161,7 @@ ok_mkdir(lua_State *L)
 }
 
 static const struct luaL_Reg okutils[] = {
-	{"sha3_256", ok_sha3sum},
+	{"sha3sum", ok_sha3sum},
 	{"chroot", ok_chroot},
 	{"pwd", ok_pwd},
 	{"chdir", ok_chdir},

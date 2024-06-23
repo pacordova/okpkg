@@ -3,8 +3,8 @@
 -- imports
 local unpack = unpack or table.unpack
 local ok = require"okutils"
-local chdir, setenv, unsetenv, basename, mkdir, pwd, sha3_256 =
-   ok.chdir, ok.setenv, ok.unsetenv, ok.basename, ok.mkdir, ok.pwd, ok.sha3_256
+local chdir, setenv, unsetenv, basename, mkdir, pwd, sha3sum =
+   ok.chdir, ok.setenv, ok.unsetenv, ok.basename, ok.mkdir, ok.pwd, ok.sha3sum
 
 -- environment
 setenv("CFLAGS", "-O2 -march=x86-64-v2 -fstack-protector-strong -fstack-clash-protection -fcommon -pipe")
@@ -73,7 +73,7 @@ gsub("https://cran.r%-project.org", "https://archive.linux.duke.edu/cran")
    source_date_epoch(f)
 
    -- checksum to verify the authenticity of the tarball
-   if t.sha3 ~= sha3_256(f) then
+   if t.sha3 ~= sha3sum(f) then
       os.remove(f); error(string.format("error: bad checksum for %s", f))
    else
       print(string.format("%s: OK", f))
