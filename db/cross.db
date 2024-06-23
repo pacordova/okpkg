@@ -474,12 +474,7 @@ libressl = {
       "--program-prefix=''",
       "--host=x86_64-unknown-linux-gnu",
       "--build=$(./config.guess)",
-   },
-   post = [[
-      rm -f $destdir/usr/bin/{openssl,ocspcheck}
-      rm -f $destdir/usr/share/man/man1/openssl.1
-      rm -f $destdir/usr/share/man/man8/ocspcheck.8
-   ]]
+   }
 };
 
 binutils-pass2 = {

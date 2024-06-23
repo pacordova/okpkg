@@ -601,7 +601,7 @@ gettext = {
    }
 };
 
-libpcre2 = {
+pcre2 = {
    url = "https://github.com/PCRE2Project/pcre2/releases/download/pcre2-10.44/pcre2-10.44.tar.bz2",
    sha3 = "d4fd6a95630fbf9bde69c95536be875762dea369c473c13d350da545d2eeba9f",
    build = "./configure",
@@ -611,13 +611,12 @@ libpcre2 = {
       "--enable-jit",
       "--enable-pcre2-16",
       "--enable-pcre2-32",
+      "--enable-pcre2grep-libz",
+      "--enable-pcre2grep-libbz2",
+      "--enable-pcre2test-libreadline",
       "--enable-unicode",
       "--disable-static",
-   },
-   post = [[
-      rm -f $destdir/usr/bin/{pcre2-config,pcre2grep,pcre2test}
-      rm -fr $destdir/usr/share/man/man1
-   ]]
+   }
 };
 
 grep = {
@@ -813,12 +812,7 @@ libressl = {
       "--disable-static",
       "--with-openssldir=/etc/ssl",
       "--program-prefix=''",
-   },
-   post = [[
-      rm -f $destdir/usr/bin/{openssl,ocspcheck}
-      rm -f $destdir/usr/share/man/man1/openssl.1
-      rm -f $destdir/usr/share/man/man8/ocspcheck.8
-   ]]
+   }
 };
 
 kmod = {

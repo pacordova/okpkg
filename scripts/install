@@ -38,6 +38,11 @@ local function clean_minimal()
       rm -fr $destdir/usr/include
       rm -f  $destdir/usr/bin/localedef
       rm -fr $destdir/usr/src
+      rm -f $destdir/usr/bin/{pcre2-config,pcre2grep,pcre2test}
+      rm -f $destdir/usr/share/man/man1/{pcre2-config,pcre2grep,pcre2test}.1
+      rm -f $destdir/usr/bin/{openssl,ocspcheck}
+      rm -f $destdir/usr/share/man/man1/openssl.1
+      rm -f $destdir/usr/share/man/man8/ocspcheck.8
    ]]
 end
 
