@@ -21,13 +21,13 @@ minimal = {
    "tzdata", "libxcrypt", "libressl", "kmod", "curl", "libelf", "coreutils",
    "findutils", "pigz", "kbd", "ed", "tar", "lua", "openvi", "eudev",
    "procps-ng", "util-linux", "e2fsprogs", "dinit", "libaio", "device-mapper",
-   "parted", "dcron", "time"
+   "parted", "glib2", "dbus", "dcron", "time",
 }
 
 network = {
-   "libmnl", "libnl3", "libtirpc", "libusb", "glib2", "dbus",
-   "libpcap", "iptables", "connman", "inetutils", "iproute2", "iputils",
-   "netcat", "openntpd", "openssh", "wpa_supplicant", "gnupg1"
+   "libmnl", "libnl3", "libtirpc", "libusb", "libpcap", "iptables", "connman",
+   "gnupg1", "inetutils", "iproute2", "iputils", "netcat", "openntpd",
+   "openssh", "wpa_supplicant",
 }
 
 local function clean_minimal()
