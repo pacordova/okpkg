@@ -185,6 +185,7 @@ coreutils = {
       "--mandir=/usr/share/man",
       "--enable-install-program=hostname",
       "--enable-no-install-program=kill,uptime",
+      "--without-libgmp",
       "--without-openssl",
       "--without-selinux",
       "--host=x86_64-unknown-linux-gnu",
