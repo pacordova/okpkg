@@ -815,8 +815,9 @@ libressl = {
       "--program-prefix=''",
    },
    post = [[
-      rm -f $destdir/usr/bin/{ocspcheck,openssl}
-      rm -fr $destdir/usr/share/man/man{1,8}
+      rm -f $destdir/usr/bin/{openssl,ocspcheck}
+      rm -f $destdir/usr/share/man/man1/openssl.1
+      rm -f $destdir/usr/share/man/man8/ocspcheck.8
    ]]
 };
 
