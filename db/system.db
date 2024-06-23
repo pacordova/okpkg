@@ -1059,7 +1059,6 @@ coreutils = {
       "--sysconfdir=/etc",
       "--mandir=/usr/share/man",
       "--enable-no-install-program=hostname,kill,uptime",
-      "--without-libgmp",
       "--without-openssl",
       "--without-selinux",
       "FORCE_UNSAFE_CONFIGURE=1",
