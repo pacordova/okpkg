@@ -1,0 +1,336 @@
+_freetype2 = {
+   url = "https://downloads.sourceforge.net/freetype/freetype-2.13.2.tar.xz",
+   sha3 = "d459da912526aa543282fa4b7ec45380bd57d247007ba3a2d423cfc516f6af67",
+   build = "meson",
+   flags = {
+      "-Dharfbuzz=disabled",
+      "-Dbzip2=disabled",
+      "-Dzlib=disabled",
+      "-Dpng=disabled",
+   }
+};
+
+alsa-lib = {
+   url = "https://alsa-project.org/files/pub/lib/alsa-lib-1.2.11.tar.bz2",
+   sha3 = "4265effdd142056ea3246fabbecbdc6188578af26678a54ae2c3d149aec681e7",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--without-debug"
+   }
+};
+
+dav1d = {
+   url = "https://downloads.videolan.org/pub/videolan/dav1d/1.4.2/dav1d-1.4.2.tar.xz",
+   sha3 = "f6e5221aac889aeb1cabdede62b41f29a426a2caad679b9f6eaa5d74fb50b665",
+   build = "meson",
+   flags = {
+      "-Dtestdata_tests=false",
+      "-Denable_docs=false",
+   }
+};
+
+flac = {
+   url = "https://downloads.xiph.org/releases/flac/flac-1.4.3.tar.xz",
+   sha3 = "24b4d4d600396dbedfb46e031bd7cc26408a6ecab1e3e2ac929c725fdc665fc1",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--disable-thorough-tests"
+   }
+};
+
+fribidi = {
+   url = "https://github.com/fribidi/fribidi/releases/download/v1.0.13/fribidi-1.0.13.tar.xz",
+   sha3 = "d7874adf16283867ae23a78ec5f3e5196dc5ff570a5fd0415eb3b9fb6917c699",
+   build = "meson",
+};
+
+dbus-glib = {
+   url = "https://dbus.freedesktop.org/releases/dbus-glib/dbus-glib-0.112.tar.gz",
+   sha3 = "403eaea495309ea8260148a2cb945a1c08785b1c431bd867d1100b188b4efa41",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--sysconfdir=/etc",
+      "--disable-static",
+      "--disable-gtk-doc"
+   }
+};
+
+gobject-introspection = {
+   url = "https://download.gnome.org/sources/gobject-introspection/1.78/gobject-introspection-1.78.1.tar.xz",
+   sha3 = "0c3dacb5a258ba94bd8b41e0e94522c800b3c5bdedf67b1501e743581760ce6e",
+   build = "meson",
+   flags = { "-Dgtk_doc=false" }
+};
+
+json-glib = {
+   url = "https://download.gnome.org/sources/json-glib/1.8/json-glib-1.8.0.tar.xz",
+   sha3 = "e62adc949ff5e5f4b58b129f3004b8eca7b052288c47ff146d53de3826d81999",
+   build = "meson",
+   flags = { "-Dgtk_doc=disabled" }
+};
+
+libgudev = {
+   url = "https://download.gnome.org/sources/libgudev/238/libgudev-238.tar.xz",
+   sha3 = "6500e55c1ceeaf85747d3eeaebd57e1cfc7fae4b5b4ceb7161cd8ab059d1863d",
+   build = "meson",
+   flags = { "-Dgtk_doc=false" }
+};
+
+gsettings-desktop-schemas = {
+   url = "https://download.gnome.org/sources/gsettings-desktop-schemas/45/gsettings-desktop-schemas-45.0.tar.xz",
+   sha3 = "3a733b8c5ab7eacde0be56b7674f54218e75cc5620952fbf981549d4f50ae5aa",
+   build = "meson",
+   prepare = [[ sed -i -r 's:"(/system):"/org/gnome\1:g' schemas/*.in ]]
+};
+
+libpng = {
+   url = "https://downloads.sourceforge.net/libpng/libpng-1.6.43.tar.xz",
+   sha3 = "77bea57721f50c4a656994d644f77f75689a5d360c71b1aee1044eb275b9da7b",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--disable-static"
+   }
+};
+
+harfbuzz = {
+   url = "https://github.com/harfbuzz/harfbuzz/releases/download/8.4.0/harfbuzz-8.4.0.tar.xz",
+   sha3 = "645641f1d39f8bb50bf5ac0ec8e72c6e288db6840d2f12669c3b6c830b396280",
+   build = "meson",
+   flags = {
+      "-Dglib=enabled",
+      "-Dcairo=disabled",
+      "-Dicu=disabled",
+      "-Dgraphite2=disabled",
+      "-Dbenchmark=disabled",
+      "-Dtests=disabled",
+   }
+};
+
+freetype2 = {
+   url = "https://downloads.sourceforge.net/freetype/freetype-2.13.2.tar.xz",
+   sha3 = "d459da912526aa543282fa4b7ec45380bd57d247007ba3a2d423cfc516f6af67",
+   build = "meson",
+   flags = {
+      "-Dharfbuzz=enabled",
+      "-Dbzip2=disabled",
+      "-Dzlib=disabled",
+      "-Dpng=enabled",
+   }
+};
+
+fontconfig = {
+   url = "https://freedesktop.org/software/fontconfig/release/fontconfig-2.15.0.tar.xz",
+   sha3 = "01271f5261ea7b47332da761d02f2b0ed62fb164a2921a1d81d3e53c6a5f7623",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--sysconfdir=/etc",
+      "--localstatedir=/var",
+   }
+};
+
+libass = {
+   url = "https://github.com/libass/libass/releases/download/0.17.1/libass-0.17.1.tar.xz",
+   sha3 = "c7892769c34b70fdc2d474684165944f6b13c3ebde5ead99780eef68afda3df2",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--disable-static",
+      "--enable-fontconfig",
+   }
+};
+
+lame = {
+   url = "https://downloads.sourceforge.net/lame/lame-3.100.tar.gz",
+   sha3 = "36700934b5b3e64f2e3ff33ee85bd7fc033890aa92d1f6a0a9b5acc2a3a0d199",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--disable-static",
+   }
+};
+
+libvpx = {
+   url = "https://github.com/webmproject/libvpx/archive/v1.14.1/libvpx-1.14.1.tar.gz",
+   sha3 = "6f2658dc6260ee0915ea4f27226dad31d0f45dca6f70ecb988bfe64ea5ae9887",
+   build = "../configure",
+   prepare = [[
+      sed -i 's/cp -p/cp/' build/make/Makefile
+      sed -i 's/perl/:/g;s/diff --version/command -v diff/' configure
+   ]],
+   flags = {
+      "--libdir=/usr/lib64",
+      "--enable-vp8",
+      "--enable-vp9",
+      "--enable-shared",
+      "--enable-postproc",
+      "--enable-pic",
+      "--disable-static",
+      "--disable-tools",
+      "--disable-examples",
+      "--disable-docs",
+      "--disable-unit-tests",
+      "--disable-install-docs",
+      "--disable-install-srcs",
+      "--disable-install-bins",
+      "--as=nasm",
+   }
+};
+
+libfdk-aac = {
+   url = "https://downloads.sourceforge.net/opencore-amr/fdk-aac-2.0.3.tar.gz",
+   sha3 = "f82f593cfcf49eb9417af68c299ab0a971876946a432007913256767dbcdc4c0",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--disable-static",
+   }
+};
+
+libkeccak = {
+   url = "https://codeberg.org/maandree/libkeccak/archive/1.4.tar.gz",
+   sha3 = "e9d70587db310b53b22707c568c31d7d4eb9f01576ee8cb2657c90fa9f04d7e1",
+   build = "make",
+   flags = {
+      "CONFIGFILE=optimised.mk",
+      "PREFIX=/usr"
+   },
+   prepare = [[ sed -i 's#FLAGS\s\+=#FLAGS +=#g' optimised.mk ]],
+   post = [[
+      mv $destdir/usr/lib $destdir/usr/lib64
+      rm $destdir/usr/lib64/libkeccak.a
+   ]]
+};
+
+x264 = {
+   url = "https://code.videolan.org/videolan/x264/-/archive/c196240409e4d7c01b47448d93b1f9683aaa7cf7/x264-c196240409e4d7c01b47448d93b1f9683aaa7cf7.tar.bz2",
+   sha3 = "c4af21e637a73287462f7cfa1834728d0b146662b5cbca4136e31db483fee219",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--enable-shared",
+      "--disable-cli"
+   }
+};
+
+x265 = {
+   url = "https://bitbucket.org/multicoreware/x265_git/downloads/x265_3.5.tar.gz",
+   sha3 = "aeacb2d1437dd6057679f297443a7da5365e97d951219b5b45864562084c1fb3",
+   build = "cmake",
+   flags = {
+      "-DENABLE_SHARED=ON",
+      "-DGIT_ARCHETYPE=1",
+      "-Wno-dev",
+      "../source",
+   },
+   post = [[
+      mv $destdir/usr/lib $destdir/usr/lib64
+      rm -f $destdir/usr/lib64/libx265.a
+   ]]
+};
+
+libevent = {
+   url = "https://github.com/libevent/libevent/releases/download/release-2.1.12-stable/libevent-2.1.12-stable.tar.gz",
+   sha3 = "aeadcbd599fc49e5fe9554a668093e4bdc53cf9fd177d099bce41e46ec0b783d",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--disable-static"
+   },
+   prepare = [[ sed -i 's/python/&3/' event_rpcgen.py ]]
+};
+
+libjpeg-turbo = {
+   url = "https://github.com/libjpeg-turbo/libjpeg-turbo/releases/download/3.0.2/libjpeg-turbo-3.0.2.tar.gz",
+   sha3 = "73ee0afc5e1a45dd9992f68f6231f7a056ae31b2f665eea09435563a8c3b105c",
+   build = "cmake",
+   flags = {
+      "-DENABLE_STATIC=FALSE",
+      "-DWITH_JPEG8=1",
+      "-DWITH_JAVA=OFF",
+   }
+};
+
+libogg = {
+   url = "https://downloads.xiph.org/releases/ogg/libogg-1.3.5.tar.xz",
+   sha3 = "caabb9bead5d1b33279bd7367f40a807869273cf2e176bf0eb5ec4e009f37af6",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--disable-static"
+   }
+};
+
+libvorbis = {
+   url = "https://downloads.xiph.org/releases/vorbis/libvorbis-1.3.7.tar.xz",
+   sha3 = "2c28108d60b3ac2bd0f2a38ac3ee0dc70a24b84f6f6e892df20d266cd11a5e9d",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--disable-static",
+      "--disable-docs"
+   }
+};
+
+opus = {
+   url = "https://downloads.xiph.org/releases/opus/opus-1.5.2.tar.gz",
+   sha3 = "6f0c6a0215fa2c898f9f37fe07cdafb230a9135e722163de605e480ebf6820e0",
+   build = "meson",
+   flags = {
+      "-Dcustom-modes=true",
+      "-Dfloat-approx=true",
+   }
+};
+
+libsass = {
+   url = "https://github.com/sass/libsass/archive/3.6.6/libsass-3.6.6.tar.gz",
+   sha3 = "9637cd39de53582abc24deefb2ed3c28c92db591c81f4765dd58c287631b2667",
+   build = "autoreconf",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--disable-static"
+   }
+};
+
+libexif = {
+   url = "https://github.com/libexif/libexif/releases/download/v0.6.24/libexif-0.6.24.tar.bz2",
+   sha3 = "a3d9130008e06b086ff60624ed629eeb259916da99fa045784fc6177b4b591c3",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--disable-static"
+   }
+};
+
+mtdev = {
+   url = "https://bitmath.org/code/mtdev/mtdev-1.1.6.tar.bz2",
+   sha3 = "3448b0fbe5e054b91aa7412e65fb6f6a0f302e2e72e7c61b04e5679a1e1ff6d3",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--disable-static"
+   }
+};
+
+uchardet = {
+   url = "https://www.freedesktop.org/software/uchardet/releases/uchardet-0.0.8.tar.xz",
+   sha3 = "a6b22fbf93ac19bc33d2f06bba03abdd36d53e58c3b575722de5d6f2d4219597",
+   build = "cmake",
+   flags = {
+      "-DBUILD_STATIC=OFF",
+   }
+};
+
+uthash = {
+   url = "https://github.com/troydhanson/uthash/archive/v2.3.0/uthash-2.3.0.tar.gz",
+   sha3 = "d416f46e3922a59538311fc9e20d7303430e31d2be22e5d7abf2f5391fc3d3f7",
+   build = _,
+   post = [[
+      mkdir -p $destdir/usr/include
+      cp -p src/*.h $destdir/usr/include
+   ]]
+};

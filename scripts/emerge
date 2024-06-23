@@ -1,0 +1,54 @@
+#!/usr/bin/env lua
+
+-- ensure okpkg is installed
+local fp; fp = io.open"/usr/bin/okpkg"
+if fp then fp:close() else fp = io.open"/usr/bin/make"
+   if fp then fp:close(); os.execute"cd /usr/okpkg && make && make install"; end
+end
+
+-- imports
+dofile"/usr/okpkg/okpkg.lua"
+local ok = require"okutils"
+local chdir = ok.chdir
+
+-- if you already have a reproducible gcc/cmake, set to false to save time.
+build_cmake = true
+build_gcc   = true
+
+-- Generate locales
+os.execute"localedef -i POSIX -f UTF-8 C.UTF-8 2> /dev/null || true"
+os.execute"localedef -i en_US -f UTF-8 en_US.UTF-8"
+
+-- main loop
+local fp, buf
+fp = io.open("/usr/okpkg/db/system.db"); buf = '\n' .. fp:read("*a"); fp:close()
+for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do
+   if i == "_python" then fp = io.open"/usr/bin/python3"
+      if not fp then emerge(i) else fp:close() end
+   elseif i == "_perl" then fp = io.open"/usr/bin/perl"
+      if not fp then emerge(i) else fp:close() end
+   elseif i:sub(1, 3) == "gcc" then
+      if build_gcc then emerge(i); os.execute"/usr/okpkg/scripts/split-gcc.sh"
+      else os.execute"okpkg install /usr/okpkg/packages/gcc-*.tar.lz" end
+   elseif i == "cmake" then
+      if build_cmake then emerge(i)
+      else os.execute"okpkg install /usr/okpkg/packages/cmake-*.tar.lz" end
+   else emerge(i) end
+end
+
+-- rebuilds
+emerge"bison"; emerge"binutils"; emerge"texinfo"
+emerge"glibc"; "mpfr"
+
+-- misc post-install
+os.execute"udevadm hwdb --usr --update"
+os.execute"setcap cap_net_raw+p /usr/bin/ping"
+os.execute"makewhatis /usr/share/man"
+
+-- fix versions and cleanup
+chdir"/usr/okpkg/packages"
+os.rename("bash-5.2-x86_64.tar.lz", "bash-5.2.026-x86_64.tar.lz")
+os.rename("readline-8.2-x86_64.tar.lz", "readline-8.2.010-x86_64.tar.lz")
+os.rename("sqlite-3460000-x86_64.tar.lz", "sqlite-3.46.0-x86_64.tar.lz")
+os.rename("less-658-beta-x86_64.tar.lz", "less-658-x86_64.tar.lz")
+os.execute"rm -fr _*.tar.lz *no"

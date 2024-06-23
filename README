@@ -1,0 +1,109 @@
+okpkg
+-----
+This is a simple source-based package manager written in Lua.
+There is no dependency management.
+usage:
+`okpkg download [PACKAGE]`  - Downloads the source tarball into `sources`
+`okpkg build [PACKAGE]`     - Builds the sources into a .tar.lz in `packages`
+`okpkg install [ARCHIVE]`   - Installs a .tar.lz archive to the system
+`okpkg emerge [PACKAGE]`    - download+build+install in oneshot
+`okpkg purge [PACKAGE]`     - Uninstalls a package
+`okpkg chroot [DIRECTORY]`  - Sets up and then chroots into a directory
+
+
+Install
+-------
+It is strongly recommended to clone this repository into `/usr/okpkg`
+
+Then run: `make && make install`
+
+You need Lua, a C compiler and a standard Unix environment (with development
+tools, like find, patch, etc.)
+
+Note: Because Lua targets an ANSI libc implementation, some additional
+filesystem functions and syscalls are added as a Lua library, see: `okutils.c`
+
+
+Configuration
+-------------
+The metadata and configuration for each package is in the `db` directory.
+`db/system.db`  - Base system packages
+`db/lib.db`     - Additional libraries
+`db/gnu.db`     - Gnu packages
+`db/extra.db`   - Useful additional packages
+`db/xorg.db`    - Xorg libraries and utilities
+`db/xfce.db`    - Xfce and complementary packages
+`db/cross.db`   - Separate configuration for cross-compilation and bootstrap
+
+
+Patches
+-------
+Packages are kept as close to upstream as possible. However, some patches are
+included in the `patches` directory. When a package is downloaded using
+`okpkg download`, okpkg checks for a diff file with the name of the package,
+and patches it at *download* time.
+
+Below is a non-exhaustive list for why okpkg patches certain packages:
+- The patch is recommended by LFS/BLFS
+- Set the libdir to be /usr/lib64
+- Ensure gcc-ada is reproducible by respecting SOURCE_DATE_EPOCH
+- Python needs to be patched to use libressl instead of openssl
+- Make shared library for lua
+
+Many thanks to Slackware, Arch Linux, KISS Linux, Gentoo Linux, and Linux From Scratch.
+Configuration, build modifications, patches, checksums, etc. are adapted from their build scripts.
+
+
+Bootstrap
+---------
+This repository contains scripts to bootstrap a Linux From Scratch.
+You need the usual dependencies for LFS.
+See: <https://www.linuxfromscratch.org/>
+
+`scripts/download-all`  - Downloads all needed source tarballs
+`scripts/cross-compile` - Builds the cross-compiled environment
+`scripts/emerge`        - Builds packages in `db/system.db`
+
+Some packages are added because okpkg needs them, like lua and curl. This
+system uses dinit instead of sysvinit or systemd and dinit needs dbus and
+dhcpcd (at least in a standard configuration). Additionally, some additional
+libraries (e.g. pcre2) not included in LFS are included, while some packages
+are dropped (gettext, texinfo).
+
+
+Updating
+--------
+You should be able to just upgrade the packages by pointing to a newer version
+in the `db` directory. Build and install it. Optionally remove the old version
+first.
+
+Caveat: glibc. When updating glibc, tar will segfault on itself. You may need
+to use LD_LIBRARY_PATH.
+
+
+Reproducible Builds
+-------------------
+Every package in `scripts/emerge` should be bit-for-bit reproducible in the
+first pass!
+
+The order has been slighly rearranged from LFS to avoid circular build
+dependencies (currently untested for gcc with multiple languages).
+
+okpkg uses the SOURCE_DATE_EPOCH from the timestamp of the source tarball that
+is downloaded.
+
+Automatic archives for git tags posted on GitHub have a static checksum, but
+their timestamps are dynamic (releases do not have this issue). You can
+manually touch the files in `download` if you want a different
+SOURCE_DATE_EPOCH.
+
+A few interesting observations:
+- libcap depends on gperf, but it also needs `which` to pick up gperf.
+- pigz can result in gzipped files generating a different hash. For example:
+  glibc will change checksums in the charmaps.
+- perl depends on the kernel version and build times.
+- The order of tzdata.zi is dependent on the version of awk you're using.
+- The git hash for okpkg repo leaks into iputils.
+
+For circular dependencies, there are temporary packages (prefixed with `_')
+that are built first.

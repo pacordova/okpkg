@@ -1,0 +1,387 @@
+alsa-utils = {
+   url = "https://alsa-project.org/files/pub/utils/alsa-utils-1.2.11.tar.bz2",
+   sha3 = "aa7012bede0f9c7b69c7d74a306bb1c376315d242b8cfeba78ab2536000ef72a",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--sbindir=/usr/bin",
+      "--with-udev-rules-dir=/usr/lib64/udev/rules.d",
+      "--localstatedir=/var",
+      "--disable-alsaconf",
+      "--disable-bat",
+      "--disable-xmlto",
+      "--with-curses=ncursesw"
+   }
+};
+
+cmatrix = {
+   url = "https://github.com/abishekvashok/cmatrix/archive/v2.0/cmatrix-2.0.tar.gz",
+   sha3 = "f37ce888fe14ed8dd5ecd84e7cea4a67909eede471ecf407c491d2b703ca14c3",
+   build = "cmake",
+};
+
+dhcpcd = {
+   url = "https://github.com/NetworkConfiguration/dhcpcd/releases/download/v10.0.8/dhcpcd-10.0.8.tar.xz",
+   sha3 = "8984e9dfecb36a3c1dbcaba6ab5342274755f25c78c46ae90c979ac9e2286b9d",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--sbindir=/usr/bin",
+      "--sysconfdir=/etc",
+      "--localstatedir=/var",
+      "--libexecdir=/usr/lib64/dhcpcd",
+      "--runstatedir=/run",
+      "--rundir=/run",
+      "--disable-privsep",
+      "--dbdir=/var/lib/dhcpcd"
+   }
+};
+
+ffmpeg = {
+   url = "https://ffmpeg.org/releases/ffmpeg-6.1.1.tar.xz",
+   sha3 = "108628d123b7051cf3a50fcc563fa76dfbefd92d34797f87cc69d720878b25dd",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--enable-gpl",
+      "--enable-libass",
+      "--enable-libdrm",
+      "--enable-libmp3lame",
+      "--enable-libopus",
+      "--enable-libvorbis",
+      "--enable-libvpx",
+      "--enable-libx264",
+      "--enable-libx265",
+      "--enable-libxml2",
+      "--enable-openssl",
+      "--enable-shared",
+      "--enable-version3",
+      "--disable-debug",
+      "--disable-libwebp",
+      "--disable-libxvid",
+      "--disable-nonfree",
+      "--disable-static",
+      "--x86asmexe=nasm"
+   }
+};
+
+gcc11 = {
+   url = "https://ftp.gnu.org/gnu/gcc/gcc-11.4.0/gcc-11.4.0.tar.xz",
+   sha3 = "a853c1bacc2baf9f9b9af09bd34beea13328c081f85f518c3e2d7741515f1a1d",
+   build = "../configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--libexecdir=/usr/lib64",
+      "--mandir=/usr/share/man",
+      "--with-linker-hash-style=gnu",
+      "--with-system-zlib",
+      "--enable-languages=ada,c,c++,d",
+      "--enable-threads=posix",
+      "--enable-clocale=gnu",
+      "--enable-gnu-unique-object",
+      "--enable-__cxa_atexit",
+      "--enable-default-pie",
+      "--enable-default-ssp",
+      "--enable-shared",
+      "--enable-plugin",
+      "--enable-bootstrap",
+      "--disable-werror",
+      "--disable-multilib",
+      "--disable-libstdcxx-pch",
+      "--disable-libssp",
+      "LD=ld"
+   },
+   prepare = [[
+      find /opt/gnat -name ld -exec mv -v {} {}.old \;
+      find /opt/gnat -name as -exec mv -v {} {}.old \;
+   ]],
+   post = [[
+      CHOST=$($destdir/usr/bin/gcc -dumpmachine)
+      pkgver=$($destdir/usr/bin/gcc -dumpversion)
+      find $destdir -name libgtkpeer.a  -exec rm -f '{}' +
+      find $destdir -name libgjsmalsa.a -exec rm -f '{}' +
+      find $destdir -name libgij.a      -exec rm -f '{}' +
+      ln -sr /usr/bin/cpp $destdir/usr/lib64
+      mkdir -p $destdir/usr/lib64/bfd-plugins
+      ln -sf ../../lib64/gcc/$CHOST/$pkgver/liblto_plugin.so \
+      $destdir/usr/lib64/bfd-plugins/
+      mkdir -p $destdir/usr/share/gdb/auto-load/usr/lib64
+      mv $destdir/usr/lib64/*gdb.py \
+      $destdir/usr/share/gdb/auto-load/usr/lib64
+      ln -s gcc $destdir/usr/bin/cc
+      ln -s gcc $destdir/usr/bin/c99
+      cd $destdir/usr/lib64/gcc/$CHOST/$pkgver
+      strip -s cc1 cc1plus lto1 lto-wrapper collect2 g++-mapper-server
+   ]]
+};
+
+gdb = {
+   url = "https://ftp.gnu.org/gnu/gdb/gdb-14.1.tar.xz",
+   sha3 = "52fd6f693d26e00ff21c43582e54d2fb9e3d9ce6e36da6617ddb69764063e960",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--without-guile",
+      "--with-system-readline",
+      "--without-python"
+   }
+};
+
+git = {
+   url = "https://kernel.org/pub/software/scm/git/git-2.45.1.tar.xz",
+   sha3 = "a3242dcdf485504e9a4f5b5101754df5745de9fdcc71030644c73bc761bdb8cd",
+   build = "./configure",
+   flags = {
+      "--with-gitconfig=/etc/gitconfig",
+      "--libexecdir=/usr/lib64",
+      "--without-tcltk",
+      "--without-python",
+      "--with-libpcre2"
+   },
+   prepare = [[
+      printf "NO_GETTEXT=YesPlease\n" >> config.mak
+      printf "NO_PERL=YesPlease\n" >> config.mak
+   ]]
+};
+
+htop = {
+   url = "https://github.com/htop-dev/htop/releases/download/3.3.0/htop-3.3.0.tar.xz",
+   sha3 = "41229e25dc35ed7292f83bdb55f9152782ba10fafda5f34b2e1fa45930adee1e",
+   build = "./configure",
+};
+
+iftop = {
+   url = "https://pdw.ex-parrot.com/iftop/download/iftop-1.0pre4.tar.gz",
+   sha3 = "a312fb825ead8dddafd9e1cfff755ef3c4aee2988158515225f39985058391cd",
+   build = "./configure",
+   flags = {
+      "--sbindir=/usr/bin",
+      "--mandir=/usr/share/man",
+   }
+};
+
+lsof = {
+   url = "https://github.com/lsof-org/lsof/releases/download/4.99.3/lsof-4.99.3.tar.gz",
+   sha3 = "fa87e870dadb9144e4b0b85c020c0d48e150ea70cb0ad2f1069014df9c3f72ad",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--enable-security",
+      "--enable-no-sock-security",
+      "--with-libtirpc",
+      "--disable-static",
+   }
+};
+
+libplacebo = {
+   url = "https://code.videolan.org/videolan/libplacebo/-/archive/v6.338.2/libplacebo-v6.338.2.tar.gz",
+   sha3 = "165911cc3cfee1d9baff04a5a29336be39dd29c706cb8bcf97c5dfbc9d8d7bb3",
+   build = "meson",
+   flags = {
+      "-Ddemos=false",
+      "-Dvulkan=enabled",
+      "-Dglslang=enabled",
+   }
+};
+
+mpv = {
+   url = "https://github.com/mpv-player/mpv/archive/v0.38.0/mpv-v0.35.1.tar.gz",
+   sha3 = "84a2173a5a4ffc4f28e2e3918cb4cef7818dbc6b34844b910b615e37d1e04560",
+   build = "meson",
+   flags = {
+      "-Dx11=enabled",
+      "-Dpipewire=disabled",
+   }
+};
+
+nasm = {
+   url = "https://www.nasm.us/pub/nasm/releasebuilds/2.16.03/nasm-2.16.03.tar.xz",
+   sha3 = "3a7634350853231b03bb9fec8f23836a4bc7cfb9f8a48f2317555ac4aec98414",
+   build = "./configure",
+   flags = { "--libdir=/usr/lib64" }
+};
+
+opendoas = {
+   url = "https://github.com/Duncaen/OpenDoas/archive/v6.8.2/OpenDoas-6.8.2.tar.gz",
+   sha3 = "de7bfb4797e216661db76043963090efc9e0e9e68ff420c352dbf71770c2b66c",
+   build = "./configure",
+   flags = {
+      "--with-shadow",
+      "--with-timestamp",
+      "--without-pam"
+   },
+   post = [[
+      mkdir -p $destdir/etc
+      printf "permit persist :wheel\n" > $destdir/etc/doas.conf
+      chmod 600 $destdir/etc/doas.conf
+   ]]
+};
+
+openresolv = {
+   url = "https://github.com/NetworkConfiguration/openresolv/releases/download/v3.13.2/openresolv-3.13.2.tar.xz",
+   sha3 = "d53f70a5aa38adb8c89f94ca393a1e007d05dfad9d5b8791deeab7d03378ad7e",
+   build = "./configure",
+   flags = {
+      "--sbindir=/usr/bin",
+      "--libexecdir=/usr/lib64",
+      "--sysconfdir=/etc",
+   }
+};
+
+r = {
+   url = "https://cran.r-project.org/src/base/R-4/R-4.4.0.tar.gz",
+   sha3 = "77dd8ac94b0d5087444ee111f954889fb3dcba4a9cf367682980276bcfae2fd4",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--sysconfdir=/etc/R",
+      "--datarootdir=/usr/share",
+      "rsharedir=/usr/share/R/",
+      "rincludedir=/usr/include/R/",
+      "rdocdir=/usr/share/doc/R",
+      "--without-x",
+      "--enable-R-shlib",
+      "--disable-memory-profiling",
+      "--disable-java",
+      "--with-lapack",
+      "--with-blas",
+      "F77=gfortran",
+      "LIBnn=lib64",
+   }
+};
+
+rc = {
+   url = "https://github.com/pacordova/rc/archive/20240406-1/rc-20240406-1.tar.gz",
+   sha3 = "03b33efd3418feb5f46b6fd1239650dd60aca28b095052820cc9bbb28a2fb1e5",
+   build = "make",
+};
+
+ripgrep = {
+   url = "https://github.com/BurntSushi/ripgrep/archive/14.1.0/ripgrep-14.1.0.tar.gz",
+   sha3 = "0c685042a86faf2da4098e5b0cb61f73eaad59d08d8e203be00580085be0644e",
+   build = "cargo",
+   flags = { "--features=pcre2" }
+};
+
+rsync = {
+   url = "https://samba.org/ftp/rsync/src/rsync-3.2.7.tar.gz",
+   sha3 = "763bd8517633d1bef498be5d0846346f9c15a545f59bb14d40f6dcfb8f98fa28",
+   build = "./configure",
+   flags = {
+      "--enable-ipv6",
+      "--disable-zstd",
+      "--disable-debug",
+      "--disable-lz4",
+      "--disable-xxhash",
+      "--disable-md2man",
+      "--with-rrsync",
+      "--with-included-popt=no",
+      "--with-included-zlib=no",
+   }
+};
+
+sassc = {
+   url = "https://github.com/sass/sassc/archive/3.6.2/sassc-3.6.2.tar.gz",
+   sha3 = "61e05276d1052de3c8403a6895cbca55f50d9f8f3afd2abed1263331dd33e46f",
+   build = "autoreconf",
+   flags = { "--libdir=/usr/lib64" }
+};
+
+sha3sum = {
+   url = "https://github.com/maandree/sha3sum/archive/1.2.2/sha3sum-1.2.2.tar.gz",
+   sha3 = "e649109fa11f2e92123cec7e3683cdf5f906de9dc7905e220e12cfc4e8608c68",
+   build = "make",
+   flags = { "PREFIX=/usr" },
+   prepare = [[ sed -i 's#FLAGS\s\+=#FLAGS +=#g' config.mk ]]
+};
+
+tmux = {
+   url = "https://github.com/tmux/tmux/releases/download/3.4/tmux-3.4.tar.gz",
+   sha3 = "51c4ac03a4e88cde535159877ea4fb8919d64b14ad8a030913316fc3c337a6ca",
+   build = "./configure",
+};
+
+xorriso = {
+   url = "http://ftp.gnu.org/gnu/xorriso/xorriso-1.5.6.tar.gz",
+   sha3 = "ce81f4c5fc0c4a4144a1c9e68bfc49e632ca73ffc25ce1615f849f081e1510b8",
+   build = "./configure",
+};
+
+-- picom
+libconfig = {
+   url = "https://github.com/hyperrealm/libconfig/releases/download/v1.7.3/libconfig-1.7.3.tar.gz",
+   sha3 = "81e3f782c8f366a7de6ec71d4509e02c70f1690199113a2f0e51067fd7dd29cf",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--sysconfdir=/etc"
+   }
+};
+
+libev = {
+   url = "http://dist.schmorp.de/libev/libev-4.33.tar.gz",
+   sha3 = "ba1e921dd20ef633308f837e958e136b5ec80cd73683fd1bdb1ed48ceb59cf1b",
+   build = "./configure",
+   flags = { "--libdir=/usr/lib64" }
+};
+
+picom = {
+   url = "https://github.com/yshui/picom/archive/v11.2/picom-11.2.tar.gz",
+   sha3 = "ee0a5ced3bf0fe13c92feea4a663ceadbcbe449a62fa663a4d015f5cae302fc2",
+   build = "meson",
+};
+
+-- split packages
+elfutils = {
+   url = "https://sourceware.org/ftp/elfutils/0.191/elfutils-0.191.tar.bz2",
+   sha3 = "bdf73b4f3be633a56344c1d1bcc6a9bb036c9bb565036ec16daef461e8f3a6d6",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--sysconfdir=/etc",
+      "--mandir=/usr/share/man",
+      "--enable-deterministic-archives",
+      "--enable-libdebuginfod",
+      "--enable-symbol-versioning",
+      "--disable-debuginfod",
+      "--program-prefix='eu-'",
+   },
+   post = [[ $make -C libelf uninstall DESTDIR=$destdir ]]
+};
+
+lvm2 = {
+   url = "https://sourceware.org/ftp/lvm2/LVM2.2.03.24.tgz",
+   sha3 = "ecf2a70bbb2e69979b22553ec9c8913a409c71f33713cf7e07d179e2adc26559",
+   build = "./configure",
+   flags = {
+      "--sbindir=/usr/bin",
+      "--libdir=/usr/lib64",
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
+      "--mandir=/usr/share/man",
+      "--enable-cmdlib",
+      "--enable-dmeventd",
+      "--enable-pkgconfig",
+      "--enable-udev_rules",
+      "--enable-udev_sync",
+      "--enable-write_install",
+      "--disable-readline",
+      "--disable-systemd-journal",
+      "--with-default-dm-run-dir=/run",
+      "--with-default-locking-dir=/run/lock/lvm",
+      "--with-default-run-dir=/run/lvm",
+      "--with-default-pid-dir=/run",
+      "--with-libexecdir=/usr/lib64/lvm2",
+      "--with-udev-prefix=/usr",
+      "--with-udevdir=/usr/lib64/udev/rules.d",
+      "--with-usrlibdir=/usr/lib64",
+      "--without-systemd",
+      "--without-systemdsystemunitdir",
+   },
+   post = [[
+      rm -fr $destdir && mkdir -p $destdir
+      $make install_lvm2 DESTDIR=$destdir
+   ]]
+};
+
+

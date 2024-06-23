@@ -1,0 +1,92 @@
+#!/usr/bin/env lua
+
+-- imports
+local unpack = unpack or table.unpack
+local ok = require"okutils"
+local chdir, setenv, mkdir =
+   ok.chdir, ok.setenv, ok.mkdir
+
+-- environment
+setenv("destdir", "/mnt")
+
+local function install(pkgname)
+   os.execute(string.format("tar -C $destdir -xhf %s-*.tar.lz", pkgname))
+end
+
+-- minimalist package set
+minimal = {
+   "iana-etc", "glibc", "glibc", "zlib", "bzip2", "lzlib", "xz", "zstd",
+   "file", "gmp", "mpfr", "attr", "acl", "gcc-libs", "libcap", "libmd",
+   "libbsd", "shadow", "ncurses", "readline", "sed", "pcre2", "grep", "bash",
+   "expat", "inetutils", "less", "gawk", "tzdata", "libxcrypt", "libressl",
+   "kmod", "curl", "coreutils", "findutils", "pigz", "libtirpc", "libelf",
+   "libmnl", "dbus", "libnl3", "libpcap", "iptables", "iproute2", "kbd",
+   "tar", "lua", "plzip", "openvi", "eudev", "procps-ng", "util-linux",
+   "e2fsprogs", "sysklogd", "openresolv", "dhcpcd", "dinit", "iputils",
+   "dosfstools", "parted",
+}
+
+local function clean_minimal()
+   os.execute [[
+      cp /usr/okpkg/okutils.so $destdir/usr/okpkg
+      cp /usr/bin/okpkg $destdir/usr/bin
+      cp /usr/okpkg/packages/a/locale-archive $destdir/usr/lib64/locale
+      rm -fr $destdir/usr/okpkg/{download,.git,.gitignore}
+      rm -fr $destdir/usr/share/{i18n,man,pkgconfig}
+      rm -fr $destdir/usr/lib64/{*.a,*.o,pkgconfig,gconv,xtables,gawk}
+      rm -fr $destdir/usr/lib64/libmvec.so*
+      rm -fr $destdir/usr/include
+      rm -f  $destdir/usr/bin/localedef
+      rm -fr $destdir/usr/src
+   ]]
+end
+
+-- posix package set
+posix = { "dma", "at", "s-nail", "lprng", "pax" }
+
+-- system package set, automagic
+if #arg == 0 then arg = {"system"} end
+system = { "linux-headers" }
+local fp, buf
+fp = io.open("/usr/okpkg/db/system.db")
+buf = '\n' .. fp:read("*a")
+fp:close()
+for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do
+    if i:sub(1, 3) == "gcc" then
+        table.insert(system, "gcc-libs")
+        table.insert(system, "gcc-14.1.0")
+    elseif i == "perl" then
+        table.insert(system, "perl-5.40.0")
+    elseif i:sub(1, 1) ~= "_" then
+        table.insert(system, i)
+    end
+end
+
+-- reformat the partition
+io.write("Please enter a partition to format: ")
+local partition = io.read()
+local status =
+   os.execute"umount -R -f -q $destdir || ! mountpoint -q $destdir" and
+   os.execute(string.format("mkfs.ext4 '%s'", partition)) and
+   os.execute(string.format("mount '%s' $destdir", partition))
+if not status then error("error during reformat!") end
+
+-- do-install
+chdir"/usr/okpkg/packages/a"
+os.execute [[
+   tar -C $destdir -xhf filesystem-*.tar.lz
+   git clone /usr/okpkg $destdir/usr/okpkg
+   git -C $destdir/usr/okpkg repack -adf --depth=1
+   mkdir -p $destdir/usr/okpkg/{packages,download}
+   cp -p linux-headers-*.tar.lz filesystem-*.tar.lz $destdir/usr/okpkg/packages
+   cp -p /usr/okpkg/download/* $destdir/usr/okpkg/download
+   cp -p /etc/ssl/certs/ca-certificates.crt $destdir/etc/ssl/certs
+   rm -fr $destdir/{lost+found,tools}
+]]
+
+-- main loop
+while #arg > 0 do
+   for i=1,#_G[arg[1]] do install(_G[arg[1]][i]) end
+   if arg[1] == "minimal" then clean_minimal() end
+   table.remove(arg, 1)
+end
