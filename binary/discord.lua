@@ -2,6 +2,10 @@
 
 dofile "/usr/okpkg/okpkg.lua"
 
+local ok = require"okutils"
+mkdir, chdir, symlink = 
+   ok.mkdir, ok.chdir, ok.symlink
+
 -- vars
 pkgname = "discord-bin"
 --url = "https://dl.discordapp.net/apps/linux/0.0.39/discord-0.0.39.tar.gz"
@@ -12,7 +16,6 @@ chdir("/usr/okpkg/packages")
 mkdir(pkgname)
 chdir(pkgname)
 os.execute("curl -L '" .. url .. "' | tar -xzf -")
-
 
 -- prepare package
 mkdir("usr")

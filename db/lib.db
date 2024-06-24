@@ -181,16 +181,6 @@ libvpx = {
    }
 };
 
-libfdk-aac = {
-   url = "https://downloads.sourceforge.net/opencore-amr/fdk-aac-2.0.3.tar.gz",
-   sha3 = "f82f593cfcf49eb9417af68c299ab0a971876946a432007913256767dbcdc4c0",
-   build = "./configure",
-   flags = {
-      "--libdir=/usr/lib64",
-      "--disable-static",
-   }
-};
-
 libkeccak = {
    url = "https://codeberg.org/maandree/libkeccak/archive/1.4.tar.gz",
    sha3 = "e9d70587db310b53b22707c568c31d7d4eb9f01576ee8cb2657c90fa9f04d7e1",
@@ -323,14 +313,4 @@ uchardet = {
    flags = {
       "-DBUILD_STATIC=OFF",
    }
-};
-
-uthash = {
-   url = "https://github.com/troydhanson/uthash/archive/v2.3.0/uthash-2.3.0.tar.gz",
-   sha3 = "d416f46e3922a59538311fc9e20d7303430e31d2be22e5d7abf2f5391fc3d3f7",
-   build = _,
-   post = [[
-      mkdir -p $destdir/usr/include
-      cp -p src/*.h $destdir/usr/include
-   ]]
 };

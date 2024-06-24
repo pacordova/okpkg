@@ -1,6 +1,6 @@
 prefix = /usr
 
-LUA_INCLUDE = $(shell dirname `find /usr/include -name 'lua.h'`)
+LUA_INCLUDE = $(shell dirname `find /usr/include -name 'lua.h' | sed 1q`)
 LUA_CPATH = $(shell dirname `lua -e 'print(package.cpath)' | cut -d ';' -f1`)
 
 CC = gcc

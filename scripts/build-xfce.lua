@@ -48,7 +48,7 @@ emerge"uchardet"
 emerge"mpv"
 
 -- other useful packages
-dofile"/usr/okpkg/binary/firefox.lua"
+dofile"/usr/okpkg/binary/firefox-nightly.lua"
 emerge"opendoas"
 emerge"ripgrep"
 emerge"alsa-utils"

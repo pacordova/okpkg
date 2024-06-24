@@ -179,13 +179,12 @@ libplacebo = {
    build = "meson",
    flags = {
       "-Ddemos=false",
-      "-Dvulkan=enabled",
       "-Dglslang=enabled",
    }
 };
 
 mpv = {
-   url = "https://github.com/mpv-player/mpv/archive/v0.38.0/mpv-v0.35.1.tar.gz",
+   url = "https://github.com/mpv-player/mpv/archive/v0.38.0/mpv-v0.38.0.tar.gz",
    sha3 = "84a2173a5a4ffc4f28e2e3918cb4cef7818dbc6b34844b910b615e37d1e04560",
    build = "meson",
    flags = {
@@ -305,30 +304,6 @@ xorriso = {
    url = "http://ftp.gnu.org/gnu/xorriso/xorriso-1.5.6.tar.gz",
    sha3 = "ce81f4c5fc0c4a4144a1c9e68bfc49e632ca73ffc25ce1615f849f081e1510b8",
    build = "./configure",
-};
-
--- picom
-libconfig = {
-   url = "https://github.com/hyperrealm/libconfig/releases/download/v1.7.3/libconfig-1.7.3.tar.gz",
-   sha3 = "81e3f782c8f366a7de6ec71d4509e02c70f1690199113a2f0e51067fd7dd29cf",
-   build = "./configure",
-   flags = {
-      "--libdir=/usr/lib64",
-      "--sysconfdir=/etc"
-   }
-};
-
-libev = {
-   url = "http://dist.schmorp.de/libev/libev-4.33.tar.gz",
-   sha3 = "ba1e921dd20ef633308f837e958e136b5ec80cd73683fd1bdb1ed48ceb59cf1b",
-   build = "./configure",
-   flags = { "--libdir=/usr/lib64" }
-};
-
-picom = {
-   url = "https://github.com/yshui/picom/archive/v11.2/picom-11.2.tar.gz",
-   sha3 = "ee0a5ced3bf0fe13c92feea4a663ceadbcbe449a62fa663a4d015f5cae302fc2",
-   build = "meson",
 };
 
 -- split packages

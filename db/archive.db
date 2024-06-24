@@ -1,3 +1,14 @@
+-- nonfree
+libfdk-aac = {
+   url = "https://downloads.sourceforge.net/opencore-amr/fdk-aac-2.0.3.tar.gz",
+   sha3 = "f82f593cfcf49eb9417af68c299ab0a971876946a432007913256767dbcdc4c0",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--disable-static",
+   }
+};
+
 -- missing checksums
 fontforge = {
    url = "https://github.com/fontforge/fontforge/releases/download/20230101/fontforge-20230101.tar.xz",
