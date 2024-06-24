@@ -89,16 +89,16 @@ while #arg > 0 do
    for i=1,#_G[arg[1]] do install(_G[arg[1]][i]) end
    if arg[1] == "minimal" then 
       os.execute [[
-         ln -sf /usr/bin/oksh /bin/sh
-         ln -sf /usr/bin/mawk /usr/bin/awk
-         rm -f /etc/dinit.d/boot.d/*
+         ln -sf /usr/bin/oksh $destdir/bin/sh
+         ln -sf /usr/bin/mawk $destdir/usr/bin/awk
          cp -p /usr/okpkg/okutils.so $destdir/usr/okpkg
          cp -p /usr/bin/okpkg $destdir/usr/bin
          rm -fr $destdir/usr/okpkg/{download,packages}
          rm -fr $destdir/usr/share/{i18n,man,pkgconfig}
          rm -fr $destdir/usr/lib64/{*.a,*.o,pkgconfig,gconv}
          rm -fr $destdir/usr/include
-         rm -f  $destdir/usr/bin/localedef
+         rm -f $destdir/etc/dinit.d/boot.d/*
+         rm -f $destdir/usr/bin/localedef
          rm -f $destdir/usr/bin/{pcre2-config,pcre2grep,pcre2test}
          rm -f $destdir/usr/share/man/man1/{pcre2-config,pcre2grep,pcre2test}.1
          rm -f $destdir/usr/bin/{openssl,ocspcheck}
