@@ -48,15 +48,6 @@ ok_chroot(lua_State *L)
 	const char *path = luaL_checkstring(L, 1);
 	char *const cmd[] = {"/bin/sh", "-i", NULL};
 
-	/* env */
-	clearenv();
-	setenv("PATH", "/usr/bin", 1);
-	setenv("HOME", "/root", 1);
-	setenv("USER", "root", 1);
-	setenv("LC_ALL", "C", 1);
-	setenv("SHELL", "/bin/sh", 1);
-	setenv("PS1", "(chroot)# ", 1);
-	setenv("TERM", "dumb", 1);
 
 	if (chdir(path)) {
 		fprintf(stderr, "error: chdir(\"%s\")\n", path);
@@ -79,6 +70,17 @@ ok_chroot(lua_State *L)
 		fprintf(stderr, "error: mount\n");
 		lua_pushinteger(L, -1);
 		return 1;
+	}
+	else {
+		/* env */
+		clearenv();
+		setenv("PATH", "/usr/bin", 1);
+		setenv("HOME", "/root", 1);
+		setenv("USER", "root", 1);
+		setenv("LC_ALL", "C", 1);
+		setenv("SHELL", "/bin/sh", 1);
+		setenv("PS1", "(chroot)# ", 1);
+		setenv("TERM", "dumb", 1);
 	}
 
 	if (chroot(path) || chdir("/") || execvp(cmd[0], cmd)) {
