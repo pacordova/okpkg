@@ -9,8 +9,19 @@ local chdir, setenv, mkdir =
 -- environment
 setenv("destdir", "/mnt")
 
-local function install(pkgname)
+local function install(pkgname) local fp
    os.execute(string.format("tar -C $destdir -xhf %s-*.tar.lz", pkgname))
+   if pkgname == "glibc" then fp = io.open("../files/locale-archive")
+      if fp then 
+         os.execute"cp -p ../files/locale-archive $destdir/usr/lib64/locale"
+      end
+   elseif pkgname == "eudev" then fp = io.open("../files/hwdb.bin")
+      if fp then
+         os.execute"cp -p ../files/hwdb.bin $destdir/usr/lib64/udev"
+      end
+   elseif pkgname == "iputils" then
+      os.execute"setcap cap_net_raw+p $destdir/usr/bin/ping"
+   end
 end
 
 -- minimalist package set
@@ -29,29 +40,6 @@ network = {
    "gnupg1", "inetutils", "iproute2", "iputils", "netcat", "openntpd",
    "openssh", "wpa_supplicant",
 }
-
-local function clean_minimal()
-   os.execute [[
-      ln -sf /usr/bin/oksh /bin/sh
-      ln -sf /usr/bin/mawk /usr/bin/awk
-      rm -f /etc/dinit.d/boot.d/syslogd
-      cp /usr/okpkg/okutils.so $destdir/usr/okpkg
-      cp /usr/bin/okpkg $destdir/usr/bin
-      cp /usr/okpkg/packages/a/locale-archive $destdir/usr/lib64/locale
-      rm -fr $destdir/usr/okpkg/{download,.git,.gitignore}
-      rm -fr $destdir/usr/share/{i18n,man,pkgconfig}
-      rm -fr $destdir/usr/lib64/{*.a,*.o,pkgconfig,gconv,xtables,gawk}
-      rm -fr $destdir/usr/lib64/libmvec.so*
-      rm -fr $destdir/usr/include
-      rm -f  $destdir/usr/bin/localedef
-      rm -fr $destdir/usr/src
-      rm -f $destdir/usr/bin/{pcre2-config,pcre2grep,pcre2test}
-      rm -f $destdir/usr/share/man/man1/{pcre2-config,pcre2grep,pcre2test}.1
-      rm -f $destdir/usr/bin/{openssl,ocspcheck}
-      rm -f $destdir/usr/share/man/man1/openssl.1
-      rm -f $destdir/usr/share/man/man8/ocspcheck.8
-   ]]
-end
 
 -- posix package set
 posix = { "dma", "at", "s-nail", "lprng", "pax" }
@@ -90,15 +78,33 @@ os.execute [[
    git clone /usr/okpkg $destdir/usr/okpkg
    git -C $destdir/usr/okpkg repack -adf --depth=1
    mkdir -p $destdir/usr/okpkg/{packages,download}
-   cp -p linux-headers-*.tar.lz filesystem-*.tar.lz $destdir/usr/okpkg/packages
+   cp -p *.tar.lz $destdir/usr/okpkg/packages
    cp -p /usr/okpkg/download/* $destdir/usr/okpkg/download
-   cp -p /etc/ssl/certs/ca-certificates.crt $destdir/etc/ssl/certs
-   rm -fr $destdir/{lost+found,tools}
+   curl -L https://curl.se/ca/cacert.pem > /etc/ssl/certs/ca-certificates.crt
+   rm -fr $destdir/lost+found
 ]]
 
 -- main loop
 while #arg > 0 do
    for i=1,#_G[arg[1]] do install(_G[arg[1]][i]) end
-   if arg[1] == "minimal" then clean_minimal() end
+   if arg[1] == "minimal" then 
+      os.execute [[
+         ln -sf /usr/bin/oksh /bin/sh
+         ln -sf /usr/bin/mawk /usr/bin/awk
+         rm -f /etc/dinit.d/boot.d/*
+         cp -p /usr/okpkg/okutils.so $destdir/usr/okpkg
+         cp -p /usr/bin/okpkg $destdir/usr/bin
+         rm -fr $destdir/usr/okpkg/{download,packages}
+         rm -fr $destdir/usr/share/{i18n,man,pkgconfig}
+         rm -fr $destdir/usr/lib64/{*.a,*.o,pkgconfig,gconv}
+         rm -fr $destdir/usr/include
+         rm -f  $destdir/usr/bin/localedef
+         rm -f $destdir/usr/bin/{pcre2-config,pcre2grep,pcre2test}
+         rm -f $destdir/usr/share/man/man1/{pcre2-config,pcre2grep,pcre2test}.1
+         rm -f $destdir/usr/bin/{openssl,ocspcheck}
+         rm -f $destdir/usr/share/man/man1/openssl.1
+         rm -f $destdir/usr/share/man/man8/ocspcheck.8
+      ]]
+   end
    table.remove(arg, 1)
 end
