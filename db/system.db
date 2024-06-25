@@ -577,7 +577,7 @@ libxml2 = {
       "--with-history",
       "--with-legacy",
       "--without-icu",
-      "--without-python",
+      "PYTHON=/usr/bin/python3",
    }
 };
 
