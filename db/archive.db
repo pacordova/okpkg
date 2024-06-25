@@ -68,18 +68,6 @@ poppler-data = {
    flags = { "prefix=/usr" }
 };
 
-evince = {
-   url = "https://download.gnome.org/sources/evince/45/evince-45.0.tar.xz",
-   build = "meson",
-   flags = {
-      "-Dsystemduserunitdir=no",
-      "-Dnautilus=false",
-      "-Duser_doc=false",
-      "-Dgtk_doc=false",
-      "-Dpdf=enabled"
-   }
-};
-
 feh = {
    url = "https://feh.finalrewind.org/feh-3.8.tar.bz2",
    build = "make",
@@ -1598,16 +1586,6 @@ libtimezonemap = {
 liburcu = {
    url = "https://lttng.org/files/urcu/userspace-rcu-0.13.1.tar.bz2",
    build = "./configure",
-};
-
-libhandy = {
-   url = "https://download.gnome.org/sources/libhandy/1.8/libhandy-1.8.3.tar.xz",
-   build = "meson",
-   flags = {
-      "-Dexamples=false",
-      "-Dtests=false",
-      "-Dvapi=false"
-   }
 };
 
 libndp = {
