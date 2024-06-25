@@ -528,35 +528,3 @@ picom = {
    sha3 = "ee0a5ced3bf0fe13c92feea4a663ceadbcbe449a62fa663a4d015f5cae302fc2",
    build = "meson",
 };
-
-libhandy = {
-   url = "https://download.gnome.org/sources/libhandy/1.8/libhandy-1.8.3.tar.xz",
-   sha3 = "ba3b355ab5cf271259ddc2697b52cf29d1a1f357d9f6909c076e75af3eb15157",
-   build = "meson",
-};
-
-evince = {
-   url = "https://download.gnome.org/sources/evince/41/evince-41.5.tar.xz",
-   sha3 = "e814a5996935f40da119f07f4deb3dcc7c4d051e9209ad5ca049c0b52bdbde9b",
-   build = "meson",
-   flags = {
-      "-Dgspell=disabled",
-      "-Dgtk_doc=false",
-      "-Dintrospection=true",
-      "-Dkeyring=auto",
-      "-Dnautilus=false",
-      "-Dpdf=enabled",
-      "-Dps=enabled",
-      "-Dsystemduserunitdir=no",
-      "-Duser_doc=false",
-   }
-};
-
-file-roller = {
-   url = "https://download.gnome.org/sources/file-roller/3.36/file-roller-3.36.2.tar.xz",
-   sha3 = "197463f88508b16701a139e281352769e65c0dc382106eec971113611f63d447",
-   build = "meson",
-   flags = {
-      "-Dpackagekit=false",
-   }
-};
