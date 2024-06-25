@@ -229,7 +229,9 @@ libevent = {
    build = "./configure",
    flags = {
       "--libdir=/usr/lib64",
-      "--disable-static"
+      "--sysconfdir=/etc",
+      "--mandir=/usr/share/man",
+      "--disable-static",
    },
    prepare = [[ sed -i 's/python/&3/' event_rpcgen.py ]]
 };
@@ -239,8 +241,8 @@ libjpeg-turbo = {
    sha3 = "73ee0afc5e1a45dd9992f68f6231f7a056ae31b2f665eea09435563a8c3b105c",
    build = "cmake",
    flags = {
-      "-DENABLE_STATIC=FALSE",
-      "-DWITH_JPEG8=1",
+      "-DENABLE_STATIC=OFF",
+      "-DWITH_JPEG8=ON",
       "-DWITH_JAVA=OFF",
    }
 };
@@ -272,7 +274,6 @@ opus = {
    build = "meson",
    flags = {
       "-Dcustom-modes=true",
-      "-Dfloat-approx=true",
    }
 };
 
