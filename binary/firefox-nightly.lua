@@ -48,3 +48,4 @@ StartupNotify=True
 ]]
 fp:close()
 else fp:close() end
+os.execute"chown -R 1000:1000 /usr/lib64/firefox"
