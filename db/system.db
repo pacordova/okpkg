@@ -1200,8 +1200,8 @@ lua = {
 };
 
 vim = {
-   url = "https://github.com/vim/vim/archive/v9.1.0496/vim-9.1.0496.tar.gz",
-   sha3 = "f40dae577d07fad60a8293ae28962eda7d15dfef27aeec810084f5ed51f04a48",
+   url = "https://github.com/vim/vim/archive/v9.1.0514/vim-9.1.0514.tar.gz",
+   sha3 = "403d6201e8e3a8f69550135c4cf3cc0ce8467fad5a7c4e68eae2fdf0e25af57f",
    build = "./configure",
    flags = {
       "--localstatedir=/var/lib/vim",
