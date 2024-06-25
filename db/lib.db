@@ -4,8 +4,6 @@ _freetype2 = {
    build = "meson",
    flags = {
       "-Dharfbuzz=disabled",
-      "-Dbzip2=disabled",
-      "-Dzlib=disabled",
       "-Dpng=disabled",
    }
 };
@@ -24,10 +22,6 @@ dav1d = {
    url = "https://downloads.videolan.org/pub/videolan/dav1d/1.4.2/dav1d-1.4.2.tar.xz",
    sha3 = "f6e5221aac889aeb1cabdede62b41f29a426a2caad679b9f6eaa5d74fb50b665",
    build = "meson",
-   flags = {
-      "-Dtestdata_tests=false",
-      "-Denable_docs=false",
-   }
 };
 
 flac = {
@@ -52,9 +46,10 @@ dbus-glib = {
    build = "./configure",
    flags = {
       "--libdir=/usr/lib64",
+      "--libexecdir=/usr/lib64",
+      "--localstatedir=/var",
       "--sysconfdir=/etc",
       "--disable-static",
-      "--disable-gtk-doc"
    }
 };
 
@@ -62,21 +57,18 @@ gobject-introspection = {
    url = "https://download.gnome.org/sources/gobject-introspection/1.78/gobject-introspection-1.78.1.tar.xz",
    sha3 = "0c3dacb5a258ba94bd8b41e0e94522c800b3c5bdedf67b1501e743581760ce6e",
    build = "meson",
-   flags = { "-Dgtk_doc=false" }
 };
 
 json-glib = {
    url = "https://download.gnome.org/sources/json-glib/1.8/json-glib-1.8.0.tar.xz",
    sha3 = "e62adc949ff5e5f4b58b129f3004b8eca7b052288c47ff146d53de3826d81999",
    build = "meson",
-   flags = { "-Dgtk_doc=disabled" }
 };
 
 libgudev = {
    url = "https://download.gnome.org/sources/libgudev/238/libgudev-238.tar.xz",
    sha3 = "6500e55c1ceeaf85747d3eeaebd57e1cfc7fae4b5b4ceb7161cd8ab059d1863d",
    build = "meson",
-   flags = { "-Dgtk_doc=false" }
 };
 
 gsettings-desktop-schemas = {
@@ -92,7 +84,8 @@ libpng = {
    build = "./configure",
    flags = {
       "--libdir=/usr/lib64",
-      "--disable-static"
+      "--sysconfdir=/etc",
+      "--disable-static",
    }
 };
 
@@ -101,11 +94,14 @@ harfbuzz = {
    sha3 = "645641f1d39f8bb50bf5ac0ec8e72c6e288db6840d2f12669c3b6c830b396280",
    build = "meson",
    flags = {
-      "-Dglib=enabled",
-      "-Dcairo=disabled",
-      "-Dicu=disabled",
-      "-Dgraphite2=disabled",
       "-Dbenchmark=disabled",
+      "-Dcairo=disabled",
+      "-Dfreetype=enabled",
+      "-Dglib=enabled",
+      "-Dgobject=enabled",
+      "-Dgraphite2=disabled",
+      "-Dicu=disabled",
+      "-Dintrospection=enabled",
       "-Dtests=disabled",
    }
 };
@@ -116,8 +112,6 @@ freetype2 = {
    build = "meson",
    flags = {
       "-Dharfbuzz=enabled",
-      "-Dbzip2=disabled",
-      "-Dzlib=disabled",
       "-Dpng=enabled",
    }
 };
@@ -128,8 +122,8 @@ fontconfig = {
    build = "./configure",
    flags = {
       "--libdir=/usr/lib64",
-      "--sysconfdir=/etc",
       "--localstatedir=/var",
+      "--sysconfdir=/etc",
       "--disable-docs",
       "--disable-static",
       "--with-xmldir=/etc/fonts",
@@ -171,23 +165,23 @@ libvpx = {
    ]],
    flags = {
       "--libdir=/usr/lib64",
+      "--enable-pic",
+      "--enable-postproc",
+      "--enable-runtime-cpu-detect",
+      "--enable-shared",
       "--enable-vp8",
       "--enable-vp9",
-      "--enable-shared",
-      "--enable-postproc",
-      "--enable-pic",
-      "--enable-runtime-cpu-detect",
       "--enable-vp9-highbitdepth",
-      "--disable-static",
-      "--disable-tools",
-      "--disable-examples",
       "--disable-debug",
       "--disable-debug-libs",
       "--disable-docs",
-      "--disable-unit-tests",
+      "--disable-examples",
+      "--disable-install-bins",
       "--disable-install-docs",
       "--disable-install-srcs",
-      "--disable-install-bins",
+      "--disable-static",
+      "--disable-tools",
+      "--disable-unit-tests",
       "--as=nasm",
    }
 };
@@ -243,7 +237,6 @@ libevent = {
    flags = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
-      "--mandir=/usr/share/man",
       "--disable-static",
    },
    prepare = [[ sed -i 's/python/&3/' event_rpcgen.py ]]
@@ -296,6 +289,7 @@ libsass = {
    build = "autoreconf",
    flags = {
       "--libdir=/usr/lib64",
+      "--localstatedir=/var",
       "--disable-static"
    }
 };
@@ -320,7 +314,6 @@ mtdev = {
       "--libdir=/usr/lib64",
       "--localstatedir=/var",
       "--sysconfdir=/etc",
-      "--mandir=/usr/share/man",
       "--disable-static"
    }
 };
