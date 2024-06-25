@@ -551,3 +551,12 @@ evince = {
       "-Duser_doc=false",
    }
 };
+
+file-roller = {
+   url = "https://download.gnome.org/sources/file-roller/3.36/file-roller-3.36.2.tar.xz",
+   sha3 = "197463f88508b16701a139e281352769e65c0dc382106eec971113611f63d447",
+   build = "meson",
+   flags = {
+      "-Dpackagekit=false",
+   }
+};
