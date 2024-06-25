@@ -47,7 +47,6 @@ emerge"uchardet"
 emerge"mpv"
 
 -- other useful packages
-dofile"/usr/okpkg/binary/firefox-nightly.lua"
 emerge"opendoas"
 emerge"ripgrep"
 emerge"alsa-utils"
@@ -84,6 +83,9 @@ symlink("/usr/share/zoneinfo/US/Eastern", "/etc/localtime")
 
 -- adduser
 os.execute"useradd -m pac && usermod -a -G wheel pac"
+
+-- firefox
+dofile"/usr/okpkg/binary/firefox-nightly.lua"
 
 -- cleanup
 os.execute"rm -fr _*.tar.lz *no"
