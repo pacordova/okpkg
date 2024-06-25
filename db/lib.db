@@ -130,6 +130,9 @@ fontconfig = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
+      "--disable-docs",
+      "--disable-static",
+      "--with-xmldir=/etc/fonts",
    }
 };
 
@@ -150,7 +153,11 @@ lame = {
    build = "./configure",
    flags = {
       "--libdir=/usr/lib64",
+      "--sysconfdir=/etc",
+      "--enable-nasm",
+      "--enable-mp3rtp",
       "--disable-static",
+      "--disable-gtktest",
    }
 };
 
@@ -169,9 +176,13 @@ libvpx = {
       "--enable-shared",
       "--enable-postproc",
       "--enable-pic",
+      "--enable-runtime-cpu-detect",
+      "--enable-vp9-highbitdepth",
       "--disable-static",
       "--disable-tools",
       "--disable-examples",
+      "--disable-debug",
+      "--disable-debug-libs",
       "--disable-docs",
       "--disable-unit-tests",
       "--disable-install-docs",
@@ -203,7 +214,9 @@ x264 = {
    flags = {
       "--libdir=/usr/lib64",
       "--enable-shared",
-      "--disable-cli"
+      "--disable-cli",
+      "--disable-swscale",
+      "--disable-avs",
    }
 };
 
@@ -293,6 +306,8 @@ libexif = {
    build = "./configure",
    flags = {
       "--libdir=/usr/lib64",
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
       "--disable-static"
    }
 };
@@ -303,6 +318,9 @@ mtdev = {
    build = "./configure",
    flags = {
       "--libdir=/usr/lib64",
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
+      "--mandir=/usr/share/man",
       "--disable-static"
    }
 };
