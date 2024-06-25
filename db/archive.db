@@ -48,26 +48,6 @@ pwgen = {
    build = "./configure",
 };
 
-poppler = {
-   url = "https://poppler.freedesktop.org/poppler-24.02.0.tar.xz",
-   build = "cmake",
-   flags = {
-      "-DENABLE_QT5=OFF",
-      "-DENABLE_QT6=OFF",
-      "-DENABLE_BOOST=OFF",
-      "-DENABLE_NSS3=OFF",
-      "-DENABLE_GPGME=OFF",
-      "-DENABLE_LIBTIFF=OFF",
-      "-DENABLE_GTK_DOC=OFF"
-   }
-};
-
-poppler-data = {
-   url = "https://poppler.freedesktop.org/poppler-data-0.4.12.tar.gz",
-   build = "make",
-   flags = { "prefix=/usr" }
-};
-
 feh = {
    url = "https://feh.finalrewind.org/feh-3.8.tar.bz2",
    build = "make",
@@ -713,13 +693,6 @@ nettle = {
    post = [[ cd $destdir/usr/lib64 && chmod 755 libhogweed.so libnettle.so ]]
 };
 
-p11-kit = {
-   url = "https://github.com/p11-glue/p11-kit/releases/download/0.25.3/p11-kit-0.25.3.tar.xz",
-   sha3 = "6f0e441fe9f0f23b148bd56890b8fa30e13c013b73530bcd3d92a70450eeac4f",
-   build = "meson",
-   flags = { "-Dtrust_paths=/etc/ssl/certs/ca-certificates.crt" }
-};
-
 gnutls = {
    url = "https://gnupg.org/ftp/gcrypt/gnutls/v3.8/gnutls-3.8.3.tar.xz",
    sha3 = "546dacb1f1810759adb799a3b8572e057b8742cd59c0c5b183880c36d9e36eac",
@@ -1073,13 +1046,6 @@ gettext-tiny-cross = {
    }
 };
 
-gcr = {
-   url = "https://download.gnome.org/sources/gcr/3.41/gcr-3.41.2.tar.xz",
-   build = "meson",
-   flags = { "-Dgtk_doc=false" },
-   prepare = [[ sed -i 's:"/desktop:"/org:' schema/*.xml ]]
-};
-
 geoclue = {
    url = "https://gitlab.freedesktop.org/geoclue/geoclue/-/archive/2.6.0/geoclue-2.6.0.tar.bz2",
    build = "meson",
@@ -1088,34 +1054,6 @@ geoclue = {
 gs = {
    url = "https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs9550/ghostscript-9.55.0.tar.xz",
    build = "./configure",
-};
-
-gnome-keyring = {
-   url = "https://download.gnome.org/sources/gnome-keyring/42/gnome-keyring-42.1.tar.xz",
-   build = "./configure",
-   flags = {
-      "--sysconfdir=/etc",
-      "--libdir=/usr/lib64"
-   },
-   prepare = [[ sed -i 's:"/desktop:"/org:' schema/*.xml ]]
-};
-
-gvfs = {
-   url = "https://download.gnome.org/sources/gvfs/1.52/gvfs-1.52.2.tar.xz",
-   build = "meson",
-   flags = {
-      "-Dfuse=false",
-      "-Dgphoto2=false",
-      "-Dafc=false",
-      "-Dbluray=false",
-      "-Dnfs=false",
-      "-Dmtp=false",
-      "-Dtmpfilesdir=no",
-      "-Ddnssd=false",
-      "-Dgoa=false",
-      "-Dgoogle=false",
-      '-Dsystemduserunitdir=no"
-   }
 };
 
 gegl = {
@@ -1298,15 +1236,6 @@ iwd = {
    post = [[ rm -fr "$destdir"no ]]
 };
 
-itstool = {
-   url = "https://files.itstool.org/itstool/itstool-2.0.7.tar.bz2",
-   build = "./configure",
-   flags = {
-      "--libdir=/usr/lib64",
-      "--sysconfdir=/etc"
-   }
-};
-
 imlib2 = {
    url = "https://downloads.sourceforge.net/enlightenment/imlib2-1.12.2.tar.xz",
    build = "./configure",
@@ -1425,33 +1354,6 @@ libcdio-paranoia = {
    flags = {
       "--libdir=/usr/lib64",
       "--disable-static"
-   }
-};
-
-libgpg-error = {
-   url = "https://gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-1.48.tar.bz2",
-   build = "./configure",
-   flags = {
-      "--libdir=/usr/lib64"
-   }
-};
-
-libgcrypt = {
-   url = "https://gnupg.org/ftp/gcrypt/libgcrypt/libgcrypt-1.10.3.tar.bz2",
-   build = "./configure",
-   flags = {
-      "--libdir=/usr/lib64",
-      "--disable-static",
-      "--disable-padlock-support"
-   }
-};
-
-libsecret = {
-   url = "https://download.gnome.org/sources/libsecret/0.21/libsecret-0.21.1.tar.xz",
-   build = "meson",
-   flags = {
-      "-Dgtk_doc=false",
-      "-Dmanpage=true"
    }
 };
 
@@ -1699,16 +1601,6 @@ libsoup3 = {
    prepare = [[
    sed 's/apiversion/soup_version/' -i docs/reference/meson.build
    ]]
-};
-
-libtasn1 = {
-   url = "https://ftp.gnu.org/gnu/libtasn1/libtasn1-4.19.0.tar.gz",
-   sha3 = "1fea801ff44ee976956c7d36295afcbf0d8b3c33f3f0a460fbf28b7b0df9a432",
-   build = "./configure",
-   flags = {
-      "--libdir=/usr/lib64",
-      "--disable-static"
-   }
 };
 
 libunistring = {
