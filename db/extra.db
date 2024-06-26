@@ -286,7 +286,7 @@ sassc = {
    sha3 = "61e05276d1052de3c8403a6895cbca55f50d9f8f3afd2abed1263331dd33e46f",
    build = "autoreconf",
    flags = { 
-      "--libdir=/usr/lib64" 
+      "--libdir=/usr/lib64",
       "--localstatedir=/var",
       "--sysconfdir=/etc",
       "--disable-static",
