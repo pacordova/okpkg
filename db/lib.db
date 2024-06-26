@@ -194,50 +194,6 @@ libvpx = {
    }
 };
 
-libkeccak = {
-   url = "https://codeberg.org/maandree/libkeccak/archive/1.4.tar.gz",
-   sha3 = "e9d70587db310b53b22707c568c31d7d4eb9f01576ee8cb2657c90fa9f04d7e1",
-   build = "make",
-   flags = {
-      "CONFIGFILE=optimised.mk",
-      "PREFIX=/usr"
-   },
-   prepare = [[ sed -i 's#FLAGS\s\+=#FLAGS +=#g' optimised.mk ]],
-   post = [[
-      mv $destdir/usr/lib $destdir/usr/lib64
-      rm $destdir/usr/lib64/libkeccak.a
-   ]]
-};
-
-x264 = {
-   url = "https://code.videolan.org/videolan/x264/-/archive/c196240409e4d7c01b47448d93b1f9683aaa7cf7/x264-c196240409e4d7c01b47448d93b1f9683aaa7cf7.tar.bz2",
-   sha3 = "c4af21e637a73287462f7cfa1834728d0b146662b5cbca4136e31db483fee219",
-   build = "./configure",
-   flags = {
-      "--libdir=/usr/lib64",
-      "--enable-shared",
-      "--disable-cli",
-      "--disable-swscale",
-      "--disable-avs",
-   }
-};
-
-x265 = {
-   url = "https://bitbucket.org/multicoreware/x265_git/downloads/x265_3.5.tar.gz",
-   sha3 = "aeacb2d1437dd6057679f297443a7da5365e97d951219b5b45864562084c1fb3",
-   build = "cmake",
-   flags = {
-      "-DENABLE_SHARED=ON",
-      "-DGIT_ARCHETYPE=1",
-      "-Wno-dev",
-      "../source",
-   },
-   post = [[
-      mv $destdir/usr/lib $destdir/usr/lib64
-      rm -f $destdir/usr/lib64/libx265.a
-   ]]
-};
-
 libevent = {
    url = "https://github.com/libevent/libevent/releases/download/release-2.1.12-stable/libevent-2.1.12-stable.tar.gz",
    sha3 = "aeadcbd599fc49e5fe9554a668093e4bdc53cf9fd177d099bce41e46ec0b783d",
@@ -261,6 +217,21 @@ libjpeg-turbo = {
    }
 };
 
+libkeccak = {
+   url = "https://codeberg.org/maandree/libkeccak/archive/1.4.tar.gz",
+   sha3 = "e9d70587db310b53b22707c568c31d7d4eb9f01576ee8cb2657c90fa9f04d7e1",
+   build = "make",
+   flags = {
+      "CONFIGFILE=optimised.mk",
+      "PREFIX=/usr"
+   },
+   prepare = [[ sed -i 's#FLAGS\s\+=#FLAGS +=#g' optimised.mk ]],
+   post = [[
+      mv $destdir/usr/lib $destdir/usr/lib64
+      rm $destdir/usr/lib64/libkeccak.a
+   ]]
+};
+
 libogg = {
    url = "https://downloads.xiph.org/releases/ogg/libogg-1.3.5.tar.xz",
    sha3 = "caabb9bead5d1b33279bd7367f40a807869273cf2e176bf0eb5ec4e009f37af6",
@@ -269,6 +240,12 @@ libogg = {
       "--libdir=/usr/lib64",
       "--disable-static"
    }
+};
+
+libtiff = {
+   url = "https://download.osgeo.org/libtiff/tiff-4.6.0.tar.gz",
+   sha3 = "bab4329a43c48338b3e00af8d44358b7e01109b065f9790d06901be822f6f1ac",
+   build = "cmake",
 };
 
 libvorbis = {
@@ -333,4 +310,33 @@ uchardet = {
    flags = {
       "-DBUILD_STATIC=OFF",
    }
+};
+
+x264 = {
+   url = "https://code.videolan.org/videolan/x264/-/archive/c196240409e4d7c01b47448d93b1f9683aaa7cf7/x264-c196240409e4d7c01b47448d93b1f9683aaa7cf7.tar.bz2",
+   sha3 = "c4af21e637a73287462f7cfa1834728d0b146662b5cbca4136e31db483fee219",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--enable-shared",
+      "--disable-cli",
+      "--disable-swscale",
+      "--disable-avs",
+   }
+};
+
+x265 = {
+   url = "https://bitbucket.org/multicoreware/x265_git/downloads/x265_3.5.tar.gz",
+   sha3 = "aeacb2d1437dd6057679f297443a7da5365e97d951219b5b45864562084c1fb3",
+   build = "cmake",
+   flags = {
+      "-DENABLE_SHARED=ON",
+      "-DGIT_ARCHETYPE=1",
+      "-Wno-dev",
+      "../source",
+   },
+   post = [[
+      mv $destdir/usr/lib $destdir/usr/lib64
+      rm -f $destdir/usr/lib64/libx265.a
+   ]]
 };
