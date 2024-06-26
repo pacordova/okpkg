@@ -223,7 +223,7 @@ libnotify = {
    flags = {
       "-Dgtk_doc=false",
       "-Dman=false",
-      "-Dtests=false"
+      "-Dtests=false",
    }
 };
 
@@ -233,7 +233,7 @@ thunar = {
    build = "./configure",
    flags = {
       "--libdir=/usr/lib64",
-      "--sysconfdir=/etc"
+      "--sysconfdir=/etc",
       "--enable-gio-unix",
       "--enable-gudev",
       "--enable-notifications",
