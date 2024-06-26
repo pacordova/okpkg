@@ -89,6 +89,14 @@ libpng = {
    }
 };
 
+graphite = {
+   url = "https://github.com/silnrsi/graphite/releases/download/1.3.14/graphite2-1.3.14.tgz",
+   sha3 = "bccf21b15d3278bfcb4601f1e0e2cecfb48385575c309788f524465a5139f9ff",
+   build = "cmake",
+   flags = { "-DLIB_SUFFIX=64" },
+   prepare = [[ sed -i '/cmptest/d' tests/CMakeLists.txt ]]
+};
+
 harfbuzz = {
    url = "https://github.com/harfbuzz/harfbuzz/releases/download/8.4.0/harfbuzz-8.4.0.tar.xz",
    sha3 = "645641f1d39f8bb50bf5ac0ec8e72c6e288db6840d2f12669c3b6c830b396280",
@@ -99,7 +107,7 @@ harfbuzz = {
       "-Dfreetype=enabled",
       "-Dglib=enabled",
       "-Dgobject=enabled",
-      "-Dgraphite2=disabled",
+      "-Dgraphite2=enabled",
       "-Dicu=disabled",
       "-Dintrospection=enabled",
       "-Dtests=disabled",

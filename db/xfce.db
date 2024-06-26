@@ -609,29 +609,49 @@ gnome-keyring = {
    prepare = [[ sed -i 's:"/desktop:"/org:' schema/*.xml ]]
 };
 
+libcdio = {
+   url = "https://ftp.gnu.org/gnu/libcdio/libcdio-2.1.0.tar.bz2",
+   sha3 = "76020cbcb9cd3d52434051c4996f73c886daff146bef9344988cdc98f8b10c4e",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--disable-static"
+   }
+};
+
+libcdio-paranoia = {
+   url = "https://ftp.gnu.org/gnu/libcdio/libcdio-paranoia-10.2+2.0.1.tar.bz2",
+   sha3 = "05502373915c3cad99be35a5f98001b139fdc54c3736448fba33158412da409c",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--disable-static"
+   }
+};
+
 gvfs = {
    url = "https://download.gnome.org/sources/gvfs/1.52/gvfs-1.52.3.tar.xz",
    sha3 = "c726f9ddc90d02a9fd0569009f3fe35280f8546b4bae497e01f8228dc9a88ddd",
    build = "meson",
    flags = {
-      "-Dcdda=false",
-      "-Darchive=false",
       "-Dadmin=false",
-      "-Dfuse=false",
-      "-Dgphoto2=false",
-      "-Dhttp=false",
       "-Dafc=false",
+      "-Darchive=false",
       "-Dbluray=false",
-      "-Dnfs=false",
-      "-Dmtp=false",
-      "-Dtmpfilesdir=no",
       "-Ddnssd=false",
+      "-Dfuse=false",
       "-Dgoa=false",
       "-Dgoogle=false",
+      "-Dgphoto2=false",
+      "-Dhttp=false",
       "-Dlogind=false",
-      "-Dudisks2=false",
+      "-Dmtp=false",
+      "-Dnfs=false",
+      "-Donedrive=false",
       "-Dsmb=false",
       "-Dsystemduserunitdir=no",
+      "-Dtmpfilesdir=no",
+      "-Dudisks2=false",
    }
 };
 
@@ -651,6 +671,15 @@ libhandy = {
    build = "meson",
 };
 
+lcms2 = {
+   url = "https://github.com/mm2/Little-CMS/releases/download/lcms2.16/lcms2-2.16.tar.gz",
+   sha3 = "cc75ac1ddc6d1d0abfd2b81e312396621b87096ee8d7e95f8eadb4bf672da252",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+   }
+};
+
 poppler = {
    url = "https://poppler.freedesktop.org/poppler-24.06.1.tar.xz",
    sha3 = "8fc5dd39f1df53fce78bc69fccfa3d631117634470f4b83ce61871e3d2c3c2fb",
@@ -663,7 +692,6 @@ poppler = {
       "-DENABLE_GPGME=OFF",
       "-DENABLE_LIBTIFF=OFF",
       "-DENABLE_GTK_DOC=OFF",
-      "-DENABLE_LCMS=OFF",
       "-DENABLE_LIBOPENJPEG=none",
    }
 };
