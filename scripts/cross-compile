@@ -136,7 +136,7 @@ os.execute [[
    git clone /usr/okpkg $destdir/usr/okpkg
    git -C $destdir/usr/okpkg repack -adf --depth=1
    mkdir -p $destdir/usr/okpkg/{packages,download}
-   cp -p *.tar.lz $destdir/usr/okpkg/packages
+   cp -p linux-headers*.tar.lz filesystem*.tar.lz $destdir/usr/okpkg/packages
    cp -p /usr/okpkg/download/* $destdir/usr/okpkg/download
    rm -fr $destdir/{lost+found,tools}
    curl -L https://curl.se/ca/cacert.pem > \
