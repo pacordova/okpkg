@@ -245,7 +245,12 @@ libogg = {
 libtiff = {
    url = "https://download.osgeo.org/libtiff/tiff-4.6.0.tar.gz",
    sha3 = "bab4329a43c48338b3e00af8d44358b7e01109b065f9790d06901be822f6f1ac",
-   build = "cmake",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--mandir=/usr/share/man",
+      "--disable-static",
+   }
 };
 
 libvorbis = {
