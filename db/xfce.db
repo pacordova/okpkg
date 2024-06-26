@@ -33,6 +33,7 @@ pango = {
    build = "meson",
    flags = {
       "-Dgtk_doc=false",
+      "-Ddocumentation=false",
       "-Dxft=enabled",
       "-Dintrospection=enabled",
    }
@@ -42,7 +43,9 @@ iso-codes = {
    url = "https://salsa.debian.org/iso-codes-team/iso-codes/-/archive/v4.16.0/iso-codes-v4.16.0.tar.gz",
    sha3 = "14987ae3a6b275eee609a6cab2d23ea0f6a83015c33cfd613fac9f4405c491c4",
    build = "./configure",
-   flags = { "--libdir=/usr/lib64" }
+   flags = { 
+      "--libdir=/usr/lib64",
+   }
 };
 
 shared-mime-info = {
@@ -52,22 +55,25 @@ shared-mime-info = {
    flags = {
       "-Dupdate-mimedb=false",
       "-Dbuild-translations=false",
-      "-Dbuild-tests=false"
+      "-Dbuild-tests=false",
    }
 };
 
-gdk-pixbuf = {
+gdk-pixbuf2 = {
    url = "https://download.gnome.org/sources/gdk-pixbuf/2.42/gdk-pixbuf-2.42.12.tar.xz",
    sha3 = "12483dead22787c04dc64abfccf9866b9c7aa3d50afe7c13b80fd6971180f775",
    build = "meson",
    flags = {
-      "-Djpeg=enabled",
-      "-Dpng=enabled",
-      "-Ddocs=false",
-      "-Dman=false",
-      "-Dgio_sniffing=false",
-      "-Dinstalled_tests=false",
       "-Dbuiltin_loaders=all",
+      "-Ddocs=false",
+      "-Dgio_sniffing=false",
+      "-Dgtk_doc=false",
+      "-Dinstalled_tests=false",
+      "-Dintrospection=enabled",
+      "-Djpeg=enabled",
+      "-Dman=false",
+      "-Dpng=enabled",
+      "-Dothers=enabled",
    }
 };
 
@@ -79,7 +85,7 @@ vala = {
       "--libdir=/usr/lib64",
       "--enable-python3=yes",
       "--disable-python",
-      "--disable-valadoc"
+      "--disable-valadoc",
    },
    prepare = [[ sed -i '/gvc.h/a#define TRUE 1' libvaladoc/gvc-compat.c ]]
 };
@@ -123,7 +129,9 @@ libxfce4util = {
       "--bindir=/usr/bin",
       "--sbindir=/usr/bin",
       "--libdir=/usr/lib64",
+      "--localstatedir=/var",
       "--sysconfdir=/etc",
+      "--disable-debug",
    }
 };
 
@@ -133,7 +141,9 @@ xfconf = {
    build = "./configure",
    flags = {
       "--libdir=/usr/lib64",
-      "--sysconfdir=/etc"
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
+      "--disable-debug",
    }
 };
 
@@ -153,7 +163,9 @@ libxfce4ui = {
    build = "./configure",
    flags = {
       "--libdir=/usr/lib64",
-      "--sysconfdir=/etc"
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
+      "--disable-debug",
    }
 };
 
@@ -164,7 +176,8 @@ exo = {
    flags = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
-      "--disable-gtk-doc"
+      "--disable-gtk-doc",
+      "--disable-debug",
    }
 };
 
@@ -174,7 +187,9 @@ garcon = {
    build = "./configure",
    flags = {
       "--libdir=/usr/lib64",
-      "--sysconfdir=/etc"
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
+      "--disable-debug",
    }
 };
 
@@ -182,7 +197,9 @@ libwnck3 = {
    url = "https://download.gnome.org/sources/libwnck/43/libwnck-43.0.tar.xz",
    sha3 = "e04ab36ef11d074e24324b2138f8902f15cfb7adac85641e5c2cc017febb67d8",
    build = "meson",
-   flags = { "-Dgtk_doc=false" }
+   flags = { 
+      "-Dgtk_doc=false" 
+   }
 };
 
 xfce4-panel = {
@@ -191,8 +208,11 @@ xfce4-panel = {
    build = "./configure",
    flags = {
       "--libdir=/usr/lib64",
+      "--localstatedir=/var",
       "--sysconfdir=/etc",
-      "--disable-gtk-doc"
+      "--enable-gio-unix",
+      "--disable-debug",
+      "--disable-gtk-doc",
    }
 };
 
@@ -214,6 +234,11 @@ thunar = {
    flags = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc"
+      "--enable-gio-unix",
+      "--enable-gudev",
+      "--enable-notifications",
+      "--enable-exif",
+      "--disable-debug",
    },
    prepare = [[ sed -i 's/\tinstall-systemd_userDATA/\t/' Makefile.in ]]
 };
@@ -224,7 +249,9 @@ thunar-volman = {
    build = "./configure",
    flags = {
       "--libdir=/usr/lib64",
-      "--sysconfdir=/etc"
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
+      "--disable-debug",
    }
 };
 
@@ -234,7 +261,9 @@ tumbler = {
    build = "./configure",
    flags = {
       "--libdir=/usr/lib64",
-      "--sysconfdir=/etc"
+      "--sysconfdir=/etc",
+      "--disable-debug",
+      "--disable-gstreamer-thumbnailer",
    },
    post = [[ rm -fr $destdir/usr/lib/systemd ]]
 };
@@ -245,7 +274,9 @@ xfce4-appfinder = {
    build = "./configure",
    flags = {
       "--libdir=/usr/lib64",
-      "--sysconfdir=/etc"
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
+      "--disable-debug",
    }
 };
 
@@ -270,7 +301,11 @@ xfce4-power-manager = {
       "--bindir=/usr/bin",
       "--sbindir=/usr/bin",
       "--libdir=/usr/lib64",
+      "--localstatedir=/var",
       "--sysconfdir=/etc",
+      "--disable-network-manager",
+      "--disable-polkit",
+      "--disable-debug",
    }
 };
 
@@ -291,9 +326,16 @@ xfce4-settings = {
    build = "./configure",
    flags = {
       "--libdir=/usr/lib64",
+      "--localstatedir=/var",
       "--sysconfdir=/etc",
+      "--enable-xrandr",
+      "--enable-xcursor",
+      "--enable-libnotify",
+      "--enable-libxklavier",
+      "--enable-pluggable-dialogs",
       "--enable-sound-settings",
-      "--enable-pluggable-dialogs"
+      "--enable-pluggable-dialogs",
+      "--disable-debug",
    }
 };
 
@@ -303,7 +345,10 @@ xfdesktop = {
    build = "./configure",
    flags = {
       "--libdir=/usr/lib64",
-      "--sysconfdir=/etc"
+      "--sysconfdir=/etc",
+      "--enable-thunarx",
+      "--enable-notifications",
+      "--disable-debug",
    }
 };
 
@@ -313,7 +358,13 @@ xfwm4 = {
    build = "./configure",
    flags = {
       "--libdir=/usr/lib64",
-      "--sysconfdir=/etc"
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
+      "--enable-startup-notification",
+      "--enable-randr",
+      "--enable-compositor",
+      "--enable-xsync",
+      "--disable-debug",
    }
 };
 
@@ -329,11 +380,11 @@ xfce4-screensaver = {
    build = "./configure",
    flags = {
       "--libdir=/usr/lib64",
-      "--sysconfdir=/etc",
       "--libexecdir=/usr/lib64",
       "--localstatedir=/var",
+      "--sysconfdir=/etc",
       "--disable-static",
-      "--disable-debug"
+      "--disable-debug",
    }
 };
 
@@ -343,8 +394,10 @@ xfce4-session = {
    build = "./configure",
    flags = {
       "--libdir=/usr/lib64",
+      "--localstatedir=/var",
       "--sysconfdir=/etc",
-      "--disable-legacy-sm"
+      "--disable-legacy-sm",
+      "--disable-debug",
    }
 };
 
@@ -354,7 +407,9 @@ ristretto = {
    build = "./configure",
    flags = {
       "--libdir=/usr/lib64",
-      "--sysconfdir=/etc"
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
+      "--disable-debug",
    }
 };
 
@@ -364,6 +419,7 @@ xfce4-dev-tools = {
    build = "./configure",
    flags = {
       "--libdir=/usr/lib64",
+      "--localstatedir=/var",
       "--sysconfdir=/etc"
    }
 };
@@ -375,7 +431,8 @@ xfce4-notifyd = {
    flags = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
-      "--disable-systemd"
+      "--disable-systemd",
+      "--disable-debug",
    }
 };
 
@@ -384,7 +441,9 @@ gtksourceview4 = {
    url = "https://download.gnome.org/sources/gtksourceview/4.8/gtksourceview-4.8.4.tar.xz",
    sha3 = "404b0d854e122ba0ed4d76375077e86f088a56e2aec29799afc829a134597fbf",
    build = "meson",
-   flags = { "-Dgtk_doc=false" }
+   flags = { 
+      "-Dgtk_doc=false" 
+   }
 };
 
 mousepad = {
@@ -393,8 +452,10 @@ mousepad = {
    build = "./configure",
    flags = {
       "--libdir=/usr/lib64",
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
       "--enable-gtksourceview4",
-      "--sysconfdir=/etc"
+      "--disable-debug",
    }
 };
 
@@ -404,7 +465,9 @@ xfce4-battery-plugin = {
    build = "./configure",
    flags = {
       "--libdir=/usr/lib64",
-      "--sysconfdir=/etc"
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
+      "--disable-debug",
    }
 };
 
@@ -414,7 +477,10 @@ thunar-archive-plugin = {
    build = "./configure",
    flags = {
       "--libdir=/usr/lib64",
-      "--sysconfdir=/etc"
+      "--libexecdir=/usr/lib64/xfce4",
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
+      "--disable-static",
    }
 };
 
@@ -422,6 +488,11 @@ optipng = {
    url = "https://prdownloads.sourceforge.net/optipng/optipng-0.7.8.tar.gz",
    sha3 = "4aa347bb09ec8421bf6cce96a3c9e12c0b47a100ece108c342a79a944d2b9027",
    build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--mandir=/usr/share/man",
+      "--with-system-libs",
+   }
 };
 
 hicolor-icon-theme = {
@@ -500,7 +571,7 @@ libconfig = {
    build = "./configure",
    flags = {
       "--libdir=/usr/lib64",
-      "--sysconfdir=/etc"
+      "--sysconfdir=/etc",
    }
 };
 
@@ -508,7 +579,9 @@ libev = {
    url = "http://dist.schmorp.de/libev/libev-4.33.tar.gz",
    sha3 = "ba1e921dd20ef633308f837e958e136b5ec80cd73683fd1bdb1ed48ceb59cf1b",
    build = "./configure",
-   flags = { "--libdir=/usr/lib64" }
+   flags = { 
+      "--libdir=/usr/lib64" 
+   }
 };
 
 picom = {
@@ -575,24 +648,21 @@ gcr = {
    prepare = [[ sed -i 's:"/desktop:"/org:' schema/*.xml ]]
 };
 
-gcr = {
-   url = "https://download.gnome.org/sources/gcr/3.41/gcr-3.41.2.tar.xz",
-   sha3 = "1a57ff812bfd3b5fa51842313734abdd186011d0f235407ac8ec6673aae666c6",
-   build = "meson",
-   flags = { 
-      "-Dgtk_doc=false" 
-   },
-   prepare = [[ sed -i 's:"/desktop:"/org:' schema/*.xml ]]
-};
-
 gnome-keyring = {
    url = "https://download.gnome.org/sources/gnome-keyring/46/gnome-keyring-46.1.tar.xz",
    sha3 = "f621ef19492d22341f5783fdb4e0fa7668f3bca139f9b82e871a0b099a10b325",
    build = "autoreconf",
    flags = {
       "--libdir=/usr/lib64",
+      "--libexecdir=/usr/lib64",
+      "--localstatedir=/var",
       "--sysconfdir=/etc",
+      "--disable-schemas-compile",
+      "--disable-static",
       "--disable-doc",
+      "--disable-pam",
+      "--without-libcap-ng",
+      "--without-systemd",
    },
    prepare = [[ sed -i 's:"/desktop:"/org:' schema/*.xml ]]
 };
@@ -603,7 +673,11 @@ libcdio = {
    build = "./configure",
    flags = {
       "--libdir=/usr/lib64",
-      "--disable-static"
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
+      "--disable-vcd-info",
+      "--disable-cddb",
+      "--disable-static",
    }
 };
 
@@ -688,7 +762,9 @@ poppler-data = {
    url = "https://poppler.freedesktop.org/poppler-data-0.4.12.tar.gz",
    sha3 = "474793bd050d8e2cc4b2ed3d7690c2fc61a1e42dd31475f712c4d73f73d5879b",
    build = "make",
-   flags = { "prefix=/usr" }
+   flags = { 
+      "prefix=/usr" 
+   }
 };
 
 evince = {
@@ -723,7 +799,7 @@ xarchiver = {
    build = "./configure",
    flags = {
       "--libdir=/usr/lib64",
+      "--libexecdir=/usr/lib64/xfce4",
       "--sysconfdir=/etc",
-      "--libexecdir=/usr/lib64/xfce4"
    }
 };
