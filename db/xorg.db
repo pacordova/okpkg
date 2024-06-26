@@ -23,7 +23,7 @@ libxau = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -35,7 +35,7 @@ libxdmcp = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -60,7 +60,7 @@ libxcb = {
       "--sysconfdir=/etc",
       "--localstatedir=/var",
       "--disable-static",
-      "--without-doxygen"
+      "--without-doxygen",
    }
 };
 
@@ -83,7 +83,8 @@ libx11 = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
+      "--disable-xf86bigfont",
    }
 };
 
@@ -95,7 +96,7 @@ libxext = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -107,7 +108,7 @@ libice = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -119,7 +120,7 @@ libsm = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -131,7 +132,7 @@ libxss = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -144,7 +145,7 @@ libxt = {
       "--sysconfdir=/etc",
       "--localstatedir=/var",
       "--disable-static",
-      "--with-appdefaultdir=/etc/X11/app-defaults"
+      "--with-appdefaultdir=/etc/X11/app-defaults",
    }
 };
 
@@ -156,7 +157,7 @@ libxmu = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -170,7 +171,6 @@ libxpm = {
       "--localstatedir=/var",
       "--disable-static",
       "--disable-open-zfile",
-      "ac_cv_search_gettext=no"
    }
 };
 
@@ -182,7 +182,7 @@ libxaw = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -194,7 +194,7 @@ libxfixes = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -206,7 +206,7 @@ libxcomposite = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -218,7 +218,7 @@ libxrender = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -230,7 +230,7 @@ libxcursor = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -242,7 +242,7 @@ libxdamage = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -254,7 +254,8 @@ libfontenc = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
+      "--with-encodingsdir=/usr/share/fonts/encodings",
    }
 };
 
@@ -267,7 +268,7 @@ libxfont2 = {
       "--sysconfdir=/etc",
       "--localstatedir=/var",
       "--disable-static",
-      "--disable-devel-docs"
+      "--disable-devel-docs",
    }
 };
 
@@ -279,7 +280,7 @@ libxft = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -291,7 +292,7 @@ libxi = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -303,7 +304,7 @@ libxinerama = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -315,7 +316,7 @@ libxrandr = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -327,7 +328,7 @@ libxres = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -339,7 +340,7 @@ libxtst = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -351,7 +352,7 @@ libxv = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -363,7 +364,7 @@ libxvmc = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -375,7 +376,7 @@ libxxf86vm = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -393,7 +394,7 @@ libxkbfile = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -405,7 +406,7 @@ libxshmfence = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -417,7 +418,7 @@ libxpresent = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -435,7 +436,7 @@ xcb-util = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -447,7 +448,7 @@ xcb-util-image = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -459,7 +460,7 @@ xcb-util-keysyms = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -471,7 +472,7 @@ xcb-util-renderutil = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -483,7 +484,7 @@ xcb-util-wm = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -495,7 +496,7 @@ xcb-util-cursor = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -505,7 +506,10 @@ libdrm = {
    build = "meson",
    flags = {
       "-Dudev=true",
-      "-Dvalgrind=disabled"
+      "-Detnaviv=disabled",
+      "-Dfreedreno=disabled",
+      "-Dvc4=disabled",
+      "-Dvalgrind=disabled",
    }
 };
 
@@ -523,7 +527,7 @@ spirv-tools = {
       "-DSPIRV_WERROR=OFF",
       "-DBUILD_SHARED_LIBS=ON",
       "-DSPIRV_TOOLS_BUILD_STATIC=OFF",
-      "-DSPIRV-Headers_SOURCE_DIR=/usr"
+      "-DSPIRV-Headers_SOURCE_DIR=/usr",
    }
 };
 
@@ -534,7 +538,7 @@ glslang = {
    flags = {
       "-DALLOW_EXTERNAL_SPIRV_TOOLS=ON",
       "-DBUILD_SHARED_LIBS=ON",
-      "-DGLSLANG_TESTS=OFF"
+      "-DGLSLANG_TESTS=OFF",
    }
 };
 
@@ -554,6 +558,7 @@ vulkan-loader = {
       "-DBUILD_WSI_WAYLAND_SUPPORT=OFF",
       "-DBUILD_WSI_XCB_SUPPORT=ON",
       "-DBUILD_WSI_XLIB_SUPPORT=ON",
+      "-DBUILD_WSI_WAYLAND_SUPPORT=OFF",
       "-DVULKAN_HEADERS_INSTALL_DIR=/usr"
    }
 };
@@ -630,7 +635,7 @@ xorg-iceauth = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -643,7 +648,8 @@ luit = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--enable-fontenc",
+      "--disable-static",
    }
 };
 
@@ -655,7 +661,7 @@ xorg-mkfontscale = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -667,7 +673,7 @@ xorg-sessreg = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -679,7 +685,7 @@ xorg-setxkbmap = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -691,7 +697,7 @@ xorg-smproxy = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -703,7 +709,7 @@ xorg-x11perf = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -715,7 +721,7 @@ xorg-xauth = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -727,7 +733,7 @@ xorg-xbacklight = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -739,7 +745,7 @@ xorg-xcmsdb = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -751,7 +757,7 @@ xorg-xcursorgen = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -763,7 +769,7 @@ xorg-xdpyinfo = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 
 };
@@ -776,7 +782,7 @@ xorg-xdriinfo = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -788,7 +794,7 @@ xorg-xev = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -800,7 +806,7 @@ xorg-xgamma = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -813,7 +819,6 @@ xorg-xhost = {
       "--sysconfdir=/etc",
       "--localstatedir=/var",
       "--disable-static",
-      "ac_cv_search_gettext=no"
    }
 };
 
@@ -825,7 +830,7 @@ xorg-xinput = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -837,7 +842,7 @@ xorg-xkbcomp = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -849,7 +854,7 @@ xorg-xkbevd = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -861,7 +866,7 @@ xorg-xkbutils = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -873,7 +878,7 @@ xorg-xkill = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -885,7 +890,7 @@ xorg-xlsatoms = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -897,7 +902,7 @@ xorg-xlsclients = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -909,7 +914,7 @@ xorg-xmessage = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -921,7 +926,7 @@ xorg-xmodmap = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -933,7 +938,7 @@ xorg-xpr = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -945,7 +950,7 @@ xorg-xprop = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -957,7 +962,7 @@ xorg-xrandr = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -969,7 +974,7 @@ xorg-xrdb = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -981,7 +986,7 @@ xorg-xrefresh = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -993,7 +998,8 @@ xorg-xset = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
+      "--without-fontcache",
    }
 };
 
@@ -1005,7 +1011,7 @@ xorg-xsetroot = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -1017,7 +1023,7 @@ xorg-xvinfo = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -1029,7 +1035,7 @@ xorg-xwd = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -1041,7 +1047,7 @@ xorg-xwininfo = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -1053,7 +1059,7 @@ xorg-xwud = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -1065,7 +1071,10 @@ xorg-font-util = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--mandir=/usr/share/man",
+      "--disable-static",
+      "--with-mapdir=/usr/share/fonts/util",
+      "--with-fontrootdir=/usr/share/fonts",
    }
 };
 
@@ -1073,6 +1082,11 @@ xkeyboard-config = {
    url = "https://x.org/pub/individual/data/xkeyboard-config/xkeyboard-config-2.42.tar.xz",
    sha3 = "cb7cca2ffc338aa79ea21e945f6087116d1e1dabe63fe9d96f7d60e124ef280f",
    build = "meson",
+   flags = {
+      "-Dxkb-base=/usr/share/X11/xkb",
+      "-Dcompat-rules=true",
+      "-Dxorg-rules-symlinks=true",
+   }
 };
 
 libxkbcommon = {
@@ -1089,6 +1103,16 @@ pixman = {
    url = "https://xorg.freedesktop.org/releases/individual/lib/pixman-0.43.4.tar.xz",
    sha3 = "a48525f14efe9ac8036292499ec9955fc20b8ca7630024d80eb0b8335abb35d2",
    build = "meson",
+   flags = {
+      "-Dloongson-mmi=disabled",
+      "-Dvmx=disabled",
+      "-Darm-simd=disabled",
+      "-Dneon=disabled",
+      "-Da64-neon=disabled",
+      "-Diwmmxt=disabled",
+      "-Dmips-dspr2=disabled",
+      "-Dgtk=disabled",
+   }
 };
 
 libepoxy = {
@@ -1104,11 +1128,23 @@ xorg-server = {
    flags = {
       "--localstatedir=/var",
       "-Dglamor=true",
-      "-Dxkb_output_dir=/var/lib/xkb"
+      "-Dxkb_output_dir=/var/lib/xkb",
+      "-Dipv6=true",
+      "-Dxvfb=true",
+      "-Dxnest=true",
+      "-Dxcsecurity=true",
+      "-Dxorg=true",
+      "-Dxephyr=true",
+      "-Dudev=true",
+      "-Ddtrace=false",
+      "-Dsystemd_logind=false",
+      "-Dsuid_wrapper=true",
+      "-Dxkb_dir=/usr/share/X11/xkb",
+      "-Dxkb_output_dir=/var/lib/xkb",
+      "-Dlibunwind=false",
    },
    post = [[
-      mkdir -p $destdir/etc/sysconfig \
-      $destdir/etc/X11/xorg.conf.d
+      mkdir -p $destdir/etc/{sysconfig,X11/xorg.conf.d}
       cd $destdir/etc/sysconfig
       printf "/tmp/.ICE-unix dir 1777 root root\n" >> createfiles
       printf "/tmp/.X11-unix dir 1777 root root\n" >> createfiles
@@ -1132,7 +1168,7 @@ xf86-input-evdev = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -1144,7 +1180,8 @@ libinput = {
       "-Ddebug-gui=false",
       "-Dtests=false",
       "-Dlibwacom=false",
-      "-Dudev-dir=/usr/lib64/udev"
+      "-Dudev-dir=/usr/lib64/udev",
+      "-Ddocumentation=false",
    }
 };
 
@@ -1156,7 +1193,7 @@ xf86-input-libinput = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -1168,7 +1205,7 @@ xf86-input-synaptics = {
       "--libdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--localstatedir=/var",
-      "--disable-static"
+      "--disable-static",
    }
 };
 
@@ -1181,7 +1218,8 @@ xf86-input-wacom = {
       "--sysconfdir=/etc",
       "--localstatedir=/var",
       "--disable-static",
-      "--with-systemd-unit-dir=no"
+      "--with-systemd-unit-dir=no",
+      "--with-xorg-conf-dir=/usr/share/X11/xorg.conf.d/",
    }
 };
 
@@ -1194,6 +1232,6 @@ xorg-xinit = {
       "--sysconfdir=/etc",
       "--localstatedir=/var",
       "--disable-static",
-      "--with-xinitdir=/etc/X11/app-defaults"
+      "--with-xinitdir=/etc/X11/app-defaults",
    },
 };
