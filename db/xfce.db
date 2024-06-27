@@ -489,7 +489,6 @@ optipng = {
    sha3 = "4aa347bb09ec8421bf6cce96a3c9e12c0b47a100ece108c342a79a944d2b9027",
    build = "./configure",
    flags = {
-      "--libdir=/usr/lib64",
       "--mandir=/usr/share/man",
       "--with-system-libs",
    }
