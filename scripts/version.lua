@@ -24,7 +24,7 @@ end
 
 local function getv(t, pkg)
    for i=1,#t do
-      if t[i]:match("^" .. pkg .. "%%-") then return vstr(t[i]) end
+      if t[i]:match("^" .. pkg .. "%-%d") then return vstr(t[i]) end
    end
    return nil
 end
@@ -74,7 +74,7 @@ end
 
 -- list okpkg package versions
 local okpkg = {}
-fd = io.popen("ls /usr/okpkg/packages/a")
+fd = io.popen("find /usr/okpkg/packages -name '*.tar.lz' -exec basename '{}' \\;")
 buf = fd:read("*a")
 fd:close()
 fd = io.popen("ls /usr/okpkg/packages/x")
