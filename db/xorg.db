@@ -510,6 +510,7 @@ libdrm = {
       "-Dfreedreno=disabled",
       "-Dvc4=disabled",
       "-Dvalgrind=disabled",
+      "-Dintel=enabled",
    }
 };
 
