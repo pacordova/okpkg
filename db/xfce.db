@@ -708,7 +708,6 @@ gvfs = {
       "-Dlogind=false",
       "-Dmtp=false",
       "-Dnfs=false",
-      "-Donedrive=false",
       "-Dsmb=false",
       "-Dsystemduserunitdir=no",
       "-Dtmpfilesdir=no",
