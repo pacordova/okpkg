@@ -29,26 +29,13 @@ local function getv(t, pkg)
    return nil
 end
 
--- get packages to check
-fp = io.open("/usr/okpkg/db/system.db")
-buf = '\n' .. fp:read('*a')
-fp:close()
-
-local pkgs = {}
-for i in buf:gmatch("\n([%w%-%+]-) = {.-;") do
-   if i:sub(1, 3) == "gcc" then table.insert(pkgs, i:sub(1, 3))
-   else table.insert(pkgs, i) end
-end
-
 -- list arch package versions
 local arch = {}
 buf = {}
-
 table.insert(buf, curl"https://mirrors.kernel.org/archlinux/core/os/x86_64/")
 table.insert(buf, curl"https://mirrors.kernel.org/archlinux/extra/os/x86_64/")
 table.insert(buf, curl"https://mirrors.kernel.org/archlinux/community/os/x86_64/")
 buf = table.concat(buf, '\n')
-
 for w in string.gmatch(buf, 'href="(.-)"') do
    if string.find(w, "%.tar.zst$") then
       local s =
@@ -87,9 +74,13 @@ end
 
 -- list okpkg package versions
 local okpkg = {}
-
 fd = io.popen("ls /usr/okpkg/packages/a")
 buf = fd:read("*a")
+fd:close()
+fd = io.popen("ls /usr/okpkg/packages/x")
+buf = buf .. fd:read("*a")
+fd:close()
+
 for w in string.gmatch(buf, '(.-\n)') do
    local s =
       w:gsub("%-x86_64.tar.lz\n", ""):
@@ -98,18 +89,33 @@ for w in string.gmatch(buf, '(.-\n)') do
       gsub("_GH0", "")
    table.insert(okpkg, s)
 end
-io.close(fd)
 
--- print as csv
-io.write("package,arch,slackware,okpkg\n")
-for i=1, #pkgs do
-   local pkg = pkgs[i]:gsub("%-", "%%-")
-   local arch = getv(arch, pkg)
-   local slack = getv(slackware, pkg)
-   local okpkg = getv(okpkg, pkg)
+-- compare versions for a list of packages
+function version(pkglist)
+   io.write("package,arch,slackware,okpkg\n")
+   for i=1, #pkglist do
+      local pkg = pkglist[i]:gsub("%-", "%%-")
+      local arch = getv(arch, pkg)
+      local slack = getv(slackware, pkg)
+      local okpkg = getv(okpkg, pkg)
 
-   -- omit when versions are the same
-   if (slack and okpkg ~= slack) or (arch and okpkg ~= arch) then
-      io.write(string.format("%s,%s,%s,%s\n", pkgs[i], arch, slack, okpkg))
+      -- omit when versions are the same
+      if (slack and okpkg ~= slack) or (arch and okpkg ~= arch) then
+         io.write(string.format("%s,%s,%s,%s\n", pkglist[i], arch, slack, okpkg))
+      end
    end
+end
+
+-- get packages to check
+fp = io.open("/usr/okpkg/db/system.db")
+buf = '\n' .. fp:read('*a')
+fp:close()
+local pkgs = {}
+for i in buf:gmatch("\n([%w%-%+]-) = {.-;") do
+   if i:sub(1, 3) == "gcc" then table.insert(pkgs, i:sub(1, 3))
+   else table.insert(pkgs, i) end
+end
+
+if basename(arg[0]) == "version.lua" then
+   version(pkgs)
 end
