@@ -1,3 +1,20 @@
+-- needs webkit, other deps
+xreader = {
+   url = "https://github.com/linuxmint/xreader/archive/4.2.1/xreader-4.2.1.tar.gz",
+   sha3 = "3d9995cf9917154697bed603578f8145e95210b670c9794c60e768662d4c1f9a",
+   build = "meson",
+   flags = {
+      "-Dmathjax-directory=/usr/share/mathjax2",
+      "-Dcomics=true", 
+      "-Ddjvu=true",
+      "-Ddvi=true",
+      "-Dt1lib=true",
+      "-Dpixbuf=true",
+      "-Dhelp_files=true",
+      "-Dintrospection=true",
+   }
+};
+
 -- versions for slackware-15
 evince = {
    url = "https://download.gnome.org/sources/evince/41/evince-41.5.tar.xz",
