@@ -767,8 +767,8 @@ poppler-data = {
 };
 
 evince = {
-   url = "https://download.gnome.org/sources/evince/41/evince-41.5.tar.xz",
-   sha3 = "e814a5996935f40da119f07f4deb3dcc7c4d051e9209ad5ca049c0b52bdbde9b",
+   url = "https://download.gnome.org/sources/evince/46/evince-46.3.tar.xz",
+   sha3 = "898d612dcb6410cc88cdf85a04622d0dd6a90c5c864f389aed692dcbb1ff6a08",
    build = "meson",
    flags = {
       "-Dgspell=disabled",
@@ -780,15 +780,6 @@ evince = {
       "-Dps=enabled",
       "-Dsystemduserunitdir=no",
       "-Duser_doc=false",
-   }
-};
-
-file-roller = {
-   url = "https://download.gnome.org/sources/file-roller/3.36/file-roller-3.36.2.tar.xz",
-   sha3 = "197463f88508b16701a139e281352769e65c0dc382106eec971113611f63d447",
-   build = "meson",
-   flags = {
-      "-Dpackagekit=false",
    }
 };
 

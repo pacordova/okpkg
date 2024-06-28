@@ -1,3 +1,30 @@
+-- versions for slackware-15
+evince = {
+   url = "https://download.gnome.org/sources/evince/41/evince-41.5.tar.xz",
+   sha3 = "e814a5996935f40da119f07f4deb3dcc7c4d051e9209ad5ca049c0b52bdbde9b",
+   build = "meson",
+   flags = {
+      "-Dgspell=disabled",
+      "-Dgtk_doc=false",
+      "-Dintrospection=true",
+      "-Dkeyring=auto",
+      "-Dnautilus=false",
+      "-Dpdf=enabled",
+      "-Dps=enabled",
+      "-Dsystemduserunitdir=no",
+      "-Duser_doc=false",
+   }
+};
+
+file-roller = {
+   url = "https://download.gnome.org/sources/file-roller/3.36/file-roller-3.36.2.tar.xz",
+   sha3 = "197463f88508b16701a139e281352769e65c0dc382106eec971113611f63d447",
+   build = "meson",
+   flags = {
+      "-Dpackagekit=false",
+   }
+};
+
 -- nonfree
 libfdk-aac = {
    url = "https://downloads.sourceforge.net/opencore-amr/fdk-aac-2.0.3.tar.gz",

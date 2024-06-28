@@ -565,8 +565,8 @@ vulkan-loader = {
 };
 
 _libva = {
-   url = "https://github.com/intel/libva/archive/2.21.0/libva-2.21.0.tar.gz",
-   sha3 = "3e9817a1e3bc5f6807db1d49a522d67288fe4e67e1285cad4d8231867b2467f5",
+   url = "https://github.com/intel/libva/archive/2.22.0/libva-2.22.0.tar.gz",
+   sha3 = "946b1f9f33ea331c15dfa36f26883fa061c12c9062564360157cc24728df5fe1",
    build = "meson",
    flags = {
       "-Dwith_wayland=no",
@@ -598,8 +598,8 @@ mesa = {
 };
 
 libva = {
-   url = "https://github.com/intel/libva/archive/2.21.0/libva-2.21.0.tar.gz",
-   sha3 = "3e9817a1e3bc5f6807db1d49a522d67288fe4e67e1285cad4d8231867b2467f5",
+   url = "https://github.com/intel/libva/archive/2.22.0/libva-2.22.0.tar.gz",
+   sha3 = "946b1f9f33ea331c15dfa36f26883fa061c12c9062564360157cc24728df5fe1",
    build = "meson",
    flags = {
       "-Dwith_wayland=no",
