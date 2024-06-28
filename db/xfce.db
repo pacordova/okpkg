@@ -819,7 +819,7 @@ xreader = {
       "-Dt1lib=false",
       "-Dpixbuf=true",
       "-Dhelp_files=true",
-      "-Dintrospection=false",
+      "-Dintrospection=true",
       "-Depub=false",
    }
 };
