@@ -501,8 +501,8 @@ xcb-util-cursor = {
 };
 
 libdrm = {
-   url = "https://dri.freedesktop.org/libdrm/libdrm-2.4.121.tar.xz",
-   sha3 = "f8505dc9da42c984e5c12d3e2f11d260c9baacba0819aa6b51ffdfaba0d630d0",
+   url = "https://dri.freedesktop.org/libdrm/libdrm-2.4.122.tar.xz",
+   sha3 = "7b62a20364260e8e3456a2392cb9e912ff4ac8aab748ce2866b9c7bcbd4af589",
    build = "meson",
    flags = {
       "-Dudev=true",

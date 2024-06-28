@@ -98,8 +98,8 @@ graphite = {
 };
 
 harfbuzz = {
-   url = "https://github.com/harfbuzz/harfbuzz/releases/download/8.4.0/harfbuzz-8.4.0.tar.xz",
-   sha3 = "645641f1d39f8bb50bf5ac0ec8e72c6e288db6840d2f12669c3b6c830b396280",
+   url = "https://github.com/harfbuzz/harfbuzz/archive/9.0.0/harfbuzz-9.0.0.tar.gz",
+   sha3 = "df45d84d14d6bb1df59b5962099acc6f04be699d9a2f4c3608d73ecd5a5561d5",
    build = "meson",
    flags = {
       "-Dbenchmark=disabled",
