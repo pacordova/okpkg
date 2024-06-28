@@ -1,6 +1,6 @@
 alsa-utils = {
-   url = "https://alsa-project.org/files/pub/utils/alsa-utils-1.2.11.tar.bz2",
-   sha3 = "aa7012bede0f9c7b69c7d74a306bb1c376315d242b8cfeba78ab2536000ef72a",
+   url = "https://alsa-project.org/files/pub/utils/alsa-utils-1.2.12.tar.bz2",
+   sha3 = "c7ce5050986682b2944bfe344accc0107d0e37f8ca0047605d02610c908107d9",
    build = "./configure",
    flags = {
       "--libdir=/usr/lib64",
@@ -39,8 +39,8 @@ dhcpcd = {
 };
 
 ffmpeg = {
-   url = "https://ffmpeg.org/releases/ffmpeg-6.1.1.tar.xz",
-   sha3 = "108628d123b7051cf3a50fcc563fa76dfbefd92d34797f87cc69d720878b25dd",
+   url = "https://ffmpeg.org/releases/ffmpeg-7.0.1.tar.xz",
+   sha3 = "6b3bb50b289dbd1424d6476183f9f5ef4ed334f72dcbe9ffa077c6fab35b755d",
    build = "./configure",
    flags = {
       "--libdir=/usr/lib64",

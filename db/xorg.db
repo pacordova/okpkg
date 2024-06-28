@@ -1174,8 +1174,8 @@ xf86-input-evdev = {
 };
 
 libinput = {
-   url = "https://gitlab.freedesktop.org/libinput/libinput/-/archive/1.26.0/libinput-1.26.0.tar.bz2",
-   sha3 = "05103f3e3b43ab42351b08bb1e7c0ded3951451207e5c6da78d9f50eba4758b7",
+   url = "https://gitlab.freedesktop.org/libinput/libinput/-/archive/1.26.1/libinput-1.26.1.tar.bz2",
+   sha3 = "367efb20c61d750a8510dcf2c5a78798640658e723d43fa4ecdd0ce25d222921",
    build = "meson",
    flags = {
       "-Ddebug-gui=false",

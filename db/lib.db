@@ -9,8 +9,8 @@ _freetype2 = {
 };
 
 alsa-lib = {
-   url = "https://alsa-project.org/files/pub/lib/alsa-lib-1.2.11.tar.bz2",
-   sha3 = "4265effdd142056ea3246fabbecbdc6188578af26678a54ae2c3d149aec681e7",
+   url = "https://alsa-project.org/files/pub/lib/alsa-lib-1.2.12.tar.bz2",
+   sha3 = "3d65e490d7c1f25890e099c89f3a4e2c9b36a8553db4e17d05b9ee36feb19d71",
    build = "./configure",
    flags = {
       "--libdir=/usr/lib64",
@@ -19,8 +19,8 @@ alsa-lib = {
 };
 
 dav1d = {
-   url = "https://downloads.videolan.org/pub/videolan/dav1d/1.4.2/dav1d-1.4.2.tar.xz",
-   sha3 = "f6e5221aac889aeb1cabdede62b41f29a426a2caad679b9f6eaa5d74fb50b665",
+   url = "https://downloads.videolan.org/pub/videolan/dav1d/1.4.3/dav1d-1.4.3.tar.xz",
+   sha3 = "fc84c431c4f2405ae8b351a9ecd7b1ce10b96863d50ae3206df857c81a2cf118",
    build = "meson",
 };
 
@@ -54,8 +54,8 @@ dbus-glib = {
 };
 
 gobject-introspection = {
-   url = "https://download.gnome.org/sources/gobject-introspection/1.78/gobject-introspection-1.78.1.tar.xz",
-   sha3 = "0c3dacb5a258ba94bd8b41e0e94522c800b3c5bdedf67b1501e743581760ce6e",
+   url = "https://download.gnome.org/sources/gobject-introspection/1.80/gobject-introspection-1.80.1.tar.xz",
+   sha3 = "0aee06c2479fc07b9aa7092fecdf757f4efd7739c585b01b1733cd1b8d9ed034",
    build = "meson",
 };
 
@@ -72,8 +72,8 @@ libgudev = {
 };
 
 gsettings-desktop-schemas = {
-   url = "https://download.gnome.org/sources/gsettings-desktop-schemas/45/gsettings-desktop-schemas-45.0.tar.xz",
-   sha3 = "3a733b8c5ab7eacde0be56b7674f54218e75cc5620952fbf981549d4f50ae5aa",
+   url = "https://download.gnome.org/sources/gsettings-desktop-schemas/46/gsettings-desktop-schemas-46.0.tar.xz",
+   sha3 = "c53040bbec29c15ee714fa1a1beeb6712bdbf50870f86c10df640717fec9a9a2",
    build = "meson",
    prepare = [[ sed -i -r 's:"(/system):"/org/gnome\1:g' schemas/*.in ]]
 };
@@ -139,8 +139,8 @@ fontconfig = {
 };
 
 libass = {
-   url = "https://github.com/libass/libass/releases/download/0.17.1/libass-0.17.1.tar.xz",
-   sha3 = "c7892769c34b70fdc2d474684165944f6b13c3ebde5ead99780eef68afda3df2",
+   url = "https://github.com/libass/libass/releases/download/0.17.2/libass-0.17.2.tar.xz",
+   sha3 = "995f1084b0e7646e823c443836d864c119b6c9bb2e448ed2e2be3e25ae6d7146",
    build = "./configure",
    flags = {
       "--libdir=/usr/lib64",
@@ -207,8 +207,8 @@ libevent = {
 };
 
 libjpeg-turbo = {
-   url = "https://github.com/libjpeg-turbo/libjpeg-turbo/releases/download/3.0.2/libjpeg-turbo-3.0.2.tar.gz",
-   sha3 = "73ee0afc5e1a45dd9992f68f6231f7a056ae31b2f665eea09435563a8c3b105c",
+   url = "https://github.com/libjpeg-turbo/libjpeg-turbo/releases/download/3.0.3/libjpeg-turbo-3.0.3.tar.gz",
+   sha3 = "648f531e76e7151d521106a081671f41e5153725d38d0c5a91ec6c80e6f113b4",
    build = "cmake",
    flags = {
       "-DENABLE_STATIC=OFF",
@@ -297,8 +297,8 @@ libexif = {
 };
 
 mtdev = {
-   url = "https://bitmath.org/code/mtdev/mtdev-1.1.6.tar.bz2",
-   sha3 = "3448b0fbe5e054b91aa7412e65fb6f6a0f302e2e72e7c61b04e5679a1e1ff6d3",
+   url = "https://bitmath.org/code/mtdev/mtdev-1.1.7.tar.bz2",
+   sha3 = "4afd35629a236b17597841cfd394e51af7c215eaaa8097ace8c8da6ffb8cfd71",
    build = "./configure",
    flags = {
       "--libdir=/usr/lib64",
