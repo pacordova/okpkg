@@ -1,19 +1,55 @@
--- needs webkit, other deps
-xreader = {
-   url = "https://github.com/linuxmint/xreader/archive/4.2.1/xreader-4.2.1.tar.gz",
-   sha3 = "3d9995cf9917154697bed603578f8145e95210b670c9794c60e768662d4c1f9a",
-   build = "meson",
+-- gnome stuff
+itstool = {
+   url = "https://files.itstool.org/itstool/itstool-2.0.7.tar.bz2",
+   sha3 = "68d36ae4c43c1131cbaeaff67daac1fa236c44b58d0aff6bc5190ba5001b7046",
+   build = "./configure",
    flags = {
-      "-Dmathjax-directory=/usr/share/mathjax2",
-      "-Dcomics=true", 
-      "-Ddjvu=true",
-      "-Ddvi=true",
-      "-Dt1lib=true",
-      "-Dpixbuf=true",
-      "-Dhelp_files=true",
-      "-Dintrospection=true",
+      "--libdir=/usr/lib64",
+      "--sysconfdir=/etc"
    }
 };
+
+libhandy = {
+   url = "https://download.gnome.org/sources/libhandy/1.8/libhandy-1.8.3.tar.xz",
+   sha3 = "ba3b355ab5cf271259ddc2697b52cf29d1a1f357d9f6909c076e75af3eb15157",
+   build = "meson",
+};
+
+evince = {
+   url = "https://download.gnome.org/sources/evince/46/evince-46.3.tar.xz",
+   sha3 = "898d612dcb6410cc88cdf85a04622d0dd6a90c5c864f389aed692dcbb1ff6a08",
+   build = "meson",
+   flags = {
+      "-Dgspell=disabled",
+      "-Dgtk_doc=false",
+      "-Dintrospection=true",
+      "-Dkeyring=auto",
+      "-Dnautilus=false",
+      "-Dpdf=enabled",
+      "-Dps=enabled",
+      "-Dsystemduserunitdir=no",
+      "-Duser_doc=false",
+   }
+};
+
+-- optional deps
+graphite = {
+   url = "https://github.com/silnrsi/graphite/releases/download/1.3.14/graphite2-1.3.14.tgz",
+   sha3 = "bccf21b15d3278bfcb4601f1e0e2cecfb48385575c309788f524465a5139f9ff",
+   build = "cmake",
+   flags = { "-DLIB_SUFFIX=64" },
+   prepare = [[ sed -i '/cmptest/d' tests/CMakeLists.txt ]]
+};
+
+lcms2 = {
+   url = "https://github.com/mm2/Little-CMS/releases/download/lcms2.16/lcms2-2.16.tar.gz",
+   sha3 = "cc75ac1ddc6d1d0abfd2b81e312396621b87096ee8d7e95f8eadb4bf672da252",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+   }
+};
+
 
 -- versions for slackware-15
 evince = {
@@ -1967,11 +2003,6 @@ xorg-xclock = {
       "--localstatedir=/var",
       "--disable-static"
    },
-};
-
-xapp = {
-   url = "https://github.com/linuxmint/xapp/archive/refs/tags/master.mint21.tar.gz",
-   build = "meson",
 };
 
 xfce4-screenshooter = {

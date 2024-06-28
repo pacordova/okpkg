@@ -715,28 +715,14 @@ gvfs = {
    }
 };
 
-itstool = {
-   url = "https://files.itstool.org/itstool/itstool-2.0.7.tar.bz2",
-   sha3 = "68d36ae4c43c1131cbaeaff67daac1fa236c44b58d0aff6bc5190ba5001b7046",
+xarchiver = {
+   url = "https://github.com/ib/xarchiver/archive/0.5.4.23/xarchiver-0.5.4.23.tar.gz",
+   sha3 = "bd34257a67da0698038f2a870374679621d323ca42d965580fee0a964881d4b4",
    build = "./configure",
    flags = {
       "--libdir=/usr/lib64",
-      "--sysconfdir=/etc"
-   }
-};
-
-libhandy = {
-   url = "https://download.gnome.org/sources/libhandy/1.8/libhandy-1.8.3.tar.xz",
-   sha3 = "ba3b355ab5cf271259ddc2697b52cf29d1a1f357d9f6909c076e75af3eb15157",
-   build = "meson",
-};
-
-lcms2 = {
-   url = "https://github.com/mm2/Little-CMS/releases/download/lcms2.16/lcms2-2.16.tar.gz",
-   sha3 = "cc75ac1ddc6d1d0abfd2b81e312396621b87096ee8d7e95f8eadb4bf672da252",
-   build = "./configure",
-   flags = {
-      "--libdir=/usr/lib64",
+      "--libexecdir=/usr/lib64/xfce4",
+      "--sysconfdir=/etc",
    }
 };
 
@@ -765,30 +751,35 @@ poppler-data = {
    }
 };
 
-evince = {
-   url = "https://download.gnome.org/sources/evince/46/evince-46.3.tar.xz",
-   sha3 = "898d612dcb6410cc88cdf85a04622d0dd6a90c5c864f389aed692dcbb1ff6a08",
+xapp = {
+   url = "https://github.com/linuxmint/xapp/archive/2.8.4/xapp-2.8.4.tar.gz",
+   sha3 = "bbf12e1b080d0be63f415ee9bd16fa91286ef17f1d95dbbfe7afb247ddb48d90",
    build = "meson",
    flags = {
-      "-Dgspell=disabled",
-      "-Dgtk_doc=false",
-      "-Dintrospection=true",
-      "-Dkeyring=auto",
-      "-Dnautilus=false",
-      "-Dpdf=enabled",
-      "-Dps=enabled",
-      "-Dsystemduserunitdir=no",
-      "-Duser_doc=false",
+      "-Ddeprecated_warnings=false",
+      "-Dstatus-notifier=false",
+      "-Dapp-lib-only=true",
+      "-Ddebian_derivative=false",
+      "-Dmate=false",
+      "-Dxfce=true",
    }
 };
 
-xarchiver = {
-   url = "https://github.com/ib/xarchiver/archive/0.5.4.23/xarchiver-0.5.4.23.tar.gz",
-   sha3 = "bd34257a67da0698038f2a870374679621d323ca42d965580fee0a964881d4b4",
-   build = "./configure",
+xreader = {
+   url = "https://github.com/linuxmint/xreader/archive/4.2.1/xreader-4.2.1.tar.gz",
+   sha3 = "3d9995cf9917154697bed603578f8145e95210b670c9794c60e768662d4c1f9a",
+   build = "meson",
    flags = {
-      "--libdir=/usr/lib64",
-      "--libexecdir=/usr/lib64/xfce4",
-      "--sysconfdir=/etc",
+      "-Dmathjax-directory=/usr/share/mathjax2",
+      "-Ddeprecated_warnings=false",
+      "-Dcomics=false", 
+      "-Dxps=false",
+      "-Ddjvu=false",
+      "-Ddvi=false",
+      "-Dt1lib=false",
+      "-Dpixbuf=true",
+      "-Dhelp_files=true",
+      "-Dintrospection=false",
+      "-Depub=false",
    }
 };
