@@ -1024,7 +1024,7 @@ python-setuptools = {
    sha3 = "b2d51983850a21fcd3939425fbb11cbd4995b53109d08a131555faeacf19dc3a",
    build = "python-build",
 };
-\
+
 samurai = {
    url = "https://github.com/michaelforney/samurai/releases/download/1.2/samurai-1.2.tar.gz",
    sha3 = "127ea48499f38f1a1c476957453ccca9419c8a4a938925e1361818102307375d",
