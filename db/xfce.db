@@ -691,8 +691,8 @@ libcdio-paranoia = {
 };
 
 gvfs = {
-   url = "https://download.gnome.org/sources/gvfs/1.54/gvfs-1.54.1.tar.xz",
-   sha3 = "8b6c68c1acdd52be0d7b85f0cd7d3c45f22e78cadb5b81ab267ba5c5acf6df06",
+   url = "https://download.gnome.org/sources/gvfs/1.52/gvfs-1.52.3.tar.xz",
+   sha3 = "c726f9ddc90d02a9fd0569009f3fe35280f8546b4bae497e01f8228dc9a88ddd",
    build = "meson",
    flags = {
       "-Donedrive=false",
