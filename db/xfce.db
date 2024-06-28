@@ -1,9 +1,3 @@
-gobject-introspection = {
-   url = "https://download.gnome.org/sources/gobject-introspection/1.78/gobject-introspection-1.78.1.tar.xz",
-   sha3 = "0c3dacb5a258ba94bd8b41e0e94522c800b3c5bdedf67b1501e743581760ce6e",
-   build = "meson",
-};
-
 dbus-glib = {
    url = "https://dbus.freedesktop.org/releases/dbus-glib/dbus-glib-0.112.tar.gz",
    sha3 = "403eaea495309ea8260148a2cb945a1c08785b1c431bd867d1100b188b4efa41",
@@ -15,6 +9,18 @@ dbus-glib = {
       "--sysconfdir=/etc",
       "--disable-static",
    }
+};
+
+desktop-file-utils = {
+   url = "https://www.freedesktop.org/software/desktop-file-utils/releases/desktop-file-utils-0.27.tar.xz",
+   sha3 = "c7e2480ad3a12bb90f68995645845c4c140f7c9b274ac21cfcb9ed443a7c7ef9",
+   build = "meson",
+};
+
+gobject-introspection = {
+   url = "https://download.gnome.org/sources/gobject-introspection/1.78/gobject-introspection-1.78.1.tar.xz",
+   sha3 = "0c3dacb5a258ba94bd8b41e0e94522c800b3c5bdedf67b1501e743581760ce6e",
+   build = "meson",
 };
 
 gsettings-desktop-schemas = {
@@ -34,6 +40,51 @@ libgudev = {
    url = "https://download.gnome.org/sources/libgudev/238/libgudev-238.tar.xz",
    sha3 = "6500e55c1ceeaf85747d3eeaebd57e1cfc7fae4b5b4ceb7161cd8ab059d1863d",
    build = "meson",
+};
+
+libnotify = {
+   url = "https://download.gnome.org/sources/libnotify/0.8/libnotify-0.8.3.tar.xz",
+   sha3 = "90216f182efa5ed279cb32527cfaa242a09fa1b7fac4fe6fee2981b40483d967",
+   build = "meson",
+   flags = {
+      "-Dgtk_doc=false",
+      "-Dman=false",
+      "-Dtests=false",
+   }
+};
+
+startup-notification = {
+   url = "https://www.freedesktop.org/software/startup-notification/releases/startup-notification-0.12.tar.gz",
+   sha3 = "f551c61e57c983b0cae7fa57ba727226a67fe33ebd8c5ac6d0452338ccefa31f",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--disable-static"
+   }
+};
+
+shared-mime-info = {
+   url = "https://gitlab.freedesktop.org/xdg/shared-mime-info/-/archive/2.4/shared-mime-info-2.4.tar.bz2",
+   sha3 = "e5c98a3407bcdc4523da451748e2f1d8cccf7a74a830e3150e3d9543132e3352",
+   build = "meson",
+   flags = {
+      "-Dupdate-mimedb=false",
+      "-Dbuild-translations=false",
+      "-Dbuild-tests=false",
+   }
+};
+
+upower = {
+   url = "https://gitlab.freedesktop.org/upower/upower/-/archive/v1.90.4/upower-v1.90.4.tar.bz2",
+   sha3 = "0361098291361171697efa94e7b061dc101e725a1ae532e7de7ddd4564bf266e",
+   build = "meson",
+   flags = {
+      "-Dsystemdsystemunitdir=no",
+      "-Dudevrulesdir=/usr/lib64/udev/rules.d",
+      "-Dgtk-doc=false",
+      "-Dman=false"
+   },
+   prepare = [[ sed '/parse_version/d' -i src/linux/integration-test.py ]]
 };
 
 --------------------------------------------------------------------------------
@@ -76,26 +127,6 @@ pango = {
       "-Ddocumentation=false",
       "-Dxft=enabled",
       "-Dintrospection=enabled",
-   }
-};
-
-iso-codes = {
-   url = "https://salsa.debian.org/iso-codes-team/iso-codes/-/archive/v4.16.0/iso-codes-v4.16.0.tar.gz",
-   sha3 = "14987ae3a6b275eee609a6cab2d23ea0f6a83015c33cfd613fac9f4405c491c4",
-   build = "./configure",
-   flags = { 
-      "--libdir=/usr/lib64",
-   }
-};
-
-shared-mime-info = {
-   url = "https://gitlab.freedesktop.org/xdg/shared-mime-info/-/archive/2.4/shared-mime-info-2.4.tar.bz2",
-   sha3 = "e5c98a3407bcdc4523da451748e2f1d8cccf7a74a830e3150e3d9543132e3352",
-   build = "meson",
-   flags = {
-      "-Dupdate-mimedb=false",
-      "-Dbuild-translations=false",
-      "-Dbuild-tests=false",
    }
 };
 
@@ -187,16 +218,6 @@ xfconf = {
    }
 };
 
-startup-notification = {
-   url = "https://www.freedesktop.org/software/startup-notification/releases/startup-notification-0.12.tar.gz",
-   sha3 = "f551c61e57c983b0cae7fa57ba727226a67fe33ebd8c5ac6d0452338ccefa31f",
-   build = "./configure",
-   flags = {
-      "--libdir=/usr/lib64",
-      "--disable-static"
-   }
-};
-
 libxfce4ui = {
    url = "https://archive.xfce.org/src/xfce/libxfce4ui/4.18/libxfce4ui-4.18.6.tar.bz2",
    sha3 = "bf995ed17168d3be32c53306abfb4f81e863097c0aed4f2f0108eb7045c59374",
@@ -256,17 +277,6 @@ xfce4-panel = {
    }
 };
 
-libnotify = {
-   url = "https://download.gnome.org/sources/libnotify/0.8/libnotify-0.8.3.tar.xz",
-   sha3 = "90216f182efa5ed279cb32527cfaa242a09fa1b7fac4fe6fee2981b40483d967",
-   build = "meson",
-   flags = {
-      "-Dgtk_doc=false",
-      "-Dman=false",
-      "-Dtests=false",
-   }
-};
-
 thunar = {
    url = "https://archive.xfce.org/src/xfce/thunar/4.18/thunar-4.18.10.tar.bz2",
    sha3 = "8512fc79e725ac841325cd31237e10256f855f5c57328efc5f2fd7b211f1dc57",
@@ -320,19 +330,6 @@ xfce4-appfinder = {
    }
 };
 
-upower = {
-   url = "https://gitlab.freedesktop.org/upower/upower/-/archive/v1.90.4/upower-v1.90.4.tar.bz2",
-   sha3 = "0361098291361171697efa94e7b061dc101e725a1ae532e7de7ddd4564bf266e",
-   build = "meson",
-   flags = {
-      "-Dsystemdsystemunitdir=no",
-      "-Dudevrulesdir=/usr/lib64/udev/rules.d",
-      "-Dgtk-doc=false",
-      "-Dman=false"
-   },
-   prepare = [[ sed '/parse_version/d' -i src/linux/integration-test.py ]]
-};
-
 xfce4-power-manager = {
    url = "https://archive.xfce.org/src/xfce/xfce4-power-manager/4.18/xfce4-power-manager-4.18.4.tar.bz2",
    sha3 = "3ac8c4269e09e133187911b114950bc785f09309dd82715e9b3444c75e8c94d5",
@@ -346,17 +343,6 @@ xfce4-power-manager = {
       "--disable-network-manager",
       "--disable-polkit",
       "--disable-debug",
-   }
-};
-
-libxklavier = {
-   url = "https://people.freedesktop.org/~svu/libxklavier-5.4.tar.bz2",
-   sha3 = "9af44b71f74161cfb2e4fabf3d2642730b7608c8d32d5ff84108a043074c582f",
-   build = "./configure",
-   flags = {
-      "--libdir=/usr/lib64",
-      "--disable-static",
-      "--disable-gtk-doc"
    }
 };
 
@@ -406,12 +392,6 @@ xfwm4 = {
       "--enable-xsync",
       "--disable-debug",
    }
-};
-
-desktop-file-utils = {
-   url = "https://www.freedesktop.org/software/desktop-file-utils/releases/desktop-file-utils-0.27.tar.xz",
-   sha3 = "c7e2480ad3a12bb90f68995645845c4c140f7c9b274ac21cfcb9ed443a7c7ef9",
-   build = "meson",
 };
 
 xfce4-screensaver = {
@@ -821,5 +801,77 @@ xreader = {
       "-Dhelp_files=true",
       "-Dintrospection=true",
       "-Depub=false",
+   }
+};
+
+--------------------------------------------------------------------------------
+
+libass = {
+   url = "https://github.com/libass/libass/releases/download/0.17.2/libass-0.17.2.tar.xz",
+   sha3 = "995f1084b0e7646e823c443836d864c119b6c9bb2e448ed2e2be3e25ae6d7146",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--disable-static",
+      "--enable-fontconfig",
+   }
+};
+
+
+ffmpeg = {
+   url = "https://ffmpeg.org/releases/ffmpeg-7.0.1.tar.xz",
+   sha3 = "6b3bb50b289dbd1424d6476183f9f5ef4ed334f72dcbe9ffa077c6fab35b755d",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--enable-gpl",
+      "--enable-libass",
+      "--enable-libdrm",
+      "--enable-libmp3lame",
+      "--enable-libopus",
+      "--enable-libvorbis",
+      "--enable-libvpx",
+      "--enable-libx264",
+      "--enable-libx265",
+      "--enable-libxml2",
+      "--enable-openssl",
+      "--enable-shared",
+      "--enable-version3",
+      "--disable-debug",
+      "--disable-libwebp",
+      "--disable-libxvid",
+      "--disable-nonfree",
+      "--disable-static",
+      "--x86asmexe=nasm"
+   }
+};
+
+libplacebo = {
+   url = "https://code.videolan.org/videolan/libplacebo/-/archive/v6.338.2/libplacebo-v6.338.2.tar.gz",
+   sha3 = "165911cc3cfee1d9baff04a5a29336be39dd29c706cb8bcf97c5dfbc9d8d7bb3",
+   build = "meson",
+   flags = {
+      "-Ddemos=false",
+      "-Dvulkan=auto",
+      "-Dglslang=auto",
+   }
+};
+
+uchardet = {
+   url = "https://www.freedesktop.org/software/uchardet/releases/uchardet-0.0.8.tar.xz",
+   sha3 = "a6b22fbf93ac19bc33d2f06bba03abdd36d53e58c3b575722de5d6f2d4219597",
+   build = "cmake",
+   flags = {
+      "-DBUILD_STATIC=OFF",
+   }
+};
+
+mpv = {
+   url = "https://github.com/mpv-player/mpv/archive/v0.38.0/mpv-v0.38.0.tar.gz",
+   sha3 = "84a2173a5a4ffc4f28e2e3918cb4cef7818dbc6b34844b910b615e37d1e04560",
+   build = "meson",
+   flags = {
+      "-Dx11=enabled",
+      "-Dpipewire=disabled",
    }
 };

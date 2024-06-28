@@ -1,3 +1,12 @@
+nasm = {
+   url = "https://www.nasm.us/pub/nasm/releasebuilds/2.16.03/nasm-2.16.03.tar.xz",
+   sha3 = "3a7634350853231b03bb9fec8f23836a4bc7cfb9f8a48f2317555ac4aec98414",
+   build = "./configure",
+   flags = { "--libdir=/usr/lib64" }
+};
+
+--------------------------------------------------------------------------------
+
 alsa-lib = {
    url = "https://alsa-project.org/files/pub/lib/alsa-lib-1.2.12.tar.bz2",
    sha3 = "3d65e490d7c1f25890e099c89f3a4e2c9b36a8553db4e17d05b9ee36feb19d71",
@@ -30,6 +39,15 @@ fribidi = {
    build = "meson",
 };
 
+iso-codes = {
+   url = "https://salsa.debian.org/iso-codes-team/iso-codes/-/archive/v4.16.0/iso-codes-v4.16.0.tar.gz",
+   sha3 = "14987ae3a6b275eee609a6cab2d23ea0f6a83015c33cfd613fac9f4405c491c4",
+   build = "./configure",
+   flags = { 
+      "--libdir=/usr/lib64",
+   }
+};
+
 lame = {
    url = "https://downloads.sourceforge.net/lame/lame-3.100.tar.gz",
    sha3 = "36700934b5b3e64f2e3ff33ee85bd7fc033890aa92d1f6a0a9b5acc2a3a0d199",
@@ -41,17 +59,6 @@ lame = {
       "--enable-mp3rtp",
       "--disable-static",
       "--disable-gtktest",
-   }
-};
-
-libass = {
-   url = "https://github.com/libass/libass/releases/download/0.17.2/libass-0.17.2.tar.xz",
-   sha3 = "995f1084b0e7646e823c443836d864c119b6c9bb2e448ed2e2be3e25ae6d7146",
-   build = "./configure",
-   flags = {
-      "--libdir=/usr/lib64",
-      "--disable-static",
-      "--enable-fontconfig",
    }
 };
 
@@ -208,15 +215,6 @@ opus = {
    build = "meson",
    flags = {
       "-Dcustom-modes=true",
-   }
-};
-
-uchardet = {
-   url = "https://www.freedesktop.org/software/uchardet/releases/uchardet-0.0.8.tar.xz",
-   sha3 = "a6b22fbf93ac19bc33d2f06bba03abdd36d53e58c3b575722de5d6f2d4219597",
-   build = "cmake",
-   flags = {
-      "-DBUILD_STATIC=OFF",
    }
 };
 

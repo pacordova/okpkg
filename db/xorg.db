@@ -475,6 +475,17 @@ libxpresent = {
    }
 };
 
+libxklavier = {
+   url = "https://people.freedesktop.org/~svu/libxklavier-5.4.tar.bz2",
+   sha3 = "9af44b71f74161cfb2e4fabf3d2642730b7608c8d32d5ff84108a043074c582f",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--disable-static",
+      "--disable-gtk-doc"
+   }
+};
+
 libxcvt = {
    url = "https://x.org/pub/individual/lib/libxcvt-0.1.2.tar.xz",
    sha3 = "fe6fdc97deade7b35ccc86898eb12bb0a3e210b36aded13cf52a335eececa7b3",
