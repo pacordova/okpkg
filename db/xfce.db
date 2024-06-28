@@ -695,7 +695,6 @@ gvfs = {
    sha3 = "c726f9ddc90d02a9fd0569009f3fe35280f8546b4bae497e01f8228dc9a88ddd",
    build = "meson",
    flags = {
-      "-Donedrive=false",
       "-Dadmin=false",
       "-Dafc=false",
       "-Darchive=false",
