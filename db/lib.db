@@ -54,8 +54,8 @@ dbus-glib = {
 };
 
 gobject-introspection = {
-   url = "https://download.gnome.org/sources/gobject-introspection/1.80/gobject-introspection-1.80.1.tar.xz",
-   sha3 = "0aee06c2479fc07b9aa7092fecdf757f4efd7739c585b01b1733cd1b8d9ed034",
+   url = "https://download.gnome.org/sources/gobject-introspection/1.78/gobject-introspection-1.78.1.tar.xz",
+   sha3 = "0c3dacb5a258ba94bd8b41e0e94522c800b3c5bdedf67b1501e743581760ce6e",
    build = "meson",
 };
 
@@ -63,11 +63,6 @@ json-glib = {
    url = "https://download.gnome.org/sources/json-glib/1.8/json-glib-1.8.0.tar.xz",
    sha3 = "e62adc949ff5e5f4b58b129f3004b8eca7b052288c47ff146d53de3826d81999",
    build = "meson",
-   flags = { 
-      "-Dtests=false", 
-      "-Dgtk_doc=disabled",
-      "-Dintrospection=disabled",
-   } 
 };
 
 libgudev = {
