@@ -1,3 +1,56 @@
+_freetype2 = {
+   url = "https://downloads.sourceforge.net/freetype/freetype-2.13.2.tar.xz",
+   sha3 = "d459da912526aa543282fa4b7ec45380bd57d247007ba3a2d423cfc516f6af67",
+   build = "meson",
+   flags = {
+      "-Dharfbuzz=disabled",
+      "-Dpng=disabled",
+   }
+};
+
+harfbuzz = {
+   url = "https://github.com/harfbuzz/harfbuzz/archive/9.0.0/harfbuzz-9.0.0.tar.gz",
+   sha3 = "df45d84d14d6bb1df59b5962099acc6f04be699d9a2f4c3608d73ecd5a5561d5",
+   build = "meson",
+   flags = {
+      "-Dbenchmark=disabled",
+      "-Dcairo=disabled",
+      "-Dfreetype=enabled",
+      "-Dglib=enabled",
+      "-Dgobject=enabled",
+      "-Dgraphite2=disabled",
+      "-Dicu=disabled",
+      "-Dintrospection=enabled",
+      "-Dtests=disabled",
+   }
+};
+
+freetype2 = {
+   url = "https://downloads.sourceforge.net/freetype/freetype-2.13.2.tar.xz",
+   sha3 = "d459da912526aa543282fa4b7ec45380bd57d247007ba3a2d423cfc516f6af67",
+   build = "meson",
+   flags = {
+      "-Dharfbuzz=enabled",
+      "-Dpng=enabled",
+   }
+};
+
+fontconfig = {
+   url = "https://freedesktop.org/software/fontconfig/release/fontconfig-2.15.0.tar.xz",
+   sha3 = "01271f5261ea7b47332da761d02f2b0ed62fb164a2921a1d81d3e53c6a5f7623",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
+      "--disable-docs",
+      "--disable-static",
+      "--with-xmldir=/etc/fonts",
+   }
+};
+
+--------------------------------------------------------------------------------
+
 xorg-util-macros = {
    url = "https://x.org/pub/individual/util/util-macros-1.20.1.tar.xz",
    sha3 = "d8affb47a8536ab5582f151b1b84725671d24aa557ef6546c3f3440c79dc1515",

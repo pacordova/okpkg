@@ -1,3 +1,43 @@
+gobject-introspection = {
+   url = "https://download.gnome.org/sources/gobject-introspection/1.78/gobject-introspection-1.78.1.tar.xz",
+   sha3 = "0c3dacb5a258ba94bd8b41e0e94522c800b3c5bdedf67b1501e743581760ce6e",
+   build = "meson",
+};
+
+dbus-glib = {
+   url = "https://dbus.freedesktop.org/releases/dbus-glib/dbus-glib-0.112.tar.gz",
+   sha3 = "403eaea495309ea8260148a2cb945a1c08785b1c431bd867d1100b188b4efa41",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--libexecdir=/usr/lib64",
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
+      "--disable-static",
+   }
+};
+
+gsettings-desktop-schemas = {
+   url = "https://download.gnome.org/sources/gsettings-desktop-schemas/46/gsettings-desktop-schemas-46.0.tar.xz",
+   sha3 = "c53040bbec29c15ee714fa1a1beeb6712bdbf50870f86c10df640717fec9a9a2",
+   build = "meson",
+   prepare = [[ sed -i -r 's:"(/system):"/org/gnome\1:g' schemas/*.in ]]
+};
+
+json-glib = {
+   url = "https://download.gnome.org/sources/json-glib/1.8/json-glib-1.8.0.tar.xz",
+   sha3 = "e62adc949ff5e5f4b58b129f3004b8eca7b052288c47ff146d53de3826d81999",
+   build = "meson",
+};
+
+libgudev = {
+   url = "https://download.gnome.org/sources/libgudev/238/libgudev-238.tar.xz",
+   sha3 = "6500e55c1ceeaf85747d3eeaebd57e1cfc7fae4b5b4ceb7161cd8ab059d1863d",
+   build = "meson",
+};
+
+--------------------------------------------------------------------------------
+
 at-spi2-core = {
    url = "https://download.gnome.org/sources/at-spi2-core/2.52/at-spi2-core-2.52.0.tar.xz",
    sha3 = "4bff424cc3969f854fc11b5798f092e515406a08fb489070b1cd3dab16aa221c",

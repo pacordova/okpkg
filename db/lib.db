@@ -1,13 +1,3 @@
-_freetype2 = {
-   url = "https://downloads.sourceforge.net/freetype/freetype-2.13.2.tar.xz",
-   sha3 = "d459da912526aa543282fa4b7ec45380bd57d247007ba3a2d423cfc516f6af67",
-   build = "meson",
-   flags = {
-      "-Dharfbuzz=disabled",
-      "-Dpng=disabled",
-   }
-};
-
 alsa-lib = {
    url = "https://alsa-project.org/files/pub/lib/alsa-lib-1.2.12.tar.bz2",
    sha3 = "3d65e490d7c1f25890e099c89f3a4e2c9b36a8553db4e17d05b9ee36feb19d71",
@@ -40,107 +30,6 @@ fribidi = {
    build = "meson",
 };
 
-dbus-glib = {
-   url = "https://dbus.freedesktop.org/releases/dbus-glib/dbus-glib-0.112.tar.gz",
-   sha3 = "403eaea495309ea8260148a2cb945a1c08785b1c431bd867d1100b188b4efa41",
-   build = "./configure",
-   flags = {
-      "--libdir=/usr/lib64",
-      "--libexecdir=/usr/lib64",
-      "--localstatedir=/var",
-      "--sysconfdir=/etc",
-      "--disable-static",
-   }
-};
-
-gobject-introspection = {
-   url = "https://download.gnome.org/sources/gobject-introspection/1.78/gobject-introspection-1.78.1.tar.xz",
-   sha3 = "0c3dacb5a258ba94bd8b41e0e94522c800b3c5bdedf67b1501e743581760ce6e",
-   build = "meson",
-};
-
-json-glib = {
-   url = "https://download.gnome.org/sources/json-glib/1.8/json-glib-1.8.0.tar.xz",
-   sha3 = "e62adc949ff5e5f4b58b129f3004b8eca7b052288c47ff146d53de3826d81999",
-   build = "meson",
-};
-
-libgudev = {
-   url = "https://download.gnome.org/sources/libgudev/238/libgudev-238.tar.xz",
-   sha3 = "6500e55c1ceeaf85747d3eeaebd57e1cfc7fae4b5b4ceb7161cd8ab059d1863d",
-   build = "meson",
-};
-
-gsettings-desktop-schemas = {
-   url = "https://download.gnome.org/sources/gsettings-desktop-schemas/46/gsettings-desktop-schemas-46.0.tar.xz",
-   sha3 = "c53040bbec29c15ee714fa1a1beeb6712bdbf50870f86c10df640717fec9a9a2",
-   build = "meson",
-   prepare = [[ sed -i -r 's:"(/system):"/org/gnome\1:g' schemas/*.in ]]
-};
-
-libpng = {
-   url = "https://downloads.sourceforge.net/libpng/libpng-1.6.43.tar.xz",
-   sha3 = "77bea57721f50c4a656994d644f77f75689a5d360c71b1aee1044eb275b9da7b",
-   build = "./configure",
-   flags = {
-      "--libdir=/usr/lib64",
-      "--sysconfdir=/etc",
-      "--disable-static",
-   }
-};
-
-harfbuzz = {
-   url = "https://github.com/harfbuzz/harfbuzz/archive/9.0.0/harfbuzz-9.0.0.tar.gz",
-   sha3 = "df45d84d14d6bb1df59b5962099acc6f04be699d9a2f4c3608d73ecd5a5561d5",
-   build = "meson",
-   flags = {
-      "-Dbenchmark=disabled",
-      "-Dcairo=disabled",
-      "-Dfreetype=enabled",
-      "-Dglib=enabled",
-      "-Dgobject=enabled",
-      "-Dgraphite2=disabled",
-      "-Dicu=disabled",
-      "-Dintrospection=enabled",
-      "-Dtests=disabled",
-   }
-};
-
-freetype2 = {
-   url = "https://downloads.sourceforge.net/freetype/freetype-2.13.2.tar.xz",
-   sha3 = "d459da912526aa543282fa4b7ec45380bd57d247007ba3a2d423cfc516f6af67",
-   build = "meson",
-   flags = {
-      "-Dharfbuzz=enabled",
-      "-Dpng=enabled",
-   }
-};
-
-fontconfig = {
-   url = "https://freedesktop.org/software/fontconfig/release/fontconfig-2.15.0.tar.xz",
-   sha3 = "01271f5261ea7b47332da761d02f2b0ed62fb164a2921a1d81d3e53c6a5f7623",
-   build = "./configure",
-   flags = {
-      "--libdir=/usr/lib64",
-      "--localstatedir=/var",
-      "--sysconfdir=/etc",
-      "--disable-docs",
-      "--disable-static",
-      "--with-xmldir=/etc/fonts",
-   }
-};
-
-libass = {
-   url = "https://github.com/libass/libass/releases/download/0.17.2/libass-0.17.2.tar.xz",
-   sha3 = "995f1084b0e7646e823c443836d864c119b6c9bb2e448ed2e2be3e25ae6d7146",
-   build = "./configure",
-   flags = {
-      "--libdir=/usr/lib64",
-      "--disable-static",
-      "--enable-fontconfig",
-   }
-};
-
 lame = {
    url = "https://downloads.sourceforge.net/lame/lame-3.100.tar.gz",
    sha3 = "36700934b5b3e64f2e3ff33ee85bd7fc033890aa92d1f6a0a9b5acc2a3a0d199",
@@ -155,34 +44,14 @@ lame = {
    }
 };
 
-libvpx = {
-   url = "https://github.com/webmproject/libvpx/archive/v1.14.1/libvpx-1.14.1.tar.gz",
-   sha3 = "6f2658dc6260ee0915ea4f27226dad31d0f45dca6f70ecb988bfe64ea5ae9887",
-   build = "../configure",
-   prepare = [[
-      sed -i 's/cp -p/cp/' build/make/Makefile
-      sed -i 's/perl/:/g;s/diff --version/command -v diff/' configure
-   ]],
+libass = {
+   url = "https://github.com/libass/libass/releases/download/0.17.2/libass-0.17.2.tar.xz",
+   sha3 = "995f1084b0e7646e823c443836d864c119b6c9bb2e448ed2e2be3e25ae6d7146",
+   build = "./configure",
    flags = {
       "--libdir=/usr/lib64",
-      "--enable-pic",
-      "--enable-postproc",
-      "--enable-runtime-cpu-detect",
-      "--enable-shared",
-      "--enable-vp8",
-      "--enable-vp9",
-      "--enable-vp9-highbitdepth",
-      "--disable-debug",
-      "--disable-debug-libs",
-      "--disable-docs",
-      "--disable-examples",
-      "--disable-install-bins",
-      "--disable-install-docs",
-      "--disable-install-srcs",
       "--disable-static",
-      "--disable-tools",
-      "--disable-unit-tests",
-      "--as=nasm",
+      "--enable-fontconfig",
    }
 };
 
@@ -196,6 +65,18 @@ libevent = {
       "--disable-static",
    },
    prepare = [[ sed -i 's/python/&3/' event_rpcgen.py ]]
+};
+
+libexif = {
+   url = "https://github.com/libexif/libexif/releases/download/v0.6.24/libexif-0.6.24.tar.bz2",
+   sha3 = "a3d9130008e06b086ff60624ed629eeb259916da99fa045784fc6177b4b591c3",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
+      "--disable-static"
+   }
 };
 
 libjpeg-turbo = {
@@ -234,6 +115,28 @@ libogg = {
    }
 };
 
+libpng = {
+   url = "https://downloads.sourceforge.net/libpng/libpng-1.6.43.tar.xz",
+   sha3 = "77bea57721f50c4a656994d644f77f75689a5d360c71b1aee1044eb275b9da7b",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--sysconfdir=/etc",
+      "--disable-static",
+   }
+};
+
+libsass = {
+   url = "https://github.com/sass/libsass/archive/3.6.6/libsass-3.6.6.tar.gz",
+   sha3 = "9637cd39de53582abc24deefb2ed3c28c92db591c81f4765dd58c287631b2667",
+   build = "autoreconf",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--localstatedir=/var",
+      "--disable-static"
+   }
+};
+
 libtiff = {
    url = "https://download.osgeo.org/libtiff/tiff-4.6.0.tar.gz",
    sha3 = "bab4329a43c48338b3e00af8d44358b7e01109b065f9790d06901be822f6f1ac",
@@ -256,35 +159,34 @@ libvorbis = {
    }
 };
 
-opus = {
-   url = "https://downloads.xiph.org/releases/opus/opus-1.5.2.tar.gz",
-   sha3 = "6f0c6a0215fa2c898f9f37fe07cdafb230a9135e722163de605e480ebf6820e0",
-   build = "meson",
-   flags = {
-      "-Dcustom-modes=true",
-   }
-};
-
-libsass = {
-   url = "https://github.com/sass/libsass/archive/3.6.6/libsass-3.6.6.tar.gz",
-   sha3 = "9637cd39de53582abc24deefb2ed3c28c92db591c81f4765dd58c287631b2667",
-   build = "autoreconf",
+libvpx = {
+   url = "https://github.com/webmproject/libvpx/archive/v1.14.1/libvpx-1.14.1.tar.gz",
+   sha3 = "6f2658dc6260ee0915ea4f27226dad31d0f45dca6f70ecb988bfe64ea5ae9887",
+   build = "../configure",
+   prepare = [[
+      sed -i 's/cp -p/cp/' build/make/Makefile
+      sed -i 's/perl/:/g;s/diff --version/command -v diff/' configure
+   ]],
    flags = {
       "--libdir=/usr/lib64",
-      "--localstatedir=/var",
-      "--disable-static"
-   }
-};
-
-libexif = {
-   url = "https://github.com/libexif/libexif/releases/download/v0.6.24/libexif-0.6.24.tar.bz2",
-   sha3 = "a3d9130008e06b086ff60624ed629eeb259916da99fa045784fc6177b4b591c3",
-   build = "./configure",
-   flags = {
-      "--libdir=/usr/lib64",
-      "--localstatedir=/var",
-      "--sysconfdir=/etc",
-      "--disable-static"
+      "--enable-pic",
+      "--enable-postproc",
+      "--enable-runtime-cpu-detect",
+      "--enable-shared",
+      "--enable-vp8",
+      "--enable-vp9",
+      "--enable-vp9-highbitdepth",
+      "--disable-debug",
+      "--disable-debug-libs",
+      "--disable-docs",
+      "--disable-examples",
+      "--disable-install-bins",
+      "--disable-install-docs",
+      "--disable-install-srcs",
+      "--disable-static",
+      "--disable-tools",
+      "--disable-unit-tests",
+      "--as=nasm",
    }
 };
 
@@ -297,6 +199,15 @@ mtdev = {
       "--localstatedir=/var",
       "--sysconfdir=/etc",
       "--disable-static"
+   }
+};
+
+opus = {
+   url = "https://downloads.xiph.org/releases/opus/opus-1.5.2.tar.gz",
+   sha3 = "6f0c6a0215fa2c898f9f37fe07cdafb230a9135e722163de605e480ebf6820e0",
+   build = "meson",
+   flags = {
+      "-Dcustom-modes=true",
    }
 };
 
