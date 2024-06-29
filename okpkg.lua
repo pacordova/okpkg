@@ -187,7 +187,7 @@ function build(pkgname) local t, v, status, destdir, fp
       status =
          os.execute(string.format("cmake %s", t.flags)) and
          setenv("DESTDIR", destdir) and
-         os.execute"$ninja install" and
+         os.execute"ninja install" and
          unsetenv"DESTDIR"
    end
 
@@ -216,7 +216,7 @@ function build(pkgname) local t, v, status, destdir, fp
       status =
          os.execute("meson setup build " .. t.flags) and
          setenv("DESTDIR", destdir) and
-         os.execute"$ninja -C build install" and
+         os.execute"ninja -C build install" and
          unsetenv"DESTDIR"
    end
 
