@@ -37,11 +37,10 @@ for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do
 end
 
 -- rebuilds
-emerge"bison"; emerge"texinfo"; emerge"glibc"; emerge"binutils"; emerge "mpfr"
+emerge"bison"; emerge"glibc"; emerge"binutils"; emerge "mpfr"
 
 -- misc post-install
 os.execute"udevadm hwdb --usr --update"
-os.execute"setcap cap_net_raw+p /usr/bin/ping"
 os.execute"makewhatis /usr/share/man"
 
 -- fix versions and cleanup

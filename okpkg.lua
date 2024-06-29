@@ -51,10 +51,10 @@ end
 function download(pkgname) local t, f, fp
    t = vlook(pkgname)
 
--- change mirrors
-t.url = t.url:
-gsub("https://ftp.gnu.org", "http://mirror.rit.edu"):
-gsub("https://cran.r%-project.org", "https://archive.linux.duke.edu/cran")
+   -- change mirrors
+   t.url = t.url:
+      gsub("https://ftp.gnu.org", "http://mirror.rit.edu"):
+      gsub("https://cran.r%-project.org", "https://archive.linux.duke.edu/cran")
 
    -- fresh build the sources
    chdir"/usr/okpkg/sources"; unlink(pkgname); mkdir(pkgname)
