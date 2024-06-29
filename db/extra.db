@@ -1,17 +1,12 @@
-alsa-utils = {
-   url = "https://alsa-project.org/files/pub/utils/alsa-utils-1.2.12.tar.bz2",
-   sha3 = "c7ce5050986682b2944bfe344accc0107d0e37f8ca0047605d02610c908107d9",
+acpid = {
+   url = "https://downloads.sourceforge.net/acpid2/acpid-2.0.34.tar.xz",
+   sha3 = "3e346422c38cf10bd0072581d77283d979e184d37a687b442a0c792c2fad62d2",
    build = "./configure",
    flags = {
-      "--libdir=/usr/lib64",
       "--sbindir=/usr/bin",
+      "--libdir=/usr/lib64",
       "--localstatedir=/var",
-      "--sysconfdir=/etc",
-      "--with-udev-rules-dir=/usr/lib64/udev/rules.d",
-      "--disable-alsaconf",
-      "--disable-bat",
-      "--disable-xmlto",
-      "--with-curses=ncursesw"
+      "--mandir=/usr/share/man",
    }
 };
 
@@ -21,20 +16,76 @@ cmatrix = {
    build = "cmake",
 };
 
-dhcpcd = {
-   url = "https://github.com/NetworkConfiguration/dhcpcd/releases/download/v10.0.8/dhcpcd-10.0.8.tar.xz",
-   sha3 = "8984e9dfecb36a3c1dbcaba6ab5342274755f25c78c46ae90c979ac9e2286b9d",
+cpio = {
+   url = "https://ftp.gnu.org/gnu/cpio/cpio-2.15.tar.bz2",
+   sha3 = "112b5cd46328b32e9bbc463721f2c0ece9adc4671dcbb016a096007181771524",
    build = "./configure",
    flags = {
+      "--bindir=/usr/share/bin",
       "--libdir=/usr/lib64",
-      "--sbindir=/usr/bin",
       "--sysconfdir=/etc",
+      "--mandir=/usr/share/man",
+   }
+};
+
+dcron = {
+   url = "http://www.jimpryor.net/linux/releases/dcron-4.5.tar.gz",
+   sha3 = "4190e7664e055d0540c03e38b5ad3e7597ca9b27953b27b53731e66884da2c84",
+   build = "make",
+   flags = {
+      "PREFIX=/usr",
+      "SBINDIR=/usr/bin"
+   }
+};
+
+json-c = {
+   url = "https://s3.amazonaws.com/json-c_releases/releases/json-c-0.17.tar.gz",
+   sha3 = "6e3bb804e61de257c313a2d4e39e89262dea68477acc518f8c0c4ab15a37ea69",
+   build = "cmake",
+   flags = {
+      "-DBUILD_STATIC_LIBS=OFF",
+      "-DBUILD_TESTING=OFF",
+      "-DENABLE_THREADING=ON",
+      "-DENABLE_RDRAND=OFF"
+   }
+};
+
+argon2 = {
+   url = "http://distcache.freebsd.org/ports-distfiles/P-H-C-phc-winner-argon2-20190702_GH0.tar.gz",
+   sha3 = "8147687cbaa78ac3fa5ef0d07996934b741621e1c24705479ae09bf17a8976aa",
+   build = "make",
+   flags = { "LIBRARY_REL=lib64" }
+};
+
+cryptsetup = {
+   url = "https://kernel.org/pub/linux/utils/cryptsetup/v2.7/cryptsetup-2.7.3.tar.xz",
+   sha3 = "d6d65023fb6545d553cc97b222f5001e845872a77cb25240465261a04c3c0892",
+   build = "./configure",
+   flags = {
+      "--sbindir=/usr/bin",
+      "--libdir=/usr/lib64",
       "--localstatedir=/var",
-      "--libexecdir=/usr/lib64/dhcpcd",
-      "--runstatedir=/run",
-      "--rundir=/run",
-      "--disable-privsep",
-      "--dbdir=/var/lib/dhcpcd"
+      "--sysconfdir=/etc",
+      "--mandir=/usr/share/man",
+      "--enable-libargon2",
+      "--disable-asciidoc",
+      "--disable-ssh-token",
+      "--disable-static",
+   }
+};
+
+dosfstools = {
+   url = "https://github.com/dosfstools/dosfstools/releases/download/v4.2/dosfstools-4.2.tar.gz",
+   sha3 = "3f41e94fd88aa576f5694d2f36d0ec76c8c2750243063b8f0c7c34612606cf5d",
+   build = "./configure",
+   flags = {
+      "--sbindir=/usr/bin",
+      "--libdir=/usr/lib64",
+      "--libexecdir=/usr/lib64",
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
+      "--mandir=/usr/share/man",
+      "--enable-compat-symlinks",
    }
 };
 
@@ -133,6 +184,21 @@ iftop = {
    }
 };
 
+logrotate = {
+   url = "https://github.com/logrotate/logrotate/releases/download/3.22.0/logrotate-3.22.0.tar.xz",
+   sha3 = "e23bd85e242aadbc110b8acba874947c13f783bbc7c9e65663dc0a757c609291",
+   build = "./configure",
+   flags = {
+      "--sbindir=/usr/bin",
+      "--libdir=/usr/lib64",
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
+      "--mandir=/usr/share/man",
+      "--with-compress-command=/usr/bin/pigz",
+      "--with-uncompress-command=/usr/bin/unpigz",
+   }
+};
+
 lsof = {
    url = "https://github.com/lsof-org/lsof/releases/download/4.99.3/lsof-4.99.3.tar.gz",
    sha3 = "fa87e870dadb9144e4b0b85c020c0d48e150ea70cb0ad2f1069014df9c3f72ad",
@@ -144,6 +210,18 @@ lsof = {
       "--with-libtirpc",
       "--disable-static",
    }
+};
+
+mawk = {
+   url = "https://invisible-island.net/archives/mawk/mawk-1.3.4-20240622.tgz",
+   sha3 = "3f07042cc941c4b9257875e4d387831255576ccbc3f31f4a92bddabb514bba57",
+   build = "./configure",
+};
+
+oksh = {
+   url = "https://github.com/ibara/oksh/releases/download/oksh-7.5/oksh-7.5.tar.gz",
+   sha3 = "786cee634f58a6e2d93bdb5cf439480e11c2c1e1ff287822213424040333746d",
+   build = "./configure",
 };
 
 opendoas = {
@@ -162,15 +240,47 @@ opendoas = {
    ]]
 };
 
-openresolv = {
-   url = "https://github.com/NetworkConfiguration/openresolv/releases/download/v3.13.2/openresolv-3.13.2.tar.xz",
-   sha3 = "d53f70a5aa38adb8c89f94ca393a1e007d05dfad9d5b8791deeab7d03378ad7e",
+openvi = {
+   url = "https://github.com/johnsonjh/OpenVi/archive/7.5.28/OpenVi-7.5.28.tar.gz",
+   sha3 = "bc8b4846bc61052d4a55a5b0eb411222bc66a4fd2f3954be874a1f3e0702114b",
+   build = "make",
+   flags = {
+      "CC=gcc",
+      "OPTLEVEL=-O2",
+      "PREFIX=/usr",
+      "BINPREFIX=''",
+   },
+   post = [[ rm -fr $destdir/usr/libexec ]]
+};
+
+parted = {
+   url = "https://ftp.gnu.org/gnu/parted/parted-3.6.tar.xz",
+   sha3 = "47ffc9b3cddcf9226b54a8ef159a39c5a25748549f1fa39c833c1afbdd40e589",
    build = "./configure",
    flags = {
       "--sbindir=/usr/bin",
-      "--libexecdir=/usr/lib64",
-      "--sysconfdir=/etc",
+      "--libdir=/usr/lib64",
+      "--mandir=/usr/share/man",
+      "--enable-device-mapper",
+      "--enable-shared",
+      "--disable-rpath",
+      "--disable-static",
+      "--with-readline",
    }
+};
+
+pciutils = {
+   url = "https://mj.ucw.cz/download/linux/pci/pciutils-3.13.0.tar.gz",
+   sha3 = "53507c5220643d8d4f1a8b7c701c19378038f711a08fd81144672cac0d4ffce5",
+   build = "make",
+   flags = {
+      "PREFIX=/usr",
+      "LIBDIR=/usr/lib64",
+      "SBINDIR=/usr/bin",
+      "SHAREDIR=/usr/share/hwdata",
+      "SHARED=yes"
+   },
+   post = [[ chmod 755 $destdir/usr/lib64/libpci.so ]]
 };
 
 r = {
@@ -245,67 +355,53 @@ sha3sum = {
    prepare = [[ sed -i 's#FLAGS\s\+=#FLAGS +=#g' config.mk ]]
 };
 
+time = {
+   url = "https://ftp.gnu.org/gnu/time/time-1.9.tar.gz",
+   sha3 = "21b27eeec844d70f0b91316d2ac96b6774959275c1df4250a2484c211993d7bc",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--mandir=/usr/share/man",
+      "--sysconfdir=/etc",
+   }
+};
+
 tmux = {
    url = "https://github.com/tmux/tmux/releases/download/3.4/tmux-3.4.tar.gz",
    sha3 = "51c4ac03a4e88cde535159877ea4fb8919d64b14ad8a030913316fc3c337a6ca",
    build = "./configure",
 };
 
-xorriso = {
-   url = "http://ftp.gnu.org/gnu/xorriso/xorriso-1.5.6.tar.gz",
-   sha3 = "ce81f4c5fc0c4a4144a1c9e68bfc49e632ca73ffc25ce1615f849f081e1510b8",
-   build = "./configure",
-};
-
--- split packages
-elfutils = {
-   url = "https://sourceware.org/ftp/elfutils/0.191/elfutils-0.191.tar.bz2",
-   sha3 = "bdf73b4f3be633a56344c1d1bcc6a9bb036c9bb565036ec16daef461e8f3a6d6",
+libusb = {
+   url = "https://github.com/libusb/libusb/releases/download/v1.0.27/libusb-1.0.27.tar.bz2",
+   sha3 = "e79a5aa5c54bd32d07f1e0935b1b18c09fe7bfa6a202d5a1c218938764781164",
    build = "./configure",
    flags = {
       "--libdir=/usr/lib64",
-      "--sysconfdir=/etc",
       "--mandir=/usr/share/man",
-      "--enable-deterministic-archives",
-      "--enable-libdebuginfod",
-      "--enable-symbol-versioning",
-      "--disable-debuginfod",
-      "--program-prefix='eu-'",
-   },
-   post = [[ $make -C libelf uninstall DESTDIR=$destdir ]]
+      "--disable-static",
+   }
 };
 
-lvm2 = {
-   url = "https://sourceware.org/ftp/lvm2/LVM2.2.03.24.tgz",
-   sha3 = "ecf2a70bbb2e69979b22553ec9c8913a409c71f33713cf7e07d179e2adc26559",
+usbutils = {
+   url = "https://mirrors.kernel.org/pub/linux/utils/usb/usbutils/usbutils-017.tar.xz",
+   sha3 = "536184ee79409ec212e2b060791792384d428bd3176438c47826294bd572e80b",
    build = "./configure",
    flags = {
       "--sbindir=/usr/bin",
       "--libdir=/usr/lib64",
-      "--localstatedir=/var",
-      "--sysconfdir=/etc",
       "--mandir=/usr/share/man",
-      "--enable-cmdlib",
-      "--enable-dmeventd",
-      "--enable-pkgconfig",
-      "--enable-udev_rules",
-      "--enable-udev_sync",
-      "--enable-write_install",
-      "--disable-readline",
-      "--disable-systemd-journal",
-      "--with-default-dm-run-dir=/run",
-      "--with-default-locking-dir=/run/lock/lvm",
-      "--with-default-run-dir=/run/lvm",
-      "--with-default-pid-dir=/run",
-      "--with-libexecdir=/usr/lib64/lvm2",
-      "--with-udev-prefix=/usr",
-      "--with-udevdir=/usr/lib64/udev/rules.d",
-      "--with-usrlibdir=/usr/lib64",
-      "--without-systemd",
-      "--without-systemdsystemunitdir",
+      "--datadir=/usr/share/hwdata",
    },
    post = [[
-      rm -fr $destdir && mkdir -p $destdir
-      $make install_lvm2 DESTDIR=$destdir
+      mkdir -p $destdir/usr/share/hwdata
+      cd $destdir/usr/share/hwdata
+      curl -LOR https://www.linux-usb.org/usb.ids
    ]]
+};
+
+xorriso = {
+   url = "http://ftp.gnu.org/gnu/xorriso/xorriso-1.5.6.tar.gz",
+   sha3 = "ce81f4c5fc0c4a4144a1c9e68bfc49e632ca73ffc25ce1615f849f081e1510b8",
+   build = "./configure",
 };

@@ -1,12 +1,3 @@
-nasm = {
-   url = "https://www.nasm.us/pub/nasm/releasebuilds/2.16.03/nasm-2.16.03.tar.xz",
-   sha3 = "3a7634350853231b03bb9fec8f23836a4bc7cfb9f8a48f2317555ac4aec98414",
-   build = "./configure",
-   flags = { "--libdir=/usr/lib64" }
-};
-
---------------------------------------------------------------------------------
-
 alsa-lib = {
    url = "https://alsa-project.org/files/pub/lib/alsa-lib-1.2.12.tar.bz2",
    sha3 = "3d65e490d7c1f25890e099c89f3a4e2c9b36a8553db4e17d05b9ee36feb19d71",
@@ -14,6 +5,23 @@ alsa-lib = {
    flags = {
       "--libdir=/usr/lib64",
       "--without-debug"
+   }
+};
+
+alsa-utils = {
+   url = "https://alsa-project.org/files/pub/utils/alsa-utils-1.2.12.tar.bz2",
+   sha3 = "c7ce5050986682b2944bfe344accc0107d0e37f8ca0047605d02610c908107d9",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--sbindir=/usr/bin",
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
+      "--with-udev-rules-dir=/usr/lib64/udev/rules.d",
+      "--disable-alsaconf",
+      "--disable-bat",
+      "--disable-xmlto",
+      "--with-curses=ncursesw"
    }
 };
 

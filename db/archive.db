@@ -1,3 +1,56 @@
+-- split packages
+elfutils = {
+   url = "https://sourceware.org/ftp/elfutils/0.191/elfutils-0.191.tar.bz2",
+   sha3 = "bdf73b4f3be633a56344c1d1bcc6a9bb036c9bb565036ec16daef461e8f3a6d6",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--sysconfdir=/etc",
+      "--mandir=/usr/share/man",
+      "--enable-deterministic-archives",
+      "--enable-libdebuginfod",
+      "--enable-symbol-versioning",
+      "--disable-debuginfod",
+      "--program-prefix='eu-'",
+   },
+   post = [[ $make -C libelf uninstall DESTDIR=$destdir ]]
+};
+
+lvm2 = {
+   url = "https://sourceware.org/ftp/lvm2/LVM2.2.03.24.tgz",
+   sha3 = "ecf2a70bbb2e69979b22553ec9c8913a409c71f33713cf7e07d179e2adc26559",
+   build = "./configure",
+   flags = {
+      "--sbindir=/usr/bin",
+      "--libdir=/usr/lib64",
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
+      "--mandir=/usr/share/man",
+      "--enable-cmdlib",
+      "--enable-dmeventd",
+      "--enable-pkgconfig",
+      "--enable-udev_rules",
+      "--enable-udev_sync",
+      "--enable-write_install",
+      "--disable-readline",
+      "--disable-systemd-journal",
+      "--with-default-dm-run-dir=/run",
+      "--with-default-locking-dir=/run/lock/lvm",
+      "--with-default-run-dir=/run/lvm",
+      "--with-default-pid-dir=/run",
+      "--with-libexecdir=/usr/lib64/lvm2",
+      "--with-udev-prefix=/usr",
+      "--with-udevdir=/usr/lib64/udev/rules.d",
+      "--with-usrlibdir=/usr/lib64",
+      "--without-systemd",
+      "--without-systemdsystemunitdir",
+   },
+   post = [[
+      rm -fr $destdir && mkdir -p $destdir
+      $make install_lvm2 DESTDIR=$destdir
+   ]]
+};
+
 -- gnome stuff
 itstool = {
    url = "https://files.itstool.org/itstool/itstool-2.0.7.tar.bz2",
