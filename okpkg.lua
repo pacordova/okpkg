@@ -10,7 +10,6 @@ local chdir, setenv, unsetenv, basename, mkdir, pwd, sha3sum =
 setenv("CFLAGS", "-O2 -march=x86-64-v2 -fstack-protector-strong -fstack-clash-protection -fcommon -pipe")
 setenv("CXXFLAGS", os.getenv("CFLAGS"))
 setenv("LC_ALL", "POSIX")
-setenv("ninja", "samu")
 setenv("make", "make -j5")
 
 
