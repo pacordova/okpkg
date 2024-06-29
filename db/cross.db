@@ -448,19 +448,6 @@ util-linux = {
    }
 };
 
-gettext = {
-   build = "./configure",
-   flags = {
-      "--prefix=/usr",
-      "--libdir=/usr/lib64",
-      "--mandir=/usr/share/man",
-      "--disable-shared",
-      "--without-git",
-      "--host=x86_64-unknown-linux-gnu",
-      "--build=$(build-aux/config.guess)",
-   }
-};
-
 libressl = {
    build = "./configure",
    flags = {
