@@ -65,13 +65,12 @@ end
 
 -- minimal package set
 minimal = {
-   "iana-etc", "glibc", "zlib", "bzip2", "lzlib", "xz", "zstd", "file",
-   "gmp", "attr", "acl", "gcc-libs", "which", "libcap", "shadow", "ncurses",
-   "readline", "sed", "pcre2", "grep", "oksh", "expat", "less", "mawk",
-   "tzdata", "libxcrypt", "libressl", "kmod", "curl", "libelf", "coreutils",
-   "findutils", "pigz", "kbd", "ed", "tar", "lua", "openvi", "eudev",
-   "procps-ng", "util-linux", "e2fsprogs", "dinit", "libaio", "device-mapper",
-   "parted", "glib2", "dbus", "dcron", "time",
+   "iana-etc", "glibc", "zlib", "bzip2", "lzlib", "xz", "zstd", "file", "gmp",
+   "attr", "acl", "gcc-libs", "libcap", "shadow", "ncurses", "readline", "sed",
+   "pcre2", "grep", "oksh", "expat", "less", "mawk", "tzdata", "libxcrypt",
+   "libressl", "kmod", "coreutils", "findutils", "pigz", "kbd", "ed", "tar",
+   "lua", "openvi", "eudev", "procps-ng", "util-linux", "e2fsprogs", "dinit",
+   "dbus", "libaio", "device-mapper", "parted",
 }
 
 -- posix package set
