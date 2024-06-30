@@ -29,6 +29,9 @@ end
 -- rebuilds
 emerge"bison"; emerge"glibc"; emerge"binutils"; emerge "mpfr"
 
+-- extras
+emerge"mawk"; emerge"oksh"; emerge"openvi"
+
 -- python/perl modules
 local fp, buf
 fp = io.open("/usr/okpkg/db/modules.db"); buf = '\n' .. fp:read("*a"); fp:close()

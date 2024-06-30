@@ -24,7 +24,46 @@ local function install(pkgname) local fp
    end
 end
 
--- minimalist package set
+
+-- base package set
+if #arg == 0 then arg = {"base"} end
+base = { "linux-headers" }
+local fp, buf
+fp = io.open("/usr/okpkg/db/system.db")
+buf = '\n' .. fp:read("*a")
+fp:close()
+for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do
+    if i:sub(1, 3) == "gcc" then
+        table.insert(base, "gcc-libs")
+        table.insert(base, "gcc-14.1.0")
+    elseif i == "perl" then
+        table.insert(base, "perl-5.40.0")
+    elseif i:sub(1, 1) ~= "_" then
+        table.insert(base, i)
+    end
+end
+
+-- devel package set
+devel = {}
+local fp, buf
+fp = io.open("/usr/okpkg/db/dev.db")
+buf = '\n' .. fp:read("*a")
+fp:close()
+for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do
+   table.insert(devel, i)
+end
+
+-- network package set
+network = {}
+local fp, buf
+fp = io.open("/usr/okpkg/db/net.db")
+buf = '\n' .. fp:read("*a")
+fp:close()
+for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do
+   table.insert(network, i)
+end
+
+-- minimal package set
 minimal = {
    "iana-etc", "glibc", "zlib", "bzip2", "lzlib", "xz", "zstd", "file",
    "gmp", "attr", "acl", "gcc-libs", "which", "libcap", "shadow", "ncurses",
@@ -35,32 +74,8 @@ minimal = {
    "parted", "glib2", "dbus", "dcron", "time",
 }
 
-network = {
-   "libmnl", "libnl3", "libtirpc", "libusb", "libpcap", "iptables", "connman",
-   "gnupg1", "inetutils", "iproute2", "iputils", "netcat", "openntpd",
-   "openssh", "wpa_supplicant",
-}
-
 -- posix package set
 posix = { "dma", "at", "s-nail", "lprng", "pax" }
-
--- system package set, automagic
-if #arg == 0 then arg = {"system"} end
-system = { "linux-headers" }
-local fp, buf
-fp = io.open("/usr/okpkg/db/system.db")
-buf = '\n' .. fp:read("*a")
-fp:close()
-for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do
-    if i:sub(1, 3) == "gcc" then
-        table.insert(system, "gcc-libs")
-        table.insert(system, "gcc-14.1.0")
-    elseif i == "perl" then
-        table.insert(system, "perl-5.40.0")
-    elseif i:sub(1, 1) ~= "_" then
-        table.insert(system, i)
-    end
-end
 
 -- reformat the partition
 io.write("Please enter a partition to format: ")
