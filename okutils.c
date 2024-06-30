@@ -6,119 +6,15 @@
 #include <libgen.h>
 #include <sys/stat.h>
 #include <openssl/evp.h>
+#include <glob.h>
+
 #include <lua.h>
 #include <lualib.h>
 #include <lauxlib.h>
-#include <glob.h>
 
 #define DIRMODE 0777
 #define BUFSIZE 4096
 #define MDSIZE 256/8
-
-int
-ok_glob(lua_State *L) {
-	static int i = -1;
-	static glob_t buf;
-
-	if (i < 0) {
-		const char *pattern = luaL_checkstring(L, 1);
-		glob(pattern, GLOB_NOSORT, NULL, &buf);
-		i = 0;
-		lua_pushcfunction(L, ok_glob);
-		return 1;
-	}
-
-	if (i < buf.gl_pathc) {
-		lua_pushstring(L, (const char*) buf.gl_pathv[i]);
-		++i;
-		return 1;
-	}
-	else {
-		globfree(&buf);
-		i = -1;
-		return 0;
-	}
-}
-
-int
-ok_sha3sum(lua_State *L)
-{
-	const char *path = luaL_checkstring(L, 1);
-
-	static char output[MDSIZE*2];
-	unsigned char buf[BUFSIZE], md[MDSIZE];
-	FILE *fp = fopen(path, "rb");
-	EVP_MD_CTX *mdctx = EVP_MD_CTX_new();
-	EVP_DigestInit_ex(mdctx, EVP_sha3_256(), NULL);
-
-	size_t cnt;
-	do {
-		cnt = fread(buf, 1, sizeof(buf), fp);
-		EVP_DigestUpdate(mdctx, buf, cnt);
-	} while(cnt > 0);
-
-	EVP_DigestFinal_ex(mdctx, md, NULL);
-	EVP_MD_CTX_free(mdctx);
-	fclose(fp);
-
-	for(int i = 0; i<MDSIZE; ++i)
-		sprintf(output+2*i, "%.2x", md[i]);
-
-	lua_pushstring(L, (const char*) output);
-	return 1;
-}
-
-int
-ok_chroot(lua_State *L)
-{
-	const char *path = luaL_checkstring(L, 1);
-	char *const cmd[] = {"/bin/sh", "-i", NULL};
-
-
-	if (chdir(path)) {
-		fprintf(stderr, "error: chdir(\"%s\")\n", path);
-		lua_pushinteger(L, -1);
-		return 1;
-	}
-	else {
-		mkdir("proc", DIRMODE);
-		mkdir("sys", DIRMODE);
-		mkdir("dev", DIRMODE);
-	}
-
-	const char *mountcmd =
-		"mountpoint -q proc || mount -t proc  -o ro /proc proc/;"
-		"mountpoint -q sys  || mount -t sysfs -o ro /sys sys/;"
-		"mountpoint -q dev  || mount --rbind  -o ro /dev dev/;"
-		"mount --make-rslave dev/";
-
-	if (system(mountcmd)) {
-		fprintf(stderr, "error: mount\n");
-		lua_pushinteger(L, -1);
-		return 1;
-	}
-	else {
-		/* env */
-		clearenv();
-		setenv("PATH", "/usr/bin", 1);
-		setenv("HOME", "/root", 1);
-		setenv("USER", "root", 1);
-		setenv("LC_ALL", "C", 1);
-		setenv("SHELL", "/bin/sh", 1);
-		setenv("PS1", "(chroot)# ", 1);
-		setenv("TERM", "dumb", 1);
-	}
-
-	if (chroot(path) || chdir("/") || execvp(cmd[0], cmd)) {
-		fprintf(stderr, "error: chroot\n");
-		lua_pushinteger(L, -1);
-		return 1;
-	}
-	else {
-		lua_pushinteger(L, 0);
-		return 1;
-	}
-}
 
 int
 ok_chdir(lua_State *L)
@@ -188,17 +84,122 @@ ok_mkdir(lua_State *L)
 	return 1;
 }
 
+int
+ok_chroot(lua_State *L)
+{
+	const char *path = luaL_checkstring(L, 1);
+	char *const cmd[] = {"/bin/sh", "-i", NULL};
+
+
+	if (chdir(path)) {
+		fprintf(stderr, "error: chdir(\"%s\")\n", path);
+		lua_pushinteger(L, -1);
+		return 1;
+	}
+	else {
+		mkdir("proc", DIRMODE);
+		mkdir("sys", DIRMODE);
+		mkdir("dev", DIRMODE);
+	}
+
+	const char *mountcmd =
+		"mountpoint -q proc || mount -t proc  -o ro /proc proc/;"
+		"mountpoint -q sys  || mount -t sysfs -o ro /sys sys/;"
+		"mountpoint -q dev  || mount --rbind  -o ro /dev dev/;"
+		"mount --make-rslave dev/";
+
+	if (system(mountcmd)) {
+		fprintf(stderr, "error: mount\n");
+		lua_pushinteger(L, -1);
+		return 1;
+	}
+	else {
+		/* env */
+		clearenv();
+		setenv("PATH", "/usr/bin", 1);
+		setenv("HOME", "/root", 1);
+		setenv("USER", "root", 1);
+		setenv("LC_ALL", "C", 1);
+		setenv("SHELL", "/bin/sh", 1);
+		setenv("PS1", "(chroot)# ", 1);
+		setenv("TERM", "dumb", 1);
+	}
+
+	if (chroot(path) || chdir("/") || execvp(cmd[0], cmd)) {
+		fprintf(stderr, "error: chroot\n");
+		lua_pushinteger(L, -1);
+		return 1;
+	}
+	else {
+		lua_pushinteger(L, 0);
+		return 1;
+	}
+}
+
+int
+ok_sha3sum(lua_State *L)
+{
+	const char *path = luaL_checkstring(L, 1);
+
+	static char output[MDSIZE*2];
+	unsigned char buf[BUFSIZE], md[MDSIZE];
+	FILE *fp = fopen(path, "rb");
+	EVP_MD_CTX *mdctx = EVP_MD_CTX_new();
+	EVP_DigestInit_ex(mdctx, EVP_sha3_256(), NULL);
+
+	size_t cnt;
+	do {
+		cnt = fread(buf, 1, sizeof(buf), fp);
+		EVP_DigestUpdate(mdctx, buf, cnt);
+	} while(cnt > 0);
+
+	EVP_DigestFinal_ex(mdctx, md, NULL);
+	EVP_MD_CTX_free(mdctx);
+	fclose(fp);
+
+	for(int i = 0; i<MDSIZE; ++i)
+		sprintf(output+2*i, "%.2x", md[i]);
+
+	lua_pushstring(L, (const char*) output);
+	return 1;
+}
+
+int
+ok_glob(lua_State *L) {
+	static int i = -1;
+	static glob_t buf;
+
+	if (i < 0) {
+		const char *pattern = luaL_checkstring(L, 1);
+		glob(pattern, GLOB_NOSORT, NULL, &buf);
+		i = 0;
+		lua_pushcfunction(L, ok_glob); /* returns an iterator */
+		return 1;
+	}
+
+	if (i < buf.gl_pathc) {
+		lua_pushstring(L, (const char*) buf.gl_pathv[i]);
+		++i;
+		return 1;
+	}
+	else {
+		globfree(&buf);
+		i = -1;
+		return 0;
+	}
+}
+
 static const struct luaL_Reg okutils[] = {
-	{"glob", ok_glob},
-	{"sha3sum", ok_sha3sum},
-	{"chroot", ok_chroot},
-	{"pwd", ok_pwd},
 	{"chdir", ok_chdir},
+	{"pwd", ok_pwd},
 	{"setenv", ok_setenv},
 	{"unsetenv", ok_unsetenv},
 	{"basename", ok_basename},
 	{"symlink", ok_symlink},
 	{"mkdir", ok_mkdir},
+	{"chroot", ok_chroot},
+	{"sha3sum", ok_sha3sum},
+	{"glob", ok_glob},
 	{NULL, NULL}
 };
 
