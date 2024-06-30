@@ -2,7 +2,7 @@
 +++ b/lua.pc
 @@ -0,0 +1,21 @@
 +V=5.4
-+R=5.4.6
++R=5.4.7
 +
 +prefix=/usr
 +INSTALL_BIN=${prefix}/bin
