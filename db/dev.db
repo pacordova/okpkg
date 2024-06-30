@@ -53,11 +53,10 @@ cmake = {
    flags = {
       "--mandir=/share/man",
       "--datadir=/share/cmake",
-      "--system-libs",
-      "--no-system-cppdap",
-      "--no-system-jsoncpp",
-      "--no-system-librhash",
       "--parallel=$(getconf _NPROCESSORS_ONLN)",
+      "--system-bzip2", 
+      "--system-expat",
+      "--system-zlib",
    },
    post = [[
       rm -fr $destdir/usr/share/cmake*/Help
