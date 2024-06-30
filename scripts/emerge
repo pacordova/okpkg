@@ -30,7 +30,7 @@ end
 emerge"bison"; emerge"glibc"; emerge"binutils"; emerge "mpfr"
 
 -- extras
-emerge"mawk"; emerge"oksh"; emerge"openvi"
+emerge"mawk"; emerge"oksh"; emerge"openvi"; emerge"parted"
 
 -- python/perl modules
 local fp, buf
