@@ -107,7 +107,7 @@ function version(pkglist)
 end
 
 -- get packages to check
-fp = io.open("/usr/okpkg/db/system.db")
+fp = io.popen("cat /usr/okpkg/db/{system,modules,dev,net}.db")
 buf = '\n' .. fp:read('*a')
 fp:close()
 local pkgs = {}
