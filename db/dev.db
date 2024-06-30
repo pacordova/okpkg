@@ -54,9 +54,14 @@ cmake = {
       "--mandir=/share/man",
       "--datadir=/share/cmake",
       "--parallel=$(getconf _NPROCESSORS_ONLN)",
-      "--system-bzip2", 
-      "--system-expat",
-      "--system-zlib",
+      "--system-libs",
+      "--no-system-cppdap",
+      "--no-system-curl",
+      "--no-system-jsoncpp",
+      "--no-system-libarchive",
+      "--no-system-librhash",
+      "--no-system-libuv",
+      "--no-system-nghttp2",
    },
    post = [[
       rm -fr $destdir/usr/share/cmake*/Help
