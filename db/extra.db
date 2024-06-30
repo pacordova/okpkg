@@ -212,18 +212,6 @@ lsof = {
    }
 };
 
-mawk = {
-   url = "https://invisible-island.net/archives/mawk/mawk-1.3.4-20240622.tgz",
-   sha3 = "3f07042cc941c4b9257875e4d387831255576ccbc3f31f4a92bddabb514bba57",
-   build = "./configure",
-};
-
-oksh = {
-   url = "https://github.com/ibara/oksh/releases/download/oksh-7.5/oksh-7.5.tar.gz",
-   sha3 = "786cee634f58a6e2d93bdb5cf439480e11c2c1e1ff287822213424040333746d",
-   build = "./configure",
-};
-
 opendoas = {
    url = "https://github.com/Duncaen/OpenDoas/archive/v6.8.2/OpenDoas-6.8.2.tar.gz",
    sha3 = "de7bfb4797e216661db76043963090efc9e0e9e68ff420c352dbf71770c2b66c",
@@ -238,19 +226,6 @@ opendoas = {
       printf "permit persist :wheel\n" > $destdir/etc/doas.conf
       chmod 600 $destdir/etc/doas.conf
    ]]
-};
-
-openvi = {
-   url = "https://github.com/johnsonjh/OpenVi/archive/7.5.28/OpenVi-7.5.28.tar.gz",
-   sha3 = "bc8b4846bc61052d4a55a5b0eb411222bc66a4fd2f3954be874a1f3e0702114b",
-   build = "make",
-   flags = {
-      "CC=gcc",
-      "OPTLEVEL=-O2",
-      "PREFIX=/usr",
-      "BINPREFIX=''",
-   },
-   post = [[ rm -fr $destdir/usr/libexec ]]
 };
 
 parted = {
@@ -305,12 +280,6 @@ r = {
    }
 };
 
-rc = {
-   url = "https://github.com/pacordova/rc/archive/20240406-1/rc-20240406-1.tar.gz",
-   sha3 = "03b33efd3418feb5f46b6fd1239650dd60aca28b095052820cc9bbb28a2fb1e5",
-   build = "make",
-};
-
 ripgrep = {
    url = "https://github.com/BurntSushi/ripgrep/archive/14.1.0/ripgrep-14.1.0.tar.gz",
    sha3 = "0c685042a86faf2da4098e5b0cb61f73eaad59d08d8e203be00580085be0644e",
@@ -332,18 +301,6 @@ rsync = {
       "--with-rrsync",
       "--with-included-popt=no",
       "--with-included-zlib=no",
-   }
-};
-
-sassc = {
-   url = "https://github.com/sass/sassc/archive/3.6.2/sassc-3.6.2.tar.gz",
-   sha3 = "61e05276d1052de3c8403a6895cbca55f50d9f8f3afd2abed1263331dd33e46f",
-   build = "autoreconf",
-   flags = { 
-      "--libdir=/usr/lib64",
-      "--localstatedir=/var",
-      "--sysconfdir=/etc",
-      "--disable-static",
    }
 };
 

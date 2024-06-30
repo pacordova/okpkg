@@ -192,6 +192,26 @@ gtk3 = {
    }
 };
 
+gtksourceview4 = {
+   url = "https://download.gnome.org/sources/gtksourceview/4.8/gtksourceview-4.8.4.tar.xz",
+   sha3 = "404b0d854e122ba0ed4d76375077e86f088a56e2aec29799afc829a134597fbf",
+   build = "meson",
+   flags = { 
+      "-Dgtk_doc=false" 
+   }
+};
+
+libwnck3 = {
+   url = "https://download.gnome.org/sources/libwnck/43/libwnck-43.0.tar.xz",
+   sha3 = "e04ab36ef11d074e24324b2138f8902f15cfb7adac85641e5c2cc017febb67d8",
+   build = "meson",
+   flags = { 
+      "-Dgtk_doc=false" 
+   }
+};
+
+--------------------------------------------------------------------------------
+
 libxfce4util = {
    url = "https://archive.xfce.org/src/xfce/libxfce4util/4.18/libxfce4util-4.18.2.tar.bz2",
    sha3 = "f384a18c908d54d01903daa6e7194c5a23b4176d7ec064e7b1a2d1b6b20ea214",
@@ -251,15 +271,6 @@ garcon = {
       "--localstatedir=/var",
       "--sysconfdir=/etc",
       "--disable-debug",
-   }
-};
-
-libwnck3 = {
-   url = "https://download.gnome.org/sources/libwnck/43/libwnck-43.0.tar.xz",
-   sha3 = "e04ab36ef11d074e24324b2138f8902f15cfb7adac85641e5c2cc017febb67d8",
-   build = "meson",
-   flags = { 
-      "-Dgtk_doc=false" 
    }
 };
 
@@ -456,16 +467,6 @@ xfce4-notifyd = {
    }
 };
 
-
-gtksourceview4 = {
-   url = "https://download.gnome.org/sources/gtksourceview/4.8/gtksourceview-4.8.4.tar.xz",
-   sha3 = "404b0d854e122ba0ed4d76375077e86f088a56e2aec29799afc829a134597fbf",
-   build = "meson",
-   flags = { 
-      "-Dgtk_doc=false" 
-   }
-};
-
 mousepad = {
    url = "https://archive.xfce.org/src/apps/mousepad/0.6/mousepad-0.6.2.tar.bz2",
    sha3 = "588d199ba4d62c7ff8e4eae8c3e7911f4ca7fc4038adcdb5032e4b03e63733fd",
@@ -504,6 +505,14 @@ thunar-archive-plugin = {
    }
 };
 
+xfce4-alsa-plugin = {
+   url = "https://github.com/equeim/xfce4-alsa-plugin/archive/0.3.0/xfce4-alsa-plugin-0.3.0.tar.gz",
+   sha3 = "81a6f9fb940244fbe3cee2be406d0df8865e9e5d28257ca56d77529dbec91cc4",
+   build = "meson",
+};
+
+--------------------------------------------------------------------------------
+
 optipng = {
    url = "https://prdownloads.sourceforge.net/optipng/optipng-0.7.8.tar.gz",
    sha3 = "4aa347bb09ec8421bf6cce96a3c9e12c0b47a100ece108c342a79a944d2b9027",
@@ -535,12 +544,6 @@ elementary-xfce-icon-theme = {
 greybird = {
    url = "https://github.com/shimmerproject/Greybird/archive/v3.22.14/Greybird-3.22.14.tar.gz",
    sha3 = "736b7974d0687c58a92306c5c1f47910182cc4f19d64a548453313e10702e059",
-   build = "meson",
-};
-
-xfce4-alsa-plugin = {
-   url = "https://github.com/equeim/xfce4-alsa-plugin/archive/0.3.0/xfce4-alsa-plugin-0.3.0.tar.gz",
-   sha3 = "81a6f9fb940244fbe3cee2be406d0df8865e9e5d28257ca56d77529dbec91cc4",
    build = "meson",
 };
 
