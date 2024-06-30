@@ -12,12 +12,6 @@ setenv("CXXFLAGS", os.getenv("CFLAGS"))
 setenv("LC_ALL", "POSIX")
 setenv("make", "make -j5")
 
-
--- TODO: unlink syscall and cfunction, recursive
-local function unlink(path)
-   os.execute(string.format("rm -fr %s", path))
-end
-
 -- set SOURCE_DATE_EPOCH to a mtime of a file
 local function source_date_epoch(filename) local fp, buf
    fp = io.popen("stat -c '%Y' " .. filename)
@@ -36,9 +30,8 @@ local function vstr(path) local f, i, j
 end
 
 local function vlook(pkgname) local db, fp, buf, i, j
-   db = { "system", "modules", "extra", "lib", "xorg", "xfce" }
-   for n=1,#db do
-      fp = io.open(string.format("/usr/okpkg/db/%s.db", db[n]))
+   for x in ok.glob("/usr/okpkg/db/*.db") do
+      fp = io.open(x)
       buf = '\n' .. fp:read('*a')
       fp:close()
       i = buf:find(string.format("\n%s = {", pkgname), 1, true)
@@ -57,7 +50,9 @@ function download(pkgname) local t, f, fp
       gsub("https://cran.r%-project.org", "https://archive.linux.duke.edu/cran")
 
    -- fresh build the sources
-   chdir"/usr/okpkg/sources"; unlink(pkgname); mkdir(pkgname)
+   chdir"/usr/okpkg/sources"; 
+   os.execute("rm -fr " .. pkgname)
+   mkdir(pkgname)
 
    -- download file if not already downloaded
    chdir"/usr/okpkg/download"
@@ -119,7 +114,7 @@ function makepkg(path)
 
    -- cleanup
    chdir".."
-   unlink(path)
+   os.execute("rm -fr " .. path)
    unsetenv"pwd"
    unsetenv"SOURCE_DATE_EPOCH"
 

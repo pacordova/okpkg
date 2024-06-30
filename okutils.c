@@ -9,10 +9,36 @@
 #include <lua.h>
 #include <lualib.h>
 #include <lauxlib.h>
+#include <glob.h>
 
 #define DIRMODE 0777
 #define BUFSIZE 4096
 #define MDSIZE 256/8
+
+int
+ok_glob(lua_State *L) {
+	static int i = -1;
+	static glob_t buf;
+
+	if (i < 0) {
+		const char *pattern = luaL_checkstring(L, 1);
+		glob(pattern, GLOB_NOSORT, NULL, &buf);
+		i = 0;
+		lua_pushcfunction(L, ok_glob);
+		return 1;
+	}
+
+	if (i < buf.gl_pathc) {
+		lua_pushstring(L, (const char*) buf.gl_pathv[i]);
+		++i;
+		return 1;
+	}
+	else {
+		globfree(&buf);
+		i = -1;
+		return 0;
+	}
+}
 
 int
 ok_sha3sum(lua_State *L)
@@ -163,6 +189,7 @@ ok_mkdir(lua_State *L)
 }
 
 static const struct luaL_Reg okutils[] = {
+	{"glob", ok_glob},
 	{"sha3sum", ok_sha3sum},
 	{"chroot", ok_chroot},
 	{"pwd", ok_pwd},
