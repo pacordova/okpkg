@@ -6,7 +6,6 @@
 #include <libgen.h>
 #include <sys/stat.h>
 #include <openssl/evp.h>
-#include <glob.h>
 
 #include <lua.h>
 #include <lualib.h>
@@ -164,31 +163,6 @@ ok_sha3sum(lua_State *L)
 	return 1;
 }
 
-int
-ok_glob(lua_State *L) {
-	static int i = -1;
-	static glob_t buf;
-
-	if (i < 0) {
-		const char *pattern = luaL_checkstring(L, 1);
-		glob(pattern, GLOB_NOSORT, NULL, &buf);
-		i = 0;
-		lua_pushcfunction(L, ok_glob); /* returns an iterator */
-		return 1;
-	}
-
-	if (i < buf.gl_pathc) {
-		lua_pushstring(L, (const char*) buf.gl_pathv[i]);
-		++i;
-		return 1;
-	}
-	else {
-		globfree(&buf);
-		i = -1;
-		return 0;
-	}
-}
-
 static const struct luaL_Reg okutils[] = {
 	{"chdir", ok_chdir},
 	{"pwd", ok_pwd},
@@ -199,7 +173,6 @@ static const struct luaL_Reg okutils[] = {
 	{"mkdir", ok_mkdir},
 	{"chroot", ok_chroot},
 	{"sha3sum", ok_sha3sum},
-	{"glob", ok_glob},
 	{NULL, NULL}
 };
 

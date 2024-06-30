@@ -30,14 +30,12 @@ local function vstr(path) local f, i, j
 end
 
 local function vlook(pkgname) local db, fp, buf, i, j
-   for x in ok.glob("/usr/okpkg/db/*.db") do
-      fp = io.open(x)
-      buf = '\n' .. fp:read('*a')
-      fp:close()
-      i = buf:find(string.format("\n%s = {", pkgname), 1, true)
-      if i then i = buf:find('{', i, true); j = buf:find('};', i, true)
-         return load(string.format("return %s", buf:sub(i, j)))()
-      end
+   fp = io.popen("cat /usr/okpkg/db/*.db")
+   buf = '\n' .. fp:read('*a')
+   fp:close()
+   i = buf:find(string.format("\n%s = {", pkgname), 1, true)
+   if i then i = buf:find('{', i, true); j = buf:find('};', i, true)
+      return load(string.format("return %s", buf:sub(i, j)))()
    end
 end
 
