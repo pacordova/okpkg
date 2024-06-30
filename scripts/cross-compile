@@ -22,7 +22,7 @@ setenv("make", "make -j5")
 setenv("destdir", "/mnt")
 
 local function vlook(pkgname) local fp, buf, i, j
-   fp = io.open("/usr/okpkg/db/cross.db")
+   fp = io.open("/usr/okpkg/db/.cross.db")
    buf = '\n' .. fp:read('*a')
    fp:close()
    i = buf:find(string.format("\n%s = {", pkgname), 1, true)
@@ -125,7 +125,7 @@ os.execute [[
 
 -- build cross.db
 local fp, buf
-fp = io.open("/usr/okpkg/db/cross.db")
+fp = io.open("/usr/okpkg/db/.cross.db")
 buf = '\n' .. fp:read('*a')
 fp:close()
 for i in buf:gmatch("\n([%w%-%+]-) = {.-;") do emerge(i) end

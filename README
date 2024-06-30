@@ -28,12 +28,15 @@ Configuration
 -------------
 The metadata and configuration for each package is in the `db` directory.
 `db/system.db`  - Base system packages
+`db/modules`    - Python/Perl modules
+`db/dev.db`     - Development tools
+`db/net.db`     - Network utilities
 `db/lib.db`     - Additional libraries
 `db/gnu.db`     - Gnu packages
 `db/extra.db`   - Useful additional packages
 `db/xorg.db`    - Xorg libraries and utilities
 `db/xfce.db`    - Xfce and complementary packages
-`db/cross.db`   - Separate configuration for cross-compilation and bootstrap
+`db/.cross.db`  - Separate configuration for cross-compilation and bootstrap
 
 
 Patches
