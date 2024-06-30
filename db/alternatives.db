@@ -12,14 +12,12 @@ rc = {
    build = "make",
 };
 
-
 -- alternative to bash
 oksh = {
    url = "https://github.com/ibara/oksh/releases/download/oksh-7.5/oksh-7.5.tar.gz",
    sha3 = "786cee634f58a6e2d93bdb5cf439480e11c2c1e1ff287822213424040333746d",
    build = "./configure",
 };
-
 
 -- alternative to vim
 openvi = {
@@ -34,7 +32,6 @@ openvi = {
    },
    post = [[ rm -fr $destdir/usr/libexec ]]
 };
-
 
 -- alternative to bash
 dash = {
@@ -59,7 +56,7 @@ mksh = {
    ]]
 };
 
--- alternative to bash
+-- alternative shell 
 tcsh = {
    url = "https://astron.com/pub/tcsh/tcsh-6.24.13.tar.gz",
    sha3 = "90e8b2e89d976f0782098d6407419edb54db69705a42f041922580af5159d527",
@@ -72,7 +69,7 @@ tcsh = {
    }
 };
 
--- alternative to bash
+-- alternative shell 
 zsh = {
    url = "https://www.zsh.org/pub/zsh-5.9.tar.xz",
    sha3 = "b108fd76e5ca4810e33a0c3bf69ff173393529d0ca0b5d0131ab4b40c03e227e",
