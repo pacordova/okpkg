@@ -958,8 +958,8 @@ tar = {
 };
 
 lua = {
-   url = "https://lua.org/ftp/lua-5.4.6.tar.gz",
-   sha3 = "4f5728782c666fa6b1df41de10ee77111c58b5a375e5bb69bfc5c10dbd27cdd5",
+   url = "https://lua.org/ftp/lua-5.4.7.tar.gz",
+   sha3 = "e7d3fbf7dc7b879cb932975adb2d7ca3990f7253472c738ce142175583ade7db",
    build = "make",
    flags = {
       'TO_LIB="liblua.so liblua.so.5.4 liblua.so.5.4.6"',
