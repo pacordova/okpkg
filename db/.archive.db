@@ -1666,30 +1666,6 @@ libiconv = {
    }
 };
 
-libidn2 = {
-   url = "https://ftp.gnu.org/gnu/libidn/libidn2-2.3.7.tar.gz",
-   sha3 = "889197927b322f26b41a4ba21e78f631cf0cdca8d8fcfa0f5ac0d4bdcd8278c8",
-   build = "./configure",
-   flags = {
-      "--libdir=/usr/lib64",
-      "--disable-static"
-   },
-   post = [[ rm -fr $destdir/usr/bin $destdir/usr/share/man/man1 ]]
-};
-
-libpsl = {
-   url = "https://github.com/rockdaboot/libpsl/releases/download/0.21.5/libpsl-0.21.5.tar.gz",
-   sha3 = "41c5824497c1e40e8c97eab9027fd0b4f74e9bd1c9b482f5d8a92261c779a07e",
-   build = "./configure",
-   flags = {
-      "--libdir=/usr/lib64",
-      "--disable-dependency-tracking",
-      "--enable-man",
-      "--disable-static"
-   },
-   post = [[ cd $destdir && rm -fr usr/bin usr/share/man/man1 ]]
-};
-
 libsoup3 = {
    url = "https://download.gnome.org/sources/libsoup/3.4/libsoup-3.4.4.tar.xz",
    build = "meson",
@@ -1702,16 +1678,6 @@ libsoup3 = {
    prepare = [[
    sed 's/apiversion/soup_version/' -i docs/reference/meson.build
    ]]
-};
-
-libunistring = {
-   url = "https://ftp.gnu.org/gnu/libunistring/libunistring-1.1.tar.xz",
-   sha3 = "9ab5fcf14c5089895d2973528aa00e338377e6fe270851368dc6f4e204d1089a",
-   build = "./configure",
-   flags = {
-      "--libdir=/usr/lib64",
-      "--disable-static"
-   }
 };
 
 lz4 = {

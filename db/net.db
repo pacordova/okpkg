@@ -97,6 +97,40 @@ libxslt = {
    }
 };
 
+libunistring = {
+   url = "https://ftp.gnu.org/gnu/libunistring/libunistring-1.2.tar.xz",
+   sha3 = "95472c6995afaa039064bab986637cb2825dd2cb20814db26fb365fd5cea9fd6",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--disable-static"
+   }
+};
+
+libidn2 = {
+   url = "https://ftp.gnu.org/gnu/libidn/libidn2-2.3.7.tar.gz",
+   sha3 = "889197927b322f26b41a4ba21e78f631cf0cdca8d8fcfa0f5ac0d4bdcd8278c8",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--disable-static"
+   },
+   post = [[ rm -fr $destdir/usr/bin $destdir/usr/share/man/man1 ]]
+};
+
+libpsl = {
+   url = "https://github.com/rockdaboot/libpsl/releases/download/0.21.5/libpsl-0.21.5.tar.gz",
+   sha3 = "41c5824497c1e40e8c97eab9027fd0b4f74e9bd1c9b482f5d8a92261c779a07e",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--disable-dependency-tracking",
+      "--enable-man",
+      "--disable-static"
+   },
+   post = [[ cd $destdir && rm -fr usr/bin usr/share/man/man1 ]]
+};
+
 --------------------------------------------------------------------------------
 
 iptables = {
@@ -154,27 +188,16 @@ curl = {
       "--mandir=/usr/share/man",
       "--enable-ipv6",
       "--enable-threaded-resolver",
-      "--enable-unix-sockets",
       "--disable-ares",
       "--disable-ldap",
       "--disable-ldaps",
       "--disable-manual",
       "--disable-static",
       "--with-ca-bundle=/etc/ssl/certs/ca-certificates.crt",
-      "--with-ca-fallback",
-      "--with-ca-path=/etc/ssl/certs",
       "--with-openssl",
       "--with-pic",
-      "--with-random=/dev/urandom",
       "--without-brotli",
-      "--without-gssapi",
-      "--without-libgsasl",
-      "--without-libidn",
-      "--without-libidn2",
-      "--without-libpsl",
       "--without-librtmp",
-      "--without-libssh2",
-      "--without-zstd",
    }
 };
 
