@@ -23,6 +23,8 @@ for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do
       if not fp then emerge(i) else fp:close() end
    elseif i == "_perl" then fp = io.open"/usr/bin/perl"
       if not fp then emerge(i) else fp:close() end
+   elseif i:sub(1, 3) == "gcc" then
+      emerge(i); os.execute"/usr/okpkg/scripts/split-gcc.sh"
    else emerge(i) end
 end
 
