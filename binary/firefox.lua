@@ -8,7 +8,7 @@ local chdir, mkdir, symlink =
 local fp, url
 
 -- website gives us a bz2
-url = "https://download.mozilla.org/?product=firefox-latest-ssl&os=linux64&lang=en-US"
+url = "https://download.mozilla.org/?product=firefox-devedition-latest-ssl&os=linux64&lang=en-US"
 
 -- prepare package
 mkdir"/usr"
