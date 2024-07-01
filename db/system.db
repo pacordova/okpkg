@@ -358,6 +358,7 @@ gcc14 = {
       ln -sf gcc $destdir/usr/bin/cc
       ln -sf gcc $destdir/usr/bin/c99
       mkdir -p $destdir/usr/share/gdb/auto-load/usr/lib64
+      mkdir -p $destdir/usr/lib64/bfd-plugins
       cc=$destdir/usr/bin/gcc
       ln -sf ../../lib64/gcc/`$cc -dumpmachine`/`$cc -dumpversion`/liblto_plugin.so \
           $destdir/usr/lib64/bfd-plugins/
