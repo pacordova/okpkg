@@ -36,12 +36,12 @@ fp = io.open("/usr/share/applications/firefox.desktop", 'w')
 fp:write [[
 [Desktop Entry]
 Encoding=UTF-8
-Name=Firefox
+Name=Firefox Developer Edition
 GenericName=Web Browser
 Exec=firefox %u
 Terminal=false
 Type=Application
-Icon=firefox
+Icon=firefox-developer-edition
 Categories=GNOME;GTK;Network;WebBrowser;
 MimeType=text/xml;text/mml;text/html;application/xhtml+xml;application/vnd.mozilla.xul+xml;x-scheme-handler/http;x-scheme-handler/https
 StartupNotify=True
