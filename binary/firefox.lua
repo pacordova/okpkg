@@ -41,10 +41,21 @@ GenericName=Web Browser
 Exec=firefox %u
 Terminal=false
 Type=Application
-Icon=web-browser
+Icon=firefox-developer-edition
 Categories=GNOME;GTK;Network;WebBrowser;
 MimeType=text/xml;text/mml;text/html;application/xhtml+xml;application/vnd.mozilla.xul+xml;x-scheme-handler/http;x-scheme-handler/https
 StartupNotify=True
 ]]
 fp:close()
 else fp:close() end
+
+-- copy icons
+chdir"/usr/lib64/firefox/browser/chrome/icons/default"
+setenv("destdir", "/usr/share/icons/hicolor")
+os.execute [[
+   cp -p default128.png $destdir/128x128/apps/firefox-developer-edition.png
+   cp -p default16.png  $destdir/16x16/apps/firefox-developer-edition.png
+   cp -p default32.png  $destdir/32x32/apps/firefox-developer-edition.png
+   cp -p default48.png  $destdir/48x48/apps/firefox-developer-edition.png
+   cp -p default64.png  $destdir/64x64/apps/firefox-developer-edition.png
+]]
