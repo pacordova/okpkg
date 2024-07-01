@@ -33,23 +33,16 @@ os.execute"mv /usr/okpkg/packages/*.tar.lz /usr/okpkg/packages/a"
 
 -- build all
 emerge_all"/usr/okpkg/db/modules.db"
-emerge"nasm"
+emerge_all"/usr/okpkg/db/dev.db"
 emerge_all"/usr/okpkg/db/lib.db"
-emerge"sassc"
-emerge_all"/usr/okpkg/db/xorg.db"
-emerge"dbus"
+emerge_all"/usr/okpkg/db/net.db"
+emerge_all"/usr/okpkg/db/xorg.db"; emerge"dbus"
 dofile"/usr/okpkg/binary/rust.lua"
-emerge"dav1d"
-emerge"ffmpeg"
 emerge_all"/usr/okpkg/db/xfce.db"
-emerge"libplacebo"
-emerge"uchardet"
-emerge"mpv"
 
 -- other useful packages
 emerge"opendoas"
 emerge"ripgrep"
-emerge"alsa-utils"
 
 -- misc post-install
 os.execute"udevadm hwdb --usr --update"

@@ -34,31 +34,9 @@ emerge"bison"; emerge"glibc"; emerge"binutils"; emerge "mpfr"
 -- extras
 emerge"mawk"; emerge"oksh"; emerge"openvi"; emerge"parted"
 
--- python/perl modules
-local fp, buf
-fp = io.open("/usr/okpkg/db/modules.db"); buf = '\n' .. fp:read("*a"); fp:close()
-for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do
-   emerge(i)
-end
-
--- development tools
-local fp, buf
-fp = io.open("/usr/okpkg/db/dev.db"); buf = '\n' .. fp:read("*a"); fp:close()
-for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do
-   emerge(i)
-end
-
--- network
-local fp, buf
-fp = io.open("/usr/okpkg/db/net.db"); buf = '\n' .. fp:read("*a"); fp:close()
-for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do
-   emerge(i)
-end
-
 -- misc post-install
 os.execute"udevadm hwdb --usr --update"
 os.execute"makewhatis /usr/share/man"
-os.execute"setcap cap_net_raw+p /usr/bin/ping"
 
 -- fix versions and cleanup
 chdir"/usr/okpkg/packages"

@@ -53,6 +53,16 @@ for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do
    table.insert(devel, i)
 end
 
+-- extra libraries
+library = {}
+local fp, buf
+fp = io.open("/usr/okpkg/db/lib.db")
+buf = '\n' .. fp:read("*a")
+fp:close()
+for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do
+   table.insert(library, i)
+end
+
 -- network package set
 network = {}
 local fp, buf
