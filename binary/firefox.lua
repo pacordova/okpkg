@@ -2,8 +2,8 @@
 
 local ok = require"okutils"
 
-local chdir, mkdir, symlink =
-    ok.chdir, ok.mkdir, ok.symlink
+local chdir, mkdir, symlink, setenv, unsetenv =
+    ok.chdir, ok.mkdir, ok.symlink, ok.setenv, ok.unsetenv
 
 local fp, url
 
@@ -59,3 +59,4 @@ os.execute [[
    cp -p default48.png  $destdir/48x48/apps/firefox-developer-edition.png
    cp -p default64.png  $destdir/64x64/apps/firefox-developer-edition.png
 ]]
+unsetenv("destdir")
