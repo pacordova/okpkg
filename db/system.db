@@ -7,7 +7,6 @@ _python = {
       "--mandir=/usr/share/man",
       "--enable-shared",
       "--disable-ipv6",
-      "--disable-loadable-sqlite-extensions",
       "--disable-optimizations",
       "--with-platlibdir=lib64",
       "--without-doc-strings",
@@ -749,40 +748,6 @@ libffi = {
    }
 };
 
-sqlite = {
-   url = "https://sqlite.org/2024/sqlite-autoconf-3460000.tar.gz",
-   sha3 = "83d2acf79453deb7d6520338b1f4585f12e39b27cd370fb08593afa198f471fc",
-   build = "./configure",
-   flags = {
-      "--libdir=/usr/lib64",
-      "--localstatedir=/var",
-      "--sysconfdir=/etc",
-      "--mandir=/usr/share/man",
-      "--enable-dynamic-extensions",
-      "--enable-fts3",
-      "--enable-fts4",
-      "--enable-fts5",
-      "--enable-rtree",
-      "--enable-session",
-      "--enable-threadsafe",
-      "--disable-static",
-      "TCLLIBDIR=/usr/lib64/sqlite3.45.3",
-      [[ CPPFLAGS="$CPPFLAGS \
-      -DSQLITE_ENABLE_COLUMN_METADATA=1 \
-      -DSQLITE_ENABLE_UNLOCK_NOTIFY \
-      -DSQLITE_ENABLE_DBSTAT_VTAB=1 \
-      -DSQLITE_SECURE_DELETE=1 \
-      -DSQLITE_ENABLE_FTS3_TOKENIZER=1 \
-      -DSQLITE_ENABLE_FTS3_PARENTHESIS \
-      -DSQLITE_ENABLE_STMTVTAB \
-      -DSQLITE_ENABLE_STAT4 \
-      -DSQLITE_MAX_VARIABLE_NUMBER=250000 \
-      -DSQLITE_MAX_EXPR_DEPTH=10000 \
-      -DSQLITE_ENABLE_MATH_FUNCTIONS"
-      ]]
-   }
-};
-
 python3 = {
    url = "https://www.python.org/ftp/python/3.11.9/Python-3.11.9.tar.xz",
    sha3 = "bdcd906e3ef8a9b5986d4807fdc1cdacf3dbe575649ab79b42dc064743a33f92",
@@ -791,7 +756,6 @@ python3 = {
       "--libdir=/usr/lib64",
       "--mandir=/usr/share/man",
       "--enable-ipv6",
-      "--enable-loadable-sqlite-extensions",
       "--enable-shared",
       "--disable-optimizations",
       "--with-computed-gotos",
