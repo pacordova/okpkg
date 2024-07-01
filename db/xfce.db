@@ -42,17 +42,6 @@ libgudev = {
    build = "meson",
 };
 
-libnotify = {
-   url = "https://download.gnome.org/sources/libnotify/0.8/libnotify-0.8.3.tar.xz",
-   sha3 = "90216f182efa5ed279cb32527cfaa242a09fa1b7fac4fe6fee2981b40483d967",
-   build = "meson",
-   flags = {
-      "-Dgtk_doc=false",
-      "-Dman=false",
-      "-Dtests=false",
-   }
-};
-
 startup-notification = {
    url = "https://www.freedesktop.org/software/startup-notification/releases/startup-notification-0.12.tar.gz",
    sha3 = "f551c61e57c983b0cae7fa57ba727226a67fe33ebd8c5ac6d0452338ccefa31f",
@@ -148,19 +137,6 @@ gdk-pixbuf2 = {
    }
 };
 
-vala = {
-   url = "https://download.gnome.org/sources/vala/0.56/vala-0.56.17.tar.xz",
-   sha3 = "668609ee19af025e1778f93f81086e11d850354db8c4278a2ad2db944a951f9f",
-   build = "./configure",
-   flags = {
-      "--libdir=/usr/lib64",
-      "--enable-python3=yes",
-      "--disable-python",
-      "--disable-valadoc",
-   },
-   prepare = [[ sed -i '/gvc.h/a#define TRUE 1' libvaladoc/gvc-compat.c ]]
-};
-
 librsvg = {
    url = "https://download.gnome.org/sources/librsvg/2.58/librsvg-2.58.1.tar.xz",
    sha3 = "059b96c6adbef84318ba043283b2b146006e17265fd9ff19cc7ede5fb0f14385",
@@ -198,6 +174,17 @@ gtksourceview4 = {
    build = "meson",
    flags = { 
       "-Dgtk_doc=false" 
+   }
+};
+
+libnotify = {
+   url = "https://download.gnome.org/sources/libnotify/0.8/libnotify-0.8.3.tar.xz",
+   sha3 = "90216f182efa5ed279cb32527cfaa242a09fa1b7fac4fe6fee2981b40483d967",
+   build = "meson",
+   flags = {
+      "-Dgtk_doc=false",
+      "-Dman=false",
+      "-Dtests=false",
    }
 };
 

@@ -1415,27 +1415,6 @@ libunwind = {
    }
 };
 
-libuv = {
-   url = "https://dist.libuv.org/dist/v1.48.0/libuv-v1.48.0.tar.gz",
-   sha3 = "68fb3f8b47090edd4b9f6d0a458f1f846ca9173404a12a9c3c5ff78b4190b314",
-   build = "./autogen.sh",
-   flags = {
-      "--libdir=/usr/lib64",
-      "--disable-static"
-   }
-};
-
-libnghttp2 = {
-   url = "https://github.com/nghttp2/nghttp2/releases/download/v1.61.0/nghttp2-1.61.0.tar.xz",
-   sha3 = "e1b911212edc200b71547bf95e06f77afcd5f4d37ed90d02520d14b54e72bbf5",
-   build = "./configure",
-   flags = {
-      "--libdir=/usr/lib64",
-      "--disable-static",
-      "--enable-lib-only"
-   }
-};
-
 libbpf = {
    url = "https://github.com/libbpf/libbpf/archive/v1.3.0/libbpf-1.3.0.tar.gz",
    sha3 = "21c39b710dcd05cc19f7a5ce5d34b6bffc666de6650eda3bbeb040b1b7d5dceb",
@@ -1443,18 +1422,6 @@ libbpf = {
    flags = {
       "--directory=src",
       "LIBSUBDIR=lib64"
-   }
-};
-
-libarchive = {
-   url = "https://github.com/libarchive/libarchive/releases/download/v3.7.2/libarchive-3.7.2.tar.xz",
-   sha3 = "63e570ded059340b0d242304bc5f261fc0569d49017d8c67935eae05a03f7bd6",
-   build = "./configure",
-   flags = {
-      "--libdir=/usr/lib64",
-      "--without-xml2",
-      "--without-nettle",
-      "--disable-static",
    }
 };
 

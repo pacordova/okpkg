@@ -50,13 +50,6 @@ json-c = {
    }
 };
 
-argon2 = {
-   url = "http://distcache.freebsd.org/ports-distfiles/P-H-C-phc-winner-argon2-20190702_GH0.tar.gz",
-   sha3 = "8147687cbaa78ac3fa5ef0d07996934b741621e1c24705479ae09bf17a8976aa",
-   build = "make",
-   flags = { "LIBRARY_REL=lib64" }
-};
-
 cryptsetup = {
    url = "https://kernel.org/pub/linux/utils/cryptsetup/v2.7/cryptsetup-2.7.3.tar.xz",
    sha3 = "d6d65023fb6545d553cc97b222f5001e845872a77cb25240465261a04c3c0892",
@@ -327,34 +320,6 @@ tmux = {
    url = "https://github.com/tmux/tmux/releases/download/3.4/tmux-3.4.tar.gz",
    sha3 = "51c4ac03a4e88cde535159877ea4fb8919d64b14ad8a030913316fc3c337a6ca",
    build = "./configure",
-};
-
-libusb = {
-   url = "https://github.com/libusb/libusb/releases/download/v1.0.27/libusb-1.0.27.tar.bz2",
-   sha3 = "e79a5aa5c54bd32d07f1e0935b1b18c09fe7bfa6a202d5a1c218938764781164",
-   build = "./configure",
-   flags = {
-      "--libdir=/usr/lib64",
-      "--mandir=/usr/share/man",
-      "--disable-static",
-   }
-};
-
-usbutils = {
-   url = "https://mirrors.kernel.org/pub/linux/utils/usb/usbutils/usbutils-017.tar.xz",
-   sha3 = "536184ee79409ec212e2b060791792384d428bd3176438c47826294bd572e80b",
-   build = "./configure",
-   flags = {
-      "--sbindir=/usr/bin",
-      "--libdir=/usr/lib64",
-      "--mandir=/usr/share/man",
-      "--datadir=/usr/share/hwdata",
-   },
-   post = [[
-      mkdir -p $destdir/usr/share/hwdata
-      cd $destdir/usr/share/hwdata
-      curl -LOR https://www.linux-usb.org/usb.ids
-   ]]
 };
 
 xorriso = {

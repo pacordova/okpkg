@@ -25,6 +25,14 @@ alsa-utils = {
    }
 };
 
+argon2 = {
+   url = "http://distcache.freebsd.org/ports-distfiles/P-H-C-phc-winner-argon2-20190702_GH0.tar.gz",
+   sha3 = "8147687cbaa78ac3fa5ef0d07996934b741621e1c24705479ae09bf17a8976aa",
+   build = "make",
+   flags = { "LIBRARY_REL=lib64" }
+};
+
+
 dav1d = {
    url = "https://downloads.videolan.org/pub/videolan/dav1d/1.4.3/dav1d-1.4.3.tar.xz",
    sha3 = "fc84c431c4f2405ae8b351a9ecd7b1ce10b96863d50ae3206df857c81a2cf118",
@@ -45,6 +53,22 @@ fribidi = {
    url = "https://github.com/fribidi/fribidi/releases/download/v1.0.15/fribidi-1.0.15.tar.xz",
    sha3 = "8179f6d561ddf746af18aa5670016598f0e7db9536aa799f3d75821d87bb265e",
    build = "meson",
+};
+
+glib2 = {
+   url = "https://download.gnome.org/sources/glib/2.80/glib-2.80.3.tar.xz",
+   sha3 = "6147c38d30b1c2f7e78d7b06162b252a393b78f71ada8e7afe73b795fe9ff50c",
+   build = "meson",
+   flags = {
+      "-Ddocumentation=false",
+      "-Dglib_debug=disabled",
+      "-Dgtk_doc=false",
+      "-Dinstalled_tests=false",
+      "-Dintrospection=disabled",
+      "-Dman-pages=enabled",
+      "-Dselinux=disabled",
+      "-Dsysprof=disabled",
+   }
 };
 
 iso-codes = {
@@ -120,6 +144,34 @@ libkeccak = {
    ]]
 };
 
+libmnl = {
+   url = "https://netfilter.org/projects/libmnl/files/libmnl-1.0.5.tar.bz2",
+   sha3 = "0f289aaf93935856a674b8c5c9e6b390f94f348965d899f285a1d4d259081181",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
+      "--mandir=/usr/share/man",
+      "--disable-static",
+   }
+};
+
+libnl3 = {
+   url = "https://github.com/thom311/libnl/releases/download/libnl3_9_0/libnl-3.9.0.tar.gz",
+   sha3 = "5ffde40856be45441f9b13634a464dfe1155276c8fd9a29b26b080685a14198c",
+   build = "./configure",
+   flags = {
+      "--sbindir=/usr/bin",
+      "--libdir=/usr/lib64",
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
+      "--mandir=/usr/share/man",
+      "--disable-static",
+      "--disable-cli",
+   }
+};
+
 libogg = {
    url = "https://downloads.xiph.org/releases/ogg/libogg-1.3.5.tar.xz",
    sha3 = "caabb9bead5d1b33279bd7367f40a807869273cf2e176bf0eb5ec4e009f37af6",
@@ -127,6 +179,17 @@ libogg = {
    flags = {
       "--libdir=/usr/lib64",
       "--disable-static"
+   }
+};
+
+libpcap = {
+   url = "https://www.tcpdump.org/release/libpcap-1.10.4.tar.gz",
+   sha3 = "0c428ebe79bb836222ff5418dcbb270ef69c90fb093ea7081438713b6bba0bee",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--mandir=/usr/share/man",
+      "--enable-ipv6",
    }
 };
 
@@ -175,6 +238,47 @@ libtiff = {
    }
 };
 
+libtirpc = {
+   url = "https://downloads.sourceforge.net/libtirpc/libtirpc-1.3.4.tar.bz2",
+   sha3 = "13dcbf1ef118cd2eaf18bcef2b7d2086c34daba0eba74c906aa4c99e677180f4",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--sysconfdir=/etc",
+      "--mandir=/usr/share/man",
+      "--disable-static",
+      "--disable-gssapi",
+   }
+};
+
+libusb = {
+   url = "https://github.com/libusb/libusb/releases/download/v1.0.27/libusb-1.0.27.tar.bz2",
+   sha3 = "e79a5aa5c54bd32d07f1e0935b1b18c09fe7bfa6a202d5a1c218938764781164",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--mandir=/usr/share/man",
+      "--disable-static",
+   }
+};
+
+usbutils = {
+   url = "https://mirrors.kernel.org/pub/linux/utils/usb/usbutils/usbutils-017.tar.xz",
+   sha3 = "536184ee79409ec212e2b060791792384d428bd3176438c47826294bd572e80b",
+   build = "./configure",
+   flags = {
+      "--sbindir=/usr/bin",
+      "--libdir=/usr/lib64",
+      "--mandir=/usr/share/man",
+      "--datadir=/usr/share/hwdata",
+   },
+   post = [[
+      mkdir -p $destdir/usr/share/hwdata
+      cd $destdir/usr/share/hwdata
+      curl -LOR https://www.linux-usb.org/usb.ids
+   ]]
+};
+
 libvorbis = {
    url = "https://downloads.xiph.org/releases/vorbis/libvorbis-1.3.7.tar.xz",
    sha3 = "2c28108d60b3ac2bd0f2a38ac3ee0dc70a24b84f6f6e892df20d266cd11a5e9d",
@@ -214,6 +318,37 @@ libvpx = {
       "--disable-tools",
       "--disable-unit-tests",
       "--as=nasm",
+   }
+};
+
+libxml2 = {
+   url = "https://download.gnome.org/sources/libxml2/2.13/libxml2-2.13.1.tar.xz",
+   sha3 = "5611f3ec31cc7a1be734d740e3d06694605d273ade3217834de646ccd5dad996",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
+      "--mandir=/usr/share/man",
+      "--disable-static",
+      "--with-history",
+      "--with-legacy",
+      "--without-icu",
+      "PYTHON=/usr/bin/python3",
+   }
+};
+
+libxslt = {
+   url = "https://download.gnome.org/sources/libxslt/1.1/libxslt-1.1.41.tar.xz",
+   sha3 = "0841446fbbdf69e1ddcbd9567f60d9b566ce2fa3dca066ce8c1483111f97e25b",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
+      "--mandir=/usr/share/man",
+      "--disable-static",
+      "--without-python",
    }
 };
 
