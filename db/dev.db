@@ -46,6 +46,23 @@ check = {
    }
 };
 
+libxml2 = {
+   url = "https://download.gnome.org/sources/libxml2/2.13/libxml2-2.13.1.tar.xz",
+   sha3 = "5611f3ec31cc7a1be734d740e3d06694605d273ade3217834de646ccd5dad996",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
+      "--mandir=/usr/share/man",
+      "--disable-static",
+      "--with-history",
+      "--with-legacy",
+      "--without-icu",
+      "PYTHON=/usr/bin/python3",
+   }
+};
+
 gettext = {
    url = "https://ftp.gnu.org/gnu/gettext/gettext-0.22.5.tar.xz",
    sha3 = "410646226a2f971e0789082352d6e270606af924c97305316d3bbd764fa9fbd5",

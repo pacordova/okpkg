@@ -355,23 +355,6 @@ libvpx = {
    }
 };
 
-libxml2 = {
-   url = "https://download.gnome.org/sources/libxml2/2.13/libxml2-2.13.1.tar.xz",
-   sha3 = "5611f3ec31cc7a1be734d740e3d06694605d273ade3217834de646ccd5dad996",
-   build = "./configure",
-   flags = {
-      "--libdir=/usr/lib64",
-      "--localstatedir=/var",
-      "--sysconfdir=/etc",
-      "--mandir=/usr/share/man",
-      "--disable-static",
-      "--with-history",
-      "--with-legacy",
-      "--without-icu",
-      "PYTHON=/usr/bin/python3",
-   }
-};
-
 libxslt = {
    url = "https://download.gnome.org/sources/libxslt/1.1/libxslt-1.1.41.tar.xz",
    sha3 = "0841446fbbdf69e1ddcbd9567f60d9b566ce2fa3dca066ce8c1483111f97e25b",
