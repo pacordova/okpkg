@@ -78,7 +78,7 @@ symlink("/usr/share/zoneinfo/US/Eastern", "/etc/localtime")
 os.execute"useradd -m pac && usermod -a -G wheel pac"
 
 -- firefox
-dofile"/usr/okpkg/binary/firefox-nightly.lua"
+dofile"/usr/okpkg/binary/firefox.lua"
 
 -- cleanup
 os.execute"rm -fr _*.tar.lz *no"
