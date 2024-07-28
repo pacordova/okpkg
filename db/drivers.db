@@ -1,0 +1,32 @@
+libvdpau-va-gl = {
+   url = "https://github.com/i-rinat/libvdpau-va-gl/archive/v0.4.0/libvdpau-va-gl-0.4.0.tar.gz",
+   build = "cmake",
+};
+
+intel-vaapi-driver = {
+   url = "https://github.com/intel/intel-vaapi-driver/releases/download/2.4.1/intel-vaapi-driver-2.4.1.tar.bz2",
+   sha3 = "e1abf1da12f242cd6055919174f18b97f3277a1cbeebb39a13b64cd8274e2e6f",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+   }
+};
+
+dkms = {
+   url = "https://github.com/dell/dkms/archive/v3.0.13/dkms-3.0.13.tar.gz",
+   sha3 = "e355acf31f2a2ed93c558d69c2a23b97bf03bbc05a19017249ec27a54247a763",
+   build = "make",
+   flags = {
+      "SBIN=/usr/bin"
+   },
+   post = [[ rm -fr $destdir/usr/lib $destdir/etc/kernel ]]
+};
+
+nvidia = {
+   url = "https://github.com/NVIDIA/open-gpu-kernel-modules/archive/555.58.02/nvidia-555.58.02.tar.gz",
+   sha3 = "4d195a14d980eb38532f3eb7cb48b24b18e1e65346072a3deec69b368cddcd90",
+   build = "make",
+   flags = {
+      "SYSRC=/usr/src/linux",
+   }
+};

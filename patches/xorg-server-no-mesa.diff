@@ -1,0 +1,48 @@
+diff --git a/glx/meson.build b/glx/meson.build
+index 2ec00ce..18d3f41 100644
+--- a/glx/meson.build
++++ b/glx/meson.build
+@@ -38,7 +38,6 @@ if build_glx
+         dependencies: [
+             common_dep,
+             dl_dep,
+-            dri_dep,
+             dependency('glproto', version: '>= 1.4.17'),
+             dependency('gl', version: '>= 1.2'),
+         ],
+diff --git a/hw/xfree86/dixmods/meson.build b/hw/xfree86/dixmods/meson.build
+index a1afbe8..e4ac022 100644
+--- a/hw/xfree86/dixmods/meson.build
++++ b/hw/xfree86/dixmods/meson.build
+@@ -33,7 +33,7 @@ if build_glx
+
+         include_directories: [ inc, xorg_inc, glx_inc ],
+         c_args: [ xorg_c_args, glx_align64 ],
+-        dependencies: [ common_dep, dl_dep, dri_dep ],
++        dependencies: [ common_dep, dl_dep ],
+         link_whole: libxserver_glx,
+         link_with: e,
+
+diff --git a/include/meson.build b/include/meson.build
+index 591bc25..eef9478 100644
+--- a/include/meson.build
++++ b/include/meson.build
+@@ -6,8 +6,6 @@ patch = version_split[2].to_int()
+ # convert to the old-style 1.x.y version scheme used up to 1.20.x for backwards compatibility
+ release = 1 * 10000000 + major * 100000 + minor * 1000 + patch
+
+-dri_dep = dependency('dri', required: build_glx)
+-
+ conf_data = configuration_data()
+ conf_data.set('_DIX_CONFIG_H_', '1')
+
+@@ -209,9 +207,6 @@ conf_data.set('DGA', build_dga ? '1' : false)
+ conf_data.set('DPMSExtension', build_dpms ? '1' : false)
+ conf_data.set('DRI2', build_dri2 ? '1' : false)
+ conf_data.set('DRI3', build_dri3 ? '1' : false)
+-if build_glx
+-    conf_data.set_quoted('DRI_DRIVER_PATH', dri_dep.get_pkgconfig_variable('dridriverdir'))
+-endif
+ conf_data.set('HAS_SHM', build_mitshm ? '1' : false)
+ conf_data.set('MITSHM', build_mitshm ? '1' : false)
+ conf_data.set('PANORAMIX', build_xinerama ? '1' : false) 

@@ -1,0 +1,313 @@
+libxml2 = {
+   url = "https://download.gnome.org/sources/libxml2/2.13/libxml2-2.13.3.tar.xz",
+   sha3 = "abba2c837356e1303c07b2703a95a1de5697f7e0c39d4e37b5e2132d96121de5",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
+      "--disable-static",
+      "--with-history",
+      "--with-legacy",
+      "--without-icu",
+      "PYTHON=/usr/bin/python3",
+   },
+   post = [[
+      mv $destdir/usr/lib/python*/site-packages/* $destdir/usr/lib64/python*/site-packages
+      rm -fr $destdir/usr/lib/python*
+   ]]
+};
+
+libxslt = {
+   url = "https://download.gnome.org/sources/libxslt/1.1/libxslt-1.1.42.tar.xz",
+   sha3 = "89c1ef277e8a38b3825ede2c791e35e2495c600a9e94e2ca527663fb15cc815c",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
+      "--disable-static",
+      "--without-python",
+   }
+};
+
+libunistring = {
+   url = "https://ftp.gnu.org/gnu/libunistring/libunistring-1.2.tar.xz",
+   sha3 = "95472c6995afaa039064bab986637cb2825dd2cb20814db26fb365fd5cea9fd6",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--disable-static"
+   }
+};
+
+libidn2 = {
+   url = "https://ftp.gnu.org/gnu/libidn/libidn2-2.3.7.tar.gz",
+   sha3 = "889197927b322f26b41a4ba21e78f631cf0cdca8d8fcfa0f5ac0d4bdcd8278c8",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--disable-static"
+   },
+   post = [[ rm -fr $destdir/usr/bin $destdir/usr/share/man/man1 ]]
+};
+
+libpsl = {
+   url = "https://github.com/rockdaboot/libpsl/releases/download/0.21.5/libpsl-0.21.5.tar.gz",
+   sha3 = "41c5824497c1e40e8c97eab9027fd0b4f74e9bd1c9b482f5d8a92261c779a07e",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--enable-man",
+      "--disable-static",
+   }
+};
+
+--------------------------------------------------------------------------------
+
+autoconf = {
+   url = "https://ftp.gnu.org/gnu/autoconf/autoconf-2.72.tar.xz",
+   sha3 = "58d79b241a66db533747785182df3e49a61c9e5ed7508a002fd5bf033deaf7c8",
+   build = "./configure",
+};
+
+automake = {
+   url = "https://ftp.gnu.org/gnu/automake/automake-1.17.tar.xz",
+   sha3 = "9ef65366aeef36107f79db7caeacb0829f328bc6456087d443361df3759851cf",
+   build = "./configure",
+};
+
+bc-gh = {
+   url = "https://github.com/gavinhoward/bc/releases/download/6.7.6/bc-6.7.6.tar.xz",
+   sha3 = "1489f334be1908ec5727ddb52424a7dcb938b5e4bb615bab3cca4f0c9d72d0c0",
+   build = "./configure",
+   flags = {
+      "--predefined-build-type=GNU",
+      "--enable-readline",
+      "--disable-generated-tests",
+      "--disable-problematic-tests",
+   },
+   prepare = [[
+      sed -e 's/%%CFLAGS%%/-O3/' \
+          -e 's/%%HOSTCFLAGS%%/-O3/' \
+          -i Makefile.in
+   ]]
+};
+
+check = {
+   url = "https://github.com/libcheck/check/releases/download/0.15.2/check-0.15.2.tar.gz",
+   sha3 = "bfb856a68c0ea4d930803f6bd16c1eed38910a231c9e0f0009e69310e35e7a5d",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
+      "--disable-static"
+   }
+};
+
+curl = {
+   url = "https://curl.se/download/curl-8.9.0.tar.xz",
+   sha3 = "8b9cb862973551c7892f5ae7c4a9342c1097578843b7963da37ae1fe644e8f5c",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--enable-ipv6",
+      "--enable-threaded-resolver",
+      "--disable-ares",
+      "--disable-ldap",
+      "--disable-ldaps",
+      "--disable-manual",
+      "--disable-static",
+      "--with-ca-bundle=/etc/ssl/certs/ca-certificates.crt",
+      "--with-openssl",
+      "--with-pic",
+   }
+};
+
+cmake = {
+   url = "https://cmake.org/files/v3.30/cmake-3.30.1.tar.gz",
+   sha3 = "02a8331dd675e4f6ddb5f06c4bf8cc345949db548c9dd63877d7972ba4c25704",
+   build = "./configure",
+   flags = {
+      "--mandir=/share/man",
+      "--datadir=/share/cmake",
+      "--parallel=$(getconf _NPROCESSORS_ONLN)",
+      "--system-curl",
+      "--system-expat",
+      "--system-zlib",
+      "--system-bzip2",
+      "--system-liblzma",
+   },
+   post = [[
+      rm -fr $destdir/usr/share/cmake*/Help
+      rm -fr $destdir/usr/share/bash-completion
+   ]]
+};
+
+gettext = {
+   url = "https://ftp.gnu.org/gnu/gettext/gettext-0.22.5.tar.xz",
+   sha3 = "410646226a2f971e0789082352d6e270606af924c97305316d3bbd764fa9fbd5",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--disable-static",
+      "--without-git",
+   }
+};
+
+help2man = {
+   url = "https://ftp.gnu.org/gnu/help2man/help2man-1.49.3.tar.xz",
+   sha3 = "bc9a32dc38382300d57aa14e87cde7d218841190cb1745e65984a7ddc0bd8cb9",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
+   }
+};
+
+intltool = {
+   url = "https://launchpad.net/intltool/trunk/0.51.0/+download/intltool-0.51.0.tar.gz",
+   sha3 = "c215547f72957e1727976aeaa7156517fb005a5c8fe0df30e7f546c990ca8d19",
+   build = "./configure",
+   flags = { "--libdir=/usr/lib64" },
+   prepare = [[ sed -i 's:\\\${:\\\$\\{:' intltool-update.in ]]
+};
+
+libtool = {
+   url = "https://alpha.gnu.org/gnu/libtool/libtool-2.5.0.tar.xz",
+   sha3 = "6215631f6c42a00b97f90b9881290fede178a0c2294b0b0916b5e792b00a2b87",
+   build = "./configure",
+   flags = { "--libdir=/usr/lib64" },
+   post = [[ rm -f $destdir/usr/lib64/libltdl.a ]]
+};
+
+meson = {
+   url = "https://github.com/mesonbuild/meson/releases/download/1.5.1/meson-1.5.1.tar.gz",
+   sha3 = "d0ebf1dce37be5e28c56ba155c5e0fbc2b4aa2958ede523e083b202b2c4b0759",
+   build = "python-build",
+};
+
+nasm = {
+   url = "https://www.nasm.us/pub/nasm/releasebuilds/2.16.03/nasm-2.16.03.tar.xz",
+   sha3 = "3a7634350853231b03bb9fec8f23836a4bc7cfb9f8a48f2317555ac4aec98414",
+   build = "./configure",
+   flags = { "--libdir=/usr/lib64" }
+};
+
+samurai = {
+   url = "https://github.com/michaelforney/samurai/releases/download/1.2/samurai-1.2.tar.gz",
+   sha3 = "127ea48499f38f1a1c476957453ccca9419c8a4a938925e1361818102307375d",
+   build = "make",
+   flags = { "PREFIX=/usr" },
+   post = [[ ln -sf samu $destdir/usr/bin/ninja ]]
+};
+
+libsass = {
+   url = "https://github.com/sass/libsass/archive/3.6.6/libsass-3.6.6.tar.gz",
+   sha3 = "9637cd39de53582abc24deefb2ed3c28c92db591c81f4765dd58c287631b2667",
+   build = "autoreconf",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--localstatedir=/var",
+      "--disable-static"
+   }
+};
+
+sassc = {
+   url = "https://github.com/sass/sassc/archive/3.6.2/sassc-3.6.2.tar.gz",
+   sha3 = "61e05276d1052de3c8403a6895cbca55f50d9f8f3afd2abed1263331dd33e46f",
+   build = "autoreconf",
+   flags = { 
+      "--libdir=/usr/lib64",
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
+      "--disable-static",
+   }
+};
+
+texinfo = {
+   url = "https://ftp.gnu.org/gnu/texinfo/texinfo-7.1.tar.xz",
+   sha3 = "e62a3765829007a33de369d4f0c1b5dfda41b18b73a199bbaf5b2ca4606c2d15",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--sysconfdir=/etc",
+   }
+};
+
+which = {
+   url = "https://ftp.gnu.org/gnu/which/which-2.21.tar.gz",
+   sha3 = "4a008a5fba90aa48ab099a000f60ce1067ef61f05ea0ace5e261066824f67792",
+   build = "./configure",
+};
+
+--------------------------------------------------------------------------------
+
+_glib2 = {
+   url = "https://download.gnome.org/sources/glib/2.80/glib-2.80.4.tar.xz",
+   sha3 = "4205bbce0611dc46082fccecbecf8913f445dd6dd9739c99e9d750ff943104a5",
+   build = "meson",
+   flags = { "-Dintrospection=disabled" }
+};
+
+gobject-introspection = {
+   url = "https://download.gnome.org/sources/gobject-introspection/1.80/gobject-introspection-1.80.1.tar.xz",
+   sha3 = "0aee06c2479fc07b9aa7092fecdf757f4efd7739c585b01b1733cd1b8d9ed034",
+   build = "meson",
+};
+
+glib2 = {
+   url = "https://download.gnome.org/sources/glib/2.80/glib-2.80.4.tar.xz",
+   sha3 = "4205bbce0611dc46082fccecbecf8913f445dd6dd9739c99e9d750ff943104a5",
+   build = "meson",
+   flags = { "-Dintrospection=enabled" }
+};
+
+vala = {
+   url = "https://download.gnome.org/sources/vala/0.56/vala-0.56.17.tar.xz",
+   sha3 = "668609ee19af025e1778f93f81086e11d850354db8c4278a2ad2db944a951f9f",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--enable-python3=yes",
+      "--disable-python",
+      "--disable-valadoc",
+   },
+   prepare = [[ sed -i '/gvc.h/a#define TRUE 1' libvaladoc/gvc-compat.c ]]
+};
+
+dbus-glib = {
+   url = "https://dbus.freedesktop.org/releases/dbus-glib/dbus-glib-0.112.tar.gz",
+   sha3 = "403eaea495309ea8260148a2cb945a1c08785b1c431bd867d1100b188b4efa41",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--libexecdir=/usr/lib64",
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
+      "--disable-static",
+   }
+};
+
+libgudev = {
+   url = "https://download.gnome.org/sources/libgudev/238/libgudev-238.tar.xz",
+   sha3 = "6500e55c1ceeaf85747d3eeaebd57e1cfc7fae4b5b4ceb7161cd8ab059d1863d",
+   build = "meson",
+};
+
+--------------------------------------------------------------------------------
+
+nv-codec-headers = {
+   url = "https://github.com/FFmpeg/nv-codec-headers/releases/download/n12.1.14.0/nv-codec-headers-12.1.14.0.tar.gz",
+   sha3 = "8dc9b52f8a2256ff15439caed043e4d93229d9acabb4217d255f9dc7be0c9fc7",
+   build = "make",
+   flags = { "PREFIX=/usr", "LIBDIR=lib64" }
+};
+
+vulkan-headers = {
+   url = "https://github.com/KhronosGroup/Vulkan-Headers/archive/v1.3.285/Vulkan-Headers-1.3.285.tar.gz",
+   sha3 = "15d1dd241f5582a269f9047a7c9cacb1afabea945c28803241d676748f04e3fa",
+   build = "cmake",
+};

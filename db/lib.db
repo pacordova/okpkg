@@ -1,0 +1,274 @@
+alsa-lib = {
+   url = "https://alsa-project.org/files/pub/lib/alsa-lib-1.2.12.tar.bz2",
+   sha3 = "3d65e490d7c1f25890e099c89f3a4e2c9b36a8553db4e17d05b9ee36feb19d71",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--without-debug"
+   }
+};
+
+argon2 = {
+   url = "https://github.com/P-H-C/phc-winner-argon2/archive/20190702/phc-winner-argon2-20190702.tar.gz",
+   sha3 = "8147687cbaa78ac3fa5ef0d07996934b741621e1c24705479ae09bf17a8976aa",
+   build = "make",
+   flags = { "LIBRARY_REL=lib64" }
+};
+
+dav1d = {
+   url = "https://downloads.videolan.org/pub/videolan/dav1d/1.4.3/dav1d-1.4.3.tar.xz",
+   sha3 = "fc84c431c4f2405ae8b351a9ecd7b1ce10b96863d50ae3206df857c81a2cf118",
+   build = "meson",
+};
+
+flac = {
+   url = "https://downloads.xiph.org/releases/flac/flac-1.4.3.tar.xz",
+   sha3 = "24b4d4d600396dbedfb46e031bd7cc26408a6ecab1e3e2ac929c725fdc665fc1",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--disable-ogg",
+      "--disable-thorough-tests",
+   }
+};
+
+fribidi = {
+   url = "https://github.com/fribidi/fribidi/releases/download/v1.0.15/fribidi-1.0.15.tar.xz",
+   sha3 = "8179f6d561ddf746af18aa5670016598f0e7db9536aa799f3d75821d87bb265e",
+   build = "meson",
+};
+
+lame = {
+   url = "https://downloads.sourceforge.net/lame/lame-3.100.tar.gz",
+   sha3 = "36700934b5b3e64f2e3ff33ee85bd7fc033890aa92d1f6a0a9b5acc2a3a0d199",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--sysconfdir=/etc",
+      "--enable-nasm",
+      "--enable-mp3rtp",
+      "--disable-static",
+      "--disable-gtktest",
+   }
+};
+
+libbpf = {
+   url = "https://github.com/libbpf/libbpf/archive/v1.4.5/libbpf-1.4.5.tar.gz",
+   sha3 = "e0b91f8110d545f296ee1440fd296a50627d02bd6295a05334a2170439702bce",
+   build = "make",
+   flags = {
+      "--directory=src",
+      "LIBSUBDIR=lib64"
+   }
+};
+
+libevent = {
+   url = "https://github.com/libevent/libevent/releases/download/release-2.1.12-stable/libevent-2.1.12-stable.tar.gz",
+   sha3 = "aeadcbd599fc49e5fe9554a668093e4bdc53cf9fd177d099bce41e46ec0b783d",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--sysconfdir=/etc",
+      "--disable-static",
+   },
+   prepare = [[ sed -i 's/python/&3/' event_rpcgen.py ]]
+};
+
+libexif = {
+   url = "https://github.com/libexif/libexif/releases/download/v0.6.24/libexif-0.6.24.tar.bz2",
+   sha3 = "a3d9130008e06b086ff60624ed629eeb259916da99fa045784fc6177b4b591c3",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
+      "--disable-static"
+   }
+};
+
+libjpeg-turbo = {
+   url = "https://github.com/libjpeg-turbo/libjpeg-turbo/releases/download/3.0.3/libjpeg-turbo-3.0.3.tar.gz",
+   sha3 = "648f531e76e7151d521106a081671f41e5153725d38d0c5a91ec6c80e6f113b4",
+   build = "cmake",
+   flags = {
+      "-DENABLE_STATIC=OFF",
+      "-DWITH_JPEG8=ON",
+      "-DWITH_JAVA=OFF",
+   }
+};
+
+libmnl = {
+   url = "https://netfilter.org/projects/libmnl/files/libmnl-1.0.5.tar.bz2",
+   sha3 = "0f289aaf93935856a674b8c5c9e6b390f94f348965d899f285a1d4d259081181",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
+      "--disable-static",
+   }
+};
+
+libnl3 = {
+   url = "https://github.com/thom311/libnl/releases/download/libnl3_10_0/libnl-3.10.0.tar.gz",
+   sha3 = "a35a965ac148ade1d4cf9fed2ee089146d4182c4b746359f030b72f529cb5990",
+   build = "./configure",
+   flags = {
+      "--sbindir=/usr/bin",
+      "--libdir=/usr/lib64",
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
+      "--disable-static",
+      "--disable-cli",
+   }
+};
+
+libogg = {
+   url = "https://downloads.xiph.org/releases/ogg/libogg-1.3.5.tar.xz",
+   sha3 = "caabb9bead5d1b33279bd7367f40a807869273cf2e176bf0eb5ec4e009f37af6",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--disable-static"
+   }
+};
+
+libpcap = {
+   url = "https://www.tcpdump.org/release/libpcap-1.10.4.tar.gz",
+   sha3 = "0c428ebe79bb836222ff5418dcbb270ef69c90fb093ea7081438713b6bba0bee",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--enable-ipv6",
+   }
+};
+
+libpng = {
+   url = "https://downloads.sourceforge.net/libpng/libpng-1.6.43.tar.xz",
+   sha3 = "77bea57721f50c4a656994d644f77f75689a5d360c71b1aee1044eb275b9da7b",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--sysconfdir=/etc",
+      "--disable-static",
+   }
+};
+
+libtasn1 = {
+   url = "https://ftp.gnu.org/gnu/libtasn1/libtasn1-4.19.0.tar.gz",
+   sha3 = "1fea801ff44ee976956c7d36295afcbf0d8b3c33f3f0a460fbf28b7b0df9a432",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--disable-static"
+   }
+};
+
+libtiff = {
+   url = "https://download.osgeo.org/libtiff/tiff-4.6.0.tar.gz",
+   sha3 = "bab4329a43c48338b3e00af8d44358b7e01109b065f9790d06901be822f6f1ac",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--disable-static",
+   }
+};
+
+libtirpc = {
+   url = "https://downloads.sourceforge.net/libtirpc/libtirpc-1.3.5.tar.bz2",
+   sha3 = "d039939874447be073f6f65acab90b2ecfa4385b5b1b2ca2cf8991b1504ddeee",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--sysconfdir=/etc",
+      "--disable-static",
+      "--disable-gssapi",
+   }
+};
+
+libusb = {
+   url = "https://github.com/libusb/libusb/releases/download/v1.0.27/libusb-1.0.27.tar.bz2",
+   sha3 = "e79a5aa5c54bd32d07f1e0935b1b18c09fe7bfa6a202d5a1c218938764781164",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--disable-static",
+   }
+};
+
+libvorbis = {
+   url = "https://downloads.xiph.org/releases/vorbis/libvorbis-1.3.7.tar.xz",
+   sha3 = "2c28108d60b3ac2bd0f2a38ac3ee0dc70a24b84f6f6e892df20d266cd11a5e9d",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--disable-static",
+      "--disable-docs"
+   }
+};
+
+libvpx = {
+   url = "https://github.com/webmproject/libvpx/archive/v1.14.1/libvpx-1.14.1.tar.gz",
+   sha3 = "6f2658dc6260ee0915ea4f27226dad31d0f45dca6f70ecb988bfe64ea5ae9887",
+   build = "../configure",
+   prepare = [[
+      sed -i 's/cp -p/cp/' build/make/Makefile
+      sed -i 's/perl/:/g;s/diff --version/command -v diff/' configure
+   ]],
+   flags = {
+      "--libdir=/usr/lib64",
+      "--enable-pic",
+      "--enable-postproc",
+      "--enable-runtime-cpu-detect",
+      "--enable-shared",
+      "--enable-vp8",
+      "--enable-vp9",
+      "--enable-vp9-highbitdepth",
+      "--disable-debug",
+      "--disable-debug-libs",
+      "--disable-docs",
+      "--disable-examples",
+      "--disable-install-bins",
+      "--disable-install-docs",
+      "--disable-install-srcs",
+      "--disable-static",
+      "--disable-tools",
+      "--disable-unit-tests",
+      "--as=nasm",
+   }
+};
+
+opus = {
+   url = "https://downloads.xiph.org/releases/opus/opus-1.5.2.tar.gz",
+   sha3 = "6f0c6a0215fa2c898f9f37fe07cdafb230a9135e722163de605e480ebf6820e0",
+   build = "meson",
+   flags = { "-Dcustom-modes=true" }
+};
+
+x264 = {
+   url = "https://code.videolan.org/videolan/x264/-/archive/c196240409e4d7c01b47448d93b1f9683aaa7cf7/x264-c196240409e4d7c01b47448d93b1f9683aaa7cf7.tar.bz2",
+   sha3 = "c4af21e637a73287462f7cfa1834728d0b146662b5cbca4136e31db483fee219",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--enable-shared",
+      "--disable-cli",
+      "--disable-swscale",
+      "--disable-avs",
+   },
+   prepare = [[ sed -i 's:#!/bin/sh:#!/bin/bash:' ./tools/cltostr.sh ]]
+};
+
+x265 = {
+   url = "https://bitbucket.org/multicoreware/x265_git/downloads/x265_3.6.tar.gz",
+   sha3 = "06731a2b191eb95eab35fe248ea5beb500f52c07f481994124663bc02eeeb0f0",
+   build = "cmake",
+   flags = {
+      "-DLIB_INSTALL_DIR=lib64",
+      "-DENABLE_SHARED=ON",
+      "-DGIT_ARCHETYPE=1",
+      "-Wno-dev",
+      "../source",
+   },
+   post = [[ rm -f $destdir/usr/lib64/libx265.a ]]
+};

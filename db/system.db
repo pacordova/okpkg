@@ -1,0 +1,1278 @@
+_file = {
+   url = "https://astron.com/pub/file/file-5.45.tar.gz",
+   sha3 = "07aeb9d12d226c669fc8123cee5da374642c6320b7c7bdffcf66823e2c3aac8d",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--sysconfdir=/etc",
+      "--datadir=/usr/share/file",
+      "--disable-bzlib",
+      "--disable-libseccomp",
+      "--disable-static",
+      "--disable-xzlib",
+      "--disable-zlib",
+   }
+};
+
+_python3 = {
+   url = "https://www.python.org/ftp/python/3.12.4/Python-3.12.4.tar.xz",
+   sha3 = "70614f9dc6b42142e88e219f1a01b3c0ebaff5c8cf66f565876b794106ffc15e",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--enable-shared",
+      "--disable-ipv6",
+      "--disable-optimizations",
+      "--with-platlibdir=lib64",
+      "--without-doc-strings",
+      "--without-ensurepip",
+      "--without-system-expat",
+   },
+   post = [[
+      cd $destdir/usr/bin
+      rm -f pydoc* idle*
+      cd $destdir/usr/lib64/python*
+      rm -fr test ./*/test ./*/tests pydoc* idlelib turtle* config-*
+   ]]
+};
+
+bison = {
+   url = "https://ftp.gnu.org/gnu/bison/bison-3.8.2.tar.xz",
+   sha3 = "f5c25f55138842dbd620adea16d788c502410702137950ce5178e692b85d5286",
+   build = "./configure",
+   flags = { "--libdir=/usr/lib64" }
+};
+
+_perl = {
+   url = "https://www.cpan.org/src/5.0/perl-5.40.0.tar.xz",
+   sha3 = "79932e1815d865e73674a2b1b944a6abdea8638d90892d82bdb1810b8a273645",
+   build = "./configure.gnu",
+   flags= {
+      "-Dvendorprefix=/usr",
+      "-Duseshrplib",
+      "-Dprivlib=/usr/share/perl5/core_perl",
+      "-Darchlib=/usr/lib64/perl5/core_perl",
+      "-Dsitelib=/usr/share/perl5/site_perl",
+      "-Dsitearch=/usr/lib64/perl5/site_perl",
+      "-Dvendorlib=/usr/share/perl5/vendor_perl",
+      "-Dvendorarch=/usr/lib64/perl5/vendor_perl",
+      "-Dscriptdir=/usr/bin",
+      "-Dman1dir=/usr/share/man/man1",
+      "-Dman3dir=/usr/share/man/man3",
+   },
+   post = [[
+      find $destdir -name \*.pod       -exec rm -f {} +
+      find $destdir -name .packlist    -exec rm -f {} +
+      find $destdir -name README\*     -exec rm -f {} +
+      find $destdir -name TODO\*       -exec rm -f {} +
+      find $destdir -name Change\*     -exec rm -f {} +
+      find $destdir -name \*.bs        -exec rm -f {} +
+      find $destdir -name \*.0 -type f -exec rm -f {} +
+      find $destdir/usr/lib64  -type f -exec chmod 644 {} +
+   ]]
+};
+
+iana-etc = {
+   url = "https://github.com/Mic92/iana-etc/releases/download/20240612/iana-etc-20240612.tar.gz",
+   sha3 = "02738d475e3a18074a494eba554cca0c4007afe1f4cc2540fe336c2f4f867414",
+   build = _,
+   post = [[ 
+      install -d $destdir/etc/
+      install -m 644 services  $destdir/etc/
+      install -m 644 protocols $destdir/etc/
+   ]]
+};
+
+glibc = {
+   url = "https://ftp.gnu.org/gnu/glibc/glibc-2.40.tar.xz",
+   sha3 = "cbed5402bd33830040f33755e59828c6fd8fbb80aa4cc8c31aca991c7287142a",
+   build = "../configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--libexecdir=/usr/lib64",
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
+      "--enable-bind-now",
+      "--enable-kernel=4.4",
+      "--enable-stack-protector=strong",
+      "--disable-nscd",
+      "--disable-profile",
+      "--disable-werror",
+      "--with-headers=/usr/include",
+      "libc_cv_slibdir=/lib64"
+   },
+   prepare = [[
+      mkdir -p build && cd build
+      printf "slibdir=/usr/lib64\n" >> configparms
+      printf "rtlddir=/usr/lib64\n" >> configparms
+      printf "sbindir=/usr/bin\n" >> configparms
+      printf "rootsbindir=/usr/bin\n" >> configparms
+   ]]
+};
+
+zlib = {
+   url = "https://zlib.net/zlib-1.3.1.tar.gz",
+   sha3 = "012a4a5f8977048e6339775e62ac1fc71dc6ebc00ceaff972197e59fa5ecb72b",
+   build = "./configure",
+   flags = { "--libdir=/usr/lib64" },
+   post = [[ rm -f $destdir/usr/lib64/libz.a ]]
+};
+
+bzip2 = {
+   url = "https://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz",
+   sha3 = "34400e535a9018e93fc04f509811df340e8f9b48b06467b9c025400ac0a4898d",
+   build = "make",
+   flags = { "PREFIX=$destdir/usr" },
+   prepare = [[
+      sed -e 's@\(ln -s -f \)$(PREFIX)/bin/@\1@' \
+          -e "s@(PREFIX)/man@(PREFIX)/share/man@g" \
+          -e "s@(PREFIX)/lib@(PREFIX)/lib64@g" \
+          -i Makefile
+      make -f Makefile-libbz2_so
+      make clean
+   ]],
+   post = [[
+      cp -f  libbz2.so.*  $destdir/usr/lib64
+      cp -f  bzip2-shared $destdir/usr/bin/bzip2
+      ln -sf libbz2.so.1.0.8 $destdir/usr/lib64/libbz2.so
+      ln -sf libbz2.so.1.0.8 $destdir/usr/lib64/libbz2.so.1
+      ln -sf libbz2.so.1.0.8 $destdir/usr/lib64/libbz2.so.1.0
+      ln -sf bzip2 $destdir/usr/bin/bunzip2
+      ln -sf bzip2 $destdir/usr/bin/bzcat
+      rm -f  $destdir/usr/lib64/libbz2.a
+   ]]
+};
+
+lzlib = {
+   url = "https://download.savannah.gnu.org/releases/lzip/lzlib/lzlib-1.14.tar.lz",
+   sha3 = "581e72585d5b7a2828606e59caf929b36bd2e2a4cb39c5b5299743a64610ae74",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--enable-shared",
+      "--disable-static",
+   }
+};
+
+xz = {
+   url = "https://downloads.sourceforge.net/lzmautils/xz-5.6.2.tar.gz",
+   sha3 = "f1a23360d3c4b4615d92f1bafc05970b61aff1345a4e0d49c6b3f44c570cab00",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--sysconfdir=/etc",
+      "--enable-shared",
+      "--enable-werror",
+      "--disable-doc",
+      "--disable-doxygen",
+      "--disable-rpath",
+      "--disable-static",
+   }
+};
+
+zstd = {
+   url = "https://github.com/facebook/zstd/releases/download/v1.5.6/zstd-1.5.6.tar.gz",
+   sha3 = "a684831fa2367ab1873ed9efb000ba4d4e663b620cb60121db8f0cb3eb83d2b1",
+   build = "make",
+   flags = {
+      "prefix=/usr",
+      "LIBDIR=/usr/lib64",
+      "HAVE_LZMA=0",
+      "HAVE_ZLIB=0",
+      "HAVE_LZ4=0"
+   },
+   post = [[ rm -f $destdir/usr/lib64/libzstd.a ]]
+};
+
+gperf = {
+   url = "https://ftp.gnu.org/gnu/gperf/gperf-3.1.tar.gz",
+   sha3 = "7a684165950a12cf747c246c1e675877dd70c4df09d9291d380ceb0a4687fd35",
+   build = "./configure",
+   flags = {
+      "--sysconfdir=/etc",
+   }
+};
+
+libseccomp = {
+   url = "https://github.com/seccomp/libseccomp/releases/download/v2.5.5/libseccomp-2.5.5.tar.gz",
+   sha3 = "d9af57ba52f49198efac8e07b37eb073ecda2d49cc7dd53d045084f558877488",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--disable-static"
+   }
+};
+
+file = {
+   url = "https://astron.com/pub/file/file-5.45.tar.gz",
+   sha3 = "07aeb9d12d226c669fc8123cee5da374642c6320b7c7bdffcf66823e2c3aac8d",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--sysconfdir=/etc",
+      "--datadir=/usr/share/file",
+      "--enable-fsect-man5",
+      "--enable-libseccomp",
+      "--disable-static",
+   }
+};
+
+m4 = {
+   url = "https://ftp.gnu.org/gnu/m4/m4-1.4.19.tar.xz",
+   sha3 = "7798bfdfc35ce65aca936e82a3f68b4f4a66278f4d477f86284960ead7103265",
+   build = "./configure",
+   flags = { "--libdir=/usr/lib64" }
+};
+
+flex = {
+   url = "https://github.com/westes/flex/releases/download/v2.6.4/flex-2.6.4.tar.gz",
+   sha3 = "cde654d28148d09eca97574c4201307cf1a6a90e887b304bcd2006b5cd46b220",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--disable-static",
+   },
+   post = [[ ln -sf flex $destdir/usr/bin/lex ]]
+};
+
+pkgconf = {
+   url = "https://distfiles.ariadne.space/pkgconf/pkgconf-2.1.1.tar.xz",
+   sha3 = "96d0726e75564b8b3a85ed18be4f37f09018bd73f43e2064a0d7caac1c8aeba6",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--sysconfdir=/etc",
+      "--disable-static",
+   },
+   post = [[ ln -sf pkgconf $destdir/usr/bin/pkg-config ]]
+};
+
+binutils = {
+   url = "https://ftp.gnu.org/gnu/binutils/binutils-2.42.tar.xz",
+   sha3 = "fb96468f25f1794d59165ccb87cd44d01b78aa8218a072daeaa665e9a13b95e6",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--sysconfdir=/etc",
+      "--enable-64-bit-bfd",
+      "--enable-default-hash-style=gnu",
+      "--enable-deterministic-archives",
+      "--enable-gold",
+      "--enable-install-libiberty",
+      "--enable-ld=default",
+      "--enable-lto",
+      "--enable-relro",
+      "--enable-shared",
+      "--enable-threads",
+      "--enable-plugins",
+      "--disable-werror",
+      "--with-pic",
+      "--with-system-zlib",
+   },
+   prepare = [[ sed -i 's/tooldir=.*/tooldir=\/usr/g' configure ]],
+   post = [[
+      rm -f  $destdir/usr/lib64/lib{bfd,ctf,ctf-nobfd,gprofng,opcodes,sframe}.a
+      rm -fr $destdir/usr/lib/ldscripts
+   ]]
+};
+
+gmp = {
+   url = "https://ftp.gnu.org/gnu/gmp/gmp-6.3.0.tar.xz",
+   sha3 = "025f4fc3c5f68a0faae40cb8579dc7979eded558edfbc58ac030a072a6b5a6e7",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--enable-cxx",
+      "--disable-static",
+   }
+};
+
+mpfr = {
+   url = "https://ftp.gnu.org/gnu/mpfr/mpfr-4.2.1.tar.xz",
+   sha3 = "9f31eedffa3da6348bcb924cd6dd579048715e66fad56532b2927e76932eef03",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--enable-shared",
+      "--enable-thread-safe",
+      "--disable-static",
+   }
+};
+
+libmpc = {
+   url = "https://ftp.gnu.org/gnu/mpc/mpc-1.3.1.tar.gz",
+   sha3 = "b8f70a181e6125c82d61da3641b7be00680524cb6a8c97945f080a7b29a68ac8",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--enable-shared",
+      "--disable-static",
+   }
+};
+
+isl = {
+   url = "https://libisl.sourceforge.io/isl-0.26.tar.xz",
+   sha3 = "cadc038bd1b115a7fe130b533543af8f1b736bc2c90faaa9b1a95f038258e20f",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
+      "--disable-static",
+   }
+};
+
+attr = {
+   url = "https://download.savannah.gnu.org/releases/attr/attr-2.5.2.tar.gz",
+   sha3 = "b919ed9280aa8ac0c75602e21d0463d4e0f1946b1c0ff5cacda75ab9762c8048",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--libexecdir=/usr/lib64",
+      "--sysconfdir=/etc",
+      "--localstatedir=/var",
+      "--disable-static",
+   }
+};
+
+acl = {
+   url = "https://download.savannah.gnu.org/releases/acl/acl-2.3.2.tar.xz",
+   sha3 = "921838c2d83672eeaf096492e6e0640aa9b317ed41628e2a13d386f84b50d9f3",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--libexecdir=/usr/lib64",
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
+      "--disable-static",
+   }
+};
+
+gcc14 = {
+   url = "https://ftp.gnu.org/gnu/gcc/gcc-14.1.0/gcc-14.1.0.tar.xz",
+   sha3 = "98ce67e8827f913732dd82b700c18f52ee5acdae8adbae19ba1a8ce5c2978d7c",
+   build = "../configure",
+   flags = {
+      "libat_cv_have_ifunc=no",
+      "--libdir=/usr/lib64",
+      "--libexecdir=/usr/lib64",
+      "--enable-bootstrap",
+      "--enable-checking=release",
+      "--enable-clocale=gnu",
+      "--enable-__cxa_atexit",
+      "--enable-default-pie",
+      "--enable-default-ssp",
+      "--enable-gnu-unique-object",
+      "--enable-initfini-array",
+      "--enable-languages=c,c++",
+      "--enable-link-serialization=1",
+      "--enable-lto",
+      "--enable-shared",
+      "--enable-threads=posix",
+      "--disable-fixincludes",
+      "--disable-libssp",
+      "--disable-libstdcxx-pch",
+      "--disable-multilib",
+      "--disable-werror",
+      "--with-linker-hash-style=gnu",
+      "--with-system-zlib",
+      "LD=ld",
+   },
+   post = [[
+      cc=$destdir/usr/bin/gcc
+      find $destdir -name libgtkpeer.a  -exec rm -f '{}' +
+      find $destdir -name libgjsmalsa.a -exec rm -f '{}' +
+      install -d $destdir/usr/lib64/bfd-plugins
+      ln -sf ../../lib64/gcc/`$cc -dumpmachine`/`$cc -dumpversion`/liblto_plugin.so \
+          $destdir/usr/lib64/bfd-plugins/
+      install -d $destdir/usr/share/gdb/auto-load/usr/lib64
+      mv $destdir/usr/lib64/*gdb.py $destdir/usr/share/gdb/auto-load/usr/lib64
+      ln -sf gcc $destdir/usr/bin/cc
+      ln -sf gcc $destdir/usr/bin/c99
+   ]]
+};
+
+libcap = {
+   url = "https://kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-2.70.tar.xz",
+   sha3 = "d69c5f2817583fa535f0a63eedf89ae39c6fa9b86a1b5ccc11fb9f49a9ea674a",
+   build = "make",
+   flags = {
+      "prefix=/usr",
+      "sbindir=bin",
+      "lib=lib64",
+   },
+   prepare = [[ sed -i '/install -m.*STA/d' libcap/Makefile ]]
+};
+
+shadow = {
+   url = "https://github.com/shadow-maint/shadow/releases/download/4.16.0/shadow-4.16.0.tar.xz",
+   sha3 = "931c04bd27bccb5b6d0bc68291aeb68bdf286a2ff1581ff51bd561277102db2d",
+   build = "./configure",
+   flags = {
+      "--bindir=/usr/bin",
+      "--sbindir=/usr/bin",
+      "--libdir=/usr/lib64",
+      "--sysconfdir=/etc",
+      "--disable-account-tools-setuid",
+      "--disable-static",
+      "--with-fcaps",
+      "--with-group-name-max-length=32",
+      "--with-su",
+      "--with-yescrypt",
+      "--without-bcrypt",
+      "--without-libbsd",
+      "--without-libpam",
+      "--without-nscd",
+      "--without-selinux",
+   },
+   prepare = [[
+      sed -i 's/groups$(EXEEXT) //' src/Makefile.in
+      find man -name Makefile.in -exec sed -i 's/groups\.1 / /'   {} \;
+      sed -e 's:#ENCRYPT_METHOD DES:ENCRYPT_METHOD YESCRYPT:'  \
+          -e 's:/var/spool/mail:/var/mail:'                    \
+          -e '/PATH=/{s@/sbin:@@;s@/bin:@@}'                   \
+          -e 's:PREVENT_NO_AUTH superuser:PREVENT_NO_AUTH no:' \
+          -i etc/login.defs
+      sed -e 's@usbindir = ${prefix}/sbin@usbindir = ${prefix}/bin@' \
+          -i src/Makefile.in
+      touch /usr/bin/passwd
+   ]],
+   post = [[ make -C man install DESTDIR=$destdir ]]
+};
+
+ncurses = {
+   url = "https://invisible-island.net/archives/ncurses/ncurses-6.5.tar.gz",
+   sha3 = "ecf25cbdc136cb236a3bfa42b3aa10bf73e780572b4b7ed0647c58a6de1c9e38",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--enable-pc-files",
+      "--enable-widec",
+      "--disable-root-access",
+      "--disable-root-environ",
+      "--disable-setuid-environ",
+      "--with-cxx-binding",
+      "--with-cxx-shared",
+      "--with-manpage-format=normal",
+      "--with-pkg-config-libdir=/usr/lib64/pkgconfig",
+      "--with-shared",
+      "--with-termlib=tinfo",
+      "--with-ticlib=tic",
+      "--with-versioned-syms",
+      "--with-xterm-kbs=del",
+      "--without-ada",
+      "--without-debug",
+      "--without-normal",
+   },
+   post = [[
+      cd $destdir/usr/lib64
+      rm -f lib{form,panel,menu,*curses*}.so
+      printf "INPUT(-lformw)\n" > libform.so
+      printf "INPUT(-lpanelw)\n" > libpanel.so
+      printf "INPUT(-lmenuw)\n" > libmenu.so
+      printf "INPUT(-lncurses)\n"  > libcurses.so
+      printf "INPUT(-lncursesw)\n" > libcursesw.so
+      printf "INPUT(-lncursesw -ltinfo)\n" > libncurses.so
+      printf "INPUT(libncursesw.so.6 -ltinfo)\n" > libncursesw.so
+      printf "INPUT(-lncurses++w)\n" > libncurses++.so
+      printf "INPUT(-ltinfo)\n" > libtermcap.so
+      ln -sf formw.pc pkgconfig/form.pc
+      ln -sf panelw.pc pkgconfig/panel.pc
+      ln -sf menuw.pc pkgconfig/menu.pc
+      ln -sf ncurses.pc pkgconfig/curses.pc
+      ln -sf ncursesw.pc pkgconfig/cursesw.pc
+      ln -sf ncursesw.pc pkgconfig/ncurses.pc
+      ln -sf ncurses++w.pc pkgconfig/ncurses++.pc
+   ]]
+};
+
+readline = {
+   url = "https://ftp.gnu.org/gnu/readline/readline-8.2.tar.gz",
+   sha3 = "b4dcf44d1b31e503851d2fb10876578fd9a582b021ab6a96c6d35e14e0835df6",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--disable-static",
+      "--with-curses",
+      "SHLIB_LIBS=-ltinfo",
+   },
+   prepare = [[
+      sed -e 's/^SHLIB_LIBS=$/SHLIB_LIBS=-ltinfo/' \
+          -e 's|-Wl,-rpath,$(libdir) ||g' \
+          -i support/shobj-conf
+   ]]
+};
+
+sed = {
+   url = "https://ftp.gnu.org/gnu/sed/sed-4.9.tar.xz",
+   sha3 = "0aa23acbc6b1670475f44850bd94502aeedf4d0e5def38e4f7590db7d7065050",
+   build = "./configure",
+   flags = { "--libdir=/usr/lib64" }
+};
+
+psmisc = {
+   url = "https://sourceforge.net/projects/psmisc/files/psmisc/psmisc-23.7.tar.xz",
+   sha3 = "c893bea9968d7c06acccfbaacc1b3bbd2a1a69fb7a227d15e3542a649f30153e",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
+      "--disable-rpath",
+   }
+};
+
+pcre2 = {
+   url = "https://github.com/PCRE2Project/pcre2/releases/download/pcre2-10.44/pcre2-10.44.tar.bz2",
+   sha3 = "d4fd6a95630fbf9bde69c95536be875762dea369c473c13d350da545d2eeba9f",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--enable-jit",
+      "--enable-pcre2-16",
+      "--enable-pcre2-32",
+      "--enable-pcre2grep-libz",
+      "--enable-pcre2grep-libbz2",
+      "--enable-pcre2test-libreadline",
+      "--enable-unicode",
+      "--disable-static",
+   }
+};
+
+grep = {
+   url = "https://ftp.gnu.org/gnu/grep/grep-3.11.tar.xz",
+   sha3 = "4ae8043b51dc30c5f269ae6119bee84e728e4539019f29e6e6e400e31e2cf422",
+   build = "./configure",
+   prepare = [[ sed -i "s/echo/#echo/" src/egrep.sh ]]
+};
+
+oksh = {
+   url = "https://github.com/ibara/oksh/releases/download/oksh-7.5/oksh-7.5.tar.gz",
+   sha3 = "786cee634f58a6e2d93bdb5cf439480e11c2c1e1ff287822213424040333746d",
+   build = "./configure",
+   flags = {
+      "--cflags=$CFLAGS",
+      "--enable-ksh",
+   },
+   post = [[ 
+      ln -f $destdir/usr/bin/ksh $destdir/usr/bin/sh 
+      install -m 644 sh.1 $destdir/usr/share/man/man1
+   ]]
+};
+
+bash = {
+   url = "https://ftp.gnu.org/gnu/bash/bash-5.2.tar.gz",
+   sha3 = "01af6b12452665d8202cd50cdc9ca7e6e80d58ba3388d72eb5a0f1c737f8abd7",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--enable-readline",
+      "--with-installed-readline",
+      "--without-bash-malloc",
+   },
+   post = [[
+      rm -f "$destdir/usr/bin/bashbug"
+      rm -f "$destdir/usr/share/man/man1/bashbug.1"
+   ]]
+};
+
+time = {
+   url = "https://ftp.gnu.org/gnu/time/time-1.9.tar.gz",
+   sha3 = "21b27eeec844d70f0b91316d2ac96b6774959275c1df4250a2484c211993d7bc",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--mandir=/usr/share/man",
+      "--sysconfdir=/etc",
+   }
+};
+
+gdbm = {
+   url = "https://ftp.gnu.org/gnu/gdbm/gdbm-1.24.tar.gz",
+   sha3 = "cafd8a05e498c0c2cd42084c824e68e5da07c92e2b9deb96e43187923ad00f1d",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--enable-libgdbm-compat",
+      "--disable-static",
+   }
+};
+
+expat = {
+   url = "https://downloads.sourceforge.net/expat/expat-2.6.2.tar.bz2",
+   sha3 = "6ef36e0e415e9440597fa92d2449e51b51fefb7f82d32ecdfd71fe85f8a03c03",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--disable-static",
+      "--without-xmlwf",
+      "--without-examples",
+      "--without-tests",
+      "--without-docbook",
+   }
+};
+
+less = {
+   url = "https://www.greenwoodsoftware.com/less/less-661.tar.gz",
+   sha3 = "5431c1c29d537cee83767235eb5e3e6ffdfbce5d5ce0542d7a49c316fa8e0389",
+   build = "./configure",
+   flags = {
+      "--sysconfdir=/etc",
+      "--with-regex=pcre2"
+   }
+};
+
+gawk = {
+   url = "https://ftp.gnu.org/gnu/gawk/gawk-5.3.0.tar.xz",
+   sha3 = "4a6bde87e51e468f7b1bce275225d5a8e9d2edd4f1dc7b8920c57830755b7ba1",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--libexecdir=/usr/lib64",
+      "--sysconfdir=/etc",
+      "--without-libsigsegv",
+   }
+};
+
+tzdata = {
+   url = "https://github.com/eggert/tz/archive/2024a/tz-2024a.tar.gz",
+   sha3 = "e5cd838b360297b300db8be111d7eb98c9fef0e7b41bedf16968d6fd62184dd7",
+   build = "make",
+   flags = { "LIBDIR=/usr/lib64" },
+   prepare = [[ sed -i 's/sbin/bin/g' Makefile ]],
+   post = [[ rm -f $destdir/etc/localtime ]]
+};
+
+perl = {
+   url = "https://www.cpan.org/src/5.0/perl-5.40.0.tar.xz",
+   sha3 = "79932e1815d865e73674a2b1b944a6abdea8638d90892d82bdb1810b8a273645",
+   build = "./configure.gnu",
+   flags= {
+      "-Dvendorprefix=/usr",
+      "-Duseshrplib",
+      "-Dusethreads",
+      '-Doptimize="$CFLAGS"',
+      "-Dprivlib=/usr/share/perl5/core_perl",
+      "-Darchlib=/usr/lib64/perl5/core_perl",
+      "-Dsitelib=/usr/share/perl5/site_perl",
+      "-Dsitearch=/usr/lib64/perl5/site_perl",
+      "-Dvendorlib=/usr/share/perl5/vendor_perl",
+      "-Dvendorarch=/usr/lib64/perl5/vendor_perl",
+      "-Dscriptdir=/usr/bin",
+      "-Dman1dir=/usr/share/man/man1",
+      "-Dman3dir=/usr/share/man/man3",
+   },
+   post = [[
+      find $destdir -name \*.pod       -exec rm -f {} +
+      find $destdir -name .packlist    -exec rm -f {} +
+      find $destdir -name README\*     -exec rm -f {} +
+      find $destdir -name TODO\*       -exec rm -f {} +
+      find $destdir -name Change\*     -exec rm -f {} +
+      find $destdir -name \*.bs        -exec rm -f {} +
+      find $destdir -name \*.0 -type f -exec rm -f {} +
+      find $destdir/usr/lib64  -type f -exec chmod 644 {} +
+   ]]
+};
+
+libxcrypt = {
+   url = "https://github.com/besser82/libxcrypt/releases/download/v4.4.36/libxcrypt-4.4.36.tar.xz",
+   sha3 = "315c9bbbb87da32521b2f67170ab417dbd23138750b0ca85bc5fac2f4ec2fb9d",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--enable-hashes=strong,glibc",
+      "--enable-obsolete-api=no",
+      "--disable-static",
+      "--disable-failure-tokens",
+   }
+};
+
+libressl = {
+   url = "https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-3.9.2.tar.gz",
+   sha3 = "dfd622cd960058447b859ac9e94a19d9524733d861594af84d03db5e0109eac6",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--sysconfdir=/etc",
+      "--includedir=/usr/include",
+      "--disable-static",
+      "--with-openssldir=/etc/ssl",
+      "--program-prefix=''",
+   }
+};
+
+kmod = {
+   url = "https://kernel.org/pub/linux/utils/kernel/kmod/kmod-32.tar.xz",
+   sha3 = "e9435d1b3ce23fb39fa84f3cfbe06fcf772784176e47172fa63959f9ccca30d7",
+   build = "./configure",
+   flags = {
+      "--bindir=/usr/sbin",
+      "--libdir=/usr/lib64",
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
+      "--with-openssl",
+      "--with-zlib",
+      "--with-zstd",
+      "--with-xz",
+   }
+};
+
+libelf = {
+   url = "https://sourceware.org/ftp/elfutils/0.191/elfutils-0.191.tar.bz2",
+   sha3 = "bdf73b4f3be633a56344c1d1bcc6a9bb036c9bb565036ec16daef461e8f3a6d6",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--sysconfdir=/etc",
+      "--enable-deterministic-archives",
+      "--enable-symbol-versioning",
+      "--disable-debuginfod",
+      "--disable-libdebuginfod",
+      "--program-prefix='eu-'",
+   },
+   post = [[
+      rm -fr $destdir && mkdir -p $destdir
+      $make -C libelf install DESTDIR=$destdir
+      install -d $destdir/usr/lib64/pkgconfig
+      install -m 644 config/libelf.pc $destdir/usr/lib64/pkgconfig
+      rm -fr $destdir/usr/lib64/*.a
+   ]]
+};
+
+libffi = {
+   url = "https://github.com/libffi/libffi/releases/download/v3.4.6/libffi-3.4.6.tar.gz",
+   sha3 = "ee4aaa63160929d663836784eded2bd1566e1e68e12d95149b4484a025a4f5dc",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
+      "--with-gcc-arch=x86-64-v2",
+      "--with-pic",
+      "--disable-exec-static-tramp",
+      "--disable-multi-os-directory",
+      "--disable-static",
+   }
+};
+
+sqlite = {
+   url = "https://sqlite.org/2024/sqlite-autoconf-3460000.tar.gz",
+   sha3 = "83d2acf79453deb7d6520338b1f4585f12e39b27cd370fb08593afa198f471fc",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
+      "--enable-dynamic-extensions",
+      "--enable-fts5",
+      "--enable-threadsafe",
+      "--disable-static",
+      "TCLLIBDIR=/usr/lib64/sqlite3.45.3",
+      "CPPFLAGS=-DSQLITE_ENABLE_COLUMN_METADATA=1",
+      "ac_cv_search_readline=no",
+   }
+};
+
+python3 = {
+   url = "https://www.python.org/ftp/python/3.12.4/Python-3.12.4.tar.xz",
+   sha3 = "70614f9dc6b42142e88e219f1a01b3c0ebaff5c8cf66f565876b794106ffc15e",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--enable-ipv6",
+      "--enable-shared",
+      "--disable-optimizations",
+      "--with-computed-gotos",
+      "--with-dbmliborder=gdbm:ndbm",
+      "--with-platlibdir=lib64",
+      "--with-system-expat",
+      "--with-tzpath=/usr/share/zoneinfo",
+      "--without-doc-strings",
+      "--without-ensurepip",
+      'CFLAGS="$CFLAGS -fno-semantic-interposition"',
+      'LDFLAGS="$LDFLAGS -fno-semantic-interposition"',
+   },
+   post = [[
+      cd $destdir/usr/bin
+      rm -f pydoc* idle*
+      cd $destdir/usr/lib64/python*
+      rm -fr test ./*/test ./*/tests pydoc* idlelib turtle* config-*
+   ]]
+};
+
+coreutils = {
+   url = "https://ftp.gnu.org/gnu/coreutils/coreutils-9.5.tar.xz",
+   sha3 = "b1ec0d3be8380d8c93719bc31224419e5a0bc1a4dd7ddbcbff5b16e672247d0c",
+   build = "./configure",
+   flags = {
+      "--bindir=/usr/bin",
+      "--sbindir=/usr/bin",
+      "--libdir=/usr/lib64",
+      "--libexecdir=/usr/lib64",
+      "--sysconfdir=/etc",
+      "--enable-install-program=hostname",
+      "--enable-no-install-program=kill,uptime",
+      "--without-openssl",
+      "--without-selinux",
+      "FORCE_UNSAFE_CONFIGURE=1",
+   }
+};
+
+diffutils = {
+   url = "https://ftp.gnu.org/gnu/diffutils/diffutils-3.10.tar.xz",
+   sha3 = "a09b8284d5a42496e84bf356e1b32721b3e92a2b52459067773e74e2bd396772",
+   build = "./configure",
+};
+
+findutils = {
+   url = "https://ftp.gnu.org/gnu/findutils/findutils-4.10.0.tar.xz",
+   sha3 = "4f3f69efaf206112030eafe1dab9f93e6edc132d1424b0756df091f553a83a54",
+   build = "./configure",
+   flags = { "--localstatedir=/var" },
+   post = [[
+      cd $destdir/usr
+      rm -fr libexec
+      rm -fr share/man/man5
+      rm -fr share/man/man1/{locate,updatedb}.1
+      rm -fr bin/{locate,updatedb}
+   ]]
+};
+
+pigz = {
+   url = "https://zlib.net/pigz/pigz-2.8.tar.gz",
+   sha3 = "530248da5b27562503cfcfa6b96d2d483e7ae5c7acb088e0b2e3cdb33164a1a8",
+   build = "make",
+   post = [[ ln -sf pigz $destdir/usr/bin/gzip ]]
+};
+
+plzip = {
+   url = "https://download.savannah.gnu.org/releases/lzip/plzip/plzip-1.11.tar.lz",
+   sha3 = "ec50d56f9f14c0091cef0bfe039c350df5968ad1056e70289cb6e54495b2661b",
+   build = "./configure",
+   flags = {
+      "--bindir=/usr/bin",
+      "--libdir=/usr/lib64",
+      "--sysconfdir=/etc",
+      "--disable-static",
+   },
+   post = [[ ln -sf plzip $destdir/usr/bin/lzip ]]
+};
+
+kbd = {
+   url = "https://kernel.org/pub/linux/utils/kbd/kbd-2.6.4.tar.xz",
+   sha3 = "bce3e92142acc97625908d3bf35722b2c31780efbb2d8892099535f8e5b8ca59",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
+      "--localedir=/usr/share/locale",
+      "--datadir=/usr/share/kbd",
+      "--enable-optional-progs",
+      "--disable-vlock",
+      "--disable-tests",
+      "--disable-static",
+   },
+   prepare = [[
+      sed -i '/RESIZECONS_PROGS=/s/yes/no/' configure
+      sed -i 's/resizecons.8 //' docs/man/man8/Makefile.in
+      sed -i 's/gunzip/unpigz/' data/Makefile.in
+   ]]
+};
+
+make = {
+   url = "https://ftp.gnu.org/gnu/make/make-4.4.1.tar.gz",
+   sha3 = "2a454ed568be72675824bfa7b9527b0342e2770d9e478c7600e3fffc0714eb90",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--without-guile",
+   }
+};
+
+ed = {
+   url = "https://ftp.gnu.org/gnu/ed/ed-1.20.2.tar.lz",
+   sha3 = "ff8fcebefa1cbf8e5f651152629191d61c7f92f129cd6e9bc0d9ddc48e2998f0",
+   build = "./configure",
+   flags = {
+      "--bindir=/usr/bin",
+      "--sbindir=/usr/bin",
+   }
+};
+
+patch = {
+   url = "https://ftp.gnu.org/gnu/patch/patch-2.7.6.tar.xz",
+   sha3 = "ed81c9aa2062006688e50adec68148660f4798a8f8a0f576d658417e816b94e7",
+   build = "./configure",
+};
+
+tar = {
+   url = "https://ftp.gnu.org/gnu/tar/tar-1.35.tar.xz",
+   sha3 = "d8f59be9b3c00294ad98ba08b47a18515f178b33129f2ddce3281b56d56448bd",
+   build = "./configure",
+   flags = {
+      "--sbindir=/usr/bin",
+      "--libexecdir=/usr/lib64/tar",
+      "--enable-backup-scripts",
+      "FORCE_UNSAFE_CONFIGURE=1",
+   }
+};
+
+cpio = {
+   url = "https://ftp.gnu.org/gnu/cpio/cpio-2.15.tar.bz2",
+   sha3 = "112b5cd46328b32e9bbc463721f2c0ece9adc4671dcbb016a096007181771524",
+   build = "./configure",
+   flags = {
+      "--bindir=/usr/share/bin",
+      "--libdir=/usr/lib64",
+      "--sysconfdir=/etc",
+      "--mandir=/usr/share/man",
+   }
+};
+
+lua = {
+   url = "https://lua.org/ftp/lua-5.4.7.tar.gz",
+   sha3 = "e7d3fbf7dc7b879cb932975adb2d7ca3990f7253472c738ce142175583ade7db",
+   build = "make",
+   flags = {
+      'TO_LIB="liblua.so liblua.so.5.4 liblua.so.5.4.7"',
+      "INSTALL_DATA='cp -d'",
+      'MYCFLAGS="$CFLAGS -fPIC"',
+      "INSTALL_TOP=$destdir/usr",
+      "INSTALL_LIB=$destdir/usr/lib64",
+      "INSTALL_MAN=$destdir/usr/share/man/man1",
+      "INSTALL_CMOD=$destdir/usr/lib64/lua/5.4",
+      "linux-readline"
+   },
+   post = [[ install -m 644 -D lua.pc $destdir/usr/lib64/pkgconfig/lua.pc ]]
+};
+
+openvi = {
+   url = "https://github.com/johnsonjh/OpenVi/archive/7.5.28/OpenVi-7.5.28.tar.gz",
+   sha3 = "bc8b4846bc61052d4a55a5b0eb411222bc66a4fd2f3954be874a1f3e0702114b",
+   build = "make",
+   flags = {
+      "CC=gcc",
+      "OPTLEVEL=-O2",
+      "PREFIX=/usr",
+      "BINPREFIX=''",
+   },
+   post = [[ rm -fr $destdir/usr/libexec ]]
+};
+
+vim = {
+   url = "https://github.com/vim/vim/archive/v9.1.0611/vim-9.1.0611.tar.gz",
+   sha3 = "ac973803abd9e5841639bcc16950dce5531e1d95ae46e89bd14e738abcdaa7a1",
+   build = "./configure",
+   flags = {
+      "--localstatedir=/var/lib/vim",
+      "--with-features=huge",
+      "--enable-cscope",
+      "--enable-multibyte",
+      "--disable-canberra",
+      "--disable-gpm",
+      "--disable-gui",
+      "--disable-netbeans",
+      "--disable-perlinterp",
+      "--disable-pythoninterp",
+      "--disable-rubyinterp",
+      "--disable-xim",
+      "--without-x",
+   },
+   prepare = [[
+      printf '#define SYS_VIMRC_FILE "/etc/vimrc"\n' >> src/feature.h
+   ]],
+};
+
+eudev = {
+   url = "https://github.com/eudev-project/eudev/releases/download/v3.2.14/eudev-3.2.14.tar.gz",
+   sha3 = "334ad42e160b69c29170b4c19585568dda738c4dc516bb1e764bc565d1d4cddb",
+   build = "./configure",
+   flags = {
+      "--bindir=/usr/bin",
+      "--sbindir=/usr/bin",
+      "--libdir=/usr/lib64",
+      "--libexecdir=/usr/lib64",
+      "--sysconfdir=/etc",
+      "--enable-hwdb",
+      "--enable-manpages",
+      "--disable-static",
+      "--with-rootlibdir=/usr/lib64",
+      "--with-rootlibexecdir=/usr/lib64/udev",
+      "--with-rootprefix=/",
+      "--with-rootrundir=/run",
+   },
+   prepare = [[
+      sed -i '/udevdir/a udev_dir=${udevdir}' src/udev/udev.pc.in
+      sed -i 's/GROUP="sgx", //' rules/50-udev-default.rules
+   ]]
+};
+
+mandoc = {
+   url = "https://mandoc.bsd.lv/snapshots/mandoc-1.14.6.tar.gz",
+   sha3 = "23db13cc9e5ca6f729c4211929b745f5d8a82f87827dbf97d64c6ab8a937152d",
+   build = "./configure",
+   prepare = [[
+      printf "PREFIX=/usr\n" >> configure.local
+      printf "LIBDIR=/usr/lib64\n" >> configure.local
+      printf "MANDIR=/usr/share/man\n" >> configure.local
+      printf "SBINDIR=/usr/bin\n" >> configure.local
+   ]]
+};
+
+procps-ng = {
+   url = "https://prdownloads.sourceforge.net/procps-ng/procps-ng-4.0.4.tar.xz",
+   sha3 = "c8dfb677329bdca7c991a8234a9b058210622006fd72589bc8e5c4023395c875",
+   build = "./configure",
+   flags = {
+      "--bindir=/usr/bin",
+      "--sbindir=/usr/bin",
+      "--libdir=/usr/lib64",
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
+      "--exec-prefix=/usr",
+      "--includedir=/usr/include",
+      "--disable-static",
+      "--disable-rpath",
+      "--disable-modern-top",
+      "--disable-kill",
+      "--without-systemd",
+   }
+};
+
+util-linux = {
+   url = "https://kernel.org/pub/linux/utils/util-linux/v2.40/util-linux-2.40.2.tar.xz",
+   sha3 = "6cfe339e782e0b9caa02be49fd952197327f9d6145d1d6ae9f4d00729d51fbb0",
+   build = "./configure",
+   flags = {
+      "--bindir=/usr/bin",
+      "--sbindir=/usr/bin",
+      "--libdir=/usr/lib64",
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
+      "--runstatedir=/run",
+      "--disable-chfn-chsh",
+      "--disable-liblastlog2",
+      "--disable-login",
+      "--disable-nologin",
+      "--disable-pam-lastlog2",
+      "--disable-pylibmount",
+      "--disable-rpath",
+      "--disable-runuser",
+      "--disable-setpriv",
+      "--disable-static",
+      "--disable-su",
+      "--without-python",
+      "--without-systemd",
+      "ADJTIME_PATH=/var/lib/hwclock/adjtime",
+   },
+   post = [[ mv $destdir/usr/sbin/* $destdir/usr/bin ]]
+};
+
+dcron = {
+   url = "http://www.jimpryor.net/linux/releases/dcron-4.5.tar.gz",
+   sha3 = "4190e7664e055d0540c03e38b5ad3e7597ca9b27953b27b53731e66884da2c84",
+   build = "make",
+   flags = {
+      "PREFIX=/usr",
+      "SBINDIR=/usr/bin"
+   }
+};
+
+e2fsprogs = {
+   url = "https://www.kernel.org/pub/linux/kernel/people/tytso/e2fsprogs/v1.47.1/e2fsprogs-1.47.1.tar.xz",
+   sha3 = "30a60c31d8594d8b71694142e7e5320add4a476a8357c06686e28a2bfaa11d0e",
+   build = "./configure",
+   flags = {
+      "--bindir=/usr/bin",
+      "--sbindir=/usr/bin",
+      "--libdir=/usr/lib64",
+      "--libexecdir=/usr/lib64",
+      "--sysconfdir=/etc",
+      "--datarootdir=/usr/share",
+      "--datadir=/usr/share",
+      "--includedir=/usr/include",
+      "--enable-elf-shlibs",
+      "--disable-libblkid",
+      "--disable-libuuid",
+      "--disable-uuidd",
+   },
+   post = [[ rm -f $destdir/usr/lib64/*.a ]]
+};
+
+sysklogd = {
+   url = "https://github.com/troglobit/sysklogd/releases/download/v2.6.0/sysklogd-2.6.0.tar.gz",
+   sha3 = "379fe8080c255ca5665e1a35d6f6b312edd0e968956f3ce4ba38e8c98893d9ae",
+   build = "./configure",
+   flags = {
+      "--sbindir=/usr/bin",
+      "--libdir=/usr/lib64",
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
+      "--disable-static",
+      "--without-logger",
+   }
+};
+
+dinit = {
+   url = "https://github.com/davmac314/dinit/releases/download/v0.18.0/dinit-0.18.0.tar.xz",
+   sha3 = "1ffaa363d8ae8cdc1f561f0242492250ffb2d927dc11a7a837f3c2aa4262e388",
+   build = "make",
+   flags = { 
+      "SBINDIR=/usr/bin",
+      "BUILD_SHUTDOWN=yes",
+   },
+   post = [[
+      install -d $destdir/usr/sbin
+      ln -sf ../bin/dinit $destdir/usr/sbin/init
+   ]]
+};
+
+dbus = {
+   url = "https://dbus.freedesktop.org/releases/dbus/dbus-1.14.10.tar.xz",
+   sha3 = "8e9d0418dfa461edaf56deb760c1d3ae0417cb3aaf6cfe8bee0487bb9eeb1a11",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--libexecdir=/usr/lib64/dbus-1.0",
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
+      "--runstatedir=/run",
+      "--enable-inotify",
+      "--enable-user-session",
+      "--disable-apparmor",
+      "--disable-doxygen-docs",
+      "--disable-selinux",
+      "--disable-static",
+      "--disable-systemd",
+      "--disable-xml-docs",
+      "--with-console-auth-dir=/run/console",
+      "--with-system-pid-file=/run/dbus/dbus.pid",
+      "--with-system-socket=/run/dbus/system_bus_socket",
+      "--without-systemdsystemunitdir",
+      "--without-systemduserunitdir",
+   },
+   post = [[
+      chown root:messagebus $destdir/usr/libexec/dbus-daemon-launch-helper
+      chmod 4750 $destdir/usr/lib64/dbus-1.0/dbus-daemon-launch-helper
+   ]]
+};
+
+--------------------------------------------------------------------------------
+
+libaio = {
+   url = "https://pagure.io/libaio/archive/libaio-0.3.113/libaio-0.3.113.tar.gz",
+   sha3 = "c4f6f1398bb02d365498ab4bd631ab8ae5fd52d0f9404fc4d815f523a885b4ec",
+   build = "make",
+   flags = { "libdir=/usr/lib64" },
+   post = [[ rm -f $destdir/usr/lib64/libaio.a ]]
+};
+
+device-mapper = {
+   url = "https://sourceware.org/ftp/lvm2/LVM2.2.03.25.tgz",
+   sha3 = "a2b64d6e9357e8093c580460fb83216e48760c0cb03df614d510a438ad6a1db0",
+   build = "./configure",
+   flags = {
+      "--sbindir=/usr/bin",
+      "--libdir=/usr/lib64",
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
+      "--enable-cmdlib",
+      "--enable-dmeventd",
+      "--enable-pkgconfig",
+      "--enable-udev_rules",
+      "--enable-udev_sync",
+      "--enable-write_install",
+      "--disable-readline",
+      "--disable-systemd-journal",
+      "--with-default-dm-run-dir=/run",
+      "--with-default-locking-dir=/run/lock/lvm",
+      "--with-default-run-dir=/run/lvm",
+      "--with-default-pid-dir=/run",
+      "--with-libexecdir=/usr/lib64/lvm2",
+      "--with-udev-prefix=/usr",
+      "--with-udevdir=/usr/lib64/udev/rules.d",
+      "--with-usrlibdir=/usr/lib64",
+      "--without-systemd",
+      "--without-systemdsystemunitdir",
+   },
+   post = [[
+      rm -fr $destdir && mkdir -p $destdir
+      $make install_device-mapper DESTDIR=$destdir
+   ]]
+};
+
+parted = {
+   url = "https://ftp.gnu.org/gnu/parted/parted-3.6.tar.xz",
+   sha3 = "47ffc9b3cddcf9226b54a8ef159a39c5a25748549f1fa39c833c1afbdd40e589",
+   build = "./configure",
+   flags = {
+      "--sbindir=/usr/bin",
+      "--libdir=/usr/lib64",
+      "--mandir=/usr/share/man",
+      "--enable-device-mapper",
+      "--enable-shared",
+      "--disable-rpath",
+      "--disable-static",
+      "--with-readline",
+   }
+};
+
+efivar = {
+   url = "https://github.com/rhboot/efivar/archive/39/efivar-39.tar.gz",
+   sha3 = "c1a40eb8583b23d3b31ce547d00e4cb4ac089add38f303e70f9629ea8852600a",
+   build = "make",
+   flags = {
+      "LIBDIR=/usr/lib64",
+      "PREFIX=/usr"
+   }
+};
+
+popt = {
+   url = "http://ftp.rpm.org/popt/releases/popt-1.x/popt-1.19.tar.gz",
+   sha3 = "d5188c702608a3a615e5607378e78789e5237e66bf2fa0aba4ac718f803e6021",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--sysconfdir=/etc",
+      "--disable-static",
+   }
+};
+
+efibootmgr = {
+   url = "https://github.com/rhboot/efibootmgr/releases/download/18/efibootmgr-18.tar.bz2",
+   sha3 = "0ee98e9ee17940e4feb573ff5afb0d9e372fbed6f38449ee90c16e3e515b08ad",
+   build = "make",
+   flags = {
+      "EFIDIR=/boot/efi",
+      "sbindir=/usr/bin",
+   }
+};
+
+grub = {
+   url = "https://ftp.gnu.org/gnu/grub/grub-2.12.tar.xz",
+   sha3 = "8dadf87a18b9c26c699b30d038b8f2eef22062d4238e7c5c844d027f51a81630",
+   build = "./configure",
+   flags = {
+      "--bindir=/usr/bin",
+      "--sbindir=/usr/bin",
+      "--libdir=/usr/lib64",
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
+      "--datarootdir=/usr/share",
+      "--with-bootdir=/boot",
+      "--with-grubdir=grub",
+      "--enable-device-mapper",
+      "--disable-efiemu",
+      "--disable-grub-mkfont",
+      "--disable-grub-mount",
+      "--disable-liblzma",
+      "--disable-werror",
+      "{C,CPP,CXX,LD}FLAGS="
+   },
+   prepare = [[ printf "depends bli part_gpt\n" > grub-core/extra_deps.lst ]],
+   post = [[
+      cd $destdir/usr/lib64/grub
+      rm -f */*.module */*.image */kernel.exec */gdb_grub */gmodule.pl
+   ]]
+};
