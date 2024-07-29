@@ -176,8 +176,8 @@ intltool = {
 };
 
 libtool = {
-   url = "https://alpha.gnu.org/gnu/libtool/libtool-2.5.0.tar.xz",
-   sha3 = "6215631f6c42a00b97f90b9881290fede178a0c2294b0b0916b5e792b00a2b87",
+   url = "https://alpha.gnu.org/gnu/libtool/libtool-2.5.1.tar.xz",
+   sha3 = "fc6821f0112f2c2668ca06e9c9973200992abf0e0c47b70a520adccaaccf7046",
    build = "./configure",
    flags = { "--libdir=/usr/lib64" },
    post = [[ rm -f $destdir/usr/lib64/libltdl.a ]]

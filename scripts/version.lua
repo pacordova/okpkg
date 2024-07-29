@@ -50,7 +50,8 @@ for w in string.gmatch(buf, 'href="(.-)"') do
          gsub("libnl%-", "libnl3-"):
          gsub("libisl%-", "isl-"):
          gsub("%%2B.*", ""):
-         gsub("gcr%-4", "gcr4")
+         gsub("gcr%-4", "gcr4"):
+         gsub("ffnvcodec", "nv-codec")
       table.insert(arch, s)
    end
 end
