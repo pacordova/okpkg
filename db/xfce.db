@@ -639,7 +639,7 @@ p11-kit = {
    }
 };
 
-gcr = {
+gcr4 = {
    url = "https://download.gnome.org/sources/gcr/4.3/gcr-4.3.0.tar.xz",
    sha3 = "03de4e64b17b5c9a299c7fccad1332aa12e588a5f47af3d4488964b5581538ca",
    build = "meson",

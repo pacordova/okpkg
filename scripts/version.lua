@@ -49,7 +49,8 @@ for w in string.gmatch(buf, 'href="(.-)"') do
          gsub("python%-3", "python3-3"):
          gsub("libnl%-", "libnl3-"):
          gsub("libisl%-", "isl-"):
-         gsub("%%2B.*", "")
+         gsub("%%2B.*", ""):
+         gsub("gcr%-4", "gcr4")
       table.insert(arch, s)
    end
 end
