@@ -207,7 +207,7 @@ function build(pkgname) local t, v, status, destdir, fp
    end
 
    if t.build == "meson" then
-      table.insert(t.flags, 1, "--prefix=/usr")
+      table.insert(t.flags, 1, "-Dprefix=/usr")
       table.insert(t.flags, 2, "-Dbuildtype=release")
       table.insert(t.flags, 3, "-Dwrap_mode=nodownload")
       t.flags = table.concat(t.flags, ' ')

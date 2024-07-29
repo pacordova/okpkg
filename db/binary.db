@@ -5,6 +5,8 @@ rust-bin = {
    post = [[ 
       install -d $destdir/usr
       ./install.sh --prefix=/usr --destdir=$destdir --libdir=/usr/lib64 
+      mv $destdir/usr/libexec/* $destdir/usr/lib64
+      rmdir $destdir/usr/libexec
    ]]
 };
 
