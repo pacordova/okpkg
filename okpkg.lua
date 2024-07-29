@@ -222,7 +222,6 @@ function build(pkgname) local t, v, status, destdir, fp
       table.insert(t.flags, 1, "--destdir=$destdir")
       table.insert(t.flags, 2, "--no-compile-bytecode")
       t.flags = table.concat(t.flags, ' ')
-      t.post = "mv $destdir/usr/lib $destdir/usr/lib64 2>/dev/null"
       status =
          os.execute"python3 -m build -nw || python3 -m flit_core.wheel" and
          os.execute(

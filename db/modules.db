@@ -19,7 +19,6 @@ python-installer = {
       python3 -m flit_core.wheel
       cd src && python3 -m installer \
           --destdir=$destdir --no-compile-bytecode ../dist/*.whl
-      mv $destdir/usr/lib $destdir/usr/lib64
    ]]
 };
 
