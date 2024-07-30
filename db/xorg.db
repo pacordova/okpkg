@@ -610,12 +610,12 @@ libvdpau = {
 --    * https://forums.gentoo.org/viewtopic-t-1167405.html
 --------------------------------------------------------------------------------
 mesa = {
-   url = "https://mesa.freedesktop.org/archive/mesa-24.1.4.tar.xz",
-   sha3 = "c2725a90a87e87c1076827bc81452d1f93a94fba048368e24137c10a7a2f303d",
+   url = "https://mesa.freedesktop.org/archive/mesa-24.0.9.tar.xz",
+   sha3 = "cba6413a854faf83fe99988114661c2cbf717eac093f27d6363c8c1cf1c48075",
    build = "meson",
    flags = {
       "-Dplatforms=x11",
-      "-Dgallium-drivers=swrast",
+      "-Dgallium-drivers=nouveau,r300,r600,svga,radeonsi,swrast,virgl,i915,iris,crocus,zink,d3d12",
       '-Dvulkan-drivers=""',
       "-Dllvm=disabled",
       "-Dgles1=disabled",
