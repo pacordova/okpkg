@@ -1107,8 +1107,8 @@ e2fsprogs = {
 };
 
 sysklogd = {
-   url = "https://github.com/troglobit/sysklogd/releases/download/v2.6.0/sysklogd-2.6.0.tar.gz",
-   sha3 = "379fe8080c255ca5665e1a35d6f6b312edd0e968956f3ce4ba38e8c98893d9ae",
+   url = "https://github.com/troglobit/sysklogd/releases/download/v2.6.1/sysklogd-2.6.1.tar.gz",
+   sha3 = "d3277a255b4905892b601f8835c920f9fb5edf1982db436642c301e493ffb7c4",
    build = "./configure",
    flags = {
       "--sbindir=/usr/bin",
