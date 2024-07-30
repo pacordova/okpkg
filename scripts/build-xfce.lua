@@ -79,6 +79,7 @@ os.execute"mv /usr/okpkg/packages/*.tar.lz /usr/okpkg/packages/xfce"
 -- Other useful packages
 emerge"opendoas"
 emerge"ripgrep"
+emerge"htop"
 emerge"firefox-bin"
 
 -- Fix firefox to use apulse
