@@ -333,11 +333,7 @@ usbutils = {
       "--sbindir=/usr/bin",
       "--libdir=/usr/lib64",
       "--datadir=/usr/share/hwdata",
-   },
-   post = [[
-      mkdir -p $destdir/usr/share/hwdata && cd $destdir/usr/share/hwdata
-      curl -LOR https://www.linux-usb.org/usb.ids
-   ]]
+   }
 };
 
 xorriso = {

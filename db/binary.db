@@ -15,11 +15,17 @@ firefox-bin = {
    sha3 = "97ea5872975ae11bc42cefaa99621d990151261fdaa57cd69875e2b3ec46e003",
    build = _,
    post = [[
+      firefox=$destdir/usr/bin/firefox
       install -d $destdir/usr/{bin,lib64}
       install -d $destdir/usr/share/applications
+      mv firefox.desktop $destdir/usr/share/applications
       cp -rp . $destdir/usr/lib64/firefox
-      curl -LR https://raw.githubusercontent.com/mozilla/sumo-kb/main/install-firefox-linux/firefox.desktop |
-          sed 's:opt:usr/lib64:' >$destdir/usr/share/applications/firefox.desktop
+      if [ -x /usr/bin/apulse ]; then
+          printf "#!/bin/sh\n" >$firefox
+          printf "/usr/bin/apulse /usr/lib64/firefox/firefox\n" >$firefox
+      else
+          ln -sf /usr/lib64/firefox/firefox $firefox
+      fi
    ]]
 };
 
