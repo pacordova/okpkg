@@ -250,7 +250,6 @@ _glib2 = {
    sha3 = "4205bbce0611dc46082fccecbecf8913f445dd6dd9739c99e9d750ff943104a5",
    build = "meson",
    flags = { 
-      "-Dlibexecdir=/usr/lib64", 
       "-Dintrospection=disabled", 
    }
 };
@@ -266,7 +265,6 @@ glib2 = {
    sha3 = "4205bbce0611dc46082fccecbecf8913f445dd6dd9739c99e9d750ff943104a5",
    build = "meson",
    flags = { 
-      "-Dlibexecdir=/usr/lib64", 
       "-Dintrospection=enabled", 
    }
 };
@@ -290,7 +288,6 @@ dbus-glib = {
    build = "./configure",
    flags = {
       "--libdir=/usr/lib64",
-      "--libexecdir=/usr/lib64",
       "--localstatedir=/var",
       "--sysconfdir=/etc",
       "--disable-static",
@@ -301,9 +298,6 @@ json-glib = {
    url = "https://download.gnome.org/sources/json-glib/1.8/json-glib-1.8.0.tar.xz",
    sha3 = "e62adc949ff5e5f4b58b129f3004b8eca7b052288c47ff146d53de3826d81999",
    build = "meson",
-   flags = {
-      "-Dlibexecdir=/usr/lib64",
-   }
 };
 
 libgudev = {
