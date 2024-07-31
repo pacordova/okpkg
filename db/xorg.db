@@ -1177,6 +1177,8 @@ xorg-server = {
       cd $destdir/etc/sysconfig
       printf "/tmp/.ICE-unix dir 1777 root root\n" >> createfiles
       printf "/tmp/.X11-unix dir 1777 root root\n" >> createfiles
+      cd $destdir/etc/X11
+      printf "needs_root_rights = no\n" > Xwrapper.config
    ]]
 };
 
@@ -1273,6 +1275,12 @@ xorg-xinit = {
       "--sysconfdir=/etc",
       "--localstatedir=/var",
       "--disable-static",
-      "--with-xinitdir=/etc/X11/app-defaults",
+      "--with-xinitdir=/etc/X11/xinit",
    },
+   post = [[
+      cd $destdir/etc/X11/xinit
+      printf "#!/bin/sh\n" >xserverrc
+      printf "exec /usr/bin/Xorg -nolisten tcp "$@" vt1\n" >>xserverrc
+      chmod 755 xserverrc
+   ]]
 };

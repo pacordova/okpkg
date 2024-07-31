@@ -77,7 +77,6 @@ mkdir"/usr/okpkg/packages/xfce"
 os.execute"mv /usr/okpkg/packages/*.tar.lz /usr/okpkg/packages/xfce"
 
 -- Other useful packages
-emerge"opendoas"
 emerge"ripgrep"
 emerge"htop"
 emerge"firefox-bin"
@@ -107,21 +106,7 @@ os.execute"gtk-update-icon-cache /usr/share/icons/Adwaita"
 -- Set XFCE default terminal
 symlink("st", "/usr/bin/xfce4-terminal")
 
--- Rootless xorg
-mkdir"/etc/X11"
-fp = io.open("/etc/X11/Xwrapper.config", 'w')
-fp:write"needs_root_rights = no"
-fp:close()
-mkdir"/etc/X11/xinit"
-fp = io.open("/etc/X11/xinit/xserverrc", 'w')
-fp:write [[
-#!/bin/sh
-exec /usr/bin/Xorg -nolisten tcp "$@" vt1
-]]
-fp:close()
-os.execute"chmod +x /etc/X11/xinit/xserverrc"
-
--- cleanup
+-- Cleanup
 chdir"/usr/okpkg/packages/l"
 os.rename("sqlite-3460000-amd64.tar.lz", "sqlite-3.46.0-amd64.tar.lz")
 os.rename("x264--amd64.tar.lz", "x264-20231114-amd64.tar.lz")

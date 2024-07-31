@@ -1,0 +1,10 @@
+--- a/conf/40-libinput.conf
++++ b/conf/40-libinput.conf
+@@ -21,6 +21,7 @@
+         MatchIsPointer "on"
+         MatchDevicePath "/dev/input/event*"
+         Driver "libinput"
++        Option "AccelProfile" "flat"
+ EndSection
+ 
+ Section "InputClass"

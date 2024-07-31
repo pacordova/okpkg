@@ -159,23 +159,6 @@ gdb = {
    }
 };
 
-git = {
-   url = "https://kernel.org/pub/software/scm/git/git-2.45.1.tar.xz",
-   sha3 = "a3242dcdf485504e9a4f5b5101754df5745de9fdcc71030644c73bc761bdb8cd",
-   build = "./configure",
-   flags = {
-      "--with-gitconfig=/etc/gitconfig",
-      "--libexecdir=/usr/lib64",
-      "--without-tcltk",
-      "--without-python",
-      "--with-libpcre2"
-   },
-   prepare = [[
-      printf "NO_GETTEXT=YesPlease\n" >> config.mak
-      printf "NO_PERL=YesPlease\n" >> config.mak
-   ]]
-};
-
 htop = {
    url = "https://github.com/htop-dev/htop/releases/download/3.3.0/htop-3.3.0.tar.xz",
    sha3 = "41229e25dc35ed7292f83bdb55f9152782ba10fafda5f34b2e1fa45930adee1e",
@@ -218,22 +201,6 @@ lsof = {
       "--with-libtirpc",
       "--disable-static",
    }
-};
-
-opendoas = {
-   url = "https://github.com/Duncaen/OpenDoas/archive/v6.8.2/OpenDoas-6.8.2.tar.gz",
-   sha3 = "de7bfb4797e216661db76043963090efc9e0e9e68ff420c352dbf71770c2b66c",
-   build = "./configure",
-   flags = {
-      "--with-shadow",
-      "--with-timestamp",
-      "--without-pam"
-   },
-   post = [[
-      mkdir -p $destdir/etc
-      printf "permit persist :wheel\n" > $destdir/etc/doas.conf
-      chmod 600 $destdir/etc/doas.conf
-   ]]
 };
 
 pciutils = {
