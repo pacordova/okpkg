@@ -1,16 +1,3 @@
-diff --git i/docs/buildsystem-and-repos.md w/docs/buildsystem-and-repos.md
-index e265ee7a..2e9250d5 100644
---- i/docs/buildsystem-and-repos.md
-+++ w/docs/buildsystem-and-repos.md
-@@ -151,7 +151,7 @@ rofiles-fuse exampleos-build mnt
- # Now run global "triggers", generate cache files:
- ldconfig -r mnt
-   (Insert other programs here)
--fusermount -u mnt
-+fusermount3 -u mnt
- ostree --repo=build-repo commit -b exampleos/x86_64/standard --link-checkout-speedup exampleos-build
- ```
- 
 diff --git i/man/rofiles-fuse.xml w/man/rofiles-fuse.xml
 index f4d23739..e8569130 100644
 --- i/man/rofiles-fuse.xml
