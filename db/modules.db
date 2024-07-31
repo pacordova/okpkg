@@ -155,6 +155,12 @@ glad = {
    build = "python-build",
 };
 
+python-pyparsing = {
+   url = "https://github.com/pyparsing/pyparsing/releases/download/3.1.2/pyparsing-3.1.2.tar.gz",
+   sha3 = "70ef9dcd0810e4ca4f034737c85f74bb936213d70a579cbc2374874bb5a5318f",
+   build = "python-build",
+};
+
 perl-xml-parser = {
    url = "https://cpan.metacpan.org/authors/id/T/TO/TODDR/XML-Parser-2.47.tar.gz",
    sha3 = "daaacd05fb62d1f8811c6f792c87bd4062ea70d57a951d3f15236c2424b24618",

@@ -743,3 +743,79 @@ mpv = {
       "-Dpipewire=disabled",
    }
 };
+
+--------------------------------------------------------------------------------
+
+ostree = {
+   url = "https://github.com/ostreedev/ostree/releases/download/v2024.3/libostree-2024.3.tar.xz",
+   sha3 = "ee941ab0a7ede03a577aa39e43d2c81a702b9890fe34fd113865840f8bed4bfd",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--libexecdir=/usr/lib64",
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
+      "--with-curl",
+      "--with-ed25519-libsodium",
+      "--with-grub2-mkconfig-path=/usr/bin/grub-mkconfig",
+      "--with-modern-grub",
+      "--with-openssl",
+      "--without-dracut",
+      "--disable-man",
+      "--disable-man-html",
+      "--disable-static",
+   }
+};
+
+libxmlb = {
+   url = "https://github.com/hughsie/libxmlb/archive/0.3.19/libxmlb-0.3.19.tar.gz",
+   sha3 = "0c3acdca8672581dae0b237d649264706c757979d8553dee5cc30dec3f9b688a",
+   build = "meson",
+   flags = { "-Dgtkdoc=false" },
+   post = [[ rm -fr $destdir/usr/libexec ]]
+};
+
+appstream = {
+   url = "https://www.freedesktop.org/software/appstream/releases/AppStream-1.0.3.tar.xz",
+   sha3 = "c0a54c5e715a993c8bd7d23038140408d395918d733cccda22a8e139a919bd2d",
+   build = "meson",
+   flags = {
+      "-Dsystemd=false",
+      "-Dapidocs=false",
+      "-Dstemming=false",
+      "-Dvapi=true",
+      "-Dcompose=true",
+   },
+   prepare = [[
+      mv AppStream*/* . && rm -fr AppStream*
+      sed -i "/subdir('docs\/')/d" meson.build
+   ]]
+};
+
+bubblewrap = {
+   url = "https://github.com/projectatomic/bubblewrap/releases/download/v0.9.0/bubblewrap-0.9.0.tar.xz",
+   sha3 = "22bd7cf1095d62a924917ffc451e4c7fbb4f30e741ab3000f7011a7401021212",
+   build = "meson",
+   flags = { "-Dselinux=disabled" }
+};
+
+xdg-dbus-proxy = {
+   url = "https://github.com/flatpak/xdg-dbus-proxy/releases/download/0.1.5/xdg-dbus-proxy-0.1.5.tar.xz",
+   sha3 = "21d1c476a8b397a84342a35fd58ce61ed0ae1927aa355281cbd7caf76163a7a9",
+   build = "meson",
+   flags = { "-Dman=disabled" }
+};
+
+flatpak = {
+   url = "https://github.com/flatpak/flatpak/releases/download/1.15.9/flatpak-1.15.9.tar.xz",
+   sha3 = "8c6857560d688a4fd979b100bc2b938472f1a6fd736d7b82b11358b7ef239fe6",
+   build = "meson",
+   flags = {
+      "-Dlibexecdir=/usr/lib64",
+      "-Dsystem_bubblewrap=bwrap",
+      "-Dsystem_dbus_proxy=xdg-dbus-proxy",
+      "-Dsystemd=disabled",
+      "-Dsystem_helper=disabled",
+      "-Dtests=false",
+   }    
+};

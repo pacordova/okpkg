@@ -1,7 +1,20 @@
-json-glib = {
-   url = "https://download.gnome.org/sources/json-glib/1.8/json-glib-1.8.0.tar.xz",
-   sha3 = "e62adc949ff5e5f4b58b129f3004b8eca7b052288c47ff146d53de3826d81999",
-   build = "meson",
+docbook-xsl-nons = {
+   url = "https://github.com/docbook/xslt10-stylesheets/releases/download/release/1.79.2/docbook-xsl-nons-1.79.2.tar.gz",
+   sha3 = "7a8eb136af529b6592cc93c23fd46c879a4def9c82a48d01b02485fc4bf837ee",
+   build = _,
+   post = [[
+      destdir=$destdir/usr/share/xml/docbook/xsl-stylesheet-nons 
+      install -m 644 -d $destdir
+      install -m 644 VERSION $destdir
+      ln -sf VERSION $destdir/VERSION.xsl
+      for dir in assembly common eclipse epub epub3 fo highlighting html \
+          htmlhelp javahelp lib manpages params profiling roundtrip template \
+          website xhtml xhtml-1_1 xhtml5 
+      do
+          install -m 644 -d $destdir/$dir
+          install -m 644 $dir/* $destdir/$dir
+      done
+   ]]
 };
 
 glibmm = {
@@ -212,13 +225,6 @@ vulkan-loader = {
    }
 };
 
-directx-headers = {
-   url = "https://github.com/microsoft/DirectX-Headers/archive/v1.613.1/DirectX-Headers-1.613.1.tar.gz",
-   sha3 = "3c161edae5790eec87f9c2883eb466ecd6be62dadff179cae60ea3411b3d7ffa",
-   build = "meson",
-   flags = { "-Dbuild-test=false" }
-};
-
 mesa = {
    url = "https://mesa.freedesktop.org/archive/mesa-24.1.4.tar.xz",
    sha3 = "c2725a90a87e87c1076827bc81452d1f93a94fba048368e24137c10a7a2f303d",
@@ -237,19 +243,6 @@ mesa = {
 };
 
 --------------------------------------------------------------------------------
-
--- optional cmake deps
-libarchive = {
-   url = "https://github.com/libarchive/libarchive/releases/download/v3.7.4/libarchive-3.7.4.tar.xz",
-   sha3 = "27ee1cf7f44d7ba0a12998715d8dfb5aaca92c34279c34ee1ccf10325b19b098",
-   build = "./configure",
-   flags = {
-      "--libdir=/usr/lib64",
-      "--without-xml2",
-      "--without-nettle",
-      "--disable-static",
-   }
-};
 
 -- gnupg1
 gnupg1 = {
@@ -647,17 +640,6 @@ s-nail = {
    ]]
 };
 
--- ruby
-libyaml = {
-   url = "https://github.com/yaml/libyaml/releases/download/0.2.5/yaml-0.2.5.tar.gz",
-   sha3 = "cd085eedddb0caeaa360db3e037155db95f8998d495047f3a8cbee6ee0430022",
-   build = "./configure",
-   flags = {
-      "--libdir=/usr/lib64",
-      "--disable-static"
-   }
-};
-
 ruby = {
    url = "https://cache.ruby-lang.org/pub/ruby/3.3/ruby-3.3.0.tar.xz",
    build = "./configure",
@@ -907,18 +889,6 @@ lzop = {
    url = "https://lzop.org/download/lzop-1.04.tar.gz",
    sha3 = "eef01e89469e9e0ab7b0dbaab94f72f1fae350a6ed9fc4ba383b755d7ff6d8ca",
    build = "./configure",
-};
-
-fuse3 = {
-   url = "https://github.com/libfuse/libfuse/releases/download/fuse-3.16.2/fuse-3.16.2.tar.gz",
-   sha3 = "7511d3e5cf0a4c22de6a717c64e10a0469801fd1baa34a2e2924e3d676af2a31",
-   build = "meson",
-   flags = {
-      "-Dsbindir=bin",
-      "-Dexamples=false",
-   },
-   prepare = [[ sed -i '/^udev/,$ s/^/#/' util/meson.build ]],
-   post = [[ chmod u+s $destdir/usr/bin/fusermount3 ]]
 };
 
 libsigc++ = {
@@ -1776,13 +1746,6 @@ libpipeline = {
    flags = { "--libdir=/usr/lib64" }
 };
 
-libsodium = {
-   url = "https://download.libsodium.org/libsodium/releases/libsodium-1.0.19.tar.gz",
-   sha3 = "f506ebb63d40ae4da0d872d3b5a0f47227d3e7104af509bab7ad001f7f3f8a90",
-   build = "./configure",
-   flags = { "--libdir=/usr/lib64" }
-};
-
 libx264 = {
    url = "https://code.videolan.org/videolan/x264/-/archive/master/x264-master.tar.bz2",
    build = "./configure",
@@ -2204,33 +2167,6 @@ zenity = {
 
 --------------------------------------------------------------------------------
 
--- flatpak
-ostree = {
-   url = "https://github.com/ostreedev/ostree/releases/download/v2024.2/libostree-2024.2.tar.xz",
-   build = "./configure",
-   flags = {
-      "--libdir=/usr/lib64",
-      "--disable-man",
-      "--disable-man-html" 
-   }
-};
-
-appstream = {
-   url = "https://www.freedesktop.org/software/appstream/releases/AppStream-1.0.1.tar.xz",
-   build = "meson",
-   flags = {
-      "-Dsystemd=false",
-      "-Ddocs=false",
-      "-Dapidocs=false",
-      "-Dinstall-docs=false",
-      "-Dstemming=false"
-   },
-   prepare = [[
-      mv AppStream*/* . && rm -fr AppStream*
-      sed -i '220d' meson.build
-   ]]
-};
-
 libportal = {
    url = "https://github.com/flatpak/libportal/releases/download/0.5/libportal-0.5.tar.xz",
    build = "meson",
@@ -2254,18 +2190,4 @@ portal = {
    }
 };
 
-bwrap = {
-   url = "https://github.com/projectatomic/bubblewrap/releases/download/v0.5.0/bubblewrap-0.5.0.tar.xz",
-   build = "./configure",
-};
 
-flatpak = {
-   url = "https://github.com/flatpak/flatpak/releases/download/1.14.5/flatpak-1.14.5.tar.xz",
-   build = "./configure",
-   flags = {
-      "--libdir=/usr/lib64",
-      "--localstatedir=/var",
-      "--disable-documentation",
-      "--without-systemd"
-   }    
-};

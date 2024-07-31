@@ -297,6 +297,15 @@ dbus-glib = {
    }
 };
 
+json-glib = {
+   url = "https://download.gnome.org/sources/json-glib/1.8/json-glib-1.8.0.tar.xz",
+   sha3 = "e62adc949ff5e5f4b58b129f3004b8eca7b052288c47ff146d53de3826d81999",
+   build = "meson",
+   flags = {
+      "-Dlibexecdir=/usr/lib64",
+   }
+};
+
 libgudev = {
    url = "https://download.gnome.org/sources/libgudev/238/libgudev-238.tar.xz",
    sha3 = "6500e55c1ceeaf85747d3eeaebd57e1cfc7fae4b5b4ceb7161cd8ab059d1863d",
@@ -304,6 +313,13 @@ libgudev = {
 };
 
 --------------------------------------------------------------------------------
+
+directx-headers = {
+   url = "https://github.com/microsoft/DirectX-Headers/archive/v1.613.1/DirectX-Headers-1.613.1.tar.gz",
+   sha3 = "3c161edae5790eec87f9c2883eb466ecd6be62dadff179cae60ea3411b3d7ffa",
+   build = "meson",
+   flags = { "-Dbuild-test=false" }
+};
 
 nv-codec-headers = {
    url = "https://github.com/FFmpeg/nv-codec-headers/releases/download/n12.1.14.0/nv-codec-headers-12.1.14.0.tar.gz",

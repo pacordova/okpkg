@@ -8,6 +8,23 @@ alsa-lib = {
    }
 };
 
+alsa-utils = {
+   url = "https://alsa-project.org/files/pub/utils/alsa-utils-1.2.12.tar.bz2",
+   sha3 = "c7ce5050986682b2944bfe344accc0107d0e37f8ca0047605d02610c908107d9",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--sbindir=/usr/bin",
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
+      "--with-udev-rules-dir=/usr/lib64/udev/rules.d",
+      "--disable-alsaconf",
+      "--disable-bat",
+      "--disable-xmlto",
+      "--with-curses=ncursesw"
+   }
+};
+
 argon2 = {
    url = "https://github.com/P-H-C/phc-winner-argon2/archive/20190702/phc-winner-argon2-20190702.tar.gz",
    sha3 = "8147687cbaa78ac3fa5ef0d07996934b741621e1c24705479ae09bf17a8976aa",
@@ -38,6 +55,18 @@ fribidi = {
    build = "meson",
 };
 
+fuse3 = {
+   url = "https://github.com/libfuse/libfuse/releases/download/fuse-3.16.2/fuse-3.16.2.tar.gz",
+   sha3 = "7511d3e5cf0a4c22de6a717c64e10a0469801fd1baa34a2e2924e3d676af2a31",
+   build = "meson",
+   flags = {
+      "-Dsbindir=bin",
+      "-Dexamples=false",
+   },
+   prepare = [[ sed -i '/^udev/,$ s/^/#/' util/meson.build ]],
+   post = [[ chmod u+s $destdir/usr/bin/fusermount3 ]]
+};
+
 lame = {
    url = "https://downloads.sourceforge.net/lame/lame-3.100.tar.gz",
    sha3 = "36700934b5b3e64f2e3ff33ee85bd7fc033890aa92d1f6a0a9b5acc2a3a0d199",
@@ -49,6 +78,19 @@ lame = {
       "--enable-mp3rtp",
       "--disable-static",
       "--disable-gtktest",
+   }
+};
+
+libarchive = {
+   url = "https://github.com/libarchive/libarchive/releases/download/v3.7.4/libarchive-3.7.4.tar.xz",
+   sha3 = "27ee1cf7f44d7ba0a12998715d8dfb5aaca92c34279c34ee1ccf10325b19b098",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--sysconfdir=/etc",
+      "--localstatedir=/var",
+      "--without-nettle",
+      "--disable-static",
    }
 };
 
@@ -154,6 +196,17 @@ libpng = {
    }
 };
 
+libsodium = {
+   url = "https://download.libsodium.org/libsodium/releases/libsodium-1.0.20.tar.gz",
+   sha3 = "e74a767d92c5b58d5f9b5e882e220df7899a8dc1fa173461c0c76099776ab456",
+   build = "./configure",
+   flags = { 
+      "--libdir=/usr/lib64", 
+      "--sysconfdir=/etc",
+      "--disable-static",
+   }
+};
+
 libtasn1 = {
    url = "https://ftp.gnu.org/gnu/libtasn1/libtasn1-4.19.0.tar.gz",
    sha3 = "1fea801ff44ee976956c7d36295afcbf0d8b3c33f3f0a460fbf28b7b0df9a432",
@@ -235,6 +288,18 @@ libvpx = {
       "--disable-tools",
       "--disable-unit-tests",
       "--as=nasm",
+   }
+};
+
+libyaml = {
+   url = "https://github.com/yaml/libyaml/releases/download/0.2.5/yaml-0.2.5.tar.gz",
+   sha3 = "cd085eedddb0caeaa360db3e037155db95f8998d495047f3a8cbee6ee0430022",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--sysconfdir=/etc",
+      "--localstatedir=/var",
+      "--disable-static",
    }
 };
 

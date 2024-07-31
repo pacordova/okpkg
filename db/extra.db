@@ -10,23 +10,6 @@ acpid = {
    }
 };
 
-alsa-utils = {
-   url = "https://alsa-project.org/files/pub/utils/alsa-utils-1.2.12.tar.bz2",
-   sha3 = "c7ce5050986682b2944bfe344accc0107d0e37f8ca0047605d02610c908107d9",
-   build = "./configure",
-   flags = {
-      "--libdir=/usr/lib64",
-      "--sbindir=/usr/bin",
-      "--localstatedir=/var",
-      "--sysconfdir=/etc",
-      "--with-udev-rules-dir=/usr/lib64/udev/rules.d",
-      "--disable-alsaconf",
-      "--disable-bat",
-      "--disable-xmlto",
-      "--with-curses=ncursesw"
-   }
-};
-
 cmatrix = {
    url = "https://github.com/abishekvashok/cmatrix/archive/v2.0/cmatrix-2.0.tar.gz",
    sha3 = "f37ce888fe14ed8dd5ecd84e7cea4a67909eede471ecf407c491d2b703ca14c3",

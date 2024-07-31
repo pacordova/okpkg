@@ -295,3 +295,15 @@ gnupg2 = {
       "--enable-gpg-is-gpg2",
    }
 };
+
+gpgme = {
+   url = "https://gnupg.org/ftp/gcrypt/gpgme/gpgme-1.23.2.tar.bz2",
+   sha3 = "5afea62fb6149860964622a615fd3fa9605ae813dfe7e5312469a245b217e74c",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--sysconfdir=/etc",
+      "--disable-gpg-test",
+      "--disable-static",
+   }
+};
