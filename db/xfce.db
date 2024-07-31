@@ -234,8 +234,8 @@ xfce4-panel = {
 };
 
 thunar = {
-   url = "https://archive.xfce.org/src/xfce/thunar/4.18/thunar-4.18.10.tar.bz2",
-   sha3 = "8512fc79e725ac841325cd31237e10256f855f5c57328efc5f2fd7b211f1dc57",
+   url = "https://archive.xfce.org/src/xfce/thunar/4.18/thunar-4.18.11.tar.bz2",
+   sha3 = "c85a1df2df236d251e7bb941ffaeb0e00b40769914e1fbf57be092e1c0edf3a3",
    build = "./configure",
    flags = {
       "--libdir=/usr/lib64",
