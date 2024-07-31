@@ -760,9 +760,8 @@ ostree = {
       "--with-grub2-mkconfig-path=/usr/bin/grub-mkconfig",
       "--with-modern-grub",
       "--with-openssl",
-      "--without-dracut",
+      "--without-soup",
       "--disable-man",
-      "--disable-man-html",
       "--disable-static",
    }
 };
