@@ -145,23 +145,6 @@ cmake = {
    ]]
 };
 
-git = {
-   url = "https://kernel.org/pub/software/scm/git/git-2.46.0.tar.xz",
-   sha3 = "ee222d0aecbf4b2b87534dc1352d94bf3e848f57561ea101993ab77a8c130949",
-   build = "./configure",
-   flags = {
-      "--with-gitconfig=/etc/gitconfig",
-      "--libexecdir=/usr/lib64",
-      "--without-tcltk",
-      "--without-python",
-      "--with-libpcre2"
-   },
-   prepare = [[
-      printf "NO_GETTEXT=YesPlease\n" >> config.mak
-      printf "NO_PERL=YesPlease\n" >> config.mak
-   ]]
-};
-
 gettext = {
    url = "https://ftp.gnu.org/gnu/gettext/gettext-0.22.5.tar.xz",
    sha3 = "410646226a2f971e0789082352d6e270606af924c97305316d3bbd764fa9fbd5",

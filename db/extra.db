@@ -159,6 +159,23 @@ gdb = {
    }
 };
 
+git = {
+   url = "https://kernel.org/pub/software/scm/git/git-2.46.0.tar.xz",
+   sha3 = "ee222d0aecbf4b2b87534dc1352d94bf3e848f57561ea101993ab77a8c130949",
+   build = "./configure",
+   flags = {
+      "--with-gitconfig=/etc/gitconfig",
+      "--libexecdir=/usr/lib64",
+      "--without-tcltk",
+      "--without-python",
+      "--with-libpcre2"
+   },
+   prepare = [[
+      printf "NO_GETTEXT=YesPlease\n" >> config.mak
+      printf "NO_PERL=YesPlease\n" >> config.mak
+   ]]
+};
+
 gzip = {
    url = "https://ftp.gnu.org/gnu/gzip/gzip-1.13.tar.xz",
    sha3 = "6b03d763c4a9755955723b70ed0387e077b8f0452997e829e1061519f73a23ec",
