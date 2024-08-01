@@ -967,8 +967,8 @@ openvi = {
 };
 
 vim = {
-   url = "https://github.com/vim/vim/archive/v9.1.0611/vim-9.1.0611.tar.gz",
-   sha3 = "ac973803abd9e5841639bcc16950dce5531e1d95ae46e89bd14e738abcdaa7a1",
+   url = "https://github.com/vim/vim/archive/v9.1.0645/vim-9.1.0645.tar.gz",
+   sha3 = "37f531682a12c51d8086fe3f2fb5a0a398fa6bb1e396c24ffc03c3bc1dee2bbb",
    build = "./configure",
    flags = {
       "--localstatedir=/var/lib/vim",

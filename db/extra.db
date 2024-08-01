@@ -159,6 +159,12 @@ gdb = {
    }
 };
 
+gzip = {
+   url = "https://ftp.gnu.org/gnu/gzip/gzip-1.13.tar.xz",
+   sha3 = "6b03d763c4a9755955723b70ed0387e077b8f0452997e829e1061519f73a23ec",
+   build = "./configure",
+};
+
 htop = {
    url = "https://github.com/htop-dev/htop/releases/download/3.3.0/htop-3.3.0.tar.xz",
    sha3 = "41229e25dc35ed7292f83bdb55f9152782ba10fafda5f34b2e1fa45930adee1e",

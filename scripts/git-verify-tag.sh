@@ -1,8 +1,7 @@
-#!/bin/sh
+#!/bin/bash
 
 # verify the vim and tz checksum
 # should be identical to the github tarball: note the `-n' gzip flag
-# the `-6' flag is used for compatibility with pigz which uses `-9' by default
 
 # tempdir
 tempdir=$(mktemp -d) && pushd $tempdir >/dev/null
@@ -22,17 +21,17 @@ ckone(){
     git clone --depth 1 --branch "$2" "$1"
     git -C `basename $1` verify-tag "$2" || exit 1
     git -C `basename $1` archive --format=tar --prefix=`basename $1`-$v/ "$2" |
-        gzip -n -6 > `basename $1`-$v.tar.gz
+        gzip -n > `basename $1`-$v.tar.gz
 }
 
-ckone https://github.com/vim/vim/ v9.1.0611
+ckone https://github.com/vim/vim/ v9.1.0645
 #ckone https://github.com/eggert/tz/ 2024a
 #ckone https://github.com/harfbuzz/harfbuzz 9.0.0
 #ckone https://github.com/fribidi/fribidi v1.0.15
 #ckone https://github.com/systemd/systemd/ v256
 
 # print sums
-sha3-256sum *.tar.gz
+okpkg sha3sum *.tar.gz
 
 # cleanup
 popd >/dev/null && rm -fr $tempdir
