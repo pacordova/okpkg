@@ -41,7 +41,7 @@ os.execute"makewhatis /usr/share/man"
 
 -- fix versions and cleanup
 chdir"/usr/okpkg/packages"
-os.rename("bash-5.2-amd64.tar.lz", "bash-5.2.026-amd64.tar.lz")
+os.rename("bash-5.2.32-amd64.tar.lz", "bash-5.2.032-amd64.tar.lz")
 os.rename("readline-8.2-amd64.tar.lz", "readline-8.2.010-amd64.tar.lz")
 os.rename("sqlite-3460000-amd64.tar.lz", "sqlite-3.46.0-amd64.tar.lz")
 os.execute"rm -fr _*.tar.lz *no"

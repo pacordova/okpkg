@@ -178,7 +178,6 @@ bash = {
       "--host=x86_64-unknown-linux-gnu",
       "--build=$(sh support/config.guess)",
    },
-   prepare = [[ patch -p1 <../../patches/bash.diff ]],
 };
 
 coreutils = {

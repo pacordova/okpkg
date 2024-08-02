@@ -561,8 +561,8 @@ oksh = {
 };
 
 bash = {
-   url = "https://ftp.gnu.org/gnu/bash/bash-5.2.tar.gz",
-   sha3 = "01af6b12452665d8202cd50cdc9ca7e6e80d58ba3388d72eb5a0f1c737f8abd7",
+   url = "https://ftp.gnu.org/gnu/bash/bash-5.2.32.tar.gz",
+   sha3 = "d3139218b2ebdfa67093526d0a64a83cf55e5c1f736f991695b5cf8ecbe4fff4",
    build = "./configure",
    flags = {
       "--libdir=/usr/lib64",
@@ -967,8 +967,8 @@ openvi = {
 };
 
 vim = {
-   url = "https://github.com/vim/vim/archive/v9.1.0645/vim-9.1.0645.tar.gz",
-   sha3 = "37f531682a12c51d8086fe3f2fb5a0a398fa6bb1e396c24ffc03c3bc1dee2bbb",
+   url = "https://github.com/vim/vim/archive/v9.1.0648/vim-9.1.0648.tar.gz",
+   sha3 = "931c711436fc636f2ad1b903fdf81fe6988f97302a4f9cfe2e85ed271f114baf",
    build = "./configure",
    flags = {
       "--localstatedir=/var/lib/vim",
