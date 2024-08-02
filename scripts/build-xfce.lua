@@ -81,18 +81,16 @@ emerge"ripgrep"
 emerge"htop"
 emerge"firefox-bin"
 
--- Fix firefox to use apulse
-os.execute"sed -i 's:Exec=:&apulse :' /usr/share/applications/firefox.desktop"
-
 -- Post-install
 os.execute"udevadm hwdb --usr --update"
 os.execute"setcap cap_net_raw+p /usr/bin/ping"
 os.execute"makewhatis /usr/share/man"
+os.execute"pwconv && grpconv"
 os.execute"glib-compile-schemas /usr/share/glib-2.0/schemas"
 os.execute"fc-cache"
 os.execute"update-desktop-database"
 os.execute"update-mime-database /usr/share/mime"
-os.execute"pwconv && grpconv"
+os.execute"gdk-pixbuf-query-loaders --update-cache"
 
 -- Update the icon caches
 os.execute"gtk-update-icon-cache /usr/share/icons/elementary-xfce-darkest"
