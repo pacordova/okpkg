@@ -1,3 +1,9 @@
+nss = {
+   url = "https://archive.mozilla.org/pub/security/nss/releases/NSS_3_102_1_RTM/src/nss-3.102.1.tar.gz",
+   sha3 = "9fc2072eb603a71d9c26a4805a94e6fc9fdae6a8701cd57b3642f9c96e50948b",
+   build = "make",
+};
+
 docbook-xsl-nons = {
    url = "https://github.com/docbook/xslt10-stylesheets/releases/download/release/1.79.2/docbook-xsl-nons-1.79.2.tar.gz",
    sha3 = "7a8eb136af529b6592cc93c23fd46c879a4def9c82a48d01b02485fc4bf837ee",
