@@ -241,8 +241,8 @@ pciutils = {
 };
 
 r = {
-   url = "https://cran.r-project.org/src/base/R-4/R-4.4.0.tar.gz",
-   sha3 = "77dd8ac94b0d5087444ee111f954889fb3dcba4a9cf367682980276bcfae2fd4",
+   url = "https://cran.r-project.org/src/base/R-4/R-4.4.1.tar.gz",
+   sha3 = "84bc3941d786810f5fd9c97f72cbff9e0a535d90ea3dc15dfd7036215b2d5c16",
    build = "./configure",
    flags = {
       "--libdir=/usr/lib64",

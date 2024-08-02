@@ -45,6 +45,17 @@ upower = {
    prepare = [[ sed '/parse_version/d' -i src/linux/integration-test.py ]]
 };
 
+xdg-user-dirs = {
+   url = "https://user-dirs.freedesktop.org/releases/xdg-user-dirs-0.18.tar.gz",
+   sha3 = "b94c66edbf2d901c8353916fda76263845f2e6b7d9d0dd071472dcb37f87ad29",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--sysconfdir=/etc",
+      "--disable-documentation",
+   }
+};
+
 --------------------------------------------------------------------------------
 
 at-spi2-core = {

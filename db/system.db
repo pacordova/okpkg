@@ -364,7 +364,7 @@ gcc14 = {
       "--enable-default-ssp",
       "--enable-gnu-unique-object",
       "--enable-initfini-array",
-      "--enable-languages=c,c++",
+      "--enable-languages=c,c++,fortran",
       "--enable-link-serialization=1",
       "--enable-lto",
       "--enable-shared",
