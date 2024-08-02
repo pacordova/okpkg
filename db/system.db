@@ -1268,11 +1268,12 @@ grub = {
       "--datarootdir=/usr/share",
       "--with-bootdir=/boot",
       "--with-grubdir=grub",
+      "--with-platform=efi",
+      "--target=x86_64",
       "--enable-device-mapper",
       "--disable-efiemu",
       "--disable-grub-mkfont",
       "--disable-grub-mount",
-      "--disable-liblzma",
       "--disable-werror",
       "{C,CPP,CXX,LD}FLAGS="
    },
