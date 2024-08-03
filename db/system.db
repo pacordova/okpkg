@@ -1106,6 +1106,21 @@ e2fsprogs = {
    post = [[ rm -f $destdir/usr/lib64/*.a ]]
 };
 
+dosfstools = {
+   url = "https://github.com/dosfstools/dosfstools/releases/download/v4.2/dosfstools-4.2.tar.gz",
+   sha3 = "3f41e94fd88aa576f5694d2f36d0ec76c8c2750243063b8f0c7c34612606cf5d",
+   build = "./configure",
+   flags = {
+      "--sbindir=/usr/bin",
+      "--libdir=/usr/lib64",
+      "--libexecdir=/usr/lib64",
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
+      "--mandir=/usr/share/man",
+      "--enable-compat-symlinks",
+   }
+};
+
 sysklogd = {
    url = "https://github.com/troglobit/sysklogd/releases/download/v2.6.1/sysklogd-2.6.1.tar.gz",
    sha3 = "d3277a255b4905892b601f8835c920f9fb5edf1982db436642c301e493ffb7c4",

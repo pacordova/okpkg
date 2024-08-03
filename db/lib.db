@@ -67,18 +67,6 @@ fuse3 = {
    post = [[ chmod u+s $destdir/usr/bin/fusermount3 ]]
 };
 
-imlib2 = {
-   url = "https://downloads.sourceforge.net/enlightenment/imlib2-1.12.3.tar.xz",
-   sha3 = "36c1ce1eebf83d68ac622e4391435ece50e5a1eac8683d68ab4b294f6d79d0ee",
-   build = "./configure",
-   flags = {
-      "--libdir=/usr/lib64",
-      "--sysconfdir=/etc/imlib2",
-      "--enable-amd64",
-      "--disable-static",
-   }
-};
-
 json-c = {
    url = "https://s3.amazonaws.com/json-c_releases/releases/json-c-0.17.tar.gz",
    sha3 = "6e3bb804e61de257c313a2d4e39e89262dea68477acc518f8c0c4ab15a37ea69",

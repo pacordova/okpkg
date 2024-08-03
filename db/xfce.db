@@ -45,17 +45,6 @@ upower = {
    prepare = [[ sed '/parse_version/d' -i src/linux/integration-test.py ]]
 };
 
-xdg-user-dirs = {
-   url = "https://user-dirs.freedesktop.org/releases/xdg-user-dirs-0.18.tar.gz",
-   sha3 = "b94c66edbf2d901c8353916fda76263845f2e6b7d9d0dd071472dcb37f87ad29",
-   build = "./configure",
-   flags = {
-      "--libdir=/usr/lib64",
-      "--sysconfdir=/etc",
-      "--disable-documentation",
-   }
-};
-
 --------------------------------------------------------------------------------
 
 at-spi2-core = {
@@ -487,6 +476,17 @@ thunar-archive-plugin = {
    }
 };
 
+xarchiver = {
+   url = "https://github.com/ib/xarchiver/archive/0.5.4.23/xarchiver-0.5.4.23.tar.gz",
+   sha3 = "bd34257a67da0698038f2a870374679621d323ca42d965580fee0a964881d4b4",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--libexecdir=/usr/lib64/xfce4",
+      "--sysconfdir=/etc",
+   }
+};
+
 xfce4-alsa-plugin = {
    url = "https://github.com/equeim/xfce4-alsa-plugin/archive/0.3.0/xfce4-alsa-plugin-0.3.0.tar.gz",
    sha3 = "81a6f9fb940244fbe3cee2be406d0df8865e9e5d28257ca56d77529dbec91cc4",
@@ -539,62 +539,7 @@ elementary-xfce-icon-theme = {
    build = "./configure",
 };
 
-apulse = {
-   url = "https://github.com/i-rinat/apulse/archive/v0.1.13/apulse-0.1.13.tar.gz",
-   sha3 = "e6940335c56e088af4b69e8ad47f37d5f9ffc3365ca9f047b799188548cc9eba",
-   build = "cmake",
-   post = [[
-      sed -i 's:/usr/lib/:/usr/lib64/:' $destdir/usr/bin/apulse
-      mv $destdir/usr/lib $destdir/usr/lib64
-   ]]
-};
-
-st = {
-   url = "https://github.com/pacordova/st/archive/v0.9/st-0.9.tar.gz",
-   sha3 = "f430a4c56411b79c4e618aab2ec22abd1c66a55bd7779ae11b3e7709ca10164d",
-   build = "make",
-   flags = {
-      "PREFIX=/usr"
-   },
-   post = [[ tic -sx st.info ]]
-};
-
-uthash = {
-   url = "https://github.com/troydhanson/uthash/archive/v2.3.0/uthash-2.3.0.tar.gz",
-   sha3 = "d416f46e3922a59538311fc9e20d7303430e31d2be22e5d7abf2f5391fc3d3f7",
-   build = _,
-   post = [[
-      mkdir -p $destdir/usr/include
-      cp -p src/*.h $destdir/usr/include
-   ]]
-};
-
-libconfig = {
-   url = "https://github.com/hyperrealm/libconfig/releases/download/v1.7.3/libconfig-1.7.3.tar.gz",
-   sha3 = "81e3f782c8f366a7de6ec71d4509e02c70f1690199113a2f0e51067fd7dd29cf",
-   build = "./configure",
-   flags = {
-      "--libdir=/usr/lib64",
-      "--sysconfdir=/etc",
-   }
-};
-
-picom = {
-   url = "https://github.com/yshui/picom/archive/v11.2/picom-11.2.tar.gz",
-   sha3 = "ee0a5ced3bf0fe13c92feea4a663ceadbcbe449a62fa663a4d015f5cae302fc2",
-   build = "meson",
-};
-
-xarchiver = {
-   url = "https://github.com/ib/xarchiver/archive/0.5.4.23/xarchiver-0.5.4.23.tar.gz",
-   sha3 = "bd34257a67da0698038f2a870374679621d323ca42d965580fee0a964881d4b4",
-   build = "./configure",
-   flags = {
-      "--libdir=/usr/lib64",
-      "--libexecdir=/usr/lib64/xfce4",
-      "--sysconfdir=/etc",
-   }
-};
+--------------------------------------------------------------------------------
 
 itstool = {
    url = "https://files.itstool.org/itstool/itstool-2.0.7.tar.bz2",
@@ -812,4 +757,108 @@ flatpak = {
       "-Dsystem_helper=disabled",
       "-Dtests=false",
    }    
+};
+
+--------------------------------------------------------------------------------
+
+uthash = {
+   url = "https://github.com/troydhanson/uthash/archive/v2.3.0/uthash-2.3.0.tar.gz",
+   sha3 = "d416f46e3922a59538311fc9e20d7303430e31d2be22e5d7abf2f5391fc3d3f7",
+   build = _,
+   post = [[
+      mkdir -p $destdir/usr/include
+      cp -p src/*.h $destdir/usr/include
+   ]]
+};
+
+libconfig = {
+   url = "https://github.com/hyperrealm/libconfig/releases/download/v1.7.3/libconfig-1.7.3.tar.gz",
+   sha3 = "81e3f782c8f366a7de6ec71d4509e02c70f1690199113a2f0e51067fd7dd29cf",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--sysconfdir=/etc",
+   }
+};
+
+picom = {
+   url = "https://github.com/yshui/picom/archive/v11.2/picom-11.2.tar.gz",
+   sha3 = "ee0a5ced3bf0fe13c92feea4a663ceadbcbe449a62fa663a4d015f5cae302fc2",
+   build = "meson",
+};
+
+--------------------------------------------------------------------------------
+
+imlib2 = {
+   url = "https://downloads.sourceforge.net/enlightenment/imlib2-1.12.3.tar.xz",
+   sha3 = "36c1ce1eebf83d68ac622e4391435ece50e5a1eac8683d68ab4b294f6d79d0ee",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--sysconfdir=/etc/imlib2",
+      "--enable-amd64",
+      "--disable-static",
+   }
+};
+
+feh = {
+   url = "https://feh.finalrewind.org/feh-3.10.3.tar.bz2",
+   sha3 = "98040180056d52e47a2932e0611b1b457c0a6d4e463881c37a55f1b321c5aee0",
+   build = "make",
+   flags = {
+      "PREFIX=/usr",
+      "exif=1",
+   }
+};
+
+scrot = {
+   url = "https://github.com/resurrecting-open-source-projects/scrot/releases/download/1.11.1/scrot-1.11.1.tar.bz2",
+   sha3 = "183450df0187a0f6c107f828585160ad2d7dfe858e353ddd08ce85bf65da94df",
+   build = "./configure",
+};
+
+--------------------------------------------------------------------------------
+
+apulse = {
+   url = "https://github.com/i-rinat/apulse/archive/v0.1.13/apulse-0.1.13.tar.gz",
+   sha3 = "e6940335c56e088af4b69e8ad47f37d5f9ffc3365ca9f047b799188548cc9eba",
+   build = "cmake",
+   post = [[
+      sed -i 's:/usr/lib/:/usr/lib64/:' $destdir/usr/bin/apulse
+      mv $destdir/usr/lib $destdir/usr/lib64
+   ]]
+};
+
+htop = {
+   url = "https://github.com/htop-dev/htop/releases/download/3.3.0/htop-3.3.0.tar.xz",
+   sha3 = "41229e25dc35ed7292f83bdb55f9152782ba10fafda5f34b2e1fa45930adee1e",
+   build = "./configure",
+};
+
+ripgrep = {
+   url = "https://github.com/BurntSushi/ripgrep/archive/14.1.0/ripgrep-14.1.0.tar.gz",
+   sha3 = "0c685042a86faf2da4098e5b0cb61f73eaad59d08d8e203be00580085be0644e",
+   build = "cargo",
+   flags = { "--features=pcre2" }
+};
+
+st = {
+   url = "https://github.com/pacordova/st/archive/v0.9/st-0.9.tar.gz",
+   sha3 = "f430a4c56411b79c4e618aab2ec22abd1c66a55bd7779ae11b3e7709ca10164d",
+   build = "make",
+   flags = {
+      "PREFIX=/usr"
+   },
+   post = [[ tic -sx st.info ]]
+};
+
+xdg-user-dirs = {
+   url = "https://user-dirs.freedesktop.org/releases/xdg-user-dirs-0.18.tar.gz",
+   sha3 = "b94c66edbf2d901c8353916fda76263845f2e6b7d9d0dd071472dcb37f87ad29",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--sysconfdir=/etc",
+      "--disable-documentation",
+   }
 };

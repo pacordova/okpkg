@@ -77,8 +77,6 @@ mkdir"/usr/okpkg/packages/xfce"
 os.execute"mv /usr/okpkg/packages/*.tar.lz /usr/okpkg/packages/xfce"
 
 -- Other useful packages
-emerge"ripgrep"
-emerge"htop"
 emerge"firefox-bin"
 
 -- Post-install

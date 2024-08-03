@@ -16,16 +16,6 @@ cmatrix = {
    build = "cmake",
 };
 
-feh = {
-   url = "https://feh.finalrewind.org/feh-3.10.3.tar.bz2",
-   sha3 = "98040180056d52e47a2932e0611b1b457c0a6d4e463881c37a55f1b321c5aee0",
-   build = "make",
-   flags = {
-      "PREFIX=/usr",
-      "exif=1",
-   }
-};
-
 cryptsetup = {
    url = "https://kernel.org/pub/linux/utils/cryptsetup/v2.7/cryptsetup-2.7.3.tar.xz",
    sha3 = "d6d65023fb6545d553cc97b222f5001e845872a77cb25240465261a04c3c0892",
@@ -56,21 +46,6 @@ linux = {
       cp -rp usr/include $destdir/usr
       find $destdir/usr/include -type f ! -name '*.h' -delete
    ]]
-};
-
-dosfstools = {
-   url = "https://github.com/dosfstools/dosfstools/releases/download/v4.2/dosfstools-4.2.tar.gz",
-   sha3 = "3f41e94fd88aa576f5694d2f36d0ec76c8c2750243063b8f0c7c34612606cf5d",
-   build = "./configure",
-   flags = {
-      "--sbindir=/usr/bin",
-      "--libdir=/usr/lib64",
-      "--libexecdir=/usr/lib64",
-      "--localstatedir=/var",
-      "--sysconfdir=/etc",
-      "--mandir=/usr/share/man",
-      "--enable-compat-symlinks",
-   }
 };
 
 gcc11 = {
@@ -158,12 +133,6 @@ gzip = {
    build = "./configure",
 };
 
-htop = {
-   url = "https://github.com/htop-dev/htop/releases/download/3.3.0/htop-3.3.0.tar.xz",
-   sha3 = "41229e25dc35ed7292f83bdb55f9152782ba10fafda5f34b2e1fa45930adee1e",
-   build = "./configure",
-};
-
 iftop = {
    url = "https://pdw.ex-parrot.com/iftop/download/iftop-1.0pre4.tar.gz",
    sha3 = "a312fb825ead8dddafd9e1cfff755ef3c4aee2988158515225f39985058391cd",
@@ -238,13 +207,6 @@ r = {
    }
 };
 
-ripgrep = {
-   url = "https://github.com/BurntSushi/ripgrep/archive/14.1.0/ripgrep-14.1.0.tar.gz",
-   sha3 = "0c685042a86faf2da4098e5b0cb61f73eaad59d08d8e203be00580085be0644e",
-   build = "cargo",
-   flags = { "--features=pcre2" }
-};
-
 rsync = {
    url = "https://samba.org/ftp/rsync/src/rsync-3.2.7.tar.gz",
    sha3 = "763bd8517633d1bef498be5d0846346f9c15a545f59bb14d40f6dcfb8f98fa28",
@@ -260,12 +222,6 @@ rsync = {
       "--with-included-popt=no",
       "--with-included-zlib=no",
    }
-};
-
-scrot = {
-   url = "https://github.com/resurrecting-open-source-projects/scrot/releases/download/1.11.1/scrot-1.11.1.tar.bz2",
-   sha3 = "183450df0187a0f6c107f828585160ad2d7dfe858e353ddd08ce85bf65da94df",
-   build = "./configure",
 };
 
 tmux = {
