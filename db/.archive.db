@@ -1,3 +1,106 @@
+appstream-glib = {
+   url = "https://people.freedesktop.org/~hughsient/appstream-glib/releases/appstream-glib-0.8.2.tar.xz",
+   sha3 = "c1c6b46bab260e73070061707fe1f01df4363b3fca0349de29400752ae0a21e5",
+   build = "meson",
+   flags = { 
+      "-Drpm=false", 
+      "-Dstemmer=false",
+      "-Dman=false", 
+   }
+};
+
+-- optional poppler dependency
+lcms2 = {
+   url = "https://github.com/mm2/Little-CMS/releases/download/lcms2.16/lcms2-2.16.tar.gz",
+   sha3 = "cc75ac1ddc6d1d0abfd2b81e312396621b87096ee8d7e95f8eadb4bf672da252",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+   }
+};
+
+babl = {
+   url = "https://download.gimp.org/pub/babl/0.1/babl-0.1.108.tar.xz",
+   sha3 = "aec774ba647daa9e57572c1905f1e03d4f69400def385395cc9b4d782eb2b027",
+   build = "meson",
+};
+
+
+gegl = {
+   url = "https://download.gimp.org/pub/gegl/0.4/gegl-0.4.48.tar.xz",
+   sha3 = "9b7a9a2e33ae77a2a63c0a4d35383a47e3d888bf238a9d348bae2f4d89ac6a43",
+   build = "meson",
+   flags = { 
+      "-Dlibav=disabled", 
+   }
+};
+
+libmypaint = {
+   url = "https://github.com/mypaint/libmypaint/releases/download/v1.6.1/libmypaint-1.6.1.tar.xz",
+   sha3 = "2ec991f21543b1c5326f1396a6794608518ca36dcf134a45cf5cfa2b95c5f211",
+   build = "./configure",
+   flags = { "--libdir=/usr/lib64" }
+};
+
+mypaint-brushes = {
+   url = "https://github.com/mypaint/mypaint-brushes/releases/download/v2.0.2/mypaint-brushes-2.0.2.tar.xz",
+   sha3 = "52a4bcfa64e66d61905350cdd06e25a9835d63c8ae6c522c6c012b21fbd6ff25",
+   build = "./configure",
+};
+
+exiv2 = {
+   url = "https://github.com/Exiv2/exiv2/archive/v0.28.3/exiv2-0.28.3.tar.gz",
+   sha3 = "751d35d5703ff27b7c17a9052a3760e0445e8a1c6a6e57b45352adf8599c1ac6",
+   build = "cmake",
+   flags = {
+      "-DEXIV2_ENABLE_VIDEO=yes",
+      "-DEXIV2_ENABLE_WEBREADY=yes",
+      "-DEXIV2_ENABLE_CURL=yes",
+      "-DEXIV2_BUILD_SAMPLES=no",
+      "-DCMAKE_SKIP_INSTALL_RPATH=ON",
+      "-DEXIV2_ENABLE_INIH=no",
+      "-DEXIV2_ENABLE_BROTLI=no",
+   }
+};
+
+gexiv2 = {
+   url = "https://download.gnome.org/sources/gexiv2/0.14/gexiv2-0.14.2.tar.xz",
+   sha3 = "0cfc01e95c80cad96404761dfaf71b76c57a308d1b8f0b5d7085edd9ad293483",
+   build = "meson",
+   flags = { "-Dpython3=false" }
+};
+
+gimp = {
+   url = "https://download.gimp.org/gimp/v2.99/gimp-2.99.18.tar.xz",
+   sha3 = "a91a2f09e71bc389880cb901b9d81420dff19d9a870b51b30c00d2e1cf46f6b6",
+   build = "meson",
+};
+
+--------------------------------------------------------------------------------
+
+-- Note: might want to build with gdk-pixbuf
+libavif = {
+   url = "https://github.com/AOMediaCodec/libavif/archive/v1.1.1/libavif-1.1.1.tar.gz",
+   sha3 = "c8f7d1fdbaac6bb6e424039450be95d1dd072453e4ffc1665685a94550edcc78",
+   build = "cmake",
+   flags = { "-DAVIF_CODEC_DAV1D=SYSTEM", "-DAVIF_LIBYUV=OFF" }
+};
+
+-- Note: lots of dependencies?
+libjxl = {
+   url = "https://github.com/libjxl/libjxl/archive/v0.10.3/libjxl-0.10.3.tar.gz",
+   sha3 = "9d560d3fa97db2d1b592e8b67197b7644289eceeb97723f054f392f0173e7992",
+   build = "cmake",
+   flags = {
+      "-DBUILD_TESTING=OFF",
+      "-DBUILD_SHARED_LIBS=ON",
+      "-DJPEGXL_ENABLE_SKCMS=OFF",
+      "-DJPEGXL_ENABLE_SJPEG=OFF",
+      "-DJPEGXL_ENABLE_PLUGINS=ON",
+      "-DJPEGXL_INSTALL_JARDIR=/usr/share/java",
+   }
+};
+
 libkeccak = {
    url = "https://codeberg.org/maandree/libkeccak/archive/1.4.tar.gz",
    sha3 = "e9d70587db310b53b22707c568c31d7d4eb9f01576ee8cb2657c90fa9f04d7e1",
@@ -66,16 +169,6 @@ glib-networking = {
 geocode-glib = {
    url = "https://download.gnome.org/sources/geocode-glib/3.26/geocode-glib-3.26.2.tar.xz",
    build = "meson",
-};
-
-appstream-glib = {
-   url = "https://github.com/hughsie/appstream-glib/archive/refs/tags/appstream_glib_0_8_0.tar.gz",
-   build = "meson",
-   flags = {
-      "-Drpm=false",
-      "-Dstemmer=false",
-      "-Dman=false"
-   }
 };
 
 --------------------------------------------------------------------------------
@@ -315,16 +408,6 @@ xreader = {
 };
 
 
--- optional poppler dependency
-lcms2 = {
-   url = "https://github.com/mm2/Little-CMS/releases/download/lcms2.16/lcms2-2.16.tar.gz",
-   sha3 = "cc75ac1ddc6d1d0abfd2b81e312396621b87096ee8d7e95f8eadb4bf672da252",
-   build = "./configure",
-   flags = {
-      "--libdir=/usr/lib64",
-   }
-};
-
 -- split packages
 elfutils = {
    url = "https://sourceware.org/ftp/elfutils/0.191/elfutils-0.191.tar.bz2",
@@ -431,18 +514,6 @@ lm-sensors = {
    url = "https://github.com/lm-sensors/lm-sensors/archive/V3-6-0/lm-sensors-3-6-0.tar.gz",
    build = "make",
    flags = { "LIBDIR=$LIBDIR" }
-};
-
-gimp = {
-   url = "https://download.gimp.org/mirror/pub/gimp/v2.10/gimp-2.10.32.tar.bz2",
-   build = "./configure",
-   flags = {
-      "--libdir=/usr/lib64",
-      "--libexecdir=/usr/bin",
-      "--sysconfdir=/etc",
-      "--enable-mp",
-      "--disable-python"
-   }
 };
 
 dmenu = {
@@ -1146,11 +1217,6 @@ bluez = {
    ]]
 };
 
-babl = {
-   url = "https://download.gimp.org/pub/babl/0.1/babl-0.1.88.tar.xz",
-   build = "meson",
-};
-
 bamf = {
    url = "https://launchpad.net/bamf/0.5/0.5.6/+download/bamf-0.5.6.tar.gz",
    build = "./configure",
@@ -1379,12 +1445,6 @@ geoclue = {
 gs = {
    url = "https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs9550/ghostscript-9.55.0.tar.xz",
    build = "./configure",
-};
-
-gegl = {
-   url = "https://download.gimp.org/pub/gegl/0.4/gegl-0.4.48.tar.xz",
-   build = "meson",
-   flags = { "-Ddocs=false" }
 };
 
 gedit = {
@@ -1684,11 +1744,6 @@ libinih = {
    build = "meson",
 };
 
-libmypaint = {
-   url = "https://github.com/mypaint/libmypaint/releases/download/v1.6.1/libmypaint-1.6.1.tar.xz",
-   build = "./configure",
-};
-
 libpotrace = {
    url = "https://downloads.sourceforge.net/potrace/potrace-1.16.tar.gz",
    build = "./configure",
@@ -1956,11 +2011,6 @@ pax = {
    mkdir -p $destdir/usr/share/man/man1
    mv pax.1 $destdir/usr/share/man/man1
    ]]
-};
-
-paintbrush = {
-   url = "https://github.com/mypaint/mypaint-brushes/releases/download/v1.3.1/mypaint-brushes-1.3.1.tar.xz",
-   build = "./configure",
 };
 
 pass = {
