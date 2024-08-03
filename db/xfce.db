@@ -817,6 +817,18 @@ scrot = {
    build = "./configure",
 };
 
+sxiv = {
+   url = "https://github.com/xyb3rt/sxiv/archive/v26/sxiv-26.tar.gz",
+   sha3 = "9d658d77fd4f9da3bb02247016ba4d4f1c3afcedc18ac790fb67bf91e66aaff7",
+   build = "make",
+   flags = { "PREFIX=/usr", "HAVE_GIFLIB=0" },
+   post = [[ 
+      $make -C icon PREFIX=/usr DESTDIR=$destdir install
+      install -d $destdir/usr/share/applications
+      install -m 644 sxiv.desktop $destdir/usr/share/applications
+   ]]
+};
+
 --------------------------------------------------------------------------------
 
 apulse = {
