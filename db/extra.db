@@ -16,18 +16,6 @@ cmatrix = {
    build = "cmake",
 };
 
-imlib2 = {
-   url = "https://downloads.sourceforge.net/enlightenment/imlib2-1.12.3.tar.xz",
-   sha3 = "36c1ce1eebf83d68ac622e4391435ece50e5a1eac8683d68ab4b294f6d79d0ee",
-   build = "./configure",
-   flags = {
-      "--libdir=/usr/lib64",
-      "--sysconfdir=/etc/imlib2",
-      "--enable-amd64",
-      "--disable-static",
-   }
-};
-
 feh = {
    url = "https://feh.finalrewind.org/feh-3.10.3.tar.bz2",
    sha3 = "98040180056d52e47a2932e0611b1b457c0a6d4e463881c37a55f1b321c5aee0",
@@ -35,18 +23,6 @@ feh = {
    flags = {
       "PREFIX=/usr",
       "exif=1",
-   }
-};
-
-json-c = {
-   url = "https://s3.amazonaws.com/json-c_releases/releases/json-c-0.17.tar.gz",
-   sha3 = "6e3bb804e61de257c313a2d4e39e89262dea68477acc518f8c0c4ab15a37ea69",
-   build = "cmake",
-   flags = {
-      "-DBUILD_STATIC_LIBS=OFF",
-      "-DBUILD_TESTING=OFF",
-      "-DENABLE_THREADING=ON",
-      "-DENABLE_RDRAND=OFF"
    }
 };
 
@@ -286,27 +262,10 @@ rsync = {
    }
 };
 
-libkeccak = {
-   url = "https://codeberg.org/maandree/libkeccak/archive/1.4.tar.gz",
-   sha3 = "e9d70587db310b53b22707c568c31d7d4eb9f01576ee8cb2657c90fa9f04d7e1",
-   build = "make",
-   flags = {
-      "CONFIGFILE=optimised.mk",
-      "PREFIX=/usr"
-   },
-   prepare = [[ 
-      sed -i 's#FLAGS\s\+=#FLAGS +=#g' optimised.mk 
-      sed -i 's:$(PREFIX)/lib:$(PREFIX)/lib64:g' Makefile
-   ]],
-   post = [[ rm -f $destdir/usr/lib64/libkeccak.a ]]
-};
-
-sha3sum = {
-   url = "https://github.com/maandree/sha3sum/archive/1.2.2/sha3sum-1.2.2.tar.gz",
-   sha3 = "e649109fa11f2e92123cec7e3683cdf5f906de9dc7905e220e12cfc4e8608c68",
-   build = "make",
-   flags = { "PREFIX=/usr" },
-   prepare = [[ sed -i 's#FLAGS\s\+=#FLAGS +=#g' config.mk ]]
+scrot = {
+   url = "https://github.com/resurrecting-open-source-projects/scrot/releases/download/1.11.1/scrot-1.11.1.tar.bz2",
+   sha3 = "183450df0187a0f6c107f828585160ad2d7dfe858e353ddd08ce85bf65da94df",
+   build = "./configure",
 };
 
 tmux = {

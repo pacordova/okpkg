@@ -1,3 +1,26 @@
+libkeccak = {
+   url = "https://codeberg.org/maandree/libkeccak/archive/1.4.tar.gz",
+   sha3 = "e9d70587db310b53b22707c568c31d7d4eb9f01576ee8cb2657c90fa9f04d7e1",
+   build = "make",
+   flags = {
+      "CONFIGFILE=optimised.mk",
+      "PREFIX=/usr"
+   },
+   prepare = [[ 
+      sed -i 's#FLAGS\s\+=#FLAGS +=#g' optimised.mk 
+      sed -i 's:$(PREFIX)/lib:$(PREFIX)/lib64:g' Makefile
+   ]],
+   post = [[ rm -f $destdir/usr/lib64/libkeccak.a ]]
+};
+
+sha3sum = {
+   url = "https://github.com/maandree/sha3sum/archive/1.2.2/sha3sum-1.2.2.tar.gz",
+   sha3 = "e649109fa11f2e92123cec7e3683cdf5f906de9dc7905e220e12cfc4e8608c68",
+   build = "make",
+   flags = { "PREFIX=/usr" },
+   prepare = [[ sed -i 's#FLAGS\s\+=#FLAGS +=#g' config.mk ]]
+};
+
 nss = {
    url = "https://archive.mozilla.org/pub/security/nss/releases/NSS_3_102_1_RTM/src/nss-3.102.1.tar.gz",
    sha3 = "9fc2072eb603a71d9c26a4805a94e6fc9fdae6a8701cd57b3642f9c96e50948b",

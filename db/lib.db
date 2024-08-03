@@ -67,6 +67,30 @@ fuse3 = {
    post = [[ chmod u+s $destdir/usr/bin/fusermount3 ]]
 };
 
+imlib2 = {
+   url = "https://downloads.sourceforge.net/enlightenment/imlib2-1.12.3.tar.xz",
+   sha3 = "36c1ce1eebf83d68ac622e4391435ece50e5a1eac8683d68ab4b294f6d79d0ee",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--sysconfdir=/etc/imlib2",
+      "--enable-amd64",
+      "--disable-static",
+   }
+};
+
+json-c = {
+   url = "https://s3.amazonaws.com/json-c_releases/releases/json-c-0.17.tar.gz",
+   sha3 = "6e3bb804e61de257c313a2d4e39e89262dea68477acc518f8c0c4ab15a37ea69",
+   build = "cmake",
+   flags = {
+      "-DBUILD_STATIC_LIBS=OFF",
+      "-DBUILD_TESTING=OFF",
+      "-DENABLE_THREADING=ON",
+      "-DENABLE_RDRAND=OFF"
+   }
+};
+
 lame = {
    url = "https://downloads.sourceforge.net/lame/lame-3.100.tar.gz",
    sha3 = "36700934b5b3e64f2e3ff33ee85bd7fc033890aa92d1f6a0a9b5acc2a3a0d199",
