@@ -579,15 +579,6 @@ libconfig = {
    }
 };
 
-libev = {
-   url = "http://dist.schmorp.de/libev/libev-4.33.tar.gz",
-   sha3 = "ba1e921dd20ef633308f837e958e136b5ec80cd73683fd1bdb1ed48ceb59cf1b",
-   build = "./configure",
-   flags = { 
-      "--libdir=/usr/lib64" 
-   }
-};
-
 picom = {
    url = "https://github.com/yshui/picom/archive/v11.2/picom-11.2.tar.gz",
    sha3 = "ee0a5ced3bf0fe13c92feea4a663ceadbcbe449a62fa663a4d015f5cae302fc2",

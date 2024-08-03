@@ -81,17 +81,12 @@ lame = {
    }
 };
 
-libarchive = {
-   url = "https://github.com/libarchive/libarchive/releases/download/v3.7.4/libarchive-3.7.4.tar.xz",
-   sha3 = "27ee1cf7f44d7ba0a12998715d8dfb5aaca92c34279c34ee1ccf10325b19b098",
-   build = "./configure",
-   flags = {
-      "--libdir=/usr/lib64",
-      "--sysconfdir=/etc",
-      "--localstatedir=/var",
-      "--without-nettle",
-      "--disable-static",
-   }
+-- Note: might want to build with gdk-pixbuf
+libavif = {
+   url = "https://github.com/AOMediaCodec/libavif/archive/v1.1.1/libavif-1.1.1.tar.gz",
+   sha3 = "c8f7d1fdbaac6bb6e424039450be95d1dd072453e4ffc1665685a94550edcc78",
+   build = "cmake",
+   flags = { "-DAVIF_CODEC_DAV1D=SYSTEM", "-DAVIF_LIBYUV=OFF" }
 };
 
 libbpf = {
@@ -136,6 +131,21 @@ libjpeg-turbo = {
       "-DENABLE_STATIC=OFF",
       "-DWITH_JPEG8=ON",
       "-DWITH_JAVA=OFF",
+   }
+};
+
+-- Note: lots of dependencies?
+libjxl = {
+   url = "https://github.com/libjxl/libjxl/archive/v0.10.3/libjxl-0.10.3.tar.gz",
+   sha3 = "9d560d3fa97db2d1b592e8b67197b7644289eceeb97723f054f392f0173e7992",
+   build = "cmake",
+   flags = {
+      "-DBUILD_TESTING=OFF",
+      "-DBUILD_SHARED_LIBS=ON",
+      "-DJPEGXL_ENABLE_SKCMS=OFF",
+      "-DJPEGXL_ENABLE_SJPEG=OFF",
+      "-DJPEGXL_ENABLE_PLUGINS=ON",
+      "-DJPEGXL_INSTALL_JARDIR=/usr/share/java",
    }
 };
 

@@ -57,29 +57,6 @@ appstream-glib = {
 
 --------------------------------------------------------------------------------
 
-libuv = {
-   url = "https://dist.libuv.org/dist/v1.48.0/libuv-v1.48.0.tar.gz",
-   sha3 = "68fb3f8b47090edd4b9f6d0a458f1f846ca9173404a12a9c3c5ff78b4190b314",
-   build = "./autogen.sh",
-   flags = {
-      "--libdir=/usr/lib64",
-      "--disable-static"
-   }
-};
-
-libnghttp2 = {
-   url = "https://github.com/nghttp2/nghttp2/releases/download/v1.62.1/nghttp2-1.62.1.tar.xz",
-   sha3 = "c65ba551ff0cd315e50a2e00b29993240b9a3ef2ff922977dbb2682d367f6aa9",
-   build = "./configure",
-   flags = {
-      "--libdir=/usr/lib64",
-      "--enable-lib-only",
-      "--disable-examples",
-      "--disable-python-bindings",
-      "--disable-static",
-   }
-};
-
 libsecret = {
    url = "https://download.gnome.org/sources/libsecret/0.21/libsecret-0.21.4.tar.xz",
    sha3 = "67e95ac0aa1bee9012903ad5b769aec7ef1a07594c3806f4d132bd5633c68fcb",
