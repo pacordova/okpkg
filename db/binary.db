@@ -1,0 +1,153 @@
+rust-bin = {
+   url = "https://static.rust-lang.org/dist/rust-1.80.1-x86_64-unknown-linux-gnu.tar.xz",
+   sha3 = "eb02ae32a1187d0dde113b64caf518e111b1eda00a419902d44da2d8fd13fc12",
+   build = _,
+   post = [[ 
+      install -d $destdir/usr
+      ./install.sh --prefix=/usr --destdir=$destdir --libdir=/usr/lib64 
+   ]]
+};
+
+firefox-bin = {
+   url = "https://download-installer.cdn.mozilla.net/pub/devedition/releases/130.0b7/linux-x86_64/en-US/firefox-130.0b7.tar.bz2",
+   sha3 = "01f5a2a832b8bd24800c1a53a1407808f3f0ff6dd9dcd03223a25f077409dc49",
+   build = _,
+   post = [[
+      install -d $destdir/usr/{bin,lib64}
+      install -d $destdir/usr/share/applications
+      mv firefox.desktop $destdir/usr/share/applications
+      cp -rp . $destdir/usr/lib64/firefox
+
+      # setup /usr/bin/firefox wrapper
+      cd $destdir/usr/bin
+      if [ -x /usr/bin/apulse ]; then
+          printf "#!/bin/sh\n" >firefox
+          printf "/usr/bin/apulse /usr/lib64/firefox/firefox\n" >>firefox
+          chmod 755 firefox
+      else
+          ln -sf /usr/lib64/firefox/firefox firefox
+      fi
+   ]]
+};
+
+-- from firefox: libnss3.so libnssutil3.so libsmime3.so libnspr4.so libplc4.so libplds4.so
+-- needs cups
+discord-bin = {
+   url = "https://dl.discordapp.net/apps/linux/0.0.62/discord-0.0.62.tar.gz",
+   sha3 = "1f699379ec6700a2d3df895f032ae5eb58b482dec3d679944520466ab883aefc",
+   build = _,
+   post = [[
+      sed -i 's:/usr/share:/usr/lib64:' discord.desktop
+      install -d $destdir/usr/{bin,lib64}
+      install -d $destdir/usr/share/applications  
+      install -m 644 discord.desktop $destdir/usr/share/applications
+      cp -rp . $destdir/usr/lib64/discord
+      ln -sf /usr/lib64/discord/Discord $destdir/usr/bin/discord
+   ]]
+};
+
+libreoffice-bin = {
+   url = "https://download.documentfoundation.org/libreoffice/stable/24.2.5/deb/x86_64/LibreOffice_24.2.5_Linux_x86-64_deb.tar.gz",
+   sha3 = "a0ca5702298dbefc84591f3b8a93be1b3407a1e18d7412593ae3d36bd40694bf",
+   build = _,
+   post = [[
+      find DEBS -name '*.deb' -exec ar x '{}' data.tar.xz \; -exec tar -xf data.tar.xz \;
+      soffice=`basename opt/*`
+      install -d $destdir/usr/{bin,lib64}
+      cp -rp  opt/* $destdir/usr/lib64
+      cp -rp  usr/share $destdir/usr/share
+      ln -sfr $destdir/usr/lib64/*/program/soffice $destdir/usr/bin/$soffice
+      ln -sf  $soffice $destdir/usr/bin/libreoffice
+      ln -sf  $soffice $destdir/usr/bin/soffice
+   ]]
+};
+
+-- TOFU
+tinytex = {
+   url = "https://github.com/rstudio/tinytex-releases/releases/download/v2024.07.03/TinyTeX-1-v2024.07.03.tar.gz",
+   sha3 = "b6d573122dc97c5085993f707f439f07e3ac18dee500e6a0c8bb9250997e3385",
+   build = _,
+   post = [[
+      install -d $destdir/usr/{bin,lib64}
+      cp -rp . $destdir/usr/lib64/TinyTeX
+      find $destdir/usr/lib64/TinyTeX/bin/* -type f \
+           -exec ln -sfr '{}' $destdir/usr/bin \;
+   ]] 
+};
+
+nodejs = {
+   url = "https://nodejs.org/dist/v22.6.0/node-v22.6.0-linux-x64.tar.xz",
+   sha3 = "82b4d018232a302d7a00d64e8c7d2e0b0db83958d680930b57d5080fdb1009c4",
+   build = _,
+   post = [[
+      install -d $destdir/usr
+      cp -rp share bin lib include $destdir/usr        
+      mv $destdir/usr/lib $destdir/usr/lib64
+   ]]
+};
+
+-- TODO: download error: cannot handle debfile
+-- Consider building from source.
+signal-desktop = {
+   url = "https://updates.signal.org/desktop/apt/pool/s/signal-desktop/signal-desktop_7.16.0_amd64.deb",
+   sha3 = "1cd56b9cde1d89e2c33024e9341c01139c58ad2a7ebb5ff1b9e8d66af5d9186c",
+   build = _,
+   post = [[
+      ar x /usr/okpkg/download/signal-desktop*.deb data.tar.xz
+      tar -xf data.tar.xz
+      sed -i 's:/opt/Signal:/usr/bin:' usr/share/applications/signal-desktop.desktop
+      install -d $destdir/usr/{lib64,bin}
+      cp -rp usr/share  $destdir/usr/share
+      cp -rp opt/Signal $destdir/usr/lib64/signal-desktop
+      ln -sf /usr/lib64/signal-desktop/signal-desktop $destdir/usr/bin/signal-desktop
+   ]]
+};
+
+-- 14.0.0 is the last signed binary release.
+-- Consider building from source.
+llvm-bin = {
+   url = "https://github.com/llvm/llvm-project/releases/download/llvmorg-14.0.0/clang+llvm-14.0.0-x86_64-linux-gnu-ubuntu-18.04.tar.xz",
+   sha3 = "746c02a728ea5916493682ac18c10610ca881971f603b53c524c8ba15850013d",
+   build = _,
+   post = [[
+      install -d $destdir/usr
+      cp -rp bin include share $destdir/usr/
+      cp -rp lib $destdir/usr/lib64
+   ]]
+};
+
+cmake-bin = {
+   url = "https://github.com/Kitware/CMake/releases/download/v3.30.2/cmake-3.30.2-linux-x86_64.tar.gz", 
+   sha3 = "b4ac9f72581da029f4d66770298e42f8015a31c11f8603afc7e4ce346591e677",
+   build = _,
+   post = [[
+      install -d $destdir/usr/bin $destdir/usr/share/man/man{1,7}
+      install -m 755 bin/* $destdir/usr/bin
+      install -m 644 man/man1/*.1 $destdir/usr/share/man/man1
+      install -m 644 man/man7/*.7 $destdir/usr/share/man/man7
+      cp -rp share/cmake* share/aclocal $destdir/usr/share
+   ]]
+};
+
+-- TODO: cannot handle zipfile
+brave-bin = {
+   url = "https://github.com/brave/brave-browser/releases/download/v1.61.120/brave-browser-1.61.120-linux-amd64.zip",
+   sha3 = _,
+   build = _,
+   post = [[
+      install -d $destdir/usr/{bin,lib64}
+      cp -rp . $destdir/usr/lib64/brave
+      ln -sf /usr/lib64/brave/brave-browser $destdir/usr/bin/brave
+   ]]
+};
+
+ungoogled-chromium-bin = {
+   url = "https://github.com/ungoogled-software/ungoogled-chromium-portablelinux/releases/download/126.0.6478.182-1/ungoogled-chromium_126.0.6478.182-1_linux.tar.xz",
+   sha3 = "9a5fb02463263f6a7d2a0c57d46602c7a01511fda430b47b072afaf1370b063b",
+   build = _,
+   post = [[
+      install -d $destdir/usr/{bin,lib64}
+      cp -rp . $destdir/usr/lib64/chromium
+      ln -sf /usr/lib64/chromium/chrome $destdir/usr/bin/chromium
+   ]] 
+};

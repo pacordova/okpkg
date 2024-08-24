@@ -1,0 +1,790 @@
+desktop-file-utils = {
+   url = "https://www.freedesktop.org/software/desktop-file-utils/releases/desktop-file-utils-0.27.tar.xz",
+   sha3 = "c7e2480ad3a12bb90f68995645845c4c140f7c9b274ac21cfcb9ed443a7c7ef9",
+   build = "meson",
+};
+
+gsettings-desktop-schemas = {
+   url = "https://download.gnome.org/sources/gsettings-desktop-schemas/46/gsettings-desktop-schemas-46.1.tar.xz",
+   sha3 = "aa7f8ed3ba9bf31f4d660436f45dc7cccf983fa5650fe1939f74270770365330",
+   build = "meson",
+   prepare = [[ sed -i -r 's:"(/system):"/org/gnome\1:g' schemas/*.in ]]
+};
+
+libsass = {
+   url = "https://github.com/sass/libsass/archive/3.6.6/libsass-3.6.6.tar.gz",
+   sha3 = "9637cd39de53582abc24deefb2ed3c28c92db591c81f4765dd58c287631b2667",
+   prepare = [[ autoreconf -fi ]],
+   build = "./configure",
+};
+
+sassc = {
+   url = "https://github.com/sass/sassc/archive/3.6.2/sassc-3.6.2.tar.gz",
+   sha3 = "61e05276d1052de3c8403a6895cbca55f50d9f8f3afd2abed1263331dd33e46f",
+   prepare = [[ autoreconf -fi ]],
+   build = "./configure",
+};
+
+startup-notification = {
+   url = "https://www.freedesktop.org/software/startup-notification/releases/startup-notification-0.12.tar.gz",
+   sha3 = "f551c61e57c983b0cae7fa57ba727226a67fe33ebd8c5ac6d0452338ccefa31f",
+   build = "./configure",
+};
+
+shared-mime-info = {
+   url = "https://gitlab.freedesktop.org/xdg/shared-mime-info/-/archive/2.4/shared-mime-info-2.4.tar.bz2",
+   sha3 = "e5c98a3407bcdc4523da451748e2f1d8cccf7a74a830e3150e3d9543132e3352",
+   build = "meson",
+   flags = {
+      "-Dupdate-mimedb=false",
+      "-Dbuild-translations=false",
+      "-Dbuild-tests=false",
+   }
+};
+
+upower = {
+   url = "https://gitlab.freedesktop.org/upower/upower/-/archive/v1.90.4/upower-v1.90.4.tar.bz2",
+   sha3 = "0361098291361171697efa94e7b061dc101e725a1ae532e7de7ddd4564bf266e",
+   build = "meson",
+   flags = {
+      "-Dsystemdsystemunitdir=no",
+      "-Dudevrulesdir=/usr/lib64/udev/rules.d",
+      "-Dgtk-doc=false",
+      "-Dman=false"
+   },
+   prepare = [[ sed '/parse_version/d' -i src/linux/integration-test.py ]]
+};
+
+vala = {
+   url = "https://download.gnome.org/sources/vala/0.56/vala-0.56.17.tar.xz",
+   sha3 = "668609ee19af025e1778f93f81086e11d850354db8c4278a2ad2db944a951f9f",
+   build = "./configure",
+   flags = {
+      "--enable-python3=yes",
+      "--disable-python",
+      "--disable-valadoc",
+   },
+   prepare = [[ sed -i '/gvc.h/a#define TRUE 1' libvaladoc/gvc-compat.c ]]
+};
+
+xdg-user-dirs = {
+   url = "https://user-dirs.freedesktop.org/releases/xdg-user-dirs-0.18.tar.gz",
+   sha3 = "b94c66edbf2d901c8353916fda76263845f2e6b7d9d0dd071472dcb37f87ad29",
+   build = "./configure",
+   flags = { "--disable-documentation" }
+};
+
+--------------------------------------------------------------------------------
+
+at-spi2-core = {
+   url = "https://download.gnome.org/sources/at-spi2-core/2.52/at-spi2-core-2.52.0.tar.xz",
+   sha3 = "4bff424cc3969f854fc11b5798f092e515406a08fb489070b1cd3dab16aa221c",
+   build = "meson",
+   flags = {
+      "-Dsystemd_user_dir=/tmp",
+      "-Ddefault_bus=dbus-daemon",
+      "-Ddocs=false",
+   },
+   post = [[ rm -fr $destdir/tmp ]]
+};
+
+cairo = {
+   url = "https://gitlab.freedesktop.org/cairo/cairo/-/archive/1.18.0/cairo-1.18.0.tar.bz2",
+   sha3 = "b1f25f47fce99fd726c39a217a651fbcfef60c4bb84ec29f7baf9d735269438b",
+   build = "meson",
+   flags = {
+      "-Ddwrite=disabled",
+      "-Dtee=enabled",
+      "-Dxlib-xcb=enabled",
+      "-Dxcb=enabled",
+      "-Dxlib=enabled",
+      "-Dgtk_doc=false",
+      "-Dspectre=disabled",
+      "-Dsymbol-lookup=disabled",
+      "-Dtests=disabled",
+   }
+};
+
+pango = {
+   url = "https://download.gnome.org/sources/pango/1.54/pango-1.54.0.tar.xz",
+   sha3 = "6aa59a06c31354e90c16c9015e90ad25d7b711cef90e1bd57ec326ced5eda815",
+   build = "meson",
+   flags = {
+      "-Dgtk_doc=false",
+      "-Ddocumentation=false",
+      "-Dxft=enabled",
+   }
+};
+
+gdk-pixbuf2 = {
+   url = "https://download.gnome.org/sources/gdk-pixbuf/2.42/gdk-pixbuf-2.42.12.tar.xz",
+   sha3 = "12483dead22787c04dc64abfccf9866b9c7aa3d50afe7c13b80fd6971180f775",
+   build = "meson",
+   flags = {
+      "-Dbuiltin_loaders=all",
+      "-Dinstalled_tests=false",
+      "-Dgio_sniffing=false",
+   }
+};
+
+librsvg = {
+   url = "https://download.gnome.org/sources/librsvg/2.58/librsvg-2.58.3.tar.xz",
+   sha3 = "441420392cd3b175074697db1f8e44768e2c805c64a5ebcdcdcee8b08ccf1600",
+   build = "./configure",
+   flags = { "--enable-vala" }
+};
+
+gtk3 = {
+   url = "https://download.gnome.org/sources/gtk+/3.24/gtk+-3.24.43.tar.xz",
+   sha3 = "5d219fe4e240cf2f80bb8c87e38f11b1ab70c6f4df70a7f16954bedb2a7c0b8d",
+   build = "meson",
+   flags = {
+      "-Dtests=false",
+      "-Ddemos=false",
+      "-Dexamples=false",
+      "-Dwin32_backend=false",
+      "-Dquartz_backend=false",
+      "-Dwayland_backend=false",
+      "-Dbroadway_backend=true",
+      "-Dtracker3=false",
+      "-Dgtk_doc=false",
+      "-Dcloudproviders=false",
+      "-Dman=false",
+   }
+};
+
+libnotify = {
+   url = "https://download.gnome.org/sources/libnotify/0.8/libnotify-0.8.3.tar.xz",
+   sha3 = "90216f182efa5ed279cb32527cfaa242a09fa1b7fac4fe6fee2981b40483d967",
+   build = "meson",
+   flags = {
+      "-Dgtk_doc=false",
+      "-Dman=false",
+      "-Dtests=false",
+   }
+};
+
+--------------------------------------------------------------------------------
+
+libxfce4util = {
+   url = "https://archive.xfce.org/src/xfce/libxfce4util/4.18/libxfce4util-4.18.2.tar.bz2",
+   sha3 = "f384a18c908d54d01903daa6e7194c5a23b4176d7ec064e7b1a2d1b6b20ea214",
+   build = "./configure",
+   flags = { "--disable-debug" }
+};
+
+xfconf = {
+   url = "https://archive.xfce.org/src/xfce/xfconf/4.18/xfconf-4.18.3.tar.bz2",
+   sha3 = "e386878490a899feb1859a51fc0e4a835640ec9bacbb3121fd896aa4a24b5864",
+   build = "./configure",
+   flags = { "--disable-debug" }
+};
+
+libxfce4ui = {
+   url = "https://archive.xfce.org/src/xfce/libxfce4ui/4.18/libxfce4ui-4.18.6.tar.bz2",
+   sha3 = "bf995ed17168d3be32c53306abfb4f81e863097c0aed4f2f0108eb7045c59374",
+   build = "./configure",
+   flags = { "--disable-debug" }
+};
+
+exo = {
+   url = "https://archive.xfce.org/src/xfce/exo/4.18/exo-4.18.0.tar.bz2",
+   sha3 = "f658b1f12d1cf85a42e447f25de70431e04d5e71e89e4534d60be5f251801e9b",
+   build = "./configure",
+   flags = { "--disable-gtk-doc", "--disable-debug" }
+};
+
+garcon = {
+   url = "https://archive.xfce.org/src/xfce/garcon/4.18/garcon-4.18.2.tar.bz2",
+   sha3 = "4803c1c61716bbb2b2b7760e161f011a592a0fbaafe0f4e42e948e68c40f798b",
+   build = "./configure",
+   flags = { "--disable-debug" }
+};
+
+libwnck3 = {
+   url = "https://download.gnome.org/sources/libwnck/43/libwnck-43.0.tar.xz",
+   sha3 = "e04ab36ef11d074e24324b2138f8902f15cfb7adac85641e5c2cc017febb67d8",
+   build = "meson",
+   flags = { 
+      "-Dgtk_doc=false",
+   }
+};
+
+xfce4-panel = {
+   url = "https://archive.xfce.org/src/xfce/xfce4-panel/4.18/xfce4-panel-4.18.6.tar.bz2",
+   sha3 = "9286b8bde0c346bce8472336957fe435d194e2e89f52dee6469e71e7b9ddf38f",
+   build = "./configure",
+   flags = {
+      "--enable-gio-unix",
+      "--disable-debug",
+      "--disable-gtk-doc",
+   }
+};
+
+thunar = {
+   url = "https://archive.xfce.org/src/xfce/thunar/4.18/thunar-4.18.11.tar.bz2",
+   sha3 = "c85a1df2df236d251e7bb941ffaeb0e00b40769914e1fbf57be092e1c0edf3a3",
+   build = "./configure",
+   flags = {
+      "--enable-gio-unix",
+      "--enable-gudev",
+      "--enable-notifications",
+      "--enable-exif",
+      "--disable-debug",
+   },
+   prepare = [[ sed -i 's/\tinstall-systemd_userDATA/\t/' Makefile.in ]]
+};
+
+thunar-volman = {
+   url = "https://archive.xfce.org/src/xfce/thunar-volman/4.18/thunar-volman-4.18.0.tar.bz2",
+   sha3 = "dc2c07a20f59649f52b0687ae535d1e108f3f9ea23c9042053954c7212818053",
+   build = "./configure",
+   flags = { "--disable-debug" }
+};
+
+poppler = {
+   url = "https://poppler.freedesktop.org/poppler-24.08.0.tar.xz",
+   sha3 = "f9c309fbca0ce03142f172f48b0665a49d1684c0d3904a7f4f86d9175b3a65b4",
+   build = "cmake",
+   flags = {
+      "-DENABLE_QT5=OFF",
+      "-DENABLE_QT6=OFF",
+      "-DENABLE_BOOST=OFF",
+      "-DENABLE_NSS3=OFF",
+      "-DENABLE_GPGME=OFF",
+      "-DENABLE_LIBTIFF=OFF",
+      "-DENABLE_GTK_DOC=OFF",
+      "-DENABLE_LIBOPENJPEG=none",
+      "-DENABLE_LCMS=OFF",
+   }
+};
+
+poppler-data = {
+   url = "https://poppler.freedesktop.org/poppler-data-0.4.12.tar.gz",
+   sha3 = "474793bd050d8e2cc4b2ed3d7690c2fc61a1e42dd31475f712c4d73f73d5879b",
+   build = "make",
+   flags = { 
+      "prefix=/usr" 
+   }
+};
+
+tumbler = {
+   url = "https://archive.xfce.org/src/xfce/tumbler/4.18/tumbler-4.18.2.tar.bz2",
+   sha3 = "b52ac5998d0089abf96f6fe99d92a8b36b7b8867e241538dcb347027e8363033",
+   build = "./configure",
+   flags = {
+      "--disable-debug",
+      "--disable-gstreamer-thumbnailer",
+   },
+   post = [[ rm -fr $destdir/usr/lib/systemd ]]
+};
+
+xfce4-appfinder = {
+   url = "https://archive.xfce.org/src/xfce/xfce4-appfinder/4.18/xfce4-appfinder-4.18.1.tar.bz2",
+   sha3 = "84ba37016fb6923c7ca12b152ba91a04442040b3ab1e30e6786d2c7243b16679",
+   build = "./configure",
+   flags = {
+      "--disable-debug",
+   }
+};
+
+xfce4-power-manager = {
+   url = "https://archive.xfce.org/src/xfce/xfce4-power-manager/4.18/xfce4-power-manager-4.18.4.tar.bz2",
+   sha3 = "3ac8c4269e09e133187911b114950bc785f09309dd82715e9b3444c75e8c94d5",
+   build = "./configure",
+   flags = {
+      "--disable-network-manager",
+      "--disable-polkit",
+      "--disable-debug",
+   }
+};
+
+xfce4-settings = {
+   url = "https://archive.xfce.org/src/xfce/xfce4-settings/4.18/xfce4-settings-4.18.6.tar.bz2",
+   sha3 = "a14c6a677414c47ca2b04ace6ae9d9998757192a759fbfa677f6e5f817d2fe34",
+   build = "./configure",
+   flags = {
+      "--enable-xrandr",
+      "--enable-xcursor",
+      "--enable-libnotify",
+      "--enable-libxklavier",
+      "--enable-pluggable-dialogs",
+      "--enable-sound-settings",
+      "--enable-pluggable-dialogs",
+      "--disable-debug",
+   }
+};
+
+xfdesktop = {
+   url = "https://archive.xfce.org/src/xfce/xfdesktop/4.18/xfdesktop-4.18.1.tar.bz2",
+   sha3 = "3ef549cd6b3ef2b179222a2e0f2a721581c14bcc88aab949edf88c58ec04dc1f",
+   build = "./configure",
+   flags = {
+      "--enable-thunarx",
+      "--enable-notifications",
+      "--disable-debug",
+   }
+};
+
+xfwm4 = {
+   url = "https://archive.xfce.org/src/xfce/xfwm4/4.18/xfwm4-4.18.0.tar.bz2",
+   sha3 = "dd79699d094291a57dc3faab36f0a9cbf778f34c8b93bb160265656249bdb850",
+   build = "./configure",
+   flags = {
+      "--enable-startup-notification",
+      "--enable-randr",
+      "--enable-compositor",
+      "--enable-xsync",
+      "--disable-debug",
+   }
+};
+
+xfce4-screensaver = {
+   url = "https://archive.xfce.org/src/apps/xfce4-screensaver/4.18/xfce4-screensaver-4.18.3.tar.bz2",
+   sha3 = "56e5b71025dfde25a9b84f133da7faeebe7830df796774fdeb1dbe04301808cd",
+   build = "./configure",
+   flags = {
+      "--disable-debug",
+   }
+};
+
+xfce4-session = {
+   url = "https://archive.xfce.org/src/xfce/xfce4-session/4.18/xfce4-session-4.18.4.tar.bz2",
+   sha3 = "0197ec836f4d58b15c7b60458716792178181e3bbe2b00b0940faa3b3fef9ecb",
+   build = "./configure",
+   flags = {
+      "--disable-legacy-sm",
+      "--disable-debug",
+   }
+};
+
+xfce4-dev-tools = {
+   url = "http://archive.xfce.org/src/xfce/xfce4-dev-tools/4.18/xfce4-dev-tools-4.18.1.tar.bz2",
+   sha3 = "2d2dd9722a194f3c2be8f052f214650f10a5bf755b4da4cc582f546862e3dbb2",
+   build = "./configure",
+};
+
+xfce4-notifyd = {
+   url = "https://archive.xfce.org/src/apps/xfce4-notifyd/0.9/xfce4-notifyd-0.9.6.tar.bz2",
+   sha3 = "4ed4585fcc6a65a774f5725a73f458681b97de30afae1dd3306bb3f5c4f78c44",
+   build = "./configure",
+   flags = {
+      "--disable-systemd",
+      "--disable-debug",
+   }
+};
+
+xfce4-battery-plugin = {
+   url = "https://archive.xfce.org/src/panel-plugins/xfce4-battery-plugin/1.1/xfce4-battery-plugin-1.1.5.tar.bz2",
+   sha3 = "eb77d00fe0d691dd1625ab5cf4c4ac5ead2918d767e0b1089cc2c26990b31437",
+   build = "./configure",
+   flags = {
+      "--disable-debug",
+   }
+};
+
+thunar-archive-plugin = {
+   url = "https://archive.xfce.org/src/thunar-plugins/thunar-archive-plugin/0.5/thunar-archive-plugin-0.5.2.tar.bz2",
+   sha3 = "b206a1c98616c5a07e064896d125a7897e29fb604b8b42436d63c4f051fcdeba",
+   build = "./configure",
+};
+
+xarchiver = {
+   url = "https://github.com/ib/xarchiver/archive/0.5.4.23/xarchiver-0.5.4.23.tar.gz",
+   sha3 = "bd34257a67da0698038f2a870374679621d323ca42d965580fee0a964881d4b4",
+   build = "./configure",
+};
+
+xfce4-alsa-plugin = {
+   url = "https://github.com/equeim/xfce4-alsa-plugin/archive/0.3.0/xfce4-alsa-plugin-0.3.0.tar.gz",
+   sha3 = "81a6f9fb940244fbe3cee2be406d0df8865e9e5d28257ca56d77529dbec91cc4",
+   build = "meson",
+};
+
+--------------------------------------------------------------------------------
+
+optipng = {
+   url = "https://prdownloads.sourceforge.net/optipng/optipng-0.7.8.tar.gz",
+   sha3 = "4aa347bb09ec8421bf6cce96a3c9e12c0b47a100ece108c342a79a944d2b9027",
+   build = "./configure",
+   flags = {
+      "--with-system-libs",
+   }
+};
+
+hicolor-icon-theme = {
+   url = "https://icon-theme.freedesktop.org/releases/hicolor-icon-theme-0.18.tar.xz",
+   sha3 = "67a8fb5352c9cd1a9e3897b51adbbac90a32063b4d135f806e07ca45f02c0f13",
+   build = "meson",
+};
+
+adwaita-icon-theme = {
+   url = "https://download.gnome.org/sources/adwaita-icon-theme/46/adwaita-icon-theme-46.2.tar.xz",
+   sha3 = "c9c017e966e0cee4b8c69c1d182b3182cdca5b1d7af93543e482f604604ca9c7",
+   build = "meson",
+};
+
+greybird = {
+   url = "https://github.com/shimmerproject/Greybird/archive/v3.22.14/Greybird-3.22.14.tar.gz",
+   sha3 = "736b7974d0687c58a92306c5c1f47910182cc4f19d64a548453313e10702e059",
+   build = "meson",
+};
+
+ttf-go = {
+   url = "https://github.com/golang/image/archive/v0.17.0/image-0.17.0.tar.gz",
+   sha3 = "2d1963d47c32afc435e946d1dc235c010c615d4f6f051335de04e3ff2d0f2360",
+   build = _,
+   post = [[
+      install -d $destdir/usr/share/fonts/Go
+      install -m 644 font/gofont/ttfs/*.ttf $destdir/usr/share/fonts/Go
+   ]]
+};
+
+ttf-sazanami = {
+   url = "http://osdn.dl.sourceforge.jp/efont/10087/sazanami-20040629.tar.bz2",
+   sha3 = "3a2101a51020efe1002f03fd50b30e35ed2ba62e062c44e706705c7d8cf9aae8",
+   post = [[
+      install -d $destdir/usr/share/fonts/Sazanami
+      install -m 644 *.ttf $destdir/usr/share/fonts/Sazanami
+   ]]
+};
+
+elementary-xfce-icon-theme = {
+   url = "https://github.com/shimmerproject/elementary-xfce/archive/v0.19/elementary-xfce-0.19.tar.gz",
+   sha3 = "b22d6d64feeffdd048a19d933c2b6815a584f3b64394bf69f4f015e42577e168",
+   build = "./configure",
+};
+
+--------------------------------------------------------------------------------
+
+ristretto = {
+   url = "https://archive.xfce.org/src/apps/ristretto/0.13/ristretto-0.13.2.tar.bz2",
+   sha3 = "286f140db8e41548c5a00a086a5255e9920a30aa1f92532131d39a383fbe605c",
+   build = "./configure",
+   flags = {
+      "--disable-debug",
+   }
+};
+
+gtksourceview4 = {
+   url = "https://download.gnome.org/sources/gtksourceview/4.8/gtksourceview-4.8.4.tar.xz",
+   sha3 = "404b0d854e122ba0ed4d76375077e86f088a56e2aec29799afc829a134597fbf",
+   build = "meson",
+   flags = { "-Dgtk_doc=false" }
+};
+
+mousepad = {
+   url = "https://archive.xfce.org/src/apps/mousepad/0.6/mousepad-0.6.2.tar.bz2",
+   sha3 = "588d199ba4d62c7ff8e4eae8c3e7911f4ca7fc4038adcdb5032e4b03e63733fd",
+   build = "./configure",
+   flags = {
+      "--enable-gtksourceview4",
+      "--disable-debug",
+   }
+};
+
+itstool = {
+   url = "https://files.itstool.org/itstool/itstool-2.0.7.tar.bz2",
+   sha3 = "68d36ae4c43c1131cbaeaff67daac1fa236c44b58d0aff6bc5190ba5001b7046",
+   build = "./configure",
+};
+
+libhandy = {
+   url = "https://download.gnome.org/sources/libhandy/1.8/libhandy-1.8.3.tar.xz",
+   sha3 = "ba3b355ab5cf271259ddc2697b52cf29d1a1f357d9f6909c076e75af3eb15157",
+   build = "meson",
+};
+
+evince = {
+   url = "https://download.gnome.org/sources/evince/46/evince-46.3.1.tar.xz",
+   sha3 = "2904ed9f206394b88a46726711505a535e13b1c02bc2d4f782ef4427b355f9c4",
+   build = "meson",
+   flags = {
+      "-Dgspell=disabled",
+      "-Dgtk_doc=false",
+      "-Dkeyring=disabled",
+      "-Dnautilus=false",
+      "-Dpdf=enabled",
+      "-Dps=enabled",
+      "-Dsystemduserunitdir=no",
+      "-Duser_doc=false",
+   }
+};
+
+p11-kit = {
+   url = "https://github.com/p11-glue/p11-kit/releases/download/0.25.5/p11-kit-0.25.5.tar.xz",
+   sha3 = "c17d9a241a9a25077bfafe61f80a33bebcb07917bd30a54e95c2717325f11596",
+   build = "meson",
+   flags = { 
+      "-Dtrust_paths=/etc/ssl/certs/ca-certificates.crt",
+   }
+};
+
+gcr4 = {
+   url = "https://download.gnome.org/sources/gcr/4.3/gcr-4.3.0.tar.xz",
+   sha3 = "03de4e64b17b5c9a299c7fccad1332aa12e588a5f47af3d4488964b5581538ca",
+   build = "meson",
+   flags = { 
+      "-Dgtk_doc=false", 
+      "-Dgtk4=false",
+      "-Dssh_agent=false",
+   }
+};
+
+gvfs = {
+   url = "https://download.gnome.org/sources/gvfs/1.54/gvfs-1.54.2.tar.xz",
+   sha3 = "f4e70a04f8b5579428a0d8f8958be1cb219ed23ec63952542e00ab8834b19826",
+   build = "meson",
+   flags = {
+      "-Dadmin=false",
+      "-Dafc=false",
+      "-Darchive=false",
+      "-Dbluray=false",
+      "-Dcdda=false",
+      "-Ddnssd=false",
+      "-Dfuse=false",
+      "-Dgoa=false",
+      "-Dgoogle=false",
+      "-Dgphoto2=false",
+      "-Dhttp=false",
+      "-Dkeyring=false",
+      "-Dlogind=false",
+      "-Dmtp=false",
+      "-Dnfs=false",
+      "-Donedrive=false",
+      "-Dsmb=false",
+      "-Dsystemduserunitdir=no",
+      "-Dtmpfilesdir=no",
+      "-Dudisks2=false",
+   }
+};
+
+--------------------------------------------------------------------------------
+
+libass = {
+   url = "https://github.com/libass/libass/releases/download/0.17.3/libass-0.17.3.tar.gz",
+   sha3 = "b163363fa4926a3d8991a138cea75ee83431787209df74a3ee66f6b269ca6fec",
+   build = "./configure",
+   flags = {
+      "--enable-fontconfig",
+   }
+};
+
+ffmpeg = {
+   url = "https://ffmpeg.org/releases/ffmpeg-7.0.2.tar.xz",
+   sha3 = "9cbfbeae2739d2425dfefdbe3c2cd8b6cbaefe72688bf45f6b85a4594ba11655",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--enable-gpl",
+      "--enable-libass",
+      "--enable-libdrm",
+      "--enable-libmp3lame",
+      "--enable-libopus",
+      "--enable-libvorbis",
+      "--enable-libvpx",
+      "--enable-libx264",
+      "--enable-libx265",
+      "--enable-openssl",
+      "--enable-shared",
+      "--enable-version3",
+      "--disable-debug",
+      "--disable-libxml2",
+      "--disable-libwebp",
+      "--disable-static",
+      "--x86asmexe=nasm",
+   },
+   post = [[ rm -fr $destdir/usr/share/ffmpeg/examples ]]
+};
+
+libplacebo = {
+   url = "https://code.videolan.org/videolan/libplacebo/-/archive/v7.349.0/libplacebo-v7.349.0.tar.gz",
+   sha3 = "c213ef4b5eb437040012891e2e002600251fd27f8a0a825afe72a4c24727b797",
+   build = "meson",
+   flags = { "-Ddemos=false" }
+};
+
+uchardet = {
+   url = "https://www.freedesktop.org/software/uchardet/releases/uchardet-0.0.8.tar.xz",
+   sha3 = "a6b22fbf93ac19bc33d2f06bba03abdd36d53e58c3b575722de5d6f2d4219597",
+   build = "cmake",
+   flags = { "-DBUILD_STATIC=OFF" }
+};
+
+mpv = {
+   url = "https://github.com/mpv-player/mpv/archive/v0.38.0/mpv-0.38.0.tar.gz",
+   sha3 = "84a2173a5a4ffc4f28e2e3918cb4cef7818dbc6b34844b910b615e37d1e04560",
+   build = "meson",
+   flags = {
+      "-Dx11=enabled",
+      "-Dpipewire=disabled",
+   }
+};
+
+--------------------------------------------------------------------------------
+
+xdg-dbus-proxy = {
+   url = "https://github.com/flatpak/xdg-dbus-proxy/releases/download/0.1.6/xdg-dbus-proxy-0.1.6.tar.xz",
+   sha3 = "57497aa3cb9d71bdbdb937affe1f2f69ec48217205bf8b5fe9d6422c66d33de4",
+   build = "meson",
+   flags = { "-Dman=disabled" }
+};
+
+ostree = {
+   url = "https://github.com/ostreedev/ostree/releases/download/v2024.7/libostree-2024.7.tar.xz",
+   sha3 = "9c8779fdc8657f43426a0d383a3df2d36fb31ac9dad6507b6b14b421401b6b35",
+   build = "./configure",
+   flags = {
+      "--with-curl",
+      "--with-ed25519-libsodium",
+      "--with-grub2-mkconfig-path=/usr/bin/grub-mkconfig",
+      "--with-modern-grub",
+      "--with-openssl",
+      "--without-soup",
+      "--disable-man",
+   }
+};
+
+libxmlb = {
+   url = "https://github.com/hughsie/libxmlb/archive/0.3.19/libxmlb-0.3.19.tar.gz",
+   sha3 = "0c3acdca8672581dae0b237d649264706c757979d8553dee5cc30dec3f9b688a",
+   build = "meson",
+   flags = { "-Dgtkdoc=false" },
+};
+
+appstream = {
+   url = "https://www.freedesktop.org/software/appstream/releases/AppStream-1.0.3.tar.xz",
+   sha3 = "c0a54c5e715a993c8bd7d23038140408d395918d733cccda22a8e139a919bd2d",
+   build = "meson",
+   flags = {
+      "-Dsystemd=false",
+      "-Dapidocs=false",
+      "-Dstemming=false",
+      "-Dvapi=true",
+      "-Dcompose=true",
+   },
+   prepare = [[
+      mv AppStream*/* . && rm -fr AppStream*
+      sed -i "/subdir('docs\/')/d" meson.build
+   ]]
+};
+
+bubblewrap = {
+   url = "https://github.com/projectatomic/bubblewrap/releases/download/v0.10.0/bubblewrap-0.10.0.tar.xz",
+   sha3 = "904805747a74005323ea021ecbdab29b02a70211d91758f6c9b20d46fe3809e5",
+   build = "meson",
+   flags = { "-Dselinux=disabled" }
+};
+
+flatpak = {
+   url = "https://github.com/flatpak/flatpak/releases/download/1.15.10/flatpak-1.15.10.tar.xz",
+   sha3 = "9f69a2c9e8db09405f21f51eb87ab31b90db3c179e7501a7bfef3e6f497877be",
+   build = "meson",
+   flags = {
+      "-Dsystem_bubblewrap=bwrap",
+      "-Dsystem_dbus_proxy=xdg-dbus-proxy",
+      "-Dsystemd=disabled",
+      "-Dsystem_helper=disabled",
+      "-Dtests=false",
+   },
+   post = [[ rm -fr "$destdir/usr/lib" ]]
+};
+
+--------------------------------------------------------------------------------
+
+uthash = {
+   url = "https://github.com/troydhanson/uthash/archive/v2.3.0/uthash-2.3.0.tar.gz",
+   sha3 = "d416f46e3922a59538311fc9e20d7303430e31d2be22e5d7abf2f5391fc3d3f7",
+   build = _,
+   post = [[
+      mkdir -p $destdir/usr/include
+      cp -p src/*.h $destdir/usr/include
+   ]]
+};
+
+libev = {
+   url = "http://dist.schmorp.de/libev/libev-4.33.tar.gz",
+   sha3 = "ba1e921dd20ef633308f837e958e136b5ec80cd73683fd1bdb1ed48ceb59cf1b",
+   build = "./configure",
+};
+
+libconfig = {
+   url = "https://github.com/hyperrealm/libconfig/releases/download/v1.7.3/libconfig-1.7.3.tar.gz",
+   sha3 = "81e3f782c8f366a7de6ec71d4509e02c70f1690199113a2f0e51067fd7dd29cf",
+   build = "./configure",
+};
+
+picom = {
+   url = "https://github.com/yshui/picom/archive/v11.2/picom-11.2.tar.gz",
+   sha3 = "ee0a5ced3bf0fe13c92feea4a663ceadbcbe449a62fa663a4d015f5cae302fc2",
+   build = "meson",
+};
+
+--------------------------------------------------------------------------------
+
+imlib2 = {
+   url = "https://downloads.sourceforge.net/enlightenment/imlib2-1.12.3.tar.xz",
+   sha3 = "36c1ce1eebf83d68ac622e4391435ece50e5a1eac8683d68ab4b294f6d79d0ee",
+   build = "./configure",
+   flags = { "--enable-amd64" }
+};
+
+feh = {
+   url = "https://feh.finalrewind.org/feh-3.10.3.tar.bz2",
+   sha3 = "98040180056d52e47a2932e0611b1b457c0a6d4e463881c37a55f1b321c5aee0",
+   build = "make",
+   flags = { "PREFIX=/usr", "exif=1" }
+};
+
+scrot = {
+   url = "https://github.com/resurrecting-open-source-projects/scrot/releases/download/1.11.1/scrot-1.11.1.tar.bz2",
+   sha3 = "183450df0187a0f6c107f828585160ad2d7dfe858e353ddd08ce85bf65da94df",
+   build = "./configure",
+};
+
+sxiv = {
+   url = "https://github.com/xyb3rt/sxiv/archive/v26/sxiv-26.tar.gz",
+   sha3 = "9d658d77fd4f9da3bb02247016ba4d4f1c3afcedc18ac790fb67bf91e66aaff7",
+   build = "make",
+   flags = { "PREFIX=/usr", "HAVE_GIFLIB=0" },
+   post = [[ 
+      $make -C icon PREFIX=/usr DESTDIR=$destdir install
+      install -d $destdir/usr/share/applications
+      install -m 644 sxiv.desktop $destdir/usr/share/applications
+   ]]
+};
+
+--------------------------------------------------------------------------------
+
+apulse = {
+   url = "https://github.com/i-rinat/apulse/archive/v0.1.13/apulse-0.1.13.tar.gz",
+   sha3 = "e6940335c56e088af4b69e8ad47f37d5f9ffc3365ca9f047b799188548cc9eba",
+   build = "cmake",
+   post = [[
+      sed -i 's:/usr/lib/:/usr/lib64/:' $destdir/usr/bin/apulse
+      mv $destdir/usr/lib $destdir/usr/lib64
+   ]]
+};
+
+htop = {
+   url = "https://github.com/htop-dev/htop/releases/download/3.3.0/htop-3.3.0.tar.xz",
+   sha3 = "41229e25dc35ed7292f83bdb55f9152782ba10fafda5f34b2e1fa45930adee1e",
+   build = "./configure",
+};
+
+ripgrep = {
+   url = "https://github.com/BurntSushi/ripgrep/archive/14.1.0/ripgrep-14.1.0.tar.gz",
+   sha3 = "0c685042a86faf2da4098e5b0cb61f73eaad59d08d8e203be00580085be0644e",
+   build = "cargo",
+   flags = { "--features=pcre2" }
+};
+
+st = {
+   url = "https://github.com/pacordova/st/archive/v0.9/st-0.9.tar.gz",
+   sha3 = "f430a4c56411b79c4e618aab2ec22abd1c66a55bd7779ae11b3e7709ca10164d",
+   build = "make",
+   flags = {
+      "PREFIX=/usr"
+   },
+   post = [[ tic -sx st.info ]]
+};

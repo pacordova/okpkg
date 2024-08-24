@@ -1,0 +1,16 @@
+--- a/Configure
++++ b/Configure
+@@ -9234,6 +9234,13 @@ esac
+ set $myhostname
+ myhostname=$1
+ 
++if test -n "$SOURCE_DATE_EPOCH" ; then
++	cf_time="`LC_ALL=C LANGUAGE=C $date -u -d@$SOURCE_DATE_EPOCH`"
++	cf_by="root"
++	myhostname="myhost"
++	myuname="Linux myhost 6.6 #1 SMP $cf_time x86_64 GNU/Linux"
++fi
++
+ : verify guess
+ if $test "$myhostname" ; then
+ 	dflt=y

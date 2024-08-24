@@ -1,0 +1,2376 @@
+libvdpau-va-gl = {
+   url = "https://github.com/i-rinat/libvdpau-va-gl/archive/v0.4.0/libvdpau-va-gl-0.4.0.tar.gz",
+   build = "cmake",
+};
+
+intel-vaapi-driver = {
+   url = "https://github.com/intel/intel-vaapi-driver/releases/download/2.4.1/intel-vaapi-driver-2.4.1.tar.bz2",
+   sha3 = "e1abf1da12f242cd6055919174f18b97f3277a1cbeebb39a13b64cd8274e2e6f",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+   }
+};
+
+dkms = {
+   url = "https://github.com/dell/dkms/archive/v3.0.13/dkms-3.0.13.tar.gz",
+   sha3 = "e355acf31f2a2ed93c558d69c2a23b97bf03bbc05a19017249ec27a54247a763",
+   build = "make",
+   flags = {
+      "SBIN=/usr/bin"
+   },
+   post = [[ rm -fr $destdir/usr/lib $destdir/etc/kernel ]]
+};
+
+nvidia = {
+   url = "https://github.com/NVIDIA/open-gpu-kernel-modules/archive/555.58.02/nvidia-555.58.02.tar.gz",
+   sha3 = "4d195a14d980eb38532f3eb7cb48b24b18e1e65346072a3deec69b368cddcd90",
+   build = "make",
+   flags = {
+      "SYSRC=/usr/src/linux",
+   }
+};
+
+--------------------------------------------------------------------------------
+
+libnghttp2 = {
+   url = "https://github.com/nghttp2/nghttp2/releases/download/v1.62.1/nghttp2-1.62.1.tar.xz",
+   sha3 = "c65ba551ff0cd315e50a2e00b29993240b9a3ef2ff922977dbb2682d367f6aa9",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--enable-lib-only",
+      "--disable-examples",
+      "--disable-python-bindings",
+      "--disable-static",
+      "--with-libev",
+      "--with-openssl",
+      "--without-neverbleed",
+      "--without-systemd",
+   }
+};
+
+rhash = {
+   url = "https://github.com/rhash/RHash/archive/v1.4.4/RHash-1.4.4.tar.gz",
+   sha3 = "68982508df2965b2cb8b6567f867b0be13a1054409772d58b35d1a8f9621a23b",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--sysconfdir=/etc",
+      "--enable-openssl",
+      "--extra-cflags=$CFLAGS",
+   }
+};
+
+cmake = {
+   url = "https://cmake.org/files/v3.30/cmake-3.30.2.tar.gz",
+   sha3 = "4a5fb325169d34adee82a4b56619471a1cac82708f7e77960377747312cb93ca",
+   build = "./configure",
+   flags = {
+      "--mandir=/share/man",
+      "--datadir=/share/cmake",
+      "--parallel=$(getconf _NPROCESSORS_ONLN)",
+      "--system-libs",
+      "--no-system-cppdap",
+      "--no-system-jsoncpp",
+      "--no-system-librhash",
+   },
+   post = [[
+      rm -fr $destdir/usr/share/cmake*/Help
+      rm -fr $destdir/usr/share/bash-completion
+   ]]
+};
+
+--------------------------------------------------------------------------------
+
+libsigc++ = {
+   url = "https://download.gnome.org/sources/libsigc++/2.12/libsigc++-2.12.1.tar.xz",
+   build = "meson",
+};
+
+glibmm = {
+   url = "https://download.gnome.org/sources/glibmm/2.66/glibmm-2.66.7.tar.xz",
+   build = "meson",
+};
+
+mm-common = {
+   url = "https://download.gnome.org/sources/mm-common/1.0/mm-common-1.0.6.tar.xz",
+   build = "meson",
+};
+
+atkmm = {
+   url = "https://download.gnome.org/sources/atkmm/2.28/atkmm-2.28.4.tar.xz",
+   build = "meson",
+   flags = {
+      "-Dmaintainer-mode=true",
+      "-Dbuild-documentation=false",
+   }
+};
+
+cairomm = {
+   url = "https://www.cairographics.org/releases/cairomm-1.14.4.tar.xz",
+   sha3 = "549409d22224539d1df7daf96e07e3eaf4471942f27d876d076f487ffa2b8770",
+   build = "meson",
+   flags = {
+      "-Dbuild-tests=false",
+      "-Dbuild-documentation=false"
+   }
+};
+
+pangomm = {
+   url = "https://download.gnome.org/sources/pangomm/2.46/pangomm-2.46.4.tar.xz",
+   build = "meson",
+   flags = {
+      "-Dmaintainer-mode=true",
+      "-Dbuild-documentation=false",
+   }
+};
+
+gtkmm = {
+   url = "https://download.gnome.org/sources/gtkmm/3.24/gtkmm-3.24.9.tar.xz",
+   build = "meson",
+   flags = { "-Dbuild-documentation=false" }
+};
+
+dht = {
+   url = "https://github.com/jech/dht/archive/refs/tags/dht-0.27.tar.gz",
+   sha3 = "4253f60b496ee893bf040f89e95f1921c63e7a66aa57392159bbc7de00dc54db",
+   build = "cmake",
+   post = [[
+      install -d $destdir/usr/include/dht
+      mv $destdir/usr/include/dht.h $destdir/usr/include/dht
+   ]]
+};
+
+transmission = {
+   url = "https://github.com/transmission/transmission/releases/download/4.0.5/transmission-4.0.5.tar.xz",
+   sha3 = "f7e94a99a07c8e38dd506f748a66e5c70896f3eb2c8501d743afe77b7e8013e4",
+   build = "cmake",
+};
+
+--------------------------------------------------------------------------------
+
+appstream-glib = {
+   url = "https://people.freedesktop.org/~hughsient/appstream-glib/releases/appstream-glib-0.8.2.tar.xz",
+   sha3 = "c1c6b46bab260e73070061707fe1f01df4363b3fca0349de29400752ae0a21e5",
+   build = "meson",
+   flags = { 
+      "-Drpm=false", 
+      "-Dstemmer=false",
+      "-Dman=false", 
+   }
+};
+
+-- optional poppler dependency
+lcms2 = {
+   url = "https://github.com/mm2/Little-CMS/releases/download/lcms2.16/lcms2-2.16.tar.gz",
+   sha3 = "cc75ac1ddc6d1d0abfd2b81e312396621b87096ee8d7e95f8eadb4bf672da252",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+   }
+};
+
+babl = {
+   url = "https://download.gimp.org/pub/babl/0.1/babl-0.1.108.tar.xz",
+   sha3 = "aec774ba647daa9e57572c1905f1e03d4f69400def385395cc9b4d782eb2b027",
+   build = "meson",
+};
+
+
+gegl = {
+   url = "https://download.gimp.org/pub/gegl/0.4/gegl-0.4.48.tar.xz",
+   sha3 = "9b7a9a2e33ae77a2a63c0a4d35383a47e3d888bf238a9d348bae2f4d89ac6a43",
+   build = "meson",
+   flags = { 
+      "-Dlibav=disabled", 
+   }
+};
+
+libmypaint = {
+   url = "https://github.com/mypaint/libmypaint/releases/download/v1.6.1/libmypaint-1.6.1.tar.xz",
+   sha3 = "2ec991f21543b1c5326f1396a6794608518ca36dcf134a45cf5cfa2b95c5f211",
+   build = "./configure",
+   flags = { "--libdir=/usr/lib64" }
+};
+
+mypaint-brushes = {
+   url = "https://github.com/mypaint/mypaint-brushes/releases/download/v2.0.2/mypaint-brushes-2.0.2.tar.xz",
+   sha3 = "52a4bcfa64e66d61905350cdd06e25a9835d63c8ae6c522c6c012b21fbd6ff25",
+   build = "./configure",
+};
+
+exiv2 = {
+   url = "https://github.com/Exiv2/exiv2/archive/v0.28.3/exiv2-0.28.3.tar.gz",
+   sha3 = "751d35d5703ff27b7c17a9052a3760e0445e8a1c6a6e57b45352adf8599c1ac6",
+   build = "cmake",
+   flags = {
+      "-DEXIV2_ENABLE_VIDEO=yes",
+      "-DEXIV2_ENABLE_WEBREADY=yes",
+      "-DEXIV2_ENABLE_CURL=yes",
+      "-DEXIV2_BUILD_SAMPLES=no",
+      "-DCMAKE_SKIP_INSTALL_RPATH=ON",
+      "-DEXIV2_ENABLE_INIH=no",
+      "-DEXIV2_ENABLE_BROTLI=no",
+   }
+};
+
+gexiv2 = {
+   url = "https://download.gnome.org/sources/gexiv2/0.14/gexiv2-0.14.2.tar.xz",
+   build = "meson",
+   flags = { "-Dpython3=false" }
+};
+
+gimp = {
+   url = "https://download.gimp.org/gimp/v2.99/gimp-2.99.18.tar.xz",
+   sha3 = "a91a2f09e71bc389880cb901b9d81420dff19d9a870b51b30c00d2e1cf46f6b6",
+   build = "meson",
+};
+
+--------------------------------------------------------------------------------
+
+-- Note: might want to build with gdk-pixbuf
+libavif = {
+   url = "https://github.com/AOMediaCodec/libavif/archive/v1.1.1/libavif-1.1.1.tar.gz",
+   sha3 = "c8f7d1fdbaac6bb6e424039450be95d1dd072453e4ffc1665685a94550edcc78",
+   build = "cmake",
+   flags = { "-DAVIF_CODEC_DAV1D=SYSTEM", "-DAVIF_LIBYUV=OFF" }
+};
+
+-- Note: lots of dependencies?
+libjxl = {
+   url = "https://github.com/libjxl/libjxl/archive/v0.10.3/libjxl-0.10.3.tar.gz",
+   sha3 = "9d560d3fa97db2d1b592e8b67197b7644289eceeb97723f054f392f0173e7992",
+   build = "cmake",
+   flags = {
+      "-DBUILD_TESTING=OFF",
+      "-DBUILD_SHARED_LIBS=ON",
+      "-DJPEGXL_ENABLE_SKCMS=OFF",
+      "-DJPEGXL_ENABLE_SJPEG=OFF",
+      "-DJPEGXL_ENABLE_PLUGINS=ON",
+      "-DJPEGXL_INSTALL_JARDIR=/usr/share/java",
+   }
+};
+
+libkeccak = {
+   url = "https://codeberg.org/maandree/libkeccak/archive/1.4.tar.gz",
+   sha3 = "e9d70587db310b53b22707c568c31d7d4eb9f01576ee8cb2657c90fa9f04d7e1",
+   build = "make",
+   flags = {
+      "CONFIGFILE=optimised.mk",
+      "PREFIX=/usr"
+   },
+   prepare = [[ 
+      sed -i 's#FLAGS\s\+=#FLAGS +=#g' optimised.mk 
+      sed -i 's:$(PREFIX)/lib:$(PREFIX)/lib64:g' Makefile
+   ]],
+   post = [[ rm -f $destdir/usr/lib64/libkeccak.a ]]
+};
+
+sha3sum = {
+   url = "https://github.com/maandree/sha3sum/archive/1.2.2/sha3sum-1.2.2.tar.gz",
+   sha3 = "e649109fa11f2e92123cec7e3683cdf5f906de9dc7905e220e12cfc4e8608c68",
+   build = "make",
+   flags = { "PREFIX=/usr" },
+   prepare = [[ sed -i 's#FLAGS\s\+=#FLAGS +=#g' config.mk ]]
+};
+
+nss = {
+   url = "https://archive.mozilla.org/pub/security/nss/releases/NSS_3_102_1_RTM/src/nss-3.102.1.tar.gz",
+   sha3 = "9fc2072eb603a71d9c26a4805a94e6fc9fdae6a8701cd57b3642f9c96e50948b",
+   build = "make",
+};
+
+docbook-xsl-nons = {
+   url = "https://github.com/docbook/xslt10-stylesheets/releases/download/release/1.79.2/docbook-xsl-nons-1.79.2.tar.gz",
+   sha3 = "7a8eb136af529b6592cc93c23fd46c879a4def9c82a48d01b02485fc4bf837ee",
+   build = _,
+   post = [[
+      destdir=$destdir/usr/share/xml/docbook/xsl-stylesheet-nons 
+      install -m 644 -d $destdir
+      install -m 644 VERSION $destdir
+      ln -sf VERSION $destdir/VERSION.xsl
+      for dir in assembly common eclipse epub epub3 fo highlighting html \
+          htmlhelp javahelp lib manpages params profiling roundtrip template \
+          website xhtml xhtml-1_1 xhtml5 
+      do
+          install -m 644 -d $destdir/$dir
+          install -m 644 $dir/* $destdir/$dir
+      done
+   ]]
+};
+
+glib-networking = {
+   url = "https://download.gnome.org/sources/glib-networking/2.78/glib-networking-2.78.0.tar.xz",
+   build = "meson",
+   flags = { "-Dlibproxy=disabled" }
+};
+
+geocode-glib = {
+   url = "https://download.gnome.org/sources/geocode-glib/3.26/geocode-glib-3.26.2.tar.xz",
+   build = "meson",
+};
+
+--------------------------------------------------------------------------------
+
+libsecret = {
+   url = "https://download.gnome.org/sources/libsecret/0.21/libsecret-0.21.4.tar.xz",
+   build = "meson",
+   flags = {
+      "-Dgtk_doc=false",
+      "-Dmanpage=false",
+      "-Dintrospection=false",
+   }
+};
+
+gcr3 = {
+   url = "https://download.gnome.org/sources/gcr/3.41/gcr-3.41.1.tar.xz",
+   sha3 = "41898c49109478c26914f3ada7ffcfbcc33917e206b5e7306dfc03ea9ba9c897",
+   build = "meson",
+   flags = { 
+      "-Dgtk_doc=false", 
+      "-Dssh_agent=false",
+   },
+   prepare = [[ sed -i 's:"/desktop:"/org:' schema/*.xml ]]
+};
+
+gnome-keyring = {
+   url = "https://download.gnome.org/sources/gnome-keyring/46/gnome-keyring-46.2.tar.xz",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--libexecdir=/usr/lib64",
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
+      "--disable-schemas-compile",
+      "--disable-static",
+      "--disable-doc",
+      "--disable-pam",
+      "--without-libcap-ng",
+      "--without-systemd",
+   },
+   prepare = [[ 
+      sed -i 's:"/desktop:"/org:' schema/*.xml 
+      autoreconf -fi 
+   ]]
+};
+
+libcdio = {
+   url = "https://ftp.gnu.org/gnu/libcdio/libcdio-2.1.0.tar.bz2",
+   sha3 = "76020cbcb9cd3d52434051c4996f73c886daff146bef9344988cdc98f8b10c4e",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
+      "--disable-vcd-info",
+      "--disable-cddb",
+      "--disable-static",
+   }
+};
+
+libcdio-paranoia = {
+   url = "https://ftp.gnu.org/gnu/libcdio/libcdio-paranoia-10.2+2.0.2.tar.bz2",
+   sha3 = "9ad61745416592638827d9e1ea6ed8cbad087c9d62ee18bb6a91fd7c2eba5fea",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--disable-static"
+   }
+};
+
+--------------------------------------------------------------------------------
+
+llvm-cmake = {
+   url = "https://github.com/llvm/llvm-project/releases/download/llvmorg-18.1.8/cmake-18.1.8.src.tar.xz",
+   sha3 = "9ec8036ea45ff51ed92aa9014d594a282a0ff9da272f55229fa8539c66a38588",
+};
+
+clang = {
+   url = "https://github.com/llvm/llvm-project/releases/download/llvmorg-18.1.8/clang-18.1.8.src.tar.xz",
+   sha3 = "f7fb4edf08c3ab83fe9c3e4465ff364d9ed488f5bbcd088806f2aa4800c2df9c",
+};
+
+llvm-third-party = {
+   url = "https://github.com/llvm/llvm-project/releases/download/llvmorg-18.1.8/third-party-18.1.8.src.tar.xz",
+   sha3 = "6c79fb62143e993dfce98afb3e6cfe69f503f2e1e6613b7f50ebfab82c125c95",
+};
+
+llvm = {
+   url = "https://github.com/llvm/llvm-project/releases/download/llvmorg-18.1.8/llvm-18.1.8.src.tar.xz",
+   sha3 = "8fc29c1c673f09025e95e2de0cd79b91d0237a349783f67ac247ccb04a549b18",
+   build = "cmake",
+   flags = {
+      "-DLLVM_LIBDIR_SUFFIX=64",
+      "-DLIBCXX_LIBDIR_SUFFIX=64",
+      "-DLIBCXXABI_LIBDIR_SUFFIX=64",
+      "-DLLVM_BUILD_LLVM_DYLIB=ON", 
+      "-DLLVM_LINK_LLVM_DYLIB=ON",
+      '-DLLVM_TARGETS_TO_BUILD="host;AMDGPU"',
+      "-DLLVM_ENABLE_RTTI=ON",
+      "-DLLVM_HOST_TRIPLE=$(cc -dumpmachine)",
+      "-DLLVM_INCLUDE_BENCHMARKS=OFF",
+      "-DLLVM_INCLUDE_EXAMPLES=OFF",
+      "-DLLVM_INCLUDE_DOCS=OFF",
+      "-DLLVM_INCLUDE_TESTS=OFF",
+      "-DLLVM_ENABLE_BINDINGS=OFF",
+      "-DLLVM_ENABLE_FFI=ON",
+      "-DCLANG_DEFAULT_PIE_ON_LINUX=ON",
+   },
+   prepare = [[
+      okpkg download llvm-cmake clang llvm-third-party
+      mv ../llvm-cmake ../llvm-third-party .
+      mv ../clang tools
+      sed -e '/LLVM_COMMON_CMAKE_UTILS/s@../cmake@llvm-cmake@' \
+          -i CMakeLists.txt
+      sed -e '/LLVM_THIRD_PARTY_DIR/s@../third-party@llvm-third-party@' \
+          -i cmake/modules/HandleLLVMOptions.cmake
+      grep -rl '#!.*python' | xargs sed -i '1s/python$/python3/'
+      sed 's/utility/tool/' -i utils/FileCheck/CMakeLists.txt
+   ]]
+};
+
+--------------------------------------------------------------------------------
+
+spirv-headers = {
+   url = "https://github.com/KhronosGroup/SPIRV-Headers/archive/vulkan-sdk-1.3.275/SPIRV-Headers-1.3.275.tar.gz",
+   sha3 = "e84d4a6444b7c7a08f451ac1270ada3ca9dde9ffe3bd981258dc57d295e4e713",
+   build = "cmake",
+};
+
+spirv-tools = {
+   url = "https://github.com/KhronosGroup/SPIRV-Tools/archive/vulkan-sdk-1.3.275.0/SPIRV-Tools-1.3.275.0.tar.gz",
+   sha3 = "44e7e5306f47944bd9d59eaba301b03238014fb6d3a087dceed8f6065aa4cca6",
+   build = "cmake",
+   flags = {
+      "-DSPIRV_WERROR=OFF",
+      "-DBUILD_SHARED_LIBS=ON",
+      "-DSPIRV_TOOLS_BUILD_STATIC=OFF",
+      "-DSPIRV-Headers_SOURCE_DIR=/usr",
+   }
+};
+
+glslang = {
+   url = "https://github.com/KhronosGroup/glslang/archive/14.0.0/glslang-14.0.0.tar.gz",
+   sha3 = "3615e52febfda66ef09d94a823b1747d0e530157db02dc502ab14d6a4d15ed17",
+   build = "cmake",
+   flags = {
+      "-DALLOW_EXTERNAL_SPIRV_TOOLS=ON",
+      "-DBUILD_SHARED_LIBS=ON",
+      "-DGLSLANG_TESTS=OFF",
+   }
+};
+
+directx-headers = {
+   url = "https://github.com/microsoft/DirectX-Headers/archive/v1.613.1/DirectX-Headers-1.613.1.tar.gz",
+   sha3 = "3c161edae5790eec87f9c2883eb466ecd6be62dadff179cae60ea3411b3d7ffa",
+   build = "meson",
+   flags = { "-Dbuild-test=false" }
+};
+
+cython = {
+   url = "https://github.com/cython/cython/archive/3.0.11/cython-3.0.11.tar.gz",
+   sha3 = "f6ab0fa96d4bb591ae7fcae697eb61aced9eea8352e28f8a4b4f2c02536fc915",
+   build = "python-build",
+};
+
+python-yaml = {
+   url = "https://github.com/yaml/pyyaml/archive/6.0.2/pyyaml-6.0.2.tar.gz",
+   sha3 = "eca18a30377fbd896ce096e6085be77082365b915e9bde8343ed2090493b24c2",
+   build = "python-build",
+};
+
+--------------------------------------------------------------------------------
+-- 1. vulkan-drivers depend on LLVM
+--    * vulkan-drivers are split by some distros, and disabled here
+--    * Not needed except for multilib native Steam
+-- 2. As of 24.1.0, iris gallium-drivers requires libclc and LLVM, pick one:
+--    * Build LLVM and libclc
+--    * Drop iris from gallium-drivers
+--    * Minimal build with gallium-drivers=swrast
+--    * Use 24.0.9 which does not require libclc
+-- 3. On NVIDIA, you can build xorg-server without mesa at all, just libglvnd
+--    * https://forums.gentoo.org/viewtopic-t-1167405.html
+--------------------------------------------------------------------------------
+mesa = {
+   url = "https://mesa.freedesktop.org/archive/mesa-24.0.9.tar.xz",
+   sha3 = "cba6413a854faf83fe99988114661c2cbf717eac093f27d6363c8c1cf1c48075",
+   build = "meson",
+   flags = {
+      "-Dplatforms=x11",
+      "-Dgallium-drivers=nouveau,r300,r600,svga,radeonsi,swrast,virgl,i915,iris,crocus,zink,d3d12",
+      '-Dvulkan-drivers=""',
+      "-Dllvm=disabled",
+      "-Dgles1=disabled",
+      "-Dglx=dri",
+      "-Degl=enabled",
+      "-Dvalgrind=disabled",
+      "-Dlibunwind=disabled",
+      "-Dglvnd=true",
+   }
+};
+
+--------------------------------------------------------------------------------
+
+-- gnupg1
+gnupg1 = {
+   url = "https://gnupg.org/ftp/gcrypt/gnupg/gnupg-1.4.23.tar.bz2",
+   sha3 = "eef877549b42999ee328bdf9fb2091f7d7690feadf12307d7d5cb2c5a130305e",
+   build = "./configure",
+   flags = {
+      "--libexecdir=/usr/lib64",
+      "--sysconfdir=/etc",
+      "--mandir=/usr/share/man",
+      "--enable-noexecstack",
+   },
+   post = [[
+      sed -i -e "s/$(date +'%Y-%m-%d')/$(date -d @$SOURCE_DATE_EPOCH +'%Y-%m-%d')/" \
+          $destdir/usr/share/man/man1/gpg.1 $destdir/usr/share/man/man1/gpgv.1
+   ]]
+};
+
+-- xreader
+pycairo = {
+   url = "https://github.com/pygobject/pycairo/releases/download/v1.26.1/pycairo-1.26.1.tar.gz",
+   sha3 = "26f4f10ceb110ef5ed40712428e78affdc59d271201004e12921bb414ea3f49c",
+   build = "meson",
+};
+
+pygobject = {
+   url = "https://download.gnome.org/sources/pygobject/3.48/pygobject-3.48.2.tar.xz",
+   build = "meson",
+};
+
+xapp = {
+   url = "https://github.com/linuxmint/xapp/archive/2.8.4/xapp-2.8.4.tar.gz",
+   sha3 = "bbf12e1b080d0be63f415ee9bd16fa91286ef17f1d95dbbfe7afb247ddb48d90",
+   build = "meson",
+   flags = {
+      "-Ddeprecated_warnings=false",
+      "-Dstatus-notifier=false",
+      "-Dapp-lib-only=true",
+      "-Ddebian_derivative=false",
+      "-Dmate=false",
+      "-Dxfce=true",
+   }
+};
+
+xreader = {
+   url = "https://github.com/linuxmint/xreader/archive/4.2.1/xreader-4.2.1.tar.gz",
+   sha3 = "3d9995cf9917154697bed603578f8145e95210b670c9794c60e768662d4c1f9a",
+   build = "meson",
+   flags = {
+      "-Dmathjax-directory=/usr/share/mathjax2",
+      "-Ddeprecated_warnings=false",
+      "-Dcomics=false", 
+      "-Dxps=false",
+      "-Ddjvu=false",
+      "-Ddvi=false",
+      "-Dt1lib=false",
+      "-Dpixbuf=true",
+      "-Dps=false",
+      "-Dhelp_files=true",
+      "-Dintrospection=true",
+      "-Depub=false",
+   }
+};
+
+
+-- split packages
+elfutils = {
+   url = "https://sourceware.org/ftp/elfutils/0.191/elfutils-0.191.tar.bz2",
+   sha3 = "bdf73b4f3be633a56344c1d1bcc6a9bb036c9bb565036ec16daef461e8f3a6d6",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--sysconfdir=/etc",
+      "--mandir=/usr/share/man",
+      "--enable-deterministic-archives",
+      "--enable-libdebuginfod",
+      "--enable-symbol-versioning",
+      "--disable-debuginfod",
+      "--program-prefix='eu-'",
+   },
+   post = [[ $make -C libelf uninstall DESTDIR=$destdir ]]
+};
+
+lvm2 = {
+   url = "https://sourceware.org/ftp/lvm2/LVM2.2.03.24.tgz",
+   sha3 = "ecf2a70bbb2e69979b22553ec9c8913a409c71f33713cf7e07d179e2adc26559",
+   build = "./configure",
+   flags = {
+      "--sbindir=/usr/bin",
+      "--libdir=/usr/lib64",
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
+      "--mandir=/usr/share/man",
+      "--enable-cmdlib",
+      "--enable-dmeventd",
+      "--enable-pkgconfig",
+      "--enable-udev_rules",
+      "--enable-udev_sync",
+      "--enable-write_install",
+      "--disable-readline",
+      "--disable-systemd-journal",
+      "--with-default-dm-run-dir=/run",
+      "--with-default-locking-dir=/run/lock/lvm",
+      "--with-default-run-dir=/run/lvm",
+      "--with-default-pid-dir=/run",
+      "--with-libexecdir=/usr/lib64/lvm2",
+      "--with-udev-prefix=/usr",
+      "--with-udevdir=/usr/lib64/udev/rules.d",
+      "--with-usrlibdir=/usr/lib64",
+      "--without-systemd",
+      "--without-systemdsystemunitdir",
+   },
+   post = [[
+      rm -fr $destdir && mkdir -p $destdir
+      $make install_lvm2 DESTDIR=$destdir
+   ]]
+};
+
+-- versions for slackware-15
+evince = {
+   url = "https://download.gnome.org/sources/evince/41/evince-41.5.tar.xz",
+   sha3 = "e814a5996935f40da119f07f4deb3dcc7c4d051e9209ad5ca049c0b52bdbde9b",
+   build = "meson",
+   flags = {
+      "-Dgspell=disabled",
+      "-Dgtk_doc=false",
+      "-Dintrospection=true",
+      "-Dkeyring=auto",
+      "-Dnautilus=false",
+      "-Dpdf=enabled",
+      "-Dps=enabled",
+      "-Dsystemduserunitdir=no",
+      "-Duser_doc=false",
+   }
+};
+
+file-roller = {
+   url = "https://download.gnome.org/sources/file-roller/3.36/file-roller-3.36.2.tar.xz",
+   sha3 = "197463f88508b16701a139e281352769e65c0dc382106eec971113611f63d447",
+   build = "meson",
+   flags = {
+      "-Dpackagekit=false",
+   }
+};
+
+-- nonfree
+libfdk-aac = {
+   url = "https://downloads.sourceforge.net/opencore-amr/fdk-aac-2.0.3.tar.gz",
+   sha3 = "f82f593cfcf49eb9417af68c299ab0a971876946a432007913256767dbcdc4c0",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--disable-static",
+   }
+};
+
+-- missing checksums
+fontforge = {
+   url = "https://github.com/fontforge/fontforge/releases/download/20230101/fontforge-20230101.tar.xz",
+   build = "cmake",
+   flags = {
+      "-DENABLE_DOCS=OFF",
+      "-DENABLE_LIBSPIRO=OFF",
+      "-Wno-dev"
+   }
+};
+
+lm-sensors = {
+   url = "https://github.com/lm-sensors/lm-sensors/archive/V3-6-0/lm-sensors-3-6-0.tar.gz",
+   build = "make",
+   flags = { "LIBDIR=$LIBDIR" }
+};
+
+dmenu = {
+   url = "https://dl.suckless.org/tools/dmenu-5.1.tar.gz",
+   build = "make",
+};
+
+pwgen = {
+   url = "https://prdownloads.sourceforge.net/pwgen/pwgen-2.08.tar.gz",
+   build = "./configure",
+};
+
+flashrom = {
+   url = "https://download.flashrom.org/releases/flashrom-v1.3.0.tar.bz2",
+   build = "make",
+   flags = { "PREFIX=/usr" }
+};
+
+-- network
+networkmanager = {
+   url = "https://download.gnome.org/sources/NetworkManager/1.34/NetworkManager-1.34.0.tar.xz",
+   build = "meson",
+   flags = {
+      "-Dqt=false",
+      "-Dnmtui=false",
+      "-Dmodem_manager=false",
+      "-Dsession_tracking=no",
+      "-Dsystemd_journal=false",
+      "-Dlibaudit=no",
+      "-Dselinux=false",
+      "-Dsystemdsystemunitdir=no"
+   }
+};
+
+wget = {
+   url = "https://ftp.gnu.org/gnu/wget/wget-1.21.4.tar.gz",
+   sha3 = "e9d70587db310b53b22707c568c31d7d4eb9f01576ee8cb2657c90fa9f04d7e1",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--sysconfdir=/etc",
+      "--with-ssl=openssl"
+   }
+};
+
+-- editors
+leafpad = {
+   url = "https://download.savannah.gnu.org/releases/leafpad/leafpad-0.8.19.tar.gz",
+   build = "./configure",
+};
+
+nano = {
+   url = "https://ftp.gnu.org/gnu/nano/nano-7.2.tar.xz",
+   sha3 = "82186f2a698b087f44e52b8e56ce5566c74f05b48496b584b6bd030898a2d361",
+   build = "./configure",
+   flags = {
+      "--sysconfdir=/etc",
+      "--enable-color",
+      "--enable-nanorc",
+      "--enable-multibuffer"
+   }
+};
+
+-- fonts
+liberation-fonts = {
+   url = "https://github.com/liberationfonts/liberation-fonts/files/7261483/liberation-fonts-2.1.5.tar.gz",
+   build = "make",
+};
+
+font-adobe-utopia-type1 = {
+   url = "https://www.x.org/pub/individual/font/font-adobe-utopia-type1-1.0.5.tar.xz",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--sysconfdir=/etc",
+      "--localstatedir=/var",
+      "--disable-static"
+   }
+};
+
+font-bh-type1 = {
+   url = "https://www.x.org/pub/individual/font/font-bh-type1-1.0.4.tar.xz",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--sysconfdir=/etc",
+      "--localstatedir=/var",
+      "--disable-static"
+   }
+};
+
+font-ibm-type1 = {
+   url = "https://www.x.org/pub/individual/font/font-ibm-type1-1.0.4.tar.xz",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--sysconfdir=/etc",
+      "--localstatedir=/var",
+      "--disable-static"
+   }
+};
+
+font-misc-ethiopic = {
+   url = "https://www.x.org/pub/individual/font/font-misc-ethiopic-1.0.5.tar.xz",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--sysconfdir=/etc",
+      "--localstatedir=/var",
+      "--disable-static"
+   }
+};
+
+font-xfree86-type1 = {
+   url = "https://www.x.org/pub/individual/font/font-xfree86-type1-1.0.5.tar.xz",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--sysconfdir=/etc",
+      "--localstatedir=/var",
+      "--disable-static"
+   }
+};
+
+-- gemini clients
+castor = {
+   url = "https://git.sr.ht/~julienxx/castor/archive/0.9.0.tar.gz",
+   build = "make",
+};
+
+lagrange = {
+   url = "https://git.skyjake.fi/gemini/lagrange/releases/download/v1.15.8/lagrange-1.15.8.tar.gz",
+   build = "cmake",
+};
+
+-- not working for some reason
+ccache = {
+   url = "https://github.com/ccache/ccache/releases/download/v4.9.1/ccache-4.9.1.tar.xz",
+   sha3 = "a9b494a5c6578d14252cbe26c2078489f78d83314e2ba947fbbffd4172a39871",
+   build = "cmake",
+   flags = {
+      "-DREDIS_STORAGE_BACKEND=OFF",
+      "-DENABLE_TESTING=OFF"
+   }
+};
+
+-- mail tools
+at = {
+   url = "http://software.calhariz.com/at/at_3.2.5.orig.tar.gz",
+   sha3 = "781272396617141265642878a66058ab2a82a1a5ee77b0053d1064550f6f953f",
+   build = "./configure",
+   flags = {
+      "--sbindir=/usr/bin",
+      "--with-daemon_username=atd",
+      "--with-daemon_groupname=atd",
+      "--with-jobdir=/var/spool/atd",
+      "--with-atspool=/var/spool/atd",
+      "SENDMAIL=/usr/bin/sendmail"
+   }
+};
+
+dma = {
+   url = "http://distcache.freebsd.org/ports-distfiles/corecode-dma-v0.13_GH0.tar.gz",
+   sha3 = "2ae553a54f0e79f6568a425e472de5ef533105b18ba6f3f5a82ab5a157db38b2",
+   build = "make",
+   flags = {
+      "PREFIX=/usr",
+      "LIBEXEC=/usr/lib64/dma",
+      "SBIN=/usr/bin"
+   },
+   post = [[
+      ln -sf dma $destdir/usr/bin/sendmail
+      ln -sf dma $destdir/usr/bin/mailq
+      mkdir -p $destdir/etc
+      chmod 644 dma.conf
+      chown root:mail dma.conf
+      mv dma.conf $destdir/etc
+   ]]
+};
+
+s-nail = {
+   url = "https://ftp.sdaoden.eu/s-nail-14.9.24.tar.xz",
+   sha3 = "e23b84770d43c7c509b2ac41522fbc252f56aa1eeaa61742102802b66be707d9",
+   build = "make",
+   flags = { "build" },
+   prepare = [[
+      make \
+      VAL_PREFIX=/usr \
+      VAL_SYSCONFDIR=/etc \
+      VAL_MANDIR=/usr/share/man \
+      VAL_LIBEXECDIR=/usr/lib64 \
+      VAL_MAIL=/var/spool/mail \
+      VAL_MTA=/usr/bin/sendmail \
+      VAL_SID= \
+      VAL_MAILX=mailx \
+      OPT_AUTOCC=no \
+      OPT_DOTLOCK=no \
+      VAL_SYSCONFRC=nail.rc \
+      VAL_RANDOM="libgetrandom,sysgetrandom,urandom" \
+      config
+   ]]
+};
+
+ruby = {
+   url = "https://cache.ruby-lang.org/pub/ruby/3.3/ruby-3.3.0.tar.xz",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--disable-rpath",
+      "--enable-shared",
+      "--without-valgrind",
+      "--without-baseruby",
+      "ac_cv_func_qsort_r=no"
+   }
+};
+
+-- dynare with octave
+octave = {
+   url = "https://ftp.gnu.org/gnu/octave/octave-8.4.0.tar.gz",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--libexecdir=/usr/lib64",
+      "--enable-shared",
+      "--disable-static",
+      "--with-quantum-depth=16"
+   }
+};
+
+dynare = {
+   url = "https://dynare.org/release/source/dynare-6.0.tar.xz",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--disable-doc",
+      "--disable-dynare++",
+      "--disable-matlab",
+      "--disable-mex-dynare++",
+      "--disable-mex-ms-sbvar",
+      "--disable-mex-kalman-steady-state"
+   }
+};
+
+
+-- build fail - use pure c instead?
+b3sum = {
+   url = "https://github.com/BLAKE3-team/BLAKE3/archive/1.5.1/BLAKE3-1.5.1.tar.gz",
+   sha3 = "41bf0a7cf352ceba6c006b042c69e09dd16c0c279a758d35e342b41677f82bc0",
+   build = "cargo",
+};
+
+docbook2x = {
+   url = "http://downloads.sourceforge.net/docbook2x/docbook2X-0.8.8.tar.gz",
+   sha3 = "640d0960fcb674d5316dfa138da8bc44c7a94d0bbb9c4c12a3700ee66217fc51",
+   build = "./configure",
+   flags = {
+      "--mandir=/usr/share/man",
+      "--program-transform-name 's/docbook2/db2x_docbook2/'"
+   },
+   prepare = [[
+      autoreconf -fi
+      sed -e 's/AM_CONFIG_HEADER(/AC_CONFIG_HEADERS(/' -i configure.ac
+   ]]
+};
+
+-- lxc depends:
+--     perl-xml-parser autoconf automake perl-xml-namespacesupport
+--     perl-xml-sax-base perl-xml-sax perl-xml-sax-expat docbook2x
+lxc = {
+   url = "https://linuxcontainers.org/downloads/lxc/lxc-6.0.0.tar.gz",
+   sha3 = "0f272c945ea20ec64361f56ecb8d098d964fbbb8058f9d747dfe62364ed83546",
+   build = "meson",
+   flags = {
+      "-Dinstall-init-files=false",
+      "-Dspecfile=false"
+   },
+   prepare = [[
+      sed -i "s|if sanitize == 'none'|if false|g" src/lxc/cmd/meson.build
+   ]]
+};
+
+tarlz = {
+   url = "https://download.savannah.gnu.org/releases/lzip/tarlz/tarlz-0.25.tar.lz",
+   sha3 = "d1e17ac0993b121137f29d5ea5d74e5699ec0b02908be38acd71d589208cb331",
+   build = "./configure",
+};
+
+unzip = {
+   url = "https://downloads.sourceforge.net/infozip/unzip60.tar.gz",
+   build = "make",
+   flags = {
+      "--file=unix/Makefile",
+      "prefix=$destdir/usr",
+      "MANDIR=/usr/share/man/man1",
+      "generic",
+   }
+};
+
+zip = {
+   url = "https://downloads.sourceforge.net/infozip/zip30.tar.gz",
+   build = "make",
+   flags = {
+      "--file=unix/Makefile",
+      "prefix=$destdir/usr",
+      "generic_gcc"
+   }
+};
+
+xterm = {
+   url = "https://invisible-mirror.net/archives/xterm/xterm-390.tgz",
+   sha3 = "921672783dad95badd402d3618cc9ca181ffec646b5a44569000c7b898259a13",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--sysconfdir=/etc",
+      "--localstatedir=/var",
+      "--disable-static",
+      "--with-app-defaults=/etc/X11/app-defaults",
+      "TERMINFO=/usr/share/terminfo"
+   },
+   prepare = [[
+      sed -i '/v0/{n;s/new:/new:kb=^?:/}' termcap
+      printf '\tkbs=\\177,\n' >> terminfo
+   ]],
+   post = [[
+      make install-ti DESTDIR=$destdir
+      mkdir -p $destdir/usr/share/applications
+      cp -p *.desktop $destdir/usr/share/applications
+   ]]
+};
+
+-- udev from systemd
+udev = {
+   url = "https://github.com/systemd/systemd/archive/v256/systemd-256.tar.gz",
+   sha3 = "0cf73fb19ec08d2643d759cb51e0b154cb63d9bf428e9532449ae65c8ee463c7",
+   build = "meson",
+   prepare = [[
+      sed -e 's/GROUP="render"/GROUP="video"/' \
+          -e 's/GROUP="sgx", //' \
+          -i rules.d/50-udev-default.rules.in
+      sed -i '/systemd-sysctl/s/^/#/' rules.d/99-systemd.rules.in
+      sed -i '/NETWORK_DIRS/s/systemd/udev/' src/basic/path-lookup.h
+   ]],
+   flags = {
+      "-Dmode=release", "-Ddev-kvm-mode=0660", "-Dlink-udev-shared=false",
+      "-Dlogind=false", "-Dvconsole=false", "-Dtests=false",
+      "-Dtmpfiles=false", "-Dsysusers=false", "-Dsysvinit-path=",
+      "-Dadm-group=false", "-Dadm-group=false", "-Danalyze=false",
+      "-Dapparmor=disabled", "-Daudit=disabled", "-Dbacklight=false",
+      "-Dbinfmt=false", "-Dbpf-framework=disabled", "-Dbzip2=disabled",
+      "-Dcoredump=false", "-Ddbus=disabled", "-Delfutils=disabled",
+      "-Denvironment-d=false", "-Dfdisk=disabled", "-Dgcrypt=disabled",
+      "-Dglib=disabled", "-Dgshadow=false", "-Dgnutls=disabled",
+      "-Dhibernate=false", "-Dhostnamed=false", "-Didn=false",
+      "-Dima=false", "-Dinitrd=false", "-Dfirstboot=false",
+      "-Dldconfig=false", "-Dlibcryptsetup=disabled", "-Dlibcurl=disabled",
+      "-Dlibfido2=disabled", "-Dlibidn=disabled", "-Dlibidn2=disabled",
+      "-Dlibiptc=disabled", "-Dlocaled=false", "-Dlz4=disabled",
+      "-Dmachined=false", "-Dmicrohttpd=disabled", "-Dnetworkd=false",
+      "-Dnscd=false", "-Dnss-myhostname=false", "-Dnss-resolve=disabled",
+      "-Dnss-systemd=false", "-Doomd=false", "-Dopenssl=disabled",
+      "-Dp11kit=disabled", "-Dpam=disabled", "-Dpcre2=disabled",
+      "-Dpolkit=disabled", "-Dportabled=false", "-Dpstore=false",
+      "-Dpwquality=disabled", "-Drandomseed=false", "-Dresolve=false",
+      "-Drfkill=false", "-Dseccomp=disabled", "-Dsmack=false",
+      "-Dsysext=false", "-Dtimedated=false", "-Dtimesyncd=false",
+      "-Dtpm=false", "-Dqrencode=disabled", "-Dquotacheck=false",
+      "-Duserdb=false", "-Dutmp=false", "-Dwheel-group=false",
+      "-Dxdg-autostart=false", "-Dxkbcommon=disabled", "-Dxz=disabled",
+      "-Dzlib=disabled", "-Dzstd=disabled", "-Dstandalone-binaries=true",
+      "-Dhwdb=true", "-Dblkid=enabled", "-Dkmod=enabled",
+      "-Ddefault-keymap='us'", "-Dman=disabled", "-Dhtml=disabled",
+      "-Ddns-servers=''", "-Dntp-servers=''", "-Defi=false",
+      "-Dsysvrcnd-path=", "-Ddefault-dnssec=no", "-Ddefault-llmnr=no",
+      "-Ddefault-mdns=no", "-Dsshconfdir=no", "-Dbootloader=disabled",
+      "-Dkernel-install=false", "-Dselinux=disabled", "-Dukify=disabled",
+      "-Dstoragetm=false", "-Dvmspawn=disabled", "-Dpasswdqc=disabled",
+      "-Dxenctrl=disabled", "-Dlibcryptsetup-plugins=disabled",
+      "-Drepart=disabled", "-Dsysupdate=disabled", "-Dimportd=disabled",
+      "-Dhomed=disabled", "-Dremote=disabled", "-Dnss-mymachines=disabled",
+      "-Dtpm2=disabled",
+   },
+   post = [[
+      rm -fr $destdir && mkdir -p $destdir
+      meson install -C build --destdir $destdir --no-rebuild --tags libudev,libudev-devel
+      meson install -C build --destdir $destdir --no-rebuild --tags udev,udev-devel
+   ]]
+};
+
+-- openbsd-netcat
+libmd = {
+   url = "https://libbsd.freedesktop.org/releases/libmd-1.1.0.tar.xz",
+   sha3 = "177ddc3f07b7163ab1ee746be455753690176868e2dcc0bf7e17f2fc2eaacebc",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+   }
+};
+
+libbsd = {
+   url = "https://libbsd.freedesktop.org/releases/libbsd-0.12.2.tar.xz",
+   sha3 = "b94c502ea857c23620cc740d0ad649484bae2dad0fb4825b5f23865093f4309c",
+   build = "./configure",
+   flags= {
+      "--libdir=/usr/lib64",
+   }
+};
+
+openbsd-netcat = {
+   url = "https://salsa.debian.org/debian/netcat-openbsd/-/archive/debian/1.226-1/netcat-openbsd-debian-1.226-1.tar.gz",
+   sha3 = "657e0fe36c89b291e3ed961cccc498a3a4d0e742abc2aeea0732b9e62e79c622",
+   build = _,
+   post = [[
+      $make LDFLAGS="$LDFLAGS -lbsd" \
+      mkdir -p $destdir/usr/bin \
+      $destdir/usr/share/man/man1
+      cp -p nc $destdir/usr/bin
+      cp -p nc.1 $destdir/usr/share/man/man1
+   ]]
+};
+
+-- fails to build gcc14
+sharutils = {
+   url = "https://ftp.gnu.org/gnu/sharutils/sharutils-4.15.2.tar.xz",
+   sha3 = "9b06bc145640281df912a2af83849621a25a10fb2deb3bd5b1c8561f9c1b53a1",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--disable-nls",
+   },
+   prepare = [[
+   sed -i 's/BUFSIZ/rw_base_size/' src/unshar.c &&
+   sed -i '/program_name/s/^/extern /' src/*opts.h
+   sed -i 's/IO_ftrylockfile/IO_EOF_SEEN/' lib/*.c        &&
+   printf "#define _IO_IN_BACKUP 0x100\n" >> lib/stdio-impl.h
+   ]]
+};
+
+lzo = {
+   url = "https://oberhumer.com/opensource/lzo/download/lzo-2.10.tar.gz",
+   sha3 = "7ff1e73460926eae1b8909947cc848594ff1b83234272615b4a48616e42997b1",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--enable-shared",
+      "--disable-static"
+   }
+};
+
+lzop = {
+   url = "https://lzop.org/download/lzop-1.04.tar.gz",
+   sha3 = "eef01e89469e9e0ab7b0dbaab94f72f1fae350a6ed9fc4ba383b755d7ff6d8ca",
+   build = "./configure",
+};
+
+xvid = {
+   url = "https://downloads.xvid.com/downloads/xvidcore-1.3.7.tar.bz2",
+   build = "make",
+   prepare = [[
+   cd build/generic
+   sed -i 's/^LN_S=@LN_S@/& -f -v/' platform.inc.in
+   configure --prefix=/usr --libdir=/usr/lib64
+   ]],
+   flags = { "-C build/generic" }
+};
+
+gstreamer = {
+   url = "https://gstreamer.freedesktop.org/src/gstreamer/gstreamer-1.22.11.tar.xz",
+   sha3 = "5def4ae9f1b50da87816789539ce659a37876a3fe35269fc30c489dd81400adb",
+   build = "meson",
+   flags = {
+      "-Dexamples=disabled",
+      "-Ddbghelp=disabled",
+      "-Dptp-helper-permissions=capabilities",
+   }
+};
+
+gst-plugins-base = {
+   url = "https://gstreamer.freedesktop.org/src/gst-plugins-base/gst-plugins-base-1.22.11.tar.xz",
+   sha3 = "80e2511a1e9e60a99ec36feacf85b90f6a3b37135bf7f651124db3faba4b7d88",
+   build = "meson",
+   flags = {
+      "-Dexamples=disabled",
+      "-Dlibvisual=disabled",
+      "-Dtremor=disabled",
+   }
+};
+
+sound-theme-freedesktop = {
+   url = "https://people.freedesktop.org/~mccann/dist/sound-theme-freedesktop-0.8.tar.bz2",
+   sha3 = "ee0e1cc730436157d05dc38aeedff77cd99168de367ca7ea4146ea5c32c396a3",
+   build = "./configure",
+};
+
+libcanberra = {
+   url = "https://0pointer.de/lennart/projects/libcanberra/libcanberra-0.30.tar.xz",
+   sha3 = "494462202a9b91d3da333d6d8d78857cb38ba94eb53306a8b92d008f6f6b6025",
+   build = "./configure",
+   flags= {
+      "--libdir=/usr/lib64",
+      "--disable-oss",
+      "--disable-gtk",
+      "--enable-gtk3"
+   }
+};
+
+libwebp = {
+   url = "https://storage.googleapis.com/downloads.webmproject.org/releases/webp/libwebp-1.4.0.tar.gz",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--enable-libwebpmux",
+      "--enable-libwebpdemux",
+      "--enable-libwebpdecoder",
+      "--enable-swap-16bit-csp",
+      "--disable-static",
+      "--disable-tiff",
+   }
+};
+
+nettle = {
+   url = "https://ftp.gnu.org/gnu/nettle/nettle-3.9.1.tar.gz",
+   sha3 = "d659a4b5e8cfbbf08af0772feccf0742b78acf0cf82a8038231c163c9367b9bc",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--enable-shared",
+      "--disable-static"
+   },
+   post = [[ cd $destdir/usr/lib64 && chmod 755 libhogweed.so libnettle.so ]]
+};
+
+gnutls = {
+   url = "https://gnupg.org/ftp/gcrypt/gnutls/v3.8/gnutls-3.8.3.tar.xz",
+   sha3 = "546dacb1f1810759adb799a3b8572e057b8742cd59c0c5b183880c36d9e36eac",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--disable-static",
+      "--disable-gtk-doc",
+      "--enable-shared",
+      "--enable-ktls",
+      "--enable-openssl-compatibility",
+      "--without-brotli",
+      "--without-zstd",
+      "--with-p11-kit",
+      "--with-included-libtasn1",
+      "--with-included-unistring",
+      "--with-default-trust-store-file=/etc/pki/tls/certs/ca-bundle.crt"
+   }
+};
+
+pipewire = {
+   url = "https://gitlab.freedesktop.org/pipewire/pipewire/-/archive/1.0.5/pipewire-1.0.5.tar.bz2",
+   sha3 = "baff4cd51cca0a5ba1b470457426cc132f16adcdfa9cde9b09e48690b26c2c77",
+   build = "meson",
+   flags = { '-Dsession-managers="[]"' }
+};
+
+wireplumber = {
+   url = "https://gitlab.freedesktop.org/pipewire/wireplumber/-/archive/0.4.17/wireplumber-0.4.17.tar.bz2",
+   sha3 = "8d52ac5d8ea601e52119180457260335fc29851764453349e066569fd63afdc2",
+   build = "meson",
+   flags = { "-Dsystem-lua=true" }
+};
+
+pavucontrol = {
+   url = "https://freedesktop.org/software/pulseaudio/pavucontrol/pavucontrol-5.0.tar.xz",
+   sha3 = "eb0a190222a482d3f3cb29d4d1f43483b689e528f6473d6d09394b0725d78862",
+   build = "./configure",
+   flags = { "--libdir=/usr/lib64" }
+};
+
+libkeybinder3 = {
+   url = "https://github.com/kupferlauncher/keybinder/releases/download/keybinder-3.0-v0.3.2/keybinder-3.0-0.3.2.tar.gz",
+   sha3 = "cacc583e7cbdc7d2a9c0f535a954f6fbcd0bcb64b0c591b46a0639659b3ea779",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--disable-gtk-doc"
+   }
+};
+
+xfce4-pulseaudio-plugin = {
+   url = "https://archive.xfce.org/src/panel-plugins/xfce4-pulseaudio-plugin/0.4/xfce4-pulseaudio-plugin-0.4.8.tar.bz2",
+   sha3 = "57633877b38b1105557720db51b043a609523d2d59b8e00443fe13e002ebcc61",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--sysconfdir=/etc"
+   }
+};
+
+accountsservice = {
+   url = "https://freedesktop.org/software/accountsservice/accountsservice-22.07.5.tar.xz",
+   build = "meson",
+};
+
+autobuild = {
+   url = "https://download.savannah.gnu.org/releases/autobuild/autobuild-5.3.tar.gz",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64"
+   }
+};
+
+avahi = {
+   url = "https://github.com/lathiat/avahi/releases/download/v0.8/avahi-0.8.tar.gz",
+   build = "./configure",
+   flags = {
+      "--disable-mono",
+      "--disable-monodoc",
+      "--without-systemdsystemunitdir"
+   }
+};
+
+azpainter = {
+   url = "https://github.com/Symbian9/azpainter/releases/download/v2.1.6/azpainter-2.1.6.tar.xz",
+   build = "./configure",
+};
+
+-- gnu bc
+bc = {
+   url = "https://ftp.gnu.org/gnu/bc/bc-1.07.1.tar.gz",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--sbindir=/usr/bin",
+      "--bindir=/usr/bin",
+      "--mandir=/usr/share/man",
+      "--with-readline",
+   }
+};
+
+bluez = {
+   url = "https://www.kernel.org/pub/linux/bluetooth/bluez-5.72.tar.xz",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--sysconfdir=/etc",
+      "--localstatedir=/var",
+      "--libexecdir=/usr/lib64",
+      "--enable-library",
+      "--disable-manpages",
+      "--disable-systemd"
+   }
+   post = [[
+   mkdir -p $destdir/etc/bluetooth
+   cp -p src/main.conf $destdir/etc/bluetooth
+   ln -sf ../lib64/bluetooth/bluetoothd $destdir/usr/bin/bluetoothd
+   ]]
+};
+
+bamf = {
+   url = "https://launchpad.net/bamf/0.5/0.5.6/+download/bamf-0.5.6.tar.gz",
+   build = "./configure",
+};
+
+bcachefs-tools = {
+   url = "https://github.com/koverstreet/bcachefs-tools/archive/master.tar.gz",
+   build = "make",
+};
+
+bspwm = {
+   url = "https://github.com/baskerville/bspwm/archive/refs/tags/0.9.10.tar.gz",
+   build = "make",
+};
+
+btrfs-progs = {
+   url = "https://kernel.org/pub/linux/kernel/people/kdave/btrfs-progs/btrfs-progs-v5.16.2.tar.xz",
+   build = "./configure",
+   flags = { "--disable-documentation" }
+};
+
+colord = {
+   url = "https://freedesktop.org/software/colord/releases/colord-1.4.6.tar.xz",
+   build = "meson",
+   flags = {
+      "-Dsystemd=false",
+      "-Dbash_completion=false"
+   }
+};
+
+compiz = {
+   url = "https://github.com/compiz-reloaded/compiz/releases/download/v0.8.14/compiz-0.8.14.tar.xz",
+   build = "./configure",
+};
+
+-- no parallel make - need to think about how to fix
+cdparanoia = {
+   url = "https://downloads.xiph.org/releases/cdparanoia/cdparanoia-III-10.2.src.tgz",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--mandir=/usr/share/man"
+   },
+   post = [[ rm -f /usr/lib/libcdda_*.a ]]
+};
+
+c-ares = {
+   url = "https://c-ares.haxx.se/download/c-ares-1.26.0.tar.gz",
+   sha3 = "7d0fb54e2abbbd535cddab63e27e5b59f447c58cc6735b23f27b4230f5b64912",
+   build = "cmake",
+};
+
+caribou = {
+   url = "https://download.gnome.org/sources/caribou/0.4/caribou-0.4.21.tar.xz",
+   build = "./configure",
+};
+
+cinnamon = {
+   url = "https://github.com/linuxmint/cinnamon/archive/refs/tags/master.mint21.tar.gz",
+   build = "meson",
+};
+
+cinnamon-control-center = {
+   url = "https://github.com/linuxmint/cinnamon-control-center/archive/refs/tags/master.mint21.tar.gz",
+   build = "meson",
+};
+
+cinnamon-desktop = {
+   url = "https://github.com/linuxmint/cinnamon-desktop/archive/refs/tags/master.mint21.tar.gz",
+   build = "meson",
+};
+
+cinnamon-menus = {
+   url = "https://github.com/linuxmint/cinnamon-menus/archive/refs/tags/master.mint21.tar.gz",
+   build = "meson",
+};
+
+cinnamon-screensaver = {
+   url = "https://github.com/linuxmint/cinnamon-screensaver/archive/refs/tags/master.mint21.tar.gz",
+   build = "meson",
+};
+
+cinnamon-session = {
+   url = "https://github.com/linuxmint/cinnamon-session/archive/refs/tags/master.mint21.tar.gz",
+   build = "meson",
+};
+
+cinnamon-settings-daemon = {
+   url = "https://github.com/linuxmint/cinnamon-settings-daemon/archive/refs/tags/master.mint21.tar.gz",
+   build = "meson",
+};
+
+cinnamon-translations = {
+   url = "https://github.com/linuxmint/cinnamon-translations/archive/refs/tags/master.mint21.tar.gz",
+   build = "make",
+};
+
+cjs = {
+   url = "https://github.com/linuxmint/cjs/archive/refs/tags/master.mint21.tar.gz",
+   build = "meson",
+};
+
+clutter = {
+   url = "https://download.gnome.org/sources/clutter/1.26/clutter-1.26.4.tar.xz",
+   build = "./configure",
+   flags = {
+      "--enable-egl-backend",
+      "--enable-evdev-input"
+   }
+};
+
+clutter-gtk = {
+   url = "https://download.gnome.org/sources/clutter-gtk/1.8/clutter-gtk-1.8.4.tar.xz",
+   build = "./configure",
+};
+
+cogl = {
+   url = "https://download.gnome.org/sources/cogl/1.22/cogl-1.22.8.tar.xz",
+   build = "./configure",
+   flags = {
+      "--enable-xlib-egl-platform"
+   }
+};
+
+db1 = {
+   url = "https://github.com/berkeleydb/libdb/releases/download/v1.85/db.1.85.tar.gz",
+   sha3 = "72fe634cd82f468daddedd19dc8a54f17bd4276b3c97ab24e9030e634fc3af1c",
+   build = _,
+   prepare = [[
+   cd PORT/linux
+   $make CC='gcc -Wno-error=incompatible-pointer-types'
+   ar rsc libdb1.a *.o
+   mkdir -p $destdir/usr/include/db1
+   cp -p include/*.h $destdir/usr/include/db1
+   mkdir -p $destdir/usr/lib64
+   cp -p libdb1.a $destdir/usr/lib64
+   ]]
+};
+
+deluge = {
+   url = "https://ftp.osuosl.org/pub/deluge/source/2.1/deluge-2.1.1.tar.xz",
+   build = "python-build",
+};
+
+double-conversion = {
+   url = "https://github.com/google/double-conversion/archive/v3.2.0/double-conversion-3.2.0.tar.gz",
+   build = "cmake",
+   flags = { "-DBUILD_SHARED_LIBS=ON" }
+};
+
+dupeguru = {
+   url = "https://github.com/arsenetar/dupeguru/archive/4.3.1.tar.gz",
+   build = "make",
+};
+
+ell = {
+   url = "https://mirrors.edge.kernel.org/pub/linux/libs/ell/ell-0.57.tar.xz",
+   build = "./configure",
+   flags = { "--libdir=/usr/lib64" }
+};
+
+elogind = {
+   url = "https://github.com/elogind/elogind/archive/v246.10/elogind-246.10.tar.gz",
+   build = "meson",
+};
+
+firejail = {
+   url = "https://downloads.sourceforge.net/firejail/firejail-0.9.72.tar.xz",
+   build = "./configure",
+   flags = { "--libdir=/usr/lib64" }
+};
+
+font-alias = {
+   url = "https://x.org/pub/individual/font/font-alias-1.0.5.tar.xz",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--sysconfdir=/etc",
+      "--localstatedir=/var",
+      "--disable-static"
+   }
+};
+
+fragments = {
+   url = "https://gitlab.gnome.org/World/Fragments/-/archive/2.0.2/Fragments-2.0.2.tar.gz",
+   build = "meson",
+};
+
+faad2 = {
+   url = "https://github.com/knik0/faad2/archive/refs/tags/2_10_0.tar.gz",
+   build = "./configure",
+};
+
+gnome-icon-theme = {
+   url = "https://download.gnome.org/sources/gnome-icon-theme/3.12/gnome-icon-theme-3.12.0.tar.xz",
+   build = "./configure",
+   flags = { "--libdir=/usr/lib64" }
+};
+
+gettext-tiny = {
+   url = "http://ftp.barfooze.de/pub/sabotage/tarballs/gettext-tiny-0.3.2.tar.xz",
+   sha3 = "53a0b055ac5e9322335a1f6b44fb0ef019e0da5007f30ce338e52d5a8c5aa34d",
+   build = "make",
+   flags = {
+      "LIBINTL=NONE",
+      "prefix=/usr",
+   }
+};
+
+gettext-tiny-cross = {
+   build = "make",
+   flags = {
+      "LIBINTL=NONE",
+      "prefix=/usr",
+      "CC=x86_64-unknown-linux-gnu-gcc",
+      "AR=x86_64-unknown-linux-gnu-ar",
+      "RANLIB=x86_64-unknown-linux-gnu-ranlib",
+   }
+};
+
+geoclue = {
+   url = "https://gitlab.freedesktop.org/geoclue/geoclue/-/archive/2.6.0/geoclue-2.6.0.tar.bz2",
+   build = "meson",
+};
+
+gs = {
+   url = "https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs9550/ghostscript-9.55.0.tar.xz",
+   build = "./configure",
+};
+
+gedit = {
+   url = "https://download.gnome.org/sources/gedit/41/gedit-41.0.tar.xz",
+   build = "meson",
+   flags = {
+      "-Dspell=disabled",
+      "-Duser_documentation=false",
+      "-Dplugin_externaltools=false"
+   }
+};
+
+gjs = {
+   url = "https://download.gnome.org/sources/gjs/1.70/gjs-1.70.1.tar.xz",
+   build = "meson",
+};
+
+gnome-autoar = {
+   url = "https://download.gnome.org/sources/gnome-autoar/0.4/gnome-autoar-0.4.3.tar.xz",
+   build = "meson",
+};
+
+gnome-backgrounds = {
+   url = "https://download.gnome.org/sources/gnome-backgrounds/41/gnome-backgrounds-41.0.tar.xz",
+   build = "meson",
+};
+
+gnome-color-manager = {
+   url = "https://download.gnome.org/sources/gnome-color-manager/3.36/gnome-color-manager-3.36.0.tar.xz",
+   build = "meson",
+   flags = {
+      "-Dsystemd_session=disable",
+      "-Dsystemd=false",
+      "-Dsystemd_journal=false"
+   }
+};
+
+gnome-common = {
+   url = "https://download.gnome.org/sources/gnome-common/3.18/gnome-common-3.18.0.tar.xz",
+   build = "./configure",
+};
+
+gnome-desktop = {
+   url = "https://download.gnome.org/sources/gnome-desktop/41/gnome-desktop-41.3.tar.xz",
+   build = "meson",
+};
+
+gnome-menus = {
+   url = "https://download.gnome.org/sources/gnome-menus/3.36/gnome-menus-3.36.0.tar.xz",
+   build = "./configure",
+};
+
+gnome-session = {
+   url = "https://download.gnome.org/sources/gnome-session/41/gnome-session-41.3.tar.xz",
+   build = "meson",
+   flags = {
+      "-Dsystemd_session=disable",
+      "-Dsystemd=false",
+      "-Dsystemd_journal=false"
+   }
+};
+
+gnome-settings-daemon = {
+   url = "https://download.gnome.org/sources/gnome-settings-daemon/41/gnome-settings-daemon-41.0.tar.xz",
+   build = "meson",
+   flags = { "-Dsystemd=false" }
+};
+
+gnome-tweak-tool = {
+   url = "https://download.gnome.org/sources/gnome-tweaks/40/gnome-tweaks-40.0.tar.xz",
+   build = "meson",
+};
+
+gtk-doc = {
+   url = "https://download.gnome.org/sources/gtk-doc/1.33/gtk-doc-1.33.2.tar.xz",
+   build = "meson",
+};
+
+gtk2 = {
+   url = "https://download.gnome.org/sources/gtk+/2.24/gtk+-2.24.33.tar.xz",
+   build = "./configure",
+   flags = {
+      "--disable-gtk-doc",
+      "--disable-gtk-doc-html",
+      "--disable-glibtest"
+   }
+};
+
+groff = {
+   url = "https://ftp.gnu.org/gnu/groff/groff-1.23.0.tar.gz",
+   sha3 = "2bc1c17281f2b91264615382ae79ab2f943b8e29f179c9c35230880d3833ee12",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--without-x",
+      "PAGE=letter"
+   }
+};
+
+gsasl = {
+   url = "https://ftp.gnu.org/gnu/gsasl/gsasl-2.2.1.tar.gz",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--disable-static"
+   }
+};
+
+guile = {
+   url = "https://ftp.gnu.org/gnu/guile/guile-3.0.9.tar.xz",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--disable-static"
+   }
+};
+
+icu = {
+   url = "https://github.com/unicode-org/icu/releases/download/release-74-2/icu4c-74_2-src.tgz",
+   build = "../source/configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--enable-shared",
+      "--disable-static",
+   }
+};
+
+icon-naming-utils = {
+   url = "htttp://tango.freedesktop.org/releases/icon-naming-utils-0.8.90.tar.gz",
+   build = "./configure",
+   flags = { "--libdir=/usr/lib64" }
+};
+
+i3wm = {
+   url = "https://i3wm.org/downloads/i3-4.20.1.tar.xz",
+   build = "meson",
+   flags = {
+      "-Dprefix=/usr",
+      "-Dbuildtype=release"
+   }
+};
+
+inkscape = {
+   url = "https://inkscape.org/gallery/item/33449/inkscape-1.2_2022-05-15_dc2aedaf03.tar.xz",
+   build = "cmake",
+};
+
+iwd = {
+   url = "https://mirrors.edge.kernel.org/pub/linux/network/wireless/iwd-2.6.tar.xz",
+   build = "./configure",
+   flags = {
+      "--without-systemd-unitdir",
+      "--without-systemd-networkdir",
+      "--without-systemd-modloaddir",
+      "--localstatedir=/var",
+      "--disable-systemd-service",
+      "LIBS=-lncursesw"
+   },
+   post = [[ rm -fr "$destdir"no ]]
+};
+
+jansson = {
+   url = "https://github.com/akheron/jansson/releases/download/v2.14/jansson-2.14.tar.bz2",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--disable-static"
+   },
+   prepare = [[
+   sed -e "/DT/s;| sort;| sed 's/@@libjansson.*//' &;" \
+   -i test/suites/api/check-exports
+   ]]
+};
+
+jfsutils = {
+   url = "https://jfs.sourceforge.net/project/pub/jfsutils-1.1.15.tar.gz",
+   build = "./configure",
+};
+
+libsigsegv = {
+   url = "https://ftp.gnu.org/gnu/libsigsegv/libsigsegv-2.14.tar.gz",
+   sha3 = "dfb805b4760bb719b9f37c5cd28e8b11b5e0452838d7c1bd09756edad65b2cdc",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--enable-shared",
+      "--disable-static"
+   }
+};
+
+libunwind = {
+   url = "https://download.savannah.nongnu.org/releases/libunwind/libunwind-1.6.2.tar.gz",
+   sha3 = "1c1704283614a7806825903ec27c07850cbb93bc65cfca2125b6b5b290898e42",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--sysconfdir=/etc",
+      "--localstatedir=/var",
+      "--disable-static"
+   }
+};
+
+libcroco = {
+   url = "https://download.gnome.org/sources/libcroco/0.6/libcroco-0.6.13.tar.xz",
+   build = "./configure",
+};
+
+libgee = {
+   url = "https://download.gnome.org/sources/libgee/0.20/libgee-0.20.5.tar.xz",
+   build = "meson",
+};
+
+libgnomekbd = {
+   url = "https://download.gnome.org/sources/libgnomekbd/3.26/libgnomekbd-3.26.1.tar.xz",
+   build = "./configure",
+   prepare = [[ autoreconf -fi ]]
+};
+
+libgtop = {
+   url = "https://download.gnome.org/sources/libgtop/2.40/libgtop-2.40.0.tar.xz",
+   build = "./configure",
+};
+
+libgweather = {
+   url = "https://download.gnome.org/sources/libgweather/40/libgweather-40.0.tar.xz",
+   build = "meson",
+};
+
+libgxps = {
+   url = "https://download.gnome.org/sources/libgxps/0.3/libgxps-0.3.2.tar.xz",
+   build = "meson",
+};
+
+libpeas = {
+   url = "https://download.gnome.org/sources/libpeas/1.30/libpeas-1.30.0.tar.xz",
+   build = "meson",
+};
+
+libgusb = {
+   url = "https://people.freedesktop.org/~hughsient/releases/libgusb-0.3.10.tar.xz",
+   build = "meson",
+   flags = {
+      "-Dprefix=/usr",
+      "-Dbuildtype=release",
+      "-Dtests=false",
+      "-Dvapi=false",
+      "-Ddocs=false"
+   }
+};
+
+libwacom = {
+   url = "https://github.com/linuxwacom/libwacom/releases/download/libwacom-2.1.0/libwacom-2.1.0.tar.xz",
+   build = "meson",
+};
+
+libdmx = {
+   url = "https://x.org/pub/individual/lib/libdmx-1.1.4.tar.bz2",
+   build = "./configure",
+};
+
+libical = {
+   url = "https://github.com/libical/libical/releases/download/v3.0.17/libical-3.0.17.tar.gz",
+   build = "cmake",
+   flags = {
+      "-DSHARED_ONLY=yes",
+      "-DICAL_BUILD_DOCS=false",
+      "-DGOBJECT_INTROSPECTION=true",
+      "-DICAL_GLIB_VAPI=true"
+   }
+};
+
+libwnck2 = {
+   url = "https://download.gnome.org/sources/libwnck/2.31/libwnck-2.31.0.tar.xz",
+   build = "./configure",
+};
+
+lib2geom = {
+   url = "",
+   build = "cmake",
+   flags = {
+      "-D2GEOM_TESTING=FALSE",
+      "-D2GEOM_BUILD_SHARED=ON"
+   }
+};
+
+libdaemon = {
+   url = "https://0pointer.de/lennart/projects/libdaemon/libdaemon-0.14.tar.gz",
+   build = "./configure",
+};
+
+libdbusmenu = {
+   url = "https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/libdbusmenu/16.04.1+18.10.20180917-0ubuntu8/libdbusmenu_16.04.1+18.10.20180917.orig.tar.gz",
+   build = "./configure",
+   prepare = [[ autoreconf -fi ]]
+};
+
+libinih = {
+   url = "https://github.com/benhoyt/inih/archive/r53/inih-r53.tar.gz",
+   build = "meson",
+};
+
+libpotrace = {
+   url = "https://downloads.sourceforge.net/potrace/potrace-1.16.tar.gz",
+   build = "./configure",
+   flags = { "--with-libpotrace" }
+};
+
+libscrypt = {
+   url = "https://github.com/technion/libscrypt/archive/refs/tags/v1.22.tar.gz",
+   build = "make",
+};
+
+libspectre = {
+   url = "https://libspectre.freedesktop.org/releases/libspectre-0.2.10.tar.gz",
+   build = "./configure",
+};
+
+libtimezonemap = {
+   url = "https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/libtimezonemap/0.4.6-3/libtimezonemap_0.4.6.orig.tar.gz",
+   build = "./configure",
+   prepare = [[ autoreconf -fi ]]
+
+};
+
+liburcu = {
+   url = "https://lttng.org/files/urcu/userspace-rcu-0.13.1.tar.bz2",
+   build = "./configure",
+};
+
+libndp = {
+   url = "http://libndp.org/files/libndp-1.8.tar.gz",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--libexecdir=/usr/lib64",
+      "--sysconfdir=/etc",
+      "--localstatedir=/var",
+      "--disable-static"
+   }
+};
+
+libnftnl = {
+   url = "https://netfilter.org/pub/libnftnl/libnftnl-1.2.6.tar.xz",
+   sha3 = "517d7c659d3c006aa709dbb46dcb7d97645f759393d68fec104b8e3487dbb8ea",
+   build = "./configure",
+   flags = { "--libdir=/usr/lib64" }
+};
+
+libnsl = {
+   url = "https://github.com/thkukuk/libnsl/releases/download/v2.0.1/libnsl-2.0.1.tar.xz",
+   sha3 = "f11ab8a6d9f4eb770a0f96c648f8516d96a36d155924b67407be04a5a25b2cdd",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--sysconfdir=/etc",
+      "--disable-static"
+   }
+};
+
+libpipeline = {
+   url = "https://download.savannah.gnu.org/releases/libpipeline/libpipeline-1.5.7.tar.gz",
+   sha3 = "776489d6f4e7c0a9aea3846d2842c629eb1bd34dbcf66846d9667eeb1726f8f5",
+   build = "./configure",
+   flags = { "--libdir=/usr/lib64" }
+};
+
+libx264 = {
+   url = "https://code.videolan.org/videolan/x264/-/archive/master/x264-master.tar.bz2",
+   build = "./configure",
+   flags = {
+      "--enable-shared",
+      "--disable-cli",
+      "--bit-depth=10"
+   }
+};
+
+libiconv = {
+   url = "https://ftp.gnu.org/gnu/libiconv/libiconv-1.17.tar.gz",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--enable-shared",
+      "--disable-static",
+      "--enable-extra-encodings"
+   }
+};
+
+libsoup3 = {
+   url = "https://download.gnome.org/sources/libsoup/3.4/libsoup-3.4.4.tar.xz",
+   build = "meson",
+   flags = {
+      "-Dvapi=enabled",
+      "-Dgssapi=disabled",
+      "-Dsysprof=disabled",
+      "-Ddocs=disabled"
+   },
+   prepare = [[
+   sed 's/apiversion/soup_version/' -i docs/reference/meson.build
+   ]]
+};
+
+lz4 = {
+   url = "https://github.com/lz4/lz4/releases/download/v1.9.4/lz4-1.9.4.tar.gz",
+   build = "make",
+   flags = {
+      "PREFIX=/usr",
+      "LIBDIR=/usr/lib64"
+   }
+};
+
+lzip = {
+   url = "https://download.savannah.gnu.org/releases/lzip/lzip-1.24.1.tar.gz",
+   sha3 = "90db551950647f2fae7983a87de2725ce046ef2f90882fb7162394b3b2bb65ca",
+   build = "./configure",
+};
+
+metacity = {
+   url = "https://download.gnome.org/sources/metacity/3.44/metacity-3.44.0.tar.xz",
+   build = "./configure",
+};
+
+muffin = {
+   url = "https://github.com/linuxmint/muffin/archive/refs/tags/master.mint21.tar.gz",
+   build = "meson",
+};
+
+mutter = {
+   url = "https://download.gnome.org/sources/mutter/41/mutter-41.4.tar.xz",
+   build = "meson",
+   flags = { "-Dtests=false" }
+};
+
+magick = {
+   url = "https://imagemagick.org/download/releases/ImageMagick-7.1.0-25.tar.xz",
+   build = "./configure",
+   flags = {
+      "--enable-hdri",
+      "--with-modules"
+   }
+};
+
+mold = {
+   url = "https://github.com/rui314/mold/archive/refs/tags/v2.30.0.tar.gz",
+   build = "cmake",
+   flags = {
+      "-DCMAKE_INSTALL_LIBEXECDIR=lib64",
+      "-DCMAKE_DISABLE_PRECOMPILE_HEADERS=ON",
+      "-DMOLD_ENABLE_QEMU_TESTS=OFF",
+      "-DMOLD_LTO=ON",
+      "-DMOLD_USE_MOLD=ON"
+   }
+};
+
+murrine = {
+   url = "https://download.gnome.org/sources/murrine/0.98/murrine-0.98.2.tar.xz",
+   build = "./configure",
+};
+
+nvi2 = {
+   url = "http://distcache.freebsd.org/ports-distfiles/lichray-nvi2-v2.2.1_GH0.tar.gz",
+   sha3 = "ae7202571bf48533c1287e6aa955f84205e4d438c0381716496d5524a9d8c009",
+   build = _,
+   post = [[
+   cmake -B build \
+   -DCMAKE_BUILD_TYPE=Release \
+   -DDB_INCLUDE_DIR=/usr/include/db1 \
+   -DUSE_ICONV=OFF
+   $make -C build
+   mkdir -p $destdir/usr/bin \
+   $destdir/usr/share/man/man1
+   mv build/nvi $destdir/usr/bin
+   mv man/vi.1 $destdir/usr/share/man/man1/nvi.1
+   mkdir -p $destdir/var/tmp/vi.recover
+   ]]
+};
+
+nvi = {
+   url = "http://pkgs.fedoraproject.org/repo/pkgs/nvi/nvi-1.81.6.tar.bz2/88d1e23115ee9f2961186b62e55f5704/nvi-1.81.6.tar.bz2",
+   sha3 = "a747bcab56588ad37ff755fc76975c647b66b26c6a0ec36ec32c73a437ee44c8",
+   build = "../dist/configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--sbindir=/usr/bin",
+      "--sysconfdir=/etc",
+      "--mandir=/usr/share/man",
+      "--enable-widechar",
+      "--disable-static",
+      '--program-prefix="n"',
+      "--with-db=bundled"
+   }
+};
+
+ninja = {
+   url = "https://github.com/ninja-build/ninja/archive/v1.11.1/ninja-1.11.1.tar.gz",
+   build = "cmake",
+};
+
+nitrogen = {
+   url = "https://github.com/l3ib/nitrogen/releases/download/1.6.1/nitrogen-1.6.1.tar.gz",
+   build = "./configure",
+};
+
+nautilus = {
+   url = "https://download.gnome.org/sources/nautilus/41/nautilus-41.2.tar.xz",
+   build = "meson",
+};
+
+nemo = {
+   url = "https://github.com/linuxmint/nemo/archive/refs/tags/master.mint21.tar.gz",
+   build = "meson",
+};
+
+
+-- build fails with gcc14?
+openblas = {
+   url = "https://github.com/xianyi/OpenBLAS/releases/download/v0.3.26/OpenBLAS-0.3.26.tar.gz",
+   sha3 = "b172bf0ba8c717304cced3568903d06ab0eb126fa42247d5ecf6b53b4003eb02",
+   build = "cmake",
+   flags = {
+      "-DBUILD_SHARED_LIBS=ON",
+      "-DBUILD_TESTING=OFF",
+      "-DNO_AFFINITY=ON",
+      "-DNO_WARMUP=1",
+      "-DTARGET=CORE2",
+      "-DNUM_THREADS=$(/usr/bin/getconf _NPROCESSORS_ONLN)",
+      "-DINTERFACE64=1",
+   }
+};
+
+openssl = {
+   url = "https://openssl.org/source/openssl-3.1.2.tar.gz",
+   build = "./config",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--openssldir=/etc/ssl",
+      "shared",
+      "zlib-dynamic"
+   },
+   post = [[ rm -f $destdir/usr/lib64/{libcrypto.a,libssl.a} ]]
+};
+
+pam = {
+   url = "https://github.com/linux-pam/linux-pam/releases/download/v1.6.1/Linux-PAM-1.6.1.tar.xz",
+   build = "./configure",
+   flags = {
+      "--sbindir=/usr/bin",
+      "--sysconfdir=/etc",
+      "--libdir=/usr/lib64",
+      "--enable-securedir=/usr/lib64/security"
+   },
+   post = [[ chmod 4755 /usr/bin/unix_chkpwd ]]
+};
+
+ppp = {
+   url = "https://samba.org/ftp/ppp/ppp-2.4.9.tar.gz",
+   build = "./configure",
+};
+
+pax = {
+   url = "http://www.mirbsd.org/MirOS/dist/mir/cpio/paxmirabilis-20201030.tgz",
+   sha3 = "9fb9c58131d2a98b4e86882bdac60cd9ff24b61f60096e89dc011af584dbad7a",
+   build = _,
+   post = [[
+   bash Build.sh
+   mkdir -p $destdir/usr/bin
+   mv pax $destdir/usr/bin
+   chmod 644 pax.1
+   mkdir -p $destdir/usr/share/man/man1
+   mv pax.1 $destdir/usr/share/man/man1
+   ]]
+};
+
+pass = {
+   url = "https://git.zx2c4.com/password-store/snapshot/password-store-1.7.4.tar.xz",
+   build = "make",
+};
+
+pcre = {
+   url = "https://sourceforge.net/projects/pcre/files/pcre/8.45/pcre-8.45.tar.bz2",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--enable-unicode-properties",
+      "--enable-pcre16",
+      "--enable-pcre32"
+   }
+};
+
+pangox-compat = {
+   url = "https://download.gnome.org/sources/pangox-compat/0.0/pangox-compat-0.0.2.tar.xz",
+   build = "./configure",
+   prepare = [[ autoreconf -fi ]]
+};
+
+pnmixer = {
+   url = "https://github.com/nicklan/pnmixer/releases/download/v0.7.2/pnmixer-v0.7.2.tar.gz",
+   build = "cmake",
+};
+
+qemu = {
+   url = "https://download.qemu-project.org/qemu-6.2.0.tar.xz",
+   build = "./configure",
+};
+
+sudo = {
+   url = "https://www.sudo.ws/dist/sudo-1.9.15p5.tar.gz",
+   sha3 = "342a3debeadbba52c9e09116f0ded085ddf239ecfa773d984f476268c402a161",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--sbindir=/usr/bin",
+      "--libexecdir=/usr/lib64",
+      "--with-rundir=/run/sudo",
+      "--with-vardir=/var/db/sudo",
+      "--sysconfdir=/etc",
+      "--with-logfac=auth",
+      "--localstatedir=/var",
+      "--disable-pam-session",
+      "--without-pam",
+      "--with-insults",
+      "--with-all-insults",
+   }
+};
+
+sdl-image = {
+   url = "https://github.com/libsdl-org/SDL_image/archive/refs/tags/release-2.6.1.tar.gz",
+   build = "./configure",
+};
+
+sdl2 = {
+   url = "https://libsdl.org/release/SDL2-2.0.20.tar.gz",
+   build = "./configure",
+};
+
+squashfs-tools = {
+   url = "https://github.com/plougher/squashfs-tools/archive/refs/tags/4.6.1.tar.gz",
+   build = "make",
+   flags = {
+      "--directory=squashfs-tools",
+      "INSTALL_PREFIX=$destdir/usr",
+      "XZ_SUPPORT=1"
+   }
+};
+
+sxhkd = {
+   url = "https://github.com/baskerville/sxhkd/archive/refs/tags/0.6.2.tar.gz",
+   build = "make",
+};
+
+sbc = {
+   url = "https://www.kernel.org/pub/linux/bluetooth/sbc-2.0.tar.xz",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--disable-static",
+      "--disable-tester"
+   }
+};
+
+secrets = {
+   url = "https://gitlab.gnome.org/World/secrets/-/archive/6.5/secrets-6.5.tar.gz",
+   build = "meson",
+};
+
+tracker = {
+   url = "https://download.gnome.org/sources/tracker/3.2/tracker-3.2.1.tar.xz",
+   build = "meson",
+   flags = { "-Dsystemd_user_services=false" }
+};
+
+tinyproxy = {
+   url = "https://github.com/tinyproxy/tinyproxy/releases/download/1.11.1/tinyproxy-1.11.1.tar.xz",
+   build = "./configure",
+};
+
+ucl = {
+   url = "https://oberhumer.com/opensource/ucl/download/ucl-1.03.tar.gz",
+   build = "./configure",
+};
+
+upx = {
+   url = "https://github.com/upx/upx/releases/download/v3.96/upx-3.96-src.tar.xz",
+   build = "make",
+};
+
+wine = {
+   url = "https://dl.winehq.org/wine/source/7.0/wine-7.0.tar.xz",
+   build = "./configure",
+   flags = { "--enable-win64" }
+};
+
+wireguard = {
+   url = "https://git.zx2c4.com/wireguard-tools/snapshot/wireguard-tools-1.0.20210914.tar.xz",
+   build = "make",
+};
+
+xorg-twm = {
+   url = "https://www.x.org/pub/individual/app/twm-1.0.12.tar.xz",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--sysconfdir=/etc",
+      "--localstatedir=/var",
+      "--disable-static",
+   },
+   prepare = [[
+   sed -e '/^rcdir =/s,^\(rcdir = \).*,\1/etc/X11/app-defaults,' \
+   -i src/Makefile.in
+   ]]
+};
+
+xorg-xclock = {
+   url = "https://www.x.org/pub/individual/app/xclock-1.1.1.tar.xz",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--sysconfdir=/etc",
+      "--localstatedir=/var",
+      "--disable-static"
+   },
+};
+
+xfce4-screenshooter = {
+   url = "https://archive.xfce.org/src/apps/xfce4-screenshooter/1.10/xfce4-screenshooter-1.10.5.tar.bz2",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--sysconfdir=/etc"
+   }
+};
+
+xcursor-themes = {
+   url = "https://x.org/pub/individual/data/xcursor-themes-1.0.7.tar.xz",
+   build = "./configure",
+};
+
+xorg-fonts-encodings = {
+   url = "https://x.org/pub/individual/font/encodings-1.1.0.tar.xz",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--sysconfdir=/etc",
+      "--localstatedir=/var",
+      "--disable-static"
+   }
+};
+
+xfce4-i3-workspaces-plugin = {
+   url = "https://github.com/denesb/xfce4-i3-workspaces-plugin/archive/refs/tags/1.4.1.tar.gz",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--sysconfdir=/etc"
+   }
+};
+
+xcb-util-xrm = {
+   url = "https://github.com/Airblader/xcb-util-xrm/releases/download/v1.3/xcb-util-xrm-1.3.tar.gz",
+   build = "./configure",
+};
+
+xfsprogs = {
+   url = "https://kernel.org/pub/linux/utils/fs/xfs/xfsprogs/xfsprogs-5.14.2.tar.xz",
+   build = "make",
+};
+
+yajl = {
+   url = "https://github.com/lloyd/yajl/archive/refs/tags/2.1.0.tar.gz",
+   build = "cmake",
+};
+
+zenity = {
+   url = "https://download.gnome.org/sources/zenity/3.32/zenity-3.32.0.tar.xz",
+   build = "./configure",
+};
+
+--------------------------------------------------------------------------------
+
+libportal = {
+   url = "https://github.com/flatpak/libportal/releases/download/0.5/libportal-0.5.tar.xz",
+   build = "meson",
+   flags = {
+      "-Dbackends=gtk3",
+      "-Ddocs=false"
+   } 
+};
+
+portal-gtk = {
+   url = "https://github.com/flatpak/xdg-desktop-portal-gtk/releases/download/1.14.0/xdg-desktop-portal-gtk-1.14.0.tar.xz",
+   build = "./configure",
+};
+
+portal = {
+   url = "https://github.com/flatpak/xdg-desktop-portal/releases/download/1.14.6/xdg-desktop-portal-1.14.6.tar.xz",
+   build = "./configure",
+   flags = {
+      "--disable-geoclue",
+      "--without-systemd"
+   }
+};
+
+inetutils = {
+   url = "https://ftp.gnu.org/gnu/inetutils/inetutils-2.5.tar.xz",
+   sha3 = "72d891ed6dfffb9b93ea83f4388466b6a14ba04bea61c84e387fb373b807a824",
+   build = "./configure",
+   flags = {
+      "--enable-{dnsdomainname,ftp,ftpd,hostname,talk,talkd,telnet,telnetd}",
+      "--disable-{ifconfig,inetd,logger,ping,ping6,rcp,rexec,rexecd,rlogin}",
+      "--disable-{rsh,servers,syslogd,tftp,tftpd,traceroute,uucpd,whois}",
+   }
+};

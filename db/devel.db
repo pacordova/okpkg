@@ -1,0 +1,115 @@
+autoconf = {
+   url = "https://ftp.gnu.org/gnu/autoconf/autoconf-2.72.tar.xz",
+   sha3 = "58d79b241a66db533747785182df3e49a61c9e5ed7508a002fd5bf033deaf7c8",
+   build = "./configure",
+};
+
+automake = {
+   url = "https://ftp.gnu.org/gnu/automake/automake-1.17.tar.xz",
+   sha3 = "9ef65366aeef36107f79db7caeacb0829f328bc6456087d443361df3759851cf",
+   build = "./configure",
+};
+
+bc-gh = {
+   url = "https://github.com/gavinhoward/bc/releases/download/6.7.6/bc-6.7.6.tar.xz",
+   sha3 = "1489f334be1908ec5727ddb52424a7dcb938b5e4bb615bab3cca4f0c9d72d0c0",
+   build = "./configure",
+   flags = {
+      "--predefined-build-type=GNU",
+      "--enable-readline",
+      "--disable-generated-tests",
+      "--disable-problematic-tests",
+   },
+   prepare = [[
+      sed -e 's/%%CFLAGS%%/-O3/' \
+          -e 's/%%HOSTCFLAGS%%/-O3/' \
+          -i Makefile.in
+   ]]
+};
+
+check = {
+   url = "https://github.com/libcheck/check/releases/download/0.15.2/check-0.15.2.tar.gz",
+   sha3 = "bfb856a68c0ea4d930803f6bd16c1eed38910a231c9e0f0009e69310e35e7a5d",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--localstatedir=/var",
+      "--sysconfdir=/etc",
+      "--disable-static"
+   }
+};
+
+gettext = {
+   url = "https://ftp.gnu.org/gnu/gettext/gettext-0.22.5.tar.xz",
+   sha3 = "410646226a2f971e0789082352d6e270606af924c97305316d3bbd764fa9fbd5",
+   build = "./configure",
+   flags = { "--without-git" }
+};
+
+help2man = {
+   url = "https://ftp.gnu.org/gnu/help2man/help2man-1.49.3.tar.xz",
+   sha3 = "bc9a32dc38382300d57aa14e87cde7d218841190cb1745e65984a7ddc0bd8cb9",
+   build = "./configure",
+};
+
+intltool = {
+   url = "https://launchpad.net/intltool/trunk/0.51.0/+download/intltool-0.51.0.tar.gz",
+   sha3 = "c215547f72957e1727976aeaa7156517fb005a5c8fe0df30e7f546c990ca8d19",
+   build = "./configure",
+   prepare = [[ sed -i 's:\\\${:\\\$\\{:' intltool-update.in ]]
+};
+
+libtool = {
+   url = "https://ftp.gnu.org/gnu/libtool/libtool-2.4.7.tar.xz",
+   sha3 = "a94fc179bf6832bc7e5974e4223d7cd16f6fd15664644ac77f769cafa280a7a4",
+   build = "./configure",
+   post = [[ rm -f $destdir/usr/lib64/libltdl.a ]]
+};
+
+meson = {
+   url = "https://github.com/mesonbuild/meson/releases/download/1.5.1/meson-1.5.1.tar.gz",
+   sha3 = "d0ebf1dce37be5e28c56ba155c5e0fbc2b4aa2958ede523e083b202b2c4b0759",
+   build = "python-build",
+};
+
+nasm = {
+   url = "https://www.nasm.us/pub/nasm/releasebuilds/2.16.03/nasm-2.16.03.tar.xz",
+   sha3 = "3a7634350853231b03bb9fec8f23836a4bc7cfb9f8a48f2317555ac4aec98414",
+   build = "./configure",
+};
+
+opendoas = {
+   url = "https://github.com/Duncaen/OpenDoas/archive/v6.8.2/OpenDoas-6.8.2.tar.gz",
+   sha3 = "de7bfb4797e216661db76043963090efc9e0e9e68ff420c352dbf71770c2b66c",
+   build = "./configure",
+   flags = {
+      "--with-shadow",
+      "--with-timestamp",
+      "--without-pam"
+   },
+   post = [[
+      mkdir -p $destdir/etc
+      printf "permit persist :wheel\n" > $destdir/etc/doas.conf
+      chmod 600 $destdir/etc/doas.conf
+   ]]
+};
+
+samurai = {
+   url = "https://github.com/michaelforney/samurai/releases/download/1.2/samurai-1.2.tar.gz",
+   sha3 = "127ea48499f38f1a1c476957453ccca9419c8a4a938925e1361818102307375d",
+   build = "make",
+   flags = { "PREFIX=/usr" },
+   post = [[ ln -sf samu $destdir/usr/bin/ninja ]]
+};
+
+texinfo = {
+   url = "https://ftp.gnu.org/gnu/texinfo/texinfo-7.1.tar.xz",
+   sha3 = "e62a3765829007a33de369d4f0c1b5dfda41b18b73a199bbaf5b2ca4606c2d15",
+   build = "./configure",
+};
+
+which = {
+   url = "https://ftp.gnu.org/gnu/which/which-2.21.tar.gz",
+   sha3 = "4a008a5fba90aa48ab099a000f60ce1067ef61f05ea0ace5e261066824f67792",
+   build = "./configure",
+};

@@ -1,0 +1,69 @@
+OKPKG
+-----
+This is a simple source-based package manager written in Lua.
+Usage:
+   okpkg {build|download|emerge|purge} [PACKAGE]
+   okpkg install [ARCHIVE]
+   okpkg chroot [DIRECTORY]
+   okpkg sha3sum [FILE]
+
+
+REQUIREMENTS
+------------
+In order to build okpkg, you need:
+   * A C compiler
+   * UNIX development tools (e.g. patch, find, tar)
+   * Lua
+   * OpenSSL or LibreSSL
+
+
+BUILD
+-----
+Clone the repository to /usr/okpkg. Then run: `make && make install`
+
+
+CONFIG
+------
+The metadata and configuration for each package is in the `./db' sub-directory.
+
+
+PATCHES
+-------
+Packages are kept as close to upstream as possible. However, some patches are
+included in the `./patches' sub-directory. When a package is downloaded using
+`okpkg download`, okpkg checks for a diff file with the name of the package,
+and patches it.
+
+Below is a non-exhaustive list for why okpkg patches certain packages:
+   * The patch is recommended by LFS/BLFS
+   * Set the libdir to be /usr/lib64
+   * Ensure gcc-ada is reproducible by respecting SOURCE_DATE_EPOCH
+   * Python needs to be patched to use libressl instead of openssl
+   * Make shared library for lua
+
+
+BOOTSTRAP
+---------
+This repository contains scripts to bootstrap a Linux From Scratch in the
+`scripts' sub-directory.
+You need the usual dependencies for LFS.
+See: <https://www.linuxfromscratch.org/>
+
+
+REPRODUCIBILITY
+---------------
+When built in order, most packages should be reproducible without rebuilding.
+
+For circular dependencies, there are temporary packages (prefixed with `_')
+that are built first.
+
+okpkg uses the SOURCE_DATE_EPOCH from the timestamp of the source tarball that
+is downloaded.
+
+Misc notes:
+   * libcap depends on gperf, but it also needs `which' to pick up gperf.
+   * pigz can result in gzipped files generating a different hash. For example:
+   * glibc will change checksums in the charmaps.
+   * perl depends on the kernel version and build times.
+   * The order of tzdata.zi is dependent on the version of awk you're using.
+   * The git hash for okpkg repo leaks into iputils.

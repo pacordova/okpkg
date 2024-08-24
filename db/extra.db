@@ -1,0 +1,214 @@
+acpid = {
+   url = "https://downloads.sourceforge.net/acpid2/acpid-2.0.34.tar.xz",
+   sha3 = "3e346422c38cf10bd0072581d77283d979e184d37a687b442a0c792c2fad62d2",
+   build = "./configure",
+};
+
+cmatrix = {
+   url = "https://github.com/abishekvashok/cmatrix/archive/v2.0/cmatrix-2.0.tar.gz",
+   sha3 = "f37ce888fe14ed8dd5ecd84e7cea4a67909eede471ecf407c491d2b703ca14c3",
+   build = "cmake",
+};
+
+cryptsetup = {
+   url = "https://kernel.org/pub/linux/utils/cryptsetup/v2.7/cryptsetup-2.7.3.tar.xz",
+   sha3 = "d6d65023fb6545d553cc97b222f5001e845872a77cb25240465261a04c3c0892",
+   build = "./configure",
+   flags = {
+      "--enable-libargon2",
+      "--disable-asciidoc",
+      "--disable-ssh-token",
+   }
+};
+
+linux = {
+   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.6.47.tar.xz",
+   sha3 = "5980626fea48e12fc0381ec7e698752aa13cb6a5152b60c60c21ad9e8aa6f587",
+   build = _,
+   post = [[  
+      $make headers bzImage modules
+      $make modules_install INSTALL_MOD_PATH=$destdir/usr
+      install -d $destdir/{boot,usr}
+      install -m 644 arch/x86/boot/bzImage $destdir/boot/vmlinuz-6.6
+      cp -rp usr/include $destdir/usr
+      find $destdir/usr/include -type f ! -name '*.h' -delete
+   ]]
+};
+
+gcc11 = {
+   url = "https://ftp.gnu.org/gnu/gcc/gcc-11.4.0/gcc-11.4.0.tar.xz",
+   sha3 = "a853c1bacc2baf9f9b9af09bd34beea13328c081f85f518c3e2d7741515f1a1d",
+   build = "../configure",
+   flags = {
+      "--with-linker-hash-style=gnu",
+      "--with-system-zlib",
+      "--enable-languages=ada,c,c++,d",
+      "--enable-threads=posix",
+      "--enable-clocale=gnu",
+      "--enable-gnu-unique-object",
+      "--enable-__cxa_atexit",
+      "--enable-default-pie",
+      "--enable-default-ssp",
+      "--enable-shared",
+      "--enable-plugin",
+      "--enable-bootstrap",
+      "--disable-werror",
+      "--disable-multilib",
+      "--disable-libstdcxx-pch",
+      "--disable-libssp",
+      "LD=ld"
+   },
+   prepare = [[
+      find /opt/gnat -name ld -exec mv -v {} {}.old \;
+      find /opt/gnat -name as -exec mv -v {} {}.old \;
+   ]],
+   post = [[
+      CHOST=$($destdir/usr/bin/gcc -dumpmachine)
+      pkgver=$($destdir/usr/bin/gcc -dumpversion)
+      find $destdir -name libgtkpeer.a  -exec rm -f '{}' +
+      find $destdir -name libgjsmalsa.a -exec rm -f '{}' +
+      find $destdir -name libgij.a      -exec rm -f '{}' +
+      ln -sr /usr/bin/cpp $destdir/usr/lib64
+      mkdir -p $destdir/usr/lib64/bfd-plugins
+      ln -sf ../../lib64/gcc/$CHOST/$pkgver/liblto_plugin.so \
+      $destdir/usr/lib64/bfd-plugins/
+      mkdir -p $destdir/usr/share/gdb/auto-load/usr/lib64
+      mv $destdir/usr/lib64/*gdb.py \
+      $destdir/usr/share/gdb/auto-load/usr/lib64
+      ln -s gcc $destdir/usr/bin/cc
+      ln -s gcc $destdir/usr/bin/c99
+      cd $destdir/usr/lib64/gcc/$CHOST/$pkgver
+      strip -s cc1 cc1plus lto1 lto-wrapper collect2 g++-mapper-server
+   ]]
+};
+
+gdb = {
+   url = "https://ftp.gnu.org/gnu/gdb/gdb-14.1.tar.xz",
+   sha3 = "52fd6f693d26e00ff21c43582e54d2fb9e3d9ce6e36da6617ddb69764063e960",
+   build = "./configure",
+   flags = {
+      "--without-guile",
+      "--with-system-readline",
+      "--without-python"
+   }
+};
+
+git = {
+   url = "https://kernel.org/pub/software/scm/git/git-2.46.0.tar.xz",
+   sha3 = "ee222d0aecbf4b2b87534dc1352d94bf3e848f57561ea101993ab77a8c130949",
+   build = "./configure",
+   flags = {
+      "--with-gitconfig=/etc/gitconfig",
+      "--without-tcltk",
+      "--without-python",
+      "--with-libpcre2"
+   },
+   prepare = [[
+      printf "NO_GETTEXT=YesPlease\n" >> config.mak
+      printf "NO_PERL=YesPlease\n" >> config.mak
+   ]]
+};
+
+gzip = {
+   url = "https://ftp.gnu.org/gnu/gzip/gzip-1.13.tar.xz",
+   sha3 = "6b03d763c4a9755955723b70ed0387e077b8f0452997e829e1061519f73a23ec",
+   build = "./configure",
+};
+
+iftop = {
+   url = "https://pdw.ex-parrot.com/iftop/download/iftop-1.0pre4.tar.gz",
+   sha3 = "a312fb825ead8dddafd9e1cfff755ef3c4aee2988158515225f39985058391cd",
+   build = "./configure",
+};
+
+logrotate = {
+   url = "https://github.com/logrotate/logrotate/releases/download/3.22.0/logrotate-3.22.0.tar.xz",
+   sha3 = "e23bd85e242aadbc110b8acba874947c13f783bbc7c9e65663dc0a757c609291",
+   build = "./configure",
+   flags = {
+      "--with-compress-command=pigz",
+      "--with-uncompress-command=unpigz",
+   }
+};
+
+lsof = {
+   url = "https://github.com/lsof-org/lsof/releases/download/4.99.3/lsof-4.99.3.tar.gz",
+   sha3 = "fa87e870dadb9144e4b0b85c020c0d48e150ea70cb0ad2f1069014df9c3f72ad",
+   build = "./configure",
+   flags = {
+      "--enable-security",
+      "--enable-no-sock-security",
+      "--with-libtirpc",
+   }
+};
+
+pciutils = {
+   url = "https://mj.ucw.cz/download/linux/pci/pciutils-3.13.0.tar.gz",
+   sha3 = "53507c5220643d8d4f1a8b7c701c19378038f711a08fd81144672cac0d4ffce5",
+   build = "make",
+   flags = {
+      "PREFIX=/usr",
+      "LIBDIR=/usr/lib64",
+      "SBINDIR=/usr/bin",
+      "SHAREDIR=/usr/share/hwdata",
+      "SHARED=yes"
+   },
+   post = [[ chmod 755 $destdir/usr/lib64/libpci.so ]]
+};
+
+r = {
+   url = "https://cran.r-project.org/src/base/R-4/R-4.4.1.tar.gz",
+   sha3 = "84bc3941d786810f5fd9c97f72cbff9e0a535d90ea3dc15dfd7036215b2d5c16",
+   build = "./configure",
+   flags = {
+      "--sysconfdir=/etc/R",
+      "--datarootdir=/usr/share",
+      "rsharedir=/usr/share/R/",
+      "rincludedir=/usr/include/R/",
+      "rdocdir=/usr/share/doc/R",
+      "--without-x",
+      "--enable-R-shlib",
+      "--disable-memory-profiling",
+      "--disable-java",
+      "--with-lapack",
+      "--with-blas",
+      "F77=gfortran",
+      "LIBnn=lib64",
+   }
+};
+
+rsync = {
+   url = "https://samba.org/ftp/rsync/src/rsync-3.2.7.tar.gz",
+   sha3 = "763bd8517633d1bef498be5d0846346f9c15a545f59bb14d40f6dcfb8f98fa28",
+   build = "./configure",
+   flags = {
+      "--enable-ipv6",
+      "--disable-zstd",
+      "--disable-debug",
+      "--disable-lz4",
+      "--disable-xxhash",
+      "--disable-md2man",
+      "--with-rrsync",
+      "--with-included-popt=no",
+      "--with-included-zlib=no",
+   }
+};
+
+tmux = {
+   url = "https://github.com/tmux/tmux/releases/download/3.4/tmux-3.4.tar.gz",
+   sha3 = "51c4ac03a4e88cde535159877ea4fb8919d64b14ad8a030913316fc3c337a6ca",
+   build = "./configure",
+};
+
+usbutils = {
+   url = "https://mirrors.kernel.org/pub/linux/utils/usb/usbutils/usbutils-017.tar.xz",
+   sha3 = "536184ee79409ec212e2b060791792384d428bd3176438c47826294bd572e80b",
+   build = "./configure",
+   flags = { "--datadir=/usr/share/hwdata" }
+};
+
+xorriso = {
+   url = "http://ftp.gnu.org/gnu/xorriso/xorriso-1.5.6.tar.gz",
+   sha3 = "ce81f4c5fc0c4a4144a1c9e68bfc49e632ca73ffc25ce1615f849f081e1510b8",
+   build = "./configure",
+};

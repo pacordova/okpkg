@@ -1,0 +1,198 @@
+python-flit-core = {
+   url = "https://github.com/pypa/flit/archive/3.9.0/flit-3.9.0.tar.gz",
+   sha3 = "3fe4093fe7c2b2c6e4fa8ba985cb3a8fd15bbc839f3c43e2be7d63e42be9f676",
+   build = _,
+   post = [[
+      cd flit_core
+      python3 -m flit_core.wheel
+      python3 bootstrap_install.py \
+          --installdir $destdir/usr/lib64/python3.12/site-packages \
+          dist/flit_core-*.whl
+   ]]
+};
+
+python-installer = {
+   url = "https://pypi.org/packages/source/i/installer/installer-0.7.0.tar.gz",
+   sha3 = "03d004eb827338703d8061e1e82c76df015773bae9bbd28cf2fed732b3238597",
+   build = _,
+   post = [[
+      python3 -m flit_core.wheel
+      cd src && python3 -m installer \
+          --destdir=$destdir --no-compile-bytecode ../dist/*.whl
+   ]]
+};
+
+python-pyproject-hooks = {
+   url = "https://github.com/pypa/pyproject-hooks/archive/v1.0.0/pyproject-hooks-1.0.0.tar.gz",
+   sha3 = "169e3fac2b4feee8034963d2ec1b18ded6910d8f41d7b2f8a5cf3e03f84bab38",
+   build = "python-build",
+};
+
+python-packaging = {
+   url = "https://pypi.org/packages/source/p/packaging/packaging-24.1.tar.gz",
+   sha3 = "d659e80e77aa95e544a0886ecac3ab3868e24af78501e6f54ea089005cbe165d",
+   build = "python-build",
+};
+
+python-build = {
+   url = "https://github.com/pypa/build/archive/1.2.1/build-1.2.1.tar.gz",
+   sha3 = "c1d8f40ec9c506b01346fb985f6a8bb921282355f3b2890da505d9d6f6b10067",
+   build = "python-build",
+};
+
+python-wheel = {
+   url = "https://pypi.org/packages/source/w/wheel/wheel-0.44.0.tar.gz",
+   sha3 = "7c95161296e740d920bb08718e59208b2c077b39d891d222762a62019ee4dc17",
+   build = "python-build",
+};
+
+python-setuptools = {
+   url = "https://pypi.org/packages/source/s/setuptools/setuptools-73.0.1.tar.gz",
+   sha3 = "0d19f8a59c091d81f31416fb19406decbf6763479854d0fb7c27466c5adb680c",
+   build = "python-build",
+};
+
+python-markupsafe = {
+   url = "https://pypi.org/packages/source/m/MarkupSafe/MarkupSafe-2.1.5.tar.gz",
+   sha3 = "82fe48c7d091f390f27f88bd219da2ca2add72e117322b9a538b4d9cfd5d40e4",
+   build = "python-build",
+};
+
+python-jinja = {
+   url = "https://github.com/pallets/jinja/archive/3.1.4/jinja-3.1.4.tar.gz",
+   sha3 = "3cd3b81bfee619c14230cd0945b05319d4279c308912d2dd6283949a1765fb12",
+   build = "python-build",
+};
+
+python-docutils = {
+   url = "https://downloads.sourceforge.net/docutils/docutils-0.21.2.tar.gz",
+   sha3 = "d38cbb7b8b851781bc7839f2ef2809568c3071087ec96bea2ec185b78745d5ec",
+   build = "python-build",
+};
+
+python-mako = {
+   url = "https://pypi.org/packages/source/M/Mako/Mako-1.3.5.tar.gz",
+   sha3 = "0856d483c888a48cb2ac3822d22d398e3bc9897c068b1bbfd72226b9af071ea2",
+   build = "python-build",
+};
+
+python-editables = {
+   url = "https://github.com/pfmoore/editables/archive/0.5/editables-0.5.tar.gz",
+   sha3 = "0a536128b2d0f5b932f59ea7e5b1fb8b523e0cb5801d3d4198fb7c135db41447",
+   build = "python-build",
+};
+
+python-typing_extensions = {
+   url = "https://pypi.org/packages/source/t/typing_extensions/typing_extensions-4.11.0.tar.gz",
+   sha3 = "4212d312dd322406f9104852e2dfeebffea3728ef3964bb808d7d361c46f4d8d",
+   build = "python-build",
+};
+
+python-setuptools-scm = {
+   url = "https://pypi.org/packages/source/s/setuptools-scm/setuptools_scm-8.1.0.tar.gz",
+   sha3 = "6bf3aac16da1a0828f4dd6d4516e09b724e23a64b725b5ba1f20b044c5206937",
+   build = "python-build",
+};
+
+python-pluggy = {
+   url = "https://pypi.org/packages/source/p/pluggy/pluggy-1.5.0.tar.gz",
+   sha3 = "0571f57e7b7c961662d5f42cc6109b51b48a9b92e34c6ebe137c36fb73dc0d34",
+   build = "python-build",
+};
+
+python-pathspec = {
+   url = "https://pypi.org/packages/source/p/pathspec/pathspec-0.12.1.tar.gz",
+   sha3 = "b6c4661141920a055f743b81c144ff57279bdf10899dcee1e16610daf0e3045e",
+   build = "python-build",
+};
+
+python-calver = {
+   url = "https://github.com/di/calver/archive/2022.06.26/calver-2022.06.26.tar.gz",
+   sha3 = "e77d8420d318a515f63f45018d5264aa3f31706ff9fc4d9ba0437b5d4e05af03",
+   build = "python-build",
+   prepare = [[ printf "Version: 2022.06.26\n" > PKG-INFO ]]
+};
+
+python-trove-classifiers = {
+   url = "https://pypi.org/packages/source/t/trove-classifiers/trove_classifiers-2024.7.2.tar.gz",
+   sha3 = "5dbd7d0be3a7cbd754f24d10ed27e1b55bbde4872b2789d4ccd5e732241f093c",
+   build = "python-build",
+};
+
+python-hatchling = {
+   url = "https://pypi.org/packages/source/h/hatchling/hatchling-1.25.0.tar.gz",
+   sha3 = "7af16b605ab790c6be6d8b85ed176713a85c4f44c7dfb0d6edbfdfe273ba2d39",
+   build = "python-build",
+};
+
+python-pygments = {
+   url = "https://pypi.org/packages/source/p/pygments/pygments-2.18.0.tar.gz",
+   sha3 = "e8902154acf0e5aa730579e955d2f7d55df81514c65cbf26e8a5a476dd02a004",
+   build = "python-build",
+};
+
+python-libevdev = {
+   url = "https://gitlab.freedesktop.org/libevdev/python-libevdev/-/archive/0.11/python-libevdev-0.11.tar.bz2",
+   sha3 = "194ab04f2c251b6b25d995fb63a32923252a38839ee65061aa1d3b921f8ca943",
+   build = "python-build",
+};
+
+python-pyudev = {
+   url = "https://pypi.org/packages/source/p/pyudev/pyudev-0.24.3.tar.gz",
+   sha3 = "a0b3d27cf6cea77bbbc01495aca6dcb65bf4637c2ef85d040e296a4ab49d6cdf",
+   build = "python-build",
+};
+
+python-ply = {
+   url = "http://www.dabeaz.com/ply/ply-3.11.tar.gz",
+   sha3 = "3d49c834da5ef47d9455dae9044f27d2f16cdf0ab58b655588142298d5736484",
+   build = "python-build",
+};
+
+glad = {
+   url = "https://github.com/Dav1dde/glad/archive/refs/tags/v2.0.6/glad-2.0.6.tar.gz",
+   sha3 = "10343dcc3fe48aee6e247ba9a3c6ef5e4b9d9b5f72398620a914c45ee2233f36",
+   build = "python-build",
+};
+
+python-pyparsing = {
+   url = "https://github.com/pyparsing/pyparsing/releases/download/3.1.2/pyparsing-3.1.2.tar.gz",
+   sha3 = "70ef9dcd0810e4ca4f034737c85f74bb936213d70a579cbc2374874bb5a5318f",
+   build = "python-build",
+};
+
+perl-xml-parser = {
+   url = "https://cpan.metacpan.org/authors/id/T/TO/TODDR/XML-Parser-2.47.tar.gz",
+   sha3 = "daaacd05fb62d1f8811c6f792c87bd4062ea70d57a951d3f15236c2424b24618",
+   build = "perl",
+};
+
+perl-xml-namespacesupport = {
+   url = "https://cpan.metacpan.org/authors/id/P/PE/PERIGRIN/XML-NamespaceSupport-1.12.tar.gz",
+   sha3 = "0c2792a4acad3fac873455f1c1eb63831b7f6dc6d159dc7976288eb805429efa",
+   build = "perl",
+};
+
+perl-xml-sax = {
+   url = "https://cpan.metacpan.org/authors/id/G/GR/GRANTM/XML-SAX-1.02.tar.gz",
+   sha3 = "bc1a3a754ce20c4f7a247430a0446626cc6fa7ca8bd248fe181146b7a516707d",
+   build = "perl",
+};
+
+perl-xml-sax-base = {
+   url = "https://cpan.metacpan.org/authors/id/G/GR/GRANTM/XML-SAX-Base-1.09.tar.gz",
+   sha3 = "684a18fce123d2a032f4ea0db190d028407c1e02b060cc936eb5678d3dbc078c",
+   build = "perl",
+};
+
+perl-xml-sax-expat = {
+   url = "https://cpan.metacpan.org/authors/id/B/BJ/BJOERN/XML-SAX-Expat-0.51.tar.gz",
+   sha3 = "4b0a0a2e945361db69108d9d25713e2a419f8a6bf94d9bf024302bea658a72a6",
+   build = "perl",
+};
+
+perl-xml-simple = {
+   url = "https://www.cpan.org/authors/id/G/GR/GRANTM/XML-Simple-2.25.tar.gz",
+   sha3 = "0b0068c5e608fcdb90b7906a6e1741519a122f28871fa7080da66ab0cb5e62b4",
+   build = "perl",
+};

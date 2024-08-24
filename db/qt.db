@@ -1,0 +1,98 @@
+-- wip
+extra-cmake-modules = {
+   url = "https://download.kde.org/stable/frameworks/5.91/extra-cmake-modules-5.91.0.tar.xz",
+   build = "cmake",
+};
+
+boost = {
+   url = "https://boostorg.jfrog.io/artifactory/main/release/1.78.0/source/boost_1_78_0.tar.bz2",
+   build = "cmake",
+};
+
+libtorrent = {
+   url = "https://github.com/arvidn/libtorrent/releases/download/v2.0.7/libtorrent-rasterbar-2.0.7.tar.gz",
+   build = "cmake",
+};
+
+qtbase = {
+   url = "https://invent.kde.org/qt/qt/qtbase/-/archive/v5.15.5-lts-lgpl/qtbase-v5.15.5-lts-lgpl.tar.gz",
+   build = "./configure",
+   flags = {
+      "--extprefix=$destdir/usr",
+      "--libdir=/usr/lib64",
+      "--archdatadir=/usr/lib64/qt",
+      "--datadir=/usr/share/qt",
+      "--docdir=/usr/share/doc/qt",
+      "--opensource",
+      "--confirm-license",
+      "--optimize-size",
+      "--nobuild = "make"=examples",
+      "--nobuild = "make"=tests"
+   }
+};
+
+qtsvg = {
+   url = "https://invent.kde.org/qt/qt/qtsvg/-/archive/v5.15.5-lts-lgpl/qtsvg-v5.15.5-lts-lgpl.tar.gz",
+   prepare = [[ qmake -makefile ]]
+   build = "make",
+};
+
+qttools = {
+   url = "https://invent.kde.org/qt/qt/qttools/-/archive/v5.15.5-lts-lgpl/qttools-v5.15.5-lts-lgpl.tar.gz",
+   build = "qmake",
+};
+
+qtx11extras = {
+   url = "https://invent.kde.org/qt/qt/qtx11extras/-/archive/v5.15.5-lts-lgpl/qtx11extras-v5.15.5-lts-lgpl.tar.gz",
+   build = "qmake",
+};
+
+qtdeclarative = {
+   url = "https://invent.kde.org/qt/qt/qtdeclarative/-/archive/v5.15.5-lts-lgpl/qtdeclarative-v5.15.5-lts-lgpl.tar.gz",
+   build = "qmake",
+};
+
+botan = {
+   url = "https://botan.randombit.net/releases/Botan-2.19.2.tar.xz",
+   build = "./configure",
+   flags = { "--libdir=/usr/lib64" }
+};
+
+qrencode = {
+   url = "https://fukuchi.org/works/qrencode/qrencode-4.1.1.tar.bz2",
+   build = "./configure",
+};
+
+keepassxc = {
+   url = "https://github.com/keepassxreboot/keepassxc/releases/download/2.7.1/keepassxc-2.7.1-src.tar.xz",
+   build = "make",
+   flags = {
+      "-DWITH_XC_DOCS=OFF",
+      "-DWITH_APP_BUNDLE=OFF"
+   }
+};
+
+qbittorrent = {
+   url = "https://sourceforge.net/projects/qbittorrent/files/qbittorrent/qbittorrent-4.4.3.1/qbittorrent-4.4.3.1.tar.xz",
+   build = "cmake",
+};
+
+qtpass = {
+   url = "https://github.com/IJHack/QtPass/archive/refs/tags/1.4.0-rc1.tar.gz",
+   build = "qmake",
+};
+
+strawberry = {
+   url = "https://files.strawberrymusicplayer.org/strawberry-1.0.7.tar.xz",
+   build = "cmake",
+};
+
+vlc = {
+   url = "https://download.videolan.org/vlc/3.0.16/vlc-3.0.16.tar.xz",
+   build = "./configure",
+};
+
+okular = {
+   url = "https://download.kde.org/stable/release-service/21.12.2/src/okular-21.12.2.tar.xz",
+   build = "cmake",
+};
