@@ -287,6 +287,7 @@ shadow = {
    sha3 = "931c04bd27bccb5b6d0bc68291aeb68bdf286a2ff1581ff51bd561277102db2d",
    build = "./configure",
    flags = {
+      "--disable-account-tools-setuid",
       "--with-group-name-max-length=32",
       "--with-{su,yescrypt}",
       "--without-{bcrypt,libbsd,libpam,nscd,selinux}",
