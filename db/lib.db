@@ -51,10 +51,8 @@ alsa-utils = {
    build = "./configure",
    flags = {
       "--with-udev-rules-dir=/usr/lib64/udev/rules.d",
-      "--disable-alsaconf",
-      "--disable-bat",
-      "--disable-xmlto",
-      "--with-curses=ncursesw"
+      "--disable-{alsaconf,bat,xmlto}",
+      "--with-curses=ncursesw",
    }
 };
 
@@ -75,7 +73,7 @@ flac = {
    url = "https://downloads.xiph.org/releases/flac/flac-1.4.3.tar.xz",
    sha3 = "24b4d4d600396dbedfb46e031bd7cc26408a6ecab1e3e2ac929c725fdc665fc1",
    build = "./configure",
-   flags = { "--disable-ogg", "--disable-thorough-tests" }
+   flags = { "--disable-{ogg,thorough-tests}" }
 };
 
 fribidi = {
@@ -98,10 +96,8 @@ json-c = {
    sha3 = "6e3bb804e61de257c313a2d4e39e89262dea68477acc518f8c0c4ab15a37ea69",
    build = "cmake",
    flags = {
-      "-DBUILD_STATIC_LIBS=OFF",
-      "-DBUILD_TESTING=OFF",
-      "-DENABLE_THREADING=ON",
-      "-DENABLE_RDRAND=OFF"
+      "-DBUILD_{STATIC_LIBS=OFF,TESTING=OFF}"
+      "-DENABLE_{THREADING=ON,RDRAND=OFF}"
    }
 };
 
@@ -109,11 +105,7 @@ lame = {
    url = "https://downloads.sourceforge.net/lame/lame-3.100.tar.gz",
    sha3 = "36700934b5b3e64f2e3ff33ee85bd7fc033890aa92d1f6a0a9b5acc2a3a0d199",
    build = "./configure",
-   flags = {
-      "--enable-nasm",
-      "--enable-mp3rtp",
-      "--disable-gtktest",
-   }
+   flags = { "--enable-{nasm=yes,mp3rtp=yes,gtktest=no}" }
 };
 
 libarchive = {
@@ -160,11 +152,7 @@ libjpeg-turbo = {
    url = "https://github.com/libjpeg-turbo/libjpeg-turbo/releases/download/3.0.3/libjpeg-turbo-3.0.3.tar.gz",
    sha3 = "648f531e76e7151d521106a081671f41e5153725d38d0c5a91ec6c80e6f113b4",
    build = "cmake",
-   flags = {
-      "-DENABLE_STATIC=OFF",
-      "-DWITH_JPEG8=ON",
-      "-DWITH_JAVA=OFF",
-   }
+   flags = { "-DENABLE_STATIC=OFF", "-DWITH_{JPEG8=ON,JAVA=OFF}" }
 };
 
 libmnl = {
@@ -258,23 +246,11 @@ libvpx = {
    ]],
    flags = {
       "--libdir=/usr/lib64",
-      "--enable-pic",
-      "--enable-postproc",
-      "--enable-runtime-cpu-detect",
-      "--enable-shared",
-      "--enable-vp8",
-      "--enable-vp9",
-      "--enable-vp9-highbitdepth",
-      "--disable-debug",
-      "--disable-debug-libs",
-      "--disable-docs",
-      "--disable-examples",
-      "--disable-install-bins",
-      "--disable-install-docs",
-      "--disable-install-srcs",
-      "--disable-static",
-      "--disable-tools",
-      "--disable-unit-tests",
+      "--enable-{pic,shared}",
+      "--enable-{postproc,runtime-cpu-detect}",
+      "--enable-{vp8,vp9,vp9-highbitdepth}",
+      "--disable-{debug,debug-libs,docs,examples,static,tools,unit-tests}",
+      "--disable-install-{bins,docs,srcs}",
       "--as=nasm",
    }
 };
@@ -284,15 +260,9 @@ libxml2 = {
    sha3 = "abba2c837356e1303c07b2703a95a1de5697f7e0c39d4e37b5e2132d96121de5",
    build = "./configure",
    flags = {
-      "--with-history",
-      "--with-legacy",
-      "--without-icu",
+      "--with-{history=yes,legacy=yes,icu=no}",
       "PYTHON=/usr/bin/python3",
-   },
-   post = [[
-      mv $destdir/usr/lib/python*/site-packages/* $destdir/usr/lib64/python*/site-packages
-      rm -fr $destdir/usr/lib/python*
-   ]]
+   }
 };
 
 libxslt = {
@@ -322,9 +292,7 @@ x264 = {
    flags = {
       "--libdir=/usr/lib64",
       "--enable-shared",
-      "--disable-cli",
-      "--disable-swscale",
-      "--disable-avs",
+      "--disable-{cli,swscale,avs}",
    },
 };
 
@@ -336,7 +304,7 @@ x265 = {
       "-DLIB_INSTALL_DIR=lib64",
       "-DENABLE_SHARED=ON",
       "-DGIT_ARCHETYPE=1",
-      "-Ssource",
+      "-S source",
    },
    post = [[ rm -f $destdir/usr/lib64/libx265.a ]]
 };

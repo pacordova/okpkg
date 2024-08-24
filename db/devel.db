@@ -17,8 +17,7 @@ bc-gh = {
    flags = {
       "--predefined-build-type=GNU",
       "--enable-readline",
-      "--disable-generated-tests",
-      "--disable-problematic-tests",
+      "--disable-{generated,problematic}-tests",
    },
    prepare = [[
       sed -e 's/%%CFLAGS%%/-O3/' \
@@ -31,12 +30,6 @@ check = {
    url = "https://github.com/libcheck/check/releases/download/0.15.2/check-0.15.2.tar.gz",
    sha3 = "bfb856a68c0ea4d930803f6bd16c1eed38910a231c9e0f0009e69310e35e7a5d",
    build = "./configure",
-   flags = {
-      "--libdir=/usr/lib64",
-      "--localstatedir=/var",
-      "--sysconfdir=/etc",
-      "--disable-static"
-   }
 };
 
 gettext = {
@@ -83,8 +76,7 @@ opendoas = {
    sha3 = "de7bfb4797e216661db76043963090efc9e0e9e68ff420c352dbf71770c2b66c",
    build = "./configure",
    flags = {
-      "--with-shadow",
-      "--with-timestamp",
+      "--with-{shadow,timestamp}",
       "--without-pam"
    },
    post = [[

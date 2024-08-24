@@ -2,13 +2,7 @@ iptables = {
    url = "https://www.netfilter.org/projects/iptables/files/iptables-1.8.10.tar.xz",
    sha3 = "bd162ed0541dfcc8d14faafb8bef0a7c6ecddf86b1d7ef6da70e7cadbe737610",
    build = "./configure",
-   flags = {
-      "--enable-bpf-compiler",
-      "--enable-devel",
-      "--enable-libipq",
-      "--enable-nfsynproxy",
-      "--disable-nftables",
-   }
+   flags = { "--enable-{bpf-compiler,devel,libipq,nfsynproxy,nftables=no}" }
 };
 
 connman = {
@@ -16,18 +10,9 @@ connman = {
    sha3 = "b8d68eb0b67baa2f9326d8906fd469f23ee9a379730847eac24faa62d35cd8f4",
    build = "./configure",
    flags = {
-      "--enable-client",
-      "--enable-nmcompat",
-      "--enable-pie",
-      "--enable-test",
-      "--disable-iwd",
-      "--disable-openconnect",
-      "--disable-openvpn",
-      "--disable-polkit",
-      "--disable-pptp",
-      "--disable-vpnc",
-      "--disable-wispr",
-      "--without-systemdunitdir",
+      "--enable-{client,nmcompat,pie,test}",
+      "--disable-{iwd,openconnect,openvpn,polkit,pptp,vpnc,wispr}"
+      "--with-systemdunitdir=no",
       "LIBS=-lncursesw",
    },
 };
@@ -37,18 +22,10 @@ curl = {
    sha3 = "d97e00e815d2249acca089b659e62ec4fac1653503464da5b46ea360f9032092",
    build = "./configure",
    flags = {
-      "--enable-ipv6",
-      "--enable-threaded-resolver",
-      "--enable-unix-sockets",
-      "--disable-ares",
-      "--disable-ldap",
-      "--disable-ldaps",
-      "--disable-manual",
+      "--enable-{ipv6,threaded-resolver,unix-sockets}",
+      "--disable-{ares,ldap,ldaps,manual}",
+      "--with-{openssl=yes,libidn2=yes,nghttp2=no,libssh2=no}",
       "--with-ca-bundle=/etc/ssl/certs/ca-certificates.crt",
-      "--with-openssl",
-      "--with-libidn2",
-      "--with-nghttp2",
-      "--without-libssh2",
    }
 };
 
@@ -56,7 +33,11 @@ openresolv = {
    url = "https://github.com/NetworkConfiguration/openresolv/releases/download/v3.13.2/openresolv-3.13.2.tar.xz",
    sha3 = "d53f70a5aa38adb8c89f94ca393a1e007d05dfad9d5b8791deeab7d03378ad7e",
    build = "./configure",
-   flags = { "--sysconfdir=/etc" }
+   flags = { 
+      "--libdir=/usr/lib64", 
+      "--libexecdir=/usr/lib64", 
+      "--sysconfdir=/etc" 
+   }
 };
 
 openntpd = {
@@ -100,14 +81,14 @@ iputils = {
 netcat = {
    url = "https://downloads.sourceforge.net/nc110/nc110.20180111.tar.xz",
    sha3 = "98ae44f399eac93e383559e87183dc9bf3080ec928f7d8cb727a5da256272344",
-   build = _,
+   build = "make",
    prepare = [[
       sed -e '/#define HAVE_BIND/s:#define:#undef:' \
           -e '/#define FD_SETSIZE 16/s:16:1024: #34250' \
           -i netcat.c
+      printf "install:\n" >> Makefile
    ]],
    post = [[
-      $make linux
       install -d $destdir/usr/{bin,share/man/man1}
       install -m 755 nc   $destdir/usr/bin/
       install -m 644 nc.1 $destdir/usr/share/man/man1/
@@ -126,11 +107,7 @@ openssh = {
       "--with-privsep-user=nobody",
       "--with-ssl-engine",
       "--with-xauth=/usr/bin/xauth",
-      "--without-pam",
-      "--without-selinux",
-      "--disable-strip",
-      "--disable-wtmp",
-      "--disable-utmp",
+      "--disable-{strip,wtmp,utmp}",
    },
    post = [[
       install -d $destdir/usr/{bin,share/man/man1}
@@ -215,10 +192,7 @@ pinentry = {
    sha3 = "0573d6a02b6fdf4c89b23d5e995ac0d60130f3879c6f0ed8f53e31768c70b39e",
    build = "./configure",
    flags = {
-      "--enable-pinentry-tty",
-      "--disable-pinentry-qt",
-      "--disable-pinentry-gtk2",
-      "--disable-pinentry-gnome3",
+      "--enable-pinentry-{tty=yes,qt=no,gtk2=no,gnome3=no}"
       "--disable-libsecret",
    }
 };

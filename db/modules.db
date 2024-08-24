@@ -3,11 +3,9 @@ python-flit-core = {
    sha3 = "3fe4093fe7c2b2c6e4fa8ba985cb3a8fd15bbc839f3c43e2be7d63e42be9f676",
    build = _,
    post = [[
-      cd flit_core
-      python3 -m flit_core.wheel
-      python3 bootstrap_install.py \
-          --installdir $destdir/usr/lib64/python3.12/site-packages \
-          dist/flit_core-*.whl
+      cd flit_core &&
+      python3 -m flit_core.wheel &&
+      python3 bootstrap_install.py --install-root $destdir dist/*.whl
    ]]
 };
 
@@ -17,8 +15,8 @@ python-installer = {
    build = _,
    post = [[
       python3 -m flit_core.wheel
-      cd src && python3 -m installer \
-          --destdir=$destdir --no-compile-bytecode ../dist/*.whl
+      cd src && 
+      python3 -m installer --destdir=$destdir ../dist/*whl
    ]]
 };
 
