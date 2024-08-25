@@ -300,7 +300,7 @@ shadow = {
           -e '/PATH=/{s@/sbin:@@;s@/bin:@@}'                   \
           -e 's:PREVENT_NO_AUTH superuser:PREVENT_NO_AUTH no:' \
           -i etc/login.defs
-      touch /usr/bin/passwd
+      : > /usr/bin/passwd
    ]],
    post = [[ make -C man install DESTDIR=$destdir ]]
 };
@@ -608,6 +608,8 @@ pigz = {
    url = "https://zlib.net/pigz/pigz-2.8.tar.gz",
    sha3 = "530248da5b27562503cfcfa6b96d2d483e7ae5c7acb088e0b2e3cdb33164a1a8",
    build = "make",
+   flags = { 'CFLAGS="$CFLAGS -O3 -DNOZOPFLI"', "ZOP=" },
+   prepare = [[ : > install ]],
    post = [[ 
       install -d $destdir/usr/bin 
       install -d $destdir/usr/share/man/man1

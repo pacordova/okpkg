@@ -97,6 +97,26 @@ os.execute"gtk-update-icon-cache /usr/share/icons/Adwaita"
 -- Set XFCE default terminal
 symlink("st", "/usr/bin/xfce4-terminal")
 
+-- Create firefox.desktop
+fp = io.open("/usr/share/applications/firefox.desktop", 'w')
+fp:write [[
+[Desktop Entry]
+Version=1.0
+Name=Firefox Web Browser
+Comment=Browse the World Wide Web
+GenericName=Web Browser
+Keywords=Internet;WWW;Browser;Web;Explorer
+Exec=apulse firefox %u
+Terminal=false
+X-MultipleArgs=false
+Type=Application
+Icon=/usr/lib64/firefox/browser/chrome/icons/default/default128.png
+Categories=GNOME;GTK;Network;WebBrowser;
+MimeType=text/html;text/xml;application/xhtml+xml;application/xml;application/rss+xml;application/rdf+xml;image/gif;image/jpeg;image/png;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/ftp;x-scheme-handler/chrome;video/webm;application/x-xpinstall;
+StartupNotify=true
+]]
+fp:close()
+
 -- Cleanup
 chdir"/usr/okpkg/packages/l"
 os.rename("sqlite-3460100-amd64.tar.lz", "sqlite-3.46.1-amd64.tar.lz")

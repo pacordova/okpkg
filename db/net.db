@@ -2,7 +2,6 @@ iptables = {
    url = "https://www.netfilter.org/projects/iptables/files/iptables-1.8.10.tar.xz",
    sha3 = "bd162ed0541dfcc8d14faafb8bef0a7c6ecddf86b1d7ef6da70e7cadbe737610",
    build = "./configure",
-   flags = { "--enable-{bpf-compiler,devel,libipq,nfsynproxy,nftables=no}" }
 };
 
 connman = {
@@ -82,11 +81,12 @@ netcat = {
    url = "https://downloads.sourceforge.net/nc110/nc110.20180111.tar.xz",
    sha3 = "98ae44f399eac93e383559e87183dc9bf3080ec928f7d8cb727a5da256272344",
    build = "make",
+   flags = { "linux" },
    prepare = [[
       sed -e '/#define HAVE_BIND/s:#define:#undef:' \
           -e '/#define FD_SETSIZE 16/s:16:1024: #34250' \
           -i netcat.c
-      printf "install:\n" >> Makefile
+      : > install
    ]],
    post = [[
       install -d $destdir/usr/{bin,share/man/man1}
