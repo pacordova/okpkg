@@ -28,6 +28,13 @@ curl = {
    }
 };
 
+openntpd = {
+   url = "https://ftp.openbsd.org/pub/OpenBSD/OpenNTPD/openntpd-6.8p1.tar.gz",
+   sha3 = "05a6c3e7f6928b0455e13e5167f455c1a7d9162cf394d415e6c48da7c49d8eec",
+   build = "./configure",
+   flags = { "--with-privsep-user=ntp" }
+};
+
 openresolv = {
    url = "https://github.com/NetworkConfiguration/openresolv/releases/download/v3.13.2/openresolv-3.13.2.tar.xz",
    sha3 = "d53f70a5aa38adb8c89f94ca393a1e007d05dfad9d5b8791deeab7d03378ad7e",
@@ -37,13 +44,6 @@ openresolv = {
       "--libexecdir=/usr/lib64", 
       "--sysconfdir=/etc" 
    }
-};
-
-openntpd = {
-   url = "https://ftp.openbsd.org/pub/OpenBSD/OpenNTPD/openntpd-6.8p1.tar.gz",
-   sha3 = "05a6c3e7f6928b0455e13e5167f455c1a7d9162cf394d415e6c48da7c49d8eec",
-   build = "./configure",
-   flags = { "--with-privsep-user=ntp" }
 };
 
 dhcpcd = {
@@ -101,13 +101,12 @@ openssh = {
    build = "./configure",
    flags = {
       "--sysconfdir=/etc/ssh",
-      "--datadir=/usr/share/openssh",
       "--with-default-path=/usr/bin",
       "--with-pid-dir=/run",
       "--with-privsep-user=nobody",
       "--with-ssl-engine",
       "--with-xauth=/usr/bin/xauth",
-      "--disable-{strip,wtmp,utmp}",
+      "--disable-{u,w}tmp",
    },
    post = [[
       install -d $destdir/usr/{bin,share/man/man1}
@@ -120,11 +119,7 @@ wpa_supplicant = {
    url = "https://w1.fi/releases/wpa_supplicant-2.10.tar.gz",
    sha3 = "5a6ec512f18ea33e5e8bfccbbaff3fc88571fcd482a420ed3aeaff6404ef3690",
    build = "make",
-   flags = {
-      "-C wpa_supplicant",
-      "BINDIR=/usr/bin",
-      "LIBDIR=/usr/lib64"
-   },
+   flags = { "-C wpa_supplicant", "BINDIR=/usr/sbin", "LIBDIR=/usr/lib64" },
    prepare = [[
       cd wpa_supplicant
       cp defconfig .config
@@ -192,7 +187,7 @@ pinentry = {
    sha3 = "0573d6a02b6fdf4c89b23d5e995ac0d60130f3879c6f0ed8f53e31768c70b39e",
    build = "./configure",
    flags = {
-      "--enable-pinentry-{tty=yes,qt=no,gtk2=no,gnome3=no}"
+      "--enable-pinentry-{tty=yes,qt=no,gtk2=no,gnome3=no}",
       "--disable-libsecret",
    }
 };

@@ -649,7 +649,7 @@ libxmlb = {
    url = "https://github.com/hughsie/libxmlb/archive/0.3.19/libxmlb-0.3.19.tar.gz",
    sha3 = "0c3acdca8672581dae0b237d649264706c757979d8553dee5cc30dec3f9b688a",
    build = "meson",
-   flags = { "-Dgtkdoc=false" },
+   flags = { "-Dintrospection=true", "-D{gtkdoc,tests}=false" },
 };
 
 appstream = {
