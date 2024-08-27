@@ -34,7 +34,7 @@ fontconfig = {
    url = "https://www.freedesktop.org/software/fontconfig/release/fontconfig-2.15.0.tar.xz",
    sha3 = "01271f5261ea7b47332da761d02f2b0ed62fb164a2921a1d81d3e53c6a5f7623",
    build = "./configure",
-   flags = { "--disable-docs", "--with-xmldir=/etc/fonts" }
+   flags = { "--disable-docs" }
 };
 
 --------------------------------------------------------------------------------
@@ -93,7 +93,6 @@ libx11 = {
    url = "https://x.org/pub/individual/lib/libX11-1.8.10.tar.xz",
    sha3 = "b2c1ecfd494a02c6e87766352a292aa6eccfaec4110deaec5b8981500de90d5d",
    build = "./configure",
-   flags = { "--disable-xf86bigfont" }
 };
 
 libxext = {
@@ -180,7 +179,6 @@ libfontenc = {
    url = "https://x.org/pub/individual/lib/libfontenc-1.1.8.tar.xz",
    sha3 = "8da80734b169343d4dfccffd07640adad661b247b9a4f0576e3cf4b55d69a87f",
    build = "./configure",
-   flags = { "--with-encodingsdir=/usr/share/fonts/encodings" }
 };
 
 libxfont2 = {
@@ -363,10 +361,7 @@ vulkan-loader = {
    flags = {
       "-DCMAKE_SKIP_RPATH=TRUE",
       "-DBUILD_TESTS=OFF",
-      "-DBUILD_WSI_WAYLAND_SUPPORT=OFF",
-      "-DBUILD_WSI_XCB_SUPPORT=ON",
-      "-DBUILD_WSI_XLIB_SUPPORT=ON",
-      "-DBUILD_WSI_WAYLAND_SUPPORT=OFF",
+      "-DBUILD_WSI_{WAYLAND_SUPPORT=OFF,XCB_SUPPORT=ON,XLIB_SUPPORT=ON}",
       "-DVULKAN_HEADERS_INSTALL_DIR=/usr"
    }
 };
@@ -392,13 +387,10 @@ mesa = {
       "-Dplatforms=x11",
       "-Dgallium-drivers=swrast",
       '-Dvulkan-drivers=""',
-      "-Dllvm=disabled",
-      "-Dgles1=disabled",
       "-Dglx=dri",
       "-Degl=enabled",
-      "-Dvalgrind=disabled",
-      "-Dlibunwind=disabled",
       "-Dglvnd=true",
+      "-D{llvm,gles1,valgrind,libunwind}=disabled",
    }
 };
 
