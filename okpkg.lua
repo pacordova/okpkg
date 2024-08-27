@@ -267,6 +267,7 @@ function build(x)
    os.execute [[ find $destdir -exec touch -hd "@$SOURCE_DATE_EPOCH" '{}' + ]]
 
    -- Cleanup
+   os.execute[[ rm -fr "$destdir"no ]]
    unsetenv("destdir")
    unsetenv("SOURCE_DATE_EPOCH")
 

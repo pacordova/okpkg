@@ -376,6 +376,8 @@ libpcre2 = {
    flags = {
       "--enable-jit",
       "--enable-pcre2-{16,32}",
+      "--enable-pcre2grep-{libz,libbz2}",
+      "--enable-pcre2test-libreadline",
       "--enable-unicode",
       'CFLAGS="$CFLAGS -O3"',
    },

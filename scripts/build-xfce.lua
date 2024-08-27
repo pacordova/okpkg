@@ -122,7 +122,7 @@ os.rename("sqlite-3460100-amd64.tar.lz", "sqlite-3.46.1-amd64.tar.lz")
 os.rename("x264-31e19f92f00c7003fa115047ce50978bc98c3a0d-amd64.tar.lz", "x264-20231001-amd64.tar.lz")
 os.rename("dav1d-1d-1.4.3-amd64.tar.lz", "dav1d-1.4.3-amd64.tar.lz")
 chdir("/usr/okpkg/packages")
-os.execute("rm -fr */_*.tar.lz *no")
+os.execute("rm -fr */_*.tar.lz")
 
 -- You may want to edit these to your own timezone/user
 symlink("/usr/share/zoneinfo/US/Eastern", "/etc/localtime")
