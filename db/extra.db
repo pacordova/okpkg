@@ -14,11 +14,7 @@ cryptsetup = {
    url = "https://kernel.org/pub/linux/utils/cryptsetup/v2.7/cryptsetup-2.7.3.tar.xz",
    sha3 = "d6d65023fb6545d553cc97b222f5001e845872a77cb25240465261a04c3c0892",
    build = "./configure",
-   flags = {
-      "--enable-libargon2",
-      "--disable-asciidoc",
-      "--disable-ssh-token",
-   }
+   flags = { "--enable-{asciidoc=no,libargon2=yes,ssh-token=no}" }
 };
 
 linux = {
@@ -86,11 +82,7 @@ gdb = {
    url = "https://ftp.gnu.org/gnu/gdb/gdb-14.1.tar.xz",
    sha3 = "52fd6f693d26e00ff21c43582e54d2fb9e3d9ce6e36da6617ddb69764063e960",
    build = "./configure",
-   flags = {
-      "--without-guile",
-      "--with-system-readline",
-      "--without-python"
-   }
+   flags = { "--with-{guile=no,system-readline=yes,python=no}" }
 };
 
 git = {
@@ -99,9 +91,7 @@ git = {
    build = "./configure",
    flags = {
       "--with-gitconfig=/etc/gitconfig",
-      "--without-tcltk",
-      "--without-python",
-      "--with-libpcre2"
+      "--with-{libpcre2=yes,python=no,tcltlk=no}",
    },
    prepare = [[
       printf "NO_GETTEXT=YesPlease\n" >> config.mak
@@ -125,21 +115,13 @@ logrotate = {
    url = "https://github.com/logrotate/logrotate/releases/download/3.22.0/logrotate-3.22.0.tar.xz",
    sha3 = "e23bd85e242aadbc110b8acba874947c13f783bbc7c9e65663dc0a757c609291",
    build = "./configure",
-   flags = {
-      "--with-compress-command=pigz",
-      "--with-uncompress-command=unpigz",
-   }
+   flags = { "--with-{compress-command=pigz,uncompress-command=unpigz}" }
 };
 
 lsof = {
    url = "https://github.com/lsof-org/lsof/releases/download/4.99.3/lsof-4.99.3.tar.gz",
    sha3 = "fa87e870dadb9144e4b0b85c020c0d48e150ea70cb0ad2f1069014df9c3f72ad",
    build = "./configure",
-   flags = {
-      "--enable-security",
-      "--enable-no-sock-security",
-      "--with-libtirpc",
-   }
 };
 
 pciutils = {
@@ -149,7 +131,6 @@ pciutils = {
    flags = {
       "PREFIX=/usr",
       "LIBDIR=/usr/lib64",
-      "SBINDIR=/usr/bin",
       "SHAREDIR=/usr/share/hwdata",
       "SHARED=yes"
    },
@@ -160,21 +141,7 @@ r = {
    url = "https://cran.r-project.org/src/base/R-4/R-4.4.1.tar.gz",
    sha3 = "84bc3941d786810f5fd9c97f72cbff9e0a535d90ea3dc15dfd7036215b2d5c16",
    build = "./configure",
-   flags = {
-      "--sysconfdir=/etc/R",
-      "--datarootdir=/usr/share",
-      "rsharedir=/usr/share/R/",
-      "rincludedir=/usr/include/R/",
-      "rdocdir=/usr/share/doc/R",
-      "--without-x",
-      "--enable-R-shlib",
-      "--disable-memory-profiling",
-      "--disable-java",
-      "--with-lapack",
-      "--with-blas",
-      "F77=gfortran",
-      "LIBnn=lib64",
-   }
+   flags = { "--enable-{R-shlib=yes,java=no}", "--without-x" }
 };
 
 rsync = {
@@ -182,15 +149,8 @@ rsync = {
    sha3 = "763bd8517633d1bef498be5d0846346f9c15a545f59bb14d40f6dcfb8f98fa28",
    build = "./configure",
    flags = {
-      "--enable-ipv6",
-      "--disable-zstd",
-      "--disable-debug",
-      "--disable-lz4",
-      "--disable-xxhash",
-      "--disable-md2man",
-      "--with-rrsync",
-      "--with-included-popt=no",
-      "--with-included-zlib=no",
+      "--disable-{debug,lz4,xxhash}",
+      "--with-included-{popt,zlib}=no",
    }
 };
 
