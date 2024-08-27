@@ -9,13 +9,21 @@ os.execute [[
 
 -- Imports
 dofile("/usr/okpkg/okpkg.lua")
+
 local ok = require("okutils")
-local mkdir, symlink, chdir =
-   ok.mkdir, ok.symlink, ok.chdir
+
+local chdir, mkdir, symlink =
+   ok.chdir, ok.mkdir, ok.symlink
+
 local fp, buf
 
+-- Generate locales
+os.execute("localedef -i POSIX -f UTF-8 C.UTF-8 2> /dev/null || true")
+os.execute("localedef -i en_US -f UTF-8 en_US.UTF-8")
+
 -- Builds and installs all packages in a single db file
-local function emerge_all(db) local fp, buf
+local function emerge_all(db) 
+   local fp, buf
    fp = io.open(db)
    buf = '\n' .. fp:read('*a')
    fp:close()
@@ -29,16 +37,11 @@ end
 -- Install system packages to track in /usr/okpkg/index
 os.execute("okpkg install /usr/okpkg/packages/a/*.tar.lz")
 
--- Generate locales
-os.execute("localedef -i POSIX -f UTF-8 C.UTF-8 2> /dev/null || true")
-os.execute("localedef -i en_US -f UTF-8 en_US.UTF-8")
-
 -- Modules
 emerge_all("/usr/okpkg/db/modules.db")
 mkdir("/usr/okpkg/packages/m")
 os.execute("mv /usr/okpkg/packages/python-*.tar.lz /usr/okpkg/packages/m")
 os.execute("mv /usr/okpkg/packages/perl-*.tar.lz /usr/okpkg/packages/m")
-
 
 -- Development tools
 emerge_all("/usr/okpkg/db/devel.db")

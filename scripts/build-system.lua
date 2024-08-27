@@ -7,18 +7,24 @@ os.execute [[
    fi
 ]]
 
--- imports
+-- Imports
 dofile("/usr/okpkg/okpkg.lua")
+
 local ok = require("okutils")
-local chdir = ok.chdir
+
+local chdir, mkdir, symlink =
+   ok.chdir, ok.mkdir, ok.symlink
+
+local fp, buf
 
 -- Generate locales
 os.execute("localedef -i POSIX -f UTF-8 C.UTF-8 2> /dev/null || true")
 os.execute("localedef -i en_US -f UTF-8 en_US.UTF-8")
 
 -- core system
-local fp, buf
-fp = io.open("/usr/okpkg/db/system.db"); buf = '\n' .. fp:read("*a"); fp:close()
+fp = io.open("/usr/okpkg/db/system.db")
+buf = '\n' .. fp:read("*a")
+fp:close()
 for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do
    if i == "_python" then fp = io.open("/usr/bin/python3")
       if not fp then emerge(i) else fp:close() end
