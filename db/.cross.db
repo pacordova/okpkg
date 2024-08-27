@@ -213,7 +213,7 @@ zlib = {
 pigz = {
    build = "make",
    flags = { "CC=x86_64-unknown-linux-gnu-gcc" },
-   prepare = [[ $patch < ../../patches/pigz.diff ]],
+   prepare = [[ $patch < ../../patches/pigz.diff && : > install ]],
    post = [[ 
       install -d $destdir/usr/bin 
       install -d $destdir/usr/share/man/man1
