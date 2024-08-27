@@ -19,11 +19,6 @@ bc-gh = {
       "--enable-readline",
       "--disable-{generated,problematic}-tests",
    },
-   prepare = [[
-      sed -e 's/%%CFLAGS%%/-O3/' \
-          -e 's/%%HOSTCFLAGS%%/-O3/' \
-          -i Makefile.in
-   ]]
 };
 
 check = {

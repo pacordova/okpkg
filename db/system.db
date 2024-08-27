@@ -608,7 +608,7 @@ pigz = {
    url = "https://zlib.net/pigz/pigz-2.8.tar.gz",
    sha3 = "530248da5b27562503cfcfa6b96d2d483e7ae5c7acb088e0b2e3cdb33164a1a8",
    build = "make",
-   flags = { 'CFLAGS="$CFLAGS -O3 -DNOZOPFLI"', "ZOP=" },
+   flags = { 'CFLAGS="$CFLAGS -DNOZOPFLI"', "ZOP=" },
    prepare = [[ : > install ]],
    post = [[ 
       install -d $destdir/usr/bin 
