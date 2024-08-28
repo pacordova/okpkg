@@ -10,7 +10,7 @@ connman = {
    build = "./configure",
    flags = {
       "--enable-{client,nmcompat,pie,test}",
-      "--disable-{iwd,openconnect,openvpn,polkit,pptp,vpnc,wispr}"
+      "--disable-{iwd,openconnect,openvpn,polkit,pptp,vpnc,wispr}",
       "--with-systemdunitdir=no",
       "LIBS=-lncursesw",
    },

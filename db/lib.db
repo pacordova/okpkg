@@ -102,8 +102,8 @@ json-c = {
    sha3 = "6e3bb804e61de257c313a2d4e39e89262dea68477acc518f8c0c4ab15a37ea69",
    build = "cmake",
    flags = {
-      "-DBUILD_{STATIC_LIBS=OFF,TESTING=OFF}"
-      "-DENABLE_{THREADING=ON,RDRAND=OFF}"
+      "-DBUILD_{STATIC_LIBS=OFF,TESTING=OFF}",
+      "-DENABLE_{THREADING=ON,RDRAND=OFF}",
    }
 };
 
