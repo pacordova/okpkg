@@ -1904,13 +1904,6 @@ libndp = {
    }
 };
 
-libnftnl = {
-   url = "https://netfilter.org/pub/libnftnl/libnftnl-1.2.6.tar.xz",
-   sha3 = "517d7c659d3c006aa709dbb46dcb7d97645f759393d68fec104b8e3487dbb8ea",
-   build = "./configure",
-   flags = { "--libdir=/usr/lib64" }
-};
-
 libnsl = {
    url = "https://github.com/thkukuk/libnsl/releases/download/v2.0.1/libnsl-2.0.1.tar.xz",
    sha3 = "f11ab8a6d9f4eb770a0f96c648f8516d96a36d155924b67407be04a5a25b2cdd",

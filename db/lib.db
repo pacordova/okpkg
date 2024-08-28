@@ -167,6 +167,12 @@ libmnl = {
    build = "./configure",
 };
 
+libnftnl = {
+   url = "https://netfilter.org/pub/libnftnl/libnftnl-1.2.7.tar.xz",
+   sha3 = "c3f196ec36e49fe6c13d0fea2371f324b36f897354542d904349bb2e011044d8",
+   build = "./configure",
+};
+
 libnl3 = {
    url = "https://github.com/thom311/libnl/releases/download/libnl3_10_0/libnl-3.10.0.tar.gz",
    sha3 = "a35a965ac148ade1d4cf9fed2ee089146d4182c4b746359f030b72f529cb5990",
