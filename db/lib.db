@@ -28,7 +28,7 @@ json-glib = {
    url = "https://download.gnome.org/sources/json-glib/1.8/json-glib-1.8.0.tar.xz",
    sha3 = "e62adc949ff5e5f4b58b129f3004b8eca7b052288c47ff146d53de3826d81999",
    build = "meson",
-   flags = { "-D{gtk_doc,tests,nls}=false" }
+   flags = { "-D{gtk_doc=disabled,nls=disabled,tests=false}" },
 };
 
 libgudev = {
