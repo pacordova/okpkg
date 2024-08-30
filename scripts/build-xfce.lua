@@ -99,6 +99,24 @@ os.execute("gtk-update-icon-cache /usr/share/icons/Adwaita")
 -- Set XFCE default terminal
 symlink("st", "/usr/bin/xfce4-terminal")
 
+-- apulse firefox
+fp = io.open("/usr/bin/firefox", 'w')
+fp:write [[
+#!/bin/sh
+/usr/bin/apulse /usr/lib64/firefox/firefox
+]]
+fp:close()
+os.execute("chmod 755 /usr/bin/firefox")
+
+-- firefox symlinks
+os.execute [[
+   install -d /usr/local/lib64
+   printf "/usr/local/lib64\n" >> /etc/ld.so.conf
+   for f in /usr/lib64/firefox/*.so; do
+       ln -sf $f /usr/local/lib64/`basename $f` 
+   done
+]]
+
 -- Create firefox.desktop
 fp = io.open("/usr/share/applications/firefox.desktop", 'w')
 fp:write [[

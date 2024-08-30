@@ -17,17 +17,6 @@ firefox-bin = {
       install -d $destdir/usr/share/applications
       mv firefox.desktop $destdir/usr/share/applications
       cp -rp . $destdir/usr/lib64/firefox
-
-      # setup /usr/bin/firefox wrapper
-      cd $destdir/usr/bin
-      if [ -x /usr/bin/apulse ]; then
-          printf "#!/bin/sh\n" >firefox
-          printf "/usr/bin/apulse /usr/lib64/firefox/firefox\n" >>firefox
-          chmod 755 firefox
-      else
-          ln -sf /usr/lib64/firefox/firefox firefox
-      fi
-   ]]
 };
 
 -- from firefox: libnss3.so libnssutil3.so libsmime3.so libnspr4.so libplc4.so libplds4.so

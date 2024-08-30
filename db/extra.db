@@ -17,6 +17,18 @@ cryptsetup = {
    flags = { "--enable-{asciidoc=no,libargon2=yes,ssh-token=no}" }
 };
 
+cups = {
+   url = "https://github.com/OpenPrinting/cups/releases/download/v2.4.10/cups-2.4.10-source.tar.gz",
+   sha3 = "5af24397f54e33798a0ed1313e51796f3a4faf53182ab5d7af71447c67e24ecc",
+   build = "./configure",
+   flags = {
+      "--with-rcdir=/tmp/cupsinit",
+      "--with-rundir=/run/cups",
+      "--with-system-groups=lpadmin",
+   },
+   post = [[ rm -fr $destdir/tmp/cupsinit ]]
+};
+
 linux = {
    url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.6.47.tar.xz",
    sha3 = "5980626fea48e12fc0381ec7e698752aa13cb6a5152b60c60c21ad9e8aa6f587",
