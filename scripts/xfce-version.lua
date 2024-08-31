@@ -2,7 +2,7 @@
 
 package.path = "/usr/okpkg/scripts/?.lua;" .. package.path
 
-require"version"
+require("version")
 
 -- List packages
 fp = io.popen("cat /usr/okpkg/db/{modules,devel,lib,net,xorg,xfce}.db")
@@ -16,6 +16,7 @@ end
 -- extras
 table.insert(pkgs, "dbus")
 table.insert(pkgs, "opendoas")
-table.insert(pkgs, "ripgrep")
+table.insert(pkgs, "rust")
+table.insert(pkgs, "cmake")
 
 version(pkgs)
