@@ -772,13 +772,6 @@ htop = {
    build = "./configure",
 };
 
-ripgrep = {
-   url = "https://github.com/BurntSushi/ripgrep/archive/14.1.0/ripgrep-14.1.0.tar.gz",
-   sha3 = "0c685042a86faf2da4098e5b0cb61f73eaad59d08d8e203be00580085be0644e",
-   build = "cargo",
-   flags = { "--features=pcre2" }
-};
-
 st = {
    url = "https://github.com/pacordova/st/archive/v0.9/st-0.9.tar.gz",
    sha3 = "f430a4c56411b79c4e618aab2ec22abd1c66a55bd7779ae11b3e7709ca10164d",

@@ -156,6 +156,13 @@ r = {
    flags = { "--enable-{R-shlib=yes,java=no}", "--without-x" }
 };
 
+ripgrep = {
+   url = "https://github.com/BurntSushi/ripgrep/archive/14.1.0/ripgrep-14.1.0.tar.gz",
+   sha3 = "0c685042a86faf2da4098e5b0cb61f73eaad59d08d8e203be00580085be0644e",
+   build = "cargo",
+   flags = { "--features=pcre2" }
+};
+
 rsync = {
    url = "https://samba.org/ftp/rsync/src/rsync-3.2.7.tar.gz",
    sha3 = "763bd8517633d1bef498be5d0846346f9c15a545f59bb14d40f6dcfb8f98fa28",
@@ -169,6 +176,12 @@ rsync = {
 tmux = {
    url = "https://github.com/tmux/tmux/releases/download/3.4/tmux-3.4.tar.gz",
    sha3 = "51c4ac03a4e88cde535159877ea4fb8919d64b14ad8a030913316fc3c337a6ca",
+   build = "./configure",
+};
+
+ugrep = {
+   url = "https://github.com/Genivia/ugrep/archive/v6.5.0/ugrep-6.5.0.tar.gz",
+   sha3 = "22ea3da7d1a3889daf5b55f5120cbacd6a4ae88c1a43aec05bbcd93a0faa746d",
    build = "./configure",
 };
 
