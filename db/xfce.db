@@ -43,8 +43,8 @@ shared-mime-info = {
 };
 
 upower = {
-   url = "https://gitlab.freedesktop.org/upower/upower/-/archive/v1.90.4/upower-v1.90.4.tar.bz2",
-   sha3 = "0361098291361171697efa94e7b061dc101e725a1ae532e7de7ddd4564bf266e",
+   url = "https://gitlab.freedesktop.org/upower/upower/-/archive/v1.90.5/upower-v1.90.5.tar.bz2",
+   sha3 = "7b24ed91602d2b2cdc055e0193d44c17e171d7927d0575f876e43cd5adf026c1",
    build = "meson",
    flags = {
       "-Dsystemdsystemunitdir=no",

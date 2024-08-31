@@ -1,6 +1,6 @@
 _glib2 = {
-   url = "https://download.gnome.org/sources/glib/2.80/glib-2.80.4.tar.xz",
-   sha3 = "4205bbce0611dc46082fccecbecf8913f445dd6dd9739c99e9d750ff943104a5",
+   url = "https://download.gnome.org/sources/glib/2.82/glib-2.82.0.tar.xz",
+   sha3 = "bb8c6fd9c76cdb85e315c1dbeeb2c86412a70ba901345bdf6c2f6b5782989571",
    build = "meson",
    flags = { "-Dintrospection=disabled" }
 };
@@ -12,8 +12,8 @@ gobject-introspection = {
 };
 
 glib2 = {
-   url = "https://download.gnome.org/sources/glib/2.80/glib-2.80.4.tar.xz",
-   sha3 = "4205bbce0611dc46082fccecbecf8913f445dd6dd9739c99e9d750ff943104a5",
+   url = "https://download.gnome.org/sources/glib/2.82/glib-2.82.0.tar.xz",
+   sha3 = "bb8c6fd9c76cdb85e315c1dbeeb2c86412a70ba901345bdf6c2f6b5782989571",
    build = "meson",
    flags = { "-Dintrospection=enabled" }
 };
@@ -25,8 +25,8 @@ dbus-glib = {
 };
 
 json-glib = {
-   url = "https://download.gnome.org/sources/json-glib/1.8/json-glib-1.8.0.tar.xz",
-   sha3 = "e62adc949ff5e5f4b58b129f3004b8eca7b052288c47ff146d53de3826d81999",
+   url = "https://download.gnome.org/sources/json-glib/1.10/json-glib-1.10.0.tar.xz",
+   sha3 = "63a0253ff4c71c1d49765cd773934af6982c6ce8cf051a4c63261a0105ae83d4",
    build = "meson",
    flags = { "-D{gtk_doc=disabled,nls=disabled,tests=false}" },
 };

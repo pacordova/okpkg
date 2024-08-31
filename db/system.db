@@ -53,8 +53,8 @@ _perl = {
 };
 
 iana-etc = {
-   url = "https://github.com/Mic92/iana-etc/releases/download/20240612/iana-etc-20240612.tar.gz",
-   sha3 = "02738d475e3a18074a494eba554cca0c4007afe1f4cc2540fe336c2f4f867414",
+   url = "https://github.com/Mic92/iana-etc/releases/download/20240813/iana-etc-20240813.tar.gz",
+   sha3 = "38d20fc63f13c6527205683daab3fd541fafd8310787d3d3ec70d869f6f796ce",
    build = _,
    post = [[ 
       install -d $destdir/etc
@@ -711,8 +711,8 @@ openvi = {
 };
 
 vim = {
-   url = "https://github.com/vim/vim/archive/v9.1.0697/vim-9.1.0697.tar.gz",
-   sha3 = "bffb3b0a444acb5dd8ecb6624e93c2f574121196c2be9c3db81d88ad90e3c5dc",
+   url = "https://github.com/vim/vim/archive/v9.1.0703/vim-9.1.0703.tar.gz",
+   sha3 = "b18445453ae0402525032bb9cafd2659fb200c46799cb1b742f784c6a1455463",
    build = "./configure",
    flags = {
       "--enable-{cscope,multibyte}",

@@ -309,8 +309,8 @@ xcb-util-cursor = {
 };
 
 libdrm = {
-   url = "https://dri.freedesktop.org/libdrm/libdrm-2.4.122.tar.xz",
-   sha3 = "7b62a20364260e8e3456a2392cb9e912ff4ac8aab748ce2866b9c7bcbd4af589",
+   url = "https://dri.freedesktop.org/libdrm/libdrm-2.4.123.tar.xz",
+   sha3 = "63f886cc8b1561937ae5074f40e295d12c9d43b82267d83ce95a5f3d83250e49",
    build = "meson",
    flags = {
       "-Dudev=true",
@@ -379,13 +379,20 @@ nvidia-vaapi-driver = {
    build = "meson",
 };
 
+directx-headers = {
+   url = "https://github.com/microsoft/DirectX-Headers/archive/v1.613.1/DirectX-Headers-1.613.1.tar.gz",
+   sha3 = "3c161edae5790eec87f9c2883eb466ecd6be62dadff179cae60ea3411b3d7ffa",
+   build = "meson",
+   flags = { "-Dbuild-test=false" }
+};
+
 mesa = {
    url = "https://mesa.freedesktop.org/archive/mesa-24.0.9.tar.xz",
    sha3 = "cba6413a854faf83fe99988114661c2cbf717eac093f27d6363c8c1cf1c48075",
    build = "meson",
    flags = {
       "-Dplatforms=x11",
-      "-Dgallium-drivers=swrast",
+      "-Dgallium-drivers=nouveau,r300,r600,svga,radeonsi,swrast,virgl,i915,iris,crocus,zink,d3d12",
       '-Dvulkan-drivers=""',
       "-Dglx=dri",
       "-Degl=enabled",
