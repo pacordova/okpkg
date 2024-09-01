@@ -152,7 +152,7 @@ function download(x)
 
    -- Delete old files
    srcdir = string.format("%s/%s", C.srcpath, x)
-   os.execute("rm -fr " .. srcdir)
+   os.execute(string.format("rm -fr %s", srcdir))
    mkdir(srcdir)
 
    -- Download file if not already downloaded
@@ -191,41 +191,39 @@ function makepkg(path)
    if chdir(path) ~= 0 then
       error(string.format("error: Path `%s' does not exist", path))
    else
-      setenv("SOURCE_DATE_EPOCH", timestamp(pwd()))
-      setenv("pwd", pwd())
+      setenv("SOURCE_DATE_EPOCH", timestamp("."))
    end
 
    -- Delete unneeded, strip, timestamp, etc.
    os.execute [[
-      find . | xargs file | grep "executable" | grep ELF | cut -f 1 -d : | \
-          xargs strip --strip-unneeded 2>/dev/null
-      find . | xargs file | grep "shared object" | grep ELF | cut -f 1 -d : | \
-          xargs strip --strip-unneeded 2>/dev/null
-      find . -name \*.a -exec strip --strip-debug '{}' + 2>/dev/null
-      find . -name \*.o -exec strip --strip-debug '{}' + 2>/dev/null
+      rm -fr usr/share/man/{de,fr,pl,pt_BR,ro,sv,uk}
+      rm -fr usr/share/{info,doc,locale,gtk-doc}
       find . -name \*.pyc -delete
       find . -name \*.la -delete
-      rm -fr $pwd/usr/share/man/{de,fr,pl,pt_BR,ro,sv,uk}
-      rm -fr $pwd/usr/share/{info,doc,locale,gtk-doc}
-      rm -fr $pwd/usr/doc 
+      find . -name \*.a -o -name \*.o -exec strip -g '{}' + 2>/dev/null
+      find . | \
+          xargs file | \
+          grep -e "executable" -e "shared object" | \
+          grep ELF | \
+          cut -f 1 -d : | \
+          xargs strip --strip-unneeded 2>/dev/null
       tar --mtime="@$SOURCE_DATE_EPOCH" \
           --sort=name \
           --owner=0 \
           --group=0 \
           --numeric-owner \
-          --file=$pwd.tar \
+          --use-compress-program="lzip -f" \
+          --file=$PWD.tar.lz \
           --create .
-      lzip -f $pwd.tar
-      touch -hd "@$SOURCE_DATE_EPOCH" $pwd.tar.lz
+      touch -hd "@$SOURCE_DATE_EPOCH" $PWD.tar.lz
    ]]
 
    -- Cleanup environment
-   chdir(dirname(pwd()))
-   os.execute("rm -fr $pwd")
-   unsetenv("pwd")
+   chdir("..")
+   os.execute(string.format("rm -fr %s", basename(path)))
    unsetenv("SOURCE_DATE_EPOCH")
 
-   return path .. ".tar.lz"
+   return string.format("%s.tar.lz", path)
 end
 
 function build(x) 
