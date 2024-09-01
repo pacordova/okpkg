@@ -9,7 +9,9 @@ printlibs(){
 }
 
 printdeps(){ 
-    for f in `printlibs $1`; do printf "%s: %s\n" $(grep -rlie $f .) $f; done
+    for f in `printlibs $1`; do 
+        printf "%s: %s\n" $f $(grep -rlie $f . | sed 's:^\./::;s:\.index$::')
+    done
 }
 
 printdeps xorg-server
