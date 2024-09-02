@@ -918,12 +918,17 @@ dynare = {
    }
 };
 
-
--- build fail - use pure c instead?
 b3sum = {
    url = "https://github.com/BLAKE3-team/BLAKE3/archive/1.5.1/BLAKE3-1.5.1.tar.gz",
    sha3 = "41bf0a7cf352ceba6c006b042c69e09dd16c0c279a758d35e342b41677f82bc0",
-   build = "cargo",
+   build = "cmake",
+   flags = { "c" }
+};
+
+-- TOFU
+b3sum = {
+   url = "https://github.com/michaelforney/b3sum/archive/0.3.8/b3sum-0.3.8.tar.gz",
+   sha3 = "5f71068125412945711a0660f0905efe847380d38d2e9619750595dde8813aba",
 };
 
 docbook2x = {
