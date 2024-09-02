@@ -92,7 +92,9 @@ for w in string.gmatch(buf, '(.-\n)') do
       gsub(".orig", ""):
       gsub("-stable", ""):
       gsub("_GH0", ""):
-      gsub("libpcre2", "pcre2")
+      gsub("libpcre2", "pcre2"):
+      gsub("rust%-bin", "rust"):
+      gsub("cmake%-bin", "cmake")
    table.insert(okpkg, s)
 end
 

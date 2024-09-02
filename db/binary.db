@@ -109,8 +109,8 @@ llvm-bin = {
 };
 
 cmake-bin = {
-   url = "https://github.com/Kitware/CMake/releases/download/v3.30.2/cmake-3.30.2-linux-x86_64.tar.gz", 
-   sha3 = "b4ac9f72581da029f4d66770298e42f8015a31c11f8603afc7e4ce346591e677",
+   url = "https://github.com/Kitware/CMake/releases/download/v3.30.3/cmake-3.30.3-linux-x86_64.tar.gz", 
+   sha3 = "226606c986f6d544b7a9ba2e968ae3a563f6b2585cfcbf996895ee02f10b1e31",
    build = _,
    post = [[
       install -d $destdir/usr/bin $destdir/usr/share/man/man{1,7}
