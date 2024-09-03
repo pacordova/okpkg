@@ -46,7 +46,6 @@ os.execute("mv /usr/okpkg/packages/perl-*.tar.lz /usr/okpkg/packages/m")
 -- Development tools
 emerge_all("/usr/okpkg/db/devel.db")
 emerge("rust-bin")
-emerge("cmake-bin")
 mkdir("/usr/okpkg/packages/d")
 os.execute("mv /usr/okpkg/packages/*.tar.lz /usr/okpkg/packages/d")
 
@@ -143,7 +142,6 @@ os.rename("sqlite-3460100-amd64.tar.lz", "sqlite-3.46.1-amd64.tar.lz")
 os.rename("x264-31e19f92f00c7003fa115047ce50978bc98c3a0d-amd64.tar.lz", "x264-20231001-amd64.tar.lz")
 os.rename("dav1d-1d-1.4.3-amd64.tar.lz", "dav1d-1.4.3-amd64.tar.lz")
 os.rename("rust-bin-1.80.1-x86_64-unknown-linux-gnu-amd64.tar.lz", "rust-bin-1.80.1-amd64.tar.lz")
-os.rename("cmake-bin-3.30.3-linux-x86_64-amd64.tar.lz", "cmake-bin-3.30.3-amd64.tar.lz")
 chdir("/usr/okpkg/packages")
 os.execute("rm -fr */_*.tar.lz")
 

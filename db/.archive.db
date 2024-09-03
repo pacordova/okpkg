@@ -33,23 +33,6 @@ nvidia = {
 
 --------------------------------------------------------------------------------
 
-libnghttp2 = {
-   url = "https://github.com/nghttp2/nghttp2/releases/download/v1.62.1/nghttp2-1.62.1.tar.xz",
-   sha3 = "c65ba551ff0cd315e50a2e00b29993240b9a3ef2ff922977dbb2682d367f6aa9",
-   build = "./configure",
-   flags = {
-      "--libdir=/usr/lib64",
-      "--enable-lib-only",
-      "--disable-examples",
-      "--disable-python-bindings",
-      "--disable-static",
-      "--with-libev",
-      "--with-openssl",
-      "--without-neverbleed",
-      "--without-systemd",
-   }
-};
-
 rhash = {
    url = "https://github.com/rhash/RHash/archive/v1.4.4/RHash-1.4.4.tar.gz",
    sha3 = "68982508df2965b2cb8b6567f867b0be13a1054409772d58b35d1a8f9621a23b",
@@ -60,25 +43,6 @@ rhash = {
       "--enable-openssl",
       "--extra-cflags=$CFLAGS",
    }
-};
-
-cmake = {
-   url = "https://cmake.org/files/v3.30/cmake-3.30.2.tar.gz",
-   sha3 = "4a5fb325169d34adee82a4b56619471a1cac82708f7e77960377747312cb93ca",
-   build = "./configure",
-   flags = {
-      "--mandir=/share/man",
-      "--datadir=/share/cmake",
-      "--parallel=$(getconf _NPROCESSORS_ONLN)",
-      "--system-libs",
-      "--no-system-cppdap",
-      "--no-system-jsoncpp",
-      "--no-system-librhash",
-   },
-   post = [[
-      rm -fr $destdir/usr/share/cmake*/Help
-      rm -fr $destdir/usr/share/bash-completion
-   ]]
 };
 
 --------------------------------------------------------------------------------
@@ -401,21 +365,15 @@ llvm = {
    sha3 = "8fc29c1c673f09025e95e2de0cd79b91d0237a349783f67ac247ccb04a549b18",
    build = "cmake",
    flags = {
-      "-DLLVM_LIBDIR_SUFFIX=64",
-      "-DLIBCXX_LIBDIR_SUFFIX=64",
-      "-DLIBCXXABI_LIBDIR_SUFFIX=64",
-      "-DLLVM_BUILD_LLVM_DYLIB=ON", 
-      "-DLLVM_LINK_LLVM_DYLIB=ON",
-      '-DLLVM_TARGETS_TO_BUILD="host;AMDGPU"',
-      "-DLLVM_ENABLE_RTTI=ON",
-      "-DLLVM_HOST_TRIPLE=$(cc -dumpmachine)",
-      "-DLLVM_INCLUDE_BENCHMARKS=OFF",
-      "-DLLVM_INCLUDE_EXAMPLES=OFF",
-      "-DLLVM_INCLUDE_DOCS=OFF",
-      "-DLLVM_INCLUDE_TESTS=OFF",
-      "-DLLVM_ENABLE_BINDINGS=OFF",
-      "-DLLVM_ENABLE_FFI=ON",
       "-DCLANG_DEFAULT_PIE_ON_LINUX=ON",
+      "-DLIBCXXABI_LIBDIR_SUFFIX=64",
+      "-DLIBCXX_LIBDIR_SUFFIX=64",
+      "-DLLVM_LIBDIR_SUFFIX=64",
+      '-DLLVM_TARGETS_TO_BUILD="host;AMDGPU"',
+      "-DLLVM_HOST_TRIPLE=$(cc -dumpmachine)",
+      "-DLLVM_{BUILD,LINK}_LLVM_DYLIB=ON", 
+      "-DLLVM_ENABLE_{BINDINGS=OFF,FFI=ON,RTTI=ON}",
+      "-DLLVM_INCLUDE_{BENCHMARKS,DOCS,EXAMPLES,TESTS}=OFF",
    },
    prepare = [[
       okpkg download llvm-cmake clang llvm-third-party

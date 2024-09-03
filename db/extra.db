@@ -29,6 +29,18 @@ cups = {
    post = [[ rm -fr $destdir/tmp/cupsinit ]]
 };
 
+dhcpcd = {
+   url = "https://github.com/NetworkConfiguration/dhcpcd/releases/download/v10.0.10/dhcpcd-10.0.10.tar.xz",
+   sha3 = "f478c10cb398916e5793442a3701f1cedd8c67a78948825637b134466e5381d4",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--runstatedir=/run",
+      "--sysconfdir=/etc",
+      "--disable-privsep",
+   }
+};
+
 linux = {
    url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.6.47.tar.xz",
    sha3 = "5980626fea48e12fc0381ec7e698752aa13cb6a5152b60c60c21ad9e8aa6f587",

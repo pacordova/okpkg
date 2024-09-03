@@ -1,3 +1,55 @@
+libxml2 = {
+   url = "https://download.gnome.org/sources/libxml2/2.13/libxml2-2.13.3.tar.xz",
+   sha3 = "abba2c837356e1303c07b2703a95a1de5697f7e0c39d4e37b5e2132d96121de5",
+   build = "./configure",
+   flags = {
+      "--with-{history=yes,legacy=yes,icu=no}",
+      "PYTHON=/usr/bin/python3",
+   }
+};
+
+libarchive = {
+   url = "https://github.com/libarchive/libarchive/releases/download/v3.7.4/libarchive-3.7.4.tar.xz",
+   sha3 = "27ee1cf7f44d7ba0a12998715d8dfb5aaca92c34279c34ee1ccf10325b19b098",
+   build = "./configure",
+   flags = { "--without-nettle" }
+};
+
+libev = {
+   url = "http://dist.schmorp.de/libev/libev-4.33.tar.gz",
+   sha3 = "ba1e921dd20ef633308f837e958e136b5ec80cd73683fd1bdb1ed48ceb59cf1b",
+   build = "./configure",
+};
+
+libnghttp2 = {
+   url = "https://github.com/nghttp2/nghttp2/releases/download/v1.62.1/nghttp2-1.62.1.tar.xz",
+   sha3 = "c65ba551ff0cd315e50a2e00b29993240b9a3ef2ff922977dbb2682d367f6aa9",
+   build = "./configure",
+   flags = { "--enable-lib-only", "--with-libev" }
+};
+
+libxslt = {
+   url = "https://download.gnome.org/sources/libxslt/1.1/libxslt-1.1.42.tar.xz",
+   sha3 = "89c1ef277e8a38b3825ede2c791e35e2495c600a9e94e2ca527663fb15cc815c",
+   build = "./configure",
+   flags = { "--without-python" }
+};
+
+libunistring = {
+   url = "https://ftp.gnu.org/gnu/libunistring/libunistring-1.2.tar.xz",
+   sha3 = "95472c6995afaa039064bab986637cb2825dd2cb20814db26fb365fd5cea9fd6",
+   build = "./configure",
+};
+
+libidn2 = {
+   url = "https://ftp.gnu.org/gnu/libidn/libidn2-2.3.7.tar.gz",
+   sha3 = "889197927b322f26b41a4ba21e78f631cf0cdca8d8fcfa0f5ac0d4bdcd8278c8",
+   build = "./configure",
+   post = [[ rm -fr $destdir/usr/bin $destdir/usr/share/man/man1 ]]
+};
+
+--------------------------------------------------------------------------------
+
 autoconf = {
    url = "https://ftp.gnu.org/gnu/autoconf/autoconf-2.72.tar.xz",
    sha3 = "58d79b241a66db533747785182df3e49a61c9e5ed7508a002fd5bf033deaf7c8",
@@ -25,6 +77,42 @@ check = {
    url = "https://github.com/libcheck/check/releases/download/0.15.2/check-0.15.2.tar.gz",
    sha3 = "bfb856a68c0ea4d930803f6bd16c1eed38910a231c9e0f0009e69310e35e7a5d",
    build = "./configure",
+};
+
+curl = {
+   url = "https://curl.se/download/curl-8.9.1.tar.xz",
+   sha3 = "d97e00e815d2249acca089b659e62ec4fac1653503464da5b46ea360f9032092",
+   build = "./configure",
+   flags = {
+      "--enable-{ipv6,threaded-resolver,unix-sockets}",
+      "--disable-{ares,ldap,ldaps,manual}",
+      "--with-{openssl=yes,libidn2=yes,nghttp2=yes,libssh2=no}",
+      "--with-ca-bundle=/etc/ssl/certs/ca-certificates.crt",
+   }
+};
+
+libuv = {
+   url = "https://dist.libuv.org/dist/v1.48.0/libuv-v1.48.0.tar.gz",
+   sha3 = "68fb3f8b47090edd4b9f6d0a458f1f846ca9173404a12a9c3c5ff78b4190b314",
+   prepare = [[ ./autogen.sh ]],
+   build = "./configure",
+};
+
+cmake = {
+   url = "https://cmake.org/files/v3.30/cmake-3.30.3.tar.gz",
+   sha3 = "7c8d4532fc1951814e535335de94edd054abcb3c1e6efa3edd1b583d4ee5dd40",
+   build = "./configure",
+   flags = {
+      "--mandir=/share/man",
+      "--datadir=/share/cmake",
+      "--parallel=$(getconf _NPROCESSORS_ONLN)",
+      "--system-libs",
+      "--no-system-{cppdap,jsoncpp,librhash}",
+   },
+   post = [[
+      rm -fr $destdir/usr/share/cmake*/Help
+      rm -fr $destdir/usr/share/bash-completion
+   ]]
 };
 
 gettext = {
