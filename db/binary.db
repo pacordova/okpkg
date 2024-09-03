@@ -95,11 +95,9 @@ signal-desktop = {
    ]]
 };
 
--- 14.0.0 is the last signed binary release.
--- Consider building from source.
 llvm-bin = {
-   url = "https://github.com/llvm/llvm-project/releases/download/llvmorg-14.0.0/clang+llvm-14.0.0-x86_64-linux-gnu-ubuntu-18.04.tar.xz",
-   sha3 = "746c02a728ea5916493682ac18c10610ca881971f603b53c524c8ba15850013d",
+   url = "https://github.com/llvm/llvm-project/releases/download/llvmorg-18.1.8/clang+llvm-18.1.8-x86_64-linux-gnu-ubuntu-18.04.tar.xz",
+   sha3 = "3a9c2e15e214ad3dd9b805c7273a859c2d27b33be20b5c0902726c7e6b2c0c75",
    build = _,
    post = [[
       install -d $destdir/usr
