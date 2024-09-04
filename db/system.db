@@ -707,7 +707,10 @@ openvi = {
    sha3 = "bc8b4846bc61052d4a55a5b0eb411222bc66a4fd2f3954be874a1f3e0702114b",
    build = "make",
    flags = { "CC=gcc", "OPTLEVEL=-O2", "PREFIX=/usr", "BINPREFIX=''" },
-   prepare = [[ sed -i 's/escapetime=2/escapetime=1/' common/options.c ]],
+   prepare = [[ 
+      sed -i 's/escapetime=2/escapetime=1/' common/options.c 
+      sed -i 's/libexec/bin/' GNUmakefile
+   ]],
 };
 
 vim = {
