@@ -365,23 +365,21 @@ llvm = {
    sha3 = "8fc29c1c673f09025e95e2de0cd79b91d0237a349783f67ac247ccb04a549b18",
    build = "cmake",
    flags = {
-      "-DCLANG_DEFAULT_PIE_ON_LINUX=ON",
-      "-DLIBCXXABI_LIBDIR_SUFFIX=64",
-      "-DLIBCXX_LIBDIR_SUFFIX=64",
-      "-DLLVM_LIBDIR_SUFFIX=64",
       '-DLLVM_TARGETS_TO_BUILD="host;AMDGPU"',
       "-DLLVM_HOST_TRIPLE=$(cc -dumpmachine)",
+      "-D{LIBCXXABI,LIBCXX,LLVM}_LIBDIR_SUFFIX=64",
       "-DLLVM_{BUILD,LINK}_LLVM_DYLIB=ON", 
       "-DLLVM_ENABLE_{BINDINGS=OFF,FFI=ON,RTTI=ON}",
       "-DLLVM_INCLUDE_{BENCHMARKS,DOCS,EXAMPLES,TESTS}=OFF",
+      "-DCLANG_DEFAULT_PIE_ON_LINUX=ON",
    },
    prepare = [[
       okpkg download llvm-cmake clang llvm-third-party
       mv ../llvm-cmake ../llvm-third-party .
       mv ../clang tools
-      sed -e '/LLVM_COMMON_CMAKE_UTILS/s@../cmake@llvm-cmake@' \
+      sed -e '/LLVM_COMMON_CMAKE_UTILS/s:../cmake:llvm-cmake:' \
           -i CMakeLists.txt
-      sed -e '/LLVM_THIRD_PARTY_DIR/s@../third-party@llvm-third-party@' \
+      sed -e '/LLVM_THIRD_PARTY_DIR/s:../third-party:llvm-third-party:' \
           -i cmake/modules/HandleLLVMOptions.cmake
       grep -rl '#!.*python' | xargs sed -i '1s/python$/python3/'
       sed 's/utility/tool/' -i utils/FileCheck/CMakeLists.txt
