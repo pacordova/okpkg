@@ -41,6 +41,7 @@ glibc = {
    flags = {
       "--prefix=/usr",
       "--libdir=/usr/lib64",
+      "--sbindir=/usr/bin",
       "--enable-kernel=6.6",
       "--disable-nscd",
       "--with-headers=$destdir/usr/include",
