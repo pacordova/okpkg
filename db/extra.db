@@ -125,6 +125,7 @@ linux = {
    url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.6.47.tar.xz",
    sha3 = "5980626fea48e12fc0381ec7e698752aa13cb6a5152b60c60c21ad9e8aa6f587",
    build = _,
+   prepare = [[ gzip -cd /proc/config.gz > .config ]],
    post = [[  
       $make headers bzImage modules
       $make modules_install INSTALL_MOD_PATH=$destdir/usr
