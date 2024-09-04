@@ -278,7 +278,7 @@ libcap = {
    url = "https://kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-2.70.tar.xz",
    sha3 = "d69c5f2817583fa535f0a63eedf89ae39c6fa9b86a1b5ccc11fb9f49a9ea674a",
    build = "make",
-   flags = { "prefix=/usr", "lib=lib64" },
+   flags = { "prefix=/usr", "lib=lib64", "SBINDIR=/usr/bin" },
    prepare = [[ sed -i '/install -m.*STA/d' libcap/Makefile ]]
 };
 
@@ -444,7 +444,7 @@ tzdata = {
    url = "https://github.com/eggert/tz/archive/2024a/tz-2024a.tar.gz",
    sha3 = "e5cd838b360297b300db8be111d7eb98c9fef0e7b41bedf16968d6fd62184dd7",
    build = "make",
-   flags = { "LIBDIR=/usr/lib64" },
+   flags = { "LIBDIR=/usr/lib64", "ZICDIR=$destdir/usr/bin" },
    post = [[ rm -f $destdir/etc/localtime ]]
 };
 
@@ -743,7 +743,7 @@ mandoc = {
       printf "PREFIX=/usr\n" >> configure.local
       printf "LIBDIR=/usr/lib64\n" >> configure.local
       printf "MANDIR=/usr/share/man\n" >> configure.local
-      printf "SBINDIR=/usr/sbin\n" >> configure.local
+      printf "SBINDIR=/usr/bin\n" >> configure.local
    ]]
 };
 
@@ -770,7 +770,7 @@ dcron = {
    url = "http://www.jimpryor.net/linux/releases/dcron-4.5.tar.gz",
    sha3 = "4190e7664e055d0540c03e38b5ad3e7597ca9b27953b27b53731e66884da2c84",
    build = "make",
-   flags = { "PREFIX=/usr" }
+   flags = { "PREFIX=/usr", "SBINDIR=/usr/bin" }
 };
 
 e2fsprogs = {
@@ -798,8 +798,8 @@ dinit = {
    url = "https://github.com/davmac314/dinit/releases/download/v0.18.0/dinit-0.18.0.tar.xz",
    sha3 = "1ffaa363d8ae8cdc1f561f0242492250ffb2d927dc11a7a837f3c2aa4262e388",
    build = "make",
-   flags = { "BUILD_SHUTDOWN=yes" },
-   post = [[ ln -sf dinit $destdir/usr/sbin/init ]]
+   flags = { "BUILD_SHUTDOWN=yes", "SBINDIR=/usr/bin" },
+   post = [[ ln -sf dinit $destdir/usr/bin/init ]]
 };
 
 dbus = {
@@ -872,7 +872,7 @@ efibootmgr = {
    url = "https://github.com/rhboot/efibootmgr/releases/download/18/efibootmgr-18.tar.bz2",
    sha3 = "0ee98e9ee17940e4feb573ff5afb0d9e372fbed6f38449ee90c16e3e515b08ad",
    build = "make",
-   flags = { "EFIDIR=/boot/efi" }
+   flags = { "EFIDIR=/boot/efi", "sbindir=/usr/bin" }
 };
 
 grub = {
