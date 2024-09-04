@@ -1,3 +1,15 @@
+autoconf = {
+   url = "https://ftp.gnu.org/gnu/autoconf/autoconf-2.72.tar.xz",
+   sha3 = "58d79b241a66db533747785182df3e49a61c9e5ed7508a002fd5bf033deaf7c8",
+   build = "./configure",
+};
+
+automake = {
+   url = "https://ftp.gnu.org/gnu/automake/automake-1.17.tar.xz",
+   sha3 = "9ef65366aeef36107f79db7caeacb0829f328bc6456087d443361df3759851cf",
+   build = "./configure",
+};
+
 libxml2 = {
    url = "https://download.gnome.org/sources/libxml2/2.13/libxml2-2.13.3.tar.xz",
    sha3 = "abba2c837356e1303c07b2703a95a1de5697f7e0c39d4e37b5e2132d96121de5",
@@ -35,6 +47,20 @@ libxslt = {
    flags = { "--without-python" }
 };
 
+libtool = {
+   url = "https://ftp.gnu.org/gnu/libtool/libtool-2.4.7.tar.xz",
+   sha3 = "a94fc179bf6832bc7e5974e4223d7cd16f6fd15664644ac77f769cafa280a7a4",
+   build = "./configure",
+   post = [[ rm -f $destdir/usr/lib64/libltdl.a ]]
+};
+
+libuv = {
+   url = "https://dist.libuv.org/dist/v1.48.0/libuv-v1.48.0.tar.gz",
+   sha3 = "68fb3f8b47090edd4b9f6d0a458f1f846ca9173404a12a9c3c5ff78b4190b314",
+   prepare = [[ ./autogen.sh ]],
+   build = "./configure",
+};
+
 libunistring = {
    url = "https://ftp.gnu.org/gnu/libunistring/libunistring-1.2.tar.xz",
    sha3 = "95472c6995afaa039064bab986637cb2825dd2cb20814db26fb365fd5cea9fd6",
@@ -49,18 +75,6 @@ libidn2 = {
 };
 
 --------------------------------------------------------------------------------
-
-autoconf = {
-   url = "https://ftp.gnu.org/gnu/autoconf/autoconf-2.72.tar.xz",
-   sha3 = "58d79b241a66db533747785182df3e49a61c9e5ed7508a002fd5bf033deaf7c8",
-   build = "./configure",
-};
-
-automake = {
-   url = "https://ftp.gnu.org/gnu/automake/automake-1.17.tar.xz",
-   sha3 = "9ef65366aeef36107f79db7caeacb0829f328bc6456087d443361df3759851cf",
-   build = "./configure",
-};
 
 bc-gh = {
    url = "https://github.com/gavinhoward/bc/releases/download/6.7.6/bc-6.7.6.tar.xz",
@@ -89,13 +103,6 @@ curl = {
       "--with-{openssl=yes,libidn2=yes,nghttp2=yes,libssh2=no}",
       "--with-ca-bundle=/etc/ssl/certs/ca-certificates.crt",
    }
-};
-
-libuv = {
-   url = "https://dist.libuv.org/dist/v1.48.0/libuv-v1.48.0.tar.gz",
-   sha3 = "68fb3f8b47090edd4b9f6d0a458f1f846ca9173404a12a9c3c5ff78b4190b314",
-   prepare = [[ ./autogen.sh ]],
-   build = "./configure",
 };
 
 cmake = {
@@ -133,13 +140,6 @@ intltool = {
    sha3 = "c215547f72957e1727976aeaa7156517fb005a5c8fe0df30e7f546c990ca8d19",
    build = "./configure",
    prepare = [[ sed -i 's:\\\${:\\\$\\{:' intltool-update.in ]]
-};
-
-libtool = {
-   url = "https://ftp.gnu.org/gnu/libtool/libtool-2.4.7.tar.xz",
-   sha3 = "a94fc179bf6832bc7e5974e4223d7cd16f6fd15664644ac77f769cafa280a7a4",
-   build = "./configure",
-   post = [[ rm -f $destdir/usr/lib64/libltdl.a ]]
 };
 
 meson = {
