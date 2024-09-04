@@ -221,8 +221,8 @@ libmpc = {
 };
 
 isl = {
-   url = "https://libisl.sourceforge.io/isl-0.26.tar.xz",
-   sha3 = "cadc038bd1b115a7fe130b533543af8f1b736bc2c90faaa9b1a95f038258e20f",
+   url = "https://libisl.sourceforge.io/isl-0.27.tar.xz",
+   sha3 = "75a391c4bfea7658b5926c17fd860168f81bae770b0f53378512998da27960b4",
    build = "./configure",
 };
 
