@@ -764,6 +764,7 @@ util-linux = {
       "--without-{python,systemd}",
       "ADJTIME_PATH=/var/lib/hwclock/adjtime",
    },
+   post = [[ cd $destdir && mv bin/* usr/sbin/* usr/bin && rmdir bin usr/sbin ]]
 };
 
 dcron = {
