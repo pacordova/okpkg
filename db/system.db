@@ -265,7 +265,7 @@ gcc14 = {
       find $destdir -name libgtkpeer.a  -exec rm -f '{}' +
       find $destdir -name libgjsmalsa.a -exec rm -f '{}' +
       install -d $destdir/usr/lib64/bfd-plugins
-      ln -sf ../../libexec/gcc/`$cc -dumpmachine`/`$cc -dumpversion`/liblto_plugin.so \
+      ln -sf ../gcc/`$cc -dumpmachine`/`$cc -dumpversion`/liblto_plugin.so \
           $destdir/usr/lib64/bfd-plugins/liblto_plugin.so
       install -d $destdir/usr/share/gdb/auto-load/usr/lib64
       mv $destdir/usr/lib64/*gdb.py $destdir/usr/share/gdb/auto-load/usr/lib64
@@ -601,8 +601,8 @@ findutils = {
    post = [[
       rm -f $destdir/usr/bin/{locate,updatedb}
       rm -f $destdir/usr/share/man/man1/{locate,updatedb}.1
-      rm -f $destdir/usr/libexec/frcode
       rm -f $destdir/share/man/man5/locatedb.5
+      rm -f $destdir/usr/lib64/frcode
    ]]
 };
 
@@ -666,14 +666,14 @@ tar = {
    url = "https://ftp.gnu.org/gnu/tar/tar-1.35.tar.xz",
    sha3 = "d8f59be9b3c00294ad98ba08b47a18515f178b33129f2ddce3281b56d56448bd",
    build = "./configure",
-   flags = { "FORCE_UNSAFE_CONFIGURE=1" }
+   flags = { "--libexecdir=/usr/bin", "FORCE_UNSAFE_CONFIGURE=1" }
 };
 
 cpio = {
    url = "https://ftp.gnu.org/gnu/cpio/cpio-2.15.tar.bz2",
    sha3 = "112b5cd46328b32e9bbc463721f2c0ece9adc4671dcbb016a096007181771524",
    build = "./configure",
-   flags = { "--with-rmt=/usr/libexec/rmt" }
+   flags = { "--with-rmt=/usr/bin/rmt" }
 };
 
 lua = {
@@ -808,6 +808,7 @@ dbus = {
    sha3 = "8e9d0418dfa461edaf56deb760c1d3ae0417cb3aaf6cfe8bee0487bb9eeb1a11",
    build = "./configure",
    flags = {
+      "--libexecdir=/usr/lib64/dbus",
       "--enable-inotify",
       "--disable-{doxygen,xml}-docs",
       "--with-system-pid-file=/run/dbus/pid",
@@ -815,8 +816,8 @@ dbus = {
       "--with-system-socket=/run/dbus/system_bus_socket",
    },
    post = [[
-      chown root:messagebus $destdir/usr/libexec/dbus-daemon-launch-helper
-      chmod 4750 $destdir/usr/libexec/dbus-daemon-launch-helper
+      chown root:messagebus $destdir/usr/lib64/dbus/dbus-daemon-launch-helper
+      chmod 4750 $destdir/usr/lib64/dbus/dbus-daemon-launch-helper
    ]]
 };
 

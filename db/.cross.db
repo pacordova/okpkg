@@ -170,14 +170,15 @@ findutils = {
    build = "./configure",
    flags = {
       "--prefix=/usr",
+      "--libexecdir=/usr/lib64",
       "--host=x86_64-unknown-linux-gnu",
       "--build=$(build-aux/config.guess)",
    },
    post = [[
       rm -f $destdir/usr/bin/{locate,updatedb}
       rm -f $destdir/usr/share/man/man1/{locate,updatedb}.1
-      rm -f $destdir/usr/libexec/frcode
       rm -f $destdir/share/man/man5/locatedb.5
+      rm -f $destdir/usr/lib64/frcode
    ]]
 };
 
