@@ -41,20 +41,6 @@ dhcpcd = {
    }
 };
 
-linux = {
-   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.6.47.tar.xz",
-   sha3 = "5980626fea48e12fc0381ec7e698752aa13cb6a5152b60c60c21ad9e8aa6f587",
-   build = _,
-   post = [[  
-      $make headers bzImage modules
-      $make modules_install INSTALL_MOD_PATH=$destdir/usr
-      install -d $destdir/{boot,usr}
-      install -m 644 arch/x86/boot/bzImage $destdir/boot/vmlinuz-6.6
-      cp -rp usr/include $destdir/usr
-      find $destdir/usr/include -type f ! -name '*.h' -delete
-   ]]
-};
-
 gcc11 = {
    url = "https://ftp.gnu.org/gnu/gcc/gcc-11.4.0/gcc-11.4.0.tar.xz",
    sha3 = "a853c1bacc2baf9f9b9af09bd34beea13328c081f85f518c3e2d7741515f1a1d",
@@ -135,6 +121,20 @@ iftop = {
    build = "./configure",
 };
 
+linux = {
+   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.6.47.tar.xz",
+   sha3 = "5980626fea48e12fc0381ec7e698752aa13cb6a5152b60c60c21ad9e8aa6f587",
+   build = _,
+   post = [[  
+      $make headers bzImage modules
+      $make modules_install INSTALL_MOD_PATH=$destdir/usr
+      install -d $destdir/{boot,usr}
+      install -m 644 arch/x86/boot/bzImage $destdir/boot/vmlinuz-6.6
+      cp -rp usr/include $destdir/usr
+      find $destdir/usr/include -type f ! -name '*.h' -delete
+   ]]
+};
+
 logrotate = {
    url = "https://github.com/logrotate/logrotate/releases/download/3.22.0/logrotate-3.22.0.tar.xz",
    sha3 = "e23bd85e242aadbc110b8acba874947c13f783bbc7c9e65663dc0a757c609291",
@@ -146,6 +146,21 @@ lsof = {
    url = "https://github.com/lsof-org/lsof/releases/download/4.99.3/lsof-4.99.3.tar.gz",
    sha3 = "fa87e870dadb9144e4b0b85c020c0d48e150ea70cb0ad2f1069014df9c3f72ad",
    build = "./configure",
+};
+
+mesa = {
+   url = "https://mesa.freedesktop.org/archive/mesa-24.0.9.tar.xz",
+   sha3 = "cba6413a854faf83fe99988114661c2cbf717eac093f27d6363c8c1cf1c48075",
+   build = "meson",
+   flags = {
+      "-Dplatforms=x11",
+      "-Dgallium-drivers=nouveau,r300,r600,svga,radeonsi,swrast,virgl,i915,iris,crocus,zink,d3d12",
+      '-Dvulkan-drivers=""',
+      "-Dglx=dri",
+      "-Degl=enabled",
+      "-Dglvnd=true",
+      "-D{llvm,gles1,valgrind,libunwind}=disabled",
+   }
 };
 
 pciutils = {

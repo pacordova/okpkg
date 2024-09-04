@@ -386,21 +386,6 @@ directx-headers = {
    flags = { "-Dbuild-test=false" }
 };
 
-mesa = {
-   url = "https://mesa.freedesktop.org/archive/mesa-24.0.9.tar.xz",
-   sha3 = "cba6413a854faf83fe99988114661c2cbf717eac093f27d6363c8c1cf1c48075",
-   build = "meson",
-   flags = {
-      "-Dplatforms=x11",
-      "-Dgallium-drivers=nouveau,r300,r600,svga,radeonsi,swrast,virgl,i915,iris,crocus,zink,d3d12",
-      '-Dvulkan-drivers=""',
-      "-Dglx=dri",
-      "-Degl=enabled",
-      "-Dglvnd=true",
-      "-D{llvm,gles1,valgrind,libunwind}=disabled",
-   }
-};
-
 xbitmaps = {
    url = "https://x.org/pub/individual/data/xbitmaps-1.1.3.tar.xz",
    sha3 = "867ea521b24178cc3570434e81c069ab9b368dd4a5c16dd6987068b716e29c4b",
