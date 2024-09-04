@@ -84,6 +84,7 @@ B = {
          [0] = "meson setup build",
          "-Dprefix=/usr",
          "-Dlibdir=lib64",
+         "-Dsbindir=bin",
          "-Dbuildtype=release",
          "-Dwrap_mode=nodownload",
          ...
