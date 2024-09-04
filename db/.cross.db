@@ -53,8 +53,8 @@ glibc = {
       mkdir -p build && cd build
       printf "slibdir=/usr/lib64\n" >> configparms
       printf "rtlddir=/usr/lib64\n" >> configparms
-      printf "sbindir=/usr/sbin\n" >> configparms
-      printf "rootsbindir=/usr/sbin\n" >> configparms
+      printf "sbindir=/usr/bin\n" >> configparms
+      printf "rootsbindir=/usr/bin\n" >> configparms
    ]],
 };
 
