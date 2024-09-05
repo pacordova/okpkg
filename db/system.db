@@ -686,6 +686,7 @@ lua = {
       'TO_LIB="liblua.so liblua.so.5.4 liblua.so.5.4.7"',
       "INSTALL_DATA='cp -d'",
       'MYCFLAGS="$CFLAGS -fPIC"',
+      "LUA_ROOT=/usr/",
       "INSTALL_TOP=$destdir/usr",
       "INSTALL_LIB=$destdir/usr/lib64",
       "INSTALL_MAN=$destdir/usr/share/man/man1",
