@@ -29,7 +29,7 @@ openresolv = {
    build = "./configure",
    flags = { 
       "--libdir=/usr/lib64", 
-      "--libexecdir=/usr/lib64", 
+      "--libexecdir=/usr/libexec", 
       "--sysconfdir=/etc" 
    }
 };
