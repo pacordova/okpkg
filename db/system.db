@@ -711,7 +711,7 @@ openvi = {
    flags = { "CC=gcc", "OPTLEVEL=-O2", "PREFIX=/usr", "BINPREFIX=''" },
    prepare = [[ 
       sed -i 's:escapetime=2:escapetime=1:' common/options.c 
-      sed -i 's:libexec:bin:' GNUmakefile
+      sed -i 's:libexec:lib64:' GNUmakefile
    ]],
 };
 
