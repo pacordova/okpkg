@@ -41,7 +41,6 @@ glibc = {
    flags = {
       "--prefix=/usr",
       "--libdir=/usr/lib64",
-      "--libexecdir=/usr/lib64",
       "--sbindir=/usr/bin",
       "--enable-kernel=6.6",
       "--disable-nscd",
@@ -149,7 +148,6 @@ coreutils = {
    build = "./configure",
    flags = {
       "--prefix=/usr",
-      "--libexecdir=/usr/lib64",
       "--enable-install-program=hostname",
       "--enable-no-install-program=kill,uptime",
       "--without-openssl",
@@ -172,7 +170,6 @@ findutils = {
    build = "./configure",
    flags = {
       "--prefix=/usr",
-      "--libexecdir=/usr/lib64",
       "--host=x86_64-unknown-linux-gnu",
       "--build=$(build-aux/config.guess)",
    },
@@ -180,7 +177,7 @@ findutils = {
       rm -f $destdir/usr/bin/{locate,updatedb}
       rm -f $destdir/usr/share/man/man1/{locate,updatedb}.1
       rm -f $destdir/share/man/man5/locatedb.5
-      rm -f $destdir/usr/lib64/frcode
+      rm -f $destdir/usr/libexec/frcode
    ]]
 };
 
@@ -189,7 +186,6 @@ gawk = {
    flags = {
       "--prefix=/usr",
       "--libdir=/usr/lib64",
-      "--libexecdir=/usr/lib64",
       "--sysconfdir=/etc",
       "--host=x86_64-unknown-linux-gnu",
       "--build=$(build-aux/config.guess)",
@@ -267,7 +263,6 @@ tar = {
    build = "./configure",
    flags = {
       "--prefix=/usr",
-      "--libexecdir=/usr/lib64",
       "--host=x86_64-unknown-linux-gnu",
       "--build=$(build-aux/config.guess)",
       "FORCE_UNSAFE_CONFIGURE=1",
@@ -389,7 +384,6 @@ gcc-pass2 = {
    flags = {
       "--prefix=/usr",
       "--libdir=/usr/lib64",
-      "--libexecdir=/usr/lib64",
       "--disable-{bootstrap,fixincludes,multilib,nls}",
       "--disable-lib{atomic,gomp,quadmath,sanitizer,ssp,stdcxx-pch,vtv}",
       "--enable-clocale=gnu",
