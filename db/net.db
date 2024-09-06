@@ -30,7 +30,8 @@ openresolv = {
    flags = { 
       "--libdir=/usr/lib64", 
       "--libexecdir=/usr/lib64", 
-      "--sysconfdir=/etc" 
+      "--sbindir=/usr/bin",
+      "--sysconfdir=/etc",
    }
 };
 
@@ -42,7 +43,7 @@ iproute2 = {
    prepare = [[
       rm -f man/man8/arpd.8
       sed -e '/ARPD/d' \
-          -e 's:/sbin:/usr/sbin:' \
+          -e 's:/sbin:/usr/bin:' \
           -i Makefile
    ]]
 };
@@ -96,7 +97,7 @@ wpa_supplicant = {
    url = "https://w1.fi/releases/wpa_supplicant-2.10.tar.gz",
    sha3 = "5a6ec512f18ea33e5e8bfccbbaff3fc88571fcd482a420ed3aeaff6404ef3690",
    build = "make",
-   flags = { "-C wpa_supplicant", "BINDIR=/usr/sbin", "LIBDIR=/usr/lib64" },
+   flags = { "-C wpa_supplicant", "BINDIR=/usr/bin", "LIBDIR=/usr/lib64" },
    prepare = [[
       cd wpa_supplicant
       cp defconfig .config
