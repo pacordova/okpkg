@@ -110,7 +110,6 @@ os.execute("chmod 755 /usr/bin/firefox")
 -- firefox symlinks
 os.execute [[
    install -d /usr/local/lib64
-   printf "/usr/local/lib64\n" >> /etc/ld.so.conf
    for f in /usr/lib64/firefox/*.so; do
        ln -sf $f /usr/local/lib64/`basename $f` 
    done
