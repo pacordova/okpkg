@@ -446,7 +446,7 @@ tzdata = {
    url = "https://github.com/eggert/tz/archive/2024a/tz-2024a.tar.gz",
    sha3 = "e5cd838b360297b300db8be111d7eb98c9fef0e7b41bedf16968d6fd62184dd7",
    build = "make",
-   flags = { "LIBDIR=/usr/lib64", "ZICDIR=$destdir/usr/bin" },
+   flags = { "LIBDIR=/usr/lib64", "ZICDIR=/usr/bin" },
    post = [[ rm -f $destdir/etc/localtime ]]
 };
 
