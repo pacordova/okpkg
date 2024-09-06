@@ -99,7 +99,6 @@ os.execute [[
    mkdir -p $destdir/usr/okpkg/{packages,download}
    cp -p *.tar.lz $destdir/usr/okpkg/packages
    cp -p /usr/okpkg/download/* $destdir/usr/okpkg/download
-   cp -p /etc/config.site $destdir/etc/config.site
    rm -fr $destdir/lost+found
    curl -L https://curl.se/ca/cacert.pem > \
        $destdir/etc/ssl/certs/ca-certificates.crt
