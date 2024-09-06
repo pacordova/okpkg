@@ -343,9 +343,7 @@ xfce4-screensaver = {
    url = "https://archive.xfce.org/src/apps/xfce4-screensaver/4.18/xfce4-screensaver-4.18.3.tar.bz2",
    sha3 = "56e5b71025dfde25a9b84f133da7faeebe7830df796774fdeb1dbe04301808cd",
    build = "./configure",
-   flags = {
-      "--disable-debug",
-   }
+   flags = { "--disable-debug" }
 };
 
 xfce4-session = {
@@ -387,12 +385,14 @@ thunar-archive-plugin = {
    url = "https://archive.xfce.org/src/thunar-plugins/thunar-archive-plugin/0.5/thunar-archive-plugin-0.5.2.tar.bz2",
    sha3 = "b206a1c98616c5a07e064896d125a7897e29fb604b8b42436d63c4f051fcdeba",
    build = "./configure",
+   flags = { "--libexecdir=/usr/lib64/xfce4" }
 };
 
 xarchiver = {
    url = "https://github.com/ib/xarchiver/archive/0.5.4.23/xarchiver-0.5.4.23.tar.gz",
    sha3 = "bd34257a67da0698038f2a870374679621d323ca42d965580fee0a964881d4b4",
    build = "./configure",
+   flags = { "--libexecdir=/usr/lib64/xfce4" }
 };
 
 xfce4-alsa-plugin = {
