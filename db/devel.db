@@ -112,6 +112,7 @@ cmake = {
    flags = {
       "--mandir=/share/man",
       "--datadir=/share/cmake",
+      "--docdir=/share/doc/cmake",
       "--parallel=$(getconf _NPROCESSORS_ONLN)",
       "--system-libs",
       "--no-system-{cppdap,jsoncpp,librhash}",

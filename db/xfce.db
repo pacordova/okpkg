@@ -409,6 +409,7 @@ optipng = {
    build = "./configure",
    flags = {
       "--with-system-libs",
+      "--mandir=/usr/share/man",
    }
 };
 

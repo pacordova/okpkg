@@ -132,6 +132,7 @@ libexif = {
    url = "https://github.com/libexif/libexif/releases/download/v0.6.24/libexif-0.6.24.tar.bz2",
    sha3 = "a3d9130008e06b086ff60624ed629eeb259916da99fa045784fc6177b4b591c3",
    build = "./configure",
+   flags = { "--with-doc-dir=/usr/share/doc/libexif" }
 };
 
 libjpeg-turbo = {
