@@ -5,8 +5,8 @@ iptables = {
 };
 
 connman = {
-   url = "https://kernel.org/pub/linux/network/connman/connman-1.42.tar.xz",
-   sha3 = "b8d68eb0b67baa2f9326d8906fd469f23ee9a379730847eac24faa62d35cd8f4",
+   url = "https://kernel.org/pub/linux/network/connman/connman-1.43.tar.xz",
+   sha3 = "fd9fb830bb719abf463e560e7ff21a86d1c1cafc6389b223ecdf8db62853a72d",
    build = "./configure",
    flags = {
       "--enable-{client,nmcompat,pie,test}",
@@ -49,8 +49,8 @@ iproute2 = {
 };
 
 iputils = {
-   url = "https://github.com/iputils/iputils/releases/download/20240117/iputils-20240117.tar.xz",
-   sha3 = "ecf7e4fc20e413c577f9e874e6d91340ccf2b7f73f2ffa39a39715ca670a5d6c",
+   url = "https://github.com/iputils/iputils/releases/download/20240905/iputils-20240905.tar.xz",
+   sha3 = "04a0bdd009f955cb485324fb182dd7bfa1389d46589eb72a033be3547064dbfc",
    build = "meson",
 };
 

@@ -33,9 +33,9 @@ libev = {
    build = "./configure",
 };
 
-libnghttp2 = {
-   url = "https://github.com/nghttp2/nghttp2/releases/download/v1.62.1/nghttp2-1.62.1.tar.xz",
-   sha3 = "c65ba551ff0cd315e50a2e00b29993240b9a3ef2ff922977dbb2682d367f6aa9",
+nghttp2 = {
+   url = "https://github.com/nghttp2/nghttp2/releases/download/v1.63.0/nghttp2-1.63.0.tar.xz",
+   sha3 = "cbf7364a6ea68d6c9753f57154dc94dc07fd6160f8bf0c01a9470ad4a3403e99",
    build = "./configure",
    flags = { "--enable-lib-only", "--with-libev" }
 };

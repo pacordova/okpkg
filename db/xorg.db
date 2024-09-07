@@ -195,8 +195,8 @@ libxft = {
 };
 
 libxi = {
-   url = "https://x.org/pub/individual/lib/libXi-1.8.1.tar.xz",
-   sha3 = "1af17d88d8e845f5d569d5902aee20232fb5edcb571bc6900c76c47566528a13",
+   url = "https://x.org/pub/individual/lib/libXi-1.8.2.tar.xz",
+   sha3 = "ea36f569e15c066f9df62150cf430551be3d96fb9fe6a37a3abceb0297584a34",
    build = "./configure",
 };
 
@@ -380,8 +380,8 @@ nvidia-vaapi-driver = {
 };
 
 directx-headers = {
-   url = "https://github.com/microsoft/DirectX-Headers/archive/v1.613.1/DirectX-Headers-1.613.1.tar.gz",
-   sha3 = "3c161edae5790eec87f9c2883eb466ecd6be62dadff179cae60ea3411b3d7ffa",
+   url = "https://github.com/microsoft/DirectX-Headers/archive/v1.614.0/DirectX-Headers-1.614.0.tar.gz",
+   sha3 = "1cd57424860b8950f23d664740bed346156d37220cb008de453422cd2e7ced28",
    build = "meson",
    flags = { "-Dbuild-test=false" }
 };
@@ -699,8 +699,8 @@ mtdev = {
 };
 
 libevdev = {
-   url = "https://www.freedesktop.org/software/libevdev/libevdev-1.13.2.tar.xz",
-   sha3 = "bc91957009c3717a4443c3589c16e25b2b73a478d22fddb31af168e22d8b5242",
+   url = "https://www.freedesktop.org/software/libevdev/libevdev-1.13.3.tar.xz",
+   sha3 = "262752df86983253af78937285ef6d298a7efade0aa3cf6937a3299af9ef1748",
    build = "meson",
    flags = {
       "-Ddocumentation=disabled"

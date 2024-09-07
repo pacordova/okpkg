@@ -89,8 +89,8 @@ at-spi2-core = {
 };
 
 cairo = {
-   url = "https://gitlab.freedesktop.org/cairo/cairo/-/archive/1.18.0/cairo-1.18.0.tar.bz2",
-   sha3 = "b1f25f47fce99fd726c39a217a651fbcfef60c4bb84ec29f7baf9d735269438b",
+   url = "https://gitlab.freedesktop.org/cairo/cairo/-/archive/1.18.2/cairo-1.18.2.tar.bz2",
+   sha3 = "6804da6c04fedabeb3cd850fc3422b7c0fc79cb0d6cdd47ad424bc3da43882ab",
    build = "meson",
    flags = {
       "-Ddwrite=disabled",
@@ -243,8 +243,8 @@ thunar-volman = {
 };
 
 poppler = {
-   url = "https://poppler.freedesktop.org/poppler-24.08.0.tar.xz",
-   sha3 = "f9c309fbca0ce03142f172f48b0665a49d1684c0d3904a7f4f86d9175b3a65b4",
+   url = "https://poppler.freedesktop.org/poppler-24.09.0.tar.xz",
+   sha3 = "7e65cab74745054bc9a73cc528f93da01034e13e24bec2ef4cb7eae8d92dad93",
    build = "cmake",
    flags = {
       "-DENABLE_QT5=OFF",

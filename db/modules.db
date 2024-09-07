@@ -33,8 +33,8 @@ python-packaging = {
 };
 
 python-build = {
-   url = "https://github.com/pypa/build/archive/1.2.1/build-1.2.1.tar.gz",
-   sha3 = "c1d8f40ec9c506b01346fb985f6a8bb921282355f3b2890da505d9d6f6b10067",
+   url = "https://github.com/pypa/build/archive/1.2.2/build-1.2.2.tar.gz",
+   sha3 = "a20e16e448e525136b903cb446da5879fd45158903b7f4084b2cd7d2533a1f78",
    build = "python-build",
 };
 
@@ -148,8 +148,8 @@ python-ply = {
 };
 
 glad = {
-   url = "https://github.com/Dav1dde/glad/archive/refs/tags/v2.0.6/glad-2.0.6.tar.gz",
-   sha3 = "10343dcc3fe48aee6e247ba9a3c6ef5e4b9d9b5f72398620a914c45ee2233f36",
+   url = "https://github.com/Dav1dde/glad/archive/refs/tags/v2.0.7/glad-2.0.7.tar.gz",
+   sha3 = "a83a5ebbedc94567b683279016719583557f0ba17c34b6dedc47e9cb97542a99",
    build = "python-build",
 };
 

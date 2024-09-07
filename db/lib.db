@@ -162,8 +162,8 @@ libnl3 = {
 };
 
 libpcap = {
-   url = "https://www.tcpdump.org/release/libpcap-1.10.4.tar.gz",
-   sha3 = "0c428ebe79bb836222ff5418dcbb270ef69c90fb093ea7081438713b6bba0bee",
+   url = "https://www.tcpdump.org/release/libpcap-1.10.5.tar.xz",
+   sha3 = "c0b03f1e7ce0b321ba9d3fd055b9684cc9cc9a6560d8975137c0255bf9a0673d",
    build = "./configure",
 };
 
