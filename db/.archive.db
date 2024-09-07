@@ -1,3 +1,10 @@
+directx-headers = {
+   url = "https://github.com/microsoft/DirectX-Headers/archive/v1.614.0/DirectX-Headers-1.614.0.tar.gz",
+   sha3 = "1cd57424860b8950f23d664740bed346156d37220cb008de453422cd2e7ced28",
+   build = "meson",
+   flags = { "-Dbuild-test=false" }
+};
+
 libvdpau-va-gl = {
    url = "https://github.com/i-rinat/libvdpau-va-gl/archive/v0.4.0/libvdpau-va-gl-0.4.0.tar.gz",
    build = "cmake",

@@ -189,3 +189,18 @@ which = {
    sha3 = "4a008a5fba90aa48ab099a000f60ce1067ef61f05ea0ace5e261066824f67792",
    build = "./configure",
 };
+
+--------------------------------------------------------------------------------
+
+nv-codec-headers = {
+   url = "https://github.com/FFmpeg/nv-codec-headers/releases/download/n12.1.14.0/nv-codec-headers-12.1.14.0.tar.gz",
+   sha3 = "8dc9b52f8a2256ff15439caed043e4d93229d9acabb4217d255f9dc7be0c9fc7",
+   build = "make",
+   flags = { "PREFIX=/usr", "LIBDIR=lib64" }
+};
+
+vulkan-headers = {
+   url = "https://github.com/KhronosGroup/Vulkan-Headers/archive/v1.3.285/Vulkan-Headers-1.3.285.tar.gz",
+   sha3 = "15d1dd241f5582a269f9047a7c9cacb1afabea945c28803241d676748f04e3fa",
+   build = "cmake",
+};
