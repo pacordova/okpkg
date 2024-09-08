@@ -159,6 +159,18 @@ python-pyparsing = {
    build = "python-build",
 };
 
+cython = {
+   url = "https://github.com/cython/cython/archive/3.0.11/cython-3.0.11.tar.gz",
+   sha3 = "f6ab0fa96d4bb591ae7fcae697eb61aced9eea8352e28f8a4b4f2c02536fc915",
+   build = "python-build",
+};
+
+pyyaml = {
+   url = "https://github.com/yaml/pyyaml/archive/6.0.2/pyyaml-6.0.2.tar.gz",
+   sha3 = "eca18a30377fbd896ce096e6085be77082365b915e9bde8343ed2090493b24c2",
+   build = "python-build",
+};
+
 perl-xml-parser = {
    url = "https://cpan.metacpan.org/authors/id/T/TO/TODDR/XML-Parser-2.47.tar.gz",
    sha3 = "daaacd05fb62d1f8811c6f792c87bd4062ea70d57a951d3f15236c2424b24618",

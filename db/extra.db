@@ -149,21 +149,6 @@ lsof = {
    build = "./configure",
 };
 
-mesa = {
-   url = "https://mesa.freedesktop.org/archive/mesa-24.0.9.tar.xz",
-   sha3 = "cba6413a854faf83fe99988114661c2cbf717eac093f27d6363c8c1cf1c48075",
-   build = "meson",
-   flags = {
-      "-Dplatforms=x11",
-      "-Dgallium-drivers=nouveau,r300,r600,svga,radeonsi,swrast,virgl,i915,iris,crocus,zink",
-      '-Dvulkan-drivers=""',
-      "-Dglx=dri",
-      "-Degl=enabled",
-      "-Dglvnd=true",
-      "-D{llvm,gles1,valgrind,libunwind}=disabled",
-   }
-};
-
 pciutils = {
    url = "https://mj.ucw.cz/download/linux/pci/pciutils-3.13.0.tar.gz",
    sha3 = "53507c5220643d8d4f1a8b7c701c19378038f711a08fd81144672cac0d4ffce5",

@@ -424,18 +424,6 @@ glslang = {
    }
 };
 
-cython = {
-   url = "https://github.com/cython/cython/archive/3.0.11/cython-3.0.11.tar.gz",
-   sha3 = "f6ab0fa96d4bb591ae7fcae697eb61aced9eea8352e28f8a4b4f2c02536fc915",
-   build = "python-build",
-};
-
-python-yaml = {
-   url = "https://github.com/yaml/pyyaml/archive/6.0.2/pyyaml-6.0.2.tar.gz",
-   sha3 = "eca18a30377fbd896ce096e6085be77082365b915e9bde8343ed2090493b24c2",
-   build = "python-build",
-};
-
 --------------------------------------------------------------------------------
 -- 1. vulkan-drivers depend on LLVM
 --    * vulkan-drivers are split by some distros, and disabled here
