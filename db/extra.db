@@ -125,12 +125,13 @@ linux = {
    url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.6.50.tar.xz",
    sha3 = "c02d58542a28a55028d20090d82cd8f9fdb5a7fa726d0f358f7dcb60df7766fc",
    build = _,
-   --prepare = [[ gzip -cd /proc/config.gz > .config ]],
    post = [[  
+      install -d $destdir/boot $destdir/usr/lib64
+      ln -sf lib64 $destdir/usr/lib
       $make headers bzImage modules
       $make modules_install INSTALL_MOD_PATH=$destdir/usr
-      install -d $destdir/{boot,usr}
       install -m 644 arch/x86/boot/bzImage $destdir/boot/vmlinuz-6.6
+      rm -f $destdir/usr/lib
       cp -rp usr/include $destdir/usr
       find $destdir/usr/include -type f ! -name '*.h' -delete
    ]]

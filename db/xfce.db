@@ -643,7 +643,11 @@ ostree = {
       "--with-openssl",
       "--without-soup",
       "--disable-man",
-   }
+   },
+   post = [[ 
+      mv $destdir/usr/lib/ostree $destdir/usr/lib64 
+      rmdir $destdir/usr/lib
+   ]]
 };
 
 libxmlb = {
