@@ -122,10 +122,10 @@ iftop = {
 };
 
 linux = {
-   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.6.49.tar.xz",
-   sha3 = "05f886ade46fdc219afe21ac3c8db5196f787e59e0e264c082c155de1a1a1c47",
+   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.6.50.tar.xz",
+   sha3 = "c02d58542a28a55028d20090d82cd8f9fdb5a7fa726d0f358f7dcb60df7766fc",
    build = _,
-   prepare = [[ gzip -cd /proc/config.gz > .config ]],
+   --prepare = [[ gzip -cd /proc/config.gz > .config ]],
    post = [[  
       $make headers bzImage modules
       $make modules_install INSTALL_MOD_PATH=$destdir/usr
