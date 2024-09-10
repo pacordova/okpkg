@@ -371,7 +371,7 @@ psmisc = {
    build = "./configure",
 };
 
-libpcre2 = {
+pcre2 = {
    url = "https://github.com/PCRE2Project/pcre2/releases/download/pcre2-10.44/pcre2-10.44.tar.bz2",
    sha3 = "d4fd6a95630fbf9bde69c95536be875762dea369c473c13d350da545d2eeba9f",
    build = "./configure",
