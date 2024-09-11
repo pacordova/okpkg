@@ -17,12 +17,24 @@ local chdir, mkdir, symlink =
 
 local fp, buf
 
+local dirs = {
+   ["/usr/okpkg/db/modules.db"] = "/usr/okpkg/packages/m",
+   ["/usr/okpkg/db/devel.db"]   = "/usr/okpkg/packages/d",
+   ["/usr/okpkg/db/lib.db"]     = "/usr/okpkg/packages/l",
+   ["/usr/okpkg/db/net.db"]     = "/usr/okpkg/packages/n",
+   ["/usr/okpkg/db/xorg.db"]    = "/usr/okpkg/packages/x",
+   ["/usr/okpkg/db/gtk.db"]     = "/usr/okpkg/packages/x",
+   ["/usr/okpkg/db/xfce.db"]    = "/usr/okpkg/packages/xf",
+   ["/usr/okpkg/db/video.db"]   = "/usr/okpkg/packages/v",
+   ["/usr/okpkg/db/flatpak.db"] = "/usr/okpkg/packages/b",
+}
+
 -- Generate locales
 os.execute("localedef -i POSIX -f UTF-8 C.UTF-8 2> /dev/null || true")
 os.execute("localedef -i en_US -f UTF-8 en_US.UTF-8")
 
 -- Builds and installs all packages in a single db file
-local function emerge_all(db) 
+local function build_all(db) 
    local fp, buf
    fp = io.open(db)
    buf = '\n' .. fp:read('*a')
@@ -32,43 +44,41 @@ local function emerge_all(db)
          os.execute("gdk-pixbuf-query-loaders --update-cache")
       end
    end
+   mkdir(dirs[db])
+   ok.execute("mv /usr/okpkg/packages/*.tar.lz " .. dirs[db])
 end
 
 -- Install system packages to track in /usr/okpkg/index
 os.execute("okpkg install /usr/okpkg/packages/a/*.tar.lz")
 
 -- Modules
-emerge_all("/usr/okpkg/db/modules.db")
-mkdir("/usr/okpkg/packages/m")
-os.execute("mv /usr/okpkg/packages/python-*.tar.lz /usr/okpkg/packages/m")
-os.execute("mv /usr/okpkg/packages/perl-*.tar.lz /usr/okpkg/packages/m")
+build_all("/usr/okpkg/db/modules.db")
 
 -- Development tools
-emerge_all("/usr/okpkg/db/devel.db")
 emerge("rust-bin")
-mkdir("/usr/okpkg/packages/d")
-os.execute("mv /usr/okpkg/packages/*.tar.lz /usr/okpkg/packages/d")
+build_all("/usr/okpkg/db/devel.db")
 
 -- Libraries
-emerge_all("/usr/okpkg/db/lib.db")
-mkdir("/usr/okpkg/packages/l")
-os.execute("mv /usr/okpkg/packages/*.tar.lz /usr/okpkg/packages/l")
+build_all("/usr/okpkg/db/lib.db")
 
 -- Network tools
-emerge_all("/usr/okpkg/db/net.db")
 emerge("firefox-bin")
-mkdir("/usr/okpkg/packages/n")
-os.execute("mv /usr/okpkg/packages/*.tar.lz /usr/okpkg/packages/n")
+build_all("/usr/okpkg/db/net.db")
 
 -- Xorg
-emerge_all("/usr/okpkg/db/xorg.db")
-mkdir("/usr/okpkg/packages/x")
-os.execute("mv /usr/okpkg/packages/*.tar.lz /usr/okpkg/packages/x")
+build_all("/usr/okpkg/db/xorg.db")
+
+-- GTK+
+build_all("/usr/okpkg/db/gtk.db")
 
 -- XFCE
-emerge_all("/usr/okpkg/db/xfce.db")
-mkdir("/usr/okpkg/packages/xf")
-os.execute("mv /usr/okpkg/packages/*.tar.lz /usr/okpkg/packages/xf")
+build_all("/usr/okpkg/db/xfce.db")
+
+-- Flatpak
+build_all("/usr/okpkg/db/flatpak.db")
+
+-- Video
+build_all("/usr/okpkg/db/video.db")
 
 -- Rebuilds
 emerge("dbus")
