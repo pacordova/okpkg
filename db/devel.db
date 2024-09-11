@@ -61,6 +61,12 @@ libuv = {
    build = "./configure",
 };
 
+libusb = {
+   url = "https://github.com/libusb/libusb/releases/download/v1.0.27/libusb-1.0.27.tar.bz2",
+   sha3 = "e79a5aa5c54bd32d07f1e0935b1b18c09fe7bfa6a202d5a1c218938764781164",
+   build = "./configure",
+};
+
 libunistring = {
    url = "https://ftp.gnu.org/gnu/libunistring/libunistring-1.2.tar.xz",
    sha3 = "95472c6995afaa039064bab986637cb2825dd2cb20814db26fb365fd5cea9fd6",
@@ -143,6 +149,12 @@ intltool = {
    prepare = [[ sed -i 's:\\\${:\\\$\\{:' intltool-update.in ]]
 };
 
+itstool = {
+   url = "https://files.itstool.org/itstool/itstool-2.0.7.tar.bz2",
+   sha3 = "68d36ae4c43c1131cbaeaff67daac1fa236c44b58d0aff6bc5190ba5001b7046",
+   build = "./configure",
+};
+
 meson = {
    url = "https://github.com/mesonbuild/meson/releases/download/1.5.1/meson-1.5.1.tar.gz",
    sha3 = "d0ebf1dce37be5e28c56ba155c5e0fbc2b4aa2958ede523e083b202b2c4b0759",
@@ -170,6 +182,16 @@ opendoas = {
    ]]
 };
 
+optipng = {
+   url = "https://prdownloads.sourceforge.net/optipng/optipng-0.7.8.tar.gz",
+   sha3 = "4aa347bb09ec8421bf6cce96a3c9e12c0b47a100ece108c342a79a944d2b9027",
+   build = "./configure",
+   flags = {
+      "--with-system-libs",
+      "--mandir=/usr/share/man",
+   }
+};
+
 samurai = {
    url = "https://github.com/michaelforney/samurai/releases/download/1.2/samurai-1.2.tar.gz",
    sha3 = "127ea48499f38f1a1c476957453ccca9419c8a4a938925e1361818102307375d",
@@ -192,9 +214,66 @@ which = {
 
 --------------------------------------------------------------------------------
 
-nv-codec-headers = {
-   url = "https://github.com/FFmpeg/nv-codec-headers/releases/download/n12.1.14.0/nv-codec-headers-12.1.14.0.tar.gz",
-   sha3 = "8dc9b52f8a2256ff15439caed043e4d93229d9acabb4217d255f9dc7be0c9fc7",
-   build = "make",
-   flags = { "PREFIX=/usr", "LIBDIR=lib64" }
+_glib2 = {
+   url = "https://download.gnome.org/sources/glib/2.82/glib-2.82.0.tar.xz",
+   sha3 = "bb8c6fd9c76cdb85e315c1dbeeb2c86412a70ba901345bdf6c2f6b5782989571",
+   build = "meson",
+   flags = { "-Dintrospection=disabled" }
+};
+
+gobject-introspection = {
+   url = "https://download.gnome.org/sources/gobject-introspection/1.80/gobject-introspection-1.80.1.tar.xz",
+   sha3 = "0aee06c2479fc07b9aa7092fecdf757f4efd7739c585b01b1733cd1b8d9ed034",
+   build = "meson",
+};
+
+glib2 = {
+   url = "https://download.gnome.org/sources/glib/2.82/glib-2.82.0.tar.xz",
+   sha3 = "bb8c6fd9c76cdb85e315c1dbeeb2c86412a70ba901345bdf6c2f6b5782989571",
+   build = "meson",
+   flags = { "-Dintrospection=enabled" }
+};
+
+dbus-glib = {
+   url = "https://dbus.freedesktop.org/releases/dbus-glib/dbus-glib-0.112.tar.gz",
+   sha3 = "403eaea495309ea8260148a2cb945a1c08785b1c431bd867d1100b188b4efa41",
+   build = "./configure",
+};
+
+json-glib = {
+   url = "https://download.gnome.org/sources/json-glib/1.10/json-glib-1.10.0.tar.xz",
+   sha3 = "63a0253ff4c71c1d49765cd773934af6982c6ce8cf051a4c63261a0105ae83d4",
+   build = "meson",
+   flags = { "-D{gtk_doc=disabled,nls=disabled,tests=false}" },
+};
+
+libgudev = {
+   url = "https://download.gnome.org/sources/libgudev/238/libgudev-238.tar.xz",
+   sha3 = "6500e55c1ceeaf85747d3eeaebd57e1cfc7fae4b5b4ceb7161cd8ab059d1863d",
+   build = "meson",
+};
+
+upower = {
+   url = "https://gitlab.freedesktop.org/upower/upower/-/archive/v1.90.5/upower-v1.90.5.tar.bz2",
+   sha3 = "7b24ed91602d2b2cdc055e0193d44c17e171d7927d0575f876e43cd5adf026c1",
+   build = "meson",
+   flags = {
+      "-Dsystemdsystemunitdir=no",
+      "-Dudevrulesdir=/usr/lib64/udev/rules.d",
+      "-Dgtk-doc=false",
+      "-Dman=false"
+   },
+   prepare = [[ sed '/parse_version/d' -i src/linux/integration-test.py ]]
+};
+
+vala = {
+   url = "https://download.gnome.org/sources/vala/0.56/vala-0.56.17.tar.xz",
+   sha3 = "668609ee19af025e1778f93f81086e11d850354db8c4278a2ad2db944a951f9f",
+   build = "./configure",
+   flags = {
+      "--enable-python3=yes",
+      "--disable-python",
+      "--disable-valadoc",
+   },
+   prepare = [[ sed -i '/gvc.h/a#define TRUE 1' libvaladoc/gvc-compat.c ]]
 };

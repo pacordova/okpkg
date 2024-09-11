@@ -1,40 +1,29 @@
-_glib2 = {
-   url = "https://download.gnome.org/sources/glib/2.82/glib-2.82.0.tar.xz",
-   sha3 = "bb8c6fd9c76cdb85e315c1dbeeb2c86412a70ba901345bdf6c2f6b5782989571",
+_freetype2 = {
+   url = "https://downloads.sourceforge.net/freetype/freetype-2.13.3.tar.xz",
+   sha3 = "764b5a302571b7ead0d180b3e5e7af19b0b47e6cb1315f26ee5266bd0460d2fc",
    build = "meson",
-   flags = { "-Dintrospection=disabled" }
+   flags = { "-Dharfbuzz=disabled" }
 };
 
-gobject-introspection = {
-   url = "https://download.gnome.org/sources/gobject-introspection/1.80/gobject-introspection-1.80.1.tar.xz",
-   sha3 = "0aee06c2479fc07b9aa7092fecdf757f4efd7739c585b01b1733cd1b8d9ed034",
+harfbuzz = {
+   url = "https://github.com/harfbuzz/harfbuzz/archive/9.0.0/harfbuzz-9.0.0.tar.gz",
+   sha3 = "df45d84d14d6bb1df59b5962099acc6f04be699d9a2f4c3608d73ecd5a5561d5",
    build = "meson",
+   flags = { "-Dcairo=disabled" }
 };
 
-glib2 = {
-   url = "https://download.gnome.org/sources/glib/2.82/glib-2.82.0.tar.xz",
-   sha3 = "bb8c6fd9c76cdb85e315c1dbeeb2c86412a70ba901345bdf6c2f6b5782989571",
+freetype2 = {
+   url = "https://downloads.sourceforge.net/freetype/freetype-2.13.3.tar.xz",
+   sha3 = "764b5a302571b7ead0d180b3e5e7af19b0b47e6cb1315f26ee5266bd0460d2fc",
    build = "meson",
-   flags = { "-Dintrospection=enabled" }
+   flags = { "-Dharfbuzz=enabled" }
 };
 
-dbus-glib = {
-   url = "https://dbus.freedesktop.org/releases/dbus-glib/dbus-glib-0.112.tar.gz",
-   sha3 = "403eaea495309ea8260148a2cb945a1c08785b1c431bd867d1100b188b4efa41",
+fontconfig = {
+   url = "https://www.freedesktop.org/software/fontconfig/release/fontconfig-2.15.0.tar.xz",
+   sha3 = "01271f5261ea7b47332da761d02f2b0ed62fb164a2921a1d81d3e53c6a5f7623",
    build = "./configure",
-};
-
-json-glib = {
-   url = "https://download.gnome.org/sources/json-glib/1.10/json-glib-1.10.0.tar.xz",
-   sha3 = "63a0253ff4c71c1d49765cd773934af6982c6ce8cf051a4c63261a0105ae83d4",
-   build = "meson",
-   flags = { "-D{gtk_doc=disabled,nls=disabled,tests=false}" },
-};
-
-libgudev = {
-   url = "https://download.gnome.org/sources/libgudev/238/libgudev-238.tar.xz",
-   sha3 = "6500e55c1ceeaf85747d3eeaebd57e1cfc7fae4b5b4ceb7161cd8ab059d1863d",
-   build = "meson",
+   flags = { "--disable-docs" }
 };
 
 --------------------------------------------------------------------------------
@@ -97,6 +86,12 @@ fuse3 = {
    post = [[ chmod u+s $destdir/usr/bin/fusermount3 ]]
 };
 
+iso-codes = {
+   url = "https://salsa.debian.org/iso-codes-team/iso-codes/-/archive/v4.16.0/iso-codes-v4.16.0.tar.gz",
+   sha3 = "14987ae3a6b275eee609a6cab2d23ea0f6a83015c33cfd613fac9f4405c491c4",
+   build = "./configure",
+};
+
 json-c = {
    url = "https://s3.amazonaws.com/json-c_releases/releases/json-c-0.17.tar.gz",
    sha3 = "6e3bb804e61de257c313a2d4e39e89262dea68477acc518f8c0c4ab15a37ea69",
@@ -114,11 +109,26 @@ lame = {
    flags = { "--enable-{nasm=yes,mp3rtp=yes,gtktest=no}" }
 };
 
+libass = {
+   url = "https://github.com/libass/libass/releases/download/0.17.3/libass-0.17.3.tar.gz",
+   sha3 = "b163363fa4926a3d8991a138cea75ee83431787209df74a3ee66f6b269ca6fec",
+   build = "./configure",
+   flags = {
+      "--enable-fontconfig",
+   }
+};
+
 libbpf = {
    url = "https://github.com/libbpf/libbpf/archive/v1.4.5/libbpf-1.4.5.tar.gz",
    sha3 = "e0b91f8110d545f296ee1440fd296a50627d02bd6295a05334a2170439702bce",
    build = "make",
    flags = { "-C src", "LIBSUBDIR=lib64" }
+};
+
+libconfig = {
+   url = "https://github.com/hyperrealm/libconfig/releases/download/v1.7.3/libconfig-1.7.3.tar.gz",
+   sha3 = "81e3f782c8f366a7de6ec71d4509e02c70f1690199113a2f0e51067fd7dd29cf",
+   build = "./configure",
 };
 
 libevent = {
@@ -179,6 +189,13 @@ libpsl = {
    build = "./configure",
 };
 
+libsass = {
+   url = "https://github.com/sass/libsass/archive/3.6.6/libsass-3.6.6.tar.gz",
+   sha3 = "9637cd39de53582abc24deefb2ed3c28c92db591c81f4765dd58c287631b2667",
+   prepare = [[ autoreconf -fi ]],
+   build = "./configure",
+};
+
 libsodium = {
    url = "https://download.libsodium.org/libsodium/releases/libsodium-1.0.20.tar.gz",
    sha3 = "e74a767d92c5b58d5f9b5e882e220df7899a8dc1fa173461c0c76099776ab456",
@@ -202,12 +219,6 @@ libtirpc = {
    sha3 = "d039939874447be073f6f65acab90b2ecfa4385b5b1b2ca2cf8991b1504ddeee",
    build = "./configure",
    flags = { "--disable-gssapi" }
-};
-
-libusb = {
-   url = "https://github.com/libusb/libusb/releases/download/v1.0.27/libusb-1.0.27.tar.bz2",
-   sha3 = "e79a5aa5c54bd32d07f1e0935b1b18c09fe7bfa6a202d5a1c218938764781164",
-   build = "./configure",
 };
 
 libvorbis = {
@@ -235,9 +246,25 @@ libvpx = {
    }
 };
 
+libxkbcommon = {
+   url = "https://xkbcommon.org/download/libxkbcommon-1.7.0.tar.xz",
+   sha3 = "225ea10c40348a194d8a27cb114533461c6d6ad6613721c05d33f88b02749a8e",
+   build = "meson",
+   flags = {
+      "-Denable-wayland=false",
+      "-Denable-docs=false"
+   }
+};
+
 libyaml = {
    url = "https://github.com/yaml/libyaml/releases/download/0.2.5/yaml-0.2.5.tar.gz",
    sha3 = "cd085eedddb0caeaa360db3e037155db95f8998d495047f3a8cbee6ee0430022",
+   build = "./configure",
+};
+
+mtdev = {
+   url = "https://bitmath.org/code/mtdev/mtdev-1.1.7.tar.bz2",
+   sha3 = "4afd35629a236b17597841cfd394e51af7c215eaaa8097ace8c8da6ffb8cfd71",
    build = "./configure",
 };
 
@@ -245,6 +272,74 @@ opus = {
    url = "https://downloads.xiph.org/releases/opus/opus-1.5.2.tar.gz",
    sha3 = "6f0c6a0215fa2c898f9f37fe07cdafb230a9135e722163de605e480ebf6820e0",
    build = "meson",
+};
+
+p11-kit = {
+   url = "https://github.com/p11-glue/p11-kit/releases/download/0.25.5/p11-kit-0.25.5.tar.xz",
+   sha3 = "c17d9a241a9a25077bfafe61f80a33bebcb07917bd30a54e95c2717325f11596",
+   build = "meson",
+   flags = { 
+      "-Dtrust_paths=/etc/ssl/certs/ca-certificates.crt",
+   }
+};
+
+pixman = {
+   url = "https://xorg.freedesktop.org/releases/individual/lib/pixman-0.43.4.tar.xz",
+   sha3 = "a48525f14efe9ac8036292499ec9955fc20b8ca7630024d80eb0b8335abb35d2",
+   build = "meson",
+   flags = {
+      "-Dloongson-mmi=disabled",
+      "-Dvmx=disabled",
+      "-Darm-simd=disabled",
+      "-Dneon=disabled",
+      "-Da64-neon=disabled",
+      "-Diwmmxt=disabled",
+      "-Dmips-dspr2=disabled",
+      "-Dgtk=disabled",
+   }
+};
+
+poppler = {
+   url = "https://poppler.freedesktop.org/poppler-24.09.0.tar.xz",
+   sha3 = "7e65cab74745054bc9a73cc528f93da01034e13e24bec2ef4cb7eae8d92dad93",
+   build = "cmake",
+   flags = {
+      "-DENABLE_QT5=OFF",
+      "-DENABLE_QT6=OFF",
+      "-DENABLE_BOOST=OFF",
+      "-DENABLE_NSS3=OFF",
+      "-DENABLE_GPGME=OFF",
+      "-DENABLE_LIBTIFF=OFF",
+      "-DENABLE_GTK_DOC=OFF",
+      "-DENABLE_LIBOPENJPEG=none",
+      "-DENABLE_LCMS=OFF",
+   }
+};
+
+poppler-data = {
+   url = "https://poppler.freedesktop.org/poppler-data-0.4.12.tar.gz",
+   sha3 = "474793bd050d8e2cc4b2ed3d7690c2fc61a1e42dd31475f712c4d73f73d5879b",
+   build = "make",
+   flags = { 
+      "prefix=/usr" 
+   }
+};
+
+sassc = {
+   url = "https://github.com/sass/sassc/archive/3.6.2/sassc-3.6.2.tar.gz",
+   sha3 = "61e05276d1052de3c8403a6895cbca55f50d9f8f3afd2abed1263331dd33e46f",
+   prepare = [[ autoreconf -fi ]],
+   build = "./configure",
+};
+
+uthash = {
+   url = "https://github.com/troydhanson/uthash/archive/v2.3.0/uthash-2.3.0.tar.gz",
+   sha3 = "d416f46e3922a59538311fc9e20d7303430e31d2be22e5d7abf2f5391fc3d3f7",
+   build = _,
+   post = [[
+      mkdir -p $destdir/usr/include
+      cp -p src/*.h $destdir/usr/include
+   ]]
 };
 
 x264 = {

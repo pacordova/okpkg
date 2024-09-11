@@ -1,50 +1,3 @@
-_freetype2 = {
-   url = "https://downloads.sourceforge.net/freetype/freetype-2.13.3.tar.xz",
-   sha3 = "764b5a302571b7ead0d180b3e5e7af19b0b47e6cb1315f26ee5266bd0460d2fc",
-   build = "meson",
-   flags = { "-Dharfbuzz=disabled" }
-};
-
-graphite = {
-   url = "https://github.com/silnrsi/graphite/releases/download/1.3.14/graphite2-1.3.14.tgz",
-   sha3 = "bccf21b15d3278bfcb4601f1e0e2cecfb48385575c309788f524465a5139f9ff",
-   build = "cmake",
-   flags = { "-DLIB_SUFFIX=64" },
-   prepare = [[ sed -i '/cmptest/d' tests/CMakeLists.txt ]]
-};
-
-harfbuzz = {
-   url = "https://github.com/harfbuzz/harfbuzz/archive/9.0.0/harfbuzz-9.0.0.tar.gz",
-   sha3 = "df45d84d14d6bb1df59b5962099acc6f04be699d9a2f4c3608d73ecd5a5561d5",
-   build = "meson",
-   flags = { 
-      "-Dgraphite2=enabled", 
-      "-Dcairo=disabled", 
-   }
-};
-
-freetype2 = {
-   url = "https://downloads.sourceforge.net/freetype/freetype-2.13.3.tar.xz",
-   sha3 = "764b5a302571b7ead0d180b3e5e7af19b0b47e6cb1315f26ee5266bd0460d2fc",
-   build = "meson",
-   flags = { "-Dharfbuzz=enabled" }
-};
-
-fontconfig = {
-   url = "https://www.freedesktop.org/software/fontconfig/release/fontconfig-2.15.0.tar.xz",
-   sha3 = "01271f5261ea7b47332da761d02f2b0ed62fb164a2921a1d81d3e53c6a5f7623",
-   build = "./configure",
-   flags = { "--disable-docs" }
-};
-
---------------------------------------------------------------------------------
-
-iso-codes = {
-   url = "https://salsa.debian.org/iso-codes-team/iso-codes/-/archive/v4.16.0/iso-codes-v4.16.0.tar.gz",
-   sha3 = "14987ae3a6b275eee609a6cab2d23ea0f6a83015c33cfd613fac9f4405c491c4",
-   build = "./configure",
-};
-
 xorg-util-macros = {
    url = "https://x.org/pub/individual/util/util-macros-1.20.1.tar.xz",
    sha3 = "d8affb47a8536ab5582f151b1b84725671d24aa557ef6546c3f3440c79dc1515",
@@ -308,6 +261,13 @@ xcb-util-cursor = {
    build = "./configure",
 };
 
+libglvnd = {
+   url = "https://gitlab.freedesktop.org/glvnd/libglvnd/-/archive/v1.7.0/libglvnd-v1.7.0.tar.gz",
+   sha3 = "e0a5cc0d7fa70b7c5bf7704aa10d05271dd663ff372f0bbb62a0102fb9a0af33",
+   build = "meson",
+   flags = { "-Dgles1=false" }
+};
+
 libdrm = {
    url = "https://dri.freedesktop.org/libdrm/libdrm-2.4.123.tar.xz",
    sha3 = "63f886cc8b1561937ae5074f40e295d12c9d43b82267d83ce95a5f3d83250e49",
@@ -322,54 +282,16 @@ libdrm = {
    }
 };
 
-libglvnd = {
-   url = "https://gitlab.freedesktop.org/glvnd/libglvnd/-/archive/v1.7.0/libglvnd-v1.7.0.tar.gz",
-   sha3 = "e0a5cc0d7fa70b7c5bf7704aa10d05271dd663ff372f0bbb62a0102fb9a0af33",
-   build = "meson",
-   flags = {
-      "-Dgles1=false",
-   }
-};
-
 libva = {
    url = "https://github.com/intel/libva/archive/2.22.0/libva-2.22.0.tar.gz",
    sha3 = "946b1f9f33ea331c15dfa36f26883fa061c12c9062564360157cc24728df5fe1",
    build = "meson",
-   flags = {
-      "-Dwith_wayland=no",
-      "-Dwith_x11=yes",
-      "-Dwith_glx=yes",
-   }
+   flags = { "-Dwith_{glx=yes,wayland=no,x11=yes}" }
 };
 
 libvdpau = {
    url = "https://gitlab.freedesktop.org/vdpau/libvdpau/-/archive/1.5/libvdpau-1.5.tar.bz2",
    sha3 = "a7554f381f20f6bd7d46e3b60f31a3416b16587dd148bc9bc59dd65d9fe74f48",
-   build = "meson",
-};
-
-vulkan-headers = {
-   url = "https://github.com/KhronosGroup/Vulkan-Headers/archive/vulkan-sdk-1.3.290.0/Vulkan-Headers-vulkan-sdk-1.3.290.0.tar.gz",
-   sha3 = "93ace7aab4ba324d1550305393e87cd1f26ef36bbc0476308dd1fbe04e38241a",
-   build = "cmake",
-   flags = { "-DVULKAN_HEADERS_ENABLE_MODULE=OFF" }
-};
-
-vulkan-loader = {
-   url = "https://github.com/KhronosGroup/Vulkan-Loader/archive/vulkan-sdk-1.3.290.0/Vulkan-Loader-vulkan-sdk-1.3.290.0.tar.gz",
-   sha3 = "a2e6dbac88f294e900e18dd9032005a25feb31352ae4902bb6941c87652d9fc5",
-   build = "cmake",
-   flags = {
-      "-DCMAKE_SKIP_RPATH=TRUE",
-      "-DBUILD_TESTS=OFF",
-      "-DBUILD_WSI_{WAYLAND_SUPPORT=OFF,XCB_SUPPORT=ON,XLIB_SUPPORT=ON}",
-      "-DVULKAN_HEADERS_INSTALL_DIR=/usr"
-   }
-};
-
-nvidia-vaapi-driver = {
-   url = "https://github.com/elFarto/nvidia-vaapi-driver/archive/v0.0.12/nvidia-vaapi-driver-0.0.12.tar.gz",
-   sha3 = "c28f79aefa8ea0f260ca6754e417a590a20d2001bdad502e3c0efe8ec157e20e",
    build = "meson",
 };
 
@@ -634,39 +556,6 @@ xkeyboard-config = {
    }
 };
 
-libxkbcommon = {
-   url = "https://xkbcommon.org/download/libxkbcommon-1.7.0.tar.xz",
-   sha3 = "225ea10c40348a194d8a27cb114533461c6d6ad6613721c05d33f88b02749a8e",
-   build = "meson",
-   flags = {
-      "-Denable-wayland=false",
-      "-Denable-docs=false"
-   }
-};
-
-libxklavier = {
-   url = "https://people.freedesktop.org/~svu/libxklavier-5.4.tar.bz2",
-   sha3 = "9af44b71f74161cfb2e4fabf3d2642730b7608c8d32d5ff84108a043074c582f",
-   build = "./configure",
-   flags = { "--disable-gtk-doc" }
-};
-
-pixman = {
-   url = "https://xorg.freedesktop.org/releases/individual/lib/pixman-0.43.4.tar.xz",
-   sha3 = "a48525f14efe9ac8036292499ec9955fc20b8ca7630024d80eb0b8335abb35d2",
-   build = "meson",
-   flags = {
-      "-Dloongson-mmi=disabled",
-      "-Dvmx=disabled",
-      "-Darm-simd=disabled",
-      "-Dneon=disabled",
-      "-Da64-neon=disabled",
-      "-Diwmmxt=disabled",
-      "-Dmips-dspr2=disabled",
-      "-Dgtk=disabled",
-   }
-};
-
 libepoxy = {
    url = "https://github.com/anholt/libepoxy/archive/1.5.10/libepoxy-1.5.10.tar.gz",
    sha3 = "14d8260c033272610a53f9770faba81d36729b606e520287335329e030b69dd1",
@@ -692,12 +581,6 @@ xorg-server = {
       cd $destdir/etc/X11
       printf "needs_root_rights = no\n" > Xwrapper.config
    ]]
-};
-
-mtdev = {
-   url = "https://bitmath.org/code/mtdev/mtdev-1.1.7.tar.bz2",
-   sha3 = "4afd35629a236b17597841cfd394e51af7c215eaaa8097ace8c8da6ffb8cfd71",
-   build = "./configure",
 };
 
 libevdev = {

@@ -1,0 +1,70 @@
+xdg-dbus-proxy = {
+   url = "https://github.com/flatpak/xdg-dbus-proxy/releases/download/0.1.6/xdg-dbus-proxy-0.1.6.tar.xz",
+   sha3 = "57497aa3cb9d71bdbdb937affe1f2f69ec48217205bf8b5fe9d6422c66d33de4",
+   build = "meson",
+   flags = { "-Dman=disabled" }
+};
+
+ostree = {
+   url = "https://github.com/ostreedev/ostree/releases/download/v2024.7/libostree-2024.7.tar.xz",
+   sha3 = "9c8779fdc8657f43426a0d383a3df2d36fb31ac9dad6507b6b14b421401b6b35",
+   build = "./configure",
+   flags = {
+      "--with-curl",
+      "--with-ed25519-libsodium",
+      "--with-grub2-mkconfig-path=/usr/bin/grub-mkconfig",
+      "--with-modern-grub",
+      "--with-openssl",
+      "--without-soup",
+      "--disable-man",
+   },
+   post = [[ 
+      mv $destdir/usr/lib/ostree $destdir/usr/lib64 
+      rmdir $destdir/usr/lib
+   ]]
+};
+
+libxmlb = {
+   url = "https://github.com/hughsie/libxmlb/archive/0.3.19/libxmlb-0.3.19.tar.gz",
+   sha3 = "0c3acdca8672581dae0b237d649264706c757979d8553dee5cc30dec3f9b688a",
+   build = "meson",
+   flags = { "-Dintrospection=true", "-D{gtkdoc,tests}=false" },
+};
+
+appstream = {
+   url = "https://www.freedesktop.org/software/appstream/releases/AppStream-1.0.3.tar.xz",
+   sha3 = "c0a54c5e715a993c8bd7d23038140408d395918d733cccda22a8e139a919bd2d",
+   build = "meson",
+   flags = {
+      "-Dsystemd=false",
+      "-Dapidocs=false",
+      "-Dstemming=false",
+      "-Dvapi=true",
+      "-Dcompose=true",
+   },
+   prepare = [[
+      mv AppStream*/* . && rm -fr AppStream*
+      sed -i "/subdir('docs\/')/d" meson.build
+   ]]
+};
+
+bubblewrap = {
+   url = "https://github.com/projectatomic/bubblewrap/releases/download/v0.10.0/bubblewrap-0.10.0.tar.xz",
+   sha3 = "904805747a74005323ea021ecbdab29b02a70211d91758f6c9b20d46fe3809e5",
+   build = "meson",
+   flags = { "-Dselinux=disabled" }
+};
+
+flatpak = {
+   url = "https://github.com/flatpak/flatpak/releases/download/1.15.10/flatpak-1.15.10.tar.xz",
+   sha3 = "9f69a2c9e8db09405f21f51eb87ab31b90db3c179e7501a7bfef3e6f497877be",
+   build = "meson",
+   flags = {
+      "-Dsystem_bubblewrap=bwrap",
+      "-Dsystem_dbus_proxy=xdg-dbus-proxy",
+      "-Dsystemd=disabled",
+      "-Dsystem_helper=disabled",
+      "-Dtests=false",
+   },
+   post = [[ rm -fr "$destdir/usr/lib" ]]
+};

@@ -1,0 +1,201 @@
+shared-mime-info = {
+   url = "https://gitlab.freedesktop.org/xdg/shared-mime-info/-/archive/2.4/shared-mime-info-2.4.tar.bz2",
+   sha3 = "e5c98a3407bcdc4523da451748e2f1d8cccf7a74a830e3150e3d9543132e3352",
+   build = "meson",
+   flags = {
+      "-Dupdate-mimedb=false",
+      "-Dbuild-translations=false",
+      "-Dbuild-tests=false",
+   }
+};
+
+desktop-file-utils = {
+   url = "https://www.freedesktop.org/software/desktop-file-utils/releases/desktop-file-utils-0.27.tar.xz",
+   sha3 = "c7e2480ad3a12bb90f68995645845c4c140f7c9b274ac21cfcb9ed443a7c7ef9",
+   build = "meson",
+};
+
+gsettings-desktop-schemas = {
+   url = "https://download.gnome.org/sources/gsettings-desktop-schemas/46/gsettings-desktop-schemas-46.1.tar.xz",
+   sha3 = "aa7f8ed3ba9bf31f4d660436f45dc7cccf983fa5650fe1939f74270770365330",
+   build = "meson",
+   prepare = [[ sed -i -r 's:"(/system):"/org/gnome\1:g' schemas/*.in ]]
+};
+
+xdg-user-dirs = {
+   url = "https://user-dirs.freedesktop.org/releases/xdg-user-dirs-0.18.tar.gz",
+   sha3 = "b94c66edbf2d901c8353916fda76263845f2e6b7d9d0dd071472dcb37f87ad29",
+   build = "./configure",
+   flags = { "--disable-documentation" }
+};
+
+startup-notification = {
+   url = "https://www.freedesktop.org/software/startup-notification/releases/startup-notification-0.12.tar.gz",
+   sha3 = "f551c61e57c983b0cae7fa57ba727226a67fe33ebd8c5ac6d0452338ccefa31f",
+   build = "./configure",
+};
+
+--------------------------------------------------------------------------------
+
+at-spi2-core = {
+   url = "https://download.gnome.org/sources/at-spi2-core/2.52/at-spi2-core-2.52.0.tar.xz",
+   sha3 = "4bff424cc3969f854fc11b5798f092e515406a08fb489070b1cd3dab16aa221c",
+   build = "meson",
+   flags = {
+      "-Dsystemd_user_dir=/tmp",
+      "-Ddefault_bus=dbus-daemon",
+      "-Ddocs=false",
+   },
+   post = [[ rm -fr $destdir/tmp ]]
+};
+
+cairo = {
+   url = "https://gitlab.freedesktop.org/cairo/cairo/-/archive/1.18.2/cairo-1.18.2.tar.bz2",
+   sha3 = "6804da6c04fedabeb3cd850fc3422b7c0fc79cb0d6cdd47ad424bc3da43882ab",
+   build = "meson",
+   flags = {
+      "-Ddwrite=disabled",
+      "-Dtee=enabled",
+      "-Dxlib-xcb=enabled",
+      "-Dxcb=enabled",
+      "-Dxlib=enabled",
+      "-Dgtk_doc=false",
+      "-Dspectre=disabled",
+      "-Dsymbol-lookup=disabled",
+      "-Dtests=disabled",
+   }
+};
+
+pango = {
+   url = "https://download.gnome.org/sources/pango/1.54/pango-1.54.0.tar.xz",
+   sha3 = "6aa59a06c31354e90c16c9015e90ad25d7b711cef90e1bd57ec326ced5eda815",
+   build = "meson",
+   flags = {
+      "-Dgtk_doc=false",
+      "-Ddocumentation=false",
+      "-Dxft=enabled",
+   }
+};
+
+gdk-pixbuf2 = {
+   url = "https://download.gnome.org/sources/gdk-pixbuf/2.42/gdk-pixbuf-2.42.12.tar.xz",
+   sha3 = "12483dead22787c04dc64abfccf9866b9c7aa3d50afe7c13b80fd6971180f775",
+   build = "meson",
+   flags = {
+      "-Dbuiltin_loaders=all",
+      "-Dinstalled_tests=false",
+      "-Dgio_sniffing=false",
+   }
+};
+
+librsvg = {
+   url = "https://download.gnome.org/sources/librsvg/2.58/librsvg-2.58.3.tar.xz",
+   sha3 = "441420392cd3b175074697db1f8e44768e2c805c64a5ebcdcdcee8b08ccf1600",
+   build = "./configure",
+   flags = { "--enable-vala" }
+};
+
+gtk3 = {
+   url = "https://download.gnome.org/sources/gtk+/3.24/gtk+-3.24.43.tar.xz",
+   sha3 = "5d219fe4e240cf2f80bb8c87e38f11b1ab70c6f4df70a7f16954bedb2a7c0b8d",
+   build = "meson",
+   flags = {
+      "-Dtests=false",
+      "-Ddemos=false",
+      "-Dexamples=false",
+      "-Dwin32_backend=false",
+      "-Dquartz_backend=false",
+      "-Dwayland_backend=false",
+      "-Dbroadway_backend=true",
+      "-Dtracker3=false",
+      "-Dgtk_doc=false",
+      "-Dcloudproviders=false",
+      "-Dman=false",
+   }
+};
+
+gtksourceview4 = {
+   url = "https://download.gnome.org/sources/gtksourceview/4.8/gtksourceview-4.8.4.tar.xz",
+   sha3 = "404b0d854e122ba0ed4d76375077e86f088a56e2aec29799afc829a134597fbf",
+   build = "meson",
+   flags = { "-Dgtk_doc=false" }
+};
+
+libhandy = {
+   url = "https://download.gnome.org/sources/libhandy/1.8/libhandy-1.8.3.tar.xz",
+   sha3 = "ba3b355ab5cf271259ddc2697b52cf29d1a1f357d9f6909c076e75af3eb15157",
+   build = "meson",
+};
+
+libnotify = {
+   url = "https://download.gnome.org/sources/libnotify/0.8/libnotify-0.8.3.tar.xz",
+   sha3 = "90216f182efa5ed279cb32527cfaa242a09fa1b7fac4fe6fee2981b40483d967",
+   build = "meson",
+   flags = {
+      "-Dgtk_doc=false",
+      "-Dman=false",
+      "-Dtests=false",
+   }
+};
+
+libxklavier = {
+   url = "https://people.freedesktop.org/~svu/libxklavier-5.4.tar.bz2",
+   sha3 = "9af44b71f74161cfb2e4fabf3d2642730b7608c8d32d5ff84108a043074c582f",
+   build = "./configure",
+   flags = { "--disable-gtk-doc" }
+};
+
+evince = {
+   url = "https://download.gnome.org/sources/evince/46/evince-46.3.1.tar.xz",
+   sha3 = "2904ed9f206394b88a46726711505a535e13b1c02bc2d4f782ef4427b355f9c4",
+   build = "meson",
+   flags = {
+      "-Dgspell=disabled",
+      "-Dgtk_doc=false",
+      "-Dkeyring=disabled",
+      "-Dnautilus=false",
+      "-Dpdf=enabled",
+      "-Dps=enabled",
+      "-Dsystemduserunitdir=no",
+      "-Duser_doc=false",
+   }
+};
+
+gcr4 = {
+   url = "https://download.gnome.org/sources/gcr/4.3/gcr-4.3.0.tar.xz",
+   sha3 = "03de4e64b17b5c9a299c7fccad1332aa12e588a5f47af3d4488964b5581538ca",
+   build = "meson",
+   flags = { 
+      "-Dgtk_doc=false", 
+      "-Dgtk4=false",
+      "-Dssh_agent=false",
+   }
+};
+
+gvfs = {
+   url = "https://download.gnome.org/sources/gvfs/1.54/gvfs-1.54.2.tar.xz",
+   sha3 = "f4e70a04f8b5579428a0d8f8958be1cb219ed23ec63952542e00ab8834b19826",
+   build = "meson",
+   flags = {
+      "-Dadmin=false",
+      "-Dafc=false",
+      "-Darchive=false",
+      "-Dbluray=false",
+      "-Dcdda=false",
+      "-Ddnssd=false",
+      "-Dfuse=false",
+      "-Dgoa=false",
+      "-Dgoogle=false",
+      "-Dgphoto2=false",
+      "-Dhttp=false",
+      "-Dkeyring=false",
+      "-Dlogind=false",
+      "-Dmtp=false",
+      "-Dnfs=false",
+      "-Donedrive=false",
+      "-Dsmb=false",
+      "-Dsystemduserunitdir=no",
+      "-Dtmpfilesdir=no",
+      "-Dudisks2=false",
+   }
+};

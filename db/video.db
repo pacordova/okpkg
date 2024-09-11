@@ -1,0 +1,82 @@
+vulkan-headers = {
+   url = "https://github.com/KhronosGroup/Vulkan-Headers/archive/vulkan-sdk-1.3.290.0/Vulkan-Headers-vulkan-sdk-1.3.290.0.tar.gz",
+   sha3 = "93ace7aab4ba324d1550305393e87cd1f26ef36bbc0476308dd1fbe04e38241a",
+   build = "cmake",
+   flags = { "-DVULKAN_HEADERS_ENABLE_MODULE=OFF" }
+};
+
+vulkan-loader = {
+   url = "https://github.com/KhronosGroup/Vulkan-Loader/archive/vulkan-sdk-1.3.290.0/Vulkan-Loader-vulkan-sdk-1.3.290.0.tar.gz",
+   sha3 = "a2e6dbac88f294e900e18dd9032005a25feb31352ae4902bb6941c87652d9fc5",
+   build = "cmake",
+   flags = {
+      "-DCMAKE_SKIP_RPATH=TRUE",
+      "-DBUILD_TESTS=OFF",
+      "-DBUILD_WSI_{WAYLAND_SUPPORT=OFF,XCB_SUPPORT=ON,XLIB_SUPPORT=ON}",
+      "-DVULKAN_HEADERS_INSTALL_DIR=/usr"
+   }
+};
+
+nv-codec-headers = {
+   url = "https://github.com/FFmpeg/nv-codec-headers/releases/download/n12.1.14.0/nv-codec-headers-12.1.14.0.tar.gz",
+   sha3 = "8dc9b52f8a2256ff15439caed043e4d93229d9acabb4217d255f9dc7be0c9fc7",
+   build = "make",
+   flags = { "PREFIX=/usr", "LIBDIR=lib64" }
+};
+
+nvidia-vaapi-driver = {
+   url = "https://github.com/elFarto/nvidia-vaapi-driver/archive/v0.0.12/nvidia-vaapi-driver-0.0.12.tar.gz",
+   sha3 = "c28f79aefa8ea0f260ca6754e417a590a20d2001bdad502e3c0efe8ec157e20e",
+   build = "meson",
+};
+
+ffmpeg = {
+   url = "https://ffmpeg.org/releases/ffmpeg-7.0.2.tar.xz",
+   sha3 = "9cbfbeae2739d2425dfefdbe3c2cd8b6cbaefe72688bf45f6b85a4594ba11655",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--enable-gpl",
+      "--enable-libass",
+      "--enable-libdrm",
+      "--enable-libmp3lame",
+      "--enable-libopus",
+      "--enable-libvorbis",
+      "--enable-libvpx",
+      "--enable-libx264",
+      "--enable-libx265",
+      "--enable-openssl",
+      "--enable-shared",
+      "--enable-version3",
+      "--disable-debug",
+      "--disable-libxml2",
+      "--disable-libwebp",
+      "--disable-static",
+      "--x86asmexe=nasm",
+   },
+   post = [[ rm -fr $destdir/usr/share/ffmpeg/examples ]]
+};
+
+libplacebo = {
+   url = "https://code.videolan.org/videolan/libplacebo/-/archive/v7.349.0/libplacebo-v7.349.0.tar.gz",
+   sha3 = "c213ef4b5eb437040012891e2e002600251fd27f8a0a825afe72a4c24727b797",
+   build = "meson",
+   flags = { "-Ddemos=false" }
+};
+
+uchardet = {
+   url = "https://www.freedesktop.org/software/uchardet/releases/uchardet-0.0.8.tar.xz",
+   sha3 = "a6b22fbf93ac19bc33d2f06bba03abdd36d53e58c3b575722de5d6f2d4219597",
+   build = "cmake",
+   flags = { "-DBUILD_STATIC=OFF" }
+};
+
+mpv = {
+   url = "https://github.com/mpv-player/mpv/archive/v0.38.0/mpv-0.38.0.tar.gz",
+   sha3 = "84a2173a5a4ffc4f28e2e3918cb4cef7818dbc6b34844b910b615e37d1e04560",
+   build = "meson",
+   flags = {
+      "-Dx11=enabled",
+      "-Dpipewire=disabled",
+   }
+};
