@@ -556,6 +556,16 @@ xkeyboard-config = {
    }
 };
 
+libxkbcommon = {
+   url = "https://xkbcommon.org/download/libxkbcommon-1.7.0.tar.xz",
+   sha3 = "225ea10c40348a194d8a27cb114533461c6d6ad6613721c05d33f88b02749a8e",
+   build = "meson",
+   flags = {
+      "-Denable-wayland=false",
+      "-Denable-docs=false"
+   }
+};
+
 libepoxy = {
    url = "https://github.com/anholt/libepoxy/archive/1.5.10/libepoxy-1.5.10.tar.gz",
    sha3 = "14d8260c033272610a53f9770faba81d36729b606e520287335329e030b69dd1",

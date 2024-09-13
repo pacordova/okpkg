@@ -109,6 +109,13 @@ lame = {
    flags = { "--enable-{nasm=yes,mp3rtp=yes,gtktest=no}" }
 };
 
+libarchive = {
+   url = "https://github.com/libarchive/libarchive/releases/download/v3.7.4/libarchive-3.7.4.tar.xz",
+   sha3 = "27ee1cf7f44d7ba0a12998715d8dfb5aaca92c34279c34ee1ccf10325b19b098",
+   build = "./configure",
+   flags = { "--without-nettle" }
+};
+
 libass = {
    url = "https://github.com/libass/libass/releases/download/0.17.3/libass-0.17.3.tar.gz",
    sha3 = "b163363fa4926a3d8991a138cea75ee83431787209df74a3ee66f6b269ca6fec",
@@ -131,6 +138,12 @@ libconfig = {
    build = "./configure",
 };
 
+libev = {
+   url = "http://dist.schmorp.de/libev/libev-4.33.tar.gz",
+   sha3 = "ba1e921dd20ef633308f837e958e136b5ec80cd73683fd1bdb1ed48ceb59cf1b",
+   build = "./configure",
+};
+
 libevent = {
    url = "https://github.com/libevent/libevent/releases/download/release-2.1.12-stable/libevent-2.1.12-stable.tar.gz",
    sha3 = "aeadcbd599fc49e5fe9554a668093e4bdc53cf9fd177d099bce41e46ec0b783d",
@@ -143,6 +156,13 @@ libexif = {
    sha3 = "a3d9130008e06b086ff60624ed629eeb259916da99fa045784fc6177b4b591c3",
    build = "./configure",
    flags = { "--with-doc-dir=/usr/share/doc/libexif" }
+};
+
+libidn2 = {
+   url = "https://ftp.gnu.org/gnu/libidn/libidn2-2.3.7.tar.gz",
+   sha3 = "889197927b322f26b41a4ba21e78f631cf0cdca8d8fcfa0f5ac0d4bdcd8278c8",
+   build = "./configure",
+   post = [[ rm -fr $destdir/usr/bin $destdir/usr/share/man/man1 ]]
 };
 
 libjpeg-turbo = {
@@ -221,6 +241,24 @@ libtirpc = {
    flags = { "--disable-gssapi" }
 };
 
+libunistring = {
+   url = "https://ftp.gnu.org/gnu/libunistring/libunistring-1.2.tar.xz",
+   sha3 = "95472c6995afaa039064bab986637cb2825dd2cb20814db26fb365fd5cea9fd6",
+   build = "./configure",
+};
+
+libusb = {
+   url = "https://github.com/libusb/libusb/releases/download/v1.0.27/libusb-1.0.27.tar.bz2",
+   sha3 = "e79a5aa5c54bd32d07f1e0935b1b18c09fe7bfa6a202d5a1c218938764781164",
+   build = "./configure",
+};
+
+libuv = {
+   url = "https://dist.libuv.org/dist/v1.48.0/libuv-v1.48.0-dist.tar.gz",
+   sha3 = "5e721b956873474715598ed04dd50a4bfb055966140056147c519480e28d1507",
+   build = "./configure",
+};
+
 libvorbis = {
    url = "https://downloads.xiph.org/releases/vorbis/libvorbis-1.3.7.tar.xz",
    sha3 = "2c28108d60b3ac2bd0f2a38ac3ee0dc70a24b84f6f6e892df20d266cd11a5e9d",
@@ -246,15 +284,23 @@ libvpx = {
    }
 };
 
-libxkbcommon = {
-   url = "https://xkbcommon.org/download/libxkbcommon-1.7.0.tar.xz",
-   sha3 = "225ea10c40348a194d8a27cb114533461c6d6ad6613721c05d33f88b02749a8e",
-   build = "meson",
+libxml2 = {
+   url = "https://download.gnome.org/sources/libxml2/2.13/libxml2-2.13.3.tar.xz",
+   sha3 = "abba2c837356e1303c07b2703a95a1de5697f7e0c39d4e37b5e2132d96121de5",
+   build = "./configure",
    flags = {
-      "-Denable-wayland=false",
-      "-Denable-docs=false"
+      "--with-{history=yes,legacy=yes,icu=no}",
+      "PYTHON=/usr/bin/python3",
    }
 };
+
+libxslt = {
+   url = "https://download.gnome.org/sources/libxslt/1.1/libxslt-1.1.42.tar.xz",
+   sha3 = "89c1ef277e8a38b3825ede2c791e35e2495c600a9e94e2ca527663fb15cc815c",
+   build = "./configure",
+   flags = { "--without-python" }
+};
+
 
 libyaml = {
    url = "https://github.com/yaml/libyaml/releases/download/0.2.5/yaml-0.2.5.tar.gz",
@@ -266,6 +312,13 @@ mtdev = {
    url = "https://bitmath.org/code/mtdev/mtdev-1.1.7.tar.bz2",
    sha3 = "4afd35629a236b17597841cfd394e51af7c215eaaa8097ace8c8da6ffb8cfd71",
    build = "./configure",
+};
+
+nghttp2 = {
+   url = "https://github.com/nghttp2/nghttp2/releases/download/v1.63.0/nghttp2-1.63.0.tar.xz",
+   sha3 = "cbf7364a6ea68d6c9753f57154dc94dc07fd6160f8bf0c01a9470ad4a3403e99",
+   build = "./configure",
+   flags = { "--enable-lib-only", "--with-libev" }
 };
 
 opus = {
@@ -364,4 +417,70 @@ x265 = {
       "-S source",
    },
    post = [[ rm -f $destdir/usr/lib64/libx265.a ]]
+};
+
+--------------------------------------------------------------------------------
+
+_glib2 = {
+   url = "https://download.gnome.org/sources/glib/2.82/glib-2.82.0.tar.xz",
+   sha3 = "bb8c6fd9c76cdb85e315c1dbeeb2c86412a70ba901345bdf6c2f6b5782989571",
+   build = "meson",
+   flags = { "-Dintrospection=disabled" }
+};
+
+gobject-introspection = {
+   url = "https://download.gnome.org/sources/gobject-introspection/1.80/gobject-introspection-1.80.1.tar.xz",
+   sha3 = "0aee06c2479fc07b9aa7092fecdf757f4efd7739c585b01b1733cd1b8d9ed034",
+   build = "meson",
+};
+
+glib2 = {
+   url = "https://download.gnome.org/sources/glib/2.82/glib-2.82.0.tar.xz",
+   sha3 = "bb8c6fd9c76cdb85e315c1dbeeb2c86412a70ba901345bdf6c2f6b5782989571",
+   build = "meson",
+   flags = { "-Dintrospection=enabled" }
+};
+
+dbus-glib = {
+   url = "https://dbus.freedesktop.org/releases/dbus-glib/dbus-glib-0.112.tar.gz",
+   sha3 = "403eaea495309ea8260148a2cb945a1c08785b1c431bd867d1100b188b4efa41",
+   build = "./configure",
+};
+
+json-glib = {
+   url = "https://download.gnome.org/sources/json-glib/1.10/json-glib-1.10.0.tar.xz",
+   sha3 = "63a0253ff4c71c1d49765cd773934af6982c6ce8cf051a4c63261a0105ae83d4",
+   build = "meson",
+   flags = { "-D{gtk_doc=disabled,nls=disabled,tests=false}" },
+};
+
+libgudev = {
+   url = "https://download.gnome.org/sources/libgudev/238/libgudev-238.tar.xz",
+   sha3 = "6500e55c1ceeaf85747d3eeaebd57e1cfc7fae4b5b4ceb7161cd8ab059d1863d",
+   build = "meson",
+};
+
+upower = {
+   url = "https://gitlab.freedesktop.org/upower/upower/-/archive/v1.90.5/upower-v1.90.5.tar.bz2",
+   sha3 = "7b24ed91602d2b2cdc055e0193d44c17e171d7927d0575f876e43cd5adf026c1",
+   build = "meson",
+   flags = {
+      "-Dsystemdsystemunitdir=no",
+      "-Dudevrulesdir=/usr/lib64/udev/rules.d",
+      "-Dgtk-doc=false",
+      "-Dman=false"
+   },
+   prepare = [[ sed '/parse_version/d' -i src/linux/integration-test.py ]]
+};
+
+vala = {
+   url = "https://download.gnome.org/sources/vala/0.56/vala-0.56.17.tar.xz",
+   sha3 = "668609ee19af025e1778f93f81086e11d850354db8c4278a2ad2db944a951f9f",
+   build = "./configure",
+   flags = {
+      "--enable-python3=yes",
+      "--disable-python",
+      "--disable-valadoc",
+   },
+   prepare = [[ sed -i '/gvc.h/a#define TRUE 1' libvaladoc/gvc-compat.c ]]
 };

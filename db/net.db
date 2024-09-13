@@ -16,6 +16,18 @@ connman = {
    },
 };
 
+curl = {
+   url = "https://curl.se/download/curl-8.9.1.tar.xz",
+   sha3 = "d97e00e815d2249acca089b659e62ec4fac1653503464da5b46ea360f9032092",
+   build = "./configure",
+   flags = {
+      "--enable-{ipv6,threaded-resolver,unix-sockets}",
+      "--disable-{ares,ldap,ldaps,manual}",
+      "--with-{openssl=yes,libidn2=yes,nghttp2=yes,libssh2=no}",
+      "--with-ca-bundle=/etc/ssl/certs/ca-certificates.crt",
+   }
+};
+
 openntpd = {
    url = "https://ftp.openbsd.org/pub/OpenBSD/OpenNTPD/openntpd-6.8p1.tar.gz",
    sha3 = "05a6c3e7f6928b0455e13e5167f455c1a7d9162cf394d415e6c48da7c49d8eec",

@@ -18,67 +18,96 @@ local chdir, mkdir, symlink =
 local fp, buf
 
 local dirs = {
-   ["/usr/okpkg/db/modules.db"] = "/usr/okpkg/packages/m",
    ["/usr/okpkg/db/devel.db"]   = "/usr/okpkg/packages/d",
-   ["/usr/okpkg/db/lib.db"]     = "/usr/okpkg/packages/l",
-   ["/usr/okpkg/db/net.db"]     = "/usr/okpkg/packages/n",
-   ["/usr/okpkg/db/xorg.db"]    = "/usr/okpkg/packages/x",
-   ["/usr/okpkg/db/gtk.db"]     = "/usr/okpkg/packages/x",
-   ["/usr/okpkg/db/xfce.db"]    = "/usr/okpkg/packages/xf",
-   ["/usr/okpkg/db/video.db"]   = "/usr/okpkg/packages/v",
    ["/usr/okpkg/db/flatpak.db"] = "/usr/okpkg/packages/b",
+   ["/usr/okpkg/db/glib.db"]    = "/usr/okpkg/packages/l",
+   ["/usr/okpkg/db/gtk.db"]     = "/usr/okpkg/packages/x",
+   ["/usr/okpkg/db/lib.db"]     = "/usr/okpkg/packages/l",
+   ["/usr/okpkg/db/modules.db"] = "/usr/okpkg/packages/m",
+   ["/usr/okpkg/db/net.db"]     = "/usr/okpkg/packages/n",
+   ["/usr/okpkg/db/video.db"]   = "/usr/okpkg/packages/v",
+   ["/usr/okpkg/db/xfce.db"]    = "/usr/okpkg/packages/xf",
+   ["/usr/okpkg/db/xorg.db"]    = "/usr/okpkg/packages/x",
 }
+
+local function getdb(x)
+   local t, fp, buf
+   t = {}
+   fp = io.open(x)
+   buf = '\n' .. fp:read('*a')
+   fp:close()
+   for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do 
+      table.insert(t, i)
+   end
+   return unpack(t)
+end
+
+local function build_all(...)
+   local arg = {...}
+   for i=1,#arg do
+      emerge(i)
+      if arg[i] == "librsvg" or arg[i] == "gdk-pixbuf2" then
+         os.execute("gdk-pixbuf-query-loaders --update-cache")
+      end
+   end
+end
+
+local function build_db(x)
+   build_db(getdb(x))
+   mkdir(dirs[db])
+   ok.execute("mv /usr/okpkg/packages/*.tar.lz " .. dirs[db])
+end
 
 -- Generate locales
 os.execute("localedef -i POSIX -f UTF-8 C.UTF-8 2> /dev/null || true")
 os.execute("localedef -i en_US -f UTF-8 en_US.UTF-8")
 
--- Builds and installs all packages in a single db file
-local function build_all(db) 
-   local fp, buf
-   fp = io.open(db)
-   buf = '\n' .. fp:read('*a')
-   fp:close()
-   for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do emerge(i)
-      if i == "librsvg" or i == "gdk-pixbuf2" then
-         os.execute("gdk-pixbuf-query-loaders --update-cache")
-      end
-   end
-   mkdir(dirs[db])
-   ok.execute("mv /usr/okpkg/packages/*.tar.lz " .. dirs[db])
-end
+-- TODO: reorg
+-- cmake dependencies:
+-- libarchive (optionally needs libxml2)
+-- nghttp2 (optinally needs libev)
+-- libunistring libidn2 libpsl curl
+-- libuv
+
+-- make glib.db, upower needs libusb
+
 
 -- Install system packages to track in /usr/okpkg/index
 os.execute("okpkg install /usr/okpkg/packages/a/*.tar.lz")
 
 -- Modules
-build_all("/usr/okpkg/db/modules.db")
+build_db("/usr/okpkg/db/modules.db")
+
+-- CMake dependencies
+build_all("nghttp2", "libunistring", "libidn2", "libpsl", "nghttp2", "curl", 
+   "libuv", "libxml2", "libarchive")
+os.execute("rm -fr /usr/okpkg/packages/*.tar.lz")
 
 -- Development tools
 emerge("rust-bin")
-build_all("/usr/okpkg/db/devel.db")
+build_db("/usr/okpkg/db/devel.db")
 
 -- Libraries
-build_all("/usr/okpkg/db/lib.db")
+build_db("/usr/okpkg/db/lib.db")
 
 -- Network tools
 emerge("firefox-bin")
-build_all("/usr/okpkg/db/net.db")
+build_db("/usr/okpkg/db/net.db")
 
 -- Xorg
-build_all("/usr/okpkg/db/xorg.db")
+build_db("/usr/okpkg/db/xorg.db")
 
 -- GTK+
-build_all("/usr/okpkg/db/gtk.db")
+build_db("/usr/okpkg/db/gtk.db")
 
 -- XFCE
-build_all("/usr/okpkg/db/xfce.db")
+build_db("/usr/okpkg/db/xfce.db")
 
 -- Flatpak
-build_all("/usr/okpkg/db/flatpak.db")
+build_db("/usr/okpkg/db/flatpak.db")
 
 -- Video
-build_all("/usr/okpkg/db/video.db")
+build_db("/usr/okpkg/db/video.db")
 
 -- Rebuilds
 emerge("dbus")
