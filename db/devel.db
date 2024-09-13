@@ -105,16 +105,6 @@ opendoas = {
    ]]
 };
 
-optipng = {
-   url = "https://prdownloads.sourceforge.net/optipng/optipng-0.7.8.tar.gz",
-   sha3 = "4aa347bb09ec8421bf6cce96a3c9e12c0b47a100ece108c342a79a944d2b9027",
-   build = "./configure",
-   flags = {
-      "--with-system-libs",
-      "--mandir=/usr/share/man",
-   }
-};
-
 samurai = {
    url = "https://github.com/michaelforney/samurai/releases/download/1.2/samurai-1.2.tar.gz",
    sha3 = "127ea48499f38f1a1c476957453ccca9419c8a4a938925e1361818102307375d",

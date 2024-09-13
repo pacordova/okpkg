@@ -10,6 +10,8 @@ os.execute [[
 -- Imports
 dofile("/usr/okpkg/okpkg.lua")
 
+local unpack = unpack or table.unpack
+
 local ok = require("okutils")
 
 local chdir, mkdir, symlink =
@@ -31,8 +33,8 @@ local dirs = {
 }
 
 local function getdb(x)
-   local t, fp, buf
-   t = {}
+   local fp, buf
+   local t = {}
    fp = io.open(x)
    buf = '\n' .. fp:read('*a')
    fp:close()
@@ -45,7 +47,7 @@ end
 local function build_all(...)
    local arg = {...}
    for i=1,#arg do
-      emerge(i)
+      emerge(arg[i])
       if arg[i] == "librsvg" or arg[i] == "gdk-pixbuf2" then
          os.execute("gdk-pixbuf-query-loaders --update-cache")
       end
@@ -53,9 +55,9 @@ local function build_all(...)
 end
 
 local function build_db(x)
-   build_db(getdb(x))
-   mkdir(dirs[db])
-   ok.execute("mv /usr/okpkg/packages/*.tar.lz " .. dirs[db])
+   build_all(getdb(x))
+   mkdir(dirs[x])
+   os.execute("mv /usr/okpkg/packages/*.tar.lz " .. dirs[x])
 end
 
 -- Generate locales

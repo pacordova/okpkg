@@ -234,6 +234,16 @@ picom = {
 
 --------------------------------------------------------------------------------
 
+optipng = {
+   url = "https://prdownloads.sourceforge.net/optipng/optipng-0.7.8.tar.gz",
+   sha3 = "4aa347bb09ec8421bf6cce96a3c9e12c0b47a100ece108c342a79a944d2b9027",
+   build = "./configure",
+   flags = {
+      "--with-system-libs",
+      "--mandir=/usr/share/man",
+   }
+};
+
 hicolor-icon-theme = {
    url = "https://icon-theme.freedesktop.org/releases/hicolor-icon-theme-0.18.tar.xz",
    sha3 = "67a8fb5352c9cd1a9e3897b51adbbac90a32063b4d135f806e07ca45f02c0f13",
