@@ -26,12 +26,14 @@ firefox-bin = {
 
 -- from firefox: libnss3.so libnssutil3.so libsmime3.so libnspr4.so libplc4.so libplds4.so
 -- needs cups
-discord-bin = {
+discord = {
    url = "https://dl.discordapp.net/apps/linux/0.0.68/discord-0.0.68.tar.gz",
    sha3 = "ea7155a697eae29efd8046e54f3cac2877efad54a04c3814e3719aa2a36da07b",
    build = _,
    post = [[
-      sed -i 's:/usr/share:/usr/lib64:' discord.desktop
+      sed -e 's:/usr/share:/usr/lib64:' \
+          -e 's:^Icon=.*$:Icon=/usr/lib64/discord/discord.png:' \
+          -i discord.desktop
       install -d $destdir/usr/{bin,lib64}
       install -d $destdir/usr/share/applications  
       install -m 644 discord.desktop $destdir/usr/share/applications
