@@ -36,8 +36,6 @@ cmake = {
       "--datadir=/share/cmake",
       "--docdir=/share/doc/cmake",
       "--parallel=$(getconf _NPROCESSORS_ONLN)",
-      "--system-libs",
-      "--no-system-{cppdap,jsoncpp,librhash}",
    },
    post = [[
       rm -fr $destdir/usr/share/cmake*/Help

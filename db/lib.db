@@ -1,3 +1,84 @@
+libusb = {
+   url = "https://github.com/libusb/libusb/releases/download/v1.0.27/libusb-1.0.27.tar.bz2",
+   sha3 = "e79a5aa5c54bd32d07f1e0935b1b18c09fe7bfa6a202d5a1c218938764781164",
+   build = "./configure",
+};
+
+usbutils = {
+   url = "https://mirrors.kernel.org/pub/linux/utils/usb/usbutils/usbutils-017.tar.xz",
+   sha3 = "536184ee79409ec212e2b060791792384d428bd3176438c47826294bd572e80b",
+   build = "./configure",
+   flags = { "--datadir=/usr/share/hwdata" }
+};
+
+--------------------------------------------------------------------------------
+
+_glib2 = {
+   url = "https://download.gnome.org/sources/glib/2.82/glib-2.82.0.tar.xz",
+   sha3 = "bb8c6fd9c76cdb85e315c1dbeeb2c86412a70ba901345bdf6c2f6b5782989571",
+   build = "meson",
+   flags = { "-Dintrospection=disabled" }
+};
+
+gobject-introspection = {
+   url = "https://download.gnome.org/sources/gobject-introspection/1.80/gobject-introspection-1.80.1.tar.xz",
+   sha3 = "0aee06c2479fc07b9aa7092fecdf757f4efd7739c585b01b1733cd1b8d9ed034",
+   build = "meson",
+};
+
+glib2 = {
+   url = "https://download.gnome.org/sources/glib/2.82/glib-2.82.0.tar.xz",
+   sha3 = "bb8c6fd9c76cdb85e315c1dbeeb2c86412a70ba901345bdf6c2f6b5782989571",
+   build = "meson",
+   flags = { "-Dintrospection=enabled" }
+};
+
+dbus-glib = {
+   url = "https://dbus.freedesktop.org/releases/dbus-glib/dbus-glib-0.112.tar.gz",
+   sha3 = "403eaea495309ea8260148a2cb945a1c08785b1c431bd867d1100b188b4efa41",
+   build = "./configure",
+};
+
+json-glib = {
+   url = "https://download.gnome.org/sources/json-glib/1.10/json-glib-1.10.0.tar.xz",
+   sha3 = "63a0253ff4c71c1d49765cd773934af6982c6ce8cf051a4c63261a0105ae83d4",
+   build = "meson",
+   flags = { "-D{gtk_doc=disabled,nls=disabled,tests=false}" },
+};
+
+libgudev = {
+   url = "https://download.gnome.org/sources/libgudev/238/libgudev-238.tar.xz",
+   sha3 = "6500e55c1ceeaf85747d3eeaebd57e1cfc7fae4b5b4ceb7161cd8ab059d1863d",
+   build = "meson",
+};
+
+upower = {
+   url = "https://gitlab.freedesktop.org/upower/upower/-/archive/v1.90.5/upower-v1.90.5.tar.bz2",
+   sha3 = "7b24ed91602d2b2cdc055e0193d44c17e171d7927d0575f876e43cd5adf026c1",
+   build = "meson",
+   flags = {
+      "-Dsystemdsystemunitdir=no",
+      "-Dudevrulesdir=/usr/lib64/udev/rules.d",
+      "-Dgtk-doc=false",
+      "-Dman=false"
+   },
+   prepare = [[ sed '/parse_version/d' -i src/linux/integration-test.py ]]
+};
+
+vala = {
+   url = "https://download.gnome.org/sources/vala/0.56/vala-0.56.17.tar.xz",
+   sha3 = "668609ee19af025e1778f93f81086e11d850354db8c4278a2ad2db944a951f9f",
+   build = "./configure",
+   flags = {
+      "--enable-python3=yes",
+      "--disable-python",
+      "--disable-valadoc",
+   },
+   prepare = [[ sed -i '/gvc.h/a#define TRUE 1' libvaladoc/gvc-compat.c ]]
+};
+
+--------------------------------------------------------------------------------
+
 _freetype2 = {
    url = "https://downloads.sourceforge.net/freetype/freetype-2.13.3.tar.xz",
    sha3 = "764b5a302571b7ead0d180b3e5e7af19b0b47e6cb1315f26ee5266bd0460d2fc",
@@ -158,13 +239,6 @@ libexif = {
    flags = { "--with-doc-dir=/usr/share/doc/libexif" }
 };
 
-libidn2 = {
-   url = "https://ftp.gnu.org/gnu/libidn/libidn2-2.3.7.tar.gz",
-   sha3 = "889197927b322f26b41a4ba21e78f631cf0cdca8d8fcfa0f5ac0d4bdcd8278c8",
-   build = "./configure",
-   post = [[ rm -fr $destdir/usr/bin $destdir/usr/share/man/man1 ]]
-};
-
 libjpeg-turbo = {
    url = "https://github.com/libjpeg-turbo/libjpeg-turbo/releases/download/3.0.3/libjpeg-turbo-3.0.3.tar.gz",
    sha3 = "648f531e76e7151d521106a081671f41e5153725d38d0c5a91ec6c80e6f113b4",
@@ -203,6 +277,19 @@ libpng = {
    build = "./configure",
 };
 
+libunistring = {
+   url = "https://ftp.gnu.org/gnu/libunistring/libunistring-1.2.tar.xz",
+   sha3 = "95472c6995afaa039064bab986637cb2825dd2cb20814db26fb365fd5cea9fd6",
+   build = "./configure",
+};
+
+libidn2 = {
+   url = "https://ftp.gnu.org/gnu/libidn/libidn2-2.3.7.tar.gz",
+   sha3 = "889197927b322f26b41a4ba21e78f631cf0cdca8d8fcfa0f5ac0d4bdcd8278c8",
+   build = "./configure",
+   post = [[ rm -fr $destdir/usr/bin $destdir/usr/share/man/man1 ]]
+};
+
 libpsl = {
    url = "https://github.com/rockdaboot/libpsl/releases/download/0.21.5/libpsl-0.21.5.tar.gz",
    sha3 = "41c5824497c1e40e8c97eab9027fd0b4f74e9bd1c9b482f5d8a92261c779a07e",
@@ -239,18 +326,6 @@ libtirpc = {
    sha3 = "d039939874447be073f6f65acab90b2ecfa4385b5b1b2ca2cf8991b1504ddeee",
    build = "./configure",
    flags = { "--disable-gssapi" }
-};
-
-libunistring = {
-   url = "https://ftp.gnu.org/gnu/libunistring/libunistring-1.2.tar.xz",
-   sha3 = "95472c6995afaa039064bab986637cb2825dd2cb20814db26fb365fd5cea9fd6",
-   build = "./configure",
-};
-
-libusb = {
-   url = "https://github.com/libusb/libusb/releases/download/v1.0.27/libusb-1.0.27.tar.bz2",
-   sha3 = "e79a5aa5c54bd32d07f1e0935b1b18c09fe7bfa6a202d5a1c218938764781164",
-   build = "./configure",
 };
 
 libuv = {
@@ -417,70 +492,4 @@ x265 = {
       "-S source",
    },
    post = [[ rm -f $destdir/usr/lib64/libx265.a ]]
-};
-
---------------------------------------------------------------------------------
-
-_glib2 = {
-   url = "https://download.gnome.org/sources/glib/2.82/glib-2.82.0.tar.xz",
-   sha3 = "bb8c6fd9c76cdb85e315c1dbeeb2c86412a70ba901345bdf6c2f6b5782989571",
-   build = "meson",
-   flags = { "-Dintrospection=disabled" }
-};
-
-gobject-introspection = {
-   url = "https://download.gnome.org/sources/gobject-introspection/1.80/gobject-introspection-1.80.1.tar.xz",
-   sha3 = "0aee06c2479fc07b9aa7092fecdf757f4efd7739c585b01b1733cd1b8d9ed034",
-   build = "meson",
-};
-
-glib2 = {
-   url = "https://download.gnome.org/sources/glib/2.82/glib-2.82.0.tar.xz",
-   sha3 = "bb8c6fd9c76cdb85e315c1dbeeb2c86412a70ba901345bdf6c2f6b5782989571",
-   build = "meson",
-   flags = { "-Dintrospection=enabled" }
-};
-
-dbus-glib = {
-   url = "https://dbus.freedesktop.org/releases/dbus-glib/dbus-glib-0.112.tar.gz",
-   sha3 = "403eaea495309ea8260148a2cb945a1c08785b1c431bd867d1100b188b4efa41",
-   build = "./configure",
-};
-
-json-glib = {
-   url = "https://download.gnome.org/sources/json-glib/1.10/json-glib-1.10.0.tar.xz",
-   sha3 = "63a0253ff4c71c1d49765cd773934af6982c6ce8cf051a4c63261a0105ae83d4",
-   build = "meson",
-   flags = { "-D{gtk_doc=disabled,nls=disabled,tests=false}" },
-};
-
-libgudev = {
-   url = "https://download.gnome.org/sources/libgudev/238/libgudev-238.tar.xz",
-   sha3 = "6500e55c1ceeaf85747d3eeaebd57e1cfc7fae4b5b4ceb7161cd8ab059d1863d",
-   build = "meson",
-};
-
-upower = {
-   url = "https://gitlab.freedesktop.org/upower/upower/-/archive/v1.90.5/upower-v1.90.5.tar.bz2",
-   sha3 = "7b24ed91602d2b2cdc055e0193d44c17e171d7927d0575f876e43cd5adf026c1",
-   build = "meson",
-   flags = {
-      "-Dsystemdsystemunitdir=no",
-      "-Dudevrulesdir=/usr/lib64/udev/rules.d",
-      "-Dgtk-doc=false",
-      "-Dman=false"
-   },
-   prepare = [[ sed '/parse_version/d' -i src/linux/integration-test.py ]]
-};
-
-vala = {
-   url = "https://download.gnome.org/sources/vala/0.56/vala-0.56.17.tar.xz",
-   sha3 = "668609ee19af025e1778f93f81086e11d850354db8c4278a2ad2db944a951f9f",
-   build = "./configure",
-   flags = {
-      "--enable-python3=yes",
-      "--disable-python",
-      "--disable-valadoc",
-   },
-   prepare = [[ sed -i '/gvc.h/a#define TRUE 1' libvaladoc/gvc-compat.c ]]
 };

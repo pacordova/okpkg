@@ -257,13 +257,6 @@ ugrep = {
    build = "./configure",
 };
 
-usbutils = {
-   url = "https://mirrors.kernel.org/pub/linux/utils/usb/usbutils/usbutils-017.tar.xz",
-   sha3 = "536184ee79409ec212e2b060791792384d428bd3176438c47826294bd572e80b",
-   build = "./configure",
-   flags = { "--datadir=/usr/share/hwdata" }
-};
-
 xorriso = {
    url = "http://ftp.gnu.org/gnu/xorriso/xorriso-1.5.6.tar.gz",
    sha3 = "ce81f4c5fc0c4a4144a1c9e68bfc49e632ca73ffc25ce1615f849f081e1510b8",

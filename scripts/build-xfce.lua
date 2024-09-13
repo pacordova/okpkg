@@ -64,26 +64,11 @@ end
 os.execute("localedef -i POSIX -f UTF-8 C.UTF-8 2> /dev/null || true")
 os.execute("localedef -i en_US -f UTF-8 en_US.UTF-8")
 
--- TODO: reorg
--- cmake dependencies:
--- libarchive (optionally needs libxml2)
--- nghttp2 (optinally needs libev)
--- libunistring libidn2 libpsl curl
--- libuv
-
--- make glib.db, upower needs libusb
-
-
 -- Install system packages to track in /usr/okpkg/index
 os.execute("okpkg install /usr/okpkg/packages/a/*.tar.lz")
 
 -- Modules
 build_db("/usr/okpkg/db/modules.db")
-
--- CMake dependencies
-build_all("nghttp2", "libunistring", "libidn2", "libpsl", "nghttp2", "curl", 
-   "libuv", "libxml2", "libarchive")
-os.execute("rm -fr /usr/okpkg/packages/*.tar.lz")
 
 -- Development tools
 emerge("rust-bin")
