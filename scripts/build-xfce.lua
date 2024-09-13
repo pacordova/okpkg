@@ -65,7 +65,9 @@ os.execute("localedef -i POSIX -f UTF-8 C.UTF-8 2> /dev/null || true")
 os.execute("localedef -i en_US -f UTF-8 en_US.UTF-8")
 
 -- Install system packages to track in /usr/okpkg/index
-os.execute("okpkg install /usr/okpkg/packages/a/*.tar.lz")
+os.execute("okpkg install /usr/okpkg/packages/*.tar.lz")
+mkdir("/usr/okpkg/packages/a")
+os.execute("mv /usr/okpkg/packages/*.tar.lz /usr/okpkg/packages/a")
 
 -- Modules
 build_db("/usr/okpkg/db/modules.db")
