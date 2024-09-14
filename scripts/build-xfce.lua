@@ -32,30 +32,17 @@ local dirs = {
    ["/usr/okpkg/db/xorg.db"]    = "/usr/okpkg/packages/x",
 }
 
-local function getdb(x)
+-- Builds and installs all packages in a single db file
+local function build_all(x)
    local fp, buf
-   local t = {}
    fp = io.open(x)
    buf = '\n' .. fp:read('*a')
    fp:close()
-   for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do 
-      table.insert(t, i)
-   end
-   return unpack(t)
-end
-
-local function build_all(...)
-   local arg = {...}
-   for i=1,#arg do
-      emerge(arg[i])
-      if arg[i] == "librsvg" or arg[i] == "gdk-pixbuf2" then
+   for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do emerge(i)
+      if i == "librsvg" or i == "gdk-pixbuf2" then
          os.execute("gdk-pixbuf-query-loaders --update-cache")
       end
    end
-end
-
-local function build_db(x)
-   build_all(getdb(x))
    mkdir(dirs[x])
    os.execute("mv /usr/okpkg/packages/*.tar.lz " .. dirs[x])
 end
@@ -70,7 +57,7 @@ mkdir("/usr/okpkg/packages/a")
 os.execute("mv /usr/okpkg/packages/*.tar.lz /usr/okpkg/packages/a")
 
 -- Modules
-build_db("/usr/okpkg/db/modules.db")
+build_all("/usr/okpkg/db/modules.db")
 
 -- itstool needs libxml2
 emerge("libxml2")
@@ -78,29 +65,29 @@ os.execute("rm -f /usr/okpkg/packages/libxml2-*.tar.lz")
 
 -- Development tools
 emerge("rust-bin")
-build_db("/usr/okpkg/db/devel.db")
+build_all("/usr/okpkg/db/devel.db")
 
 -- Libraries
-build_db("/usr/okpkg/db/lib.db")
+build_all("/usr/okpkg/db/lib.db")
 
 -- Network tools
 emerge("firefox-bin")
-build_db("/usr/okpkg/db/net.db")
+build_all("/usr/okpkg/db/net.db")
 
 -- Xorg
-build_db("/usr/okpkg/db/xorg.db")
+build_all("/usr/okpkg/db/xorg.db")
 
 -- GTK+
-build_db("/usr/okpkg/db/gtk.db")
+build_all("/usr/okpkg/db/gtk.db")
 
 -- XFCE
-build_db("/usr/okpkg/db/xfce.db")
+build_all("/usr/okpkg/db/xfce.db")
 
 -- Flatpak
-build_db("/usr/okpkg/db/flatpak.db")
+build_all("/usr/okpkg/db/flatpak.db")
 
 -- Video
-build_db("/usr/okpkg/db/video.db")
+build_all("/usr/okpkg/db/video.db")
 
 -- Rebuilds
 emerge("dbus")
