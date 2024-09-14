@@ -441,27 +441,6 @@ pixman = {
    }
 };
 
-poppler = {
-   url = "https://poppler.freedesktop.org/poppler-24.09.0.tar.xz",
-   sha3 = "7e65cab74745054bc9a73cc528f93da01034e13e24bec2ef4cb7eae8d92dad93",
-   build = "cmake",
-   flags = {
-      "-DENABLE_QT{5,6}=OFF",
-      "-DENABLE_{BOOST,GPGME,GTK_DOC,NSS3,LIBCURL}=OFF",
-      "-DENABLE_LIBOPENJPEG=none",
-      "-Wno-dev",
-   }
-};
-
-poppler-data = {
-   url = "https://poppler.freedesktop.org/poppler-data-0.4.12.tar.gz",
-   sha3 = "474793bd050d8e2cc4b2ed3d7690c2fc61a1e42dd31475f712c4d73f73d5879b",
-   build = "make",
-   flags = { 
-      "prefix=/usr" 
-   }
-};
-
 sassc = {
    url = "https://github.com/sass/sassc/archive/3.6.2/sassc-3.6.2.tar.gz",
    sha3 = "61e05276d1052de3c8403a6895cbca55f50d9f8f3afd2abed1263331dd33e46f",

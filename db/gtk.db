@@ -145,6 +145,27 @@ libxklavier = {
    flags = { "--disable-gtk-doc" }
 };
 
+poppler = {
+   url = "https://poppler.freedesktop.org/poppler-24.09.0.tar.xz",
+   sha3 = "7e65cab74745054bc9a73cc528f93da01034e13e24bec2ef4cb7eae8d92dad93",
+   build = "cmake",
+   flags = {
+      "-DENABLE_QT{5,6}=OFF",
+      "-DENABLE_{BOOST,GPGME,GTK_DOC,NSS3,LIBCURL}=OFF",
+      "-DENABLE_LIBOPENJPEG=none",
+      "-Wno-dev",
+   }
+};
+
+poppler-data = {
+   url = "https://poppler.freedesktop.org/poppler-data-0.4.12.tar.gz",
+   sha3 = "474793bd050d8e2cc4b2ed3d7690c2fc61a1e42dd31475f712c4d73f73d5879b",
+   build = "make",
+   flags = { 
+      "prefix=/usr" 
+   }
+};
+
 evince = {
    url = "https://download.gnome.org/sources/evince/46/evince-46.3.1.tar.xz",
    sha3 = "2904ed9f206394b88a46726711505a535e13b1c02bc2d4f782ef4427b355f9c4",
