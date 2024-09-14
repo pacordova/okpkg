@@ -86,11 +86,19 @@ _freetype2 = {
    flags = { "-Dharfbuzz=disabled" }
 };
 
+graphite = {
+   url = "https://github.com/silnrsi/graphite/releases/download/1.3.14/graphite2-1.3.14.tgz",
+   sha3 = "bccf21b15d3278bfcb4601f1e0e2cecfb48385575c309788f524465a5139f9ff",
+   build = "cmake",
+   flags = { "-DLIB_SUFFIX=64" },
+   prepare = [[ sed -i '/cmptest/d' tests/CMakeLists.txt ]]
+};
+
 harfbuzz = {
    url = "https://github.com/harfbuzz/harfbuzz/archive/9.0.0/harfbuzz-9.0.0.tar.gz",
    sha3 = "df45d84d14d6bb1df59b5962099acc6f04be699d9a2f4c3608d73ecd5a5561d5",
    build = "meson",
-   flags = { "-Dcairo=disabled" }
+   flags = { "-D{cairo=disabled,graphite2=enabled}" }
 };
 
 freetype2 = {
@@ -188,6 +196,12 @@ lame = {
    sha3 = "36700934b5b3e64f2e3ff33ee85bd7fc033890aa92d1f6a0a9b5acc2a3a0d199",
    build = "./configure",
    flags = { "--enable-{nasm=yes,mp3rtp=yes,gtktest=no}" }
+};
+
+lcms2 = {
+   url = "https://github.com/mm2/Little-CMS/releases/download/lcms2.16/lcms2-2.16.tar.gz",
+   sha3 = "cc75ac1ddc6d1d0abfd2b81e312396621b87096ee8d7e95f8eadb4bf672da252",
+   build = "./configure",
 };
 
 libarchive = {

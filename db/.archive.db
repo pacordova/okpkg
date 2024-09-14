@@ -1,11 +1,3 @@
-graphite = {
-   url = "https://github.com/silnrsi/graphite/releases/download/1.3.14/graphite2-1.3.14.tgz",
-   sha3 = "bccf21b15d3278bfcb4601f1e0e2cecfb48385575c309788f524465a5139f9ff",
-   build = "cmake",
-   flags = { "-DLIB_SUFFIX=64" },
-   prepare = [[ sed -i '/cmptest/d' tests/CMakeLists.txt ]]
-};
-
 directx-headers = {
    url = "https://github.com/microsoft/DirectX-Headers/archive/v1.614.0/DirectX-Headers-1.614.0.tar.gz",
    sha3 = "1cd57424860b8950f23d664740bed346156d37220cb008de453422cd2e7ced28",
@@ -137,16 +129,6 @@ appstream-glib = {
       "-Drpm=false", 
       "-Dstemmer=false",
       "-Dman=false", 
-   }
-};
-
--- optional poppler dependency
-lcms2 = {
-   url = "https://github.com/mm2/Little-CMS/releases/download/lcms2.16/lcms2-2.16.tar.gz",
-   sha3 = "cc75ac1ddc6d1d0abfd2b81e312396621b87096ee8d7e95f8eadb4bf672da252",
-   build = "./configure",
-   flags = {
-      "--libdir=/usr/lib64",
    }
 };
 
