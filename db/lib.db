@@ -446,15 +446,10 @@ poppler = {
    sha3 = "7e65cab74745054bc9a73cc528f93da01034e13e24bec2ef4cb7eae8d92dad93",
    build = "cmake",
    flags = {
-      "-DENABLE_QT5=OFF",
-      "-DENABLE_QT6=OFF",
-      "-DENABLE_BOOST=OFF",
-      "-DENABLE_NSS3=OFF",
-      "-DENABLE_GPGME=OFF",
-      "-DENABLE_LIBTIFF=OFF",
-      "-DENABLE_GTK_DOC=OFF",
+      "-DENABLE_QT{5,6}=OFF",
+      "-DENABLE_{BOOST,GPGME,GTK_DOC,NSS3,LIBCURL}=OFF",
       "-DENABLE_LIBOPENJPEG=none",
-      "-DENABLE_LCMS=OFF",
+      "-Wno-dev",
    }
 };
 
