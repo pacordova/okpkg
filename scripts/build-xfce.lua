@@ -72,6 +72,10 @@ os.execute("mv /usr/okpkg/packages/*.tar.lz /usr/okpkg/packages/a")
 -- Modules
 build_db("/usr/okpkg/db/modules.db")
 
+-- itstool needs libxml2
+emerge("libxml2")
+os.execute("rm -f /usr/okpkg/packages/libxml2-*.tar.lz")
+
 -- Development tools
 emerge("rust-bin")
 build_db("/usr/okpkg/db/devel.db")
