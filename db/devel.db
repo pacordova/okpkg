@@ -11,8 +11,8 @@ automake = {
 };
 
 bc = {
-   url = "https://github.com/gavinhoward/bc/releases/download/6.7.6/bc-6.7.6.tar.xz",
-   sha3 = "1489f334be1908ec5727ddb52424a7dcb938b5e4bb615bab3cca4f0c9d72d0c0",
+   url = "https://github.com/gavinhoward/bc/releases/download/7.0.1/bc-7.0.1.tar.xz",
+   sha3 = "811dddb9fd6450d1d476df6c552186e9a38fce5e3a1a48fef56bd57abbe45ab2",
    build = "./configure",
    flags = {
       "--predefined-build-type=GNU",

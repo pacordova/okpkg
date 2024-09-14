@@ -205,8 +205,8 @@ lcms2 = {
 };
 
 libarchive = {
-   url = "https://github.com/libarchive/libarchive/releases/download/v3.7.4/libarchive-3.7.4.tar.xz",
-   sha3 = "27ee1cf7f44d7ba0a12998715d8dfb5aaca92c34279c34ee1ccf10325b19b098",
+   url = "https://github.com/libarchive/libarchive/releases/download/v3.7.5/libarchive-3.7.5.tar.xz",
+   sha3 = "cfc6e864b534df9ac6a33546eba48d7c668f407318a78e82e1231aa4c4d9c3d5",
    build = "./configure",
    flags = { "--without-nettle" }
 };
@@ -286,8 +286,8 @@ libpcap = {
 };
 
 libpng = {
-   url = "https://downloads.sourceforge.net/libpng/libpng-1.6.43.tar.xz",
-   sha3 = "77bea57721f50c4a656994d644f77f75689a5d360c71b1aee1044eb275b9da7b",
+   url = "https://github.com/pnggroup/libpng/archive/v1.6.44/libpng-1.6.44.tar.gz",
+   sha3 = "02bc30195164e4aa93cfc409f81d02fbd1a1db6911f111d2e3a8c2bae1be1856",
    build = "./configure",
 };
 

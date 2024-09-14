@@ -5,8 +5,8 @@ _file = {
 };
 
 _python3 = {
-   url = "https://www.python.org/ftp/python/3.12.5/Python-3.12.5.tar.xz",
-   sha3 = "c7739fb87fccedcc5b8ef24818ae0d1290d0e3f171880114f5d38b17e749368a",
+   url = "https://www.python.org/ftp/python/3.12.6/Python-3.12.6.tar.xz",
+   sha3 = "7244e2874451ec215282e73fbdef9da682d81d825f0a093a6f6b4038010c78d9",
    build = "./configure",
    flags = {
       "--with-platlibdir=lib64",
@@ -558,8 +558,8 @@ sqlite = {
 };
 
 python3 = {
-   url = "https://www.python.org/ftp/python/3.12.5/Python-3.12.5.tar.xz",
-   sha3 = "c7739fb87fccedcc5b8ef24818ae0d1290d0e3f171880114f5d38b17e749368a",
+   url = "https://www.python.org/ftp/python/3.12.6/Python-3.12.6.tar.xz",
+   sha3 = "7244e2874451ec215282e73fbdef9da682d81d825f0a093a6f6b4038010c78d9",
    build = "./configure",
    flags = {
       "--enable-loadable-sqlite-extensions",
