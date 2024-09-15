@@ -151,9 +151,8 @@ poppler = {
    build = "cmake",
    flags = {
       "-DENABLE_QT{5,6}=OFF",
-      "-DENABLE_{BOOST,GPGME,GTK_DOC,NSS3,LIBCURL}=OFF",
+      "-DENABLE_{BOOST,GPGME,GTK_DOC,NSS3}=OFF",
       "-DENABLE_LIBOPENJPEG=none",
-      "-Wno-dev",
    }
 };
 

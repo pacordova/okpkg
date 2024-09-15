@@ -49,7 +49,7 @@ B = {
    end,
    ["cmake"] = function(...)
       local arg = {
-         [0] = "cmake -B build -G Ninja",
+         [0] = "cmake -B build -G Ninja -Wno-dev",
          "-DCMAKE_SHARED_LIBS=True",
          "-DCMAKE_BUILD_TYPE=Release",
          "-DCMAKE_INSTALL_PREFIX=/usr",
