@@ -160,7 +160,7 @@ gvfs = {
    sha3 = "f4e70a04f8b5579428a0d8f8958be1cb219ed23ec63952542e00ab8834b19826",
    build = "meson",
    flags = {
-      "-D{afc,bluray,dnssd,fuse,goa,google,gphoto2,mtp,nfs,smb}",
+      "-D{afc,bluray,dnssd,fuse,goa,google,gphoto2,mtp,nfs,smb}=false",
       "-D{admin,cdda,http,keyring,logind,udisks2}=false",
       "-Donedrive=false",
       "-D{systemduserunit,tmpfiles}dir=no",
