@@ -85,7 +85,7 @@ gtk3 = {
    build = "meson",
    flags = {
       "-Dbroadway_backend=true",
-      "-Dman=true",
+      "-Dman=false",
       "-D{quartz,wayland,win32}_backend=false",
       "-D{cloudproviders,demos,examples,gtk_doc,tests,tracker3}=false",
    }
