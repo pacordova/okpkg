@@ -273,12 +273,7 @@ libdrm = {
    sha3 = "63f886cc8b1561937ae5074f40e295d12c9d43b82267d83ce95a5f3d83250e49",
    build = "meson",
    flags = {
-      "-Dudev=true",
-      "-Detnaviv=disabled",
-      "-Dfreedreno=disabled",
-      "-Dvc4=disabled",
-      "-Dvalgrind=disabled",
-      "-Dintel=enabled",
+      "-D{intel=enabled,udev=true,valgrind=disabled}",
    }
 };
 
@@ -597,9 +592,7 @@ libevdev = {
    url = "https://www.freedesktop.org/software/libevdev/libevdev-1.13.3.tar.xz",
    sha3 = "262752df86983253af78937285ef6d298a7efade0aa3cf6937a3299af9ef1748",
    build = "meson",
-   flags = {
-      "-Ddocumentation=disabled"
-   }
+   flags = { "-Ddocumentation=disabled" }
 };
 
 xf86-input-evdev = {
@@ -613,11 +606,8 @@ libinput = {
    sha3 = "3b0bdc1fd691cac18da0d65c6c114af42f61eb4bdcfe3647a4b53830eefaf362",
    build = "meson",
    flags = {
-      "-Ddebug-gui=false",
-      "-Dtests=false",
-      "-Dlibwacom=false",
+      "-D{debug-gui,documentation,libwacom,tests}=false",
       "-Dudev-dir=/usr/lib64/udev",
-      "-Ddocumentation=false",
    }
 };
 

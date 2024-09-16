@@ -4,8 +4,7 @@ shared-mime-info = {
    build = "meson",
    flags = {
       "-Dupdate-mimedb=false",
-      "-Dbuild-translations=false",
-      "-Dbuild-tests=false",
+      "-Dbuild-{tests,translations}=false",
    }
 };
 
@@ -53,28 +52,12 @@ cairo = {
    url = "https://gitlab.freedesktop.org/cairo/cairo/-/archive/1.18.2/cairo-1.18.2.tar.bz2",
    sha3 = "6804da6c04fedabeb3cd850fc3422b7c0fc79cb0d6cdd47ad424bc3da43882ab",
    build = "meson",
-   flags = {
-      "-Ddwrite=disabled",
-      "-Dtee=enabled",
-      "-Dxlib-xcb=enabled",
-      "-Dxcb=enabled",
-      "-Dxlib=enabled",
-      "-Dgtk_doc=false",
-      "-Dspectre=disabled",
-      "-Dsymbol-lookup=disabled",
-      "-Dtests=disabled",
-   }
 };
 
 pango = {
    url = "https://download.gnome.org/sources/pango/1.54/pango-1.54.0.tar.xz",
    sha3 = "6aa59a06c31354e90c16c9015e90ad25d7b711cef90e1bd57ec326ced5eda815",
    build = "meson",
-   flags = {
-      "-Dgtk_doc=false",
-      "-Ddocumentation=false",
-      "-Dxft=enabled",
-   }
 };
 
 gdk-pixbuf2 = {
@@ -83,8 +66,9 @@ gdk-pixbuf2 = {
    build = "meson",
    flags = {
       "-Dbuiltin_loaders=all",
-      "-Dinstalled_tests=false",
       "-Dgio_sniffing=false",
+      "-Dinstalled_tests=false",
+      "-Dothers=enabled",
    }
 };
 
@@ -100,17 +84,10 @@ gtk3 = {
    sha3 = "5d219fe4e240cf2f80bb8c87e38f11b1ab70c6f4df70a7f16954bedb2a7c0b8d",
    build = "meson",
    flags = {
-      "-Dtests=false",
-      "-Ddemos=false",
-      "-Dexamples=false",
-      "-Dwin32_backend=false",
-      "-Dquartz_backend=false",
-      "-Dwayland_backend=false",
       "-Dbroadway_backend=true",
-      "-Dtracker3=false",
-      "-Dgtk_doc=false",
-      "-Dcloudproviders=false",
-      "-Dman=false",
+      "-Dman=true",
+      "-D{quartz,wayland,win32}_backend=false",
+      "-D{cloudproviders,demos,examples,gtk_doc,tests,tracker3}=false",
    }
 };
 
@@ -131,11 +108,7 @@ libnotify = {
    url = "https://download.gnome.org/sources/libnotify/0.8/libnotify-0.8.3.tar.xz",
    sha3 = "90216f182efa5ed279cb32527cfaa242a09fa1b7fac4fe6fee2981b40483d967",
    build = "meson",
-   flags = {
-      "-Dgtk_doc=false",
-      "-Dman=false",
-      "-Dtests=false",
-   }
+   flags = { "-D{gtk_doc,man,tests}=false" }
 };
 
 libxklavier = {
@@ -160,9 +133,7 @@ poppler-data = {
    url = "https://poppler.freedesktop.org/poppler-data-0.4.12.tar.gz",
    sha3 = "474793bd050d8e2cc4b2ed3d7690c2fc61a1e42dd31475f712c4d73f73d5879b",
    build = "make",
-   flags = { 
-      "prefix=/usr" 
-   }
+   flags = { "prefix=/usr" }
 };
 
 evince = {
@@ -170,14 +141,10 @@ evince = {
    sha3 = "2904ed9f206394b88a46726711505a535e13b1c02bc2d4f782ef4427b355f9c4",
    build = "meson",
    flags = {
-      "-Dgspell=disabled",
-      "-Dgtk_doc=false",
-      "-Dkeyring=disabled",
-      "-Dnautilus=false",
-      "-Dpdf=enabled",
-      "-Dps=enabled",
+      "-D{gspell,keyring}=disabled",
+      "-D{gtk_doc,nautilus,user_doc}=false",
+      "-D{pdf,ps}=enabled",
       "-Dsystemduserunitdir=no",
-      "-Duser_doc=false",
    }
 };
 
@@ -185,11 +152,7 @@ gcr4 = {
    url = "https://download.gnome.org/sources/gcr/4.3/gcr-4.3.0.tar.xz",
    sha3 = "03de4e64b17b5c9a299c7fccad1332aa12e588a5f47af3d4488964b5581538ca",
    build = "meson",
-   flags = { 
-      "-Dgtk_doc=false", 
-      "-Dgtk4=false",
-      "-Dssh_agent=false",
-   }
+   flags = { "-D{gtk4,gtk_doc,ssh_agent}=false" }
 };
 
 gvfs = {
@@ -197,25 +160,9 @@ gvfs = {
    sha3 = "f4e70a04f8b5579428a0d8f8958be1cb219ed23ec63952542e00ab8834b19826",
    build = "meson",
    flags = {
-      "-Dadmin=false",
-      "-Dafc=false",
-      "-Darchive=false",
-      "-Dbluray=false",
-      "-Dcdda=false",
-      "-Ddnssd=false",
-      "-Dfuse=false",
-      "-Dgoa=false",
-      "-Dgoogle=false",
-      "-Dgphoto2=false",
-      "-Dhttp=false",
-      "-Dkeyring=false",
-      "-Dlogind=false",
-      "-Dmtp=false",
-      "-Dnfs=false",
+      "-D{afc,bluray,dnssd,fuse,goa,google,gphoto2,mtp,nfs,smb}",
+      "-D{admin,cdda,http,keyring,logind,udisks2}=false",
       "-Donedrive=false",
-      "-Dsmb=false",
-      "-Dsystemduserunitdir=no",
-      "-Dtmpfilesdir=no",
-      "-Dudisks2=false",
+      "-D{systemduserunit,tmpfiles}dir=no",
    }
 };

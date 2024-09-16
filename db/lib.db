@@ -59,8 +59,7 @@ upower = {
    flags = {
       "-Dsystemdsystemunitdir=no",
       "-Dudevrulesdir=/usr/lib64/udev/rules.d",
-      "-Dgtk-doc=false",
-      "-Dman=false"
+      "-D{gtk-doc,man}=false",
    },
    prepare = [[ sed '/parse_version/d' -i src/linux/integration-test.py ]]
 };
@@ -70,9 +69,7 @@ vala = {
    sha3 = "668609ee19af025e1778f93f81086e11d850354db8c4278a2ad2db944a951f9f",
    build = "./configure",
    flags = {
-      "--enable-python3=yes",
-      "--disable-python",
-      "--disable-valadoc",
+      "--enable-{python3=yes,python=no,valadoc=no}",
    },
    prepare = [[ sed -i '/gvc.h/a#define TRUE 1' libvaladoc/gvc-compat.c ]]
 };
@@ -429,16 +426,6 @@ pixman = {
    url = "https://xorg.freedesktop.org/releases/individual/lib/pixman-0.43.4.tar.xz",
    sha3 = "a48525f14efe9ac8036292499ec9955fc20b8ca7630024d80eb0b8335abb35d2",
    build = "meson",
-   flags = {
-      "-Dloongson-mmi=disabled",
-      "-Dvmx=disabled",
-      "-Darm-simd=disabled",
-      "-Dneon=disabled",
-      "-Da64-neon=disabled",
-      "-Diwmmxt=disabled",
-      "-Dmips-dspr2=disabled",
-      "-Dgtk=disabled",
-   }
 };
 
 sassc = {
