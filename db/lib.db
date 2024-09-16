@@ -251,8 +251,8 @@ libexif = {
 };
 
 libjpeg-turbo = {
-   url = "https://github.com/libjpeg-turbo/libjpeg-turbo/releases/download/3.0.3/libjpeg-turbo-3.0.3.tar.gz",
-   sha3 = "648f531e76e7151d521106a081671f41e5153725d38d0c5a91ec6c80e6f113b4",
+   url = "https://github.com/libjpeg-turbo/libjpeg-turbo/releases/download/3.0.4/libjpeg-turbo-3.0.4.tar.gz",
+   sha3 = "27c1f84b2057d3faf19fe3aabce6da3f2ab5fe3b8c2ab84029630c38baf835ee",
    build = "cmake",
    flags = { "-DENABLE_STATIC=OFF", "-DWITH_{JPEG8=ON,JAVA=OFF}" }
 };
