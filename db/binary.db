@@ -11,8 +11,8 @@ rust-bin = {
 };
 
 firefox-bin = {
-   url = "https://download-installer.cdn.mozilla.net/pub/devedition/releases/130.0b7/linux-x86_64/en-US/firefox-130.0b7.tar.bz2",
-   sha3 = "01f5a2a832b8bd24800c1a53a1407808f3f0ff6dd9dcd03223a25f077409dc49",
+   url = "https://download-installer.cdn.mozilla.net/pub/devedition/releases/131.0b7/linux-x86_64/en-US/firefox-131.0b7.tar.bz2",
+   sha3 = "2b4922b1a09ef3664f99c6cf15e11e506b9740406028726a4263d8882ac62339",
    build = _,
    post = [[
       install -d $destdir/usr/{bin,lib64}
