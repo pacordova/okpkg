@@ -437,8 +437,8 @@ less = {
 };
 
 gawk = {
-   url = "https://ftp.gnu.org/gnu/gawk/gawk-5.3.0.tar.xz",
-   sha3 = "4a6bde87e51e468f7b1bce275225d5a8e9d2edd4f1dc7b8920c57830755b7ba1",
+   url = "https://ftp.gnu.org/gnu/gawk/gawk-5.3.1.tar.xz",
+   sha3 = "27d8d74bf0912e7cbcaabea93bddca69724e76a07cfd62fc89df1616f6e47a2c",
    build = "./configure",
 };
 
@@ -717,8 +717,8 @@ openvi = {
 };
 
 vim = {
-   url = "https://github.com/vim/vim/archive/v9.1.0709/vim-9.1.0709.tar.gz",
-   sha3 = "b94ed4972b0afe3e354e91f3e6460c4c4b8501524521845c0980e3fc449e3f67",
+   url = "https://github.com/vim/vim/archive/v9.1.0737/vim-9.1.0737.tar.gz",
+   sha3 = "0f6c181c45cfdca2d9c242d1ae15861c2dcc4e3666c6f7642ebe96f6f9b85601",
    build = "./configure",
    flags = {
       "--enable-{cscope,multibyte}",
@@ -795,8 +795,8 @@ dosfstools = {
 };
 
 sysklogd = {
-   url = "https://github.com/troglobit/sysklogd/releases/download/v2.6.1/sysklogd-2.6.1.tar.gz",
-   sha3 = "d3277a255b4905892b601f8835c920f9fb5edf1982db436642c301e493ffb7c4",
+   url = "https://github.com/troglobit/sysklogd/releases/download/v2.6.2/sysklogd-2.6.2.tar.gz",
+   sha3 = "ec733cbb81ec5c71a99a10e8add188eebd8813ae15a9f4b95064486f48e8bb3e",
    build = "./configure",
    flags = { "--without-logger" }
 };
