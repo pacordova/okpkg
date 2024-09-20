@@ -158,6 +158,7 @@ linux = {
    post = [[  
       $make headers bzImage modules
       $make modules_install INSTALL_MOD_PATH=$destdir/usr
+      mv $destdir/usr/lib $destdir/usr/lib64
       install -d $destdir/boot
       install -m 644 arch/x86/boot/bzImage $destdir/boot/vmlinuz-6.6
       cp -rp usr/include $destdir/usr

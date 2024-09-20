@@ -21,8 +21,8 @@ _glib2 = {
 };
 
 gobject-introspection = {
-   url = "https://download.gnome.org/sources/gobject-introspection/1.80/gobject-introspection-1.80.1.tar.xz",
-   sha3 = "0aee06c2479fc07b9aa7092fecdf757f4efd7739c585b01b1733cd1b8d9ed034",
+   url = "https://download.gnome.org/sources/gobject-introspection/1.82/gobject-introspection-1.82.0.tar.xz",
+   sha3 = "c8922e07739fbbd9fceb76f16b4634f15895767b1c2f7be2964029d20c9a9f67",
    build = "meson",
 };
 
@@ -173,14 +173,14 @@ fuse3 = {
 };
 
 iso-codes = {
-   url = "https://salsa.debian.org/iso-codes-team/iso-codes/-/archive/v4.16.0/iso-codes-v4.16.0.tar.gz",
-   sha3 = "14987ae3a6b275eee609a6cab2d23ea0f6a83015c33cfd613fac9f4405c491c4",
+   url = "https://salsa.debian.org/iso-codes-team/iso-codes/-/archive/v4.17.0/iso-codes-4.17.0.tar.gz",
+   sha3 = "03fcededb532f2aa34964a9dda569a647b6d0ef7e27761cbf33662e0c8bf960d",
    build = "./configure",
 };
 
 json-c = {
-   url = "https://s3.amazonaws.com/json-c_releases/releases/json-c-0.17.tar.gz",
-   sha3 = "6e3bb804e61de257c313a2d4e39e89262dea68477acc518f8c0c4ab15a37ea69",
+   url = "https://s3.amazonaws.com/json-c_releases/releases/json-c-0.18.tar.gz",
+   sha3 = "327c1f6b51bc9c13eacc2ac6db583edb43de07d36f8ef49e2ca69b3d3bbc029c",
    build = "cmake",
    flags = {
       "-DBUILD_{STATIC_LIBS=OFF,TESTING=OFF}",
@@ -327,8 +327,8 @@ libtasn1 = {
 };
 
 libtiff = {
-   url = "https://download.osgeo.org/libtiff/tiff-4.6.0.tar.gz",
-   sha3 = "bab4329a43c48338b3e00af8d44358b7e01109b065f9790d06901be822f6f1ac",
+   url = "https://download.osgeo.org/libtiff/tiff-4.7.0.tar.xz",
+   sha3 = "88549f5176ff1e742a0222e7389e7fccad78e28d41a0bcd3bd72666adcec1a9c",
    build = "./configure",
 };
 
@@ -371,8 +371,8 @@ libvpx = {
 };
 
 libxml2 = {
-   url = "https://download.gnome.org/sources/libxml2/2.13/libxml2-2.13.3.tar.xz",
-   sha3 = "abba2c837356e1303c07b2703a95a1de5697f7e0c39d4e37b5e2132d96121de5",
+   url = "https://download.gnome.org/sources/libxml2/2.13/libxml2-2.13.4.tar.xz",
+   sha3 = "02ac3145929435049bd4697017af563a2a4564ec164032ff3130f3026544f87e",
    build = "./configure",
    flags = {
       "--with-{history=yes,legacy=yes,icu=no}",

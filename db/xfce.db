@@ -251,8 +251,8 @@ hicolor-icon-theme = {
 };
 
 adwaita-icon-theme = {
-   url = "https://download.gnome.org/sources/adwaita-icon-theme/46/adwaita-icon-theme-46.2.tar.xz",
-   sha3 = "c9c017e966e0cee4b8c69c1d182b3182cdca5b1d7af93543e482f604604ca9c7",
+   url = "https://download.gnome.org/sources/adwaita-icon-theme/47/adwaita-icon-theme-47.0.tar.xz",
+   sha3 = "ae6aba231974f646ffdcb2599ebe8dc09a2d6c54387ba56ef79167ba7b41f2ef",
    build = "meson",
 };
 
