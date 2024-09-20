@@ -152,17 +152,18 @@ iftop = {
 };
 
 linux = {
-   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.6.50.tar.xz",
-   sha3 = "c02d58542a28a55028d20090d82cd8f9fdb5a7fa726d0f358f7dcb60df7766fc",
+   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.6.52.tar.xz",
+   sha3 = "935ec47adb0bc19ecdd6d96a11dad23f1ce0da8a4b1270b7e9146ef8d72f3eb2",
    build = _,
    post = [[  
       $make headers bzImage modules
+      install -d $destdir/boot $destdir/usr/lib64
+      ln -sf lib64 $destdir/usr/lib
       $make modules_install INSTALL_MOD_PATH=$destdir/usr
-      mv $destdir/usr/lib $destdir/usr/lib64
-      install -d $destdir/boot
       install -m 644 arch/x86/boot/bzImage $destdir/boot/vmlinuz-6.6
       cp -rp usr/include $destdir/usr
       find $destdir/usr/include -type f ! -name '*.h' -delete
+      rm -f $destdir/usr/lib 
    ]]
 };
 
