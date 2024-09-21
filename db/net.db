@@ -85,8 +85,8 @@ netcat = {
 };
 
 openssh = {
-   url = "https://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-9.8p1.tar.gz",
-   sha3 = "856e5f6cf9bf94893ced81b3080ff5c326524449d190cce69d3a230f49bfef4e",
+   url = "https://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-9.9p1.tar.gz",
+   sha3 = "990e5fbfa6c2361fa92b5abf4f0f0800715147b6b9d8d370edab5172b9b0f632",
    build = "./configure",
    flags = {
       "--libexecdir=/usr/lib64/ssh",
