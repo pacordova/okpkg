@@ -521,7 +521,7 @@ kmod = {
    url = "https://kernel.org/pub/linux/utils/kernel/kmod/kmod-33.tar.xz",
    sha3 = "4d70a39150b5339a77ec80b48ba6fb9af14513a66833a5d6735b4714da2173f2",
    build = "./configure",
-   flags = { "--with-module-directory=/lib64/modules" }
+   flags = { "--with-module-directory=/usr/lib64/modules" }
 };
 
 libelf = {
