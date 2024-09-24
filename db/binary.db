@@ -8,6 +8,7 @@ rust-bin = {
       mv $destdir/usr/libexec/* $destdir/usr/lib64
       rmdir $destdir/usr/libexec
       rm -fr $destdir/usr/etc
+      : > $destdir/.nostrip
    ]]
 };
 

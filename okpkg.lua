@@ -196,19 +196,29 @@ function makepkg(path)
       setenv("SOURCE_DATE_EPOCH", timestamp("."))
    end
 
-   -- Delete unneeded, strip, timestamp, etc.
+   -- Stripping
+   local fp = io.open(".nostrip")
+   if fp then
+      fp:close()
+      os.remove(".nostrip")
+   else
+      os.execute [[
+         find . -name \*.a -o -name \*.o -exec strip -g '{}' + 2>/dev/null
+         find . | \
+             xargs file | \
+             grep -e "executable" -e "shared object" | \
+             grep ELF | \
+             cut -f 1 -d : | \
+             xargs strip --strip-unneeded 2>/dev/null
+      ]]
+   end
+
+   -- Delete unneeded, timestamp, etc.
    os.execute [[
       rm -fr usr/share/man/{de,fr,pl,pt_BR,ro,sv,uk}
       rm -fr usr/share/{info,doc,locale,gtk-doc}
       find . -name \*.pyc -delete
       find . -name \*.la -delete
-      find . -name \*.a -o -name \*.o -exec strip -g '{}' + 2>/dev/null
-      find . | \
-          xargs file | \
-          grep -e "executable" -e "shared object" | \
-          grep ELF | \
-          cut -f 1 -d : | \
-          xargs strip --strip-unneeded 2>/dev/null
       tar --mtime="@$SOURCE_DATE_EPOCH" \
           --sort=name \
           --owner=0 \
