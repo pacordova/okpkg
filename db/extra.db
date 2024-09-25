@@ -90,6 +90,7 @@ apulse = {
       sed -i 's:/usr/lib/:/usr/lib64/:' usr/bin/apulse
       printf "#!/bin/sh\n" >> usr/bin/firefox
       printf "/usr/bin/apulse /usr/lib64/firefox/firefox\n" >> usr/bin/firefox
+      chmod 755 usr/bin/firefox
       mv usr/lib usr/lib64
    ]]
 };
