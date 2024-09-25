@@ -64,6 +64,7 @@ iputils = {
    url = "https://github.com/iputils/iputils/releases/download/20240905/iputils-20240905.tar.xz",
    sha3 = "04a0bdd009f955cb485324fb182dd7bfa1389d46589eb72a033be3547064dbfc",
    build = "meson",
+   post = [[ chmod u+s $destdir/usr/bin/ping ]],
 };
 
 netcat = {
