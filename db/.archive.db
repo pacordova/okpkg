@@ -121,74 +121,6 @@ transmission = {
 
 --------------------------------------------------------------------------------
 
-appstream-glib = {
-   url = "https://people.freedesktop.org/~hughsient/appstream-glib/releases/appstream-glib-0.8.2.tar.xz",
-   sha3 = "c1c6b46bab260e73070061707fe1f01df4363b3fca0349de29400752ae0a21e5",
-   build = "meson",
-   flags = { 
-      "-Drpm=false", 
-      "-Dstemmer=false",
-      "-Dman=false", 
-   }
-};
-
-babl = {
-   url = "https://download.gimp.org/pub/babl/0.1/babl-0.1.108.tar.xz",
-   sha3 = "aec774ba647daa9e57572c1905f1e03d4f69400def385395cc9b4d782eb2b027",
-   build = "meson",
-};
-
-
-gegl = {
-   url = "https://download.gimp.org/pub/gegl/0.4/gegl-0.4.48.tar.xz",
-   sha3 = "9b7a9a2e33ae77a2a63c0a4d35383a47e3d888bf238a9d348bae2f4d89ac6a43",
-   build = "meson",
-   flags = { 
-      "-Dlibav=disabled", 
-   }
-};
-
-libmypaint = {
-   url = "https://github.com/mypaint/libmypaint/releases/download/v1.6.1/libmypaint-1.6.1.tar.xz",
-   sha3 = "2ec991f21543b1c5326f1396a6794608518ca36dcf134a45cf5cfa2b95c5f211",
-   build = "./configure",
-   flags = { "--libdir=/usr/lib64" }
-};
-
-mypaint-brushes = {
-   url = "https://github.com/mypaint/mypaint-brushes/releases/download/v2.0.2/mypaint-brushes-2.0.2.tar.xz",
-   sha3 = "52a4bcfa64e66d61905350cdd06e25a9835d63c8ae6c522c6c012b21fbd6ff25",
-   build = "./configure",
-};
-
-exiv2 = {
-   url = "https://github.com/Exiv2/exiv2/archive/v0.28.3/exiv2-0.28.3.tar.gz",
-   sha3 = "751d35d5703ff27b7c17a9052a3760e0445e8a1c6a6e57b45352adf8599c1ac6",
-   build = "cmake",
-   flags = {
-      "-DEXIV2_ENABLE_VIDEO=yes",
-      "-DEXIV2_ENABLE_WEBREADY=yes",
-      "-DEXIV2_ENABLE_CURL=yes",
-      "-DEXIV2_BUILD_SAMPLES=no",
-      "-DCMAKE_SKIP_INSTALL_RPATH=ON",
-      "-DEXIV2_ENABLE_INIH=no",
-      "-DEXIV2_ENABLE_BROTLI=no",
-   }
-};
-
-gexiv2 = {
-   url = "https://download.gnome.org/sources/gexiv2/0.14/gexiv2-0.14.2.tar.xz",
-   build = "meson",
-   flags = { "-Dpython3=false" }
-};
-
-gimp = {
-   url = "https://download.gimp.org/gimp/v2.99/gimp-2.99.18.tar.xz",
-   sha3 = "a91a2f09e71bc389880cb901b9d81420dff19d9a870b51b30c00d2e1cf46f6b6",
-   build = "meson",
-};
-
---------------------------------------------------------------------------------
 
 -- Note: might want to build with gdk-pixbuf
 libavif = {
@@ -259,12 +191,6 @@ docbook-xsl-nons = {
           install -m 644 $dir/* $destdir/$dir
       done
    ]]
-};
-
-glib-networking = {
-   url = "https://download.gnome.org/sources/glib-networking/2.78/glib-networking-2.78.0.tar.xz",
-   build = "meson",
-   flags = { "-Dlibproxy=disabled" }
 };
 
 geocode-glib = {
