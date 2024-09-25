@@ -394,8 +394,8 @@ grep = {
 };
 
 bash = {
-   url = "https://ftp.gnu.org/gnu/bash/bash-5.2.32.tar.gz",
-   sha3 = "d3139218b2ebdfa67093526d0a64a83cf55e5c1f736f991695b5cf8ecbe4fff4",
+   url = "https://ftp.gnu.org/gnu/bash/bash-5.2.37.tar.gz",
+   sha3 = "fc58981e392bfc994e3d27e04eeb0c8077accce0f5d860aea0e896a1b4672e6e",
    build = "./configure",
    flags = {
       "--enable-readline",
