@@ -95,7 +95,6 @@ emerge("libva")
 emerge("gdk-pixbuf2")
 
 -- Post-install
-os.execute("udevadm hwdb --usr --update")
 os.execute("makewhatis /usr/share/man")
 os.execute("pwconv && grpconv")
 os.execute("glib-compile-schemas /usr/share/glib-2.0/schemas")

@@ -43,7 +43,6 @@ emerge("binutils")
 emerge("mpfr")
 
 -- misc post-install
-os.execute("udevadm hwdb --usr --update")
 os.execute("makewhatis /usr/share/man")
 
 -- fix versions and cleanup

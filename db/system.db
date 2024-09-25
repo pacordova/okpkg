@@ -738,6 +738,12 @@ eudev = {
    prepare = [[
       sed -i '/udevdir/a udev_dir=${udevdir}' src/udev/udev.pc.in
       sed -i 's/GROUP="sgx", //' rules/50-udev-default.rules
+   ]],
+   post = [[
+      UDEV_HWDB_PATH=$destdir/etc/udev/hwdb.d \
+      $destdir/usr/bin/udevadm hwdb \
+          --output=$destdir/usr/lib64/udev/hwdb.bin \
+          --update
    ]]
 };
 
