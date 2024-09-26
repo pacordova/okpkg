@@ -103,15 +103,6 @@ os.execute("update-desktop-database")
 os.execute("update-mime-database /usr/share/mime")
 os.execute("gdk-pixbuf-query-loaders --update-cache")
 
--- Update the icon caches
-os.execute("gtk-update-icon-cache /usr/share/icons/elementary-xfce-darkest")
-os.execute("gtk-update-icon-cache /usr/share/icons/elementary-xfce-darkest")
-os.execute("gtk-update-icon-cache /usr/share/icons/elementary-xfce-darker")
-os.execute("gtk-update-icon-cache /usr/share/icons/hicolor")
-os.execute("gtk-update-icon-cache /usr/share/icons/elementary-xfce")
-os.execute("gtk-update-icon-cache /usr/share/icons/elementary-xfce-dark")
-os.execute("gtk-update-icon-cache /usr/share/icons/Adwaita")
-
 -- Set XFCE default terminal
 symlink("st", "/usr/bin/xfce4-terminal")
 
