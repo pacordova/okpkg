@@ -71,8 +71,9 @@ build_all("/usr/okpkg/db/devel.db")
 build_all("/usr/okpkg/db/lib.db")
 
 -- Network tools
-emerge("firefox-bin")
 build_all("/usr/okpkg/db/net.db")
+emerge("firefox-bin")
+os.execute("mv /usr/okpkg/packages/firefox-*.tar.lz /usr/okpkg/packages/n")
 
 -- Xorg
 build_all("/usr/okpkg/db/xorg.db")
@@ -114,34 +115,6 @@ fp:write [[
 ]]
 fp:close()
 os.execute("chmod 755 /usr/bin/firefox")
-
--- firefox symlinks
-os.execute [[
-   install -d /usr/local/lib64
-   for f in /usr/lib64/firefox/*.so; do
-       ln -sf $f /usr/local/lib64/`basename $f` 
-   done
-]]
-
--- Create firefox.desktop
-fp = io.open("/usr/share/applications/firefox.desktop", 'w')
-fp:write [[
-[Desktop Entry]
-Version=1.0
-Name=Firefox Web Browser
-Comment=Browse the World Wide Web
-GenericName=Web Browser
-Keywords=Internet;WWW;Browser;Web;Explorer
-Exec=apulse firefox %u
-Terminal=false
-X-MultipleArgs=false
-Type=Application
-Icon=/usr/lib64/firefox/browser/chrome/icons/default/default128.png
-Categories=GNOME;GTK;Network;WebBrowser;
-MimeType=text/html;text/xml;application/xhtml+xml;application/xml;application/rss+xml;application/rdf+xml;image/gif;image/jpeg;image/png;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/ftp;x-scheme-handler/chrome;video/webm;application/x-xpinstall;
-StartupNotify=true
-]]
-fp:close()
 
 -- Cleanup
 chdir("/usr/okpkg/packages/a")
