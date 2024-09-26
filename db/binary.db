@@ -13,16 +13,20 @@ rust-bin = {
 };
 
 firefox-bin = {
-   url = "https://download-installer.cdn.mozilla.net/pub/devedition/releases/131.0b7/linux-x86_64/en-US/firefox-131.0b7.tar.bz2",
-   sha3 = "2b4922b1a09ef3664f99c6cf15e11e506b9740406028726a4263d8882ac62339",
+   url = "https://download-installer.cdn.mozilla.net/pub/devedition/releases/131.0b9/linux-x86_64/en-US/firefox-131.0b9.tar.bz2",
+   sha3 = "2156795bfba25faf426c88a29ff29291dab5e49186f2c23da7e28dec2bbe1907",
    build = _,
    post = [[
       install -d $destdir/usr/{bin,lib64}
       install -d $destdir/usr/share/applications
-      mv firefox.desktop $destdir/usr/share/applications
       cp -rp . $destdir/usr/lib64/firefox
-      cd $destdir/usr/lib64
-      for f in firefox/*.so; do ln -sf firefox/$f .; done
+      cd $destdir/usr/lib64/firefox
+      for f in *.so; do ln -sf firefox/$f ..; done
+      cd $destdir/usr/share/applications
+      curl -LRO https://raw.githubusercontent.com/mozilla/sumo-kb/main/install-firefox-linux/firefox.desktop
+      printf "dff1368874606c8ef8579879bb0173eb6cc26bca74be999cf41d4bed00c2db61 firefox.desktop" | sha256sum -c
+      [ ! "$?" = "0" ] && rm -f firefox.desktop && exit 1
+      sed -i 's:Icon=/opt/firefox:Icon=/usr/lib64/firefox:' firefox.desktop
    ]]
 };
 
