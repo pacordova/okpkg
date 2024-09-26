@@ -248,12 +248,14 @@ hicolor-icon-theme = {
    url = "https://icon-theme.freedesktop.org/releases/hicolor-icon-theme-0.18.tar.xz",
    sha3 = "67a8fb5352c9cd1a9e3897b51adbbac90a32063b4d135f806e07ca45f02c0f13",
    build = "meson",
+   post = [[ gtk-update-icon-cache $destdir/usr/share/icons/hicolor ]],
 };
 
 adwaita-icon-theme = {
    url = "https://download.gnome.org/sources/adwaita-icon-theme/47/adwaita-icon-theme-47.0.tar.xz",
    sha3 = "ae6aba231974f646ffdcb2599ebe8dc09a2d6c54387ba56ef79167ba7b41f2ef",
    build = "meson",
+   post = [[ gtk-update-icon-cache $destdir/usr/share/icons/Adwaita ]],
 };
 
 greybird = {
@@ -285,4 +287,10 @@ elementary-xfce-icon-theme = {
    url = "https://github.com/shimmerproject/elementary-xfce/archive/v0.19/elementary-xfce-0.19.tar.gz",
    sha3 = "b22d6d64feeffdd048a19d933c2b6815a584f3b64394bf69f4f015e42577e168",
    build = "./configure",
+   post = [[
+      gtk-update-icon-cache $destdir/usr/share/icons/elementary-xfce
+      gtk-update-icon-cache $destdir/usr/share/icons/elementary-xfce-dark
+      gtk-update-icon-cache $destdir/usr/share/icons/elementary-xfce-darker
+      gtk-update-icon-cache $destdir/usr/share/icons/elementary-xfce-darkest
+   ]]
 };
