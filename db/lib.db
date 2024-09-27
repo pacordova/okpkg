@@ -158,8 +158,8 @@ flac = {
 };
 
 fribidi = {
-   url = "https://github.com/fribidi/fribidi/archive/v1.0.16/fribidi-1.0.16.tar.gz",
-   sha3 = "f8eed33276fa92fb9f1cd85ad56bde661a776713f19ca263ca38350ed38060b5",
+   url = "https://github.com/fribidi/fribidi/releases/download/v1.0.16/fribidi-1.0.16.tar.xz",
+   sha3 = "a731bd3ee010661adfab760ce854a8bd337bb7972ec0a530a41ce1a32992b0c2",
    build = "meson",
 };
 
