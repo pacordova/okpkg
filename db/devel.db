@@ -70,8 +70,8 @@ itstool = {
 };
 
 libtool = {
-   url = "https://ftp.gnu.org/gnu/libtool/libtool-2.4.7.tar.xz",
-   sha3 = "a94fc179bf6832bc7e5974e4223d7cd16f6fd15664644ac77f769cafa280a7a4",
+   url = "https://ftp.gnu.org/gnu/libtool/libtool-2.5.3.tar.xz",
+   sha3 = "40ced948603a5eb451af6531e3db7251b9848a71b8c71892cc00ca021dab7ade",
    build = "./configure",
    post = [[ rm -f $destdir/usr/lib64/libltdl.a ]]
 };
