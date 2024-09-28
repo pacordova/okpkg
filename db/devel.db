@@ -11,8 +11,8 @@ automake = {
 };
 
 bc = {
-   url = "https://github.com/gavinhoward/bc/releases/download/7.0.2/bc-7.0.2.tar.xz",
-   sha3 = "fe2824f26e0eb5028ee8a579484642012eb72e2d5e43dcca6c3a23c850f8b2fa",
+   url = "https://github.com/gavinhoward/bc/releases/download/7.0.3/bc-7.0.3.tar.xz",
+   sha3 = "019b20d2414f8a6a7957bb830ff04063c960ff2ffa33e8b84effc917c90476bf",
    build = "./configure",
    flags = {
       "--predefined-build-type=GNU",
@@ -28,8 +28,8 @@ check = {
 };
 
 cmake = {
-   url = "https://cmake.org/files/v3.30/cmake-3.30.3.tar.gz",
-   sha3 = "7c8d4532fc1951814e535335de94edd054abcb3c1e6efa3edd1b583d4ee5dd40",
+   url = "https://cmake.org/files/v3.30/cmake-3.30.4.tar.gz",
+   sha3 = "dea3d2d6c4394289ae66956e9a08b1be07d11e32b56faa4350bd6b929bee75a6",
    build = "./configure",
    flags = {
       "--mandir=/share/man",
