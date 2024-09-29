@@ -1,20 +1,22 @@
 #!/bin/bash
 
-# verify the vim and tz checksum
-# should be identical to the github tarball: note the `-n' gzip flag
+# Verify the vim and tz checksum
+# The checksum should be identical to the github tarball (with `gzip -n`)
+# Note: you need gzip, pigz compression gives a different checksum
 
-# tempdir
+# Temporary directory
 tempdir=$(mktemp -d) && pushd $tempdir >/dev/null
 
 
-# import gnupg keys
-validpgpkeys=(
+# Import gnupg keys
+keys=(
    '4F19708816918E19AAE19DEEF3F92DA383FDDE09' # Christian Brabandt <cb@256bit.org>
    '7E3792A9D8ACF7D633BC1588ED97E90E62AA7E34' # Paul Eggert <eggert@cs.ucla.edu>
-   #'0AD041B27CA166DDA1FE3BAEA7B3409C0CA4ED14' # Dov Grobgeld <dov.grobgeld@gmail.com>
-   #'053D20F17CCCA9651B2C6FCB9AB24930C0B997A2' # Khaled Hosny <khaled@aliftype.com> (@khaledhosny)
+   'A22F5C0F4FCF9C7C89A167462C965E9E5D45D730' # Yuxuan Shui <yshuiv7@gmail.com>
+   '0AD041B27CA166DDA1FE3BAEA7B3409C0CA4ED14' # Dov Grobgeld <dov.grobgeld@gmail.com>
+   '053D20F17CCCA9651B2C6FCB9AB24930C0B997A2' # Khaled Hosny <khaled@aliftype.com> (@khaledhosny)
 )
-for k in ${validpgpkeys[@]}; do gpg --keyserver hkp://keyserver.ubuntu.com/ --recv-keys $k; done
+for k in ${keys[@]}; do gpg --recv-keys $k; done
 
 ckone(){
     v=$(echo "$2" | sed 's/^v//')
@@ -24,7 +26,8 @@ ckone(){
         gzip -n > `basename $1`-$v.tar.gz
 }
 
-ckone https://github.com/vim/vim/ v9.1.0741
+ckone https://github.com/vim/vim/ v9.1.0744
+ckone https://github.com/yshui/picom v12.1
 #ckone https://github.com/eggert/tz/ 2024b
 #ckone https://github.com/pnggroup/libpng v1.6.44
 #ckone https://github.com/harfbuzz/harfbuzz 9.0.0

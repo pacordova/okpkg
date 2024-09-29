@@ -227,8 +227,8 @@ xfce4-alsa-plugin = {
 };
 
 picom = {
-   url = "https://github.com/yshui/picom/archive/v11.2/picom-11.2.tar.gz",
-   sha3 = "ee0a5ced3bf0fe13c92feea4a663ceadbcbe449a62fa663a4d015f5cae302fc2",
+   url = "https://github.com/yshui/picom/archive/v12.1/picom-12.1.tar.gz",
+   sha3 = "60113bf26051208cefe4a559b39f441edfc97bf692d36919004ad080c7fa873a",
    build = "meson",
 };
 
