@@ -148,8 +148,8 @@ python-ply = {
 };
 
 glad = {
-   url = "https://github.com/Dav1dde/glad/archive/refs/tags/v2.0.7/glad-2.0.7.tar.gz",
-   sha3 = "a83a5ebbedc94567b683279016719583557f0ba17c34b6dedc47e9cb97542a99",
+   url = "https://github.com/Dav1dde/glad/archive/refs/tags/v2.0.8/glad-2.0.8.tar.gz",
+   sha3 = "9e00f5c97a1ae042ce45154f86c46d997e878a9c6c0af527f4efd62744eb8cac",
    build = "python-build",
 };
 
