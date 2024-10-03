@@ -128,8 +128,8 @@ lzlib = {
 };
 
 xz = {
-   url = "https://downloads.sourceforge.net/lzmautils/xz-5.6.2.tar.gz",
-   sha3 = "f1a23360d3c4b4615d92f1bafc05970b61aff1345a4e0d49c6b3f44c570cab00",
+   url = "https://downloads.sourceforge.net/lzmautils/xz-5.6.3.tar.gz",
+   sha3 = "3b9452ed7392ae54e2daa8d1335c5756316887bace6186c1f310e90190b39d7f",
    build = "./configure",
 };
 
