@@ -218,8 +218,8 @@ libass = {
 };
 
 libbpf = {
-   url = "https://github.com/libbpf/libbpf/archive/v1.4.5/libbpf-1.4.5.tar.gz",
-   sha3 = "e0b91f8110d545f296ee1440fd296a50627d02bd6295a05334a2170439702bce",
+   url = "https://github.com/libbpf/libbpf/archive/v1.4.6/libbpf-1.4.6.tar.gz",
+   sha3 = "f53eae3c8a05306368c679b8499b998ff547fbfc798d21c4fad0dd893fef9f3f",
    build = "make",
    flags = { "-C src", "LIBSUBDIR=lib64" }
 };
@@ -264,8 +264,8 @@ libmnl = {
 };
 
 libnftnl = {
-   url = "https://netfilter.org/pub/libnftnl/libnftnl-1.2.7.tar.xz",
-   sha3 = "c3f196ec36e49fe6c13d0fea2371f324b36f897354542d904349bb2e011044d8",
+   url = "https://netfilter.org/pub/libnftnl/libnftnl-1.2.8.tar.xz",
+   sha3 = "23613dd6236be91abc4a7811f388562e8cff599cea554c289b9f995b2016d905",
    build = "./configure",
 };
 

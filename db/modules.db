@@ -21,8 +21,8 @@ python-installer = {
 };
 
 python-pyproject-hooks = {
-   url = "https://github.com/pypa/pyproject-hooks/archive/v1.0.0/pyproject-hooks-1.0.0.tar.gz",
-   sha3 = "169e3fac2b4feee8034963d2ec1b18ded6910d8f41d7b2f8a5cf3e03f84bab38",
+   url = "https://pypi.org/packages/source/p/pyproject_hooks/pyproject_hooks-1.2.0.tar.gz",
+   sha3 = "3f369951b1a8aef0e473fc1bb3200714f931b1f08014ede9b3e116a48c0a3b35",
    build = "python-build",
 };
 
