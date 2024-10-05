@@ -244,7 +244,7 @@ linux = {
    post = [[  
       install -d $destdir/boot
       install -m 644 arch/x86/boot/bzImage $destdir/boot/vmlinuz-6.6
-      $make modules_install \
+      make modules_install \
           INSTALL_MOD_PATH=$destdir \
           MODLIB=$destdir/usr/lib64/modules/6.6.52
       cp -rp usr/include $destdir/usr
@@ -324,7 +324,7 @@ sxiv = {
    build = "make",
    flags = { "PREFIX=/usr", "HAVE_GIFLIB=0" },
    post = [[ 
-      $make -C icon PREFIX=/usr DESTDIR=$destdir install
+      make -C icon PREFIX=/usr DESTDIR=$destdir install
       install -d $destdir/usr/share/applications
       install -m 644 sxiv.desktop $destdir/usr/share/applications
    ]]

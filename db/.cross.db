@@ -51,7 +51,7 @@ glibc = {
       "libc_cv_slibdir=/usr/lib64",
    },
    prepare = [[
-      mkdir -p build && cd build
+      mkdir build && cd build
       printf "slibdir=/usr/lib64\n" >> configparms
       printf "rtlddir=/usr/lib64\n" >> configparms
       printf "sbindir=/usr/bin\n" >> configparms

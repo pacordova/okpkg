@@ -503,9 +503,9 @@ libressl = {
       install -m 644 libcrypto.pc $destdir/usr/lib64/pkgconfig
       install -m 644 libssl.pc $destdir/usr/lib64/pkgconfig
       install -m 644 openssl.pc $destdir/usr/lib64/pkgconfig
-      $make -C include install DESTDIR=$destdir
-      $make -C crypto install DESTDIR=$destdir
-      $make -C ssl install DESTDIR=$destdir
+      make -C include install DESTDIR=$destdir
+      make -C crypto install DESTDIR=$destdir
+      make -C ssl install DESTDIR=$destdir
       rm -fr $destdir/usr/lib64/*.a
    ]]
 };
@@ -538,7 +538,7 @@ libelf = {
       rm -fr $destdir
       install -d $destdir/usr/lib64/pkgconfig
       install -m 644 config/libelf.pc $destdir/usr/lib64/pkgconfig
-      $make -C libelf install DESTDIR=$destdir
+      make -C libelf install DESTDIR=$destdir
       rm -fr $destdir/usr/lib64/*.a
    ]]
 };
@@ -858,7 +858,7 @@ device-mapper = {
    post = [[
       rm -fr $destdir
       install -d $destdir
-      $make install_device-mapper DESTDIR=$destdir
+      make install_device-mapper DESTDIR=$destdir
    ]]
 };
 

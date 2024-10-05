@@ -18,12 +18,12 @@ B = {
       local arg = { [0]=f, ... }
       return (
          os.execute(table.concat({arg[0], unpack(arg)}, ' ')) and
-         os.execute("$make") and
-         os.execute("$make install DESTDIR=$destdir"))
+         os.execute("make") and
+         os.execute("make install DESTDIR=$destdir"))
    end,
    ["make"] = function(...)
       local arg = { 
-         [0]={"$make", "$make install DESTDIR=$destdir"}, 
+         [0]={"make", "make install DESTDIR=$destdir"}, 
          ... 
       }
       return (
@@ -117,7 +117,7 @@ setenv("CFLAGS", "-O2 -fcommon -pipe")
 setenv("CXXFLAGS", os.getenv("CFLAGS"))
 setenv("PATH", "/mnt/tools/bin:/usr/bin:/usr/sbin")
 setenv("LC_ALL", "POSIX")
-setenv("make", "make -j5")
+setenv("MAKEFLAGS", "-j5")
 setenv("patch", "patch -b -p1")
 setenv("destdir", "/mnt")
 

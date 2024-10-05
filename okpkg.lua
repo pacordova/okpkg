@@ -67,12 +67,12 @@ B = {
       }
       return (
          os.execute(table.concat({arg[0], unpack(arg)}, ' ')) and
-         os.execute("$make") and
-         os.execute("$make install DESTDIR=$destdir"))
+         os.execute("make") and
+         os.execute("make install DESTDIR=$destdir"))
    end,
    ["make"] = function(...)
       local arg = { 
-         [0] = { "$make", "$make install DESTDIR=$destdir" }, 
+         [0] = { "make", "make install DESTDIR=$destdir" }, 
          ... 
       }
       return (
@@ -97,8 +97,8 @@ B = {
    ["perl"] = function()
       return (
          os.execute("perl Makefile.PL") and
-         os.execute("$make") and 
-         os.execute("$make pure_install doc_install DESTDIR=$destdir"))
+         os.execute("make") and 
+         os.execute("make pure_install doc_install DESTDIR=$destdir"))
    end,
    ["python-build"] = function()
       if os.execute("python3 -m build -nw") or 
@@ -320,8 +320,8 @@ setenv("LC_ALL", "POSIX")
 setenv("CONFIG_SITE", C.config_site)
 setenv("CFLAGS", table.concat(C.cflags, ' '))
 setenv("CXXFLAGS", table.concat(C.cflags, ' '))
-setenv("ninja", C.ninja)
-setenv("make", string.format("make -j %d", C.jobs))
+setenv("MAKEFLAGS", "-j5")
+setenv("ninja", "samu")
 setenv("patch", "patch -b -p1")
 
 -- Main loop over arglist
