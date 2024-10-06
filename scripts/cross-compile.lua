@@ -4,7 +4,6 @@
 -- It follows LFS closely, but not exactly.
 -- https://www.linuxfromscratch.org/lfs/view/stable/index.html
 
--- imports
 local unpack = unpack or table.unpack
 
 local ok = require"okutils"
@@ -12,7 +11,6 @@ local ok = require"okutils"
 local chdir, setenv, mkdir, basename, symlink =
    ok.chdir, ok.setenv, ok.mkdir, ok.basename, ok.symlink
 
--- build routines
 B = {
    ["configure"] = function(f, ...)
       local arg = { [0]=f, ... }
@@ -61,16 +59,16 @@ local function extract(pkgname)
    t = vlook(pkgname)
    f = basename(get_url(pkgname))
 
-   -- setup srcdir
+   -- Setup the source directory for build.
    chdir("/usr/okpkg/sources")
    os.execute("rm -fr " .. pkgname)
    mkdir(pkgname)
 
-   -- ensure tarball exists
+   -- Ensure tarball exists.
    fp = io.open(string.format("../download/%s", f))
    if fp then fp:close() else error("source tarball doesn't exist!") end
 
-   -- extract the tarball
+   -- Extract the tarball.
    os.execute(string.format(
       "tar -C %s --strip-components=1 -xf ../download/%s", pkgname, f))
 
@@ -98,7 +96,7 @@ local function emerge(pkgname)
          error(string.format("error: build: %s: %s", t.build, x))
       end
    elseif tostring(t.build):match("config") then
-      -- Check if we are doing an out of tree build
+      -- Check if we are doing an out of tree build.
       if tostring(t.build):sub(1, 2) == ".." then 
          mkdir("build") 
          chdir("build") 
@@ -112,7 +110,7 @@ local function emerge(pkgname)
    os.execute"find $destdir -name '*.la' -delete"
 end
 
--- env
+-- Setup the environment.
 setenv("CFLAGS", "-O2 -fcommon -pipe")
 setenv("CXXFLAGS", os.getenv("CFLAGS"))
 setenv("PATH", "/mnt/tools/bin:/usr/bin:/usr/sbin")
@@ -121,7 +119,7 @@ setenv("MAKEFLAGS", "-j5")
 setenv("patch", "patch -b -p1")
 setenv("destdir", "/mnt")
 
--- reformat
+-- Reformat the partition specified at command line.
 io.write("Please enter a partition/device to format: ")
 local dev = io.read()
 if not (
@@ -132,20 +130,22 @@ then
    error("error: reformat")
 end
 
--- install filesystem and kernel-headers
-chdir("/usr/okpkg/packages/a")
-os.execute("tar -C $destdir -xhf filesystem-*.tar.lz")
-os.execute("tar -C $destdir -xhf linux-*.tar.lz")
+-- Install filesystem and kernel-headers.
+-- Cross compile needs lib symlinks.
+chdir(os.getenv("destdir"))
+os.execute("tar -xhf /usr/okpkg/packages/a/filesystem-*.tar.lz")
+os.execute("tar -xhf /usr/okpkg/packages/a/linux-*.tar.lz")
+symlink("lib64", "usr/lib")
+symlink("usr/lib", "lib")
 
--- build cross.db
+-- Build all packages in /usr/okpkg/db/.cross.db.
 local fp, buf
 fp = io.open("/usr/okpkg/db/.cross.db")
 buf = '\n' .. fp:read('*a')
 fp:close()
 for i in buf:gmatch("\n([%w%-%+]-) = {.-;") do emerge(i) end
 
--- post-install 
-chdir"/usr/okpkg/packages/a"
+chdir("/usr/okpkg/packages/a")
 os.execute [[
    git clone /usr/okpkg $destdir/usr/okpkg
    git -C $destdir/usr/okpkg repack -adf --depth=1
