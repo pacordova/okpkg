@@ -717,8 +717,8 @@ openvi = {
 };
 
 vim = {
-   url = "https://github.com/vim/vim/archive/v9.1.0764/vim-9.1.0764.tar.gz",
-   sha3 = "71b5bad9bb542a70f94471f9c1e7f8a90dd9a1cc550c0c7772a0ec437a9db8c7",
+   url = "https://github.com/vim/vim/archive/v9.1.0774/vim-9.1.0774.tar.gz",
+   sha3 = "b46a2bf8721a697e8699db79025961fa311e24d22e884edc69e18d1862da8678",
    build = "./configure",
    flags = {
       "--enable-{cscope,multibyte}",
