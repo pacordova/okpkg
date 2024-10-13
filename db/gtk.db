@@ -73,8 +73,8 @@ gdk-pixbuf2 = {
 };
 
 librsvg = {
-   url = "https://download.gnome.org/sources/librsvg/2.59/librsvg-2.59.1.tar.xz",
-   sha3 = "71995ae4d7477fb3062f348ef454632d0b4528e81d61fa1227cfa7f3171058fe",
+   url = "https://download.gnome.org/sources/librsvg/2.58/librsvg-2.58.5.tar.xz",
+   sha3 = "4451c4c14f7c08b21795fe92e04901b598c3cffeaac6b9db7a265b9bf946c0ee",
    build = "./configure",
    flags = { "--enable-vala" }
 };
