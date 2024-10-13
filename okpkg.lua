@@ -123,9 +123,9 @@ end
 local function vstr(s) 
    local i, j
    s = basename(s)
-   j = s:find("%.tar") or s:find("%.tgz") or s:find("%.deb")
+   j = s:find("%.[debtargz]+$")
    if s:find("^%d") then i = 0
-   elseif s:find"[v._-]%d" then i = s:find"[v._-]%d"
+   elseif s:find("[nv._-]%d") then i = s:find("[nv._-]%d")
    else return "" end; return s:sub(i+1, j-1)
 end
 
