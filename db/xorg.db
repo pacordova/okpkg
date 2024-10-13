@@ -37,8 +37,8 @@ libxcb = {
 };
 
 xtrans = {
-   url = "https://x.org/pub/individual/lib/xtrans-1.5.0.tar.xz",
-   sha3 = "dda2e761c73c31e30fe1e1999500b12eac439ef19433c2562329864a56ec7604",
+   url = "https://x.org/pub/individual/lib/xtrans-1.5.1.tar.xz",
+   sha3 = "de154ebe328f0887cd6ce8986d7f6640af7fa8e8b09b75d5446b10c20a9079df",
    build = "./configure",
 };
 
@@ -525,8 +525,8 @@ xorg-xwininfo = {
 };
 
 xorg-xwud = {
-   url = "https://x.org/pub/individual/app/xwud-1.0.6.tar.xz",
-   sha3 = "ecebca7805c42bdb8824a4c51cf3debfba1f9539be69fd939f356e5eee6e8474",
+   url = "https://x.org/pub/individual/app/xwud-1.0.7.tar.xz",
+   sha3 = "d96f9889ad702e63887439794a4c703b44de12871d527c56774f658104827867",
    build = "./configure",
 };
 

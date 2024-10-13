@@ -124,7 +124,7 @@ os.rename("rust-bin-1.81.0-x86_64-unknown-linux-gnu-amd64.tar.lz", "rust-bin-1.8
 chdir("/usr/okpkg/packages/l")
 os.rename("x264-31e19f92f00c7003fa115047ce50978bc98c3a0d-amd64.tar.lz", "x264-20231001-amd64.tar.lz")
 os.rename("dav1d-1d-1.4.3-amd64.tar.lz", "dav1d-1.4.3-amd64.tar.lz")
-os.rename("libuv-1.49.0-dist-amd64.tar.lz", "libuv-1.49.0-amd64.tar.lz")
+os.rename("libuv-1.49.1-dist-amd64.tar.lz", "libuv-1.49.1-amd64.tar.lz")
 chdir("/usr/okpkg/packages")
 os.execute("rm -fr */_*.tar.lz")
 
