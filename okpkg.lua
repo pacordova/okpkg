@@ -123,7 +123,7 @@ end
 local function vstr(s) 
    local i, j
    s = basename(s)
-   j = s:find("%.[debtargz]+$")
+   j = s:find("%.[debtargz]+")
    if s:find("^%d") then i = 0
    elseif s:find("[nv._-]%d") then i = s:find("[nv._-]%d")
    else return "" end; return s:sub(i+1, j-1)
