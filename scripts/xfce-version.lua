@@ -5,7 +5,7 @@ package.path = "/usr/okpkg/scripts/?.lua;" .. package.path
 require("version")
 
 -- List packages
-fp = io.popen("cat /usr/okpkg/db/{modules,devel,lib,net,xorg,xfce}.db")
+fp = io.popen("cat /usr/okpkg/db/{modules,devel,flatpak,gtk,lib,net,video,xorg,xfce}.db")
 buf = '\n' .. fp:read("*a")
 fp:close()
 local pkgs = {}

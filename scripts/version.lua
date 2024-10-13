@@ -69,7 +69,8 @@ for w in string.gmatch(buf, '%./(.-)\n') do
          gsub("bash%-completion%-", ""):
          gsub("20201015_cff88dd", "39"):
          gsub("20191011_e8ce9fe", "18"):
-         gsub("0.17_20230812", "0.17"):
+         gsub("0.18_20240915", "0.18"):
+         gsub(".post1", ""):
          gsub("lvm2%-", "device-mapper-"):
          gsub("gtk%+3%-", "gtk3-")
       table.insert(slackware, s)

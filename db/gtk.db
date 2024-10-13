@@ -15,8 +15,8 @@ desktop-file-utils = {
 };
 
 gsettings-desktop-schemas = {
-   url = "https://download.gnome.org/sources/gsettings-desktop-schemas/46/gsettings-desktop-schemas-46.1.tar.xz",
-   sha3 = "aa7f8ed3ba9bf31f4d660436f45dc7cccf983fa5650fe1939f74270770365330",
+   url = "https://download.gnome.org/sources/gsettings-desktop-schemas/47/gsettings-desktop-schemas-47.1.tar.xz",
+   sha3 = "4e6016bea37b13244d75c2fc382fcbcd1a0975299370f5d3339fc592d04b23ad",
    build = "meson",
    prepare = [[ sed -i -r 's:"(/system):"/org/gnome\1:g' schemas/*.in ]]
 };
@@ -37,8 +37,8 @@ startup-notification = {
 --------------------------------------------------------------------------------
 
 at-spi2-core = {
-   url = "https://download.gnome.org/sources/at-spi2-core/2.52/at-spi2-core-2.52.0.tar.xz",
-   sha3 = "4bff424cc3969f854fc11b5798f092e515406a08fb489070b1cd3dab16aa221c",
+   url = "https://download.gnome.org/sources/at-spi2-core/2.54/at-spi2-core-2.54.0.tar.xz",
+   sha3 = "5973caabb042a102dbbf2a5e5687625cf4a3cadb0ce6c62bd4fa26ba80ce3514",
    build = "meson",
    flags = {
       "-Dsystemd_user_dir=/tmp",
@@ -73,8 +73,8 @@ gdk-pixbuf2 = {
 };
 
 librsvg = {
-   url = "https://download.gnome.org/sources/librsvg/2.58/librsvg-2.58.3.tar.xz",
-   sha3 = "441420392cd3b175074697db1f8e44768e2c805c64a5ebcdcdcee8b08ccf1600",
+   url = "https://download.gnome.org/sources/librsvg/2.59/librsvg-2.59.1.tar.xz",
+   sha3 = "71995ae4d7477fb3062f348ef454632d0b4528e81d61fa1227cfa7f3171058fe",
    build = "./configure",
    flags = { "--enable-vala" }
 };
@@ -156,8 +156,8 @@ gcr4 = {
 };
 
 gvfs = {
-   url = "https://download.gnome.org/sources/gvfs/1.54/gvfs-1.54.2.tar.xz",
-   sha3 = "f4e70a04f8b5579428a0d8f8958be1cb219ed23ec63952542e00ab8834b19826",
+   url = "https://download.gnome.org/sources/gvfs/1.56/gvfs-1.56.0.tar.xz",
+   sha3 = "3edc6f312a2546fad631cbcd248df488df15525eeef204735628058b0cc6793e",
    build = "meson",
    flags = {
       "-D{afc,bluray,dnssd,fuse,goa,google,gphoto2,mtp,nfs,smb}=false",

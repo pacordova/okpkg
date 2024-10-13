@@ -18,8 +18,8 @@ vulkan-loader = {
 };
 
 nv-codec-headers = {
-   url = "https://github.com/FFmpeg/nv-codec-headers/releases/download/n12.1.14.0/nv-codec-headers-12.1.14.0.tar.gz",
-   sha3 = "8dc9b52f8a2256ff15439caed043e4d93229d9acabb4217d255f9dc7be0c9fc7",
+   url = "https://github.com/FFmpeg/nv-codec-headers/archive/n12.2.72.0/nv-codec-headers-n12.2.72.0.tar.gz",
+   sha3 = "ba2644d683e47a51b3552504e7fab94eeffa3f5fcfb2094159dc84323b101583",
    build = "make",
    flags = { "PREFIX=/usr", "LIBDIR=lib64" }
 };
@@ -31,8 +31,8 @@ nvidia-vaapi-driver = {
 };
 
 ffmpeg = {
-   url = "https://ffmpeg.org/releases/ffmpeg-7.0.2.tar.xz",
-   sha3 = "9cbfbeae2739d2425dfefdbe3c2cd8b6cbaefe72688bf45f6b85a4594ba11655",
+   url = "https://ffmpeg.org/releases/ffmpeg-7.1.tar.xz",
+   sha3 = "2bf4c97c9853b6afd9a07e4d9a6ed611afd0290ab5466a4edd1a84437d8e7bac",
    build = "./configure",
    flags = {
       "--libdir=/usr/lib64",
@@ -72,8 +72,8 @@ uchardet = {
 };
 
 mpv = {
-   url = "https://github.com/mpv-player/mpv/archive/v0.38.0/mpv-0.38.0.tar.gz",
-   sha3 = "84a2173a5a4ffc4f28e2e3918cb4cef7818dbc6b34844b910b615e37d1e04560",
+   url = "https://github.com/mpv-player/mpv/archive/v0.39.0/mpv-0.39.0.tar.gz",
+   sha3 = "74a6e0b52d03fc15a5e7ef4591f931fe8d53821ef02f4c20d8ce9e78f1bd8ef7",
    build = "meson",
    flags = {
       "-Dx11=enabled",

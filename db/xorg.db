@@ -368,8 +368,8 @@ xorg-xbacklight = {
 };
 
 xorg-xcmsdb = {
-   url = "https://x.org/pub/individual/app/xcmsdb-1.0.6.tar.xz",
-   sha3 = "6530b5887d8e640278765cd8d0be4bbb7b7ae123d1dc535d6919eaee4aad2928",
+   url = "https://x.org/pub/individual/app/xcmsdb-1.0.7.tar.xz",
+   sha3 = "5adbc57d74f953e37e5a4bfc35b4fa508bf45d77f5f308d5fa1f67c24c1be08f",
    build = "./configure",
 };
 
