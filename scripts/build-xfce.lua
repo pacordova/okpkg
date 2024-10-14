@@ -123,6 +123,7 @@ os.rename("d/rust-bin-1.81.0-x86_64-unknown-linux-gnu-amd64.tar.lz", "d/rust-bin
 os.rename("l/x264-31e19f92f00c7003fa115047ce50978bc98c3a0d-amd64.tar.lz", "l/x264-20231001-amd64.tar.lz")
 os.rename("l/dav1d-1d-1.4.3-amd64.tar.lz", "l/dav1d-1.4.3-amd64.tar.lz")
 os.rename("l/libuv-1.49.1-dist-amd64.tar.lz", "l/libuv-1.49.1-amd64.tar.lz")
+os.rename("l/libinih-r58-amd64.tar.lz", "l/libinih-58-amd64.tar.lz")
 os.rename("v/nv-codec-headers-n12.2.72.0-amd64.tar.lz", "v/nv-codec-headers-12.2.72.0-amd64.tar.lz")
 os.execute("rm -fr */_*.tar.lz")
 
