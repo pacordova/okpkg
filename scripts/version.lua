@@ -94,7 +94,8 @@ for w in string.gmatch(buf, '(.-\n)') do
       gsub("-stable", ""):
       gsub("_GH0", ""):
       gsub("rust%-bin", "rust"):
-      gsub("cmake%-bin", "cmake")
+      gsub("cmake%-bin", "cmake"):
+      gsub("nv%-codec%-headers%-n", "nv-codec-headers-")
    table.insert(okpkg, s)
 end
 
