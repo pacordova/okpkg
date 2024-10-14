@@ -250,6 +250,12 @@ libexif = {
    flags = { "--with-doc-dir=/usr/share/doc/libexif" }
 };
 
+libinih = {
+   url = "https://github.com/benhoyt/inih/archive/r58/inih-r58.tar.gz",
+   sha3 = "929cef82c8e3613565a9cb9ae8323963783d90558681d9cb62615e81d3529f6a",
+   build = "meson",
+};
+
 libjpeg-turbo = {
    url = "https://github.com/libjpeg-turbo/libjpeg-turbo/releases/download/3.0.4/libjpeg-turbo-3.0.4.tar.gz",
    sha3 = "27c1f84b2057d3faf19fe3aabce6da3f2ab5fe3b8c2ab84029630c38baf835ee",
@@ -391,6 +397,12 @@ libxslt = {
 libyaml = {
    url = "https://github.com/yaml/libyaml/releases/download/0.2.5/yaml-0.2.5.tar.gz",
    sha3 = "cd085eedddb0caeaa360db3e037155db95f8998d495047f3a8cbee6ee0430022",
+   build = "./configure",
+};
+
+lzo = {
+   url = "https://oberhumer.com/opensource/lzo/download/lzo-2.10.tar.gz",
+   sha3 = "7ff1e73460926eae1b8909947cc848594ff1b83234272615b4a48616e42997b1",
    build = "./configure",
 };
 

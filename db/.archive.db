@@ -985,17 +985,6 @@ sharutils = {
    ]]
 };
 
-lzo = {
-   url = "https://oberhumer.com/opensource/lzo/download/lzo-2.10.tar.gz",
-   sha3 = "7ff1e73460926eae1b8909947cc848594ff1b83234272615b4a48616e42997b1",
-   build = "./configure",
-   flags = {
-      "--libdir=/usr/lib64",
-      "--enable-shared",
-      "--disable-static"
-   }
-};
-
 lzop = {
    url = "https://lzop.org/download/lzop-1.04.tar.gz",
    sha3 = "eef01e89469e9e0ab7b0dbaab94f72f1fae350a6ed9fc4ba383b755d7ff6d8ca",
@@ -1722,11 +1711,6 @@ libdbusmenu = {
    url = "https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/libdbusmenu/16.04.1+18.10.20180917-0ubuntu8/libdbusmenu_16.04.1+18.10.20180917.orig.tar.gz",
    build = "./configure",
    prepare = [[ autoreconf -fi ]]
-};
-
-libinih = {
-   url = "https://github.com/benhoyt/inih/archive/r53/inih-r53.tar.gz",
-   build = "meson",
 };
 
 libpotrace = {
