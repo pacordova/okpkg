@@ -400,6 +400,13 @@ libyaml = {
    build = "./configure",
 };
 
+lz4 = {
+   url = "https://github.com/lz4/lz4/releases/download/v1.10.0/lz4-1.10.0.tar.gz",
+   sha3 = "334597ee49a286bb22065133a000792cb7191203eaed826b8f4681f48cad2512",
+   build = "make",
+   flags = { "prefix=/usr", "libdir=/usr/lib64" }
+};
+
 lzo = {
    url = "https://oberhumer.com/opensource/lzo/download/lzo-2.10.tar.gz",
    sha3 = "7ff1e73460926eae1b8909947cc848594ff1b83234272615b4a48616e42997b1",

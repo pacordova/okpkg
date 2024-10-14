@@ -106,6 +106,26 @@ openssh = {
    ]]
 };
 
+rsync = {
+   url = "https://samba.org/ftp/rsync/src/rsync-3.3.0.tar.gz",
+   sha3 = "77935adf5af5b295857ed95381113413d785c6e3da8b83308bab9717ebf4c98c",
+   build = "./configure",
+   flags = { "--disable-{debug,xxhash}" }
+};
+
+sharutils = {
+   url = "https://ftp.gnu.org/gnu/sharutils/sharutils-4.15.2.tar.xz",
+   sha3 = "9b06bc145640281df912a2af83849621a25a10fb2deb3bd5b1c8561f9c1b53a1",
+   build = "./configure",
+   flags = { 'CFLAGS="$CFLAGS -Wno-implicit-function-declaration"' },
+   prepare = [[
+      sed -i 's/BUFSIZ/rw_base_size/' src/unshar.c
+      sed -i '/program_name/s/^/extern /' src/*opts.h
+      sed -i 's/IO_ftrylockfile/IO_EOF_SEEN/' lib/*.c
+      printf "#define _IO_IN_BACKUP 0x100\n" >> lib/stdio-impl.h
+   ]]
+};
+
 wpa_supplicant = {
    url = "https://w1.fi/releases/wpa_supplicant-2.10.tar.gz",
    sha3 = "5a6ec512f18ea33e5e8bfccbbaff3fc88571fcd482a420ed3aeaff6404ef3690",

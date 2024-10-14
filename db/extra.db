@@ -292,16 +292,6 @@ ripgrep = {
    flags = { "--features=pcre2" }
 };
 
-rsync = {
-   url = "https://samba.org/ftp/rsync/src/rsync-3.2.7.tar.gz",
-   sha3 = "763bd8517633d1bef498be5d0846346f9c15a545f59bb14d40f6dcfb8f98fa28",
-   build = "./configure",
-   flags = {
-      "--disable-{debug,lz4,xxhash}",
-      "--with-included-{popt,zlib}=no",
-   }
-};
-
 scrot = {
    url = "https://github.com/resurrecting-open-source-projects/scrot/releases/download/1.11.1/scrot-1.11.1.tar.bz2",
    sha3 = "183450df0187a0f6c107f828585160ad2d7dfe858e353ddd08ce85bf65da94df",
