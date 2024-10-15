@@ -1,3 +1,40 @@
+-- alternative to gawk
+mawk = {
+   url = "https://invisible-island.net/archives/mawk/mawk-1.3.4-20240622.tgz",
+   sha3 = "3f07042cc941c4b9257875e4d387831255576ccbc3f31f4a92bddabb514bba57",
+   build = "configure",
+};
+
+-- alternative to gawk
+nawk = {
+   url = "https://github.com/onetrueawk/awk/archive/refs/tags/20220122.tar.gz",
+   build = "make",
+};
+
+-- alternative to nasm
+yasm = {
+   url = "https://www.tortall.net/projects/yasm/releases/yasm-1.3.0.tar.gz",
+   sha3 = "56bf07340b7a3bbfec94f89894db2c0d487d534d90c99241ba45b70feaa1a0f3",
+   build = "configure",
+};
+
+-- alternative to bison
+byacc = {
+   url = "https://invisible-island.net/archives/byacc/byacc-20240109.tgz",
+   sha3 = "6c9d173ab61a6e06f51e8158f046990942e70a3a8f5dea3fac0dc52713d86640",
+   build = "configure",
+};
+
+-- alternative to cups
+lprng = {
+   url = "https://prdownloads.sourceforge.net/lprng/lprng-3.9.0.tar.gz",
+   sha3 = "0310fd4168a77834a7f48705cb594aedebfa343512a56f5562eaf2759da746bc",
+   build = "configure",
+   flags = { "--libdir=/usr/lib64" }
+};
+
+--------------------------------------------------------------------------------
+
 directx-headers = {
    url = "https://github.com/microsoft/DirectX-Headers/archive/v1.614.0/DirectX-Headers-1.614.0.tar.gz",
    sha3 = "1cd57424860b8950f23d664740bed346156d37220cb008de453422cd2e7ced28",
