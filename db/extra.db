@@ -299,14 +299,15 @@ scrot = {
 };
 
 st = {
-   url = "https://github.com/pacordova/st/archive/v0.9/st-0.9.tar.gz",
-   sha3 = "f430a4c56411b79c4e618aab2ec22abd1c66a55bd7779ae11b3e7709ca10164d",
+   url = "https://dl.suckless.org/st/st-0.9.2.tar.gz",
+   sha3 = "6478f57dcc1afdc1f7b5b4b101bd0246ea490d852af208d643d474896df2992b",
    build = "make",
    flags = {
       "PREFIX=/usr"
    },
    post = [[ tic -sx st.info ]]
 };
+
 
 sxiv = {
    url = "https://github.com/xyb3rt/sxiv/archive/v26/sxiv-26.tar.gz",
