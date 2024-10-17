@@ -490,8 +490,8 @@ libxcrypt = {
 };
 
 libressl = {
-   url = "https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-3.9.2.tar.gz",
-   sha3 = "dfd622cd960058447b859ac9e94a19d9524733d861594af84d03db5e0109eac6",
+   url = "https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-4.0.0.tar.gz",
+   sha3 = "62da54e4f88e3d7f61c918b9d04e5829608e423e74b50e3f56442e3a52bfe20e",
    build = "./configure",
    flags = { 
       "--with-openssldir=/etc/ssl",
