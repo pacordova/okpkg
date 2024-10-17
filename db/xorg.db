@@ -291,8 +291,8 @@ libvdpau = {
 };
 
 mesa = {
-   url = "https://mesa.freedesktop.org/archive/mesa-24.2.4.tar.xz",
-   sha3 = "5fe94e9ed37b5ea2b6c9f864fd80ef97d8652d115a965cf9f9813940fbe1b5c8",
+   url = "https://mesa.freedesktop.org/archive/mesa-24.2.5.tar.xz",
+   sha3 = "822f8a7187c56a37727bab2da26831420bf3862e1df8a9ed520b4a2862151fcd",
    build = "meson",
    flags = {
       "-Dplatforms=x11",
@@ -596,8 +596,8 @@ libevdev = {
 };
 
 xf86-input-evdev = {
-   url = "https://x.org/pub/individual/driver/xf86-input-evdev-2.10.6.tar.bz2",
-   sha3 = "818dc4dbd354489b839e1b6541bfd13a620a80246e6485de9aa56ef9c4232672",
+   url = "https://x.org/pub/individual/driver/xf86-input-evdev-2.11.0.tar.xz",
+   sha3 = "a46b99f27f13ae37176eb62f42833f7092fe07d3b2c767bc74e6a12b6ee49acb",
    build = "./configure",
 };
 
@@ -612,8 +612,8 @@ libinput = {
 };
 
 xf86-input-libinput = {
-   url = "https://x.org/pub/individual/driver/xf86-input-libinput-1.4.0.tar.xz",
-   sha3 = "704b8c87c9bc7c67b5269c61db1229a89f361cbeedddf5d1a6461fd4dea7dbc6",
+   url = "https://x.org/pub/individual/driver/xf86-input-libinput-1.5.0.tar.xz",
+   sha3 = "7141fe5d065fcb9dc238f956b99b65a45c0dea4e36adbe1afae79a97d080aee4",
    build = "./configure",
 };
 
