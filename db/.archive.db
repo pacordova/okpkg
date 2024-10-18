@@ -613,17 +613,6 @@ networkmanager = {
    }
 };
 
-wget = {
-   url = "https://ftp.gnu.org/gnu/wget/wget-1.21.4.tar.gz",
-   sha3 = "e9d70587db310b53b22707c568c31d7d4eb9f01576ee8cb2657c90fa9f04d7e1",
-   build = "./configure",
-   flags = {
-      "--libdir=/usr/lib64",
-      "--sysconfdir=/etc",
-      "--with-ssl=openssl"
-   }
-};
-
 -- editors
 leafpad = {
    url = "https://download.savannah.gnu.org/releases/leafpad/leafpad-0.8.19.tar.gz",

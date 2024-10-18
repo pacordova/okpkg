@@ -126,6 +126,13 @@ sharutils = {
    ]]
 };
 
+wget = {
+   url = "https://ftp.gnu.org/gnu/wget/wget-1.24.5.tar.lz",
+   sha3 = "3e5bebc652f196ad60443d5c226a8e846cf21f594fd248263502e9bc0f649c68",
+   build = "./configure",
+   flags = { "--with-ssl=openssl" }
+};
+
 wpa_supplicant = {
    url = "https://w1.fi/releases/wpa_supplicant-2.10.tar.gz",
    sha3 = "5a6ec512f18ea33e5e8bfccbbaff3fc88571fcd482a420ed3aeaff6404ef3690",
