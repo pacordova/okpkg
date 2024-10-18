@@ -45,6 +45,7 @@ local function build_all(x)
    end
    mkdir(dirs[x])
    os.execute("mv /usr/okpkg/packages/*.tar.lz " .. dirs[x])
+   os.execute("rm -fr /usr/okpkg/sources/*")
 end
 
 -- Generate locales
