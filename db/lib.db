@@ -14,8 +14,8 @@ usbutils = {
 --------------------------------------------------------------------------------
 
 _glib2 = {
-   url = "https://download.gnome.org/sources/glib/2.82/glib-2.82.1.tar.xz",
-   sha3 = "7a66b0125cbaa5d42b213e1f293823048cebe5dc168fa16847e768e90b9bf1b9",
+   url = "https://download.gnome.org/sources/glib/2.82/glib-2.82.2.tar.xz",
+   sha3 = "b8a46cc32d25ff5e8c1cbf5fb64821788e600db3b1bb8295ecbb452b91e3e57e",
    build = "meson",
    flags = { "-Dintrospection=disabled" }
 };
@@ -27,8 +27,8 @@ gobject-introspection = {
 };
 
 glib2 = {
-   url = "https://download.gnome.org/sources/glib/2.82/glib-2.82.1.tar.xz",
-   sha3 = "7a66b0125cbaa5d42b213e1f293823048cebe5dc168fa16847e768e90b9bf1b9",
+   url = "https://download.gnome.org/sources/glib/2.82/glib-2.82.2.tar.xz",
+   sha3 = "b8a46cc32d25ff5e8c1cbf5fb64821788e600db3b1bb8295ecbb452b91e3e57e",
    build = "meson",
    flags = { "-Dintrospection=enabled" }
 };
@@ -295,8 +295,8 @@ libpng = {
 };
 
 libunistring = {
-   url = "https://ftp.gnu.org/gnu/libunistring/libunistring-1.2.tar.xz",
-   sha3 = "95472c6995afaa039064bab986637cb2825dd2cb20814db26fb365fd5cea9fd6",
+   url = "https://ftp.gnu.org/gnu/libunistring/libunistring-1.3.tar.xz",
+   sha3 = "22a5975e90b0034f8b5aee36fc80663e10b12d5d1fa9f91987fe1eb8902906bc",
    build = "./configure",
 };
 
@@ -339,8 +339,8 @@ libtiff = {
 };
 
 libtirpc = {
-   url = "https://downloads.sourceforge.net/libtirpc/libtirpc-1.3.5.tar.bz2",
-   sha3 = "d039939874447be073f6f65acab90b2ecfa4385b5b1b2ca2cf8991b1504ddeee",
+   url = "https://downloads.sourceforge.net/libtirpc/libtirpc-1.3.6.tar.bz2",
+   sha3 = "544322c780772a0a15e8ca62a23540b67939aa39839ad6cf445d9a29e8afa4aa",
    build = "./configure",
    flags = { "--disable-gssapi" }
 };

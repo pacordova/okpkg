@@ -1,6 +1,6 @@
 rust-bin = {
-   url = "https://static.rust-lang.org/dist/rust-1.81.0-x86_64-unknown-linux-gnu.tar.xz",
-   sha3 = "29704bcc3197a0c094cdbaabc97e8329015cda6629149914e161d370f179ded6",
+   url = "https://static.rust-lang.org/dist/rust-1.82.0-x86_64-unknown-linux-gnu.tar.xz",
+   sha3 = "5919fb829bc32c48c3ad93749b407b5d42c3893489797f996fd0a3b0e954ec13",
    build = _,
    post = [[ 
       install -d $destdir/usr
