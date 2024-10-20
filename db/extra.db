@@ -333,6 +333,14 @@ ugrep = {
    build = "./configure",
 };
 
+xbattbar = {
+   url = "http://deb.debian.org/debian/pool/main/x/xbattbar/xbattbar_1.4.9.orig.tar.gz",
+   sha3 = "9e5a3df48373a424a09408765e6be5c250e2d49cd2f137fdb0ae3a05e43da04a",
+   build = "make",
+   flags = { 'CFLAGS="$CFLAGS -Wno-implicit-int"' },
+   prepare = [[ sed -i 's:lib:lib64:' Makefile ]]
+};
+
 xorriso = {
    url = "http://ftp.gnu.org/gnu/xorriso/xorriso-1.5.6.tar.gz",
    sha3 = "ce81f4c5fc0c4a4144a1c9e68bfc49e632ca73ffc25ce1615f849f081e1510b8",
