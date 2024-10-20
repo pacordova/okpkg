@@ -10,6 +10,12 @@ dwm = {
    build = "make",
 };
 
+slock = {
+   url = "https://dl.suckless.org/tools/slock-1.5.tar.gz",
+   sha3 = "1c95de48a4cfed1efb161905e66ca8eb5effda04b931455124c5f16e91d2d926",
+   build = "make",
+};
+
 slstatus = {
    url = "https://dl.suckless.org/tools/slstatus-1.0.tar.gz",
    sha3 = "df3805bc40d20af08d4c9b8f7f88c0d9ecae035010c28183dc11e020ab936349",
