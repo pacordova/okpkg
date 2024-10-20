@@ -346,8 +346,8 @@ libtirpc = {
 };
 
 libuv = {
-   url = "https://dist.libuv.org/dist/v1.49.1/libuv-v1.49.1-dist.tar.gz",
-   sha3 = "a9b756ef484949ff7deefa2db1ea3f74aabce73352ca5a70a6f1d2eefa0ed1c7",
+   url = "https://dist.libuv.org/dist/v1.49.2/libuv-v1.49.2-dist.tar.gz",
+   sha3 = "00dd01b15e2a1ca2586997607a5c822bb1874cb6b4bef037226c71625a1fe3c6",
    build = "./configure",
 };
 

@@ -156,8 +156,8 @@ gcr4 = {
 };
 
 gvfs = {
-   url = "https://download.gnome.org/sources/gvfs/1.56/gvfs-1.56.0.tar.xz",
-   sha3 = "3edc6f312a2546fad631cbcd248df488df15525eeef204735628058b0cc6793e",
+   url = "https://download.gnome.org/sources/gvfs/1.56/gvfs-1.56.1.tar.xz",
+   sha3 = "931d556e56f621e51f6bf78c52791c855525e3a256a47ddc4def4592cc1ecc89",
    build = "meson",
    flags = {
       "-D{afc,bluray,dnssd,fuse,goa,google,gphoto2,mtp,nfs,smb}=false",
