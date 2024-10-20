@@ -1,0 +1,21 @@
+dmenu = {
+   url = "https://dl.suckless.org/tools/dmenu-5.3.tar.gz",
+   sha3 = "d38f271dda46174ccc149c32b41955d6b59a2cf0e3023a09eb9fd844907a9a7d",
+   build = "make",
+};
+
+dwm = {
+   url = "https://dl.suckless.org/dwm/dwm-6.5.tar.gz",
+   sha3 = "10e5acf41123f43282c0bced05dfa64ba70547671e79ced166786a28b55d80b4",
+   build = "make",
+};
+
+st = {
+   url = "https://dl.suckless.org/st/st-0.9.2.tar.gz",
+   sha3 = "6478f57dcc1afdc1f7b5b4b101bd0246ea490d852af208d643d474896df2992b",
+   build = "make",
+   flags = {
+      "PREFIX=/usr"
+   },
+   post = [[ tic -sx st.info ]]
+};

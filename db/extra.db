@@ -298,17 +298,6 @@ scrot = {
    build = "./configure",
 };
 
-st = {
-   url = "https://dl.suckless.org/st/st-0.9.2.tar.gz",
-   sha3 = "6478f57dcc1afdc1f7b5b4b101bd0246ea490d852af208d643d474896df2992b",
-   build = "make",
-   flags = {
-      "PREFIX=/usr"
-   },
-   post = [[ tic -sx st.info ]]
-};
-
-
 sxiv = {
    url = "https://github.com/xyb3rt/sxiv/archive/v26/sxiv-26.tar.gz",
    sha3 = "9d658d77fd4f9da3bb02247016ba4d4f1c3afcedc18ac790fb67bf91e66aaff7",
@@ -338,7 +327,10 @@ xbattbar = {
    sha3 = "9e5a3df48373a424a09408765e6be5c250e2d49cd2f137fdb0ae3a05e43da04a",
    build = "make",
    flags = { 'CFLAGS="$CFLAGS -Wno-implicit-int"' },
-   prepare = [[ sed -i 's:lib:lib64:' Makefile ]]
+   prepare = [[ 
+      sed -i 's:lib:lib64:' Makefile 
+      sed -i 's:usr/lib:usr/lib64:' xbattbar.c
+   ]]
 };
 
 xorriso = {

@@ -581,11 +581,6 @@ lm-sensors = {
    flags = { "LIBDIR=$LIBDIR" }
 };
 
-dmenu = {
-   url = "https://dl.suckless.org/tools/dmenu-5.1.tar.gz",
-   build = "make",
-};
-
 pwgen = {
    url = "https://prdownloads.sourceforge.net/pwgen/pwgen-2.08.tar.gz",
    build = "./configure",
