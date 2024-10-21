@@ -493,21 +493,7 @@ libressl = {
    url = "https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-4.0.0.tar.gz",
    sha3 = "62da54e4f88e3d7f61c918b9d04e5829608e423e74b50e3f56442e3a52bfe20e",
    build = "./configure",
-   flags = { 
-      "--with-openssldir=/etc/ssl",
-      "--program-prefix='libressl-'",
-   },
-   post = [[
-      rm -fr $destdir
-      install -d $destdir/usr/lib64/pkgconfig
-      install -m 644 libcrypto.pc $destdir/usr/lib64/pkgconfig
-      install -m 644 libssl.pc $destdir/usr/lib64/pkgconfig
-      install -m 644 openssl.pc $destdir/usr/lib64/pkgconfig
-      make -C include install DESTDIR=$destdir
-      make -C crypto install DESTDIR=$destdir
-      make -C ssl install DESTDIR=$destdir
-      rm -fr $destdir/usr/lib64/*.a
-   ]]
+   flags = { "--with-openssldir=/etc/ssl", },
 };
 
 scdoc = {
