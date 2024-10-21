@@ -77,6 +77,7 @@ emerge("firefox-bin")
 os.execute("mv /usr/okpkg/packages/firefox-*.tar.lz /usr/okpkg/packages/n")
 
 -- Xorg
+emerge("ttf-go")
 build_all("/usr/okpkg/db/xorg.db")
 
 -- GTK+

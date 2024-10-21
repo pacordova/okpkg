@@ -265,25 +265,6 @@ greybird = {
    build = "meson",
 };
 
-ttf-go = {
-   url = "https://github.com/golang/image/archive/v0.17.0/image-0.17.0.tar.gz",
-   sha3 = "2d1963d47c32afc435e946d1dc235c010c615d4f6f051335de04e3ff2d0f2360",
-   build = _,
-   post = [[
-      install -d $destdir/usr/share/fonts/Go
-      install -m 644 font/gofont/ttfs/*.ttf $destdir/usr/share/fonts/Go
-   ]]
-};
-
-ttf-sazanami = {
-   url = "http://osdn.dl.sourceforge.jp/efont/10087/sazanami-20040629.tar.bz2",
-   sha3 = "3a2101a51020efe1002f03fd50b30e35ed2ba62e062c44e706705c7d8cf9aae8",
-   post = [[
-      install -d $destdir/usr/share/fonts/Sazanami
-      install -m 644 *.ttf $destdir/usr/share/fonts/Sazanami
-   ]]
-};
-
 elementary-xfce-icon-theme = {
    url = "https://github.com/shimmerproject/elementary-xfce/archive/v0.19/elementary-xfce-0.19.tar.gz",
    sha3 = "b22d6d64feeffdd048a19d933c2b6815a584f3b64394bf69f4f015e42577e168",
