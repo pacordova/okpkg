@@ -200,6 +200,7 @@ mousepad = {
    build = "./configure",
    flags = {
       "--enable-gtksourceview4",
+      "--disable-plugin-gspell",
       "--disable-debug",
    }
 };
