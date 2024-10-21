@@ -223,3 +223,13 @@ gpgme = {
    build = "./configure",
    flags = { "--disable-gpg-test" }
 };
+
+--------------------------------------------------------------------------------
+
+kirc = {
+   url = "https://github.com/mcpcpc/kirc/archive/0.3.2/kirc-0.3.2.tar.gz",
+   sha3 = "2e4df46287bb6f07b30e6d6325012ce21701196e3d801adf978bcd6dea7097dc",
+   build = "make",
+   flags = { "PREFIX=/usr" },
+   prepare = [[ sed -i 's/all: clean/all:/g' Makefile ]]
+};
