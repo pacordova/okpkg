@@ -318,8 +318,8 @@ xorg-iceauth = {
 };
 
 luit = {
-   url = "https://invisible-mirror.net/archives/luit/luit-20240102.tgz",
-   sha3 = "eae96492d87c7ac3999e9de354ab64014e6b3716bbd7c5a3363c8212aae69209",
+   url = "https://invisible-mirror.net/archives/luit/luit-20240910.tgz",
+   sha3 = "7159f91f8fc813f1be85512fb18c5cfbe04f4801dc877fd4cda0fe070b4d3aca",
    build = "./configure",
    prepare = [[ sed -i -e "/D_XOPEN/s/5/6/" configure ]],
    flags = { "--enable-fontenc" }
