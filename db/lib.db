@@ -139,8 +139,8 @@ argon2 = {
 };
 
 dav1d = {
-   url = "https://downloads.videolan.org/pub/videolan/dav1d/1.4.3/dav1d-1.4.3.tar.xz",
-   sha3 = "fc84c431c4f2405ae8b351a9ecd7b1ce10b96863d50ae3206df857c81a2cf118",
+   url = "https://downloads.videolan.org/pub/videolan/dav1d/1.5.0/dav1d-1.5.0.tar.xz",
+   sha3 = "7eabacfe2249b28e312446b6f7122cf04e46fcaad92d6604940b32aacfdb14e2",
    build = "meson",
 };
 
