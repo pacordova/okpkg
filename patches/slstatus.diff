@@ -1,16 +1,23 @@
---- a/config.def.h
+--- a/config.def.h.orig
 +++ b/config.def.h
-@@ -64,6 +64,12 @@
+@@ -7,7 +7,7 @@
+ static const char unknown_str[] = "n/a";
+ 
+ /* maximum output string length */
+-#define MAXLEN 2048
++#define MAXLEN 256
+ 
+ /*
+  * function            description                     argument (example)
+@@ -64,6 +64,11 @@
   * wifi_perc           WiFi signal in percent          interface name (wlan0)
   */
  static const struct arg args[] = {
--	/* function format          argument */
+	/* function format          argument */
 -	{ datetime, "%s",           "%F %T" },
-+	/* function      format        argument */
-+    { temp, "[TEMP %sC] ", "/sys/class/thermal/thermal_zone0/temp" },
++	{ temp, "[TEMP %sC] ", "/sys/class/thermal/thermal_zone0/temp" },
 +	{ cpu_perc, "[CPU %s%] ", NULL },
 +	{ ram_perc, "[RAM %s%] ", NULL },
-+	//{ vol_perc, "[VOL %s%] ", "/dev/mixer1" },
 +	{ battery_perc, "[BAT %s%] ", "BAT0" },
 +	{ ipv4, "[WLAN IP %s] ", "wlp2s0" },
 +	{ datetime, "[%s]", "%F %r" },
