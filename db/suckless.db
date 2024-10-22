@@ -8,6 +8,7 @@ dwm = {
    url = "https://dl.suckless.org/dwm/dwm-6.5.tar.gz",
    sha3 = "10e5acf41123f43282c0bced05dfa64ba70547671e79ced166786a28b55d80b4",
    build = "make",
+   flags = { "PREFIX=/usr" },
 };
 
 slock = {
@@ -20,14 +21,13 @@ slstatus = {
    url = "https://dl.suckless.org/tools/slstatus-1.0.tar.gz",
    sha3 = "df3805bc40d20af08d4c9b8f7f88c0d9ecae035010c28183dc11e020ab936349",
    build = "make",
+   flags = { "PREFIX=/usr" },
 };
 
 st = {
    url = "https://dl.suckless.org/st/st-0.9.2.tar.gz",
    sha3 = "6478f57dcc1afdc1f7b5b4b101bd0246ea490d852af208d643d474896df2992b",
    build = "make",
-   flags = {
-      "PREFIX=/usr"
-   },
+   flags = { "PREFIX=/usr" },
    post = [[ tic -sx st.info ]]
 };
