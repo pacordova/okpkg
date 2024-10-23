@@ -420,8 +420,8 @@ mtdev = {
 };
 
 nghttp2 = {
-   url = "https://github.com/nghttp2/nghttp2/releases/download/v1.63.0/nghttp2-1.63.0.tar.xz",
-   sha3 = "cbf7364a6ea68d6c9753f57154dc94dc07fd6160f8bf0c01a9470ad4a3403e99",
+   url = "https://github.com/nghttp2/nghttp2/releases/download/v1.64.0/nghttp2-1.64.0.tar.xz",
+   sha3 = "9873ca4808b55cd7c271c8ec0be2c012a98c8d08f9255183e8729f0cc63889cc",
    build = "./configure",
    flags = { "--enable-lib-only" }
 };

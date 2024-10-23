@@ -511,8 +511,8 @@ kmod = {
 };
 
 libelf = {
-   url = "https://sourceware.org/ftp/elfutils/0.191/elfutils-0.191.tar.bz2",
-   sha3 = "bdf73b4f3be633a56344c1d1bcc6a9bb036c9bb565036ec16daef461e8f3a6d6",
+   url = "https://sourceware.org/ftp/elfutils/0.192/elfutils-0.192.tar.bz2",
+   sha3 = "2e8bc5cc10b70784974b42f0d7b83542391b909749fe1979203331da6f280ea0",
    build = "./configure",
    flags = {
       "--enable-deterministic-archives",
@@ -703,8 +703,8 @@ openvi = {
 };
 
 vim = {
-   url = "https://github.com/vim/vim/archive/v9.1.0791/vim-9.1.0791.tar.gz",
-   sha3 = "514f380269150aae9e767eb68eff4cfcdc7c0cc6906c9ac3152782ad26c19c13",
+   url = "https://github.com/vim/vim/archive/v9.1.0810/vim-9.1.0810.tar.gz",
+   sha3 = "8789977d65a81240511b20acbc9bc63cb6c1874352cc9b62f6fca78af44f8cd6",
    build = "./configure",
    flags = {
       "--enable-{cscope,multibyte}",
