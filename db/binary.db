@@ -19,14 +19,10 @@ firefox-bin = {
    post = [[
       install -d $destdir/usr/{bin,lib64}
       install -d $destdir/usr/share/applications
+      install ../../download/firefox.desktop $destdir/usr/share/applications
       cp -rp . $destdir/usr/lib64/firefox
       cd $destdir/usr/lib64/firefox
       for f in *.so; do ln -sf firefox/$f ..; done
-      cd $destdir/usr/share/applications
-      curl -LRO https://raw.githubusercontent.com/mozilla/sumo-kb/main/install-firefox-linux/firefox.desktop
-      printf "dff1368874606c8ef8579879bb0173eb6cc26bca74be999cf41d4bed00c2db61 firefox.desktop" | sha256sum -c
-      [ ! "$?" = "0" ] && rm -f firefox.desktop && exit 1
-      sed -i 's:Icon=/opt/firefox:Icon=/usr/lib64/firefox:' firefox.desktop
    ]]
 };
 
