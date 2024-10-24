@@ -876,6 +876,14 @@ zip = {
    }
 };
 
+luit = {
+   url = "https://invisible-mirror.net/archives/luit/luit-20240910.tgz",
+   sha3 = "7159f91f8fc813f1be85512fb18c5cfbe04f4801dc877fd4cda0fe070b4d3aca",
+   build = "./configure",
+   prepare = [[ sed -i -e "/D_XOPEN/s/5/6/" configure ]],
+   flags = { "--enable-fontenc" }
+};
+
 xterm = {
    url = "https://invisible-mirror.net/archives/xterm/xterm-390.tgz",
    sha3 = "921672783dad95badd402d3618cc9ca181ffec646b5a44569000c7b898259a13",

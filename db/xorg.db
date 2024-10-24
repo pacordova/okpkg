@@ -317,14 +317,6 @@ xorg-iceauth = {
    build = "./configure",
 };
 
-luit = {
-   url = "https://invisible-mirror.net/archives/luit/luit-20240910.tgz",
-   sha3 = "7159f91f8fc813f1be85512fb18c5cfbe04f4801dc877fd4cda0fe070b4d3aca",
-   build = "./configure",
-   prepare = [[ sed -i -e "/D_XOPEN/s/5/6/" configure ]],
-   flags = { "--enable-fontenc" }
-};
-
 xorg-mkfontscale = {
    url = "https://x.org/pub/individual/app/mkfontscale-1.2.3.tar.xz",
    sha3 = "c5772c2f296fc5b118d260fc3a6dbe051a8b55d639bf2fa9d3f4912fb8e99e6b",
