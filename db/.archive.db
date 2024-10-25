@@ -1,3 +1,10 @@
+cargo-c = {
+   url = "https://github.com/lu-zero/cargo-c/archive/v0.10.5/cargo-c-0.10.5.tar.gz",
+   sha3 = "e6bb23af13194e3e20e306657267869ce4317413ef05d57ea03b4b8a1b9a91e5",
+   build = "cargo",
+   prepare = [[ cp -p ../../download/cargo-c.lock Cargo.lock ]]
+};
+
 -- alternative to gawk
 mawk = {
    url = "https://invisible-island.net/archives/mawk/mawk-1.3.4-20240622.tgz",
