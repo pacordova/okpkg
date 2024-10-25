@@ -53,8 +53,8 @@ _perl = {
 };
 
 iana-etc = {
-   url = "https://github.com/Mic92/iana-etc/releases/download/20240912/iana-etc-20240912.tar.gz",
-   sha3 = "18554e2d0e96ccb64493ff20bc9e75b958dee399eecaa063b2d5299c5bed8bdd",
+   url = "https://github.com/Mic92/iana-etc/releases/download/20241015/iana-etc-20241015.tar.gz",
+   sha3 = "a361091c3f266025ab48b9ac6aaa6b9cebcd2171168b6b9b6faefb9ba25ee47e",
    build = _,
    post = [[ 
       install -d $destdir/etc
