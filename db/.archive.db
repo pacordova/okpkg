@@ -621,18 +621,6 @@ leafpad = {
    build = "./configure",
 };
 
-nano = {
-   url = "https://ftp.gnu.org/gnu/nano/nano-7.2.tar.xz",
-   sha3 = "82186f2a698b087f44e52b8e56ce5566c74f05b48496b584b6bd030898a2d361",
-   build = "./configure",
-   flags = {
-      "--sysconfdir=/etc",
-      "--enable-color",
-      "--enable-nanorc",
-      "--enable-multibuffer"
-   }
-};
-
 -- fonts
 liberation-fonts = {
    url = "https://github.com/liberationfonts/liberation-fonts/files/7261483/liberation-fonts-2.1.5.tar.gz",
