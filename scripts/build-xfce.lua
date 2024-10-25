@@ -22,6 +22,7 @@ local fp, buf
 local dirs = {
    ["/usr/okpkg/db/devel.db"]   = "/usr/okpkg/packages/d",
    ["/usr/okpkg/db/flatpak.db"] = "/usr/okpkg/packages/b",
+   ["/usr/okpkg/db/fonts.db"]   = "/usr/okpkg/packages/f",
    ["/usr/okpkg/db/glib.db"]    = "/usr/okpkg/packages/l",
    ["/usr/okpkg/db/gtk.db"]     = "/usr/okpkg/packages/x",
    ["/usr/okpkg/db/lib.db"]     = "/usr/okpkg/packages/l",
@@ -76,8 +77,10 @@ build_all("/usr/okpkg/db/net.db")
 emerge("firefox-bin")
 os.execute("mv /usr/okpkg/packages/firefox-*.tar.lz /usr/okpkg/packages/n")
 
+-- Fonts
+build_all("/usr/okpkg/db/fonts.db")
+
 -- Xorg
-emerge("ttf-go")
 build_all("/usr/okpkg/db/xorg.db")
 
 -- GTK+

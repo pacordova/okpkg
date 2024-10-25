@@ -278,13 +278,6 @@ pciutils = {
    post = [[ chmod 755 $destdir/usr/lib64/libpci.so ]]
 };
 
-r = {
-   url = "https://cran.r-project.org/src/base/R-4/R-4.4.1.tar.gz",
-   sha3 = "84bc3941d786810f5fd9c97f72cbff9e0a535d90ea3dc15dfd7036215b2d5c16",
-   build = "./configure",
-   flags = { "--enable-{R-shlib=yes,java=no}", "--without-x" }
-};
-
 ripgrep = {
    url = "https://github.com/BurntSushi/ripgrep/archive/14.1.1/ripgrep-14.1.1.tar.gz",
    sha3 = "d6373624002b64f8c385918f4fa3e0512f41044fac9cbec8e547046de05030cb",

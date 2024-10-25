@@ -75,44 +75,6 @@ vala = {
 
 --------------------------------------------------------------------------------
 
-_freetype2 = {
-   url = "https://downloads.sourceforge.net/freetype/freetype-2.13.3.tar.xz",
-   sha3 = "764b5a302571b7ead0d180b3e5e7af19b0b47e6cb1315f26ee5266bd0460d2fc",
-   build = "meson",
-   flags = { "-Dharfbuzz=disabled" }
-};
-
-graphite = {
-   url = "https://github.com/silnrsi/graphite/releases/download/1.3.14/graphite2-1.3.14.tgz",
-   sha3 = "bccf21b15d3278bfcb4601f1e0e2cecfb48385575c309788f524465a5139f9ff",
-   build = "cmake",
-   flags = { "-DLIB_SUFFIX=64" },
-   prepare = [[ sed -i '/cmptest/d' tests/CMakeLists.txt ]]
-};
-
-harfbuzz = {
-   url = "https://github.com/harfbuzz/harfbuzz/releases/download/10.0.1/harfbuzz-10.0.1.tar.xz",
-   sha3 = "826885e8d6564e0291aa62d961bd95150a95189a2ba049333afae4d6ad3f7446",
-   build = "meson",
-   flags = { "-D{cairo=disabled,graphite2=enabled}" }
-};
-
-freetype2 = {
-   url = "https://downloads.sourceforge.net/freetype/freetype-2.13.3.tar.xz",
-   sha3 = "764b5a302571b7ead0d180b3e5e7af19b0b47e6cb1315f26ee5266bd0460d2fc",
-   build = "meson",
-   flags = { "-Dharfbuzz=enabled" }
-};
-
-fontconfig = {
-   url = "https://www.freedesktop.org/software/fontconfig/release/fontconfig-2.15.0.tar.xz",
-   sha3 = "01271f5261ea7b47332da761d02f2b0ed62fb164a2921a1d81d3e53c6a5f7623",
-   build = "./configure",
-   flags = { "--disable-docs" }
-};
-
---------------------------------------------------------------------------------
-
 alsa-lib = {
    url = "https://alsa-project.org/files/pub/lib/alsa-lib-1.2.12.tar.bz2",
    sha3 = "3d65e490d7c1f25890e099c89f3a4e2c9b36a8553db4e17d05b9ee36feb19d71",
@@ -169,6 +131,14 @@ fuse3 = {
    flags = { "-Dexamples=false" },
    prepare = [[ sed -i '/^udev/,$ s/^/#/' util/meson.build ]],
    post = [[ chmod u+s $destdir/usr/bin/fusermount3 ]]
+};
+
+graphite = {
+   url = "https://github.com/silnrsi/graphite/releases/download/1.3.14/graphite2-1.3.14.tgz",
+   sha3 = "bccf21b15d3278bfcb4601f1e0e2cecfb48385575c309788f524465a5139f9ff",
+   build = "cmake",
+   flags = { "-DLIB_SUFFIX=64" },
+   prepare = [[ sed -i '/cmptest/d' tests/CMakeLists.txt ]]
 };
 
 iso-codes = {
