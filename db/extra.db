@@ -1,3 +1,10 @@
+r = {
+   url = "https://cran.r-project.org/src/base/R-4/R-4.4.1.tar.gz",
+   sha3 = "84bc3941d786810f5fd9c97f72cbff9e0a535d90ea3dc15dfd7036215b2d5c16",
+   build = "./configure",
+   flags = { "--enable-{R-shlib=yes,java=no}", "--without-x" }
+};
+
 appstream-glib = {
    url = "https://people.freedesktop.org/~hughsient/appstream-glib/releases/appstream-glib-0.8.2.tar.xz",
    sha3 = "c1c6b46bab260e73070061707fe1f01df4363b3fca0349de29400752ae0a21e5",

@@ -103,13 +103,6 @@ opendoas = {
    ]]
 };
 
-r = {
-   url = "https://cran.r-project.org/src/base/R-4/R-4.4.1.tar.gz",
-   sha3 = "84bc3941d786810f5fd9c97f72cbff9e0a535d90ea3dc15dfd7036215b2d5c16",
-   build = "./configure",
-   flags = { "--enable-{R-shlib=yes,java=no}", "--without-x" }
-};
-
 samurai = {
    url = "https://github.com/michaelforney/samurai/releases/download/1.2/samurai-1.2.tar.gz",
    sha3 = "127ea48499f38f1a1c476957453ccca9419c8a4a938925e1361818102307375d",
