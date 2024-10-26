@@ -692,8 +692,8 @@ lua = {
 };
 
 openvi = {
-   url = "https://github.com/johnsonjh/OpenVi/archive/7.5.28/OpenVi-7.5.28.tar.gz",
-   sha3 = "bc8b4846bc61052d4a55a5b0eb411222bc66a4fd2f3954be874a1f3e0702114b",
+   url = "https://github.com/johnsonjh/openvi/archive/7.6.30/openvi-7.6.30.tar.gz",
+   sha3 = "020a44c7fd8117c96065b87f805c5b9529713e7ef634d353d986b0edecc462ae",
    build = "make",
    flags = { "CC=gcc", "OPTLEVEL=-O2", "PREFIX=/usr", "BINPREFIX=''" },
    prepare = [[ 

@@ -9,8 +9,8 @@ shared-mime-info = {
 };
 
 desktop-file-utils = {
-   url = "https://www.freedesktop.org/software/desktop-file-utils/releases/desktop-file-utils-0.27.tar.xz",
-   sha3 = "c7e2480ad3a12bb90f68995645845c4c140f7c9b274ac21cfcb9ed443a7c7ef9",
+   url = "https://www.freedesktop.org/software/desktop-file-utils/releases/desktop-file-utils-0.28.tar.xz",
+   sha3 = "0ba571ca197bb0d03d32598caff59eb6b7b4520f178dfe651e38ebcc6b6e8adf",
    build = "meson",
 };
 
