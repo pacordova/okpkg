@@ -32,7 +32,7 @@ B = {
 
 
 local function vlook(pkgname) local fp, buf, i, j
-   fp = io.open("/usr/okpkg/db/.cross.db")
+   fp = io.open("/var/lib/okpkg/db/.cross.db")
    buf = '\n' .. fp:read('*a')
    fp:close()
    i = buf:find(string.format("\n%s = {", pkgname), 1, true)
@@ -45,7 +45,7 @@ local function get_url(pkgname) local fp, buf, i, j
    pkgname = pkgname:gsub("gcc%-.*", "gcc%%d+")
    pkgname = pkgname:gsub("binutils%-.*", "binutils")
    pkgname = pkgname:gsub("%-", "%%-")
-   fp = io.open("/usr/okpkg/db/system.db")
+   fp = io.open("/var/lib/okpkg/db/system.db")
    buf = '\n' .. fp:read('*a')
    fp:close()
    i = buf:find(string.format("\n%s = {", pkgname), 1)
@@ -60,7 +60,7 @@ local function extract(pkgname)
    f = basename(get_url(pkgname))
 
    -- Setup the source directory for build.
-   chdir("/usr/okpkg/sources")
+   chdir("/var/lib/okpkg/sources")
    os.execute("rm -fr " .. pkgname)
    mkdir(pkgname)
 
@@ -87,7 +87,7 @@ local function emerge(pkgname)
    local t = extract(pkgname)
    t.flags = t.flags or {}
 
-   chdir("/usr/okpkg/sources/" .. pkgname)
+   chdir("/var/lib/okpkg/sources/" .. pkgname)
 
    if t.prepare then os.execute(t.prepare) end
 
@@ -133,25 +133,25 @@ end
 -- Install filesystem and kernel-headers.
 -- Cross compile needs lib symlinks.
 chdir(os.getenv("destdir"))
-os.execute("tar -xhf /usr/okpkg/packages/a/filesystem-*.tar.lz")
-os.execute("tar -xhf /usr/okpkg/packages/a/linux-*.tar.lz")
+os.execute("tar -xhf /var/lib/okpkg/packages/a/filesystem-*.tar.lz")
+os.execute("tar -xhf /var/lib/okpkg/packages/a/linux-*.tar.lz")
 symlink("lib64", "usr/lib")
 symlink("usr/lib", "lib")
 
--- Build all packages in /usr/okpkg/db/.cross.db.
+-- Build all packages in /var/lib/okpkg/db/.cross.db.
 local fp, buf
-fp = io.open("/usr/okpkg/db/.cross.db")
+fp = io.open("/var/lib/okpkg/db/.cross.db")
 buf = '\n' .. fp:read('*a')
 fp:close()
 for i in buf:gmatch("\n([%w%-%+]-) = {.-;") do emerge(i) end
 
-chdir("/usr/okpkg/packages/a")
+chdir("/var/lib/okpkg/packages/a")
 os.execute [[
-   git clone /usr/okpkg $destdir/usr/okpkg
-   git -C $destdir/usr/okpkg repack -adf --depth=1
-   mkdir -p $destdir/usr/okpkg/{packages,download}
-   cp -p linux-*.tar.lz filesystem*.tar.lz $destdir/usr/okpkg/packages
-   cp -p /usr/okpkg/download/* $destdir/usr/okpkg/download
+   git clone /var/lib/okpkg $destdir/var/lib/okpkg
+   git -C $destdir/var/lib/okpkg repack -adf --depth=1
+   mkdir -p $destdir/var/lib/okpkg/{packages,download}
+   cp -p linux-*.tar.lz filesystem*.tar.lz $destdir/var/lib/okpkg/packages
+   cp -p /var/lib/okpkg/download/* $destdir/var/lib/okpkg/download
    curl -L https://curl.se/ca/cacert.pem > \
        $destdir/etc/ssl/certs/ca-certificates.crt
    rm -fr $destdir/{lost+found,tools,lib} $destdir/usr/{lib,libexec,var}

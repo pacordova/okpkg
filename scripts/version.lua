@@ -1,6 +1,6 @@
 #!/usr/bin/env lua
 
-local ok = require"okutils"
+local ok = require("okutils")
 
 local basename = ok.basename
 
@@ -79,11 +79,8 @@ end
 
 -- list okpkg package versions
 local okpkg = {}
-fd = io.popen("find /usr/okpkg/packages/* -name '*.tar.lz' -exec basename '{}' \\;")
+fd = io.popen("find /var/lib/okpkg/packages/* -name '*.tar.lz' -exec basename '{}' \\;")
 buf = fd:read("*a")
-fd:close()
-fd = io.popen("ls /usr/okpkg/packages/x")
-buf = buf .. fd:read("*a")
 fd:close()
 
 for w in string.gmatch(buf, '(.-\n)') do
@@ -116,7 +113,7 @@ function version(pkglist)
 end
 
 -- get packages to check
-fp = io.open("/usr/okpkg/db/system.db")
+fp = io.open("/var/lib/okpkg/db/system.db")
 buf = '\n' .. fp:read('*a')
 fp:close()
 local pkgs = {}

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-cd /usr/okpkg/index
+cd /var/lib/okpkg/index
 
 printlibs(){
     sed 's/^.//' $1.index | xargs file | \

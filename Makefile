@@ -17,7 +17,7 @@ install: okutils.so
 	mkdir -p index packages sources download
 	install -d $(DESTDIR)$(prefix)/bin $(DESTDIR)$(LUA_CPATH)
 	install okutils.so $(DESTDIR)$(LUA_CPATH)/
-	ln -sf /usr/okpkg/okpkg.lua $(DESTDIR)$(prefix)/bin/okpkg
+	ln -sf `pwd`/okpkg.lua $(DESTDIR)$(prefix)/bin/okpkg
 
 uninstall: clean
 	rm -f $(DESTDIR)$(prefix)/bin/okpkg

@@ -11,7 +11,7 @@ Usage:
 
 Install
 -------
-Clone the repository to /usr/okpkg. Then run: `make && make install`
+Clone the repository to /var/lib/okpkg. Then run: `make && make install`
 
 In order to build okpkg, you need:
    * A C compiler

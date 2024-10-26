@@ -1,6 +1,6 @@
 #!/bin/sh
 
-cd /usr/okpkg/packages
+cd /var/lib/okpkg/packages
 
 target=`gcc -dumpmachine`
 version=`gcc -dumpversion`
@@ -147,4 +147,4 @@ mv gcc "gcc-$version-amd64"
 okpkg makepkg "gcc-$version-amd64"
 okpkg install "gcc-$version-amd64.tar.lz"
 rm -f "$pkgname"*.tar.lz
-rm -f "/usr/okpkg/index/$pkgname.index"
+rm -f "/var/lib/okpkg/index/$pkgname.index"

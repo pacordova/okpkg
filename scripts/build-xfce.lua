@@ -1,14 +1,16 @@
 #!/usr/bin/env lua
 
+-- Paths
+local okpath = "/var/lib/okpkg"
+local dbpath = "/var/lib/okpkg/db"
+local pkgdir = "/var/lib/okpkg/packages"
+lcoal srcpath = "/var/lib/okpkg/sources"
+
 -- Ensure okpkg is installed
-os.execute [[
-   if [ ! -x /usr/bin/okpkg ] && [ -x /usr/bin/make ]; then
-      cd /usr/okpkg && make && make install
-   fi
-]]
+os.execute(string.format("cd %s && make && make install", okpath))
 
 -- Imports
-dofile("/usr/okpkg/okpkg.lua")
+dofile("/usr/bin/okpkg")
 
 local unpack = unpack or table.unpack
 
@@ -20,23 +22,23 @@ local chdir, mkdir, symlink =
 local fp, buf
 
 local dirs = {
-   ["/usr/okpkg/db/devel.db"]   = "/usr/okpkg/packages/d",
-   ["/usr/okpkg/db/flatpak.db"] = "/usr/okpkg/packages/b",
-   ["/usr/okpkg/db/fonts.db"]   = "/usr/okpkg/packages/f",
-   ["/usr/okpkg/db/glib.db"]    = "/usr/okpkg/packages/l",
-   ["/usr/okpkg/db/gtk.db"]     = "/usr/okpkg/packages/x",
-   ["/usr/okpkg/db/lib.db"]     = "/usr/okpkg/packages/l",
-   ["/usr/okpkg/db/modules.db"] = "/usr/okpkg/packages/m",
-   ["/usr/okpkg/db/net.db"]     = "/usr/okpkg/packages/n",
-   ["/usr/okpkg/db/video.db"]   = "/usr/okpkg/packages/v",
-   ["/usr/okpkg/db/xfce.db"]    = "/usr/okpkg/packages/xf",
-   ["/usr/okpkg/db/xorg.db"]    = "/usr/okpkg/packages/x",
+   ["devel.db"]   = "d",
+   ["flatpak.db"] = "b",
+   ["fonts.db"]   = "f",
+   ["glib.db"]    = "l",
+   ["gtk.db"]     = "x",
+   ["lib.db"]     = "l",
+   ["modules.db"] = "m",
+   ["net.db"]     = "n",
+   ["video.db"]   = "v",
+   ["xfce.db"]    = "xf",
+   ["xorg.db"]    = "x",
 }
 
 -- Builds and installs all packages in a single db file
 local function build_all(x)
    local fp, buf
-   fp = io.open(x)
+   fp = io.open(string.format("%s/%s", dbpath, x))
    buf = '\n' .. fp:read('*a')
    fp:close()
    for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do emerge(i)
@@ -44,56 +46,39 @@ local function build_all(x)
          os.execute("gdk-pixbuf-query-loaders --update-cache")
       end
    end
+   chdir(pkgdir)
    mkdir(dirs[x])
-   os.execute("mv /usr/okpkg/packages/*.tar.lz " .. dirs[x])
-   os.execute("rm -fr /usr/okpkg/sources/*")
+   os.execute("mv *.tar.lz " .. dirs[x])
+   os.execute("rm -fr " .. srcpath)
+   mkdir(srcpath)
 end
 
 -- Generate locales
 os.execute("localedef -i POSIX -f UTF-8 C.UTF-8 2> /dev/null || true")
 os.execute("localedef -i en_US -f UTF-8 en_US.UTF-8")
 
--- Install system packages to track in /usr/okpkg/index
-os.execute("okpkg install /usr/okpkg/packages/*.tar.lz")
-mkdir("/usr/okpkg/packages/a")
-os.execute("mv /usr/okpkg/packages/*.tar.lz /usr/okpkg/packages/a")
-
--- Modules
-build_all("/usr/okpkg/db/modules.db")
+-- Install system packages to track in indexdir
+chdir(pkgdir)
+os.execute("okpkg install *.tar.lz")
+mkdir("a")
+os.execute("mv *.tar.lz a")
 
 -- itstool needs libxml2
 emerge("libxml2")
-os.execute("rm -f /usr/okpkg/packages/libxml2-*.tar.lz")
+os.execute(string.format("rm -f %s/libxml2-*.tar.lz", pkgdir))
 
--- Development tools
+build_all("modules.db")
 emerge("rust-bin")
-build_all("/usr/okpkg/db/devel.db")
-
--- Libraries
-build_all("/usr/okpkg/db/lib.db")
-
--- Network tools
-build_all("/usr/okpkg/db/net.db")
+build_all("devel.db")
+build_all("lib.db")
 emerge("firefox-bin")
-os.execute("mv /usr/okpkg/packages/firefox-*.tar.lz /usr/okpkg/packages/n")
-
--- Fonts
-build_all("/usr/okpkg/db/fonts.db")
-
--- Xorg
-build_all("/usr/okpkg/db/xorg.db")
-
--- GTK+
-build_all("/usr/okpkg/db/gtk.db")
-
--- XFCE
-build_all("/usr/okpkg/db/xfce.db")
-
--- Flatpak
-build_all("/usr/okpkg/db/flatpak.db")
-
--- Video
-build_all("/usr/okpkg/db/video.db")
+build_all("net.db")
+build_all("fonts.db")
+build_all("xorg.db")
+build_all("gtk.db")
+build_all("xfce.db")
+build_all("video.db")
+build_all("flatpak.db")
 
 -- Rebuilds
 emerge("dbus")
@@ -122,7 +107,7 @@ fp:close()
 os.execute("chmod 755 /usr/bin/firefox")
 
 -- Cleanup
-chdir("/usr/okpkg/packages")
+chdir(pkgdir)
 os.rename("a/sqlite-3460100-amd64.tar.lz", "a/sqlite-3.46.1-amd64.tar.lz")
 os.rename("d/rust-bin-1.82.0-x86_64-unknown-linux-gnu-amd64.tar.lz", "d/rust-bin-1.82.0-amd64.tar.lz")
 os.rename("l/x264-31e19f92f00c7003fa115047ce50978bc98c3a0d-amd64.tar.lz", "l/x264-20231001-amd64.tar.lz")

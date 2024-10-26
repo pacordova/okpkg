@@ -15,11 +15,13 @@ local chdir, mkdir, pwd, basename, dirname, setenv, unsetenv  =
 C = {
    ["gnu"] = "http://mirror.fcix.net",
    ["cran"] = "https://archive.linux.duke.edu/cran",
-   ["pkgdir"] = "/usr/okpkg/packages",
-   ["dbpath"] = "/usr/okpkg/db",
-   ["outdir"] = "/usr/okpkg/download",
-   ["srcpath"] = "/usr/okpkg/sources",
-   ["patchdir"] = "/usr/okpkg/patches",
+   ["pkgdir"] = "/var/lib/okpkg/packages",
+   ["okpath"] = "/var/lib/okpkg",
+   ["dbpath"] = "/var/lib/okpkg/db",
+   ["outdir"] = "/var/lib/okpkg/download",
+   ["srcpath"] = "/var/lib/okpkg/sources",
+   ["indexdir"] = "/var/lib/okpkg/index",
+   ["patchdir"] = "/var/lib/okpkg/patches",
    ["config_site"] = "/etc/config.site",
    ["ninja"] = "/usr/bin/samu",
    ["jobs"] = 5,
@@ -178,7 +180,7 @@ function download(x)
       print(string.format("%s: OK", basename(f)))
    end
       
-   -- Patch if file exists in /usr/okpkg/patches
+   -- Patch if file exists in patchdir
    f = string.format("%s/%s.diff", C.patchdir, x:gsub('^_', ''))
    fp = io.open(f);
    if fp then fp:close(); os.execute(string.format("$patch <%s", f)); end
@@ -286,7 +288,7 @@ end
 
 function purge(x)
    local fp, f
-   f = string.format("/usr/okpkg/index/%s.index", x)
+   f = string.format("%s/%s.index", C.indexdir, x)
    fp = io.open(f)
    if fp then
       for path in fp:lines() do os.remove(path:sub(2, #path)) end
@@ -306,7 +308,7 @@ function install(path)
    v = vstr(path)
    if #v > 0 then x = basename(path:sub(1, #path-#v-8))
    else x = basename(path:sub(1, #path-7)) end
-   fp = io.open(string.format("/usr/okpkg/index/%s.index", x), 'w')
+   fp = io.open(string.format("%s/%s.index", C.indexdir, x), 'w')
    fp:write(buf)
    fp:close()
 

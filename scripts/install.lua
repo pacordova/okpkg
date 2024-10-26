@@ -1,16 +1,21 @@
 #!/usr/bin/env lua
 
--- imports
+-- Directories
+local pkgdir = "/var/lib/okpkg/packages"
+local dbpath = "/var/lib/okpkg/db"
+
+-- Imports
 local unpack = unpack or table.unpack
-local ok = require"okutils"
+local ok = require("okutils")
 local chdir, setenv, mkdir =
    ok.chdir, ok.setenv, ok.mkdir
 
--- environment
+-- Environment
 setenv("destdir", "/mnt")
+chdir(dbpath)
 
 local function install(pkgname) local fp
-   chdir"/usr/okpkg/packages"
+   chdir(pkgdir)
    fp = io.popen(string.format("find * -name '%s-*.tar.lz' | head -1", pkgname))
    os.execute(string.format("tar -C $destdir -xhf %s", fp:read("*a")))
    fp:close()
@@ -24,7 +29,7 @@ end
 if #arg == 0 then arg = {"base"} end
 base = { "linux" }
 local fp, buf
-fp = io.open("/usr/okpkg/db/system.db")
+fp = io.open("system.db")
 buf = '\n' .. fp:read("*a")
 fp:close()
 for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do
@@ -41,7 +46,7 @@ end
 -- devel package set
 devel = {}
 local fp, buf
-fp = io.open("/usr/okpkg/db/devel.db")
+fp = io.open("devel.db")
 buf = '\n' .. fp:read("*a")
 fp:close()
 for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do
@@ -51,7 +56,7 @@ end
 -- extra libraries
 library = {}
 local fp, buf
-fp = io.open("/usr/okpkg/db/lib.db")
+fp = io.open("lib.db")
 buf = '\n' .. fp:read("*a")
 fp:close()
 for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do
@@ -61,7 +66,7 @@ end
 -- network package set
 network = {}
 local fp, buf
-fp = io.open("/usr/okpkg/db/net.db")
+fp = io.open("net.db")
 buf = '\n' .. fp:read("*a")
 fp:close()
 for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do
@@ -91,14 +96,15 @@ local status =
 if not status then error("error during reformat!") end
 
 -- do-install
-chdir"/usr/okpkg/packages/a"
+chdir(pkgdir)
+chdir("a")
 os.execute [[
    tar -C $destdir -xhf filesystem-*.tar.lz
-   git clone /usr/okpkg $destdir/usr/okpkg
-   git -C $destdir/usr/okpkg repack -adf --depth=1
-   mkdir -p $destdir/usr/okpkg/{packages,download}
-   cp -p *.tar.lz $destdir/usr/okpkg/packages
-   cp -p /usr/okpkg/download/* $destdir/usr/okpkg/download
+   git clone /var/lib/okpkg $destdir/var/lib/okpkg
+   git -C $destdir/var/lib/okpkg repack -adf --depth=1
+   mkdir -p $destdir/var/lib/okpkg/{packages,download}
+   cp -p *.tar.lz $destdir/var/lib/okpkg/packages
+   cp -p /var/lib/okpkg/download/* $destdir/var/lib/okpkg/download
    rm -fr $destdir/lost+found
    curl -L https://curl.se/ca/cacert.pem > \
        $destdir/etc/ssl/certs/ca-certificates.crt
@@ -109,9 +115,9 @@ while #arg > 0 do
    for i=1,#_G[arg[1]] do install(_G[arg[1]][i]) end
    if arg[1] == "minimal" then 
       os.execute [[
-         cp -p /usr/okpkg/okutils.so $destdir/usr/okpkg
+         cp -p /var/lib/okpkg/okutils.so $destdir/var/lib/okpkg
          cp -p /usr/bin/okpkg $destdir/usr/bin
-         rm -fr $destdir/usr/okpkg/{download,packages}
+         rm -fr $destdir/var/lib/okpkg/{download,packages}
          rm -fr $destdir/usr/share/{i18n,man,pkgconfig}
          rm -fr $destdir/usr/lib64/{*.a,*.o,pkgconfig,gconv}
          rm -fr $destdir/usr/include

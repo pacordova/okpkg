@@ -1,11 +1,11 @@
 #!/usr/bin/env lua
 
-package.path = "/usr/okpkg/scripts/?.lua;" .. package.path
+package.path = "/var/lib/okpkg/scripts/?.lua;" .. package.path
 
 require("version")
 
 -- List packages
-fp = io.popen("cat /usr/okpkg/db/*.db")
+fp = io.popen("cat /var/lib/okpkg/db/*.db")
 buf = '\n' .. fp:read("*a")
 fp:close()
 local pkgs = {}

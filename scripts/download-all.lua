@@ -1,26 +1,33 @@
 #!/usr/bin/env lua
 
-dofile("/usr/okpkg/okpkg.lua")
 local ok = require("okutils")
 local mkdir = ok.mkdir
+local dbpath = "/var/lib/okpkg/db"
+local srcpath = "/var/lib/okpkg/sources"
+
+dofile("/usr/bin/okpkg")
 
 local function download_all(db) 
    local fp, buf
-   fp = io.open(db)
+   fp = io.open(string.format("%s/%s, dbpath, db))
    buf = '\n'..fp:read("*a")
    fp:close()
    for i in buf:gmatch("\n([%w%-%+]-) = {.-;") do download(i) end
 end
 
-os.execute("rm -fr /usr/okpkg/sources")
-mkdir("/usr/okpkg/sources")
+os.execute("rm -fr " .. srcpath)
+mkdir(srcpath)
 
-download_all("/usr/okpkg/db/system.db")
-download_all("/usr/okpkg/db/modules.db")
-download_all("/usr/okpkg/db/devel.db")
-download_all("/usr/okpkg/db/lib.db")
-download_all("/usr/okpkg/db/net.db")
-download_all("/usr/okpkg/db/xorg.db")
-download_all("/usr/okpkg/db/xfce.db")
---download_all("/usr/okpkg/db/binary.db")
-download_all("/usr/okpkg/db/extra.db")
+download_all("system.db")
+download_all("modules.db")
+download_all("devel.db")
+download_all("lib.db")
+download_all("net.db")
+download_all("xorg.db")
+download_all("xfce.db")
+download_all("video.db")
+download_all("gtk.db")
+download_all("fonts.db")
+--download_all("binary.db")
+download_all("extra.db")
+download_all("suckless.db")
