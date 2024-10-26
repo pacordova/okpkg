@@ -177,15 +177,6 @@ libarchive = {
    flags = { "--without-nettle" }
 };
 
-libass = {
-   url = "https://github.com/libass/libass/releases/download/0.17.3/libass-0.17.3.tar.gz",
-   sha3 = "b163363fa4926a3d8991a138cea75ee83431787209df74a3ee66f6b269ca6fec",
-   build = "./configure",
-   flags = {
-      "--enable-fontconfig",
-   }
-};
-
 libbpf = {
    url = "https://github.com/libbpf/libbpf/archive/v1.4.6/libbpf-1.4.6.tar.gz",
    sha3 = "f53eae3c8a05306368c679b8499b998ff547fbfc798d21c4fad0dd893fef9f3f",

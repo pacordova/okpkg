@@ -30,6 +30,15 @@ nvidia-vaapi-driver = {
    build = "meson",
 };
 
+libass = {
+   url = "https://github.com/libass/libass/releases/download/0.17.3/libass-0.17.3.tar.gz",
+   sha3 = "b163363fa4926a3d8991a138cea75ee83431787209df74a3ee66f6b269ca6fec",
+   build = "./configure",
+   flags = {
+      "--enable-fontconfig",
+   }
+};
+
 ffmpeg = {
    url = "https://ffmpeg.org/releases/ffmpeg-7.1.tar.xz",
    sha3 = "2bf4c97c9853b6afd9a07e4d9a6ed611afd0290ab5466a4edd1a84437d8e7bac",
