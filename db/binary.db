@@ -87,11 +87,11 @@ nodejs = {
 -- TODO: download error: cannot handle debfile
 -- Consider building from source.
 signal-desktop = {
-   url = "https://updates.signal.org/desktop/apt/pool/s/signal-desktop/signal-desktop_7.22.0_amd64.deb",
-   sha3 = "887e0a8237a5b11705eee8feaa6372c47468896c4bfadf6f40f11bbaa5d1e5db",
+   url = "https://updates.signal.org/desktop/apt/pool/s/signal-desktop/signal-desktop_7.30.0_amd64.deb",
+   sha3 = "4c25d759089df9e1454be58db6c6542310b3fea75a5f1c40f983845b8bc76f7f",
    build = _,
    post = [[
-      ar x ../../download/signal-desktop*.deb data.tar.xz
+      ar x ../../download/signal-desktop_7.30.0_amd64.deb data.tar.xz
       tar -xf data.tar.xz
       sed -i 's:/opt/Signal:/usr/bin:' usr/share/applications/signal-desktop.desktop
       install -d $destdir/usr/{lib64,bin}

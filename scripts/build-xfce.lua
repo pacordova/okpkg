@@ -4,7 +4,7 @@
 local okpath = "/var/lib/okpkg"
 local dbpath = "/var/lib/okpkg/db"
 local pkgdir = "/var/lib/okpkg/packages"
-lcoal srcpath = "/var/lib/okpkg/sources"
+local srcpath = "/var/lib/okpkg/sources"
 
 -- Ensure okpkg is installed
 os.execute(string.format("cd %s && make && make install", okpath))
