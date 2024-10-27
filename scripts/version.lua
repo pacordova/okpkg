@@ -106,7 +106,9 @@ function version(pkglist)
       local okpkg = getv(okpkg, pkg)
 
       -- omit when versions are the same
-      if (slack and okpkg ~= slack) or (arch and okpkg ~= arch) then
+      if (okpkg and slack and okpkg ~= slack) or
+         (okpkg and arch and okpkg ~= arch)
+      then
          io.write(string.format("%s,%s,%s,%s\n", pkglist[i], arch, slack, okpkg))
       end
    end
