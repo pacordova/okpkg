@@ -136,18 +136,6 @@ poppler-data = {
    flags = { "prefix=/usr" }
 };
 
-evince = {
-   url = "https://download.gnome.org/sources/evince/46/evince-46.3.1.tar.xz",
-   sha3 = "2904ed9f206394b88a46726711505a535e13b1c02bc2d4f782ef4427b355f9c4",
-   build = "meson",
-   flags = {
-      "-D{gspell,keyring}=disabled",
-      "-D{gtk_doc,nautilus,user_doc}=false",
-      "-D{pdf,ps}=enabled",
-      "-Dsystemduserunitdir=no",
-   }
-};
-
 gcr4 = {
    url = "https://download.gnome.org/sources/gcr/4.3/gcr-4.3.0.tar.xz",
    sha3 = "03de4e64b17b5c9a299c7fccad1332aa12e588a5f47af3d4488964b5581538ca",

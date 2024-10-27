@@ -1,8 +1,33 @@
-r = {
-   url = "https://cran.r-project.org/src/base/R-4/R-4.4.1.tar.gz",
-   sha3 = "84bc3941d786810f5fd9c97f72cbff9e0a535d90ea3dc15dfd7036215b2d5c16",
+evince = {
+   url = "https://download.gnome.org/sources/evince/46/evince-46.3.1.tar.xz",
+   sha3 = "2904ed9f206394b88a46726711505a535e13b1c02bc2d4f782ef4427b355f9c4",
+   build = "meson",
+   flags = {
+      "-D{gspell,keyring}=disabled",
+      "-D{gtk_doc,nautilus,user_doc}=false",
+      "-D{pdf,ps}=enabled",
+      "-Dsystemduserunitdir=no",
+   }
+};
+
+mousepad = {
+   url = "https://archive.xfce.org/src/apps/mousepad/0.6/mousepad-0.6.3.tar.bz2",
+   sha3 = "2f29510d10b5c4baf573ce0bd7a59b377fb8a1c01f781c65950736df04095a13",
    build = "./configure",
-   flags = { "--enable-{R-shlib=yes,java=no}", "--without-x" }
+   flags = {
+      "--enable-gtksourceview4",
+      "--disable-plugin-gspell",
+      "--disable-debug",
+   }
+};
+
+ristretto = {
+   url = "https://archive.xfce.org/src/apps/ristretto/0.13/ristretto-0.13.2.tar.bz2",
+   sha3 = "286f140db8e41548c5a00a086a5255e9920a30aa1f92532131d39a383fbe605c",
+   build = "./configure",
+   flags = {
+      "--disable-debug",
+   }
 };
 
 appstream-glib = {
@@ -81,6 +106,13 @@ gimp = {
 };
 
 --------------------------------------------------------------------------------
+
+r = {
+   url = "https://cran.r-project.org/src/base/R-4/R-4.4.1.tar.gz",
+   sha3 = "84bc3941d786810f5fd9c97f72cbff9e0a535d90ea3dc15dfd7036215b2d5c16",
+   build = "./configure",
+   flags = { "--enable-{R-shlib=yes,java=no}", "--without-x" }
+};
 
 acpid = {
    url = "https://downloads.sourceforge.net/acpid2/acpid-2.0.34.tar.xz",

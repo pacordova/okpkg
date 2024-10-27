@@ -194,26 +194,6 @@ thunar-archive-plugin = {
    flags = { "--libexecdir=/usr/lib64/xfce4" }
 };
 
-mousepad = {
-   url = "https://archive.xfce.org/src/apps/mousepad/0.6/mousepad-0.6.3.tar.bz2",
-   sha3 = "2f29510d10b5c4baf573ce0bd7a59b377fb8a1c01f781c65950736df04095a13",
-   build = "./configure",
-   flags = {
-      "--enable-gtksourceview4",
-      "--disable-plugin-gspell",
-      "--disable-debug",
-   }
-};
-
-ristretto = {
-   url = "https://archive.xfce.org/src/apps/ristretto/0.13/ristretto-0.13.2.tar.bz2",
-   sha3 = "286f140db8e41548c5a00a086a5255e9920a30aa1f92532131d39a383fbe605c",
-   build = "./configure",
-   flags = {
-      "--disable-debug",
-   }
-};
-
 xarchiver = {
    url = "https://github.com/ib/xarchiver/archive/0.5.4.23/xarchiver-0.5.4.23.tar.gz",
    sha3 = "bd34257a67da0698038f2a870374679621d323ca42d965580fee0a964881d4b4",
