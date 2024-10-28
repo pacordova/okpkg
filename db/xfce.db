@@ -211,6 +211,7 @@ picom = {
    url = "https://github.com/yshui/picom/archive/v12.3/picom-12.3.tar.gz",
    sha3 = "f89df2bfe57e0340cfd421eeb0786c97b19e9efc72c398de4201e2f8a7087be9",
    build = "meson",
+   post = [[ rm -fr $destdir/usr/share/applications ]]
 };
 
 --------------------------------------------------------------------------------

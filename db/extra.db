@@ -148,8 +148,8 @@ cryptsetup = {
 };
 
 cups = {
-   url = "https://github.com/OpenPrinting/cups/releases/download/v2.4.10/cups-2.4.10-source.tar.gz",
-   sha3 = "5af24397f54e33798a0ed1313e51796f3a4faf53182ab5d7af71447c67e24ecc",
+   url = "https://github.com/OpenPrinting/cups/releases/download/v2.4.11/cups-2.4.11-source.tar.gz",
+   sha3 = "2a8571653a7b56da2c4d7819e74f46d0709c15c4c4f8dc14974985c2ed95f718",
    build = "./configure",
    flags = {
       "--with-rcdir=/tmp/cupsinit",
@@ -240,8 +240,8 @@ gdb = {
 };
 
 git = {
-   url = "https://kernel.org/pub/software/scm/git/git-2.46.1.tar.xz",
-   sha3 = "36ba0bab8109aab853391e035bae27a966e2b1cc651bc7066381fcc07ed4e8ea",
+   url = "https://kernel.org/pub/software/scm/git/git-2.47.0.tar.xz",
+   sha3 = "c64ad813d1214fdbf1350e814e0863ccc5278dff4f79f2d12661e65c4d5a258e",
    build = "./configure",
    flags = {
       "--with-gitconfig=/etc/gitconfig",
