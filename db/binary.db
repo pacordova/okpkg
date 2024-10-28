@@ -102,8 +102,8 @@ signal-desktop = {
 };
 
 llvm-bin = {
-   url = "https://github.com/llvm/llvm-project/releases/download/llvmorg-18.1.8/clang+llvm-18.1.8-x86_64-linux-gnu-ubuntu-18.04.tar.xz",
-   sha3 = "3a9c2e15e214ad3dd9b805c7273a859c2d27b33be20b5c0902726c7e6b2c0c75",
+   url = "https://github.com/llvm/llvm-project/releases/download/llvmorg-19.1.0/LLVM-19.1.0-Linux-X64.tar.xz",
+   sha3 = "dc589f728138402247a983b8b92e857efc2b1abd87ef93396b9bc1946fae5f49",
    build = _,
    post = [[
       install -d $destdir/usr
