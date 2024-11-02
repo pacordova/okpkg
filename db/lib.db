@@ -236,8 +236,8 @@ libnftnl = {
 };
 
 libnl3 = {
-   url = "https://github.com/thom311/libnl/releases/download/libnl3_10_0/libnl-3.10.0.tar.gz",
-   sha3 = "a35a965ac148ade1d4cf9fed2ee089146d4182c4b746359f030b72f529cb5990",
+   url = "https://github.com/thom311/libnl/releases/download/libnl3_11_0/libnl-3.11.0.tar.gz",
+   sha3 = "82376c1353da938cc205a70cfa262c8578b90c7869b2a402d3272871e73d8ece",
    build = "./configure",
    flags = { "--disable-cli" }
 };
@@ -318,8 +318,8 @@ libvorbis = {
 };
 
 libvpx = {
-   url = "https://github.com/webmproject/libvpx/archive/v1.14.1/libvpx-1.14.1.tar.gz",
-   sha3 = "6f2658dc6260ee0915ea4f27226dad31d0f45dca6f70ecb988bfe64ea5ae9887",
+   url = "https://github.com/webmproject/libvpx/archive/v1.15.0/libvpx-1.15.0.tar.gz",
+   sha3 = "7cc5cfa6f23f785b97ebd44e2308a2b6f376ac47703a7abc0efd50af21068bd3",
    build = "../configure",
    prepare = [[
       sed -i 's/cp -p/cp/' build/make/Makefile

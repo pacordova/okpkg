@@ -211,10 +211,11 @@ pinentry = {
 };
 
 gnupg2 = {
-   url = "https://gnupg.org/ftp/gcrypt/gnupg/gnupg-2.4.5.tar.bz2",
-   sha3 = "09de2d54653a8f2386ef08ad17bdcfc8c18281682c693e27af44005296c969b1",
+   url = "https://gnupg.org/ftp/gcrypt/gnupg/gnupg-2.4.6.tar.bz2",
+   sha3 = "44206345e16b6905c50ac5b086050213342d2ba2bb294395c8438c974d15de11",
    build = "./configure",
    flags = { "--enable-gpg-is-gpg2", "--libexecdir=/usr/lib64/gpg" }
+   post = [[ ln -sf gpg2 $destdir/usr/bin/gpg ]]
 };
 
 gpgme = {

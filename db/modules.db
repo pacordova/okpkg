@@ -1,6 +1,6 @@
 python-flit-core = {
-   url = "https://github.com/pypa/flit/archive/3.9.0/flit-3.9.0.tar.gz",
-   sha3 = "3fe4093fe7c2b2c6e4fa8ba985cb3a8fd15bbc839f3c43e2be7d63e42be9f676",
+   url = "https://pypi.org/packages/source/f/flit_core/flit_core-3.10.0.tar.gz",
+   sha3 = "9f5f3565ceec0d767fe629abf2125899b91ffc383f27ae80a2e7f8f1ecd1a59a",
    build = _,
    post = [[
       cd flit_core &&
@@ -45,8 +45,8 @@ python-wheel = {
 };
 
 python-setuptools = {
-   url = "https://pypi.org/packages/source/s/setuptools/setuptools-75.2.0.tar.gz",
-   sha3 = "5d8ea75f57ef077f329545b715cba38bde25f4cb4ffaa9bf1dc21aba3d82889a",
+   url = "https://pypi.org/packages/source/s/setuptools/setuptools-75.3.0.tar.gz",
+   sha3 = "9e3e18c607881a76f54463890c62471c6daa8b0de887504d3d8125a9ce45bf31",
    build = "python-build",
 };
 

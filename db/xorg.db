@@ -291,8 +291,8 @@ libvdpau = {
 };
 
 mesa = {
-   url = "https://mesa.freedesktop.org/archive/mesa-24.2.5.tar.xz",
-   sha3 = "822f8a7187c56a37727bab2da26831420bf3862e1df8a9ed520b4a2862151fcd",
+   url = "https://mesa.freedesktop.org/archive/mesa-24.2.6.tar.xz",
+   sha3 = "8c3c93fc2e96115a8a64bc1dd68e49ed9bd5c739d3f95b558ced217c8350a8c2",
    build = "meson",
    flags = {
       "-Dplatforms=x11",
@@ -616,8 +616,8 @@ xf86-input-synaptics = {
 };
 
 xf86-input-wacom = {
-   url = "https://github.com/linuxwacom/xf86-input-wacom/releases/download/xf86-input-wacom-1.2.2/xf86-input-wacom-1.2.2.tar.bz2",
-   sha3 = "34810a0f51c6a0ca9d1c28d66b225ad677675ec9be6fd00a7486c9f95e715bee",
+   url = "https://github.com/linuxwacom/xf86-input-wacom/releases/download/xf86-input-wacom-1.2.3/xf86-input-wacom-1.2.3.tar.bz2",
+   sha3 = "4f1662d449be5dece00471967323ceed2e3125431c5d52090fc5b7eabc6a4862",
    build = "./configure",
    flags = {
       "--with-systemd-unit-dir=no",

@@ -108,8 +108,8 @@ gimp = {
 --------------------------------------------------------------------------------
 
 r = {
-   url = "https://cran.r-project.org/src/base/R-4/R-4.4.1.tar.gz",
-   sha3 = "84bc3941d786810f5fd9c97f72cbff9e0a535d90ea3dc15dfd7036215b2d5c16",
+   url = "https://cran.r-project.org/src/base/R-4/R-4.4.2.tar.gz",
+   sha3 = "45e92ef6576a1c55a4edc9d67fe96375f44e4a7366b988ce9ea6e7c5815c1fe1",
    build = "./configure",
    flags = { "--enable-{R-shlib=yes,java=no}", "--without-x" }
 };
