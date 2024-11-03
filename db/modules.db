@@ -3,7 +3,6 @@ python-flit-core = {
    sha3 = "9f5f3565ceec0d767fe629abf2125899b91ffc383f27ae80a2e7f8f1ecd1a59a",
    build = _,
    post = [[
-      cd flit_core &&
       python3 -m flit_core.wheel &&
       python3 bootstrap_install.py --install-root $destdir dist/*.whl
    ]]
