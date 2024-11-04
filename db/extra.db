@@ -272,8 +272,8 @@ iftop = {
 };
 
 linux = {
-   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.6.52.tar.xz",
-   sha3 = "935ec47adb0bc19ecdd6d96a11dad23f1ce0da8a4b1270b7e9146ef8d72f3eb2",
+   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.6.59.tar.xz",
+   sha3 = "3d76f361da711599ca315091796ecbdb38c00afb184926ef46a32baf04492492",
    build = "make",
    flags = { "bzImage", "modules", "headers" },
    prepare = [[
