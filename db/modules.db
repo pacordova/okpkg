@@ -1,6 +1,6 @@
 python-flit-core = {
-   url = "https://pypi.org/packages/source/f/flit_core/flit_core-3.10.0.tar.gz",
-   sha3 = "9f5f3565ceec0d767fe629abf2125899b91ffc383f27ae80a2e7f8f1ecd1a59a",
+   url = "https://pypi.org/packages/source/f/flit_core/flit_core-3.10.1.tar.gz",
+   sha3 = "de6866cb6f7ec35ffba5d939fc5d84a4b3291cc85ec58ee959ecf532931a39a5",
    build = _,
    post = [[
       python3 -m flit_core.wheel &&

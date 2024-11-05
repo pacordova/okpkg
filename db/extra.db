@@ -2,7 +2,11 @@ dracut = {
    url = "https://github.com/dracut-ng/dracut-ng/archive/105/dracut-ng-105.tar.gz",
    sha3 = "f20c9c1dcd07e38fca112fb649208e103a317b014a867be9a385f0c1e9fe3547",
    build = "./configure",
-   flags = { "--disable-documentation", "--libdir=/usr/lib64" },
+   flags = { 
+      "--disable-documentation", 
+      "--libdir=/usr/lib64",
+      "--sysconfdir=/etc",
+   },
    prepare = [[ 
       sed -e 's:lib/kernel:lib64/kernel:' \
           -i install.d/*.install modules.d/95resume/module-setup.sh Makefile

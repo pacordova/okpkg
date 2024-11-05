@@ -114,14 +114,13 @@ function version(pkglist)
    end
 end
 
--- get packages to check
-fp = io.open("/var/lib/okpkg/db/system.db")
-buf = '\n' .. fp:read('*a')
+-- List packages
+fp = io.popen("cat /var/lib/okpkg/db/*.db")
+buf = '\n' .. fp:read("*a")
 fp:close()
 local pkgs = {}
 for i in buf:gmatch("\n([%w%-%+]-) = {.-;") do
-   if i:sub(1, 3) == "gcc" then table.insert(pkgs, i:sub(1, 3))
-   else table.insert(pkgs, i) end
+    table.insert(pkgs, i)
 end
 
 if basename(arg[0]) == "version.lua" then
