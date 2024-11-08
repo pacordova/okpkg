@@ -17,8 +17,8 @@ connman = {
 };
 
 curl = {
-   url = "https://curl.se/download/curl-8.10.1.tar.xz",
-   sha3 = "9dc2a4daafc1afa46cb5f77a0b9592817271770b1a89ae16c9fb864e997fc008",
+   url = "https://curl.se/download/curl-8.11.0.tar.xz",
+   sha3 = "3a83216307dbdd9c9b76a665598d1028f41a9305ce7f1d3d9c4d503055e67eb1",
    build = "./configure",
    flags = {
       "--enable-{ipv6,threaded-resolver,unix-sockets}",
@@ -219,8 +219,8 @@ gnupg2 = {
 };
 
 gpgme = {
-   url = "https://gnupg.org/ftp/gcrypt/gpgme/gpgme-1.23.2.tar.bz2",
-   sha3 = "5afea62fb6149860964622a615fd3fa9605ae813dfe7e5312469a245b217e74c",
+   url = "https://gnupg.org/ftp/gcrypt/gpgme/gpgme-1.24.0.tar.bz2",
+   sha3 = "17dc21193c0f3fcde69af6033385229097e3100bf91f616b73c05521e6dfa681",
    build = "./configure",
    flags = { "--disable-gpg-test" }
 };

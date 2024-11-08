@@ -117,8 +117,8 @@ libxrender = {
 };
 
 libxcursor = {
-   url = "https://x.org/pub/individual/lib/libXcursor-1.2.2.tar.xz",
-   sha3 = "babe84b7910aa5380598d2093f8b94512a93e62dc201b44b3b3c1195fbb74e8b",
+   url = "https://x.org/pub/individual/lib/libXcursor-1.2.3.tar.xz",
+   sha3 = "ec59d022210d96972b73be9f69f94302c65443bb2ecc65d0be9c5d0316ee64c4",
    build = "./configure",
 };
 
@@ -354,8 +354,8 @@ xorg-xauth = {
 };
 
 xorg-xbacklight = {
-   url = "https://x.org/pub/individual/app/xbacklight-1.2.3.tar.bz2",
-   sha3 = "90634c0211a1d94331b4ce71e40cb7c33f22d376fdf41347cbfd361a74809b5f",
+   url = "https://x.org/pub/individual/app/xbacklight-1.2.4.tar.xz",
+   sha3 = "7488cf023d1098ef89a15cbea9833c3fc60223d9de26c90d3fdb1cb51a92ee2b",
    build = "./configure",
 };
 
@@ -468,8 +468,8 @@ xorg-xprop = {
 };
 
 xorg-xrandr = {
-   url = "https://x.org/pub/individual/app/xrandr-1.5.2.tar.xz",
-   sha3 = "ea9735eee23a998525f9cc5268e91df95c951c9ea6b66dbb18911813987a8a8e",
+   url = "https://x.org/pub/individual/app/xrandr-1.5.3.tar.xz",
+   sha3 = "0a25fce459af6fda7fbb04211abe4991f3bed288c3987bbcfd7dc04f76863863",
    build = "./configure",
 };
 

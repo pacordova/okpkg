@@ -402,8 +402,8 @@ p11-kit = {
 };
 
 pixman = {
-   url = "https://xorg.freedesktop.org/releases/individual/lib/pixman-0.43.4.tar.xz",
-   sha3 = "a48525f14efe9ac8036292499ec9955fc20b8ca7630024d80eb0b8335abb35d2",
+   url = "https://xorg.freedesktop.org/releases/individual/lib/pixman-0.44.0.tar.xz",
+   sha3 = "c54cd48d121fe4467f16e5f7f31736bfb900cefda9e67c236a7265533c79312e",
    build = "meson",
 };
 
@@ -436,7 +436,7 @@ x264 = {
 };
 
 x265 = {
-   url = "https://bitbucket.org/multicoreware/x265_git/downloads/x265_3.6.tar.gz",
+   url = "http://ftp.videolan.org/pub/videolan/x265/x265_3.6.tar.gz",
    sha3 = "06731a2b191eb95eab35fe248ea5beb500f52c07f481994124663bc02eeeb0f0",
    build = "cmake",
    flags = {

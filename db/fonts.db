@@ -6,8 +6,8 @@ _freetype2 = {
 };
 
 harfbuzz = {
-   url = "https://github.com/harfbuzz/harfbuzz/releases/download/10.0.1/harfbuzz-10.0.1.tar.xz",
-   sha3 = "826885e8d6564e0291aa62d961bd95150a95189a2ba049333afae4d6ad3f7446",
+   url = "https://github.com/harfbuzz/harfbuzz/releases/download/10.1.0/harfbuzz-10.1.0.tar.xz",
+   sha3 = "a38c7abcbe774ffeae63bb6b299088830f498d0a765cb2bb52434152bef5f51c",
    build = "meson",
    flags = { "-D{cairo=disabled,graphite2=enabled}" }
 };
