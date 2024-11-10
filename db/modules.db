@@ -38,8 +38,8 @@ python-build = {
 };
 
 python-wheel = {
-   url = "https://pypi.org/packages/source/w/wheel/wheel-0.44.0.tar.gz",
-   sha3 = "7c95161296e740d920bb08718e59208b2c077b39d891d222762a62019ee4dc17",
+   url = "https://pypi.org/packages/source/w/wheel/wheel-0.45.0.tar.gz",
+   sha3 = "7bf83177d9ab6c4637c6a9c020c00645d8f0bcb677fd4ee6e7b47dfb8b80cec0",
    build = "python-build",
 };
 

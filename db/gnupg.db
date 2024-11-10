@@ -1,0 +1,60 @@
+libgpg-error = {
+   url = "https://gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-1.50.tar.bz2",
+   sha3 = "38e9d4589212e0715379f60a28ebcf0f5f2b68c076036bcb40cef422cb224075",
+   build = "./configure",
+};
+
+libgcrypt = {
+   url = "https://gnupg.org/ftp/gcrypt/libgcrypt/libgcrypt-1.11.0.tar.bz2",
+   sha3 = "998fc22058e0d273b2787041ce2d8154e88f249e142cfe7f841214e5bfc3c1a2",
+   build = "./configure",
+};
+
+libksba = {
+   url = "https://gnupg.org/ftp/gcrypt/libksba/libksba-1.6.7.tar.bz2",
+   build = "./configure",
+   sha3 = "838a011da2911deaa68de6ed293c05215a5bc5610dacf97b420268fcc5d37537",
+};
+
+libassuan = {
+   url = "https://gnupg.org/ftp/gcrypt/libassuan/libassuan-3.0.1.tar.bz2",
+   sha3 = "df47504b77005f663ecc32dca634aa8e3b8b46607fca17144c3bf7b24d39f01d",
+   build = "./configure",
+};
+
+ntbtls = {
+   url = "https://gnupg.org/ftp/gcrypt/ntbtls/ntbtls-0.3.2.tar.bz2",
+   sha3 = "149b54f97c4610bb638496f99ab1cf424b4797c8c3ff03774d18d9854ce69cb6",
+   build = "./configure",
+};
+
+npth = {
+   url = "https://gnupg.org/ftp/gcrypt/npth/npth-1.7.tar.bz2",
+   sha3 = "044c1633a2319620c83110cc66dd710245ab8a6c43d28952ab82e28516a5f07e",
+   build = "./configure",
+};
+
+pinentry = {
+   url = "https://gnupg.org/ftp/gcrypt/pinentry/pinentry-1.3.1.tar.bz2",
+   sha3 = "0573d6a02b6fdf4c89b23d5e995ac0d60130f3879c6f0ed8f53e31768c70b39e",
+   build = "./configure",
+   flags = {
+      "--enable-pinentry-{tty=yes,qt=no,gtk2=no,gnome3=no}",
+      "--disable-libsecret",
+   }
+};
+
+gnupg2 = {
+   url = "https://gnupg.org/ftp/gcrypt/gnupg/gnupg-2.4.5.tar.bz2",
+   sha3 = "09de2d54653a8f2386ef08ad17bdcfc8c18281682c693e27af44005296c969b1",
+   build = "./configure",
+   flags = { "--enable-gpg-is-gpg2", "--libexecdir=/usr/lib64/gpg" },
+   post = [[ ln -sf gpg2 $destdir/usr/bin/gpg ]]
+};
+
+gpgme = {
+   url = "https://gnupg.org/ftp/gcrypt/gpgme/gpgme-1.24.0.tar.bz2",
+   sha3 = "17dc21193c0f3fcde69af6033385229097e3100bf91f616b73c05521e6dfa681",
+   build = "./configure",
+   flags = { "--disable-gpg-test" }
+};

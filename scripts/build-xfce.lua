@@ -26,6 +26,7 @@ local dirs = {
    ["flatpak.db"] = "b",
    ["fonts.db"]   = "f",
    ["glib.db"]    = "l",
+   ["gnupg.db"]   = "n",
    ["gtk.db"]     = "x",
    ["lib.db"]     = "l",
    ["modules.db"] = "m",
@@ -73,6 +74,7 @@ build_all("devel.db")
 build_all("lib.db")
 emerge("firefox-bin")
 build_all("net.db")
+build_all("gnupg.db")
 build_all("fonts.db")
 build_all("xorg.db")
 build_all("gtk.db")

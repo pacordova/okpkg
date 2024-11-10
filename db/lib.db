@@ -178,8 +178,8 @@ libarchive = {
 };
 
 libbpf = {
-   url = "https://github.com/libbpf/libbpf/archive/v1.4.6/libbpf-1.4.6.tar.gz",
-   sha3 = "f53eae3c8a05306368c679b8499b998ff547fbfc798d21c4fad0dd893fef9f3f",
+   url = "https://github.com/libbpf/libbpf/archive/v1.5.0/libbpf-1.5.0.tar.gz",
+   sha3 = "35e330473125aef0cff9bfab8ed56e2ce7ebe7b7a385ccb3bc9b84eca54299a6",
    build = "make",
    flags = { "-C src", "LIBSUBDIR=lib64" }
 };
@@ -436,8 +436,8 @@ x264 = {
 };
 
 x265 = {
-   url = "http://ftp.videolan.org/pub/videolan/x265/x265_3.6.tar.gz",
-   sha3 = "06731a2b191eb95eab35fe248ea5beb500f52c07f481994124663bc02eeeb0f0",
+   url = "http://ftp.videolan.org/pub/videolan/x265/x265_4.0.tar.gz",
+   sha3 = "cd78d748750c99bb2acef05ec0d721e4f160fc51cf85cdfa7f0a570c1f3b507e",
    build = "cmake",
    flags = {
       "-DLIB_INSTALL_DIR=lib64",
