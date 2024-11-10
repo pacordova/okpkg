@@ -37,8 +37,8 @@ libxcb = {
 };
 
 xtrans = {
-   url = "https://x.org/pub/individual/lib/xtrans-1.5.1.tar.xz",
-   sha3 = "de154ebe328f0887cd6ce8986d7f6640af7fa8e8b09b75d5446b10c20a9079df",
+   url = "https://x.org/pub/individual/lib/xtrans-1.5.2.tar.xz",
+   sha3 = "94573907f206a11380ac24ee76b67746969efeaf8806850775d36b94eed5f456",
    build = "./configure",
 };
 

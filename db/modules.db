@@ -26,8 +26,8 @@ python-pyproject-hooks = {
 };
 
 python-packaging = {
-   url = "https://pypi.org/packages/source/p/packaging/packaging-24.1.tar.gz",
-   sha3 = "d659e80e77aa95e544a0886ecac3ab3868e24af78501e6f54ea089005cbe165d",
+   url = "https://pypi.org/packages/source/p/packaging/packaging-24.2.tar.gz",
+   sha3 = "0e3c826ae56a73a04a4ecaaee6ef317b39617cf9a85329edf403548d48f076be",
    build = "python-build",
 };
 
