@@ -127,8 +127,8 @@ sharutils = {
 };
 
 wget = {
-   url = "https://ftp.gnu.org/gnu/wget/wget-1.24.5.tar.lz",
-   sha3 = "3e5bebc652f196ad60443d5c226a8e846cf21f594fd248263502e9bc0f649c68",
+   url = "https://ftp.gnu.org/gnu/wget/wget-1.25.0.tar.lz",
+   sha3 = "ded3b9f3547aa32926e0257e12ce12992db051c45f6b1125bfad3b3ad5074604",
    build = "./configure",
    flags = { "--with-ssl=openssl" }
 };

@@ -6,8 +6,8 @@ nano = {
 };
 
 vim = {
-   url = "https://github.com/vim/vim/archive/v9.1.0847/vim-9.1.0847.tar.gz",
-   sha3 = "baed8ecfe78993fb152761f8b486c6f44e99549657a686c8d0388dae5f0e17dc",
+   url = "https://github.com/vim/vim/archive/v9.1.0857/vim-9.1.0857.tar.gz",
+   sha3 = "4f8f7fe9907c7a24e17fad406b3b64d5841cc4fb20222970456e3e06ff40a156",
    build = "./configure",
    flags = {
       "--enable-{cscope,multibyte}",

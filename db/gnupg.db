@@ -1,6 +1,6 @@
 libgpg-error = {
-   url = "https://gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-1.50.tar.bz2",
-   sha3 = "38e9d4589212e0715379f60a28ebcf0f5f2b68c076036bcb40cef422cb224075",
+   url = "https://gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-1.51.tar.bz2",
+   sha3 = "bb26d59b8fd8ab629928f83b256ea462fbba03e717507579fb3d83bcde355569",
    build = "./configure",
 };
 
