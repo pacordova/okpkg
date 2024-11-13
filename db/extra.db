@@ -156,8 +156,8 @@ cmatrix = {
 };
 
 cryptsetup = {
-   url = "https://kernel.org/pub/linux/utils/cryptsetup/v2.7/cryptsetup-2.7.3.tar.xz",
-   sha3 = "d6d65023fb6545d553cc97b222f5001e845872a77cb25240465261a04c3c0892",
+   url = "https://kernel.org/pub/linux/utils/cryptsetup/v2.7/cryptsetup-2.7.5.tar.xz",
+   sha3 = "572bf81b0c3907bd9f495c0cc3bceca8b302ce559e4eabcfe6c896cca01698a5",
    build = "./configure",
    flags = { "--enable-{asciidoc=no,libargon2=yes,ssh-token=no}" }
 };

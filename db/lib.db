@@ -76,14 +76,14 @@ vala = {
 --------------------------------------------------------------------------------
 
 alsa-lib = {
-   url = "https://alsa-project.org/files/pub/lib/alsa-lib-1.2.12.tar.bz2",
-   sha3 = "3d65e490d7c1f25890e099c89f3a4e2c9b36a8553db4e17d05b9ee36feb19d71",
+   url = "https://alsa-project.org/files/pub/lib/alsa-lib-1.2.13.tar.bz2",
+   sha3 = "e56e4ab59499b1435e40e77831f11c4fabfb2ee5be9a174ef037bcba90176b87",
    build = "./configure",
 };
 
 alsa-utils = {
-   url = "https://alsa-project.org/files/pub/utils/alsa-utils-1.2.12.tar.bz2",
-   sha3 = "c7ce5050986682b2944bfe344accc0107d0e37f8ca0047605d02610c908107d9",
+   url = "https://alsa-project.org/files/pub/utils/alsa-utils-1.2.13.tar.bz2",
+   sha3 = "b11eedef8c0b2e482a5c314a4417c7826f4f81c5519a7fdff08d416aca6618a8",
    build = "./configure",
    flags = {
       "--with-udev-rules-dir=/usr/lib64/udev/rules.d",
