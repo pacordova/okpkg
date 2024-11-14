@@ -44,8 +44,8 @@ python-wheel = {
 };
 
 python-setuptools = {
-   url = "https://pypi.org/packages/source/s/setuptools/setuptools-75.4.0.tar.gz",
-   sha3 = "2a81ba8969c8338a9f7351b18cc5c6fefd425c81199c2f483e6cbfa53a1854fb",
+   url = "https://pypi.org/packages/source/s/setuptools/setuptools-75.5.0.tar.gz",
+   sha3 = "7a306eb2e631bdf85380ae2bfe0f8051b59ac4370ff0c05b97e452a394755a3d",
    build = "python-build",
 };
 
@@ -117,8 +117,8 @@ python-trove-classifiers = {
 };
 
 python-hatchling = {
-   url = "https://pypi.org/packages/source/h/hatchling/hatchling-1.25.0.tar.gz",
-   sha3 = "7af16b605ab790c6be6d8b85ed176713a85c4f44c7dfb0d6edbfdfe273ba2d39",
+   url = "https://pypi.org/packages/source/h/hatchling/hatchling-1.26.3.tar.gz",
+   sha3 = "c0af98e7ae9a7d19a2cd306e37e39ad6824e36967e06c8848155a8b576a58e78",
    build = "python-build",
 };
 

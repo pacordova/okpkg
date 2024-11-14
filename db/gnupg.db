@@ -29,8 +29,8 @@ ntbtls = {
 };
 
 npth = {
-   url = "https://gnupg.org/ftp/gcrypt/npth/npth-1.7.tar.bz2",
-   sha3 = "044c1633a2319620c83110cc66dd710245ab8a6c43d28952ab82e28516a5f07e",
+   url = "https://gnupg.org/ftp/gcrypt/npth/npth-1.8.tar.bz2",
+   sha3 = "660444c5fe7a6a75410426cdf7593d94da694787bae580a4eab5fba613bba53c",
    build = "./configure",
 };
 
