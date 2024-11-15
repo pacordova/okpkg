@@ -1,6 +1,6 @@
 xorg-util-macros = {
-   url = "https://x.org/pub/individual/util/util-macros-1.20.1.tar.xz",
-   sha3 = "d8affb47a8536ab5582f151b1b84725671d24aa557ef6546c3f3440c79dc1515",
+   url = "https://x.org/pub/individual/util/util-macros-1.20.2.tar.xz",
+   sha3 = "3d40e98f621bef38dbb94acff303d838f7ff3e42220b88eb1f6ee0af4bafcacd",
    build = "./configure",
 };
 
@@ -462,8 +462,8 @@ xorg-xpr = {
 };
 
 xorg-xprop = {
-   url = "https://x.org/pub/individual/app/xprop-1.2.7.tar.xz",
-   sha3 = "ca5672b92f1138fc1e9eae6ff5f985744cdf5923231942b645ca20398f1ab71f",
+   url = "https://x.org/pub/individual/app/xprop-1.2.8.tar.xz",
+   sha3 = "bee11c0e4443a61bd86b5759edb1ee7696c3d485b3a6d034aecec79cda96b548",
    build = "./configure",
 };
 
