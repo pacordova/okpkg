@@ -15,7 +15,6 @@ babl = {
    build = "meson",
 };
 
-
 gegl = {
    url = "https://download.gimp.org/pub/gegl/0.4/gegl-0.4.48.tar.xz",
    sha3 = "9b7a9a2e33ae77a2a63c0a4d35383a47e3d888bf238a9d348bae2f4d89ac6a43",
