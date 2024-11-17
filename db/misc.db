@@ -1,0 +1,208 @@
+apulse = {
+   url = "https://github.com/i-rinat/apulse/archive/v0.1.13/apulse-0.1.13.tar.gz",
+   sha3 = "e6940335c56e088af4b69e8ad47f37d5f9ffc3365ca9f047b799188548cc9eba",
+   build = "cmake",
+   post = [[
+      cd $destdir
+      sed -i 's:/usr/lib/:/usr/lib64/:' usr/bin/apulse
+      printf "#!/bin/sh\n" >> usr/bin/firefox
+      printf "/usr/bin/apulse /usr/lib64/firefox/firefox\n" >> usr/bin/firefox
+      chmod 755 usr/bin/firefox
+      mv usr/lib usr/lib64
+   ]]
+};
+
+cryptsetup = {
+   url = "https://kernel.org/pub/linux/utils/cryptsetup/v2.7/cryptsetup-2.7.5.tar.xz",
+   sha3 = "572bf81b0c3907bd9f495c0cc3bceca8b302ce559e4eabcfe6c896cca01698a5",
+   build = "./configure",
+   flags = { "--enable-{asciidoc=no,libargon2=yes,ssh-token=no}" }
+};
+
+cups = {
+   url = "https://github.com/OpenPrinting/cups/releases/download/v2.4.11/cups-2.4.11-source.tar.gz",
+   sha3 = "2a8571653a7b56da2c4d7819e74f46d0709c15c4c4f8dc14974985c2ed95f718",
+   build = "./configure",
+   flags = {
+      "--with-rcdir=/tmp/cupsinit",
+      "--with-rundir=/run/cups",
+      "--with-system-groups=lpadmin",
+   },
+   post = [[ rm -fr $destdir/tmp/cupsinit ]]
+};
+
+dhcpcd = {
+   url = "https://github.com/NetworkConfiguration/dhcpcd/releases/download/v10.0.10/dhcpcd-10.0.10.tar.xz",
+   sha3 = "f478c10cb398916e5793442a3701f1cedd8c67a78948825637b134466e5381d4",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--runstatedir=/run",
+      "--sysconfdir=/etc",
+      "--disable-privsep",
+   }
+};
+
+imlib2 = {
+   url = "https://downloads.sourceforge.net/enlightenment/imlib2-1.12.3.tar.xz",
+   sha3 = "36c1ce1eebf83d68ac622e4391435ece50e5a1eac8683d68ab4b294f6d79d0ee",
+   build = "./configure",
+   flags = { "--enable-amd64" }
+};
+
+feh = {
+   url = "https://feh.finalrewind.org/feh-3.10.3.tar.bz2",
+   sha3 = "98040180056d52e47a2932e0611b1b457c0a6d4e463881c37a55f1b321c5aee0",
+   build = "make",
+   flags = { "PREFIX=/usr", "exif=1" }
+};
+
+git = {
+   url = "https://kernel.org/pub/software/scm/git/git-2.47.0.tar.xz",
+   sha3 = "c64ad813d1214fdbf1350e814e0863ccc5278dff4f79f2d12661e65c4d5a258e",
+   build = "./configure",
+   flags = {
+      "--with-gitconfig=/etc/gitconfig",
+      "--with-{libpcre2=yes,python=no,tcltlk=no}",
+   },
+   prepare = [[
+      printf "NO_GETTEXT=YesPlease\n" >> config.mak
+      printf "NO_PERL=YesPlease\n" >> config.mak
+   ]]
+};
+
+gzip = {
+   url = "https://ftp.gnu.org/gnu/gzip/gzip-1.13.tar.xz",
+   sha3 = "6b03d763c4a9755955723b70ed0387e077b8f0452997e829e1061519f73a23ec",
+   build = "./configure",
+};
+
+htop = {
+   url = "https://github.com/htop-dev/htop/releases/download/3.3.0/htop-3.3.0.tar.xz",
+   sha3 = "41229e25dc35ed7292f83bdb55f9152782ba10fafda5f34b2e1fa45930adee1e",
+   build = "./configure",
+};
+
+iftop = {
+   url = "https://pdw.ex-parrot.com/iftop/download/iftop-1.0pre4.tar.gz",
+   sha3 = "a312fb825ead8dddafd9e1cfff755ef3c4aee2988158515225f39985058391cd",
+   build = "./configure",
+};
+
+linux = {
+   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.6.59.tar.xz",
+   sha3 = "3d76f361da711599ca315091796ecbdb38c00afb184926ef46a32baf04492492",
+   build = "make",
+   flags = { "bzImage", "modules", "headers" },
+   prepare = [[
+      pigz -cd /proc/config.gz > .config
+      : > install
+   ]],
+   post = [[  
+      install -d $destdir/boot
+      install -m 644 arch/x86/boot/bzImage $destdir/boot/vmlinuz-6.6
+      make modules_install \
+          INSTALL_MOD_PATH=$destdir \
+          MODLIB=$destdir/usr/lib64/modules/6.6.52
+      cp -rp usr/include $destdir/usr
+      find $destdir/usr/include -type f ! -name '*.h' -delete
+   ]]
+};
+
+logrotate = {
+   url = "https://github.com/logrotate/logrotate/releases/download/3.22.0/logrotate-3.22.0.tar.xz",
+   sha3 = "e23bd85e242aadbc110b8acba874947c13f783bbc7c9e65663dc0a757c609291",
+   build = "./configure",
+   flags = { "--with-{compress-command=pigz,uncompress-command=unpigz}" }
+};
+
+lsof = {
+   url = "https://github.com/lsof-org/lsof/releases/download/4.99.3/lsof-4.99.3.tar.gz",
+   sha3 = "fa87e870dadb9144e4b0b85c020c0d48e150ea70cb0ad2f1069014df9c3f72ad",
+   build = "./configure",
+};
+
+nano = {
+   url = "https://ftp.gnu.org/gnu/nano/nano-7.2.tar.xz",
+   sha3 = "82186f2a698b087f44e52b8e56ce5566c74f05b48496b584b6bd030898a2d361",
+   build = "./configure",
+   flags = { "--enable-utf8" },
+};
+
+pciutils = {
+   url = "https://mj.ucw.cz/download/linux/pci/pciutils-3.13.0.tar.gz",
+   sha3 = "53507c5220643d8d4f1a8b7c701c19378038f711a08fd81144672cac0d4ffce5",
+   build = "make",
+   flags = {
+      "PREFIX=/usr",
+      "LIBDIR=/usr/lib64",
+      "SHAREDIR=/usr/share/hwdata",
+      "SHARED=yes"
+   },
+   post = [[ chmod 755 $destdir/usr/lib64/libpci.so ]]
+};
+
+r = {
+   url = "https://cran.r-project.org/src/base/R-4/R-4.4.2.tar.gz",
+   sha3 = "45e92ef6576a1c55a4edc9d67fe96375f44e4a7366b988ce9ea6e7c5815c1fe1",
+   build = "./configure",
+   flags = { "--enable-{R-shlib=yes,java=no}", "--without-x" }
+};
+
+ripgrep = {
+   url = "https://github.com/BurntSushi/ripgrep/archive/14.1.1/ripgrep-14.1.1.tar.gz",
+   sha3 = "d6373624002b64f8c385918f4fa3e0512f41044fac9cbec8e547046de05030cb",
+   build = "cargo",
+   flags = { "--features=pcre2" }
+};
+
+scrot = {
+   url = "https://github.com/resurrecting-open-source-projects/scrot/releases/download/1.11.1/scrot-1.11.1.tar.bz2",
+   sha3 = "183450df0187a0f6c107f828585160ad2d7dfe858e353ddd08ce85bf65da94df",
+   build = "./configure",
+};
+
+sxiv = {
+   url = "https://github.com/xyb3rt/sxiv/archive/v26/sxiv-26.tar.gz",
+   sha3 = "9d658d77fd4f9da3bb02247016ba4d4f1c3afcedc18ac790fb67bf91e66aaff7",
+   build = "make",
+   flags = { "PREFIX=/usr", "HAVE_GIFLIB=0" },
+   post = [[ 
+      make -C icon PREFIX=/usr DESTDIR=$destdir install
+      install -d $destdir/usr/share/applications
+      install -m 644 sxiv.desktop $destdir/usr/share/applications
+   ]]
+};
+
+tmux = {
+   url = "https://github.com/tmux/tmux/releases/download/3.4/tmux-3.4.tar.gz",
+   sha3 = "51c4ac03a4e88cde535159877ea4fb8919d64b14ad8a030913316fc3c337a6ca",
+   build = "./configure",
+};
+
+ugrep = {
+   url = "https://github.com/Genivia/ugrep/archive/v6.5.0/ugrep-6.5.0.tar.gz",
+   sha3 = "22ea3da7d1a3889daf5b55f5120cbacd6a4ae88c1a43aec05bbcd93a0faa746d",
+   build = "./configure",
+};
+
+vim = {
+   url = "https://github.com/vim/vim/archive/v9.1.0867/vim-9.1.0867.tar.gz",
+   sha3 = "35f82030ee2c34220a669eb32cde3da361e3f5ad04adaf4f245401f2f1a510e7",
+   build = "./configure",
+   flags = {
+      "--enable-{cscope,multibyte}",
+      "--disable-{canberra,gpm,gui,netbeans,xim}",
+      "--disable-{perl,python,ruby}interp",
+      "--with-{features=huge,x=no}",
+   },
+   prepare = [[
+      printf '#define SYS_VIMRC_FILE "/etc/vimrc"\n' >> src/feature.h
+   ]],
+};
+
+xorriso = {
+   url = "http://ftp.gnu.org/gnu/xorriso/xorriso-1.5.6.tar.gz",
+   sha3 = "ce81f4c5fc0c4a4144a1c9e68bfc49e632ca73ffc25ce1615f849f081e1510b8",
+   build = "./configure",
+};

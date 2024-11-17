@@ -1,9 +1,103 @@
+acpid = {
+   url = "https://downloads.sourceforge.net/acpid2/acpid-2.0.34.tar.xz",
+   sha3 = "3e346422c38cf10bd0072581d77283d979e184d37a687b442a0c792c2fad62d2",
+   build = "./configure",
+};
+
+cmatrix = {
+   url = "https://github.com/abishekvashok/cmatrix/archive/v2.0/cmatrix-2.0.tar.gz",
+   sha3 = "f37ce888fe14ed8dd5ecd84e7cea4a67909eede471ecf407c491d2b703ca14c3",
+   build = "cmake",
+};
+
+gdb = {
+   url = "https://ftp.gnu.org/gnu/gdb/gdb-14.1.tar.xz",
+   sha3 = "52fd6f693d26e00ff21c43582e54d2fb9e3d9ce6e36da6617ddb69764063e960",
+   build = "./configure",
+   flags = { "--with-{guile=no,system-readline=yes,python=no}" }
+};
+
+gcc11 = {
+   url = "https://ftp.gnu.org/gnu/gcc/gcc-11.4.0/gcc-11.4.0.tar.xz",
+   sha3 = "a853c1bacc2baf9f9b9af09bd34beea13328c081f85f518c3e2d7741515f1a1d",
+   build = "../configure",
+   flags = {
+      "--with-linker-hash-style=gnu",
+      "--with-system-zlib",
+      "--enable-languages=ada,c,c++,d",
+      "--enable-threads=posix",
+      "--enable-clocale=gnu",
+      "--enable-gnu-unique-object",
+      "--enable-__cxa_atexit",
+      "--enable-default-pie",
+      "--enable-default-ssp",
+      "--enable-shared",
+      "--enable-plugin",
+      "--enable-bootstrap",
+      "--disable-werror",
+      "--disable-multilib",
+      "--disable-libstdcxx-pch",
+      "--disable-libssp",
+      "LD=ld"
+   },
+   prepare = [[
+      find /opt/gnat -name ld -exec mv -v {} {}.old \;
+      find /opt/gnat -name as -exec mv -v {} {}.old \;
+   ]],
+   post = [[
+      CHOST=$($destdir/usr/bin/gcc -dumpmachine)
+      pkgver=$($destdir/usr/bin/gcc -dumpversion)
+      find $destdir -name libgtkpeer.a  -exec rm -f '{}' +
+      find $destdir -name libgjsmalsa.a -exec rm -f '{}' +
+      find $destdir -name libgij.a      -exec rm -f '{}' +
+      ln -sr /usr/bin/cpp $destdir/usr/lib64
+      mkdir -p $destdir/usr/lib64/bfd-plugins
+      ln -sf ../../lib64/gcc/$CHOST/$pkgver/liblto_plugin.so \
+      $destdir/usr/lib64/bfd-plugins/
+      mkdir -p $destdir/usr/share/gdb/auto-load/usr/lib64
+      mv $destdir/usr/lib64/*gdb.py \
+      $destdir/usr/share/gdb/auto-load/usr/lib64
+      ln -s gcc $destdir/usr/bin/cc
+      ln -s gcc $destdir/usr/bin/c99
+      cd $destdir/usr/lib64/gcc/$CHOST/$pkgver
+      strip -s cc1 cc1plus lto1 lto-wrapper collect2 g++-mapper-server
+   ]]
+};
+
+xbattbar = {
+   url = "http://deb.debian.org/debian/pool/main/x/xbattbar/xbattbar_1.4.9.orig.tar.gz",
+   sha3 = "9e5a3df48373a424a09408765e6be5c250e2d49cd2f137fdb0ae3a05e43da04a",
+   build = "make",
+   flags = { 'CFLAGS="$CFLAGS -Wno-implicit-int"' },
+   prepare = [[ 
+      sed -i 's:lib:lib64:' Makefile 
+      sed -i 's:usr/lib:usr/lib64:' xbattbar.c
+   ]]
+};
+
 cargo-c = {
    url = "https://github.com/lu-zero/cargo-c/archive/v0.10.5/cargo-c-0.10.5.tar.gz",
    sha3 = "e6bb23af13194e3e20e306657267869ce4317413ef05d57ea03b4b8a1b9a91e5",
    build = "cargo",
    prepare = [[ cp -p ../../download/cargo-c.lock Cargo.lock ]]
 };
+
+dracut = {
+   url = "https://github.com/dracut-ng/dracut-ng/archive/105/dracut-ng-105.tar.gz",
+   sha3 = "f20c9c1dcd07e38fca112fb649208e103a317b014a867be9a385f0c1e9fe3547",
+   build = "./configure",
+   flags = { 
+      "--disable-documentation", 
+      "--libdir=/usr/lib64",
+      "--sysconfdir=/etc",
+   },
+   prepare = [[ 
+      sed -e 's:lib/kernel:lib64/kernel:' \
+          -i install.d/*.install modules.d/95resume/module-setup.sh Makefile
+   ]]
+};
+
+--------------------------------------------------------------------------------
 
 -- alternative to gawk
 mawk = {
