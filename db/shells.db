@@ -42,7 +42,7 @@ rc = {
 tcsh = {
    url = "https://astron.com/pub/tcsh/tcsh-6.24.13.tar.gz",
    sha3 = "90e8b2e89d976f0782098d6407419edb54db69705a42f041922580af5159d527",
-   build = "configure",
+   build = "./configure",
    flags = {
       "--bindir=/usr/bin",
       "--libdir=/usr/lib64",
@@ -54,28 +54,11 @@ tcsh = {
 zsh = {
    url = "https://www.zsh.org/pub/zsh-5.9.tar.xz",
    sha3 = "b108fd76e5ca4810e33a0c3bf69ff173393529d0ca0b5d0131ab4b40c03e227e",
-   build = "configure",
+   build = "./configure",
    flags = {
-      "--libdir=/usr/lib64",
-      "--sysconfdir=/etc/zsh",
-      "--docdir=/usr/share/doc/zsh",
-      "--htmldir=/usr/share/doc/zsh/html",
-      "--enable-etcdir=/etc/zsh",
-      "--enable-zshenv=/etc/zsh/zshenv",
-      "--enable-zlogin=/etc/zsh/zlogin",
-      "--enable-zlogout=/etc/zsh/zlogout",
-      "--enable-zprofile=/etc/zsh/zprofile",
-      "--enable-zshrc=/etc/zsh/zshrc",
-      "--enable-maildir-support",
-      "--with-term-lib=ncursesw",
-      "--enable-multibyte",
-      "--enable-function-subdirs",
-      "--enable-fndir=/usr/share/zsh/functions",
-      "--enable-scriptdir=/usr/share/zsh/scripts",
-      "--with-tcsetpgrp",
-      "--enable-pcre",
-      "--enable-cap",
-      "--enable-gdbm",
-      "--enable-zsh-secure-free"
-   }
+      "--{enable-etcdir,sysconfdir}=/etc/zsh",
+      "--enable-{cap,gdbm,multibyte,runhelpdir=no}",
+      "--with-term-lib='tinfow ncursesw'",
+   },
+   prepare = [[ sed 's|/etc/z|/etc/zsh/z|g' -i Doc/*.* && autoconf ]]
 };

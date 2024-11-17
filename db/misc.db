@@ -175,8 +175,8 @@ sxiv = {
 };
 
 tmux = {
-   url = "https://github.com/tmux/tmux/releases/download/3.4/tmux-3.4.tar.gz",
-   sha3 = "51c4ac03a4e88cde535159877ea4fb8919d64b14ad8a030913316fc3c337a6ca",
+   url = "https://github.com/tmux/tmux/releases/download/3.5a/tmux-3.5a.tar.gz",
+   sha3 = "bac325fb417afb3cac05df63bff0003d39afdd54a0d9bbd630364d1a9f6d38ce",
    build = "./configure",
 };
 
