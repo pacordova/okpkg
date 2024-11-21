@@ -55,10 +55,12 @@ zsh = {
    url = "https://www.zsh.org/pub/zsh-5.9.tar.xz",
    sha3 = "b108fd76e5ca4810e33a0c3bf69ff173393529d0ca0b5d0131ab4b40c03e227e",
    build = "./configure",
-   flags = {
-      "--{enable-etcdir,sysconfdir}=/etc/zsh",
-      "--enable-{cap,gdbm,multibyte,runhelpdir=no}",
+   flags = { 
+      "--enable-{cap,gdbm}",
+      "--enable-multibyte",
+      "--enable-function-subdirs",
+      "--enable-pcre",
       "--with-term-lib='tinfow ncursesw'",
    },
-   prepare = [[ sed 's|/etc/z|/etc/zsh/z|g' -i Doc/*.* && autoconf ]]
+   prepare = [[ autoreconf -fi ]],
 };
