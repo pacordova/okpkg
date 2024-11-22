@@ -114,8 +114,8 @@ B = {
    ["waf"] = function()
       os.execute [[
          ./waf configure --prefix=/usr --libdir=/usr/lib64
-	 ./waf build
-	 ./waf install --destdir=$destdir
+         ./waf build
+         ./waf install --destdir=$destdir
       ]]
       return true
    end,
