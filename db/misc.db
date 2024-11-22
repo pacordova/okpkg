@@ -1,3 +1,14 @@
+waf = {
+   url = "https://waf.io/waf-2.1.4.tar.bz2",
+   sha3 = "1ed574cf64f5f730f1c849dbc420e47563489920d08495dd6b30aa22d8d849aa",
+};
+
+jack2 = {
+   url = "https://github.com/jackaudio/jack2/archive/v1.9.22/jack2-1.9.22.tar.gz",
+   sha3 = "93ef4a5afcdaf348b74c06c0b8206b0cf6f27414185697382dc3ab8ad27a3b27",
+   build = "waf"
+};
+
 apulse = {
    url = "https://github.com/i-rinat/apulse/archive/v0.1.13/apulse-0.1.13.tar.gz",
    sha3 = "e6940335c56e088af4b69e8ad47f37d5f9ffc3365ca9f047b799188548cc9eba",

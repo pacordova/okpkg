@@ -111,6 +111,14 @@ B = {
          return false
       end
    end,
+   ["waf"] = function()
+      os.execute [[
+         ./waf configure --prefix=/usr --libdir=/usr/lib64
+	 ./waf build
+	 ./waf install --destdir=$destdir
+      ]]
+      return true
+   end,
 }
 
 local function timestamp(f)
