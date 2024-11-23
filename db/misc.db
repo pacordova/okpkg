@@ -9,6 +9,12 @@ jack2 = {
    build = "waf"
 };
 
+alsa-plugins = {
+   url = "http://www.alsa-project.org/files/pub/plugins/alsa-plugins-1.2.12.tar.bz2",
+   sha3 = "591c84aecbaf4a91957afdefa41fee369afe783172eb57a9290ed71399ed17bb",
+   build = "./configure",
+};
+
 apulse = {
    url = "https://github.com/i-rinat/apulse/archive/v0.1.13/apulse-0.1.13.tar.gz",
    sha3 = "e6940335c56e088af4b69e8ad47f37d5f9ffc3365ca9f047b799188548cc9eba",
@@ -123,12 +129,12 @@ kirc = {
 };
 
 linux = {
-   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.6.59.tar.xz",
-   sha3 = "3d76f361da711599ca315091796ecbdb38c00afb184926ef46a32baf04492492",
+   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.6.63.tar.xz",
+   sha3 = "5e22a165906b85d5f50836a7bdf7b03b31bda138aa6cb36b18bb07ab756fa572",
    build = "make",
    flags = { "bzImage", "modules", "headers" },
    prepare = [[
-      pigz -cd /proc/config.gz > .config
+      #pigz -cd /proc/config.gz > .config
       : > install
    ]],
    post = [[  
