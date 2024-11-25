@@ -1,14 +1,25 @@
-qt6 = {
-   url = "https://qt.mirror.constant.com/archive/qt/6.7/6.7.3/single/qt-everywhere-src-6.7.3.tar.xz",
-   sha3 = "ff73dbb999debbcf08d6972a4cd7c591f92f174258cdfbf428e56180b16e4f98",
+qtbase = {
+   url = "https://download.qt.io/archive/qt/6.7/6.7.3/submodules/qtbase-everywhere-src-6.7.3.tar.xz",
+   sha3 = "fcfada71110882acc3486b37e88c7101b6b937cdc3be045aba725dbe4c321f0e",
    build = "cmake",
    flags = {
+      "-DINSTALL_BINDIR=lib64/qt6/bin",
+      "-DINSTALL_PUBLICBINDIR=usr/bin",
+      "-DINSTALL_LIBDIR=/usr/lib64",
+      "-DINSTALL_LIBEXECDIR=/usr/lib64/qt6",
+      "-DINSTALL_DOCDIR=/usr/share/doc/qt6",
+      "-DINSTALL_ARCHDATADIR=/usr/lib64/qt6",
+      "-DINSTALL_DATADIR=/usr/share/qt6",
+      "-DINSTALL_INCLUDEDIR=/usr/include/qt6",
+      "-DINSTALL_MKSPECSDIR=/usr/lib64/qt6/mkspecs",
+      "-DINSTALL_EXAMPLESDIR=/usr/share/doc/qt6/examples",
       "-DQT_BUILD_{EXAMPLES,TESTS}=OFF",
-      "-DBUILD_{qt3d,qtquick3dphysics,qtwebengine}=OFF",
+      "-DFEATURE_openssl_linked=ON",
+      "-DFEATURE_dtls=OFF",
    }
 };
 
-qtbase = {
+qt5base = {
    url = "https://invent.kde.org/qt/qt/qtbase/-/archive/v5.15.16-lts-lgpl/qtbase-v5.15.16-lts-lgpl.tar.bz2",
    sha3 = "05ca7cdb3b0f5520fa6fe05182e8df44f1e93fac9fd7902bb517bf577e5aa043",
    build = "./configure",
