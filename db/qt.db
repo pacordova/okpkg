@@ -22,15 +22,14 @@ qtbase = {
 qtsvg = {
    url = "https://download.qt.io/archive/qt/6.7/6.7.3/submodules/qtsvg-everywhere-src-6.7.3.tar.xz",
    sha3 = "949342671291d66e39411b5db53a98930740473941f98d49765d572198e9c5d1",
-   build = "make",
-   prepare = [[ qmake -makefile ]]
+   build = "cmake",
 };
 
 qttools = {
    url = "https://download.qt.io/archive/qt/6.7/6.7.3/submodules/qttools-everywhere-src-6.7.3.tar.xz",
    sha3 = "7c64e90c5fa1bc4db34517e0537ebed7ff1dd11d2e7f857a5d3b8840e1bd4de6",
-   build = "make",
-   prepare = [[ qmake -makefile ]]
+   build = "cmake",
+   flags = { "-DINSTALL_PUBLICBINDIR=usr/bin" }
 };
 
 qt5base = {
