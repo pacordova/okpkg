@@ -19,6 +19,20 @@ qtbase = {
    }
 };
 
+qtsvg = {
+   url = "https://download.qt.io/archive/qt/6.7/6.7.3/submodules/qtsvg-everywhere-src-6.7.3.tar.xz",
+   sha3 = "949342671291d66e39411b5db53a98930740473941f98d49765d572198e9c5d1",
+   build = "make",
+   prepare = [[ qmake -makefile ]]
+};
+
+qttools = {
+   url = "https://download.qt.io/archive/qt/6.7/6.7.3/submodules/qttools-everywhere-src-6.7.3.tar.xz",
+   sha3 = "7c64e90c5fa1bc4db34517e0537ebed7ff1dd11d2e7f857a5d3b8840e1bd4de6",
+   build = "make",
+   prepare = [[ qmake -makefile ]]
+};
+
 qt5base = {
    url = "https://invent.kde.org/qt/qt/qtbase/-/archive/v5.15.16-lts-lgpl/qtbase-v5.15.16-lts-lgpl.tar.bz2",
    sha3 = "05ca7cdb3b0f5520fa6fe05182e8df44f1e93fac9fd7902bb517bf577e5aa043",
@@ -36,13 +50,13 @@ qt5base = {
    }
 };
 
-qtsvg = {
+qt5svg = {
    url = "https://invent.kde.org/qt/qt/qtsvg/-/archive/v5.15.5-lts-lgpl/qtsvg-v5.15.5-lts-lgpl.tar.gz",
    build = "make",
    prepare = [[ qmake -makefile ]]
 };
 
-qttools = {
+qt5tools = {
    url = "https://invent.kde.org/qt/qt/qttools/-/archive/v5.15.5-lts-lgpl/qttools-v5.15.5-lts-lgpl.tar.gz",
    build = "make",
    prepare = [[ qmake -makefile ]]

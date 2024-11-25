@@ -1,3 +1,9 @@
+qjackctl = {
+   url = "https://downloads.sourceforge.net/qjackctl/qjackctl-1.0.3.tar.gz",
+   sha3 = "8c8f936374dcbc75ec9f7bad45d7c6079e793bd32f8e9a931c89568a83f61f03",
+   build = "cmake",
+};
+
 waf = {
    url = "https://waf.io/waf-2.1.4.tar.bz2",
    sha3 = "1ed574cf64f5f730f1c849dbc420e47563489920d08495dd6b30aa22d8d849aa",
