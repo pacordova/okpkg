@@ -1,3 +1,55 @@
+qt6 = {
+   url = "https://qt.mirror.constant.com/archive/qt/6.7/6.7.3/single/qt-everywhere-src-6.7.3.tar.xz",
+   sha3 = "ff73dbb999debbcf08d6972a4cd7c591f92f174258cdfbf428e56180b16e4f98",
+   build = "cmake",
+   flags = {
+      "-DQT_BUILD_{EXAMPLES,TESTS}=OFF",
+      "-DBUILD_{qt3d,qtquick3dphysics,qtwebengine}=OFF",
+   }
+};
+
+qtbase = {
+   url = "https://invent.kde.org/qt/qt/qtbase/-/archive/v5.15.16-lts-lgpl/qtbase-v5.15.16-lts-lgpl.tar.bz2",
+   sha3 = "05ca7cdb3b0f5520fa6fe05182e8df44f1e93fac9fd7902bb517bf577e5aa043",
+   build = "./configure",
+   flags = {
+      "-opensource",
+      "-confirm-license",
+      "-prefix /usr",
+      "-extprefix $destdir/usr",
+      "-libdir /usr/lib64",
+      "-archdatadir /usr/lib64/qt",
+      "-nomake examples",
+      "-nomake tests",
+      "-optimize-size",
+   }
+};
+
+qtsvg = {
+   url = "https://invent.kde.org/qt/qt/qtsvg/-/archive/v5.15.5-lts-lgpl/qtsvg-v5.15.5-lts-lgpl.tar.gz",
+   build = "make",
+   prepare = [[ qmake -makefile ]]
+};
+
+qttools = {
+   url = "https://invent.kde.org/qt/qt/qttools/-/archive/v5.15.5-lts-lgpl/qttools-v5.15.5-lts-lgpl.tar.gz",
+   build = "make",
+   prepare = [[ qmake -makefile ]]
+};
+
+qtx11extras = {
+   url = "https://invent.kde.org/qt/qt/qtx11extras/-/archive/v5.15.5-lts-lgpl/qtx11extras-v5.15.5-lts-lgpl.tar.gz",
+   build = "make",
+   prepare = [[ qmake -makefile ]]
+};
+
+qtdeclarative = {
+   url = "https://invent.kde.org/qt/qt/qtdeclarative/-/archive/v5.15.5-lts-lgpl/qtdeclarative-v5.15.5-lts-lgpl.tar.gz",
+   build = "make",
+   prepare = [[ qmake -makefile ]]
+};
+
+
 -- wip
 extra-cmake-modules = {
    url = "https://download.kde.org/stable/frameworks/5.91/extra-cmake-modules-5.91.0.tar.xz",
@@ -12,44 +64,6 @@ boost = {
 libtorrent = {
    url = "https://github.com/arvidn/libtorrent/releases/download/v2.0.7/libtorrent-rasterbar-2.0.7.tar.gz",
    build = "cmake",
-};
-
-qtbase = {
-   url = "https://invent.kde.org/qt/qt/qtbase/-/archive/v5.15.5-lts-lgpl/qtbase-v5.15.5-lts-lgpl.tar.gz",
-   build = "./configure",
-   flags = {
-      "--extprefix=$destdir/usr",
-      "--libdir=/usr/lib64",
-      "--archdatadir=/usr/lib64/qt",
-      "--datadir=/usr/share/qt",
-      "--docdir=/usr/share/doc/qt",
-      "--opensource",
-      "--confirm-license",
-      "--optimize-size",
-      "--nobuild = "make"=examples",
-      "--nobuild = "make"=tests"
-   }
-};
-
-qtsvg = {
-   url = "https://invent.kde.org/qt/qt/qtsvg/-/archive/v5.15.5-lts-lgpl/qtsvg-v5.15.5-lts-lgpl.tar.gz",
-   prepare = [[ qmake -makefile ]]
-   build = "make",
-};
-
-qttools = {
-   url = "https://invent.kde.org/qt/qt/qttools/-/archive/v5.15.5-lts-lgpl/qttools-v5.15.5-lts-lgpl.tar.gz",
-   build = "qmake",
-};
-
-qtx11extras = {
-   url = "https://invent.kde.org/qt/qt/qtx11extras/-/archive/v5.15.5-lts-lgpl/qtx11extras-v5.15.5-lts-lgpl.tar.gz",
-   build = "qmake",
-};
-
-qtdeclarative = {
-   url = "https://invent.kde.org/qt/qt/qtdeclarative/-/archive/v5.15.5-lts-lgpl/qtdeclarative-v5.15.5-lts-lgpl.tar.gz",
-   build = "qmake",
 };
 
 botan = {
