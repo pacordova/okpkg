@@ -21,6 +21,7 @@ firefox-bin = {
       install -d $destdir/usr/share/applications
       install ../../download/firefox.desktop $destdir/usr/share/applications
       cp -rp . $destdir/usr/lib64/firefox
+      ln -sf /usr/lib64/firefox/firefox $destdir/usr/bin/firefox
       cd $destdir/usr/lib64/firefox
       for f in *.so; do ln -sf firefox/$f ..; done
    ]]

@@ -1,14 +1,3 @@
-qjackctl = {
-   url = "https://downloads.sourceforge.net/qjackctl/qjackctl-1.0.3.tar.gz",
-   sha3 = "8c8f936374dcbc75ec9f7bad45d7c6079e793bd32f8e9a931c89568a83f61f03",
-   build = "cmake",
-};
-
-waf = {
-   url = "https://waf.io/waf-2.1.4.tar.bz2",
-   sha3 = "1ed574cf64f5f730f1c849dbc420e47563489920d08495dd6b30aa22d8d849aa",
-};
-
 jack2 = {
    url = "https://github.com/jackaudio/jack2/archive/v1.9.22/jack2-1.9.22.tar.gz",
    sha3 = "93ef4a5afcdaf348b74c06c0b8206b0cf6f27414185697382dc3ab8ad27a3b27",
@@ -21,17 +10,37 @@ alsa-plugins = {
    build = "./configure",
 };
 
+qjackctl = {
+   url = "https://downloads.sourceforge.net/qjackctl/qjackctl-1.0.3.tar.gz",
+   sha3 = "8c8f936374dcbc75ec9f7bad45d7c6079e793bd32f8e9a931c89568a83f61f03",
+   build = "cmake",
+};
+
+pipewire = {
+   url = "https://gitlab.freedesktop.org/pipewire/pipewire/-/archive/1.2.6/pipewire-1.2.6.tar.bz2",
+   sha3 = "0d418f43cae9b9103a5e342259c8f120a2a944a2ef037a77c6304a3d7ce7a257",
+   build = "meson",
+   flags = { '-Dsession-managers="[]"' }
+};
+
+wireplumber = {
+   url = "https://gitlab.freedesktop.org/pipewire/wireplumber/-/archive/0.5.6/wireplumber-0.5.6.tar.bz2",
+   sha3 = "993f770165895af37853c3b79aea21754a5dd759a6cd543328bc00a88114d5c7",
+   build = "meson",
+   flags = { "-Dsystem-lua=true" }
+};
+
+--------------------------------------------------------------------------------
+
 apulse = {
    url = "https://github.com/i-rinat/apulse/archive/v0.1.13/apulse-0.1.13.tar.gz",
    sha3 = "e6940335c56e088af4b69e8ad47f37d5f9ffc3365ca9f047b799188548cc9eba",
    build = "cmake",
    post = [[
       cd $destdir
-      sed -i 's:/usr/lib/:/usr/lib64/:' usr/bin/apulse
-      printf "#!/bin/sh\n" >> usr/bin/firefox
-      printf "/usr/bin/apulse /usr/lib64/firefox/firefox\n" >> usr/bin/firefox
-      chmod 755 usr/bin/firefox
       mv usr/lib usr/lib64
+      ln -sf apulse/libpulse.so.0 usr/lib64
+      sed -i 's:/usr/lib/:/usr/lib64/:' usr/bin/apulse
    ]]
 };
 

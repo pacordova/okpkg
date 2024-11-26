@@ -1184,20 +1184,6 @@ gnutls = {
    }
 };
 
-pipewire = {
-   url = "https://gitlab.freedesktop.org/pipewire/pipewire/-/archive/1.0.5/pipewire-1.0.5.tar.bz2",
-   sha3 = "baff4cd51cca0a5ba1b470457426cc132f16adcdfa9cde9b09e48690b26c2c77",
-   build = "meson",
-   flags = { '-Dsession-managers="[]"' }
-};
-
-wireplumber = {
-   url = "https://gitlab.freedesktop.org/pipewire/wireplumber/-/archive/0.4.17/wireplumber-0.4.17.tar.bz2",
-   sha3 = "8d52ac5d8ea601e52119180457260335fc29851764453349e066569fd63afdc2",
-   build = "meson",
-   flags = { "-Dsystem-lua=true" }
-};
-
 pavucontrol = {
    url = "https://freedesktop.org/software/pulseaudio/pavucontrol/pavucontrol-5.0.tar.xz",
    sha3 = "eb0a190222a482d3f3cb29d4d1f43483b689e528f6473d6d09394b0725d78862",
