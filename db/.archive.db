@@ -1184,13 +1184,6 @@ gnutls = {
    }
 };
 
-pavucontrol = {
-   url = "https://freedesktop.org/software/pulseaudio/pavucontrol/pavucontrol-5.0.tar.xz",
-   sha3 = "eb0a190222a482d3f3cb29d4d1f43483b689e528f6473d6d09394b0725d78862",
-   build = "./configure",
-   flags = { "--libdir=/usr/lib64" }
-};
-
 libkeybinder3 = {
    url = "https://github.com/kupferlauncher/keybinder/releases/download/keybinder-3.0-v0.3.2/keybinder-3.0-0.3.2.tar.gz",
    sha3 = "cacc583e7cbdc7d2a9c0f535a954f6fbcd0bcb64b0c591b46a0639659b3ea779",

@@ -16,6 +16,29 @@ qjackctl = {
    build = "cmake",
 };
 
+libsndfile = {
+   url = "https://github.com/libsndfile/libsndfile/releases/download/1.2.2/libsndfile-1.2.2.tar.xz",
+   sha3 = "0da345e24aeda71dc79e9edb6c6e43661bde35043bcb3d7819a8d109a7274434",
+   build = "./configure",
+};
+
+pulseaudio = {
+   url = "https://www.freedesktop.org/software/pulseaudio/releases/pulseaudio-17.0.tar.xz",
+   sha3 = "3b16f66156e36e372a9792379fbb2b4fb56c245d5c066dba8b2d7d23a199d427",
+   build = "meson",
+   flags = {
+      "-Ddatabase=gdbm",
+      "-Ddoxygen=false",
+      "-Dbluez5=disabled",
+   }
+};
+
+pavucontrol = {
+   url = "https://freedesktop.org/software/pulseaudio/pavucontrol/pavucontrol-6.1.tar.xz",
+   sha3 = "eb0a190222a482d3f3cb29d4d1f43483b689e528f6473d6d09394b0725d78862",
+   build = "meson",
+};
+
 pipewire = {
    url = "https://gitlab.freedesktop.org/pipewire/pipewire/-/archive/1.2.6/pipewire-1.2.6.tar.bz2",
    sha3 = "0d418f43cae9b9103a5e342259c8f120a2a944a2ef037a77c6304a3d7ce7a257",
