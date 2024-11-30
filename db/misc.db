@@ -180,7 +180,7 @@ linux = {
       install -m 644 arch/x86/boot/bzImage $destdir/boot/vmlinuz-6.6
       make modules_install \
           INSTALL_MOD_PATH=$destdir \
-          MODLIB=$destdir/usr/lib64/modules/6.6.52
+          MODLIB=$destdir/usr/lib64/modules/6.6.63
       cp -rp usr/include $destdir/usr
       find $destdir/usr/include -type f ! -name '*.h' -delete
    ]]

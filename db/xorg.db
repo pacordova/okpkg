@@ -291,8 +291,8 @@ libvdpau = {
 };
 
 mesa = {
-   url = "https://mesa.freedesktop.org/archive/mesa-24.2.7.tar.xz",
-   sha3 = "e4ecee48a98c0b1540df2504e129b64a9c4cfb7a9a09128f5d3d4a17238405ff",
+   url = "https://mesa.freedesktop.org/archive/mesa-24.2.8.tar.xz",
+   sha3 = "7e9d7d3d738affe355b9e53d5ce40e2aec8ea44c41cf4b1fe18560cc4baf79f2",
    build = "meson",
    flags = {
       "-Dplatforms=x11",
@@ -300,7 +300,7 @@ mesa = {
       '-Dvulkan-drivers=""',
       "-Dglx=dri",
       "-Degl=enabled",
-      "-Dglvnd=true",
+      "-Dglvnd=enabled",
       "-D{llvm,gles1,valgrind,libunwind}=disabled",
    }
 };
