@@ -1,6 +1,6 @@
 _file = {
-   url = "https://astron.com/pub/file/file-5.45.tar.gz",
-   sha3 = "07aeb9d12d226c669fc8123cee5da374642c6320b7c7bdffcf66823e2c3aac8d",
+   url = "https://astron.com/pub/file/file-5.46.tar.gz",
+   sha3 = "4a1b431335ee9f08e2554b7ac41998bbdc4ca8588f2f79f85e1a28ea972c9d38",
    build = "./configure",
 };
 
@@ -154,8 +154,8 @@ libseccomp = {
 };
 
 file = {
-   url = "https://astron.com/pub/file/file-5.45.tar.gz",
-   sha3 = "07aeb9d12d226c669fc8123cee5da374642c6320b7c7bdffcf66823e2c3aac8d",
+   url = "https://astron.com/pub/file/file-5.46.tar.gz",
+   sha3 = "4a1b431335ee9f08e2554b7ac41998bbdc4ca8588f2f79f85e1a28ea972c9d38",
    build = "./configure",
    flags = { "--enable-libseccomp" },
 };

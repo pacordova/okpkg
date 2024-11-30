@@ -121,8 +121,8 @@ feh = {
 };
 
 git = {
-   url = "https://kernel.org/pub/software/scm/git/git-2.47.0.tar.xz",
-   sha3 = "c64ad813d1214fdbf1350e814e0863ccc5278dff4f79f2d12661e65c4d5a258e",
+   url = "https://kernel.org/pub/software/scm/git/git-2.47.1.tar.xz",
+   sha3 = "49b0504e6497070a16627337256301ebf312edf56a136a7e71a650bf8ab489bd",
    build = "./configure",
    flags = {
       "--with-gitconfig=/etc/gitconfig",
@@ -264,8 +264,8 @@ ugrep = {
 };
 
 vim = {
-   url = "https://github.com/vim/vim/archive/v9.1.0867/vim-9.1.0867.tar.gz",
-   sha3 = "35f82030ee2c34220a669eb32cde3da361e3f5ad04adaf4f245401f2f1a510e7",
+   url = "https://github.com/vim/vim/archive/v9.1.0895/vim-9.1.0895.tar.gz",
+   sha3 = "8fb3fad0541e8d4ab4abb820e062804ff5b5bae59e90238bc7e6acfa4cb98dd2",
    build = "./configure",
    flags = {
       "--enable-{cscope,multibyte}",

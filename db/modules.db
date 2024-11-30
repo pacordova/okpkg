@@ -38,14 +38,14 @@ python-build = {
 };
 
 python-wheel = {
-   url = "https://pypi.org/packages/source/w/wheel/wheel-0.45.0.tar.gz",
-   sha3 = "7bf83177d9ab6c4637c6a9c020c00645d8f0bcb677fd4ee6e7b47dfb8b80cec0",
+   url = "https://pypi.org/packages/source/w/wheel/wheel-0.45.1.tar.gz",
+   sha3 = "eac44ace5f8a7a3182564a85eb78bc8d99639d1cd74d2b91c21c099ea91156ac",
    build = "python-build",
 };
 
 python-setuptools = {
-   url = "https://pypi.org/packages/source/s/setuptools/setuptools-75.5.0.tar.gz",
-   sha3 = "7a306eb2e631bdf85380ae2bfe0f8051b59ac4370ff0c05b97e452a394755a3d",
+   url = "https://pypi.org/packages/source/s/setuptools/setuptools-75.6.0.tar.gz",
+   sha3 = "acc084e97d0ce76e962ea57e8239db5018b6ed0028f5d147f361562b439ae6e7",
    build = "python-build",
 };
 

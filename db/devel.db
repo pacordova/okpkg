@@ -28,8 +28,8 @@ check = {
 };
 
 cmake = {
-   url = "https://cmake.org/files/v3.31/cmake-3.31.0.tar.gz",
-   sha3 = "43eb27d064652a8716db75f6bc2f878227e5c0c015ed4d254aa5641b4725b7f8",
+   url = "https://cmake.org/files/v3.31/cmake-3.31.1.tar.gz",
+   sha3 = "92bdc4997e5bbfdbf9c68695ddb8b0d403c40226a76e4d385e90a3de5121c11f",
    build = "./configure",
    flags = {
       "--mandir=/share/man",
@@ -70,8 +70,8 @@ itstool = {
 };
 
 libtool = {
-   url = "https://ftp.gnu.org/gnu/libtool/libtool-2.5.3.tar.xz",
-   sha3 = "40ced948603a5eb451af6531e3db7251b9848a71b8c71892cc00ca021dab7ade",
+   url = "https://ftp.gnu.org/gnu/libtool/libtool-2.5.4.tar.xz",
+   sha3 = "09883550ac346f552d246c831afb56124cd109c81e83f7191dace7d7ffd9af83",
    build = "./configure",
    post = [[ rm -f $destdir/usr/lib64/libltdl.a ]]
 };
