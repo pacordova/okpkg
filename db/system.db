@@ -174,8 +174,8 @@ flex = {
 };
 
 pkgconf = {
-   url = "https://distfiles.ariadne.space/pkgconf/pkgconf-2.1.1.tar.xz",
-   sha3 = "96d0726e75564b8b3a85ed18be4f37f09018bd73f43e2064a0d7caac1c8aeba6",
+   url = "https://distfiles.ariadne.space/pkgconf/pkgconf-2.3.0.tar.xz",
+   sha3 = "1975d19f4a2896de5335b9a8ed6d419172a3aca5f5e600907c33fec0d456ea6f",
    build = "./configure",
    post = [[ ln -sf pkgconf $destdir/usr/bin/pkg-config ]]
 };
