@@ -402,8 +402,8 @@ p11-kit = {
 };
 
 pixman = {
-   url = "https://xorg.freedesktop.org/releases/individual/lib/pixman-0.44.0.tar.xz",
-   sha3 = "c54cd48d121fe4467f16e5f7f31736bfb900cefda9e67c236a7265533c79312e",
+   url = "https://xorg.freedesktop.org/releases/individual/lib/pixman-0.44.2.tar.xz",
+   sha3 = "784f46f1a12f332e5dd5a4eef35866667a2d0e63fcff0b6e36ac9b59a259fd5c",
    build = "meson",
 };
 

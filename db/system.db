@@ -5,8 +5,8 @@ _file = {
 };
 
 _python3 = {
-   url = "https://www.python.org/ftp/python/3.12.7/Python-3.12.7.tar.xz",
-   sha3 = "47cd57ebfa5941d7c718ef7640b2f3424f9c06d2be3b87e219590e9db76711d4",
+   url = "https://www.python.org/ftp/python/3.12.8/Python-3.12.8.tar.xz",
+   sha3 = "2805955d5a25228a25550b3ad47d471c13e5f064a48a511eafa3e7b0f7391444",
    build = "./configure",
    flags = {
       "--with-platlibdir=lib64",
@@ -275,8 +275,8 @@ gcc14 = {
 };
 
 libcap = {
-   url = "https://kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-2.72.tar.xz",
-   sha3 = "349a891752f6cbd84986a0256bc19ad2af41b4af3b698d4aab5227de1173cfd1",
+   url = "https://kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-2.73.tar.xz",
+   sha3 = "0fdd9e3f889ec564e2c78ac40c021585672575da989d514802d27a989bfca727",
    build = "make",
    flags = { "prefix=/usr", "lib=lib64", "SBINDIR=/usr/bin" },
    prepare = [[ sed -i '/install -m.*STA/d' libcap/Makefile ]]
@@ -544,8 +544,8 @@ sqlite = {
 };
 
 python3 = {
-   url = "https://www.python.org/ftp/python/3.12.7/Python-3.12.7.tar.xz",
-   sha3 = "47cd57ebfa5941d7c718ef7640b2f3424f9c06d2be3b87e219590e9db76711d4",
+   url = "https://www.python.org/ftp/python/3.12.8/Python-3.12.8.tar.xz",
+   sha3 = "2805955d5a25228a25550b3ad47d471c13e5f064a48a511eafa3e7b0f7391444",
    build = "./configure",
    flags = {
       "--enable-loadable-sqlite-extensions",
