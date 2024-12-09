@@ -53,8 +53,8 @@ _perl = {
 };
 
 iana-etc = {
-   url = "https://github.com/Mic92/iana-etc/releases/download/20241015/iana-etc-20241015.tar.gz",
-   sha3 = "a361091c3f266025ab48b9ac6aaa6b9cebcd2171168b6b9b6faefb9ba25ee47e",
+   url = "https://github.com/Mic92/iana-etc/releases/download/20241122/iana-etc-20241122.tar.gz",
+   sha3 = "756e93ffe03ad4b5ea922305cbdd013483ce978ee27331f757d9ee4d67e87e8f",
    build = _,
    post = [[ 
       install -d $destdir/etc
@@ -537,8 +537,8 @@ libffi = {
 };
 
 sqlite = {
-   url = "https://www.sqlite.org/2024/sqlite-autoconf-3470100.tar.gz",
-   sha3 = "c6c1756fbeb1e34e0ee31f8609bfc1fd4630b3faadde71a28ad3a55df259d854",
+   url = "https://www.sqlite.org/2024/sqlite-autoconf-3470200.tar.gz",
+   sha3 = "52cd4a2304b627abbabe1a438ba853d0f6edb8e2774fcb5773c7af11077afe94",
    build = "./configure",
    flags = { "--enable-fts5", "CPPFLAGS=-DSQLITE_ENABLE_COLUMN_METADATA=1" },
 };

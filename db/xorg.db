@@ -269,8 +269,8 @@ libglvnd = {
 };
 
 libdrm = {
-   url = "https://dri.freedesktop.org/libdrm/libdrm-2.4.123.tar.xz",
-   sha3 = "63f886cc8b1561937ae5074f40e295d12c9d43b82267d83ce95a5f3d83250e49",
+   url = "https://dri.freedesktop.org/libdrm/libdrm-2.4.124.tar.xz",
+   sha3 = "e52de4b9b290ec00ecbd59669ecc53efccfb4953bd79683a54a41ac758144428",
    build = "meson",
    flags = {
       "-D{intel=enabled,udev=true,valgrind=disabled}",
@@ -291,8 +291,8 @@ libvdpau = {
 };
 
 mesa = {
-   url = "https://mesa.freedesktop.org/archive/mesa-24.2.8.tar.xz",
-   sha3 = "7e9d7d3d738affe355b9e53d5ce40e2aec8ea44c41cf4b1fe18560cc4baf79f2",
+   url = "https://mesa.freedesktop.org/archive/mesa-24.3.1.tar.xz",
+   sha3 = "d8edd5bcc9e5f86588c3f751caeeaac75edd0630e110ec057eb5959d79d9c206",
    build = "meson",
    flags = {
       "-Dplatforms=x11",
@@ -414,8 +414,8 @@ xorg-xkbcomp = {
 };
 
 xorg-xkbevd = {
-   url = "https://x.org/pub/individual/app/xkbevd-1.1.5.tar.xz",
-   sha3 = "6568b7561a18cc872c340766bd91cef983755ac91f9a317d296ca0896d54babe",
+   url = "https://x.org/pub/individual/app/xkbevd-1.1.6.tar.xz",
+   sha3 = "ddd47d66488ea93fbc4da0a91af8f8293565b8c82f403a8b6e28d11efd97da1d",
    build = "./configure",
 };
 
