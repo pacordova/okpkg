@@ -32,8 +32,8 @@ libxmlb = {
 };
 
 appstream = {
-   url = "https://www.freedesktop.org/software/appstream/releases/AppStream-1.0.3.tar.xz",
-   sha3 = "c0a54c5e715a993c8bd7d23038140408d395918d733cccda22a8e139a919bd2d",
+   url = "https://www.freedesktop.org/software/appstream/releases/AppStream-1.0.4.tar.xz",
+   sha3 = "c224bb922d5bce7b41695f272a596fcfff1536932dd8943503464be45811eb67",
    build = "meson",
    flags = {
       "-Dsystemd=false",

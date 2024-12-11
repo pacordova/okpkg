@@ -816,8 +816,8 @@ libaio = {
 };
 
 device-mapper = {
-   url = "https://sourceware.org/ftp/lvm2/LVM2.2.03.28.tgz",
-   sha3 = "431f4541af14b30d28778665e67a426df33df3a5289017503ef1014d7e37f6f4",
+   url = "https://sourceware.org/ftp/lvm2/LVM2.2.03.29.tgz",
+   sha3 = "710002490d3e7b55cc2b53258c222cc92fa7cab8620983949679ffa1a9584863",
    build = "./configure",
    flags = {
       "--enable-{cmdlib,dmeventd,pkgconfig}",

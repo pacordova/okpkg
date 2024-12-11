@@ -13,8 +13,8 @@ usbutils = {
 --------------------------------------------------------------------------------
 
 _glib2 = {
-   url = "https://download.gnome.org/sources/glib/2.82/glib-2.82.2.tar.xz",
-   sha3 = "b8a46cc32d25ff5e8c1cbf5fb64821788e600db3b1bb8295ecbb452b91e3e57e",
+   url = "https://download.gnome.org/sources/glib/2.82/glib-2.82.3.tar.xz",
+   sha3 = "2a6160b181dc193d7316cb2eb6117cb41013afffdff80c9ad25aabd7e95dfe6d",
    build = "meson",
    flags = { "-Dintrospection=disabled" }
 };
@@ -26,8 +26,8 @@ gobject-introspection = {
 };
 
 glib2 = {
-   url = "https://download.gnome.org/sources/glib/2.82/glib-2.82.2.tar.xz",
-   sha3 = "b8a46cc32d25ff5e8c1cbf5fb64821788e600db3b1bb8295ecbb452b91e3e57e",
+   url = "https://download.gnome.org/sources/glib/2.82/glib-2.82.3.tar.xz",
+   sha3 = "2a6160b181dc193d7316cb2eb6117cb41013afffdff80c9ad25aabd7e95dfe6d",
    build = "meson",
    flags = { "-Dintrospection=enabled" }
 };
