@@ -13,8 +13,8 @@ usbutils = {
 --------------------------------------------------------------------------------
 
 _glib2 = {
-   url = "https://download.gnome.org/sources/glib/2.82/glib-2.82.3.tar.xz",
-   sha3 = "2a6160b181dc193d7316cb2eb6117cb41013afffdff80c9ad25aabd7e95dfe6d",
+   url = "https://download.gnome.org/sources/glib/2.82/glib-2.82.4.tar.xz",
+   sha3 = "64cb36759c759225b6fc8b817ab29f31a86cc52a054b71fc0d5a9323e05197c9",
    build = "meson",
    flags = { "-Dintrospection=disabled" }
 };
@@ -26,8 +26,8 @@ gobject-introspection = {
 };
 
 glib2 = {
-   url = "https://download.gnome.org/sources/glib/2.82/glib-2.82.3.tar.xz",
-   sha3 = "2a6160b181dc193d7316cb2eb6117cb41013afffdff80c9ad25aabd7e95dfe6d",
+   url = "https://download.gnome.org/sources/glib/2.82/glib-2.82.4.tar.xz",
+   sha3 = "64cb36759c759225b6fc8b817ab29f31a86cc52a054b71fc0d5a9323e05197c9",
    build = "meson",
    flags = { "-Dintrospection=enabled" }
 };
@@ -39,8 +39,8 @@ dbus-glib = {
 };
 
 json-glib = {
-   url = "https://download.gnome.org/sources/json-glib/1.10/json-glib-1.10.0.tar.xz",
-   sha3 = "63a0253ff4c71c1d49765cd773934af6982c6ce8cf051a4c63261a0105ae83d4",
+   url = "https://download.gnome.org/sources/json-glib/1.10/json-glib-1.10.6.tar.xz",
+   sha3 = "45fd4d90d933149e081289cee95d3fb48c4f5b2a09ff0a360261f96a2df82efb",
    build = "meson",
    flags = { "-D{gtk_doc=disabled,nls=disabled,tests=false}" },
 };
@@ -217,8 +217,8 @@ libinih = {
 };
 
 libjpeg-turbo = {
-   url = "https://github.com/libjpeg-turbo/libjpeg-turbo/releases/download/3.0.4/libjpeg-turbo-3.0.4.tar.gz",
-   sha3 = "27c1f84b2057d3faf19fe3aabce6da3f2ab5fe3b8c2ab84029630c38baf835ee",
+   url = "https://github.com/libjpeg-turbo/libjpeg-turbo/releases/download/3.1.0/libjpeg-turbo-3.1.0.tar.gz",
+   sha3 = "482f97cf1794e24456f7d3d0c0ed85567791a4bf24059febf73a9f8fa7bec328",
    build = "cmake",
    flags = { "-DENABLE_STATIC=OFF", "-DWITH_{JPEG8=ON,JAVA=OFF}" }
 };
