@@ -167,8 +167,8 @@ kirc = {
 };
 
 linux = {
-   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.6.63.tar.xz",
-   sha3 = "5e22a165906b85d5f50836a7bdf7b03b31bda138aa6cb36b18bb07ab756fa572",
+   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.6.66.tar.xz",
+   sha3 = "8f63fdad09eda3e7a76066b2e0ed3d466777ae0791f63c8571e101416d08ee23",
    build = "make",
    flags = { "bzImage", "modules", "headers" },
    prepare = [[
@@ -180,7 +180,7 @@ linux = {
       install -m 644 arch/x86/boot/bzImage $destdir/boot/vmlinuz-6.6
       make modules_install \
           INSTALL_MOD_PATH=$destdir \
-          MODLIB=$destdir/usr/lib64/modules/6.6.63
+          MODLIB=$destdir/usr/lib64/modules/6.6.66
       cp -rp usr/include $destdir/usr
       find $destdir/usr/include -type f ! -name '*.h' -delete
    ]]

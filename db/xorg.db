@@ -55,14 +55,14 @@ libxext = {
 };
 
 libice = {
-   url = "https://x.org/pub/individual/lib/libICE-1.1.1.tar.xz",
-   sha3 = "fbf5e80e6dcff66b6ebef7e8dc85254ecef76a2f279dc03dfefc867ef011c66c",
+   url = "https://x.org/pub/individual/lib/libICE-1.1.2.tar.xz",
+   sha3 = "9081dc54a8153971fe2dbe9b2bd745c16b4300dd8ceb00515fcd4a46abd1e118",
    build = "./configure",
 };
 
 libsm = {
-   url = "https://x.org/pub/individual/lib/libSM-1.2.4.tar.xz",
-   sha3 = "ebd1815dcd4574b4b182b4211e2f70c743aea623b9f30e4ecbbf21f5c47c7bd8",
+   url = "https://x.org/pub/individual/lib/libSM-1.2.5.tar.xz",
+   sha3 = "6eb4106fd162edf699b40c4253c7d259a2c56276227b161bda7920f27c584150",
    build = "./configure",
 };
 
@@ -111,8 +111,8 @@ libxcomposite = {
 };
 
 libxrender = {
-   url = "https://x.org/pub/individual/lib/libXrender-0.9.11.tar.xz",
-   sha3 = "2f130065537ac9634865e7b10886a67fe6bcfcf61da2fac78b48c824b0c1b8a5",
+   url = "https://x.org/pub/individual/lib/libXrender-0.9.12.tar.xz",
+   sha3 = "803ad06075b13d1b9c331407a2c640b11970c3c9b3a6122ae9121c0e27471ae7",
    build = "./configure",
 };
 
@@ -178,8 +178,8 @@ libxtst = {
 };
 
 libxv = {
-   url = "https://x.org/pub/individual/lib/libXv-1.0.12.tar.xz",
-   sha3 = "32d337cfbd68290257783e3bf879c681f152db7625023253c693b76da111d102",
+   url = "https://x.org/pub/individual/lib/libXv-1.0.13.tar.xz",
+   sha3 = "c98112882d8b99d62c999536e29c64030c876b0b4a3e678ffafa4c731b33df86",
    build = "./configure",
 };
 
@@ -190,8 +190,8 @@ libxvmc = {
 };
 
 libxxf86vm = {
-   url = "https://x.org/pub/individual/lib/libXxf86vm-1.1.5.tar.xz",
-   sha3 = "6dac4a500b8c62abfb1526015575efb095dbda5d92c268de683958ca37ebd360",
+   url = "https://x.org/pub/individual/lib/libXxf86vm-1.1.6.tar.xz",
+   sha3 = "a2d7bc5805abf5ad55e2da1a68947156185ebe9795426077fef0bb6e47befdcc",
    build = "./configure",
 };
 
@@ -208,8 +208,8 @@ libxkbfile = {
 };
 
 libxshmfence = {
-   url = "https://x.org/pub/individual/lib/libxshmfence-1.3.2.tar.xz",
-   sha3 = "2aa34dd81d5bd636236acf624abaa025550a1e2debf45f743b7609e8885e30ab",
+   url = "https://x.org/pub/individual/lib/libxshmfence-1.3.3.tar.xz",
+   sha3 = "108184e5368e3cbe32257559f463b62a4fb6e7c45ec65721c5d941a7775b5ab1",
    build = "./configure",
 };
 
@@ -220,8 +220,8 @@ libxpresent = {
 };
 
 libxcvt = {
-   url = "https://x.org/pub/individual/lib/libxcvt-0.1.2.tar.xz",
-   sha3 = "fe6fdc97deade7b35ccc86898eb12bb0a3e210b36aded13cf52a335eececa7b3",
+   url = "https://x.org/pub/individual/lib/libxcvt-0.1.3.tar.xz",
+   sha3 = "3657e78a35a6a7d53b06c8529bbd6b8c05df4897590f89d73c6ff6cb9a5fae7e",
    build = "meson",
 };
 
@@ -560,8 +560,8 @@ libepoxy = {
 };
 
 xorg-server = {
-   url = "https://x.org/archive/individual/xserver/xorg-server-21.1.14.tar.xz",
-   sha3 = "50ca986a1ac5086c9eb78d277e86040d226f6f7929990f02df09f500e909ef59",
+   url = "https://x.org/archive/individual/xserver/xorg-server-21.1.15.tar.xz",
+   sha3 = "79b202aba33f87e06e3f0a6087c84ed033833f825f9ff34170a53de786fe9cb2",
    build = "meson",
    flags = {
       "-D{xephyr,xnest,xvfb}=false",
