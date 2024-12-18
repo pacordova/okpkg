@@ -11,8 +11,8 @@ xorgproto = {
 };
 
 libxau = {
-   url = "https://x.org/pub/individual/lib/libXau-1.0.11.tar.xz",
-   sha3 = "199d32777cfae28af6fb6ca9d83134513204795d3e05f9b3da2b1a1984dc332f",
+   url = "https://x.org/pub/individual/lib/libXau-1.0.12.tar.xz",
+   sha3 = "2104425eff3b4432c5b81980cbf3dd8db0d52f8507bb46fb19b652c217cae15c",
    build = "./configure",
 };
 

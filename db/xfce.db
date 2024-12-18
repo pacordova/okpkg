@@ -1,34 +1,34 @@
 libxfce4util = {
-   url = "https://archive.xfce.org/src/xfce/libxfce4util/4.18/libxfce4util-4.18.2.tar.bz2",
-   sha3 = "f384a18c908d54d01903daa6e7194c5a23b4176d7ec064e7b1a2d1b6b20ea214",
+   url = "https://archive.xfce.org/src/xfce/libxfce4util/4.20/libxfce4util-4.20.0.tar.bz2",
+   sha3 = "53c2b1beea7878a03262b6ead3fbff2f6ad7e94205a7fd7ded323e0a5b81adb1",
    build = "./configure",
    flags = { "--disable-debug" }
 };
 
 xfconf = {
-   url = "https://archive.xfce.org/src/xfce/xfconf/4.18/xfconf-4.18.3.tar.bz2",
-   sha3 = "e386878490a899feb1859a51fc0e4a835640ec9bacbb3121fd896aa4a24b5864",
+   url = "https://archive.xfce.org/src/xfce/xfconf/4.20/xfconf-4.20.0.tar.bz2",
+   sha3 = "1a968973d0128f1432959e9bedc378be5662685cf8bc1291cfdc81c2483a9239",
    build = "./configure",
    flags = { "--disable-debug" }
 };
 
 libxfce4ui = {
-   url = "https://archive.xfce.org/src/xfce/libxfce4ui/4.18/libxfce4ui-4.18.6.tar.bz2",
-   sha3 = "bf995ed17168d3be32c53306abfb4f81e863097c0aed4f2f0108eb7045c59374",
+   url = "https://archive.xfce.org/src/xfce/libxfce4ui/4.20/libxfce4ui-4.20.0.tar.bz2",
+   sha3 = "664e0bf35f5ec395254c8c7198ccb433883189bc6f3b73f6673690315e987930",
    build = "./configure",
    flags = { "--disable-debug" }
 };
 
 exo = {
-   url = "https://archive.xfce.org/src/xfce/exo/4.18/exo-4.18.0.tar.bz2",
-   sha3 = "f658b1f12d1cf85a42e447f25de70431e04d5e71e89e4534d60be5f251801e9b",
+   url = "https://archive.xfce.org/src/xfce/exo/4.20/exo-4.20.0.tar.bz2",
+   sha3 = "01d57a812c4d0c13a4d3e006689f904501dae0506f487acb0ea64529a37271cd",
    build = "./configure",
    flags = { "--disable-gtk-doc", "--disable-debug" }
 };
 
 garcon = {
-   url = "https://archive.xfce.org/src/xfce/garcon/4.18/garcon-4.18.2.tar.bz2",
-   sha3 = "4803c1c61716bbb2b2b7760e161f011a592a0fbaafe0f4e42e948e68c40f798b",
+   url = "https://archive.xfce.org/src/xfce/garcon/4.20/garcon-4.20.0.tar.bz2",
+   sha3 = "b919f4b447f544fd5bfe9d4010d1843bc0125b42e6c7147ce396002480dd7a4c",
    build = "./configure",
    flags = { "--disable-debug" }
 };
@@ -37,14 +37,38 @@ libwnck3 = {
    url = "https://download.gnome.org/sources/libwnck/43/libwnck-43.1.tar.xz",
    sha3 = "b4e65d550174e2667495384d5a52ac0061640515b6464e02e50fcbb0ad01a62b",
    build = "meson",
-   flags = { 
-      "-Dgtk_doc=false",
-   }
+   flags = { "-Dgtk_doc=false" }
+};
+
+xfce4-dev-tools = {
+   url = "http://archive.xfce.org/src/xfce/xfce4-dev-tools/4.20/xfce4-dev-tools-4.20.0.tar.bz2",
+   sha3 = "ccfde695b4bb0ab2ac36f267e7e57e59616dcbc78aa184fc94f50288d1e7e400",
+   build = "./configure",
+};
+
+hwdata = {
+   url = "https://github.com/vcrhonek/hwdata/archive/v0.390/hwdata-0.390.tar.gz",
+   sha3 = "2d08c0965125ade913924d1364afc9aaebe85ad58b29f1ce9261f112a5765ec6",
+   build = "./configure",
+   flags = { "--disable-blacklist" }
+};
+
+libdisplay-info = {
+   url = "https://gitlab.freedesktop.org/emersion/libdisplay-info/-/releases/0.2.0/downloads/libdisplay-info-0.2.0.tar.xz",
+   sha3 = "3d707b38b75f501d74677e346166ab4f41fb45b8ac9fce7e8462a99d440e6a4b",
+   build = "meson",
+};
+
+libxfce4windowing = {
+   url = "https://archive.xfce.org/src/xfce/libxfce4windowing/4.20/libxfce4windowing-4.20.0.tar.bz2",
+   sha3 = "15bafe94d047002787f4c9cdddcc17a24121136467151874f02597fdc49e5be6",
+   build = "./configure",
+   flags = { "--enable-x11", "--disable-debug" }
 };
 
 xfce4-panel = {
-   url = "https://archive.xfce.org/src/xfce/xfce4-panel/4.18/xfce4-panel-4.18.6.tar.bz2",
-   sha3 = "9286b8bde0c346bce8472336957fe435d194e2e89f52dee6469e71e7b9ddf38f",
+   url = "https://archive.xfce.org/src/xfce/xfce4-panel/4.20/xfce4-panel-4.20.0.tar.bz2",
+   sha3 = "1661ac866e1727bc4691f913c96d02774e0b8d87193f16e51094ea3869196070",
    build = "./configure",
    flags = {
       "--enable-gio-unix",
@@ -54,8 +78,8 @@ xfce4-panel = {
 };
 
 thunar = {
-   url = "https://archive.xfce.org/src/xfce/thunar/4.18/thunar-4.18.11.tar.bz2",
-   sha3 = "c85a1df2df236d251e7bb941ffaeb0e00b40769914e1fbf57be092e1c0edf3a3",
+   url = "https://archive.xfce.org/src/xfce/thunar/4.20/thunar-4.20.0.tar.bz2",
+   sha3 = "eb79fe8c07522f26d4b278cd334debfab1c3766f9b4b30485cd98bacd41f8047",
    build = "./configure",
    flags = {
       "--enable-gio-unix",
@@ -68,15 +92,15 @@ thunar = {
 };
 
 thunar-volman = {
-   url = "https://archive.xfce.org/src/xfce/thunar-volman/4.18/thunar-volman-4.18.0.tar.bz2",
-   sha3 = "dc2c07a20f59649f52b0687ae535d1e108f3f9ea23c9042053954c7212818053",
+   url = "https://archive.xfce.org/src/xfce/thunar-volman/4.20/thunar-volman-4.20.0.tar.bz2",
+   sha3 = "4b3b430259850cafc80c42d236ce19482b28cdbfbe0cdc9f26b2d6feb6c56a44",
    build = "./configure",
    flags = { "--disable-debug" }
 };
 
 tumbler = {
-   url = "https://archive.xfce.org/src/xfce/tumbler/4.18/tumbler-4.18.2.tar.bz2",
-   sha3 = "b52ac5998d0089abf96f6fe99d92a8b36b7b8867e241538dcb347027e8363033",
+   url = "https://archive.xfce.org/src/xfce/tumbler/4.20/tumbler-4.20.0.tar.bz2",
+   sha3 = "54f7978b13b9d8dd983e036e1637903af340648901735fa013db78edd12ba8f8",
    build = "./configure",
    flags = {
       "--disable-debug",
@@ -86,17 +110,15 @@ tumbler = {
 };
 
 xfce4-appfinder = {
-   url = "https://archive.xfce.org/src/xfce/xfce4-appfinder/4.18/xfce4-appfinder-4.18.1.tar.bz2",
-   sha3 = "84ba37016fb6923c7ca12b152ba91a04442040b3ab1e30e6786d2c7243b16679",
+   url = "https://archive.xfce.org/src/xfce/xfce4-appfinder/4.20/xfce4-appfinder-4.20.0.tar.bz2",
+   sha3 = "d4472fa2ff8533e0cc1fe14c8a5f0661ef4bbd775315ec166fb530aec2247713",
    build = "./configure",
-   flags = {
-      "--disable-debug",
-   }
+   flags = { "--disable-debug" }
 };
 
 xfce4-power-manager = {
-   url = "https://archive.xfce.org/src/xfce/xfce4-power-manager/4.18/xfce4-power-manager-4.18.4.tar.bz2",
-   sha3 = "3ac8c4269e09e133187911b114950bc785f09309dd82715e9b3444c75e8c94d5",
+   url = "https://archive.xfce.org/src/xfce/xfce4-power-manager/4.20/xfce4-power-manager-4.20.0.tar.bz2",
+   sha3 = "fe373642bf3667ce53c2f0c30c7654ab838ebafef5327bd6863aa4bbf0011d08",
    build = "./configure",
    flags = {
       "--disable-network-manager",
@@ -106,8 +128,8 @@ xfce4-power-manager = {
 };
 
 xfce4-settings = {
-   url = "https://archive.xfce.org/src/xfce/xfce4-settings/4.18/xfce4-settings-4.18.6.tar.bz2",
-   sha3 = "a14c6a677414c47ca2b04ace6ae9d9998757192a759fbfa677f6e5f817d2fe34",
+   url = "https://archive.xfce.org/src/xfce/xfce4-settings/4.20/xfce4-settings-4.20.0.tar.bz2",
+   sha3 = "e2c41fb81ceaf51ccd0bf2152caebe6c9e5c04d02e9f6663cf29687c686a2c99",
    build = "./configure",
    flags = {
       "--enable-xrandr",
@@ -122,8 +144,8 @@ xfce4-settings = {
 };
 
 xfdesktop = {
-   url = "https://archive.xfce.org/src/xfce/xfdesktop/4.18/xfdesktop-4.18.1.tar.bz2",
-   sha3 = "3ef549cd6b3ef2b179222a2e0f2a721581c14bcc88aab949edf88c58ec04dc1f",
+   url = "https://archive.xfce.org/src/xfce/xfdesktop/4.20/xfdesktop-4.20.0.tar.bz2",
+   sha3 = "0492ea45758224af5453521edb7ca6c4b9503288b65714f78f0ce9bdd1561cdb",
    build = "./configure",
    flags = {
       "--enable-thunarx",
@@ -133,8 +155,8 @@ xfdesktop = {
 };
 
 xfwm4 = {
-   url = "https://archive.xfce.org/src/xfce/xfwm4/4.18/xfwm4-4.18.0.tar.bz2",
-   sha3 = "dd79699d094291a57dc3faab36f0a9cbf778f34c8b93bb160265656249bdb850",
+   url = "https://archive.xfce.org/src/xfce/xfwm4/4.20/xfwm4-4.20.0.tar.bz2",
+   sha3 = "d16d69cc7a48900202a3219c3f7779003396464fceed18692a3f6c91295951e7",
    build = "./configure",
    flags = {
       "--enable-startup-notification",
@@ -153,19 +175,13 @@ xfce4-screensaver = {
 };
 
 xfce4-session = {
-   url = "https://archive.xfce.org/src/xfce/xfce4-session/4.18/xfce4-session-4.18.4.tar.bz2",
-   sha3 = "0197ec836f4d58b15c7b60458716792178181e3bbe2b00b0940faa3b3fef9ecb",
+   url = "https://archive.xfce.org/src/xfce/xfce4-session/4.20/xfce4-session-4.20.0.tar.bz2",
+   sha3 = "cb13a8b02c01de40929f4f71164901590dfeef40383202195c11253504f5ab30",
    build = "./configure",
    flags = {
       "--disable-legacy-sm",
       "--disable-debug",
    }
-};
-
-xfce4-dev-tools = {
-   url = "http://archive.xfce.org/src/xfce/xfce4-dev-tools/4.18/xfce4-dev-tools-4.18.1.tar.bz2",
-   sha3 = "2d2dd9722a194f3c2be8f052f214650f10a5bf755b4da4cc582f546862e3dbb2",
-   build = "./configure",
 };
 
 xfce4-notifyd = {
@@ -209,9 +225,7 @@ ristretto = {
    url = "https://archive.xfce.org/src/apps/ristretto/0.13/ristretto-0.13.2.tar.bz2",
    sha3 = "286f140db8e41548c5a00a086a5255e9920a30aa1f92532131d39a383fbe605c",
    build = "./configure",
-   flags = {
-      "--disable-debug",
-   }
+   flags = { "--disable-debug" }
 };
 
 xarchiver = {
@@ -222,8 +236,8 @@ xarchiver = {
 };
 
 xfce4-alsa-plugin = {
-   url = "https://github.com/equeim/xfce4-alsa-plugin/archive/0.3.0/xfce4-alsa-plugin-0.3.0.tar.gz",
-   sha3 = "81a6f9fb940244fbe3cee2be406d0df8865e9e5d28257ca56d77529dbec91cc4",
+   url = "https://github.com/equeim/xfce4-alsa-plugin/archive/0.4.0/xfce4-alsa-plugin-0.4.0.tar.gz",
+   sha3 = "78aff63bf0dc17a581b03d177e494f83423819cea25f10867ece96a526b70665",
    build = "meson",
 };
 
@@ -267,8 +281,8 @@ greybird = {
 };
 
 elementary-xfce-icon-theme = {
-   url = "https://github.com/shimmerproject/elementary-xfce/archive/v0.19/elementary-xfce-0.19.tar.gz",
-   sha3 = "b22d6d64feeffdd048a19d933c2b6815a584f3b64394bf69f4f015e42577e168",
+   url = "https://github.com/shimmerproject/elementary-xfce/archive/v0.20/elementary-xfce-0.20.tar.gz",
+   sha3 = "9ea595732bbeca243b28d47527c1dc48eb2858f405eef0950b3b87fb8ad240ce",
    build = "./configure",
    post = [[
       gtk-update-icon-cache $destdir/usr/share/icons/elementary-xfce
