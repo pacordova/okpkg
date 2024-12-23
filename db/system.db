@@ -621,8 +621,8 @@ plzip = {
 };
 
 kbd = {
-   url = "https://kernel.org/pub/linux/utils/kbd/kbd-2.7.tar.xz",
-   sha3 = "711d0aa1baf2c07f3fc8cdf1203440c5c696b5750737b15c4fbf67a6ba8695c5",
+   url = "https://kernel.org/pub/linux/utils/kbd/kbd-2.7.1.tar.xz",
+   sha3 = "6e27ca792d7c6a1acf0aa3f1fbeb54148c435b87507bdba83b0813f995dee7f1",
    build = "./configure",
    flags = { "--disable-vlock" },
    prepare = [[
@@ -731,8 +731,8 @@ mandoc = {
 };
 
 procps-ng = {
-   url = "https://prdownloads.sourceforge.net/procps-ng/procps-ng-4.0.4.tar.xz",
-   sha3 = "c8dfb677329bdca7c991a8234a9b058210622006fd72589bc8e5c4023395c875",
+   url = "https://prdownloads.sourceforge.net/procps-ng/procps-ng-4.0.5.tar.xz",
+   sha3 = "373142bce8af2737c5367ae4fd11f656cb40f1a72573605e3978e2fe79a4f31a",
    build = "./configure",
    flags = { "--disable-modern-top", "--disable-kill", "--without-systemd" }
 };
@@ -788,21 +788,14 @@ dinit = {
 };
 
 dbus = {
-   url = "https://dbus.freedesktop.org/releases/dbus/dbus-1.14.10.tar.xz",
-   sha3 = "8e9d0418dfa461edaf56deb760c1d3ae0417cb3aaf6cfe8bee0487bb9eeb1a11",
-   build = "./configure",
+   url = "https://dbus.freedesktop.org/releases/dbus/dbus-1.16.0.tar.xz",
+   sha3 = "5f2eecd76f5ae16711ebb410cd072daa9f815bf6ff9106f7f9b40424410a7407",
+   build = "meson",
    flags = {
-      "--libexecdir=/usr/lib64/dbus",
-      "--enable-inotify",
-      "--disable-{doxygen,xml}-docs",
-      "--with-system-pid-file=/run/dbus/pid",
-      "--with-systemd{system,user}unitdir=no",
-      "--with-system-socket=/run/dbus/system_bus_socket",
+      "-Dsystem_pid_file=/run/dbus/pid",
+      "-Dsystemd_{system,user}_unitdir=no",
+      "-Dsystem_socket=/run/dbus/system_bus_socket",
    },
-   post = [[
-      chown root:messagebus $destdir/usr/lib64/dbus/dbus-daemon-launch-helper
-      chmod 4750 $destdir/usr/lib64/dbus/dbus-daemon-launch-helper
-   ]]
 };
 
 --------------------------------------------------------------------------------

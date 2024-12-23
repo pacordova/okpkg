@@ -68,8 +68,8 @@ python-docutils = {
 };
 
 python-mako = {
-   url = "https://pypi.org/packages/source/M/Mako/mako-1.3.6.tar.gz",
-   sha3 = "d4ed5badefce3498970ace190be3c1574c07e9f1d9f63c44674c7979d9841b94",
+   url = "https://pypi.org/packages/source/M/Mako/mako-1.3.8.tar.gz",
+   sha3 = "f96ed13744effb344fe292aad5798785c0e9e22a4b6311fcaeebd42bc1d25921",
    build = "python-build",
 };
 

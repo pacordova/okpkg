@@ -168,8 +168,8 @@ xfwm4 = {
 };
 
 xfce4-screensaver = {
-   url = "https://archive.xfce.org/src/apps/xfce4-screensaver/4.18/xfce4-screensaver-4.18.3.tar.bz2",
-   sha3 = "56e5b71025dfde25a9b84f133da7faeebe7830df796774fdeb1dbe04301808cd",
+   url = "https://archive.xfce.org/src/apps/xfce4-screensaver/4.18/xfce4-screensaver-4.18.4.tar.bz2",
+   sha3 = "c5cd51317661ac201802de92329bbf6a37a905372bcd5130200455624e99b2ea",
    build = "./configure",
    flags = { "--disable-debug" }
 };
