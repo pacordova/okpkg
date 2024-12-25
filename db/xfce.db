@@ -195,8 +195,8 @@ xfce4-notifyd = {
 };
 
 xfce4-battery-plugin = {
-   url = "https://archive.xfce.org/src/panel-plugins/xfce4-battery-plugin/1.1/xfce4-battery-plugin-1.1.5.tar.bz2",
-   sha3 = "eb77d00fe0d691dd1625ab5cf4c4ac5ead2918d767e0b1089cc2c26990b31437",
+   url = "https://archive.xfce.org/src/panel-plugins/xfce4-battery-plugin/1.1/xfce4-battery-plugin-1.1.6.tar.bz2",
+   sha3 = "bc53008e01c113e5b39f99aefdfc1e76ff1fe4d42532bbe6860c1c08a780f3c5",
    build = "./configure",
    flags = {
       "--disable-debug",
@@ -222,8 +222,8 @@ mousepad = {
 };
 
 ristretto = {
-   url = "https://archive.xfce.org/src/apps/ristretto/0.13/ristretto-0.13.2.tar.bz2",
-   sha3 = "286f140db8e41548c5a00a086a5255e9920a30aa1f92532131d39a383fbe605c",
+   url = "https://archive.xfce.org/src/apps/ristretto/0.13/ristretto-0.13.3.tar.bz2",
+   sha3 = "adc56c8de3ecf905b8cd8bdd4db27b7933b58abb53551ea206069017a7c28524",
    build = "./configure",
    flags = { "--disable-debug" }
 };
