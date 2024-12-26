@@ -305,18 +305,29 @@ function purge(x)
 end
 
 function install(path) 
-   local v, fp, buf, x
+   local v, fp, buf, f
 
    -- Extract tarball, save the output buffer
    fp = io.popen(string.format("tar -C / -xvhf %s 2>&1", path))
    buf = fp:read('*a')
    fp:close()
 
-   -- Write output buffer as a file index
    v = vstr(path)
-   if #v > 0 then x = basename(path:sub(1, #path-#v-8))
-   else x = basename(path:sub(1, #path-7)) end
-   fp = io.open(string.format("%s/%s.index", C.indexdir, x), 'w')
+   if #v > 0 then 
+      f = C.indexdir .. "/" .. basename(path:sub(1, #path-#v-8)) .. ".index"
+   else 
+      f = C.indexdir .. "/" .. basename(path:sub(1, #path-7)) .. ".index" 
+   end
+
+   -- Save original file to *.orig, use diff to delete old files
+   fp = io.open(f)
+   if fp then 
+      fp:close()
+      os.rename(f, f .. ".orig") 
+   end
+
+   -- Write output buffer as a file index
+   fp = io.open(f, 'w')
    fp:write(buf)
    fp:close()
 
