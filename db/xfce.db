@@ -204,8 +204,8 @@ xfce4-battery-plugin = {
 };
 
 thunar-archive-plugin = {
-   url = "https://archive.xfce.org/src/thunar-plugins/thunar-archive-plugin/0.5/thunar-archive-plugin-0.5.2.tar.bz2",
-   sha3 = "b206a1c98616c5a07e064896d125a7897e29fb604b8b42436d63c4f051fcdeba",
+   url = "https://archive.xfce.org/src/thunar-plugins/thunar-archive-plugin/0.5/thunar-archive-plugin-0.5.3.tar.bz2",
+   sha3 = "1416498349c716cb5c9d557a2c99a6a3a75433d0cf50e412b93fbf7b111ab573",
    build = "./configure",
    flags = { "--libexecdir=/usr/lib64/xfce4" }
 };

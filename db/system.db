@@ -479,8 +479,8 @@ perl = {
 };
 
 libxcrypt = {
-   url = "https://github.com/besser82/libxcrypt/releases/download/v4.4.36/libxcrypt-4.4.36.tar.xz",
-   sha3 = "315c9bbbb87da32521b2f67170ab417dbd23138750b0ca85bc5fac2f4ec2fb9d",
+   url = "https://github.com/besser82/libxcrypt/releases/download/v4.4.37/libxcrypt-4.4.37.tar.xz",
+   sha3 = "c9e178f2b5744c3415384568916724181350c43630cd11c57dde6652627fe23f",
    build = "./configure",
    flags = {
       "--enable-hashes=strong,glibc",
