@@ -119,6 +119,16 @@ B = {
       ]]
       return true
    end,
+   ["zig"] = function()
+      os.execute [[
+         DESTDIR=$destdir zig build \
+	     -Dprefix=/usr \
+	     -Doptimize=ReleaseFast \
+	     -Dcpu=baseline \
+	     -Dpie=true \
+      ]]
+      return true
+   end,
 }
 
 local function timestamp(f)

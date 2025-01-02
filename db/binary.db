@@ -1,3 +1,14 @@
+zig-bin = {
+   url = "https://ziglang.org/download/0.13.0/zig-linux-x86_64-0.13.0.tar.xz",
+   sha3 = "60947fd18bcdd206b579ee510db6cdfd3f86d7ac6776ebe9045e13502c259e63",
+   post = [[
+      install -d $destdir/usr/{bin,lib64}
+      install zig $destdir/usr/bin
+      cp -rp lib $destdir/usr/lib64/zig
+      ln -sf lib64 $destdir/usr/lib
+   ]]
+};
+
 rust-bin = {
    url = "https://static.rust-lang.org/dist/rust-1.82.0-x86_64-unknown-linux-gnu.tar.xz",
    sha3 = "5919fb829bc32c48c3ad93749b407b5d42c3893489797f996fd0a3b0e954ec13",
