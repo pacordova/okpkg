@@ -15,6 +15,7 @@ keys=(
    'A22F5C0F4FCF9C7C89A167462C965E9E5D45D730' # Yuxuan Shui <yshuiv7@gmail.com>
    '0AD041B27CA166DDA1FE3BAEA7B3409C0CA4ED14' # Dov Grobgeld <dov.grobgeld@gmail.com>
    '053D20F17CCCA9651B2C6FCB9AB24930C0B997A2' # Khaled Hosny <khaled@aliftype.com> (@khaledhosny)
+   '3C40194FB79138CE0F78FD4919C2F062574F5403' # Vitezslav Crhonek
 )
 for k in ${keys[@]}; do gpg --recv-keys $k; done
 
@@ -26,7 +27,8 @@ ckone(){
         gzip -n > `basename $1`-$v.tar.gz
 }
 
-ckone https://github.com/vim/vim/ v9.1.0988
+#ckone https://github.com/vim/vim/ v9.1.0988
+ckone https://github.com/vcrhonek/hwdata v0.391
 #ckone https://github.com/yshui/picom v12.5
 #ckone https://github.com/eggert/tz/ 2024b
 #ckone https://github.com/pnggroup/libpng v1.6.44
