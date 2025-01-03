@@ -122,10 +122,8 @@ B = {
    ["zig"] = function()
       os.execute [[
          DESTDIR=$destdir zig build \
-	     -Dprefix=/usr \
+	     --prefix "/usr" \
 	     -Doptimize=ReleaseFast \
-	     -Dcpu=baseline \
-	     -Dpie=true \
       ]]
       return true
    end,

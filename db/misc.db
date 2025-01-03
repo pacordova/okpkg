@@ -1,6 +1,6 @@
 ghostty = {
-   url = "https://github.com/ghostty-org/ghostty/archive/v1.0.1/ghostty-1.0.1.tar.gz",
-   sha3 = "bbc56f35585d01b2fdacdbac5aa9f11a4b9d3647035a21220fb0ca5cc5818a0b",
+   url = "https://github.com/ghostty-org/ghostty/archive/v1.0.0/ghostty-1.0.0.tar.gz",
+   sha3 = "d9b2c6de401278817a084c05c59493dd745afe601f2475238aa3ce731c21b082",
    build = "zig",
 };
 
@@ -270,8 +270,8 @@ ugrep = {
 };
 
 vim = {
-   url = "https://github.com/vim/vim/archive/v9.1.0983/vim-9.1.0983.tar.gz",
-   sha3 = "34eb762d0e8d1078d956831199817e41ccffa67c5a50ea17fd06e76b35a09238",
+   url = "https://github.com/vim/vim/archive/v9.1.0988/vim-9.1.0988.tar.gz",
+   sha3 = "17d94cf11b50067b909df08fc7d478fef0f632ada7c908eb47a098ce798260cb",
    build = "./configure",
    flags = {
       "--enable-{cscope,multibyte}",

@@ -759,8 +759,8 @@ dcron = {
 };
 
 e2fsprogs = {
-   url = "https://www.kernel.org/pub/linux/kernel/people/tytso/e2fsprogs/v1.47.1/e2fsprogs-1.47.1.tar.xz",
-   sha3 = "30a60c31d8594d8b71694142e7e5320add4a476a8357c06686e28a2bfaa11d0e",
+   url = "https://www.kernel.org/pub/linux/kernel/people/tytso/e2fsprogs/v1.47.2/e2fsprogs-1.47.2.tar.xz",
+   sha3 = "582f495331e7a79e5703e14333da9ba2c07c1dc21bf1bab33c95677a640e0824",
    build = "./configure",
    flags = { "--enable-elf-shlibs", "--disable-{libblkid,libuuid,uuidd}" },
 };
