@@ -44,8 +44,8 @@ python-wheel = {
 };
 
 python-setuptools = {
-   url = "https://pypi.org/packages/source/s/setuptools/setuptools-75.6.0.tar.gz",
-   sha3 = "acc084e97d0ce76e962ea57e8239db5018b6ed0028f5d147f361562b439ae6e7",
+   url = "https://pypi.org/packages/source/s/setuptools/setuptools-75.7.0.tar.gz",
+   sha3 = "f9b3b7f1555b847eb719fa4f7a9ec4fe2adabfb9cdab869be707e10ee176faa7",
    build = "python-build",
 };
 
@@ -123,8 +123,8 @@ python-hatchling = {
 };
 
 python-pygments = {
-   url = "https://pypi.org/packages/source/p/pygments/pygments-2.18.0.tar.gz",
-   sha3 = "e8902154acf0e5aa730579e955d2f7d55df81514c65cbf26e8a5a476dd02a004",
+   url = "https://pypi.org/packages/source/p/pygments/pygments-2.19.0.tar.gz",
+   sha3 = "1c212cb5452f16c9011a1cce1b1db00262c8f8481c27dfd18e6d9102e59cbef8",
    build = "python-build",
 };
 

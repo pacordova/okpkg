@@ -291,8 +291,8 @@ libvdpau = {
 };
 
 mesa = {
-   url = "https://mesa.freedesktop.org/archive/mesa-24.3.2.tar.xz",
-   sha3 = "16c33ad45c2139e1bda407b9c121bcd3ff211a21252861a34106ec7afa58222e",
+   url = "https://mesa.freedesktop.org/archive/mesa-24.3.3.tar.xz",
+   sha3 = "357809eea46fd756ee390e48b9f975b08e726ab08424361606c66a581ff8f127",
    build = "meson",
    flags = {
       "-Dplatforms=x11",
@@ -594,8 +594,8 @@ xf86-input-evdev = {
 };
 
 libinput = {
-   url = "https://gitlab.freedesktop.org/libinput/libinput/-/archive/1.27.0/libinput-1.27.0.tar.bz2",
-   sha3 = "89d07b72d5f4e308abe3f24680e202cccadd16ede1bf4ca4e8552447c8282eb5",
+   url = "https://gitlab.freedesktop.org/libinput/libinput/-/archive/1.27.1/libinput-1.27.1.tar.bz2",
+   sha3 = "a7aaf28890d6101c3072d9e61cdd378768310241b6098836b7e57f9a90e7f9b8",
    build = "meson",
    flags = {
       "-D{debug-gui,documentation,libwacom,tests}=false",
@@ -610,8 +610,8 @@ xf86-input-libinput = {
 };
 
 xf86-input-synaptics = {
-   url = "https://x.org/pub/individual/driver/xf86-input-synaptics-1.9.2.tar.xz",
-   sha3 = "c4533dff52f044c3b4c20e2f048440238bab23d351b0cb39049df723046fa07f",
+   url = "https://x.org/pub/individual/driver/xf86-input-synaptics-1.10.0.tar.xz",
+   sha3 = "fadefdffd72c375444c41e5dd951a8c2594c6be1fb7e606e29166cac3c4b2f2d",
    build = "./configure",
 };
 
