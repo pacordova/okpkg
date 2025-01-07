@@ -773,8 +773,8 @@ dosfstools = {
 };
 
 sysklogd = {
-   url = "https://github.com/troglobit/sysklogd/releases/download/v2.6.2/sysklogd-2.6.2.tar.gz",
-   sha3 = "ec733cbb81ec5c71a99a10e8add188eebd8813ae15a9f4b95064486f48e8bb3e",
+   url = "https://github.com/troglobit/sysklogd/releases/download/v2.7.0/sysklogd-2.7.0.tar.gz",
+   sha3 = "559704de57b84e87188585d92049438129272706e7a1a1936c20eebf1313bbda",
    build = "./configure",
    flags = { "--without-logger" }
 };

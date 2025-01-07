@@ -626,8 +626,8 @@ xf86-input-wacom = {
 };
 
 xorg-xinit = {
-   url = "https://x.org/pub/individual/app/xinit-1.4.2.tar.xz",
-   sha3 = "2ad9bb22c2fac6a6b1b0d7278ec15b845fe7096b3547fb1ac16d8ed68bf4ff1a",
+   url = "https://x.org/pub/individual/app/xinit-1.4.3.tar.xz",
+   sha3 = "303c39d56641cb5d37546f68d14365fdaa08f9c385d4d437737765273eb99edb",
    build = "./configure",
    flags = { "--with-xinitdir=/etc/X11/xinit" },
    post = [[

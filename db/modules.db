@@ -123,8 +123,8 @@ python-hatchling = {
 };
 
 python-pygments = {
-   url = "https://pypi.org/packages/source/p/pygments/pygments-2.19.0.tar.gz",
-   sha3 = "1c212cb5452f16c9011a1cce1b1db00262c8f8481c27dfd18e6d9102e59cbef8",
+   url = "https://pypi.org/packages/source/p/pygments/pygments-2.19.1.tar.gz",
+   sha3 = "890bb1a085bfc6560d2eddeb61e4d8d1779d3dfdb383f7973353b181b67ae335",
    build = "python-build",
 };
 
