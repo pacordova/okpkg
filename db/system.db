@@ -640,8 +640,8 @@ make = {
 };
 
 ed = {
-   url = "https://ftp.gnu.org/gnu/ed/ed-1.20.2.tar.lz",
-   sha3 = "ff8fcebefa1cbf8e5f651152629191d61c7f92f129cd6e9bc0d9ddc48e2998f0",
+   url = "https://ftp.gnu.org/gnu/ed/ed-1.21.tar.lz",
+   sha3 = "b846639de83bea36010248194c6f04cfdc4504f5f57b8fcf36e8b80da6f862b1",
    build = "./configure",
 };
 
