@@ -1489,11 +1489,6 @@ geoclue = {
    build = "meson",
 };
 
-gs = {
-   url = "https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs9550/ghostscript-9.55.0.tar.xz",
-   build = "./configure",
-};
-
 gedit = {
    url = "https://download.gnome.org/sources/gedit/41/gedit-41.0.tar.xz",
    build = "meson",

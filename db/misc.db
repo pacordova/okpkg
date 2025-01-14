@@ -1,3 +1,13 @@
+ghostscript = {
+   url = "https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs10040/ghostscript-10.04.0.tar.xz",
+   sha3 = "30e1c09238960f93b97126b4de902b938225467b78adb093cc2d6de690fa4f8b",
+   build = "./configure",
+   flags = {
+      "--disable-{compile-inits,cups}",
+      --"--with-system-libtiff",
+   }
+};
+
 ghostty = {
    url = "https://github.com/ghostty-org/ghostty/archive/v1.0.0/ghostty-1.0.0.tar.gz",
    sha3 = "d9b2c6de401278817a084c05c59493dd745afe601f2475238aa3ce731c21b082",
