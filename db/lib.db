@@ -52,8 +52,8 @@ libgudev = {
 };
 
 upower = {
-   url = "https://gitlab.freedesktop.org/upower/upower/-/archive/v1.90.6/upower-v1.90.6.tar.gz",
-   sha3 = "34a5218f0499e67a0a3b1b372cda7980d8aeb85f630c9d893e26b4fadaa08bfa",
+   url = "https://gitlab.freedesktop.org/upower/upower/-/archive/v1.90.7/upower-v1.90.7.tar.bz2",
+   sha3 = "971553ec09ad063adde141ffc0ae37a1f82577db01f2db9d311e3e5e6c853282",
    build = "meson",
    flags = {
       "-Dsystemdsystemunitdir=no",
@@ -249,8 +249,8 @@ libpcap = {
 };
 
 libpng = {
-   url = "https://github.com/pnggroup/libpng/archive/v1.6.44/libpng-1.6.44.tar.gz",
-   sha3 = "02bc30195164e4aa93cfc409f81d02fbd1a1db6911f111d2e3a8c2bae1be1856",
+   url = "https://downloads.sourceforge.net/libpng/libpng-1.6.45.tar.xz",
+   sha3 = "e4d29d54281dad5dd4c74392cc9b7c69349ea599fa902600c406b3110f2c855f",
    build = "./configure",
 };
 

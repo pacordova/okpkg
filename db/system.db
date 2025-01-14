@@ -738,8 +738,8 @@ procps-ng = {
 };
 
 util-linux = {
-   url = "https://kernel.org/pub/linux/utils/util-linux/v2.40/util-linux-2.40.2.tar.xz",
-   sha3 = "6cfe339e782e0b9caa02be49fd952197327f9d6145d1d6ae9f4d00729d51fbb0",
+   url = "https://kernel.org/pub/linux/utils/util-linux/v2.40/util-linux-2.40.4.tar.xz",
+   sha3 = "fcb618c18bfd19cd596d503c49d5be0b7fdff0916919398765cbfa0f34d85a54",
    build = "./configure",
    flags = {
       "--disable-{chfn-chsh,login,nologin,su,setpriv,runuser,pylibmount}",
