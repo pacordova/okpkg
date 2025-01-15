@@ -56,15 +56,15 @@ bubblewrap = {
 };
 
 flatpak = {
-   url = "https://github.com/flatpak/flatpak/releases/download/1.14.10/flatpak-1.14.10.tar.xz",
-   sha3 = "a27f9eddb9b9d56310d9fbc6ef7832f035d353e8fdc5c80c7e2319abb3e959a4",
-   build = "./configure", 
+   url = "https://github.com/flatpak/flatpak/releases/download/1.16.0/flatpak-1.16.0.tar.xz",
+   sha3 = "35001480cc47ad1c703bbfbc92ebd9f1da1d2adf071e351ef7721ad50bae4170",
+   build = "meson",
    flags = {
-      "--with-system-bubblewrap",
-      "--with-system-dbus-proxy",
-      "--without-systemd",
-      "--disable-system-helper",
-      "--disable-documentation",
+      "-Dsystem_bubblewrap=bwrap",
+      "-Dsystem_dbus_proxy=xdg-dbus-proxy",
+      "-Dsystemd=disabled",
+      "-Dsystem_helper=disabled",
+      "-Dtests=false",
    },
    post = [[ rm -fr "$destdir/usr/lib" ]]
 };

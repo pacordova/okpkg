@@ -117,8 +117,8 @@ bzip2 = {
 };
 
 lzlib = {
-   url = "https://download.savannah.gnu.org/releases/lzip/lzlib/lzlib-1.14.tar.lz",
-   sha3 = "581e72585d5b7a2828606e59caf929b36bd2e2a4cb39c5b5299743a64610ae74",
+   url = "https://download.savannah.gnu.org/releases/lzip/lzlib/lzlib-1.15.tar.lz",
+   sha3 = "245e59a2feab412266446acb913af13bfb385c225d7ccf6c724b9c6f7c8b69b4",
    build = "./configure",
    flags = {
       "--libdir=/usr/lib64",
@@ -614,8 +614,8 @@ pigz = {
 };
 
 plzip = {
-   url = "https://download.savannah.gnu.org/releases/lzip/plzip/plzip-1.11.tar.lz",
-   sha3 = "ec50d56f9f14c0091cef0bfe039c350df5968ad1056e70289cb6e54495b2661b",
+   url = "https://download.savannah.gnu.org/releases/lzip/plzip/plzip-1.12.tar.lz",
+   sha3 = "d7dc9adea8988bd03dd967337905faf4e2a1ac115a458a4551d1987fa0b9e58d",
    build = "./configure",
    post = [[ ln -sf plzip $destdir/usr/bin/lzip ]]
 };

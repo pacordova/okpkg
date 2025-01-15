@@ -39,10 +39,10 @@ firefox-bin = {
 };
 
 -- from firefox: libnss3.so libnssutil3.so libsmime3.so libnspr4.so libplc4.so libplds4.so
--- needs cups
+-- needs libcups.so.2
 discord = {
-   url = "https://dl.discordapp.net/apps/linux/0.0.79/discord-0.0.79.tar.gz",
-   sha3 = "de61042dc79d44c966efe32c377438b29e932ac4d5f3efd57c2138a350db1ffb",
+   url = "https://dl.discordapp.net/apps/linux/0.0.80/discord-0.0.80.tar.gz",
+   sha3 = "d76034ae64179800b87bb294192a3c47f653d83a95aca4809332b86deaad807e",
    build = _,
    post = [[
       sed -e 's:/usr/share:/usr/lib64:' \
