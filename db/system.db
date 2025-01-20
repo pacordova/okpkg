@@ -27,8 +27,8 @@ bison = {
 };
 
 _perl = {
-   url = "https://www.cpan.org/src/5.0/perl-5.40.0.tar.xz",
-   sha3 = "79932e1815d865e73674a2b1b944a6abdea8638d90892d82bdb1810b8a273645",
+   url = "https://www.cpan.org/src/5.0/perl-5.40.1.tar.xz",
+   sha3 = "ce73bfaebcc5a8fec4a0800e1511ae90e4102c53b37419f31f8e85600313fc7f",
    build = "./configure.gnu",
    flags= {
       "-Dvendorprefix=/usr",
@@ -443,16 +443,16 @@ gawk = {
 };
 
 tzdata = {
-   url = "https://github.com/eggert/tz/archive/2024b/tz-2024b.tar.gz",
-   sha3 = "00da9db43f7fe82b918c8d43753f31805a870944bf1e140d3979ca9262eb0034",
+   url = "https://github.com/eggert/tz/archive/2025a/tz-2025a.tar.gz",
+   sha3 = "20b6ccc53c84b0ac448e2f5020b5fcd53c731aad845eeb8049c1ddb06613782b",
    build = "make",
    flags = { "LIBDIR=/usr/lib64", "ZICDIR=/usr/bin" },
    post = [[ rm -f $destdir/etc/localtime ]]
 };
 
 perl = {
-   url = "https://www.cpan.org/src/5.0/perl-5.40.0.tar.xz",
-   sha3 = "79932e1815d865e73674a2b1b944a6abdea8638d90892d82bdb1810b8a273645",
+   url = "https://www.cpan.org/src/5.0/perl-5.40.1.tar.xz",
+   sha3 = "ce73bfaebcc5a8fec4a0800e1511ae90e4102c53b37419f31f8e85600313fc7f",
    build = "./configure.gnu",
    flags= {
       "-Dvendorprefix=/usr",
@@ -479,8 +479,8 @@ perl = {
 };
 
 libxcrypt = {
-   url = "https://github.com/besser82/libxcrypt/releases/download/v4.4.37/libxcrypt-4.4.37.tar.xz",
-   sha3 = "c9e178f2b5744c3415384568916724181350c43630cd11c57dde6652627fe23f",
+   url = "https://github.com/besser82/libxcrypt/releases/download/v4.4.38/libxcrypt-4.4.38.tar.xz",
+   sha3 = "7794c56f301317cc2140ba1ae77f97bdcd03a9ab9e57024f43523af6e9da75ec",
    build = "./configure",
    flags = {
       "--enable-hashes=strong,glibc",
@@ -537,8 +537,8 @@ libffi = {
 };
 
 sqlite = {
-   url = "https://www.sqlite.org/2024/sqlite-autoconf-3470200.tar.gz",
-   sha3 = "52cd4a2304b627abbabe1a438ba853d0f6edb8e2774fcb5773c7af11077afe94",
+   url = "https://www.sqlite.org/2025/sqlite-autoconf-3480000.tar.gz",
+   sha3 = "279e3dd8fc8fea6d56acb79b380440b57f8e0c02b371e3b195c993b51c2b5b0c",
    build = "./configure",
    flags = { "--enable-fts5", "CPPFLAGS=-DSQLITE_ENABLE_COLUMN_METADATA=1" },
 };
@@ -566,8 +566,8 @@ python3 = {
 };
 
 coreutils = {
-   url = "https://ftp.gnu.org/gnu/coreutils/coreutils-9.5.tar.xz",
-   sha3 = "b1ec0d3be8380d8c93719bc31224419e5a0bc1a4dd7ddbcbff5b16e672247d0c",
+   url = "https://ftp.gnu.org/gnu/coreutils/coreutils-9.6.tar.xz",
+   sha3 = "6c7efca54b6c2606f807a188c6e632049c1fe327898d35b44cdd5d85af1f8400",
    build = "./configure",
    flags = {
       "--enable-install-program=hostname",
@@ -809,8 +809,8 @@ libaio = {
 };
 
 device-mapper = {
-   url = "https://sourceware.org/ftp/lvm2/LVM2.2.03.29.tgz",
-   sha3 = "710002490d3e7b55cc2b53258c222cc92fa7cab8620983949679ffa1a9584863",
+   url = "https://sourceware.org/ftp/lvm2/LVM2.2.03.30.tgz",
+   sha3 = "0c6f5ce25e720bdb9d049f8e1f29ba308baa0964a86cfea75cbe1ff20d1db18c",
    build = "./configure",
    flags = {
       "--enable-{cmdlib,dmeventd,pkgconfig}",

@@ -204,8 +204,8 @@ libevent = {
 };
 
 libexif = {
-   url = "https://github.com/libexif/libexif/releases/download/v0.6.24/libexif-0.6.24.tar.bz2",
-   sha3 = "a3d9130008e06b086ff60624ed629eeb259916da99fa045784fc6177b4b591c3",
+   url = "https://github.com/libexif/libexif/releases/download/v0.6.25/libexif-0.6.25.tar.xz",
+   sha3 = "7237c460419244249b8350669b2434960c93f276a809f80e7d9a8a4535762984",
    build = "./configure",
    flags = { "--with-doc-dir=/usr/share/doc/libexif" }
 };
@@ -306,8 +306,8 @@ libtirpc = {
 };
 
 libuv = {
-   url = "https://dist.libuv.org/dist/v1.49.2/libuv-v1.49.2-dist.tar.gz",
-   sha3 = "00dd01b15e2a1ca2586997607a5c822bb1874cb6b4bef037226c71625a1fe3c6",
+   url = "https://dist.libuv.org/dist/v1.50.0/libuv-v1.50.0-dist.tar.gz",
+   sha3 = "8743e14a25dd8a8d46b1700daf84166677a4d9f25464db9751556754814c3fa5",
    build = "./configure",
 };
 

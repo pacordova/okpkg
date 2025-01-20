@@ -183,8 +183,8 @@ kirc = {
 };
 
 linux = {
-   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.6.66.tar.xz",
-   sha3 = "8f63fdad09eda3e7a76066b2e0ed3d466777ae0791f63c8571e101416d08ee23",
+   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.6.72.tar.xz",
+   sha3 = "3742d327c9b2c25ed0f7b65d60a01fdb05edb28a5b788f129419bf66c9a28f0f",
    build = "make",
    flags = { "bzImage", "modules", "headers" },
    prepare = [[
@@ -196,7 +196,7 @@ linux = {
       install -m 644 arch/x86/boot/bzImage $destdir/boot/vmlinuz-6.6
       make modules_install \
           INSTALL_MOD_PATH=$destdir \
-          MODLIB=$destdir/usr/lib64/modules/6.6.66
+          MODLIB=$destdir/usr/lib64/modules/6.6.72
       cp -rp usr/include $destdir/usr
       find $destdir/usr/include -type f ! -name '*.h' -delete
    ]]
@@ -280,8 +280,8 @@ ugrep = {
 };
 
 vim = {
-   url = "https://github.com/vim/vim/archive/v9.1.1012/vim-9.1.1012.tar.gz",
-   sha3 = "528af064fc6164a15daa8a84b27bbbe9a2862295942896a110ade81d49d9db34",
+   url = "https://github.com/vim/vim/archive/v9.1.1033/vim-9.1.1033.tar.gz",
+   sha3 = "b24a2d45f1c2c9ed21704f447d6ce8d48183dc73f43b79d4639c3fdf7741a763",
    build = "./configure",
    flags = {
       "--enable-{cscope,multibyte}",

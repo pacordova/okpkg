@@ -107,8 +107,8 @@ openssh = {
 };
 
 rsync = {
-   url = "https://samba.org/ftp/rsync/src/rsync-3.4.0.tar.gz",
-   sha3 = "c24880e57016ac4587bad97cb4056df4ffd1472a74a6752707184e51db56ec82",
+   url = "https://samba.org/ftp/rsync/src/rsync-3.4.1.tar.gz",
+   sha3 = "a67ce89d9fcc7cc203ded0b174f01bb24cdd861e44c6c214b44a17435a38e3fa",
    build = "./configure",
    flags = { "--disable-{debug,xxhash}" }
 };

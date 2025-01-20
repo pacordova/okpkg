@@ -111,14 +111,14 @@ python-calver = {
 };
 
 python-trove-classifiers = {
-   url = "https://pypi.org/packages/source/t/trove-classifiers/trove_classifiers-2025.1.10.15.tar.gz",
-   sha3 = "2275b9e10075349878342fd20c0045ed929a2fe8be54b5d2244f899c28885355",
+   url = "https://pypi.org/packages/source/t/trove-classifiers/trove_classifiers-2025.1.15.22.tar.gz",
+   sha3 = "248e657b24083ea377e79dbc501f88238a962099e7e6c12df864ef64c7249eb8",
    build = "python-build",
 };
 
 python-hatchling = {
-   url = "https://pypi.org/packages/source/h/hatchling/hatchling-1.26.3.tar.gz",
-   sha3 = "c0af98e7ae9a7d19a2cd306e37e39ad6824e36967e06c8848155a8b576a58e78",
+   url = "https://pypi.org/packages/source/h/hatchling/hatchling-1.27.0.tar.gz",
+   sha3 = "84665f7b1aafb35c97d7f28c5ba7edfc0c86055fb45143a42962269f8124b8e1",
    build = "python-build",
 };
 
