@@ -128,8 +128,8 @@ lzlib = {
 };
 
 xz = {
-   url = "https://downloads.sourceforge.net/lzmautils/xz-5.6.3.tar.gz",
-   sha3 = "3b9452ed7392ae54e2daa8d1335c5756316887bace6186c1f310e90190b39d7f",
+   url = "https://downloads.sourceforge.net/lzmautils/xz-5.6.4.tar.gz",
+   sha3 = "f2f785861be650d82dcca2f14b5f86511984bbe307faee09d18fd198aed56066",
    build = "./configure",
 };
 
@@ -148,8 +148,8 @@ gperf = {
 };
 
 libseccomp = {
-   url = "https://github.com/seccomp/libseccomp/releases/download/v2.5.5/libseccomp-2.5.5.tar.gz",
-   sha3 = "d9af57ba52f49198efac8e07b37eb073ecda2d49cc7dd53d045084f558877488",
+   url = "https://github.com/seccomp/libseccomp/releases/download/v2.6.0/libseccomp-2.6.0.tar.gz",
+   sha3 = "1bbae54d95e09cab6ea6b490a2f5e4d4e4ac72ff7c9ab568412533c19b1c4bd0",
    build = "./configure",
 };
 
