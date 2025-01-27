@@ -283,8 +283,8 @@ libcap = {
 };
 
 shadow = {
-   url = "https://github.com/shadow-maint/shadow/releases/download/4.16.0/shadow-4.16.0.tar.xz",
-   sha3 = "931c04bd27bccb5b6d0bc68291aeb68bdf286a2ff1581ff51bd561277102db2d",
+   url = "https://github.com/shadow-maint/shadow/releases/download/4.17.2/shadow-4.17.2.tar.xz",
+   sha3 = "24fe5c054b467a8892c5dc54fd8ecb5767b37394cb5e33efc948f5ab41e488b9",
    build = "./configure",
    flags = {
       "--disable-account-tools-setuid",
