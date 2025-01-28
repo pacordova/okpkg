@@ -183,8 +183,8 @@ kirc = {
 };
 
 linux = {
-   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.6.72.tar.xz",
-   sha3 = "3742d327c9b2c25ed0f7b65d60a01fdb05edb28a5b788f129419bf66c9a28f0f",
+   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.6.74.tar.xz",
+   sha3 = "bdca7146f368d1c8348a1bb3f5ff128889a712fafc646688911c3fe01e40d471",
    build = "make",
    flags = { "bzImage", "modules", "headers" },
    prepare = [[
