@@ -1,0 +1,17 @@
+apr = {
+   url = "https://archive.apache.org/dist/apr/apr-1.7.5.tar.bz2",
+   sha3 = "e9a6d9cd2df6e2d16b3eb66134abe4ef8d703e14246bd02eeb5c85bd4ee3b686",
+   build = "./configure",
+};
+
+apr-util = {
+   url = "https://archive.apache.org/dist/apr/apr-util-1.6.3.tar.bz2"
+   sha3 = "fcdccf06e3095d4b5f4c7b97a2e35f5a832893d8cef7da53c06c6086e9012536",
+   build = "./configure",
+};
+
+apache = {
+   url = "https://archive.apache.org/dist/httpd/httpd-2.4.63.tar.bz2",
+   sha3 = "5588d1d8e8e073dae4309914536f1683c1981e784a4036bb067bb0ff6fe26071",
+   build = "./configure",
+};
