@@ -8,6 +8,10 @@ apr-util = {
    url = "https://archive.apache.org/dist/apr/apr-util-1.6.3.tar.bz2"
    sha3 = "fcdccf06e3095d4b5f4c7b97a2e35f5a832893d8cef7da53c06c6086e9012536",
    build = "./configure",
+   flags = {
+      "--with-{apr,gdbm,openssl}=/usr"
+      "--with-crypto",
+   },
 };
 
 apache = {
