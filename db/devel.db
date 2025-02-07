@@ -118,7 +118,7 @@ texinfo = {
 };
 
 which = {
-   url = "https://ftp.gnu.org/gnu/which/which-2.22.tar.gz",
-   sha3 = "651070b0c505754b292387eb86d4f811e8a04b6f53bea2103979eb4a62ab30d9",
+   url = "https://ftp.gnu.org/gnu/which/which-2.23.tar.gz",
+   sha3 = "58788754b09cfe008e24f69665eee36320693f82dab97d09fccef549c8115fef",
    build = "./configure",
 };

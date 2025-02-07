@@ -64,8 +64,8 @@ iana-etc = {
 };
 
 glibc = {
-   url = "https://ftp.gnu.org/gnu/glibc/glibc-2.40.tar.xz",
-   sha3 = "cbed5402bd33830040f33755e59828c6fd8fbb80aa4cc8c31aca991c7287142a",
+   url = "https://ftp.gnu.org/gnu/glibc/glibc-2.41.tar.xz",
+   sha3 = "da49f557057bfe3d11ae289cd9e668826d0cf33a0c1b977c88c208e50e24854f",
    build = "../configure",
    flags = {
       "--enable-kernel=6.6",
@@ -181,8 +181,8 @@ pkgconf = {
 };
 
 binutils = {
-   url = "https://ftp.gnu.org/gnu/binutils/binutils-2.43.1.tar.xz",
-   sha3 = "9c89c884adca7ff44e11fb09b45b431c22739e55e1757323d71e4d7ea64a136b",
+   url = "https://ftp.gnu.org/gnu/binutils/binutils-2.44.tar.xz",
+   sha3 = "3c99fe119a5246664a901fd643843ac31f94f85c7a83723bf16876d5f41e1a9d",
    build = "./configure",
    flags = {
       "--enable-64-bit-bfd",
@@ -537,8 +537,8 @@ libffi = {
 };
 
 sqlite = {
-   url = "https://www.sqlite.org/2025/sqlite-autoconf-3480000.tar.gz",
-   sha3 = "279e3dd8fc8fea6d56acb79b380440b57f8e0c02b371e3b195c993b51c2b5b0c",
+   url = "https://www.sqlite.org/2025/sqlite-autoconf-3490000.tar.gz",
+   sha3 = "df4fe162b8b73e8a9ba9f362280f0758dbf67e77de59d3d65dcbf8f6abc25706",
    build = "./configure",
    flags = { "--enable-fts5", "CPPFLAGS=-DSQLITE_ENABLE_COLUMN_METADATA=1" },
 };
@@ -578,8 +578,8 @@ coreutils = {
 };
 
 diffutils = {
-   url = "https://ftp.gnu.org/gnu/diffutils/diffutils-3.10.tar.xz",
-   sha3 = "a09b8284d5a42496e84bf356e1b32721b3e92a2b52459067773e74e2bd396772",
+   url = "https://ftp.gnu.org/gnu/diffutils/diffutils-3.11.tar.xz",
+   sha3 = "f69b8f281087a90e977dec316c8d8913d924b7fb9362e78428325c1dc5f7b68a",
    build = "./configure",
 };
 

@@ -43,8 +43,8 @@ xtrans = {
 };
 
 libx11 = {
-   url = "https://x.org/pub/individual/lib/libX11-1.8.10.tar.xz",
-   sha3 = "b2c1ecfd494a02c6e87766352a292aa6eccfaec4110deaec5b8981500de90d5d",
+   url = "https://x.org/pub/individual/lib/libX11-1.8.11.tar.xz",
+   sha3 = "a8511c77331b7b861823cc5e0e1f72f95eec5ef6f46b78561939f70d91d0826e",
    build = "./configure",
 };
 
@@ -396,8 +396,8 @@ xorg-xgamma = {
 };
 
 xorg-xhost = {
-   url = "https://x.org/pub/individual/app/xhost-1.0.9.tar.xz",
-   sha3 = "d4c9ee9b1c96d4a6ced6853c92c5e0c2911d91c3ac149ed74e11647f2d8c8cf6",
+   url = "https://x.org/pub/individual/app/xhost-1.0.10.tar.xz",
+   sha3 = "926ae33a57edd6bbdc216b9db9d56e9da823f4cb62e4d0fb743f5546c7d1cc87",
    build = "./configure",
 };
 

@@ -287,8 +287,8 @@ libsodium = {
 };
 
 libtasn1 = {
-   url = "https://ftp.gnu.org/gnu/libtasn1/libtasn1-4.19.0.tar.gz",
-   sha3 = "1fea801ff44ee976956c7d36295afcbf0d8b3c33f3f0a460fbf28b7b0df9a432",
+   url = "https://ftp.gnu.org/gnu/libtasn1/libtasn1-4.20.0.tar.gz",
+   sha3 = "6f0d140c4148e41b9ed2c81846a5301f4f24c1915a94c47c3a1e5569a7edf3b4",
    build = "./configure",
 };
 

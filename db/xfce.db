@@ -47,10 +47,9 @@ xfce4-dev-tools = {
 };
 
 hwdata = {
-   url = "https://github.com/vcrhonek/hwdata/archive/v0.391/hwdata-0.391.tar.gz",
-   sha3 = "45cffde0651bedc627a2aa8ce1a2eb2552593c8f669c04e087f06b7e8c7f7b6a",
+   url = "https://github.com/vcrhonek/hwdata/archive/v0.392/hwdata-0.392.tar.gz",
+   sha3 = "ee1ac67e66873574bbe2ea00cdaea0a008e0f16bdd7683875a76d23951f7a8d5",
    build = "./configure",
-   flags = { "--disable-blacklist" }
 };
 
 libdisplay-info = {
@@ -60,15 +59,15 @@ libdisplay-info = {
 };
 
 libxfce4windowing = {
-   url = "https://archive.xfce.org/src/xfce/libxfce4windowing/4.20/libxfce4windowing-4.20.0.tar.bz2",
-   sha3 = "15bafe94d047002787f4c9cdddcc17a24121136467151874f02597fdc49e5be6",
+   url = "https://archive.xfce.org/src/xfce/libxfce4windowing/4.20/libxfce4windowing-4.20.2.tar.bz2",
+   sha3 = "030dc576a61f12f480b616e4dfce6df165221aeb4cc041d8a605c2d2445eaddc",
    build = "./configure",
    flags = { "--enable-x11", "--disable-debug" }
 };
 
 xfce4-panel = {
-   url = "https://archive.xfce.org/src/xfce/xfce4-panel/4.20/xfce4-panel-4.20.0.tar.bz2",
-   sha3 = "1661ac866e1727bc4691f913c96d02774e0b8d87193f16e51094ea3869196070",
+   url = "https://archive.xfce.org/src/xfce/xfce4-panel/4.20/xfce4-panel-4.20.3.tar.bz2",
+   sha3 = "7fe76230710decbd28798b79dd5b612d4d26fcc399b23efc9f48199dd2a2609a",
    build = "./configure",
    flags = {
       "--enable-gio-unix",

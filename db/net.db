@@ -17,8 +17,8 @@ connman = {
 };
 
 curl = {
-   url = "https://curl.se/download/curl-8.11.1.tar.xz",
-   sha3 = "178166dd1875e0935e07073c1e8ad6286ce039c47ea9f72133b31ab89255ecd3",
+   url = "https://curl.se/download/curl-8.12.0.tar.xz",
+   sha3 = "2de279a1cd5035c06aca4f8775a9d28006951ba64a3df0b948f33d3f2af0a2fb",
    build = "./configure",
    flags = {
       "--enable-{ipv6,threaded-resolver,unix-sockets}",
