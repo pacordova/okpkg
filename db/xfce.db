@@ -127,8 +127,8 @@ xfce4-power-manager = {
 };
 
 xfce4-settings = {
-   url = "https://archive.xfce.org/src/xfce/xfce4-settings/4.20/xfce4-settings-4.20.0.tar.bz2",
-   sha3 = "e2c41fb81ceaf51ccd0bf2152caebe6c9e5c04d02e9f6663cf29687c686a2c99",
+   url = "https://archive.xfce.org/src/xfce/xfce4-settings/4.20/xfce4-settings-4.20.1.tar.bz2",
+   sha3 = "ec1709d285f76f7bde6b4af984c3164855766580346884166698baa4f03bb984",
    build = "./configure",
    flags = {
       "--enable-xrandr",
