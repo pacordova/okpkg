@@ -112,8 +112,8 @@ libogg = {
 };
 
 flac = {
-   url = "https://downloads.xiph.org/releases/flac/flac-1.4.3.tar.xz",
-   sha3 = "24b4d4d600396dbedfb46e031bd7cc26408a6ecab1e3e2ac929c725fdc665fc1",
+   url = "https://downloads.xiph.org/releases/flac/flac-1.5.0.tar.xz",
+   sha3 = "bd579a99270882c15d9d6e0911dbb74d47a7e2ba904aa892b93c88cc0f5eed86",
    build = "./configure",
    flags = { "--disable-thorough-tests" }
 };
@@ -165,8 +165,8 @@ lame = {
 };
 
 lcms2 = {
-   url = "https://github.com/mm2/Little-CMS/releases/download/lcms2.16/lcms2-2.16.tar.gz",
-   sha3 = "cc75ac1ddc6d1d0abfd2b81e312396621b87096ee8d7e95f8eadb4bf672da252",
+   url = "https://github.com/mm2/Little-CMS/releases/download/lcms2.17/lcms2-2.17.tar.gz",
+   sha3 = "0403fd5d92c09a66bb3b1e92e001b7c1d71f4714aaaff9f610d4d5521f3e925e",
    build = "./configure",
 };
 

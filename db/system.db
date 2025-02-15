@@ -530,8 +530,8 @@ libelf = {
 };
 
 libffi = {
-   url = "https://github.com/libffi/libffi/releases/download/v3.4.6/libffi-3.4.6.tar.gz",
-   sha3 = "ee4aaa63160929d663836784eded2bd1566e1e68e12d95149b4484a025a4f5dc",
+   url = "https://github.com/libffi/libffi/releases/download/v3.4.7/libffi-3.4.7.tar.gz",
+   sha3 = "6d28886e15ad931c75489be15fdf865077d0b9c4c5693fb861f41f42621d7f28",
    build = "./configure",
    flags = { "--with-gcc-arch=x86-64-v2", "--disable-exec-static-tramp" }
 };

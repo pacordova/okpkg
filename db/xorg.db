@@ -533,8 +533,8 @@ xorg-font-util = {
 };
 
 xkeyboard-config = {
-   url = "https://x.org/pub/individual/data/xkeyboard-config/xkeyboard-config-2.43.tar.xz",
-   sha3 = "f3e8922ec9c38259ece0cbc827e1702219c16d806a9568b7a3a0cc07b0c1bd9e",
+   url = "https://x.org/pub/individual/data/xkeyboard-config/xkeyboard-config-2.44.tar.xz",
+   sha3 = "4734d7c3a6c2a66ecccf358667cf8dd5e468f7377fb111139d40e760795d0728",
    build = "meson",
    flags = {
       "-Dxkb-base=/usr/share/X11/xkb",
