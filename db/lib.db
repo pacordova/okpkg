@@ -13,8 +13,8 @@ usbutils = {
 --------------------------------------------------------------------------------
 
 _glib2 = {
-   url = "https://download.gnome.org/sources/glib/2.82/glib-2.82.4.tar.xz",
-   sha3 = "64cb36759c759225b6fc8b817ab29f31a86cc52a054b71fc0d5a9323e05197c9",
+   url = "https://download.gnome.org/sources/glib/2.82/glib-2.82.5.tar.xz",
+   sha3 = "6c3a1341235222395d01ba8b61394887e8dee495946b2337212c1b5a59e59aae",
    build = "meson",
    flags = { "-Dintrospection=disabled" }
 };
@@ -26,8 +26,8 @@ gobject-introspection = {
 };
 
 glib2 = {
-   url = "https://download.gnome.org/sources/glib/2.82/glib-2.82.4.tar.xz",
-   sha3 = "64cb36759c759225b6fc8b817ab29f31a86cc52a054b71fc0d5a9323e05197c9",
+   url = "https://download.gnome.org/sources/glib/2.82/glib-2.82.5.tar.xz",
+   sha3 = "6c3a1341235222395d01ba8b61394887e8dee495946b2337212c1b5a59e59aae",
    build = "meson",
    flags = { "-Dintrospection=enabled" }
 };
@@ -249,8 +249,8 @@ libpcap = {
 };
 
 libpng = {
-   url = "https://downloads.sourceforge.net/libpng/libpng-1.6.46.tar.xz",
-   sha3 = "f7ae8cd401414bc93d00a9939a622c8c370feb8faac08c33cef91b48051b8263",
+   url = "https://downloads.sourceforge.net/libpng/libpng-1.6.47.tar.xz",
+   sha3 = "98219cfc77a684db0c5b99e13e9f519a46123dedf204b880191af0f22e1edba8",
    build = "./configure",
 };
 
@@ -337,8 +337,8 @@ libvpx = {
 };
 
 libxml2 = {
-   url = "https://download.gnome.org/sources/libxml2/2.13/libxml2-2.13.5.tar.xz",
-   sha3 = "48e1b91088477056fbcc457b85ee510e1d3f9c4304859dc1eb202a07f07ac6bf",
+   url = "https://download.gnome.org/sources/libxml2/2.13/libxml2-2.13.6.tar.xz",
+   sha3 = "dbda5db258b3265459271eae39c9f5121515595e92925a48b6d29e7d5b898a33",
    build = "./configure",
    flags = {
       "--with-{history=yes,legacy=yes,icu=no}",

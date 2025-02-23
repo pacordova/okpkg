@@ -5,8 +5,8 @@ _file = {
 };
 
 _python3 = {
-   url = "https://www.python.org/ftp/python/3.13.1/Python-3.13.1.tar.xz",
-   sha3 = "59f63ede3b38f0a10dd11b3a95db6a3b1cc197c291afd8c3a5f53d072cf2c0b9",
+   url = "https://www.python.org/ftp/python/3.13.2/Python-3.13.2.tar.xz",
+   sha3 = "668c9c7fdb4f1ec067eff05cac90e8e80e79c26a0d5c9e851e08ff32b36c1586",
    build = "./configure",
    flags = {
       "--with-platlibdir=lib64",
@@ -134,8 +134,8 @@ xz = {
 };
 
 zstd = {
-   url = "https://github.com/facebook/zstd/releases/download/v1.5.6/zstd-1.5.6.tar.gz",
-   sha3 = "a684831fa2367ab1873ed9efb000ba4d4e663b620cb60121db8f0cb3eb83d2b1",
+   url = "https://github.com/facebook/zstd/releases/download/v1.5.7/zstd-1.5.7.tar.gz",
+   sha3 = "8eaf8a9c9ed5c5ef7a3f1bc68f6e1ab254d8b5947ea9d55455f0a403fa006e6c",
    build = "make",
    flags = { "prefix=/usr", "LIBDIR=/usr/lib64", "HAVE_{LZ4,LZMA,ZLIB}=0" },
    post = [[ rm -f $destdir/usr/lib64/libzstd.a ]]
@@ -372,8 +372,8 @@ psmisc = {
 };
 
 pcre2 = {
-   url = "https://github.com/PCRE2Project/pcre2/releases/download/pcre2-10.44/pcre2-10.44.tar.bz2",
-   sha3 = "d4fd6a95630fbf9bde69c95536be875762dea369c473c13d350da545d2eeba9f",
+   url = "https://github.com/PCRE2Project/pcre2/releases/download/pcre2-10.45/pcre2-10.45.tar.bz2",
+   sha3 = "84d16be3158d92aca5808a21b3168ae773f88201053e7c8ef40497ff16c75f43",
    build = "./configure",
    flags = {
       "--enable-jit",
@@ -537,15 +537,15 @@ libffi = {
 };
 
 sqlite = {
-   url = "https://www.sqlite.org/2025/sqlite-autoconf-3490000.tar.gz",
-   sha3 = "df4fe162b8b73e8a9ba9f362280f0758dbf67e77de59d3d65dcbf8f6abc25706",
+   url = "https://www.sqlite.org/2025/sqlite-autoconf-3490100.tar.gz",
+   sha3 = "6cc831c9f588b637e5bd48d9fbf28e58737e08daf825c81085fb8e0a0b8ad14c",
    build = "./configure",
    flags = { "--enable-fts5", "CPPFLAGS=-DSQLITE_ENABLE_COLUMN_METADATA=1" },
 };
 
 python3 = {
-   url = "https://www.python.org/ftp/python/3.13.1/Python-3.13.1.tar.xz",
-   sha3 = "59f63ede3b38f0a10dd11b3a95db6a3b1cc197c291afd8c3a5f53d072cf2c0b9",
+   url = "https://www.python.org/ftp/python/3.13.2/Python-3.13.2.tar.xz",
+   sha3 = "668c9c7fdb4f1ec067eff05cac90e8e80e79c26a0d5c9e851e08ff32b36c1586",
    build = "./configure",
    flags = {
       "--enable-loadable-sqlite-extensions",
@@ -780,8 +780,8 @@ sysklogd = {
 };
 
 dinit = {
-   url = "https://github.com/davmac314/dinit/archive/v0.19.1/dinit-0.19.1.tar.gz",
-   sha3 = "a9094c1cc1eb2a7af9789c86c6d6c2ba18f35612aedcc4c172e5b23b4f9a65f5",
+   url = "https://github.com/davmac314/dinit/releases/download/v0.19.3/dinit-0.19.3.tar.xz",
+   sha3 = "db7515654dbe57034125c2c02182663ff3b6ee95b05b5728cfe0e4c6bcf0a38b",
    build = "make",
    flags = { "BUILD_SHUTDOWN=yes", "SBINDIR=/usr/bin" },
    post = [[ ln -sf dinit $destdir/usr/bin/init ]]

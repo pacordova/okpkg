@@ -143,8 +143,8 @@ xfce4-settings = {
 };
 
 xfdesktop = {
-   url = "https://archive.xfce.org/src/xfce/xfdesktop/4.20/xfdesktop-4.20.0.tar.bz2",
-   sha3 = "0492ea45758224af5453521edb7ca6c4b9503288b65714f78f0ce9bdd1561cdb",
+   url = "https://archive.xfce.org/src/xfce/xfdesktop/4.20/xfdesktop-4.20.1.tar.bz2",
+   sha3 = "1677fd3a659be272057126b7c1d40e11eafebb73e85d0ab0c78e5f9c91279a50",
    build = "./configure",
    flags = {
       "--enable-thunarx",
@@ -184,8 +184,8 @@ xfce4-session = {
 };
 
 xfce4-notifyd = {
-   url = "https://archive.xfce.org/src/apps/xfce4-notifyd/0.9/xfce4-notifyd-0.9.6.tar.bz2",
-   sha3 = "4ed4585fcc6a65a774f5725a73f458681b97de30afae1dd3306bb3f5c4f78c44",
+   url = "https://archive.xfce.org/src/apps/xfce4-notifyd/0.9/xfce4-notifyd-0.9.7.tar.bz2",
+   sha3 = "a42d58ccc6bc2ede68c8e39533c0c79d24ae04c486e2da674fae26fab9f09a27",
    build = "./configure",
    flags = {
       "--disable-systemd",

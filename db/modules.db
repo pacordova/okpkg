@@ -1,6 +1,6 @@
 python-flit-core = {
-   url = "https://pypi.org/packages/source/f/flit_core/flit_core-3.10.1.tar.gz",
-   sha3 = "de6866cb6f7ec35ffba5d939fc5d84a4b3291cc85ec58ee959ecf532931a39a5",
+   url = "https://pypi.org/packages/source/f/flit_core/flit_core-3.11.0.tar.gz",
+   sha3 = "78897a7df664650b7c0bda79a8d75a3d59e010ded905bd83c0dbc02d8685df0e",
    build = _,
    post = [[
       python3 -m flit_core.wheel &&
@@ -86,8 +86,8 @@ python-typing_extensions = {
 };
 
 python-setuptools-scm = {
-   url = "https://pypi.org/packages/source/s/setuptools-scm/setuptools_scm-8.1.0.tar.gz",
-   sha3 = "6bf3aac16da1a0828f4dd6d4516e09b724e23a64b725b5ba1f20b044c5206937",
+   url = "https://pypi.org/packages/source/s/setuptools-scm/setuptools_scm-8.2.0.tar.gz",
+   sha3 = "78e25731289b952b98cbb35fcae23acbaeeeeb8455f0c33fca821996a062159c",
    build = "python-build",
 };
 
@@ -111,8 +111,8 @@ python-calver = {
 };
 
 python-trove-classifiers = {
-   url = "https://pypi.org/packages/source/t/trove-classifiers/trove_classifiers-2025.1.15.22.tar.gz",
-   sha3 = "248e657b24083ea377e79dbc501f88238a962099e7e6c12df864ef64c7249eb8",
+   url = "https://pypi.org/packages/source/t/trove-classifiers/trove_classifiers-2025.2.18.16.tar.gz",
+   sha3 = "6f70da507f5d56c349f2c85885838b78e3e6098166ea4ec2bab4402f6985bd36",
    build = "python-build",
 };
 
