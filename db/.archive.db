@@ -75,13 +75,6 @@ xbattbar = {
    ]]
 };
 
-cargo-c = {
-   url = "https://github.com/lu-zero/cargo-c/archive/v0.10.5/cargo-c-0.10.5.tar.gz",
-   sha3 = "e6bb23af13194e3e20e306657267869ce4317413ef05d57ea03b4b8a1b9a91e5",
-   build = "cargo",
-   prepare = [[ cp -p ../../download/cargo-c.lock Cargo.lock ]]
-};
-
 dracut = {
    url = "https://github.com/dracut-ng/dracut-ng/archive/105/dracut-ng-105.tar.gz",
    sha3 = "f20c9c1dcd07e38fca112fb649208e103a317b014a867be9a385f0c1e9fe3547",

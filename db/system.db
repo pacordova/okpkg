@@ -283,8 +283,8 @@ libcap = {
 };
 
 shadow = {
-   url = "https://github.com/shadow-maint/shadow/releases/download/4.17.2/shadow-4.17.2.tar.xz",
-   sha3 = "24fe5c054b467a8892c5dc54fd8ecb5767b37394cb5e33efc948f5ab41e488b9",
+   url = "https://github.com/shadow-maint/shadow/releases/download/4.17.3/shadow-4.17.3.tar.xz",
+   sha3 = "20f950287a9e2904254bbca1b2ef56740e42716b195c444d3c656f4ae7cf151f",
    build = "./configure",
    flags = {
       "--disable-account-tools-setuid",
@@ -504,10 +504,10 @@ scdoc = {
 };
 
 kmod = {
-   url = "https://kernel.org/pub/linux/utils/kernel/kmod/kmod-33.tar.xz",
-   sha3 = "4d70a39150b5339a77ec80b48ba6fb9af14513a66833a5d6735b4714da2173f2",
-   build = "./configure",
-   flags = { "--with-module-directory=/usr/lib64/modules" }
+   url = "https://kernel.org/pub/linux/utils/kernel/kmod/kmod-34.tar.xz",
+   sha3 = "00346e477eaa4230bc94f5d101780ec1854eec79075a0b4270135ed195b4b656",
+   build = "meson",
+   flags = { "-Dmoduledir=/usr/lib64/modules" }
 };
 
 libelf = {

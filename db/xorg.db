@@ -560,8 +560,8 @@ libepoxy = {
 };
 
 xorg-server = {
-   url = "https://x.org/archive/individual/xserver/xorg-server-21.1.15.tar.xz",
-   sha3 = "79b202aba33f87e06e3f0a6087c84ed033833f825f9ff34170a53de786fe9cb2",
+   url = "https://x.org/archive/individual/xserver/xorg-server-21.1.16.tar.xz",
+   sha3 = "9058ebf4c738b2be1fa2a9c01a48965bcbf87a2102331c6ff807a5c27ba1c64a",
    build = "meson",
    flags = {
       "-D{xephyr,xnest,xvfb}=false",

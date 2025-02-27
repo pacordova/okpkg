@@ -272,7 +272,11 @@ function build(x)
    setenv("SOURCE_DATE_EPOCH", timestamp(srcdir))
    chdir(srcdir)
 
-   if t.prepare then os.execute(t.prepare) end
+   if t.prepare then 
+      if not os.execute(t.prepare) then 
+         error(string.format("error: build: prepare: %s", x))
+      end
+   end
 
    if B[t.build] then
       if not B[t.build](unpack(t.flags)) then 
@@ -289,7 +293,12 @@ function build(x)
       end
    end
 
-   if t.post then os.execute(t.post) end
+   if t.post then
+      if not os.execute(t.post) then
+         error(string.format("error: build: post: %s", x))
+      end
+   end
+
 
    -- Set the mtime
    os.execute [[ find $destdir -exec touch -hd "@$SOURCE_DATE_EPOCH" '{}' + ]]
