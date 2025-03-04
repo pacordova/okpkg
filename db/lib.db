@@ -64,8 +64,8 @@ upower = {
 };
 
 vala = {
-   url = "https://download.gnome.org/sources/vala/0.56/vala-0.56.17.tar.xz",
-   sha3 = "668609ee19af025e1778f93f81086e11d850354db8c4278a2ad2db944a951f9f",
+   url = "https://download.gnome.org/sources/vala/0.56/vala-0.56.18.tar.xz",
+   sha3 = "19f1b9220be852f67ac7bd42db6ef0eb698570910c3d22f5e91c82d8be9fb02b",
    build = "./configure",
    flags = {
       "--enable-{python3=yes,python=no,valadoc=no}",
@@ -380,8 +380,8 @@ mtdev = {
 };
 
 nghttp2 = {
-   url = "https://github.com/nghttp2/nghttp2/releases/download/v1.64.0/nghttp2-1.64.0.tar.xz",
-   sha3 = "9873ca4808b55cd7c271c8ec0be2c012a98c8d08f9255183e8729f0cc63889cc",
+   url = "https://github.com/nghttp2/nghttp2/releases/download/v1.65.0/nghttp2-1.65.0.tar.xz",
+   sha3 = "2f121623ea9c4a4179e6159f3b6e3c1572626f2e77f00c3d4bec6bf8e26d492b",
    build = "./configure",
    flags = { "--enable-lib-only" }
 };

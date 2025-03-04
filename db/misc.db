@@ -236,8 +236,8 @@ pciutils = {
 };
 
 r = {
-   url = "https://cran.r-project.org/src/base/R-4/R-4.4.2.tar.gz",
-   sha3 = "45e92ef6576a1c55a4edc9d67fe96375f44e4a7366b988ce9ea6e7c5815c1fe1",
+   url = "https://cran.r-project.org/src/base/R-4/R-4.4.3.tar.gz",
+   sha3 = "a27d1a350d96b00aa81eba15b1a90fe8cca1256c973cddf8a8c12cb4b35df836",
    build = "./configure",
    flags = { "--enable-{R-shlib=yes,java=no}", "--without-x" }
 };
@@ -280,8 +280,8 @@ ugrep = {
 };
 
 vim = {
-   url = "https://github.com/vim/vim/archive/v9.1.1120/vim-9.1.1120.tar.gz",
-   sha3 = "f1e3a83ec4a151ca5ef3ccb6d26b39c7e0ea2fb5cd834dc0041e28b412fb373a",
+   url = "https://github.com/vim/vim/archive/v9.1.1169/vim-9.1.1169.tar.gz",
+   sha3 = "0bd25faf178ab12428b91b050d91030dd3f1012002c4cec81fba22763c64a68f",
    build = "./configure",
    flags = {
       "--enable-{cscope,multibyte}",

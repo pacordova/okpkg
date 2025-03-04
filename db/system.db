@@ -53,8 +53,8 @@ _perl = {
 };
 
 iana-etc = {
-   url = "https://github.com/Mic92/iana-etc/releases/download/20241206/iana-etc-20241206.tar.gz",
-   sha3 = "4eadc75e91acf7cb59fc911ae6dcc87b9a9cf81e20b10be84fbfec25edcded8b",
+   url = "https://github.com/Mic92/iana-etc/releases/download/20250123/iana-etc-20250123.tar.gz",
+   sha3 = "de61579dd45099b7f119c0e4be09f891deba1c3c780c64a6d1126fb29e5836b1",
    build = _,
    post = [[ 
       install -d $destdir/etc
@@ -773,8 +773,8 @@ dosfstools = {
 };
 
 sysklogd = {
-   url = "https://github.com/troglobit/sysklogd/releases/download/v2.7.0/sysklogd-2.7.0.tar.gz",
-   sha3 = "559704de57b84e87188585d92049438129272706e7a1a1936c20eebf1313bbda",
+   url = "https://github.com/troglobit/sysklogd/releases/download/v2.7.1/sysklogd-2.7.1.tar.gz",
+   sha3 = "2a23f8780846b778a07fa0d5cc69432618f2fd742bd5fb747e1ddf81337d138a",
    build = "./configure",
    flags = { "--without-logger" }
 };
@@ -788,8 +788,8 @@ dinit = {
 };
 
 dbus = {
-   url = "https://dbus.freedesktop.org/releases/dbus/dbus-1.16.0.tar.xz",
-   sha3 = "5f2eecd76f5ae16711ebb410cd072daa9f815bf6ff9106f7f9b40424410a7407",
+   url = "https://dbus.freedesktop.org/releases/dbus/dbus-1.16.2.tar.xz",
+   sha3 = "f28f013111fb8d51e3c9ac335c9357d0b466debd56f94c328569c13140daf652",
    build = "meson",
    flags = {
       "-Dsystem_pid_file=/run/dbus/pid",
@@ -809,8 +809,8 @@ libaio = {
 };
 
 device-mapper = {
-   url = "https://sourceware.org/ftp/lvm2/LVM2.2.03.30.tgz",
-   sha3 = "0c6f5ce25e720bdb9d049f8e1f29ba308baa0964a86cfea75cbe1ff20d1db18c",
+   url = "https://sourceware.org/ftp/lvm2/LVM2.2.03.31.tgz",
+   sha3 = "15047898bf4fd28b1b5d0a9921b315e34e7fa5d815ae4071ae48a0fe147f7272",
    build = "./configure",
    flags = {
       "--enable-{cmdlib,dmeventd,pkgconfig}",

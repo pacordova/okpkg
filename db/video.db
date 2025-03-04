@@ -1,6 +1,6 @@
 vulkan-headers = {
-   url = "https://github.com/KhronosGroup/Vulkan-Headers/archive/vulkan-sdk-1.4.304.0/Vulkan-Headers-vulkan-sdk-1.4.304.0.tar.gz",
-   sha3 = "af56617552d0dea792026bf223efb2f56144c0e4beb82ab38c6b49259d81bf07",
+   url = "https://github.com/KhronosGroup/Vulkan-Headers/archive/vulkan-sdk-1.4.304.1/Vulkan-Headers-vulkan-sdk-1.4.304.1.tar.gz",
+   sha3 = "afdc6d9ce691e6b6563d64188e6982aca41cbdd5f74da4a35753149361c764a2",
    build = "cmake",
    flags = { "-DVULKAN_HEADERS_ENABLE_MODULE=OFF" }
 };
@@ -34,33 +34,18 @@ libass = {
    url = "https://github.com/libass/libass/releases/download/0.17.3/libass-0.17.3.tar.gz",
    sha3 = "b163363fa4926a3d8991a138cea75ee83431787209df74a3ee66f6b269ca6fec",
    build = "./configure",
-   flags = {
-      "--enable-fontconfig",
-   }
+   flags = { "--enable-fontconfig" }
 };
 
 ffmpeg = {
-   url = "https://ffmpeg.org/releases/ffmpeg-7.1.tar.xz",
-   sha3 = "2bf4c97c9853b6afd9a07e4d9a6ed611afd0290ab5466a4edd1a84437d8e7bac",
+   url = "https://ffmpeg.org/releases/ffmpeg-7.1.1.tar.xz",
+   sha3 = "9c8653c7e08c3b24c04571c74140d2a14081f7807144fe1f17bd1a8600262606",
    build = "./configure",
    flags = {
       "--libdir=/usr/lib64",
-      "--enable-gpl",
-      "--enable-libass",
-      "--enable-libdrm",
-      "--enable-libmp3lame",
-      "--enable-libopus",
-      "--enable-libvorbis",
-      "--enable-libvpx",
-      "--enable-libx264",
-      "--enable-libx265",
-      "--enable-openssl",
-      "--enable-shared",
-      "--enable-version3",
-      "--disable-debug",
-      "--disable-libxml2",
-      "--disable-libwebp",
-      "--disable-static",
+      "--enable-{gpl,openssl,shared,version3}",
+      "--enable-lib{ass,drm,freetype,mp3lame,opus,vorbis,vpx,x264,x265}",
+      "--disable-{debug,libxml2,libwebp,static}",
       "--x86asmexe=nasm",
    },
    post = [[ rm -fr $destdir/usr/share/ffmpeg/examples ]]
