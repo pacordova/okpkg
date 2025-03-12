@@ -157,8 +157,8 @@ gzip = {
 };
 
 htop = {
-   url = "https://github.com/htop-dev/htop/releases/download/3.3.0/htop-3.3.0.tar.xz",
-   sha3 = "41229e25dc35ed7292f83bdb55f9152782ba10fafda5f34b2e1fa45930adee1e",
+   url = "https://github.com/htop-dev/htop/releases/download/3.4.0/htop-3.4.0.tar.xz",
+   sha3 = "2fd5c6013722fc6d43b041471267ef5c4b3ae55968b3653a73b23b8c28c9e786",
    build = "./configure",
 };
 

@@ -25,8 +25,8 @@ ostree = {
 };
 
 libxmlb = {
-   url = "https://github.com/hughsie/libxmlb/releases/download/0.3.21/libxmlb-0.3.21.tar.xz",
-   sha3 = "c669f2102eb1cbda9e6005c329ea9e656f5c6b75e651cde02c5bc93aa2977b48",
+   url = "https://github.com/hughsie/libxmlb/releases/download/0.3.22/libxmlb-0.3.22.tar.xz",
+   sha3 = "ff769d5bf7d6c631ec3ccf824c228e9c3b143842a686f750c96902eb1686272f",
    build = "meson",
    flags = { "-Dintrospection=true", "-D{gtkdoc,tests}=false" },
 };

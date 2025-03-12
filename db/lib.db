@@ -13,8 +13,8 @@ usbutils = {
 --------------------------------------------------------------------------------
 
 _glib2 = {
-   url = "https://download.gnome.org/sources/glib/2.82/glib-2.82.5.tar.xz",
-   sha3 = "6c3a1341235222395d01ba8b61394887e8dee495946b2337212c1b5a59e59aae",
+   url = "https://download.gnome.org/sources/glib/2.84/glib-2.84.0.tar.xz",
+   sha3 = "22497969c60e15f4476d4a3860b8133af01f305b9188e4b021ab083cfe763ce2",
    build = "meson",
    flags = { "-Dintrospection=disabled" }
 };
@@ -26,8 +26,8 @@ gobject-introspection = {
 };
 
 glib2 = {
-   url = "https://download.gnome.org/sources/glib/2.82/glib-2.82.5.tar.xz",
-   sha3 = "6c3a1341235222395d01ba8b61394887e8dee495946b2337212c1b5a59e59aae",
+   url = "https://download.gnome.org/sources/glib/2.84/glib-2.84.0.tar.xz",
+   sha3 = "22497969c60e15f4476d4a3860b8133af01f305b9188e4b021ab083cfe763ce2",
    build = "meson",
    flags = { "-Dintrospection=enabled" }
 };
@@ -261,8 +261,8 @@ libunistring = {
 };
 
 libidn2 = {
-   url = "https://ftp.gnu.org/gnu/libidn/libidn2-2.3.7.tar.gz",
-   sha3 = "889197927b322f26b41a4ba21e78f631cf0cdca8d8fcfa0f5ac0d4bdcd8278c8",
+   url = "https://ftp.gnu.org/gnu/libidn/libidn2-2.3.8.tar.gz",
+   sha3 = "ef4836ef6f5a870da184018c363894095631e892cf4f1db6719cab8f9d9ed862",
    build = "./configure",
    post = [[ rm -fr $destdir/usr/bin $destdir/usr/share/man/man1 ]]
 };

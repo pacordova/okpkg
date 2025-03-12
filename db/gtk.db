@@ -91,8 +91,8 @@ librsvg = {
 };
 
 gtk3 = {
-   url = "https://download.gnome.org/sources/gtk/3.24/gtk-3.24.48.tar.xz",
-   sha3 = "6c8c59404f4bb92a360b05d70fc5dee2b243d7147818f7374af9b91cf29b6117",
+   url = "https://download.gnome.org/sources/gtk/3.24/gtk-3.24.49.tar.xz",
+   sha3 = "cff406b8e384b5326189eea0edfef4bba667eacd116a3a6bbb8abfb1798815ed",
    build = "meson",
    flags = {
       "-Dbroadway_backend=true",
@@ -130,8 +130,8 @@ libxklavier = {
 };
 
 poppler = {
-   url = "https://poppler.freedesktop.org/poppler-25.02.0.tar.xz",
-   sha3 = "56f4c5bcb7d8fbd28e9442f00410d5363a40f74cbf2ae424c69e132d01e57372",
+   url = "https://poppler.freedesktop.org/poppler-25.03.0.tar.xz",
+   sha3 = "354516a85f062a9a7c6cbb7a24bfa23ea2763d15875f949bd4d7490d1a45bd33",
    build = "cmake",
    flags = {
       "-DENABLE_QT{5,6}=OFF",

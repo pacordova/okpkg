@@ -37,14 +37,14 @@ libxcb = {
 };
 
 xtrans = {
-   url = "https://x.org/pub/individual/lib/xtrans-1.5.2.tar.xz",
-   sha3 = "94573907f206a11380ac24ee76b67746969efeaf8806850775d36b94eed5f456",
+   url = "https://x.org/pub/individual/lib/xtrans-1.6.0.tar.xz",
+   sha3 = "d4ec5691d75e81a5e9f17061a4897401b71ee406f5034db7c4380d5382b657f5",
    build = "./configure",
 };
 
 libx11 = {
-   url = "https://x.org/pub/individual/lib/libX11-1.8.11.tar.xz",
-   sha3 = "a8511c77331b7b861823cc5e0e1f72f95eec5ef6f46b78561939f70d91d0826e",
+   url = "https://x.org/pub/individual/lib/libX11-1.8.12.tar.xz",
+   sha3 = "7c90c7b02595a159476ebcee0fe35dd03e6530665906c14ce9db84753fdfa50c",
    build = "./configure",
 };
 
@@ -61,8 +61,8 @@ libice = {
 };
 
 libsm = {
-   url = "https://x.org/pub/individual/lib/libSM-1.2.5.tar.xz",
-   sha3 = "6eb4106fd162edf699b40c4253c7d259a2c56276227b161bda7920f27c584150",
+   url = "https://x.org/pub/individual/lib/libSM-1.2.6.tar.xz",
+   sha3 = "e5af47fffb67ceac2dce331b502f7c1cd7b958a23566dc53c14a9c5b236fbc09",
    build = "./configure",
 };
 
@@ -291,8 +291,8 @@ libvdpau = {
 };
 
 mesa = {
-   url = "https://mesa.freedesktop.org/archive/mesa-24.3.4.tar.xz",
-   sha3 = "98fd295205b8ccfbaf7378a103e7e506f62575684d80bc43c8f3bf2e5e69b778",
+   url = "https://mesa.freedesktop.org/archive/mesa-25.0.1.tar.xz",
+   sha3 = "8835408b50f3fa2a9fd4975ee43f48bfabe1db5b9976e58f174a5ef67e0ebaad",
    build = "meson",
    flags = {
       "-Dplatforms=x11",
@@ -348,8 +348,8 @@ xorg-x11perf = {
 };
 
 xorg-xauth = {
-   url = "https://x.org/pub/individual/app/xauth-1.1.3.tar.xz",
-   sha3 = "8cd326c71d9dc3d7ccf687680defbd8f8faf29249eaf3f4bd29e322f44401f96",
+   url = "https://x.org/pub/individual/app/xauth-1.1.4.tar.xz",
+   sha3 = "94a32a2dfd831057cad571a5868b92e67262f78a251144ba5dfc2f7182513482",
    build = "./configure",
 };
 

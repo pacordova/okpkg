@@ -275,8 +275,8 @@ gcc14 = {
 };
 
 libcap = {
-   url = "https://kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-2.73.tar.xz",
-   sha3 = "0fdd9e3f889ec564e2c78ac40c021585672575da989d514802d27a989bfca727",
+   url = "https://kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-2.75.tar.xz",
+   sha3 = "14f0a9d6c490dd000e6a55922a7e293446d3ebcbf960de919edeabe805d5b4ec",
    build = "make",
    flags = { "prefix=/usr", "lib=lib64", "SBINDIR=/usr/bin" },
    prepare = [[ sed -i '/install -m.*STA/d' libcap/Makefile ]]
@@ -504,8 +504,8 @@ scdoc = {
 };
 
 kmod = {
-   url = "https://kernel.org/pub/linux/utils/kernel/kmod/kmod-34.tar.xz",
-   sha3 = "00346e477eaa4230bc94f5d101780ec1854eec79075a0b4270135ed195b4b656",
+   url = "https://kernel.org/pub/linux/utils/kernel/kmod/kmod-34.1.tar.xz",
+   sha3 = "8e37d0d129a2d2ff1762c24e39c849c80566da5272ff1723e33dfa51d50e2d98",
    build = "meson",
    flags = { "-Dmoduledir=/usr/lib64/modules" }
 };
