@@ -55,8 +55,8 @@ cairo = {
 };
 
 pango = {
-   url = "https://download.gnome.org/sources/pango/1.56/pango-1.56.1.tar.xz",
-   sha3 = "632bd6f49b038d00ca7b2effceb38ea38fc934cd1a118f61605957a808a7fc1e",
+   url = "https://download.gnome.org/sources/pango/1.56/pango-1.56.2.tar.xz",
+   sha3 = "3465d5b2bfc7ede914411bf7aee1530f73fcae2035bbc096b81b61c26f573c37",
    build = "meson",
    flags = { "-Dintrospection=enabled" },
 };
