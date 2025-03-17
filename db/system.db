@@ -53,8 +53,8 @@ _perl = {
 };
 
 iana-etc = {
-   url = "https://github.com/Mic92/iana-etc/releases/download/20250123/iana-etc-20250123.tar.gz",
-   sha3 = "de61579dd45099b7f119c0e4be09f891deba1c3c780c64a6d1126fb29e5836b1",
+   url = "https://github.com/Mic92/iana-etc/releases/download/20250304/iana-etc-20250304.tar.gz",
+   sha3 = "5198842fa84d00b16b0f57eaea930b0ec4d2c8ab0c78384084eac9a555d287ef",
    build = _,
    post = [[ 
       install -d $destdir/etc
@@ -423,8 +423,8 @@ gdbm = {
 };
 
 expat = {
-   url = "https://downloads.sourceforge.net/expat/expat-2.6.4.tar.lz",
-   sha3 = "7bb5f4b5d63dce6a56481a0d6c15c54b945531166473ebe35fe2b5b1ed5c1698",
+   url = "https://downloads.sourceforge.net/expat/expat-2.7.0.tar.lz",
+   sha3 = "84a42bec7339d80b7af92fbdecb60ce9f3b0a2bc8e0741ef18ca949ca7cf8ec5",
    build = "./configure",
    flags = { "--without-{docbook,examples,tests,xmlwf}" }
 };

@@ -20,8 +20,8 @@ _glib2 = {
 };
 
 gobject-introspection = {
-   url = "https://download.gnome.org/sources/gobject-introspection/1.82/gobject-introspection-1.82.0.tar.xz",
-   sha3 = "c8922e07739fbbd9fceb76f16b4634f15895767b1c2f7be2964029d20c9a9f67",
+   url = "https://download.gnome.org/sources/gobject-introspection/1.84/gobject-introspection-1.84.0.tar.xz",
+   sha3 = "e029a63a632d0427482a725409ba55ce1bafaf7b1d4ae0f13ff34515a36c60b1",
    build = "meson",
 };
 
@@ -33,8 +33,8 @@ glib2 = {
 };
 
 dbus-glib = {
-   url = "https://dbus.freedesktop.org/releases/dbus-glib/dbus-glib-0.112.tar.gz",
-   sha3 = "403eaea495309ea8260148a2cb945a1c08785b1c431bd867d1100b188b4efa41",
+   url = "https://dbus.freedesktop.org/releases/dbus-glib/dbus-glib-0.114.tar.gz",
+   sha3 = "72776008f5283aea3929c720b3c0941556f3081a749d7e179ca18ee969765921",
    build = "./configure",
 };
 
@@ -347,8 +347,8 @@ libxml2 = {
 };
 
 libxslt = {
-   url = "https://download.gnome.org/sources/libxslt/1.1/libxslt-1.1.42.tar.xz",
-   sha3 = "89c1ef277e8a38b3825ede2c791e35e2495c600a9e94e2ca527663fb15cc815c",
+   url = "https://download.gnome.org/sources/libxslt/1.1/libxslt-1.1.43.tar.xz",
+   sha3 = "c073d7fac7ef63f6931391401a81bbbeb0cd3a39ef0850de146cdffb42da01fd",
    build = "./configure",
    flags = { "--without-python" }
 };

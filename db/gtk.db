@@ -37,8 +37,8 @@ startup-notification = {
 --------------------------------------------------------------------------------
 
 at-spi2-core = {
-   url = "https://download.gnome.org/sources/at-spi2-core/2.54/at-spi2-core-2.54.1.tar.xz",
-   sha3 = "09282a32f2f5bf8dd1f58705608514b8136e8159fc062e94c0dcb03e63cf7616",
+   url = "https://download.gnome.org/sources/at-spi2-core/2.56/at-spi2-core-2.56.0.tar.xz",
+   sha3 = "16ead8a897cfaea7f63e6cbd05fcde3bb00dc667fbff768670ae421ccb305b59",
    build = "meson",
    flags = {
       "-Dsystemd_user_dir=/tmp",
@@ -49,14 +49,14 @@ at-spi2-core = {
 };
 
 cairo = {
-   url = "https://gitlab.freedesktop.org/cairo/cairo/-/archive/1.18.2/cairo-1.18.2.tar.bz2",
-   sha3 = "6804da6c04fedabeb3cd850fc3422b7c0fc79cb0d6cdd47ad424bc3da43882ab",
+   url = "https://cairographics.org/releases/cairo-1.18.4.tar.xz",
+   sha3 = "8faa093a29e4a795ac0cc781b63aa2d864a13504595c9b3fac63700a6728b568",
    build = "meson",
 };
 
 pango = {
-   url = "https://download.gnome.org/sources/pango/1.56/pango-1.56.2.tar.xz",
-   sha3 = "3465d5b2bfc7ede914411bf7aee1530f73fcae2035bbc096b81b61c26f573c37",
+   url = "https://download.gnome.org/sources/pango/1.56/pango-1.56.3.tar.xz",
+   sha3 = "92f672dec1a3a653f5fc250c424fd08fe2581855d4d12fb0481fb0c900a8bbd6",
    build = "meson",
    flags = { "-Dintrospection=enabled" },
 };
@@ -160,8 +160,8 @@ evince = {
 };
 
 gcr4 = {
-   url = "https://download.gnome.org/sources/gcr/4.3/gcr-4.3.0.tar.xz",
-   sha3 = "03de4e64b17b5c9a299c7fccad1332aa12e588a5f47af3d4488964b5581538ca",
+   url = "https://download.gnome.org/sources/gcr/4.3/gcr-4.3.1.tar.xz",
+   sha3 = "ea31f7413631a81d468a029d560270d438a88cfb75c4427c16fc2e6ac94460e6",
    build = "meson",
    flags = { "-D{gtk4,gtk_doc,ssh_agent}=false" }
 };
