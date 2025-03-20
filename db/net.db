@@ -151,6 +151,7 @@ wpa_supplicant = {
       install -d $destdir/usr/bin
       install -d $destdir/usr/share/man/man{5,8}
       install -d $destdir/usr/share/dbus-1/{system-services,system.d}
+      install -d $destdir/etc/dbus-1/system.d
       install -m 644 doc/docbook/wpa_supplicant.conf.5 \
           $destdir/usr/share/man/man5/
       install -m 644 doc/docbook/wpa_{cli,passphrase,supplicant}.8 \
