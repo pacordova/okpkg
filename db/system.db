@@ -174,8 +174,8 @@ flex = {
 };
 
 pkgconf = {
-   url = "https://distfiles.ariadne.space/pkgconf/pkgconf-2.3.0.tar.xz",
-   sha3 = "1975d19f4a2896de5335b9a8ed6d419172a3aca5f5e600907c33fec0d456ea6f",
+   url = "https://distfiles.ariadne.space/pkgconf/pkgconf-2.4.3.tar.xz",
+   sha3 = "c84f40ea08c8f33fd9152ba580875020ca4af7911a82b8a18a9238b43828beb4",
    build = "./configure",
    post = [[ ln -sf pkgconf $destdir/usr/bin/pkg-config ]]
 };
@@ -283,8 +283,8 @@ libcap = {
 };
 
 shadow = {
-   url = "https://github.com/shadow-maint/shadow/releases/download/4.17.3/shadow-4.17.3.tar.xz",
-   sha3 = "20f950287a9e2904254bbca1b2ef56740e42716b195c444d3c656f4ae7cf151f",
+   url = "https://github.com/shadow-maint/shadow/releases/download/4.17.4/shadow-4.17.4.tar.xz",
+   sha3 = "6db3b0416ecbae388ecbe4a204c588ef2f9ff341af30e92efb28f78c46644832",
    build = "./configure",
    flags = {
       "--disable-account-tools-setuid",
