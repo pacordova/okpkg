@@ -123,8 +123,8 @@ dhcpcd = {
 };
 
 imlib2 = {
-   url = "https://downloads.sourceforge.net/enlightenment/imlib2-1.12.3.tar.xz",
-   sha3 = "36c1ce1eebf83d68ac622e4391435ece50e5a1eac8683d68ab4b294f6d79d0ee",
+   url = "https://downloads.sourceforge.net/enlightenment/imlib2-1.12.4.tar.xz",
+   sha3 = "f6680861cadda36550d34cfb2d58f1da45d75c251eb82d9b5ae164d7c697c9e5",
    build = "./configure",
    flags = { "--enable-amd64" }
 };
