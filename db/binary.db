@@ -10,8 +10,8 @@ zig-bin = {
 };
 
 rust = {
-   url = "https://static.rust-lang.org/dist/rust-1.85.0-x86_64-unknown-linux-gnu.tar.xz",
-   sha3 = "dd517e66140a93bf1a13f476d7f1db2ff08ed63c62d975d8708f632543d52494",
+   url = "https://static.rust-lang.org/dist/rust-1.85.1-x86_64-unknown-linux-gnu.tar.xz",
+   sha3 = "d7a4d93b1df218855394def66c9874634adcd634e099a8de9359aa091ace65a7",
    build = _,
    post = [[ 
       install -d $destdir/usr
@@ -23,9 +23,9 @@ rust = {
    ]]
 };
 
-firefox-bin = {
-   url = "https://download-installer.cdn.mozilla.net/pub/firefox/releases/135.0/linux-x86_64/en-US/firefox-135.0.tar.xz",
-   sha3 = "3b0d0f00dde5be7454ef2f13e351c35496933e6682a477a980329a544af26199",
+firefox = {
+   url = "https://download-installer.cdn.mozilla.net/pub/firefox/releases/136.0.2/linux-x86_64/en-US/firefox-136.0.2.tar.xz",
+   sha3 = "ce42faefb1ae3d23adf3779e3bec956b91d8da765050011daca961d741be8a00",
    build = _,
    post = [[
       install -d $destdir/usr/{bin,lib64}
