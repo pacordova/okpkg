@@ -208,8 +208,8 @@ gmp = {
 };
 
 mpfr = {
-   url = "https://ftp.gnu.org/gnu/mpfr/mpfr-4.2.1.tar.xz",
-   sha3 = "9f31eedffa3da6348bcb924cd6dd579048715e66fad56532b2927e76932eef03",
+   url = "https://ftp.gnu.org/gnu/mpfr/mpfr-4.2.2.tar.xz",
+   sha3 = "f900bec0f89f35bf5fa792079aaeea5705be2f5b965e014f7bc9663309d09e02",
    build = "./configure",
    flags = { "--enable-thread-safe" }
 };

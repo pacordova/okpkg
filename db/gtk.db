@@ -15,8 +15,8 @@ desktop-file-utils = {
 };
 
 gsettings-desktop-schemas = {
-   url = "https://download.gnome.org/sources/gsettings-desktop-schemas/47/gsettings-desktop-schemas-47.1.tar.xz",
-   sha3 = "4e6016bea37b13244d75c2fc382fcbcd1a0975299370f5d3339fc592d04b23ad",
+   url = "https://download.gnome.org/sources/gsettings-desktop-schemas/48/gsettings-desktop-schemas-48.0.tar.xz",
+   sha3 = "12bbe519253ae3250aab54f72913e743960936e8d5f2f1ad3d30aeab7ba972ce",
    build = "meson",
    prepare = [[ sed -i -r 's:"(/system):"/org/gnome\1:g' schemas/*.in ]]
 };
@@ -84,8 +84,8 @@ cargo-c = {
 };
 
 librsvg = {
-   url = "https://download.gnome.org/sources/librsvg/2.59/librsvg-2.59.2.tar.xz",
-   sha3 = "63a0f4a4d8300480517f9a72da9011fdab4c6484f1f9cef5b784bcdfcb418183",
+   url = "https://download.gnome.org/sources/librsvg/2.60/librsvg-2.60.0.tar.xz",
+   sha3 = "d936854e66235024cdf3402feab217fa1de2cdf1656edf4ac61ec127f46a1a78",
    build = "meson",
    flags = { "-Dvala=enabled" },
 };
@@ -148,8 +148,8 @@ poppler-data = {
 };
 
 evince = {
-   url = "https://download.gnome.org/sources/evince/46/evince-46.3.1.tar.xz",
-   sha3 = "2904ed9f206394b88a46726711505a535e13b1c02bc2d4f782ef4427b355f9c4",
+   url = "https://download.gnome.org/sources/evince/48/evince-48.0.tar.xz",
+   sha3 = "011b250369e0d246ecd956e82a048c3452628aafd31e966da7156127d7002ca5",
    build = "meson",
    flags = {
       "-D{gspell,keyring}=disabled",
@@ -160,8 +160,8 @@ evince = {
 };
 
 gcr4 = {
-   url = "https://download.gnome.org/sources/gcr/4.3/gcr-4.3.1.tar.xz",
-   sha3 = "ea31f7413631a81d468a029d560270d438a88cfb75c4427c16fc2e6ac94460e6",
+   url = "https://download.gnome.org/sources/gcr/4.4/gcr-4.4.0.1.tar.xz",
+   sha3 = "1e00b019433c3cb871c377b4a0e7a337bd905b46432e7a58d616d532a6029b20",
    build = "meson",
    flags = { "-D{gtk4,gtk_doc,ssh_agent}=false" }
 };
