@@ -416,8 +416,8 @@ time = {
 };
 
 gdbm = {
-   url = "https://ftp.gnu.org/gnu/gdbm/gdbm-1.24.tar.gz",
-   sha3 = "cafd8a05e498c0c2cd42084c824e68e5da07c92e2b9deb96e43187923ad00f1d",
+   url = "https://ftp.gnu.org/gnu/gdbm/gdbm-1.25.tar.gz",
+   sha3 = "0ad63b1893ad0a8a28fd27d21c2d9b89d521ca476c890b6a5dc474c3051ffe93",
    build = "./configure",
    flags = { "--enable-libgdbm-compat" }
 };
@@ -443,8 +443,8 @@ gawk = {
 };
 
 tzdata = {
-   url = "https://github.com/eggert/tz/archive/2025a/tz-2025a.tar.gz",
-   sha3 = "20b6ccc53c84b0ac448e2f5020b5fcd53c731aad845eeb8049c1ddb06613782b",
+   url = "https://github.com/eggert/tz/archive/2025b/tz-2025b.tar.gz",
+   sha3 = "2a8484dc817034ed32cfc42c522a42ef32adcf04908a201df03f51f6919c428a",
    build = "make",
    flags = { "LIBDIR=/usr/lib64", "ZICDIR=/usr/bin" },
    post = [[ rm -f $destdir/etc/localtime ]]

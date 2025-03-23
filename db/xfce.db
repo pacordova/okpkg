@@ -1,6 +1,6 @@
 libxfce4util = {
-   url = "https://archive.xfce.org/src/xfce/libxfce4util/4.20/libxfce4util-4.20.0.tar.bz2",
-   sha3 = "53c2b1beea7878a03262b6ead3fbff2f6ad7e94205a7fd7ded323e0a5b81adb1",
+   url = "https://archive.xfce.org/src/xfce/libxfce4util/4.20/libxfce4util-4.20.1.tar.bz2",
+   sha3 = "699c9a6681a5a8acaaf5d7d588042bbfc1c91b26c5992d1593c607925e8b2a1d",
    build = "./configure",
    flags = { "--disable-debug" }
 };
@@ -13,8 +13,8 @@ xfconf = {
 };
 
 libxfce4ui = {
-   url = "https://archive.xfce.org/src/xfce/libxfce4ui/4.20/libxfce4ui-4.20.0.tar.bz2",
-   sha3 = "664e0bf35f5ec395254c8c7198ccb433883189bc6f3b73f6673690315e987930",
+   url = "https://archive.xfce.org/src/xfce/libxfce4ui/4.20/libxfce4ui-4.20.1.tar.bz2",
+   sha3 = "844036eb0a5f69c4d2739d1d09e0d81ad1ed03219aede7cbc369d72aafc908ec",
    build = "./configure",
    flags = { "--disable-debug" }
 };
@@ -66,8 +66,8 @@ libxfce4windowing = {
 };
 
 xfce4-panel = {
-   url = "https://archive.xfce.org/src/xfce/xfce4-panel/4.20/xfce4-panel-4.20.3.tar.bz2",
-   sha3 = "7fe76230710decbd28798b79dd5b612d4d26fcc399b23efc9f48199dd2a2609a",
+   url = "https://archive.xfce.org/src/xfce/xfce4-panel/4.20/xfce4-panel-4.20.4.tar.bz2",
+   sha3 = "ada24b2f522525948619dbc9327c1d5d6a8462cea9a2d76977fae210308bb1d7",
    build = "./configure",
    flags = {
       "--enable-gio-unix",
@@ -174,8 +174,8 @@ xfce4-screensaver = {
 };
 
 xfce4-session = {
-   url = "https://archive.xfce.org/src/xfce/xfce4-session/4.20/xfce4-session-4.20.0.tar.bz2",
-   sha3 = "cb13a8b02c01de40929f4f71164901590dfeef40383202195c11253504f5ab30",
+   url = "https://archive.xfce.org/src/xfce/xfce4-session/4.20/xfce4-session-4.20.1.tar.bz2",
+   sha3 = "47dc48b2e702afef15a705ba3017a85abf73799879e7fd29d68a640cd4d9e607",
    build = "./configure",
    flags = {
       "--disable-legacy-sm",

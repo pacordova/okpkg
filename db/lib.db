@@ -171,8 +171,8 @@ lcms2 = {
 };
 
 libarchive = {
-   url = "https://github.com/libarchive/libarchive/releases/download/v3.7.7/libarchive-3.7.7.tar.xz",
-   sha3 = "0a97152716af3b50f5373c7196032c3392b17b1efdd2d2031d495083eaaae521",
+   url = "https://github.com/libarchive/libarchive/releases/download/v3.7.8/libarchive-3.7.8.tar.xz",
+   sha3 = "5a493e4bbf5cd7be5ec8d5ac74ac5cd8809503d36b5682af53dcffc9c017a67d",
    build = "./configure",
    flags = { "--without-nettle" }
 };
