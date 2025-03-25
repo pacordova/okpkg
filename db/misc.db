@@ -1,3 +1,15 @@
+cpu-x = {
+   url = "https://github.com/TheTumultuousUnicornOfDarkness/CPU-X/archive/v5.1.3/CPU-X-5.1.3.tar.gz",
+   sha3 = "148f38d191d6978b4ced4adecb42d2699e3795b284ccba18193d5b6ca2d486cf",
+   build = "cmake",
+};
+
+conky = {
+   url = "https://github.com/brndnmtthws/conky/archive/v1.22.1/conky-1.22.1.tar.gz",
+   sha3 = "52f593a7b5335c0df4719b3097e7baae44f5dc80af241036f5fbeb20d573b9fa",
+   build = "cmake",
+};
+
 ghostscript = {
    url = "https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs10050/ghostscript-10.05.0.tar.xz",
    sha3 = "89c98d2e4cf3654db60f2f1e1107879c949b7351b5cbe287de94aba7beb09e44",
