@@ -66,8 +66,8 @@ uchardet = {
 };
 
 mpv = {
-   url = "https://github.com/mpv-player/mpv/archive/v0.39.0/mpv-0.39.0.tar.gz",
-   sha3 = "74a6e0b52d03fc15a5e7ef4591f931fe8d53821ef02f4c20d8ce9e78f1bd8ef7",
+   url = "https://github.com/mpv-player/mpv/archive/v0.40.0/mpv-0.40.0.tar.gz",
+   sha3 = "76233de301943489d4336891fa089d63baa235e71684a907821a6eedbe44c4f9",
    build = "meson",
    flags = {
       "-Dx11=enabled",

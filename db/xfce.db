@@ -174,8 +174,8 @@ xfce4-screensaver = {
 };
 
 xfce4-session = {
-   url = "https://archive.xfce.org/src/xfce/xfce4-session/4.20/xfce4-session-4.20.1.tar.bz2",
-   sha3 = "47dc48b2e702afef15a705ba3017a85abf73799879e7fd29d68a640cd4d9e607",
+   url = "https://archive.xfce.org/src/xfce/xfce4-session/4.20/xfce4-session-4.20.2.tar.bz2",
+   sha3 = "56aa19408115a8505446271a09113c22001e96640bb410722a37a217dff72cea",
    build = "./configure",
    flags = {
       "--disable-legacy-sm",
@@ -210,14 +210,9 @@ thunar-archive-plugin = {
 };
 
 mousepad = {
-   url = "https://archive.xfce.org/src/apps/mousepad/0.6/mousepad-0.6.3.tar.bz2",
-   sha3 = "2f29510d10b5c4baf573ce0bd7a59b377fb8a1c01f781c65950736df04095a13",
-   build = "./configure",
-   flags = {
-      "--enable-gtksourceview4",
-      "--disable-plugin-gspell",
-      "--disable-debug",
-   }
+   url = "https://archive.xfce.org/src/apps/mousepad/0.6/mousepad-0.6.4.tar.xz",
+   sha3 = "02a13aa04c58a79ef48c96d7aeb7f60862d7df3a509e6ff6fa8b097170eeb775",
+   build = "meson",
 };
 
 ristretto = {
@@ -228,8 +223,8 @@ ristretto = {
 };
 
 xarchiver = {
-   url = "https://github.com/ib/xarchiver/archive/0.5.4.23/xarchiver-0.5.4.23.tar.gz",
-   sha3 = "bd34257a67da0698038f2a870374679621d323ca42d965580fee0a964881d4b4",
+   url = "https://github.com/ib/xarchiver/archive/0.5.4.25/xarchiver-0.5.4.25.tar.gz",
+   sha3 = "463e5f54e678083958571c04a6b289052b9987417ac5034c9e346a54af774e74",
    build = "./configure",
    flags = { "--libexecdir=/usr/lib64/xfce4" }
 };

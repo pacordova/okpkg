@@ -581,8 +581,8 @@ xorg-server = {
 };
 
 libevdev = {
-   url = "https://www.freedesktop.org/software/libevdev/libevdev-1.13.3.tar.xz",
-   sha3 = "262752df86983253af78937285ef6d298a7efade0aa3cf6937a3299af9ef1748",
+   url = "https://www.freedesktop.org/software/libevdev/libevdev-1.13.4.tar.xz",
+   sha3 = "10d5f557a2b23eb3041d9b291bcc082c81b8114be0068f9967e4114dd3b115b9",
    build = "meson",
    flags = { "-Ddocumentation=disabled" }
 };
@@ -594,8 +594,8 @@ xf86-input-evdev = {
 };
 
 libinput = {
-   url = "https://gitlab.freedesktop.org/libinput/libinput/-/archive/1.27.1/libinput-1.27.1.tar.bz2",
-   sha3 = "a7aaf28890d6101c3072d9e61cdd378768310241b6098836b7e57f9a90e7f9b8",
+   url = "https://gitlab.freedesktop.org/libinput/libinput/-/archive/1.28.0/libinput-1.28.0.tar.gz",
+   sha3 = "96d734b815d01ec58b1ed50e4d2fed2fa07db52f50bfb2c3dc77fc839d694022",
    build = "meson",
    flags = {
       "-D{debug-gui,documentation,libwacom,tests}=false",

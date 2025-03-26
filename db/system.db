@@ -128,8 +128,8 @@ lzlib = {
 };
 
 xz = {
-   url = "https://downloads.sourceforge.net/lzmautils/xz-5.6.4.tar.gz",
-   sha3 = "f2f785861be650d82dcca2f14b5f86511984bbe307faee09d18fd198aed56066",
+   url = "https://downloads.sourceforge.net/lzmautils/xz-5.8.0.tar.gz",
+   sha3 = "11888be290d1e1ddd978c01271584fbbc42fe0956551645b37bebc4ae7a87ba8",
    build = "./configure",
 };
 
@@ -640,8 +640,8 @@ make = {
 };
 
 ed = {
-   url = "https://ftp.gnu.org/gnu/ed/ed-1.21.tar.lz",
-   sha3 = "b846639de83bea36010248194c6f04cfdc4504f5f57b8fcf36e8b80da6f862b1",
+   url = "https://ftp.gnu.org/gnu/ed/ed-1.21.1.tar.lz",
+   sha3 = "1403c56fc4ffd2c083b8906f520f8d96cafd34c54047612d24594b34e6bd1010",
    build = "./configure",
 };
 

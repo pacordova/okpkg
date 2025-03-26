@@ -48,8 +48,8 @@ openresolv = {
 };
 
 iproute2 = {
-   url = "https://kernel.org/pub/linux/utils/net/iproute2/iproute2-6.13.0.tar.xz",
-   sha3 = "09d608b381e4e015bbbc97e1c1ee84b4ee3534abf407e45c22d3960462cadd30",
+   url = "https://kernel.org/pub/linux/utils/net/iproute2/iproute2-6.14.0.tar.xz",
+   sha3 = "e00876693a9e6ae1b0ce35e261edd3e01e5795665eb5b3ba880135b503422ba5",
    build = "./configure",
    flags = { "--libdir=/usr/lib64" },
    prepare = [[

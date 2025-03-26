@@ -262,8 +262,8 @@ ripgrep = {
 };
 
 scrot = {
-   url = "https://github.com/resurrecting-open-source-projects/scrot/releases/download/1.11.1/scrot-1.11.1.tar.bz2",
-   sha3 = "183450df0187a0f6c107f828585160ad2d7dfe858e353ddd08ce85bf65da94df",
+   url = "https://github.com/resurrecting-open-source-projects/scrot/releases/download/1.12/scrot-1.12.tar.bz2",
+   sha3 = "7bad8d99aa51038bd7c79f3726029a8a14006c84ae423ce1c2a6efca0485f523",
    build = "./configure",
 };
 
