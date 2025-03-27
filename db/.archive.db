@@ -669,12 +669,6 @@ fontforge = {
    }
 };
 
-lm-sensors = {
-   url = "https://github.com/lm-sensors/lm-sensors/archive/V3-6-0/lm-sensors-3-6-0.tar.gz",
-   build = "make",
-   flags = { "LIBDIR=$LIBDIR" }
-};
-
 pwgen = {
    url = "https://prdownloads.sourceforge.net/pwgen/pwgen-2.08.tar.gz",
    build = "./configure",

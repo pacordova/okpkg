@@ -1,3 +1,16 @@
+lm-sensors = {
+   url = "https://github.com/lm-sensors/lm-sensors/archive/V3-6-0/lm-sensors-3-6-0.tar.gz",
+   sha3 = "49e0ccef37d001581142d673a8ec9687cd94590d18e5382a276091b6eeca6fca",
+   build = "make",
+   flags = { 
+      "PREFIX=/usr",
+      "BUILD_STATIC_LIB=0",
+      "MANDIR=/usr/share/man", 
+      "EXLDFLAGS=",
+      "LIBDIR=/usr/lib64"
+   }
+};
+
 cpu-x = {
    url = "https://github.com/TheTumultuousUnicornOfDarkness/CPU-X/archive/v5.1.3/CPU-X-5.1.3.tar.gz",
    sha3 = "148f38d191d6978b4ced4adecb42d2699e3795b284ccba18193d5b6ca2d486cf",
