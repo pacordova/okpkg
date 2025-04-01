@@ -423,8 +423,8 @@ gdbm = {
 };
 
 expat = {
-   url = "https://downloads.sourceforge.net/expat/expat-2.7.0.tar.lz",
-   sha3 = "84a42bec7339d80b7af92fbdecb60ce9f3b0a2bc8e0741ef18ca949ca7cf8ec5",
+   url = "https://downloads.sourceforge.net/expat/expat-2.7.1.tar.lz",
+   sha3 = "42c3609e354419344dba812efa5f5df65a51604a651d943bd25c98ff8886d4fb",
    build = "./configure",
    flags = { "--without-{docbook,examples,tests,xmlwf}" }
 };
@@ -504,8 +504,8 @@ scdoc = {
 };
 
 kmod = {
-   url = "https://kernel.org/pub/linux/utils/kernel/kmod/kmod-34.1.tar.xz",
-   sha3 = "8e37d0d129a2d2ff1762c24e39c849c80566da5272ff1723e33dfa51d50e2d98",
+   url = "https://kernel.org/pub/linux/utils/kernel/kmod/kmod-34.2.tar.xz",
+   sha3 = "7736b1c8aa0a1edfa539b30456a9107be7942f1cda3cb74fd48323a24e99444d",
    build = "meson",
    flags = { "-Dmoduledir=/usr/lib64/modules" }
 };
@@ -646,8 +646,8 @@ ed = {
 };
 
 patch = {
-   url = "https://ftp.gnu.org/gnu/patch/patch-2.7.6.tar.xz",
-   sha3 = "ed81c9aa2062006688e50adec68148660f4798a8f8a0f576d658417e816b94e7",
+   url = "https://ftp.gnu.org/gnu/patch/patch-2.8.tar.xz",
+   sha3 = "9aeb0c45623a1777cee4bcb8fd1aece7007bd2504e87fb5ba0fc039547fbc23b",
    build = "./configure",
 };
 
@@ -773,8 +773,8 @@ dosfstools = {
 };
 
 sysklogd = {
-   url = "https://github.com/troglobit/sysklogd/releases/download/v2.7.1/sysklogd-2.7.1.tar.gz",
-   sha3 = "2a23f8780846b778a07fa0d5cc69432618f2fd742bd5fb747e1ddf81337d138a",
+   url = "https://github.com/troglobit/sysklogd/releases/download/v2.7.2/sysklogd-2.7.2.tar.gz",
+   sha3 = "a0144148f70bb8dc2289c64d0d1607483cbd6e0ccd1e2d7c443dd4aed486920c",
    build = "./configure",
    flags = { "--without-logger" }
 };

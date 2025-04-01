@@ -6,8 +6,8 @@ xdg-dbus-proxy = {
 };
 
 ostree = {
-   url = "https://github.com/ostreedev/ostree/releases/download/v2025.1/libostree-2025.1.tar.xz",
-   sha3 = "d16f167fe014fcf2ea923dd3494a2a9c682b09840bf0a5b0372250302e8fc92c",
+   url = "https://github.com/ostreedev/ostree/releases/download/v2025.2/libostree-2025.2.tar.xz",
+   sha3 = "047ae96ae72b1083c14760737713349d68e9a166b3322fe3d7001d08d163295f",
    build = "./configure",
    flags = {
       "--with-curl",

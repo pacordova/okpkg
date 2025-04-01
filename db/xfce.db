@@ -210,8 +210,8 @@ thunar-archive-plugin = {
 };
 
 mousepad = {
-   url = "https://archive.xfce.org/src/apps/mousepad/0.6/mousepad-0.6.4.tar.xz",
-   sha3 = "02a13aa04c58a79ef48c96d7aeb7f60862d7df3a509e6ff6fa8b097170eeb775",
+   url = "https://archive.xfce.org/src/apps/mousepad/0.6/mousepad-0.6.5.tar.xz",
+   sha3 = "5a4b38a68b2b7c3f820833949e5cdc62b5f79454a11250ba96ce8dcb52d41236",
    build = "meson",
 };
 

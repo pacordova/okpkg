@@ -125,8 +125,8 @@ fribidi = {
 };
 
 fuse3 = {
-   url = "https://github.com/libfuse/libfuse/releases/download/fuse-3.16.2/fuse-3.16.2.tar.gz",
-   sha3 = "7511d3e5cf0a4c22de6a717c64e10a0469801fd1baa34a2e2924e3d676af2a31",
+   url = "https://github.com/libfuse/libfuse/releases/download/fuse-3.17.1/fuse-3.17.1.tar.gz",
+   sha3 = "e23b5b83bf7e9d9349879287110bea63ea2f6bb6c2e68ee60cc7bb73e6371732",
    build = "meson",
    flags = { "-Dexamples=false" },
    prepare = [[ sed -i '/^udev/,$ s/^/#/' util/meson.build ]],
@@ -171,8 +171,8 @@ lcms2 = {
 };
 
 libarchive = {
-   url = "https://github.com/libarchive/libarchive/releases/download/v3.7.8/libarchive-3.7.8.tar.xz",
-   sha3 = "5a493e4bbf5cd7be5ec8d5ac74ac5cd8809503d36b5682af53dcffc9c017a67d",
+   url = "https://github.com/libarchive/libarchive/releases/download/v3.7.9/libarchive-3.7.9.tar.xz",
+   sha3 = "519a3e4aa82f82390a2c56ad839b2fa5e5ea5a53c26a2a0d7c51edc3fcaefc10",
    build = "./configure",
    flags = { "--without-nettle" }
 };
