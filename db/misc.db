@@ -275,8 +275,8 @@ ripgrep = {
 };
 
 scrot = {
-   url = "https://github.com/resurrecting-open-source-projects/scrot/releases/download/1.12/scrot-1.12.tar.bz2",
-   sha3 = "7bad8d99aa51038bd7c79f3726029a8a14006c84ae423ce1c2a6efca0485f523",
+   url = "https://github.com/resurrecting-open-source-projects/scrot/releases/download/1.12.1/scrot-1.12.1.tar.gz",
+   sha3 = "c09b507a8ebbf7b34f3e8d2671af3553412035c121a92ab2f16803cf87dbbd5a",
    build = "./configure",
 };
 
@@ -305,8 +305,8 @@ ugrep = {
 };
 
 vim = {
-   url = "https://github.com/vim/vim/archive/v9.1.1232/vim-9.1.1232.tar.gz",
-   sha3 = "252222eab327a86df9c4f10e3e4c53c5a2b1721664e8c64301e3ced6fbfd7161",
+   url = "https://github.com/vim/vim/archive/v9.1.1275/vim-9.1.1275.tar.gz",
+   sha3 = "ee84fcf8af2f4670249c0e9b986f6742485d719ae7b3ac9f743b6924187aebba",
    build = "./configure",
    flags = {
       "--enable-{cscope,multibyte}",

@@ -13,8 +13,8 @@ usbutils = {
 --------------------------------------------------------------------------------
 
 _glib2 = {
-   url = "https://download.gnome.org/sources/glib/2.84/glib-2.84.0.tar.xz",
-   sha3 = "22497969c60e15f4476d4a3860b8133af01f305b9188e4b021ab083cfe763ce2",
+   url = "https://download.gnome.org/sources/glib/2.84/glib-2.84.1.tar.xz",
+   sha3 = "862fec266ea880138910fa8111969e46c65fee9725e6101d17ec11fc9150706b",
    build = "meson",
    flags = { "-Dintrospection=disabled" }
 };
@@ -26,8 +26,8 @@ gobject-introspection = {
 };
 
 glib2 = {
-   url = "https://download.gnome.org/sources/glib/2.84/glib-2.84.0.tar.xz",
-   sha3 = "22497969c60e15f4476d4a3860b8133af01f305b9188e4b021ab083cfe763ce2",
+   url = "https://download.gnome.org/sources/glib/2.84/glib-2.84.1.tar.xz",
+   sha3 = "862fec266ea880138910fa8111969e46c65fee9725e6101d17ec11fc9150706b",
    build = "meson",
    flags = { "-Dintrospection=enabled" }
 };
@@ -52,8 +52,8 @@ libgudev = {
 };
 
 upower = {
-   url = "https://gitlab.freedesktop.org/upower/upower/-/archive/v1.90.7/upower-v1.90.7.tar.bz2",
-   sha3 = "971553ec09ad063adde141ffc0ae37a1f82577db01f2db9d311e3e5e6c853282",
+   url = "https://gitlab.freedesktop.org/upower/upower/-/archive/v1.90.8/upower-v1.90.8.tar.bz2",
+   sha3 = "db524a65092ee15645b7d105aecc4de511ff8861993aad31a771cb86b8e8b6c2",
    build = "meson",
    flags = {
       "-Dsystemdsystemunitdir=no",

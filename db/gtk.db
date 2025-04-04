@@ -37,8 +37,8 @@ startup-notification = {
 --------------------------------------------------------------------------------
 
 at-spi2-core = {
-   url = "https://download.gnome.org/sources/at-spi2-core/2.56/at-spi2-core-2.56.0.tar.xz",
-   sha3 = "16ead8a897cfaea7f63e6cbd05fcde3bb00dc667fbff768670ae421ccb305b59",
+   url = "https://download.gnome.org/sources/at-spi2-core/2.56/at-spi2-core-2.56.1.tar.xz",
+   sha3 = "61a071d4b45e0cfa1fbbfb80cbfe160084b5e1c6fbeb3e4521418750c96606de",
    build = "meson",
    flags = {
       "-Dsystemd_user_dir=/tmp",
@@ -116,8 +116,8 @@ libhandy = {
 };
 
 libnotify = {
-   url = "https://download.gnome.org/sources/libnotify/0.8/libnotify-0.8.4.tar.xz",
-   sha3 = "7aa0c603eb692312886162a614c9bdc4f4b6767fe32bc5a07b29a1daf060521e",
+   url = "https://download.gnome.org/sources/libnotify/0.8/libnotify-0.8.6.tar.xz",
+   sha3 = "f6c36df1575d499ffbe844a1b6249a4c6bbd67aa8e305b0a48268b9d58915698",
    build = "meson",
    flags = { "-D{gtk_doc,man,tests}=false" }
 };
@@ -130,8 +130,8 @@ libxklavier = {
 };
 
 poppler = {
-   url = "https://poppler.freedesktop.org/poppler-25.03.0.tar.xz",
-   sha3 = "354516a85f062a9a7c6cbb7a24bfa23ea2763d15875f949bd4d7490d1a45bd33",
+   url = "https://poppler.freedesktop.org/poppler-25.04.0.tar.xz",
+   sha3 = "4ea0d936a26018dfc5c8cdf01bce0a46129c1fafb172226a3c5086f868ad6ea2",
    build = "cmake",
    flags = {
       "-DENABLE_QT{5,6}=OFF",

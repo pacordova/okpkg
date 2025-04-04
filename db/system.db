@@ -53,8 +53,8 @@ _perl = {
 };
 
 iana-etc = {
-   url = "https://github.com/Mic92/iana-etc/releases/download/20250304/iana-etc-20250304.tar.gz",
-   sha3 = "5198842fa84d00b16b0f57eaea930b0ec4d2c8ab0c78384084eac9a555d287ef",
+   url = "https://github.com/Mic92/iana-etc/releases/download/20250328/iana-etc-20250328.tar.gz",
+   sha3 = "91d993fc612096d0da96aab04feef8ac4e30a43ecd6defe0dd13750bbd50f19a",
    build = _,
    post = [[ 
       install -d $destdir/etc
@@ -128,8 +128,8 @@ lzlib = {
 };
 
 xz = {
-   url = "https://downloads.sourceforge.net/lzmautils/xz-5.8.0.tar.gz",
-   sha3 = "11888be290d1e1ddd978c01271584fbbc42fe0956551645b37bebc4ae7a87ba8",
+   url = "https://downloads.sourceforge.net/lzmautils/xz-5.8.1.tar.gz",
+   sha3 = "8941f202ab32a71f17a0718571cfd2f033295db806a254da4eddd6810a081db9",
    build = "./configure",
 };
 
@@ -437,8 +437,8 @@ less = {
 };
 
 gawk = {
-   url = "https://ftp.gnu.org/gnu/gawk/gawk-5.3.1.tar.xz",
-   sha3 = "27d8d74bf0912e7cbcaabea93bddca69724e76a07cfd62fc89df1616f6e47a2c",
+   url = "https://ftp.gnu.org/gnu/gawk/gawk-5.3.2.tar.lz",
+   sha3 = "3e94c0084ca12a31ae2509e9e2bd85f872ab967fec1f5b487bf98d60d586f04a",
    build = "./configure",
 };
 
