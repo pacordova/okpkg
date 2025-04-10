@@ -566,8 +566,8 @@ python3 = {
 };
 
 coreutils = {
-   url = "https://ftp.gnu.org/gnu/coreutils/coreutils-9.6.tar.xz",
-   sha3 = "6c7efca54b6c2606f807a188c6e632049c1fe327898d35b44cdd5d85af1f8400",
+   url = "https://ftp.gnu.org/gnu/coreutils/coreutils-9.7.tar.xz",
+   sha3 = "c338d429e9cdbf31d034e8a70a9292c9abd97a88ab9e88bdf800edee6cc33071",
    build = "./configure",
    flags = {
       "--enable-install-program=hostname",
@@ -578,8 +578,8 @@ coreutils = {
 };
 
 diffutils = {
-   url = "https://ftp.gnu.org/gnu/diffutils/diffutils-3.11.tar.xz",
-   sha3 = "f69b8f281087a90e977dec316c8d8913d924b7fb9362e78428325c1dc5f7b68a",
+   url = "https://ftp.gnu.org/gnu/diffutils/diffutils-3.12.tar.xz",
+   sha3 = "f5752ae425dd05b2b6d0227aa18eb915aecfc7a8d003e447d768bdbcabe1f3e1",
    build = "./configure",
 };
 

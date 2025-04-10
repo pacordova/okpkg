@@ -104,10 +104,10 @@ python-pathspec = {
 };
 
 python-calver = {
-   url = "https://github.com/di/calver/archive/2022.06.26/calver-2022.06.26.tar.gz",
-   sha3 = "e77d8420d318a515f63f45018d5264aa3f31706ff9fc4d9ba0437b5d4e05af03",
+   url = "https://github.com/di/calver/archive/2025.04.02/calver-2025.04.02.tar.gz",
+   sha3 = "623e80425957e5691039f0e889b90076f525fff6b7127e971b74bfcf6541efe3",
    build = "python-build",
-   prepare = [[ printf "Version: 2022.06.26\n" > PKG-INFO ]]
+   prepare = [[ printf "Version: 2025.04.02\n" > PKG-INFO ]]
 };
 
 python-trove-classifiers = {
