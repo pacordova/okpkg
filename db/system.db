@@ -142,8 +142,8 @@ zstd = {
 };
 
 gperf = {
-   url = "https://ftp.gnu.org/gnu/gperf/gperf-3.1.tar.gz",
-   sha3 = "7a684165950a12cf747c246c1e675877dd70c4df09d9291d380ceb0a4687fd35",
+   url = "https://ftp.gnu.org/gnu/gperf/gperf-3.2.tar.gz",
+   sha3 = "6f9be871c8a0bab321246039cd60a57937a7127b68c6a4f977db2cf43ccbaa6b",
    build = "./configure",
 };
 
