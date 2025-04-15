@@ -182,8 +182,8 @@ gzip = {
 };
 
 htop = {
-   url = "https://github.com/htop-dev/htop/releases/download/3.4.0/htop-3.4.0.tar.xz",
-   sha3 = "2fd5c6013722fc6d43b041471267ef5c4b3ae55968b3653a73b23b8c28c9e786",
+   url = "https://github.com/htop-dev/htop/releases/download/3.4.1/htop-3.4.1.tar.xz",
+   sha3 = "5c4df4c6f6dbc3d3dede923f9cc9fd318a3c4cf83176bc5591a5c62e567afa05",
    build = "./configure",
 };
 
@@ -261,8 +261,8 @@ pciutils = {
 };
 
 r = {
-   url = "https://cran.r-project.org/src/base/R-4/R-4.4.3.tar.gz",
-   sha3 = "a27d1a350d96b00aa81eba15b1a90fe8cca1256c973cddf8a8c12cb4b35df836",
+   url = "https://cran.r-project.org/src/base/R-4/R-4.5.0.tar.gz",
+   sha3 = "45570ac49bfb353612253ceb627cad183c9fe8bd50e1b09422d2336658c5d3e7",
    build = "./configure",
    flags = { "--enable-{R-shlib=yes,java=no}", "--without-x" }
 };

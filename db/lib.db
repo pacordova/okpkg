@@ -52,8 +52,8 @@ libgudev = {
 };
 
 upower = {
-   url = "https://gitlab.freedesktop.org/upower/upower/-/archive/v1.90.8/upower-v1.90.8.tar.bz2",
-   sha3 = "db524a65092ee15645b7d105aecc4de511ff8861993aad31a771cb86b8e8b6c2",
+   url = "https://gitlab.freedesktop.org/upower/upower/-/archive/v1.90.9/upower-v1.90.9.tar.gz",
+   sha3 = "59a5c2f01f609d64018c453f165d625e6f4ed642ef7f05645fe578ad07f9844f",
    build = "meson",
    flags = {
       "-Dsystemdsystemunitdir=no",
@@ -76,14 +76,14 @@ vala = {
 --------------------------------------------------------------------------------
 
 alsa-lib = {
-   url = "https://alsa-project.org/files/pub/lib/alsa-lib-1.2.13.tar.bz2",
-   sha3 = "e56e4ab59499b1435e40e77831f11c4fabfb2ee5be9a174ef037bcba90176b87",
+   url = "https://alsa-project.org/files/pub/lib/alsa-lib-1.2.14.tar.bz2",
+   sha3 = "f1cfc4237cd379b6e4a4a847fd0726f969f2293fa42a4c4a09fde7a57c230896",
    build = "./configure",
 };
 
 alsa-utils = {
-   url = "https://alsa-project.org/files/pub/utils/alsa-utils-1.2.13.tar.bz2",
-   sha3 = "b11eedef8c0b2e482a5c314a4417c7826f4f81c5519a7fdff08d416aca6618a8",
+   url = "https://alsa-project.org/files/pub/utils/alsa-utils-1.2.14.tar.bz2",
+   sha3 = "b7e56315ee2e82af2199ab4bbe2e130759053cd365ebcf8997341d1c5cc4c914",
    build = "./configure",
    flags = {
       "--with-udev-rules-dir=/usr/lib64/udev/rules.d",
@@ -142,8 +142,8 @@ graphite = {
 };
 
 iso-codes = {
-   url = "https://salsa.debian.org/iso-codes-team/iso-codes/-/archive/v4.17.0/iso-codes-4.17.0.tar.gz",
-   sha3 = "03fcededb532f2aa34964a9dda569a647b6d0ef7e27761cbf33662e0c8bf960d",
+   url = "https://salsa.debian.org/iso-codes-team/iso-codes/-/archive/v4.18.0/iso-codes-4.18.0.tar.gz",
+   sha3 = "2fd6271b8b5ab41cb1a57ec05d78cdda12440bfa77b87133371f433cd2bf135a",
    build = "./configure",
 };
 
@@ -318,8 +318,8 @@ libvorbis = {
 };
 
 libvpx = {
-   url = "https://github.com/webmproject/libvpx/archive/v1.15.0/libvpx-1.15.0.tar.gz",
-   sha3 = "7cc5cfa6f23f785b97ebd44e2308a2b6f376ac47703a7abc0efd50af21068bd3",
+   url = "https://github.com/webmproject/libvpx/archive/v1.15.1/libvpx-1.15.1.tar.gz",
+   sha3 = "c2daa97137be2e63b3c0ae1c4c8eefa2715daf61eca993ac13c232c77c2d532b",
    build = "../configure",
    prepare = [[
       sed -i 's/cp -p/cp/' build/make/Makefile

@@ -27,8 +27,8 @@ bison = {
 };
 
 _perl = {
-   url = "https://www.cpan.org/src/5.0/perl-5.40.1.tar.xz",
-   sha3 = "ce73bfaebcc5a8fec4a0800e1511ae90e4102c53b37419f31f8e85600313fc7f",
+   url = "https://www.cpan.org/src/5.0/perl-5.40.2.tar.xz",
+   sha3 = "1121fe1c7abe894e6cd73dffabd76cf1c2ea69b26c559d245f31fbdc9173ba92",
    build = "./configure.gnu",
    flags= {
       "-Dvendorprefix=/usr",
@@ -142,8 +142,8 @@ zstd = {
 };
 
 gperf = {
-   url = "https://ftp.gnu.org/gnu/gperf/gperf-3.2.tar.gz",
-   sha3 = "6f9be871c8a0bab321246039cd60a57937a7127b68c6a4f977db2cf43ccbaa6b",
+   url = "https://ftp.gnu.org/gnu/gperf/gperf-3.2.1.tar.gz",
+   sha3 = "1d2f5afc355e8f73a25de01bedb285d76061c708b6dd00d7559b50f26a6ac7b5",
    build = "./configure",
 };
 
@@ -275,8 +275,8 @@ gcc14 = {
 };
 
 libcap = {
-   url = "https://kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-2.75.tar.xz",
-   sha3 = "14f0a9d6c490dd000e6a55922a7e293446d3ebcbf960de919edeabe805d5b4ec",
+   url = "https://kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-2.76.tar.xz",
+   sha3 = "b34343b17a28b09ca782133c3277323373c242d65f4d186f8a2d697d4224a34f",
    build = "make",
    flags = { "prefix=/usr", "lib=lib64", "SBINDIR=/usr/bin" },
    prepare = [[ sed -i '/install -m.*STA/d' libcap/Makefile ]]
@@ -387,8 +387,8 @@ pcre2 = {
 };
 
 grep = {
-   url = "https://ftp.gnu.org/gnu/grep/grep-3.11.tar.xz",
-   sha3 = "4ae8043b51dc30c5f269ae6119bee84e728e4539019f29e6e6e400e31e2cf422",
+   url = "https://ftp.gnu.org/gnu/grep/grep-3.12.tar.xz",
+   sha3 = "8a257960e6ce28a39d3fcecde32b3d1d1f2e4009e80447715109435d8242caa7",
    build = "./configure",
    prepare = [[ sed -i 's/echo/#echo/' src/egrep.sh ]]
 };
@@ -451,8 +451,8 @@ tzdata = {
 };
 
 perl = {
-   url = "https://www.cpan.org/src/5.0/perl-5.40.1.tar.xz",
-   sha3 = "ce73bfaebcc5a8fec4a0800e1511ae90e4102c53b37419f31f8e85600313fc7f",
+   url = "https://www.cpan.org/src/5.0/perl-5.40.2.tar.xz",
+   sha3 = "1121fe1c7abe894e6cd73dffabd76cf1c2ea69b26c559d245f31fbdc9173ba92",
    build = "./configure.gnu",
    flags= {
       "-Dvendorprefix=/usr",
@@ -530,8 +530,8 @@ libelf = {
 };
 
 libffi = {
-   url = "https://github.com/libffi/libffi/releases/download/v3.4.7/libffi-3.4.7.tar.gz",
-   sha3 = "6d28886e15ad931c75489be15fdf865077d0b9c4c5693fb861f41f42621d7f28",
+   url = "https://github.com/libffi/libffi/releases/download/v3.4.8/libffi-3.4.8.tar.gz",
+   sha3 = "93c55ab59ef0c291f4ffbbf77c7a5082ec57564ad0dd19d67ac9b3617903a58c",
    build = "./configure",
    flags = { "--with-gcc-arch=x86-64-v2", "--disable-exec-static-tramp" }
 };
