@@ -27,8 +27,8 @@ ckone(){
         gzip -n > `basename $1`-$v.tar.gz
 }
 
-ckone https://github.com/vim/vim v9.1.1275
-ckone https://github.com/vcrhonek/hwdata v0.394
+ckone https://github.com/vim/vim v9.1.1313
+#ckone https://github.com/vcrhonek/hwdata v0.394
 #ckone https://github.com/yshui/picom v12.5
 #ckone https://github.com/eggert/tz 2025b
 #ckone https://github.com/pnggroup/libpng v1.6.44
