@@ -182,7 +182,7 @@ function download(x)
    if fp then 
       fp:close()
    else 
-      os.execute(string.format("curl --progress-bar -o %s -LR %s", f, t.url))
+      os.execute(string.format("curl -# -o %s -LR %s", f, t.url))
    end
   
    -- Verify checksum 
