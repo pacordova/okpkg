@@ -230,8 +230,8 @@ libmnl = {
 };
 
 libnftnl = {
-   url = "https://netfilter.org/pub/libnftnl/libnftnl-1.2.8.tar.xz",
-   sha3 = "23613dd6236be91abc4a7811f388562e8cff599cea554c289b9f995b2016d905",
+   url = "https://netfilter.org/pub/libnftnl/libnftnl-1.2.9.tar.xz",
+   sha3 = "9025a4db4e246fbbb3d2819bd2dde246ec5ffedc9803675f987a87fa7fe9c683",
    build = "./configure",
 };
 
