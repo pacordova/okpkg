@@ -26,7 +26,6 @@ xcb-proto = {
    url = "https://xorg.freedesktop.org/archive/individual/proto/xcb-proto-1.17.0.tar.xz",
    sha3 = "059abc35a3573885d5274d5f5a9444761fde55232395a6fda22477ac1ba00598",
    build = "./configure",
-   post = [[ mv $destdir/usr/lib $destdir/usr/lib64 ]]
 };
 
 libxcb = {

@@ -342,7 +342,7 @@ libxml2 = {
    build = "./configure",
    flags = {
       "--with-{history=yes,legacy=yes,icu=no}",
-      "--with-minimum",
+      --"--with-minimum",
       "PYTHON=/usr/bin/python3",
    }
 };
