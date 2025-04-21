@@ -337,11 +337,12 @@ libvpx = {
 };
 
 libxml2 = {
-   url = "https://download.gnome.org/sources/libxml2/2.13/libxml2-2.13.7.tar.xz",
-   sha3 = "f56d1642b4333e25df90afd0751ee561f6ac953ff851fd1a376a8854538e11b2",
+   url = "https://download.gnome.org/sources/libxml2/2.14/libxml2-2.14.1.tar.xz",
+   sha3 = "9d6f9209adb380b2c1108a5c6246db2b0f3600a398b226b2d7ce414debeeb36c",
    build = "./configure",
    flags = {
       "--with-{history=yes,legacy=yes,icu=no}",
+      "--with-minimum",
       "PYTHON=/usr/bin/python3",
    }
 };

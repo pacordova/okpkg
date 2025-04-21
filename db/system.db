@@ -5,8 +5,8 @@ _file = {
 };
 
 _python3 = {
-   url = "https://www.python.org/ftp/python/3.13.2/Python-3.13.2.tar.xz",
-   sha3 = "668c9c7fdb4f1ec067eff05cac90e8e80e79c26a0d5c9e851e08ff32b36c1586",
+   url = "https://www.python.org/ftp/python/3.13.3/Python-3.13.3.tar.xz",
+   sha3 = "7c643b0d4792c0d7828cb4f2824108c4f04ea9a5cbaca17a00a414ca9c947835",
    build = "./configure",
    flags = {
       "--with-platlibdir=lib64",
@@ -142,8 +142,8 @@ zstd = {
 };
 
 gperf = {
-   url = "https://ftp.gnu.org/gnu/gperf/gperf-3.2.1.tar.gz",
-   sha3 = "1d2f5afc355e8f73a25de01bedb285d76061c708b6dd00d7559b50f26a6ac7b5",
+   url = "https://ftp.gnu.org/gnu/gperf/gperf-3.3.tar.gz",
+   sha3 = "4938b555aed7b5fda78cc06d871540ac8025985e0f16843ed933d9135e8edcf9",
    build = "./configure",
 };
 
@@ -544,8 +544,8 @@ sqlite = {
 };
 
 python3 = {
-   url = "https://www.python.org/ftp/python/3.13.2/Python-3.13.2.tar.xz",
-   sha3 = "668c9c7fdb4f1ec067eff05cac90e8e80e79c26a0d5c9e851e08ff32b36c1586",
+   url = "https://www.python.org/ftp/python/3.13.3/Python-3.13.3.tar.xz",
+   sha3 = "7c643b0d4792c0d7828cb4f2824108c4f04ea9a5cbaca17a00a414ca9c947835",
    build = "./configure",
    flags = {
       "--enable-loadable-sqlite-extensions",
