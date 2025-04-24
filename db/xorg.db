@@ -141,8 +141,8 @@ libxfont2 = {
 };
 
 libxft = {
-   url = "https://x.org/pub/individual/lib/libXft-2.3.8.tar.xz",
-   sha3 = "f74576a9553f803bf0398988c209569bab38727eaf7ddd10a3e92dcbdc9d34d2",
+   url = "https://x.org/pub/individual/lib/libXft-2.3.9.tar.xz",
+   sha3 = "668c550537e06bc5ff5ce1acb24e9390547d46b7c1cc862728f6120245013d34",
    build = "./configure",
 };
 
