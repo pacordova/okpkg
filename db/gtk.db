@@ -37,8 +37,8 @@ startup-notification = {
 --------------------------------------------------------------------------------
 
 at-spi2-core = {
-   url = "https://download.gnome.org/sources/at-spi2-core/2.56/at-spi2-core-2.56.1.tar.xz",
-   sha3 = "61a071d4b45e0cfa1fbbfb80cbfe160084b5e1c6fbeb3e4521418750c96606de",
+   url = "https://download.gnome.org/sources/at-spi2-core/2.56/at-spi2-core-2.56.2.tar.xz",
+   sha3 = "65b3c3f76943208839944b2887054b42224bd1c9bf387a4075474183676b7d6d",
    build = "meson",
    flags = {
       "-Dsystemd_user_dir=/tmp",
