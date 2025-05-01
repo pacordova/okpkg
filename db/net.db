@@ -134,8 +134,8 @@ wget = {
 };
 
 wpa_supplicant = {
-   url = "https://w1.fi/releases/wpa_supplicant-2.10.tar.gz",
-   sha3 = "5a6ec512f18ea33e5e8bfccbbaff3fc88571fcd482a420ed3aeaff6404ef3690",
+   url = "https://w1.fi/releases/wpa_supplicant-2.11.tar.gz",
+   sha3 = "14f105ecef1b2c7734fbefa49a3ac7eed505606fcf0fae3d4d14caaaa982d821",
    build = "make",
    flags = { "-C wpa_supplicant", "BINDIR=/usr/bin", "LIBDIR=/usr/lib64" },
    prepare = [[
@@ -145,6 +145,7 @@ wpa_supplicant = {
       printf "CONFIG_IPV6=y\n" >> .config
       printf "CONFIG_READLINE=y\n" >> .config
       printf "CFLAGS += -I/usr/include/libnl3\n" >> .config
+      printf "CFLAGS += -Wno-incompatible-pointer-types\n" >> .config
    ]],
    post = [[
       cd wpa_supplicant
