@@ -24,8 +24,8 @@ conky = {
 };
 
 ghostscript = {
-   url = "https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs10050/ghostscript-10.05.0.tar.xz",
-   sha3 = "89c98d2e4cf3654db60f2f1e1107879c949b7351b5cbe287de94aba7beb09e44",
+   url = "https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs10051/ghostscript-10.05.1.tar.xz",
+   sha3 = "677ddd0a829a9edea0d091cadd241ee2f862b8e69a82d31379f4f6f24f306ebb",
    build = "./configure",
    flags = {
       "--disable-{compile-inits,cups}",

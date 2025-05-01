@@ -337,8 +337,8 @@ libvpx = {
 };
 
 libxml2 = {
-   url = "https://download.gnome.org/sources/libxml2/2.14/libxml2-2.14.1.tar.xz",
-   sha3 = "9d6f9209adb380b2c1108a5c6246db2b0f3600a398b226b2d7ce414debeeb36c",
+   url = "https://download.gnome.org/sources/libxml2/2.14/libxml2-2.14.2.tar.xz",
+   sha3 = "ca427a8ea78511de8bbd9640236a13322f44dbacbfd3f3cb2c3cbf9b37864c14",
    build = "./configure",
    flags = {
       "--with-{history=yes,legacy=yes,icu=no}",
@@ -403,8 +403,8 @@ p11-kit = {
 };
 
 pixman = {
-   url = "https://xorg.freedesktop.org/releases/individual/lib/pixman-0.44.2.tar.xz",
-   sha3 = "784f46f1a12f332e5dd5a4eef35866667a2d0e63fcff0b6e36ac9b59a259fd5c",
+   url = "https://xorg.freedesktop.org/releases/individual/lib/pixman-0.46.0.tar.xz",
+   sha3 = "5b528b4a67ecfddb6e80af154392527eadfda3dc654b47bca79fb5ebdd8e6446",
    build = "meson",
 };
 

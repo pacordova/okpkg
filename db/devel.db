@@ -77,8 +77,8 @@ libtool = {
 };
 
 meson = {
-   url = "https://github.com/mesonbuild/meson/releases/download/1.7.2/meson-1.7.2.tar.gz",
-   sha3 = "c2dbef89e1911da9eb62e8e80df23938e22e612c9a004043af79ccb053520a6e",
+   url = "https://github.com/mesonbuild/meson/releases/download/1.8.0/meson-1.8.0.tar.gz",
+   sha3 = "de79301b99b789e3ebe5dbe17dc0e3cf09840eaf3d3937aeada403fe6ae7c355",
    build = "python-build",
 };
 

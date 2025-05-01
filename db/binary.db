@@ -24,8 +24,8 @@ rust = {
 };
 
 firefox = {
-   url = "https://download-installer.cdn.mozilla.net/pub/firefox/releases/137.0.2/linux-x86_64/en-US/firefox-137.0.2.tar.xz",
-   sha3 = "b9becdb8564a9268d10dbe700a7591e9d5f50ac236268f9643e51ab5d979dcc8",
+   url = "https://download-installer.cdn.mozilla.net/pub/firefox/releases/138.0.1/linux-x86_64/en-US/firefox-138.0.1.tar.xz",
+   sha3 = "94d99fca49599df3c15174ac14ddba1d3affa0b16f0c724b7c559fdb7cb4a3db",
    build = _,
    post = [[
       install -d $destdir/usr/{bin,lib64}
@@ -41,8 +41,8 @@ firefox = {
 -- from firefox: libnss3.so libnssutil3.so libsmime3.so libnspr4.so libplc4.so libplds4.so
 -- needs libcups.so.2
 discord = {
-   url = "https://dl.discordapp.net/apps/linux/0.0.92/discord-0.0.92.tar.gz",
-   sha3 = "d500c8e5407cf3711938dc4c3234208966144d8703da15f4eb03ab27d2574a6f",
+   url = "https://dl.discordapp.net/apps/linux/0.0.93/discord-0.0.93.tar.gz",
+   sha3 = "c1ded552807b6ca7f03d1aeb077076925e9f686328483c2e879e8fe1e5447c07",
    build = _,
    post = [[
       sed -e 's:/usr/share:/usr/lib64:' \
