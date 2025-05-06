@@ -62,13 +62,18 @@ libreoffice-bin = {
    build = _,
    post = [[
       find DEBS -name '*.deb' -exec ar x '{}' data.tar.xz \; -exec tar -xf data.tar.xz \;
-      soffice=`basename opt/*`
+      version=`basename opt/*`
       install -d $destdir/usr/{bin,lib64}
       cp -rp  opt/* $destdir/usr/lib64
       cp -rp  usr/share $destdir/usr/share
-      ln -sfr $destdir/usr/lib64/*/program/soffice $destdir/usr/bin/$soffice
-      ln -sf  $soffice $destdir/usr/bin/libreoffice
+      ln -sfr $destdir/usr/lib64/$version/program/soffice $destdir/usr/bin/$version
+      ln -sf  $version $destdir/usr/bin/libreoffice
       ln -sf  $soffice $destdir/usr/bin/soffice
+      cd $destdir/usr/share/applications
+      for x in base calc draw impress math startcenter writer xsltfilter
+      do
+          ln -sf /usr/lib64/$version/share/xdg/$x.desktop $version-$x.desktop
+      done
    ]]
 };
 
