@@ -57,8 +57,8 @@ discord = {
 };
 
 libreoffice-bin = {
-   url = "https://download.documentfoundation.org/libreoffice/stable/24.2.5/deb/x86_64/LibreOffice_24.2.5_Linux_x86-64_deb.tar.gz",
-   sha3 = "a0ca5702298dbefc84591f3b8a93be1b3407a1e18d7412593ae3d36bd40694bf",
+   url = "https://download.documentfoundation.org/libreoffice/stable/25.2.3/deb/x86_64/LibreOffice_25.2.3_Linux_x86-64_deb.tar.gz",
+   sha3 = "0ec180fb759cca7c76d260e6f7078ef93413293c4ae7daad5c6006897d319b52",
    build = _,
    post = [[
       find DEBS -name '*.deb' -exec ar x '{}' data.tar.xz \; -exec tar -xf data.tar.xz \;
