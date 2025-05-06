@@ -44,8 +44,8 @@ python-wheel = {
 };
 
 python-setuptools = {
-   url = "https://pypi.org/packages/source/s/setuptools/setuptools-79.0.1.tar.gz",
-   sha3 = "38a5efdfb36d9162c318faadb94c5e81d1e467fb916048d209130c7fc6bb08ae",
+   url = "https://pypi.org/packages/source/s/setuptools/setuptools-80.3.1.tar.gz",
+   sha3 = "c75851a7ba25205b2199c1e49ab8b0be897a0212b648ef69c6dc1e61778c492f",
    build = "python-build",
 };
 
@@ -86,8 +86,8 @@ python-typing_extensions = {
 };
 
 python-setuptools-scm = {
-   url = "https://pypi.org/packages/source/s/setuptools-scm/setuptools_scm-8.3.0.tar.gz",
-   sha3 = "38d97432b309f09a769fae7dd8330b83f76c2c6c803cb0730992ab8cf4538dce",
+   url = "https://pypi.org/packages/source/s/setuptools-scm/setuptools_scm-8.3.1.tar.gz",
+   sha3 = "3614d12fa3a5f35f58815e099a906d65db71097bee73f3bc7597ccaafd97cea2",
    build = "python-build",
 };
 
@@ -104,15 +104,15 @@ python-pathspec = {
 };
 
 python-calver = {
-   url = "https://github.com/di/calver/archive/2022.06.26/calver-2022.06.26.tar.gz",
-   sha3 = "e77d8420d318a515f63f45018d5264aa3f31706ff9fc4d9ba0437b5d4e05af03",
+   url = "https://pypi.org/packages/source/c/calver/calver-2025.4.17.tar.gz",
+   sha3 = "72a03735ea17397dd2741764653659c05c6fe437d0fad15ed585451b7ff9fefb",
    build = "python-build",
-   prepare = [[ printf "Version: 2025.04.02\n" > PKG-INFO ]]
+   prepare = [[ printf "Version: 2025.4.17\n" > PKG-INFO ]]
 };
 
 python-trove-classifiers = {
-   url = "https://pypi.org/packages/source/t/trove-classifiers/trove_classifiers-2025.4.11.15.tar.gz",
-   sha3 = "2721224bc9495384729c18192bd854c65acd9972d041cfd3badcf03f6ad0e1da",
+   url = "https://pypi.org/packages/source/t/trove-classifiers/trove_classifiers-2025.5.1.12.tar.gz",
+   sha3 = "d5570e38f2d85b70638a0eb8132c2198b8d0c8c01397773fe70c396664eeef0e",
    build = "python-build",
 };
 
@@ -153,8 +153,8 @@ glad = {
 };
 
 python-pyparsing = {
-   url = "https://github.com/pyparsing/pyparsing/archive/3.2.1/pyparsing-3.2.1.tar.gz",
-   sha3 = "4b25f7e0aa8fc2568d6bd40130db1a2ddfa7fccd1bc7d7ecb415501793970cfa",
+   url = "https://pypi.org/packages/source/p/pyparsing/pyparsing-3.2.3.tar.gz",
+   sha3 = "f9904826f488501e6eec7080cea1fb7a74e108cba637e018de506cbd199fa17e",
    build = "python-build",
 };
 
