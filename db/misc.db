@@ -45,6 +45,17 @@ jack2 = {
    build = "waf"
 };
 
+krb5 = {
+   url = "https://kerberos.org/dist/krb5/1.21/krb5-1.21.3.tar.gz",
+   sha3 = "033c7a244a9621256c6c8ddd7fc00078b8a04739b2a6ad0080d0de7e7a8855a5",
+   build = "./src/configure",
+   flags = {
+      "--without-system-vertno",
+      "--disable-pkinit",
+   },
+   prepare = [[ sed -i -e '/eq 0/{N;s/12 //}' src/plugins/kdb/db2/libdb2/test/run.test ]],
+};
+
 alsa-plugins = {
    url = "http://www.alsa-project.org/files/pub/plugins/alsa-plugins-1.2.12.tar.bz2",
    sha3 = "591c84aecbaf4a91957afdefa41fee369afe783172eb57a9290ed71399ed17bb",
