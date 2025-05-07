@@ -561,7 +561,7 @@ python3 = {
       cd "$destdir/usr/bin"
       rm -f pydoc* idle*
       cd "$destdir/usr/lib64/python"*
-      rm -fr test ./*/test ./*/tests pydoc* idlelib turtle* config-*
+      rm -fr test ./*/test ./*/tests idlelib turtle* config-*
    ]]
 };
 
