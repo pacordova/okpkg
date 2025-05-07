@@ -41,8 +41,8 @@ firefox = {
 -- from firefox: libnss3.so libnssutil3.so libsmime3.so libnspr4.so libplc4.so libplds4.so
 -- needs libcups.so.2
 discord = {
-   url = "https://dl.discordapp.net/apps/linux/0.0.93/discord-0.0.93.tar.gz",
-   sha3 = "c1ded552807b6ca7f03d1aeb077076925e9f686328483c2e879e8fe1e5447c07",
+   url = "https://dl.discordapp.net/apps/linux/0.0.94/discord-0.0.94.tar.gz",
+   sha3 = "69d4b82c770236fafdb7541cf4d9ef946dd52ec8ff5552f0f96f34f9453fd6b5",
    build = _,
    post = [[
       sed -e 's:/usr/share:/usr/lib64:' \
@@ -73,6 +73,7 @@ libreoffice-bin = {
       for x in base calc draw impress math startcenter writer xsltfilter
       do
           ln -sf /usr/lib64/$version/share/xdg/$x.desktop $version-$x.desktop
+          sed -i "s|Icon=$version|Icon=libreoffice|" $version-$x.desktop
       done
    ]]
 };
@@ -104,11 +105,11 @@ nodejs = {
 -- TODO: download error: cannot handle debfile
 -- Consider building from source.
 signal-desktop = {
-   url = "https://updates.signal.org/desktop/apt/pool/s/signal-desktop/signal-desktop_7.52.0_amd64.deb",
-   sha3 = "0b47436dc9c148bab4448c2867f9503fd0f0f5367e2cce96f8f932e9900d86c9",
+   url = "https://updates.signal.org/desktop/apt/pool/s/signal-desktop/signal-desktop_7.53.0_amd64.deb",
+   sha3 = "907b7f191388b0b3da5059fa710adf0b0be15301cdbee583eaeb7ea893c95793",
    build = _,
    post = [[
-      ar x ../../download/signal-desktop_7.52.0_amd64.deb data.tar.xz
+      ar x ../../download/signal-desktop_7.53.0_amd64.deb data.tar.xz
       tar -xf data.tar.xz
       sed -i 's:/opt/Signal:/usr/bin:' usr/share/applications/signal-desktop.desktop
       install -d $destdir/usr/{lib64,bin}
