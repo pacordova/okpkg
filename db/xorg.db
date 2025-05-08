@@ -290,8 +290,8 @@ libvdpau = {
 };
 
 mesa = {
-   url = "https://mesa.freedesktop.org/archive/mesa-25.0.5.tar.xz",
-   sha3 = "a63284c75fa6de81a4731d614d5f3d1d86b84e1b7a57fee4e79c2fd151ee74a0",
+   url = "https://mesa.freedesktop.org/archive/mesa-25.1.0.tar.xz",
+   sha3 = "6e23f89cf294a4e11e111d7a07aba38c854d6a5629d28e849c42c1176cc7a3d1",
    build = "meson",
    flags = {
       "-Dplatforms=x11",
@@ -543,8 +543,8 @@ xkeyboard-config = {
 };
 
 libxkbcommon = {
-   url = "https://github.com/xkbcommon/libxkbcommon/archive/xkbcommon-1.9.1/xkbcommon-1.9.1.tar.gz",
-   sha3 = "b1abdd9cc087b6bb4451ffd969d86333293e2c1a5312e7e3db4f3cd23188ca44",
+   url = "https://github.com/xkbcommon/libxkbcommon/archive/xkbcommon-1.9.2/xkbcommon-1.9.2.tar.gz",
+   sha3 = "3a017be2714ad8983e68c0ee18c209df598c30d2bffb4372f98c71e3ccafcc10",
    build = "meson",
    flags = {
       "-Denable-wayland=false",
