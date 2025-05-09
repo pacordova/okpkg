@@ -6,8 +6,8 @@ libgpg-error = {
 };
 
 libgcrypt = {
-   url = "https://gnupg.org/ftp/gcrypt/libgcrypt/libgcrypt-1.11.0.tar.bz2",
-   sha3 = "998fc22058e0d273b2787041ce2d8154e88f249e142cfe7f841214e5bfc3c1a2",
+   url = "https://gnupg.org/ftp/gcrypt/libgcrypt/libgcrypt-1.11.1.tar.bz2",
+   sha3 = "9f8d2bcab323b88ed3cd110dd44bfe79deb6d017e75f4521ea734d195a5d64f7",
    build = "./configure",
 };
 

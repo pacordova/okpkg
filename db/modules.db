@@ -111,8 +111,8 @@ python-calver = {
 };
 
 python-trove-classifiers = {
-   url = "https://pypi.org/packages/source/t/trove-classifiers/trove_classifiers-2025.5.1.12.tar.gz",
-   sha3 = "d5570e38f2d85b70638a0eb8132c2198b8d0c8c01397773fe70c396664eeef0e",
+   url = "https://pypi.org/packages/source/t/trove-classifiers/trove_classifiers-2025.5.8.15.tar.gz",
+   sha3 = "c2b1bcea3266b1ea98322321b04563f96618ba5d9b0b66b7df693ddf03cd2892",
    build = "python-build",
 };
 
@@ -159,8 +159,8 @@ python-pyparsing = {
 };
 
 cython = {
-   url = "https://pypi.org/packages/source/c/cython/cython-3.0.12.tar.gz",
-   sha3 = "a8ebcba8a87889de6eff6d1f8465423270af1458a04201e1121c44b10cc46d7b",
+   url = "https://pypi.org/packages/source/c/cython/cython-3.1.0.tar.gz",
+   sha3 = "b98cb9e3f61715eb27c1e8edf3de18e32ae46e8f3acbc82f48da2381d8ade209",
    build = "python-build",
 };
 

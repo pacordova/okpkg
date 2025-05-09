@@ -28,8 +28,8 @@ check = {
 };
 
 cmake = {
-   url = "https://cmake.org/files/v4.0/cmake-4.0.1.tar.gz",
-   sha3 = "509a7188bd89eb33a1d7212194e055639bddcdebb2cfdad40fbe6653c0f0b0cf",
+   url = "https://cmake.org/files/v4.0/cmake-4.0.2.tar.gz",
+   sha3 = "7587e35c1329363c118cbf69560d6b9fd101576bfbe4e8b28b9f36a5a75f9394",
    build = "./configure",
    flags = {
       "--mandir=/share/man",
@@ -44,8 +44,8 @@ cmake = {
 };
 
 gettext = {
-   url = "https://ftp.gnu.org/gnu/gettext/gettext-0.24.1.tar.lz",
-   sha3 = "e2a2551e2d206f49dba2ad11ded3798f1f0eba447a9d76c030aaf4bc1d21c2a1",
+   url = "https://ftp.gnu.org/gnu/gettext/gettext-0.25.tar.lz",
+   sha3 = "221c29d13d36ac63bc47a8944a8b597a8e2d5e9e87c8ec40ce6d441078b2d703",
    build = "./configure",
    flags = { "--without-git" }
 };
