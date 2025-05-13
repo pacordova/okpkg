@@ -44,8 +44,8 @@ python-wheel = {
 };
 
 python-setuptools = {
-   url = "https://pypi.org/packages/source/s/setuptools/setuptools-80.3.1.tar.gz",
-   sha3 = "c75851a7ba25205b2199c1e49ab8b0be897a0212b648ef69c6dc1e61778c492f",
+   url = "https://pypi.org/packages/source/s/setuptools/setuptools-80.4.0.tar.gz",
+   sha3 = "d9a0b4268a5bf70666f203d7a618b7632e3734a4c8b92fdfbc154f0743f4c028",
    build = "python-build",
 };
 
@@ -111,8 +111,8 @@ python-calver = {
 };
 
 python-trove-classifiers = {
-   url = "https://pypi.org/packages/source/t/trove-classifiers/trove_classifiers-2025.5.8.15.tar.gz",
-   sha3 = "c2b1bcea3266b1ea98322321b04563f96618ba5d9b0b66b7df693ddf03cd2892",
+   url = "https://pypi.org/packages/source/t/trove-classifiers/trove_classifiers-2025.5.9.12.tar.gz",
+   sha3 = "01eb0e1d30f953d1bc6cc11746ed84323b6e325d243f1685986de6f67e948f03",
    build = "python-build",
 };
 

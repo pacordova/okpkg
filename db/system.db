@@ -53,8 +53,8 @@ _perl = {
 };
 
 iana-etc = {
-   url = "https://github.com/Mic92/iana-etc/releases/download/20250328/iana-etc-20250328.tar.gz",
-   sha3 = "91d993fc612096d0da96aab04feef8ac4e30a43ecd6defe0dd13750bbd50f19a",
+   url = "https://github.com/Mic92/iana-etc/releases/download/20250407/iana-etc-20250407.tar.gz",
+   sha3 = "80de7a7ada09e2bec02d18c1f755bd6c2aef76ccce1efb9be5be8f97d47a141b",
    build = _,
    post = [[ 
       install -d $destdir/etc
@@ -161,8 +161,8 @@ file = {
 };
 
 m4 = {
-   url = "https://ftp.gnu.org/gnu/m4/m4-1.4.19.tar.xz",
-   sha3 = "7798bfdfc35ce65aca936e82a3f68b4f4a66278f4d477f86284960ead7103265",
+   url = "https://ftp.gnu.org/gnu/m4/m4-1.4.20.tar.xz",
+   sha3 = "97f68626d6e98e875dcd31df932142b87b6b229c92ee88210e50fd7fb275c95f",
    build = "./configure",
 };
 
