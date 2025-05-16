@@ -36,8 +36,8 @@ openntpd = {
 };
 
 openresolv = {
-   url = "https://github.com/NetworkConfiguration/openresolv/releases/download/v3.16.3/openresolv-3.16.3.tar.xz",
-   sha3 = "6a4931a5088456ed467f7d0f22ecbd83a685239917d765fa7d8ebdef50ea9012",
+   url = "https://github.com/NetworkConfiguration/openresolv/releases/download/v3.16.5/openresolv-3.16.5.tar.xz",
+   sha3 = "d9c12d38387cddae8c4971c63328afbd72a6ef4dc83aabb18ca140b6042beaec",
    build = "./configure",
    flags = { 
       "--libdir=/usr/lib64", 

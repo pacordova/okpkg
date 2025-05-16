@@ -56,8 +56,8 @@ bubblewrap = {
 };
 
 flatpak = {
-   url = "https://github.com/flatpak/flatpak/releases/download/1.16.0/flatpak-1.16.0.tar.xz",
-   sha3 = "35001480cc47ad1c703bbfbc92ebd9f1da1d2adf071e351ef7721ad50bae4170",
+   url = "https://github.com/flatpak/flatpak/releases/download/1.16.1/flatpak-1.16.1.tar.xz",
+   sha3 = "f5d4e02a5103f4597863ab5c5187e4a366b33e01b131e9cc06ac6fb92bc2ba23",
    build = "meson",
    flags = {
       "-Dsystem_bubblewrap=bwrap",
