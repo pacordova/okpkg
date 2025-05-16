@@ -46,8 +46,8 @@ pinentry = {
 };
 
 gnupg2 = {
-   url = "https://gnupg.org/ftp/gcrypt/gnupg/gnupg-2.4.7.tar.bz2",
-   sha3 = "a76e79467c20e0e1a060c2669c50759545a0f2e8da137a93c635e4b9b9dbb8e9",
+   url = "https://gnupg.org/ftp/gcrypt/gnupg/gnupg-2.4.8.tar.bz2",
+   sha3 = "bf8c9980f5087e491ed3570c3403114cd640ed8d9fc9b884f08c72ad26680820",
    build = "./configure",
    flags = { 
       "--enable-gpg-is-gpg2", 
