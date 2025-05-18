@@ -234,6 +234,13 @@ xfce4-alsa-plugin = {
    build = "meson",
 };
 
+xfce4-taskmanager = {
+   url = "https://archive.xfce.org/src/apps/xfce4-taskmanager/1.5/xfce4-taskmanager-1.5.8.tar.bz2",
+   sha3 = "875272b67a236d0724623d9182518ace3066cf0b4c18146bb8c5681a0ff227f0", 
+   build = "./configure",
+   flags = { "--disable-debug" }
+};
+
 picom = {
    url = "https://github.com/yshui/picom/archive/v12.5/picom-12.5.tar.gz",
    sha3 = "1b5d25bf34ccf12db9fe7ab0680dd2d1bc17b979b43490ae316bebbff4f4a8ed",
