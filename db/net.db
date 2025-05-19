@@ -37,7 +37,7 @@ openntpd = {
       sed -i 's/PRIO_PROCESS, 0, -20/PRIO_PROCESS, 0, 0/' src/ntpd.c
       sed -i 's|pool.ntp.org|2.gentoo.pool.ntp.org|' ntpd.conf
       sed -i '/time.cloudflare.com/d' ntpd.conf
-      sed -i 's/^constraint/#constraints/g' ntpd.conf
+      sed -i 's/^constraint/#constraint/g' ntpd.conf
    ]]
 };
 
