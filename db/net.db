@@ -35,9 +35,10 @@ openntpd = {
    flags = { "--with-privsep-user=ntp" },
    prepare = [[
       sed -i 's/PRIO_PROCESS, 0, -20/PRIO_PROCESS, 0, 0/' src/ntpd.c
-      sed -i 's|pool.ntp.org|2.gentoo.pool.ntp.org|' ntpd.conf
-      sed -i '/time.cloudflare.com/d' ntpd.conf
-      sed -i 's/^constraint/#constraint/g' ntpd.conf
+      sed -i ntpd.conf
+          -e 's/pool.ntp.org/2.gentoo.pool.ntp.org/' ntpd.conf
+          -e '/time.cloudflare.com/d'
+          -e 's/^constraint/#constraint/g'
    ]]
 };
 
