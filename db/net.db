@@ -32,7 +32,13 @@ openntpd = {
    url = "https://ftp.openbsd.org/pub/OpenBSD/OpenNTPD/openntpd-6.8p1.tar.gz",
    sha3 = "05a6c3e7f6928b0455e13e5167f455c1a7d9162cf394d415e6c48da7c49d8eec",
    build = "./configure",
-   flags = { "--with-privsep-user=ntp" }
+   flags = { "--with-privsep-user=ntp" },
+   prepare = [[
+      sed -i 's/PRIO_PROCESS, 0, -20/PRIO_PROCESS, 0, 0/' src/ntpd.c
+      sed -i 's|pool.ntp.org|2.gentoo.pool.ntp.org|' "${pkgdir}/etc/ntpd.conf"
+      sed -i '/time.cloudflare.com/d' ntpd.conf
+      sed -i 's/^constraints/#constraints/g' ntpd.conf
+   ]]
 };
 
 openresolv = {
