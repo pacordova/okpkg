@@ -10,8 +10,8 @@ zig-bin = {
 };
 
 rust = {
-   url = "https://static.rust-lang.org/dist/rust-1.86.0-x86_64-unknown-linux-gnu.tar.xz",
-   sha3 = "991ce8761c20199dfdd97a8876586523f828e3363730e9521c2080f9f6835415",
+   url = "https://static.rust-lang.org/dist/rust-1.87.0-x86_64-unknown-linux-gnu.tar.xz",
+   sha3 = "2eab5a970ce0407efb55ab11d529e5f783eda9978258f2e011e68579d12bdee2",
    build = _,
    post = [[ 
       install -d $destdir/usr
@@ -41,8 +41,8 @@ firefox = {
 -- from firefox: libnss3.so libnssutil3.so libsmime3.so libnspr4.so libplc4.so libplds4.so
 -- needs libcups.so.2
 discord = {
-   url = "https://dl.discordapp.net/apps/linux/0.0.94/discord-0.0.94.tar.gz",
-   sha3 = "69d4b82c770236fafdb7541cf4d9ef946dd52ec8ff5552f0f96f34f9453fd6b5",
+   url = "https://dl.discordapp.net/apps/linux/0.0.95/discord-0.0.95.tar.gz",
+   sha3 = "54bc07112ebe134bb2e8e99f2391ad4f49712e9029093ce68a22155713ca7743",
    build = _,
    post = [[
       sed -e 's:/usr/share:/usr/lib64:' \

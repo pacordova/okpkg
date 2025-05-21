@@ -77,8 +77,8 @@ xfce4-panel = {
 };
 
 thunar = {
-   url = "https://archive.xfce.org/src/xfce/thunar/4.20/thunar-4.20.2.tar.bz2",
-   sha3 = "2d5bda0e3699b90e20dd52102aa55ea94a39dcd9e59bfbffeafd458aca589ecc",
+   url = "https://archive.xfce.org/src/xfce/thunar/4.20/thunar-4.20.3.tar.bz2",
+   sha3 = "a19d3995d94a9ee375f5af16cbb44780fc9430c24279728a137bbc7e555a839e",
    build = "./configure",
    flags = {
       "--enable-gio-unix",

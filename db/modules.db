@@ -44,8 +44,8 @@ python-wheel = {
 };
 
 python-setuptools = {
-   url = "https://pypi.org/packages/source/s/setuptools/setuptools-80.4.0.tar.gz",
-   sha3 = "d9a0b4268a5bf70666f203d7a618b7632e3734a4c8b92fdfbc154f0743f4c028",
+   url = "https://pypi.org/packages/source/s/setuptools/setuptools-80.8.0.tar.gz",
+   sha3 = "10e8c45e85afe2c97207cd12aebd6ad3eaa062e1a0a9972161da0b34a495c290",
    build = "python-build",
 };
 
@@ -92,8 +92,8 @@ python-setuptools-scm = {
 };
 
 python-pluggy = {
-   url = "https://pypi.org/packages/source/p/pluggy/pluggy-1.5.0.tar.gz",
-   sha3 = "0571f57e7b7c961662d5f42cc6109b51b48a9b92e34c6ebe137c36fb73dc0d34",
+   url = "https://pypi.org/packages/source/p/pluggy/pluggy-1.6.0.tar.gz",
+   sha3 = "3fd47e50db8ec4aa8e7c266ece1c8c6fd7a0a37ab52e4f8636bdbc104e65c185",
    build = "python-build",
 };
 
@@ -159,8 +159,8 @@ python-pyparsing = {
 };
 
 cython = {
-   url = "https://pypi.org/packages/source/c/cython/cython-3.1.0.tar.gz",
-   sha3 = "b98cb9e3f61715eb27c1e8edf3de18e32ae46e8f3acbc82f48da2381d8ade209",
+   url = "https://pypi.org/packages/source/c/cython/cython-3.1.1.tar.gz",
+   sha3 = "4756c7774227452f113ba0a9fb59cc5f67a0e710f383a2bfd2fa0312ddfb39af",
    build = "python-build",
 };
 

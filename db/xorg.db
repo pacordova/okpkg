@@ -323,8 +323,8 @@ xorg-mkfontscale = {
 };
 
 xorg-sessreg = {
-   url = "https://x.org/pub/individual/app/sessreg-1.1.3.tar.xz",
-   sha3 = "09138ea885224972d7dff7269264655a7371898ad898cbf85328c6fcf5c5ead5",
+   url = "https://x.org/pub/individual/app/sessreg-1.1.4.tar.xz",
+   sha3 = "598c8e08a99a40efd50e9a2269f56d5615fcb503105b8d8af73a1ee7665153ef",
    build = "./configure",
 };
 
@@ -335,8 +335,8 @@ xorg-setxkbmap = {
 };
 
 xorg-smproxy = {
-   url = "https://x.org/pub/individual/app/smproxy-1.0.7.tar.xz",
-   sha3 = "6819757b5b35669795abb85a025101d19e36960a8b22a2718949601bcb4a71dc",
+   url = "https://x.org/pub/individual/app/smproxy-1.0.8.tar.xz",
+   sha3 = "76f59ea4a9a1b281aa940083a0c0dcc6f4a978580a0d941826518776e8e19ef4",
    build = "./configure",
 };
 
@@ -365,8 +365,8 @@ xorg-xcmsdb = {
 };
 
 xorg-xcursorgen = {
-   url = "https://x.org/pub/individual/app/xcursorgen-1.0.8.tar.xz",
-   sha3 = "170b64f4e81fa8c7b2fcbb2fae93d2c2e97438445e1b5f6eaed0f965385f7e44",
+   url = "https://x.org/pub/individual/app/xcursorgen-1.0.9.tar.xz",
+   sha3 = "3fe505668321af5c1e8fcaaf76a7606f9ac3fa511b734083f46f76e4b25e986c",
    build = "./configure",
 };
 
