@@ -59,8 +59,8 @@ libdisplay-info = {
 };
 
 libxfce4windowing = {
-   url = "https://archive.xfce.org/src/xfce/libxfce4windowing/4.20/libxfce4windowing-4.20.2.tar.bz2",
-   sha3 = "030dc576a61f12f480b616e4dfce6df165221aeb4cc041d8a605c2d2445eaddc",
+   url = "https://archive.xfce.org/src/xfce/libxfce4windowing/4.20/libxfce4windowing-4.20.3.tar.bz2",
+   sha3 = "0d9e3443384408d8fbd2cd64e255128e2ed056af254e7bf81a2c1aef09adf9cc",
    build = "./configure",
    flags = { "--enable-x11", "--disable-debug" }
 };
@@ -194,19 +194,16 @@ xfce4-notifyd = {
 };
 
 xfce4-battery-plugin = {
-   url = "https://archive.xfce.org/src/panel-plugins/xfce4-battery-plugin/1.1/xfce4-battery-plugin-1.1.6.tar.bz2",
-   sha3 = "bc53008e01c113e5b39f99aefdfc1e76ff1fe4d42532bbe6860c1c08a780f3c5",
-   build = "./configure",
-   flags = {
-      "--disable-debug",
-   }
+   url = "https://archive.xfce.org/src/panel-plugins/xfce4-battery-plugin/1.2/xfce4-battery-plugin-1.2.0.tar.xz",
+   sha3 = "74e17f5cea60ffb8bf752a71ed822f6aaac962cde134344e9b8e5b11cc50802b",
+   build = "meson",
 };
 
 thunar-archive-plugin = {
-   url = "https://archive.xfce.org/src/thunar-plugins/thunar-archive-plugin/0.5/thunar-archive-plugin-0.5.3.tar.bz2",
-   sha3 = "1416498349c716cb5c9d557a2c99a6a3a75433d0cf50e412b93fbf7b111ab573",
-   build = "./configure",
-   flags = { "--libexecdir=/usr/lib64/xfce4" }
+   url = "https://archive.xfce.org/src/thunar-plugins/thunar-archive-plugin/0.6/thunar-archive-plugin-0.6.0.tar.xz",
+   sha3 = "e7d13ad5ca50d0805d8931142f2e9889a1f83203767940028b7a0b1bf9411e83",
+   build = "meson",
+   flags = { "-Dlibexecdir=/usr/lib64/xfce4" }
 };
 
 mousepad = {
@@ -235,10 +232,9 @@ xfce4-alsa-plugin = {
 };
 
 xfce4-taskmanager = {
-   url = "https://archive.xfce.org/src/apps/xfce4-taskmanager/1.5/xfce4-taskmanager-1.5.8.tar.bz2",
-   sha3 = "875272b67a236d0724623d9182518ace3066cf0b4c18146bb8c5681a0ff227f0", 
-   build = "./configure",
-   flags = { "--disable-debug" }
+   url = "https://archive.xfce.org/src/apps/xfce4-taskmanager/1.6/xfce4-taskmanager-1.6.0.tar.xz",
+   sha3 = "042298c1d252eeefed6f2eb8fe64aaa548efd24ab6611f7d29df60601b5275df",
+   build = "meson",
 };
 
 picom = {

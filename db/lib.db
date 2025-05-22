@@ -13,8 +13,8 @@ usbutils = {
 --------------------------------------------------------------------------------
 
 _glib2 = {
-   url = "https://download.gnome.org/sources/glib/2.84/glib-2.84.1.tar.xz",
-   sha3 = "862fec266ea880138910fa8111969e46c65fee9725e6101d17ec11fc9150706b",
+   url = "https://download.gnome.org/sources/glib/2.84/glib-2.84.2.tar.xz",
+   sha3 = "e3e8b6b4c090cbc2814e8a7ba5a3aa1d7438ad582100b186f4d5594dc4bf831d",
    build = "meson",
    flags = { "-Dintrospection=disabled" }
 };
@@ -26,8 +26,8 @@ gobject-introspection = {
 };
 
 glib2 = {
-   url = "https://download.gnome.org/sources/glib/2.84/glib-2.84.1.tar.xz",
-   sha3 = "862fec266ea880138910fa8111969e46c65fee9725e6101d17ec11fc9150706b",
+   url = "https://download.gnome.org/sources/glib/2.84/glib-2.84.2.tar.xz",
+   sha3 = "e3e8b6b4c090cbc2814e8a7ba5a3aa1d7438ad582100b186f4d5594dc4bf831d",
    build = "meson",
    flags = { "-Dintrospection=enabled" }
 };
@@ -171,8 +171,8 @@ lcms2 = {
 };
 
 libarchive = {
-   url = "https://github.com/libarchive/libarchive/releases/download/v3.7.9/libarchive-3.7.9.tar.xz",
-   sha3 = "519a3e4aa82f82390a2c56ad839b2fa5e5ea5a53c26a2a0d7c51edc3fcaefc10",
+   url = "https://github.com/libarchive/libarchive/releases/download/v3.8.0/libarchive-3.8.0.tar.xz",
+   sha3 = "42ac58af6c4aa112b8311877c1b56f9975b876066ce05635457201839cf9b14f",
    build = "./configure",
    flags = { "--without-nettle" }
 };

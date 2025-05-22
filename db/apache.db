@@ -1,6 +1,6 @@
 apr = {
-   url = "https://archive.apache.org/dist/apr/apr-1.7.5.tar.bz2",
-   sha3 = "e9a6d9cd2df6e2d16b3eb66134abe4ef8d703e14246bd02eeb5c85bd4ee3b686",
+   url = "https://archive.apache.org/dist/apr/apr-1.7.6.tar.bz2",
+   sha3 = "9f24e3fae0328c3522dba7f0548a34495bfe4381c701efc9b1a559fd95857695",
    build = "./configure",
    flags = { "--with-installbuilddir=/usr/share/apr-1/build" },
 };
