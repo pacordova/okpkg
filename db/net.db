@@ -17,8 +17,8 @@ connman = {
 };
 
 curl = {
-   url = "https://curl.se/download/curl-8.13.0.tar.xz",
-   sha3 = "51122f34a8c5289b8e84b7c78ba2b6f1307945f988da0b43d7b0b2036c428bc9",
+   url = "https://curl.se/download/curl-8.14.0.tar.xz",
+   sha3 = "f6d119f7e3629165ea46f91e9e4e64282a09add5b93a0ebeb90d564a7dcfbde9",
    build = "./configure",
    flags = {
       "--enable-{ipv6,threaded-resolver,unix-sockets}",
@@ -55,8 +55,8 @@ openresolv = {
 };
 
 iproute2 = {
-   url = "https://kernel.org/pub/linux/utils/net/iproute2/iproute2-6.14.0.tar.xz",
-   sha3 = "e00876693a9e6ae1b0ce35e261edd3e01e5795665eb5b3ba880135b503422ba5",
+   url = "https://kernel.org/pub/linux/utils/net/iproute2/iproute2-6.15.0.tar.xz",
+   sha3 = "042dd513fc431b0a70ee4d1eaa3c3e1f58f0d98bbf7691c3f9e940100caad090",
    build = "./configure",
    flags = { "--libdir=/usr/lib64" },
    prepare = [[

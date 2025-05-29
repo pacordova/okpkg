@@ -56,8 +56,8 @@ python-markupsafe = {
 };
 
 python-jinja = {
-   url = "https://pypi.org/packages/source/J/Jinja2/jinja2-3.1.5.tar.gz",
-   sha3 = "365f6f9298993e5da27bfa434523983f252485f4d83e8eb0e8fdc6db1b9f09a5",
+   url = "https://pypi.org/packages/source/J/Jinja2/jinja2-3.1.6.tar.gz",
+   sha3 = "3f1b8239e487d282f75e45fc8f0d28978f2acebdbc031045da812c7aa07c87f5",
    build = "python-build",
 };
 

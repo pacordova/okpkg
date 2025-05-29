@@ -5,8 +5,8 @@ autoconf = {
 };
 
 automake = {
-   url = "https://ftp.gnu.org/gnu/automake/automake-1.17.tar.xz",
-   sha3 = "9ef65366aeef36107f79db7caeacb0829f328bc6456087d443361df3759851cf",
+   url = "https://ftp.gnu.org/gnu/automake/automake-1.18.tar.xz",
+   sha3 = "e76966f87ec81c5ba3f1a40af476dfd89a2792a022a74b4cb640431cb6c9e2e4",
    build = "./configure",
 };
 
@@ -77,8 +77,8 @@ libtool = {
 };
 
 meson = {
-   url = "https://github.com/mesonbuild/meson/releases/download/1.8.0/meson-1.8.0.tar.gz",
-   sha3 = "de79301b99b789e3ebe5dbe17dc0e3cf09840eaf3d3937aeada403fe6ae7c355",
+   url = "https://github.com/mesonbuild/meson/releases/download/1.8.1/meson-1.8.1.tar.gz",
+   sha3 = "24cbcf4094a503401190ee7a68e2409fa1cd022db5612ce29bd9cdbcb96d6805",
    build = "python-build",
 };
 

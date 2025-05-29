@@ -247,8 +247,8 @@ picom = {
 --------------------------------------------------------------------------------
 
 optipng = {
-   url = "https://prdownloads.sourceforge.net/optipng/optipng-0.7.8.tar.gz",
-   sha3 = "4aa347bb09ec8421bf6cce96a3c9e12c0b47a100ece108c342a79a944d2b9027",
+   url = "https://downloads.sourceforge.net/optipng/optipng-7.9.1.tar.gz",
+   sha3 = "b77f88a534097609d4f7e115f3daa9ab80e96ae612077eb01be83e7c09e6641f",
    build = "./configure",
    flags = {
       "--with-system-libs",
