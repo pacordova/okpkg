@@ -53,8 +53,8 @@ _perl = {
 };
 
 iana-etc = {
-   url = "https://github.com/Mic92/iana-etc/releases/download/20250407/iana-etc-20250407.tar.gz",
-   sha3 = "80de7a7ada09e2bec02d18c1f755bd6c2aef76ccce1efb9be5be8f97d47a141b",
+   url = "https://github.com/Mic92/iana-etc/releases/download/20250519/iana-etc-20250519.tar.gz",
+   sha3 = "93c8b4cf059a6f3f09f51d7dff002db1a32881fb241609ebc154e993fb5e39e8",
    build = _,
    post = [[ 
       install -d $destdir/etc
@@ -537,8 +537,8 @@ libffi = {
 };
 
 sqlite = {
-   url = "https://www.sqlite.org/2025/sqlite-autoconf-3490200.tar.gz",
-   sha3 = "6527dce15f55cd51af22190c866f28801505ce7faa536893fdc87d9108c1fb1e",
+   url = "https://www.sqlite.org/2025/sqlite-autoconf-3500000.tar.gz",
+   sha3 = "aad00919dfb418d71f9394e34ef2bc9abdd65395cb21103b1e01c94d0bf296e8",
    build = "./configure",
    flags = { "--enable-fts5", "CPPFLAGS=-DSQLITE_ENABLE_COLUMN_METADATA=1" },
 };
@@ -621,8 +621,8 @@ plzip = {
 };
 
 kbd = {
-   url = "https://kernel.org/pub/linux/utils/kbd/kbd-2.7.1.tar.xz",
-   sha3 = "6e27ca792d7c6a1acf0aa3f1fbeb54148c435b87507bdba83b0813f995dee7f1",
+   url = "https://kernel.org/pub/linux/utils/kbd/kbd-2.8.0.tar.xz",
+   sha3 = "d6918b324bfc8468ffacd4c4758a2c3ab9cd80132e284b1eeca9f515603bb511",
    build = "./configure",
    flags = { "--disable-vlock" },
    prepare = [[

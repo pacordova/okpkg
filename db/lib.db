@@ -185,8 +185,8 @@ libbpf = {
 };
 
 libconfig = {
-   url = "https://github.com/hyperrealm/libconfig/archive/v1.8/libconfig-1.8.tar.gz",
-   sha3 = "8d8030317997e8559fa588112ca35b173ceba7b4101eb0a744e92c7492bef6ef",
+   url = "https://github.com/hyperrealm/libconfig/archive/v1.8.1/libconfig-1.8.1.tar.gz",
+   sha3 = "5c9b788987fe3ba3cad5162b2cea62bb1c0fbce3c57206e42f9595c4f5a3d631",
    build = "cmake",
 };
 
