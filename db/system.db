@@ -666,11 +666,11 @@ cpio = {
 };
 
 lua = {
-   url = "https://lua.org/ftp/lua-5.4.7.tar.gz",
-   sha3 = "e7d3fbf7dc7b879cb932975adb2d7ca3990f7253472c738ce142175583ade7db",
+   url = "https://lua.org/ftp/lua-5.4.8.tar.gz",
+   sha3 = "c986edb990b3c0cfa683b44af4c0cc7ce9ea8ffe9d9c79f0ab3d555a1e96ac97",
    build = "make",
    flags = {
-      'TO_LIB="liblua.so liblua.so.5.4 liblua.so.5.4.7"',
+      'TO_LIB="liblua.so liblua.so.5.4 liblua.so.5.4.8"',
       "INSTALL_DATA='cp -d'",
       'MYCFLAGS="$CFLAGS -fPIC"',
       "INSTALL_TOP=$destdir/usr",
@@ -684,7 +684,7 @@ lua = {
       cd $destdir/usr/lib64/pkgconfig
       printf "Name: Lua\n" >> lua.pc
       printf "Description: An Extensible Extension Language\n" >> lua.pc
-      printf "Version: 5.4.7\n" >> lua.pc
+      printf "Version: 5.4.8\n" >> lua.pc
       printf "Requires:\n" >> lua.pc
       printf "Libs: -L/usr/lib64 -llua -lm\n" >> lua.pc
       printf "Cflags: -I/usr/include\n" >> lua.pc
