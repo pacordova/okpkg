@@ -17,8 +17,8 @@ connman = {
 };
 
 curl = {
-   url = "https://curl.se/download/curl-8.14.0.tar.xz",
-   sha3 = "f6d119f7e3629165ea46f91e9e4e64282a09add5b93a0ebeb90d564a7dcfbde9",
+   url = "https://curl.se/download/curl-8.14.1.tar.xz",
+   sha3 = "4bbb171ee2d0c33e52bcbe06aee0c832771a9f13a09ee7b97a9fb53e9158db94",
    build = "./configure",
    flags = {
       "--enable-{ipv6,threaded-resolver,unix-sockets}",
@@ -68,8 +68,8 @@ iproute2 = {
 };
 
 iputils = {
-   url = "https://github.com/iputils/iputils/releases/download/20240905/iputils-20240905.tar.xz",
-   sha3 = "04a0bdd009f955cb485324fb182dd7bfa1389d46589eb72a033be3547064dbfc",
+   url = "https://github.com/iputils/iputils/releases/download/20250602/iputils-20250602.tar.xz",
+   sha3 = "d2edfaa69ab7ee4fd22affacad4100453f5dd560683aeaabaef8a236f309eb9d",
    build = "meson",
    post = [[ chmod u+s $destdir/usr/bin/ping ]],
 };

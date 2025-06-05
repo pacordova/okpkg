@@ -41,11 +41,11 @@ firefox = {
 -- from firefox: libnss3.so libnssutil3.so libsmime3.so libnspr4.so libplc4.so libplds4.so
 -- needs libcups.so.2
 discord = {
-   url = "https://dl.discordapp.net/apps/linux/0.0.95/discord-0.0.95.tar.gz",
-   sha3 = "54bc07112ebe134bb2e8e99f2391ad4f49712e9029093ce68a22155713ca7743",
+   url = "https://dl.discordapp.net/apps/linux/0.0.96/discord-0.0.96.tar.gz",
+   sha3 = "2b2e084cc56a306e89c08681d4336813799af77a60d850461447cc0337274240",
    build = _,
    post = [[
-      sed -e 's:/usr/share:/usr/lib64:' \
+      sed -e 's:/usr/share:/usr/lib64:'                         \
           -e 's:^Icon=.*$:Icon=/usr/lib64/discord/discord.png:' \
           -i discord.desktop
       install -d $destdir/usr/{bin,lib64}

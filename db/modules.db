@@ -50,8 +50,8 @@ python-setuptools = {
 };
 
 python-markupsafe = {
-   url = "https://pypi.org/packages/source/m/MarkupSafe/MarkupSafe-2.1.5.tar.gz",
-   sha3 = "82fe48c7d091f390f27f88bd219da2ca2add72e117322b9a538b4d9cfd5d40e4",
+   url = "https://pypi.org/packages/source/m/markupsafe/markupsafe-3.0.2.tar.gz",
+   sha3 = "a53d8d6be15690fabc321993e2040dc212901c0f39a5d8bfce2afc97acc44168",
    build = "python-build",
 };
 

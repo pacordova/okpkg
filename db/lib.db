@@ -1,6 +1,6 @@
 libusb = {
-   url = "https://github.com/libusb/libusb/releases/download/v1.0.28/libusb-1.0.28.tar.bz2",
-   sha3 = "57ee9dc96dfa313edead72043337e13a351e49bfb293c41453a63312e0562c35",
+   url = "https://github.com/libusb/libusb/releases/download/v1.0.29/libusb-1.0.29.tar.bz2",
+   sha3 = "e4e8974707ce3055e30ac1a540cd23937939cb856bbe02270404065d4b7c650c",
    build = "./configure",
 };
 
@@ -171,8 +171,8 @@ lcms2 = {
 };
 
 libarchive = {
-   url = "https://github.com/libarchive/libarchive/releases/download/v3.8.0/libarchive-3.8.0.tar.xz",
-   sha3 = "42ac58af6c4aa112b8311877c1b56f9975b876066ce05635457201839cf9b14f",
+   url = "https://github.com/libarchive/libarchive/releases/download/v3.8.1/libarchive-3.8.1.tar.xz",
+   sha3 = "b0e12dfc2cd1221fb59bb17620e6495321fc6f67a8170b842eb40110dc05fe7b",
    build = "./configure",
    flags = { "--without-nettle" }
 };
