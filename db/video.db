@@ -31,8 +31,8 @@ nvidia-vaapi-driver = {
 };
 
 libass = {
-   url = "https://github.com/libass/libass/releases/download/0.17.3/libass-0.17.3.tar.gz",
-   sha3 = "b163363fa4926a3d8991a138cea75ee83431787209df74a3ee66f6b269ca6fec",
+   url = "https://github.com/libass/libass/releases/download/0.17.4/libass-0.17.4.tar.xz",
+   sha3 = "f347492db6281a1ea7feaa9cb3be953f32ecd9aad9307b87b925522efd4f209e",
    build = "./configure",
    flags = { "--enable-fontconfig" }
 };

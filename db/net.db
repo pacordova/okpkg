@@ -68,8 +68,8 @@ iproute2 = {
 };
 
 iputils = {
-   url = "https://github.com/iputils/iputils/releases/download/20250602/iputils-20250602.tar.xz",
-   sha3 = "d2edfaa69ab7ee4fd22affacad4100453f5dd560683aeaabaef8a236f309eb9d",
+   url = "https://github.com/iputils/iputils/releases/download/20250605/iputils-20250605.tar.xz",
+   sha3 = "31a2a992c9789d91c29d630d02bbf57cffd09b01911405c27c40a208d160b2fa",
    build = "meson",
    post = [[ chmod u+s $destdir/usr/bin/ping ]],
 };

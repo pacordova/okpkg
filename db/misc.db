@@ -23,6 +23,16 @@ conky = {
    build = "cmake",
 };
 
+dmidecode = {
+   url = "https://download.savannah.gnu.org/releases/dmidecode/dmidecode-3.6.tar.xz",
+   sha3 = "751c576320d228d5a98f99c1e01b3b1e9c6b72986daba85f779572ca919c53c7",
+   build = "make",
+   flags = {
+      "prefix=/usr",
+      "sbindir=/usr/bin",
+   }
+};
+
 ghostscript = {
    url = "https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs10051/ghostscript-10.05.1.tar.xz",
    sha3 = "677ddd0a829a9edea0d091cadd241ee2f862b8e69a82d31379f4f6f24f306ebb",
@@ -219,8 +229,8 @@ kirc = {
 };
 
 linux = {
-   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.12.27.tar.xz",
-   sha3 = "cc4218ae36a3c00eac6786e35cfe9adad2fe58cf40dd1d0a960670207a8b716a",
+   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.12.32.tar.xz",
+   sha3 = "9f1cbe5dcefaeada70acadbed13270f00a3edea1216051f8f970590025041a27",
    build = "make",
    flags = { "bzImage", "modules", "headers" },
    prepare = [[
@@ -232,7 +242,7 @@ linux = {
       install -m 644 arch/x86/boot/bzImage $destdir/boot/vmlinuz-6.12
       make modules_install \
           INSTALL_MOD_PATH=$destdir \
-          MODLIB=$destdir/usr/lib64/modules/6.12.27
+          MODLIB=$destdir/usr/lib64/modules/6.12.32
       cp -rp usr/include $destdir/usr
       find $destdir/usr/include -type f ! -name '*.h' -delete
    ]]
@@ -316,8 +326,8 @@ ugrep = {
 };
 
 vim = {
-   url = "https://github.com/vim/vim/archive/v9.1.1432/vim-9.1.1432.tar.gz",
-   sha3 = "2b40c439f30cb451082149395344de47a4f68b40e1bfc1bb5c8aac071423325c",
+   url = "https://github.com/vim/vim/archive/v9.1.1436/vim-9.1.1436.tar.gz",
+   sha3 = "9855091286bc291258d429d72204aec3055e75013294459a42eff69a47e64961",
    build = "./configure",
    flags = {
       "--enable-{cscope,multibyte}",
