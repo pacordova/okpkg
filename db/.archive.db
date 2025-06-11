@@ -1,3 +1,10 @@
+libbpf = {
+   url = "https://github.com/libbpf/libbpf/archive/v1.5.1/libbpf-1.5.1.tar.gz",
+   sha3 = "cd54e4dcd1414de57917728f5cdc650ac8c8f5730b3e234215da649d9eb35833",
+   build = "make",
+   flags = { "-C src", "LIBSUBDIR=lib64" }
+};
+
 acpid = {
    url = "https://downloads.sourceforge.net/acpid2/acpid-2.0.34.tar.xz",
    sha3 = "3e346422c38cf10bd0072581d77283d979e184d37a687b442a0c792c2fad62d2",
