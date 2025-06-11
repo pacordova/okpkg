@@ -268,8 +268,8 @@ libglvnd = {
 };
 
 libdrm = {
-   url = "https://dri.freedesktop.org/libdrm/libdrm-2.4.124.tar.xz",
-   sha3 = "e52de4b9b290ec00ecbd59669ecc53efccfb4953bd79683a54a41ac758144428",
+   url = "https://dri.freedesktop.org/libdrm/libdrm-2.4.125.tar.xz",
+   sha3 = "8465252e83d999f6aee96d05162cb0f0086ca8b643a45115a29ab534460d4af8",
    build = "meson",
    flags = {
       "-D{intel=enabled,udev=true,valgrind=disabled}",
@@ -532,8 +532,8 @@ xorg-font-util = {
 };
 
 xkeyboard-config = {
-   url = "https://x.org/pub/individual/data/xkeyboard-config/xkeyboard-config-2.44.tar.xz",
-   sha3 = "4734d7c3a6c2a66ecccf358667cf8dd5e468f7377fb111139d40e760795d0728",
+   url = "https://x.org/pub/individual/data/xkeyboard-config/xkeyboard-config-2.45.tar.xz",
+   sha3 = "0ac9f41868f6fcfb60da98c02b94be8ff91bc67ad42ae7486a0c7e8e8f6c60f9",
    build = "meson",
    flags = {
       "-Dxkb-base=/usr/share/X11/xkb",

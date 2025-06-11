@@ -159,8 +159,8 @@ python-pyparsing = {
 };
 
 cython = {
-   url = "https://pypi.org/packages/source/c/cython/cython-3.1.1.tar.gz",
-   sha3 = "4756c7774227452f113ba0a9fb59cc5f67a0e710f383a2bfd2fa0312ddfb39af",
+   url = "https://pypi.org/packages/source/c/cython/cython-3.1.2.tar.gz",
+   sha3 = "e6f7dfff72b22bfc2cc23107249c9c80139ecd1a55a6c15dcdc15438a69d23e8",
    build = "python-build",
 };
 

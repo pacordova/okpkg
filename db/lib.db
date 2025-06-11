@@ -178,8 +178,8 @@ libarchive = {
 };
 
 libbpf = {
-   url = "https://github.com/libbpf/libbpf/archive/v1.5.0/libbpf-1.5.0.tar.gz",
-   sha3 = "35e330473125aef0cff9bfab8ed56e2ce7ebe7b7a385ccb3bc9b84eca54299a6",
+   url = "https://github.com/libbpf/libbpf/archive/v1.5.1/libbpf-1.5.1.tar.gz",
+   sha3 = "cd54e4dcd1414de57917728f5cdc650ac8c8f5730b3e234215da649d9eb35833",
    build = "make",
    flags = { "-C src", "LIBSUBDIR=lib64" }
 };
@@ -217,8 +217,8 @@ libinih = {
 };
 
 libjpeg-turbo = {
-   url = "https://github.com/libjpeg-turbo/libjpeg-turbo/releases/download/3.1.0/libjpeg-turbo-3.1.0.tar.gz",
-   sha3 = "482f97cf1794e24456f7d3d0c0ed85567791a4bf24059febf73a9f8fa7bec328",
+   url = "https://github.com/libjpeg-turbo/libjpeg-turbo/releases/download/3.1.1/libjpeg-turbo-3.1.1.tar.gz",
+   sha3 = "6c96dc5de64004cc944af69907ab20cf053768adba8733634c808599f9718b1a",
    build = "cmake",
    flags = { "-DENABLE_STATIC=OFF", "-DWITH_{JPEG8=ON,JAVA=OFF}" }
 };
@@ -318,8 +318,8 @@ libvorbis = {
 };
 
 libvpx = {
-   url = "https://github.com/webmproject/libvpx/archive/v1.15.1/libvpx-1.15.1.tar.gz",
-   sha3 = "c2daa97137be2e63b3c0ae1c4c8eefa2715daf61eca993ac13c232c77c2d532b",
+   url = "https://github.com/webmproject/libvpx/archive/v1.15.2/libvpx-1.15.2.tar.gz",
+   sha3 = "e19b1c439cf00833bccf77234bf1eca3a10c15dca527a648bfe7c345f7804070",
    build = "../configure",
    prepare = [[
       sed -i 's/cp -p/cp/' build/make/Makefile
@@ -403,8 +403,8 @@ p11-kit = {
 };
 
 pixman = {
-   url = "https://xorg.freedesktop.org/releases/individual/lib/pixman-0.46.0.tar.xz",
-   sha3 = "5b528b4a67ecfddb6e80af154392527eadfda3dc654b47bca79fb5ebdd8e6446",
+   url = "https://xorg.freedesktop.org/releases/individual/lib/pixman-0.46.2.tar.xz",
+   sha3 = "fa7ea43fa5aa756a9b50096f8b8532870ae3a8d2bc257760f1a93107aa42d0d6",
    build = "meson",
 };
 
@@ -437,14 +437,16 @@ x264 = {
 };
 
 x265 = {
-   url = "http://ftp.videolan.org/pub/videolan/x265/x265_4.0.tar.gz",
-   sha3 = "cd78d748750c99bb2acef05ec0d721e4f160fc51cf85cdfa7f0a570c1f3b507e",
+   url = "http://ftp.videolan.org/pub/videolan/x265/x265_4.1.tar.gz",
+   sha3 = "26b6b359def36f0d9ff073b406e47697baaa9ca67a622e2e46009ceecee72e48",
    build = "cmake",
    flags = {
       "-DLIB_INSTALL_DIR=lib64",
       "-DENABLE_SHARED=ON",
       "-DGIT_ARCHETYPE=1",
+      "-DCMAKE_POLICY_VERSION_MINIMUM=3.5",
       "-S source",
    },
+   prepare = [[ sed -r '/cmake_policy.*(0025|0054)/d' -i source/CMakeLists.txt ]],
    post = [[ rm -f $destdir/usr/lib64/libx265.a ]]
 };
