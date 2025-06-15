@@ -28,8 +28,8 @@ check = {
 };
 
 cmake = {
-   url = "https://cmake.org/files/v4.0/cmake-4.0.2.tar.gz",
-   sha3 = "7587e35c1329363c118cbf69560d6b9fd101576bfbe4e8b28b9f36a5a75f9394",
+   url = "https://cmake.org/files/v4.0/cmake-4.0.3.tar.gz",
+   sha3 = "e42a17fbd0e8149a436bc7c39121aa7f3d54affee07b14d9ea548ee060a00720",
    build = "./configure",
    flags = {
       "--mandir=/share/man",

@@ -229,8 +229,8 @@ kirc = {
 };
 
 linux = {
-   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.12.32.tar.xz",
-   sha3 = "9f1cbe5dcefaeada70acadbed13270f00a3edea1216051f8f970590025041a27",
+   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.12.33.tar.xz",
+   sha3 = "89abe0c8f5e6fc387dac6d75afde891ffb2f76d13d115fdbde0c10079af2e2c9",
    build = "make",
    flags = { "bzImage", "modules", "headers" },
    prepare = [[
@@ -242,7 +242,7 @@ linux = {
       install -m 644 arch/x86/boot/bzImage $destdir/boot/vmlinuz-6.12
       make modules_install \
           INSTALL_MOD_PATH=$destdir \
-          MODLIB=$destdir/usr/lib64/modules/6.12.32
+          MODLIB=$destdir/usr/lib64/modules/6.12.33
       cp -rp usr/include $destdir/usr
       find $destdir/usr/include -type f ! -name '*.h' -delete
    ]]
@@ -282,8 +282,8 @@ pciutils = {
 };
 
 r = {
-   url = "https://cran.r-project.org/src/base/R-4/R-4.5.0.tar.gz",
-   sha3 = "45570ac49bfb353612253ceb627cad183c9fe8bd50e1b09422d2336658c5d3e7",
+   url = "https://cran.r-project.org/src/base/R-4/R-4.5.1.tar.gz",
+   sha3 = "8ad6cf484881709581c288ac0471e16ce9de91c9e065c5f4266d19417ab6fa79",
    build = "./configure",
    flags = { "--enable-{R-shlib=yes,java=no}", "--without-x" }
 };
@@ -326,8 +326,8 @@ ugrep = {
 };
 
 vim = {
-   url = "https://github.com/vim/vim/archive/v9.1.1453/vim-9.1.1453.tar.gz",
-   sha3 = "392de14ecc245f4b0fcef1fcb9d09b304647cabb4c7ce0b14213598dd345a99d",
+   url = "https://github.com/vim/vim/archive/v9.1.1457/vim-9.1.1457.tar.gz",
+   sha3 = "7ae86426e59132d41ecfe094e47601ae2d5c3a96c608c90e674cc048484111f6",
    build = "./configure",
    flags = {
       "--enable-{cscope,multibyte}",
