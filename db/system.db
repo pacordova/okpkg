@@ -174,8 +174,8 @@ flex = {
 };
 
 pkgconf = {
-   url = "https://distfiles.ariadne.space/pkgconf/pkgconf-2.4.3.tar.xz",
-   sha3 = "c84f40ea08c8f33fd9152ba580875020ca4af7911a82b8a18a9238b43828beb4",
+   url = "https://distfiles.ariadne.space/pkgconf/pkgconf-2.5.0.tar.xz",
+   sha3 = "163ca0254d661f08c39a6caf22fe4f08d189f29857eb0dca0de2b92a9312ec71",
    build = "./configure",
    post = [[ ln -sf pkgconf $destdir/usr/bin/pkg-config ]]
 };
@@ -430,8 +430,8 @@ expat = {
 };
 
 less = {
-   url = "https://www.greenwoodsoftware.com/less/less-668.tar.gz",
-   sha3 = "dd2757ab01020f66cbb2b8841106809d5aff5b33b267b5ecaac2282597a19fe4",
+   url = "https://www.greenwoodsoftware.com/less/less-679.tar.gz",
+   sha3 = "d78476c0734bbe4fd05901e29a7b7e694753e2cde69535a61e518b357efef5e3",
    build = "./configure",
    flags = { "--with-regex=pcre2" }
 };

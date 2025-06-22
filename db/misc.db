@@ -183,8 +183,8 @@ feh = {
 };
 
 git = {
-   url = "https://kernel.org/pub/software/scm/git/git-2.49.0.tar.xz",
-   sha3 = "6f461ba3428196378bd5ee8277176c4e91a00f9cb5d61bce1de8d02b81aba6df",
+   url = "https://kernel.org/pub/software/scm/git/git-2.50.0.tar.xz",
+   sha3 = "e193c1e12fbf19d2827c392a418ab01f3a2e3f0a1aef74b7611943ae4916785f",
    build = "./configure",
    flags = {
       "--with-gitconfig=/etc/gitconfig",
@@ -269,8 +269,8 @@ nano = {
 };
 
 pciutils = {
-   url = "https://mj.ucw.cz/download/linux/pci/pciutils-3.13.0.tar.gz",
-   sha3 = "53507c5220643d8d4f1a8b7c701c19378038f711a08fd81144672cac0d4ffce5",
+   url = "https://mj.ucw.cz/download/linux/pci/pciutils-3.14.0.tar.gz",
+   sha3 = "87906156f343d07f937bd636951f4e810e818de47cb177835e52c091ebc3a581",
    build = "make",
    flags = {
       "PREFIX=/usr",
@@ -326,8 +326,8 @@ ugrep = {
 };
 
 vim = {
-   url = "https://github.com/vim/vim/archive/v9.1.1457/vim-9.1.1457.tar.gz",
-   sha3 = "7ae86426e59132d41ecfe094e47601ae2d5c3a96c608c90e674cc048484111f6",
+   url = "https://github.com/vim/vim/archive/v9.1.1473/vim-9.1.1473.tar.gz",
+   sha3 = "9538cc3b155440b57ce0740bd275f7d93fbe67892d5224af227ddae9767281a8",
    build = "./configure",
    flags = {
       "--enable-{cscope,multibyte}",

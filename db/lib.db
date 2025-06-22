@@ -106,8 +106,8 @@ dav1d = {
 };
 
 libogg = {
-   url = "https://downloads.xiph.org/releases/ogg/libogg-1.3.5.tar.xz",
-   sha3 = "caabb9bead5d1b33279bd7367f40a807869273cf2e176bf0eb5ec4e009f37af6",
+   url = "https://downloads.xiph.org/releases/ogg/libogg-1.3.6.tar.xz",
+   sha3 = "d9b1643759da4315d1122cd3ec8b09db6c2cc8ca4986b7d29ff6c0c349ca822d",
    build = "./configure",
 };
 
@@ -330,8 +330,8 @@ libvpx = {
 };
 
 libxml2 = {
-   url = "https://download.gnome.org/sources/libxml2/2.14/libxml2-2.14.3.tar.xz",
-   sha3 = "5e85c30ce3fa7de80631bd40c8348bbbc8b91e3e68fa1e990b56f24254f0a269",
+   url = "https://download.gnome.org/sources/libxml2/2.14/libxml2-2.14.4.tar.xz",
+   sha3 = "0d16d1272d73a1f8d411c8f388b799f82f861dba1e326825f387b2942ecd74f7",
    build = "./configure",
    flags = {
       "--with-{history=yes,legacy=yes,icu=no}",
@@ -374,8 +374,8 @@ mtdev = {
 };
 
 nghttp2 = {
-   url = "https://github.com/nghttp2/nghttp2/releases/download/v1.65.0/nghttp2-1.65.0.tar.xz",
-   sha3 = "2f121623ea9c4a4179e6159f3b6e3c1572626f2e77f00c3d4bec6bf8e26d492b",
+   url = "https://github.com/nghttp2/nghttp2/releases/download/v1.66.0/nghttp2-1.66.0.tar.xz",
+   sha3 = "fc2109d0c83bbae56b5fe8e4bd01b0da4b1864d6a1b5c9d52ff69c46515e9a11",
    build = "./configure",
    flags = { "--enable-lib-only" }
 };
