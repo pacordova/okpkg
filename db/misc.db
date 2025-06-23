@@ -228,7 +228,7 @@ kirc = {
    prepare = [[ sed -i 's/all: clean/all:/g' Makefile ]]
 };
 
-linux = {
+linux-lts = {
    url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.12.34.tar.xz",
    sha3 = "332840df284e4c23214b6db71ffbe63f2097f10dcd104d6fa1eba0bb63e75c0f",
    build = "make",
