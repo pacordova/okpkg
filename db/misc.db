@@ -278,7 +278,7 @@ pciutils = {
       "SHAREDIR=/usr/share/hwdata",
       "SHARED=yes"
    },
-   post = [[ chmod 755 $destdir/usr/lib64/libpci.so ]]
+   post = [[ chmod 755 $destdir/usr/lib64/libpci.so.3.14.0 ]]
 };
 
 r = {
