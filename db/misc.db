@@ -138,8 +138,8 @@ catgirl = {
 };
 
 cryptsetup = {
-   url = "https://kernel.org/pub/linux/utils/cryptsetup/v2.7/cryptsetup-2.7.5.tar.xz",
-   sha3 = "572bf81b0c3907bd9f495c0cc3bceca8b302ce559e4eabcfe6c896cca01698a5",
+   url = "https://kernel.org/pub/linux/utils/cryptsetup/v2.8/cryptsetup-2.8.0.tar.xz",
+   sha3 = "4d23ba2f1bc99c3df39476734be239b957594d7fc23701cb643787258f42cec4",
    build = "./configure",
    flags = { "--enable-{asciidoc=no,libargon2=yes,ssh-token=no}" }
 };
@@ -326,8 +326,8 @@ ugrep = {
 };
 
 vim = {
-   url = "https://github.com/vim/vim/archive/v9.1.1473/vim-9.1.1473.tar.gz",
-   sha3 = "9538cc3b155440b57ce0740bd275f7d93fbe67892d5224af227ddae9767281a8",
+   url = "https://github.com/vim/vim/archive/v9.1.1484/vim-9.1.1484.tar.gz",
+   sha3 = "ad16e034dbf1c68625ce45d589697ded6b5be219f4c5557c63c34861919f8c78",
    build = "./configure",
    flags = {
       "--enable-{cscope,multibyte}",

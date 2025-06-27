@@ -5,8 +5,8 @@ _file = {
 };
 
 _python3 = {
-   url = "https://www.python.org/ftp/python/3.13.3/Python-3.13.3.tar.xz",
-   sha3 = "7c643b0d4792c0d7828cb4f2824108c4f04ea9a5cbaca17a00a414ca9c947835",
+   url = "https://www.python.org/ftp/python/3.13.5/Python-3.13.5.tar.xz",
+   sha3 = "68bec288a984a4bbd7ea263e2a4261abf491cc0d8b5e70eb04d3d6da04917b79",
    build = "./configure",
    flags = {
       "--with-platlibdir=lib64",
@@ -174,8 +174,8 @@ flex = {
 };
 
 pkgconf = {
-   url = "https://distfiles.ariadne.space/pkgconf/pkgconf-2.5.0.tar.xz",
-   sha3 = "163ca0254d661f08c39a6caf22fe4f08d189f29857eb0dca0de2b92a9312ec71",
+   url = "https://distfiles.ariadne.space/pkgconf/pkgconf-2.5.1.tar.xz",
+   sha3 = "ad9ac35e816135c83ee74e49cb68e51f8509fd31702a6bb168142ece1b030ef7",
    build = "./configure",
    post = [[ ln -sf pkgconf $destdir/usr/bin/pkg-config ]]
 };
@@ -283,8 +283,8 @@ libcap = {
 };
 
 shadow = {
-   url = "https://github.com/shadow-maint/shadow/releases/download/4.17.4/shadow-4.17.4.tar.xz",
-   sha3 = "6db3b0416ecbae388ecbe4a204c588ef2f9ff341af30e92efb28f78c46644832",
+   url = "https://github.com/shadow-maint/shadow/releases/download/4.18.0/shadow-4.18.0.tar.xz",
+   sha3 = "e9e7d0f2cf68e9c7e51f16847cfbe64082b66e1aa1d0ab3da613cf7dd48a25c8",
    build = "./configure",
    flags = {
       "--disable-account-tools-setuid",
@@ -544,8 +544,8 @@ sqlite = {
 };
 
 python3 = {
-   url = "https://www.python.org/ftp/python/3.13.3/Python-3.13.3.tar.xz",
-   sha3 = "7c643b0d4792c0d7828cb4f2824108c4f04ea9a5cbaca17a00a414ca9c947835",
+   url = "https://www.python.org/ftp/python/3.13.5/Python-3.13.5.tar.xz",
+   sha3 = "68bec288a984a4bbd7ea263e2a4261abf491cc0d8b5e70eb04d3d6da04917b79",
    build = "./configure",
    flags = {
       "--enable-loadable-sqlite-extensions",
@@ -738,8 +738,8 @@ procps-ng = {
 };
 
 util-linux = {
-   url = "https://kernel.org/pub/linux/utils/util-linux/v2.41/util-linux-2.41.tar.xz",
-   sha3 = "7efcb1f0f9703a835d4bf3bc371997f36a67f77b5807293e5670a08005ee860b",
+   url = "https://kernel.org/pub/linux/utils/util-linux/v2.41/util-linux-2.41.1.tar.xz",
+   sha3 = "bd38ac324144b18ae24c06ff1928050226179d0f5441c471d2c11475fbfc7ad1",
    build = "./configure",
    flags = {
       "--disable-{chfn-chsh,login,nologin,su,setpriv,runuser,pylibmount}",
