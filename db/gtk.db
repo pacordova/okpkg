@@ -37,8 +37,8 @@ startup-notification = {
 --------------------------------------------------------------------------------
 
 at-spi2-core = {
-   url = "https://download.gnome.org/sources/at-spi2-core/2.56/at-spi2-core-2.56.2.tar.xz",
-   sha3 = "65b3c3f76943208839944b2887054b42224bd1c9bf387a4075474183676b7d6d",
+   url = "https://download.gnome.org/sources/at-spi2-core/2.56/at-spi2-core-2.56.3.tar.xz",
+   sha3 = "df0c19d5ecd1f6f9b54974ff29227c30c0bf9889c8bb169f705e1d81deeb8547",
    build = "meson",
    flags = {
       "-Dsystemd_user_dir=/tmp",
@@ -55,8 +55,8 @@ cairo = {
 };
 
 pango = {
-   url = "https://download.gnome.org/sources/pango/1.56/pango-1.56.3.tar.xz",
-   sha3 = "92f672dec1a3a653f5fc250c424fd08fe2581855d4d12fb0481fb0c900a8bbd6",
+   url = "https://download.gnome.org/sources/pango/1.56/pango-1.56.4.tar.xz",
+   sha3 = "f0c3655cbd677509bcf9a711637ed977b212e92a80698e61b4fa8163556b8e45",
    build = "meson",
    flags = { "-Dintrospection=enabled" },
 };
@@ -74,12 +74,12 @@ gdk-pixbuf2 = {
 };
 
 cargo-c = {
-   url = "https://github.com/lu-zero/cargo-c/archive/v0.10.13/cargo-c-0.10.13.tar.gz",
-   sha3 = "e56071ed7d46ad70604b9f497c54d8e3546f16649b6cd0f60ea1740b4908765f",
+   url = "https://github.com/lu-zero/cargo-c/archive/v0.10.14/cargo-c-0.10.14.tar.gz",
+   sha3 = "5a6d4d8b2b812f67bafd4af1ce7ab884b50b4660950486190aa798940b2a04c1",
    build = "cargo",
    prepare = [[ 
-      curl -LRO "https://github.com/lu-zero/cargo-c/releases/download/v0.10.13/Cargo.lock" 
-      echo e5548cf627d93b53c6f32ccd21315e2fd64d8a08990100426a40c41d2ff832c0 Cargo.lock | sha256sum -c
+      curl -LRO "https://github.com/lu-zero/cargo-c/releases/download/v0.10.14/Cargo.lock" 
+      echo 0af99496210d7e5cb70de6643b571a8882120148e628d7a75327937b64fd9841 Cargo.lock | sha256sum -c
    ]]
 };
 
@@ -148,8 +148,8 @@ poppler-data = {
 };
 
 evince = {
-   url = "https://download.gnome.org/sources/evince/48/evince-48.0.tar.xz",
-   sha3 = "011b250369e0d246ecd956e82a048c3452628aafd31e966da7156127d7002ca5",
+   url = "https://download.gnome.org/sources/evince/48/evince-48.1.tar.xz",
+   sha3 = "13196ca9118f60d0ff401f179377a301ee086c5e36bd5351fffc36698dcce0ed",
    build = "meson",
    flags = {
       "-D{gspell,keyring}=disabled",

@@ -5,8 +5,8 @@ autoconf = {
 };
 
 automake = {
-   url = "https://ftp.gnu.org/gnu/automake/automake-1.18.tar.xz",
-   sha3 = "e76966f87ec81c5ba3f1a40af476dfd89a2792a022a74b4cb640431cb6c9e2e4",
+   url = "https://ftp.gnu.org/gnu/automake/automake-1.18.1.tar.xz",
+   sha3 = "3fbee14ea4faa4af94c1c4295dc6872865faed72f80b552c35416751683b5e51",
    build = "./configure",
 };
 
