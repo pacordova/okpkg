@@ -242,8 +242,8 @@ libpcap = {
 };
 
 libpng = {
-   url = "https://downloads.sourceforge.net/libpng/libpng-1.6.49.tar.xz",
-   sha3 = "7219207648c73ccd93f945f5f7a454f2df34c103814c73289f28601ae6bd4cc3",
+   url = "https://downloads.sourceforge.net/libpng/libpng-1.6.50.tar.xz",
+   sha3 = "b3c841468ba819b4d039b26de547ed37a4a1181a9f7dd0fe5cd7ffcc5b0c5fbe",
    build = "./configure",
 };
 
