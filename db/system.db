@@ -745,7 +745,7 @@ util-linux = {
       "--disable-{chfn-chsh,login,nologin,su,setpriv,runuser,pylibmount}",
       "--disable-{liblastlog2,pam-lastlog2}",
       "--without-{python,systemd}",
-      "ADJTIME_PATH=/var/lib/hwclock/adjtime",
+      "ADJTIME_PATH=/etc/adjtime",
    },
    prepare = [[ sed -i 's:/sbin:/usr/bin:' disk-utils/fsck.c ]],
    post = [[ cd $destdir && mv bin/* usr/sbin/* usr/bin && rmdir bin usr/sbin ]]

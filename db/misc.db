@@ -55,6 +55,13 @@ jack2 = {
    build = "waf"
 };
 
+jq = {
+   url = "https://github.com/jqlang/jq/releases/download/jq-1.8.1/jq-1.8.1.tar.gz",
+   sha3 = "38d31be04a186ead25fc414d44332a7943e2661e4ec92cf849063077db7a69e3",
+   build = "./configure",
+   flags = { "--with-oniguruma=builtin" }
+};
+
 krb5 = {
    url = "https://kerberos.org/dist/krb5/1.21/krb5-1.21.3.tar.gz",
    sha3 = "033c7a244a9621256c6c8ddd7fc00078b8a04739b2a6ad0080d0de7e7a8855a5",
