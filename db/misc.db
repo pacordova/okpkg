@@ -190,8 +190,8 @@ feh = {
 };
 
 git = {
-   url = "https://kernel.org/pub/software/scm/git/git-2.50.0.tar.xz",
-   sha3 = "e193c1e12fbf19d2827c392a418ab01f3a2e3f0a1aef74b7611943ae4916785f",
+   url = "https://kernel.org/pub/software/scm/git/git-2.50.1.tar.xz",
+   sha3 = "24c9a9703db676b46d43bff24ae3fca4adc15df8f47820767356e97e2f676e5c",
    build = "./configure",
    flags = {
       "--with-gitconfig=/etc/gitconfig",
