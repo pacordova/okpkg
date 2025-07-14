@@ -167,10 +167,17 @@ xfwm4 = {
 };
 
 xfce4-screensaver = {
-   url = "https://archive.xfce.org/src/apps/xfce4-screensaver/4.18/xfce4-screensaver-4.18.4.tar.bz2",
-   sha3 = "c5cd51317661ac201802de92329bbf6a37a905372bcd5130200455624e99b2ea",
-   build = "./configure",
-   flags = { "--disable-debug" }
+   url = "https://archive.xfce.org/src/apps/xfce4-screensaver/4.20/xfce4-screensaver-4.20.0.tar.xz",
+   sha3 = "64d9533c7b7d279ab5d8e24d92192e922135991e0926244c8d5651a85882e6ec",
+   build = "meson",
+   flags = {
+      "-Dauthentication-scheme=pwent",
+      "-Dsession-manager=consolekit",
+      "-Dx11=enabled",
+      "-Dwayland=disabled",
+      "-Ddocs=disabled",
+   },
+   post = [[ rm -fr $destdir/etc/pam.d ]]
 };
 
 xfce4-session = {

@@ -18,8 +18,8 @@ cpu-x = {
 };
 
 conky = {
-   url = "https://github.com/brndnmtthws/conky/archive/v1.22.1/conky-1.22.1.tar.gz",
-   sha3 = "52f593a7b5335c0df4719b3097e7baae44f5dc80af241036f5fbeb20d573b9fa",
+   url = "https://github.com/brndnmtthws/conky/archive/v1.22.2/conky-1.22.2.tar.gz",
+   sha3 = "fee46b96670ff04309773badc0adfdf09fb9fcbbde033c290129313c03910068",
    build = "cmake",
 };
 
