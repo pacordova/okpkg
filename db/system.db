@@ -348,8 +348,8 @@ ncurses = {
 };
 
 readline = {
-   url = "https://ftp.gnu.org/gnu/readline/readline-8.2.13.tar.gz",
-   sha3 = "3fce772843e58552ca6bc9050617cc6381168bc2186e36d9343173364c8569e4",
+   url = "https://ftp.gnu.org/gnu/readline/readline-8.3.tar.gz",
+   sha3 = "a26ef627fb77ac6e25daf37622123200ba5c06885e3c913bac23335168f9d57f",
    build = "./configure",
    flags = { "--with-curses", "SHLIB_LIBS=-ltinfo" },
    prepare = [[
@@ -394,8 +394,8 @@ grep = {
 };
 
 bash = {
-   url = "https://ftp.gnu.org/gnu/bash/bash-5.2.37.tar.gz",
-   sha3 = "fc58981e392bfc994e3d27e04eeb0c8077accce0f5d860aea0e896a1b4672e6e",
+   url = "https://ftp.gnu.org/gnu/bash/bash-5.3.tar.gz",
+   sha3 = "b25c69ecf2151cb12627f7f43d25724cb8124352a1581d52da114338b550a1c6",
    build = "./configure",
    flags = {
       "--enable-readline",
