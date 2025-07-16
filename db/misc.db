@@ -236,8 +236,8 @@ kirc = {
 };
 
 linux-lts = {
-   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.12.35.tar.xz",
-   sha3 = "dc2213754a64c0af9cc380b943c913850c685276754baebed2f6ba76185a2d83",
+   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.12.38.tar.xz",
+   sha3 = "4b0d74ae3d0b1bebf0b6a025d588d1eb8804498b7d244acd684fc9830df2f827",
    build = "make",
    flags = { "bzImage", "modules", "headers" },
    prepare = [[
