@@ -9,11 +9,16 @@ connman = {
    sha3 = "ddd7f92243e94f8450567c263c690d3a360bb87bdba6c9731621343409d78ec0",
    build = "./configure",
    flags = {
-      "--enable-{client,nmcompat,pie,test}",
-      "--disable-{iwd,openconnect,openvpn,polkit,pptp,vpnc,wispr}",
+      "--enable-pie",
+      "--disable-wispr",
       "--with-systemdunitdir=no",
       "LIBS=-lncursesw",
    },
+   post = [[ 
+      install -d $destdir/etc/connman
+      install -m 755 client/connmanctl $destdir/usr/bin
+      install -m 644 src/main.conf     $destdir/etc/connman
+   ]]
 };
 
 curl = {
