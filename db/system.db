@@ -537,8 +537,8 @@ libffi = {
 };
 
 sqlite = {
-   url = "https://www.sqlite.org/2025/sqlite-autoconf-3500200.tar.gz",
-   sha3 = "e4d2b4332988f479ec032ccff00963a9bbd24a3a0f0222b4e249653fa680b4c0",
+   url = "https://www.sqlite.org/2025/sqlite-autoconf-3500300.tar.gz",
+   sha3 = "c3df1542703a666d3f41bb623e9bed7d6e1dc81c57f0c45e3122403f862c520d",
    build = "./configure",
    flags = { "--enable-fts5", "CPPFLAGS=-DSQLITE_ENABLE_COLUMN_METADATA=1" },
 };
