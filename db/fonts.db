@@ -6,18 +6,18 @@ _freetype2 = {
 };
 
 harfbuzz = {
-   url = "https://github.com/harfbuzz/harfbuzz/releases/download/11.2.1/harfbuzz-11.2.1.tar.xz",
-   sha3 = "a005ba0a54f1320d28e55c866063edf6bb2f41c37a7e598129f4931b16fcdc1b",
+   url = "https://github.com/harfbuzz/harfbuzz/releases/download/11.3.2/harfbuzz-11.3.2.tar.xz",
+   sha3 = "1f46672bd6f30593d8c8714c0193292a80847867d1560422bca57f7dc1e95160",
    build = "meson",
    flags = { 
-      "-Dfreetype=enabled", 
+      "-Dfreetype=enabled",
       "-Dgraphite2=enabled",
       "-Dcairo=disabled",
-      "-Dchafa=disabled",
+      "-Dglib=disabled",
+      "-Dgobject=disabled",
+      "-Dintrospection=disabled",
+      "-Dtests=disabled",
       "-Dicu=disabled",
-      "-D{docs,tests}=disabled",
-      "-D{glib,gobject,introspection}=enabled"
-      --"-Dutilities=disabled",
    }
 };
 

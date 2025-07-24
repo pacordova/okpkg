@@ -333,8 +333,8 @@ ugrep = {
 };
 
 vim = {
-   url = "https://github.com/vim/vim/archive/v9.1.1552/vim-9.1.1552.tar.gz",
-   sha3 = "8441e9bcac248f35bb42e8df3fcfa32623c399f126bea88cbbc85ac1f5cfa4bf",
+   url = "https://github.com/vim/vim/archive/v9.1.1585/vim-9.1.1585.tar.gz",
+   sha3 = "e8c1adcca6c3944306aae5d97c87b4ae13e4ed003213d11e095d0dc0f4f42384",
    build = "./configure",
    flags = {
       "--enable-{cscope,multibyte}",

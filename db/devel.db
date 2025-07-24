@@ -44,8 +44,8 @@ cmake = {
 };
 
 gettext = {
-   url = "https://ftp.gnu.org/gnu/gettext/gettext-0.25.1.tar.lz",
-   sha3 = "88dfbdb452392b0afc9aa61582980146bd3cee1902c55c8a5ab47960fae9cfd8",
+   url = "https://ftp.gnu.org/gnu/gettext/gettext-0.26.tar.lz",
+   sha3 = "cf8d820d03f0ede2abc6d304390d3531d7a9045e883f8d6935e8c5fadc0710d5",
    build = "./configure",
    flags = { "--without-git" }
 };
