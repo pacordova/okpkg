@@ -36,8 +36,8 @@ npth = {
 };
 
 pinentry = {
-   url = "https://gnupg.org/ftp/gcrypt/pinentry/pinentry-1.3.1.tar.bz2",
-   sha3 = "0573d6a02b6fdf4c89b23d5e995ac0d60130f3879c6f0ed8f53e31768c70b39e",
+   url = "https://gnupg.org/ftp/gcrypt/pinentry/pinentry-1.3.2.tar.bz2",
+   sha3 = "dbd3b42a122c5919c6735c24ee99a03f8812db001ab5bf7fff3c0bbafed3490a",
    build = "./configure",
    flags = {
       "--enable-pinentry-{tty=yes,qt=no,gtk2=no,gnome3=no}",

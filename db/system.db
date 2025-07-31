@@ -64,11 +64,11 @@ iana-etc = {
 };
 
 glibc = {
-   url = "https://ftp.gnu.org/gnu/glibc/glibc-2.41.tar.xz",
-   sha3 = "da49f557057bfe3d11ae289cd9e668826d0cf33a0c1b977c88c208e50e24854f",
+   url = "https://ftp.gnu.org/gnu/glibc/glibc-2.42.tar.xz",
+   sha3 = "2cb63bb871c7db0f785c724703c1406b35023eb60aa573890c4ae999d63d7314",
    build = "../configure",
    flags = {
-      "--enable-kernel=6.6",
+      "--enable-kernel=6.12",
       "--enable-stack-protector=strong",
       "--disable-nscd",
       "--with-headers=/usr/include",
@@ -181,8 +181,8 @@ pkgconf = {
 };
 
 binutils = {
-   url = "https://ftp.gnu.org/gnu/binutils/binutils-2.44.tar.xz",
-   sha3 = "3c99fe119a5246664a901fd643843ac31f94f85c7a83723bf16876d5f41e1a9d",
+   url = "https://ftp.gnu.org/gnu/binutils/binutils-2.45.tar.lz",
+   sha3 = "adab3461342b68846c4162fd19d87c3b36ed21140864d142a21c1bbb86461407",
    build = "./configure",
    flags = {
       "--enable-64-bit-bfd",
@@ -416,8 +416,8 @@ time = {
 };
 
 gdbm = {
-   url = "https://ftp.gnu.org/gnu/gdbm/gdbm-1.25.tar.gz",
-   sha3 = "0ad63b1893ad0a8a28fd27d21c2d9b89d521ca476c890b6a5dc474c3051ffe93",
+   url = "https://ftp.gnu.org/gnu/gdbm/gdbm-1.26.tar.gz",
+   sha3 = "407302b731b3f025ca97452a956aa10ff13316f060df207bccb34b17f252c2b9",
    build = "./configure",
    flags = { "--enable-libgdbm-compat" }
 };
@@ -809,8 +809,8 @@ libaio = {
 };
 
 device-mapper = {
-   url = "https://sourceware.org/ftp/lvm2/LVM2.2.03.33.tgz",
-   sha3 = "86b0b33f079f2fb40e68a92e8df10a93c7eaaea24cd6b900a0024e029449343b",
+   url = "https://sourceware.org/ftp/lvm2/LVM2.2.03.34.tgz",
+   sha3 = "ae9510b9c09f7c101d61a9a015e6a2db97c94e5ab0881cb314412f6bfa61209b",
    build = "./configure",
    flags = {
       "--enable-{cmdlib,dmeventd,pkgconfig}",
