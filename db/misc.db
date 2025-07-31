@@ -236,8 +236,8 @@ kirc = {
 };
 
 linux-lts = {
-   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.12.39.tar.xz",
-   sha3 = "1466e4d32e6a66502cb8fd6b2eb318fe4475443863e10c5611e0ca6f0756dd23",
+   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.12.40.tar.xz",
+   sha3 = "a5714e7889eb5ce4f67517aee3f3e464fcd3a472c74f2bd3b756b2ba59d5500a",
    build = "make",
    flags = { "bzImage", "modules", "headers" },
    prepare = [[
@@ -249,7 +249,7 @@ linux-lts = {
       install -m 644 arch/x86/boot/bzImage $destdir/boot/vmlinuz
       make modules_install \
           INSTALL_MOD_PATH=$destdir \
-          MODLIB=$destdir/usr/lib64/modules/6.12.39
+          MODLIB=$destdir/usr/lib64/modules/6.12.40
       cp -rp usr/include $destdir/usr
       find $destdir/usr/include -type f ! -name '*.h' -delete
    ]]
