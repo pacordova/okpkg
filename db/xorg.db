@@ -290,8 +290,8 @@ libvdpau = {
 };
 
 mesa = {
-   url = "https://mesa.freedesktop.org/archive/mesa-25.1.6.tar.xz",
-   sha3 = "50627ec9b51f64a949dbee5b3cf9186bebbe32422b28d072e6342487a99691c3",
+   url = "https://mesa.freedesktop.org/archive/mesa-25.1.7.tar.xz",
+   sha3 = "17299039dd19c362ac810b94d90f58af05314e9e4c9dfc49808208c66d9f839a",
    build = "meson",
    flags = {
       "-Dplatforms=x11",
@@ -593,8 +593,8 @@ xf86-input-evdev = {
 };
 
 libinput = {
-   url = "https://gitlab.freedesktop.org/libinput/libinput/-/archive/1.28.1/libinput-1.28.1.tar.bz2",
-   sha3 = "7cfa517201075a57582f151e9a563102b6bebf1aa9bebd474bb0ccba6a539e73",
+   url = "https://gitlab.freedesktop.org/libinput/libinput/-/archive/1.29.0/libinput-1.29.0.tar.bz2",
+   sha3 = "d3f1f4a0fe7682e778d3775272120f497174e80bf8d5f15d488064dcf3769e96",
    build = "meson",
    flags = {
       "-D{debug-gui,documentation,libwacom,tests}=false",
