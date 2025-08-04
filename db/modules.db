@@ -32,8 +32,8 @@ python-packaging = {
 };
 
 python-build = {
-   url = "https://github.com/pypa/build/archive/1.2.2/build-1.2.2.tar.gz",
-   sha3 = "a20e16e448e525136b903cb446da5879fd45158903b7f4084b2cd7d2533a1f78",
+   url = "https://github.com/pypa/build/archive/1.3.0/build-1.3.0.tar.gz",
+   sha3 = "343682db79a411e0abfad49c3cd79c2afb097782319bf033ef2cd4c6ed2aecec",
    build = "python-build",
 };
 
