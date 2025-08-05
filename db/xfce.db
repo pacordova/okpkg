@@ -47,8 +47,8 @@ xfce4-dev-tools = {
 };
 
 hwdata = {
-   url = "https://github.com/vcrhonek/hwdata/archive/v0.397/hwdata-0.397.tar.gz",
-   sha3 = "e2c9cbe251f26915c3eb224d9de4a9acd63d3fb78988d8e7968528b2b5332dfe",
+   url = "https://github.com/vcrhonek/hwdata/archive/v0.398/hwdata-0.398.tar.gz",
+   sha3 = "64025476cdc80337c0135fa7b8957e69348da068c205964b454461aa4d7af1e0",
    build = "./configure",
 };
 
