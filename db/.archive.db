@@ -2271,3 +2271,17 @@ inetutils = {
       "--disable-{rsh,servers,syslogd,tftp,tftpd,traceroute,uucpd,whois}",
    }
 };
+
+xmlto = {
+   url = "https://pagure.io/xmlto/archive/0.0.29/xmlto-0.0.29.tar.gz",
+   sha3 = "812135a4e5dee4e38df4cbad87af438a3d010b5f06df43795f405039402e4fbd",
+   build = "./configure",
+   prepare = [[ autoreconf -fi ]],
+   flags = { "--without-webbrowser" },
+};
+
+xdg-utils = {
+   url = "https://gitlab.freedesktop.org/xdg/xdg-utils/-/archive/v1.2.1/xdg-utils-v1.2.1.tar.bz2",
+   sha3 = "8bbd48d2142931de30cd4914eb775bbdb4b9b04f497a7059849656e0e8219c76",
+   build = "./configure",
+};
