@@ -10,8 +10,8 @@ zig-bin = {
 };
 
 rust = {
-   url = "https://static.rust-lang.org/dist/rust-1.88.0-x86_64-unknown-linux-gnu.tar.xz",
-   sha3 = "035a98e19428f4f79d883629ffe44aefbc3e7510687a37358a6f2e51fbb3f5b1",
+   url = "https://static.rust-lang.org/dist/rust-1.89.0-x86_64-unknown-linux-gnu.tar.xz",
+   sha3 = "c17bdd89089587e143461610ae91170e718fbe13aa4ad1a56eca5f807ce81ecd",
    build = _,
    post = [[ 
       install -d $destdir/usr

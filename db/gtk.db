@@ -58,7 +58,7 @@ pango = {
    url = "https://download.gnome.org/sources/pango/1.56/pango-1.56.4.tar.xz",
    sha3 = "f0c3655cbd677509bcf9a711637ed977b212e92a80698e61b4fa8163556b8e45",
    build = "meson",
-   flags = { "-Dintrospection=enabled" },
+   flags = { "-Dintrospection=disabled" },
 };
 
 gdk-pixbuf2 = {
@@ -91,12 +91,13 @@ librsvg = {
 };
 
 gtk3 = {
-   url = "https://download.gnome.org/sources/gtk/3.24/gtk-3.24.49.tar.xz",
-   sha3 = "cff406b8e384b5326189eea0edfef4bba667eacd116a3a6bbb8abfb1798815ed",
+   url = "https://download.gnome.org/sources/gtk/3.24/gtk-3.24.50.tar.xz",
+   sha3 = "5f0efbaea3eb2fb1d7741163b60006dcf8c972dc33d4970227c6fb702b8369c5",
    build = "meson",
    flags = {
       "-Dbroadway_backend=true",
       "-Dman=false",
+      "-Dintrospection=false",
       "-D{quartz,wayland,win32}_backend=false",
       "-D{cloudproviders,demos,examples,gtk_doc,tests,tracker3}=false",
    }

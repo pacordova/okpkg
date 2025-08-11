@@ -543,8 +543,8 @@ xkeyboard-config = {
 };
 
 libxkbcommon = {
-   url = "https://github.com/xkbcommon/libxkbcommon/archive/xkbcommon-1.10.0/xkbcommon-1.10.0.tar.gz",
-   sha3 = "c1d8324f769363c2484f5eaae6845c718dd0200b914f9637663dbcc5f7c37485",
+   url = "https://github.com/xkbcommon/libxkbcommon/archive/xkbcommon-1.11.0/xkbcommon-1.11.0.tar.gz",
+   sha3 = "a0f8b96a9ae69bb40e9f26de9ade65a66fce42b3e6f1db285b0194e17174ce80",
    build = "meson",
    flags = {
       "-Denable-wayland=false",
