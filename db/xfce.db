@@ -53,8 +53,8 @@ hwdata = {
 };
 
 libdisplay-info = {
-   url = "https://gitlab.freedesktop.org/emersion/libdisplay-info/-/releases/0.2.0/downloads/libdisplay-info-0.2.0.tar.xz",
-   sha3 = "3d707b38b75f501d74677e346166ab4f41fb45b8ac9fce7e8462a99d440e6a4b",
+   url = "https://gitlab.freedesktop.org/emersion/libdisplay-info/-/archive/0.3.0/libdisplay-info-0.3.0.tar.gz",
+   sha3 = "81273a1db8c9b7784db43ff42f08bbf39e12b8ad3de512a64f5e0d547a1c8d5c",
    build = "meson",
 };
 
@@ -62,7 +62,11 @@ libxfce4windowing = {
    url = "https://archive.xfce.org/src/xfce/libxfce4windowing/4.20/libxfce4windowing-4.20.3.tar.bz2",
    sha3 = "0d9e3443384408d8fbd2cd64e255128e2ed056af254e7bf81a2c1aef09adf9cc",
    build = "./configure",
-   flags = { "--enable-x11", "--disable-debug" }
+   flags = { 
+      "--enable-x11",
+      "--disable-debug",
+      "--disable-introspection",
+   }
 };
 
 xfce4-panel = {

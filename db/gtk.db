@@ -74,12 +74,12 @@ gdk-pixbuf2 = {
 };
 
 cargo-c = {
-   url = "https://github.com/lu-zero/cargo-c/archive/v0.10.14/cargo-c-0.10.14.tar.gz",
-   sha3 = "5a6d4d8b2b812f67bafd4af1ce7ab884b50b4660950486190aa798940b2a04c1",
+   url = "https://github.com/lu-zero/cargo-c/archive/v0.10.15/cargo-c-0.10.15.tar.gz",
+   sha3 = "52e834fc19930d98f423adf101a3cef6ea6a9d9e8314bf236164866d6b92d728",
    build = "cargo",
    prepare = [[ 
-      curl -LRO "https://github.com/lu-zero/cargo-c/releases/download/v0.10.14/Cargo.lock" 
-      echo 0af99496210d7e5cb70de6643b571a8882120148e628d7a75327937b64fd9841 Cargo.lock | sha256sum -c
+      curl -LRO "https://github.com/lu-zero/cargo-c/releases/download/v0.10.15/Cargo.lock" 
+      echo abc0ffb7128aa01704d63800d7a6accb8138a6f561696b19cd1cb1e3f9547e86 Cargo.lock | sha256sum -c
    ]]
 };
 
