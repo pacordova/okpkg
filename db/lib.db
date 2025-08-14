@@ -204,8 +204,8 @@ libexif = {
 };
 
 libinih = {
-   url = "https://github.com/benhoyt/inih/archive/r58/inih-r58.tar.gz",
-   sha3 = "929cef82c8e3613565a9cb9ae8323963783d90558681d9cb62615e81d3529f6a",
+   url = "https://github.com/benhoyt/inih/archive/r61/inih-r61.tar.gz",
+   sha3 = "d6229e8e8beca6cc1ff364bb1fc2dd5d03a6803a63c5fd32f310c8ce46e3a59b",
    build = "meson",
 };
 

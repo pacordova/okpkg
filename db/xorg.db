@@ -290,8 +290,8 @@ libvdpau = {
 };
 
 mesa = {
-   url = "https://mesa.freedesktop.org/archive/mesa-25.1.7.tar.xz",
-   sha3 = "17299039dd19c362ac810b94d90f58af05314e9e4c9dfc49808208c66d9f839a",
+   url = "https://mesa.freedesktop.org/archive/mesa-25.1.8.tar.xz",
+   sha3 = "5a5525407c22219a5cac92a3502e347c09b85fe062b4bfb97bde9836c2a70416",
    build = "meson",
    flags = {
       "-Dplatforms=x11",
@@ -371,14 +371,14 @@ xorg-xcursorgen = {
 };
 
 xorg-xdpyinfo = {
-   url = "https://x.org/pub/individual/app/xdpyinfo-1.3.4.tar.xz",
-   sha3 = "261509b884fd894ef17f7fe9b87f7739690d02ccffaa416760bc109879582f7a",
+   url = "https://x.org/pub/individual/app/xdpyinfo-1.4.0.tar.xz",
+   sha3 = "a81ca79a7de9017a3e495bdfe9b937abd605decf5e2f991adac6b0d81505eb48",
    build = "./configure",
 };
 
 xorg-xdriinfo = {
-   url = "https://x.org/pub/individual/app/xdriinfo-1.0.7.tar.xz",
-   sha3 = "0d4f85800f71b993da11964be9394051bc54e37b21565d4cdbbcebd24911f5df",
+   url = "https://x.org/pub/individual/app/xdriinfo-1.0.8.tar.xz",
+   sha3 = "8eb04147e739411608f920e1fafba71b37a4364a7b683976632cb3dda3f45143",
    build = "./configure",
 };
 
@@ -389,8 +389,8 @@ xorg-xev = {
 };
 
 xorg-xgamma = {
-   url = "https://x.org/pub/individual/app/xgamma-1.0.7.tar.xz",
-   sha3 = "71749fb779b5d387ab8ee79cdcde3134ad5419f41d9a77662ca01e950f70c834",
+   url = "https://x.org/pub/individual/app/xgamma-1.0.8.tar.xz",
+   sha3 = "ba3963a3080ac7fa3cc24f3bc76400c13a135b47e0fb09a3b32a2378733f8a4e",
    build = "./configure",
 };
 
