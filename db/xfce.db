@@ -13,10 +13,13 @@ xfconf = {
 };
 
 libxfce4ui = {
-   url = "https://archive.xfce.org/src/xfce/libxfce4ui/4.20/libxfce4ui-4.20.1.tar.bz2",
-   sha3 = "844036eb0a5f69c4d2739d1d09e0d81ad1ed03219aede7cbc369d72aafc908ec",
+   url = "https://archive.xfce.org/src/xfce/libxfce4ui/4.20/libxfce4ui-4.20.2.tar.bz2",
+   sha3 = "d251e7a2aaec98f9111db5d9d22ab16fa24baa97b91c41753411e00bf3366939",
    build = "./configure",
-   flags = { "--disable-debug" }
+   flags = { 
+      "--disable-debug",
+      "--disable-introspection",
+   }
 };
 
 exo = {
@@ -59,8 +62,8 @@ libdisplay-info = {
 };
 
 libxfce4windowing = {
-   url = "https://archive.xfce.org/src/xfce/libxfce4windowing/4.20/libxfce4windowing-4.20.3.tar.bz2",
-   sha3 = "0d9e3443384408d8fbd2cd64e255128e2ed056af254e7bf81a2c1aef09adf9cc",
+   url = "https://archive.xfce.org/src/xfce/libxfce4windowing/4.20/libxfce4windowing-4.20.4.tar.bz2",
+   sha3 = "9d1757849cc4c5e44c3d71177eb51d851ae6c630aee86fdebb4ef23edec8ac97",
    build = "./configure",
    flags = { 
       "--enable-x11",
@@ -70,12 +73,13 @@ libxfce4windowing = {
 };
 
 xfce4-panel = {
-   url = "https://archive.xfce.org/src/xfce/xfce4-panel/4.20/xfce4-panel-4.20.4.tar.bz2",
-   sha3 = "ada24b2f522525948619dbc9327c1d5d6a8462cea9a2d76977fae210308bb1d7",
+   url = "https://archive.xfce.org/src/xfce/xfce4-panel/4.20/xfce4-panel-4.20.5.tar.bz2",
+   sha3 = "1e18177d0ad72c59ce965baf734e825542f5e99c5d49308f03387b9d828eddf8",
    build = "./configure",
    flags = {
       "--enable-gio-unix",
       "--disable-debug",
+      "--disable-introspection",
       "--disable-gtk-doc",
    }
 };
@@ -131,8 +135,8 @@ xfce4-power-manager = {
 };
 
 xfce4-settings = {
-   url = "https://archive.xfce.org/src/xfce/xfce4-settings/4.20/xfce4-settings-4.20.1.tar.bz2",
-   sha3 = "ec1709d285f76f7bde6b4af984c3164855766580346884166698baa4f03bb984",
+   url = "https://archive.xfce.org/src/xfce/xfce4-settings/4.20/xfce4-settings-4.20.2.tar.bz2",
+   sha3 = "aa08503c6a839bab39267b1c9f5f0c5deb914caf7801c45c7539ccb760d43051",
    build = "./configure",
    flags = {
       "--enable-xrandr",
@@ -185,8 +189,8 @@ xfce4-screensaver = {
 };
 
 xfce4-session = {
-   url = "https://archive.xfce.org/src/xfce/xfce4-session/4.20/xfce4-session-4.20.2.tar.bz2",
-   sha3 = "56aa19408115a8505446271a09113c22001e96640bb410722a37a217dff72cea",
+   url = "https://archive.xfce.org/src/xfce/xfce4-session/4.20/xfce4-session-4.20.3.tar.bz2",
+   sha3 = "8b4d14640e3e9203416597fb96ef5742c9d604a43d6776441b827d3fa1c500a3",
    build = "./configure",
    flags = {
       "--disable-legacy-sm",
