@@ -84,10 +84,9 @@ cargo-c = {
 };
 
 librsvg = {
-   url = "https://download.gnome.org/sources/librsvg/2.60/librsvg-2.60.0.tar.xz",
-   sha3 = "d936854e66235024cdf3402feab217fa1de2cdf1656edf4ac61ec127f46a1a78",
+   url = "https://download.gnome.org/sources/librsvg/2.61/librsvg-2.61.0.tar.xz",
+   sha3 = "2359c0ad4ec430ced18ecd8982f04dec7696c7de0437175014998259e3cec0d1",
    build = "meson",
-   flags = { "-Dvala=enabled" },
 };
 
 gtk3 = {

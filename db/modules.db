@@ -86,8 +86,8 @@ python-typing_extensions = {
 };
 
 python-setuptools-scm = {
-   url = "https://pypi.org/packages/source/s/setuptools-scm/setuptools_scm-8.3.1.tar.gz",
-   sha3 = "3614d12fa3a5f35f58815e099a906d65db71097bee73f3bc7597ccaafd97cea2",
+   url = "https://pypi.org/packages/source/s/setuptools-scm/setuptools_scm-9.2.0.tar.gz",
+   sha3 = "0637927a345c5794b0661fdc6a4aff3b5b25909fe034c1818441fdd37ceaceb2",
    build = "python-build",
 };
 

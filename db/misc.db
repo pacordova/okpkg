@@ -145,8 +145,8 @@ catgirl = {
 };
 
 cryptsetup = {
-   url = "https://kernel.org/pub/linux/utils/cryptsetup/v2.8/cryptsetup-2.8.0.tar.xz",
-   sha3 = "4d23ba2f1bc99c3df39476734be239b957594d7fc23701cb643787258f42cec4",
+   url = "https://kernel.org/pub/linux/utils/cryptsetup/v2.8/cryptsetup-2.8.1.tar.xz",
+   sha3 = "b49e010d67ca7e749061386bae6654efd78801d2b857cac567d20bc0aaed4a16",
    build = "./configure",
    flags = { "--enable-{asciidoc=no,libargon2=yes,ssh-token=no}" }
 };
@@ -190,8 +190,8 @@ feh = {
 };
 
 git = {
-   url = "https://kernel.org/pub/software/scm/git/git-2.50.1.tar.xz",
-   sha3 = "24c9a9703db676b46d43bff24ae3fca4adc15df8f47820767356e97e2f676e5c",
+   url = "https://kernel.org/pub/software/scm/git/git-2.51.0.tar.xz",
+   sha3 = "95f05d9c19351b6d0d7f0330a8f2b527f84ff268a2536db89645520fd7d28215",
    build = "./configure",
    flags = {
       "--with-gitconfig=/etc/gitconfig",
@@ -333,8 +333,8 @@ ugrep = {
 };
 
 vim = {
-   url = "https://github.com/vim/vim/archive/v9.1.1623/vim-9.1.1623.tar.gz",
-   sha3 = "c7fc51794046c5e9d731045f37b5ea04d8a32be5ffc29f4abddb424e025c8e08",
+   url = "https://github.com/vim/vim/archive/v9.1.1652/vim-9.1.1652.tar.gz",
+   sha3 = "23e30ff0bf077ff32774d4c69a41c9debf2a0e08d6713a8d34485c9c8fb07d8b",
    build = "./configure",
    flags = {
       "--enable-{cscope,multibyte}",

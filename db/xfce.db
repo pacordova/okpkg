@@ -175,8 +175,8 @@ xfwm4 = {
 };
 
 xfce4-screensaver = {
-   url = "https://archive.xfce.org/src/apps/xfce4-screensaver/4.20/xfce4-screensaver-4.20.0.tar.xz",
-   sha3 = "64d9533c7b7d279ab5d8e24d92192e922135991e0926244c8d5651a85882e6ec",
+   url = "https://archive.xfce.org/src/apps/xfce4-screensaver/4.20/xfce4-screensaver-4.20.1.tar.xz",
+   sha3 = "5c20b5538b5cee9e51bf5e0dcb0587d2f224aae1dec6c62e90d4b206e4c3d6e8",
    build = "meson",
    flags = {
       "-Dauthentication-scheme=pwent",
