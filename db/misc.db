@@ -332,6 +332,12 @@ ugrep = {
    build = "./configure",
 };
 
+unrar = {
+   url = "https://www.rarlab.com/rar/unrarsrc-7.1.10.tar.gz",
+   sha3 = "69920a8564f07361ef043df8d45cc40f37a4ce1ee6f971217125a5e534da092e",
+   build = "make"
+};
+
 vim = {
    url = "https://github.com/vim/vim/archive/v9.1.1652/vim-9.1.1652.tar.gz",
    sha3 = "23e30ff0bf077ff32774d4c69a41c9debf2a0e08d6713a8d34485c9c8fb07d8b",
