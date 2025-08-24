@@ -25,15 +25,15 @@ ostree = {
 };
 
 libxmlb = {
-   url = "https://github.com/hughsie/libxmlb/releases/download/0.3.22/libxmlb-0.3.22.tar.xz",
-   sha3 = "ff769d5bf7d6c631ec3ccf824c228e9c3b143842a686f750c96902eb1686272f",
+   url = "https://github.com/hughsie/libxmlb/releases/download/0.3.23/libxmlb-0.3.23.tar.xz",
+   sha3 = "e00aef7c7b20262a1df5b395e19951b3aa6185ef329891e76cad6a151f2c3cfe",
    build = "meson",
    flags = { "-Dintrospection=true", "-D{gtkdoc,tests}=false" },
 };
 
 appstream = {
-   url = "https://www.freedesktop.org/software/appstream/releases/AppStream-1.0.5.tar.xz",
-   sha3 = "4850fbf4f5bea08a44d570b489586f2401ef235c4291d9d9bb4d32dbdc4bbfaa",
+   url = "https://www.freedesktop.org/software/appstream/releases/AppStream-1.0.6.tar.xz",
+   sha3 = "48cfa406f6e277c801b259160aa9efa6d9df6ba37a4e8bce8c258f266fce91e9",
    build = "meson",
    flags = {
       "-Dsystemd=false",
