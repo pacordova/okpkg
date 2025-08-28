@@ -170,6 +170,24 @@ pyyaml = {
    build = "python-build",
 };
 
+python-hatch-fancy-pypi-readme = {
+   url = "https://github.com/hynek/hatch-fancy-pypi-readme/archive/25.1.0/hatch-fancy-pypi-readme-25.1.0.tar.gz",
+   sha3 = "021c9a6ce22793ec377b09dcbf0fa8ce2af83b9bb79fb48c211bfba77e26b99f",
+   build = "python-build",
+};
+
+python-incremental = {
+   url = "https://pypi.org/packages/source/i/incremental/incremental-24.7.2.tar.gz",
+   sha3 = "185fb673276a44c608da41aa1d5e8c8845b5b79625c4f0f1aeea54473087e78e",
+   build = "python-build",
+};
+
+python-twisted = {
+   url = "https://pypi.org/packages/source/t/twisted/twisted-25.5.0.tar.gz",
+   sha3 = "d1fbb96db6cff268b330918df5a167e1c76723b41df364607fe09b93845a3854",
+   build = "python-build",
+};
+
 perl-xml-parser = {
    url = "https://cpan.metacpan.org/authors/id/T/TO/TODDR/XML-Parser-2.47.tar.gz",
    sha3 = "daaacd05fb62d1f8811c6f792c87bd4062ea70d57a951d3f15236c2424b24618",

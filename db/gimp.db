@@ -60,11 +60,16 @@ appstream-glib = {
    }
 };
 
+pycairo = {
+   url = "https://github.com/pygobject/pycairo/releases/download/v1.28.0/pycairo-1.28.0.tar.gz",
+   sha3 = "9bfb488fbf5c2a5c83ae04a10afbcd754f8b9172cd2553ce8ee912753819e6c6",
+   build = "meson",
+};
+
 pygobject = {
    url = "https://download.gnome.org/sources/pygobject/3.52/pygobject-3.52.3.tar.gz",
    sha3 = "03be64a0098c8098d48246e44c1c8671b32d162f368352e643f8f65aad22d9a4",
    build = "meson",
-   flags = { "-Dpycairo=disabled" },
 };
 
 gimp = {

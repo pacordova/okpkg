@@ -459,18 +459,6 @@ gnupg1 = {
    ]]
 };
 
--- xreader
-pycairo = {
-   url = "https://github.com/pygobject/pycairo/releases/download/v1.26.1/pycairo-1.26.1.tar.gz",
-   sha3 = "26f4f10ceb110ef5ed40712428e78affdc59d271201004e12921bb414ea3f49c",
-   build = "meson",
-};
-
-pygobject = {
-   url = "https://download.gnome.org/sources/pygobject/3.48/pygobject-3.48.2.tar.xz",
-   build = "meson",
-};
-
 xapp = {
    url = "https://github.com/linuxmint/xapp/archive/2.8.4/xapp-2.8.4.tar.gz",
    sha3 = "bbf12e1b080d0be63f415ee9bd16fa91286ef17f1d95dbbfe7afb247ddb48d90",
@@ -1330,7 +1318,8 @@ db1 = {
 };
 
 deluge = {
-   url = "https://ftp.osuosl.org/pub/deluge/source/2.1/deluge-2.1.1.tar.xz",
+   url = "https://ftp.osuosl.org/pub/deluge/source/2.2/deluge-2.2.0.tar.xz",
+   sha3 = "d521b589098532060779bad99c0570223f673119d8416c8bbb57e0bcdb8db4f3",
    build = "python-build",
 };
 
