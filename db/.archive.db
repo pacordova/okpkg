@@ -2285,3 +2285,10 @@ xdg-utils = {
    sha3 = "8bbd48d2142931de30cd4914eb775bbdb4b9b04f497a7059849656e0e8219c76",
    build = "./configure",
 };
+
+glib-networking = {
+   url = "https://download.gnome.org/sources/glib-networking/2.80/glib-networking-2.80.0.tar.xz",
+   sha3 = "5751a034cf9862e22474a9aabbc4a9b333b74532ae41842aba935b9857d70ba8",
+   build = "meson",
+   flags = { "-Dlibproxy=disabled", "-Dgnutls=disabled", "-Dopenssl=enabled" }
+};

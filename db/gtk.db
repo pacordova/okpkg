@@ -58,7 +58,7 @@ pango = {
    url = "https://download.gnome.org/sources/pango/1.56/pango-1.56.4.tar.xz",
    sha3 = "f0c3655cbd677509bcf9a711637ed977b212e92a80698e61b4fa8163556b8e45",
    build = "meson",
-   flags = { "-Dintrospection=disabled" },
+   flags = { "-Dintrospection=enabled" },
 };
 
 gdk-pixbuf2 = {
@@ -96,7 +96,7 @@ gtk3 = {
    flags = {
       "-Dbroadway_backend=true",
       "-Dman=false",
-      "-Dintrospection=false",
+      "-Dintrospection=true",
       "-D{quartz,wayland,win32}_backend=false",
       "-D{cloudproviders,demos,examples,gtk_doc,tests,tracker3}=false",
    }

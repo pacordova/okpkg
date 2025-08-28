@@ -1,45 +1,18 @@
-appstream-glib = {
-   url = "https://people.freedesktop.org/~hughsient/appstream-glib/releases/appstream-glib-0.8.2.tar.xz",
-   sha3 = "c1c6b46bab260e73070061707fe1f01df4363b3fca0349de29400752ae0a21e5",
-   build = "meson",
-   flags = { 
-      "-Drpm=false", 
-      "-Dstemmer=false",
-      "-Dman=false", 
-   }
-};
-
 babl = {
-   url = "https://download.gimp.org/pub/babl/0.1/babl-0.1.108.tar.xz",
-   sha3 = "aec774ba647daa9e57572c1905f1e03d4f69400def385395cc9b4d782eb2b027",
+   url = "https://download.gimp.org/pub/babl/0.1/babl-0.1.114.tar.xz",
+   sha3 = "b2bcd8f00ac859e3cb4185543ceb01002c07387b31e6478a0cc7de06d99f4f27",
    build = "meson",
 };
 
 gegl = {
-   url = "https://download.gimp.org/pub/gegl/0.4/gegl-0.4.48.tar.xz",
-   sha3 = "9b7a9a2e33ae77a2a63c0a4d35383a47e3d888bf238a9d348bae2f4d89ac6a43",
+   url = "https://download.gimp.org/pub/gegl/0.4/gegl-0.4.62.tar.xz",
+   sha3 = "c21b91884dbcc219076d48925025d4a3cc49199c8f798e4c5c584fa80aceec8c",
    build = "meson",
-   flags = { 
-      "-Dlibav=disabled", 
-   }
-};
-
-libmypaint = {
-   url = "https://github.com/mypaint/libmypaint/releases/download/v1.6.1/libmypaint-1.6.1.tar.xz",
-   sha3 = "2ec991f21543b1c5326f1396a6794608518ca36dcf134a45cf5cfa2b95c5f211",
-   build = "./configure",
-   flags = { "--libdir=/usr/lib64" }
-};
-
-mypaint-brushes = {
-   url = "https://github.com/mypaint/mypaint-brushes/releases/download/v1.3.1/mypaint-brushes-1.3.1.tar.xz",
-   sha3 = "89f237d78c7bd73d275eea7f04c5d003565f18b8ef1ba485b8ce30805b9a1cdc",
-   build = "./configure",
 };
 
 exiv2 = {
-   url = "https://github.com/Exiv2/exiv2/archive/v0.28.3/exiv2-0.28.3.tar.gz",
-   sha3 = "751d35d5703ff27b7c17a9052a3760e0445e8a1c6a6e57b45352adf8599c1ac6",
+   url = "https://github.com/Exiv2/exiv2/archive/v0.28.5/exiv2-0.28.5.tar.gz",
+   sha3 = "3723faae5c1bd8d3a1afd00d0b82053815f771c6623f4ed4530f67eeef3442b2",
    build = "cmake",
    flags = {
       "-DEXIV2_ENABLE_VIDEO=yes",
@@ -53,21 +26,50 @@ exiv2 = {
 };
 
 gexiv2 = {
-   url = "https://download.gnome.org/sources/gexiv2/0.14/gexiv2-0.14.2.tar.xz",
-   sha3 = "0cfc01e95c80cad96404761dfaf71b76c57a308d1b8f0b5d7085edd9ad293483",
+   url = "https://download.gnome.org/sources/gexiv2/0.14/gexiv2-0.14.6.tar.xz",
+   sha3 = "3574c6566da48dcbc98e4aa95489e2e3a6db68ca8a874baf7d35072d8d038e74",
    build = "meson",
-   flags = { "-Dpython3=false" }
+   flags = { "-Dpython3=false" },
 };
 
-glib-networking = {
-   url = "https://download.gnome.org/sources/glib-networking/2.80/glib-networking-2.80.0.tar.xz",
-   sha3 = "5751a034cf9862e22474a9aabbc4a9b333b74532ae41842aba935b9857d70ba8",
+libmypaint = {
+   url = "https://github.com/mypaint/libmypaint/releases/download/v1.6.1/libmypaint-1.6.1.tar.xz",
+   sha3 = "2ec991f21543b1c5326f1396a6794608518ca36dcf134a45cf5cfa2b95c5f211",
+   build = "./configure",
+   flags = { 
+      "--libdir=/usr/lib64",
+      "--disable-nls",
+      "--disable-i18n",
+      "--enable-introspection=no",
+   }
+};
+
+mypaint-brushes = {
+   url = "https://github.com/mypaint/mypaint-brushes/releases/download/v1.3.1/mypaint-brushes-1.3.1.tar.xz",
+   sha3 = "89f237d78c7bd73d275eea7f04c5d003565f18b8ef1ba485b8ce30805b9a1cdc",
+   build = "./configure",
+};
+
+appstream-glib = {
+   url = "https://people.freedesktop.org/~hughsient/appstream-glib/releases/appstream-glib-0.8.3.tar.xz",
+   sha3 = "2e395cb3e2a819451a0c380c22c73237f46abcf1b8658441833e2b46361756d3",
    build = "meson",
-   flags = { "-Dlibproxy=disabled", "-Dgnutls=disabled", "-Dopenssl=enabled" }
+   flags = { 
+      "-Drpm=false", 
+      "-Dman=false", 
+   }
+};
+
+pygobject = {
+   url = "https://download.gnome.org/sources/pygobject/3.52/pygobject-3.52.3.tar.gz",
+   sha3 = "03be64a0098c8098d48246e44c1c8671b32d162f368352e643f8f65aad22d9a4",
+   build = "meson",
+   flags = { "-Dpycairo=disabled" },
 };
 
 gimp = {
-   url = "https://download.gimp.org/gimp/v2.99/gimp-2.99.18.tar.xz",
-   sha3 = "a91a2f09e71bc389880cb901b9d81420dff19d9a870b51b30c00d2e1cf46f6b6",
+   url = "https://download.gimp.org/gimp/v3.0/gimp-3.0.4.tar.xz",
+   sha3 = "ca04db02ed4560aa94a193f20c10cd1980d7efeb2f5db9f4e77fb6043ab0cbd6",
    build = "meson",
+   flags = { "-Dheadless-tests=disabled" },
 };

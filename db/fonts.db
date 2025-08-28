@@ -14,8 +14,8 @@ harfbuzz = {
       "-Dgraphite2=enabled",
       "-Dcairo=disabled",
       "-Dglib=disabled",
-      "-Dgobject=disabled",
-      "-Dintrospection=disabled",
+      "-Dgobject=enabled",
+      "-Dintrospection=enabled",
       "-Dtests=disabled",
       "-Dicu=disabled",
    }
