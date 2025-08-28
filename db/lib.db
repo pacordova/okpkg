@@ -52,8 +52,8 @@ libgudev = {
 };
 
 upower = {
-   url = "https://gitlab.freedesktop.org/upower/upower/-/archive/v1.90.9/upower-v1.90.9.tar.gz",
-   sha3 = "59a5c2f01f609d64018c453f165d625e6f4ed642ef7f05645fe578ad07f9844f",
+   url = "https://gitlab.freedesktop.org/upower/upower/-/archive/v1.90.10/upower-v1.90.10.tar.bz2",
+   sha3 = "7378ac0cb9662ad89e40618202bbced1ef9c8945590372ccf832217f3cc60e6f",
    build = "meson",
    flags = {
       "-Dsystemdsystemunitdir=no",
@@ -292,8 +292,8 @@ libtiff = {
 };
 
 libtirpc = {
-   url = "https://downloads.sourceforge.net/libtirpc/libtirpc-1.3.6.tar.bz2",
-   sha3 = "544322c780772a0a15e8ca62a23540b67939aa39839ad6cf445d9a29e8afa4aa",
+   url = "https://downloads.sourceforge.net/libtirpc/libtirpc-1.3.7.tar.bz2",
+   sha3 = "728ec7837a77f18bb15999aa07687575b8bdfc036c44bb2790819d9478b794e6",
    build = "./configure",
    flags = { "--disable-gssapi" }
 };
