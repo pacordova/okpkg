@@ -23,4 +23,6 @@ okpkg install \
     m/glad-*.tar.lz \
     m/cython-*.tar.lz \
     m/pyyaml-*.tar.lz \
+    m/pygobject-*.tar.lz \
+    m/pycairo-*.tar.lz \
     x/xcb-proto-*.tar.lz \
