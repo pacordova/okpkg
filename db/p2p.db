@@ -1,0 +1,46 @@
+dht = {
+   url = "https://github.com/jech/dht/archive/refs/tags/dht-0.27.tar.gz",
+   sha3 = "4253f60b496ee893bf040f89e95f1921c63e7a66aa57392159bbc7de00dc54db",
+   build = "cmake",
+   flags = { "-DCMAKE_INSTALL_INCLUDEDIR=/usr/include/dht" }
+   --post = [[ install -D dht.h $destdir/usr/include/dht ]]
+};
+
+libdeflate = {
+   url = "https://github.com/ebiggers/libdeflate/archive/v1.24/libdeflate-1.24.tar.gz",
+   sha3 = "6377b9a21a562d01523108e87035894d402b8c702ecd1eb120131b99214f930f",
+   build = "cmake",
+};
+
+libnatpmp = {
+   url = "https://miniupnp.tuxfamily.org/files/libnatpmp-20230423.tar.gz",
+   sha3 = "ddff542a322ba02d14be12b2110aa9eb28ed0e6039f7f90c10d042fedf64767e",
+   build = "make",
+   flags = { 
+      "PREFIX=$destdir", 
+      "INSTALLDIRLIB=$destdir/usr/lib64",
+      'HEADERS="natpmp.h natpmp_declspec.h"',
+   }
+};
+
+miniupnpc = {
+   url = "https://github.com/miniupnp/miniupnp/releases/download/miniupnpc_2_3_3/miniupnpc-2.3.3.tar.gz",
+   sha3 = "ecb1917f05205ec2b06c25169e3cae6a3fede5b64fcb40acf7067b6244273a81",
+   build = "make",
+   flags = { "LIBDIR=lib64" }
+};
+
+transmission = {
+   url = "https://github.com/transmission/transmission/releases/download/4.0.6/transmission-4.0.6.tar.xz",
+   sha3 = "ffcde68d683cd0f0b264a0522da77b1f27d7a42ab787b9375200a0eec46506d5",
+   build = "cmake",
+   flags = {
+      "-DENABLE_{GTK,QT,TESTS,WEB}=OFF",
+      "-DUSE_SYSTEM_{DEFLATE,DHT,MINIUPNPC,NATPMP}=ON",
+   },
+--   prepare = [[
+--     sed -e 's/2.8/4.0/' \
+--         -i third-party/dht/CMakeLists.txt \
+--         -i third-party/libnatpmp/CMakeLists.txt
+--   ]]
+};

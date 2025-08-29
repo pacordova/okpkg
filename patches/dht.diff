@@ -1,0 +1,121 @@
+From b02da5981ccb28af9d73f2b425d157f1a00bf223 Mon Sep 17 00:00:00 2001
+From: Mike Gelfand <mikedld@mikedld.com>
+Date: Sun, 1 Jan 2017 16:23:21 +0300
+Subject: [PATCH] Remove Makefile, add Automake and CMake support
+
+---
+ CMakeLists.txt | 60 ++++++++++++++++++++++++++++++++++++++++++++++++++
+ Config.cmake   |  1 +
+ Makefile       |  9 --------
+ Makefile.am    | 11 +++++++++
+ 4 files changed, 72 insertions(+), 9 deletions(-)
+ create mode 100644 CMakeLists.txt
+ create mode 100644 Config.cmake
+ delete mode 100644 Makefile
+ create mode 100644 Makefile.am
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+new file mode 100644
+index 0000000..6a9289e
+--- /dev/null
++++ b/CMakeLists.txt
+@@ -0,0 +1,60 @@
++cmake_minimum_required(VERSION 4.0)
++project(DHT VERSION 0.26 LANGUAGES C)
++
++include(GNUInstallDirs)
++include(CMakePackageConfigHelpers)
++
++add_library(dht STATIC
++    dht.c
++    dht.h)
++
++target_include_directories(dht
++    PUBLIC
++        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
++        $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
++
++write_basic_package_version_file(
++    "${PROJECT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake"
++    VERSION ${PROJECT_VERSION}
++    COMPATIBILITY AnyNewerVersion)
++
++if(NOT CMAKE_SOURCE_DIR STREQUAL PROJECT_SOURCE_DIR)
++    add_library(${PROJECT_NAME}::dht ALIAS dht)
++
++    file(WRITE "${PROJECT_BINARY_DIR}/${PROJECT_NAME}Config.cmake" "")
++    set(${PROJECT_NAME}_DIR "${PROJECT_BINARY_DIR}" CACHE PATH
++        "The directory containing a CMake configuration file for ${PROJECT_NAME}.")
++    return()
++endif()
++
++configure_file(
++    Config.cmake
++    ${PROJECT_NAME}Config.cmake
++    @ONLY)
++
++install(
++    TARGETS dht
++    EXPORT ${PROJECT_NAME}Targets)
++
++install(
++    FILES dht.h
++    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
++
++install(
++    FILES
++        CHANGES
++        dht-example.c
++        LICENCE
++        README
++    DESTINATION ${CMAKE_INSTALL_DOCDIR})
++
++install(
++    EXPORT ${PROJECT_NAME}Targets
++    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}
++    NAMESPACE ${PROJECT_NAME}::)
++
++install(
++    FILES
++        "${PROJECT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
++        "${PROJECT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake"
++    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME})
+diff --git a/Config.cmake b/Config.cmake
+new file mode 100644
+index 0000000..8fbfc6d
+--- /dev/null
++++ b/Config.cmake
+@@ -0,0 +1 @@
++include(${CMAKE_CURRENT_LIST_DIR}/@PROJECT_NAME@Targets.cmake)
+diff --git a/Makefile b/Makefile
+deleted file mode 100644
+index e012945..0000000
+--- a/Makefile
++++ /dev/null
+@@ -1,9 +0,0 @@
+-CFLAGS = -g -Wall
+-LDLIBS = -lcrypt
+-
+-dht-example: dht-example.o dht.o
+-
+-all: dht-example
+-
+-clean:
+-	-rm -f dht-example dht-example.o dht-example.id dht.o *~ core
+diff --git a/Makefile.am b/Makefile.am
+new file mode 100644
+index 0000000..2dba648
+--- /dev/null
++++ b/Makefile.am
+@@ -0,0 +1,11 @@
++AM_CFLAGS = @PTHREAD_CFLAGS@
++
++noinst_LIBRARIES = libdht.a
++libdht_a_SOURCES = dht.c
++libdht_a_DEPENDENCIES = $(builddir)/include/dht
++noinst_HEADERS = dht.h
++EXTRA_DIST = CHANGES CMakeLists.txt dht-example.c LICENCE README
++
++$(builddir)/include/dht:
++	$(MKDIR_P) $(builddir)/include
++	(cd $(builddir)/include && $(LN_S) $(abs_srcdir) dht)
