@@ -182,9 +182,28 @@ python-incremental = {
    build = "python-build",
 };
 
+python-hatch-vcs = {
+   url = "https://github.com/ofek/hatch-vcs/archive/v0.5.0/hatch-vcs-0.5.0.tar.gz",
+   sha3 = "8265228dae4b32206fda3da08dc8df8e533f2a4ba731c1b71251c0a87252fe85",
+   build = "python-build",
+};
+ 
+python-attrs = {
+   url = "https://pypi.org/packages/source/a/attrs/attrs-25.3.0.tar.gz",
+   sha3 = "9234c6b04ee4afecd4bea77b3902c6d98a7d75a88d661e4ce1b98eb751731098",
+   build = "python-build",
+};
+
+python-zope-interface = {
+   url = "https://pypi.org/packages/source/z/zope.interface/zope.interface-7.2.tar.gz",
+   sha3 = "9512652e3fcb2fc335f395da3d0324e031d6bef1af56de7282a9b3a8434cd315",
+   build = "python-build",
+   prepare = [[ sed 's/ < [0-9]\+//' -i pyproject.toml ]],
+};
+
 python-twisted = {
-   url = "https://pypi.org/packages/source/t/twisted/twisted-25.5.0.tar.gz",
-   sha3 = "d1fbb96db6cff268b330918df5a167e1c76723b41df364607fe09b93845a3854",
+   url = "https://github.com/twisted/twisted/archive/twisted-24.3.0/twisted-24.3.0.tar.gz",
+   sha3 = "dd8ce73ccb792b11acee1bbebfc8db5a2fa9ba3e32735beeab67d888eaaabc7a",
    build = "python-build",
 };
 
