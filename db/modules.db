@@ -289,6 +289,12 @@ python-service-identity = {
    build = "python-build",
 };
 
+pyasn1 = {
+   url = "https://pypi.org/packages/source/p/pyasn1/pyasn1-0.6.1.tar.gz",
+   sha3 = "125e0ab6f7e4e75351496d660883666de1e47360f00a99a6f73661f39e248e0c",
+   build = "python-build",
+};
+
 perl-xml-parser = {
    url = "https://cpan.metacpan.org/authors/id/T/TO/TODDR/XML-Parser-2.47.tar.gz",
    sha3 = "daaacd05fb62d1f8811c6f792c87bd4062ea70d57a951d3f15236c2424b24618",
