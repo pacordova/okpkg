@@ -37,6 +37,18 @@ C = {
 
 -- Build routines
 B = {
+   ["b2"] = function(...)
+      local arg = {
+         [0] = "$BOOST_ROOT/tools/build/src/engine/b2",
+	 "toolset=gcc",
+	 "install",
+	 "--prefix=$destdir/usr"
+      }
+      return(
+         setenv("BOOST_ROOT", "/var/lib/boost_1_88_0") and
+	 os.execute(table.concat({arg[0], unpack(arg)}, ' ')) and
+	 unsetenv("BOOST_ROOT"))
+   end,
    ["cargo"] = function(...)
       local arg = {
          [0] = "cargo install",

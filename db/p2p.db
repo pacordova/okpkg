@@ -38,9 +38,33 @@ transmission = {
       "-DENABLE_{GTK,QT,TESTS,WEB}=OFF",
       "-DUSE_SYSTEM_{DEFLATE,DHT,MINIUPNPC,NATPMP}=ON",
    },
---   prepare = [[
---     sed -e 's/2.8/4.0/' \
---         -i third-party/dht/CMakeLists.txt \
---         -i third-party/libnatpmp/CMakeLists.txt
---   ]]
+};
+
+fragments = {
+   url = "https://gitlab.gnome.org/World/Fragments/-/archive/2.0.2/Fragments-2.0.2.tar.gz",
+   build = "meson",
+};
+
+torrential = {
+   url = "https://github.com/davidmhewitt/torrential/archive/2.0.1/torrential-2.0.1.tar.gz",
+   sha3 = "47bf568d11aeaa96bf0010ed8034ed1c5ebd2bcafdaedb73c0ce5cb3bbf622fb",
+   build = "meson",
+};
+
+boost_1_88_0 = {
+   url = "https://archives.boost.io/release/1.88.0/source/boost_1_88_0.tar.bz2",
+   sha3 = "c7e966823aa9e5b87a29258d0d11c0b5f7eb0f508bccb4a31e521f0ec5f3941e",
+   build = _,
+   post = [[
+      cd tools/build
+      ./bootstrap.sh
+      install -d $destdir/usr/bin
+      install src/engine/b2 $destdir/usr/bin
+   ]]
+};
+
+libtorrent-rasterbar = {
+   url = "https://github.com/arvidn/libtorrent/releases/download/v2.0.11/libtorrent-rasterbar-2.0.11.tar.gz", 
+   sha3 = "60d0e0ffc926c1ad7c608bf68211f48b15b3312b6e66e09e548e808068f05764",
+   build = "b2",
 };

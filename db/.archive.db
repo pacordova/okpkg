@@ -1362,11 +1362,6 @@ font-alias = {
    }
 };
 
-fragments = {
-   url = "https://gitlab.gnome.org/World/Fragments/-/archive/2.0.2/Fragments-2.0.2.tar.gz",
-   build = "meson",
-};
-
 faad2 = {
    url = "https://github.com/knik0/faad2/archive/refs/tags/2_10_0.tar.gz",
    build = "./configure",
