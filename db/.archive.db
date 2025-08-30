@@ -2208,3 +2208,106 @@ python-poetry-core = {
    sha3 = "7db80772eeceec779e7149d17837270e6d99236ba2dcf651af6fb10073feb6f3",
    build = "python-build",
 };
+
+--------------------------------------------------------------------------------
+
+python-typing_extensions = {
+   url = "https://pypi.org/packages/source/t/typing_extensions/typing_extensions-4.15.0.tar.gz",
+   sha3 = "b10efc4697d89ece184b01cec0fab35d413dff3350d82b9e7ebf3efddf5c11e1",
+   build = "python-build",
+};
+
+python-libevdev = {
+   url = "https://gitlab.freedesktop.org/libevdev/python-libevdev/-/archive/0.11/python-libevdev-0.11.tar.bz2",
+   sha3 = "194ab04f2c251b6b25d995fb63a32923252a38839ee65061aa1d3b921f8ca943",
+   build = "python-build",
+};
+
+python-pyudev = {
+   url = "https://pypi.org/packages/source/p/pyudev/pyudev-0.24.3.tar.gz",
+   sha3 = "a0b3d27cf6cea77bbbc01495aca6dcb65bf4637c2ef85d040e296a4ab49d6cdf",
+   build = "python-build",
+};
+
+python-incremental = {
+   url = "https://pypi.org/packages/source/i/incremental/incremental-24.7.2.tar.gz",
+   sha3 = "185fb673276a44c608da41aa1d5e8c8845b5b79625c4f0f1aeea54473087e78e",
+   build = "python-build",
+};
+
+python-zope-interface = {
+   url = "https://pypi.org/packages/source/z/zope.interface/zope.interface-7.2.tar.gz",
+   sha3 = "9512652e3fcb2fc335f395da3d0324e031d6bef1af56de7282a9b3a8434cd315",
+   build = "python-build",
+   prepare = [[ sed 's/ < [0-9]\+//' -i pyproject.toml ]],
+};
+
+python-constantly = {
+   url = "https://github.com/twisted/constantly/archive/23.10.4/constantly-23.10.4.tar.gz",
+   sha3 = "ad25dab81e007e6ae13020857018c6f5021d34e9761db8acb8b97bb7eec7b40f",
+   build = "python-build",
+};
+
+python-setuptools-rust = {
+   url = "https://github.com/PyO3/setuptools-rust/archive/v1.11.1/setuptools-rust-1.11.1.tar.gz",
+   sha3 = "b50dbfb4247838c5e17de17fce0695c854c700e7a2879022db2072c1f3213d28",
+   build = "python-build",
+};
+
+python-semantic-version = {
+   url = "https://pypi.org/packages/source/s/semantic_version/semantic_version-2.10.0.tar.gz",
+   sha3 = "94ca4e2f65bed85e07e5e092b09ed197fe49dcd2fc62006a05f8e3e4a65700a5",
+   build = "python-build",
+};
+
+maturin = {
+   url = "https://github.com/PyO3/maturin/archive/v1.9.4/maturin-1.9.4.tar.gz",
+   sha3 = "d50ee122113e2b2a3ca9171df5ecb78a042b0ac99f7748e0a95d05243b258d54",
+   build = "python-build",
+};
+
+python-cryptography = {
+   url = "https://pypi.org/packages/source/c/cryptography/cryptography-45.0.6.tar.gz",
+   sha3 = "837c65aa84e06520e8afdde90b1e47a6d2fbac9c22404e4a61cb19f00dcb98d0",
+   build = "python-build",
+};
+
+python-pyopenssl = {
+   url = "https://pypi.org/packages/source/p/pyopenssl/pyopenssl-25.1.0.tar.gz",
+   sha3 = "0b19ccab87f5cdefd9aff0e0ea1d94ccd9d6fb52294bb19fed0cc4b1151c2d2b",
+   build = "python-build",
+};
+
+python-twisted = {
+   url = "https://pypi.org/packages/source/t/twisted/twisted-25.5.0.tar.gz",
+   sha3 = "d1fbb96db6cff268b330918df5a167e1c76723b41df364607fe09b93845a3854",
+   build = "python-build",
+};
+
+python-rencode = {
+   url = "https://github.com/aresch/rencode/archive/v1.0.8/rencode-1.0.8.tar.gz",
+   sha3 = "2fab5872b00e5ede87816d55d3ddbe76aebf603d61aa8338efe57b9611da92ee",
+   build = _,
+   post = [[ 
+      destdir=$destdir/usr/lib64/python3.13/site-packages/rencode
+      sed -e '/extra_compile_args=/d' -i build.py 
+      python3 build.py
+      install -d $destdir
+      install rencode/__init.py__ $destdir
+      install rencode/_rencode.cpython-313-x86_64-linux-gnu.so* $destdir
+      install rencode/rencode_orig.py $destdir
+      install rencode/_rencode.pyx $destdir
+   ]],
+};
+
+python-service-identity = {
+   url = "https://pypi.org/packages/source/s/service_identity/service_identity-24.2.0.tar.gz",
+   sha3 = "88ca74716685a83050e8a7ffaca1d5343a932c4bc97b63de4f38490643cf3bc9",
+   build = "python-build",
+};
+
+pyasn1 = {
+   url = "https://pypi.org/packages/source/p/pyasn1/pyasn1-0.6.1.tar.gz",
+   sha3 = "125e0ab6f7e4e75351496d660883666de1e47360f00a99a6f73661f39e248e0c",
+   build = "python-build",
+};
