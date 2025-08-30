@@ -1,6 +1,6 @@
 #!/usr/bin/env lua
 
-dofile("python-bootstrap")
+dofile("python-bootstrap.lua")
 
 local dbpath = "/var/lib/okpkg/db/python.db"
 
