@@ -29,7 +29,8 @@ local dirs = {
    ["gnupg.db"]   = "n",
    ["gtk.db"]     = "x",
    ["lib.db"]     = "l",
-   ["modules.db"] = "m",
+   ["python.db"]  = "py",
+   ["perl.db"     = "pl",
    ["net.db"]     = "n",
    ["video.db"]   = "v",
    ["xfce.db"]    = "xf",
@@ -68,7 +69,8 @@ os.execute("mv *.tar.lz a")
 emerge("libxml2")
 os.execute(string.format("rm -f %s/libxml2-*.tar.lz", pkgdir))
 
-build_all("modules.db")
+build_all("python.db")
+build_all("perl.db")
 emerge("rust-bin")
 build_all("devel.db")
 build_all("lib.db")

@@ -1,0 +1,63 @@
+perl = {
+   url = "https://www.cpan.org/src/5.0/perl-5.42.0.tar.xz",
+   sha3 = "7ac9e65afc18ce498f5e921708a42652a498efc877bba9a7f184217a5fcb529b",
+   build = "./configure.gnu",
+   flags= {
+      "-Dvendorprefix=/usr",
+      "-Duseshrplib",
+      "-Dusethreads",
+      '-Doptimize="$CFLAGS"',
+      "-D{privlib,archlib}=/usr/lib64/perl5/core_perl",
+      "-D{sitelib,sitearch}=/usr/lib64/perl5/site_perl",
+      "-D{vendorlib,vendorarch}=/usr/lib64/perl/vendor_perl",
+      "-Dscriptdir=/usr/bin",
+      "-Dman1dir=/usr/share/man/man1",
+      "-Dman3dir=/usr/share/man/man3",
+   },
+   post = [[
+      find $destdir -name \*.pod       -exec rm -f {} +
+      find $destdir -name .packlist    -exec rm -f {} +
+      find $destdir -name README\*     -exec rm -f {} +
+      find $destdir -name TODO\*       -exec rm -f {} +
+      find $destdir -name Change\*     -exec rm -f {} +
+      find $destdir -name \*.bs        -exec rm -f {} +
+      find $destdir -name \*.0 -type f -exec rm -f {} +
+      find $destdir/usr/lib64  -type f -exec chmod 644 {} +
+   ]]
+};
+
+perl-xml-parser = {
+   url = "https://cpan.metacpan.org/authors/id/T/TO/TODDR/XML-Parser-2.47.tar.gz",
+   sha3 = "daaacd05fb62d1f8811c6f792c87bd4062ea70d57a951d3f15236c2424b24618",
+   build = "perl",
+};
+
+perl-xml-namespacesupport = {
+   url = "https://cpan.metacpan.org/authors/id/P/PE/PERIGRIN/XML-NamespaceSupport-1.12.tar.gz",
+   sha3 = "0c2792a4acad3fac873455f1c1eb63831b7f6dc6d159dc7976288eb805429efa",
+   build = "perl",
+};
+
+perl-xml-sax = {
+   url = "https://cpan.metacpan.org/authors/id/G/GR/GRANTM/XML-SAX-1.02.tar.gz",
+   sha3 = "bc1a3a754ce20c4f7a247430a0446626cc6fa7ca8bd248fe181146b7a516707d",
+   build = "perl",
+};
+
+perl-xml-sax-base = {
+   url = "https://cpan.metacpan.org/authors/id/G/GR/GRANTM/XML-SAX-Base-1.09.tar.gz",
+   sha3 = "684a18fce123d2a032f4ea0db190d028407c1e02b060cc936eb5678d3dbc078c",
+   build = "perl",
+};
+
+perl-xml-sax-expat = {
+   url = "https://cpan.metacpan.org/authors/id/B/BJ/BJOERN/XML-SAX-Expat-0.51.tar.gz",
+   sha3 = "4b0a0a2e945361db69108d9d25713e2a419f8a6bf94d9bf024302bea658a72a6",
+   build = "perl",
+};
+
+perl-xml-simple = {
+   url = "https://www.cpan.org/authors/id/G/GR/GRANTM/XML-Simple-2.25.tar.gz",
+   sha3 = "0b0068c5e608fcdb90b7906a6e1741519a122f28871fa7080da66ab0cb5e62b4",
+   build = "perl",
+};

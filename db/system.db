@@ -450,34 +450,6 @@ tzdata = {
    post = [[ rm -f $destdir/etc/localtime ]]
 };
 
-perl = {
-   url = "https://www.cpan.org/src/5.0/perl-5.42.0.tar.xz",
-   sha3 = "7ac9e65afc18ce498f5e921708a42652a498efc877bba9a7f184217a5fcb529b",
-   build = "./configure.gnu",
-   flags= {
-      "-Dvendorprefix=/usr",
-      "-Duseshrplib",
-      "-Dusethreads",
-      '-Doptimize="$CFLAGS"',
-      "-D{privlib,archlib}=/usr/lib64/perl5/core_perl",
-      "-D{sitelib,sitearch}=/usr/lib64/perl5/site_perl",
-      "-D{vendorlib,vendorarch}=/usr/lib64/perl/vendor_perl",
-      "-Dscriptdir=/usr/bin",
-      "-Dman1dir=/usr/share/man/man1",
-      "-Dman3dir=/usr/share/man/man3",
-   },
-   post = [[
-      find $destdir -name \*.pod       -exec rm -f {} +
-      find $destdir -name .packlist    -exec rm -f {} +
-      find $destdir -name README\*     -exec rm -f {} +
-      find $destdir -name TODO\*       -exec rm -f {} +
-      find $destdir -name Change\*     -exec rm -f {} +
-      find $destdir -name \*.bs        -exec rm -f {} +
-      find $destdir -name \*.0 -type f -exec rm -f {} +
-      find $destdir/usr/lib64  -type f -exec chmod 644 {} +
-   ]]
-};
-
 libxcrypt = {
    url = "https://github.com/besser82/libxcrypt/releases/download/v4.4.38/libxcrypt-4.4.38.tar.xz",
    sha3 = "7794c56f301317cc2140ba1ae77f97bdcd03a9ab9e57024f43523af6e9da75ec",
@@ -541,28 +513,6 @@ sqlite = {
    sha3 = "330bb88febc08814d49406391891eddac59e5f812e87b83c27ab172687554375",
    build = "./configure",
    flags = { "--enable-fts5", "CPPFLAGS=-DSQLITE_ENABLE_COLUMN_METADATA=1" },
-};
-
-python3 = {
-   url = "https://www.python.org/ftp/python/3.13.7/Python-3.13.7.tar.xz",
-   sha3 = "868bc710cde737c9518569d1be1f7749e32174ead7c8e6bf0a6d28d1bf20ab14",
-   build = "./configure",
-   flags = {
-      "--enable-loadable-sqlite-extensions",
-      "--with-dbmliborder=gdbm:ndbm",
-      "--with-platlibdir=lib64",
-      "--with-system-expat",
-      "--with-tzpath=/usr/share/zoneinfo",
-      "--without-{doc-strings,ensurepip}",
-      'CFLAGS="$CFLAGS -fno-semantic-interposition"',
-      'LDFLAGS="$LDFLAGS -fno-semantic-interposition"',
-   },
-   post = [[
-      cd "$destdir/usr/bin"
-      rm -f pydoc* idle*
-      cd "$destdir/usr/lib64/python"*
-      rm -fr test ./*/test ./*/tests idlelib turtle* config-*
-   ]]
 };
 
 coreutils = {
