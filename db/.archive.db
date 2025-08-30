@@ -1646,6 +1646,16 @@ libwacom = {
    build = "meson",
 };
 
+xf86-input-wacom = {
+   url = "https://github.com/linuxwacom/xf86-input-wacom/releases/download/xf86-input-wacom-1.2.3/xf86-input-wacom-1.2.3.tar.bz2",
+   sha3 = "4f1662d449be5dece00471967323ceed2e3125431c5d52090fc5b7eabc6a4862",
+   build = "./configure",
+   flags = {
+      "--with-systemd-unit-dir=no",
+      "--with-xorg-conf-dir=/usr/share/X11/xorg.conf.d/",
+   }
+};
+
 libdmx = {
    url = "https://x.org/pub/individual/lib/libdmx-1.1.4.tar.bz2",
    build = "./configure",
