@@ -117,8 +117,8 @@ B = {
    end,
    ["python-build"] = function()
       return (
-	  os.execute("python3 -m build --wheel --no-isolation")  and
-          os.execute("python3 -m installer --destdir=$destdir dist/*whl"))
+          os.execute("python3 -m build -nx")  and
+          os.execute("python3 -m installer -d $destdir dist/*whl"))
    end,
    ["waf"] = function()
       os.execute [[
