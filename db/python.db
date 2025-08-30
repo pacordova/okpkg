@@ -1,0 +1,208 @@
+python3 = {
+   url = "https://www.python.org/ftp/python/3.13.7/Python-3.13.7.tar.xz",
+   sha3 = "868bc710cde737c9518569d1be1f7749e32174ead7c8e6bf0a6d28d1bf20ab14",
+   build = "./configure",
+   flags = {
+      "--enable-loadable-sqlite-extensions",
+      "--with-dbmliborder=gdbm:ndbm",
+      "--with-platlibdir=lib64",
+      "--with-system-expat",
+      "--with-tzpath=/usr/share/zoneinfo",
+      "--without-{doc-strings,ensurepip}",
+      'CFLAGS="$CFLAGS -fno-semantic-interposition"',
+      'LDFLAGS="$LDFLAGS -fno-semantic-interposition"',
+   },
+   post = [[
+      cd "$destdir/usr/bin"
+      rm -f pydoc* idle*
+      cd "$destdir/usr/lib64/python"*
+      rm -fr test ./*/test ./*/tests idlelib turtle* config-*
+   ]]
+};
+
+python-flit-core = {
+   url = "https://pypi.org/packages/source/f/flit_core/flit_core-3.12.0.tar.gz",
+   sha3 = "c4aa2456160ee38c785140eae00a24e762b7aaab89fac2e2e4ed28777d9c0be6",
+   build = "python-build",
+};
+
+python-installer = {
+   url = "https://pypi.org/packages/source/i/installer/installer-0.7.0.tar.gz",
+   sha3 = "03d004eb827338703d8061e1e82c76df015773bae9bbd28cf2fed732b3238597",
+   build = "python-build",
+};
+
+python-pyproject-hooks = {
+   url = "https://pypi.org/packages/source/p/pyproject_hooks/pyproject_hooks-1.2.0.tar.gz",
+   sha3 = "3f369951b1a8aef0e473fc1bb3200714f931b1f08014ede9b3e116a48c0a3b35",
+   build = "python-build",
+};
+
+python-packaging = {
+   url = "https://pypi.org/packages/source/p/packaging/packaging-25.0.tar.gz",
+   sha3 = "bb49e9dd0eadca35f4707edd4bd8a34f8ab63d3e2283d58aabce8ff6867ce015",
+   build = "python-build",
+};
+
+python-build = {
+   url = "https://github.com/pypa/build/archive/1.3.0/build-1.3.0.tar.gz",
+   sha3 = "343682db79a411e0abfad49c3cd79c2afb097782319bf033ef2cd4c6ed2aecec",
+   build = "python-build",
+};
+
+python-wheel = {
+   url = "https://pypi.org/packages/source/w/wheel/wheel-0.45.1.tar.gz",
+   sha3 = "eac44ace5f8a7a3182564a85eb78bc8d99639d1cd74d2b91c21c099ea91156ac",
+   build = "python-build",
+};
+
+python-setuptools = {
+   url = "https://pypi.org/packages/source/s/setuptools/setuptools-80.9.0.tar.gz",
+   sha3 = "06c8e2f192dfa29845fee17c322db7cef151175a4d54483d8d2f4401870ef660",
+   build = "python-build",
+};
+
+python-markupsafe = {
+   url = "https://pypi.org/packages/source/m/markupsafe/markupsafe-3.0.2.tar.gz",
+   sha3 = "a53d8d6be15690fabc321993e2040dc212901c0f39a5d8bfce2afc97acc44168",
+   build = "python-build",
+};
+
+python-jinja = {
+   url = "https://pypi.org/packages/source/J/Jinja2/jinja2-3.1.6.tar.gz",
+   sha3 = "3f1b8239e487d282f75e45fc8f0d28978f2acebdbc031045da812c7aa07c87f5",
+   build = "python-build",
+};
+
+python-docutils = {
+   url = "https://downloads.sourceforge.net/docutils/docutils-0.22.tar.gz",
+   sha3 = "473333ff7fdf3226c7cc8b0c01edf1c4a2da7d1318bd3e52e03e951520e65eeb",
+   build = "python-build",
+};
+
+python-mako = {
+   url = "https://pypi.org/packages/source/M/Mako/mako-1.3.10.tar.gz",
+   sha3 = "d505b420fe156bd275daff6d0f4d9fb4fbd6570c94cfeab6858c216c6587e448",
+   build = "python-build",
+};
+
+python-editables = {
+   url = "https://github.com/pfmoore/editables/archive/0.5/editables-0.5.tar.gz",
+   sha3 = "0a536128b2d0f5b932f59ea7e5b1fb8b523e0cb5801d3d4198fb7c135db41447",
+   build = "python-build",
+};
+
+python-setuptools-scm = {
+   url = "https://pypi.org/packages/source/s/setuptools-scm/setuptools_scm-9.2.0.tar.gz",
+   sha3 = "0637927a345c5794b0661fdc6a4aff3b5b25909fe034c1818441fdd37ceaceb2",
+   build = "python-build",
+};
+
+python-pluggy = {
+   url = "https://pypi.org/packages/source/p/pluggy/pluggy-1.6.0.tar.gz",
+   sha3 = "3fd47e50db8ec4aa8e7c266ece1c8c6fd7a0a37ab52e4f8636bdbc104e65c185",
+   build = "python-build",
+};
+
+python-pathspec = {
+   url = "https://pypi.org/packages/source/p/pathspec/pathspec-0.12.1.tar.gz",
+   sha3 = "b6c4661141920a055f743b81c144ff57279bdf10899dcee1e16610daf0e3045e",
+   build = "python-build",
+};
+
+python-calver = {
+   url = "https://pypi.org/packages/source/c/calver/calver-2025.4.17.tar.gz",
+   sha3 = "72a03735ea17397dd2741764653659c05c6fe437d0fad15ed585451b7ff9fefb",
+   build = "python-build",
+   prepare = [[ printf "Version: 2025.4.17\n" > PKG-INFO ]]
+};
+
+python-trove-classifiers = {
+   url = "https://pypi.org/packages/source/t/trove-classifiers/trove_classifiers-2025.8.26.11.tar.gz",
+   sha3 = "8d5673338f38be78433c742de843f415c4f12cb7713f756b0dbd104658d9251c",
+   build = "python-build",
+};
+
+python-hatchling = {
+   url = "https://pypi.org/packages/source/h/hatchling/hatchling-1.27.0.tar.gz",
+   sha3 = "84665f7b1aafb35c97d7f28c5ba7edfc0c86055fb45143a42962269f8124b8e1",
+   build = "python-build",
+};
+
+python-pygments = {
+   url = "https://pypi.org/packages/source/p/pygments/pygments-2.19.2.tar.gz",
+   sha3 = "906fca23e13fb6a3ca799c6f1d527d7f197a7a2ff555c34248c8222e67ee81be",
+   build = "python-build",
+};
+
+python-ply = {
+   url = "http://www.dabeaz.com/ply/ply-3.11.tar.gz",
+   sha3 = "3d49c834da5ef47d9455dae9044f27d2f16cdf0ab58b655588142298d5736484",
+   build = "python-build",
+};
+
+glad = {
+   url = "https://github.com/Dav1dde/glad/archive/refs/tags/v2.0.8/glad-2.0.8.tar.gz",
+   sha3 = "9e00f5c97a1ae042ce45154f86c46d997e878a9c6c0af527f4efd62744eb8cac",
+   build = "python-build",
+};
+
+python-pyparsing = {
+   url = "https://pypi.org/packages/source/p/pyparsing/pyparsing-3.2.3.tar.gz",
+   sha3 = "f9904826f488501e6eec7080cea1fb7a74e108cba637e018de506cbd199fa17e",
+   build = "python-build",
+};
+
+cython = {
+   url = "https://pypi.org/packages/source/c/cython/cython-3.1.3.tar.gz",
+   sha3 = "a44fda831833a14b20c8d57bedb99a40e0da18abfea7591aeaec1ab04477dec7",
+   build = "python-build",
+};
+
+python-yaml = {
+   url = "https://github.com/yaml/pyyaml/archive/6.0.2/pyyaml-6.0.2.tar.gz",
+   sha3 = "eca18a30377fbd896ce096e6085be77082365b915e9bde8343ed2090493b24c2",
+   build = "python-build",
+};
+
+python-hatch-fancy-pypi-readme = {
+   url = "https://github.com/hynek/hatch-fancy-pypi-readme/archive/25.1.0/hatch-fancy-pypi-readme-25.1.0.tar.gz",
+   sha3 = "021c9a6ce22793ec377b09dcbf0fa8ce2af83b9bb79fb48c211bfba77e26b99f",
+   build = "python-build",
+};
+
+python-hatch-vcs = {
+   url = "https://github.com/ofek/hatch-vcs/archive/v0.5.0/hatch-vcs-0.5.0.tar.gz",
+   sha3 = "8265228dae4b32206fda3da08dc8df8e533f2a4ba731c1b71251c0a87252fe85",
+   build = "python-build",
+};
+ 
+python-attrs = {
+   url = "https://pypi.org/packages/source/a/attrs/attrs-25.3.0.tar.gz",
+   sha3 = "9234c6b04ee4afecd4bea77b3902c6d98a7d75a88d661e4ce1b98eb751731098",
+   build = "python-build",
+};
+
+python-versioneer = {
+   url = "https://github.com/python-versioneer/python-versioneer/archive/0.29/python-versioneer-0.29.tar.gz",
+   sha3 = "be3d62b534d17dbb519600bdb296a6cfcb6339106cda07e533c947b1f40c9a38",
+   build = "python-build",
+};
+
+python-cffi = {
+   url = "https://pypi.org/packages/source/c/cffi/cffi-1.17.1.tar.gz",
+   sha3 = "6889212fc867eb93021fcb26c98e2718e55a38c46352ddcac9f4f812a34d0b50",
+   build = "python-build",
+};
+
+python-pycparser = {
+   url = "https://pypi.org/packages/source/p/pycparser/pycparser-2.22.tar.gz",
+   sha3 = "446ae9a9fe5aac3c43ddff7ddb6a3bad4b1cff77e02404ec192f97f82958dbc9",
+   build = "python-build",
+};
+
+python-pyxdg = {
+   url = "https://pypi.org/packages/source/p/pyxdg/pyxdg-0.28.tar.gz",
+   sha3 = "085473373bd84fdbc3d4de35ac7b4a76c538f73de58d691668bf7dc114909fea",
+   build = "python-build",
+};
