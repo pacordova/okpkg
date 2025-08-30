@@ -11,8 +11,8 @@ gegl = {
 };
 
 exiv2 = {
-   url = "https://github.com/Exiv2/exiv2/archive/v0.28.5/exiv2-0.28.5.tar.gz",
-   sha3 = "3723faae5c1bd8d3a1afd00d0b82053815f771c6623f4ed4530f67eeef3442b2",
+   url = "https://github.com/Exiv2/exiv2/archive/v0.28.6/exiv2-0.28.6.tar.gz",
+   sha3 = "b28c01ec5c14cb0fe3aa0a6d7feb70ec900bef17f125051787b74df407afaec1",
    build = "cmake",
    flags = {
       "-DEXIV2_ENABLE_VIDEO=yes",

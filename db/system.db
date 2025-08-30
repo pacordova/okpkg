@@ -53,8 +53,8 @@ _perl = {
 };
 
 iana-etc = {
-   url = "https://github.com/Mic92/iana-etc/releases/download/20250618/iana-etc-20250618.tar.gz",
-   sha3 = "8782d9200e3a4e2561bdc270f4b76bb1c0f1ee871dfda6fe9f3ea3889996470e",
+   url = "https://github.com/Mic92/iana-etc/releases/download/20250807/iana-etc-20250807.tar.gz",
+   sha3 = "079045432e84230ee86df2c42286926f67722889413c0b193cc59ce18a72d9bb",
    build = _,
    post = [[ 
       install -d $destdir/etc
@@ -372,8 +372,8 @@ psmisc = {
 };
 
 pcre2 = {
-   url = "https://github.com/PCRE2Project/pcre2/releases/download/pcre2-10.45/pcre2-10.45.tar.bz2",
-   sha3 = "84d16be3158d92aca5808a21b3168ae773f88201053e7c8ef40497ff16c75f43",
+   url = "https://github.com/PCRE2Project/pcre2/releases/download/pcre2-10.46/pcre2-10.46.tar.bz2",
+   sha3 = "a47edf4bd716f944ec287f89b24f43fc1b6fed574cbd2632b10859b80f5b7ed6",
    build = "./configure",
    flags = {
       "--enable-jit",

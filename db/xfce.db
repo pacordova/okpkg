@@ -37,8 +37,8 @@ garcon = {
 };
 
 libwnck3 = {
-   url = "https://download.gnome.org/sources/libwnck/43/libwnck-43.2.tar.xz",
-   sha3 = "8e6e8d9e48eae8f0bad811c93232c5c145b7b3843cb7c55035b6b0f9a7bbc301",
+   url = "https://download.gnome.org/sources/libwnck/43/libwnck-43.3.tar.xz",
+   sha3 = "4b4951bc09bbba2465d9e7fc638739a90386425c6f839e3d733dbef5d9096ee7",
    build = "meson",
    flags = { "-Dgtk_doc=false" }
 };
