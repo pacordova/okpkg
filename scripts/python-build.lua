@@ -18,10 +18,13 @@ for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do
 end
 
 --------------
--- Rebuilds --
+-- Renstall --
 --------------
 local pkgs = {
    "meson", "libxml2", "glib2", "gobject-introspection", "xcb-proto", 
    "pygobject", "pycairo"
 }
-for _, v in pairs(pkgs) do purge(v); emerge(v) end
+for _, v in pairs(pkgs) do 
+   purge(v)
+   os.execute(string.format("okpkg install /var/lib/okpkg/packages/*/%s-*.tar.lz", v))
+end
