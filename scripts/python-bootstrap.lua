@@ -15,6 +15,14 @@ local srcdir = "/var/lib/okpkg/sources"
 os.execute("rm -fr /usr/lib64/python3.13")
 os.remove("/usr/bin/pyproject-build")
 os.remove("/usr/bin/wheel")
+purge("python3")
+purge("python-flit-core")
+purge("python-installer")
+purge("python-pyproject-hooks")
+purge("python-packaging")
+purge("python-build")
+purge("python-wheel")
+purge("python-setuptools")
 install("/var/lib/okpkg/packages/a/python3-3.13.7-amd64.tar.lz")
 
 ---------------

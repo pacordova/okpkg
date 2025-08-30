@@ -116,13 +116,9 @@ B = {
          os.execute("make pure_install doc_install DESTDIR=$destdir"))
    end,
    ["python-build"] = function()
-      if os.execute("python3 -m build -nw") or 
-         os.execute("python3 -m flit_core.wheel")
-      then
-         return os.execute("python3 -m installer --destdir=$destdir dist/*whl")
-      else
-         return false
-      end
+      return (
+	  os.execute("python3 -m build --wheel --no-isolation")  and
+          os.execute("python3 -m installer --destdir=$destdir dist/*whl"))
    end,
    ["waf"] = function()
       os.execute [[
