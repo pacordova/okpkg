@@ -37,19 +37,6 @@ C = {
 
 -- Build routines
 B = {
-   ["b2"] = function(...)
-      local arg = {
-         [0] = "$b2",
-         "-j5",
-         "variant=release",
-         "toolset=gcc",
-	 ...,
-         "install",
-         "--prefix=$destdir/usr",
-         "--libdir=$destdir/usr/lib64",
-      }
-      return os.execute(table.concat({arg[0], unpack(arg)}, ' '))
-   end,
    ["cargo"] = function(...)
       local arg = {
          [0] = "cargo install",
@@ -368,8 +355,6 @@ setenv("CONFIG_SITE", C.config_site)
 setenv("CFLAGS", table.concat(C.cflags, ' '))
 setenv("CXXFLAGS", table.concat(C.cflags, ' '))
 setenv("MAKEFLAGS", "-j5")
-setenv("BOOST_ROOT", "/var/lib/boost_1_88_0")
-setenv("b2", "/var/lib/boost_1_88_0/tools/build/src/engine/b2")
 setenv("ninja", "samu")
 setenv("patch", "patch -b -p1")
 

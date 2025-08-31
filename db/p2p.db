@@ -66,14 +66,29 @@ boost_1_88_0 = {
 libtorrent-rasterbar = {
    url = "https://github.com/arvidn/libtorrent/releases/download/v2.0.11/libtorrent-rasterbar-2.0.11.tar.gz", 
    sha3 = "60d0e0ffc926c1ad7c608bf68211f48b15b3312b6e66e09e548e808068f05764",
-   build = "b2",
-   flags = { "fpic=on", "boost-link=static" },
-   prepare = [[ if ! test -f $b2; then cd $BOOST_ROOT/tools/build && ./bootstrap.sh; fi ]],
-   post = [[
+   build = _,
+   post = [[ 
+      BOOST_ROOT=/var/lib/boost_1_88_0
+      b2="$BOOST_ROOT/tools/build/src/engine/b2"
+      if ! test -x $b2; then cd $BOOST_ROOT/tools/build && ./bootstrap.sh; fi
+
+      BOOST_ROOT=$BOOST_ROOT \
+      $b2 -j5 \
+          variant=release \
+          toolset=gcc \
+          fpic=on \
+          install \
+          --prefix=$destdir/usr \
+          --libdir=$destdir/usr/lib64
+
       cd bindings/python
       BOOST_ROOT=$BOOST_ROOT \
-      $b2 -j5 variant=release fpic=on boost-link=static \
-          python=3.13 stage_module install_module \
+      $b2 -j5 \
+          variant=release \
+          python=3.13 \
+          fpic=on \
+          stage_module \
+          install_module \
           python-install-path=$destdir/usr/lib64/python3.13/site-packages
    ]]
 };
