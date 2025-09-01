@@ -13,7 +13,7 @@ usbutils = {
 --------------------------------------------------------------------------------
 
 _glib2 = {
-   url = "https://download.gnome.org/sources/glib/2.84/glib-2.84.4.tar.xz",
+   url = ref("glib2"),
    sha3 = "010dcf1bd1d9a6ab8f8f638b3c72697a85386d3301d3f706c22c8f3eeec042da",
    build = "meson",
    flags = { "-Dintrospection=disabled" }

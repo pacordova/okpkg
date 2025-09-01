@@ -6,7 +6,7 @@
 
 local unpack = unpack or table.unpack
 
-local ok = require"okutils"
+local ok = require("okutils")
 
 local chdir, setenv, mkdir, basename, symlink =
    ok.chdir, ok.setenv, ok.mkdir, ok.basename, ok.symlink
@@ -41,23 +41,22 @@ local function vlook(pkgname) local fp, buf, i, j
    end
 end
 
-local function get_url(pkgname) local fp, buf, i, j
-   pkgname = pkgname:gsub("gcc%-.*", "gcc%%d+")
-   pkgname = pkgname:gsub("binutils%-.*", "binutils")
-   pkgname = pkgname:gsub("%-", "%%-")
-   fp = io.open("/var/lib/okpkg/db/system.db")
+local function ref(x, k)
+   local fp, buf, i, j
+   x = string.format("\n%s = {", x)
+   fp = io.popen(string.format("cat %s/*.db", C.dbpath))
    buf = '\n' .. fp:read('*a')
    fp:close()
-   i = buf:find(string.format("\n%s = {", pkgname), 1)
-   if i then i = buf:find('"', i); j = buf:find('"', i+1)-1
-      return buf:sub(i, j)
-   end
+   i = buf:find(x, 1, true)
+   i = buf:find('"', i, true)
+   j = buf:find('"', i+1, true)
+   return buf:sub(i+1, j-1)
 end
 
 local function extract(pkgname) 
    local t, f, fp
    t = vlook(pkgname)
-   f = basename(get_url(pkgname))
+   f = basename(t.url)
 
    -- Setup the source directory for build.
    chdir("/var/lib/okpkg/sources")

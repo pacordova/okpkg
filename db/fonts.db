@@ -1,5 +1,5 @@
 _freetype2 = {
-   url = "https://downloads.sourceforge.net/freetype/freetype-2.13.3.tar.xz",
+   url = ref("freetype2"),
    sha3 = "764b5a302571b7ead0d180b3e5e7af19b0b47e6cb1315f26ee5266bd0460d2fc",
    build = "meson",
    flags = { "-Dharfbuzz=disabled" }
@@ -13,7 +13,7 @@ harfbuzz = {
       "-Dfreetype=enabled",
       "-Dgraphite2=enabled",
       "-Dcairo=disabled",
-      "-Dglib=disabled",
+      "-Dglib=enabled",
       "-Dgobject=enabled",
       "-Dintrospection=enabled",
       "-Dtests=disabled",

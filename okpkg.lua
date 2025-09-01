@@ -157,6 +157,18 @@ local function vlook(k)
    end
 end
 
+local function ref(x, k)
+   local fp, buf, i, j
+   x = string.format("\n%s = {", x)
+   fp = io.popen(string.format("cat %s/*.db", C.dbpath))
+   buf = '\n' .. fp:read('*a')
+   fp:close()
+   i = buf:find(x, 1, true)
+   i = buf:find('"', i, true)
+   j = buf:find('"', i+1, true)
+   return buf:sub(i+1, j-1)
+end
+
 function download(x) 
    local t, f, fp, srcdir
    t = vlook(x)
