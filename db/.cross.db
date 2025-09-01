@@ -1,5 +1,5 @@
 binutils-pass1 = {
-   url = ref("binutils"),
+   url = _db_lookup("binutils")["url"],
    build = "../configure", 
    flags = {
       "--prefix=/tools",
@@ -14,7 +14,7 @@ binutils-pass1 = {
 };
 
 gcc-pass1 = {
-   url = ref("gcc"),
+   url = _db_lookup("gcc")["url"],
    build = "../configure",
    flags = {
       "--prefix=/tools",
@@ -39,7 +39,7 @@ gcc-pass1 = {
 };
 
 glibc = {
-   url = ref("glibc"),
+   url = _db_lookup("glibc")["url"],
    build = "../configure",
    flags = {
       "--prefix=/usr",
@@ -63,7 +63,7 @@ glibc = {
 };
 
 gcc-libstdc++ = {
-   url = ref("gcc"),
+   url = _db_lookup("gcc")["url"],
    build = "../libstdc++-v3/configure",
    flags = {
       "--prefix=/usr",
@@ -77,7 +77,7 @@ gcc-libstdc++ = {
 };
 
 libxcrypt = {
-   url = ref("libxcrypt"),
+   url = _db_lookup("libxcrypt")["url"],
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -92,7 +92,7 @@ libxcrypt = {
 };
 
 m4 = {
-   url = ref("m4"),
+   url = _db_lookup("m4")["url"],
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -102,7 +102,7 @@ m4 = {
 };
 
 ncurses = {
-   url = ref("ncurses"),
+   url = _db_lookup("ncurses")["url"],
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -137,7 +137,7 @@ ncurses = {
 };
 
 bash = {
-   url = ref("bash"),
+   url = _db_lookup("bash")["url"],
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -154,7 +154,7 @@ bash = {
 };
 
 coreutils = {
-   url = ref("coreutils"),
+   url = _db_lookup("coreutils")["url"],
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -169,7 +169,7 @@ coreutils = {
 };
 
 diffutils = {
-   url = ref("diffutils"),
+   url = _db_lookup("diffutils")["url"],
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -179,7 +179,7 @@ diffutils = {
 };
 
 findutils = {
-   url = ref("findutils"),
+   url = _db_lookup("findutils")["url"],
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -196,7 +196,7 @@ findutils = {
 };
 
 gawk = {
-   url = ref("gawk"),
+   url = _db_lookup("gawk")["url"],
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -209,7 +209,7 @@ gawk = {
 };
 
 grep = {
-   url = ref("grep"),
+   url = _db_lookup("grep")["url"],
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -219,7 +219,7 @@ grep = {
 };
 
 zlib = {
-   url = ref("zlib"),
+   url = _db_lookup("zlib")["url"],
    build = "make",
    prepare = [[
       CC=x86_64-unknown-linux-gnu-gcc \
@@ -231,7 +231,7 @@ zlib = {
 };
 
 pigz = {
-   url = ref("pigz"),
+   url = _db_lookup("pigz")["url"],
    build = "make",
    flags = { "CC=x86_64-unknown-linux-gnu-gcc" },
    prepare = [[ 
@@ -251,7 +251,7 @@ pigz = {
 };
 
 make = {
-   url = ref("make"),
+   url = _db_lookup("make")["url"],
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -262,7 +262,7 @@ make = {
 };
 
 patch = {
-   url = ref("patch"),
+   url = _db_lookup("patch")["url"],
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -272,7 +272,7 @@ patch = {
 };
 
 sed = {
-   url = ref("sed"),
+   url = _db_lookup("sed")["url"],
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -282,7 +282,7 @@ sed = {
 };
 
 tar = {
-   url = ref("tar"),
+   url = _db_lookup("tar")["url"],
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -294,7 +294,7 @@ tar = {
 };
 
 xz = {
-   url = ref("xz"),
+   url = _db_lookup("xz")["url"],
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -306,7 +306,7 @@ xz = {
 };
 
 lua = {
-   url = ref("lua"),
+   url = _db_lookup("lua")["url"],
    build = "make",
    flags = {
       'TO_LIB="liblua.so liblua.so.5.4 liblua.so.5.4.7"',
@@ -335,7 +335,7 @@ lua = {
 };
 
 lzlib = {
-   url = ref("lzlib"),
+   url = _db_lookup("lzlib")["url"],
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -348,7 +348,7 @@ lzlib = {
 };
 
 plzip = {
-   url = ref("plzip"),
+   url = _db_lookup("plzip")["url"],
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -358,7 +358,7 @@ plzip = {
 };
 
 util-linux = {
-   url = ref("util-linux"),
+   url = _db_lookup("util-linux")["url"],
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -374,7 +374,7 @@ util-linux = {
 };
 
 libressl = {
-   url = ref("libressl"),
+   url = _db_lookup("libressl")["url"],
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -388,7 +388,7 @@ libressl = {
 };
 
 binutils-pass2 = {
-   url = ref("binutils"),
+   url = _db_lookup("binutils")["url"],
    build = "../configure",
    flags = {
       "--prefix=/usr",
@@ -411,7 +411,7 @@ binutils-pass2 = {
 };
 
 gcc-pass2 = {
-   url = ref("gcc"),
+   url = _db_lookup("gcc")["url"],
    build = "../configure",
    flags = {
       "--prefix=/usr",

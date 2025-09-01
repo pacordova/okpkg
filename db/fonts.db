@@ -1,5 +1,5 @@
 _freetype2 = {
-   url = ref("freetype2"),
+   url = _db_lookup("freetype2")["url"],
    sha3 = "764b5a302571b7ead0d180b3e5e7af19b0b47e6cb1315f26ee5266bd0460d2fc",
    build = "meson",
    flags = { "-Dharfbuzz=disabled" }

@@ -30,32 +30,33 @@ B = {
    end,
 }
 
-
-local function vlook(pkgname) local fp, buf, i, j
-   fp = io.open("/var/lib/okpkg/db/.cross.db")
-   buf = '\n' .. fp:read('*a')
-   fp:close()
-   i = buf:find(string.format("\n%s = {", pkgname), 1, true)
-   if i then i = buf:find('{', i, true); j = buf:find('};', i, true)
-      return load(string.format("return %s", buf:sub(i, j)))()
-   end
-end
-
-local function ref(x, k)
+function _db_lookup(x)
    local fp, buf, i, j
    x = string.format("\n%s = {", x)
    fp = io.popen(string.format("cat %s/*.db", C.dbpath))
    buf = '\n' .. fp:read('*a')
    fp:close()
-   i = buf:find(x, 1, true)
-   i = buf:find('"', i, true)
-   j = buf:find('"', i+1, true)
-   return buf:sub(i+1, j-1)
+   i = buf:find(x, 1, true) or 
+       error(string.format("error: %s not found"))
+   i = buf:find('{', i, true)
+   j = buf:find('};', i, true)
+   return load(string.format("return %s", buf:sub(i, j)))()
 end
 
-local function extract(pkgname) 
+function _xlook(x) 
+   local fp, buf, i, j
+   fp = io.open("/var/lib/okpkg/db/.cross.db")
+   buf = '\n' .. fp:read('*a')
+   fp:close()
+   i = buf:find(string.format("\n%s = {", x), 1, true)
+   if i then i = buf:find('{', i, true); j = buf:find('};', i, true)
+      return load(string.format("return %s", buf:sub(i, j)))()
+   end
+end
+
+function extract(pkgname) 
    local t, f, fp
-   t = vlook(pkgname)
+   t = _xlook(pkgname)
    f = basename(t.url)
 
    -- Setup the source directory for build.
@@ -82,7 +83,7 @@ local function extract(pkgname)
    return t
 end
 
-local function emerge(pkgname) 
+function emerge(pkgname) 
    local t = extract(pkgname)
    t.flags = t.flags or {}
 

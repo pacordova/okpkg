@@ -143,35 +143,22 @@ local function vstr(s)
    else return "" end; return s:sub(i+1, j-1)
 end
 
-local function vlook(k)
-   local fp, buf, i, j
-   k = string.format("\n%s = {", k)
-   fp = io.popen(string.format("cat %s/*.db", C.dbpath))
-   buf = '\n' .. fp:read('*a')
-   fp:close()
-   i = buf:find(k, 1, true)
-   if i then 
-      i = buf:find('{', i, true)
-      j = buf:find('};', i, true)
-      return load(string.format("return %s", buf:sub(i, j)))()
-   end
-end
-
-local function ref(x, k)
+function _db_lookup(x)
    local fp, buf, i, j
    x = string.format("\n%s = {", x)
    fp = io.popen(string.format("cat %s/*.db", C.dbpath))
    buf = '\n' .. fp:read('*a')
    fp:close()
-   i = buf:find(x, 1, true)
-   i = buf:find('"', i, true)
-   j = buf:find('"', i+1, true)
-   return buf:sub(i+1, j-1)
+   i = buf:find(x, 1, true) or 
+       error(string.format("error: %s not found"))
+   i = buf:find('{', i, true)
+   j = buf:find('};', i, true)
+   return load(string.format("return %s", buf:sub(i, j)))()
 end
 
 function download(x) 
    local t, f, fp, srcdir
-   t = vlook(x)
+   t = _db_lookup(x)
 
    -- Change mirrors
    t.url = t.url:
@@ -266,7 +253,7 @@ end
 
 function build(x) 
    local t, v, fp, destdir, srcdir
-   t = vlook(x)
+   t = _db_lookup(x)
    t.flags = t.flags or {}
    v = vstr(t.url)
 

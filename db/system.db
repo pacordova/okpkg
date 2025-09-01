@@ -1,11 +1,11 @@
 _file = {
-   url = ref("file"),
+   url = _db_lookup("file")["url"],
    sha3 = "4a1b431335ee9f08e2554b7ac41998bbdc4ca8588f2f79f85e1a28ea972c9d38",
    build = "./configure",
 };
 
 _python3 = {
-   url = ref("python3"),
+   url = _db_lookup("python3")["url"],
    sha3 = "868bc710cde737c9518569d1be1f7749e32174ead7c8e6bf0a6d28d1bf20ab14",
    build = "./configure",
    flags = {
@@ -27,7 +27,7 @@ bison = {
 };
 
 _perl = {
-   ref("perl"),
+   url = _db_lookup("perl")["url"],
    sha3 = "7ac9e65afc18ce498f5e921708a42652a498efc877bba9a7f184217a5fcb529b",
    build = "./configure.gnu",
    flags= {
