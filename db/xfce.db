@@ -2,14 +2,20 @@ libxfce4util = {
    url = "https://archive.xfce.org/src/xfce/libxfce4util/4.20/libxfce4util-4.20.1.tar.bz2",
    sha3 = "699c9a6681a5a8acaaf5d7d588042bbfc1c91b26c5992d1593c607925e8b2a1d",
    build = "./configure",
-   flags = { "--disable-debug" }
+   flags = { 
+      "--enable-introspection=no",
+      "--enable-vala=no" 
+   }
 };
 
 xfconf = {
    url = "https://archive.xfce.org/src/xfce/xfconf/4.20/xfconf-4.20.0.tar.bz2",
    sha3 = "1a968973d0128f1432959e9bedc378be5662685cf8bc1291cfdc81c2483a9239",
    build = "./configure",
-   flags = { "--disable-debug" }
+   flags = { 
+      "--enable-introspection=no",
+      "--enable-vala=no" 
+   }
 };
 
 libxfce4ui = {
@@ -17,8 +23,8 @@ libxfce4ui = {
    sha3 = "d251e7a2aaec98f9111db5d9d22ab16fa24baa97b91c41753411e00bf3366939",
    build = "./configure",
    flags = { 
-      "--disable-debug",
-      "--disable-introspection",
+      "--enable-introspection=no",
+      "--enable-vala=no" 
    }
 };
 
@@ -26,21 +32,26 @@ exo = {
    url = "https://archive.xfce.org/src/xfce/exo/4.20/exo-4.20.0.tar.bz2",
    sha3 = "01d57a812c4d0c13a4d3e006689f904501dae0506f487acb0ea64529a37271cd",
    build = "./configure",
-   flags = { "--disable-gtk-doc", "--disable-debug" }
 };
 
 garcon = {
    url = "https://archive.xfce.org/src/xfce/garcon/4.20/garcon-4.20.0.tar.bz2",
    sha3 = "b919f4b447f544fd5bfe9d4010d1843bc0125b42e6c7147ce396002480dd7a4c",
    build = "./configure",
-   flags = { "--disable-debug" }
+   flags = { 
+      "--enable-introspection=no" 
+   }
 };
 
 libwnck3 = {
    url = "https://download.gnome.org/sources/libwnck/43/libwnck-43.3.tar.xz",
    sha3 = "4b4951bc09bbba2465d9e7fc638739a90386425c6f839e3d733dbef5d9096ee7",
    build = "meson",
-   flags = { "-Dgtk_doc=false" }
+   flags = { 
+      "-Dintrospection=disabled",
+      "-Dstartup_notification=disabled",
+      "-Dinstall_tools=false",
+   }
 };
 
 xfce4-dev-tools = {
@@ -67,8 +78,8 @@ libxfce4windowing = {
    build = "./configure",
    flags = { 
       "--enable-x11",
-      "--disable-debug",
-      "--disable-introspection",
+      "--disable-wayland",
+      "--enable-introspection=no",
    }
 };
 
@@ -78,9 +89,7 @@ xfce4-panel = {
    build = "./configure",
    flags = {
       "--enable-gio-unix",
-      "--disable-debug",
-      "--disable-introspection",
-      "--disable-gtk-doc",
+      "--enable-introspection=no",
    }
 };
 
@@ -102,7 +111,6 @@ thunar-volman = {
    url = "https://archive.xfce.org/src/xfce/thunar-volman/4.20/thunar-volman-4.20.0.tar.bz2",
    sha3 = "4b3b430259850cafc80c42d236ce19482b28cdbfbe0cdc9f26b2d6feb6c56a44",
    build = "./configure",
-   flags = { "--disable-debug" }
 };
 
 tumbler = {
@@ -110,7 +118,6 @@ tumbler = {
    sha3 = "54f7978b13b9d8dd983e036e1637903af340648901735fa013db78edd12ba8f8",
    build = "./configure",
    flags = {
-      "--disable-debug",
       "--disable-gstreamer-thumbnailer",
    },
    post = [[ rm -fr $destdir/usr/lib/systemd ]]
