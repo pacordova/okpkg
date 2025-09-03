@@ -230,6 +230,13 @@ libkeccak = {
    post = [[ rm -f $destdir/usr/lib64/libkeccak.a ]]
 };
 
+scdoc = {
+   url = "https://git.sr.ht/~sircmpwn/scdoc/archive/1.11.3.tar.gz",
+   sha3 = "36975ba48b7b0630f052475ca3907e8b907dc4ea4454a31550e732a9113e0c05",
+   build = "make",
+   flags = { "PREFIX=/usr" },
+};
+
 sha3sum = {
    url = "https://github.com/maandree/sha3sum/archive/1.2.2/sha3sum-1.2.2.tar.gz",
    sha3 = "e649109fa11f2e92123cec7e3683cdf5f906de9dc7905e220e12cfc4e8608c68",
