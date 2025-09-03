@@ -98,8 +98,8 @@ libxaw = {
 };
 
 libxfixes = {
-   url = "https://x.org/pub/individual/lib/libXfixes-6.0.1.tar.xz",
-   sha3 = "0071c842571baf2d5bde86180ab21b29b30289da505cb5754ee2c9f362298273",
+   url = "https://x.org/pub/individual/lib/libXfixes-6.0.2.tar.xz",
+   sha3 = "48c9aaa9234ae312aa1434075d92efc7a4f03b194d17dfd31e7ef3958fa9ddf8",
    build = "./configure",
 };
 
@@ -255,8 +255,8 @@ xcb-util-wm = {
 };
 
 xcb-util-cursor = {
-   url = "https://xorg.freedesktop.org/archive/individual/lib/xcb-util-cursor-0.1.5.tar.xz",
-   sha3 = "3a0491110bc03ec9b94f1279ff8186c32a352adcccdb14e8b74cf7becd9bbf36",
+   url = "https://xorg.freedesktop.org/archive/individual/lib/xcb-util-cursor-0.1.6.tar.xz",
+   sha3 = "5d27714654bd3d67d58a8b72e7a890611ed50d5a66d83b13935abe7615cae373",
    build = "./configure",
 };
 
