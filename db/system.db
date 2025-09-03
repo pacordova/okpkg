@@ -642,13 +642,26 @@ lua = {
 };
 
 openvi = {
-   url = "https://github.com/johnsonjh/openvi/archive/7.6.30/openvi-7.6.30.tar.gz",
-   sha3 = "020a44c7fd8117c96065b87f805c5b9529713e7ef634d353d986b0edecc462ae",
+   url = "https://github.com/johnsonjh/openvi/archive/7.6.31/openvi-7.6.31.tar.gz",
+   sha3 = "93113e9c7c34d5adc91dc6414668d381c721ab80e1f0beff58c01b710a7084f5",
    build = "make",
-   flags = { "CC=gcc", "OPTLEVEL=-O2", "PREFIX=/usr", "BINPREFIX=''" },
+   flags = { 
+      "BINPREFIX=''",
+      "IUSGR=root:root",
+      "CC=gcc",
+      "OPTLEVEL=-O2",
+      "PREFIX=/usr",
+   },
    prepare = [[ 
       sed -i 's:escapetime=2:escapetime=1:' common/options.c 
       sed -i 's:libexec:lib64:' GNUmakefile
+      sed -e 's:termio.h:termios.h:' \
+          -i 'cl/cl_screen.c' \
+          -i 'cl/cl_main.c' \
+          -i 'cl/cl_funcs.c' \
+          -i 'cl/cl_read.c' \
+          -i 'cl/cl_term.c' \
+          -i 'ex/ex_script.c'
    ]],
 };
 
