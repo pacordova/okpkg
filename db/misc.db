@@ -345,6 +345,13 @@ scrot = {
    build = "./configure",
 };
 
+sqlite = {
+   url = "https://www.sqlite.org/2025/sqlite-autoconf-3500400.tar.gz",
+   sha3 = "330bb88febc08814d49406391891eddac59e5f812e87b83c27ab172687554375",
+   build = "./configure",
+   flags = { "--enable-fts5", "CPPFLAGS=-DSQLITE_ENABLE_COLUMN_METADATA=1" },
+};
+
 sxiv = {
    url = "https://github.com/xyb3rt/sxiv/archive/v26/sxiv-26.tar.gz",
    sha3 = "9d658d77fd4f9da3bb02247016ba4d4f1c3afcedc18ac790fb67bf91e66aaff7",

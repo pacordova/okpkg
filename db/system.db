@@ -508,13 +508,6 @@ libffi = {
    flags = { "--with-gcc-arch=x86-64-v2", "--disable-exec-static-tramp" }
 };
 
-sqlite = {
-   url = "https://www.sqlite.org/2025/sqlite-autoconf-3500400.tar.gz",
-   sha3 = "330bb88febc08814d49406391891eddac59e5f812e87b83c27ab172687554375",
-   build = "./configure",
-   flags = { "--enable-fts5", "CPPFLAGS=-DSQLITE_ENABLE_COLUMN_METADATA=1" },
-};
-
 coreutils = {
    url = "https://ftp.gnu.org/gnu/coreutils/coreutils-9.7.tar.xz",
    sha3 = "c338d429e9cdbf31d034e8a70a9292c9abd97a88ab9e88bdf800edee6cc33071",
