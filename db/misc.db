@@ -10,6 +10,13 @@ conky = {
    build = "cmake",
 };
 
+dcron = {
+   url = "http://www.jimpryor.net/linux/releases/dcron-4.5.tar.gz",
+   sha3 = "4190e7664e055d0540c03e38b5ad3e7597ca9b27953b27b53731e66884da2c84",
+   build = "make",
+   flags = { "PREFIX=/usr", "SBINDIR=/usr/bin" }
+};
+
 dmidecode = {
    url = "https://download.savannah.gnu.org/releases/dmidecode/dmidecode-3.6.tar.xz",
    sha3 = "751c576320d228d5a98f99c1e01b3b1e9c6b72986daba85f779572ca919c53c7",
