@@ -133,6 +133,13 @@ xz = {
    build = "./configure",
 };
 
+lz4 = {
+   url = "https://github.com/lz4/lz4/releases/download/v1.10.0/lz4-1.10.0.tar.gz",
+   sha3 = "334597ee49a286bb22065133a000792cb7191203eaed826b8f4681f48cad2512",
+   build = "make",
+   flags = { "prefix=/usr", "libdir=/usr/lib64" }
+};
+
 zstd = {
    url = "https://github.com/facebook/zstd/releases/download/v1.5.7/zstd-1.5.7.tar.gz",
    sha3 = "8eaf8a9c9ed5c5ef7a3f1bc68f6e1ab254d8b5947ea9d55455f0a403fa006e6c",
