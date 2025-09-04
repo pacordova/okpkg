@@ -153,5 +153,5 @@ os.execute [[
    cp -p /var/lib/okpkg/download/* $destdir/var/lib/okpkg/download
    curl -L https://curl.se/ca/cacert.pem > \
        $destdir/etc/ssl/certs/ca-certificates.crt
-   rm -fr $destdir/{lost+found,tools,lib} $destdir/usr/{lib,libexec,var}
+   rm -fr lost+found
 ]]
