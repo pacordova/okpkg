@@ -87,7 +87,7 @@ B = {
          "-Dprefix=/usr",
          "-Dlibdir=lib64",
          "-Dsbindir=bin",
-         "-Dlibexecdir=lib64",
+         "-Dlibexecdir=libexec",
          "-Dbuildtype=release",
          "-Dwrap_mode=nodownload",
          ...

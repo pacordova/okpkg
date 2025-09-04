@@ -594,7 +594,7 @@ tar = {
    url = "https://ftp.gnu.org/gnu/tar/tar-1.35.tar.xz",
    sha3 = "d8f59be9b3c00294ad98ba08b47a18515f178b33129f2ddce3281b56d56448bd",
    build = "./configure",
-   flags = { "--libexecdir=/usr/bin", "FORCE_UNSAFE_CONFIGURE=1" }
+   flags = { "--libexecdir=/usr/libexec", "FORCE_UNSAFE_CONFIGURE=1" }
 };
 
 cpio = {
@@ -643,7 +643,7 @@ openvi = {
    },
    prepare = [[ 
       sed -i 's:escapetime=2:escapetime=1:' common/options.c 
-      sed -i 's:libexec:lib64:' GNUmakefile
+      #sed -i 's:libexec:lib64:' GNUmakefile
       sed -e 's:termio.h:termios.h:' \
           -i 'cl/cl_screen.c' \
           -i 'cl/cl_main.c' \
