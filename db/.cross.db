@@ -14,27 +14,29 @@ binutils-pass1 = {
 };
 
 gcc-pass1 = {
-   url = _db_lookup("gcc")["url"],
+   url = _db_lookup("gcc15")["url"],
    build = "../configure",
    flags = {
       "--prefix=/tools",
-      "--disable-{bootstrap,fixincludes,multilib,nls,shared,threads}",
-      "--disable-lib{atomic,gomp,quadmath,ssp,stdcxx,vtv}",
-      "--enable-clocale=gnu",
-      "--enable-default-{pie,ssp}",
-      "--enable-initfini-array",
-      "--enable-languages=c,c++",
-      "--enable-link-serialization=1",
-      "--with-glibc-version=2.40",
-      "--with-newlib",
-      "--with-sysroot=$destdir",
-      "--without-headers",
       "--target=x86_64-unknown-linux-gnu",
+      "--with-glibc-version=2.42",
+      "--with-sysroot=$destdir",
+      "--with-newlib",
+      "--without-headers",
+      "--enable-languages=c,c++",
+      "--{enable-clocale,with-linker-hash-style}=gnu",
+      "--enable-default-{pie,ssp}",
+      "--enable-link-serialization=1",
+      "--enable-initfini-array",
+      "--enable-__cxa_atexit",
+      "--enable-{bootstrap=no,multilib=no,nls=no,threads=no}
+      "--disable-lib{atomic,gomp,quadmath,sanitizer,ssp,stdcxx,vtv}",
+      "--disable-fixincludes",
+      "--disable-shared",
    },
    post = [[
       cc=x86_64-unknown-linux-gnu-gcc
       cat ../gcc/{limitx,glimits,limity}.h > \
-          `dirname $($cc -print-libgcc-file-name)`/include/limits.h
    ]]
 };
 
@@ -44,9 +46,9 @@ glibc = {
    flags = {
       "--prefix=/usr",
       "--libdir=/usr/lib64",
-      "--libexecdir=/usr/lib64",
+      "--libexecdir=/usr/libexec",
       "--sbindir=/usr/bin",
-      "--enable-kernel=6.6",
+      "--enable-kernel=6.12",
       "--disable-nscd",
       "--with-headers=$destdir/usr/include",
       "--host=x86_64-unknown-linux-gnu",
@@ -63,16 +65,21 @@ glibc = {
 };
 
 gcc-libstdc++ = {
-   url = _db_lookup("gcc")["url"],
+   url = _db_lookup("gcc15")["url"],
    build = "../libstdc++-v3/configure",
    flags = {
       "--prefix=/usr",
       "--libdir=/usr/lib64",
-      "--disable-{multilib,nls,libstdcxx-pch}",
-      "--enable-clocale=gnu",
-      "--with-gxx-include-dir=/tools/x86_64-unknown-linux-gnu/include/c++/14.2.0",
       "--host=x86_64-unknown-linux-gnu",
       "--build=$(../config.guess)",
+      "--{enable-clocale,with-linker-hash-style}=gnu",
+      "--enable-link-serialization=1",
+      "--enable-initfini-array",
+      "--enable-__cxa_atexit",
+      "--disable-multilib",
+      "--disable-nls",
+      "--disable-libstdcxx-pch",
+      "--with-gxx-include-dir=/tools/x86_64-unknown-linux-gnu/include/c++/15.2.0",
    }
 };
 
@@ -158,7 +165,7 @@ coreutils = {
    build = "./configure",
    flags = {
       "--prefix=/usr",
-      "--libexecdir=/usr/lib64",
+      "--libexecdir=/usr/libexec",
       "--enable-install-program=hostname",
       "--enable-no-install-program=kill,uptime",
       "--without-openssl",
@@ -183,7 +190,7 @@ findutils = {
    build = "./configure",
    flags = {
       "--prefix=/usr",
-      "--libexecdir=/usr/lib64",
+      "--libexecdir=/usr/libexec",
       "--host=x86_64-unknown-linux-gnu",
       "--build=$(build-aux/config.guess)",
    },
@@ -201,7 +208,7 @@ gawk = {
    flags = {
       "--prefix=/usr",
       "--libdir=/usr/lib64",
-      "--libexecdir=/usr/lib64",
+      "--libexecdir=/usr/libexec",
       "--sysconfdir=/etc",
       "--host=x86_64-unknown-linux-gnu",
       "--build=$(build-aux/config.guess)",
@@ -286,7 +293,7 @@ tar = {
    build = "./configure",
    flags = {
       "--prefix=/usr",
-      "--libexecdir=/usr/bin",
+      "--libexecdir=/usr/libexec",
       "--host=x86_64-unknown-linux-gnu",
       "--build=$(build-aux/config.guess)",
       "FORCE_UNSAFE_CONFIGURE=1",
@@ -411,24 +418,25 @@ binutils-pass2 = {
 };
 
 gcc-pass2 = {
-   url = _db_lookup("gcc")["url"],
+   url = _db_lookup("gcc15")["url"],
    build = "../configure",
    flags = {
       "--prefix=/usr",
-      "--libdir=/usr/lib64",
-      "--libexecdir=/usr/lib64",
-      "--disable-{bootstrap,fixincludes,multilib,nls}",
-      "--disable-lib{atomic,gomp,quadmath,sanitizer,ssp,stdcxx-pch,vtv}",
-      "--enable-clocale=gnu",
-      "--enable-default-{pie,ssp}",
-      "--enable-initfini-array",
-      "--enable-languages=c,c++",
-      "--enable-link-serialization=1",
-      "--enable-threads=posix",
-      "--with-build-sysroot=$destdir",
       "--host=x86_64-unknown-linux-gnu",
       "--build=$(../config.guess)",
       "--target=x86_64-unknown-linux-gnu",
+      "--libdir=/usr/lib64",
+      "--libexecdir=/usr/libexec",
+      "--with-build-sysroot=$destdir",
+      "--enable-languages=c,c++",
+      "--{enable-clocale,with-linker-hash-style}=gnu",
+      "--enable-default-{pie,ssp}",
+      "--enable-initfini-array",
+      "--enable-__cxa_atexit",
+      "--enable-link-serialization=1",
+      "--enable-{bootstrap=no,multilib=no,nls=no,threads=posix}
+      "--disable-lib{atomic,gomp,quadmath,sanitizer,ssp,stdcxx-pch,vtv}",
+      "--disable-fixincludes",
       "LDFLAGS_FOR_TARGET=-L$PWD/x86_64-unknown-linux-gnu/libgcc",
    },
    prepare = [[

@@ -27,6 +27,42 @@ dmidecode = {
    }
 };
 
+gcc14 = {
+   url = "https://ftp.gnu.org/gnu/gcc/gcc-14.2.0/gcc-14.2.0.tar.xz",
+   sha3 = "8551afebbdcae7e36ddd85448fb0ada8bffe07a12b4cd6b649bb9f7440e2942f",
+   build = "../configure",
+   flags = {
+      "--disable-{fixincludes,multilib}",
+      "--disable-lib{ssp,stdcxx-pch}",
+      "--enable-bootstrap",
+      "--enable-checking=release",
+      "--enable-clocale=gnu",
+      "--enable-__cxa_atexit",
+      "--enable-default-{pie,ssp}",
+      "--enable-gnu-unique-object",
+      "--enable-initfini-array",
+      "--enable-languages=c,c++,fortran",
+      "--enable-link-serialization=1",
+      "--enable-lto",
+      "--enable-threads=posix",
+      "--with-linker-hash-style=gnu",
+      "--with-system-zlib",
+      "LD=ld",
+   },
+   post = [[
+      cc=$destdir/usr/bin/gcc
+      find $destdir -name libgtkpeer.a  -exec rm -f '{}' +
+      find $destdir -name libgjsmalsa.a -exec rm -f '{}' +
+      install -d $destdir/usr/lib64/bfd-plugins
+      ln -sf ../gcc/`$cc -dumpmachine`/`$cc -dumpversion`/liblto_plugin.so \
+          $destdir/usr/lib64/bfd-plugins/liblto_plugin.so
+      install -d $destdir/usr/share/gdb/auto-load/usr/lib64
+      mv $destdir/usr/lib64/*gdb.py $destdir/usr/share/gdb/auto-load/usr/lib64
+      ln -sf gcc $destdir/usr/bin/cc
+      ln -sf gcc $destdir/usr/bin/c99
+   ]]
+};
+
 ghostscript = {
    url = "https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs10051/ghostscript-10.05.1.tar.xz",
    sha3 = "677ddd0a829a9edea0d091cadd241ee2f862b8e69a82d31379f4f6f24f306ebb",

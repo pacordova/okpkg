@@ -245,25 +245,21 @@ acl = {
    build = "./configure",
 };
 
-gcc14 = {
-   url = "https://ftp.gnu.org/gnu/gcc/gcc-14.2.0/gcc-14.2.0.tar.xz",
-   sha3 = "8551afebbdcae7e36ddd85448fb0ada8bffe07a12b4cd6b649bb9f7440e2942f",
+gcc15 = {
+   url = "https://ftp.gnu.org/gnu/gcc/gcc-15.2.0/gcc-15.2.0.tar.xz",
+   sha3 = "222cf84645a1ef23af10aac34106a9bb574c49f6c51c96c46c292b0d62043ec6",
    build = "../configure",
    flags = {
-      "--disable-{fixincludes,multilib}",
-      "--disable-lib{ssp,stdcxx-pch}",
-      "--enable-bootstrap",
-      "--enable-checking=release",
-      "--enable-clocale=gnu",
-      "--enable-__cxa_atexit",
-      "--enable-default-{pie,ssp}",
-      "--enable-gnu-unique-object",
-      "--enable-initfini-array",
       "--enable-languages=c,c++,fortran",
+      "--{enable-clocale,with-linker-hash-style}=gnu",
+      "--enable-default-{pie,ssp}",
+      "--enable-initfini-array",
+      "--enable-__cxa_atexit",
       "--enable-link-serialization=1",
-      "--enable-lto",
-      "--enable-threads=posix",
-      "--with-linker-hash-style=gnu",
+      "--enable-checking=release",
+      "--enable-{bootstrap=yes,lto=yes,multilib=no,nls=no,threads=posix}
+      "--disable-lib{ssp,stdcxx-pch}",
+      "--disable-fixincludes",
       "--with-system-zlib",
       "LD=ld",
    },
