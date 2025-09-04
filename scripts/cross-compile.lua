@@ -33,7 +33,7 @@ B = {
 function _db_lookup(x)
    local fp, buf, i, j
    x = string.format("\n%s = {", x)
-   fp = io.popen(string.format("cat %s/*.db", C.dbpath))
+   fp = io.popen(string.format("cat %s/*.db", "/var/lib/okpkg/db"))
    buf = '\n' .. fp:read('*a')
    fp:close()
    i = buf:find(x, 1, true) or 
@@ -56,7 +56,7 @@ end
 
 function extract(pkgname) 
    local t, f, fp
-   t = _xlook(pkgname)
+   t = _xlook(pkgname) or _db_lookup(pkgname)
    f = basename(t.url)
 
    -- Setup the source directory for build.
@@ -73,11 +73,10 @@ function extract(pkgname)
       "tar -C %s --strip-components=1 -xf ../download/%s", pkgname, f))
 
    if pkgname:sub(1,3) == "gcc" then
-      extract"gmp"; extract"mpfr"; extract"libmpc"; extract"isl"
-      os.rename("gmp", string.format("%s/gmp", pkgname))
-      os.rename("mpfr", string.format("%s/mpfr", pkgname))
-      os.rename("libmpc", string.format("%s/mpc", pkgname))
-      os.rename("isl", string.format("%s/isl", pkgname))
+      extract("gmp"); os.rename("gmp", string.format("%s/gmp", pkgname))
+      extract("mpfr"); os.rename("mpfr", string.format("%s/mpfr", pkgname))
+      extract("libmpc"); os.rename("libmpc", string.format("%s/mpc", pkgname))
+      extract("isl"); os.rename("isl", string.format("%s/isl", pkgname))
    end
 
    return t
