@@ -318,7 +318,7 @@ lua = {
    url = _db_lookup("lua")["url"],
    build = "make",
    flags = {
-      'TO_LIB="liblua.so liblua.so.5.4 liblua.so.5.4.7"',
+      'TO_LIB="liblua.so liblua.so.5.4 liblua.so.5.4.8"',
       "INSTALL_DATA='cp -d'",
       'MYCFLAGS="$CFLAGS -fPIC"',
       "INSTALL_TOP=$destdir/usr",
@@ -336,7 +336,7 @@ lua = {
       cd $destdir/usr/lib64/pkgconfig
       printf "Name: Lua\n" >> lua.pc
       printf "Description: An Extensible Extension Language\n" >> lua.pc
-      printf "Version: 5.4.7\n" >> lua.pc
+      printf "Version: 5.4.8\n" >> lua.pc
       printf "Requires:\n" >> lua.pc
       printf "Libs: -L/usr/lib64 -llua -lm\n" >> lua.pc
       printf "Cflags: -I/usr/include\n" >> lua.pc
