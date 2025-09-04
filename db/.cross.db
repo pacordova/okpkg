@@ -410,7 +410,7 @@ binutils-pass2 = {
       "--host=x86_64-unknown-linux-gnu",
       "--build=$(../config.guess)",
    },
-   prepare = [[ sed '6009s/$add_dir//' -i ltmain.sh ]],
+   prepare = [[ sed '6031s/$add_dir//' -i ltmain.sh ]],
    post = [[ 
       rm -f  $destdir/usr/lib64/lib{bfd,ctf,ctf-nobfd,gprofng,opcodes,sframe}.a
       rm -fr $destdir/usr/lib/ldscripts
