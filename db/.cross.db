@@ -37,6 +37,7 @@ gcc-pass1 = {
    post = [[
       cc=x86_64-unknown-linux-gnu-gcc
       cat ../gcc/{limitx,glimits,limity}.h > \
+      `dirname $($cc -print-libgcc-file-name)`/include/limits.h
    ]]
 };
 
