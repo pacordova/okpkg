@@ -183,6 +183,7 @@ diffutils = {
       "--prefix=/usr",
       "--host=x86_64-unknown-linux-gnu",
       "--build=$(build-aux/config.guess)",
+      "gl_cv_func_strcasecmp_works=y"
    }
 };
 
