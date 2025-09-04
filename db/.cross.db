@@ -29,7 +29,7 @@ gcc-pass1 = {
       "--enable-link-serialization=1",
       "--enable-initfini-array",
       "--enable-__cxa_atexit",
-      "--enable-{bootstrap=no,multilib=no,nls=no,threads=no}
+      "--enable-{bootstrap=no,multilib=no,nls=no,threads=no}",
       "--disable-lib{atomic,gomp,quadmath,sanitizer,ssp,stdcxx,vtv}",
       "--disable-fixincludes",
       "--disable-shared",
@@ -434,7 +434,7 @@ gcc-pass2 = {
       "--enable-initfini-array",
       "--enable-__cxa_atexit",
       "--enable-link-serialization=1",
-      "--enable-{bootstrap=no,multilib=no,nls=no,threads=posix}
+      "--enable-{bootstrap=no,multilib=no,nls=no,threads=posix}",
       "--disable-lib{atomic,gomp,quadmath,sanitizer,ssp,stdcxx-pch,vtv}",
       "--disable-fixincludes",
       "LDFLAGS_FOR_TARGET=-L$PWD/x86_64-unknown-linux-gnu/libgcc",

@@ -257,7 +257,7 @@ gcc15 = {
       "--enable-__cxa_atexit",
       "--enable-link-serialization=1",
       "--enable-checking=release",
-      "--enable-{bootstrap=yes,lto=yes,multilib=no,nls=no,threads=posix}
+      "--enable-{bootstrap=yes,lto=yes,multilib=no,nls=no,threads=posix}",
       "--disable-lib{ssp,stdcxx-pch}",
       "--disable-fixincludes",
       "--with-system-zlib",
