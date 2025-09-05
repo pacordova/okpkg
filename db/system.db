@@ -319,6 +319,8 @@ ncurses = {
       "--enable-pc-files",
       "--enable-widec",
       "--disable-setuid-environ",
+      "--disable-root-environ",
+      "--disable-root-access",
       "--with-cxx-{binding=yes,shared=yes}",
       "--with-manpage-format=normal",
       "--with-pkg-config-libdir=/usr/lib64/pkgconfig",
