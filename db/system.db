@@ -312,8 +312,8 @@ shadow = {
 };
 
 ncurses = {
-   url = "https://invisible-island.net/archives/ncurses/ncurses-6.5.tar.gz",
-   sha3 = "ecf25cbdc136cb236a3bfa42b3aa10bf73e780572b4b7ed0647c58a6de1c9e38",
+   url = "https://invisible-island.net/archives/ncurses/current/ncurses-6.5-20250816.tgz",
+   sha3 = "f4002ebd78f53861b28ede035d4139edcf3bccb980d6e320133ecea43eb3b923",
    build = "./configure",
    flags = {
       "--enable-pc-files",
