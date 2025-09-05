@@ -1,6 +1,6 @@
 #!/usr/bin/env lua
 
-local ok = require("okpkg")
+local ok = require("okutils")
 
 local chdir, mkdir, symlink = ok.chdir, ok.mkdir, ok.symlink
 
