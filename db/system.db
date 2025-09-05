@@ -211,7 +211,8 @@ gmp = {
    url = "https://ftp.gnu.org/gnu/gmp/gmp-6.3.0.tar.xz",
    sha3 = "025f4fc3c5f68a0faae40cb8579dc7979eded558edfbc58ac030a072a6b5a6e7",
    build = "./configure",
-   flags = { "--enable-cxx" }
+   flags = { "--enable-cxx" },
+   prepare = [[ sed -i '/long long t1;/,+1s/()/(...)/' configure ]],
 };
 
 mpfr = {
