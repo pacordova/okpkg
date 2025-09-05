@@ -210,8 +210,8 @@ libinih = {
 };
 
 libjpeg-turbo = {
-   url = "https://github.com/libjpeg-turbo/libjpeg-turbo/releases/download/3.1.1/libjpeg-turbo-3.1.1.tar.gz",
-   sha3 = "6c96dc5de64004cc944af69907ab20cf053768adba8733634c808599f9718b1a",
+   url = "https://github.com/libjpeg-turbo/libjpeg-turbo/releases/download/3.1.2/libjpeg-turbo-3.1.2.tar.gz",
+   sha3 = "f3c05322ba51716c5f992e584bd43ef59fa978ef9b551d8c5cbb706846553b41",
    build = "cmake",
    flags = { "-DENABLE_STATIC=OFF", "-DWITH_{JPEG8=ON,JAVA=OFF}" }
 };

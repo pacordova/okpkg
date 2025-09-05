@@ -296,8 +296,8 @@ libtorrent-rasterbar = {
 };
 
 linux-lts = {
-   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.12.44.tar.xz",
-   sha3 = "8b72e2d89cf22304a65fcf2ab441617a7b9920c01425f9b3badefa372cb9dc72",
+   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.12.45.tar.xz",
+   sha3 = "c75c14f2718b11b2a5f9bb4ebf7ba679eab37f180252df4fa0fbde13bf6b98de",
    build = "make",
    flags = { "bzImage", "modules", "headers" },
    prepare = [[
@@ -309,7 +309,7 @@ linux-lts = {
       install -m 644 arch/x86/boot/bzImage $destdir/boot/vmlinuz
       make modules_install \
           INSTALL_MOD_PATH=$destdir \
-          MODLIB=$destdir/usr/lib64/modules/6.12.44
+          MODLIB=$destdir/usr/lib64/modules/6.12.45
       cp -rp usr/include $destdir/usr
       find $destdir/usr/include -type f ! -name '*.h' -delete
    ]]
