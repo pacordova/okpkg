@@ -26,8 +26,8 @@ gobject-introspection = {
 };
 
 glib2 = {
-   url = "https://download.gnome.org/sources/glib/2.84/glib-2.84.4.tar.xz",
-   sha3 = "010dcf1bd1d9a6ab8f8f638b3c72697a85386d3301d3f706c22c8f3eeec042da",
+   url = "https://download.gnome.org/sources/glib/2.86/glib-2.86.0.tar.xz",
+   sha3 = "73f2f698eba6a687052e54b5fb2ee6d531ba8b449a769eac255a31703a0b56c7",
    build = "meson",
    flags = { "-Dintrospection=enabled" }
 };
