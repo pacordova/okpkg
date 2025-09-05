@@ -199,6 +199,7 @@ input:x:24:
 mail:x:34:
 kvm:x:61:
 uuidd:x:80:
+ntp:x:87:
 wheel:x:97:
 nogroup:x:99:
 users:x:999:
@@ -208,16 +209,14 @@ file:close()
 
 --------------------------------------------------------------------------------
 file = io.open("etc/profile", 'w')
-file:write([[
-if test `id -u` = 0; then export PS1='# '; else export PS1='$ '; fi
-export LANG=en_US.utf8
-]])
+file:write("export LANG=en_US.utf8")
 file:close()
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
 file = io.open("etc/inputrc", 'w')
 file:write([[
+set horizontal-scroll-mode Off
 set meta-flag On
 set input-meta On
 set convert-meta Off
@@ -234,8 +233,6 @@ set enable-keypad on
 "\e[2~": quoted-insert
 "\eOH": beginning-of-line
 "\eOF": end-of-line
-"\e[H": beginning-of-line
-"\e[F": end-of-line
 ]])
 file:close()
 --------------------------------------------------------------------------------
@@ -279,6 +276,7 @@ file:close()
 os.execute([[
    mknod -m 600 dev/console c 5 1
    mknod -m 666 dev/null c 1 3
+   chattr +i etc/resolv.conf
    curl -LO "https://curl.se/ca/cacert.pem"
    mv cacert.pem etc/ssl/certs/ca-certificates.crt
    cp -rp /etc/dinit.d etc/dinit.d
