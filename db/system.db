@@ -144,7 +144,7 @@ zstd = {
    url = "https://github.com/facebook/zstd/releases/download/v1.5.7/zstd-1.5.7.tar.gz",
    sha3 = "8eaf8a9c9ed5c5ef7a3f1bc68f6e1ab254d8b5947ea9d55455f0a403fa006e6c",
    build = "make",
-   flags = { "prefix=/usr", "LIBDIR=/usr/lib64", "HAVE_{LZ4,LZMA,ZLIB}=0" },
+   flags = { "prefix=/usr", "LIBDIR=/usr/lib64" },
    post = [[ rm -f $destdir/usr/lib64/libzstd.a ]]
 };
 
