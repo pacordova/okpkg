@@ -129,13 +129,8 @@ then
    error("error: reformat")
 end
 
--- Install filesystem and kernel-headers.
--- Cross compile needs lib symlinks.
-chdir(os.getenv("destdir"))
-os.execute("tar -xhf /var/lib/okpkg/packages/a/filesystem-*.tar.lz")
-os.execute("tar -xhf /var/lib/okpkg/packages/a/linux-*.tar.lz")
-symlink("lib64", "usr/lib")
-symlink("usr/lib", "lib")
+-- Base filesystem
+dofile("/var/lib/okpkg/scripts/filesystem.lua")
 
 -- Build all packages in /var/lib/okpkg/db/.cross.db.
 local fp, buf
@@ -143,15 +138,3 @@ fp = io.open("/var/lib/okpkg/db/.cross.db")
 buf = '\n' .. fp:read('*a')
 fp:close()
 for i in buf:gmatch("\n([%w%-%+]-) = {.-;") do emerge(i) end
-
-chdir("/var/lib/okpkg/packages/a")
-os.execute [[
-   git clone /var/lib/okpkg $destdir/var/lib/okpkg
-   git -C $destdir/var/lib/okpkg repack -adf --depth=1
-   mkdir -p $destdir/var/lib/okpkg/{packages,download}
-   cp -p linux-*.tar.lz filesystem*.tar.lz $destdir/var/lib/okpkg/packages
-   cp -p /var/lib/okpkg/download/* $destdir/var/lib/okpkg/download
-   curl -L https://curl.se/ca/cacert.pem > \
-       $destdir/etc/ssl/certs/ca-certificates.crt
-   rm -fr lost+found
-]]
