@@ -419,6 +419,10 @@ time = {
    url = "https://ftp.gnu.org/gnu/time/time-1.9.tar.gz",
    sha3 = "21b27eeec844d70f0b91316d2ac96b6774959275c1df4250a2484c211993d7bc",
    build = "./configure",
+   prepare = [[ 
+      sed -e 's/sighandler interrupt_signal/__sighandler_t interrupt_signal/' \
+          -i src/time.c
+   ]]
 };
 
 gdbm = {
