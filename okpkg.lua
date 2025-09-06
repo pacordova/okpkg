@@ -39,7 +39,6 @@ C = {
       "-march=x86-64-v2", 
       "-fstack-protector-strong", 
       "-fstack-clash-protection",
-      "-fcommon",
       "-pipe" 
    }
 }
