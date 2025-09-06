@@ -73,20 +73,11 @@ gdk-pixbuf2 = {
    }
 };
 
-cargo-c = {
-   url = "https://github.com/lu-zero/cargo-c/archive/v0.10.15/cargo-c-0.10.15.tar.gz",
-   sha3 = "52e834fc19930d98f423adf101a3cef6ea6a9d9e8314bf236164866d6b92d728",
-   build = "cargo",
-   prepare = [[ 
-      curl -LRO "https://github.com/lu-zero/cargo-c/releases/download/v0.10.15/Cargo.lock" 
-      echo abc0ffb7128aa01704d63800d7a6accb8138a6f561696b19cd1cb1e3f9547e86 Cargo.lock | sha256sum -c
-   ]]
-};
-
 librsvg = {
-   url = "https://download.gnome.org/sources/librsvg/2.61/librsvg-2.61.0.tar.xz",
-   sha3 = "2359c0ad4ec430ced18ecd8982f04dec7696c7de0437175014998259e3cec0d1",
-   build = "meson",
+   url = "https://download.gnome.org/sources/librsvg/2.40/librsvg-2.40.21.tar.xz",
+   sha3 = "b5620f0b6c164830874fd41595fceb6c60c403c6ab0f7cdd19e426261a9665c2",
+   build = "./configure",
+   flags = { "--enable-{introspection=no,vala=no}" }
 };
 
 gtk3 = {
