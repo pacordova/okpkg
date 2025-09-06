@@ -1,7 +1,7 @@
 #!/usr/bin/env lua
 
 -- Directories
-local pkgdir = "/var/lib/okpkg/packages"
+local pkgdir = "/var/lib/okpkg/packages/.new"
 local dbpath = "/var/lib/okpkg/db"
 
 -- Imports
@@ -27,7 +27,7 @@ end
 
 -- base package set
 if #arg == 0 then arg = {"base"} end
-base = { "linux" }
+base = { "linux-lts" }
 local fp, buf
 fp = io.open("system.db")
 buf = '\n' .. fp:read("*a")
@@ -35,9 +35,7 @@ fp:close()
 for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do
     if i:sub(1, 3) == "gcc" then
         table.insert(base, "gcc-libs")
-        table.insert(base, "gcc-14.2.0")
-    elseif i == "perl" then
-        table.insert(base, "perl-5.40.0")
+        table.insert(base, "gcc-15.2.0")
     elseif i:sub(1, 1) ~= "_" then
         table.insert(base, i)
     end
@@ -96,19 +94,11 @@ local status =
 if not status then error("error during reformat!") end
 
 -- do-install
+chdir(os.getenv("destdir"))
+dofile("/var/lib/okpkg/scripts/filesystem.lua")
 chdir(pkgdir)
 chdir("a")
-os.execute [[
-   tar -C $destdir -xhf filesystem-*.tar.lz
-   git clone /var/lib/okpkg $destdir/var/lib/okpkg
-   git -C $destdir/var/lib/okpkg repack -adf --depth=1
-   mkdir -p $destdir/var/lib/okpkg/{packages,download}
-   cp -p *.tar.lz $destdir/var/lib/okpkg/packages
-   cp -p /var/lib/okpkg/download/* $destdir/var/lib/okpkg/download
-   rm -fr $destdir/lost+found
-   curl -L https://curl.se/ca/cacert.pem > \
-       $destdir/etc/ssl/certs/ca-certificates.crt
-]]
+os.execute("cp -p *.tar.lz $destdir/var/lib/okpkg/packages")
 
 -- main loop
 while #arg > 0 do
