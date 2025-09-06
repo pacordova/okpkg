@@ -110,7 +110,7 @@ function emerge(pkgname)
 end
 
 -- Setup the environment.
-setenv("CFLAGS", "-O2 -fcommon -pipe")
+setenv("CFLAGS", "-O2 -fcommon -std=gnu17 -pipe")
 setenv("CXXFLAGS", os.getenv("CFLAGS"))
 setenv("PATH", "/mnt/tools/bin:/usr/bin:/usr/sbin")
 setenv("LC_ALL", "POSIX")

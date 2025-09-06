@@ -212,7 +212,6 @@ gmp = {
    sha3 = "025f4fc3c5f68a0faae40cb8579dc7979eded558edfbc58ac030a072a6b5a6e7",
    build = "./configure",
    flags = { "--enable-cxx" },
-   prepare = [[ sed -i '/long long t1;/,+1s/()/(...)/' configure ]],
 };
 
 mpfr = {
@@ -396,7 +395,6 @@ grep = {
    url = "https://ftp.gnu.org/gnu/grep/grep-3.12.tar.xz",
    sha3 = "8a257960e6ce28a39d3fcecde32b3d1d1f2e4009e80447715109435d8242caa7",
    build = "./configure",
-   prepare = [[ sed -i 's/echo/#echo/' src/egrep.sh ]]
 };
 
 bash = {
@@ -419,10 +417,6 @@ time = {
    url = "https://ftp.gnu.org/gnu/time/time-1.9.tar.gz",
    sha3 = "21b27eeec844d70f0b91316d2ac96b6774959275c1df4250a2484c211993d7bc",
    build = "./configure",
-   prepare = [[ 
-      sed -e 's/sighandler interrupt_signal/__sighandler_t interrupt_signal/' \
-          -i src/time.c
-   ]]
 };
 
 gdbm = {
@@ -601,7 +595,7 @@ tar = {
    url = "https://ftp.gnu.org/gnu/tar/tar-1.35.tar.xz",
    sha3 = "d8f59be9b3c00294ad98ba08b47a18515f178b33129f2ddce3281b56d56448bd",
    build = "./configure",
-   flags = { "--libexecdir=/usr/libexec", "FORCE_UNSAFE_CONFIGURE=1" }
+   flags = { "--libexecdir=/usr/bin", "FORCE_UNSAFE_CONFIGURE=1" }
 };
 
 cpio = {
@@ -609,12 +603,6 @@ cpio = {
    sha3 = "112b5cd46328b32e9bbc463721f2c0ece9adc4671dcbb016a096007181771524",
    build = "./configure",
    flags = { "--with-rmt=/usr/bin/rmt" },
-   prepare = [[
-      sed -e "/^extern int (\*xstat)/s/()/(const char * restrict,  struct stat * restrict)/" \
-          -i src/extern.h
-      sed -e "/^int (\*xstat)/s/()/(const char * restrict,  struct stat * restrict)/" \
-          -i src/global.c
-   ]]
 };
 
 lua = {
@@ -655,8 +643,8 @@ openvi = {
       "PREFIX=/usr",
    },
    prepare = [[ 
-      sed -i 's:escapetime=2:escapetime=1:' common/options.c 
       #sed -i 's:libexec:lib64:' GNUmakefile
+      sed -i 's:escapetime=2:escapetime=1:' common/options.c 
       sed -e 's:termio.h:termios.h:' \
           -i 'cl/cl_screen.c' \
           -i 'cl/cl_main.c' \
@@ -794,10 +782,6 @@ parted = {
       "--enable-debug=yes",
       "--with-readline",
    },
-   prepare = [[
-      sed -e 's/do_version ()/do_version (PedDevice** dev, PedDisk** diskp)/' \
-          -i parted/parted.c 
-   ]]
 };
 
 efivar = {
