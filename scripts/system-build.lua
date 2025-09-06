@@ -51,11 +51,16 @@ emerge("mpfr")
 
 -- Fix versions and cleanup
 chdir(pkgdir)
-mkdir("a")
+purge("_perl")
+purge("_python3")
 purge("samurai")
-os.execute("makewhatis /usr/share/man")
-os.rename("bash-5.2.37-amd64.tar.lz", "bash-5.2.037-amd64.tar.lz")
-os.rename("readline-8.2.13-amd64.tar.lz", "readline-8.2.013-amd64.tar.lz")
-os.rename("sqlite-3490100-amd64.tar.lz", "sqlite-3.49.1-amd64.tar.lz")
-os.execute("mv *.tar.lz a")
-os.execute("rm -fr */_*.tar.lz */samurai-*.tar.lz")
+os.remove("samurai-1.2-amd64.tar.lz")
+os.remove("/usr/bin/meson")
+os.rename("bash-5.3-amd64.tar.lz", "bash-5.3.003-amd64.tar.lz")
+os.rename("readline-8.3-amd64.tar.lz", "readline-8.3.001-amd64.tar.lz")
+mkdir("a")
+os.execute([[
+   makewhatis /usr/share/man
+   rm -fr _*.tar.lz
+   mv *.tar.lz a
+]])
