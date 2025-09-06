@@ -789,7 +789,11 @@ parted = {
    url = "https://ftp.gnu.org/gnu/parted/parted-3.6.tar.xz",
    sha3 = "47ffc9b3cddcf9226b54a8ef159a39c5a25748549f1fa39c833c1afbdd40e589",
    build = "./configure",
-   flags = { "--enable-device-mapper", "--with-readline" },
+   flags = { 
+      "--enable-device-mapper", 
+      "--enable-debug=yes",
+      "--with-readline",
+   },
    prepare = [[
       sed -e 's/do_version ()/do_version (PedDevice** dev, PedDisk** diskp)/' \
           -i parted/parted.c 

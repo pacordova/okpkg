@@ -31,6 +31,7 @@ C = {
       "-fstack-protector-strong", 
       "-fstack-clash-protection",
       "-fcommon",
+      "-std=gnu17",
       "-pipe" 
    }
 }
