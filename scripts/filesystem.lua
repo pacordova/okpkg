@@ -120,8 +120,8 @@ test -z "$enable_static" && enable_static=no
 test -z "$enable_nls" && enable_nls=no
 test -z "$enable_rpath" && enable_rpath=no
 test -z "$enable_tests" && enable_tests=no
-test -z "$enable_werror" && enable_werror=no
 test -z "$enable_debug" && enable_debug=no
+test -z "$enable_werror" && enable_werror=no
 ]])
 file:close()
 --------------------------------------------------------------------------------
