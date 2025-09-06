@@ -96,9 +96,6 @@ if not status then error("error during reformat!") end
 -- do-install
 chdir(os.getenv("destdir"))
 dofile("/var/lib/okpkg/scripts/filesystem.lua")
-chdir(pkgdir)
-chdir("a")
-os.execute("cp -p *.tar.lz $destdir/var/lib/okpkg/packages")
 
 -- main loop
 while #arg > 0 do
