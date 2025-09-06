@@ -33,6 +33,14 @@ C = {
       "-fcommon",
       "-std=gnu17",
       "-pipe" 
+   },
+   ["cxxflags"] = { 
+      "-O2", 
+      "-march=x86-64-v2", 
+      "-fstack-protector-strong", 
+      "-fstack-clash-protection",
+      "-fcommon",
+      "-pipe" 
    }
 }
 
@@ -353,7 +361,7 @@ function emerge(x) install(build(download(x))) end
 setenv("LC_ALL", "POSIX")
 setenv("CONFIG_SITE", C.config_site)
 setenv("CFLAGS", table.concat(C.cflags, ' '))
-setenv("CXXFLAGS", table.concat(C.cflags, ' '))
+setenv("CXXFLAGS", table.concat(C.cxxflags, ' '))
 setenv("MAKEFLAGS", "-j5")
 setenv("ninja", "samu")
 setenv("patch", "patch -b -p1")
