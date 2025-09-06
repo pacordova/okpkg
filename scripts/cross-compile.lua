@@ -111,7 +111,7 @@ end
 
 -- Setup the environment.
 setenv("CFLAGS", "-O2 -fcommon -std=gnu17 -pipe")
-setenv("CXXFLAGS", os.getenv("CFLAGS"))
+setenv("CXXFLAGS", "-O2 -pipe")
 setenv("PATH", "/mnt/tools/bin:/usr/bin:/usr/sbin")
 setenv("LC_ALL", "POSIX")
 setenv("MAKEFLAGS", "-j5")
