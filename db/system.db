@@ -608,7 +608,13 @@ cpio = {
    url = "https://ftp.gnu.org/gnu/cpio/cpio-2.15.tar.bz2",
    sha3 = "112b5cd46328b32e9bbc463721f2c0ece9adc4671dcbb016a096007181771524",
    build = "./configure",
-   flags = { "--with-rmt=/usr/bin/rmt" }
+   flags = { "--with-rmt=/usr/bin/rmt" },
+   prepare = [[
+      sed -e "/^extern int (\*xstat)/s/()/(const char * restrict,  struct stat * restrict)/" \
+          -i src/extern.h
+      sed -e "/^int (\*xstat)/s/()/(const char * restrict,  struct stat * restrict)/" \
+          -i src/global.c
+   ]]
 };
 
 lua = {
