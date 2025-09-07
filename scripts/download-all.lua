@@ -7,13 +7,13 @@ local srcpath = "/var/lib/okpkg/sources"
 
 dofile("/usr/bin/okpkg")
 
-local function download_all(db) 
+local function download_all(db)
    local fp, buf
    fp = io.open(string.format("%s/%s", dbpath, db))
    buf = '\n'..fp:read("*a")
    fp:close()
-   for i in buf:gmatch("\n([%w%-%+]-) = {.-;") do 
-      download(i) 
+   for i in buf:gmatch("\n([%w%-%+]-) = {.-;") do
+      download(i)
       chdir(srcpath)
       os.execute(string.format("rm -fr %s/%s", srcpath, i))
    end

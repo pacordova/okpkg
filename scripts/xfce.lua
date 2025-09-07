@@ -25,10 +25,9 @@ local dirs = {
    ["devel.db"]   = "d",
    ["flatpak.db"] = "b",
    ["fonts.db"]   = "f",
-   ["glib.db"]    = "l",
    ["gnupg.db"]   = "n",
    ["gtk.db"]     = "x",
-   ["lib.db"]     = "l",
+   ["libs.db"]    = "l",
    ["python.db"]  = "py",
    ["perl.db"     = "pl",
    ["net.db"]     = "n",
@@ -72,7 +71,7 @@ os.execute(string.format("rm -f %s/libxml2-*.tar.lz", pkgdir))
 build_all("python.db")
 build_all("perl.db")
 build_all("devel.db")
-build_all("lib.db")
+build_all("libs.db")
 build_all("net.db")
 build_all("gnupg.db")
 build_all("fonts.db")

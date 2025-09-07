@@ -17,8 +17,8 @@ notfound(){
    xargs ldd | grep -e ":" -e "not found"
 }
 
-printdeps(){ 
-    for f in `printlibs $1.index`; do 
+printdeps(){
+    for f in `printlibs $1.index`; do
         printf "%s: %s\n" $f $(grep -rlie $f . | sed 's:^\./::;s:\.index$::')
     done
 }

@@ -31,7 +31,7 @@ buf = '\n' .. file:read("*a")
 file:close()
 for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do
    emerge(i)
-   if i:sub(1, 3) == "gcc" then 
+   if i:sub(1, 3) == "gcc" then
       os.execute(string.format("%s/scripts/split-gcc.sh", okpath))
    end
 end

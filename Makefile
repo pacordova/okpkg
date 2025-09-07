@@ -23,6 +23,6 @@ uninstall: clean
 	rm -f $(DESTDIR)$(prefix)/bin/okpkg
 	rm -f $(DESTDIR)$(prefix)$(LUA_CPATH)/okutils.so
 
-clean: 
+clean:
 	find . -name \*~ -delete
-	rm -f okutils.so 
+	rm -f okutils.so
