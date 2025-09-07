@@ -8,7 +8,7 @@ local chdir, basename = ok.chdir, ok.basename
 
 mymirror = "https://mirrors.kernel.org"
 
-local function curl(path) 
+local function curl(path)
    local file, buf
    file = io.popen(string.format("curl -L %s/%s", mymirror, path))
    buf = file:read("*a")
@@ -16,15 +16,15 @@ local function curl(path)
    return buf
 end
 
-local function parse_version(path) 
+local function parse_version(path)
    local s, i, j
    s = basename(path)
-   if s:find("^%d") then 
+   if s:find("^%d") then
       i = 0
-   elseif s:find("[v._-]%d") then 
+   elseif s:find("[v._-]%d") then
       i = s:find("[v._-]%d")
-   else 
-      return "" 
+   else
+      return ""
    end
    j = s:find("%.t") or #s+1
    return s:sub(i+1, j-1):gsub("-", "_")
@@ -32,8 +32,8 @@ end
 
 local function get_version(t, pkg)
    for i=1,#t do
-      if t[i]:match("^" .. pkg .. "%-%d") then 
-         return parse_version(t[i]) 
+      if t[i]:match("^" .. pkg .. "%-%d") then
+         return parse_version(t[i])
       end
    end
    return nil
