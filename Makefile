@@ -5,7 +5,7 @@ LUA_CPATH = $(shell dirname `lua -e 'print(package.cpath)' | cut -d ';' -f1`)
 
 CC = gcc
 LDFLAGS = -lcrypto
-CFLAGS = -Os -fpic -shared -pipe
+CFLAGS = -O2 -fpic -shared -pipe
 
 all: okutils.so
 

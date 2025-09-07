@@ -14,7 +14,7 @@ _python3 = {
    },
    post = [[
       cd "$destdir/usr/lib64/python"*
-      rm -fr test ./*/test ./*/tests 
+      rm -fr test ./*/test ./*/tests
       rm -fr pydoc* idlelib turtle* config-*
       cd "$destdir/usr/bin"
       rm -f pydoc* idle*
@@ -57,7 +57,7 @@ iana-etc = {
    url = "https://github.com/Mic92/iana-etc/releases/download/20250807/iana-etc-20250807.tar.gz",
    sha3 = "079045432e84230ee86df2c42286926f67722889413c0b193cc59ce18a72d9bb",
    build = _,
-   post = [[ 
+   post = [[
       install -d $destdir/etc
       install -m 644 services  $destdir/etc
       install -m 644 protocols $destdir/etc
@@ -212,7 +212,10 @@ gmp = {
    url = "https://ftp.gnu.org/gnu/gmp/gmp-6.3.0.tar.xz",
    sha3 = "025f4fc3c5f68a0faae40cb8579dc7979eded558edfbc58ac030a072a6b5a6e7",
    build = "./configure",
-   flags = { "--enable-cxx" },
+   flags = { 
+      "--enable-cxx",
+      "CC='gcc -std=gnu17'",
+   },
 };
 
 mpfr = {
@@ -387,7 +390,7 @@ pcre2 = {
       "--enable-pcre2grep-{libz,libbz2}",
       "--enable-pcre2test-libreadline",
       "--enable-unicode",
-      'CFLAGS="$CFLAGS -O3"',
+      "CFLAGS=-O3",
    },
    post = [[ rm -fr $destdir/usr/bin $destdir/usr/share/man/man1 ]]
 };
@@ -418,6 +421,7 @@ time = {
    url = "https://ftp.gnu.org/gnu/time/time-1.9.tar.gz",
    sha3 = "21b27eeec844d70f0b91316d2ac96b6774959275c1df4250a2484c211993d7bc",
    build = "./configure",
+   flags = { "CC='gcc -std=gnu17'"
 };
 
 gdbm = {
@@ -540,10 +544,10 @@ pigz = {
    url = "https://zlib.net/pigz/pigz-2.8.tar.gz",
    sha3 = "530248da5b27562503cfcfa6b96d2d483e7ae5c7acb088e0b2e3cdb33164a1a8",
    build = "make",
-   flags = { 'CFLAGS="$CFLAGS -DNOZOPFLI"', "ZOP=" },
+   flags = { "ZOP=", "CFLAGS='-O3 -DNOZOPFLI'" },
    prepare = [[ : > install ]],
-   post = [[ 
-      install -d $destdir/usr/bin 
+   post = [[
+      install -d $destdir/usr/bin
       install -d $destdir/usr/share/man/man1
       install -m 755 pigz   $destdir/usr/bin
       install -m 644 pigz.1 $destdir/usr/share/man/man1
@@ -603,7 +607,11 @@ cpio = {
    url = "https://ftp.gnu.org/gnu/cpio/cpio-2.15.tar.bz2",
    sha3 = "112b5cd46328b32e9bbc463721f2c0ece9adc4671dcbb016a096007181771524",
    build = "./configure",
-   flags = { "--with-rmt=/usr/bin/rmt" },
+   flags = { 
+      "--enable-mt",
+      "--with-rmt=/usr/bin/rmt",
+      "CC='gcc -std=gnu17'",
+   },
 };
 
 lua = {
@@ -613,14 +621,14 @@ lua = {
    flags = {
       'TO_LIB="liblua.so liblua.so.5.4 liblua.so.5.4.8"',
       "INSTALL_DATA='cp -d'",
-      'MYCFLAGS="$CFLAGS -fPIC"',
+      "MYCFLAGS=-fPIC",
       "INSTALL_TOP=$destdir/usr",
       "INSTALL_LIB=$destdir/usr/lib64",
       "INSTALL_MAN=$destdir/usr/share/man/man1",
       "INSTALL_CMOD=$destdir/usr/lib64/lua/5.4",
       "linux-readline"
    },
-   post = [[ 
+   post = [[
       mkdir -p $destdir/usr/lib64/pkgconfig &&
       cd $destdir/usr/lib64/pkgconfig
       printf "Name: Lua\n" >> lua.pc
@@ -636,16 +644,16 @@ openvi = {
    url = "https://github.com/johnsonjh/openvi/archive/7.6.31/openvi-7.6.31.tar.gz",
    sha3 = "93113e9c7c34d5adc91dc6414668d381c721ab80e1f0beff58c01b710a7084f5",
    build = "make",
-   flags = { 
+   flags = {
       "BINPREFIX=''",
       "IUSGR=root:root",
       "CC=gcc",
       "OPTLEVEL=-O2",
       "PREFIX=/usr",
    },
-   prepare = [[ 
+   prepare = [[
       #sed -i 's:libexec:lib64:' GNUmakefile
-      sed -i 's:escapetime=2:escapetime=1:' common/options.c 
+      sed -i 's:escapetime=2:escapetime=1:' common/options.c
       sed -e 's:termio.h:termios.h:' \
           -i 'cl/cl_screen.c' \
           -i 'cl/cl_main.c' \
@@ -778,8 +786,8 @@ parted = {
    url = "https://ftp.gnu.org/gnu/parted/parted-3.6.tar.xz",
    sha3 = "47ffc9b3cddcf9226b54a8ef159a39c5a25748549f1fa39c833c1afbdd40e589",
    build = "./configure",
-   flags = { 
-      "--enable-device-mapper", 
+   flags = {
+      "--enable-device-mapper",
       "--enable-debug=yes",
       "--with-readline",
    },

@@ -31,16 +31,8 @@ C = {
       "-fstack-protector-strong",
       "-fstack-clash-protection",
       "-fcommon",
-      "-std=gnu17",
       "-pipe"
    },
-   ["cxxflags"] = {
-      "-O2",
-      "-march=x86-64-v2",
-      "-fstack-protector-strong",
-      "-fstack-clash-protection",
-      "-pipe"
-   }
 }
 
 -- Build routines
@@ -380,7 +372,7 @@ end
 setenv("LC_ALL", "POSIX")
 setenv("CONFIG_SITE", C.config_site)
 setenv("CFLAGS", table.concat(C.cflags, ' '))
-setenv("CXXFLAGS", table.concat(C.cxxflags, ' '))
+setenv("CXXFLAGS", table.concat(C.cflags, ' '))
 setenv("MAKEFLAGS", "-j5")
 setenv("ninja", "samu")
 setenv("patch", "patch -b -p1")

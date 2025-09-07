@@ -9,12 +9,12 @@ python3 = {
       "--with-system-expat",
       "--with-tzpath=/usr/share/zoneinfo",
       "--without-{doc-strings,ensurepip}",
-      'CFLAGS="$CFLAGS -fno-semantic-interposition"',
-      'LDFLAGS="$LDFLAGS -fno-semantic-interposition"',
+      "CFLAGS_NODIST=-fno-semantic-interposition",
+      "LDFLAGS_NODIST=-fno-semantic-interposition",
    },
    post = [[
       cd "$destdir/usr/lib64/python"*
-      rm -fr test ./*/test ./*/tests 
+      rm -fr test ./*/test ./*/tests
       rm -fr pydoc* idlelib turtle* config-*
       cd "$destdir/usr/bin"
       rm -f pydoc* idle*
@@ -177,7 +177,7 @@ python-hatch-vcs = {
    sha3 = "8265228dae4b32206fda3da08dc8df8e533f2a4ba731c1b71251c0a87252fe85",
    build = "python-build",
 };
- 
+
 python-attrs = {
    url = "https://pypi.org/packages/source/a/attrs/attrs-25.3.0.tar.gz",
    sha3 = "9234c6b04ee4afecd4bea77b3902c6d98a7d75a88d661e4ce1b98eb751731098",

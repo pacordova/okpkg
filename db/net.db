@@ -125,19 +125,6 @@ rsync = {
    flags = { "--disable-{debug,xxhash}" }
 };
 
-sharutils = {
-   url = "https://ftp.gnu.org/gnu/sharutils/sharutils-4.15.2.tar.xz",
-   sha3 = "9b06bc145640281df912a2af83849621a25a10fb2deb3bd5b1c8561f9c1b53a1",
-   build = "./configure",
-   flags = { 'CFLAGS="$CFLAGS -Wno-implicit-function-declaration"' },
-   prepare = [[
-      sed -i 's/BUFSIZ/rw_base_size/' src/unshar.c
-      sed -i '/program_name/s/^/extern /' src/*opts.h
-      sed -i 's/IO_ftrylockfile/IO_EOF_SEEN/' lib/*.c
-      printf "#define _IO_IN_BACKUP 0x100\n" >> lib/stdio-impl.h
-   ]]
-};
-
 wget = {
    url = "https://ftp.gnu.org/gnu/wget/wget-1.25.0.tar.lz",
    sha3 = "ded3b9f3547aa32926e0257e12ce12992db051c45f6b1125bfad3b3ad5074604",

@@ -6,7 +6,6 @@ perl = {
       "-Dvendorprefix=/usr",
       "-Duseshrplib",
       "-Dusethreads",
-      '-Doptimize="$CFLAGS"',
       "-D{privlib,archlib}=/usr/lib64/perl5/core_perl",
       "-D{sitelib,sitearch}=/usr/lib64/perl5/site_perl",
       "-D{vendorlib,vendorarch}=/usr/lib64/perl/vendor_perl",
