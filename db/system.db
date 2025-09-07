@@ -13,10 +13,11 @@ _python3 = {
       "--without-{doc-strings,ensurepip,system-expat}",
    },
    post = [[
-      cd $destdir/usr/bin
+      cd "$destdir/usr/lib64/python"*
+      rm -fr test ./*/test ./*/tests 
+      rm -fr pydoc* idlelib turtle* config-*
+      cd "$destdir/usr/bin"
       rm -f pydoc* idle*
-      cd $destdir/usr/lib64/python*
-      rm -fr test ./*/test ./*/tests pydoc* idlelib turtle* config-*
    ]]
 };
 
