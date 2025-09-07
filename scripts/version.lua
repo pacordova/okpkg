@@ -4,15 +4,15 @@ local unpack = unpack or table.unpack
 
 local ok = require("okutils")
 
-local basename = ok.basename
+local chdir, basename = ok.chdir, ok.basename
 
 mymirror = "https://mirrors.kernel.org"
 
 local function curl(path) 
-   local p, buf
-   p = io.popen(string.format("curl -L %s/%s", mymirror, path))
-   buf = p:read("*a")
-   p:close()
+   local file, buf
+   file = io.popen(string.format("curl -L %s/%s", mymirror, path))
+   buf = file:read("*a")
+   file:close()
    return buf
 end
 
@@ -110,11 +110,12 @@ end
 -- okpkg --
 -----------
 okpkg = {}
-local p, buf
+local file, buf
 
-p = io.popen("find /var/lib/okpkg/packages/* -name '*.tar.lz' -exec basename '{}' \\;")
-buf = p:read("*a")
-p:close()
+chdir("/var/lib/okpkg/packages")
+file = io.popen("find * -name '*.tar.lz' -exec basename '{}' \\;")
+buf = file:read("*a")
+file:close()
 
 for w in string.gmatch(buf, '(.-\n)') do
    local s =
@@ -133,11 +134,11 @@ end
 -- main loop -
 --------------
 pkglist = {}
-local p, buf
+local file, buf
 
-p = io.popen("cat /var/lib/okpkg/db/*.db")
-buf = '\n' .. p:read("*a")
-p:close()
+file = io.popen("cat /var/lib/okpkg/db/*.db")
+buf = '\n' .. file:read("*a")
+file:close()
 
 for i in buf:gmatch("\n([%w%-%+]-) = {.-;") do
     table.insert(pkglist, i)

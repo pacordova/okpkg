@@ -133,11 +133,11 @@ B = {
    end,
 }
 
-local function get_timestamp(file)
-   local p, buf
-   p = io.popen("stat -c '%Y' " .. file)
-   buf = p:read('*a')
-   p:close()
+local function get_timestamp(filename)
+   local file, buf
+   file = io.popen("stat -c '%Y' " .. filename)
+   buf = file:read('*a')
+   file:close()
    return(tonumber(buf:sub(1, buf:find('\n')-1)))
 end
 
@@ -151,11 +151,11 @@ local function parse_version(s)
 end
 
 function _db_lookup(x)
-   local fp, buf, i, j
+   local file, buf, i, j
    x = string.format("\n%s = {", x)
-   fp = io.popen(string.format("cat %s/*.db", C.dbpath))
-   buf = '\n' .. fp:read('*a')
-   fp:close()
+   file = io.popen(string.format("cat %s/*.db", C.dbpath))
+   buf = '\n' .. file:read('*a')
+   file:close()
    i = buf:find(x, 1, true) or 
        error(string.format("error: %s not found"))
    i = buf:find('{', i, true)
@@ -164,7 +164,7 @@ function _db_lookup(x)
 end
 
 function download(x) 
-   local t, f, fp, srcdir
+   local t, srcdir, file, filename
    t = _db_lookup(x)
 
    -- Change mirrors
@@ -179,29 +179,32 @@ function download(x)
 
    -- Download file if not already downloaded
    print(string.format("okpkg download %s:\nurl: '%s'", x, t.url))
-   f = string.format("%s/%s", C.outdir, basename(t.url))
-   fp = io.open(f)
-   if fp then 
-      fp:close()
+   filename = string.format("%s/%s", C.outdir, basename(t.url))
+   file = io.open(filename)
+   if file then 
+      file:close()
    else 
-      os.execute(string.format("curl -# -o %s -LR %s", f, t.url))
+      os.execute(string.format("curl -# -o %s -LR %s", filename, t.url))
    end
   
    -- Verify checksum 
-   if t.sha3 ~= sha3sum(f) then
-      os.remove(f)
+   if t.sha3 ~= sha3sum(filename) then
+      os.remove(filename)
       error(string.format("%s: FAILED", basename(f)))
    else
       chdir(srcdir)
-      os.execute(string.format("tar --strip-components=1 -xf %s", f))
-      setenv("SOURCE_DATE_EPOCH", get_timestamp(f))
-      print(string.format("%s: OK", basename(f)))
+      os.execute(string.format("tar --strip-components=1 -xf %s", filename))
+      setenv("SOURCE_DATE_EPOCH", get_timestamp(filename))
+      print(string.format("%s: OK", basename(filename)))
    end
       
    -- Patch if file exists in patchdir
-   f = string.format("%s/%s.diff", C.patchdir, x:gsub('^_', ''))
-   fp = io.open(f);
-   if fp then fp:close(); os.execute(string.format("$patch <%s", f)); end
+   filename = string.format("%s/%s.diff", C.patchdir, x:gsub('^_', ''))
+   file = io.open(filename);
+   if file then 
+      file:close()
+      os.execute(string.format("$patch <%s", filename))
+   end
 
    -- Set the mtime
    os.execute [[ find . -exec touch -hd "@$SOURCE_DATE_EPOCH" '{}' + ]]
@@ -210,6 +213,7 @@ function download(x)
 end
 
 function makepkg(path)
+   local file
    if chdir(path) ~= 0 then
       error(string.format("error: Path `%s' does not exist", path))
    else
@@ -217,9 +221,9 @@ function makepkg(path)
    end
 
    -- Stripping
-   local fp = io.open(".nostrip")
-   if fp then
-      fp:close()
+   file = io.open(".nostrip")
+   if file then
+      file:close()
       os.remove(".nostrip")
    else
       os.execute [[
@@ -259,7 +263,7 @@ function makepkg(path)
 end
 
 function build(x) 
-   local t, v, fp, destdir, srcdir
+   local t, v, file, destdir, srcdir
    t = _db_lookup(x)
    t.flags = t.flags or {}
    v = parse_version(t.url)
@@ -314,22 +318,25 @@ function build(x)
 end
 
 function purge(x)
-   local fp, f
-   f = string.format("%s/%s.index", C.indexdir, x)
-   fp = io.open(f)
-   if fp then
-      for path in fp:lines() do os.remove(path:sub(2, #path)) end
-      fp:close(); os.remove(f)
+   local file, filename
+   filename = string.format("%s/%s.index", C.indexdir, x)
+   file = io.open(filename)
+   if file then
+      for path in file:lines() do
+         os.remove(path:sub(2, #path))
+      end
+      file:close()
+      os.remove(filename)
    end
 end
 
 function install(path) 
-   local v, fp, buf, f
+   local v, file, buf, f
 
    -- Extract tarball, save the output buffer
-   fp = io.popen(string.format("tar -C / -xvhf %s 2>&1", path))
-   buf = fp:read('*a')
-   fp:close()
+   file = io.popen(string.format("tar -C / -xvhf %s 2>&1", path))
+   buf = file:read('*a')
+   file:close()
 
    v = parse_version(path)
    if #v > 0 then 
@@ -339,16 +346,16 @@ function install(path)
    end
 
    -- Save original file to *.orig, use diff to delete old files
-   fp = io.open(f)
-   if fp then 
-      fp:close()
+   file = io.open(f)
+   if file then 
+      file:close()
       os.rename(f, f .. ".orig") 
    end
 
    -- Write output buffer as a file index
-   fp = io.open(f, 'w')
-   fp:write(buf)
-   fp:close()
+   file = io.open(f, 'w')
+   file:write(buf)
+   file:close()
 
    os.execute("ldconfig")
 end
