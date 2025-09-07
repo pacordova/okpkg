@@ -20,9 +20,9 @@ B = {
          os.execute("make install DESTDIR=$destdir"))
    end,
    ["make"] = function(...)
-      local arg = { 
-         [0]={"make", "make install DESTDIR=$destdir"}, 
-         ... 
+      local arg = {
+         [0]={"make", "make install DESTDIR=$destdir"},
+         ...
       }
       return (
          os.execute(table.concat({arg[0][1], unpack(arg)}, ' ')) and
@@ -31,58 +31,63 @@ B = {
 }
 
 function _db_lookup(x)
-   local fp, buf, i, j
+   local file, buf, i, j
    x = string.format("\n%s = {", x)
-   fp = io.popen(string.format("cat %s/*.db", "/var/lib/okpkg/db"))
-   buf = '\n' .. fp:read('*a')
-   fp:close()
-   i = buf:find(x, 1, true) or 
+   file = io.popen(string.format("cat %s/*.db", "/var/lib/okpkg/db"))
+   buf = '\n' .. file:read('*a')
+   file:close()
+   i = buf:find(x, 1, true) or
        error(string.format("error: %s not found"))
    i = buf:find('{', i, true)
    j = buf:find('};', i, true)
    return load(string.format("return %s", buf:sub(i, j)))()
 end
 
-function _xlook(x) 
-   local fp, buf, i, j
-   fp = io.open("/var/lib/okpkg/db/.cross.db")
-   buf = '\n' .. fp:read('*a')
-   fp:close()
+function _xlook(x)
+   local file, buf, i, j
+   file = io.open("/var/lib/okpkg/db/.cross.db")
+   buf = '\n' .. file:read('*a')
+   file:close()
    i = buf:find(string.format("\n%s = {", x), 1, true)
    if i then i = buf:find('{', i, true); j = buf:find('};', i, true)
       return load(string.format("return %s", buf:sub(i, j)))()
    end
 end
 
-function extract(pkgname) 
-   local t, f, fp
+function extract(pkgname)
+   local t, file, filename
    t = _xlook(pkgname) or _db_lookup(pkgname)
-   f = basename(t.url)
+   filename = string.format("/var/lib/okpkg/download/%s", basename(t.url))
 
    -- Setup the source directory for build.
    chdir("/var/lib/okpkg/sources")
-   os.execute("rm -fr " .. pkgname)
+   os.execute(string.format("rm -fr %s", pkgname))
    mkdir(pkgname)
 
    -- Ensure tarball exists.
-   fp = io.open(string.format("../download/%s", f))
-   if fp then fp:close() else error("source tarball doesn't exist!") end
+   file = io.open(filename)
+   if file then file:close() else error("source tarball doesn't exist!") end
 
    -- Extract the tarball.
-   os.execute(string.format(
-      "tar -C %s --strip-components=1 -xf ../download/%s", pkgname, f))
+   chdir(pkgname)
+   os.execute(string.format("tar --strip-components=1 -xf %s", filename))
+   chdir("..")
 
    if pkgname:sub(1,3) == "gcc" then
-      extract("gmp"); os.rename("gmp", string.format("%s/gmp", pkgname))
-      extract("mpfr"); os.rename("mpfr", string.format("%s/mpfr", pkgname))
-      extract("libmpc"); os.rename("libmpc", string.format("%s/mpc", pkgname))
-      extract("isl"); os.rename("isl", string.format("%s/isl", pkgname))
+      extract("gmp")
+      os.rename("gmp", string.format("%s/gmp", pkgname))
+      extract("mpfr")
+      os.rename("mpfr", string.format("%s/mpfr", pkgname))
+      extract("libmpc")
+      os.rename("libmpc", string.format("%s/mpc", pkgname))
+      extract("isl")
+      os.rename("isl", string.format("%s/isl", pkgname))
    end
 
    return t
 end
 
-function emerge(pkgname) 
+function emerge(pkgname)
    local t = extract(pkgname)
    t.flags = t.flags or {}
 
@@ -91,14 +96,14 @@ function emerge(pkgname)
    if t.prepare then os.execute(t.prepare) end
 
    if B[t.build] then
-      if not B[t.build](unpack(t.flags)) then 
+      if not B[t.build](unpack(t.flags)) then
          error(string.format("error: build: %s: %s", t.build, x))
       end
    elseif tostring(t.build):match("config") then
       -- Check if we are doing an out of tree build.
-      if tostring(t.build):sub(1, 2) == ".." then 
-         mkdir("build") 
-         chdir("build") 
+      if tostring(t.build):sub(1, 2) == ".." then
+         mkdir("build")
+         chdir("build")
       end
       if not B["configure"](t.build, unpack(t.flags)) then
          error(string.format("error: build: %s: %s", t.build, x))
@@ -133,8 +138,8 @@ end
 dofile("/var/lib/okpkg/scripts/filesystem.lua")
 
 -- Build all packages in /var/lib/okpkg/db/.cross.db.
-local fp, buf
-fp = io.open("/var/lib/okpkg/db/.cross.db")
-buf = '\n' .. fp:read('*a')
-fp:close()
+local file, buf
+file = io.open("/var/lib/okpkg/db/.cross.db")
+buf = '\n' .. file:read('*a')
+file:close()
 for i in buf:gmatch("\n([%w%-%+]-) = {.-;") do emerge(i) end
