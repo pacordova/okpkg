@@ -25,21 +25,21 @@ C = {
    ["config_site"] = "/etc/config.site",
    ["ninja"] = "/usr/bin/samu",
    ["jobs"] = 5,
-   ["cflags"] = { 
-      "-O2", 
-      "-march=x86-64-v2", 
-      "-fstack-protector-strong", 
+   ["cflags"] = {
+      "-O2",
+      "-march=x86-64-v2",
+      "-fstack-protector-strong",
       "-fstack-clash-protection",
       "-fcommon",
       "-std=gnu17",
-      "-pipe" 
+      "-pipe"
    },
-   ["cxxflags"] = { 
-      "-O2", 
-      "-march=x86-64-v2", 
-      "-fstack-protector-strong", 
+   ["cxxflags"] = {
+      "-O2",
+      "-march=x86-64-v2",
+      "-fstack-protector-strong",
       "-fstack-clash-protection",
-      "-pipe" 
+      "-pipe"
    }
 }
 
@@ -70,10 +70,10 @@ B = {
          os.execute("DESTDIR=$destdir $ninja -C build install"))
    end,
    ["configure"] = function(f, ...)
-      local arg = { 
-         [0] = f, 
-         "--prefix=/usr", 
-         ... 
+      local arg = {
+         [0] = f,
+         "--prefix=/usr",
+         ...
       }
       return (
          os.execute(table.concat({arg[0], unpack(arg)}, ' ')) and
@@ -81,9 +81,9 @@ B = {
          os.execute("make install DESTDIR=$destdir"))
    end,
    ["make"] = function(...)
-      local arg = { 
-         [0] = { "make", "make install DESTDIR=$destdir" }, 
-         ... 
+      local arg = {
+         [0] = { "make", "make install DESTDIR=$destdir" },
+         ...
       }
       return (
          os.execute(table.concat({arg[0][1], unpack(arg)}, ' ')) and
@@ -107,7 +107,7 @@ B = {
    ["perl"] = function()
       return (
          os.execute("perl Makefile.PL") and
-         os.execute("make") and 
+         os.execute("make") and
          os.execute("make pure_install doc_install DESTDIR=$destdir"))
    end,
    ["python-build"] = function()
@@ -141,13 +141,17 @@ local function get_timestamp(filename)
    return(tonumber(buf:sub(1, buf:find('\n')-1)))
 end
 
-local function parse_version(s) 
+local function parse_version(s)
    local i, j
    s = basename(s)
    j = s:find("%.[debtargz]+")
    if s:find("^%d") then i = 0
-   elseif s:find("[v._-]r?n?%d") then i = s:find("[v._-]r?n?%d")
-   else return "" end; return s:sub(i+1, j-1)
+   elseif s:find("[v._-]r?n?%d") then
+      i = s:find("[v._-]r?n?%d")
+   else
+      return ""
+   end
+   return s:sub(i+1, j-1)
 end
 
 function _db_lookup(x)
@@ -156,14 +160,14 @@ function _db_lookup(x)
    file = io.popen(string.format("cat %s/*.db", C.dbpath))
    buf = '\n' .. file:read('*a')
    file:close()
-   i = buf:find(x, 1, true) or 
+   i = buf:find(x, 1, true) or
        error(string.format("error: %s not found"))
    i = buf:find('{', i, true)
    j = buf:find('};', i, true)
    return load(string.format("return %s", buf:sub(i, j)))()
 end
 
-function download(x) 
+function download(x)
    local t, srcdir, file, filename
    t = _db_lookup(x)
 
@@ -181,13 +185,13 @@ function download(x)
    print(string.format("okpkg download %s:\nurl: '%s'", x, t.url))
    filename = string.format("%s/%s", C.outdir, basename(t.url))
    file = io.open(filename)
-   if file then 
+   if file then
       file:close()
-   else 
+   else
       os.execute(string.format("curl -# -o %s -LR %s", filename, t.url))
    end
-  
-   -- Verify checksum 
+
+   -- Verify checksum
    if t.sha3 ~= sha3sum(filename) then
       os.remove(filename)
       error(string.format("%s: FAILED", basename(f)))
@@ -197,11 +201,11 @@ function download(x)
       setenv("SOURCE_DATE_EPOCH", get_timestamp(filename))
       print(string.format("%s: OK", basename(filename)))
    end
-      
+
    -- Patch if file exists in patchdir
    filename = string.format("%s/%s.diff", C.patchdir, x:gsub('^_', ''))
    file = io.open(filename);
-   if file then 
+   if file then
       file:close()
       os.execute(string.format("$patch <%s", filename))
    end
@@ -262,7 +266,7 @@ function makepkg(path)
    return string.format("%s.tar.lz", path)
 end
 
-function build(x) 
+function build(x)
    local t, v, file, destdir, srcdir
    t = _db_lookup(x)
    t.flags = t.flags or {}
@@ -278,21 +282,21 @@ function build(x)
    setenv("SOURCE_DATE_EPOCH", get_timestamp(srcdir))
    chdir(srcdir)
 
-   if t.prepare then 
-      if not os.execute(t.prepare) then 
+   if t.prepare then
+      if not os.execute(t.prepare) then
          error(string.format("error: build: prepare: %s", x))
       end
    end
 
    if B[t.build] then
-      if not B[t.build](unpack(t.flags)) then 
+      if not B[t.build](unpack(t.flags)) then
          error(string.format("error: build: %s: %s", t.build, x))
       end
    elseif tostring(t.build):match("config") then
       -- Check if we are doing an out of tree build
-      if tostring(t.build):sub(1, 2) == ".." then 
-         mkdir("build") 
-         chdir("build") 
+      if tostring(t.build):sub(1, 2) == ".." then
+         mkdir("build")
+         chdir("build")
       end
       if not B["configure"](t.build, unpack(t.flags)) then
          error(string.format("error: build: %s: %s", t.build, x))
@@ -330,37 +334,47 @@ function purge(x)
    end
 end
 
-function install(path) 
-   local v, file, buf, f
+function install(path)
+   local version, buf, file, filename
 
    -- Extract tarball, save the output buffer
    file = io.popen(string.format("tar -C / -xvhf %s 2>&1", path))
    buf = file:read('*a')
    file:close()
 
-   v = parse_version(path)
-   if #v > 0 then 
-      f = C.indexdir .. "/" .. basename(path:sub(1, #path-#v-8)) .. ".index"
-   else 
-      f = C.indexdir .. "/" .. basename(path:sub(1, #path-7)) .. ".index" 
+   version = parse_version(path)
+   if #version > 0 then
+      filename = string.format(
+         "%s/%s.index",
+         C.indexdir,
+         basename(path:sub(1, #path-#version-8))
+      )
+   else
+      filename = string.format(
+         %s/%s.index",
+         C.indexdir,
+         basename(path:sub(1, #path-7))
+      )
    end
 
    -- Save original file to *.orig, use diff to delete old files
-   file = io.open(f)
-   if file then 
+   file = io.open(filename)
+   if file then
       file:close()
-      os.rename(f, f .. ".orig") 
+      os.rename(filename, string.format("%s.orig", filename))
    end
 
    -- Write output buffer as a file index
-   file = io.open(f, 'w')
+   file = io.open(filename, 'w')
    file:write(buf)
    file:close()
 
    os.execute("ldconfig")
 end
 
-function emerge(x) install(build(download(x))) end
+function emerge(x)
+   install(build(download(x)))
+end
 
 -- Environment variables
 setenv("LC_ALL", "POSIX")
@@ -373,7 +387,10 @@ setenv("patch", "patch -b -p1")
 
 -- Main loop over arglist
 while #arg > 1 do
-   if arg[2]:sub(1,2) == "--" then load(arg[2]:sub(3,#arg[2]))()
-   else _G[arg[1]](arg[2]) end
+   if arg[2]:sub(1,2) == "--" then
+      load(arg[2]:sub(3,#arg[2]))()
+   else
+      _G[arg[1]](arg[2])
+   end
    table.remove(arg, 2)
 end
