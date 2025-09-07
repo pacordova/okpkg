@@ -133,16 +133,15 @@ B = {
    end,
 }
 
-local function timestamp(f)
-   local fp, buf
-   fp = io.popen("stat -c '%Y' " ..  f)
-   buf = fp:read('*a')
-   fp:close()
-   buf = buf:sub(1, buf:find('\n')-1)
+local function timestamp(x)
+   local p, buf
+   p = io.popen(string.format("stat -c '%Y' %s", x))
+   buf = p:read('*a'):sub(1, buf:find('\n')-1)
+   p:close()
    return(tonumber(buf))
 end
 
-local function vstr(s) 
+local function parse_version(s) 
    local i, j
    s = basename(s)
    j = s:find("%.[debtargz]+")
@@ -263,7 +262,7 @@ function build(x)
    local t, v, fp, destdir, srcdir
    t = _db_lookup(x)
    t.flags = t.flags or {}
-   v = vstr(t.url)
+   v = parse_version(t.url)
 
    -- Setup destdir
    destdir = string.format("%s/%s-%s-amd64", C.pkgdir, x, v)
@@ -332,7 +331,7 @@ function install(path)
    buf = fp:read('*a')
    fp:close()
 
-   v = vstr(path)
+   v = parse_version(path)
    if #v > 0 then 
       f = C.indexdir .. "/" .. basename(path:sub(1, #path-#v-8)) .. ".index"
    else 
