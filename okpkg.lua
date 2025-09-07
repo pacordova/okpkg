@@ -351,7 +351,7 @@ function install(path)
       )
    else
       filename = string.format(
-         %s/%s.index",
+         "%s/%s.index",
          C.indexdir,
          basename(path:sub(1, #path-7))
       )
