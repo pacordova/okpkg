@@ -133,12 +133,12 @@ B = {
    end,
 }
 
-local function timestamp(x)
+local function get_timestamp(file)
    local p, buf
-   p = io.popen(string.format("stat -c '%Y' %s", x))
-   buf = p:read('*a'):sub(1, buf:find('\n')-1)
+   p = io.popen("stat -c '%Y' " .. file)
+   buf = p:read('*a')
    p:close()
-   return(tonumber(buf))
+   return(tonumber(buf:sub(1, buf:find('\n')-1)))
 end
 
 local function parse_version(s) 
@@ -194,7 +194,7 @@ function download(x)
    else
       chdir(srcdir)
       os.execute(string.format("tar --strip-components=1 -xf %s", f))
-      setenv("SOURCE_DATE_EPOCH", timestamp(f))
+      setenv("SOURCE_DATE_EPOCH", get_timestamp(f))
       print(string.format("%s: OK", basename(f)))
    end
       
@@ -213,7 +213,7 @@ function makepkg(path)
    if chdir(path) ~= 0 then
       error(string.format("error: Path `%s' does not exist", path))
    else
-      setenv("SOURCE_DATE_EPOCH", timestamp("."))
+      setenv("SOURCE_DATE_EPOCH", get_timestamp("."))
    end
 
    -- Stripping
@@ -271,7 +271,7 @@ function build(x)
 
    -- Setup srcdir
    srcdir = string.format("%s/%s", C.srcpath, x)
-   setenv("SOURCE_DATE_EPOCH", timestamp(srcdir))
+   setenv("SOURCE_DATE_EPOCH", get_timestamp(srcdir))
    chdir(srcdir)
 
    if t.prepare then 
