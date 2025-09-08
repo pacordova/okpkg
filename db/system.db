@@ -214,7 +214,7 @@ gmp = {
    build = "./configure",
    flags = {
       "--enable-cxx",
-      "CC='gcc -std=gnu17'",
+      "CC=c99",
    },
 };
 
@@ -276,8 +276,10 @@ gcc15 = {
           $destdir/usr/lib64/bfd-plugins/liblto_plugin.so
       install -d $destdir/usr/share/gdb/auto-load/usr/lib64
       mv $destdir/usr/lib64/*gdb.py $destdir/usr/share/gdb/auto-load/usr/lib64
+      printf '#!/bin/sh\n' >>$destdir/usr/bin/c99
+      printf 'exec gcc -std=c99 "$@"' >>$destdir/usr/bin/c99
+      chmod +x $destdir/usr/bin/c99
       ln -sf gcc $destdir/usr/bin/cc
-      ln -sf gcc $destdir/usr/bin/c99
    ]]
 };
 
@@ -421,7 +423,7 @@ time = {
    url = "https://ftp.gnu.org/gnu/time/time-1.9.tar.gz",
    sha3 = "21b27eeec844d70f0b91316d2ac96b6774959275c1df4250a2484c211993d7bc",
    build = "./configure",
-   flags = { "CC='gcc -std=gnu17'" },
+   flags = { "CC=c99" },
 };
 
 gdbm = {
@@ -610,7 +612,7 @@ cpio = {
    flags = {
       "--enable-mt",
       "--with-rmt=/usr/bin/rmt",
-      "CC='gcc -std=gnu17'",
+      "CC=c99",
    },
 };
 
@@ -652,15 +654,8 @@ openvi = {
       "PREFIX=/usr",
    },
    prepare = [[
-      #sed -i 's:libexec:lib64:' GNUmakefile
       sed -i 's:escapetime=2:escapetime=1:' common/options.c
-      sed -e 's:termio.h:termios.h:' \
-          -i 'cl/cl_screen.c' \
-          -i 'cl/cl_main.c' \
-          -i 'cl/cl_funcs.c' \
-          -i 'cl/cl_read.c' \
-          -i 'cl/cl_term.c' \
-          -i 'ex/ex_script.c'
+      sed -i 's:termio.h:termios.h:' cl/*.c ex/*.c
    ]],
 };
 
@@ -675,8 +670,8 @@ eudev = {
    post = [[
       UDEV_HWDB_PATH=$destdir/etc/udev/hwdb.d \
       $destdir/usr/bin/udevadm hwdb \
-          --output=$destdir/usr/lib64/udev/hwdb.bin \
-          --update
+         --output=$destdir/usr/lib64/udev/hwdb.bin \
+         --update
    ]]
 };
 
@@ -696,7 +691,11 @@ procps-ng = {
    url = "https://prdownloads.sourceforge.net/procps-ng/procps-ng-4.0.5.tar.xz",
    sha3 = "373142bce8af2737c5367ae4fd11f656cb40f1a72573605e3978e2fe79a4f31a",
    build = "./configure",
-   flags = { "--disable-modern-top", "--disable-kill", "--without-systemd" }
+   flags = {
+      "--disable-modern-top",
+      "--disable-kill",
+      "--without-systemd",
+   }
 };
 
 util-linux = {
@@ -755,31 +754,18 @@ dbus = {
 
 --------------------------------------------------------------------------------
 
-libaio = {
-   url = "https://pagure.io/libaio/archive/libaio-0.3.113/libaio-0.3.113.tar.gz",
-   sha3 = "c4f6f1398bb02d365498ab4bd631ab8ae5fd52d0f9404fc4d815f523a885b4ec",
-   build = "make",
-   flags = { "libdir=/usr/lib64" },
-   post = [[ rm -f $destdir/usr/lib64/libaio.a ]]
-};
-
 device-mapper = {
    url = "https://sourceware.org/ftp/lvm2/LVM2.2.03.34.tgz",
    sha3 = "ae9510b9c09f7c101d61a9a015e6a2db97c94e5ab0881cb314412f6bfa61209b",
-   build = "./configure",
+   build = "make_noinstall",
    flags = {
-      "--enable-{cmdlib,dmeventd,pkgconfig}",
-      "--enable-udev-{rules,sync}",
-      "--with-udevdir=/usr/lib64/udev/rules.d",
-      "--with-usrlibdir=/usr/lib64",
-      "--with-systemdsystemunitdir=no",
-      "--without-systemd",
+      "-j5",
+      "install_device-mapper",
+      "DESTDIR=$destdir",
+      "usrlibdir=$destdir/usr/lib64",
+      "CC=c99",
    },
-   post = [[
-      rm -fr $destdir
-      install -d $destdir
-      make install_device-mapper DESTDIR=$destdir
-   ]]
+   prepare = "./configure",
 };
 
 parted = {
@@ -790,7 +776,7 @@ parted = {
       "--enable-device-mapper",
       "--enable-debug=yes",
       "--with-readline",
-      "CC='gcc -std=gnu17'",
+      "CC=c99",
    },
 };
 

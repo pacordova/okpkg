@@ -1,3 +1,11 @@
+libaio = {
+   url = "https://pagure.io/libaio/archive/libaio-0.3.113/libaio-0.3.113.tar.gz",
+   sha3 = "c4f6f1398bb02d365498ab4bd631ab8ae5fd52d0f9404fc4d815f523a885b4ec",
+   build = "make",
+   flags = { "libdir=/usr/lib64" },
+   post = [[ rm -f $destdir/usr/lib64/libaio.a ]]
+};
+
 popt = {
    url = "http://ftp.rpm.org/popt/releases/popt-1.x/popt-1.19.tar.gz",
    sha3 = "d5188c702608a3a615e5607378e78789e5237e66bf2fa0aba4ac718f803e6021",
