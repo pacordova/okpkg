@@ -212,7 +212,7 @@ gmp = {
    url = "https://ftp.gnu.org/gnu/gmp/gmp-6.3.0.tar.xz",
    sha3 = "025f4fc3c5f68a0faae40cb8579dc7979eded558edfbc58ac030a072a6b5a6e7",
    build = "./configure",
-   flags = { 
+   flags = {
       "--enable-cxx",
       "CC='gcc -std=gnu17'",
    },
@@ -607,7 +607,7 @@ cpio = {
    url = "https://ftp.gnu.org/gnu/cpio/cpio-2.15.tar.bz2",
    sha3 = "112b5cd46328b32e9bbc463721f2c0ece9adc4671dcbb016a096007181771524",
    build = "./configure",
-   flags = { 
+   flags = {
       "--enable-mt",
       "--with-rmt=/usr/bin/rmt",
       "CC='gcc -std=gnu17'",
@@ -811,7 +811,11 @@ efibootmgr = {
    url = "https://github.com/rhboot/efibootmgr/releases/download/18/efibootmgr-18.tar.bz2",
    sha3 = "0ee98e9ee17940e4feb573ff5afb0d9e372fbed6f38449ee90c16e3e515b08ad",
    build = "make",
-   flags = { "EFIDIR=/boot/efi", "sbindir=/usr/bin" }
+   flags = {
+      "libdir=/usr/lib64",
+      "sbindir=/usr/bin",
+      "EFIDIR=/boot/efi",
+   }
 };
 
 grub = {
@@ -819,17 +823,21 @@ grub = {
    sha3 = "8dadf87a18b9c26c699b30d038b8f2eef22062d4238e7c5c844d027f51a81630",
    build = "./configure",
    flags = {
-      "--with-bootdir=/boot",
       "--with-platform=efi",
       "--target=x86_64",
       "--disable-efiemu",
-      "--disable-grub-{mkfont,mount}",
-      "--enable-device-mapper",
-      "{C,CPP,CXX,LD}FLAGS="
+      "--disable-grub-mkfont",
+      "--disable-grub-mount",
+      "{C,CPP,CXX,LD}FLAGS=",
    },
    prepare = [[ printf "depends bli part_gpt\n" > grub-core/extra_deps.lst ]],
    post = [[
-      cd $destdir/usr/lib64/grub
-      rm -f */*.module */*.image */kernel.exec */gdb_grub */gmodule.pl
+      cd $destdir/usr/lib64
+      rm -f grub/*/*.module
+      rm -f grub/*/*.image
+      rm -f grub/*/kernel.exec
+      rm -f grub/*/gdb_grub
+      rm -f grub/*/gmodule.pl
+      rm -fr $destdir/etc/bash_completion.d/grub
    ]]
 };
