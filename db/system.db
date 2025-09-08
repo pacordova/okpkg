@@ -790,6 +790,7 @@ parted = {
       "--enable-device-mapper",
       "--enable-debug=yes",
       "--with-readline",
+      "CC='gcc -std=gnu17'",
    },
 };
 
