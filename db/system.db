@@ -797,25 +797,20 @@ parted = {
 efivar = {
    url = "https://github.com/rhboot/efivar/archive/39/efivar-39.tar.gz",
    sha3 = "c1a40eb8583b23d3b31ce547d00e4cb4ac089add38f303e70f9629ea8852600a",
-   build = "make",
-   flags = { "LIBDIR=/usr/lib64", "PREFIX=/usr" }
-};
-
-popt = {
-   url = "http://ftp.rpm.org/popt/releases/popt-1.x/popt-1.19.tar.gz",
-   sha3 = "d5188c702608a3a615e5607378e78789e5237e66bf2fa0aba4ac718f803e6021",
-   build = "./configure",
+   build = "make_install",
+   flags = { "libdir=/usr/lib64" }
 };
 
 efibootmgr = {
    url = "https://github.com/rhboot/efibootmgr/releases/download/18/efibootmgr-18.tar.bz2",
    sha3 = "0ee98e9ee17940e4feb573ff5afb0d9e372fbed6f38449ee90c16e3e515b08ad",
-   build = "make",
-   flags = {
-      "libdir=/usr/lib64",
-      "sbindir=/usr/bin",
-      "EFIDIR=/boot/efi",
-   }
+   build = "make_noinstall",
+   flags = { "efibootmgr" },
+   post = [[
+      mkdir -p $destdir/usr/bin $destdir/usr/share/man/man8
+      cp -f src/efibootmgr $destdir/usr/bin
+      cp -f src/efibootmgr.8.in $destdir/usr/share/man/man8/efibootmgr.8
+   ]]
 };
 
 grub = {

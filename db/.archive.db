@@ -1,7 +1,7 @@
-librsvg-rust = {
-   url = "https://download.gnome.org/sources/librsvg/2.61/librsvg-2.61.0.tar.xz",
-   sha3 = "2359c0ad4ec430ced18ecd8982f04dec7696c7de0437175014998259e3cec0d1",
-   build = "meson",
+popt = {
+   url = "http://ftp.rpm.org/popt/releases/popt-1.x/popt-1.19.tar.gz",
+   sha3 = "d5188c702608a3a615e5607378e78789e5237e66bf2fa0aba4ac718f803e6021",
+   build = "./configure",
 };
 
 cargo-c = {
@@ -12,6 +12,12 @@ cargo-c = {
       curl -LRO "https://github.com/lu-zero/cargo-c/releases/download/v0.10.15/Cargo.lock" 
       echo abc0ffb7128aa01704d63800d7a6accb8138a6f561696b19cd1cb1e3f9547e86 Cargo.lock | sha256sum -c
    ]]
+};
+
+librsvg-rust = {
+   url = "https://download.gnome.org/sources/librsvg/2.61/librsvg-2.61.0.tar.xz",
+   sha3 = "2359c0ad4ec430ced18ecd8982f04dec7696c7de0437175014998259e3cec0d1",
+   build = "meson",
 };
 
 libbpf = {

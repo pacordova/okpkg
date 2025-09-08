@@ -81,6 +81,20 @@ B = {
          os.execute(table.concat({arg[0][1], unpack(arg)}, ' ')) and
          os.execute(table.concat({arg[0][2], unpack(arg)}, ' ')))
    end,
+   ["make_noinstall"] = function(...)
+      local arg = {
+         [0] = "make",
+         ...
+      }
+      return os.execute(table.concat({arg[0], unpack(arg)}, ' '))
+   end,
+   ["make_install"] = function(...)
+      local arg = {
+         [0] = "make install DESTDIR=$destdir",
+         ...
+      }
+      return os.execute(table.concat({arg[0], unpack(arg)}, ' '))
+   end,
    ["meson"] = function(...)
       local arg = {
          [0] = "meson setup build",
