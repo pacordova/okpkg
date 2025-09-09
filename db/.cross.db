@@ -449,6 +449,5 @@ gcc-pass2 = {
       find $destdir -name libgtkpeer.a  -exec rm -f '{}' +
       find $destdir -name libgjsmalsa.a -exec rm -f '{}' +
       ln -sf gcc $destdir/usr/bin/cc
-      ln -sf gcc $destdir/usr/bin/c99
    ]]
 };
