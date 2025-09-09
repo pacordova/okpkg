@@ -286,7 +286,7 @@ os.execute([[
    mknod -m 600 dev/console c 5 1
    mknod -m 666 dev/null c 1 3
    chattr +i etc/resolv.conf
-   chmod +x /usr/bin/c99
+   chmod +x usr/bin/c99
    curl -LO "https://curl.se/ca/cacert.pem"
    mv cacert.pem etc/ssl/certs/ca-certificates.crt
    cp -rp /etc/dinit.d etc/dinit.d
