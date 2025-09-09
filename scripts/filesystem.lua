@@ -106,22 +106,22 @@ file:close()
 --------------------------------------------------------------------------------
 file = io.open("etc/config.site", 'w')
 file:write([[
-test "$libdir" = '${exec_prefix}/lib' && libdir=/usr/lib64
-test "$localstatedir" = '${prefix}/var' && localstatedir=/var
-test "$runstatedir" = '${localstatedir}/run' && runstatedir=/run
-test "$sharedstatedir" = '${prefix}/com' && sharedstatedir=/var/lib
-test "$sysconfdir" = '${prefix}/etc' && sysconfdir=/etc
-test "$sbindir" = '${exec_prefix}/sbin' && sbindir=/usr/bin
-test "$libexecdir" = '${exec_prefix}/libexec' && libexecdir=/usr/libexec
-test -z "$with_pic" && with_pic=yes
-test -z "$enable_pic" && enable_pic=yes
-test -z "$enable_shared" && enable_shared=yes
-test -z "$enable_static" && enable_static=no
-test -z "$enable_nls" && enable_nls=no
-test -z "$enable_rpath" && enable_rpath=no
-test -z "$enable_tests" && enable_tests=no
-test -z "$enable_debug" && enable_debug=no
-test -z "$enable_werror" && enable_werror=no
+if [ "$libdir" = '${exec_prefix}/lib' ]; then libdir=/usr/lib64; fi
+if [ "$localstatedir" = '${prefix}/var' ]; then localstatedir=/var; fi
+if [ "$runstatedir" = '${localstatedir}/run' ]; then runstatedir=/run; fi
+if [ "$sharedstatedir" = '${prefix}/com' ]; then sharedstatedir=/var/lib; fi 
+if [ "$sysconfdir" = '${prefix}/etc' ]; then sysconfdir=/etc; fi
+if [ "$sbindir" = '${exec_prefix}/sbin' ]; then sbindir=/usr/bin; fi
+if [ "$libexecdir" = '${exec_prefix}/libexec' ]; then libexecdir=/usr/lib64; fi
+if [ -z ${with_pic+x} ]; then with_pic=yes; fi
+if [ -z ${enable_pic+x} ]; then enable_pic=yes; fi
+if [ -z ${enable_shared+x} ]; then enable_shared=yes; fi
+if [ -z ${enable_static+x} ]; then enable_static=no; fi
+if [ -z ${enable_nls+x} ]; then enable_nls=no; fi
+if [ -z ${enable_rpath+x} ]; then enable_rpath=no; fi
+if [ -z ${enable_tests+x} ]; then enable_tests=no; fi
+if [ -z ${enable_debug+x} ]; then enable_debug=no; fi
+if [ -z ${enable_werror+x} ]; then enable_werror=no; fi
 ]])
 file:close()
 --------------------------------------------------------------------------------
@@ -161,7 +161,7 @@ file:close()
 --------------------------------------------------------------------------------
 file = io.open("etc/passwd", 'w')
 file:write([[
-root::0:0:root:/root:/usr/bin/bash
+root::0:0:root:/root:/bin/bash
 bin:x:1:1:bin:/dev/null:/usr/bin/false
 daemon:x:6:6:Daemon User:/dev/null:/usr/bin/false
 atd:x:17:17:atd daemon:/dev/null:/usr/bin/false
@@ -270,6 +270,15 @@ mail.err                         /var/log/mail.err
 file:close()
 --------------------------------------------------------------------------------
 
+--------------------------------------------------------------------------------
+file = io.open("usr/bin/c99", 'w')
+file:write([[
+#!/bin/sh
+exec /usr/bin/gcc -std=c99 "$@"
+]]
+file:close()
+--------------------------------------------------------------------------------
+
 --------------
 -- Finalize --
 --------------
@@ -277,6 +286,7 @@ os.execute([[
    mknod -m 600 dev/console c 5 1
    mknod -m 666 dev/null c 1 3
    chattr +i etc/resolv.conf
+   chmod +x /usr/bin/c99
    curl -LO "https://curl.se/ca/cacert.pem"
    mv cacert.pem etc/ssl/certs/ca-certificates.crt
    cp -rp /etc/dinit.d etc/dinit.d
