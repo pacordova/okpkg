@@ -209,7 +209,11 @@ file:close()
 
 --------------------------------------------------------------------------------
 file = io.open("etc/profile", 'w')
-file:write("export LANG=en_US.utf8")
+file:write([[
+export LANG=en_US
+export PATH=/usr/bin
+export PS1='\h \W \$ '
+]])
 file:close()
 --------------------------------------------------------------------------------
 

@@ -757,15 +757,14 @@ dbus = {
 device-mapper = {
    url = "https://sourceware.org/ftp/lvm2/LVM2.2.03.34.tgz",
    sha3 = "ae9510b9c09f7c101d61a9a015e6a2db97c94e5ab0881cb314412f6bfa61209b",
+   prepare = "./configure",
    build = "make_noinstall",
    flags = {
-      "-j5",
       "install_device-mapper",
-      "DESTDIR=$destdir",
       "usrlibdir=$destdir/usr/lib64",
-      "CC=c99",
+      "DESTDIR=$destdir",
+      "MAKEFLAGS=",
    },
-   prepare = "./configure",
 };
 
 parted = {

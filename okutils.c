@@ -132,7 +132,7 @@ ok_chroot(lua_State *L)
 		setenv("USER", "root", 1);
 		setenv("LC_ALL", "C", 1);
 		setenv("SHELL", "/bin/sh", 1);
-		setenv("PS1", "(chroot)# ", 1);
+		setenv("PS1", "(chroot) \\W \\$ ", 1);
 		setenv("TERM", term, 1);
 	}
 
