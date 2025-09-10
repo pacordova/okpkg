@@ -66,8 +66,8 @@ libsm = {
 };
 
 libxss = {
-   url = "https://x.org/pub/individual/lib/libXScrnSaver-1.2.4.tar.xz",
-   sha3 = "5a759a2ea511d43e4247e51235a6bd24bd78da562ed5abef91d02f481bf54a7e",
+   url = "https://x.org/pub/individual/lib/libXScrnSaver-1.2.5.tar.xz",
+   sha3 = "3ae029ec3c7b7af223bd1e781a8470502f09e4d27312e1e457377550f064c708",
    build = "./configure",
 };
 
@@ -165,8 +165,8 @@ libxrandr = {
 };
 
 libxres = {
-   url = "https://x.org/pub/individual/lib/libXres-1.2.2.tar.xz",
-   sha3 = "06f7415ace2d6090c64fb2e758bd0bb28760bac08815688daa21f1aeac4a918f",
+   url = "https://x.org/pub/individual/lib/libXres-1.2.3.tar.xz",
+   sha3 = "de13edb6659a1265248a5d4bbd591f9637ac912d97441fdd36bf5a888ffd9817",
    build = "./configure",
 };
 
@@ -213,8 +213,8 @@ libxshmfence = {
 };
 
 libxpresent = {
-   url = "https://x.org/pub/individual/lib/libXpresent-1.0.1.tar.xz",
-   sha3 = "28eadefd8616033cddb7b20e5200cc722eb4ce1e6cbd8028873e8c3105c93319",
+   url = "https://x.org/pub/individual/lib/libXpresent-1.0.2.tar.xz",
+   sha3 = "71a3543daae593acb965fc59cbf3a45ea1ae798be8ac7f50045dbb160f4e4c06",
    build = "./configure",
 };
 
