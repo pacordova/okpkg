@@ -330,8 +330,8 @@ libvpx = {
 };
 
 libxml2 = {
-   url = "https://download.gnome.org/sources/libxml2/2.14/libxml2-2.14.5.tar.xz",
-   sha3 = "0197409696ca873096d5de2734bafe41401c8210ca3d2d02571e5f41bc364c83",
+   url = "https://download.gnome.org/sources/libxml2/2.14/libxml2-2.14.6.tar.xz",
+   sha3 = "30e8920c73b62247e4df09d317703c302e95d157b6b7c4f88a7dda1d43f4ec7c",
    build = "./configure",
    flags = {
       "--with-{history=yes,legacy=yes,icu=no}",
@@ -380,8 +380,8 @@ opus = {
 };
 
 p11-kit = {
-   url = "https://github.com/p11-glue/p11-kit/releases/download/0.25.5/p11-kit-0.25.5.tar.xz",
-   sha3 = "c17d9a241a9a25077bfafe61f80a33bebcb07917bd30a54e95c2717325f11596",
+   url = "https://github.com/p11-glue/p11-kit/releases/download/0.25.7/p11-kit-0.25.7.tar.xz",
+   sha3 = "e083ad5b732672ea82cfa0373d448b7327ebc335d56df82aee78f1772182036b",
    build = "meson",
    flags = { 
       "-Dtrust_paths=/etc/ssl/certs/ca-certificates.crt",
