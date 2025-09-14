@@ -74,11 +74,17 @@ gdk-pixbuf2 = {
    }
 };
 
+libcroco = {
+   url = "https://download.gnome.org/sources/libcroco/0.6/libcroco-0.6.13.tar.xz",
+   sha3 = "aa1160c118aa23e68bc8e8e6f13c2b8c49dafb1299ba722f716b68ea3293e6f5",
+   build = "./configure",
+};
+
 librsvg = {
    url = "https://download.gnome.org/sources/librsvg/2.40/librsvg-2.40.21.tar.xz",
    sha3 = "b5620f0b6c164830874fd41595fceb6c60c403c6ab0f7cdd19e426261a9665c2",
    build = "./configure",
-   flags = { "--enable-{introspection=no,vala=no}" }
+   flags = { "--enable-{introspection=no,vala=no}", "CC=/usr/bin/c99", "CFLAGS=-Wno-incompatible-pointer-types", }
 };
 
 gtk3 = {

@@ -334,8 +334,7 @@ libxml2 = {
    sha3 = "30e8920c73b62247e4df09d317703c302e95d157b6b7c4f88a7dda1d43f4ec7c",
    build = "./configure",
    flags = {
-      "--with-{history=yes,legacy=yes,icu=no}",
-      --"--with-minimum",
+      "--with-{history=yes,legacy=yes,relaxng=yes,icu=no}",
       "PYTHON=/usr/bin/python3",
    }
 };
