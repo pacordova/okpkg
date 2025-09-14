@@ -303,9 +303,9 @@ elementary-xfce-icon-theme = {
    sha3 = "9ea595732bbeca243b28d47527c1dc48eb2858f405eef0950b3b87fb8ad240ce",
    build = "./configure",
    post = [[
-      gtk-update-icon-cache $destdir/usr/share/icons/elementary-xfce
-      gtk-update-icon-cache $destdir/usr/share/icons/elementary-xfce-dark
-      gtk-update-icon-cache $destdir/usr/share/icons/elementary-xfce-darker
-      gtk-update-icon-cache $destdir/usr/share/icons/elementary-xfce-darkest
+      #gtk-update-icon-cache $destdir/usr/share/icons/elementary-xfce
+      #gtk-update-icon-cache $destdir/usr/share/icons/elementary-xfce-dark
+      #gtk-update-icon-cache $destdir/usr/share/icons/elementary-xfce-darker
+      #gtk-update-icon-cache $destdir/usr/share/icons/elementary-xfce-darkest
    ]]
 };
