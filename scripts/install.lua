@@ -54,7 +54,7 @@ end
 -- extra libraries
 library = {}
 local fp, buf
-fp = io.open("libs.db")
+fp = io.open("lib.db")
 buf = '\n' .. fp:read("*a")
 fp:close()
 for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do
