@@ -6,8 +6,8 @@ _freetype2 = {
 };
 
 harfbuzz = {
-   url = "https://github.com/harfbuzz/harfbuzz/releases/download/11.4.5/harfbuzz-11.4.5.tar.xz",
-   sha3 = "dc25f78d0b860c3b01d9712696eca09daf52838dd6e3de6e346340f82d2723f2",
+   url = "https://github.com/harfbuzz/harfbuzz/releases/download/11.5.0/harfbuzz-11.5.0.tar.xz",
+   sha3 = "5e661bc06f4654fc7ac95859b8ecab652c3ff15991b554a7dc447f98640c0129",
    build = "meson",
    flags = { 
       "-Dfreetype=enabled",
@@ -22,8 +22,8 @@ harfbuzz = {
 };
 
 freetype2 = {
-   url = "https://downloads.sourceforge.net/freetype/freetype-2.13.3.tar.xz",
-   sha3 = "764b5a302571b7ead0d180b3e5e7af19b0b47e6cb1315f26ee5266bd0460d2fc",
+   url = "https://downloads.sourceforge.net/freetype/freetype-2.14.1.tar.xz",
+   sha3 = "b72a036506643d8a853c9e40a2bd7ca18064a527542c0588b4e14a55fdae2fa5",
    build = "meson",
    flags = { "-Dharfbuzz=enabled" }
 };

@@ -64,8 +64,8 @@ gcc14 = {
 };
 
 ghostscript = {
-   url = "https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs10051/ghostscript-10.05.1.tar.xz",
-   sha3 = "677ddd0a829a9edea0d091cadd241ee2f862b8e69a82d31379f4f6f24f306ebb",
+   url = "https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs10060/ghostscript-10.06.0.tar.xz",
+   sha3 = "b8bbf1a091de71690a3dea504ea5954d960e1fb8b8ed9e5f858be66a83464f74",
    build = "./configure",
    flags = {
       "--disable-{compile-inits,cups}",
@@ -182,8 +182,8 @@ cryptsetup = {
 };
 
 cups = {
-   url = "https://github.com/OpenPrinting/cups/releases/download/v2.4.12/cups-2.4.12-source.tar.gz",
-   sha3 = "5c6b380607d4a72059c45aa560e078698859237b6dc490cf02554b784c247a65",
+   url = "https://github.com/OpenPrinting/cups/releases/download/v2.4.14/cups-2.4.14-source.tar.gz",
+   sha3 = "ac7d7abd512d415d7e51a164d7e38e00996ee985d13a3d4a0871c64373817c02",
    build = "./configure",
    flags = {
       "--with-rcdir=/tmp/cupsinit",
@@ -296,8 +296,8 @@ libtorrent-rasterbar = {
 };
 
 linux-lts = {
-   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.12.45.tar.xz",
-   sha3 = "c75c14f2718b11b2a5f9bb4ebf7ba679eab37f180252df4fa0fbde13bf6b98de",
+   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.12.47.tar.xz",
+   sha3 = "a495d53a09af96bd7d449f1af7bd0a9698471a3c9e07837bd78e68910f3324b4",
    build = "make",
    flags = { "bzImage", "modules", "headers" },
    prepare = [[

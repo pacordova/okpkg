@@ -25,7 +25,7 @@ printdeps(){
 
 for i in /var/lib/okpkg/index/*.index; do
   for l in `listlibs $i`; do
-    x=`ldd $l 2>/dev/null | grep "librsvg"`
+    x=`ldd $l 2>/dev/null | grep "not found"`
     if ! test -z "$x" ; then
       printf "%s: %s: %s\n" "$i" "$l"
       printf "%s\n" "$x"

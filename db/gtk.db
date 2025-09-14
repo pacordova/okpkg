@@ -62,11 +62,12 @@ pango = {
 };
 
 gdk-pixbuf2 = {
-   url = "https://download.gnome.org/sources/gdk-pixbuf/2.42/gdk-pixbuf-2.42.12.tar.xz",
-   sha3 = "12483dead22787c04dc64abfccf9866b9c7aa3d50afe7c13b80fd6971180f775",
+   url = "https://download.gnome.org/sources/gdk-pixbuf/2.44/gdk-pixbuf-2.44.1.tar.xz",
+   sha3 = "e133036533f575c740b87c7a2332527a6aa214a288fc316c9df1ed908bd62255",
    build = "meson",
    flags = {
       "-Dbuiltin_loaders=all",
+      "-Dglycin=disabled",
       "-Dgio_sniffing=false",
       "-Dinstalled_tests=false",
       "-Dothers=enabled",
@@ -158,8 +159,8 @@ gcr4 = {
 };
 
 gvfs = {
-   url = "https://download.gnome.org/sources/gvfs/1.56/gvfs-1.56.1.tar.xz",
-   sha3 = "931d556e56f621e51f6bf78c52791c855525e3a256a47ddc4def4592cc1ecc89",
+   url = "https://download.gnome.org/sources/gvfs/1.58/gvfs-1.58.0.tar.xz",
+   sha3 = "e4b5c96fe8e9a96d81d1688987c9ef78baccccc1a723786faaba4676b291e260",
    build = "meson",
    flags = {
       "-D{afc,bluray,dnssd,fuse,goa,google,gphoto2,mtp,nfs,smb}=false",

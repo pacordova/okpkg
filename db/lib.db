@@ -20,8 +20,8 @@ _glib2 = {
 };
 
 gobject-introspection = {
-   url = "https://download.gnome.org/sources/gobject-introspection/1.84/gobject-introspection-1.84.0.tar.xz",
-   sha3 = "e029a63a632d0427482a725409ba55ce1bafaf7b1d4ae0f13ff34515a36c60b1",
+   url = "https://download.gnome.org/sources/gobject-introspection/1.86/gobject-introspection-1.86.0.tar.xz",
+   sha3 = "46790be468f4dc724f18c1d316098492de25aa4f9e803b1ab0a439e29fb7bbf3",
    build = "meson",
 };
 
@@ -39,8 +39,8 @@ dbus-glib = {
 };
 
 json-glib = {
-   url = "https://download.gnome.org/sources/json-glib/1.10/json-glib-1.10.6.tar.xz",
-   sha3 = "45fd4d90d933149e081289cee95d3fb48c4f5b2a09ff0a360261f96a2df82efb",
+   url = "https://download.gnome.org/sources/json-glib/1.10/json-glib-1.10.8.tar.xz",
+   sha3 = "f0cb53d96a005f6714002fd4711906bde4cc54f8e1cabfb494bccb79f0f88f3b",
    build = "meson",
    flags = { "-D{gtk_doc=disabled,nls=disabled,tests=false}" },
 };
@@ -380,8 +380,8 @@ opus = {
 };
 
 p11-kit = {
-   url = "https://github.com/p11-glue/p11-kit/releases/download/0.25.7/p11-kit-0.25.7.tar.xz",
-   sha3 = "e083ad5b732672ea82cfa0373d448b7327ebc335d56df82aee78f1772182036b",
+   url = "https://github.com/p11-glue/p11-kit/releases/download/0.25.8/p11-kit-0.25.8.tar.xz",
+   sha3 = "2daf479cc670f3c68beeb7078ff09aa16ebd4c512efff88b02b7356d58a51265",
    build = "meson",
    flags = { 
       "-Dtrust_paths=/etc/ssl/certs/ca-certificates.crt",
