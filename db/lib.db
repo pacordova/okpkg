@@ -412,8 +412,8 @@ uthash = {
 };
 
 x264 = {
-   url = "https://code.videolan.org/videolan/x264/-/archive/31e19f92f00c7003fa115047ce50978bc98c3a0d/x264-31e19f92f00c7003fa115047ce50978bc98c3a0d.tar.gz",
-   sha3 = "f8a227b8cc5feb27c22b3828c3a9f471d0b560bb57413696bcf03e7329711ad7",
+   url = "https://code.videolan.org/videolan/x264/-/archive/4613ac3c15fd75cebc4b9f65b7fb95e70a3acce1/x264-4613ac3c15fd75cebc4b9f65b7fb95e70a3acce1.tar.bz2",
+   sha3 = "8faf6b2c75660bbb8c190bea726665e30ed997ff68cc03e9fb5038066613ac1c",
    build = "./configure",
    flags = {
       "--libdir=/usr/lib64",
