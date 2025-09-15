@@ -62,12 +62,11 @@ pango = {
 };
 
 gdk-pixbuf2 = {
-   url = "https://download.gnome.org/sources/gdk-pixbuf/2.44/gdk-pixbuf-2.44.1.tar.xz",
-   sha3 = "e133036533f575c740b87c7a2332527a6aa214a288fc316c9df1ed908bd62255",
+   url = "https://download.gnome.org/sources/gdk-pixbuf/2.42/gdk-pixbuf-2.42.12.tar.xz",
+   sha3 = "12483dead22787c04dc64abfccf9866b9c7aa3d50afe7c13b80fd6971180f775",
    build = "meson",
    flags = {
       "-Dbuiltin_loaders=all",
-      "-Dglycin=disabled",
       "-Dgio_sniffing=false",
       "-Dinstalled_tests=false",
       "-Dothers=enabled",
