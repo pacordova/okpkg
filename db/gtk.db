@@ -83,7 +83,7 @@ librsvg = {
    url = "https://download.gnome.org/sources/librsvg/2.40/librsvg-2.40.21.tar.xz",
    sha3 = "b5620f0b6c164830874fd41595fceb6c60c403c6ab0f7cdd19e426261a9665c2",
    build = "./configure",
-   flags = { "--enable-{introspection=no,vala=no}", "CC=/usr/bin/c99", "CFLAGS=-Wno-incompatible-pointer-types", }
+   flags = { "--enable-{introspection=no,vala=no}", "CC='c99 -Wno-incompatible-pointer-types'"}
 };
 
 gtk3 = {
