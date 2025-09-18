@@ -434,8 +434,8 @@ gdbm = {
 };
 
 expat = {
-   url = "https://downloads.sourceforge.net/expat/expat-2.7.1.tar.lz",
-   sha3 = "42c3609e354419344dba812efa5f5df65a51604a651d943bd25c98ff8886d4fb",
+   url = "https://downloads.sourceforge.net/expat/expat-2.7.2.tar.lz",
+   sha3 = "7a54aabb5d04ca089ccf1c988c2c0dcca1ea994ae20679b302d973fa7cc8bec9",
    build = "./configure",
    flags = { "--without-{docbook,examples,tests,xmlwf}" }
 };

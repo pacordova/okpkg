@@ -149,14 +149,14 @@ glad = {
 };
 
 python-pyparsing = {
-   url = "https://pypi.org/packages/source/p/pyparsing/pyparsing-3.2.3.tar.gz",
-   sha3 = "f9904826f488501e6eec7080cea1fb7a74e108cba637e018de506cbd199fa17e",
+   url = "https://pypi.org/packages/source/p/pyparsing/pyparsing-3.2.4.tar.gz",
+   sha3 = "7628ddc60dd1a2cb3d3457adc9fbe16606e38cc7b07157820ce4c4662365c702",
    build = "python-build",
 };
 
 cython = {
-   url = "https://pypi.org/packages/source/c/cython/cython-3.1.3.tar.gz",
-   sha3 = "a44fda831833a14b20c8d57bedb99a40e0da18abfea7591aeaec1ab04477dec7",
+   url = "https://pypi.org/packages/source/c/cython/cython-3.1.4.tar.gz",
+   sha3 = "9af5e7587d1cdad650694ddb1d1d82bbe05beb54e7568d1312f14b10b122dae7",
    build = "python-build",
 };
 
