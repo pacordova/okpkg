@@ -568,8 +568,8 @@ plzip = {
 };
 
 kbd = {
-   url = "https://kernel.org/pub/linux/utils/kbd/kbd-2.8.0.tar.xz",
-   sha3 = "d6918b324bfc8468ffacd4c4758a2c3ab9cd80132e284b1eeca9f515603bb511",
+   url = "https://kernel.org/pub/linux/utils/kbd/kbd-2.9.0.tar.xz",
+   sha3 = "48f9f1ab135088c9d11e8a425982c94e000b6c8ec9c3bfd666b584e8bfcf71a1",
    build = "./configure",
    flags = { "--disable-vlock" },
    prepare = [[

@@ -286,8 +286,8 @@ libtasn1 = {
 };
 
 libtiff = {
-   url = "https://download.osgeo.org/libtiff/tiff-4.7.0.tar.xz",
-   sha3 = "88549f5176ff1e742a0222e7389e7fccad78e28d41a0bcd3bd72666adcec1a9c",
+   url = "https://download.osgeo.org/libtiff/tiff-4.7.1.tar.xz",
+   sha3 = "d83a9dcc4a8a838b4d0ffa4fbdfeba5bb813375ebbc7d248ff61dfee2eff9283",
    build = "./configure",
 };
 
@@ -379,8 +379,8 @@ opus = {
 };
 
 p11-kit = {
-   url = "https://github.com/p11-glue/p11-kit/releases/download/0.25.8/p11-kit-0.25.8.tar.xz",
-   sha3 = "2daf479cc670f3c68beeb7078ff09aa16ebd4c512efff88b02b7356d58a51265",
+   url = "https://github.com/p11-glue/p11-kit/releases/download/0.25.9/p11-kit-0.25.9.tar.xz",
+   sha3 = "c97f09e7099a03652b76600dc7872e8dc73d6c1af0fd553e28b4c564d0c32061",
    build = "meson",
    flags = { 
       "-Dtrust_paths=/etc/ssl/certs/ca-certificates.crt",
