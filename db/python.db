@@ -149,8 +149,8 @@ glad = {
 };
 
 python-pyparsing = {
-   url = "https://pypi.org/packages/source/p/pyparsing/pyparsing-3.2.4.tar.gz",
-   sha3 = "7628ddc60dd1a2cb3d3457adc9fbe16606e38cc7b07157820ce4c4662365c702",
+   url = "https://pypi.org/packages/source/p/pyparsing/pyparsing-3.2.5.tar.gz",
+   sha3 = "42ba7f68d0fe523defe403d47add95ef7b4781a19b668e2d08ad43532cc61094",
    build = "python-build",
 };
 

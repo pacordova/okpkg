@@ -22,10 +22,10 @@ gsettings-desktop-schemas = {
 };
 
 xdg-user-dirs = {
-   url = "https://user-dirs.freedesktop.org/releases/xdg-user-dirs-0.18.tar.gz",
-   sha3 = "b94c66edbf2d901c8353916fda76263845f2e6b7d9d0dd071472dcb37f87ad29",
-   build = "./configure",
-   flags = { "--disable-documentation" }
+   url = "https://user-dirs.freedesktop.org/releases/xdg-user-dirs-0.19.tar.xz",
+   sha3 = "6ef28992b957d0eff897cc746c6e9ef8b37a65b6a0e2f3911dc17f42c4508180",
+   build = "meson",
+   flags = { "-Ddocs=false" }
 };
 
 startup-notification = {
@@ -55,8 +55,8 @@ cairo = {
 };
 
 pango = {
-   url = "https://download.gnome.org/sources/pango/1.56/pango-1.56.4.tar.xz",
-   sha3 = "f0c3655cbd677509bcf9a711637ed977b212e92a80698e61b4fa8163556b8e45",
+   url = "https://download.gnome.org/sources/pango/1.57/pango-1.57.0.tar.xz",
+   sha3 = "4aaabd73ffc23ebb182050adf09fd7c6650b919f5e7b5497712bec999084765c",
    build = "meson",
    flags = { "-Dintrospection=enabled" },
 };

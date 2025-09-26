@@ -434,8 +434,8 @@ gdbm = {
 };
 
 expat = {
-   url = "https://downloads.sourceforge.net/expat/expat-2.7.2.tar.lz",
-   sha3 = "7a54aabb5d04ca089ccf1c988c2c0dcca1ea994ae20679b302d973fa7cc8bec9",
+   url = "https://downloads.sourceforge.net/expat/expat-2.7.3.tar.lz",
+   sha3 = "b8274a5eb9219a3d6e2e3bcb6192e289c0f8fea781ded58fec9f08d38dd91574",
    build = "./configure",
    flags = { "--without-{docbook,examples,tests,xmlwf}" }
 };
@@ -513,8 +513,8 @@ libffi = {
 };
 
 coreutils = {
-   url = "https://ftp.gnu.org/gnu/coreutils/coreutils-9.7.tar.xz",
-   sha3 = "c338d429e9cdbf31d034e8a70a9292c9abd97a88ab9e88bdf800edee6cc33071",
+   url = "https://ftp.gnu.org/gnu/coreutils/coreutils-9.8.tar.xz",
+   sha3 = "f6cb6b76a0a59108eada1168a61f53e64986a67f67fcf54e06b80d7a6997ebb4",
    build = "./configure",
    flags = {
       "--enable-install-program=hostname",
@@ -699,8 +699,8 @@ procps-ng = {
 };
 
 util-linux = {
-   url = "https://kernel.org/pub/linux/utils/util-linux/v2.41/util-linux-2.41.1.tar.xz",
-   sha3 = "bd38ac324144b18ae24c06ff1928050226179d0f5441c471d2c11475fbfc7ad1",
+   url = "https://kernel.org/pub/linux/utils/util-linux/v2.41/util-linux-2.41.2.tar.xz",
+   sha3 = "a7342070224bacfd206ce769bd3821fa558b83113ab1a3b8f34121f3b6b4c0f5",
    build = "./configure",
    flags = {
       "--disable-{chfn-chsh,login,nologin,su,setpriv,runuser,pylibmount}",

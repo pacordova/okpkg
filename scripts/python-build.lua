@@ -17,12 +17,14 @@ for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do
    if i ~= "python3" then purge(i); emerge(i) end
 end
 
+emerge("meson")
+
 --------------
 -- Renstall --
 --------------
 local pkgs = {
-   "meson", "libxml2", "glib2", "gobject-introspection", "xcb-proto", 
-   "pygobject", "pycairo"
+   "libxml2", "glib2", "gobject-introspection", "xcb-proto", 
+   "pygobject", "pycairo", "libtorrent-rasterbar",
 }
 for _, v in pairs(pkgs) do 
    purge(v)

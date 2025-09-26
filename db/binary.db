@@ -41,8 +41,8 @@ firefox = {
 -- from firefox: libnss3.so libnssutil3.so libsmime3.so libnspr4.so libplc4.so libplds4.so
 -- needs libcups.so.2
 discord = {
-   url = "https://dl.discordapp.net/apps/linux/0.0.110/discord-0.0.110.tar.gz",
-   sha3 = "0e38f0bac39c9d2893bddc5c8b59b54b18059792fef48ee5713674bf3f8ad54c",
+   url = "https://dl.discordapp.net/apps/linux/0.0.111/discord-0.0.111.tar.gz",
+   sha3 = "c02d01417ef5056be016bd9a0648d5984bc64704f1cd80df4da0764034b105e8",
    build = _,
    post = [[
       sed -e 's:/usr/share:/usr/lib64:'                         \
@@ -105,11 +105,11 @@ nodejs = {
 -- TODO: download error: cannot handle debfile
 -- Consider building from source.
 signal-desktop = {
-   url = "https://updates.signal.org/desktop/apt/pool/s/signal-desktop/signal-desktop_7.71.0_amd64.deb",
-   sha3 = "178a4b3e556271e97e6f768ac0c4cf3b9b27b47d1111dcc745093fb8aa477b4f",
+   url = "https://updates.signal.org/desktop/apt/pool/s/signal-desktop/signal-desktop_7.72.1_amd64.deb",
+   sha3 = "cd7b9abce76ff0eb0ae52852e093ea9dd5216a0332c6c374c2817848fce1d9bf",
    build = _,
    post = [[
-      ar x ../../download/signal-desktop_7.71.0_amd64.deb data.tar.xz
+      ar x ../../download/signal-desktop_7.72.1_amd64.deb data.tar.xz
       tar -xf data.tar.xz
       sed -i 's:/opt/Signal:/usr/bin:' usr/share/applications/signal-desktop.desktop
       install -d $destdir/usr/{lib64,bin}
