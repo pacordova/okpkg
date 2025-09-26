@@ -161,8 +161,8 @@ cython = {
 };
 
 python-yaml = {
-   url = "https://github.com/yaml/pyyaml/archive/6.0.2/pyyaml-6.0.2.tar.gz",
-   sha3 = "eca18a30377fbd896ce096e6085be77082365b915e9bde8343ed2090493b24c2",
+   url = "https://github.com/yaml/pyyaml/archive/6.0.3/pyyaml-6.0.3.tar.gz",
+   sha3 = "edac6f137598af5917096aecdde1ee47d4c3fc324f8c41277dca5c096994ca6f",
    build = "python-build",
 };
 

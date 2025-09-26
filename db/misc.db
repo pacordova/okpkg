@@ -296,8 +296,8 @@ libtorrent-rasterbar = {
 };
 
 linux-lts = {
-   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.12.48.tar.xz",
-   sha3 = "76b7b5df3fe99d45ca80951a4fb15a45f9f7aa78836bdee27028834b3e108ea3",
+   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.12.49.tar.xz",
+   sha3 = "6cef482e439c09c72450ca5ce9aceb39ca291532e20b7e857677aa54b2a72f28",
    build = "make",
    flags = { "bzImage", "modules", "headers" },
    prepare = [[
@@ -309,7 +309,7 @@ linux-lts = {
       install -m 644 arch/x86/boot/bzImage $destdir/boot/vmlinuz
       make modules_install \
           INSTALL_MOD_PATH=$destdir \
-          MODLIB=$destdir/usr/lib64/modules/6.12.48
+          MODLIB=$destdir/usr/lib64/modules/6.12.49
       cp -rp usr/include $destdir/usr
       find $destdir/usr/include -type f ! -name '*.h' -delete
    ]]
@@ -432,8 +432,8 @@ unrar = {
 };
 
 vim = {
-   url = "https://github.com/vim/vim/archive/v9.1.1734/vim-9.1.1734.tar.gz",
-   sha3 = "c0c226b962873804e8f5f5003a7d47b99bd3f8db6b2cef3f2403600996636e1c",
+   url = "https://github.com/vim/vim/archive/v9.1.1797/vim-9.1.1797.tar.gz",
+   sha3 = "7b1bd52d23e1bd9b88d939c8acaa0d415472601e4c2ce27733f5afd4ff9e145d",
    build = "./configure",
    flags = {
       "--enable-{cscope,multibyte}",

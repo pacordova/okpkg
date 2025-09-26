@@ -9,11 +9,10 @@ tempdir=`mktemp -d`
 curl='curl --remote-name-all'
 
 _cksum_gh(){
-    v=$(echo "$2" | sed 's/^v//')
-    git clone --depth 1 --branch "$2" "$1"
-    git -C `basename $1` verify-tag "$2" || exit 1
-    git -C `basename $1` archive --format=tar --prefix=`basename $1`-$v/ "$2" |
-        gzip -n > `basename $1`-$v.tar.gz
+   git clone --depth 1 --branch "$2" "$1"
+   git -C ${1##*/} verify-tag "$2" || exit 1
+   git -C ${1##*/} archive --format=tar --prefix=${1##*/}-${2/v/}/ "$2" | 
+      gzip -n > ${1##*/}-${2/v/}.tar.gz
 }
 
 _cksum_signal(){
@@ -26,8 +25,8 @@ _cksum_signal(){
 
 cd $tempdir
 
-_cksum_signal 7.72.1
-#_cksum_gh https://github.com/vim/vim v9.1.1734
+#_cksum_signal
+_cksum_gh https://github.com/vim/vim v9.1.1797
 #_cksum_gh https://github.com/vcrhonek/hwdata v0.399
 #_cksum_gh https://github.com/yshui/picom v12.5
 #_cksum_gh https://github.com/eggert/tz 2025b
@@ -37,6 +36,4 @@ _cksum_signal 7.72.1
 #_cksum_gh https://github.com/systemd/systemd/ v256
 
 for f in *.{tar.gz,deb}; do [ -f $f ] && okpkg sha3sum $f; done
-
-cd $oldpwd
-rm -r $tempdir
+cd $oldpwd && rm -fr $tempdir
