@@ -116,8 +116,8 @@ libhandy = {
 };
 
 libnotify = {
-   url = "https://download.gnome.org/sources/libnotify/0.8/libnotify-0.8.6.tar.xz",
-   sha3 = "f6c36df1575d499ffbe844a1b6249a4c6bbd67aa8e305b0a48268b9d58915698",
+   url = "https://download.gnome.org/sources/libnotify/0.8/libnotify-0.8.7.tar.xz",
+   sha3 = "c559691d497dd32dd4c8dcd20461859f997915491e9b09e917dcc905b3d988aa",
    build = "meson",
    flags = { "-D{gtk_doc,man,tests}=false" }
 };
