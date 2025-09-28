@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Verify the github tarball checksums
 # The checksum should be identical to the github tarball (with `gzip -n`)
@@ -11,8 +11,8 @@ curl='curl --remote-name-all'
 _cksum_gh(){
    git clone --depth 1 --branch "$2" "$1"
    git -C ${1##*/} verify-tag "$2" || exit 1
-   git -C ${1##*/} archive --format=tar --prefix=${1##*/}-${2/v/}/ "$2" | 
-      gzip -n > ${1##*/}-${2/v/}.tar.gz
+   git -C ${1##*/} archive --format=tar --prefix=${1##*/}-${2#v}/ "$2" | 
+      gzip -n > ${1##*/}-${2#v}.tar.gz
 }
 
 _cksum_signal(){
@@ -23,7 +23,7 @@ _cksum_signal(){
    printf "%s %s" `sed -n '36s|SHA512: ||p' Packages` *.deb | sha512sum -c || exit 1
 }
 
-cd $tempdir
+cd "$tempdir"
 
 #_cksum_signal
 _cksum_gh https://github.com/vim/vim v9.1.1797
