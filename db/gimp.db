@@ -44,7 +44,7 @@ libmypaint = {
    }
 };
 
-mypaint-brushes = {
+mypaint-brushes1 = {
    url = "https://github.com/mypaint/mypaint-brushes/releases/download/v1.3.1/mypaint-brushes-1.3.1.tar.xz",
    sha3 = "89f237d78c7bd73d275eea7f04c5d003565f18b8ef1ba485b8ce30805b9a1cdc",
    build = "./configure",

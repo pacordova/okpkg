@@ -101,7 +101,8 @@ for w in string.gmatch(buf, '%./(.-)\n') do
          gsub("0.18_20240915", "0.18"):
          gsub(".post1", ""):
          gsub("lvm2%-", "device-mapper-"):
-         gsub("gtk%+3%-", "gtk3-")
+         gsub("gtk%+3%-", "gtk3-"):
+         gsub("mypaint%-brushes", "mypaint-brushes1")
       table.insert(slackware, s)
    end
 end
