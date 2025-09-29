@@ -330,8 +330,8 @@ libvpx = {
 };
 
 libxml2 = {
-   url = "https://download.gnome.org/sources/libxml2/2.14/libxml2-2.14.6.tar.xz",
-   sha3 = "30e8920c73b62247e4df09d317703c302e95d157b6b7c4f88a7dda1d43f4ec7c",
+   url = "https://download.gnome.org/sources/libxml2/2.15/libxml2-2.15.0.tar.xz",
+   sha3 = "d85bca1b6c14982fbbd3e3326b284f0f3f62d2114caf4af46dc8003f113f082b",
    build = "./configure",
    flags = {
       "--with-{history=yes,legacy=yes,relaxng=yes,icu=no}",
