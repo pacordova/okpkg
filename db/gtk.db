@@ -91,8 +91,8 @@ librsvg = {
 };
 
 gtk3 = {
-   url = "https://download.gnome.org/sources/gtk/3.24/gtk-3.24.50.tar.xz",
-   sha3 = "5f0efbaea3eb2fb1d7741163b60006dcf8c972dc33d4970227c6fb702b8369c5",
+   url = "https://download.gnome.org/sources/gtk/3.24/gtk-3.24.51.tar.xz",
+   sha3 = "cc929ab254421708e2169fee8ecfeb758896f3c3236dfb3be437d980f26ff592",
    build = "meson",
    flags = {
       "-Dbroadway_backend=true",

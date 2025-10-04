@@ -58,8 +58,8 @@ gnupg2 = {
 };
 
 gpgme = {
-   url = "https://gnupg.org/ftp/gcrypt/gpgme/gpgme-2.0.0.tar.bz2",
-   sha3 = "a6179160d25df8c43da6cd29749688c1f7013785ab36bbf0cd99e8f475722b61",
+   url = "https://gnupg.org/ftp/gcrypt/gpgme/gpgme-2.0.1.tar.bz2",
+   sha3 = "0b2d72c6548835f7ecd5f3be5878c7df556769488b6682d74ff3d38de50aef88",
    build = "./configure",
    flags = { "--disable-gpg-test" }
 };

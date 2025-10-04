@@ -248,8 +248,8 @@ libpng = {
 };
 
 libunistring = {
-   url = "https://ftp.gnu.org/gnu/libunistring/libunistring-1.3.tar.xz",
-   sha3 = "22a5975e90b0034f8b5aee36fc80663e10b12d5d1fa9f91987fe1eb8902906bc",
+   url = "https://ftp.gnu.org/gnu/libunistring/libunistring-1.4.tar.xz",
+   sha3 = "dd91fead6792ec1762db588bee738412d468db79069b41a95dbec828d09bdea9",
    build = "./configure",
 };
 
