@@ -5,8 +5,8 @@ babl = {
 };
 
 gegl = {
-   url = "https://download.gimp.org/pub/gegl/0.4/gegl-0.4.62.tar.xz",
-   sha3 = "c21b91884dbcc219076d48925025d4a3cc49199c8f798e4c5c584fa80aceec8c",
+   url = "https://download.gimp.org/pub/gegl/0.4/gegl-0.4.64.tar.xz",
+   sha3 = "4e1f1d24cdde9095846bad87e52ef53eb7170bc39bd651a0dd7702861fd64122",
    build = "meson",
 };
 
@@ -73,8 +73,9 @@ pygobject = {
 };
 
 gimp = {
-   url = "https://download.gimp.org/gimp/v3.0/gimp-3.0.4.tar.xz",
-   sha3 = "ca04db02ed4560aa94a193f20c10cd1980d7efeb2f5db9f4e77fb6043ab0cbd6",
+   url = "https://download.gimp.org/gimp/v3.0/gimp-3.0.6.tar.xz",
+   sha3 = "d7a4e4970fe2bb6f63e5a59db122ee7e8d9fd32811bd8e8d26bd18cd0fd8ed4a",
    build = "meson",
    flags = { "-Dheadless-tests=disabled" },
+   prepare = [[ sed -i 's/if not glib_networking_works/if not true/' meson.build ]],
 };

@@ -179,8 +179,8 @@ python-hatch-vcs = {
 };
 
 python-attrs = {
-   url = "https://pypi.org/packages/source/a/attrs/attrs-25.3.0.tar.gz",
-   sha3 = "9234c6b04ee4afecd4bea77b3902c6d98a7d75a88d661e4ce1b98eb751731098",
+   url = "https://pypi.org/packages/source/a/attrs/attrs-25.4.0.tar.gz",
+   sha3 = "0825664f1bbce7188953cff9b3c4ef8bb3b30fb85f33d1412946fda35a88f6cc",
    build = "python-build",
 };
 
