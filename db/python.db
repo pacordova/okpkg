@@ -76,8 +76,8 @@ python-jinja = {
 };
 
 python-docutils = {
-   url = "https://downloads.sourceforge.net/docutils/docutils-0.22.tar.gz",
-   sha3 = "473333ff7fdf3226c7cc8b0c01edf1c4a2da7d1318bd3e52e03e951520e65eeb",
+   url = "https://downloads.sourceforge.net/docutils/docutils-0.22.2.tar.gz",
+   sha3 = "dd23e3e291efc41cfa7c9b7e7a0c5a4e551e875f5bcc4c1c7ba45669358fc81b",
    build = "python-build",
 };
 
