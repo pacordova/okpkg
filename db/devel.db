@@ -67,6 +67,7 @@ itstool = {
    url = "https://files.itstool.org/itstool/itstool-2.0.7.tar.bz2",
    sha3 = "68d36ae4c43c1131cbaeaff67daac1fa236c44b58d0aff6bc5190ba5001b7046",
    build = "./configure",
+   prepare = [[ autoreconf -fi ]],
 };
 
 libtool = {

@@ -114,8 +114,8 @@ thunar-volman = {
 };
 
 tumbler = {
-   url = "https://archive.xfce.org/src/xfce/tumbler/4.20/tumbler-4.20.0.tar.bz2",
-   sha3 = "54f7978b13b9d8dd983e036e1637903af340648901735fa013db78edd12ba8f8",
+   url = "https://archive.xfce.org/src/xfce/tumbler/4.20/tumbler-4.20.1.tar.bz2",
+   sha3 = "e88838c251fc583033d2404b8997dbe0cee19ea58e0451b6a9fb3860b622ca2d",
    build = "./configure",
    flags = {
       "--disable-gstreamer-thumbnailer",

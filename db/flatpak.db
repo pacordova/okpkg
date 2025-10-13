@@ -31,20 +31,29 @@ libxmlb = {
    flags = { "-Dintrospection=true", "-D{gtkdoc,tests}=false" },
 };
 
+libfyaml = {
+   url = "https://github.com/pantoniou/libfyaml/releases/download/v0.9/libfyaml-0.9.tar.gz",
+   sha3 = "a379858887156c2023f1203a4b1df4c6b4530aac66c9785e57bfdca0574459eb",
+   build = "./configure",
+};
+
 appstream = {
-   url = "https://www.freedesktop.org/software/appstream/releases/AppStream-1.1.0.tar.xz",
-   sha3 = "06603e5147c0f5bdd660261ab31fc9936489a7eb42ca6ad0035f7e2ba1f7821c",
+   url = "https://www.freedesktop.org/software/appstream/releases/AppStream-1.1.1.tar.xz",
+   sha3 = "333761f9d818e314a3df1bbe7b07bb0c3dc471eff1c73d3ffe78ef6c7eff19fc",
    build = "meson",
    flags = {
       "-Dsystemd=false",
       "-Dapidocs=false",
+      "-Dinstall-docs=false",
+      "-Dman=false",
       "-Dstemming=false",
-      "-Dvapi=true",
+      "-Dvapi=false",
       "-Dcompose=true",
    },
    prepare = [[
       mv AppStream*/* . && rm -fr AppStream*
       sed -i "/subdir('docs\/')/d" meson.build
+      sed -i "s/version: '>= 2.48'/version: '>= 2.40'/" compose/meson.build
    ]]
 };
 

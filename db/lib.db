@@ -248,8 +248,8 @@ libpng = {
 };
 
 libunistring = {
-   url = "https://ftp.gnu.org/gnu/libunistring/libunistring-1.4.tar.xz",
-   sha3 = "dd91fead6792ec1762db588bee738412d468db79069b41a95dbec828d09bdea9",
+   url = "https://ftp.gnu.org/gnu/libunistring/libunistring-1.4.1.tar.xz",
+   sha3 = "d204d6dcb145622ded1917c011f78a58d1d5c850f9c469c1386af15b36025060",
    build = "./configure",
 };
 
@@ -334,8 +334,11 @@ libxml2 = {
    sha3 = "d85bca1b6c14982fbbd3e3326b284f0f3f62d2114caf4af46dc8003f113f082b",
    build = "./configure",
    flags = {
-      "--with-{history=yes,legacy=yes,relaxng=yes,icu=no}",
-      "PYTHON=/usr/bin/python3",
+      "--with-history",
+      "--with-legacy",
+      "--with-relaxng",
+      "--without-icu",
+      "--without-docs",
    }
 };
 

@@ -207,3 +207,9 @@ python-pyxdg = {
    sha3 = "085473373bd84fdbc3d4de35ac7b4a76c538f73de58d691668bf7dc114909fea",
    build = "python-build",
 };
+
+python-lxml = {
+   url = "https://files.pythonhosted.org/packages/source/l/lxml/lxml-6.0.2.tar.gz",
+   sha3 = "e54243cb38dcbae236ce73b26a8ccf8efb182d00207af8b16440ef4d574ba55a",
+   build = "python-build",
+};
