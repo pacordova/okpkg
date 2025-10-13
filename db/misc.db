@@ -432,8 +432,8 @@ unrar = {
 };
 
 vim = {
-   url = "https://github.com/vim/vim/archive/v9.1.1825/vim-9.1.1825.tar.gz",
-   sha3 = "c93f2208a3078e35769ff4ca7e80b33f49df9f3c0b0acf640dfc4fbb7d3e2110",
+   url = "https://github.com/vim/vim/archive/v9.1.1854/vim-9.1.1854.tar.gz",
+   sha3 = "dd05d5cfc0f55fccce806d45b19a34b2b128c0e9fae16edb87f722c93ed0c223",
    build = "./configure",
    flags = {
       "--enable-{cscope,multibyte}",
