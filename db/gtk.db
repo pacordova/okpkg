@@ -15,8 +15,8 @@ desktop-file-utils = {
 };
 
 gsettings-desktop-schemas = {
-   url = "https://download.gnome.org/sources/gsettings-desktop-schemas/49/gsettings-desktop-schemas-49.0.tar.xz",
-   sha3 = "a9c37f93e018fee32b22f6008140af25f915073f05e4a6c6126738988b3cebae",
+   url = "https://download.gnome.org/sources/gsettings-desktop-schemas/49/gsettings-desktop-schemas-49.1.tar.xz",
+   sha3 = "ab6b6a8f7d1e367e45d8044c991c050234c48d98e3edf54f99fc119d69b61710",
    build = "meson",
    prepare = [[ sed -i -r 's:"(/system):"/org/gnome\1:g' schemas/*.in ]]
 };

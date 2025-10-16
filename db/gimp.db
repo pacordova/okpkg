@@ -26,8 +26,8 @@ exiv2 = {
 };
 
 gexiv2 = {
-   url = "https://download.gnome.org/sources/gexiv2/0.14/gexiv2-0.14.6.tar.xz",
-   sha3 = "3574c6566da48dcbc98e4aa95489e2e3a6db68ca8a874baf7d35072d8d038e74",
+   url = "https://download.gnome.org/sources/gexiv2/0.16/gexiv2-0.16.0.tar.xz",
+   sha3 = "57da49a7fd9d811b6cbf928cfccf2e71f25ed4b1c942083d8e14f1546f1107e0",
    build = "meson",
    flags = { "-Dpython3=false" },
 };

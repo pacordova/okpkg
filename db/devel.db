@@ -84,8 +84,8 @@ meson = {
 };
 
 nasm = {
-   url = "https://www.nasm.us/pub/nasm/releasebuilds/2.16.03/nasm-2.16.03.tar.xz",
-   sha3 = "3a7634350853231b03bb9fec8f23836a4bc7cfb9f8a48f2317555ac4aec98414",
+   url = "https://www.nasm.us/pub/nasm/releasebuilds/3.01/nasm-3.01.tar.xz",
+   sha3 = "ef78120e15ff8501d0eeae63ac1c1fbae28c36150422044a84f0e43647494cd2",
    build = "./configure",
 };
 

@@ -17,7 +17,7 @@ python3 = {
       rm -fr test ./*/test ./*/tests
       rm -fr pydoc* idlelib turtle* config-*
       cd "$destdir/usr/bin"
-      rm -f pydoc* idle*
+      #rm -f pydoc* idle*
    ]]
 };
 
@@ -94,8 +94,8 @@ python-editables = {
 };
 
 python-setuptools-scm = {
-   url = "https://pypi.org/packages/source/s/setuptools-scm/setuptools_scm-9.2.0.tar.gz",
-   sha3 = "0637927a345c5794b0661fdc6a4aff3b5b25909fe034c1818441fdd37ceaceb2",
+   url = "https://pypi.org/packages/source/s/setuptools-scm/setuptools_scm-9.2.1.tar.gz",
+   sha3 = "fc32f6b9e1f6d232b357af2a546ab3f3530b4c02631481dfd9dce61fca383bef",
    build = "python-build",
 };
 
@@ -191,8 +191,8 @@ python-versioneer = {
 };
 
 python-cffi = {
-   url = "https://pypi.org/packages/source/c/cffi/cffi-1.17.1.tar.gz",
-   sha3 = "6889212fc867eb93021fcb26c98e2718e55a38c46352ddcac9f4f812a34d0b50",
+   url = "https://pypi.org/packages/source/c/cffi/cffi-2.0.0.tar.gz",
+   sha3 = "a6d9c806e665ab83b512972ead0def02e68d1d7eea85dd9ddc6943aa290452d9",
    build = "python-build",
 };
 

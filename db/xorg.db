@@ -268,8 +268,8 @@ libglvnd = {
 };
 
 libdrm = {
-   url = "https://dri.freedesktop.org/libdrm/libdrm-2.4.126.tar.xz",
-   sha3 = "f2f1cb6be7f72a5821a23c7cc88d135c5bce89dc60d06cb2c7ed36fad0408561",
+   url = "https://dri.freedesktop.org/libdrm/libdrm-2.4.127.tar.xz",
+   sha3 = "8b49c6b28fd0fcfec3ab021d46ac217c83316b9a88587ecdb655f2e8aa348f0e",
    build = "meson",
    flags = {
       "-D{intel=enabled,udev=true,valgrind=disabled}",
@@ -290,8 +290,8 @@ libvdpau = {
 };
 
 mesa = {
-   url = "https://mesa.freedesktop.org/archive/mesa-25.2.4.tar.xz",
-   sha3 = "7f4388864ce5cde438442ae4071582daf8b5ef6e0545452e05f7f990620a59c4",
+   url = "https://mesa.freedesktop.org/archive/mesa-25.2.5.tar.xz",
+   sha3 = "0e9eacc0cc7cf749f48cb6c4e0219c0651707ceae46db78034338c1939a415c9",
    build = "meson",
    flags = {
       "-Dplatforms=x11",
