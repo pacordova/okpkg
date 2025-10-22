@@ -95,8 +95,8 @@ python-editables = {
 };
 
 python-setuptools-scm = {
-   url = "https://pypi.org/packages/source/s/setuptools-scm/setuptools_scm-9.2.1.tar.gz",
-   sha3 = "fc32f6b9e1f6d232b357af2a546ab3f3530b4c02631481dfd9dce61fca383bef",
+   url = "https://pypi.org/packages/source/s/setuptools-scm/setuptools_scm-9.2.2.tar.gz",
+   sha3 = "ba6936b2efda39792806a9659be44d1f3d738ef3d43789335662f71164ea2da7",
    build = "python-build",
 };
 
@@ -156,8 +156,8 @@ python-pyparsing = {
 };
 
 cython = {
-   url = "https://pypi.org/packages/source/c/cython/cython-3.1.4.tar.gz",
-   sha3 = "9af5e7587d1cdad650694ddb1d1d82bbe05beb54e7568d1312f14b10b122dae7",
+   url = "https://pypi.org/packages/source/c/cython/cython-3.1.5.tar.gz",
+   sha3 = "c809f7d226191fb6ada19913fa11a03e7a0ce2917efc6e08c6b0d70ad48e1b14",
    build = "python-build",
 };
 

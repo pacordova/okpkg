@@ -26,8 +26,8 @@ gobject-introspection = {
 };
 
 glib2 = {
-   url = "https://download.gnome.org/sources/glib/2.86/glib-2.86.0.tar.xz",
-   sha3 = "73f2f698eba6a687052e54b5fb2ee6d531ba8b449a769eac255a31703a0b56c7",
+   url = "https://download.gnome.org/sources/glib/2.86/glib-2.86.1.tar.xz",
+   sha3 = "7cd7283c6eaa872ba0ccae55174cd3e762fd7a14964933a11c733141daea05bd",
    build = "meson",
    flags = { "-Dintrospection=enabled" }
 };
@@ -171,8 +171,8 @@ lcms2 = {
 };
 
 libarchive = {
-   url = "https://github.com/libarchive/libarchive/releases/download/v3.8.1/libarchive-3.8.1.tar.xz",
-   sha3 = "b0e12dfc2cd1221fb59bb17620e6495321fc6f67a8170b842eb40110dc05fe7b",
+   url = "https://github.com/libarchive/libarchive/releases/download/v3.8.2/libarchive-3.8.2.tar.xz",
+   sha3 = "56bec1e8d0cc0780b71a9b01aa8ecc49fb9531279cb2ff1a24bb72e5f9951624",
    build = "./configure",
    flags = { "--without-nettle" }
 };
@@ -330,8 +330,8 @@ libvpx = {
 };
 
 libxml2 = {
-   url = "https://download.gnome.org/sources/libxml2/2.15/libxml2-2.15.0.tar.xz",
-   sha3 = "d85bca1b6c14982fbbd3e3326b284f0f3f62d2114caf4af46dc8003f113f082b",
+   url = "https://download.gnome.org/sources/libxml2/2.15/libxml2-2.15.1.tar.xz",
+   sha3 = "dd5cd09eb97c315eec5e76922e7506e7482ce8a0e40c9f287658e131be4e24a1",
    build = "./configure",
    flags = {
       "--with-history",

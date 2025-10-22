@@ -543,8 +543,8 @@ xkeyboard-config = {
 };
 
 libxkbcommon = {
-   url = "https://github.com/xkbcommon/libxkbcommon/archive/xkbcommon-1.11.0/xkbcommon-1.11.0.tar.gz",
-   sha3 = "a0f8b96a9ae69bb40e9f26de9ade65a66fce42b3e6f1db285b0194e17174ce80",
+   url = "https://github.com/xkbcommon/libxkbcommon/archive/xkbcommon-1.12.2/xkbcommon-1.12.2.tar.gz",
+   sha3 = "864e4dec13515094dafc11b050ffff698c0eba58ae1b58d5ac7bc6994dd3e76a",
    build = "meson",
    flags = {
       "-Denable-wayland=false",
@@ -593,8 +593,8 @@ xf86-input-evdev = {
 };
 
 libinput = {
-   url = "https://gitlab.freedesktop.org/libinput/libinput/-/archive/1.29.1/libinput-1.29.1.tar.bz2",
-   sha3 = "3662b4749506a3630ac51b0dc6b1e89428637897cf0837dd9a38efd81bb5520e",
+   url = "https://gitlab.freedesktop.org/libinput/libinput/-/archive/1.29.2/libinput-1.29.2.tar.bz2",
+   sha3 = "f9bcc533c0c70041345392f5c5a7d59f4095f0156488b4898ab93540e181a62a",
    build = "meson",
    flags = {
       "-D{debug-gui,documentation,libwacom,tests}=false",

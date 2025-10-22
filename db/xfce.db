@@ -94,8 +94,8 @@ xfce4-panel = {
 };
 
 thunar = {
-   url = "https://archive.xfce.org/src/xfce/thunar/4.20/thunar-4.20.5.tar.bz2",
-   sha3 = "1bc73d0988d04f57de696d24e2ebf4c6301f1840dc97bdf71c507b25e75b58ab",
+   url = "https://archive.xfce.org/src/xfce/thunar/4.20/thunar-4.20.6.tar.bz2",
+   sha3 = "38e70688dd9261dc5f475430d1d97c7d5c5036744f32892e0bc78aec3a9c40ae",
    build = "./configure",
    flags = {
       "--enable-gio-unix",
@@ -241,8 +241,8 @@ ristretto = {
 };
 
 xarchiver = {
-   url = "https://github.com/ib/xarchiver/archive/0.5.4.25/xarchiver-0.5.4.25.tar.gz",
-   sha3 = "463e5f54e678083958571c04a6b289052b9987417ac5034c9e346a54af774e74",
+   url = "https://github.com/ib/xarchiver/archive/0.5.4.26/xarchiver-0.5.4.26.tar.gz",
+   sha3 = "1f651f057f35d4bdba4d7cdf8653a71d74b0f3143bc68dfb6b12f6095e98d0bb",
    build = "./configure",
    flags = { "--libexecdir=/usr/lib64/xfce4" }
 };

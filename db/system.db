@@ -441,8 +441,8 @@ expat = {
 };
 
 less = {
-   url = "https://www.greenwoodsoftware.com/less/less-679.tar.gz",
-   sha3 = "d78476c0734bbe4fd05901e29a7b7e694753e2cde69535a61e518b357efef5e3",
+   url = "https://www.greenwoodsoftware.com/less/less-685.tar.gz",
+   sha3 = "b17dde89ab465f9e8ab36bb72c99978df82a3f54dd32c033408548d3111d3859",
    build = "./configure",
    flags = { "--with-regex=pcre2" }
 };
