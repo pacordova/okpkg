@@ -383,8 +383,8 @@ psmisc = {
 };
 
 pcre2 = {
-   url = "https://github.com/PCRE2Project/pcre2/releases/download/pcre2-10.46/pcre2-10.46.tar.bz2",
-   sha3 = "a47edf4bd716f944ec287f89b24f43fc1b6fed574cbd2632b10859b80f5b7ed6",
+   url = "https://github.com/PCRE2Project/pcre2/releases/download/pcre2-10.47/pcre2-10.47.tar.bz2",
+   sha3 = "40609a6e1e8e6cc0235f7c1f61d6786597f1d9e262800a01a81e7b0f3363d9cb",
    build = "./configure",
    flags = {
       "--enable-jit",

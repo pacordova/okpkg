@@ -5,8 +5,8 @@ libusb = {
 };
 
 usbutils = {
-   url = "https://mirrors.kernel.org/pub/linux/utils/usb/usbutils/usbutils-018.tar.xz",
-   sha3 = "d2474f8e09ba3538ef74517b370b891b6ce96460d5058a4197be5131dfedb0da",
+   url = "https://mirrors.kernel.org/pub/linux/utils/usb/usbutils/usbutils-019.tar.xz",
+   sha3 = "e47df53afa3bdcc7f7e4792ae12de2c0bbfb94c9b00c54bbc06b8892ae3e5314",
    build = "meson",
 };
 

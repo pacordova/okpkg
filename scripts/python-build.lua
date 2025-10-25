@@ -17,6 +17,7 @@ for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do
    if i ~= "python3" then purge(i); emerge(i) end
 end
 
+purge("meson")
 emerge("meson")
 
 --------------

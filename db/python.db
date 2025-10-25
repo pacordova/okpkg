@@ -113,8 +113,8 @@ python-pathspec = {
 };
 
 python-calver = {
-   url = "https://pypi.org/packages/source/c/calver/calver-2025.4.17.tar.gz",
-   sha3 = "72a03735ea17397dd2741764653659c05c6fe437d0fad15ed585451b7ff9fefb",
+   url = "https://pypi.org/packages/source/c/calver/calver-2025.10.20.tar.gz",
+   sha3 = "54c8c04195cce004a25f369fd12f48d52ec12b0633ba1277c26791a80f20ff25",
    build = "python-build",
    prepare = [[ printf "Version: 2025.4.17\n" > PKG-INFO ]]
 };
@@ -156,8 +156,8 @@ python-pyparsing = {
 };
 
 cython = {
-   url = "https://pypi.org/packages/source/c/cython/cython-3.1.5.tar.gz",
-   sha3 = "c809f7d226191fb6ada19913fa11a03e7a0ce2917efc6e08c6b0d70ad48e1b14",
+   url = "https://pypi.org/packages/source/c/cython/cython-3.1.6.tar.gz",
+   sha3 = "b139ac86d8e595b94f28d60ea3109cf50370d043f4534d457af72c3ba44bd08f",
    build = "python-build",
 };
 

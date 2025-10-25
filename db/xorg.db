@@ -580,8 +580,8 @@ xorg-server = {
 };
 
 libevdev = {
-   url = "https://www.freedesktop.org/software/libevdev/libevdev-1.13.4.tar.xz",
-   sha3 = "10d5f557a2b23eb3041d9b291bcc082c81b8114be0068f9967e4114dd3b115b9",
+   url = "https://www.freedesktop.org/software/libevdev/libevdev-1.13.5.tar.xz",
+   sha3 = "6aa50043a98d1d6669ecb276888b1950e4818978d1512eb997a98c5230fdd47a",
    build = "meson",
    flags = { "-Ddocumentation=disabled" }
 };

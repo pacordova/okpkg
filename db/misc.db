@@ -369,8 +369,8 @@ r = {
 };
 
 ripgrep = {
-   url = "https://github.com/BurntSushi/ripgrep/archive/14.1.1/ripgrep-14.1.1.tar.gz",
-   sha3 = "d6373624002b64f8c385918f4fa3e0512f41044fac9cbec8e547046de05030cb",
+   url = "https://github.com/BurntSushi/ripgrep/archive/15.1.0/ripgrep-15.1.0.tar.gz",
+   sha3 = "e1257918b5a9a565960daa6c1d65ada2b531487a2b3326fef7299c05ad6ea32e",
    build = "cargo",
    flags = { "--features=pcre2" }
 };
