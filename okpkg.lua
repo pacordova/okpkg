@@ -167,7 +167,7 @@ function _db_lookup(x)
    buf = '\n' .. file:read('*a')
    file:close()
    i = buf:find(x, 1, true) or
-       error(string.format("error: %s not found"))
+       error(string.format("error: %s not found", x))
    i = buf:find('{', i, true)
    j = buf:find('};', i, true)
    return load(string.format("return %s", buf:sub(i, j)))()

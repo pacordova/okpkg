@@ -220,8 +220,8 @@ feh = {
 };
 
 git = {
-   url = "https://kernel.org/pub/software/scm/git/git-2.51.1.tar.xz",
-   sha3 = "3ea247615b0afc16f586df59464d18b20272a6cb81e1c51bd5596ec0feac3af5",
+   url = "https://kernel.org/pub/software/scm/git/git-2.51.2.tar.xz",
+   sha3 = "d9019ceef34e2cf6a3c09576daf2dc0a0b8235ed802fbcd0d19fd0415515dc42",
    build = "./configure",
    flags = {
       "--with-gitconfig=/etc/gitconfig",
@@ -296,8 +296,8 @@ libtorrent-rasterbar = {
 };
 
 linux-lts = {
-   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.12.53.tar.xz",
-   sha3 = "3d8b10b1c33d7883db5c79a4eaf3532af7ee52532bd2e9ee20fc50ac110ba47c",
+   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.12.55.tar.xz",
+   sha3 = "a5209eb0f4747522326ee2a1baa3212afc7c5c3aeb93583214bd6ad56989d747",
    build = "make",
    flags = { "bzImage", "modules", "headers" },
    prepare = [[
@@ -309,7 +309,7 @@ linux-lts = {
       install -m 644 arch/x86/boot/bzImage $destdir/boot/vmlinuz
       make modules_install \
           INSTALL_MOD_PATH=$destdir \
-          MODLIB=$destdir/usr/lib64/modules/6.12.53
+          MODLIB=$destdir/usr/lib64/modules/6.12.55
       cp -rp usr/include $destdir/usr
       find $destdir/usr/include -type f ! -name '*.h' -delete
    ]]

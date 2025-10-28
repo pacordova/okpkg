@@ -125,8 +125,8 @@ fribidi = {
 };
 
 fuse3 = {
-   url = "https://github.com/libfuse/libfuse/releases/download/fuse-3.17.1/fuse-3.17.1.tar.gz",
-   sha3 = "e23b5b83bf7e9d9349879287110bea63ea2f6bb6c2e68ee60cc7bb73e6371732",
+   url = "https://github.com/libfuse/libfuse/releases/download/fuse-3.17.4/fuse-3.17.4.tar.gz",
+   sha3 = "e71fbedfc9b1d5dc44eaef8ce0c8e6438f703b68d8f5acbf056016bfa77da99f",
    build = "meson",
    flags = { "-Dexamples=false" },
    prepare = [[ sed -i '/^udev/,$ s/^/#/' util/meson.build ]],
@@ -369,8 +369,8 @@ mtdev = {
 };
 
 nghttp2 = {
-   url = "https://github.com/nghttp2/nghttp2/releases/download/v1.67.1/nghttp2-1.67.1.tar.xz",
-   sha3 = "60443e91a4a4130a811b522be7fbd3abeb487369983101b5e881e461dc994929",
+   url = "https://github.com/nghttp2/nghttp2/releases/download/v1.68.0/nghttp2-1.68.0.tar.xz",
+   sha3 = "1aca46c45baeda040bc95dec48b9093164e510c970947dfc52016bf1b51964b6",
    build = "./configure",
    flags = { "--enable-lib-only" }
 };
