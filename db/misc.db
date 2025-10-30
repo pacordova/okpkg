@@ -296,8 +296,8 @@ libtorrent-rasterbar = {
 };
 
 linux-lts = {
-   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.12.55.tar.xz",
-   sha3 = "a5209eb0f4747522326ee2a1baa3212afc7c5c3aeb93583214bd6ad56989d747",
+   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.12.56.tar.xz",
+   sha3 = "cbd8a39ba9eb739bffb450c4d6058fff14cef600d36f8908011987ac16cabbdd",
    build = "make",
    flags = { "bzImage", "modules", "headers" },
    prepare = [[
@@ -309,7 +309,7 @@ linux-lts = {
       install -m 644 arch/x86/boot/bzImage $destdir/boot/vmlinuz
       make modules_install \
           INSTALL_MOD_PATH=$destdir \
-          MODLIB=$destdir/usr/lib64/modules/6.12.55
+          MODLIB=$destdir/usr/lib64/modules/6.12.56
       cp -rp usr/include $destdir/usr
       find $destdir/usr/include -type f ! -name '*.h' -delete
    ]]
@@ -426,8 +426,8 @@ ugrep = {
 };
 
 unrar = {
-   url = "https://www.rarlab.com/rar/unrarsrc-7.1.10.tar.gz",
-   sha3 = "69920a8564f07361ef043df8d45cc40f37a4ce1ee6f971217125a5e534da092e",
+   url = "https://www.rarlab.com/rar/unrarsrc-7.2.1.tar.gz",
+   sha3 = "041d1141e346fe3c450674a4c053cef5350c4e054781ebe01252fa61e0502cfd",
    build = "make"
 };
 
