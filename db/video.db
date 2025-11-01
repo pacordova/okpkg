@@ -42,7 +42,7 @@ ffmpeg = {
    build = "./configure",
    flags = {
       "--libdir=/usr/lib64",
-      "--enable-{gpl,openssl,shared,version3}",
+      "--enable-{gpl,libtls,shared,version3}",
       "--enable-lib{ass,drm,freetype,mp3lame,opus,vorbis,vpx,x264,x265}",
       "--disable-{debug,libxml2,libwebp,static}",
       "--x86asmexe=nasm",

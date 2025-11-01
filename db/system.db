@@ -473,10 +473,15 @@ libxcrypt = {
 };
 
 libressl = {
-   url = "https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-4.2.0.tar.gz",
-   sha3 = "99eaae0c30f7ffc22f4c7dfd2bda88f7b8ea11ec29a94cfd7c3023b37b25dc85",
+   url = "https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-4.2.1.tar.gz",
+   sha3 = "c0299d2efadd606f30fe1ae8cdd70ba4b28617f1f2083ffe20b32c6a8bd29db7",
    build = "./configure",
    flags = { "--with-openssldir=/etc/ssl", },
+   post = [[
+      cd $destdir/usr/lib64
+      ln -sf libcrypto.so.57.0.1 libcrypto.so.56
+      ln -sf libssl.so.60.0.1    libssl.so.59
+   ]]
 };
 
 kmod = {
@@ -487,8 +492,8 @@ kmod = {
 };
 
 libelf = {
-   url = "https://sourceware.org/ftp/elfutils/0.193/elfutils-0.193.tar.bz2",
-   sha3 = "fe6a613b24eeca7dd6a297950b939e5c899ee0778039d1f8339fd724b51e6d3c",
+   url = "https://sourceware.org/ftp/elfutils/0.194/elfutils-0.194.tar.bz2",
+   sha3 = "e955aa86a2f335726beb4f5d71c0e01fc3cf0e8bb35cf0a8a6233841993f50c0",
    build = "./configure",
    flags = {
       "--enable-deterministic-archives",

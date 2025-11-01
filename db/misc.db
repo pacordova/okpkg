@@ -178,7 +178,12 @@ cryptsetup = {
    url = "https://kernel.org/pub/linux/utils/cryptsetup/v2.8/cryptsetup-2.8.1.tar.xz",
    sha3 = "b49e010d67ca7e749061386bae6654efd78801d2b857cac567d20bc0aaed4a16",
    build = "./configure",
-   flags = { "--enable-{asciidoc=no,libargon2=yes,ssh-token=no}" }
+   flags = {
+      "--with-crypto_backend=gcrypt",
+      "--enable-libargon2",
+      "--disable-ssh-token",
+      "--disable-asciidoc",
+   }
 };
 
 cups = {

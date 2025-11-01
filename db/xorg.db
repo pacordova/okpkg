@@ -290,8 +290,8 @@ libvdpau = {
 };
 
 mesa = {
-   url = "https://mesa.freedesktop.org/archive/mesa-25.2.5.tar.xz",
-   sha3 = "0e9eacc0cc7cf749f48cb6c4e0219c0651707ceae46db78034338c1939a415c9",
+   url = "https://mesa.freedesktop.org/archive/mesa-25.2.6.tar.xz",
+   sha3 = "aad2f5fd4410bf49bbd31645479314fe5d6b72bda1f6c3b4004982c2f8eb3bf4",
    build = "meson",
    flags = {
       "-Dplatforms=x11",
