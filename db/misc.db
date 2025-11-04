@@ -28,24 +28,20 @@ dmidecode = {
 };
 
 gcc14 = {
-   url = "https://ftp.gnu.org/gnu/gcc/gcc-14.2.0/gcc-14.2.0.tar.xz",
-   sha3 = "8551afebbdcae7e36ddd85448fb0ada8bffe07a12b4cd6b649bb9f7440e2942f",
+   url = "https://ftp.gnu.org/gnu/gcc/gcc-14.3.0/gcc-14.3.0.tar.xz",
+   sha3 = "b3744b6fbf810205c604c0d24ffd94f0edeca87b16d5c366e12fa264a0a9d7d1",
    build = "../configure",
    flags = {
-      "--disable-{fixincludes,multilib}",
-      "--disable-lib{ssp,stdcxx-pch}",
-      "--enable-bootstrap",
-      "--enable-checking=release",
-      "--enable-clocale=gnu",
-      "--enable-__cxa_atexit",
-      "--enable-default-{pie,ssp}",
-      "--enable-gnu-unique-object",
-      "--enable-initfini-array",
       "--enable-languages=c,c++,fortran",
+      "--{enable-clocale,with-linker-hash-style}=gnu",
+      "--enable-default-{pie,ssp}",
+      "--enable-initfini-array",
+      "--enable-__cxa_atexit",
       "--enable-link-serialization=1",
-      "--enable-lto",
-      "--enable-threads=posix",
-      "--with-linker-hash-style=gnu",
+      "--enable-checking=release",
+      "--enable-{bootstrap=yes,lto=yes,multilib=no,nls=no,threads=posix}",
+      "--disable-lib{ssp,stdcxx-pch}",
+      "--disable-fixincludes",
       "--with-system-zlib",
       "LD=ld",
    },
@@ -58,7 +54,9 @@ gcc14 = {
           $destdir/usr/lib64/bfd-plugins/liblto_plugin.so
       install -d $destdir/usr/share/gdb/auto-load/usr/lib64
       mv $destdir/usr/lib64/*gdb.py $destdir/usr/share/gdb/auto-load/usr/lib64
-      ln -sf gcc $destdir/usr/bin/cc
+      printf '#!/bin/sh\n' >>$destdir/usr/bin/c99
+      printf 'exec gcc -std=c99 "$@"' >>$destdir/usr/bin/c99
+      chmod +x $destdir/usr/bin/c99
       ln -sf gcc $destdir/usr/bin/c99
    ]]
 };
