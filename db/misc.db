@@ -44,6 +44,7 @@ gcc14 = {
       "--disable-fixincludes",
       "--with-system-zlib",
       "LD=ld",
+      [[CC="/usr/bin/gcc -std=gnu17"]]
    },
    post = [[
       cc=$destdir/usr/bin/gcc
@@ -57,7 +58,7 @@ gcc14 = {
       printf '#!/bin/sh\n' >>$destdir/usr/bin/c99
       printf 'exec gcc -std=c99 "$@"' >>$destdir/usr/bin/c99
       chmod +x $destdir/usr/bin/c99
-      ln -sf gcc $destdir/usr/bin/c99
+      ln -sf gcc $destdir/usr/bin/cc
    ]]
 };
 
