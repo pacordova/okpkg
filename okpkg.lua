@@ -200,7 +200,7 @@ function download(x)
    -- Verify checksum
    if t.sha3 ~= sha3sum(filename) then
       os.remove(filename)
-      error(string.format("%s: FAILED", basename(f)))
+      error(string.format("%s: FAILED", basename(filename)))
    else
       chdir(srcdir)
       os.execute(string.format("tar --strip-components=1 -xf %s", filename))
