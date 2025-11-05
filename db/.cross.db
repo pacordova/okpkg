@@ -154,6 +154,7 @@ bash = {
       "--host=x86_64-unknown-linux-gnu",
       "--build=$(sh support/config.guess)",
    },
+   prepare = [[ patch -p1 </var/lib/okpkg/patches/bash.diff ]],
    post = [[
       ln -s bash $destdir/usr/bin/sh
       rm -f $destdir/usr/bin/bashbug
