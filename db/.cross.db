@@ -153,6 +153,7 @@ bash = {
       "--without-bash-malloc",
       "--host=x86_64-unknown-linux-gnu",
       "--build=$(sh support/config.guess)",
+      'CFLAGS_FOR_BUILD="$CFLAGS"',
    },
    prepare = [[ patch -p1 </var/lib/okpkg/patches/bash.diff ]],
    post = [[
