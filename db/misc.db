@@ -27,9 +27,9 @@ dmidecode = {
    }
 };
 
-gcc14 = {
-   url = "https://ftp.gnu.org/gnu/gcc/gcc-14.3.0/gcc-14.3.0.tar.xz",
-   sha3 = "b3744b6fbf810205c604c0d24ffd94f0edeca87b16d5c366e12fa264a0a9d7d1",
+gcc15 = {
+   url = "https://ftp.gnu.org/gnu/gcc/gcc-15.2.0/gcc-15.2.0.tar.xz",
+   sha3 = "222cf84645a1ef23af10aac34106a9bb574c49f6c51c96c46c292b0d62043ec6",
    build = "../configure",
    flags = {
       "--enable-languages=c,c++,fortran",
@@ -44,7 +44,6 @@ gcc14 = {
       "--disable-fixincludes",
       "--with-system-zlib",
       "LD=ld",
-      [[CC="/usr/bin/gcc -std=gnu17"]]
    },
    post = [[
       cc=$destdir/usr/bin/gcc
