@@ -14,7 +14,7 @@ binutils-pass1 = {
 };
 
 gcc-pass1 = {
-   url = _db_lookup("gcc15")["url"],
+   url = _db_lookup("gcc14")["url"],
    build = "../configure",
    flags = {
       "--prefix=/tools",
@@ -66,7 +66,7 @@ glibc = {
 };
 
 gcc-libstdc++ = {
-   url = _db_lookup("gcc15")["url"],
+   url = _db_lookup("gcc14")["url"],
    build = "../libstdc++-v3/configure",
    flags = {
       "--prefix=/usr",
@@ -420,7 +420,7 @@ binutils-pass2 = {
 };
 
 gcc-pass2 = {
-   url = _db_lookup("gcc15")["url"],
+   url = _db_lookup("gcc14")["url"],
    build = "../configure",
    flags = {
       "--prefix=/usr",
