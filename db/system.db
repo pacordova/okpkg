@@ -262,7 +262,7 @@ gcc14 = {
       "--enable-link-serialization=1",
       "--enable-checking=release",
       "--enable-{bootstrap=yes,lto=yes,multilib=no,nls=no,threads=posix}",
-      "--disable-lib{ssp,stdcxx-pch}",
+      "--disable-lib{sanitizer,ssp,stdcxx-pch}",
       "--disable-fixincludes",
       "--with-system-zlib",
       "LD=ld",
