@@ -80,7 +80,7 @@ gcc-libstdc++ = {
       "--disable-multilib",
       "--disable-nls",
       "--disable-libstdcxx-pch",
-      "--with-gxx-include-dir=/tools/x86_64-unknown-linux-gnu/include/c++/15.2.0",
+      "--with-gxx-include-dir=/tools/x86_64-unknown-linux-gnu/include/c++/14.3.0",
    }
 };
 
