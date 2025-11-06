@@ -398,8 +398,8 @@ sharutils = {
 };
 
 sqlite = {
-   url = "https://www.sqlite.org/2025/sqlite-autoconf-3500400.tar.gz",
-   sha3 = "330bb88febc08814d49406391891eddac59e5f812e87b83c27ab172687554375",
+   url = "https://www.sqlite.org/2025/sqlite-autoconf-3510000.tar.gz",
+   sha3 = "fa52f9cc74dbca004aa650ae698036a3350611f672649e165078f4eae21d6a2e",
    build = "./configure",
    flags = { "--enable-fts5", "CPPFLAGS=-DSQLITE_ENABLE_COLUMN_METADATA=1" },
 };
@@ -435,8 +435,8 @@ unrar = {
 };
 
 vim = {
-   url = "https://github.com/vim/vim/archive/v9.1.1854/vim-9.1.1854.tar.gz",
-   sha3 = "dd05d5cfc0f55fccce806d45b19a34b2b128c0e9fae16edb87f722c93ed0c223",
+   url = "https://github.com/vim/vim/archive/v9.1.1898/vim-9.1.1898.tar.gz",
+   sha3 = "d1dc63b39e11f7738d26c61b31a2210bf7a5ceaf5439cf2c46e8b7bc9964a5f0",
    build = "./configure",
    flags = {
       "--enable-{cscope,multibyte}",
