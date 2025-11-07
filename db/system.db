@@ -462,8 +462,8 @@ tzdata = {
 };
 
 libxcrypt = {
-   url = "https://github.com/besser82/libxcrypt/releases/download/v4.4.38/libxcrypt-4.4.38.tar.xz",
-   sha3 = "7794c56f301317cc2140ba1ae77f97bdcd03a9ab9e57024f43523af6e9da75ec",
+   url = "https://github.com/besser82/libxcrypt/releases/download/v4.5.0/libxcrypt-4.5.0.tar.xz",
+   sha3 = "005ade2a63e93dc6c9707c9201a5e0f9e2c7f3bb749a56e739407b9d0503cbda",
    build = "./configure",
    flags = {
       "--enable-hashes=strong,glibc",

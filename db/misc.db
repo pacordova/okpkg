@@ -365,8 +365,8 @@ pciutils = {
 };
 
 r = {
-   url = "https://cran.r-project.org/src/base/R-4/R-4.5.1.tar.gz",
-   sha3 = "8ad6cf484881709581c288ac0471e16ce9de91c9e065c5f4266d19417ab6fa79",
+   url = "https://cran.r-project.org/src/base/R-4/R-4.5.2.tar.gz",
+   sha3 = "29036eb03b80153c711e6e39411f108c255994406397535adde83784d64dace4",
    build = "./configure",
    flags = { "--enable-{R-shlib=yes,java=no}", "--without-x" }
 };
