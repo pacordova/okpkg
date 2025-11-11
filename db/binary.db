@@ -56,24 +56,22 @@ discord = {
    ]]
 };
 
-libreoffice-bin = {
-   url = "https://download.documentfoundation.org/libreoffice/stable/25.2.3/deb/x86_64/LibreOffice_25.2.3_Linux_x86-64_deb.tar.gz",
-   sha3 = "0ec180fb759cca7c76d260e6f7078ef93413293c4ae7daad5c6006897d319b52",
+libreoffice = {
+   url = "https://download.documentfoundation.org/libreoffice/stable/25.8.2/deb/x86_64/LibreOffice_25.8.2_Linux_x86-64_deb.tar.gz",
+   sha3 = "b9a3cc850018528deca8b498d2bf7950d9aeb43dfaaf1185bcb47cbf3b46b8cc",
    build = _,
    post = [[
       find DEBS -name '*.deb' -exec ar x '{}' data.tar.xz \; -exec tar -xf data.tar.xz \;
-      version=`basename opt/*`
+      pkgver=`basename opt/*`
       install -d $destdir/usr/{bin,lib64}
       cp -rp  opt/* $destdir/usr/lib64
       cp -rp  usr/share $destdir/usr/share
-      ln -sfr $destdir/usr/lib64/$version/program/soffice $destdir/usr/bin/$version
-      ln -sf  $version $destdir/usr/bin/libreoffice
-      ln -sf  $soffice $destdir/usr/bin/soffice
-      cd $destdir/usr/share/applications
-      for x in base calc draw impress math startcenter writer xsltfilter
-      do
-          ln -sf /usr/lib64/$version/share/xdg/$x.desktop $version-$x.desktop
-          sed -i "s|Icon=$version|Icon=libreoffice|" $version-$x.desktop
+      ln -sfr $destdir/usr/lib64/$pkgver/program/soffice $destdir/usr/bin/$pkgver
+      ln -sf  $pkgver $destdir/usr/bin/libreoffice
+      ln -sf  $destdir/usr/lib64/$pkgver/program/soffice $destdir/usr/bin/soffice
+      for x in base calc draw impress math startcenter writer xsltfilter; do
+          ln -sf /usr/lib64/$pkgver/share/xdg/$x.desktop $destdir/usr/share/applications/$pkgver-$x.desktop
+          sed -i "s|Icon=$pkgver|Icon=libreoffice|" $destdir/usr/lib64/$pkgver/share/xdg/$x.desktop
       done
    ]]
 };

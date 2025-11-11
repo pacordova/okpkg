@@ -6,12 +6,6 @@ libaio = {
    post = [[ rm -f $destdir/usr/lib64/libaio.a ]]
 };
 
-popt = {
-   url = "http://ftp.rpm.org/popt/releases/popt-1.x/popt-1.19.tar.gz",
-   sha3 = "d5188c702608a3a615e5607378e78789e5237e66bf2fa0aba4ac718f803e6021",
-   build = "./configure",
-};
-
 cargo-c = {
    url = "https://github.com/lu-zero/cargo-c/archive/v0.10.15/cargo-c-0.10.15.tar.gz",
    sha3 = "52e834fc19930d98f423adf101a3cef6ea6a9d9e8314bf236164866d6b92d728",

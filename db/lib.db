@@ -396,6 +396,12 @@ pixman = {
    build = "meson",
 };
 
+popt = {
+   url = "http://ftp.rpm.org/popt/releases/popt-1.x/popt-1.19.tar.gz",
+   sha3 = "d5188c702608a3a615e5607378e78789e5237e66bf2fa0aba4ac718f803e6021",
+   build = "./configure",
+};
+
 sassc = {
    url = "https://github.com/sass/sassc/archive/3.6.2/sassc-3.6.2.tar.gz",
    sha3 = "61e05276d1052de3c8403a6895cbca55f50d9f8f3afd2abed1263331dd33e46f",
