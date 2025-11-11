@@ -142,8 +142,8 @@ graphite = {
 };
 
 iso-codes = {
-   url = "https://salsa.debian.org/iso-codes-team/iso-codes/-/archive/v4.18.0/iso-codes-4.18.0.tar.gz",
-   sha3 = "2fd6271b8b5ab41cb1a57ec05d78cdda12440bfa77b87133371f433cd2bf135a",
+   url = "https://salsa.debian.org/iso-codes-team/iso-codes/-/archive/v4.19.0/iso-codes-v4.19.0.tar.gz",
+   sha3 = "afc136febf6da8ccb4692eec639e88ceec575da516bc731a7a5034fe48488cca",
    build = "./configure",
 };
 

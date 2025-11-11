@@ -462,8 +462,8 @@ tzdata = {
 };
 
 libxcrypt = {
-   url = "https://github.com/besser82/libxcrypt/releases/download/v4.5.0/libxcrypt-4.5.0.tar.xz",
-   sha3 = "005ade2a63e93dc6c9707c9201a5e0f9e2c7f3bb749a56e739407b9d0503cbda",
+   url = "https://github.com/besser82/libxcrypt/releases/download/v4.5.2/libxcrypt-4.5.2.tar.xz",
+   sha3 = "5e7594b3bb2d3f7cc8925725cef0d9138e790b9d39513a60db5c6f1069c4d596",
    build = "./configure",
    flags = {
       "--enable-hashes=strong,glibc",
@@ -518,8 +518,8 @@ libffi = {
 };
 
 coreutils = {
-   url = "https://ftp.gnu.org/gnu/coreutils/coreutils-9.8.tar.xz",
-   sha3 = "f6cb6b76a0a59108eada1168a61f53e64986a67f67fcf54e06b80d7a6997ebb4",
+   url = "https://ftp.gnu.org/gnu/coreutils/coreutils-9.9.tar.xz",
+   sha3 = "36d46244fb46a4e5c99166eb4c0e6a6c64478e0abafb33e30302e6bf8c62c845",
    build = "./configure",
    flags = {
       "--enable-install-program=hostname",
