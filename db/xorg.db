@@ -606,6 +606,10 @@ xf86-input-libinput = {
    url = "https://x.org/pub/individual/driver/xf86-input-libinput-1.5.0.tar.xz",
    sha3 = "7141fe5d065fcb9dc238f956b99b65a45c0dea4e36adbe1afae79a97d080aee4",
    build = "./configure",
+   prepare = [[
+      sed -e '23 a         Option "AccelProfile" "flat"' \
+          -i ./conf/40-libinput.conf
+   ]]
 };
 
 xf86-input-synaptics = {
