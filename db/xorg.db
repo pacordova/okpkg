@@ -607,7 +607,7 @@ xf86-input-libinput = {
    sha3 = "7141fe5d065fcb9dc238f956b99b65a45c0dea4e36adbe1afae79a97d080aee4",
    build = "./configure",
    prepare = [[
-      sed -e '23 a         Option "AccelProfile" "flat"' \
+      sed -e '23 a \        Option "AccelProfile" "flat"' \
           -i ./conf/40-libinput.conf
    ]]
 };
