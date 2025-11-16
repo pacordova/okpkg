@@ -189,8 +189,8 @@ pkgconf = {
 };
 
 binutils = {
-   url = "https://ftp.gnu.org/gnu/binutils/binutils-2.45.tar.lz",
-   sha3 = "adab3461342b68846c4162fd19d87c3b36ed21140864d142a21c1bbb86461407",
+   url = "https://ftp.gnu.org/gnu/binutils/binutils-2.45.1.tar.lz",
+   sha3 = "703229a14f8a2182ada6e7b0f10128d43f0797b0f6a41fa0010d8b00f5e71310",
    build = "./configure",
    flags = {
       "--enable-64-bit-bfd",

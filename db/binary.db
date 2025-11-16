@@ -24,8 +24,8 @@ rust = {
 };
 
 firefox = {
-   url = "https://download-installer.cdn.mozilla.net/pub/firefox/releases/144.0.2/linux-x86_64/en-US/firefox-144.0.2.tar.xz",
-   sha3 = "05c0fd98299a501c7b13087519818a5fe6d65def182017a488a2893aa9ba2083",
+   url = "https://download-installer.cdn.mozilla.net/pub/firefox/releases/145.0/linux-x86_64/en-US/firefox-145.0.tar.xz",
+   sha3 = "4ba7a7879a304e82e5561c26f5631d7e57dd24875123b738729db0164af2001e",
    build = _,
    post = [[
       install -d $destdir/usr/{bin,lib64}

@@ -299,8 +299,8 @@ libtorrent-rasterbar = {
 };
 
 linux-lts = {
-   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.12.57.tar.xz",
-   sha3 = "cb23e1025d60f9f687bf4487ae517a491c3bc7ecb7aff0367838732cb5c993c0",
+   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.12.58.tar.xz",
+   sha3 = "40cc02bbcd09415465aa5de61102b79ac222a8871eab9c9a585a70ce9e819b7f",
    build = "make",
    flags = { "bzImage", "modules", "headers" },
    prepare = [[
@@ -435,8 +435,8 @@ unrar = {
 };
 
 vim = {
-   url = "https://github.com/vim/vim/archive/v9.1.1898/vim-9.1.1898.tar.gz",
-   sha3 = "d1dc63b39e11f7738d26c61b31a2210bf7a5ceaf5439cf2c46e8b7bc9964a5f0",
+   url = "https://github.com/vim/vim/archive/v9.1.1917/vim-9.1.1917.tar.gz",
+   sha3 = "7b392890422c941158ff100a6416c66e9fb9e3699d9d76b455adb663b803e54c",
    build = "./configure",
    flags = {
       "--enable-{cscope,multibyte}",
