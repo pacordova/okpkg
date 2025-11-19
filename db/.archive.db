@@ -1,3 +1,25 @@
+p7zip = {
+   url = "https://github.com/p7zip-project/p7zip/archive/v17.05/p7zip-17.05.tar.gz",
+   sha3 = "7cce53f689d055b1cdc0a33922965083d50e595e2037e2ca3e8fee3fc87336dd",
+   build = _,
+   post = [[
+      for i in Bundles/{Alone,Alone7z,Format7zF,SFXCon} UI/Console; do
+         make -C CPP/7zip/$i -f makefile
+      done
+      install -d $destdir/usr/bin
+      install -d $destdir/usr/lib64/7zip
+      install -t $destdir/usr/lib64/7zip CPP/7zip/Bundles/Alone/b/g/7za
+      install -t $destdir/usr/lib64/7zip CPP/7zip/Bundles/Alone7z/b/g/7zr
+      install -t $destdir/usr/lib64/7zip CPP/7zip/Bundles/Format7zF/b/g/7z.so
+      install -t $destdir/usr/lib64/7zip CPP/7zip/UI/Console/b/g/7z
+      install CPP/7zip/Bundles/SFXCon/b/g/7zCon $destdir/usr/lib64/7zip/7zCon.sfx
+      for i in 7z 7za 7zr; do
+         printf '#!/bin/sh\nexec /usr/lib64/7zip/$i "$@"' > _
+         install _ $destdir/usr/bin/$i
+      done
+   ]]
+};
+
 libaio = {
    url = "https://pagure.io/libaio/archive/libaio-0.3.113/libaio-0.3.113.tar.gz",
    sha3 = "c4f6f1398bb02d365498ab4bd631ab8ae5fd52d0f9404fc4d815f523a885b4ec",
