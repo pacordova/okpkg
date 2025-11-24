@@ -1127,16 +1127,6 @@ libkeybinder3 = {
    }
 };
 
-xfce4-pulseaudio-plugin = {
-   url = "https://archive.xfce.org/src/panel-plugins/xfce4-pulseaudio-plugin/0.4/xfce4-pulseaudio-plugin-0.4.8.tar.bz2",
-   sha3 = "57633877b38b1105557720db51b043a609523d2d59b8e00443fe13e002ebcc61",
-   build = "./configure",
-   flags = {
-      "--libdir=/usr/lib64",
-      "--sysconfdir=/etc"
-   }
-};
-
 accountsservice = {
    url = "https://freedesktop.org/software/accountsservice/accountsservice-22.07.5.tar.xz",
    build = "meson",

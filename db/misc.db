@@ -1,3 +1,9 @@
+xfce4-pulseaudio-plugin = {
+   url = "https://archive.xfce.org/src/panel-plugins/xfce4-pulseaudio-plugin/0.5/xfce4-pulseaudio-plugin-0.5.1.tar.xz",
+   sha3 = "7ef658b4c76f81f8dfd0415117623c8faade2c4b6b2ee62ac01b4b46ff2861e3",
+   build = "meson",
+};
+
 7zip = {
    --url = "https://github.com/p7zip-project/p7zip/archive/v17.05/p7zip-17.05.tar.gz",
    --sha3 = "7cce53f689d055b1cdc0a33922965083d50e595e2037e2ca3e8fee3fc87336dd",
