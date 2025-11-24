@@ -26,8 +26,8 @@ gobject-introspection = {
 };
 
 glib2 = {
-   url = "https://download.gnome.org/sources/glib/2.86/glib-2.86.1.tar.xz",
-   sha3 = "7cd7283c6eaa872ba0ccae55174cd3e762fd7a14964933a11c733141daea05bd",
+   url = "https://download.gnome.org/sources/glib/2.86/glib-2.86.2.tar.xz",
+   sha3 = "f5a874c5020a99c3593d640def52c4465781ae038e1d902bbdfa78170953d534",
    build = "meson",
    flags = { "-Dintrospection=enabled" }
 };
@@ -171,8 +171,8 @@ lcms2 = {
 };
 
 libarchive = {
-   url = "https://github.com/libarchive/libarchive/releases/download/v3.8.2/libarchive-3.8.2.tar.xz",
-   sha3 = "56bec1e8d0cc0780b71a9b01aa8ecc49fb9531279cb2ff1a24bb72e5f9951624",
+   url = "https://github.com/libarchive/libarchive/releases/download/v3.8.3/libarchive-3.8.3.tar.xz",
+   sha3 = "c2842e634001706ef37dfa97fe335f455b99d9e2996bda5fcd008637e1ff7a8a",
    build = "./configure",
    flags = { "--without-nettle" }
 };
@@ -242,8 +242,8 @@ libpcap = {
 };
 
 libpng = {
-   url = "https://downloads.sourceforge.net/libpng/libpng-1.6.50.tar.xz",
-   sha3 = "b3c841468ba819b4d039b26de547ed37a4a1181a9f7dd0fe5cd7ffcc5b0c5fbe",
+   url = "https://downloads.sourceforge.net/libpng/libpng-1.6.51.tar.xz",
+   sha3 = "08d6097d63c1d125f88c973ad1b0167952b581b685e5799ea48d4ea569c58c15",
    build = "./configure",
 };
 

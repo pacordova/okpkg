@@ -37,8 +37,8 @@ libass = {
 };
 
 ffmpeg = {
-   url = "https://ffmpeg.org/releases/ffmpeg-7.1.2.tar.xz",
-   sha3 = "8519697afc6d14537a423d69e53c786c38369b276a9ce724f35039827a888962",
+   url = "https://ffmpeg.org/releases/ffmpeg-8.0.1.tar.xz",
+   sha3 = "813e9105c95d3e2fac6650e9aefacd719f3377102522b8d968ee7501e40310af",
    build = "./configure",
    flags = {
       "--libdir=/usr/lib64",

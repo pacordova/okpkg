@@ -61,8 +61,8 @@ appstream-glib = {
 };
 
 pycairo = {
-   url = "https://github.com/pygobject/pycairo/releases/download/v1.28.0/pycairo-1.28.0.tar.gz",
-   sha3 = "9bfb488fbf5c2a5c83ae04a10afbcd754f8b9172cd2553ce8ee912753819e6c6",
+   url = "https://pypi.org/packages/source/p/pycairo/pycairo-1.29.0.tar.gz",
+   sha3 = "b81896eb00037b2882ea94addd2f0d1c6c5e400712c513d62d3de3f602b424fc",
    build = "meson",
 };
 

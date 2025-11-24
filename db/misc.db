@@ -248,8 +248,8 @@ feh = {
 };
 
 git = {
-   url = "https://kernel.org/pub/software/scm/git/git-2.51.2.tar.xz",
-   sha3 = "d9019ceef34e2cf6a3c09576daf2dc0a0b8235ed802fbcd0d19fd0415515dc42",
+   url = "https://kernel.org/pub/software/scm/git/git-2.52.0.tar.xz",
+   sha3 = "98bc3871aa8dc41a169e3701f02134af6c986fd54e155565226d4526f1b0ea6a",
    build = "./configure",
    flags = {
       "--with-gitconfig=/etc/gitconfig",
@@ -324,8 +324,8 @@ libtorrent-rasterbar = {
 };
 
 linux-lts = {
-   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.12.58.tar.xz",
-   sha3 = "40cc02bbcd09415465aa5de61102b79ac222a8871eab9c9a585a70ce9e819b7f",
+   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.12.59.tar.xz",
+   sha3 = "592239e226c4f2e8a91cd37c3ac4f623b346d11af0f7ff5d090ebc07252ad77d",
    build = "make",
    flags = { "bzImage", "modules", "headers" },
    prepare = [[
@@ -337,7 +337,7 @@ linux-lts = {
       install -m 644 arch/x86/boot/bzImage $destdir/boot/vmlinuz
       make modules_install \
           INSTALL_MOD_PATH=$destdir \
-          MODLIB=$destdir/usr/lib64/modules/6.12.58
+          MODLIB=$destdir/usr/lib64/modules/6.12.59
       cp -rp usr/include $destdir/usr
       find $destdir/usr/include -type f ! -name '*.h' -delete
    ]]
@@ -460,8 +460,8 @@ unrar = {
 };
 
 vim = {
-   url = "https://github.com/vim/vim/archive/v9.1.1917/vim-9.1.1917.tar.gz",
-   sha3 = "7b392890422c941158ff100a6416c66e9fb9e3699d9d76b455adb663b803e54c",
+   url = "https://github.com/vim/vim/archive/v9.1.1919/vim-9.1.1919.tar.gz",
+   sha3 = "acc1f3437c3127e63d2ddab9c0c398a8ea5c4d46b6e7d7c6675b7aa38354999e",
    build = "./configure",
    flags = {
       "--enable-{cscope,multibyte}",
