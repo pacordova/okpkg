@@ -1,3 +1,9 @@
+mm-common = {
+   url = "https://download.gnome.org/sources/mm-common/1.0/mm-common-1.0.7.tar.xz",
+   sha3 = "c35e41b58ba7a2982d05791ccad31ae8abcf3fae51bd79c03391a1f1b9ac9c67",
+   build = "meson",
+};
+
 libsigc++ = {
    url = "https://download.gnome.org/sources/libsigc++/2.12/libsigc++-2.12.1.tar.xz",
    sha3 = "c6ea9447c64942deb44e39d3eb8ce2b64436ed1945c12c22c50081b10d3dab09",
@@ -8,22 +14,6 @@ glibmm = {
    url = "https://download.gnome.org/sources/glibmm/2.66/glibmm-2.66.8.tar.xz",
    sha3 = "be743d0db6122a315b9f24e09bf52f20b42c1ab984110fb14ba13712cd79619e",
    build = "meson",
-};
-
-mm-common = {
-   url = "https://download.gnome.org/sources/mm-common/1.0/mm-common-1.0.7.tar.xz",
-   sha3 = "c35e41b58ba7a2982d05791ccad31ae8abcf3fae51bd79c03391a1f1b9ac9c67",
-   build = "meson",
-};
-
-atkmm = {
-   url = "https://download.gnome.org/sources/atkmm/2.28/atkmm-2.28.4.tar.xz",
-   sha3 = "c1ef283a5e262d6551de4c65740deb5b4fdddce16ab9f251edd7d322c6ddf032",
-   build = "meson",
-   flags = {
-      "-Dmaintainer-mode=true",
-      "-Dbuild-documentation=false",
-   }
 };
 
 cairomm = {
@@ -41,7 +31,17 @@ pangomm = {
    sha3 = "2009c639eeafa5925af1828a4479e58e888efe2af16e036097a335e480a16e86",
    build = "meson",
    flags = {
-      "-Dmaintainer-mode=true",
+      --"-Dmaintainer-mode=true",
+      "-Dbuild-documentation=false",
+   }
+};
+
+atkmm = {
+   url = "https://download.gnome.org/sources/atkmm/2.28/atkmm-2.28.4.tar.xz",
+   sha3 = "c1ef283a5e262d6551de4c65740deb5b4fdddce16ab9f251edd7d322c6ddf032",
+   build = "meson",
+   flags = {
+      --"-Dmaintainer-mode=true",
       "-Dbuild-documentation=false",
    }
 };
