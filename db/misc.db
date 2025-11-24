@@ -155,10 +155,21 @@ pulseaudio = {
    }
 };
 
+libcanberra = {
+   url = "https://0pointer.de/lennart/projects/libcanberra/libcanberra-0.30.tar.xz",
+   sha3 = "494462202a9b91d3da333d6d8d78857cb38ba94eb53306a8b92d008f6f6b6025",
+   build = "./configure",
+   flags= {
+      --"--disable-oss",
+      "--disable-gtk",
+      "--enable-gtk3"
+   }
+};
+
 pavucontrol = {
-   url = "https://freedesktop.org/software/pulseaudio/pavucontrol/pavucontrol-6.1.tar.xz",
+   url = "https://freedesktop.org/software/pulseaudio/pavucontrol/pavucontrol-5.0.tar.xz",
    sha3 = "eb0a190222a482d3f3cb29d4d1f43483b689e528f6473d6d09394b0725d78862",
-   build = "meson",
+   build = "./configure",
 };
 
 pipewire = {

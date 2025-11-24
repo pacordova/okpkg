@@ -1071,18 +1071,6 @@ sound-theme-freedesktop = {
    build = "./configure",
 };
 
-libcanberra = {
-   url = "https://0pointer.de/lennart/projects/libcanberra/libcanberra-0.30.tar.xz",
-   sha3 = "494462202a9b91d3da333d6d8d78857cb38ba94eb53306a8b92d008f6f6b6025",
-   build = "./configure",
-   flags= {
-      "--libdir=/usr/lib64",
-      "--disable-oss",
-      "--disable-gtk",
-      "--enable-gtk3"
-   }
-};
-
 libwebp = {
    url = "https://storage.googleapis.com/downloads.webmproject.org/releases/webp/libwebp-1.4.0.tar.gz",
    build = "./configure",
