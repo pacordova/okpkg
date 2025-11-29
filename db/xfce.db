@@ -247,12 +247,6 @@ xarchiver = {
    flags = { "--libexecdir=/usr/lib64/xfce4" }
 };
 
-xfce4-alsa-plugin = {
-   url = "https://github.com/equeim/xfce4-alsa-plugin/archive/0.4.0/xfce4-alsa-plugin-0.4.0.tar.gz",
-   sha3 = "78aff63bf0dc17a581b03d177e494f83423819cea25f10867ece96a526b70665",
-   build = "meson",
-};
-
 xfce4-taskmanager = {
    url = "https://archive.xfce.org/src/apps/xfce4-taskmanager/1.6/xfce4-taskmanager-1.6.0.tar.xz",
    sha3 = "042298c1d252eeefed6f2eb8fe64aaa548efd24ab6611f7d29df60601b5275df",

@@ -78,7 +78,8 @@ for w in string.gmatch(buf, 'href="(.-)"') do
          gsub("libisl%-", "isl-"):
          gsub("%%2B.*", ""):
          gsub("gcr%-4", "gcr4"):
-         gsub("ffnvcodec", "nv-codec")
+         gsub("ffnvcodec", "nv-codec"):
+         gsub("_a", "a")
       table.insert(archlinux, s)
    end
 end

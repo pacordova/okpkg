@@ -24,8 +24,8 @@ rust = {
 };
 
 firefox = {
-   url = "https://download-installer.cdn.mozilla.net/pub/firefox/releases/145.0.1/linux-x86_64/en-US/firefox-145.0.1.tar.xz",
-   sha3 = "56fb607c9f1c0e92b40a78a3bafc04b3366053d1e59d29c2373894a3c39fe9b7",
+   url = "https://download-installer.cdn.mozilla.net/pub/firefox/releases/145.0.2/linux-x86_64/en-US/firefox-145.0.2.tar.xz",
+   sha3 = "1966005f62b60f5c05724eb1e70cad60b7e769dee63a648ea450c8147b25f474",
    build = _,
    post = [[
       install -d $destdir/usr/{bin,lib64}
@@ -41,8 +41,8 @@ firefox = {
 -- from firefox: libnss3.so libnssutil3.so libsmime3.so libnspr4.so libplc4.so libplds4.so
 -- needs libcups.so.2
 discord = {
-   url = "https://dl.discordapp.net/apps/linux/0.0.115/discord-0.0.115.tar.gz",
-   sha3 = "6dab7d361c04161111fe41527deefc439fa9f6867d764b8204823118e329b040",
+   url = "https://dl.discordapp.net/apps/linux/0.0.116/discord-0.0.116.tar.gz",
+   sha3 = "e04eddf2aafaf99be623cc536049ecc0ec7b7287682da3da55ee77b3cff84c1c",
    build = _,
    post = [[
       sed -e 's:/usr/share:/usr/lib64:'                         \
@@ -103,11 +103,11 @@ nodejs = {
 -- TODO: download error: cannot handle debfile
 -- Consider building from source.
 signal-desktop = {
-   url = "https://updates.signal.org/desktop/apt/pool/s/signal-desktop/signal-desktop_7.80.0_amd64.deb",
-   sha3 = "12903dd7984eed9e70278bc30b97ddbc5395b1be6ed7846b406a87f845aa39b6",
+   url = "https://updates.signal.org/desktop/apt/pool/s/signal-desktop/signal-desktop_7.80.1_amd64.deb",
+   sha3 = "74e22d53809712b8aac73efd525f933cf1c3491f571df6114c55ba42cedd55f2",
    build = _,
    post = [[
-      ar x ../../download/signal-desktop_7.80.0_amd64.deb data.tar.xz
+      ar x ../../download/signal-desktop_7.80.1_amd64.deb data.tar.xz
       tar -xf data.tar.xz
       sed -i 's:/opt/Signal:/usr/bin:' usr/share/applications/signal-desktop.desktop
       install -d $destdir/usr/{lib64,bin}

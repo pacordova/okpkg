@@ -559,8 +559,8 @@ libepoxy = {
 };
 
 xorg-server = {
-   url = "https://x.org/archive/individual/xserver/xorg-server-21.1.20.tar.xz",
-   sha3 = "7673109026dbbecc2d9de651d1cdb0f4b6439f91025d856b8745860fdb1b842f",
+   url = "https://x.org/archive/individual/xserver/xorg-server-21.1.21.tar.xz",
+   sha3 = "c3045dc0770c94fada5ef0e88baa3bef8b01255b507816b9748f4197e1769f47",
    build = "meson",
    flags = {
       "-D{xephyr,xnest,xvfb}=false",
@@ -593,8 +593,8 @@ xf86-input-evdev = {
 };
 
 libinput = {
-   url = "https://gitlab.freedesktop.org/libinput/libinput/-/archive/1.29.2/libinput-1.29.2.tar.bz2",
-   sha3 = "f9bcc533c0c70041345392f5c5a7d59f4095f0156488b4898ab93540e181a62a",
+   url = "https://gitlab.freedesktop.org/libinput/libinput/-/archive/1.30.0/libinput-1.30.0.tar.bz2",
+   sha3 = "af73039464ab9d329fb9dbe3bdb71ae9f9406b3fb467d9bf785dbddcfee362fe",
    build = "meson",
    flags = {
       "-D{debug-gui,documentation,libwacom,tests}=false",

@@ -1,3 +1,9 @@
+xfce4-alsa-plugin = {
+   url = "https://github.com/equeim/xfce4-alsa-plugin/archive/0.4.0/xfce4-alsa-plugin-0.4.0.tar.gz",
+   sha3 = "78aff63bf0dc17a581b03d177e494f83423819cea25f10867ece96a526b70665",
+   build = "meson",
+};
+
 xfce4-pulseaudio-plugin = {
    url = "https://archive.xfce.org/src/panel-plugins/xfce4-pulseaudio-plugin/0.5/xfce4-pulseaudio-plugin-0.5.1.tar.xz",
    sha3 = "7ef658b4c76f81f8dfd0415117623c8faade2c4b6b2ee62ac01b4b46ff2861e3",
@@ -440,8 +446,8 @@ sharutils = {
 };
 
 sqlite = {
-   url = "https://www.sqlite.org/2025/sqlite-autoconf-3510000.tar.gz",
-   sha3 = "fa52f9cc74dbca004aa650ae698036a3350611f672649e165078f4eae21d6a2e",
+   url = "https://www.sqlite.org/2025/sqlite-autoconf-3510100.tar.gz",
+   sha3 = "9b2b1e73f577def1d5b75c5541555a7f42e6e073ad19f7a9118478389c9bbd9b",
    build = "./configure",
    flags = { "--enable-fts5", "CPPFLAGS=-DSQLITE_ENABLE_COLUMN_METADATA=1" },
 };
@@ -459,8 +465,8 @@ sxiv = {
 };
 
 tmux = {
-   url = "https://github.com/tmux/tmux/releases/download/3.5a/tmux-3.5a.tar.gz",
-   sha3 = "bac325fb417afb3cac05df63bff0003d39afdd54a0d9bbd630364d1a9f6d38ce",
+   url = "https://github.com/tmux/tmux/releases/download/3.6/tmux-3.6.tar.gz",
+   sha3 = "fbe33be092eee9d94a43f74ddbf9fa0110024c130f6b8105dd1f10c29b493ae4",
    build = "./configure",
 };
 
