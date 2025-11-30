@@ -46,7 +46,7 @@ atkmm = {
    }
 };
 
-gtkmm = {
+gtkmm3 = {
    url = "https://download.gnome.org/sources/gtkmm/3.24/gtkmm-3.24.10.tar.xz",
    sha3 = "475b10f05b58a5a44808ef8350a5e357479a603ebffd8db577dd96ea7313d5c9",
    build = "meson",
