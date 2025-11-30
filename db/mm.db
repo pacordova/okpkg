@@ -52,3 +52,9 @@ gtkmm3 = {
    build = "meson",
    flags = { "-Dbuild-documentation=false" }
 };
+
+pavucontrol = {
+   url = "https://freedesktop.org/software/pulseaudio/pavucontrol/pavucontrol-5.0.tar.xz",
+   sha3 = "eb0a190222a482d3f3cb29d4d1f43483b689e528f6473d6d09394b0725d78862",
+   build = "./configure",
+};
