@@ -65,8 +65,8 @@ local buf = curl("archlinux/{core,extra,community}/os/x86_64/")
 
 for w in string.gmatch(buf, 'href="(.-)"') do
    if string.find(w, "%.tar.zst$") then
-      local s =
-         basename(w):gsub(".pkg.tar.zst", ""):
+      local s = basename(w):
+         gsub(".pkg.tar.zst", ""):
          gsub("%-x86_64", ""):
          gsub("%-any", ""):
          gsub("%-%d+$", ""):
@@ -79,6 +79,7 @@ for w in string.gmatch(buf, 'href="(.-)"') do
          gsub("%%2B.*", ""):
          gsub("gcr%-4", "gcr4"):
          gsub("ffnvcodec", "nv-codec"):
+         gsub("gnupg%-", "gnupg2-"):
          gsub("_a", "a")
       table.insert(archlinux, s)
    end
@@ -92,17 +93,15 @@ local buf = curl("slackware/slackware64-current/FILELIST.TXT")
 
 for w in string.gmatch(buf, '%./(.-)\n') do
    if string.find(w, "%.txz$") then
-      local s =
-         basename(w):gsub("%-x86_64.-.txz", ""):
+      local s = basename(w):
+         gsub("%-x86_64.-.txz", ""):
          gsub("%-noarch%-%d+", ""):
-         gsub("glibc%-zoneinfso%-", "tzdata-"):
+         gsub("glibc%-zoneinfo%-", "tzdata-"):
          gsub("bash%-completion%-", ""):
-         gsub("20201015_cff88dd", "39"):
-         gsub("20191011_e8ce9fe", "18"):
-         gsub("0.18_20240915", "0.18"):
          gsub(".post1", ""):
          gsub("lvm2%-", "device-mapper-"):
          gsub("gtk%+3%-", "gtk3-"):
+         gsub("gtkmm%-", "gtkmm3-"):
          gsub("mypaint%-brushes", "mypaint-brushes1")
       table.insert(slackware, s)
    end
