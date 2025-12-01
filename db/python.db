@@ -126,8 +126,8 @@ python-trove-classifiers = {
 };
 
 python-hatchling = {
-   url = "https://pypi.org/packages/source/h/hatchling/hatchling-1.27.0.tar.gz",
-   sha3 = "84665f7b1aafb35c97d7f28c5ba7edfc0c86055fb45143a42962269f8124b8e1",
+   url = "https://pypi.org/packages/source/h/hatchling/hatchling-1.28.0.tar.gz",
+   sha3 = "63ae9f8fa1660e8bac7d472c9b8b5922ed4e6bb2a351495e83b50dc05f0db793",
    build = "python-build",
 };
 
@@ -156,8 +156,8 @@ python-pyparsing = {
 };
 
 cython = {
-   url = "https://pypi.org/packages/source/c/cython/cython-3.2.1.tar.gz",
-   sha3 = "e625661ac0f5da903dc74aa4dbd1cc6a47a28870484b9c6ce03356fac4c2ba8f",
+   url = "https://pypi.org/packages/source/c/cython/cython-3.2.2.tar.gz",
+   sha3 = "8abca9f2d6a8ede0cb6c8a3343f4a6c2ee5c195c3b41eb2945a6a004d1266a91",
    build = "python-build",
 };
 

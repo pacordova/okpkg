@@ -227,8 +227,8 @@ cryptsetup = {
 };
 
 cups = {
-   url = "https://github.com/OpenPrinting/cups/releases/download/v2.4.14/cups-2.4.14-source.tar.gz",
-   sha3 = "ac7d7abd512d415d7e51a164d7e38e00996ee985d13a3d4a0871c64373817c02",
+   url = "https://github.com/OpenPrinting/cups/releases/download/v2.4.15/cups-2.4.15-source.tar.gz",
+   sha3 = "b1077f0a6417cfeb67d4edde53b1b4cb876183fbdd65a3c9126c8e73c933dd38",
    build = "./configure",
    flags = {
       "--with-rcdir=/tmp/cupsinit",

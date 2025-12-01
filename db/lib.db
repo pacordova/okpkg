@@ -343,8 +343,8 @@ libxml2 = {
 };
 
 libxslt = {
-   url = "https://download.gnome.org/sources/libxslt/1.1/libxslt-1.1.43.tar.xz",
-   sha3 = "c073d7fac7ef63f6931391401a81bbbeb0cd3a39ef0850de146cdffb42da01fd",
+   url = "https://download.gnome.org/sources/libxslt/1.1/libxslt-1.1.45.tar.xz",
+   sha3 = "ac90e0851246088eab2c71008c0b72246eada110e1f23a109383089c88d846d6",
    build = "./configure",
    flags = { "--without-python" }
 };
