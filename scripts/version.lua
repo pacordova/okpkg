@@ -49,8 +49,13 @@ function version(pkglist)
          get_version(slackware, pkgname),
          get_version(okpkg, pkgname)
       }
-      if (row[3] and row[2] and row[3] ~= row[2]) or
-         (row[3] and row[1] and row[3] ~= row[1])
+      if (pkglist[i] ~= "bc") and 
+         (pkglist[i] ~= "librsvg") and
+         (pkglist[i] ~= "pavucontrol") and
+         (pkglist[i] ~= "vim") and
+         (pkglist[i] ~= "cmake") and
+         ((row[3] and row[2] and row[3] ~= row[2]) or
+          (row[3] and row[1] and row[3] ~= row[1]))
       then
          io.write(string.format("%s,%s,%s,%s\n", pkglist[i], unpack(row)))
       end
@@ -102,7 +107,10 @@ for w in string.gmatch(buf, '%./(.-)\n') do
          gsub("lvm2%-", "device-mapper-"):
          gsub("gtk%+3%-", "gtk3-"):
          gsub("gtkmm%-", "gtkmm3-"):
-         gsub("mypaint%-brushes", "mypaint-brushes1")
+         gsub("mypaint%-brushes", "mypaint-brushes1"):
+         gsub("20201015_cff88dd", "39"):
+         gsub("20191011_e8ce9fe", "18"):
+         gsub("0.18_20240915", "0.18")
       table.insert(slackware, s)
    end
 end
