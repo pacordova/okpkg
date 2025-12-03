@@ -477,11 +477,6 @@ libressl = {
    sha3 = "c0299d2efadd606f30fe1ae8cdd70ba4b28617f1f2083ffe20b32c6a8bd29db7",
    build = "./configure",
    flags = { "--with-openssldir=/etc/ssl", },
-   post = [[
-      cd $destdir/usr/lib64
-      ln -sf libcrypto.so.57.0.1 libcrypto.so.56
-      ln -sf libssl.so.60.0.1    libssl.so.59
-   ]]
 };
 
 kmod = {
