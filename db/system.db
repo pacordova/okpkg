@@ -53,17 +53,6 @@ _perl = {
    ]]
 };
 
-iana-etc = {
-   url = "https://github.com/Mic92/iana-etc/releases/download/20251022/iana-etc-20251022.tar.gz",
-   sha3 = "f512ea3d6e4ea6606c9cfb862a9a052db94f921361147c6cbdcee79ea020d863",
-   build = _,
-   post = [[
-      install -d $destdir/etc
-      install -m 644 services  $destdir/etc
-      install -m 644 protocols $destdir/etc
-   ]]
-};
-
 glibc = {
    url = "https://ftp.gnu.org/gnu/glibc/glibc-2.42.tar.xz",
    sha3 = "2cb63bb871c7db0f785c724703c1406b35023eb60aa573890c4ae999d63d7314",
