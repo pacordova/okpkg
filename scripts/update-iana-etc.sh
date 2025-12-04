@@ -1,4 +1,5 @@
 #!/bin/sh
+
 curl='/usr/bin/curl --fail --location'
 
 _get_url(){
