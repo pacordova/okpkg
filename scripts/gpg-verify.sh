@@ -36,4 +36,5 @@ _cksum_gh https://github.com/vcrhonek/hwdata v0.402
 #_cksum_gh https://github.com/systemd/systemd/ v256
 
 for f in *.{tar.gz,deb}; do [ -f $f ] && okpkg sha3sum $f; done
-cd $oldpwd && rm -fr $tempdir
+
+cd "$oldpwd" && rm -fr "$tempdir"

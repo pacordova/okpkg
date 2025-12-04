@@ -1,24 +1,19 @@
 #!/bin/sh
+curl='/usr/bin/curl --fail --location'
 
-protocols="https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xml"
-services="https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xml"
+_get_url(){
+  printf "https://www.iana.org/assignments/%s/%s.xml" "$1" "$1"
+}
 
-oldpwd=`pwd`
-tempdir=`mktemp -d`
-curl='/usr/bin/curl --fail --location --remote-name'
-
-
-cd "$tempdir"
-
-$curl "$protocols"
+$curl `_get_url protocol-numbers` > _
 gawk -F"[<>]" '
 (/<record/) { v=n="" }
 (/<value/) { v=$3 }
 (/<name/ && $3!~/ /) { n=$3 }
 (/<\/record/ && n && v!="") { printf "%-12s %3i %s\n", tolower(n),v,n }
-' ${protocols##*/} > /etc/protocols
+' _ > /etc/protocols
 
-$curl "$services"
+$curl `_get_url service-names-port-numbers` > _
 gawk -F"[<>]" '
 (/<record/) { n=u=p=c="" }
 (/<name/ && !/\(/) { n=$3 }
@@ -26,6 +21,4 @@ gawk -F"[<>]" '
 (/<protocol/) { p=$3 }
 (/Unassigned/ || /Reserved/ || /historic/) { c=1 }
 (/<\/record/ && n && u && p && !c) { printf "%-15s %5i/%s\n", n,u,p }
-' ${services##*/} > /etc/services
-
-cd "$oldpwd" && rm -fr "$tempdir"
+' _ > /etc/services
