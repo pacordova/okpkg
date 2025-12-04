@@ -10,6 +10,12 @@ xfce4-pulseaudio-plugin = {
    build = "meson",
 };
 
+xfce4-screenshooter = {
+   url = "https://archive.xfce.org/src/apps/xfce4-screenshooter/1.11/xfce4-screenshooter-1.11.3.tar.xz",
+   sha3 = "c22cd2ebcf7dba2d96abafb7310cf715a26827f4e539e2f530d787665f31eb7f",
+   build = "meson",
+};
+
 7zip = {
    --url = "https://github.com/p7zip-project/p7zip/archive/v17.05/p7zip-17.05.tar.gz",
    --sha3 = "7cce53f689d055b1cdc0a33922965083d50e595e2037e2ca3e8fee3fc87336dd",
