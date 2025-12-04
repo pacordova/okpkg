@@ -290,8 +290,9 @@ os.execute([[
    mknod -m 666 dev/null c 1 3
    chattr +i etc/resolv.conf
    chmod +x usr/bin/c99
-   curl -LO "https://curl.se/ca/cacert.pem"
-   mv cacert.pem etc/ssl/certs/ca-certificates.crt
+   install -m 644 /etc/protocols etc
+   install -m 644 /etc/services  etc
+   cp -p /etc/ssl/certs/ca-certificates.crt etc/ssl/certs/ca-certificates.crt
    cp -rp /etc/dinit.d etc/dinit.d
    git clone /var/lib/okpkg var/lib/okpkg
    git -C var/lib/okpkg repack -adf --depth=1
