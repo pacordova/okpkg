@@ -338,11 +338,11 @@ libtorrent-rasterbar = {
       BOOST_ROOT=$BOOST_ROOT \
       $b2 -j5 \
           variant=release \
-          python=3.13 \
+          python=3.14 \
           fpic=on \
           stage_module \
           install_module \
-          python-install-path=$destdir/usr/lib64/python3.13/site-packages
+          python-install-path=$destdir/usr/lib64/python3.14/site-packages
    ]]
 };
 
