@@ -37,12 +37,9 @@ for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do
    end
 end
 
--- Rebuilds
---emerge("bison")
---emerge("gperf")
---emerge("glibc")
---emerge("binutils")
---emerge("mpfr")
+-- Rebuilds for reproducibility
+rebuilds = { "binutils", "bison", "glibc", "gperf", "mpfr" }
+for i=1,#rebuilds do emerge(rebuilds[i]) end
 
 -- Fix versions and cleanup
 chdir(pkgdir)
