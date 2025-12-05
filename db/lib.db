@@ -14,7 +14,7 @@ usbutils = {
 
 _glib2 = {
    url = _db_lookup("glib2")["url"],
-   sha3 = "010dcf1bd1d9a6ab8f8f638b3c72697a85386d3301d3f706c22c8f3eeec042da",
+   sha3 = "f5a874c5020a99c3593d640def52c4465781ae038e1d902bbdfa78170953d534",
    build = "meson",
    flags = { "-Dintrospection=disabled" }
 };
@@ -223,8 +223,8 @@ libmnl = {
 };
 
 libnftnl = {
-   url = "https://netfilter.org/pub/libnftnl/libnftnl-1.3.0.tar.xz",
-   sha3 = "f8574f06c842102f746429fb085976e07d38909526d23c03b6e467912a03d193",
+   url = "https://netfilter.org/pub/libnftnl/libnftnl-1.3.1.tar.xz",
+   sha3 = "8dbf69796a245bf9778a6044ee9d03d82472d0ec55d591779762b57fb9b2743a",
    build = "./configure",
 };
 
@@ -242,8 +242,8 @@ libpcap = {
 };
 
 libpng = {
-   url = "https://downloads.sourceforge.net/libpng/libpng-1.6.51.tar.xz",
-   sha3 = "08d6097d63c1d125f88c973ad1b0167952b581b685e5799ea48d4ea569c58c15",
+   url = "https://downloads.sourceforge.net/libpng/libpng-1.6.52.tar.xz",
+   sha3 = "b37e35064c13bda99cfe09e0b99f48a73142dc5d28450ccc8fa83be9151b2c37",
    build = "./configure",
 };
 
