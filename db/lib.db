@@ -14,7 +14,7 @@ usbutils = {
 
 _glib2 = {
    url = _db_lookup("glib2")["url"],
-   sha3 = "f5a874c5020a99c3593d640def52c4465781ae038e1d902bbdfa78170953d534",
+   sha3 = _db_lookup("glib2")["sha3"],
    build = "meson",
    flags = { "-Dintrospection=disabled" }
 };
