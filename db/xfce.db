@@ -253,11 +253,24 @@ xfce4-taskmanager = {
    build = "meson",
 };
 
-picom = {
-   url = "https://github.com/yshui/picom/archive/v12.5/picom-12.5.tar.gz",
-   sha3 = "1b5d25bf34ccf12db9fe7ab0680dd2d1bc17b979b43490ae316bebbff4f4a8ed",
+xfce4-pulseaudio-plugin = {
+   url = "https://archive.xfce.org/src/panel-plugins/xfce4-pulseaudio-plugin/0.5/xfce4-pulseaudio-plugin-0.5.1.tar.xz",
+   sha3 = "7ef658b4c76f81f8dfd0415117623c8faade2c4b6b2ee62ac01b4b46ff2861e3",
    build = "meson",
-   post = [[ rm -fr $destdir/usr/share/applications ]]
+   flags = {
+      "-Dkeybinder=disabled",
+      "-Dlibnotify=enabled",
+      "-Dlibcanberra=disabled",
+      "-Dlibxfce4windowing=enabled",
+      "-Dmpris2=disabled",
+      "-Dmixer-command=Myxer",
+   }
+};
+
+xfce4-screenshooter = {
+   url = "https://archive.xfce.org/src/apps/xfce4-screenshooter/1.11/xfce4-screenshooter-1.11.3.tar.xz",
+   sha3 = "c22cd2ebcf7dba2d96abafb7310cf715a26827f4e539e2f530d787665f31eb7f",
+   build = "meson",
 };
 
 --------------------------------------------------------------------------------
