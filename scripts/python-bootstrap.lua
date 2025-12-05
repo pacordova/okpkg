@@ -23,7 +23,7 @@ purge("python-packaging")
 purge("python-build")
 purge("python-wheel")
 purge("python-setuptools")
-install("/var/lib/okpkg/packages/a/python3-3.13.7-amd64.tar.lz")
+install("/var/lib/okpkg/packages/py/python3-3.14.0-amd64.tar.lz")
 
 ---------------
 -- Bootstrap --

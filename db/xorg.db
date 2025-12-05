@@ -407,8 +407,8 @@ xorg-xinput = {
 };
 
 xorg-xkbcomp = {
-   url = "https://x.org/pub/individual/app/xkbcomp-1.4.7.tar.xz",
-   sha3 = "9c379d2046b6ac52960c6d7410b5578a95f7cc20326a3619057cd7b46de55b65",
+   url = "https://x.org/pub/individual/app/xkbcomp-1.5.0.tar.xz",
+   sha3 = "2bdf5ed3bb1f2c1d777d93982e31e2dcbf29179b465f97f8a099837866b7c164",
    build = "./configure",
 };
 
@@ -543,8 +543,8 @@ xkeyboard-config = {
 };
 
 libxkbcommon = {
-   url = "https://github.com/xkbcommon/libxkbcommon/archive/xkbcommon-1.13.0/xkbcommon-1.13.0.tar.gz",
-   sha3 = "5a9c2ef7e05fad3a7bc32ff1bbc82c2ff6a4d8551193e9debff9fc0ba78c2c9e",
+   url = "https://github.com/xkbcommon/libxkbcommon/archive/xkbcommon-1.13.1/xkbcommon-1.13.1.tar.gz",
+   sha3 = "405ebd237ef7682e7b265c47c12601d4443ec379cb30f8e8d2d9a24a29e7fc9a",
    build = "meson",
    flags = {
       "-Denable-wayland=false",

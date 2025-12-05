@@ -1,31 +1,4 @@
-From bbcb17dc1ed283f41c8cd94d39f70898f0c45583 Mon Sep 17 00:00:00 2001
-From: Alexander Kanavin <alex@linutronix.de>
-Date: Sun, 12 Sep 2021 21:44:36 +0200
-Subject: [PATCH] sysconfig.py: use platlibdir also for purelib
-
-This is needed in multilib configurations where hardcoding 'lib'
-is not correct.
-
-Upstream-Status: Inappropriate [oe-core specific]
-Signed-off-by: Alexander Kanavin <alex@linutronix.de>
----
- Lib/sysconfig/__init__.py | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/Lib/sysconfig/__init__.py b/Lib/sysconfig/__init__.py
-index 80aef34..f8e1c7d 100644
---- a/Lib/sysconfig/__init__.py
-+++ b/Lib/sysconfig/__init__.py
-@@ -29,7 +29,7 @@ _INSTALL_SCHEMES = {
-     'posix_prefix': {
-         'stdlib': '{installed_base}/{platlibdir}/{implementation_lower}{py_version_short}{abi_thread}',
-         'platstdlib': '{platbase}/{platlibdir}/{implementation_lower}{py_version_short}{abi_thread}',
--        'purelib': '{base}/lib/{implementation_lower}{py_version_short}{abi_thread}/site-packages',
-+        'purelib': '{base}/{platlibdir}/{implementation_lower}{py_version_short}{abi_thread}/site-packages',
-         'platlib': '{platbase}/{platlibdir}/{implementation_lower}{py_version_short}{abi_thread}/site-packages',
-         'include':
-             '{installed_base}/include/{implementation_lower}{py_version_short}{abiflags}',
---- a/Modules/_hashopenssl.c.orig
+--- a/Modules/_hashopenssl.c
 +++ b/Modules/_hashopenssl.c
 @@ -44,7 +44,9 @@
  
@@ -37,7 +10,7 @@ index 80aef34..f8e1c7d 100644
  #if defined(NID_sha3_224) && defined(NID_sha3_256) && defined(NID_sha3_384) && defined(NID_sha3_512)
  #define PY_OPENSSL_HAS_SHA3 1
  #endif
-@@ -922,11 +924,15 @@ py_evp_fromname(PyObject *module, const char *digestname, PyObject *data_obj,
+@@ -963,11 +965,15 @@ _hashlib_HASH(PyObject *module, const char *digestname, PyObject *data_obj,
          goto exit;
      }
  
@@ -53,3 +26,37 @@ index 80aef34..f8e1c7d 100644
  
      self = newEVPobject(type);
      if (self == NULL) {
+--- a/Modules/_ssl.c
++++ b/Modules/_ssl.c
+@@ -907,7 +907,7 @@ newPySSLSocket(PySSLContext *sslctx, PySocketSockObject *sock,
+     }
+ 
+     /* bpo43522 and OpenSSL < 1.1.1l: copy hostflags manually */
+-#if OPENSSL_VERSION < 0x101010cf
++#if OPENSSL_VERSION_NUMBER < 0x101010cf
+     X509_VERIFY_PARAM *ssl_verification_params = SSL_get0_param(self->ssl);
+     X509_VERIFY_PARAM *ssl_ctx_verification_params = SSL_CTX_get0_param(ctx);
+ 
+@@ -3859,7 +3859,11 @@ _ssl__SSLContext__host_flags_get_impl(PySSLContext *self)
+     unsigned int host_flags;
+ 
+     ssl_verification_params = SSL_CTX_get0_param(self->ctx);
++#ifdef LIBRESSL_VERSION_NUMBER
++    host_flags = 0;
++#else
+     host_flags = X509_VERIFY_PARAM_get_hostflags(ssl_verification_params);
++#endif
+     return PyLong_FromUnsignedLong(host_flags);
+ }
+ 
+--- a/Lib/sysconfig/__init__.py
++++ b/Lib/sysconfig/__init__.py
+@@ -29,7 +29,7 @@
+     'posix_prefix': {
+         'stdlib': '{installed_base}/{platlibdir}/{implementation_lower}{py_version_short}{abi_thread}',
+         'platstdlib': '{platbase}/{platlibdir}/{implementation_lower}{py_version_short}{abi_thread}',
+-        'purelib': '{base}/lib/{implementation_lower}{py_version_short}{abi_thread}/site-packages',
++        'purelib': '{base}/{platlibdir}/{implementation_lower}{py_version_short}{abi_thread}/site-packages',
+         'platlib': '{platbase}/{platlibdir}/{implementation_lower}{py_version_short}{abi_thread}/site-packages',
+         'include':
+             '{installed_base}/include/{implementation_lower}{py_version_short}{abiflags}',

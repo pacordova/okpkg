@@ -49,11 +49,11 @@ function version(pkglist)
          get_version(slackware, pkgname),
          get_version(okpkg, pkgname)
       }
-      if (pkglist[i] ~= "bc") and 
+      if (pkglist[i] ~= "bc") and
          (pkglist[i] ~= "librsvg") and
          (pkglist[i] ~= "pavucontrol") and
          (pkglist[i] ~= "vim") and
-         (pkglist[i] ~= "cmake") and
+         (pkglist[i] ~= "python3") and
          ((row[3] and row[2] and row[3] ~= row[2]) or
           (row[3] and row[1] and row[3] ~= row[1]))
       then

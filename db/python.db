@@ -1,6 +1,6 @@
 python3 = {
-   url = "https://www.python.org/ftp/python/3.13.7/Python-3.13.7.tar.xz",
-   sha3 = "868bc710cde737c9518569d1be1f7749e32174ead7c8e6bf0a6d28d1bf20ab14",
+   url = "https://www.python.org/ftp/python/3.14.0/Python-3.14.0.tar.xz",
+   sha3 = "e11818475734b8b1f6ddd6999629498440b44de4f983a9db44fc318e62de2834",
    build = "./configure",
    flags = {
       "--enable-loadable-sqlite-extensions",
