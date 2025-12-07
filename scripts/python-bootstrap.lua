@@ -12,7 +12,7 @@ local srcdir = "/var/lib/okpkg/sources"
 -------------
 -- Cleanup --
 -------------
-os.execute("rm -fr /usr/lib64/python3.13")
+os.execute("rm -fr /usr/lib64/python3.14")
 os.remove("/usr/bin/pyproject-build")
 os.remove("/usr/bin/wheel")
 purge("python3")

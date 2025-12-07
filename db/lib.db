@@ -229,8 +229,8 @@ libnftnl = {
 };
 
 libnl3 = {
-   url = "https://github.com/thom311/libnl/releases/download/libnl3_11_0/libnl-3.11.0.tar.gz",
-   sha3 = "82376c1353da938cc205a70cfa262c8578b90c7869b2a402d3272871e73d8ece",
+   url = "https://github.com/thom311/libnl/releases/download/libnl3_12_0/libnl-3.12.0.tar.gz",
+   sha3 = "5e84419a3c2a6e7f5391cc6be37cba06ce2f245c5b6e7a9cde3548ae64a09a60",
    build = "./configure",
    flags = { "--disable-cli" }
 };
