@@ -460,8 +460,8 @@ sxiv = {
 };
 
 tmux = {
-   url = "https://github.com/tmux/tmux/releases/download/3.6/tmux-3.6.tar.gz",
-   sha3 = "fbe33be092eee9d94a43f74ddbf9fa0110024c130f6b8105dd1f10c29b493ae4",
+   url = "https://github.com/tmux/tmux/releases/download/3.6a/tmux-3.6a.tar.gz",
+   sha3 = "51664510055598779ae7fcd1fc9c703b5960da38f9285f77b876211b0e4996c3",
    build = "./configure",
 };
 
