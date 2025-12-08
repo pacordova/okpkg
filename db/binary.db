@@ -41,8 +41,8 @@ firefox = {
 -- from firefox: libnss3.so libnssutil3.so libsmime3.so libnspr4.so libplc4.so libplds4.so
 -- needs libcups.so.2
 discord = {
-   url = "https://dl.discordapp.net/apps/linux/0.0.117/discord-0.0.117.tar.gz",
-   sha3 = "c18309e4c9c38cfa34a26040ad95765cfe8f84e3a4b31091db575b2b89a43192",
+   url = "https://dl.discordapp.net/apps/linux/0.0.118/discord-0.0.118.tar.gz",
+   sha3 = "b7bd8919977d7abbf7ae44f2a9edf1ada84a039425491014387368a241f4cb88",
    build = _,
    post = [[
       sed -e 's:/usr/share:/usr/lib64:'                         \
