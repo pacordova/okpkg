@@ -85,7 +85,8 @@ for w in string.gmatch(buf, 'href="(.-)"') do
          gsub("gcr%-4", "gcr4"):
          gsub("ffnvcodec", "nv-codec"):
          gsub("gnupg%-", "gnupg2-"):
-         gsub("_a", "a")
+         gsub("_a", "a"):
+         gsub("bash.5.3.8", "bash-5.3.008")
       table.insert(archlinux, s)
    end
 end

@@ -593,13 +593,16 @@ xf86-input-evdev = {
 };
 
 libinput = {
-   url = "https://gitlab.freedesktop.org/libinput/libinput/-/archive/1.30.0/libinput-1.30.0.tar.bz2",
-   sha3 = "af73039464ab9d329fb9dbe3bdb71ae9f9406b3fb467d9bf785dbddcfee362fe",
+   url = "https://gitlab.freedesktop.org/libinput/libinput/-/archive/1.30.1/libinput-1.30.1.tar.bz2",
+   sha3 = "1200bd26c5b53d4e0c5ca44fecf85d59bf31d80ba4992a5375932198b1fa5127",
    build = "meson",
    flags = {
-      "-D{debug-gui,documentation,libwacom,tests}=false",
       "-Dudev-dir=/usr/lib64/udev",
-   }
+      "-Dlibwacom=false",
+      "-Dmtdev=false",
+      "-Ddebug-gui=false",
+      "-Dtests=false",
+   },
 };
 
 xf86-input-libinput = {
