@@ -26,8 +26,8 @@ gobject-introspection = {
 };
 
 glib2 = {
-   url = "https://download.gnome.org/sources/glib/2.86/glib-2.86.2.tar.xz",
-   sha3 = "f5a874c5020a99c3593d640def52c4465781ae038e1d902bbdfa78170953d534",
+   url = "https://download.gnome.org/sources/glib/2.86/glib-2.86.3.tar.xz",
+   sha3 = "f932daf0ea7a375b3cc7aaf953565e0e66d51f44bbc7af254efe3dda525e25d5",
    build = "meson",
    flags = { "-Dintrospection=enabled" }
 };
@@ -76,14 +76,14 @@ vala = {
 --------------------------------------------------------------------------------
 
 alsa-lib = {
-   url = "https://alsa-project.org/files/pub/lib/alsa-lib-1.2.14.tar.bz2",
-   sha3 = "f1cfc4237cd379b6e4a4a847fd0726f969f2293fa42a4c4a09fde7a57c230896",
+   url = "https://alsa-project.org/files/pub/lib/alsa-lib-1.2.15.tar.bz2",
+   sha3 = "bee8df79b0c21769cc35f78a3baaab2f5bbd2b5d0673611815cefa665197724d",
    build = "./configure",
 };
 
 alsa-utils = {
-   url = "https://alsa-project.org/files/pub/utils/alsa-utils-1.2.14.tar.bz2",
-   sha3 = "b7e56315ee2e82af2199ab4bbe2e130759053cd365ebcf8997341d1c5cc4c914",
+   url = "https://alsa-project.org/files/pub/utils/alsa-utils-1.2.15.tar.bz2",
+   sha3 = "34b9758f90272d78c6670a766e94d24610ba14fdc21627a962cdc637ab56388c",
    build = "./configure",
    flags = {
       "--with-udev-rules-dir=/usr/lib64/udev/rules.d",
