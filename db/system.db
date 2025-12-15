@@ -444,8 +444,8 @@ gawk = {
 };
 
 tzdata = {
-   url = "https://github.com/eggert/tz/archive/2025b/tz-2025b.tar.gz",
-   sha3 = "2a8484dc817034ed32cfc42c522a42ef32adcf04908a201df03f51f6919c428a",
+   url = "https://github.com/eggert/tz/archive/2025c/tz-2025c.tar.gz",
+   sha3 = "3ad677364e3d625c305290343168606fabe80e29302f170cc5807bb26ecdbc45",
    build = "make",
    flags = { "LIBDIR=/usr/lib64", "ZICDIR=/usr/bin" },
    post = [[ rm -f $destdir/etc/localtime ]]

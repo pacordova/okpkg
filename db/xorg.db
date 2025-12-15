@@ -268,8 +268,8 @@ libglvnd = {
 };
 
 libdrm = {
-   url = "https://dri.freedesktop.org/libdrm/libdrm-2.4.130.tar.xz",
-   sha3 = "87dafa3506f2147b3f270666a43c1cb865e745478a310e8131cdee5869fa6ba4",
+   url = "https://dri.freedesktop.org/libdrm/libdrm-2.4.131.tar.xz",
+   sha3 = "bc08bf47affa1777aab2aef5de5b9360f0314f1b968421edb7725c280438fd45",
    build = "meson",
    flags = {
       "-D{intel=enabled,udev=true,valgrind=disabled}",

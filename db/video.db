@@ -1,6 +1,6 @@
 vulkan-headers = {
-   url = "https://github.com/KhronosGroup/Vulkan-Headers/archive/vulkan-sdk-1.4.328.1/Vulkan-Headers-vulkan-sdk-1.4.328.1.tar.gz",
-   sha3 = "7c9655f63cd03ec4bf4374f600039968c544bba943d0accbf0bd525b4f266f89",
+   url = "https://github.com/KhronosGroup/Vulkan-Headers/archive/vulkan-sdk-1.4.335.0/Vulkan-Headers-vulkan-sdk-1.4.335.0.tar.gz",
+   sha3 = "75a0c7532d6280b8010ce76f188b821484be729d0b1e75be1b83da8a755183db",
    build = "cmake",
 };
 
