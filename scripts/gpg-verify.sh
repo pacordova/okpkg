@@ -26,10 +26,10 @@ _cksum_signal(){
 cd "$tempdir"
 
 _cksum_signal
-#_cksum_gh https://github.com/vim/vim v9.1.1952
+_cksum_gh https://github.com/vim/vim v9.1.1980
 #_cksum_gh https://github.com/vcrhonek/hwdata v0.402
 #_cksum_gh https://github.com/yshui/picom v12.5
-#_cksum_gh https://github.com/eggert/tz 2025b
+_cksum_gh https://github.com/eggert/tz 2025c
 #_cksum_gh https://github.com/pnggroup/libpng v1.6.44
 #_cksum_gh https://github.com/harfbuzz/harfbuzz 9.0.0
 #_cksum_gh https://github.com/fribidi/fribidi v1.0.15
