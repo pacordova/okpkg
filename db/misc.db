@@ -56,8 +56,8 @@ dcron = {
 };
 
 dmidecode = {
-   url = "https://download.savannah.gnu.org/releases/dmidecode/dmidecode-3.6.tar.xz",
-   sha3 = "751c576320d228d5a98f99c1e01b3b1e9c6b72986daba85f779572ca919c53c7",
+   url = "https://download.savannah.gnu.org/releases/dmidecode/dmidecode-3.7.tar.xz",
+   sha3 = "16641cd5004dc09677a71eedeec885e18862f6c2c194141479613f218b2b129b",
    build = "make",
    flags = {
       "prefix=/usr",

@@ -119,8 +119,8 @@ lzlib = {
 };
 
 xz = {
-   url = "https://downloads.sourceforge.net/lzmautils/xz-5.8.1.tar.gz",
-   sha3 = "8941f202ab32a71f17a0718571cfd2f033295db806a254da4eddd6810a081db9",
+   url = "https://downloads.sourceforge.net/lzmautils/xz-5.8.2.tar.gz",
+   sha3 = "617ebedb04d2cec10d8d087641b63368093f6dfe57ff0fdb1851e559494fb48a",
    build = "./configure",
 };
 
