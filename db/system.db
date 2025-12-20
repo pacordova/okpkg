@@ -745,8 +745,8 @@ dbus = {
 --------------------------------------------------------------------------------
 
 device-mapper = {
-   url = "https://sourceware.org/ftp/lvm2/LVM2.2.03.37.tgz",
-   sha3 = "57150af496f63fa0e7d0e101e4561d4d9bf6442133397322d85b031a181aebe0",
+   url = "https://sourceware.org/ftp/lvm2/LVM2.2.03.38.tgz",
+   sha3 = "b3ef1d35d1ff4f6dd5d1a104b8f99c5a65c02493b732b109c5333b671e3d168a",
    prepare = "./configure",
    build = "make_noinstall",
    flags = {

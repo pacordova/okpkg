@@ -76,14 +76,14 @@ vala = {
 --------------------------------------------------------------------------------
 
 alsa-lib = {
-   url = "https://alsa-project.org/files/pub/lib/alsa-lib-1.2.15.tar.bz2",
-   sha3 = "bee8df79b0c21769cc35f78a3baaab2f5bbd2b5d0673611815cefa665197724d",
+   url = "https://alsa-project.org/files/pub/lib/alsa-lib-1.2.15.1.tar.bz2",
+   sha3 = "8fa4759f74a1edc37328eccf0a2c03faf7b90d55aa497fbf2d45f777bcbb7f62",
    build = "./configure",
 };
 
 alsa-utils = {
-   url = "https://alsa-project.org/files/pub/utils/alsa-utils-1.2.15.tar.bz2",
-   sha3 = "34b9758f90272d78c6670a766e94d24610ba14fdc21627a962cdc637ab56388c",
+   url = "https://alsa-project.org/files/pub/utils/alsa-utils-1.2.15.1.tar.bz2",
+   sha3 = "b57578f4a760f65fb34adafe50a482132ca63f0504fddafad9621e055d10e18b",
    build = "./configure",
    flags = {
       "--with-udev-rules-dir=/usr/lib64/udev/rules.d",
@@ -376,8 +376,8 @@ nghttp2 = {
 };
 
 opus = {
-   url = "https://downloads.xiph.org/releases/opus/opus-1.5.2.tar.gz",
-   sha3 = "6f0c6a0215fa2c898f9f37fe07cdafb230a9135e722163de605e480ebf6820e0",
+   url = "https://downloads.xiph.org/releases/opus/opus-1.6.tar.gz",
+   sha3 = "97a67e0e3f714d5977e74272d9f4201b8ddbeacad2912de1fe3de40c80506ccb",
    build = "meson",
 };
 

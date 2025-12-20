@@ -1,12 +1,12 @@
 babl = {
-   url = "https://download.gimp.org/pub/babl/0.1/babl-0.1.116.tar.xz",
-   sha3 = "d599c0df81fd693f2451d7fc1172f367fc645d30b49777ae6a2fe0a046f8f5e6",
+   url = "https://download.gimp.org/pub/babl/0.1/babl-0.1.118.tar.xz",
+   sha3 = "2022cfe413be4f61f19b603362e8e35488fb4ca7159e74ecef7787ffbbe2f00f",
    build = "meson",
 };
 
 gegl = {
-   url = "https://download.gimp.org/pub/gegl/0.4/gegl-0.4.64.tar.xz",
-   sha3 = "4e1f1d24cdde9095846bad87e52ef53eb7170bc39bd651a0dd7702861fd64122",
+   url = "https://download.gimp.org/pub/gegl/0.4/gegl-0.4.66.tar.xz",
+   sha3 = "8d526cb725cfc9a19a018d592bfe21050a689d5e5782c1e7d0e5989b7ea1d924",
    build = "meson",
 };
 

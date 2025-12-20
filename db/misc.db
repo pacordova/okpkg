@@ -342,8 +342,8 @@ libtorrent-rasterbar = {
 };
 
 linux-lts = {
-   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.12.61.tar.xz",
-   sha3 = "05f0b2f7f2913a2bfdabdd76570a62f6ba06f6f60a0cdc07f2aefcccc689b54f",
+   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.12.63.tar.xz",
+   sha3 = "08e931a283bdc1e7a7147569f0c5943028861013a0615ca80e8f27fe56905027",
    build = "make",
    flags = { "bzImage", "modules", "headers" },
    prepare = [[
