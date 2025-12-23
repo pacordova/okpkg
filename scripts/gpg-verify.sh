@@ -6,7 +6,7 @@
 
 oldpwd=`pwd`
 tempdir=`mktemp -d`
-curl='curl --remote-name-all'
+curl='/usr/bin/curl --silent --remote-name-all'
 
 _cksum_gh(){
    git clone --depth 1 --branch "$2" "$1"
@@ -16,7 +16,7 @@ _cksum_gh(){
 }
 
 _cksum_signal(){
-   $curl -s https://updates.signal.org/desktop/apt/dists/xenial/{InRelease,main/binary-amd64/Packages}
+   $curl https://updates.signal.org/desktop/apt/dists/xenial/{InRelease,main/binary-amd64/Packages}
    gpg -d InRelease >/dev/null || exit 1
    awk '/[0-9a-f]{128}/&&/Packages$/{print$1,"Packages"}' InRelease | sha512sum -c || exit 1
    sed -n '31s|Filename: |https://updates.signal.org/desktop/apt/|p' Packages | $curl -# @-

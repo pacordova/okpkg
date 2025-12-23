@@ -77,8 +77,8 @@ python-jinja = {
 };
 
 python-docutils = {
-   url = "https://downloads.sourceforge.net/docutils/docutils-0.22.3.tar.gz",
-   sha3 = "ef431c89768cb565eee657b7187a22fd0500d13c6af36c38b9482118f79b81a5",
+   url = "https://downloads.sourceforge.net/docutils/docutils-0.22.4.tar.gz",
+   sha3 = "c7b036fd0ec65908aae219334bee76805924feb7b1c5e123a4482d2e2309272e",
    build = "python-build",
 };
 
@@ -150,8 +150,8 @@ glad = {
 };
 
 python-pyparsing = {
-   url = "https://pypi.org/packages/source/p/pyparsing/pyparsing-3.2.5.tar.gz",
-   sha3 = "42ba7f68d0fe523defe403d47add95ef7b4781a19b668e2d08ad43532cc61094",
+   url = "https://pypi.org/packages/source/p/pyparsing/pyparsing-3.3.1.tar.gz",
+   sha3 = "59369bc2be3c52a241b92e2d4340c4130f30aedde8c1cebea9f71756980b16bf",
    build = "python-build",
 };
 

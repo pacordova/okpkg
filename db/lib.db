@@ -178,8 +178,8 @@ libarchive = {
 };
 
 libconfig = {
-   url = "https://github.com/hyperrealm/libconfig/archive/v1.8.1/libconfig-1.8.1.tar.gz",
-   sha3 = "5c9b788987fe3ba3cad5162b2cea62bb1c0fbce3c57206e42f9595c4f5a3d631",
+   url = "https://github.com/hyperrealm/libconfig/archive/v1.8.2/libconfig-1.8.2.tar.gz",
+   sha3 = "e9eb7dbf91f9e0d8692a2898e743874a71d3eaa8db03b8cfccbe333736d16665",
    build = "cmake",
 };
 

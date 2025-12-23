@@ -5,8 +5,8 @@ xorg-util-macros = {
 };
 
 xorgproto = {
-   url = "https://xorg.freedesktop.org/archive/individual/proto/xorgproto-2024.1.tar.xz",
-   sha3 = "b6f74a965513c1c82836b49b2a5e1725367ab294ebec1bbdffc4bc8e2ffa67fe",
+   url = "https://xorg.freedesktop.org/archive/individual/proto/xorgproto-2025.1.tar.xz",
+   sha3 = "7e0bfb9a8f1bbf49a1f2cec1dd901c46bc6787b58d29e893150591f8df635a6d",
    build = "meson",
 };
 
@@ -277,8 +277,8 @@ libdrm = {
 };
 
 libva = {
-   url = "https://github.com/intel/libva/archive/2.22.0/libva-2.22.0.tar.gz",
-   sha3 = "946b1f9f33ea331c15dfa36f26883fa061c12c9062564360157cc24728df5fe1",
+   url = "https://github.com/intel/libva/archive/2.23.0/libva-2.23.0.tar.gz",
+   sha3 = "a713527b16d15c255dba84bb23f7b20227a293d330cea172eac2e860e976c38b",
    build = "meson",
    flags = { "-Dwith_{glx=yes,wayland=no,x11=yes}" }
 };
