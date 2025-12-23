@@ -89,7 +89,5 @@ mpv = {
       "-Dlibarchive=enabled",
       "-Dcaca=disabled",
       "-Ddrm=enabled",
-      "-Dopenal=disabled",
-      "-Dsdl2-{audio,video,gamepad}=disabled",
    }
 };
