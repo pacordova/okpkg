@@ -625,7 +625,7 @@ lua = {
       cd $destdir/usr/lib64/pkgconfig
       printf "Name: Lua\n" >> lua.pc
       printf "Description: An Extensible Extension Language\n" >> lua.pc
-      printf "Version: 5.4.8\n" >> lua.pc
+      printf "Version: 5.5.0\n" >> lua.pc
       printf "Requires:\n" >> lua.pc
       printf "Libs: -L/usr/lib64 -llua -lm\n" >> lua.pc
       printf "Cflags: -I/usr/include\n" >> lua.pc
