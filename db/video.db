@@ -81,6 +81,7 @@ mpv = {
    sha3 = "64b566216c94c7b2613a6833ce672d5ca4d1adeafa372cace6961bc6fff29a8d",
    build = "meson",
    flags = {
+      "-Dbuild-date=false",
       "-Dx11=enabled",
       "-Dpipewire=disabled",
    }

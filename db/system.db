@@ -607,18 +607,18 @@ cpio = {
 };
 
 lua = {
-   url = "https://lua.org/ftp/lua-5.4.8.tar.gz",
-   sha3 = "c986edb990b3c0cfa683b44af4c0cc7ce9ea8ffe9d9c79f0ab3d555a1e96ac97",
+   url = "https://lua.org/ftp/lua-5.5.0.tar.gz",
+   sha3 = "5153631a215cc387b652e3bbbf6e3f82b93020a18b2f78520181bd2273c7039f",
    build = "make",
    flags = {
-      'TO_LIB="liblua.so liblua.so.5.4 liblua.so.5.4.8"',
+      'TO_LIB="liblua.so liblua.so.5.5 liblua.so.5.5.0"',
       "INSTALL_DATA='cp -d'",
       "MYCFLAGS=-fPIC",
       "INSTALL_TOP=$destdir/usr",
       "INSTALL_LIB=$destdir/usr/lib64",
       "INSTALL_MAN=$destdir/usr/share/man/man1",
-      "INSTALL_CMOD=$destdir/usr/lib64/lua/5.4",
-      "linux-readline"
+      "INSTALL_CMOD=$destdir/usr/lib64/lua/5.5",
+      "linux"
    },
    post = [[
       mkdir -p $destdir/usr/lib64/pkgconfig &&
