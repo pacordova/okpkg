@@ -81,8 +81,15 @@ mpv = {
    sha3 = "64b566216c94c7b2613a6833ce672d5ca4d1adeafa372cace6961bc6fff29a8d",
    build = "meson",
    flags = {
+      "-Dlua=disabled",
+      "-Dlibmpv=true",
       "-Dbuild-date=false",
-      "-Dx11=enabled",
-      "-Dpipewire=disabled",
+      "-D{x11,alsa}=enabled",
+      "-D{wayland,pipewire,pulse}=disabled",
+      "-Dlibarchive=enabled",
+      "-Dcaca=disabled",
+      "-Ddrm=enabled",
+      "-Dopenal=disabled",
+      "-Dsdl2-{audio,video,gamepad}=disabled",
    }
 };
