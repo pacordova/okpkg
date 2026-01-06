@@ -290,8 +290,8 @@ libvdpau = {
 };
 
 mesa = {
-   url = "https://mesa.freedesktop.org/archive/mesa-25.3.2.tar.xz",
-   sha3 = "69c6b0219ce14a250b1bf2f2ffa3251531a22d9f12eb345241e799b13fab4791",
+   url = "https://mesa.freedesktop.org/archive/mesa-25.3.3.tar.xz",
+   sha3 = "9a45efd6b5911d38f491babbb5e48e02dc2e4d96eff0856559b4b915630caead",
    build = "meson",
    flags = {
       "-Dplatforms=x11",
@@ -347,8 +347,8 @@ xorg-x11perf = {
 };
 
 xorg-xauth = {
-   url = "https://x.org/pub/individual/app/xauth-1.1.4.tar.xz",
-   sha3 = "94a32a2dfd831057cad571a5868b92e67262f78a251144ba5dfc2f7182513482",
+   url = "https://x.org/pub/individual/app/xauth-1.1.5.tar.xz",
+   sha3 = "2892ccfe4ddc9d9c1cf1302f8d74f6fcb6ff75b36cc85efb4137932d9c62e683",
    build = "./configure",
 };
 

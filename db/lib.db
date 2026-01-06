@@ -100,8 +100,8 @@ argon2 = {
 };
 
 dav1d = {
-   url = "https://github.com/videolan/dav1d/archive/1.5.2/dav1d-1.5.2.tar.gz",
-   sha3 = "176f9cee70d40e6d5999144bf0d050cbf449b82fb72c2d2030dcaf3af15b4cb0",
+   url = "https://code.videolan.org/videolan/dav1d/-/archive/1.5.3/dav1d-1.5.3.tar.gz",
+   sha3 = "224464a32663c829ee799480c6cad3bf677c9307940ae76ed000710d6fe9974b",
    build = "meson",
 };
 
@@ -142,9 +142,9 @@ graphite = {
 };
 
 iso-codes = {
-   url = "https://salsa.debian.org/iso-codes-team/iso-codes/-/archive/v4.19.0/iso-codes-v4.19.0.tar.gz",
-   sha3 = "afc136febf6da8ccb4692eec639e88ceec575da516bc731a7a5034fe48488cca",
-   build = "./configure",
+   url = "https://salsa.debian.org/iso-codes-team/iso-codes/-/archive/v4.20.1/iso-codes-v4.20.1.tar.gz",
+   sha3 = "5b0a3402ae3eba3b59fac10b8209f34d0b02d48925c42e2fb17cf7b00e92e2ad",
+   build = "meson",
 };
 
 json-c = {
@@ -171,8 +171,8 @@ lcms2 = {
 };
 
 libarchive = {
-   url = "https://github.com/libarchive/libarchive/releases/download/v3.8.4/libarchive-3.8.4.tar.xz",
-   sha3 = "8b1fe7da0ca13606ee5099597ba106b340c187ed4ffb4d55c39a3f7670678693",
+   url = "https://github.com/libarchive/libarchive/releases/download/v3.8.5/libarchive-3.8.5.tar.xz",
+   sha3 = "e55714cf7317edee13c6095691d6d80013e9b13f096dffaad420262b462827ec",
    build = "./configure",
    flags = { "--without-nettle" }
 };
@@ -236,8 +236,8 @@ libnl3 = {
 };
 
 libpcap = {
-   url = "https://www.tcpdump.org/release/libpcap-1.10.5.tar.xz",
-   sha3 = "c0b03f1e7ce0b321ba9d3fd055b9684cc9cc9a6560d8975137c0255bf9a0673d",
+   url = "https://www.tcpdump.org/release/libpcap-1.10.6.tar.xz",
+   sha3 = "a7d286b61d9595b9c830d574f0de81a36aee3b1a5bffb8fe0c752a631231b954",
    build = "./configure",
 };
 

@@ -282,14 +282,15 @@ libcap = {
 };
 
 shadow = {
-   url = "https://github.com/shadow-maint/shadow/releases/download/4.18.0/shadow-4.18.0.tar.xz",
-   sha3 = "e9e7d0f2cf68e9c7e51f16847cfbe64082b66e1aa1d0ab3da613cf7dd48a25c8",
+   url = "https://github.com/shadow-maint/shadow/releases/download/4.19.0/shadow-4.19.0.tar.xz",
+   sha3 = "a460c3421a37712d522cd9da8ed912010e6816e9e338fb0935939cbddb16934a",
    build = "./configure",
    flags = {
       "--disable-account-tools-setuid",
       "--with-group-name-max-length=32",
       "--with-{su,yescrypt}",
       "--without-{bcrypt,libbsd,libpam,nscd,selinux}",
+      "--disable-logind",
    },
    prepare = [[
        : > /usr/bin/passwd
@@ -307,8 +308,8 @@ shadow = {
 };
 
 ncurses = {
-   url = "https://invisible-island.net/archives/ncurses/current/ncurses-6.5-20250816.tgz",
-   sha3 = "f4002ebd78f53861b28ede035d4139edcf3bccb980d6e320133ecea43eb3b923",
+   url = "https://invisible-island.net/archives/ncurses/ncurses-6.6.tar.gz",
+   sha3 = "b755b6abf8bdb9fafa048a0c55973212ee491051a0aaff08dfa4533934dc53cc",
    build = "./configure",
    flags = {
       "--enable-pc-files",
@@ -577,8 +578,8 @@ make = {
 };
 
 ed = {
-   url = "https://ftp.gnu.org/gnu/ed/ed-1.22.3.tar.lz",
-   sha3 = "779f5c9d81d1efcbc5a175b6225ec699b50f832c0ce97e4bfcf91348c708bfd6",
+   url = "https://ftp.gnu.org/gnu/ed/ed-1.22.4.tar.lz",
+   sha3 = "6930e2087495074ac1a76d088ff002f18400640a2367f09bf08c99fecf923233",
    build = "./configure",
 };
 
