@@ -274,8 +274,8 @@ libsass = {
 };
 
 libsodium = {
-   url = "https://download.libsodium.org/libsodium/releases/libsodium-1.0.20.tar.gz",
-   sha3 = "e74a767d92c5b58d5f9b5e882e220df7899a8dc1fa173461c0c76099776ab456",
+   url = "https://download.libsodium.org/libsodium/releases/libsodium-1.0.21.tar.gz",
+   sha3 = "83064332be146d9d810894373dfbad0ca72ab70cc11c524f21a1f9ab40cfc626",
    build = "./configure",
 };
 
