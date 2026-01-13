@@ -76,14 +76,14 @@ vala = {
 --------------------------------------------------------------------------------
 
 alsa-lib = {
-   url = "https://alsa-project.org/files/pub/lib/alsa-lib-1.2.15.1.tar.bz2",
-   sha3 = "8fa4759f74a1edc37328eccf0a2c03faf7b90d55aa497fbf2d45f777bcbb7f62",
+   url = "https://alsa-project.org/files/pub/lib/alsa-lib-1.2.15.2.tar.bz2",
+   sha3 = "9ff5833010de2284a1d572455c7b99abe3474981d26d9de455995693716ebfe3",
    build = "./configure",
 };
 
 alsa-utils = {
-   url = "https://alsa-project.org/files/pub/utils/alsa-utils-1.2.15.1.tar.bz2",
-   sha3 = "b57578f4a760f65fb34adafe50a482132ca63f0504fddafad9621e055d10e18b",
+   url = "https://alsa-project.org/files/pub/utils/alsa-utils-1.2.15.2.tar.bz2",
+   sha3 = "85de88073a5784ccad41f66235d66da42cdad25a7a6fffd4c7f18610975c5cf4",
    build = "./configure",
    flags = {
       "--with-udev-rules-dir=/usr/lib64/udev/rules.d",
@@ -165,8 +165,8 @@ lame = {
 };
 
 lcms2 = {
-   url = "https://github.com/mm2/Little-CMS/releases/download/lcms2.17/lcms2-2.17.tar.gz",
-   sha3 = "0403fd5d92c09a66bb3b1e92e001b7c1d71f4714aaaff9f610d4d5521f3e925e",
+   url = "https://github.com/mm2/Little-CMS/releases/download/lcms2.18/lcms2-2.18.tar.gz",
+   sha3 = "bd906e4aed77d2c5a6e60f1d32ca9f69525a793be6ee3b62a58b8db15946f151",
    build = "./configure",
 };
 
@@ -210,8 +210,8 @@ libinih = {
 };
 
 libjpeg-turbo = {
-   url = "https://github.com/libjpeg-turbo/libjpeg-turbo/releases/download/3.1.2/libjpeg-turbo-3.1.2.tar.gz",
-   sha3 = "f3c05322ba51716c5f992e584bd43ef59fa978ef9b551d8c5cbb706846553b41",
+   url = "https://github.com/libjpeg-turbo/libjpeg-turbo/releases/download/3.1.3/libjpeg-turbo-3.1.3.tar.gz",
+   sha3 = "6766f76788820f0d672cd6bd19dd77b7879f80391305327083ba58b55942e493",
    build = "cmake",
    flags = { "-DENABLE_STATIC=OFF", "-DWITH_{JPEG8=ON,JAVA=OFF}" }
 };
@@ -280,8 +280,8 @@ libsodium = {
 };
 
 libtasn1 = {
-   url = "https://ftp.gnu.org/gnu/libtasn1/libtasn1-4.20.0.tar.gz",
-   sha3 = "6f0d140c4148e41b9ed2c81846a5301f4f24c1915a94c47c3a1e5569a7edf3b4",
+   url = "https://ftp.gnu.org/gnu/libtasn1/libtasn1-4.21.0.tar.gz",
+   sha3 = "5ed364fb0fd52e732b259953dc2650cbf320c26fdc9964dd5fa6416f8f444f09",
    build = "./configure",
 };
 
