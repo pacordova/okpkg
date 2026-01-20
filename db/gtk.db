@@ -131,8 +131,8 @@ libxklavier = {
 };
 
 poppler = {
-   url = "https://poppler.freedesktop.org/poppler-25.12.0.tar.xz",
-   sha3 = "3c79f72cbf699f068bc30665be7e8d3a3d769a266a1eb8476b789e60230eeeab",
+   url = "https://poppler.freedesktop.org/poppler-26.01.0.tar.xz",
+   sha3 = "add7293630d1683317297a356fcbc8e2777e795b2ead0385a39bd5f1bc15f6d7",
    build = "cmake",
    flags = {
       "-DENABLE_UNSTABLE_API_ABI_HEADERS=ON",

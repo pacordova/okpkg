@@ -76,8 +76,8 @@ vala = {
 --------------------------------------------------------------------------------
 
 alsa-lib = {
-   url = "https://alsa-project.org/files/pub/lib/alsa-lib-1.2.15.2.tar.bz2",
-   sha3 = "9ff5833010de2284a1d572455c7b99abe3474981d26d9de455995693716ebfe3",
+   url = "https://alsa-project.org/files/pub/lib/alsa-lib-1.2.15.3.tar.bz2",
+   sha3 = "fee6cd0697b00550565d862076226f78bf221875bd9f3b236aade909b8858979",
    build = "./configure",
 };
 
@@ -242,8 +242,8 @@ libpcap = {
 };
 
 libpng = {
-   url = "https://downloads.sourceforge.net/libpng/libpng-1.6.53.tar.xz",
-   sha3 = "c253a95638141752ccddc3a2db093328d0a157cc76df373d60014fa1cfcbe95b",
+   url = "https://downloads.sourceforge.net/libpng/libpng-1.6.54.tar.xz",
+   sha3 = "32e07516f7df31518099034579a29c86ca84c3c6decfbcb42ade0a3f600bc785",
    build = "./configure",
 };
 
@@ -376,8 +376,8 @@ nghttp2 = {
 };
 
 opus = {
-   url = "https://downloads.xiph.org/releases/opus/opus-1.6.tar.gz",
-   sha3 = "97a67e0e3f714d5977e74272d9f4201b8ddbeacad2912de1fe3de40c80506ccb",
+   url = "https://downloads.xiph.org/releases/opus/opus-1.6.1.tar.gz",
+   sha3 = "48cddaefbf45983912bbbd351f6445bb3793df9fc533f5f54628f10c12db9618",
    build = "meson",
 };
 

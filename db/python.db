@@ -120,8 +120,8 @@ python-calver = {
 };
 
 python-trove-classifiers = {
-   url = "https://pypi.org/packages/source/t/trove-classifiers/trove_classifiers-2026.1.12.15.tar.gz",
-   sha3 = "42ff35c4545e3c5dfaf53abb93f13ca233458931a8f5c7c652431927fd19ecde",
+   url = "https://pypi.org/packages/source/t/trove-classifiers/trove_classifiers-2026.1.14.14.tar.gz",
+   sha3 = "4840fc23cd9b9b26c60d2c21467f64689d112a73113f18c465da229b94af7e02",
    build = "python-build",
 };
 
