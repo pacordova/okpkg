@@ -282,8 +282,8 @@ libcap = {
 };
 
 shadow = {
-   url = "https://github.com/shadow-maint/shadow/releases/download/4.19.0/shadow-4.19.0.tar.xz",
-   sha3 = "a460c3421a37712d522cd9da8ed912010e6816e9e338fb0935939cbddb16934a",
+   url = "https://github.com/shadow-maint/shadow/releases/download/4.19.2/shadow-4.19.2.tar.xz",
+   sha3 = "036535cc993891611a792e920e0a260548e915fd66bb883722efc8fbe225b82d",
    build = "./configure",
    flags = {
       "--disable-account-tools-setuid",
@@ -432,8 +432,8 @@ expat = {
 };
 
 less = {
-   url = "https://www.greenwoodsoftware.com/less/less-685.tar.gz",
-   sha3 = "b17dde89ab465f9e8ab36bb72c99978df82a3f54dd32c033408548d3111d3859",
+   url = "https://www.greenwoodsoftware.com/less/less-691.tar.gz",
+   sha3 = "a4a52352695d9940ae2c70ca31963ae0ccd4c482e966740cd2c4bd997cb52128",
    build = "./configure",
    flags = { "--with-regex=pcre2" }
 };

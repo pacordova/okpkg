@@ -382,8 +382,8 @@ opus = {
 };
 
 p11-kit = {
-   url = "https://github.com/p11-glue/p11-kit/releases/download/0.25.10/p11-kit-0.25.10.tar.xz",
-   sha3 = "d856723223e1f0cb5e1a5076fd86db43b6c7841c2c2638c30f54112e79e046ae",
+   url = "https://github.com/p11-glue/p11-kit/releases/download/0.26.1/p11-kit-0.26.1.tar.xz",
+   sha3 = "788c5f90d46f0837de33f3b3a6dce685772ca9dab5863411b1cd125148e1619b",
    build = "meson",
    flags = { 
       "-Dtrust_paths=/etc/ssl/certs/ca-certificates.crt",

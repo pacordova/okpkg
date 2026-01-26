@@ -48,8 +48,8 @@ libx11 = {
 };
 
 libxext = {
-   url = "https://x.org/pub/individual/lib/libXext-1.3.6.tar.xz",
-   sha3 = "a6018b7feea6214d48098031eba7e2c6686131bada8974fc6e21dae205e033f3",
+   url = "https://x.org/pub/individual/lib/libXext-1.3.7.tar.xz",
+   sha3 = "19ca8f59ba099411b957742717ec777232334fd188f62c0ec37d0946800edaff",
    build = "./configure",
 };
 
@@ -79,14 +79,14 @@ libxt = {
 };
 
 libxmu = {
-   url = "https://x.org/pub/individual/lib/libXmu-1.2.1.tar.xz",
-   sha3 = "228021e809cacbeaed83c687b8ff66c6681eee83b87c518ae41e08658e014d70",
+   url = "https://x.org/pub/individual/lib/libXmu-1.3.0.tar.xz",
+   sha3 = "405f293192da101111b0fab48bd61caaad19bf308a3e3ca066b678da5f866cbf",
    build = "./configure",
 };
 
 libxpm = {
-   url = "https://x.org/pub/individual/lib/libXpm-3.5.17.tar.xz",
-   sha3 = "c5a645304afdd0d91e00a5282c583370552d646223601939a95ea8c7111de211",
+   url = "https://x.org/pub/individual/lib/libXpm-3.5.18.tar.xz",
+   sha3 = "1a073a08a9598ea5fa5064ea61b4f5046b10d95a8953d18786dac1e41c837fef",
    build = "./configure",
    flags = { "--disable-open-zfile" }
 };
@@ -104,8 +104,8 @@ libxfixes = {
 };
 
 libxcomposite = {
-   url = "https://x.org/pub/individual/lib/libXcomposite-0.4.6.tar.xz",
-   sha3 = "159cb10267c65cd090c07f15d5c53084a2fcba3e3bf947720beb4bedcb7c8dad",
+   url = "https://x.org/pub/individual/lib/libXcomposite-0.4.7.tar.xz",
+   sha3 = "f087c4553cbb25bd5a818baeabd6d253df5c2e4d8c07c486e6c3bd781170a3c8",
    build = "./configure",
 };
 
@@ -122,8 +122,8 @@ libxcursor = {
 };
 
 libxdamage = {
-   url = "https://x.org/pub/individual/lib/libXdamage-1.1.6.tar.xz",
-   sha3 = "a6e1672bf82853d6d57b4fd9fb86e0ebce3a8171a52426caf107d2a25c19b9e2",
+   url = "https://x.org/pub/individual/lib/libXdamage-1.1.7.tar.xz",
+   sha3 = "c63e8bebeecf2740198877f238f393bafb4d153efe01dfea7350a32a367be1b6",
    build = "./configure",
 };
 
@@ -153,14 +153,14 @@ libxi = {
 };
 
 libxinerama = {
-   url = "https://x.org/pub/individual/lib/libXinerama-1.1.5.tar.xz",
-   sha3 = "9e9679a27c7117fbf1fb9de5e622f57ea963537419b060866c8689f8beb371f4",
+   url = "https://x.org/pub/individual/lib/libXinerama-1.1.6.tar.xz",
+   sha3 = "4da8a709aafa225a67f15b139155f35fe22b3f095245123bcf09170f4f3b951f",
    build = "./configure",
 };
 
 libxrandr = {
-   url = "https://x.org/pub/individual/lib/libXrandr-1.5.4.tar.xz",
-   sha3 = "4703a5ca5f74313d5eadc59e5b371f56eab23fad18e1a3ca97c4ea0532ee3175",
+   url = "https://x.org/pub/individual/lib/libXrandr-1.5.5.tar.xz",
+   sha3 = "253bc7d7e6cd3decdc4407c135dad3a359dcd9629b0ca06d048a91537dc1d04d",
    build = "./configure",
 };
 
@@ -183,14 +183,14 @@ libxv = {
 };
 
 libxvmc = {
-   url = "https://x.org/pub/individual/lib/libXvMC-1.0.14.tar.xz",
-   sha3 = "b683420f7703a11c5e882493e7ffa3590aaaad118a38a0147ec36988f9639a54",
+   url = "https://x.org/pub/individual/lib/libXvMC-1.0.15.tar.xz",
+   sha3 = "8413a9b431349886c8f44411f405d02e26a32836bfbad1026f6033b8c9a622f5",
    build = "./configure",
 };
 
 libxxf86vm = {
-   url = "https://x.org/pub/individual/lib/libXxf86vm-1.1.6.tar.xz",
-   sha3 = "a2d7bc5805abf5ad55e2da1a68947156185ebe9795426077fef0bb6e47befdcc",
+   url = "https://x.org/pub/individual/lib/libXxf86vm-1.1.7.tar.xz",
+   sha3 = "635f1e912137b7bb3d0aeffd3078d59900a4d1e0ad59825b53e45fb10a81c592",
    build = "./configure",
 };
 
@@ -201,9 +201,9 @@ libpciaccess = {
 };
 
 libxkbfile = {
-   url = "https://x.org/pub/individual/lib/libxkbfile-1.1.3.tar.xz",
-   sha3 = "71c874d5b4bf79e3b9795adaf35e7623d606f21e8ae960dc8830c18571506d8e",
-   build = "./configure",
+   url = "https://x.org/pub/individual/lib/libxkbfile-1.2.0.tar.xz",
+   sha3 = "e99049bf8b17871e10298d8aa383a279fb9173916a19e6736afd5358130892f7",
+   build = "meson",
 };
 
 libxshmfence = {
