@@ -290,8 +290,8 @@ libvdpau = {
 };
 
 mesa = {
-   url = "https://mesa.freedesktop.org/archive/mesa-25.3.3.tar.xz",
-   sha3 = "9a45efd6b5911d38f491babbb5e48e02dc2e4d96eff0856559b4b915630caead",
+   url = "https://mesa.freedesktop.org/archive/mesa-25.3.4.tar.xz",
+   sha3 = "c0d9641877c398a36627f1f9b3a08c453e2879e9c7f0362eb15be9bc8efecc29",
    build = "meson",
    flags = {
       "-Dplatforms=x11",
@@ -425,8 +425,8 @@ xorg-xkbutils = {
 };
 
 xorg-xkill = {
-   url = "https://x.org/pub/individual/app/xkill-1.0.6.tar.xz",
-   sha3 = "d76560ab5e3b2ee882442bd79b7c55ea9d1b1e6cf961dcebe95be95518e66993",
+   url = "https://x.org/pub/individual/app/xkill-1.0.7.tar.xz",
+   sha3 = "fee0a7cfac9e6b1a2752e6be7f80fb7fa01e06ecae5bc64d9e74e37eb4d2b4da",
    build = "./configure",
 };
 
