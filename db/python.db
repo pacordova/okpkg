@@ -41,8 +41,8 @@ python-pyproject-hooks = {
 };
 
 python-packaging = {
-   url = "https://pypi.org/packages/source/p/packaging/packaging-25.0.tar.gz",
-   sha3 = "bb49e9dd0eadca35f4707edd4bd8a34f8ab63d3e2283d58aabce8ff6867ce015",
+   url = "https://pypi.org/packages/source/p/packaging/packaging-26.0.tar.gz",
+   sha3 = "3a652d86cec2ef64c7585c2e86ea89d35dccd222ca7441478d802818d67a71ad",
    build = "python-build",
 };
 
@@ -53,14 +53,14 @@ python-build = {
 };
 
 python-wheel = {
-   url = "https://pypi.org/packages/source/w/wheel/wheel-0.45.1.tar.gz",
-   sha3 = "eac44ace5f8a7a3182564a85eb78bc8d99639d1cd74d2b91c21c099ea91156ac",
+   url = "https://pypi.org/packages/source/w/wheel/wheel-0.46.3.tar.gz",
+   sha3 = "d0df66d177d494cb21f5ae3c431144396245a232fa594921f81204f8a04cc52f",
    build = "python-build",
 };
 
 python-setuptools = {
-   url = "https://pypi.org/packages/source/s/setuptools/setuptools-80.9.0.tar.gz",
-   sha3 = "06c8e2f192dfa29845fee17c322db7cef151175a4d54483d8d2f4401870ef660",
+   url = "https://pypi.org/packages/source/s/setuptools/setuptools-80.10.2.tar.gz",
+   sha3 = "ec93df53e0e49e902e247ed2eb1abc6bc277a362ccac2f2c59918c4ad1d8acff",
    build = "python-build",
 };
 
@@ -107,8 +107,8 @@ python-pluggy = {
 };
 
 python-pathspec = {
-   url = "https://pypi.org/packages/source/p/pathspec/pathspec-1.0.3.tar.gz",
-   sha3 = "0fefd89bc18082ea5fec2793b5ec449dee9b7e502fb110004604410fa862c57d",
+   url = "https://pypi.org/packages/source/p/pathspec/pathspec-1.0.4.tar.gz",
+   sha3 = "d00300651c8be99144bfa6bf800130813cd915a4c2c213ec85d08bbec63f75ac",
    build = "python-build",
 };
 
@@ -150,8 +150,8 @@ glad = {
 };
 
 python-pyparsing = {
-   url = "https://pypi.org/packages/source/p/pyparsing/pyparsing-3.3.1.tar.gz",
-   sha3 = "59369bc2be3c52a241b92e2d4340c4130f30aedde8c1cebea9f71756980b16bf",
+   url = "https://pypi.org/packages/source/p/pyparsing/pyparsing-3.3.2.tar.gz",
+   sha3 = "075108204990ecd229a8d8d2057b07ecadecf726b421073fc0fd7ad2bae9e7c1",
    build = "python-build",
 };
 
@@ -198,8 +198,8 @@ python-cffi = {
 };
 
 python-pycparser = {
-   url = "https://pypi.org/packages/source/p/pycparser/pycparser-2.23.tar.gz",
-   sha3 = "34375fbab0896af694009f09d99addc1a485c88baa5acf0473ba427b50107598",
+   url = "https://pypi.org/packages/source/p/pycparser/pycparser-3.0.tar.gz",
+   sha3 = "a6192c369c9c3269e288e7390cc75a05b9d03b45431cc61aa4c311c27404d9b3",
    build = "python-build",
 };
 

@@ -216,8 +216,8 @@ catgirl = {
 };
 
 cryptsetup = {
-   url = "https://kernel.org/pub/linux/utils/cryptsetup/v2.8/cryptsetup-2.8.3.tar.xz",
-   sha3 = "36a2888171bd93318c019a19eab455b3fc523cf41670acf3d6b1e4be2d3d6409",
+   url = "https://kernel.org/pub/linux/utils/cryptsetup/v2.8/cryptsetup-2.8.4.tar.xz",
+   sha3 = "147f6db3203e063e44b3f2dea2ccda23c1d43398d6e8195d3f0a8b5cacac19b4",
    build = "./configure",
    flags = {
       "--with-crypto_backend=gcrypt",

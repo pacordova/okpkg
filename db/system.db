@@ -679,8 +679,8 @@ mandoc = {
 };
 
 procps-ng = {
-   url = "https://prdownloads.sourceforge.net/procps-ng/procps-ng-4.0.5.tar.xz",
-   sha3 = "373142bce8af2737c5367ae4fd11f656cb40f1a72573605e3978e2fe79a4f31a",
+   url = "https://prdownloads.sourceforge.net/procps-ng/procps-ng-4.0.6.tar.xz",
+   sha3 = "db86731acda819e3e585edd97732bdfa1cc08be0c49b4a1bb3805bb0fccf4648",
    build = "./configure",
    flags = {
       "--disable-modern-top",

@@ -38,8 +38,8 @@ libfyaml = {
 };
 
 appstream = {
-   url = "https://www.freedesktop.org/software/appstream/releases/AppStream-1.1.1.tar.xz",
-   sha3 = "333761f9d818e314a3df1bbe7b07bb0c3dc471eff1c73d3ffe78ef6c7eff19fc",
+   url = "https://www.freedesktop.org/software/appstream/releases/AppStream-1.1.2.tar.xz",
+   sha3 = "d062db84251a89c90903d136d16d3712b27b8fbc9d063b34345bea968d58ff4c",
    build = "meson",
    flags = {
       "-Dsystemd=false",
@@ -49,6 +49,7 @@ appstream = {
       "-Dstemming=false",
       "-Dvapi=false",
       "-Dcompose=true",
+      "-Dbash-completion=false",
    },
    prepare = [[
       mv AppStream*/* . && rm -fr AppStream*
