@@ -790,8 +790,8 @@ efibootmgr = {
 };
 
 grub = {
-   url = "https://ftp.gnu.org/gnu/grub/grub-2.12.tar.xz",
-   sha3 = "8dadf87a18b9c26c699b30d038b8f2eef22062d4238e7c5c844d027f51a81630",
+   url = "https://ftp.gnu.org/gnu/grub/grub-2.14.tar.xz",
+   sha3 = "6bee163bd289480f4b50c2e93f595c6c69f4d215c35ba7bb97187efd48d7153e",
    build = "./configure",
    flags = {
       "--with-platform=efi",
