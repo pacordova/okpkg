@@ -159,8 +159,8 @@ file = {
 };
 
 m4 = {
-   url = "https://ftp.gnu.org/gnu/m4/m4-1.4.20.tar.xz",
-   sha3 = "97f68626d6e98e875dcd31df932142b87b6b229c92ee88210e50fd7fb275c95f",
+   url = "https://ftp.gnu.org/gnu/m4/m4-1.4.21.tar.xz",
+   sha3 = "17470ef40b4c09ef424e76e1418ffba4a2eb5b68ad9ca23cbd2659461468afed",
    build = "./configure",
 };
 
@@ -282,8 +282,8 @@ libcap = {
 };
 
 shadow = {
-   url = "https://github.com/shadow-maint/shadow/releases/download/4.19.2/shadow-4.19.2.tar.xz",
-   sha3 = "036535cc993891611a792e920e0a260548e915fd66bb883722efc8fbe225b82d",
+   url = "https://github.com/shadow-maint/shadow/releases/download/4.19.3/shadow-4.19.3.tar.xz",
+   sha3 = "0a3ba5ccd78942413590e0af112d92affa82cc8c51a0544f7f3f238b9065dba6",
    build = "./configure",
    flags = {
       "--disable-account-tools-setuid",
@@ -425,15 +425,15 @@ gdbm = {
 };
 
 expat = {
-   url = "https://downloads.sourceforge.net/expat/expat-2.7.3.tar.lz",
-   sha3 = "b8274a5eb9219a3d6e2e3bcb6192e289c0f8fea781ded58fec9f08d38dd91574",
+   url = "https://downloads.sourceforge.net/expat/expat-2.7.4.tar.lz",
+   sha3 = "77b3736c7207504c695b57b0a133b057cabd2bc9ccccf7fa9b960bd3295a16c8",
    build = "./configure",
    flags = { "--without-{docbook,examples,tests,xmlwf}" }
 };
 
 less = {
-   url = "https://www.greenwoodsoftware.com/less/less-691.tar.gz",
-   sha3 = "a4a52352695d9940ae2c70ca31963ae0ccd4c482e966740cd2c4bd997cb52128",
+   url = "https://www.greenwoodsoftware.com/less/less-692.tar.gz",
+   sha3 = "18bd903bcfd8eaa5f4d7d40bb412a0ed2fc4d693a52763bf463f08de74d5ff46",
    build = "./configure",
    flags = { "--with-regex=pcre2" }
 };
@@ -504,8 +504,8 @@ libffi = {
 };
 
 coreutils = {
-   url = "https://ftp.gnu.org/gnu/coreutils/coreutils-9.9.tar.xz",
-   sha3 = "36d46244fb46a4e5c99166eb4c0e6a6c64478e0abafb33e30302e6bf8c62c845",
+   url = "https://ftp.gnu.org/gnu/coreutils/coreutils-9.10.tar.xz",
+   sha3 = "8d4bfd2a2f6074be55b971210e11b2b91f8c778af63c09e427d242c35c5da166",
    build = "./configure",
    flags = {
       "--enable-install-program=hostname",
