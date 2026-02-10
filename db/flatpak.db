@@ -25,15 +25,15 @@ ostree = {
 };
 
 libxmlb = {
-   url = "https://github.com/hughsie/libxmlb/releases/download/0.3.24/libxmlb-0.3.24.tar.xz",
-   sha3 = "9abe0d0b1b2c57c4d17dd3a5ae8afb920df20028ea89315564973bb152d662da",
+   url = "https://github.com/hughsie/libxmlb/releases/download/0.3.25/libxmlb-0.3.25.tar.xz",
+   sha3 = "887470f9cca14688dc05801fcd396fbc17b09f22c85d668ce4f0d0569b95cc58",
    build = "meson",
    flags = { "-Dintrospection=true", "-D{gtkdoc,tests}=false" },
 };
 
 libfyaml = {
-   url = "https://github.com/pantoniou/libfyaml/releases/download/v0.9.3/libfyaml-0.9.3.tar.gz",
-   sha3 = "f03f8e5edc076be8ea6a49c6e00d90b52a57d95a6cf745a75ebfbc7fd01b5a08",
+   url = "https://github.com/pantoniou/libfyaml/releases/download/v0.9.4/libfyaml-0.9.4.tar.gz",
+   sha3 = "671a4218a47a5004308241b681710ff65c0f3ced1efc76f60fa396670582fddf",
    build = "./configure",
 };
 

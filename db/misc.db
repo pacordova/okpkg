@@ -1,6 +1,6 @@
 picom = {
-   url = "https://github.com/yshui/picom/archive/v12.5/picom-12.5.tar.gz",
-   sha3 = "1b5d25bf34ccf12db9fe7ab0680dd2d1bc17b979b43490ae316bebbff4f4a8ed",
+   url = "https://github.com/yshui/picom/archive/v13/picom-13.tar.gz",
+   sha3 = "705bac0be7c10192b523545e98e2244becd41f1e8c048e047fb59a60944e3a22",
    build = "meson",
    post = [[ rm -fr $destdir/usr/share/applications ]]
 };
@@ -266,8 +266,8 @@ feh = {
 };
 
 git = {
-   url = "https://kernel.org/pub/software/scm/git/git-2.52.0.tar.xz",
-   sha3 = "98bc3871aa8dc41a169e3701f02134af6c986fd54e155565226d4526f1b0ea6a",
+   url = "https://kernel.org/pub/software/scm/git/git-2.53.0.tar.xz",
+   sha3 = "92a117340af61df278cbc5909b0fd892db7429f538ced2eababb6e7878780621",
    build = "./configure",
    flags = {
       "--with-gitconfig=/etc/gitconfig",

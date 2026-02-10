@@ -42,8 +42,8 @@ xtrans = {
 };
 
 libx11 = {
-   url = "https://x.org/pub/individual/lib/libX11-1.8.12.tar.xz",
-   sha3 = "7c90c7b02595a159476ebcee0fe35dd03e6530665906c14ce9db84753fdfa50c",
+   url = "https://x.org/pub/individual/lib/libX11-1.8.13.tar.xz",
+   sha3 = "ff4ea9bc3cfdc95206ef58cca7718f7bfeeaf894051a27bd3f0a5faf9ec4f756",
    build = "./configure",
 };
 
@@ -128,8 +128,8 @@ libxdamage = {
 };
 
 libfontenc = {
-   url = "https://x.org/pub/individual/lib/libfontenc-1.1.8.tar.xz",
-   sha3 = "8da80734b169343d4dfccffd07640adad661b247b9a4f0576e3cf4b55d69a87f",
+   url = "https://x.org/pub/individual/lib/libfontenc-1.1.9.tar.xz",
+   sha3 = "756829c0550931db144a9dee5bcfed2d395dca31c03d3a981b445154873ea718",
    build = "./configure",
 };
 
@@ -290,8 +290,8 @@ libvdpau = {
 };
 
 mesa = {
-   url = "https://mesa.freedesktop.org/archive/mesa-25.3.4.tar.xz",
-   sha3 = "c0d9641877c398a36627f1f9b3a08c453e2879e9c7f0362eb15be9bc8efecc29",
+   url = "https://mesa.freedesktop.org/archive/mesa-25.3.5.tar.xz",
+   sha3 = "9530fdd67dd0113d3e44628332d4ca421c3cbaf73aaf7955eb58e3a3455c9aae",
    build = "meson",
    flags = {
       "-Dplatforms=x11",

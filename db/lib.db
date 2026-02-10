@@ -242,8 +242,8 @@ libpcap = {
 };
 
 libpng = {
-   url = "https://downloads.sourceforge.net/libpng/libpng-1.6.54.tar.xz",
-   sha3 = "32e07516f7df31518099034579a29c86ca84c3c6decfbcb42ade0a3f600bc785",
+   url = "https://downloads.sourceforge.net/libpng/libpng-1.6.55.tar.xz",
+   sha3 = "961ba2e494ab49add23af966dcffdff83f63387ac7bd7852ec9bbae91e5e328b",
    build = "./configure",
 };
 
@@ -311,8 +311,8 @@ libvorbis = {
 };
 
 libvpx = {
-   url = "https://github.com/webmproject/libvpx/archive/v1.15.2/libvpx-1.15.2.tar.gz",
-   sha3 = "e19b1c439cf00833bccf77234bf1eca3a10c15dca527a648bfe7c345f7804070",
+   url = "https://github.com/webmproject/libvpx/archive/v1.16.0/libvpx-1.16.0.tar.gz",
+   sha3 = "3cbb75bdfd9c1d116df345958ad074a5cb85a422ea60fb3b1992a6ca95cde1f4",
    build = "../configure",
    prepare = [[
       sed -i 's/cp -p/cp/' build/make/Makefile
@@ -382,8 +382,8 @@ opus = {
 };
 
 p11-kit = {
-   url = "https://github.com/p11-glue/p11-kit/releases/download/0.26.1/p11-kit-0.26.1.tar.xz",
-   sha3 = "788c5f90d46f0837de33f3b3a6dce685772ca9dab5863411b1cd125148e1619b",
+   url = "https://github.com/p11-glue/p11-kit/releases/download/0.26.2/p11-kit-0.26.2.tar.xz",
+   sha3 = "a5f89345be7d73388e326c20a179bab54c55b37b8329b5f07cb902f1d1f9857a",
    build = "meson",
    flags = { 
       "-Dtrust_paths=/etc/ssl/certs/ca-certificates.crt",
