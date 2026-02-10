@@ -59,8 +59,8 @@ python-wheel = {
 };
 
 python-setuptools = {
-   url = "https://pypi.org/packages/source/s/setuptools/setuptools-80.10.2.tar.gz",
-   sha3 = "ec93df53e0e49e902e247ed2eb1abc6bc277a362ccac2f2c59918c4ad1d8acff",
+   url = "https://pypi.org/packages/source/s/setuptools/setuptools-82.0.0.tar.gz",
+   sha3 = "20fe4eefa8a414de0e86b9801dfa197e1838b1aa360685b87e98b97c35cb59c6",
    build = "python-build",
 };
 
