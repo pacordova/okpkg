@@ -1,6 +1,6 @@
 babl = {
-   url = "https://download.gimp.org/pub/babl/0.1/babl-0.1.120.tar.xz",
-   sha3 = "c0972592d599f5c3556f837e3d95bf7ed08cf2d1c9709f5922b8f0e178e2b755",
+   url = "https://download.gimp.org/pub/babl/0.1/babl-0.1.122.tar.xz",
+   sha3 = "1e910a9459ac5cf3fe45cb565dde16704bb9bf1505b223cb057e08904f4df030",
    build = "meson",
 };
 
@@ -29,7 +29,11 @@ gexiv2 = {
    url = "https://download.gnome.org/sources/gexiv2/0.14/gexiv2-0.14.6.tar.xz",
    sha3 = "3574c6566da48dcbc98e4aa95489e2e3a6db68ca8a874baf7d35072d8d038e74",
    build = "meson",
-   flags = { "-Dpython3=false" },
+   flags = { 
+      "-Dintrospection=true",
+      "-Dpython3=true",
+      "-Dvapi=true",
+   }
 };
 
 libmypaint = {
@@ -73,8 +77,8 @@ pygobject = {
 };
 
 gimp = {
-   url = "https://download.gimp.org/gimp/v3.0/gimp-3.0.6.tar.xz",
-   sha3 = "d7a4e4970fe2bb6f63e5a59db122ee7e8d9fd32811bd8e8d26bd18cd0fd8ed4a",
+   url = "https://download.gimp.org/gimp/v3.0/gimp-3.0.8.tar.xz",
+   sha3 = "fc53a2a93d58091f471f41f47a3b449f06fcc8ff516a5dfb6ad09f63cea11e3b",
    build = "meson",
    flags = { "-Dheadless-tests=disabled" },
    prepare = [[ sed -i 's/if not glib_networking_works/if not true/' meson.build ]],
