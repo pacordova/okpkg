@@ -5,8 +5,8 @@ iptables = {
 };
 
 connman = {
-   url = "https://kernel.org/pub/linux/network/connman/connman-1.45.tar.xz",
-   sha3 = "db78ec445d79e22023e9158bd091110c4970349a415218df012c36dc3c1cf36a",
+   url = "https://kernel.org/pub/linux/network/connman/connman-2.0.tar.xz",
+   sha3 = "c9aa176037890aa3bfcea7f8eba2738bcb1db017250ac4856c51f2a1ea49f722",
    build = "./configure",
    flags = {
       "--enable-{client,datafiles,ethernet,loopback,wifi,wireguard}",

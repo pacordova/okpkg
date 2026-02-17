@@ -26,8 +26,8 @@ gobject-introspection = {
 };
 
 glib2 = {
-   url = "https://download.gnome.org/sources/glib/2.86/glib-2.86.3.tar.xz",
-   sha3 = "f932daf0ea7a375b3cc7aaf953565e0e66d51f44bbc7af254efe3dda525e25d5",
+   url = "https://download.gnome.org/sources/glib/2.86/glib-2.86.4.tar.xz",
+   sha3 = "0785ea4fa0563e0c414a8eaaecb03557523604dcaaa6021c35208837d6a1e471",
    build = "meson",
    flags = { "-Dintrospection=enabled" }
 };
@@ -52,8 +52,8 @@ libgudev = {
 };
 
 upower = {
-   url = "https://gitlab.freedesktop.org/upower/upower/-/archive/v1.91.0/upower-v1.91.0.tar.bz2",
-   sha3 = "ccc6d5dc56f10c52498d4f1cd0e5d61b7b146ee192c28017426868b9405d602d",
+   url = "https://gitlab.freedesktop.org/upower/upower/-/archive/v1.91.1/upower-v1.91.1.tar.bz2",
+   sha3 = "7a060d2240e473774de9911ae3685ebb6d77ec385b16de339b957204768997cc",
    build = "meson",
    flags = {
       "-Dsystemdsystemunitdir=no",
@@ -299,8 +299,8 @@ libtirpc = {
 };
 
 libuv = {
-   url = "https://dist.libuv.org/dist/v1.51.0/libuv-v1.51.0-dist.tar.gz",
-   sha3 = "e2db1892fed4bbf0b7a0b337b5a2681023da848d7b556f3aa05bfc04ba581469",
+   url = "https://dist.libuv.org/dist/v1.52.0/libuv-v1.52.0-dist.tar.gz",
+   sha3 = "8c5a4df0c1a7102be7a980e946689207efe692e2dd6ba0be6001aca937deca0a",
    build = "./configure",
 };
 
