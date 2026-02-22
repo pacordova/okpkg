@@ -24,8 +24,8 @@ rust = {
 };
 
 firefox = {
-   url = "https://download-installer.cdn.mozilla.net/pub/firefox/releases/147.0.3/linux-x86_64/en-US/firefox-147.0.3.tar.xz",
-   sha3 = "1f6ad594d6d695f8543888beafb50084c1af8c6910dc20d25fd48ca103041015",
+   url = "https://download-installer.cdn.mozilla.net/pub/firefox/releases/147.0.4/linux-x86_64/en-US/firefox-147.0.4.tar.xz",
+   sha3 = "eb9f8e822234564b72a88eb4bfb2af49a06e07d6150e73e9136efc045b622128",
    build = _,
    post = [[
       install -d $destdir/usr/{bin,lib64}
@@ -35,24 +35,6 @@ firefox = {
       ln -sf /usr/lib64/firefox/firefox $destdir/usr/bin/firefox
       cd $destdir/usr/lib64/firefox
       for f in *.so; do ln -sf firefox/$f ..; done
-   ]]
-};
-
--- from firefox: libnss3.so libnssutil3.so libsmime3.so libnspr4.so libplc4.so libplds4.so
--- needs libcups.so.2
-discord = {
-   url = "https://dl.discordapp.net/apps/linux/0.0.124/discord-0.0.124.tar.gz",
-   sha3 = "299f0f998118737b26618ce3d7703d39e56a8da9f18c058f42753923d789abe5",
-   build = _,
-   post = [[
-      sed -e 's:/usr/share:/usr/lib64:'                         \
-          -e 's:^Icon=.*$:Icon=/usr/lib64/discord/discord.png:' \
-          -i discord.desktop
-      install -d $destdir/usr/{bin,lib64}
-      install -d $destdir/usr/share/applications  
-      install -m 644 discord.desktop $destdir/usr/share/applications
-      cp -rp . $destdir/usr/lib64/discord
-      ln -sf /usr/lib64/discord/Discord $destdir/usr/bin/discord
    ]]
 };
 
@@ -103,11 +85,11 @@ nodejs = {
 -- TODO: download error: cannot handle debfile
 -- Consider building from source.
 signal-desktop = {
-   url = "https://updates.signal.org/desktop/apt/pool/s/signal-desktop/signal-desktop_7.88.0_amd64.deb",
-   sha3 = "3c11197a99cf1e3c97eb6a64735cbc1306036a9b4ea59526264eecca518b9918",
+   url = "https://updates.signal.org/desktop/apt/pool/s/signal-desktop/signal-desktop_7.90.0_amd64.deb",
+   sha3 = "68b855a4d1361d1ca3c0500b3542b652335d934346e0c2307363da6e28f24385",
    build = _,
    post = [[
-      ar x ../../download/signal-desktop_7.88.0_amd64.deb data.tar.xz
+      ar x ../../download/signal-desktop_7.90.0_amd64.deb data.tar.xz
       tar -xf data.tar.xz
       sed -i 's:/opt/Signal:/usr/bin:' usr/share/applications/signal-desktop.desktop
       install -d $destdir/usr/{lib64,bin}

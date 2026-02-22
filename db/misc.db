@@ -14,11 +14,11 @@ xfce4-alsa-plugin = {
 7zip = {
    --url = "https://github.com/p7zip-project/p7zip/archive/v17.05/p7zip-17.05.tar.gz",
    --sha3 = "7cce53f689d055b1cdc0a33922965083d50e595e2037e2ca3e8fee3fc87336dd",
-   url = "https://github.com/ip7z/7zip/releases/download/25.01/7z2501-src.tar.xz",
-   sha3 = "99811343f89c3d032f9388028092b4e6b51dd925c004d546201f96adc18bd4de",
+   url = "https://github.com/ip7z/7zip/releases/download/26.00/7z2600-src.tar.xz",
+   sha3 = "3087dfc747e0ae962cfa226f093aa74b4badd7c2288b7210e8bfd52effe9f83d",
    build = _,
    post = [[
-      rm -fr * && tar -xf ../../download/7z2501-src.tar.xz
+      rm -fr * && tar -xf ../../download/7z2600-src.tar.xz
       for i in Bundles/{Alone,Alone7z,Format7zF,SFXCon} UI/Console; do
          make -C CPP/7zip/$i -f ../../cmpl_gcc.mak
       done

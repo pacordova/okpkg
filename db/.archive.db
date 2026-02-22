@@ -1,3 +1,21 @@
+-- from firefox: libnss3.so libnssutil3.so libsmime3.so libnspr4.so libplc4.so libplds4.so
+-- needs libcups.so.2
+discord = {
+   url = "https://dl.discordapp.net/apps/linux/0.0.124/discord-0.0.124.tar.gz",
+   sha3 = "299f0f998118737b26618ce3d7703d39e56a8da9f18c058f42753923d789abe5",
+   build = _,
+   post = [[
+      sed -e 's:/usr/share:/usr/lib64:'                         \
+          -e 's:^Icon=.*$:Icon=/usr/lib64/discord/discord.png:' \
+          -i discord.desktop
+      install -d $destdir/usr/{bin,lib64}
+      install -d $destdir/usr/share/applications  
+      install -m 644 discord.desktop $destdir/usr/share/applications
+      cp -rp . $destdir/usr/lib64/discord
+      ln -sf /usr/lib64/discord/Discord $destdir/usr/bin/discord
+   ]]
+};
+
 libaio = {
    url = "https://pagure.io/libaio/archive/libaio-0.3.113/libaio-0.3.113.tar.gz",
    sha3 = "c4f6f1398bb02d365498ab4bd631ab8ae5fd52d0f9404fc4d815f523a885b4ec",

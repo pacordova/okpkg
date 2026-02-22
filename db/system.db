@@ -75,8 +75,8 @@ glibc = {
 };
 
 zlib = {
-   url = "https://zlib.net/zlib-1.3.1.tar.gz",
-   sha3 = "012a4a5f8977048e6339775e62ac1fc71dc6ebc00ceaff972197e59fa5ecb72b",
+   url = "https://zlib.net/zlib-1.3.2.tar.xz",
+   sha3 = "d60ffcfad05908d1efb932177340d2c80c9db123cf9eadff5657945f214a2214",
    build = "./configure",
    flags = { "--libdir=/usr/lib64" },
    post = [[ rm -f $destdir/usr/lib64/libz.a ]]

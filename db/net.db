@@ -1,6 +1,6 @@
 iptables = {
-   url = "https://www.netfilter.org/projects/iptables/files/iptables-1.8.11.tar.xz",
-   sha3 = "d3061c9406db2724e9f4c4205de65cc710a5a4c5b5a54876528d1ac02aeb3dcd",
+   url = "https://www.netfilter.org/projects/iptables/files/iptables-1.8.12.tar.xz",
+   sha3 = "a4b993055b9a8a3a9f644891a2fd783410e8c97f5eb80576e25313562a2bf7da",
    build = "./configure",
 };
 
@@ -60,8 +60,8 @@ openresolv = {
 };
 
 iproute2 = {
-   url = "https://kernel.org/pub/linux/utils/net/iproute2/iproute2-6.18.0.tar.xz",
-   sha3 = "4230c1603da650cc65ef6bbe578597a8225694e2258d05c45218e2c3539b7463",
+   url = "https://kernel.org/pub/linux/utils/net/iproute2/iproute2-6.19.0.tar.xz",
+   sha3 = "4c7bff5fef9b3a45d2e5a2f25d3fb70a40f1ea6c2e39f36d7a91e35b1668e18e",
    build = "./configure",
    flags = { "--libdir=/usr/lib64" },
    prepare = [[
