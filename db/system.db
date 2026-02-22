@@ -55,8 +55,8 @@ _perl = {
 };
 
 glibc = {
-   url = "https://ftp.gnu.org/gnu/glibc/glibc-2.42.tar.xz",
-   sha3 = "2cb63bb871c7db0f785c724703c1406b35023eb60aa573890c4ae999d63d7314",
+   url = "https://ftp.gnu.org/gnu/glibc/glibc-2.43.tar.xz",
+   sha3 = "1cd14849c688673ff9414b0c3a44fe4adc69a5d624c84731fe7fae91f7447227",
    build = "../configure",
    flags = {
       "--enable-kernel=6.12",
