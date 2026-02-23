@@ -439,8 +439,8 @@ less = {
 };
 
 gawk = {
-   url = "https://ftp.gnu.org/gnu/gawk/gawk-5.3.2.tar.lz",
-   sha3 = "3e94c0084ca12a31ae2509e9e2bd85f872ab967fec1f5b487bf98d60d586f04a",
+   url = "https://ftp.gnu.org/gnu/gawk/gawk-5.4.0.tar.lz",
+   sha3 = "d1f5f1b220d545cb3901ec11a9fc620eb841458364a885ae7e3b779a3d422945",
    build = "./configure",
 };
 

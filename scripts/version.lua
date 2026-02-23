@@ -49,12 +49,7 @@ function version(pkglist)
          get_version(slackware, pkgname),
          get_version(okpkg, pkgname)
       }
-      if (pkglist[i] ~= "bc") and
-         (pkglist[i] ~= "librsvg") and
-         (pkglist[i] ~= "pavucontrol") and
-         (pkglist[i] ~= "vim") and
-         (pkglist[i] ~= "python3") and
-         ((row[3] and row[2] and row[3] ~= row[2]) or
+      if ((row[3] and row[2] and row[3] ~= row[2]) or
           (row[3] and row[1] and row[3] ~= row[1]))
       then
          io.write(string.format("%s,%s,%s,%s\n", pkglist[i], unpack(row)))
@@ -150,8 +145,16 @@ file = io.popen("cat /var/lib/okpkg/db/*.db")
 buf = '\n' .. file:read("*a")
 file:close()
 
+-- Skip version checks on these packages, comma delimiter
+-- TODO: fix dashes not working in list, escape does not fix
+local skip = "bc,cmake,librsvg,pavucontrol,python3"
+
 for i in buf:gmatch("\n([%w%-%+]-) = {.-;") do
-    table.insert(pkglist, i)
+   if not string.format(",%s,", skip):
+      match(string.format(",%s,", i)) 
+   then
+      table.insert(pkglist, i)
+   end
 end
 
 if basename(arg[0]) == "version.lua" then
