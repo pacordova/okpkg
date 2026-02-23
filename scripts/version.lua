@@ -147,7 +147,7 @@ file:close()
 
 -- Skip version checks on these packages, comma delimiter
 -- TODO: fix dashes not working in list, escape does not fix
-local skip = "bc,cmake,librsvg,pavucontrol,python3"
+local skip = "bc,cmake,librsvg,pavucontrol,python3,vim"
 
 for i in buf:gmatch("\n([%w%-%+]-) = {.-;") do
    if not string.format(",%s,", skip):
