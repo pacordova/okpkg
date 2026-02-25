@@ -741,6 +741,10 @@ dbus = {
       "-Dsystemd_{system,user}_unitdir=no",
       "-Dsystem_socket=/run/dbus/system_bus_socket",
    },
+   post = [[
+      chown root:messagebus $destdir/usr/lib64/dbus-daemon-launch-helper
+      chmod 4750            $destdir/usr/lib64/dbus-daemon-launch-helper
+   ]]
 };
 
 --------------------------------------------------------------------------------
