@@ -48,8 +48,8 @@ purge("_python3")
 purge("samurai")
 os.remove("samurai-1.2-amd64.tar.lz")
 os.remove("/usr/bin/meson")
-os.rename("bash-5.3-amd64.tar.lz", "bash-5.3.008-amd64.tar.lz")
-os.rename("readline-8.3-amd64.tar.lz", "readline-8.3.001-amd64.tar.lz")
+os.rename("bash-5.3-amd64.tar.lz", "bash-5.3.009-amd64.tar.lz")
+os.rename("readline-8.3-amd64.tar.lz", "readline-8.3.003-amd64.tar.lz")
 mkdir("a")
 os.execute([[
    makewhatis /usr/share/man

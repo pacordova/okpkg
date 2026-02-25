@@ -95,6 +95,7 @@ os.execute("fc-cache")
 os.execute("update-desktop-database")
 os.execute("update-mime-database /usr/share/mime")
 os.execute("gdk-pixbuf-query-loaders --update-cache")
+os.execute("chown root:messagebus /usr/lib64/dbus-daemon-launch-helper")
 
 -- Set XFCE default terminal
 symlink("st", "/usr/bin/xfce4-terminal")
