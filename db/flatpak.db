@@ -32,8 +32,8 @@ libxmlb = {
 };
 
 libfyaml = {
-   url = "https://github.com/pantoniou/libfyaml/releases/download/v0.9.4/libfyaml-0.9.4.tar.gz",
-   sha3 = "671a4218a47a5004308241b681710ff65c0f3ced1efc76f60fa396670582fddf",
+   url = "https://github.com/pantoniou/libfyaml/releases/download/v0.9.5/libfyaml-0.9.5.tar.gz",
+   sha3 = "87aecf5ccc1f9189e92bd42bbd2fdc5257d0c948287430e8b1c6b93227ecd811",
    build = "./configure",
 };
 

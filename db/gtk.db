@@ -171,8 +171,8 @@ gcr4 = {
 };
 
 gvfs = {
-   url = "https://download.gnome.org/sources/gvfs/1.58/gvfs-1.58.1.tar.xz",
-   sha3 = "b073e968f4be75c0630c1f2a6fe5f099108c4b76377ff7a460b1785f44c1a0ec",
+   url = "https://download.gnome.org/sources/gvfs/1.58/gvfs-1.58.2.tar.xz",
+   sha3 = "56e046c89c5e8875dca2eeb6cb8c0d1dfc73125c603409ce57af2c00b039fd6e",
    build = "meson",
    flags = {
       "-D{afc,bluray,dnssd,fuse,goa,google,gphoto2,mtp,nfs,smb}=false",
