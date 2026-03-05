@@ -9,7 +9,6 @@ vulkan-loader = {
    sha3 = "4290273cbf288e9c85c1f95601de56e6fdc19a00b631772aa67c3853a634716d",
    build = "cmake",
    flags = {
-      "-DCMAKE_SKIP_RPATH=TRUE",
       "-DBUILD_TESTS=OFF",
       "-DBUILD_WSI_{WAYLAND_SUPPORT=OFF,XCB_SUPPORT=ON,XLIB_SUPPORT=ON}",
       "-DVULKAN_HEADERS_INSTALL_DIR=/usr"

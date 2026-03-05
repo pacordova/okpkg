@@ -10,18 +10,6 @@ gegl = {
    build = "meson",
 };
 
-exiv2 = {
-   url = "https://github.com/Exiv2/exiv2/archive/v0.28.8/exiv2-0.28.8.tar.gz",
-   sha3 = "83f32b46435327f4cc03f2ac0cba273cbe2b8b3cedb16fb7c523b0a0b2e639ce",
-   build = "cmake",
-   flags = {
-      "-DCMAKE_SKIP_INSTALL_RPATH=ON",
-      "-DEXIV2_ENABLE_CURL=OFF",
-      "-DEXIV2_ENABLE_INIH=no",
-      "-DEXIV2_ENABLE_BROTLI=no",
-   }
-};
-
 gexiv2 = {
    url = "https://download.gnome.org/sources/gexiv2/0.14/gexiv2-0.14.6.tar.xz",
    sha3 = "3574c6566da48dcbc98e4aa95489e2e3a6db68ca8a874baf7d35072d8d038e74",
