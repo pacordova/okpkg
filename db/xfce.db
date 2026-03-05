@@ -61,8 +61,8 @@ xfce4-dev-tools = {
 };
 
 hwdata = {
-   url = "https://github.com/vcrhonek/hwdata/archive/v0.404/hwdata-0.404.tar.gz",
-   sha3 = "5dbeba77a4db4b2b31fce3862de87d6980951978520b411efc03db343268a364",
+   url = "https://github.com/vcrhonek/hwdata/archive/v0.405/hwdata-0.405.tar.gz",
+   sha3 = "e4bb14990386569ae99956cba40db71a35174d1c9a3101b833c3cebc6eee883e",
    build = "./configure",
 };
 
@@ -84,8 +84,8 @@ libxfce4windowing = {
 };
 
 xfce4-panel = {
-   url = "https://archive.xfce.org/src/xfce/xfce4-panel/4.20/xfce4-panel-4.20.6.tar.bz2",
-   sha3 = "d77a3b8b9558403e4c107f130d1a6bc7ce6b3c18f07c8f0bad66b659ace3575c",
+   url = "https://archive.xfce.org/src/xfce/xfce4-panel/4.20/xfce4-panel-4.20.7.tar.bz2",
+   sha3 = "fb2d13a2027d3c833cda506baba4fbc9c49b563c0c109116f06cfdce41b7931d",
    build = "./configure",
    flags = {
       "--enable-gio-unix",
@@ -142,8 +142,8 @@ xfce4-power-manager = {
 };
 
 xfce4-settings = {
-   url = "https://archive.xfce.org/src/xfce/xfce4-settings/4.20/xfce4-settings-4.20.3.tar.bz2",
-   sha3 = "f793dc4f3656cd13ad0319757b45933be6d8df7f664d5cd5b29af08a6e2b9c7c",
+   url = "https://archive.xfce.org/src/xfce/xfce4-settings/4.20/xfce4-settings-4.20.4.tar.bz2",
+   sha3 = "eca512da812ca9ec6bdbc0943014e6ed99d0f944350be6eeb3a5fcb1ba1e5102",
    build = "./configure",
    flags = {
       "--enable-xrandr",
@@ -182,8 +182,8 @@ xfwm4 = {
 };
 
 xfce4-screensaver = {
-   url = "https://archive.xfce.org/src/apps/xfce4-screensaver/4.20/xfce4-screensaver-4.20.1.tar.xz",
-   sha3 = "5c20b5538b5cee9e51bf5e0dcb0587d2f224aae1dec6c62e90d4b206e4c3d6e8",
+   url = "https://archive.xfce.org/src/apps/xfce4-screensaver/4.20/xfce4-screensaver-4.20.2.tar.xz",
+   sha3 = "a97f13cd527df02701e723e6d2d1ad293b475892df23ca5bc9cfaf10a2e41b9a",
    build = "meson",
    flags = {
       "-Dauthentication-scheme=pwent",
@@ -196,8 +196,8 @@ xfce4-screensaver = {
 };
 
 xfce4-session = {
-   url = "https://archive.xfce.org/src/xfce/xfce4-session/4.20/xfce4-session-4.20.3.tar.bz2",
-   sha3 = "8b4d14640e3e9203416597fb96ef5742c9d604a43d6776441b827d3fa1c500a3",
+   url = "https://archive.xfce.org/src/xfce/xfce4-session/4.20/xfce4-session-4.20.4.tar.bz2",
+   sha3 = "0a777c000ada5cc460adaa6b837076f9c462bc8e486c85f9ace147721476a8be",
    build = "./configure",
    flags = {
       "--disable-legacy-sm",
@@ -229,8 +229,8 @@ thunar-archive-plugin = {
 };
 
 mousepad = {
-   url = "https://archive.xfce.org/src/apps/mousepad/0.6/mousepad-0.6.5.tar.xz",
-   sha3 = "5a4b38a68b2b7c3f820833949e5cdc62b5f79454a11250ba96ce8dcb52d41236",
+   url = "https://archive.xfce.org/src/apps/mousepad/0.7/mousepad-0.7.0.tar.xz",
+   sha3 = "ee8e4d8a9792c3a88dfa49dee527eae7f543589bf5e3356f22c63ff669ee2b10",
    build = "meson",
 };
 

@@ -11,15 +11,12 @@ gegl = {
 };
 
 exiv2 = {
-   url = "https://github.com/Exiv2/exiv2/archive/v0.28.7/exiv2-0.28.7.tar.gz",
-   sha3 = "b59a611995f1a6aa9a6b9d3170461f72fe165b1a79855dc5e79e605bb6583965",
+   url = "https://github.com/Exiv2/exiv2/archive/v0.28.8/exiv2-0.28.8.tar.gz",
+   sha3 = "83f32b46435327f4cc03f2ac0cba273cbe2b8b3cedb16fb7c523b0a0b2e639ce",
    build = "cmake",
    flags = {
-      "-DEXIV2_ENABLE_VIDEO=yes",
-      "-DEXIV2_ENABLE_WEBREADY=yes",
-      "-DEXIV2_ENABLE_CURL=yes",
-      "-DEXIV2_BUILD_SAMPLES=no",
       "-DCMAKE_SKIP_INSTALL_RPATH=ON",
+      "-DEXIV2_ENABLE_CURL=OFF",
       "-DEXIV2_ENABLE_INIH=no",
       "-DEXIV2_ENABLE_BROTLI=no",
    }

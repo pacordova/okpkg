@@ -113,8 +113,8 @@ samurai = {
 };
 
 texinfo = {
-   url = "https://ftp.gnu.org/gnu/texinfo/texinfo-7.2.tar.xz",
-   sha3 = "48e614c6e25c95064bef80d420ed132979fa26b1cc4689a4dbfad09ac97cd914",
+   url = "https://ftp.gnu.org/gnu/texinfo/texinfo-7.3.tar.xz",
+   sha3 = "550f281c7b518faad2e1186599bbecbf294970a1e819bc1192e4e32a5886d536",
    build = "./configure",
 };
 

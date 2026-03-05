@@ -1,6 +1,6 @@
 iptables = {
-   url = "https://www.netfilter.org/projects/iptables/files/iptables-1.8.12.tar.xz",
-   sha3 = "a4b993055b9a8a3a9f644891a2fd783410e8c97f5eb80576e25313562a2bf7da",
+   url = "https://www.netfilter.org/projects/iptables/files/iptables-1.8.13.tar.xz",
+   sha3 = "9a52272dd55783067c396639825b812854cd318d5a5ec04240b6d962cc570bc1",
    build = "./configure",
 };
 

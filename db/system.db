@@ -282,8 +282,8 @@ libcap = {
 };
 
 shadow = {
-   url = "https://github.com/shadow-maint/shadow/releases/download/4.19.3/shadow-4.19.3.tar.xz",
-   sha3 = "0a3ba5ccd78942413590e0af112d92affa82cc8c51a0544f7f3f238b9065dba6",
+   url = "https://github.com/shadow-maint/shadow/releases/download/4.19.4/shadow-4.19.4.tar.xz",
+   sha3 = "91dc2861d4377e2fc370797880224f7426f952ec5fe0115d61b7a93c214ab54a",
    build = "./configure",
    flags = {
       "--disable-account-tools-setuid",
@@ -445,8 +445,8 @@ gawk = {
 };
 
 tzdata = {
-   url = "https://github.com/eggert/tz/archive/2025c/tz-2025c.tar.gz",
-   sha3 = "3ad677364e3d625c305290343168606fabe80e29302f170cc5807bb26ecdbc45",
+   url = "https://github.com/eggert/tz/archive/2026a/tz-2026a.tar.gz",
+   sha3 = "1132f6337de62bcd8f631437c879b9524df9153d969637c221143b7b74f8d5a4",
    build = "make",
    flags = { "LIBDIR=/usr/lib64", "ZICDIR=/usr/bin" },
    post = [[ rm -f $destdir/etc/localtime ]]
