@@ -359,6 +359,13 @@ libxml2 = {
    }
 };
 
+libxmlb = {
+   url = "https://github.com/hughsie/libxmlb/releases/download/0.3.25/libxmlb-0.3.25.tar.xz",
+   sha3 = "887470f9cca14688dc05801fcd396fbc17b09f22c85d668ce4f0d0569b95cc58",
+   build = "meson",
+   flags = { "-Dintrospection=true", "-D{gtkdoc,tests}=false" },
+};
+
 libxslt = {
    url = "https://download.gnome.org/sources/libxslt/1.1/libxslt-1.1.45.tar.xz",
    sha3 = "ac90e0851246088eab2c71008c0b72246eada110e1f23a109383089c88d846d6",
@@ -372,6 +379,14 @@ libyaml = {
    sha3 = "cd085eedddb0caeaa360db3e037155db95f8998d495047f3a8cbee6ee0430022",
    build = "./configure",
 };
+
+libfyaml = {
+   url = "https://github.com/pantoniou/libfyaml/releases/download/v0.9.5/libfyaml-0.9.5.tar.gz",
+   sha3 = "87aecf5ccc1f9189e92bd42bbd2fdc5257d0c948287430e8b1c6b93227ecd811",
+   build = "./configure",
+};
+
+
 
 lzo = {
    url = "https://oberhumer.com/opensource/lzo/download/lzo-2.10.tar.gz",
