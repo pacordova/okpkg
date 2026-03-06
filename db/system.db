@@ -725,8 +725,8 @@ sysklogd = {
 };
 
 dinit = {
-   url = "https://github.com/davmac314/dinit/releases/download/v0.19.4/dinit-0.19.4.tar.xz",
-   sha3 = "107c22f8db1fdc2cec124088f244568a448e7522949e4b38af303bc3c41338dd",
+   url = "https://github.com/davmac314/dinit/releases/download/v0.20.0/dinit-0.20.0.tar.xz",
+   sha3 = "a84620a64d0b0d4916a0b6d3242b735856efab03401e9ec5f613b5150b14fc92",
    build = "make",
    flags = { "BUILD_SHUTDOWN=yes", "SBINDIR=/usr/bin" },
    post = [[ ln -sf dinit $destdir/usr/bin/init ]]
