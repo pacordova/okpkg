@@ -235,8 +235,8 @@ mousepad = {
 };
 
 ristretto = {
-   url = "https://archive.xfce.org/src/apps/ristretto/0.13/ristretto-0.13.4.tar.xz",
-   sha3 = "9554720ae15cc5190eeb8ea6e36e13f22fdc8542f46f52849662a9294578a0b1",
+   url = "https://archive.xfce.org/src/apps/ristretto/0.14/ristretto-0.14.0.tar.xz",
+   sha3 = "619b86915fc8136abd78b2a90f125ad1a6c22a155ff0349b9981a807e1f09535",
    build = "meson",
 };
 

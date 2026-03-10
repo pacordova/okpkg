@@ -441,8 +441,8 @@ sharutils = {
 };
 
 sqlite = {
-   url = "https://www.sqlite.org/2026/sqlite-autoconf-3510200.tar.gz",
-   sha3 = "e0f7ae1c28c4fa551a2ffe8bdfafafa90613dabcef9553050892d02240b44f1d",
+   url = "https://www.sqlite.org/2026/sqlite-autoconf-3520000.tar.gz",
+   sha3 = "45a4911475950ab5fd486afb776102eb29d69e7569b48947f21e3c8501b51822",
    build = "./configure",
    flags = { "--enable-fts5", "CPPFLAGS=-DSQLITE_ENABLE_COLUMN_METADATA=1" },
 };
