@@ -407,6 +407,17 @@ pciutils = {
    post = [[ chmod 755 $destdir/usr/lib64/libpci.so.3.14.0 ]]
 };
 
+-- r packages ragg (tidyverse) require libwebp to build
+libwebp = {
+   url = "https://storage.googleapis.com/downloads.webmproject.org/releases/webp/libwebp-1.6.0.tar.gz",
+   sha3 = "a1894bccbaa7248664068d56025e55dcf30fd4bd2a48818eb9e51b84d5d80fda",
+   build = "./configure",
+   flags = {
+      "--enable-libwebp{mux,demux,decoder,extras}",
+      "--enable-swap-16bit-csp",
+   }
+};
+
 r = {
    url = "https://cran.r-project.org/src/base/R-4/R-4.5.3.tar.gz",
    sha3 = "8d51283c9f73b7fe8a375066fc766e8e1cd47c7f265d7180436577440fadb39c",

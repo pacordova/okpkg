@@ -1089,20 +1089,6 @@ sound-theme-freedesktop = {
    build = "./configure",
 };
 
-libwebp = {
-   url = "https://storage.googleapis.com/downloads.webmproject.org/releases/webp/libwebp-1.4.0.tar.gz",
-   build = "./configure",
-   flags = {
-      "--libdir=/usr/lib64",
-      "--enable-libwebpmux",
-      "--enable-libwebpdemux",
-      "--enable-libwebpdecoder",
-      "--enable-swap-16bit-csp",
-      "--disable-static",
-      "--disable-tiff",
-   }
-};
-
 nettle = {
    url = "https://ftp.gnu.org/gnu/nettle/nettle-3.9.1.tar.gz",
    sha3 = "d659a4b5e8cfbbf08af0772feccf0742b78acf0cf82a8038231c163c9367b9bc",
