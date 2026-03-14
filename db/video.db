@@ -62,10 +62,19 @@ ffmpeg = {
 };
 
 libplacebo = {
-   url = "https://code.videolan.org/videolan/libplacebo/-/archive/v7.360.0/libplacebo-v7.360.0.tar.bz2",
-   sha3 = "2355d6ae1c3a3c24bc93374a2f6505f61617f031132a49851561eff58c0cc1f7",
+   url = "https://code.videolan.org/videolan/libplacebo/-/archive/v7.360.1/libplacebo-v7.360.1.tar.bz2",
+   sha3 = "b4c997f5a845197e654441d05552b796ef2761933be91a65d2e5c362ab1fd617",
    build = "meson",
-   flags = { "-Ddemos=false" }
+   flags = { 
+      "-Dvulkan=enabled",
+      "-Dopengl=enabled",
+      "-Dd3d11=disabled",
+      "-Dglslang=disabled",
+      "-Dlcms=enabled",
+      "-Dxxhash=enabled",
+      "-Ddemos=false",
+      "-Dtests=false",
+   }
 };
 
 uchardet = {

@@ -108,8 +108,8 @@ bzip2 = {
 };
 
 lzlib = {
-   url = "https://download.savannah.gnu.org/releases/lzip/lzlib/lzlib-1.15.tar.lz",
-   sha3 = "245e59a2feab412266446acb913af13bfb385c225d7ccf6c724b9c6f7c8b69b4",
+   url = "https://download.savannah.gnu.org/releases/lzip/lzlib/lzlib-1.16.tar.lz",
+   sha3 = "439e7235e1fe227167c76f9f951ab922cc16af54e333808fa7b7271cf31e5808",
    build = "./configure",
    flags = {
       "--libdir=/usr/lib64",
@@ -747,8 +747,8 @@ dbus = {
 --------------------------------------------------------------------------------
 
 device-mapper = {
-   url = "https://sourceware.org/ftp/lvm2/LVM2.2.03.38.tgz",
-   sha3 = "b3ef1d35d1ff4f6dd5d1a104b8f99c5a65c02493b732b109c5333b671e3d168a",
+   url = "https://sourceware.org/ftp/lvm2/LVM2.2.03.39.tgz",
+   sha3 = "906f5cc9f016cf5d68e802af748056b2e5e3c08ef93b340d5daaeeb30362a903",
    prepare = "./configure",
    build = "make_noinstall",
    flags = {

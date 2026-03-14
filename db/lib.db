@@ -476,3 +476,14 @@ x265 = {
    prepare = [[ sed -r '/cmake_policy.*(0025|0054)/d' -i source/CMakeLists.txt ]],
    post = [[ rm -f $destdir/usr/lib64/libx265.a ]]
 };
+
+xxhash = {
+   url = "https://github.com/Cyan4973/xxHash/archive/v0.8.3/xxhash-0.8.3.tar.gz",
+   sha3 = "3d4d6e0036938b16fd294a8ff5283f6fad3e73d5c6cc7a42196cf39d5eedb896",
+   build = "make",
+   flags = {
+      "prefix=/usr",
+      "libdir=/usr/lib64",
+      "DISPATCH=1",
+   }
+};
