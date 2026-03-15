@@ -195,8 +195,8 @@ libxxf86vm = {
 };
 
 libpciaccess = {
-   url = "https://x.org/pub/individual/lib/libpciaccess-0.18.1.tar.xz",
-   sha3 = "ea5ea32848dd3977f30b15999d0abb168d511dbb20beda28d78f6045559d781d",
+   url = "https://x.org/pub/individual/lib/libpciaccess-0.19.tar.xz",
+   sha3 = "f48819dcf8ed084cf35ec368a2a929ebc761850832b4575500a83c952d1ad598",
    build = "meson",
 };
 

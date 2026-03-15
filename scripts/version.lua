@@ -103,7 +103,6 @@ for w in string.gmatch(buf, '%./(.-)\n') do
          gsub("lvm2%-", "device-mapper-"):
          gsub("gtk%+3%-", "gtk3-"):
          gsub("gtkmm%-", "gtkmm3-"):
-         gsub("mypaint%-brushes", "mypaint-brushes1"):
          gsub("20201015_cff88dd", "39"):
          gsub("20191011_e8ce9fe", "18"):
          gsub("0.18_20240915", "0.18")

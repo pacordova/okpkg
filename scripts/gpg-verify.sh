@@ -9,23 +9,27 @@ tempdir=`mktemp -d`
 curl='/usr/bin/curl --silent --remote-name-all'
 
 _cksum_gh(){
-   git clone --depth 1 --branch "$2" "$1"
-   git -C ${1##*/} verify-tag "$2" || exit 1
-   git -C ${1##*/} archive --format=tar --prefix=${1##*/}-${2#v}/ "$2" | 
-      gzip -n > ${1##*/}-${2#v}.tar.gz
+  git clone --depth 1 --branch "$2" "$1"
+  git -C ${1##*/} verify-tag "$2" || exit 1
+  git -C ${1##*/} archive --format=tar --prefix=${1##*/}-${2#v}/ "$2" \
+  | gzip -n > ${1##*/}-${2#v}.tar.gz
 }
 
 _cksum_signal(){
-   $curl https://updates.signal.org/desktop/apt/dists/xenial/{InRelease,main/binary-amd64/Packages}
-   gpg -d InRelease >/dev/null || exit 1
-   awk '/[0-9a-f]{128}/&&/Packages$/{print$1,"Packages"}' InRelease | sha512sum -c || exit 1
-   sed -n '31s|Filename: |https://updates.signal.org/desktop/apt/|p' Packages | $curl -# @-
-   printf "%s %s" `sed -n '36s|SHA512: ||p' Packages` *.deb | sha512sum -c || exit 1
+  $curl https://updates.signal.org/desktop/apt/dists/xenial/{InRelease,main/binary-amd64/Packages}
+  gpg -d InRelease >/dev/null || exit 1
+  awk '/[0-9a-f]{128}/&&/Packages$/{print$1,"Packages"}' InRelease | sha512sum -c || exit 1
+  curl -LRO https://updates.signal.org/desktop/apt/pool/s/signal-desktop/signal-desktop_$1_amd64.deb
+  grep -e 'Filename:' -e 'SHA512' Packages \
+  | paste - - \
+  | awk 'gsub(/.*\//, "", $2){ print $4,$2 }' \
+  | grep signal-desktop_$1_amd64.deb \
+  | sha512sum -c || exit 1
 }
 
 cd "$tempdir"
 
-_cksum_signal
+_cksum_signal 8.2.1
 #_cksum_gh https://github.com/vim/vim v9.1.1980
 #_cksum_gh https://github.com/vcrhonek/hwdata v0.405
 #_cksum_gh https://github.com/yshui/picom v13

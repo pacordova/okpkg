@@ -37,8 +37,8 @@ startup-notification = {
 --------------------------------------------------------------------------------
 
 at-spi2-core = {
-   url = "https://download.gnome.org/sources/at-spi2-core/2.58/at-spi2-core-2.58.3.tar.xz",
-   sha3 = "8c556c137144d7dddf0b5e25e985aac55016739e9800c0ca7bd1cb54c3820d85",
+   url = "https://download.gnome.org/sources/at-spi2-core/2.60/at-spi2-core-2.60.0.tar.xz",
+   sha3 = "db86fa253e1004d538469110e6d0e938e0b126132cd403638d86319006a43b25",
    build = "meson",
    flags = {
       "-Dsystemd_user_dir=/tmp",
@@ -130,8 +130,8 @@ libxklavier = {
 };
 
 poppler = {
-   url = "https://poppler.freedesktop.org/poppler-26.02.0.tar.xz",
-   sha3 = "4d1d6a2acd704c520f53af71326ef9a91eba5cf64b379cb9f8447741cb4f8679",
+   url = "https://poppler.freedesktop.org/poppler-26.03.0.tar.xz",
+   sha3 = "7a5b3e00999b96807dac64dd020b69cbd073c9a1685b15d770c3aa536fa54424",
    build = "cmake",
    flags = {
       "-DENABLE_UNSTABLE_API_ABI_HEADERS=ON",
@@ -171,8 +171,8 @@ gcr4 = {
 };
 
 gvfs = {
-   url = "https://download.gnome.org/sources/gvfs/1.58/gvfs-1.58.2.tar.xz",
-   sha3 = "56e046c89c5e8875dca2eeb6cb8c0d1dfc73125c603409ce57af2c00b039fd6e",
+   url = "https://download.gnome.org/sources/gvfs/1.60/gvfs-1.60.0.tar.xz",
+   sha3 = "e99f66d7034e9efee850df94c6cec1ecc6988b58403b735d26c8b1a7606738d5",
    build = "meson",
    flags = {
       "-D{afc,bluray,dnssd,fuse,goa,google,gphoto2,mtp,nfs,smb}=false",
