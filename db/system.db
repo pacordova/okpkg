@@ -552,8 +552,8 @@ pigz = {
 };
 
 plzip = {
-   url = "https://download.savannah.gnu.org/releases/lzip/plzip/plzip-1.12.tar.lz",
-   sha3 = "d7dc9adea8988bd03dd967337905faf4e2a1ac115a458a4551d1987fa0b9e58d",
+   url = "https://download.savannah.gnu.org/releases/lzip/plzip/plzip-1.13.tar.lz",
+   sha3 = "d175ff72930a3d68ccee7ec09d82b86fe3d7b60af12c345718399058a4e94b37",
    build = "./configure",
    post = [[ ln -sf plzip $destdir/usr/bin/lzip ]]
 };

@@ -78,8 +78,8 @@ libtool = {
 };
 
 meson = {
-   url = "https://pypi.org/packages/source/m/meson/meson-1.10.1.tar.gz",
-   sha3 = "cb739819a4996da63575809275c8d351744df30b85b29e7e66fde75385ca5bb2",
+   url = "https://pypi.org/packages/source/m/meson/meson-1.10.2.tar.gz",
+   sha3 = "778447aebc05a858b77dbc95470839189d5f12a1958e00097a549dcd7fdd54e8",
    build = "python-build",
 };
 
