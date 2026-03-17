@@ -381,8 +381,8 @@ libyaml = {
 };
 
 libfyaml = {
-   url = "https://github.com/pantoniou/libfyaml/releases/download/v0.9.5/libfyaml-0.9.5.tar.gz",
-   sha3 = "87aecf5ccc1f9189e92bd42bbd2fdc5257d0c948287430e8b1c6b93227ecd811",
+   url = "https://github.com/pantoniou/libfyaml/releases/download/v0.9.6/libfyaml-0.9.6.tar.gz",
+   sha3 = "24548a6798b52898d1131bf2c642f2f79c16d57d7feea5e1aa6d9959de94fa57",
    build = "./configure",
 };
 
