@@ -22,7 +22,7 @@ end
 os.execute("rm -fr " .. srcpath)
 mkdir(srcpath)
 
-download_all("system.db")
+download_all("base.db")
 download_all("python.db")
 download_all("perl.db")
 download_all("devel.db")

@@ -27,7 +27,7 @@ symlink(string.format("%s/sources/meson/meson.py", okpath), "/usr/bin/meson")
 emerge("samurai")
 
 -- Build core system
-file = io.open(string.format("%s/db/system.db", okpath))
+file = io.open(string.format("%s/db/base.db", okpath))
 buf = '\n' .. file:read("*a")
 file:close()
 for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do

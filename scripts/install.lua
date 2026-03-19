@@ -29,7 +29,7 @@ end
 if #arg == 0 then arg = {"base"} end
 base = { "linux-lts" }
 local fp, buf
-fp = io.open("system.db")
+fp = io.open("base.db")
 buf = '\n' .. fp:read("*a")
 fp:close()
 for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do
