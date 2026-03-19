@@ -293,8 +293,8 @@ hicolor-icon-theme = {
 };
 
 adwaita-icon-theme = {
-   url = "https://download.gnome.org/sources/adwaita-icon-theme/49/adwaita-icon-theme-49.0.tar.xz",
-   sha3 = "5a31fc29622a9538ca53c0547f9165e602eb74902dca35ad49385e1aa8c198f4",
+   url = "https://download.gnome.org/sources/adwaita-icon-theme/50/adwaita-icon-theme-50.0.tar.xz",
+   sha3 = "c44aedba40c58512fb86a5a5d9c1b777dd2ee04ab8c0ed900f48e930260bcd1f",
    build = "meson",
    post = [[ gtk-update-icon-cache $destdir/usr/share/icons/Adwaita ]],
 };

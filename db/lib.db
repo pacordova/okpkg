@@ -26,8 +26,8 @@ gobject-introspection = {
 };
 
 glib2 = {
-   url = "https://download.gnome.org/sources/glib/2.86/glib-2.86.4.tar.xz",
-   sha3 = "0785ea4fa0563e0c414a8eaaecb03557523604dcaaa6021c35208837d6a1e471",
+   url = "https://download.gnome.org/sources/glib/2.88/glib-2.88.0.tar.xz",
+   sha3 = "cc95ec1898a77307ee48ddda08979c5a7e2b3c38e7410d45f202f303b05666a7",
    build = "meson",
    flags = { "-Dintrospection=enabled" }
 };
@@ -401,8 +401,8 @@ mtdev = {
 };
 
 nghttp2 = {
-   url = "https://github.com/nghttp2/nghttp2/releases/download/v1.68.0/nghttp2-1.68.0.tar.xz",
-   sha3 = "1aca46c45baeda040bc95dec48b9093164e510c970947dfc52016bf1b51964b6",
+   url = "https://github.com/nghttp2/nghttp2/releases/download/v1.68.1/nghttp2-1.68.1.tar.xz",
+   sha3 = "4d3654305088d71ac4d4f7378242d589a99877e02bf74a0313102fb1a5de8178",
    build = "./configure",
    flags = { "--enable-lib-only" }
 };

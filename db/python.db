@@ -13,12 +13,15 @@ python3 = {
       "LDFLAGS_NODIST=-fno-semantic-interposition",
    },
    post = [[
-      #rm -fr "$destdir/usr/lib64/pydoc"* "$destdir/usr/bin/pydoc"*
-      cd "$destdir/usr/lib64/python"*
-      rm -fr test ./*/test ./*/tests
-      rm -fr idlelib turtle* config-*
-      cd "$destdir/usr/bin"
-      rm -f idle*
+     #rm -fr "$destdir/usr/bin/pydoc"*
+     #rm -fr "$destdir/usr/lib64/python"*/pydoc* 
+      rm -fr "$destdir/usr/bin/idle"*
+      rm -fr "$destdir/usr/lib64/python"*/idlelib
+      rm -fr "$destdir/usr/lib64/python"*/turtle*
+      rm -fr "$destdir/usr/lib64/python"*/config-*
+      rm -fr "$destdir/usr/lib64/python"*/test
+      rm -fr "$destdir/usr/lib64/python"*/*/test
+      rm -fr "$destdir/usr/lib64/python"*/*/tests
    ]]
 };
 

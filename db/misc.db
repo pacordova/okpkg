@@ -100,8 +100,8 @@ gcc15 = {
 };
 
 ghostscript = {
-   url = "https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs10060/ghostscript-10.06.0.tar.xz",
-   sha3 = "b8bbf1a091de71690a3dea504ea5954d960e1fb8b8ed9e5f858be66a83464f74",
+   url = "https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs10070/ghostscript-10.07.0.tar.xz",
+   sha3 = "e1857b92cfccd2ee6ea881128b865123d1973a08be9bd646b241191c7151af8e",
    build = "./configure",
    flags = {
       "--disable-{compile-inits,cups}",
@@ -311,33 +311,36 @@ kirc = {
    prepare = [[ sed -i 's/all: clean/all:/g' Makefile ]]
 };
 
+-- Remember to edit /etc/site-config.jam when you update Python!
 libtorrent-rasterbar = {
-   url = "https://github.com/arvidn/libtorrent/releases/download/v2.0.11/libtorrent-rasterbar-2.0.11.tar.gz", 
-   sha3 = "60d0e0ffc926c1ad7c608bf68211f48b15b3312b6e66e09e548e808068f05764",
+   url = "https://github.com/arvidn/libtorrent/releases/download/v2.0.12/libtorrent-rasterbar-2.0.12.tar.gz", 
+   sha3 = "40217c0e2be187f4a80b380046ae7612fb3010ab987b3997e449b2f528115be2",
    build = _,
    post = [[ 
-      BOOST_ROOT=/var/lib/boost_1_88_0
+      BOOST_ROOT=/var/lib/boost_1_90_0
       b2="$BOOST_ROOT/tools/build/src/engine/b2"
-      if ! test -x $b2; then cd $BOOST_ROOT/tools/build && ./bootstrap.sh; fi
+      if ! test -x $b2; then cd "$BOOST_ROOT/tools/build" && ./bootstrap.sh; fi
 
-      BOOST_ROOT=$BOOST_ROOT \
+      BOOST_ROOT="$BOOST_ROOT" \
       $b2 -j5 \
           variant=release \
           toolset=gcc \
           fpic=on \
           install \
-          --prefix=$destdir/usr \
-          --libdir=$destdir/usr/lib64
+          --prefix="$destdir/usr" \
+          --libdir="$destdir/usr/lib64"
 
+      PYTHON_SITE=`python3 -c 'from site import *;print(getsitepackages()[0])'`
+      PYTHON_VERSION=`python3 -V | awk -F '[ .]' '{print $2 "." $3}'`
       cd bindings/python
       BOOST_ROOT=$BOOST_ROOT \
       $b2 -j5 \
           variant=release \
-          python=3.14 \
+          python="$PYTHON_VERSION" \
           fpic=on \
           stage_module \
           install_module \
-          python-install-path=$destdir/usr/lib64/python3.14/site-packages
+          python-install-path="$destdir/${PYTHON_SITE#*/}"
    ]]
 };
 
@@ -433,8 +436,8 @@ ripgrep = {
 };
 
 scrot = {
-   url = "https://github.com/resurrecting-open-source-projects/scrot/releases/download/1.12.1/scrot-1.12.1.tar.gz",
-   sha3 = "c09b507a8ebbf7b34f3e8d2671af3553412035c121a92ab2f16803cf87dbbd5a",
+   url = "https://github.com/resurrecting-open-source-projects/scrot/releases/download/2.0.0/scrot-2.0.0.tar.gz",
+   sha3 = "b5bdf998fb93ab1a8b927c6e969b71ef00e69604c8708c47b108a5db4bb080fb",
    build = "./configure",
 };
 
