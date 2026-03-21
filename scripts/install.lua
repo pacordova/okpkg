@@ -73,7 +73,7 @@ end
 
 -- minimal package set
 minimal = {
-   "iana-etc", "glibc", "zlib", "bzip2", "lzlib", "xz", "zstd", "file", "gmp",
+   "glibc", "zlib", "bzip2", "lzlib", "xz", "zstd", "file", "gmp",
    "mpfr", "attr", "acl", "gcc-libs", "libcap", "shadow", "ncurses",
    "readline", "sed", "pcre2", "grep", "oksh", "expat", "less", "gawk",
    "tzdata", "libxcrypt", "libressl", "kmod", "coreutils", "findutils", "pigz",

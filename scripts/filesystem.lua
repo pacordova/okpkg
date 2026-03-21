@@ -9,9 +9,6 @@ local file
 -- Change directory to root of new filesystem
 chdir(os.getenv("destdir"))
 
--- Remove directory fresh partition
-os.remove("lost+found")
-
 --------------
 -- Skeleton --
 --------------
@@ -56,8 +53,8 @@ mkdir("usr/share/zoneinfo")
 mkdir("usr/src")
 mkdir("var")
 mkdir("var/cache")
+mkdir("var/db")
 mkdir("var/home")
-mkdir("var/lib")
 mkdir("var/local")
 mkdir("var/log")
 mkdir("var/mail")
@@ -68,6 +65,7 @@ mkdir("var/tmp")
 --------------
 -- Symlinks --
 --------------
+symlink("db", "var/lib")
 symlink("lib64", "usr/lib")
 symlink("/proc/self/mounts", "etc/mtab")
 symlink("/run/lock", "var/lock")
@@ -75,8 +73,8 @@ symlink("/run", "var/run")
 symlink("usr/bin", "bin")
 symlink("usr/lib64", "lib64")
 symlink("usr/lib", "lib")
-symlink("var/home", "home")
-symlink("/var/lib/okpkg/sources/linux-lts", "usr/src/linux")
+symlink("/var/home", "home")
+
 
 ------------------
 -- System Files --
@@ -108,7 +106,7 @@ file:write([[
 if [ "$libdir" = '${exec_prefix}/lib' ]; then libdir=/usr/lib64; fi
 if [ "$localstatedir" = '${prefix}/var' ]; then localstatedir=/var; fi
 if [ "$runstatedir" = '${localstatedir}/run' ]; then runstatedir=/run; fi
-if [ "$sharedstatedir" = '${prefix}/com' ]; then sharedstatedir=/var/lib; fi 
+if [ "$sharedstatedir" = '${prefix}/com' ]; then sharedstatedir=/var/db; fi 
 if [ "$sysconfdir" = '${prefix}/etc' ]; then sysconfdir=/etc; fi
 if [ "$sbindir" = '${exec_prefix}/sbin' ]; then sbindir=/usr/bin; fi
 if [ "$libexecdir" = '${exec_prefix}/libexec' ]; then libexecdir=/usr/lib64; fi
@@ -280,24 +278,34 @@ file:write([[
 exec /usr/bin/gcc -std=c99 "$@"
 ]])
 file:close()
+os.execute("chmod 755 usr/bin/c99")
 --------------------------------------------------------------------------------
 
---------------
--- Finalize --
---------------
+-------------------
+-- Miscellaneous --
+-------------------
+os.remove("lost+found")
+
 os.execute([[
    mknod -m 600 dev/console c 5 1
    mknod -m 666 dev/null c 1 3
    chattr +i etc/resolv.conf
-   chmod +x usr/bin/c99
-   install -m 644 /etc/protocols etc
-   install -m 644 /etc/services  etc
-   cp -p /etc/ssl/certs/ca-certificates.crt etc/ssl/certs/ca-certificates.crt
-   cp -rp /etc/dinit.d etc/dinit.d
-   git clone /var/lib/okpkg var/lib/okpkg
-   git -C var/lib/okpkg repack -adf --depth=1
-   mkdir -p var/lib/okpkg/{packages,download}
-   cp -p /var/lib/okpkg/download/* var/lib/okpkg/download
-   tar -xhf /var/lib/okpkg/packages/a/linux-lts-*.tar.lz
-   cp -p /var/lib/okpkg/packages/a/linux-lts-*.tar.lz var/lib/okpkg/packages
+   cp -fp  /etc/{protocols,services} etc
+   cp -fp  {/,}etc/ssl/certs/ca-certificates.crt
+   cp -frp {/,}etc/dinit.d
+]])
+
+-----------
+-- okpkg --
+-----------
+mkdir("var/cache/distfiles")
+mkdir("var/cache/packages")
+mkdir("var/tmp/sources")
+symlink("/var/tmp/sources/linux-lts", "usr/src/linux")
+os.execute([[
+   git clone /usr/okpkg usr/okpkg
+   git -C usr/okpkg repack -adf --depth=1
+   cp -fp /var/cache/distfiles/* var/cache/distfiles
+   tar -xhf /var/cache/packages/a/linux-lts-*.tar.lz
+   cp -fp /var/cache/packages/a/linux-lts-*.tar.lz var/cache/packages
 ]])

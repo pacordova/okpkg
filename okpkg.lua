@@ -13,18 +13,15 @@ local chdir, mkdir, pwd, basename, dirname, setenv, unsetenv  =
 
 -- Configuration
 C = {
-   ["gnu"] = "http://mirror.fcix.net",
-   ["cran"] = "https://archive.linux.duke.edu/cran",
-   ["pkgdir"] = "/var/lib/okpkg/packages",
-   ["okpath"] = "/var/lib/okpkg",
-   ["dbpath"] = "/var/lib/okpkg/db",
-   ["outdir"] = "/var/lib/okpkg/download",
-   ["srcpath"] = "/var/lib/okpkg/sources",
-   ["indexdir"] = "/var/lib/okpkg/index",
-   ["patchdir"] = "/var/lib/okpkg/patches",
+   ["pkgdir"]      = "/var/cache/packages",
+   ["okpkg"]       = "/usr/okpkg",
+   ["okpkg_db"]    = "/usr/okpkg/db",
+   ["distdir"]     = "/var/cache/distfiles",
+   ["tempdir"]     = "/var/tmp/sources",
+   ["indexdir"]    = "/usr/okpkg/index",
+   ["patchdir"]    = "/usr/okpkg/patches",
    ["config_site"] = "/etc/config.site",
-   ["ninja"] = "/usr/bin/samu",
-   ["jobs"] = 5,
+   ["ninja"]       = "/usr/bin/samu",
    ["cflags"] = {
       "-O2",
       "-march=x86-64-v2",
@@ -33,6 +30,12 @@ C = {
       "-fcommon",
       "-pipe"
    },
+   ["jobs"] = 5,
+}
+
+mirrors = {
+   ["gnu"] = "http://mirror.fcix.net",
+   ["cran"] = "https://archive.linux.duke.edu/cran",
 }
 
 -- Build routines
@@ -164,7 +167,7 @@ end
 function _db_lookup(x)
    local file, buf, i, j
    x = string.format("\n%s = {", x)
-   file = io.popen(string.format("cat %s/*.db", C.dbpath))
+   file = io.popen(string.format("cat %s/*.db", C.okpkg_db))
    buf = '\n' .. file:read('*a')
    file:close()
    i = buf:find(x, 1, true) or
@@ -179,18 +182,17 @@ function download(x)
    t = _db_lookup(x)
 
    -- Change mirrors
-   t.url = t.url:
-      gsub("https://ftp.gnu.org", C.gnu):
-      gsub("https://cran.r%-project.org", C.cran)
+   t.url = t.url:gsub("https://ftp.gnu.org", mirrors.gnu)
+   t.url = t.url:gsub("https://cran.r%-project.org", mirrors.cran)
 
    -- Delete old files
-   srcdir = string.format("%s/%s", C.srcpath, x)
+   srcdir = string.format("%s/%s", C.tempdir, x)
    os.execute(string.format("rm -fr %s", srcdir))
    mkdir(srcdir)
 
    -- Download file if not already downloaded
    print(string.format("okpkg download %s:\nurl: '%s'", x, t.url))
-   filename = string.format("%s/%s", C.outdir, basename(t.url))
+   filename = string.format("%s/%s", C.distdir, basename(t.url))
    file = io.open(filename)
    if file then
       file:close()
@@ -285,7 +287,7 @@ function build(x)
    mkdir(destdir)
 
    -- Setup srcdir
-   srcdir = string.format("%s/%s", C.srcpath, x)
+   srcdir = string.format("%s/%s", C.tempdir, x)
    setenv("SOURCE_DATE_EPOCH", get_timestamp(srcdir))
    chdir(srcdir)
 
@@ -388,8 +390,8 @@ setenv("LC_ALL", "POSIX")
 setenv("CONFIG_SITE", C.config_site)
 setenv("CFLAGS", table.concat(C.cflags, ' '))
 setenv("CXXFLAGS", table.concat(C.cflags, ' '))
-setenv("MAKEFLAGS", "-j5")
-setenv("ninja", "samu")
+setenv("MAKEFLAGS", string.format("-j%d", C.jobs))
+setenv("ninja", C.ninja)
 setenv("patch", "patch -b -p1")
 
 -- Main loop over arglist

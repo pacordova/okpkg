@@ -1,28 +1,30 @@
-prefix = /usr
+$(shell mkdir -p index)
 
-LUA_INCLUDE = $(shell dirname `find /usr/include -name lua.h | head -1`)
-LUA_CPATH = $(shell dirname `lua -e 'print(package.cpath)' | cut -d ';' -f1`)
+prefix  := /usr
+bindir  := $(prefix)/bin
+libdir  := $(shell lua -e "print(package.cpath:match('(.-)/%?.so;'))")
 
-CC = gcc
-LDFLAGS = -lcrypto
-CFLAGS = -O2 -fpic -shared -pipe
+CC      := /usr/bin/gcc -std=c99
+CFLAGS  := -O2 -fpic -shared -pipe 
+CFLAGS  += -Wno-implicit-function-declaration
+CFLAGS  += $(shell pkgconf --cflags lua)
+LDFLAGS := $(shell pkgconf --libs libcrypto)
 
 all: okutils.so
 
 okutils.so: okutils.c
-	$(CC) -I$(LUA_INCLUDE) $(CFLAGS) -o $@ $^ $(LDFLAGS)
+	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 	strip --strip-unneeded $@
 
 install: okutils.so
-	mkdir -p index packages sources download
-	install -d $(DESTDIR)$(prefix)/bin $(DESTDIR)$(LUA_CPATH)
-	install okutils.so $(DESTDIR)$(LUA_CPATH)/
-	ln -sf `pwd`/okpkg.lua $(DESTDIR)$(prefix)/bin/okpkg
+	mkdir -p $(DESTDIR){$(bindir),$(libdir)}
+	mv -f okutils.so $(DESTDIR)$(libdir)
+	cp -f okpkg.lua  $(DESTDIR)$(bindir)/okpkg
 
 uninstall: clean
 	rm -f $(DESTDIR)$(prefix)/bin/okpkg
 	rm -f $(DESTDIR)$(prefix)$(LUA_CPATH)/okutils.so
 
 clean:
-	find . -name \*~ -delete
-	rm -f okutils.so
+	find . -name \*~   -delete
+	find . -name \*.so -delete
