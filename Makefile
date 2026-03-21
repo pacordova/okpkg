@@ -4,9 +4,8 @@ prefix  := /usr
 bindir  := $(prefix)/bin
 libdir  := $(shell lua -e "print(package.cpath:match('(.-)/%?.so;'))")
 
-CC      := /usr/bin/gcc -std=c99
+CC      := /usr/bin/gcc -std=gnu99
 CFLAGS  := -O2 -fpic -shared -pipe 
-CFLAGS  += -Wno-implicit-function-declaration
 CFLAGS  += $(shell pkgconf --cflags lua)
 LDFLAGS := $(shell pkgconf --libs libcrypto)
 

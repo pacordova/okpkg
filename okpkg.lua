@@ -22,6 +22,7 @@ C = {
    ["patchdir"]    = "/usr/okpkg/patches",
    ["config_site"] = "/etc/config.site",
    ["ninja"]       = "/usr/bin/samu",
+   ["meson"]       = "/usr/bin/meson",
    ["cflags"] = {
       "-O2",
       "-march=x86-64-v2",
@@ -101,7 +102,7 @@ B = {
    end,
    ["meson"] = function(...)
       local arg = {
-         [0] = "meson setup build",
+         [0] = "$meson setup build",
          "-Dprefix=/usr",
          "-Dlibdir=lib64",
          "-Dsbindir=bin",
@@ -392,6 +393,7 @@ setenv("CFLAGS", table.concat(C.cflags, ' '))
 setenv("CXXFLAGS", table.concat(C.cflags, ' '))
 setenv("MAKEFLAGS", string.format("-j%d", C.jobs))
 setenv("ninja", C.ninja)
+setenv("meson", C.meson)
 setenv("patch", "patch -b -p1")
 
 -- Main loop over arglist
