@@ -205,10 +205,10 @@ function download(x)
       os.remove(filename)
       error(string.format("%s: FAILED", basename(filename)))
    else
+      print(string.format("%s: OK", basename(filename)))
       chdir(C.workdir); remove_all(x); mkdir(x); chdir(x)
       os.execute(string.format("tar --strip-components=1 -xf %s", filename))
       setenv("SOURCE_DATE_EPOCH", get_timestamp(filename))
-      print(string.format("%s: OK", basename(filename)))
    end
 
    -- Patch if file exists in patches
