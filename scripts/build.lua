@@ -1,7 +1,7 @@
 #!/usr/bin/env lua
 
-local okpath = "/var/lib/okpkg"
-local pkgdir = "/var/lib/okpkg/packages"
+local okpath = "/usr/okpkg"
+local pkgdir = "/var/cache/packages"
 
 -- Ensure okpkg is installed
 os.execute(string.format("cd %s && make && make install", okpath))

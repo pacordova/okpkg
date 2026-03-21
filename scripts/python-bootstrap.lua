@@ -7,7 +7,8 @@ dofile("/usr/bin/okpkg")
 local ok = require("okutils")
 local unpack = unpack or table.unpack
 local chdir = ok.chdir
-local srcdir = "/var/lib/okpkg/sources"
+local tempdir = "/var/tmp/sources"
+local pkgdir = "/var/cache/packages"
 
 -------------
 -- Cleanup --
@@ -23,7 +24,8 @@ purge("python-packaging")
 purge("python-build")
 purge("python-wheel")
 purge("python-setuptools")
-install("/var/lib/okpkg/packages/py/python3-3.14.0-amd64.tar.lz")
+chdir(pkgdir)
+install("py/python3-3.14.0-amd64.tar.lz")
 
 ---------------
 -- Bootstrap --

@@ -11,6 +11,11 @@ local ok = require("okutils")
 local chdir, setenv, mkdir, basename, symlink =
    ok.chdir, ok.setenv, ok.mkdir, ok.basename, ok.symlink
 
+local okdir   = "/usr/okpkg"
+local dbpath  = "/usr/okpkg/db"
+local distdir = "/var/cache/distfiles"
+local tempdir = "/var/tmp/sources"
+
 B = {
    ["configure"] = function(f, ...)
       local arg = { [0]=f, ... }
@@ -33,7 +38,7 @@ B = {
 function _db_lookup(x)
    local file, buf, i, j
    x = string.format("\n%s = {", x)
-   file = io.popen(string.format("cat %s/*.db", "/var/lib/okpkg/db"))
+   file = io.popen(string.format("cat %s/*.db", dbpath))
    buf = '\n' .. file:read('*a')
    file:close()
    i = buf:find(x, 1, true) or
@@ -45,7 +50,7 @@ end
 
 function _xlook(x)
    local file, buf, i, j
-   file = io.open("/var/lib/okpkg/db/.cross.db")
+   file = io.open(string.format("%s/.cross.db", dbpath))
    buf = '\n' .. file:read('*a')
    file:close()
    i = buf:find(string.format("\n%s = {", x), 1, true)
@@ -57,10 +62,10 @@ end
 function extract(pkgname)
    local t, file, filename
    t = _xlook(pkgname) or _db_lookup(pkgname)
-   filename = string.format("/var/lib/okpkg/download/%s", basename(t.url))
+   filename = string.format("%s/%s", distdir, basename(t.url))
 
    -- Setup the source directory for build.
-   chdir("/var/lib/okpkg/sources")
+   chdir(tempdir)
    os.execute(string.format("rm -fr %s", pkgname))
    mkdir(pkgname)
 
@@ -91,7 +96,7 @@ function emerge(pkgname)
    local t = extract(pkgname)
    t.flags = t.flags or {}
 
-   chdir("/var/lib/okpkg/sources/" .. pkgname)
+   chdir(string.format("%s/%s, tempdir, pkgname)
 
    if t.prepare then os.execute(t.prepare) end
 
@@ -135,11 +140,11 @@ then
 end
 
 -- Base filesystem
-dofile("/var/lib/okpkg/scripts/filesystem.lua")
+dofile(string.format("%s/scripts/filesystem.lua", okdir)
 
--- Build all packages in /var/lib/okpkg/db/.cross.db.
+-- Build all packages in .cross.db.
 local file, buf
-file = io.open("/var/lib/okpkg/db/.cross.db")
+file = io.open(string.format("%s/.cross.db", dbpath))
 buf = '\n' .. file:read('*a')
 file:close()
 for i in buf:gmatch("\n([%w%-%+]-) = {.-;") do emerge(i) end

@@ -6,11 +6,13 @@ local ok = require("okutils")
 
 local chdir, basename = ok.chdir, ok.basename
 
-mymirror = "https://mirrors.kernel.org"
+local dbpath = "/usr/okpkg/db"
+local pkgdir = "/var/cache/packages"
 
 local function curl(path)
+   local mir = "https://mirrors.kernel.org"
    local file, buf
-   file = io.popen(string.format("curl -L %s/%s", mymirror, path))
+   file = io.popen(string.format("curl -L %s/%s", mir, path))
    buf = file:read("*a")
    file:close()
    return buf
@@ -116,7 +118,7 @@ end
 okpkg = {}
 local file, buf
 
-chdir("/var/lib/okpkg/packages")
+chdir(pkgdir)
 file = io.popen("find * -name '*.tar.lz' -exec basename '{}' \\;")
 buf = file:read("*a")
 file:close()
@@ -140,7 +142,8 @@ end
 pkglist = {}
 local file, buf
 
-file = io.popen("cat /var/lib/okpkg/db/*.db")
+chdir(dbpath)
+file = io.popen("cat *.db")
 buf = '\n' .. file:read("*a")
 file:close()
 

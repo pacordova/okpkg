@@ -1,6 +1,6 @@
 #!/bin/sh
 
-cd /var/lib/okpkg/index
+indexdir=/usr/okpkg/index
 
 listlibs(){
     sed 's/^.//' $1 | xargs file | \
@@ -23,7 +23,7 @@ printdeps(){
     done
 }
 
-for i in /var/lib/okpkg/index/*.index; do
+for i in "$indexdir/"*.index; do
   for l in `listlibs $i`; do
     x=`ldd $l 2>/dev/null | grep "not found"`
     if ! test -z "$x" ; then

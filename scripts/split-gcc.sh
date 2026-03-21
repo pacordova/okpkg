@@ -1,14 +1,15 @@
 #!/bin/sh
 
-cd /var/lib/okpkg/packages
-
 target=`gcc -dumpmachine`
 version=`gcc -dumpversion`
+indexdir=/usr/okpkg/index
+pkgdir=/var/cache/packages
 pkgname=$(printf "gcc%s" $version | cut -d . -f 1)
-timestamp=$(stat -c %Y "$pkgname"*.tar.lz)
+timestamp=$(stat -c %Y "$pkgdir/$pkgname"*.tar.lz)
 
-mkdir gcc
-tar -C gcc -xf "$pkgname"*.tar.lz
+mkdir -p "$pkgdir/gcc" && cd "$pkgdir/gcc"
+tar -xf "$pkgdir/$pkgname"*.tar.lz
+cd ..
 
 # gm2 first (includes solibs)
 if [ -f gcc/usr/bin/gm2 ]; then
@@ -147,4 +148,4 @@ mv gcc "gcc-$version-amd64"
 okpkg makepkg "gcc-$version-amd64"
 okpkg install "gcc-$version-amd64.tar.lz"
 rm -f "$pkgname"*.tar.lz
-rm -f "/var/lib/okpkg/index/$pkgname.index"
+rm -f "$indexdir/index/$pkgname.index"

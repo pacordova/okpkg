@@ -11,15 +11,18 @@ chroot, sha3sum = ok.chroot, ok.sha3sum
 local chdir, mkdir, pwd, basename, dirname, setenv, unsetenv  =
    ok.chdir, ok.mkdir, ok.pwd, ok.basename, ok.dirname, ok.setenv, ok.unsetenv
 
+-- TODO: C function or similar
+local function remove_all(x)
+   os.execute("rm -fr " .. x)
+end
+
 -- Configuration
 C = {
-   ["pkgdir"]      = "/var/cache/packages",
-   ["okpkg"]       = "/usr/okpkg",
-   ["okpkg_db"]    = "/usr/okpkg/db",
+   ["okdir"]       = "/usr/okpkg",
    ["distdir"]     = "/var/cache/distfiles",
-   ["tempdir"]     = "/var/tmp/sources",
+   ["pkgdir"]      = "/var/cache/packages",
+   ["workdir"]     = "/var/tmp/sources",
    ["indexdir"]    = "/usr/okpkg/index",
-   ["patchdir"]    = "/usr/okpkg/patches",
    ["config_site"] = "/etc/config.site",
    ["ninja"]       = "/usr/bin/samu",
    ["meson"]       = "/usr/bin/meson",
@@ -168,7 +171,7 @@ end
 function _db_lookup(x)
    local file, buf, i, j
    x = string.format("\n%s = {", x)
-   file = io.popen(string.format("cat %s/*.db", C.okpkg_db))
+   file = io.popen(string.format("cat %s/db/*.db", C.okdir))
    buf = '\n' .. file:read('*a')
    file:close()
    i = buf:find(x, 1, true) or
@@ -187,8 +190,8 @@ function download(x)
    t.url = t.url:gsub("https://cran.r%-project.org", mirrors.cran)
 
    -- Delete old files
-   srcdir = string.format("%s/%s", C.tempdir, x)
-   os.execute(string.format("rm -fr %s", srcdir))
+   srcdir = string.format("%s/%s", C.workdir, x)
+   remove_all(srcdir)
    mkdir(srcdir)
 
    -- Download file if not already downloaded
@@ -212,8 +215,8 @@ function download(x)
       print(string.format("%s: OK", basename(filename)))
    end
 
-   -- Patch if file exists in patchdir
-   filename = string.format("%s/%s.diff", C.patchdir, x:gsub('^_', ''))
+   -- Patch if file exists in patches
+   filename = string.format("%s/patches/%s.diff", C.okdir, x:gsub('^_', ''))
    file = io.open(filename);
    if file then
       file:close()
@@ -270,10 +273,10 @@ function makepkg(path)
 
    -- Cleanup environment
    chdir("..")
-   os.execute(string.format("rm -fr %s", basename(path)))
+   remove_all(basename(path))
    unsetenv("SOURCE_DATE_EPOCH")
 
-   return string.format("%s.tar.lz", path)
+   return path .. ".tar.lz"
 end
 
 function build(x)
@@ -288,7 +291,7 @@ function build(x)
    mkdir(destdir)
 
    -- Setup srcdir
-   srcdir = string.format("%s/%s", C.tempdir, x)
+   srcdir = string.format("%s/%s", C.workdir, x)
    setenv("SOURCE_DATE_EPOCH", get_timestamp(srcdir))
    chdir(srcdir)
 
@@ -324,7 +327,7 @@ function build(x)
    os.execute [[ find $destdir -exec touch -hd "@$SOURCE_DATE_EPOCH" '{}' + ]]
 
    -- Cleanup
-   os.execute[[ rm -fr "$destdir"no ]]
+   remove_all(destdir .. "no")
    unsetenv("destdir")
    unsetenv("SOURCE_DATE_EPOCH")
 

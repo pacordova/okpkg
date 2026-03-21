@@ -4,13 +4,12 @@
 -- Imports --
 -------------
 dofile("/usr/bin/okpkg")
-local dbpath = "/var/lib/okpkg/db/python.db"
 
 ---------------
 -- python.db --
 ---------------
 local fp, buf
-fp = io.open(dbpath)
+fp = io.open(string.format("%s/db/python.db", C.okdir)
 buf = '\n' .. fp:read('*a')
 fp:close()
 for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do 
@@ -29,5 +28,5 @@ local pkgs = {
 }
 for _, v in pairs(pkgs) do 
    purge(v)
-   os.execute(string.format("okpkg install /var/lib/okpkg/packages/*/%s-*.tar.lz", v))
+   os.execute(string.format("okpkg install %s/*/%s-*.tar.lz", C.pkgdir, v))
 end

@@ -1,8 +1,8 @@
 #!/usr/bin/env lua
 
 -- Directories
-local pkgdir = "/var/lib/okpkg/packages/.new"
-local dbpath = "/var/lib/okpkg/db"
+local pkgdir = "/var/cache/packages/.new"
+local dbpath = "/usr/okpkg/db"
 
 -- Imports
 local unpack = unpack or table.unpack
@@ -20,10 +20,9 @@ local function install(pkgname) local fp
    os.execute(string.format("tar -C $destdir -xhf %s", fp:read("*a")))
    fp:close()
    if pkgname == "iputils" then
-      os.execute"setcap cap_net_raw+p $destdir/usr/bin/ping"
+      os.execute("setcap cap_net_raw+p $destdir/usr/bin/ping")
    end
 end
-
 
 -- base package set
 if #arg == 0 then arg = {"base"} end
