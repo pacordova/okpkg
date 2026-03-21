@@ -1,6 +1,6 @@
 autoconf = {
-   url = "https://ftp.gnu.org/gnu/autoconf/autoconf-2.72.tar.xz",
-   sha3 = "58d79b241a66db533747785182df3e49a61c9e5ed7508a002fd5bf033deaf7c8",
+   url = "https://ftp.gnu.org/gnu/autoconf/autoconf-2.73.tar.xz",
+   sha3 = "ecb840ea12c3e2b85cd9855be0537e18aa0073793e3ca82e3845d6372385d9dc",
    build = "./configure",
 };
 

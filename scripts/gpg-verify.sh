@@ -29,7 +29,7 @@ _cksum_signal(){
 
 cd "$tempdir"
 
-_cksum_signal 8.2.1
+_cksum_signal 8.3.0
 #_cksum_gh https://github.com/vim/vim v9.1.1980
 #_cksum_gh https://github.com/vcrhonek/hwdata v0.405
 #_cksum_gh https://github.com/yshui/picom v13
