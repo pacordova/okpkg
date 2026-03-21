@@ -182,17 +182,13 @@ function _db_lookup(x)
 end
 
 function download(x)
-   local t, srcdir, file, filename
+   local t, file, filename
    t = _db_lookup(x)
 
    -- Change mirrors
    t.url = t.url:gsub("https://ftp.gnu.org", mirrors.gnu)
    t.url = t.url:gsub("https://cran.r%-project.org", mirrors.cran)
 
-   -- Delete old files
-   srcdir = string.format("%s/%s", C.workdir, x)
-   remove_all(srcdir)
-   mkdir(srcdir)
 
    -- Download file if not already downloaded
    print(string.format("okpkg download %s:\nurl: '%s'", x, t.url))
@@ -209,7 +205,7 @@ function download(x)
       os.remove(filename)
       error(string.format("%s: FAILED", basename(filename)))
    else
-      chdir(srcdir)
+      chdir(C.workdir); remove_all(x); mkdir(x); chdir(x)
       os.execute(string.format("tar --strip-components=1 -xf %s", filename))
       setenv("SOURCE_DATE_EPOCH", get_timestamp(filename))
       print(string.format("%s: OK", basename(filename)))
@@ -226,6 +222,9 @@ function download(x)
    -- Set the mtime
    os.execute [[ find . -exec touch -hd "@$SOURCE_DATE_EPOCH" '{}' + ]]
 
+   -- Cleanup
+   unsetenv("SOURCE_DATE_EPOCH")
+
    return x
 end
 
@@ -234,6 +233,7 @@ function makepkg(path)
    if chdir(path) ~= 0 then
       error(string.format("error: Path `%s' does not exist", path))
    else
+      setenv("pwd", pwd())
       setenv("SOURCE_DATE_EPOCH", get_timestamp("."))
    end
 
@@ -266,21 +266,22 @@ function makepkg(path)
           --group=0 \
           --numeric-owner \
           --use-compress-program="lzip -f" \
-          --file=$PWD.tar.lz \
+          --file=$pwd.tar.lz \
           --create .
-      touch -hd "@$SOURCE_DATE_EPOCH" $PWD.tar.lz
+      touch -hd "@$SOURCE_DATE_EPOCH" $pwd.tar.lz
    ]]
 
    -- Cleanup environment
    chdir("..")
    remove_all(basename(path))
    unsetenv("SOURCE_DATE_EPOCH")
+   unsetenv("pwd")
 
    return path .. ".tar.lz"
 end
 
 function build(x)
-   local t, v, file, destdir, srcdir
+   local t, v, file, destdir
    t = _db_lookup(x)
    t.flags = t.flags or {}
    v = parse_version(t.url)
@@ -290,10 +291,9 @@ function build(x)
    setenv("destdir", destdir)
    mkdir(destdir)
 
-   -- Setup srcdir
-   srcdir = string.format("%s/%s", C.workdir, x)
-   setenv("SOURCE_DATE_EPOCH", get_timestamp(srcdir))
-   chdir(srcdir)
+   -- Setup workdir
+   chdir(C.workdir); chdir(x)
+   setenv("SOURCE_DATE_EPOCH", get_timestamp("."))
 
    if t.prepare then
       if not os.execute(t.prepare) then
