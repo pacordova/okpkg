@@ -159,7 +159,8 @@ local function parse_version(s)
    local i, j
    s = basename(s)
    j = s:find("%.[debtargz]+")
-   if s:find("^%d") then i = 0
+   if s:find("^%d") then 
+      i = 0
    elseif s:find("[v._-]r?n?%d") then
       i = s:find("[v._-]r?n?%d")
    else
@@ -336,7 +337,7 @@ end
 
 function purge(x)
    local file, filename
-   filename = string.format("%s/%s.index", C.indexdir, x)
+   filename = string.format("%s/%s.txt", C.indexdir, x)
    file = io.open(filename)
    if file then
       for path in file:lines() do
@@ -347,34 +348,23 @@ function purge(x)
    end
 end
 
-function install(path)
-   local version, buf, file, filename
+function install(x)
+   local idx, v, buf, file, filename
 
    -- Extract tarball, save the output buffer
-   file = io.popen(string.format("tar -C / -xvhf %s 2>&1", path))
+   file = io.popen(string.format("tar -C / -xvhf %s 2>&1", x))
    buf = file:read('*a')
    file:close()
 
-   version = parse_version(path)
-   if #version > 0 then
-      filename = string.format(
-         "%s/%s.index",
-         C.indexdir,
-         basename(path:sub(1, #path-#version-8))
-      )
-   else
-      filename = string.format(
-         "%s/%s.index",
-         C.indexdir,
-         basename(path:sub(1, #path-7))
-      )
-   end
+   v = parse_version(x)
+   if #v > 0 then idx = #x-#v-8 else idx = #x-7 end
+   filename = string.format("%s/%s.txt", C.indexdir, basename(x:sub(1, idx)))
 
    -- Save original file to *.orig, use diff to delete old files
    file = io.open(filename)
    if file then
       file:close()
-      os.rename(filename, string.format("%s.orig", filename))
+      os.rename(filename, filename .. ".orig")
    end
 
    -- Write output buffer as a file index
