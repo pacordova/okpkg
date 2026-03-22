@@ -100,13 +100,17 @@ signal-desktop = {
 };
 
 llvm-bin = {
-   url = "https://github.com/llvm/llvm-project/releases/download/llvmorg-19.1.0/LLVM-19.1.0-Linux-X64.tar.xz",
-   sha3 = "dc589f728138402247a983b8b92e857efc2b1abd87ef93396b9bc1946fae5f49",
+   url = "https://github.com/llvm/llvm-project/releases/download/llvmorg-22.1.1/LLVM-22.1.1-Linux-X64.tar.xz",
+   sha3 = "517181eb8a8c55cfe6d3e07d3895fcea566261b6dedd647b1896ae24ddfbf80f",
    build = _,
    post = [[
-      install -d $destdir/usr
-      cp -rp bin include share $destdir/usr/
-      cp -rp lib $destdir/usr/lib64
+     #rm -fr lib/python*
+     #mv -f  lib/python{3.11,3.14}
+     #rm -fr lib/objects-RELEASE
+      mv -fr libexec lib/clang
+      mv -f  lib lib64
+      mkdir -p "$destdir"/usr
+      cp -fr * "$destdir/usr"
    ]]
 };
 

@@ -2,6 +2,7 @@
 
 -- Imports
 local unpack = unpack or table.unpack
+local C, E, M = unpack(loadfile("/etc/okpkg.conf")())
 local ok = require("okutils")
 
 -- Global variables (callable by cli)
@@ -15,32 +16,6 @@ local chdir, mkdir, pwd, basename, dirname, setenv, unsetenv  =
 local function remove_all(x)
    os.execute("rm -fr " .. x)
 end
-
--- Configuration
-C = {
-   ["okdir"]       = "/usr/okpkg",
-   ["distdir"]     = "/var/cache/distfiles",
-   ["pkgdir"]      = "/var/cache/packages",
-   ["workdir"]     = "/var/tmp/sources",
-   ["indexdir"]    = "/usr/okpkg/index",
-   ["config_site"] = "/etc/config.site",
-   ["ninja"]       = "/usr/bin/samu",
-   ["meson"]       = "/usr/bin/meson",
-   ["cflags"] = {
-      "-O2",
-      "-march=x86-64-v2",
-      "-fstack-protector-strong",
-      "-fstack-clash-protection",
-      "-fcommon",
-      "-pipe"
-   },
-   ["jobs"] = 5,
-}
-
-mirrors = {
-   ["gnu"] = "http://mirror.fcix.net",
-   ["cran"] = "https://archive.linux.duke.edu/cran",
-}
 
 -- Build routines
 B = {
@@ -187,9 +162,7 @@ function download(x)
    t = _db_lookup(x)
 
    -- Change mirrors
-   t.url = t.url:gsub("https://ftp.gnu.org", mirrors.gnu)
-   t.url = t.url:gsub("https://cran.r%-project.org", mirrors.cran)
-
+   for k,v in pairs(M) do t.url = t.url:gsub(k, v) end
 
    -- Download file if not already downloaded
    print(string.format("okpkg download %s:\nurl: '%s'", x, t.url))
@@ -380,11 +353,7 @@ function emerge(x)
 end
 
 -- Environment variables
-setenv("LC_ALL", "POSIX")
-setenv("CONFIG_SITE", C.config_site)
-setenv("CFLAGS", table.concat(C.cflags, ' '))
-setenv("CXXFLAGS", table.concat(C.cflags, ' '))
-setenv("MAKEFLAGS", string.format("-j%d", C.jobs))
+for k,v in pairs(E) do setenv(k,v) end
 setenv("ninja", C.ninja)
 setenv("meson", C.meson)
 setenv("patch", "patch -b -p1")
