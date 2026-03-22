@@ -12,9 +12,8 @@ local chdir, setenv, mkdir, basename, symlink =
    ok.chdir, ok.setenv, ok.mkdir, ok.basename, ok.symlink
 
 local okdir   = "/usr/okpkg"
-local dbpath  = "/usr/okpkg/db"
 local distdir = "/var/cache/distfiles"
-local tempdir = "/var/tmp/sources"
+local workdir = "/var/tmp/sources"
 
 B = {
    ["configure"] = function(f, ...)
@@ -38,7 +37,7 @@ B = {
 function _db_lookup(x)
    local file, buf, i, j
    x = string.format("\n%s = {", x)
-   file = io.popen(string.format("cat %s/*.db", dbpath))
+   file = io.popen(string.format("cat %s/db/*.db", okdir))
    buf = '\n' .. file:read('*a')
    file:close()
    i = buf:find(x, 1, true) or
@@ -50,7 +49,7 @@ end
 
 function _xlook(x)
    local file, buf, i, j
-   file = io.open(string.format("%s/.cross.db", dbpath))
+   file = io.open(string.format("%s/db/.cross.db", okdir))
    buf = '\n' .. file:read('*a')
    file:close()
    i = buf:find(string.format("\n%s = {", x), 1, true)
@@ -65,7 +64,7 @@ function extract(pkgname)
    filename = string.format("%s/%s", distdir, basename(t.url))
 
    -- Setup the source directory for build.
-   chdir(tempdir)
+   chdir(workdir)
    os.execute(string.format("rm -fr %s", pkgname))
    mkdir(pkgname)
 
@@ -96,7 +95,7 @@ function emerge(pkgname)
    local t = extract(pkgname)
    t.flags = t.flags or {}
 
-   chdir(string.format("%s/%s, tempdir, pkgname)
+   chdir(workdir); chdir(pkgname)
 
    if t.prepare then os.execute(t.prepare) end
 
@@ -144,7 +143,7 @@ dofile(string.format("%s/scripts/filesystem.lua", okdir)
 
 -- Build all packages in .cross.db.
 local file, buf
-file = io.open(string.format("%s/.cross.db", dbpath))
+file = io.open(string.format("%s/db/.cross.db", okdir))
 buf = '\n' .. file:read('*a')
 file:close()
 for i in buf:gmatch("\n([%w%-%+]-) = {.-;") do emerge(i) end

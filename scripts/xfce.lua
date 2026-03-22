@@ -1,13 +1,11 @@
 #!/usr/bin/env lua
 
 -- Paths
-local okpath = "/usr/okpkg"
-local dbpath = "/usr/okpkg/db"
+local okdir = "/usr/okpkg"
 local pkgdir = "/var/cache/packages"
-local tempdir = "/var/tmp/sources"
 
 -- Ensure okpkg is installed
-os.execute(string.format("cd %s && make && make install", okpath))
+os.execute(string.format("cd %s && make && make install", okdir))
 
 -- Imports
 dofile("/usr/bin/okpkg")
@@ -39,7 +37,7 @@ local dirs = {
 -- Builds and installs all packages in a single db file
 local function build_all(x)
    local fp, buf
-   fp = io.open(string.format("%s/%s", dbpath, x))
+   fp = io.open(string.format("%s/db/%s", okdir, x))
    buf = '\n' .. fp:read('*a')
    fp:close()
    for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do emerge(i)

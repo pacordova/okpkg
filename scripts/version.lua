@@ -6,7 +6,7 @@ local ok = require("okutils")
 
 local chdir, basename = ok.chdir, ok.basename
 
-local dbpath = "/usr/okpkg/db"
+local okdir = "/usr/okpkg"
 local pkgdir = "/var/cache/packages"
 
 local function curl(path)
@@ -142,8 +142,8 @@ end
 pkglist = {}
 local file, buf
 
-chdir(dbpath)
-file = io.popen("cat *.db")
+chdir(okdir)
+file = io.popen("cat db/*.db")
 buf = '\n' .. file:read("*a")
 file:close()
 

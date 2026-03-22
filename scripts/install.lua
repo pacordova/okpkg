@@ -2,7 +2,7 @@
 
 -- Directories
 local pkgdir = "/var/cache/packages/.new"
-local dbpath = "/usr/okpkg/db"
+local okdir = "/usr/okpkg"
 
 -- Imports
 local unpack = unpack or table.unpack
@@ -12,7 +12,7 @@ local chdir, setenv, mkdir =
 
 -- Environment
 setenv("destdir", "/mnt")
-chdir(dbpath)
+chdir(okdir)
 
 local function install(pkgname) local fp
    chdir(pkgdir)
@@ -28,7 +28,7 @@ end
 if #arg == 0 then arg = {"base"} end
 base = { "linux-lts" }
 local fp, buf
-fp = io.open("base.db")
+fp = io.open("db/base.db")
 buf = '\n' .. fp:read("*a")
 fp:close()
 for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do
@@ -43,7 +43,7 @@ end
 -- devel package set
 devel = {}
 local fp, buf
-fp = io.open("devel.db")
+fp = io.open("db/devel.db")
 buf = '\n' .. fp:read("*a")
 fp:close()
 for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do
@@ -53,7 +53,7 @@ end
 -- extra libraries
 library = {}
 local fp, buf
-fp = io.open("lib.db")
+fp = io.open("db/lib.db")
 buf = '\n' .. fp:read("*a")
 fp:close()
 for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do
@@ -63,7 +63,7 @@ end
 -- network package set
 network = {}
 local fp, buf
-fp = io.open("net.db")
+fp = io.open("db/net.db")
 buf = '\n' .. fp:read("*a")
 fp:close()
 for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do
