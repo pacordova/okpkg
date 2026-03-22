@@ -275,7 +275,7 @@ file:close()
 file = io.open("usr/bin/c99", 'w')
 file:write([[
 #!/bin/sh
-exec /usr/bin/gcc -std=gnu99 "$@"
+exec /usr/bin/gcc -std=c99 "$@"
 ]])
 file:close()
 os.execute("chmod 755 usr/bin/c99")
