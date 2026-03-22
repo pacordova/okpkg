@@ -398,6 +398,16 @@ libressl = {
    }
 };
 
+pkgconf = {
+   url = _db_lookup("pkgconf")["url"],
+   build = "./configure",
+   flags = {
+      "--host=x86_64-unknown-linux-gnu",
+      "--build=$(./config.guess)",
+   },
+   post = [[ ln -sf pkgconf $destdir/usr/bin/pkg-config ]]
+};
+
 binutils-pass2 = {
    url = _db_lookup("binutils")["url"],
    build = "../configure",
