@@ -16,8 +16,8 @@ local chdir, mkdir, pwd, basename, dirname, setenv, unsetenv  =
 for k,v in pairs(E) do setenv(k,v) end
 
 -- TODO: C function or similar
-function remove_all(x) 
-   os.execute("rm -fr " .. x) 
+local function remove_all(x)
+   os.execute("rm -fr " .. x)
 end
 
 -- Build routines
