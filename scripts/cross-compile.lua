@@ -34,7 +34,7 @@ B = {
 function _db_lookup(x)
    local file, buf, i, j
    x = string.format("\n%s = {", x)
-   file = io.popen(string.format("cat %s/db/*.db", C["okdir"]))
+   file = io.popen(string.format("cat %s/db/*", C["okdir"]))
    buf = '\n' .. file:read('*a')
    file:close()
    i = buf:find(x, 1, true) or
@@ -46,7 +46,7 @@ end
 
 function _xlook(x)
    local file, buf, i, j
-   file = io.open(string.format("%s/db/.cross.db", C["okdir"]))
+   file = io.open(string.format("%s/db/.cross", C["okdir"]))
    buf = '\n' .. file:read('*a')
    file:close()
    i = buf:find(string.format("\n%s = {", x), 1, true)
@@ -138,9 +138,9 @@ end
 -- Base filesystem
 dofile(string.format("%s/scripts/filesystem.lua", C["okdir"])
 
--- Build all packages in .cross.db.
+-- Build all packages in db/.cross
 local file, buf
-file = io.open(string.format("%s/db/.cross.db", C["okdir"]))
+file = io.open(string.format("%s/db/.cross", C["okdir"]))
 buf = '\n' .. file:read('*a')
 file:close()
 for i in buf:gmatch("\n([%w%-%+]-) = {.-;") do emerge(i) end

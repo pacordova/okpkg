@@ -1,4 +1,4 @@
--- okpkg Configuration
+-- /etc/okpkg: okpkg configuration
 
 local C, E, M
 
@@ -11,7 +11,7 @@ C = {
    ["pkgdir"]      = "/var/cache/ok/pkg",
    ["indexdir"]    = "/usr/okpkg/index",
    ["config_site"] = "/etc/config.site",
-   ["whoami"]      = "pac",
+   ["login"]       = "pac",
    ["tz"]          = "US/Eastern",
    ["ninja"]       = "/usr/bin/samu",
    ["meson"]       = "/usr/bin/meson",

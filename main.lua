@@ -2,11 +2,11 @@
 
 -- Imports
 local unpack = unpack or table.unpack
-local C, E, M = unpack(loadfile("/etc/okpkg.conf")())
 local ok = require("okutils")
 
 -- Global variables (callable by cli)
 chroot, sha3sum = ok.chroot, ok.sha3sum
+local C, E, M = unpack(loadfile("/etc/okpkg.conf")())
 
 -- Local variables
 local chdir, mkdir, pwd, basename, dirname, setenv, unsetenv  =
@@ -150,7 +150,7 @@ end
 function _db_lookup(x)
    local file, buf, i, j
    x = string.format("\n%s = {", x)
-   file = io.popen(string.format("cat %s/db/*.db", C["okdir"]))
+   file = io.popen(string.format("cat %s/db/*", C["okdir"]))
    buf = '\n' .. file:read('*a')
    file:close()
    i = buf:find(x, 1, true) or

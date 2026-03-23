@@ -41,19 +41,19 @@ setenv("destdir", "/")
 dofile(string.format("%s/scripts/install.lua", C["okdir"]))
 unsetenv("destdir")
 
-build_all("python.db")
-build_all("perl.db")
+build_all("python")
+build_all("perl")
 emerge("libxml2") -- itstool needs libxml2
-build_all("devel.db")
-build_all("libs.db")
-build_all("net.db")
-build_all("gnupg.db")
-build_all("fonts.db")
-build_all("xorg.db")
-build_all("gtk.db")
-build_all("xfce.db")
-build_all("video.db")
-build_all("flatpak.db")
+build_all("devel")
+build_all("libs")
+build_all("net")
+build_all("gnupg")
+build_all("fonts")
+build_all("xorg")
+build_all("gtk")
+build_all("xfce")
+build_all("video")
+build_all("flatpak")
 
 -- Rebuilds
 emerge("dbus")
@@ -89,6 +89,10 @@ fp:write [[
 fp:close()
 os.execute("chmod 755 /usr/bin/firefox")
 
+-- You may want to edit these to your own timezone/user
+symlink("/usr/share/zoneinfo/" .. C["tz"], "/etc/localtime")
+os.execute("useradd -m -G audio,input,video,wheel " .. C["login"])
+
 -- Cleanup
 chdir(C["outdir"])
 os.rename("sqlite-3460100-amd64.tar.lz", "sqlite-3.46.1-amd64.tar.lz")
@@ -99,7 +103,3 @@ os.rename("libuv-1.49.2-dist-amd64.tar.lz", "libuv-1.49.2-amd64.tar.lz")
 os.rename("libinih-r58-amd64.tar.lz", "libinih-58-amd64.tar.lz")
 os.rename("nv-codec-headers-n12.2.72.0-amd64.tar.lz", "nv-codec-headers-12.2.72.0-amd64.tar.lz")
 os.execute("rm -f _*.tar.lz")
-
--- You may want to edit these to your own timezone/user
-symlink("/usr/share/zoneinfo/" .. C["tz"], "/etc/localtime")
-os.execute("useradd -m -G audio,input,video,wheel " .. C["whoami"])

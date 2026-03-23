@@ -27,7 +27,7 @@ end
 if #arg == 0 then arg = {"base"} end
 base = { "linux-lts" }
 local fp, buf
-fp = io.open("db/base.db")
+fp = io.open("db/base")
 buf = '\n' .. fp:read("*a")
 fp:close()
 for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do
@@ -42,7 +42,7 @@ end
 -- devel package set
 devel = {}
 local fp, buf
-fp = io.open("db/devel.db")
+fp = io.open("db/devel")
 buf = '\n' .. fp:read("*a")
 fp:close()
 for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do
@@ -52,7 +52,7 @@ end
 -- extra libraries
 library = {}
 local fp, buf
-fp = io.open("db/lib.db")
+fp = io.open("db/lib")
 buf = '\n' .. fp:read("*a")
 fp:close()
 for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do
@@ -62,7 +62,7 @@ end
 -- network package set
 network = {}
 local fp, buf
-fp = io.open("db/net.db")
+fp = io.open("db/net")
 buf = '\n' .. fp:read("*a")
 fp:close()
 for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do
