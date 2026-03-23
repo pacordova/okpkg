@@ -5,11 +5,14 @@ local C, E, M
 -- Main Configuration
 C = {
    ["okdir"]       = "/usr/okpkg",
-   ["distdir"]     = "/var/cache/distfiles",
-   ["pkgdir"]      = "/var/cache/packages",
-   ["workdir"]     = "/var/tmp/sources",
+   ["distdir"]     = "/var/cache/ok/dist",
+   ["workdir"]     = "/var/cache/ok/src",
+   ["outdir"]      = "/var/cache/ok/out",
+   ["pkgdir"]      = "/var/cache/ok/pkg",
    ["indexdir"]    = "/usr/okpkg/index",
    ["config_site"] = "/etc/config.site",
+   ["whoami"]      = "pac",
+   ["tz"]          = "US/Eastern",
    ["ninja"]       = "/usr/bin/samu",
    ["meson"]       = "/usr/bin/meson",
    ["cflags"] = {
@@ -37,6 +40,9 @@ E = {
    ["CFLAGS"]      = table.concat(C.cflags, ' '),
    ["CXXFLAGS"]    = table.concat(C.cflags, ' '),
    ["MAKEFLAGS"]   = "-j5",
+   ["ninja"]       = C.ninja,
+   ["meson"]       = C.meson,
+   ["patch"]       = "patch -b -p1",
 }
 
 return {C, E, M}

@@ -1,25 +1,24 @@
 #!/usr/bin/env lua
 
--- Directories
-local pkgdir = "/var/cache/packages/.new"
-local okdir = "/usr/okpkg"
-
 -- Imports
 local unpack = unpack or table.unpack
 local ok = require("okutils")
+local C = unpack(loadfile("/etc/okpkg.conf")())
 local chdir, setenv, mkdir =
    ok.chdir, ok.setenv, ok.mkdir
 
--- Environment
-setenv("destdir", "/mnt")
-chdir(okdir)
+-- Directories (custom)
+local pkgdir = "/var/cache/ok/pkg.new"
 
-local function install(pkgname) local fp
+-- Environment
+if not os.getenv("destdir") then setenv("destdir", "/mnt") end
+
+local function install(x) local fp
    chdir(pkgdir)
-   fp = io.popen(string.format("find * -name '%s-*.tar.lz' | head -1", pkgname))
+   local fp = io.popen(string.format("find * -name '%s-*.tar.lz' | head -1", x))
    os.execute(string.format("tar -C $destdir -xhf %s", fp:read("*a")))
    fp:close()
-   if pkgname == "iputils" then
+   if x == "iputils" then
       os.execute("setcap cap_net_raw+p $destdir/usr/bin/ping")
    end
 end
@@ -87,7 +86,7 @@ posix = { "dma", "at", "s-nail", "lprng", "pax" }
 io.write("Please enter a partition to format: ")
 local partition = io.read()
 local status =
-   os.execute"umount -R -f -q $destdir || ! mountpoint -q $destdir" and
+   os.execute("umount -R -f -q $destdir || ! mountpoint -q $destdir") and
    os.execute(string.format("mkfs.ext4 '%s'", partition)) and
    os.execute(string.format("mount '%s' $destdir", partition))
 if not status then error("error during reformat!") end

@@ -4,16 +4,13 @@
 -- It follows LFS closely, but not exactly.
 -- https://www.linuxfromscratch.org/lfs/view/stable/index.html
 
+-- Imports
 local unpack = unpack or table.unpack
-
 local ok = require("okutils")
-
+local C = unpack(loadfile("/etc/okpkg.conf")())
 local chdir, setenv, mkdir, basename, symlink =
    ok.chdir, ok.setenv, ok.mkdir, ok.basename, ok.symlink
 
-local okdir   = "/usr/okpkg"
-local distdir = "/var/cache/distfiles"
-local workdir = "/var/tmp/sources"
 
 B = {
    ["configure"] = function(f, ...)
@@ -37,7 +34,7 @@ B = {
 function _db_lookup(x)
    local file, buf, i, j
    x = string.format("\n%s = {", x)
-   file = io.popen(string.format("cat %s/db/*.db", okdir))
+   file = io.popen(string.format("cat %s/db/*.db", C["okdir"]))
    buf = '\n' .. file:read('*a')
    file:close()
    i = buf:find(x, 1, true) or
@@ -49,7 +46,7 @@ end
 
 function _xlook(x)
    local file, buf, i, j
-   file = io.open(string.format("%s/db/.cross.db", okdir))
+   file = io.open(string.format("%s/db/.cross.db", C["okdir"]))
    buf = '\n' .. file:read('*a')
    file:close()
    i = buf:find(string.format("\n%s = {", x), 1, true)
@@ -61,10 +58,10 @@ end
 function extract(pkgname)
    local t, file, filename
    t = _xlook(pkgname) or _db_lookup(pkgname)
-   filename = string.format("%s/%s", distdir, basename(t.url))
+   filename = string.format("%s/%s", C["distdir"], basename(t.url))
 
    -- Setup the source directory for build.
-   chdir(workdir)
+   chdir(C["workdir"])
    os.execute(string.format("rm -fr %s", pkgname))
    mkdir(pkgname)
 
@@ -95,7 +92,7 @@ function emerge(pkgname)
    local t = extract(pkgname)
    t.flags = t.flags or {}
 
-   chdir(workdir); chdir(pkgname)
+   chdir(C["workdir"]); chdir(pkgname)
 
    if t.prepare then os.execute(t.prepare) end
 
@@ -139,11 +136,11 @@ then
 end
 
 -- Base filesystem
-dofile(string.format("%s/scripts/filesystem.lua", okdir)
+dofile(string.format("%s/scripts/filesystem.lua", C["okdir"])
 
 -- Build all packages in .cross.db.
 local file, buf
-file = io.open(string.format("%s/db/.cross.db", okdir))
+file = io.open(string.format("%s/db/.cross.db", C["okdir"]))
 buf = '\n' .. file:read('*a')
 file:close()
 for i in buf:gmatch("\n([%w%-%+]-) = {.-;") do emerge(i) end

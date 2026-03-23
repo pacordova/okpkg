@@ -12,9 +12,12 @@ chroot, sha3sum = ok.chroot, ok.sha3sum
 local chdir, mkdir, pwd, basename, dirname, setenv, unsetenv  =
    ok.chdir, ok.mkdir, ok.pwd, ok.basename, ok.dirname, ok.setenv, ok.unsetenv
 
+-- Environment variables
+for k,v in pairs(E) do setenv(k,v) end
+
 -- TODO: C function or similar
-local function remove_all(x)
-   os.execute("rm -fr " .. x)
+function remove_all(x) 
+   os.execute("rm -fr " .. x) 
 end
 
 -- Build routines
@@ -147,7 +150,7 @@ end
 function _db_lookup(x)
    local file, buf, i, j
    x = string.format("\n%s = {", x)
-   file = io.popen(string.format("cat %s/db/*.db", C.okdir))
+   file = io.popen(string.format("cat %s/db/*.db", C["okdir"]))
    buf = '\n' .. file:read('*a')
    file:close()
    i = buf:find(x, 1, true) or
@@ -186,7 +189,7 @@ function download(x)
    end
 
    -- Patch if file exists in patches
-   filename = string.format("%s/patches/%s.diff", C.okdir, x:gsub('^_', ''))
+   filename = string.format("%s/patches/%s.diff", C["okdir"], x:gsub('^_', ''))
    file = io.open(filename);
    if file then
       file:close()
@@ -261,7 +264,7 @@ function build(x)
    v = parse_version(t.url)
 
    -- Setup destdir
-   destdir = string.format("%s/%s-%s-amd64", C.pkgdir, x, v)
+   destdir = string.format("%s/%s-%s-amd64", C["outdir"], x, v)
    setenv("destdir", destdir)
    mkdir(destdir)
 
@@ -351,12 +354,6 @@ end
 function emerge(x)
    install(build(download(x)))
 end
-
--- Environment variables
-for k,v in pairs(E) do setenv(k,v) end
-setenv("ninja", C.ninja)
-setenv("meson", C.meson)
-setenv("patch", "patch -b -p1")
 
 -- Main loop over arglist
 while #arg > 1 do

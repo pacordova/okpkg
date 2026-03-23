@@ -2,12 +2,12 @@
 
 local unpack = unpack or table.unpack
 
+local C = unpack(loadfile("/etc/okpkg.conf")())
+
 local ok = require("okutils")
 
 local chdir, basename = ok.chdir, ok.basename
 
-local okdir = "/usr/okpkg"
-local pkgdir = "/var/cache/packages"
 
 local function curl(path)
    local mir = "https://mirrors.kernel.org"
@@ -118,7 +118,7 @@ end
 okpkg = {}
 local file, buf
 
-chdir(pkgdir)
+chdir(C["pkgdir"])
 file = io.popen("find * -name '*.tar.lz' -exec basename '{}' \\;")
 buf = file:read("*a")
 file:close()
@@ -142,7 +142,7 @@ end
 pkglist = {}
 local file, buf
 
-chdir(okdir)
+chdir(C["okdir"])
 file = io.popen("cat db/*.db")
 buf = '\n' .. file:read("*a")
 file:close()

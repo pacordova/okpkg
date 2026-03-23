@@ -1,14 +1,14 @@
 #!/bin/sh
 
+indexdir=/usr/okpkg/index
+outdir=/var/cache/ok/out
 target=`gcc -dumpmachine`
 version=`gcc -dumpversion`
-indexdir=/usr/okpkg/index
-pkgdir=/var/cache/packages
-pkgname=$(printf "gcc%s" $version | cut -d . -f 1)
-timestamp=$(stat -c %Y "$pkgdir/$pkgname"*.tar.lz)
+pkgname="gcc${version%%.*}"
+timestamp=$(stat -c %Y "$outdir/$pkgname"*.tar.lz)
 
-mkdir -p "$pkgdir/gcc" && cd "$pkgdir/gcc"
-tar -xf "$pkgdir/$pkgname"*.tar.lz
+mkdir -p "$outdir/gcc" && cd "$outdir/gcc"
+tar -xf "$outdir/$pkgname"*.tar.lz
 cd ..
 
 # gm2 first (includes solibs)

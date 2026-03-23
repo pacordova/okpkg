@@ -1,16 +1,11 @@
-$(shell mkdir -p index)
+prefix     = /usr
+sysconfdir = /etc
+bindir     = $(prefix)/bin
+libdir     = `lua -e "print(package.cpath:match('(.-)/%?.so;'))"`
 
-prefix     := /usr
-sysconfdir := /etc
-bindir     := $(prefix)/bin
-libdir     := $(shell lua -e "print(package.cpath:match('(.-)/%?.so;'))")
-
-CC      := /usr/bin/gcc -std=gnu99
-CFLAGS  := -O2 -fpic -shared -pipe 
-CFLAGS  += $(shell pkgconf --cflags lua)
-LDFLAGS := $(shell pkgconf --libs libcrypto)
-
-all: okutils.so
+CC      = /usr/bin/gcc -std=gnu99
+CFLAGS  = -O2 -fpic -shared -pipe `pkgconf --cflags lua`
+LDFLAGS = `pkgconf --libs libcrypto`
 
 okutils.so: okutils.c
 	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
@@ -20,7 +15,8 @@ install: okutils.so
 	mkdir -p $(DESTDIR){$(bindir),$(libdir)}
 	mv -f okutils.so $(DESTDIR)$(libdir)
 	cp -f main.lua   $(DESTDIR)$(bindir)/okpkg
-	cp -f okpkg.conf $(DESTDIR)$(sysconfdir)
+	cp -f config.lua $(DESTDIR)$(sysconfdir)/okpkg.conf
+	lua init.lua
 
 uninstall: clean
 	rm -f $(DESTDIR)$(prefix)/bin/okpkg
