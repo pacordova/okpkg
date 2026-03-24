@@ -3,20 +3,25 @@ sysconfdir = /etc
 bindir     = $(prefix)/bin
 
 CC = /usr/bin/gcc -std=gnu99
+CXX = /usr/bin/g++
 CFLAGS = -O2
 LDFLAGS = -lcrypto
 LUA_CPATH != lua -e "print(package.cpath:match('(.-)/%?.so;'))"
 
 objs = src/basename.o src/chdir.o src/chroot.o src/mkdir.o src/okutils.o \
-       src/pwd.o src/setenv.o src/sha3sum.o src/symlink.o
+       src/pwd.o src/setenv.o src/sha3sum.o src/symlink.o src/remove_all.o
        
 
 src/okutils.so: $(objs)
-	$(CC) $(CFLAGS) -shared -o $@ src/*.o $(LDFLAGS)
+	$(CXX) $(CFLAGS) -shared -o $@ src/*.o $(LDFLAGS)
 
 .SUFFIXES: .c .o
 .c.o:
 	$(CC) $(CFLAGS) -fpic -o $@ -c $<
+
+.SUFFIXES: .cc .o
+.cc.o:
+	$(CXX) $(CFLAGS) -fpic -o $@ -c $<
 
 install: install-strip
 install-strip: src/okutils.so
