@@ -30,8 +30,7 @@ ok_chroot(lua_State *L)
 		fprintf(stderr, "error: chroot: mount\n");
 		lua_pushinteger(L, -1);
 		return 1;
-	}
-	else {
+	} else {
 		/* env */
 		clearenv();
 		setenv("PATH", "/usr/bin:/usr/sbin", 1);
@@ -47,8 +46,7 @@ ok_chroot(lua_State *L)
 		fprintf(stderr, "error: chroot: execvp\n");
 		lua_pushinteger(L, -1);
 		return 1;
-	}
-	else {
+	} else {
 		lua_pushinteger(L, 0);
 		return 1;
 	}
