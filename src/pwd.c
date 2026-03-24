@@ -1,4 +1,4 @@
-#include <lauxlib.h>
+#include <lua.h>
 #include <unistd.h>
 #include <linux/limits.h>
 
