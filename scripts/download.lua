@@ -1,35 +1,37 @@
 #!/usr/bin/env lua
 
-local ok = require("okutils")
-local chdir, mkdir = ok.chdir, ok.mkdir
-local srcpath = "/var/lib/okpkg/sources"
-
 dofile("/usr/bin/okpkg")
 
-local function download_all(db)
+local unpack = unpack or table.unpack
+local C = unpack(loadfile("/etc/okpkg.conf")())
+local ok = require("okutils")
+local chdir, mkdir, remove_all = 
+   ok.chdir, ok.mkdir, ok.remove_all
+
+local function download_all(x)
    local fp, buf
-   fp = io.open(string.format("%s/db/%s", C.okdir, db))
+   fp = io.open(string.format("%s/db/%s", C["okdir"], x))
    buf = '\n'..fp:read("*a")
    fp:close()
    for i in buf:gmatch("\n([%w%-%+]-) = {.-;") do
       download(i)
-      chdir(C.workdir)
-      os.execute(string.format("rm -fr %s/%s", C.workdir, i))
+      chdir(C["workdir"])
+      remove_all(i)
    end
 end
 
-remove_all(C.workdir)
-mkdir(C.workdir)
+remove_all(C["workdir"])
+mkdir(C["workdir"])
 
-download_all("base.db")
-download_all("python.db")
-download_all("perl.db")
-download_all("devel.db")
-download_all("lib.db")
-download_all("net.db")
-download_all("fonts.db")
-download_all("xorg.db")
-download_all("gtk.db")
-download_all("xfce.db")
-download_all("video.db")
-download_all("flatpak.db")
+download_all("base")
+download_all("python")
+download_all("perl")
+download_all("devel")
+download_all("lib")
+download_all("net")
+download_all("fonts")
+download_all("xorg")
+download_all("gtk")
+download_all("xfce")
+download_all("video")
+download_all("flatpak")

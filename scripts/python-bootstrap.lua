@@ -1,9 +1,12 @@
 #!/usr/bin/env lua
 
+dofile("/usr/bin/okpkg")
+
 -- Imports 
 local unpack = unpack or table.unpack
 local C = unpack(loadfile("/etc/okpkg.conf")())
-dofile("/usr/bin/okpkg")
+local ok = require("okutils")
+local remove_all = ok.remove_all
 
 -- Cleanup
 remove_all("/usr/lib64/python3.14")

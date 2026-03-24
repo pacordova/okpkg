@@ -1,24 +1,25 @@
 #!/usr/bin/env lua
 
--- Imports
-local unpack = unpack or table.unpack
+unpack = unpack or table.unpack
+
+local C, E, M = dofile("/etc/okpkg.conf")
+
 local ok = require("okutils")
 
 -- Global variables (callable by cli)
 chroot, sha3sum = ok.chroot, ok.sha3sum
-local C, E, M = unpack(loadfile("/etc/okpkg.conf")())
 
 -- Local variables
-local chdir, mkdir, pwd, basename, dirname, setenv, unsetenv  =
-   ok.chdir, ok.mkdir, ok.pwd, ok.basename, ok.dirname, ok.setenv, ok.unsetenv
+local chdir, mkdir, setenv, unsetenv  =
+   ok.chdir, ok.mkdir, ok.setenv, ok.unsetenv
+
+local pwd = ok.pwd
+local remove_all = ok.remove_all
+
 
 -- Environment variables
-for k,v in pairs(E) do setenv(k,v) end
+for k,v in pairs(E) do ok.setenv(k,v) end
 
--- TODO: C function or similar
-local function remove_all(x)
-   os.execute("rm -fr " .. x)
-end
 
 -- Build routines
 B = {
@@ -125,9 +126,9 @@ B = {
    end,
 }
 
-local function get_timestamp(filename)
+local function get_timestamp(x)
    local file, buf
-   file = io.popen("stat -c '%Y' " .. filename)
+   file = io.popen(string.format("stat -c '%Y' %s", x)
    buf = file:read('*a')
    file:close()
    return(tonumber(buf:sub(1, buf:find('\n')-1)))
@@ -135,7 +136,7 @@ end
 
 local function parse_version(s)
    local i, j
-   s = basename(s)
+   s = ok.basename(s)
    j = s:find("%.[debtargz]+")
    if s:find("^%d") then 
       i = 0
@@ -161,7 +162,7 @@ function _db_lookup(x)
 end
 
 function download(x)
-   local t, file, filename
+   local t, fp
    t = _db_lookup(x)
 
    -- Change mirrors
@@ -169,7 +170,7 @@ function download(x)
 
    -- Download file if not already downloaded
    print(string.format("okpkg download %s:\nurl: '%s'", x, t.url))
-   filename = string.format("%s/%s", C.distdir, basename(t.url))
+   filename = string.format("%s/%s", C.distdir, ok.basename(t.url))
    file = io.open(filename)
    if file then
       file:close()
@@ -180,12 +181,15 @@ function download(x)
    -- Verify checksum
    if t.sha3 ~= sha3sum(filename) then
       os.remove(filename)
-      error(string.format("%s: FAILED", basename(filename)))
+      error(string.format("%s: FAILED", ok.basename(filename)))
    else
-      print(string.format("%s: OK", basename(filename)))
-      chdir(C.workdir); remove_all(x); mkdir(x); chdir(x)
+      print(string.format("%s: OK", ok.basename(filename)))
+      ok.chdir(C.workdir)
+      ok.remove_all(x)
+      ok.mkdir(x)
+      ok.chdir(x)
       os.execute(string.format("tar --strip-components=1 -xf %s", filename))
-      setenv("SOURCE_DATE_EPOCH", get_timestamp(filename))
+      ok.setenv("SOURCE_DATE_EPOCH", get_timestamp(filename))
    end
 
    -- Patch if file exists in patches
@@ -200,7 +204,7 @@ function download(x)
    os.execute [[ find . -exec touch -hd "@$SOURCE_DATE_EPOCH" '{}' + ]]
 
    -- Cleanup
-   unsetenv("SOURCE_DATE_EPOCH")
+   ok.unsetenv("SOURCE_DATE_EPOCH")
 
    return x
 end
@@ -210,8 +214,8 @@ function makepkg(path)
    if chdir(path) ~= 0 then
       error(string.format("error: Path `%s' does not exist", path))
    else
-      setenv("pwd", pwd())
-      setenv("SOURCE_DATE_EPOCH", get_timestamp("."))
+      ok.setenv("pwd", pwd())
+      ok.setenv("SOURCE_DATE_EPOCH", get_timestamp("."))
    end
 
    -- Stripping
@@ -250,9 +254,9 @@ function makepkg(path)
 
    -- Cleanup environment
    chdir("..")
-   remove_all(basename(path))
-   unsetenv("SOURCE_DATE_EPOCH")
-   unsetenv("pwd")
+   ok.remove_all(ok.basename(path))
+   ok.unsetenv("SOURCE_DATE_EPOCH")
+   ok.unsetenv("pwd")
 
    return path .. ".tar.lz"
 end
@@ -264,9 +268,9 @@ function build(x)
    v = parse_version(t.url)
 
    -- Setup destdir
-   destdir = string.format("%s/%s-%s-amd64", C["outdir"], x, v)
-   setenv("destdir", destdir)
-   mkdir(destdir)
+   destdir = string.format("%s/%s-%s-amd64", C["outdir"], x, C["arch"])
+   ok.setenv("destdir", destdir)
+   ok.mkdir(destdir)
 
    -- Setup workdir
    chdir(C.workdir); chdir(x)
@@ -334,7 +338,7 @@ function install(x)
 
    v = parse_version(x)
    if #v > 0 then idx = #x-#v-8 else idx = #x-7 end
-   filename = string.format("%s/%s.txt", C.indexdir, basename(x:sub(1, idx)))
+   filename = string.format("%s/%s.txt", C.indexdir, ok.basename(x:sub(1, idx)))
 
    -- Save original file to *.orig, use diff to delete old files
    file = io.open(filename)

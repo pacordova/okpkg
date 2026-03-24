@@ -1,34 +1,46 @@
 #!/usr/bin/env lua
 
--- Ensure okpkg is installed
-os.execute("make -C /usr/okpkg install")
+-- Bootstrap
+os.execute(("make -C %s install"):format(arg[0]:match("(.*)/.-/.-") or ".."))
 
-local unpack = unpack or table.unpack
-local C = unpack(loadfile("/etc/okpkg.conf")())
+unpack = unpack or table.unpack
+
+-- can replace basename.c
+function basename(x) return x:match(".*/(.-)$") or x end
+function dirname(x) return x:match("(.*)/.-") or "." end
+
+-- Imports
 local ok = require("okutils")
-local chdir, mkdir, symlink =
-   ok.chdir, ok.mkdir, ok.symlink
+local C = dofile("/etc/okpkg.conf")
+dofile("/usr/bin/okpkg")
 
-function remove_all(x) 
-   os.execute("rm -fr " .. x) 
-end
+
+-- Config
+local sysconfdir = "/etc"
+local tzpath = "/usr/share/zoneinfo"
+local tz = "US/Eastern"
+local usr = { 
+   name = "pac", 
+   groups = { "audio", "input", "video", "wheel" } 
+}
+
 
 -- Builds and installs all packages in a single db file
 local function build_all(x)
    local fp, buf
-   fp = io.open(string.format("%s/db/%s", C["okdir"], x))
-   buf = '\n' .. fp:read('*a')
+   fp = io.open(string.format("%s/db/%s", root, x))
+   buf = fp:read('*a')
    fp:close()
-   for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do 
+   for i in buf:gmatch("\n?([%w%-_]*)%s*=%s*{.-}%s*;") do
+      emerge(i)
       if i == "librsvg" or 
          i == "gdk-pixbuf2" 
       then
-         emerge(i); os.execute("gdk-pixbuf-query-loaders --update-cache");
-      else 
-         emerge(i);
+         os.execute("gdk-pixbuf-query-loaders --update-cache")
       end
    end
-   remove_all(C["workdir"]); mkdir(C["workdir"]);
+   ok.remove_all(C["workdir"])
+   ok.mkdir(C["workdir"])
 end
 
 -- Generate locales
@@ -89,12 +101,14 @@ fp:write [[
 fp:close()
 os.execute("chmod 755 /usr/bin/firefox")
 
--- You may want to edit these to your own timezone/user
-symlink("/usr/share/zoneinfo/" .. C["tz"], "/etc/localtime")
-os.execute("useradd -m -G audio,input,video,wheel " .. C["login"])
+-- tz
+ok.symlink(("%s/%s"):format(tzpath, tz), ("%s/timezone"):format(sysconfdir))
+
+-- useradd
+os.execute("useradd -m -G audio,input,video,wheel " .. sys.usr)
 
 -- Cleanup
-chdir(C["outdir"])
+ok.chdir(C["outdir"])
 os.rename("sqlite-3460100-amd64.tar.lz", "sqlite-3.46.1-amd64.tar.lz")
 os.rename("rust-bin-1.82.0-x86_64-unknown-linux-gnu-amd64.tar.lz", "rust-bin-1.82.0-amd64.tar.lz")
 os.rename("x264-31e19f92f00c7003fa115047ce50978bc98c3a0d-amd64.tar.lz", "x264-20231001-amd64.tar.lz")
