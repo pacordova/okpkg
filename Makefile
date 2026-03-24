@@ -13,15 +13,16 @@ objs = src/basename.o src/chdir.o src/chroot.o src/mkdir.o src/okutils.o \
 
 src/okutils.so: $(objs)
 	$(CC) $(CFLAGS) -shared -o $@ src/*.o $(LDFLAGS)
-	strip --strip-unneeded $@
 
 .SUFFIXES: .c .o
 .c.o:
 	$(CC) $(CFLAGS) -fpic -o $@ -c $<
 
-install: okutils.so
+install: install-strip
+install-strip: src/okutils.so
+	strip --strip-unneeded $<
 	mkdir -p $(DESTDIR)$(bindir) $(DESTDIR)$(LUA_CPATH)
-	mv -f src/okutils.so $(DESTDIR)$(LUA_CPATH)
+	mv -f $< $(DESTDIR)$(LUA_CPATH)
 	cp -f main.lua $(DESTDIR)$(bindir)/okpkg
 	cp -f config.lua $(DESTDIR)$(sysconfdir)/okpkg.conf
 	lua init.lua
