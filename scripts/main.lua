@@ -183,12 +183,14 @@ function download(x)
       os.remove(X.url[2])
       error(("%s: FAILED"):format(X.url[2]))
    else
-      print(("%s: OK"):format(X.url[2]))
-      X.url[1] = C["distdir"]
-      ok.setenv("SOURCE_DATE_EPOCH", get_timestamp(X.url[2]))
-      mkcd(("%s/%s"):format(C["workdir"], x))
-      os.execute("tar --strip-components=1 -xf " .. table.concat(X.url, "/")) 
+     print(("%s: OK"):format(X.url[2]))
    end
+
+   -- Setup workdir
+   X.url[1] = C["distdir"]
+   ok.setenv("SOURCE_DATE_EPOCH", get_timestamp(X.url[2]))
+   mkcd(("%s/%s"):format(C["workdir"], x))
+   os.execute("tar --strip-components=1 -xf " .. table.concat(X.url, "/")) 
 
    -- Patch if file exists in patches
    fp = io.open(("%s/patches/%s.diff"):format(C.okdir, x:gsub('^_', '')))
