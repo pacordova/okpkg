@@ -23,9 +23,9 @@ install-strip: src/okutils.so
 	strip --strip-unneeded $<
 	mkdir -p $(DESTDIR)$(bindir) $(DESTDIR)$(LUA_CPATH)
 	mv -f $< $(DESTDIR)$(LUA_CPATH)
-	cp -f main.lua $(DESTDIR)$(bindir)/okpkg
-	cp -f config.lua $(DESTDIR)$(sysconfdir)/okpkg.conf
-	lua init.lua
+	cp -f scripts/main.lua $(DESTDIR)$(bindir)/okpkg
+	cp -f scripts/config.lua $(DESTDIR)$(sysconfdir)/okpkg.conf
+	lua scripts/init.lua
 
 uninstall: clean
 	rm -f $(DESTDIR)$(prefix)/bin/okpkg
