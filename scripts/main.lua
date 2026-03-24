@@ -162,10 +162,9 @@ end
 
 function download(x)
    local X, fp
-   local X = _db_lookup(x)
 
-   -- Change mirrors
-   for k,v in pairs(M) do X.url = X.url:gsub(k, v) end
+   X = _db_lookup(x)
+   for k,v in pairs(M) do X.url = X.url:gsub(k, v) end -- change mirrors
    X.url = { X.url:match("(.*)/(.-)$") }
 
    -- Download file if not already downloaded
