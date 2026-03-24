@@ -11,7 +11,7 @@ int ok_mkdir(lua_State *L);
 int ok_chroot(lua_State *L);
 int ok_sha3sum(lua_State *L);
 
-static const struct luaL_Reg okutils[] = {
+static const struct luaL_Reg okutils [] = {
 	{"chdir", ok_chdir},
 	{"mkdir", ok_mkdir},
 	{"pwd", ok_pwd},

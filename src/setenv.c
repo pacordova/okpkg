@@ -9,3 +9,11 @@ ok_setenv(lua_State *L)
 	lua_pushinteger(L, setenv(name, value, 1));
 	return 1;
 }
+
+int
+ok_unsetenv(lua_State *L)
+{
+	const char *name = luaL_checkstring(L, 1);
+	lua_pushinteger(L, unsetenv(name));
+	return 1;
+}

@@ -7,9 +7,9 @@ CFLAGS = -O2
 LDFLAGS = -lcrypto
 LUA_CPATH != lua -e "print(package.cpath:match('(.-)/%?.so;'))"
 
-objs = src/basename.o src/chdir.o src/chroot.o src/dirname.o src/mkdir.o \
-       src/okutils.o src/pwd.o src/setenv.o src/sha3sum.o src/symlink.o \
-       src/unsetenv.o
+objs = src/basename.o src/chdir.o src/chroot.o src/mkdir.o src/okutils.o \
+       src/pwd.o src/setenv.o src/sha3sum.o src/symlink.o
+       
 
 src/okutils.so: $(objs)
 	$(CC) $(CFLAGS) -shared -o $@ src/*.o $(LDFLAGS)
@@ -17,7 +17,7 @@ src/okutils.so: $(objs)
 
 .SUFFIXES: .c .o
 .c.o:
-	$(CC) $(CFLAGS) -fpic -c $<
+	$(CC) $(CFLAGS) -fpic -o $@ -c $<
 
 install: okutils.so
 	mkdir -p $(DESTDIR)$(bindir) $(DESTDIR)$(LUA_CPATH)
