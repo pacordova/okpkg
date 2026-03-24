@@ -171,24 +171,24 @@ function download(x)
    -- Download file if not already downloaded
    print("okpkg download " .. x)
    print("url: " .. table.concat(X.url, "/"))
-   if ok.chdir(C["distdir"]) and
-      io.close(io.open(X.url[2])) or
-      os.execute("$curl -O " .. table.concat(X.url, "/"))
-   then
-      X.url[1] = C["distdir"]
+   ok.chdir(C.distdir)
+   fp = io.open(X.url[2])
+   if fp then
+      fp:close()
    else
-      error("okpkg: download: $curl")
+      os.execute("$curl -O " .. table.concat(X.url, "/"))
    end
-
+   
    -- Verify checksum
    if not X.sha3 == ok.sha3sum(X.url[2]) then
       os.remove(X.url[2])
       error(("%s: FAILED"):format(X.url[2]))
    else
       print(("%s: OK"):format(X.url[2]))
+      X.url[1] = C["distdir"]
+      ok.setenv("SOURCE_DATE_EPOCH", get_timestamp(X.url[2]))
       mkcd(("%s/%s"):format(C["workdir"], x))
       os.execute("tar --strip-components=1 -xf " .. table.concat(X.url, "/")) 
-      ok.setenv("SOURCE_DATE_EPOCH", get_timestamp(table.concat(X.url, "/")))
    end
 
    -- Patch if file exists in patches
