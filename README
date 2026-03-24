@@ -22,7 +22,7 @@ In order to build okpkg, you need:
 
 Configuration
 -------------
-The metadata and configuration for each package is in the `./db/' sub-directory.
+The metadata and configuration for each package is in the `db` sub-directory.
 
 
 Bootstrap
@@ -36,7 +36,7 @@ See: <https://www.linuxfromscratch.org/>
 Patching
 --------
 Packages are kept as close to upstream as possible. 
-However, some patches are included in the `./patches/' sub-directory. 
+However, some patches are included in the `patches` sub-directory. 
 When a package is downloaded using `okpkg download`, okpkg checks for a diff 
 file with the name of the package, and patches it.
 
@@ -52,14 +52,14 @@ Reproducible Builds
 -------------------
 When built in order, most packages should be reproducible without rebuilding.
 
-For circular dependencies, there are temporary packages (prefixed with `_')
+For circular dependencies, there are temporary packages (prefixed with `_`)
 that are built first.
 
 okpkg uses the SOURCE_DATE_EPOCH from the timestamp of the source tarball that
 is downloaded.
 
 Notes:
-   * libcap depends on gperf, but it also needs `which' to pick up gperf.
+   * libcap depends on gperf, but it also needs `which` to pick up gperf.
    * pigz can result in gzipped files generating a different hash. For example:
    * glibc will change checksums in the charmaps.
    * perl depends on the kernel version and build times.
