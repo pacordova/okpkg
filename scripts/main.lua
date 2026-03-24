@@ -2,20 +2,12 @@
 
 unpack = unpack or table.unpack
 
-local C, E, M = dofile("/etc/okpkg.conf")
-
 local ok = require("okutils")
 
 -- Global variables (callable by cli)
 chroot, sha3sum = ok.chroot, ok.sha3sum
 
--- Local variables
-local chdir, mkdir, setenv, unsetenv  =
-   ok.chdir, ok.mkdir, ok.setenv, ok.unsetenv
-
-local pwd = ok.pwd
-local remove_all = ok.remove_all
-
+local C, E, M = dofile("/etc/okpkg.conf")
 
 -- Environment variables
 for k,v in pairs(E) do ok.setenv(k,v) end
@@ -126,17 +118,24 @@ B = {
    end,
 }
 
+local function mkcd(x) ok.remove_all(x); ok.mkdir(x); ok.chdir(x); end
+
+-- can replace basename.c
+local function basename(x) return x:match(".*/(.-)$") or x end
+local function dirname(x) return x:match("(.*)/.-") or "." end
+
+
 local function get_timestamp(x)
-   local file, buf
-   file = io.popen(string.format("stat -c '%Y' %s", x)
-   buf = file:read('*a')
-   file:close()
+   local fp, buf
+   fp = io.popen("stat -c '%Y' " .. x)
+   buf = fp:read('*a')
+   io.close(fp)
    return(tonumber(buf:sub(1, buf:find('\n')-1)))
 end
 
 local function parse_version(s)
    local i, j
-   s = ok.basename(s)
+   s = basename(s)
    j = s:find("%.[debtargz]+")
    if s:find("^%d") then 
       i = 0
@@ -162,42 +161,40 @@ function _db_lookup(x)
 end
 
 function download(x)
-   local t, fp
-   t = _db_lookup(x)
+   local X, fp
+   local X = _db_lookup(x)
 
    -- Change mirrors
-   for k,v in pairs(M) do t.url = t.url:gsub(k, v) end
+   for k,v in pairs(M) do X.url = X.url:gsub(k, v) end
+   X.url = { X.url:match("(.*)/(.-)$") }
 
    -- Download file if not already downloaded
-   print(string.format("okpkg download %s:\nurl: '%s'", x, t.url))
-   filename = string.format("%s/%s", C.distdir, ok.basename(t.url))
-   file = io.open(filename)
-   if file then
-      file:close()
+   print("okpkg download " .. x)
+   print("url: " .. table.concat(X.url, "/"))
+   if ok.chdir(C["distdir"]) and
+      io.close(io.open(X.url[2])) or
+      os.execute("$curl -O " .. table.concat(X.url, "/"))
+   then
+      X.url[1] = C["distdir"]
    else
-      os.execute(string.format("curl -# -o %s -LR %s", filename, t.url))
+      error("okpkg: download: $curl")
    end
 
    -- Verify checksum
-   if t.sha3 ~= sha3sum(filename) then
-      os.remove(filename)
-      error(string.format("%s: FAILED", ok.basename(filename)))
+   if not X.sha3 == ok.sha3sum(X.url[2]) then
+      os.remove(X.url[2])
+      error(("%s: FAILED"):format(X.url[2]))
    else
-      print(string.format("%s: OK", ok.basename(filename)))
-      ok.chdir(C.workdir)
-      ok.remove_all(x)
-      ok.mkdir(x)
-      ok.chdir(x)
-      os.execute(string.format("tar --strip-components=1 -xf %s", filename))
-      ok.setenv("SOURCE_DATE_EPOCH", get_timestamp(filename))
+      print(("%s: OK"):format(X.url[2]))
+      mkcd(("%s/%s"):format(C["workdir"], x))
+      os.execute("tar --strip-components=1 -xf " .. table.concat(X.url, "/")) 
+      ok.setenv("SOURCE_DATE_EPOCH", get_timestamp(table.concat(X.url, "/")))
    end
 
    -- Patch if file exists in patches
-   filename = string.format("%s/patches/%s.diff", C["okdir"], x:gsub('^_', ''))
-   file = io.open(filename);
-   if file then
-      file:close()
-      os.execute(string.format("$patch <%s", filename))
+   fp = io.open(("%s/patches/%s.diff"):format(C.okdir, x:gsub('^_', '')))
+   if fp and io.popen("$patch", 'w'):write(fp:read("*a")):close() then
+      fp:close()
    end
 
    -- Set the mtime
@@ -211,10 +208,10 @@ end
 
 function makepkg(path)
    local file
-   if chdir(path) ~= 0 then
+   if ok.chdir(path) ~= 0 then
       error(string.format("error: Path `%s' does not exist", path))
    else
-      ok.setenv("pwd", pwd())
+      ok.setenv("pwd", ok.pwd())
       ok.setenv("SOURCE_DATE_EPOCH", get_timestamp("."))
    end
 
@@ -253,8 +250,8 @@ function makepkg(path)
    ]]
 
    -- Cleanup environment
-   chdir("..")
-   ok.remove_all(ok.basename(path))
+   ok.chdir("..")
+   ok.remove_all(basename(path))
    ok.unsetenv("SOURCE_DATE_EPOCH")
    ok.unsetenv("pwd")
 
@@ -262,43 +259,42 @@ function makepkg(path)
 end
 
 function build(x)
-   local t, v, file, destdir
-   t = _db_lookup(x)
-   t.flags = t.flags or {}
-   v = parse_version(t.url)
+   local X, file, destdir
+   X = _db_lookup(x)
+   X.flags = X.flags or {}
+   local version = parse_version(X.url)
+   local arch = os.getenv("CFLAGS"):match("-march=([%w%-]*)"):gsub("%-", "_")
 
    -- Setup destdir
-   destdir = string.format("%s/%s-%s-amd64", C["outdir"], x, C["arch"])
+   destdir = ("%s/%s-%s-%s"):format(C["outdir"], x, version, arch)
    ok.setenv("destdir", destdir)
    ok.mkdir(destdir)
 
    -- Setup workdir
-   chdir(C.workdir); chdir(x)
-   setenv("SOURCE_DATE_EPOCH", get_timestamp("."))
+   ok.chdir(("%s/%s"):format(C.workdir, x))
+   ok.setenv("SOURCE_DATE_EPOCH", get_timestamp("."))
 
-   if t.prepare then
-      if not os.execute(t.prepare) then
+   if X.prepare then
+      if not os.execute(X.prepare) then
          error(string.format("error: build: prepare: %s", x))
       end
    end
 
-   if B[t.build] then
-      if not B[t.build](unpack(t.flags)) then
-         error(string.format("error: build: %s: %s", t.build, x))
+
+   if B[X.build] then
+      if not B[X.build](unpack(X.flags)) then
+         error(string.format("error: build: %s: %s", X.build, x))
       end
-   elseif tostring(t.build):match("config") then
+   elseif tostring(X.build):match("config") then
       -- Check if we are doing an out of tree build
-      if tostring(t.build):sub(1, 2) == ".." then
-         mkdir("build")
-         chdir("build")
-      end
-      if not B["configure"](t.build, unpack(t.flags)) then
-         error(string.format("error: build: %s: %s", t.build, x))
+      if tostring(X.build):sub(1, 2) == ".." then mkcd("build") end
+      if not B["configure"](X.build, unpack(X.flags)) then
+         error(string.format("error: build: %s: %s", X.build, x))
       end
    end
 
-   if t.post then
-      if not os.execute(t.post) then
+   if X.post then
+      if not os.execute(X.post) then
          error(string.format("error: build: post: %s", x))
       end
    end
@@ -308,9 +304,9 @@ function build(x)
    os.execute [[ find $destdir -exec touch -hd "@$SOURCE_DATE_EPOCH" '{}' + ]]
 
    -- Cleanup
-   remove_all(destdir .. "no")
-   unsetenv("destdir")
-   unsetenv("SOURCE_DATE_EPOCH")
+   ok.remove_all(destdir .. "no")
+   ok.unsetenv("destdir")
+   ok.unsetenv("SOURCE_DATE_EPOCH")
 
    return makepkg(destdir)
 end
@@ -338,7 +334,7 @@ function install(x)
 
    v = parse_version(x)
    if #v > 0 then idx = #x-#v-8 else idx = #x-7 end
-   filename = string.format("%s/%s.txt", C.indexdir, ok.basename(x:sub(1, idx)))
+   filename = string.format("%s/%s.txt", C.indexdir, basename(x:sub(1, idx)))
 
    -- Save original file to *.orig, use diff to delete old files
    file = io.open(filename)

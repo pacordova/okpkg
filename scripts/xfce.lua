@@ -5,10 +5,6 @@ os.execute(("make -C %s install"):format(arg[0]:match("(.*)/.-/.-") or ".."))
 
 unpack = unpack or table.unpack
 
--- can replace basename.c
-function basename(x) return x:match(".*/(.-)$") or x end
-function dirname(x) return x:match("(.*)/.-") or "." end
-
 -- Imports
 local ok = require("okutils")
 local C = dofile("/etc/okpkg.conf")

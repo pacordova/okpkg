@@ -1,6 +1,6 @@
 -- Imports
-local unpack = unpack or table.unpack
-local C = unpack(loadfile("/etc/okpkg.conf")())
+unpack = unpack or table.unpack
+local C = dofile("/etc/okpkg.conf")
 local ok = require("okutils")
 
 local mkdir, symlink, pwd = 
