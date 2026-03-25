@@ -12,7 +12,6 @@ local C, E, M = dofile("/etc/okpkg.conf")
 -- Environment variables
 for k,v in pairs(E) do ok.setenv(k,v) end
 
-
 -- Build routines
 B = {
    ["cargo"] = function(...)
@@ -147,37 +146,34 @@ local function parse_version(s)
    return s:sub(i+1, j-1)
 end
 
-function _db_lookup(x)
-   local file, buf, i, j
-   x = string.format("\n%s = {", x)
-   file = io.popen(string.format("cat %s/db/*", C["okdir"]))
-   buf = '\n' .. file:read('*a')
-   file:close()
-   i = buf:find(x, 1, true) or
-       error(string.format("error: %s not found", x))
-   i = buf:find('{', i, true)
-   j = buf:find('};', i, true)
-   return load(string.format("return %s", buf:sub(i, j)))()
+-- TODO: C function to listdir, iterate instead of popen
+-- TODO: Don't hardcore /usr/okpkg
+function look(x)
+   local fp, buf
+   fp = io.popen("cat /usr/okpkg/db/*")
+   buf = fp:read('*a'):match("\n?" .. x .. "%s*=%s*({.-})%s*;")
+   fp:close()
+   return load("return " .. buf)()
 end
 
+-- TODO: make sha3sum use a file pointer (luaL_checkudata)
+-- TODO: curl to stdout in io.popen and read the raw data
+-- TODO: timestamp from unix headers?
 function download(x)
    local X, fp
 
-   X = _db_lookup(x)
+   X = look(x)
    for k,v in pairs(M) do X.url = X.url:gsub(k, v) end -- change mirrors
    X.url = { X.url:match("(.*)/(.-)$") }
 
    -- Download file if not already downloaded
-   print("okpkg download " .. x)
-   print("url: " .. table.concat(X.url, "/"))
+   print(("okpkg download %s\nurl: %s/%s"):format(x, X.url[1], X.url[2]))
    ok.chdir(C.distdir)
-   fp = io.open(X.url[2])
-   if fp then
-      fp:close()
-   else
-      os.execute("$curl -O " .. table.concat(X.url, "/"))
-   end
-   
+   io.close(
+      io.open(X.url[2]) or
+      io.popen(("$curl -O %s/%s"):format(X.url[1], X.url[2]))
+   )
+
    -- Verify checksum
    if not X.sha3 == ok.sha3sum(X.url[2]) then
       os.remove(X.url[2])
@@ -208,7 +204,6 @@ function download(x)
 end
 
 function makepkg(path)
-   local file
    if ok.chdir(path) ~= 0 then
       error(string.format("error: Path `%s' does not exist", path))
    else
@@ -217,21 +212,15 @@ function makepkg(path)
    end
 
    -- Stripping
-   file = io.open(".nostrip")
-   if file then
-      file:close()
-      os.remove(".nostrip")
-   else
-      os.execute [[
+   io.close(
+      (io.open(".nostrip") and os.remove(".nostrip")) or
+      io.popen [[
          find . -name \*.a -o -name \*.o -exec strip -g '{}' + 2>/dev/null
-         find . | \
-             xargs file | \
-             grep -e "executable" -e "shared object" | \
-             grep ELF | \
-             cut -f 1 -d : | \
-             xargs strip --strip-unneeded 2>/dev/null
+         find . -exec file '{}' + \
+         | awk -F: '(/executable/||/shared object/)&&/ELF/{print $1}' \
+         | xargs strip --strip-unneeded 2>/dev/null
       ]]
-   end
+   )
 
    -- Delete unneeded, timestamp, etc.
    os.execute [[
@@ -260,8 +249,8 @@ function makepkg(path)
 end
 
 function build(x)
-   local X, file, destdir
-   X = _db_lookup(x)
+   local X, destdir
+   X = look(x)
    X.flags = X.flags or {}
    local version = parse_version(X.url)
    local arch = os.getenv("CFLAGS"):match("-march=([%w%-]*)"):gsub("%-", "_")
