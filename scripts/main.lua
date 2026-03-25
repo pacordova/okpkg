@@ -355,5 +355,5 @@ while #arg > 1 do
    table.remove(arg, 2)
 end
 
--- Return config for scripts
+-- Return for dofile
 return C, M, E
