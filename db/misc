@@ -136,7 +136,7 @@ krb5 = {
       "--without-system-vertno",
       "--disable-pkinit",
    },
-   prepare = [[ sed -i -e '/eq 0/{N;s/12 //}' src/plugins/kdb/db2/libdb2/test/run.test ]],
+   prep = [[ sed -i -e '/eq 0/{N;s/12 //}' src/plugins/kdb/db2/libdb2/test/run.test ]],
 };
 
 alsa-plugins = {
@@ -212,7 +212,7 @@ catgirl = {
    sha3 = "2d5ad5e26584c403be5d6f1e33e79e2bf1c679d182de0a4b8fe9f436a3bc3206",
    build = "./configure",
    flags = { "--mandir=/usr/share/man" },
-   prepare = [[ sed -i '/ctags/d' Makefile ]]
+   prep = [[ sed -i '/ctags/d' Makefile ]]
 };
 
 cryptsetup = {
@@ -273,7 +273,7 @@ git = {
       "--with-gitconfig=/etc/gitconfig",
       "--with-{libpcre2=yes,python=no,tcltlk=no}",
    },
-   prepare = [[
+   prep = [[
       printf "NO_GETTEXT=YesPlease\n" >> config.mak
       printf "NO_PERL=YesPlease\n" >> config.mak
    ]]
@@ -308,7 +308,7 @@ kirc = {
    sha3 = "2e4df46287bb6f07b30e6d6325012ce21701196e3d801adf978bcd6dea7097dc",
    build = "make",
    flags = { "PREFIX=/usr" },
-   prepare = [[ sed -i 's/all: clean/all:/g' Makefile ]]
+   prep = [[ sed -i 's/all: clean/all:/g' Makefile ]]
 };
 
 -- Remember to edit /etc/site-config.jam when you update Python!
@@ -349,7 +349,7 @@ linux-lts = {
    sha3 = "8d515d06006f245165eed72eb3abe3686f09deb55f1f9a7385f47afc0684a093",
    build = "make",
    flags = { "bzImage", "modules", "headers" },
-   prepare = [[
+   prep = [[
       #pigz -cd /proc/config.gz > .config
       : > install
    ]],
@@ -446,7 +446,7 @@ sharutils = {
    sha3 = "9b06bc145640281df912a2af83849621a25a10fb2deb3bd5b1c8561f9c1b53a1",
    build = "./configure",
    flags = { 'CFLAGS="$CFLAGS -Wno-implicit-function-declaration"' },
-   prepare = [[
+   prep = [[
       sed -i 's/BUFSIZ/rw_base_size/' src/unshar.c
       sed -i '/program_name/s/^/extern /' src/*opts.h
       sed -i 's/IO_ftrylockfile/IO_EOF_SEEN/' lib/*.c
@@ -501,7 +501,7 @@ vim = {
       "--disable-{perl,python,ruby}interp",
       "--with-{features=huge,x=no}",
    },
-   prepare = [[
+   prep = [[
       printf '#define SYS_VIMRC_FILE "/etc/vimrc"\n' >> src/feature.h
    ]],
 };

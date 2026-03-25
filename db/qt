@@ -58,25 +58,25 @@ qt5base = {
 qt5svg = {
    url = "https://invent.kde.org/qt/qt/qtsvg/-/archive/v5.15.5-lts-lgpl/qtsvg-v5.15.5-lts-lgpl.tar.gz",
    build = "make",
-   prepare = [[ qmake -makefile ]]
+   prep = [[ qmake -makefile ]]
 };
 
 qt5tools = {
    url = "https://invent.kde.org/qt/qt/qttools/-/archive/v5.15.5-lts-lgpl/qttools-v5.15.5-lts-lgpl.tar.gz",
    build = "make",
-   prepare = [[ qmake -makefile ]]
+   prep = [[ qmake -makefile ]]
 };
 
 qtx11extras = {
    url = "https://invent.kde.org/qt/qt/qtx11extras/-/archive/v5.15.5-lts-lgpl/qtx11extras-v5.15.5-lts-lgpl.tar.gz",
    build = "make",
-   prepare = [[ qmake -makefile ]]
+   prep = [[ qmake -makefile ]]
 };
 
 qtdeclarative = {
    url = "https://invent.kde.org/qt/qt/qtdeclarative/-/archive/v5.15.5-lts-lgpl/qtdeclarative-v5.15.5-lts-lgpl.tar.gz",
    build = "make",
-   prepare = [[ qmake -makefile ]]
+   prep = [[ qmake -makefile ]]
 };
 
 

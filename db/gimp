@@ -69,5 +69,5 @@ gimp = {
       "-Dheadless-tests=disabled",
       "-Dcheck-update=no",
    },
-   prepare = [[ sed -i 's/if not glib_networking_works/if not true/' meson.build ]],
+   prep = [[ sed -i 's/if not glib_networking_works/if not true/' meson.build ]],
 };

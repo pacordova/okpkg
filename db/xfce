@@ -104,7 +104,7 @@ thunar = {
       "--enable-exif",
       "--disable-debug",
    },
-   prepare = [[ sed -i 's/\tinstall-systemd_userDATA/\t/' Makefile.in ]]
+   prep = [[ sed -i 's/\tinstall-systemd_userDATA/\t/' Makefile.in ]]
 };
 
 thunar-volman = {

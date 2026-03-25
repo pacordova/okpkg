@@ -65,7 +65,7 @@ glibc = {
       "--with-headers=/usr/include",
       "libc_cv_slibdir=/lib64"
    },
-   prepare = [[
+   prep = [[
       mkdir -p build && cd build
       printf "slibdir=/usr/lib64\n" >> configparms
       printf "rtlddir=/usr/lib64\n" >> configparms
@@ -87,7 +87,7 @@ bzip2 = {
    sha3 = "34400e535a9018e93fc04f509811df340e8f9b48b06467b9c025400ac0a4898d",
    build = "make",
    flags = { "PREFIX=$destdir/usr" },
-   prepare = [[
+   prep = [[
       sed -e 's:\(ln -s -f \)$(PREFIX)/bin/:\1:' \
           -e 's:(PREFIX)/man:(PREFIX)/share/man:g' \
           -e 's:(PREFIX)/lib:(PREFIX)/lib64:g' \
@@ -191,7 +191,7 @@ binutils = {
       "--enable-new-dtags",
       "--with-system-zlib",
    },
-   prepare = [[ sed -i 's/tooldir=.*/tooldir=\/usr/g' configure ]],
+   prep = [[ sed -i 's/tooldir=.*/tooldir=\/usr/g' configure ]],
    post = [[
       rm -f  $destdir/usr/lib64/lib{bfd,ctf,ctf-nobfd,gprofng,opcodes,sframe}.a
       rm -fr $destdir/usr/lib/ldscripts
@@ -278,7 +278,7 @@ libcap = {
    sha3 = "c2f4f8f35cb36d1d0365b860537298fad4ab00ad65fab7337741a5b7c4889c64",
    build = "make",
    flags = { "prefix=/usr", "lib=lib64", "SBINDIR=/usr/bin" },
-   prepare = [[ sed -i '/install -m.*STA/d' libcap/Makefile ]]
+   prep = [[ sed -i '/install -m.*STA/d' libcap/Makefile ]]
 };
 
 shadow = {
@@ -292,7 +292,7 @@ shadow = {
       "--without-{bcrypt,libbsd,libpam,nscd,selinux}",
       "--disable-logind",
    },
-   prepare = [[
+   prep = [[
        : > /usr/bin/passwd
        find man -name Makefile.in -exec sed -i 's/groups\.1 / /' {} \;
        sed -e 's/groups$(EXEEXT) //' \
@@ -354,7 +354,7 @@ readline = {
    sha3 = "a26ef627fb77ac6e25daf37622123200ba5c06885e3c913bac23335168f9d57f",
    build = "./configure",
    flags = { "--with-curses", "SHLIB_LIBS=-ltinfo" },
-   prepare = [[
+   prep = [[
       sed -e 's/^SHLIB_LIBS=$/SHLIB_LIBS=-ltinfo/' \
           -e 's/-Wl,-rpath,$(libdir) //g' \
           -i support/shobj-conf
@@ -538,7 +538,7 @@ pigz = {
    sha3 = "530248da5b27562503cfcfa6b96d2d483e7ae5c7acb088e0b2e3cdb33164a1a8",
    build = "make",
    flags = { "ZOP=", "CFLAGS='-O3 -DNOZOPFLI'" },
-   prepare = [[ : > install ]],
+   prep = [[ : > install ]],
    post = [[
       install -d $destdir/usr/bin
       install -d $destdir/usr/share/man/man1
@@ -563,7 +563,7 @@ kbd = {
    sha3 = "48f9f1ab135088c9d11e8a425982c94e000b6c8ec9c3bfd666b584e8bfcf71a1",
    build = "./configure",
    flags = { "--disable-vlock" },
-   prepare = [[
+   prep = [[
       sed -i '/RESIZECONS_PROGS=/s/yes/no/' configure
       sed -i 's/resizecons.8 //' docs/man/man8/Makefile.in
       sed -i 's/gunzip/unpigz/' data/Makefile.in
@@ -644,7 +644,7 @@ openvi = {
       "OPTLEVEL=-O2",
       "PREFIX=/usr",
    },
-   prepare = [[
+   prep = [[
       sed -i 's:escapetime=2:escapetime=1:' common/options.c
       sed -i 's:termio.h:termios.h:' cl/*.c ex/*.c
    ]],
@@ -654,7 +654,7 @@ eudev = {
    url = "https://github.com/eudev-project/eudev/releases/download/v3.2.14/eudev-3.2.14.tar.gz",
    sha3 = "334ad42e160b69c29170b4c19585568dda738c4dc516bb1e764bc565d1d4cddb",
    build = "./configure",
-   prepare = [[
+   prep = [[
       sed -i '/udevdir/a udev_dir=${udevdir}' src/udev/udev.pc.in
       sed -i 's/GROUP="sgx", //' rules/50-udev-default.rules
    ]],
@@ -670,7 +670,7 @@ mandoc = {
    url = "https://mandoc.bsd.lv/snapshots/mandoc-1.14.6.tar.gz",
    sha3 = "23db13cc9e5ca6f729c4211929b745f5d8a82f87827dbf97d64c6ab8a937152d",
    build = "./configure",
-   prepare = [[
+   prep = [[
       printf "PREFIX=/usr\n" >> configure.local
       printf "LIBDIR=/usr/lib64\n" >> configure.local
       printf "MANDIR=/usr/share/man\n" >> configure.local
@@ -699,7 +699,7 @@ util-linux = {
       "--without-{python,systemd}",
       "ADJTIME_PATH=/etc/adjtime",
    },
-   prepare = [[ sed -i 's:/sbin:/usr/bin:' disk-utils/fsck.c ]],
+   prep = [[ sed -i 's:/sbin:/usr/bin:' disk-utils/fsck.c ]],
    post = [[ cd $destdir && mv bin/* usr/sbin/* usr/bin && rmdir bin usr/sbin ]]
 };
 
@@ -749,7 +749,7 @@ dbus = {
 device-mapper = {
    url = "https://sourceware.org/ftp/lvm2/LVM2.2.03.39.tgz",
    sha3 = "906f5cc9f016cf5d68e802af748056b2e5e3c08ef93b340d5daaeeb30362a903",
-   prepare = "./configure",
+   prep = "./configure",
    build = "make_noinstall",
    flags = {
       "install_device-mapper",
@@ -802,7 +802,7 @@ grub = {
       "--disable-grub-mount",
       "{C,CPP,CXX,LD}FLAGS=",
    },
-   prepare = [[ printf "depends bli part_gpt\n" > grub-core/extra_deps.lst ]],
+   prep = [[ printf "depends bli part_gpt\n" > grub-core/extra_deps.lst ]],
    post = [[
       cd $destdir/usr/lib64
       rm -f grub/*/*.module

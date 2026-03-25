@@ -1,7 +1,7 @@
 dash = {
    url = "https://git.kernel.org/pub/scm/utils/dash/dash.git/snapshot/dash-0.5.12.tar.gz",
    sha3="286396d2e44bdc4c67dcd903fe441d24ab79f64ef6f3f7f860e0771da3647291",
-   prepare = [[ autoreconf -fi ]],
+   prep = [[ autoreconf -fi ]],
    build = "configure",
    flags = {
       "--bindir=/usr/bin",
@@ -62,5 +62,5 @@ zsh = {
       "--enable-pcre",
       "--with-term-lib='tinfow ncursesw'",
    },
-   prepare = [[ autoreconf -fi ]],
+   prep = [[ autoreconf -fi ]],
 };

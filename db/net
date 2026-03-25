@@ -38,7 +38,7 @@ openntpd = {
    sha3 = "05a6c3e7f6928b0455e13e5167f455c1a7d9162cf394d415e6c48da7c49d8eec",
    build = "./configure",
    flags = { "--with-privsep-user=ntp" },
-   prepare = [[
+   prep = [[
       sed -i 's/PRIO_PROCESS, 0, -20/PRIO_PROCESS, 0, 0/' src/ntpd.c
       sed -i ntpd.conf                               \
           -e 's/pool.ntp.org/2.gentoo.pool.ntp.org/' \
@@ -64,7 +64,7 @@ iproute2 = {
    sha3 = "4c7bff5fef9b3a45d2e5a2f25d3fb70a40f1ea6c2e39f36d7a91e35b1668e18e",
    build = "./configure",
    flags = { "--libdir=/usr/lib64" },
-   prepare = [[
+   prep = [[
       rm -f man/man8/arpd.8
       sed -e '/ARPD/d' \
           -e 's:/sbin:/usr/bin:' \
@@ -84,7 +84,7 @@ netcat = {
    sha3 = "98ae44f399eac93e383559e87183dc9bf3080ec928f7d8cb727a5da256272344",
    build = "make",
    flags = { "linux" },
-   prepare = [[
+   prep = [[
       sed -e '/#define HAVE_BIND/s:#define:#undef:' \
           -e '/#define FD_SETSIZE 16/s:16:1024: #34250' \
           -i netcat.c
@@ -137,7 +137,7 @@ wpa_supplicant = {
    sha3 = "14f105ecef1b2c7734fbefa49a3ac7eed505606fcf0fae3d4d14caaaa982d821",
    build = "make",
    flags = { "-C wpa_supplicant", "BINDIR=/usr/bin", "LIBDIR=/usr/lib64" },
-   prepare = [[
+   prep = [[
       cd wpa_supplicant
       cp defconfig .config
       printf "CONFIG_DEBUG_SYSLOG_FACILITY=LOG_DAEMON\n" >> .config

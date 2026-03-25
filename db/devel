@@ -60,14 +60,14 @@ intltool = {
    url = "https://launchpad.net/intltool/trunk/0.51.0/+download/intltool-0.51.0.tar.gz",
    sha3 = "c215547f72957e1727976aeaa7156517fb005a5c8fe0df30e7f546c990ca8d19",
    build = "./configure",
-   prepare = [[ sed -i 's:\\\${:\\\$\\{:' intltool-update.in ]]
+   prep = [[ sed -i 's:\\\${:\\\$\\{:' intltool-update.in ]]
 };
 
 itstool = {
    url = "https://files.itstool.org/itstool/itstool-2.0.7.tar.bz2",
    sha3 = "68d36ae4c43c1131cbaeaff67daac1fa236c44b58d0aff6bc5190ba5001b7046",
    build = "./configure",
-   prepare = [[ autoreconf -fi ]],
+   prep = [[ autoreconf -fi ]],
 };
 
 libtool = {

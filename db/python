@@ -119,7 +119,7 @@ python-calver = {
    url = "https://pypi.org/packages/source/c/calver/calver-2025.10.20.tar.gz",
    sha3 = "54c8c04195cce004a25f369fd12f48d52ec12b0633ba1277c26791a80f20ff25",
    build = "python-build",
-   prepare = [[ printf "Version: 2025.4.17\n" > PKG-INFO ]]
+   prep = [[ printf "Version: 2025.4.17\n" > PKG-INFO ]]
 };
 
 python-trove-classifiers = {

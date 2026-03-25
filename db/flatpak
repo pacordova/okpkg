@@ -38,7 +38,7 @@ appstream = {
       "-Dcompose=true",
       "-Dbash-completion=false",
    },
-   prepare = [[
+   prep = [[
       mv AppStream*/* . && rm -fr AppStream*
       sed -i "/subdir('docs\/')/d" meson.build
       sed -i "s/version: '>= 2.48'/version: '>= 2.40'/" compose/meson.build

@@ -18,7 +18,7 @@ gsettings-desktop-schemas = {
    url = "https://download.gnome.org/sources/gsettings-desktop-schemas/50/gsettings-desktop-schemas-50.0.tar.xz",
    sha3 = "5fc33c739d41e42a538dc0c1221ee930c4f5e6400d269633e182db1850741ac3",
    build = "meson",
-   prepare = [[ sed -i -r 's:"(/system):"/org/gnome\1:g' schemas/*.in ]]
+   prep = [[ sed -i -r 's:"(/system):"/org/gnome\1:g' schemas/*.in ]]
 };
 
 xdg-user-dirs = {

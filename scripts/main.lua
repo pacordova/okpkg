@@ -263,12 +263,10 @@ function build(x)
    ok.chdir(("%s/%s"):format(C.workdir, x))
    ok.setenv("SOURCE_DATE_EPOCH", get_timestamp("."))
 
-   if X.prepare then
-      if not os.execute(X.prepare) then
-         error(string.format("error: build: prepare: %s", x))
-      end
-   end
-
+   X.prep = 
+      X.prep and 
+      not os.execute(X.prep) and
+      error(string.format("error: build: prep: %s", x))
 
    if B[X.build] then
       if not B[X.build](unpack(X.flags)) then
@@ -282,12 +280,10 @@ function build(x)
       end
    end
 
-   if X.post then
-      if not os.execute(X.post) then
-         error(string.format("error: build: post: %s", x))
-      end
-   end
-
+   X.post = 
+      X.post and
+      not os.execute(X.post) and
+      error(string.format("error: build: post: %s", x))
 
    -- Set the mtime
    os.execute [[ find $destdir -exec touch -hd "@$SOURCE_DATE_EPOCH" '{}' + ]]

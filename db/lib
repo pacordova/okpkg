@@ -60,7 +60,7 @@ upower = {
       "-Dudevrulesdir=/usr/lib64/udev/rules.d",
       "-D{gtk-doc,man}=false",
    },
-   prepare = [[ sed '/parse_version/d' -i src/linux/integration-test.py ]]
+   prep = [[ sed '/parse_version/d' -i src/linux/integration-test.py ]]
 };
 
 vala = {
@@ -70,7 +70,7 @@ vala = {
    flags = {
       "--enable-{python3=yes,python=no,valadoc=no}",
    },
-   prepare = [[ sed -i '/gvc.h/a#define TRUE 1' libvaladoc/gvc-compat.c ]]
+   prep = [[ sed -i '/gvc.h/a#define TRUE 1' libvaladoc/gvc-compat.c ]]
 };
 
 --------------------------------------------------------------------------------
@@ -146,7 +146,7 @@ fuse3 = {
    sha3 = "a712c7c7fefd4c4fe6d4792a9c8a5cb3b3f460db741b39cd8d2803498a3f0c54",
    build = "meson",
    flags = { "-Dexamples=false" },
-   prepare = [[ sed -i '/^udev/,$ s/^/#/' util/meson.build ]],
+   prep = [[ sed -i '/^udev/,$ s/^/#/' util/meson.build ]],
    post = [[ chmod u+s $destdir/usr/bin/fusermount3 ]]
 };
 
@@ -155,7 +155,7 @@ graphite = {
    sha3 = "bccf21b15d3278bfcb4601f1e0e2cecfb48385575c309788f524465a5139f9ff",
    build = "cmake",
    flags = { "-DLIB_SUFFIX=64" },
-   prepare = [[ sed -i '/cmptest/d' tests/CMakeLists.txt ]]
+   prep = [[ sed -i '/cmptest/d' tests/CMakeLists.txt ]]
 };
 
 iso-codes = {
@@ -210,7 +210,7 @@ libevent = {
    url = "https://github.com/libevent/libevent/releases/download/release-2.1.12-stable/libevent-2.1.12-stable.tar.gz",
    sha3 = "aeadcbd599fc49e5fe9554a668093e4bdc53cf9fd177d099bce41e46ec0b783d",
    build = "./configure",
-   prepare = [[ sed -i 's/python/&3/' event_rpcgen.py ]]
+   prep = [[ sed -i 's/python/&3/' event_rpcgen.py ]]
 };
 
 libexif = {
@@ -286,7 +286,7 @@ libpsl = {
 libsass = {
    url = "https://github.com/sass/libsass/archive/3.6.6/libsass-3.6.6.tar.gz",
    sha3 = "9637cd39de53582abc24deefb2ed3c28c92db591c81f4765dd58c287631b2667",
-   prepare = [[ autoreconf -fi ]],
+   prep = [[ autoreconf -fi ]],
    build = "./configure",
 };
 
@@ -331,7 +331,7 @@ libvpx = {
    url = "https://github.com/webmproject/libvpx/archive/v1.16.0/libvpx-1.16.0.tar.gz",
    sha3 = "3cbb75bdfd9c1d116df345958ad074a5cb85a422ea60fb3b1992a6ca95cde1f4",
    build = "../configure",
-   prepare = [[
+   prep = [[
       sed -i 's/cp -p/cp/' build/make/Makefile
       sed -i 's/perl/:/g;s/diff --version/command -v diff/' configure
    ]],
@@ -437,7 +437,7 @@ popt = {
 sassc = {
    url = "https://github.com/sass/sassc/archive/3.6.2/sassc-3.6.2.tar.gz",
    sha3 = "61e05276d1052de3c8403a6895cbca55f50d9f8f3afd2abed1263331dd33e46f",
-   prepare = [[ autoreconf -fi ]],
+   prep = [[ autoreconf -fi ]],
    build = "./configure",
 };
 
@@ -473,7 +473,7 @@ x265 = {
       "-DCMAKE_POLICY_VERSION_MINIMUM=3.5",
       "-S source",
    },
-   prepare = [[ sed -r '/cmake_policy.*(0025|0054)/d' -i source/CMakeLists.txt ]],
+   prep = [[ sed -r '/cmake_policy.*(0025|0054)/d' -i source/CMakeLists.txt ]],
    post = [[ rm -f $destdir/usr/lib64/libx265.a ]]
 };
 
