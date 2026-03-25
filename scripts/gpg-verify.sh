@@ -3,6 +3,8 @@
 # Verify the github tarball checksums
 # The checksum should be identical to the github tarball (with `gzip -n`)
 # Note: you need gzip, pigz gives a different checksum
+# If you want to compare to Arch Linux checksums do:
+# git -c core.abbrev=no archive --format=tar "$TAG" | sha256sum
 
 oldpwd=`pwd`
 tempdir=`mktemp -d`
