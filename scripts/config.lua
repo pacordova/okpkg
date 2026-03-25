@@ -36,4 +36,4 @@ local E = {
    ["CXXFLAGS"]    = table.concat(C.cflags, ' '),
 }
 
-return C, E, M
+return C, M, E

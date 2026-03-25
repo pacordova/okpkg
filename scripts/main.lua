@@ -7,7 +7,7 @@ local ok = require("okutils")
 -- Global variables (callable by cli)
 chroot, sha3sum = ok.chroot, ok.sha3sum
 
-local C, E, M = dofile("/etc/okpkg.conf")
+local C, M, E = dofile("/etc/okpkg.conf")
 
 -- Environment variables
 for k,v in pairs(E) do ok.setenv(k,v) end
@@ -354,3 +354,6 @@ while #arg > 1 do
    end
    table.remove(arg, 2)
 end
+
+-- Return config for scripts to easly dofile("/usr/bin/okpkg")
+return C, M, E
