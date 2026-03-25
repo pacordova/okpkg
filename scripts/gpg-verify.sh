@@ -15,6 +15,13 @@ _cksum_gh(){
   | gzip -n > ${1##*/}-${2#v}.tar.gz
 }
 
+_cksum_gl(){
+  git clone --depth 1 --branch "$2" "$1"
+  git -C ${1##*/} verify-tag "$2" || exit 1
+  git -C ${1##*/} archive --format=tar --prefix=${1##*/}-${2}/ "$2" \
+  | gzip -n > ${1##*/}-${2}.tar.gz
+}
+
 _cksum_signal(){
   $curl https://updates.signal.org/desktop/apt/dists/xenial/{InRelease,main/binary-amd64/Packages}
   gpg -d InRelease >/dev/null || exit 1
@@ -29,7 +36,8 @@ _cksum_signal(){
 
 cd "$tempdir"
 
-_cksum_signal 8.3.0
+#_cksum_signal 8.3.0
+_cksum_gl https://gitlab.com/lvmteam/lvm2 v2_03_39
 #_cksum_gh https://github.com/vim/vim v9.1.1980
 #_cksum_gh https://github.com/vcrhonek/hwdata v0.405
 #_cksum_gh https://github.com/yshui/picom v13
