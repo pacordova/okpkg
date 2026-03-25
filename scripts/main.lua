@@ -117,11 +117,10 @@ B = {
    end,
 }
 
-local function mkcd(x) ok.remove_all(x); ok.mkdir(x); ok.chdir(x); end
+function mkcd(x) ok.remove_all(x); ok.mkdir(x); ok.chdir(x); end
 
 -- can replace basename.c
-local function basename(x) return x:match(".*/(.-)$") or x end
-local function dirname(x) return x:match("(.*)/.-") or "." end
+function basename(x) return x:match(".*/(.-)$") or x end
 
 
 local function get_timestamp(x)

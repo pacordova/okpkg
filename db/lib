@@ -452,7 +452,7 @@ uthash = {
 };
 
 x264 = {
-   url = "https://code.videolan.org/videolan/x264/-/archive/4613ac3c15fd75cebc4b9f65b7fb95e70a3acce1/x264-4613ac3c15fd75cebc4b9f65b7fb95e70a3acce1.tar.bz2",
+   url = "https://code.videolan.org/videolan/x264/-/archive/4613ac3c15fd75cebc4b9f65b7fb95e70a3acce1/x264-20240513.tar.bz2",
    sha3 = "8faf6b2c75660bbb8c190bea726665e30ed997ff68cc03e9fb5038066613ac1c",
    build = "./configure",
    flags = {
