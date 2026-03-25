@@ -7,9 +7,7 @@ unpack = unpack or table.unpack
 
 -- Imports
 local ok = require("okutils")
-local C = dofile("/etc/okpkg.conf")
-dofile("/usr/bin/okpkg")
-
+local C = dofile("/usr/bin/okpkg")
 
 -- Config
 local sysconfdir = "/etc"
