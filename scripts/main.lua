@@ -117,8 +117,6 @@ B = {
    end,
 }
 
-function mkcd(x) ok.remove_all(x); ok.mkdir(x); ok.chdir(x); end
-
 -- can replace basename.c
 function basename(x) return x:match(".*/(.-)$") or x end
 
@@ -129,6 +127,10 @@ local function get_timestamp(x)
    buf = fp:read('*a')
    io.close(fp)
    return(tonumber(buf:sub(1, buf:find('\n')-1)))
+end
+
+local function version(x)
+   return x:match("[-_%.][a-z]?([%d%.]+[a-z]?[0-9]?)[-_%.]")
 end
 
 local function parse_version(s)
@@ -185,8 +187,11 @@ function download(x)
    -- Setup workdir
    X.url[1] = C["distdir"]
    ok.setenv("SOURCE_DATE_EPOCH", get_timestamp(X.url[2]))
-   mkcd(("%s/%s"):format(C["workdir"], x))
-   os.execute("tar --strip-components=1 -xf " .. table.concat(X.url, "/")) 
+   ok.chdir(C["workdir"])
+   ok.remove_all(x)
+   ok.mkdir(x)
+   ok.chdir(x)
+   os.execute(("tar --strip-components=1 -xf %s/%s"):format(C.distdir, X.url))
 
    -- Patch if file exists in patches
    fp = io.open(("%s/patches/%s.diff"):format(C.okdir, x:gsub('^_', '')))
@@ -249,15 +254,16 @@ function makepkg(path)
 end
 
 function build(x)
-   local X, destdir
+   local X, v, destdir
    X = look(x)
    X.flags = X.flags or {}
-   local version = parse_version(X.url)
+   local v = version(X.url)
    local arch = os.getenv("CFLAGS"):match("-march=([%w%-]*)"):gsub("%-", "_")
 
    -- Setup destdir
    destdir = ("%s/%s-%s-%s"):format(C["outdir"], x, version, arch)
    ok.setenv("destdir", destdir)
+   ok.remove_all(destdir)
    ok.mkdir(destdir)
 
    -- Setup workdir
@@ -275,7 +281,11 @@ function build(x)
       end
    elseif tostring(X.build):match("config") then
       -- Check if we are doing an out of tree build
-      if tostring(X.build):sub(1, 2) == ".." then mkcd("build") end
+      if tostring(X.build):sub(1, 2) == ".." then 
+         ok.remove_all("build")
+         ok.mkdir("build") 
+         ok.chdir("build")
+      end
       if not B["configure"](X.build, unpack(X.flags)) then
          error(string.format("error: build: %s: %s", X.build, x))
       end
