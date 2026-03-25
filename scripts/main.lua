@@ -355,5 +355,5 @@ while #arg > 1 do
    table.remove(arg, 2)
 end
 
--- Return config for scripts to easly dofile("/usr/bin/okpkg")
+-- Return config for scripts
 return C, M, E
