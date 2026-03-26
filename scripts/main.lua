@@ -15,7 +15,7 @@ for k,v in pairs(E) do ok.setenv(k,v) end
 -- Helpers
 local F = require("F")
 function basename(x) return x:match(".*/(.-)$") or x end
-function dirname(x) return x:match(".*/(.-)$") or x end
+function dirname(x) return x:match("(.*)/.-$") or x end
 function mkcd(x) ok.remove_all(x); ok.mkdir(x); ok.chdir(x); end
 
 -- Build routines
