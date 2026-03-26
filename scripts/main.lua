@@ -13,10 +13,23 @@ local C, M, E = dofile("/etc/okpkg.conf")
 for k,v in pairs(E) do ok.setenv(k,v) end
 
 -- Helpers
-local F = require("F")
-basename = ok.basename
-dirname = ok.dirname
+F = require("F")
+
+string.basename = ok.basename or 
+   function(x) return x:match(".*/(.-)$") or x end
+
+string.dirname = ok.dirname or 
+   function(x) return x:match("(.*)/.-$") or x end
+
+string.open, string.popen, string.execute = 
+   io.open, io.popen, os.execute
+
+function string.eval(self, env)
+   return self:gsub("%$(%w+)", env)
+end
+
 function mkcd(x) ok.remove_all(x); ok.mkdir(x); ok.chdir(x); end
+
 
 -- Build routines
 B = {
@@ -149,33 +162,35 @@ end
 
 function download(x)
    local X = look(x)
-   local remote_name = basename(X.url)
-   local distfile = F"{C.distdir}/{remote_name}"
-   local workdir = F"{C.workdir}/{x}"
+   X.curl = os.getenv("curl")
+   X.distfile = string.format("%s/%s", C["distdir"], X.url:match("/([^/]*)$"))
 
    -- change mirrors
    for k,v in pairs(M) do X.url = X.url:gsub(k, v) end 
    
    -- Download file if not already downloaded
-   io.close(io.open(distfile) or io.popen(F"$curl -o {distfile} {X.url}"))
-   assert(X.sha3 == sha3sum(distfile) or not os.remove(distfile))
+   io.close (
+      io.open(X.distfile) or 
+      io.popen(string.gsub("$curl $url >$distfile", "%$(%w+)", X))
+   )
+   assert(X.sha3 == sha3sum(X.distfile) or not os.remove(X.distfile))
    
-   -- Setup workdir
-   mkcd(workdir)
-   os.execute(F"tar --strip-components=1 -xf {distfile}")
+   -- Setup source directory
+   mkcd(string.format("%s/%s", C["workdir"], x))
+   os.execute("tar --strip-components=1 -xf " .. X.distfile)
    
    -- Patch if file exists
    -- Note: symlink for temporary packages, or update patch infrastructure
-   local fp = io.open(F"/usr/okpkg/patches/{x}.diff")
-   if fp then
+   local patchfile = io.open(string.format("/usr/okpkg/patches/%s.diff", x))
+   if patchfile then
       io.popen("$patch", 'w'):
-         write(fp:read("*a")):
+         write(patchfile:read("*a")):
          close()
-      fp:close()
+      patchfile:close()
    end
 
    -- Set the mtime 
-   ok.setenv("SOURCE_DATE_EPOCH", get_timestamp(distfile))
+   ok.setenv("SOURCE_DATE_EPOCH", get_timestamp(X.distfile))
    os.execute [[ find . -exec touch -hd "@$SOURCE_DATE_EPOCH" '{}' + ]]
    ok.unsetenv("SOURCE_DATE_EPOCH")
 
@@ -301,7 +316,7 @@ function install(x)
 
    local v = version(x)
    if #v > 0 then idx = #x-#v-8 else idx = #x-7 end
-   filename = string.format("%s/%s.txt", C.indexdir, basename(x:sub(1, idx)))
+   filename = string.format("%s/%s.txt", C.indexdir, ok.basename(x:sub(1, idx)))
 
    -- Save original file to *.orig, use diff to delete old files
    file = io.open(filename)

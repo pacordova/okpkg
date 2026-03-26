@@ -1,6 +1,7 @@
 #include <lauxlib.h>
 
 int ok_chdir(lua_State *L);
+int ok_exists(lua_State *L);
 int ok_pwd(lua_State *L);
 int ok_setenv(lua_State *L); 
 int ok_unsetenv(lua_State *L);
@@ -14,6 +15,7 @@ int ok_remove_all(lua_State *L);
 
 static const struct luaL_Reg okutils [] = {
 	{"chdir", ok_chdir},
+	{"exists", ok_exists},
 	{"mkdir", ok_mkdir},
 	{"pwd", ok_pwd},
 	{"symlink", ok_symlink},

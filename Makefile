@@ -11,7 +11,8 @@ LUA_CPATH != lua -e "print(package.cpath:match('(.-)/%?.so;'))"
 
 
 objs = src/basename.o src/chdir.o src/chroot.o src/mkdir.o src/okutils.o \
-       src/pwd.o src/setenv.o src/sha3sum.o src/symlink.o src/remove_all.o
+       src/pwd.o src/setenv.o src/sha3sum.o src/symlink.o src/remove_all.o \
+       src/exists.o
        
 
 src/okutils.so: $(objs)
