@@ -161,23 +161,23 @@ function look(x)
 end
 
 function download(x)
-   local X = look(x)
-   X.curl = os.getenv("curl")
-   X.distfile = string.format("%s/%s", C["distdir"], X.url:match("/([^/]*)$"))
+   local env = look(x)
+   env.curl = E.curl
+   env.dist = string.format("%s/%s", C.distdir, env.url:match("/([^/]*)$"))
 
    -- change mirrors
-   for k,v in pairs(M) do X.url = X.url:gsub(k, v) end 
+   for k,v in pairs(M) do env.url = env.url:gsub(k, v) end 
    
    -- Download file if not already downloaded
    io.close (
-      io.open(X.distfile) or 
-      io.popen(string.gsub("$curl $url >$distfile", "%$(%w+)", X))
+      io.open(env.dist) or 
+      io.popen(("$curl %s >%s"):format(env.url, env.dist))
    )
-   assert(X.sha3 == sha3sum(X.distfile) or not os.remove(X.distfile))
+   assert(env.sha3 == sha3sum(env.dist) or not os.remove(env.dist))
    
    -- Setup source directory
    mkcd(string.format("%s/%s", C["workdir"], x))
-   os.execute("tar --strip-components=1 -xf " .. X.distfile)
+   os.execute("tar --strip-components=1 -xf " .. env.dist)
    
    -- Patch if file exists
    -- Note: symlink for temporary packages, or update patch infrastructure
@@ -190,7 +190,7 @@ function download(x)
    end
 
    -- Set the mtime 
-   ok.setenv("SOURCE_DATE_EPOCH", get_timestamp(X.distfile))
+   ok.setenv("SOURCE_DATE_EPOCH", get_timestamp(env.dist))
    os.execute [[ find . -exec touch -hd "@$SOURCE_DATE_EPOCH" '{}' + ]]
    ok.unsetenv("SOURCE_DATE_EPOCH")
 
