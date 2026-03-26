@@ -162,7 +162,6 @@ end
 
 function download(x)
    local env = look(x)
-   env.curl = E.curl
    env.dist = string.format("%s/%s", C.distdir, env.url:match("/([^/]*)$"))
 
    -- change mirrors

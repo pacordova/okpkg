@@ -32,6 +32,7 @@ local E = {
    ["curl"]        = "curl -#fLR",
    ["ninja"]       = "samu",
    ["patch"]       = "patch -b -p1",
+   ["meson"]       = "meson",
    ["CFLAGS"]      = table.concat(C.cflags, ' '),
    ["CXXFLAGS"]    = table.concat(C.cflags, ' '),
 }

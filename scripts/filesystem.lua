@@ -65,16 +65,15 @@ mkdir("var/tmp")
 --------------
 -- Symlinks --
 --------------
-symlink("db", "var/lib")
-symlink("lib64", "usr/lib")
 symlink("/proc/self/mounts", "etc/mtab")
-symlink("/run/lock", "var/lock")
-symlink("/run", "var/run")
+symlink("db", "var/lib")
+symlink("../run/lock", "var/lock")
+symlink("../run", "var/run")
 symlink("usr/bin", "bin")
 symlink("usr/lib64", "lib64")
 symlink("usr/lib", "lib")
-symlink("/var/home", "home")
-
+symlink("lib64", "usr/lib")
+symlink("var/home", "home")
 
 ------------------
 -- System Files --
