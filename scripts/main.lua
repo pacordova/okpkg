@@ -14,8 +14,8 @@ for k,v in pairs(E) do ok.setenv(k,v) end
 
 -- Helpers
 local F = require("F")
-function basename(x) return x:match(".*/(.-)$") or x end
-function dirname(x) return x:match("(.*)/.-$") or x end
+basename = ok.basename
+dirname = ok.dirname
 function mkcd(x) ok.remove_all(x); ok.mkdir(x); ok.chdir(x); end
 
 -- Build routines
@@ -175,20 +175,17 @@ function download(x)
    end
 
    -- Set the mtime 
-   ok.setenv("SOURCE_DATE_EPOCH", get_timestamp(X.dist))
+   ok.setenv("SOURCE_DATE_EPOCH", get_timestamp(distfile))
    os.execute [[ find . -exec touch -hd "@$SOURCE_DATE_EPOCH" '{}' + ]]
    ok.unsetenv("SOURCE_DATE_EPOCH")
 
    return x
-}
+end
 
 function makepkg(path)
-   if ok.chdir(path) ~= 0 then
-      error(string.format("error: Path `%s' does not exist", path))
-   else
-      ok.setenv("pwd", ok.pwd())
-      ok.setenv("SOURCE_DATE_EPOCH", get_timestamp("."))
-   end
+   assert(ok.chdir(path) == 0)
+   ok.setenv("pwd", ok.pwd())
+   ok.setenv("SOURCE_DATE_EPOCH", get_timestamp("."))
 
    -- Stripping
    io.close(
@@ -220,7 +217,7 @@ function makepkg(path)
 
    -- Cleanup environment
    ok.chdir("..")
-   ok.remove_all(basename(path))
+   ok.remove_all(path)
    ok.unsetenv("SOURCE_DATE_EPOCH")
    ok.unsetenv("pwd")
 
@@ -228,14 +225,14 @@ function makepkg(path)
 end
 
 function build(x)
-   local X, v, destdir
-   X = look(x)
+   local X = look(x)
    X.flags = X.flags or {}
    local v = version(X.url)
-   local arch = os.getenv("CFLAGS"):match("-march=([%w%-]*)"):gsub("%-", "_")
-
-   -- Setup destdir
-   destdir = ("%s/%s-%s-%s"):format(C["outdir"], x, version, arch)
+   local arch = 
+      os.getenv("CFLAGS"):
+      match("-march=([%w-]*)"):
+      gsub("%-", "_")
+   local destdir = F"{C.outdir}/{x}-{v}-{arch}"
    ok.setenv("destdir", destdir)
    ok.remove_all(destdir)
    ok.mkdir(destdir)
@@ -295,14 +292,14 @@ function purge(x)
 end
 
 function install(x)
-   local idx, v, buf, file, filename
+   local file, buf, filename, idx
 
    -- Extract tarball, save the output buffer
-   file = io.popen(string.format("tar -C / -xvhf %s 2>&1", x))
-   buf = file:read('*a')
-   file:close()
+   fp = io.popen(F"tar -C / -xvhf {x} 2>&1")
+   buf = fp:read('*a')
+   fp:close()
 
-   v = version(x)
+   local v = version(x)
    if #v > 0 then idx = #x-#v-8 else idx = #x-7 end
    filename = string.format("%s/%s.txt", C.indexdir, basename(x:sub(1, idx)))
 
