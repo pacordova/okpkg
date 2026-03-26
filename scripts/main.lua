@@ -12,6 +12,12 @@ local C, M, E = dofile("/etc/okpkg.conf")
 -- Environment variables
 for k,v in pairs(E) do ok.setenv(k,v) end
 
+-- Helpers
+local F = require("F")
+function basename(x) return x:match(".*/(.-)$") or x end
+function dirname(x) return x:match(".*/(.-)$") or x end
+function mkcd(x) ok.remove_all(x); ok.mkdir(x); ok.chdir(x); end
+
 -- Build routines
 B = {
    ["cargo"] = function(...)
@@ -117,10 +123,6 @@ B = {
    end,
 }
 
--- can replace basename.c
-function basename(x) return x:match(".*/(.-)$") or x end
-
-
 local function get_timestamp(x)
    local fp, buf
    fp = io.popen("stat -c '%Y' " .. x)
@@ -133,22 +135,9 @@ local function version(x)
    return x:match("[-_%.][a-z]?([%d%.]+[a-z]?[0-9]?)[-_%.]")
 end
 
-local function parse_version(s)
-   local i, j
-   s = basename(s)
-   j = s:find("%.[debtargz]+")
-   if s:find("^%d") then 
-      i = 0
-   elseif s:find("[v._-]r?n?%d") then
-      i = s:find("[v._-]r?n?%d")
-   else
-      return ""
-   end
-   return s:sub(i+1, j-1)
-end
 
 -- TODO: C function to listdir, iterate instead of popen
--- TODO: Don't hardcore /usr/okpkg
+-- TODO: Don't hardcode /usr/okpkg
 function look(x)
    local fp, buf
    x = x:gsub("%-", "%%-")
@@ -158,55 +147,40 @@ function look(x)
    return load("return " .. buf)()
 end
 
--- TODO: make sha3sum use a file pointer (luaL_checkudata)
--- TODO: curl to stdout in io.popen and read the raw data
--- TODO: timestamp from unix headers?
 function download(x)
-   local X, fp
+   local X = look(x)
+   local remote_name = basename(X.url)
+   local distfile = F"{C.distdir}/{remote_name}"
+   local workdir = F"{C.workdir}/{x}"
 
-   X = look(x)
-   for k,v in pairs(M) do X.url = X.url:gsub(k, v) end -- change mirrors
-   X.url = { X.url:match("(.*)/(.-)$") }
-
+   -- change mirrors
+   for k,v in pairs(M) do X.url = X.url:gsub(k, v) end 
+   
    -- Download file if not already downloaded
-   print(("okpkg download %s\nurl: %s/%s"):format(x, X.url[1], X.url[2]))
-   ok.chdir(C.distdir)
-   io.close(
-      io.open(X.url[2]) or
-      io.popen(("$curl -O %s/%s"):format(X.url[1], X.url[2]))
-   )
-
-   -- Verify checksum
-   if not X.sha3 == ok.sha3sum(X.url[2]) then
-      os.remove(X.url[2])
-      error(("%s: FAILED"):format(X.url[2]))
-   else
-     print(("%s: OK"):format(X.url[2]))
-   end
-
+   io.close(io.open(distfile) or io.popen(F"$curl -o {distfile} {X.url}"))
+   assert(X.sha3 == sha3sum(distfile) or not os.remove(distfile))
+   
    -- Setup workdir
-   X.url[1] = C["distdir"]
-   ok.setenv("SOURCE_DATE_EPOCH", get_timestamp(X.url[2]))
-   ok.chdir(C["workdir"])
-   ok.remove_all(x)
-   ok.mkdir(x)
-   ok.chdir(x)
-   os.execute(("tar --strip-components=1 -xf %s/%s"):format(C.distdir, X.url))
-
-   -- Patch if file exists in patches
-   fp = io.open(("%s/patches/%s.diff"):format(C.okdir, x:gsub('^_', '')))
-   if fp and io.popen("$patch", 'w'):write(fp:read("*a")):close() then
+   mkcd(workdir)
+   os.execute(F"tar --strip-components=1 -xf {distfile}")
+   
+   -- Patch if file exists
+   -- Note: symlink for temporary packages, or update patch infrastructure
+   local fp = io.open(F"/usr/okpkg/patches/{x}.diff")
+   if fp then
+      io.popen("$patch", 'w'):
+         write(fp:read("*a")):
+         close()
       fp:close()
    end
 
-   -- Set the mtime
+   -- Set the mtime 
+   ok.setenv("SOURCE_DATE_EPOCH", get_timestamp(X.dist))
    os.execute [[ find . -exec touch -hd "@$SOURCE_DATE_EPOCH" '{}' + ]]
-
-   -- Cleanup
    ok.unsetenv("SOURCE_DATE_EPOCH")
 
    return x
-end
+}
 
 function makepkg(path)
    if ok.chdir(path) ~= 0 then
@@ -328,7 +302,7 @@ function install(x)
    buf = file:read('*a')
    file:close()
 
-   v = parse_version(x)
+   v = version(x)
    if #v > 0 then idx = #x-#v-8 else idx = #x-7 end
    filename = string.format("%s/%s.txt", C.indexdir, basename(x:sub(1, idx)))
 

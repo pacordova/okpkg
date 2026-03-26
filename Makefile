@@ -6,7 +6,9 @@ CC = /usr/bin/gcc -std=gnu99
 CXX = /usr/bin/g++
 CFLAGS = -O2
 LDFLAGS = -lcrypto
+LUA_PATH != lua -e "print(package.path:match('(.-)/%?.lua;'))"
 LUA_CPATH != lua -e "print(package.cpath:match('(.-)/%?.so;'))"
+
 
 objs = src/basename.o src/chdir.o src/chroot.o src/mkdir.o src/okutils.o \
        src/pwd.o src/setenv.o src/sha3sum.o src/symlink.o src/remove_all.o
@@ -28,6 +30,7 @@ install-strip: src/okutils.so
 	strip --strip-unneeded $<
 	mkdir -p $(DESTDIR)$(bindir) $(DESTDIR)$(LUA_CPATH)
 	mv -f $< $(DESTDIR)$(LUA_CPATH)
+	cp -f scripts/F.lua $(DESTDIR)$(LUA_PATH)
 	cp -f scripts/main.lua $(DESTDIR)$(bindir)/okpkg
 	cp -f scripts/config.lua $(DESTDIR)$(sysconfdir)/okpkg.conf
 
