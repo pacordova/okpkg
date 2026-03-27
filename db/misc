@@ -506,6 +506,21 @@ vim = {
    ]],
 };
 
+vim-classic = {
+   url = "https://git.sr.ht/~sircmpwn/vim-classic/archive/1ef43a85989d1112d7241fb27b63e258413526ab.tar.gz",
+   sha3 = "a808605292a0b85b36b555776e7cc137061ee6fdddddd9a7c2490e0ffd745150",
+   build = "./configure",
+   flags = {
+      "--enable-{cscope,multibyte}",
+      "--disable-{canberra,gpm,gui,netbeans,xim}",
+      "--disable-{perl,python,ruby}interp",
+      "--with-{features=huge,x=no}",
+   },
+   prep = [[
+      printf '#define SYS_VIMRC_FILE "/etc/vimrc"\n' >> src/feature.h
+   ]],
+};
+
 xorriso = {
    url = "http://ftp.gnu.org/gnu/xorriso/xorriso-1.5.6.tar.gz",
    sha3 = "ce81f4c5fc0c4a4144a1c9e68bfc49e632ca73ffc25ce1615f849f081e1510b8",

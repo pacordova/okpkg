@@ -20,12 +20,37 @@ local C = {
    },
 }
 
-local GCC = {
-   ["optimize"] = 2
-   ["cpu"]      = "skylake"
-   ["ssp"]      = "strong"
-   ["cet"]      = 
+local cflags = {
+   ["optimize"] =  2,              -- -Olevel 
+   ["cpu"]      = "skylake",       -- -march=cpu
+   ["ssp"]      = "strong",        -- -fstack-protector{,-all,-strong,-explicit}
+   ["cet"]      = "none",          -- -fcf-protection=[full|branch|return|none|check]
+   ["zeroinit"] = "uninitialized", -- -ftrivial-auto-var-init=[uninitialized|pattern|zero]
+   ["scp"]      = true,            -- -fstack-clash-protection
+   ["pie"]      =  true,           -- -fpie -pie 
+   ["relro"]    =  true,           -- -Wl,-z,relro,-z,now
+   ["common"]   =  true,           -- -f{,no-}common
+   ["pipe"]     =  true,           -- -pipe
+   ["frtfy"]    =  false,          -- -D_FORTIFY_SOURCE=[0-3]
+   ["assert"]   =  false,          -- -D_GLIBCXX_ASSERTIONS
 }
+
+cflags = string.format("%s -O%s -march=%s -fcf-protection=%s
+cflags.ssp = ("-f%sstack-protector-%s"):format( 
+   unpack {{"no-",""},{"",""},{"","-all"},{"","-strong"}}[cflags.ssp])
+)
+
+if cflags.ssp == "no" then
+   cflags.ssp = "-fno-stack-protector"
+elseif cflags.ssp == "yes" then
+   cflags.ssp = "-fstack-protector"
+else
+   cflags.ssp = "-fstack-protector-" .. cflags.ssp
+end
+
+
+
+local cflags = "-O{optimize} -march={cpu} {SSP[ssp]} 
 
 -- Mirrors (note: escape any dashes)
 local M = {
