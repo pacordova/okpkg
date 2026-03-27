@@ -8,6 +8,8 @@ local C = {
    ["outdir"]      = "/var/cache/ok/out",
    ["pkgdir"]      = "/var/cache/ok/pkg",
    ["indexdir"]    = "/usr/okpkg/index",
+   ["opt-level"]   = 2
+   ["cpu"]         = "skylake"
    ["cflags"] = {
       "-march=skylake",
       "-O2",
@@ -16,6 +18,13 @@ local C = {
       "-fcommon",
       "-pipe"
    },
+}
+
+local GCC = {
+   ["optimize"] = 2
+   ["cpu"]      = "skylake"
+   ["ssp"]      = "strong"
+   ["cet"]      = 
 }
 
 -- Mirrors (note: escape any dashes)

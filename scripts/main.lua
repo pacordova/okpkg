@@ -12,6 +12,10 @@ local C, M, E = dofile("/etc/okpkg.conf")
 -- Environment variables
 for k,v in pairs(E) do ok.setenv(k,v) end
 
+for i=1,#C.cflags do
+C.arch = select(2, string.match(C.cflags[1], "(%w-)=(%w)"))
+   if string.sub(C.cflags[i], 1, 
+
 -- Helpers
 F = require("F")
 
@@ -99,7 +103,8 @@ B = {
          "-Dlibdir=lib64",
          "-Dsbindir=bin",
          "-Dlibexecdir=lib64",
-         "-Dbuildtype=release",
+         "-Ddebug=false",
+         "-Doptimization=2",
          "-Dwrap_mode=nodownload",
          ...
       }
@@ -170,13 +175,18 @@ function download(x)
    -- Download file if not already downloaded
    io.close (
       io.open(env.dist) or 
-      io.popen(("$curl %s >%s"):format(env.url, env.dist))
+      io.popen(string.format("$curl %s >%s", env.url, env.dist))
    )
    assert(env.sha3 == sha3sum(env.dist) or not os.remove(env.dist))
    
    -- Setup source directory
-   mkcd(string.format("%s/%s", C["workdir"], x))
-   os.execute("tar --strip-components=1 -xf " .. env.dist)
+   assert(
+      ok.chdir(C["workdir"]) and 
+      ok.remove_all(x) and 
+      ok.mkdir(x) and 
+      ok.chdir(x) and
+      os.execute("tar --strip-components=1 -xf " .. env.dist)
+   )
    
    -- Patch if file exists
    -- Note: symlink for temporary packages, or update patch infrastructure
@@ -239,14 +249,16 @@ function makepkg(path)
 end
 
 function build(x)
-   local X = look(x)
-   X.flags = X.flags or {}
-   local v = version(X.url)
-   local arch = 
-      os.getenv("CFLAGS"):
-      match("-march=([%w-]*)"):
-      gsub("%-", "_")
-   local destdir = F"{C.outdir}/{x}-{v}-{arch}"
+   local env = look(x)
+   env.flags = X.flags or {}
+   env.destdir = string.format(
+      "%s/%s", C.outdir, table.concat({
+         x, 
+         version(env.url),
+            }
+   )
+      
+
    ok.setenv("destdir", destdir)
    ok.remove_all(destdir)
    ok.mkdir(destdir)
