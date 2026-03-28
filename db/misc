@@ -2,6 +2,11 @@ picom = {
    url = "https://github.com/yshui/picom/archive/v13/picom-13.tar.gz",
    sha3 = "705bac0be7c10192b523545e98e2244becd41f1e8c048e047fb59a60944e3a22",
    build = "meson",
+   flags = {
+      "-Ddbus=false",
+      "-Dcompton=false",
+      "-Dregex=true",
+   },
    post = [[ rm -fr $destdir/usr/share/applications ]]
 };
 
