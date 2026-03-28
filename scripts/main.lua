@@ -12,13 +12,7 @@ local C, M, E = dofile("/etc/okpkg.conf")
 -- Environment variables
 for k,v in pairs(E) do ok.setenv(k,v) end
 
-for i=1,#C.cflags do
-C.arch = select(2, string.match(C.cflags[1], "(%w-)=(%w)"))
-   if string.sub(C.cflags[i], 1, 
-
 -- Helpers
-F = require("F")
-
 string.basename = ok.basename or 
    function(x) return x:match(".*/(.-)$") or x end
 
@@ -150,7 +144,7 @@ local function get_timestamp(x)
 end
 
 local function version(x)
-   return x:match("[-_%.][a-z]?([%d%.]+[a-z]?[0-9]?)[-_%.]")
+   return x:match("[-_%.][a-z]?([%d%.]+[a-z]?[0-9]?)[-_%.]") or "nil"
 end
 
 
@@ -245,23 +239,19 @@ function makepkg(path)
    ok.unsetenv("SOURCE_DATE_EPOCH")
    ok.unsetenv("pwd")
 
+   print(path)
    return path .. ".tar.lz"
 end
 
 function build(x)
-   local env = look(x)
-   env.flags = X.flags or {}
-   env.destdir = string.format(
-      "%s/%s", C.outdir, table.concat({
-         x, 
-         version(env.url),
-            }
-   )
-      
+   local X = look(x)
+   X.flags = X.flags or {}
+   X.version = version(X.url)
+   X.destdir = string.format("%s/%s-%s-%s", C.outdir, x, X.version, C.cc.cpu)
 
-   ok.setenv("destdir", destdir)
-   ok.remove_all(destdir)
-   ok.mkdir(destdir)
+   ok.setenv("destdir", X.destdir)
+   ok.remove_all(X.destdir)
+   ok.mkdir(X.destdir)
 
    -- Setup workdir
    ok.chdir(("%s/%s"):format(C.workdir, x))
@@ -297,11 +287,11 @@ function build(x)
    os.execute [[ find $destdir -exec touch -hd "@$SOURCE_DATE_EPOCH" '{}' + ]]
 
    -- Cleanup
-   ok.remove_all(destdir .. "no")
+   ok.remove_all(X.destdir .. "no")
    ok.unsetenv("destdir")
    ok.unsetenv("SOURCE_DATE_EPOCH")
 
-   return makepkg(destdir)
+   return makepkg(X.destdir)
 end
 
 function purge(x)
@@ -318,28 +308,23 @@ function purge(x)
 end
 
 function install(x)
-   local file, buf, filename, idx
+   local fp, buf, indexfile
+   print(x)
 
    -- Extract tarball, save the output buffer
-   fp = io.popen(F"tar -C / -xvhf {x} 2>&1")
+   fp = io.popen("tar -C / 2>&1 -xvf " .. x)
    buf = fp:read('*a')
    fp:close()
 
    local v = version(x)
-   if #v > 0 then idx = #x-#v-8 else idx = #x-7 end
-   filename = string.format("%s/%s.txt", C.indexdir, ok.basename(x:sub(1, idx)))
+
+   indexfile = string.format("%s/%s.txt", C.indexdir, x:match(".*/(.-)-%d"))
 
    -- Save original file to *.orig, use diff to delete old files
-   file = io.open(filename)
-   if file then
-      file:close()
-      os.rename(filename, filename .. ".orig")
-   end
+   os.rename(indexfile, indexfile .. ".orig")
 
    -- Write output buffer as a file index
-   file = io.open(filename, 'w')
-   file:write(buf)
-   file:close()
+   io.close(io.open(indexfile, 'w'):write(buf))
 
    os.execute("ldconfig")
 end
