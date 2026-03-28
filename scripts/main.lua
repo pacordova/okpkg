@@ -316,9 +316,7 @@ function install(x)
    buf = fp:read('*a')
    fp:close()
 
-   local v = version(x)
-
-   indexfile = string.format("%s/%s.txt", C.indexdir, x:match(".*/(.-)-%d"))
+   indexfile = string.format("%s/%s.txt", C.indexdir, x:match(".*/(.-)-n?%d?"))
 
    -- Save original file to *.orig, use diff to delete old files
    os.rename(indexfile, indexfile .. ".orig")
