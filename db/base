@@ -634,7 +634,7 @@ lua = {
 };
 
 openvi = {
-   url = "https://github.com/johnsonjh/openvi/archive/7.6.32/openvi-7.6.32.tar.gz",
+   url = "https://github.com/johnsonjh/openvi/archive/7.7.32/openvi-7.7.32.tar.gz",
    sha3 = "c00033f27f786ec5d0878d87b71746072fb06af23766ff4e62df4b1831ba6d4c",
    build = "make",
    flags = {
