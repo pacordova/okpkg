@@ -568,6 +568,7 @@ xorg-server = {
       "-Dsha1=libcrypto",
       "-Dxkb_dir=/usr/share/X11/xkb",
       "-Dxkb_output_dir=/var/db/xkb",
+      "-Dsystemd_logind=false",
    },
    post = [[
       mkdir -p $destdir/etc/{sysconfig,X11/xorg.conf.d}

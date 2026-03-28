@@ -165,7 +165,10 @@ pulseaudio = {
       "-Ddatabase=gdbm",
       "-Ddoxygen=false",
       "-Dbluez5=disabled",
-   }
+   },
+   post = [[
+      rm -f "$destdir/usr/share/dbus-1/system.d/pulseaudio-system.conf"
+   ]]
 };
 
 libcanberra = {
