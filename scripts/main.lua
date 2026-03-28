@@ -144,7 +144,7 @@ local function get_timestamp(x)
 end
 
 local function version(x)
-   return x:match("[-_%.][a-z]?([%d%.]+[a-z]?[0-9]?)[-_%.]") or "nil"
+   return x:match(".*/.-[-_%.][a-z]?([%d%.]+[a-z]?[0-9]?)[-_%.]") or "nil"
 end
 
 
