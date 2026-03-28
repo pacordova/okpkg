@@ -8,49 +8,19 @@ local C = {
    ["outdir"]      = "/var/cache/ok/out",
    ["pkgdir"]      = "/var/cache/ok/pkg",
    ["indexdir"]    = "/usr/okpkg/index",
-   ["opt-level"]   = 2
-   ["cpu"]         = "skylake"
-   ["cflags"] = {
-      "-march=skylake",
-      "-O2",
-      "-fstack-protector-strong",
-      "-fstack-clash-protection",
-      "-fcommon",
-      "-pipe"
-   },
+   cc = {
+      ["cpu"]      = "skylake",
+      ["optimize"] =  2,
+      ["fort"]     =  2,
+      ["ssp"]      = "strong",
+      ["cet"]      = "none",
+      ["zero"]     = "zero",
+      ["relro"]    =  "full",
+      ["scp"]      =  true,
+      ["pie"]      =  true,
+      ["common"]   =  false,
+   }
 }
-
-local cflags = {
-   ["optimize"] =  2,              -- -Olevel 
-   ["cpu"]      = "skylake",       -- -march=cpu
-   ["ssp"]      = "strong",        -- -fstack-protector{,-all,-strong,-explicit}
-   ["cet"]      = "none",          -- -fcf-protection=[full|branch|return|none|check]
-   ["zeroinit"] = "uninitialized", -- -ftrivial-auto-var-init=[uninitialized|pattern|zero]
-   ["scp"]      = true,            -- -fstack-clash-protection
-   ["pie"]      =  true,           -- -fpie -pie 
-   ["relro"]    =  true,           -- -Wl,-z,relro,-z,now
-   ["common"]   =  true,           -- -f{,no-}common
-   ["pipe"]     =  true,           -- -pipe
-   ["frtfy"]    =  false,          -- -D_FORTIFY_SOURCE=[0-3]
-   ["assert"]   =  false,          -- -D_GLIBCXX_ASSERTIONS
-}
-
-cflags = string.format("%s -O%s -march=%s -fcf-protection=%s
-cflags.ssp = ("-f%sstack-protector-%s"):format( 
-   unpack {{"no-",""},{"",""},{"","-all"},{"","-strong"}}[cflags.ssp])
-)
-
-if cflags.ssp == "no" then
-   cflags.ssp = "-fno-stack-protector"
-elseif cflags.ssp == "yes" then
-   cflags.ssp = "-fstack-protector"
-else
-   cflags.ssp = "-fstack-protector-" .. cflags.ssp
-end
-
-
-
-local cflags = "-O{optimize} -march={cpu} {SSP[ssp]} 
 
 -- Mirrors (note: escape any dashes)
 local M = {
@@ -67,8 +37,20 @@ local E = {
    ["ninja"]       = "samu",
    ["patch"]       = "patch -b -p1",
    ["meson"]       = "meson",
-   ["CFLAGS"]      = table.concat(C.cflags, ' '),
-   ["CXXFLAGS"]    = table.concat(C.cflags, ' '),
 }
+
+-- temporary
+local cflags = {
+   "-march=skylake",
+   "-O2",
+   "-fstack-protector-strong",
+   "-fstack-clash-protection",
+   "-ftrivial-auto-var-init=zero",
+   "-Wl,-z,relro,-z,now",
+   "-pipe",
+}
+
+E.CFLAGS = table.concat(cflags, ' ')
+E.CXXFLAGS = table.concat(cflags, ' ')
 
 return C, M, E
