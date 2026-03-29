@@ -1,33 +1,15 @@
 #!/usr/bin/env lua
 
+-- Imports
 unpack = unpack or table.unpack
-
 local ok = require("okutils")
+local C, M, E = dofile("/etc/okpkg.conf")
 
 -- Global variables (callable by cli)
 chroot, sha3sum = ok.chroot, ok.sha3sum
 
-local C, M, E = dofile("/etc/okpkg.conf")
-
 -- Environment variables
 for k,v in pairs(E) do ok.setenv(k,v) end
-
--- Helpers
-string.basename = ok.basename or 
-   function(x) return x:match(".*/(.-)$") or x end
-
-string.dirname = ok.dirname or 
-   function(x) return x:match("(.*)/.-$") or x end
-
-string.open, string.popen, string.execute = 
-   io.open, io.popen, os.execute
-
-function string.eval(self, env)
-   return self:gsub("%$(%w+)", env)
-end
-
-function mkcd(x) ok.remove_all(x); ok.mkdir(x); ok.chdir(x); end
-
 
 -- Build routines
 B = {
@@ -135,9 +117,9 @@ B = {
    end,
 }
 
-local function get_timestamp(x)
+local function mtime(x)
    local fp, buf
-   fp = io.popen("stat -c '%Y' " .. x)
+   fp = io.popen("stat -c %Y " .. x)
    buf = fp:read('*a')
    io.close(fp)
    return(tonumber(buf:sub(1, buf:find('\n')-1)))
@@ -150,28 +132,28 @@ end
 
 -- TODO: C function to listdir, iterate instead of popen
 -- TODO: Don't hardcode /usr/okpkg
-function look(x)
+function _SEEK(x)
    local fp, buf
    x = x:gsub("%-", "%%-")
    fp = io.popen("cat /usr/okpkg/db/*")
-   buf = fp:read('*a'):match("\n?" .. x .. "%s*=%s*({.-})%s*;")
+   buf = fp:read('*a'):match("\n?[^%w]" .. x .. "%s*=%s*({.-})%s*;")
    fp:close()
    return load("return " .. buf)()
 end
 
 function download(x)
-   local env = look(x)
-   env.dist = string.format("%s/%s", C.distdir, env.url:match("/([^/]*)$"))
+   local X = _SEEK(x)
+   X.dist = string.format("%s/%s", C.distdir, X.url:match("/([^/]*)$"))
 
    -- change mirrors
-   for k,v in pairs(M) do env.url = env.url:gsub(k, v) end 
+   for k,v in pairs(M) do X.url = X.url:gsub(k, v) end 
    
    -- Download file if not already downloaded
    io.close (
-      io.open(env.dist) or 
-      io.popen(string.format("$curl %s >%s", env.url, env.dist))
+      io.open(X.dist) or 
+      io.popen(string.format("$curl %s >%s", X.url, X.dist))
    )
-   assert(env.sha3 == sha3sum(env.dist) or not os.remove(env.dist))
+   assert(X.sha3 == sha3sum(X.dist) or not os.remove(X.dist))
    
    -- Setup source directory
    assert(
@@ -179,7 +161,7 @@ function download(x)
       ok.remove_all(x) and 
       ok.mkdir(x) and 
       ok.chdir(x) and
-      os.execute("tar --strip-components=1 -xf " .. env.dist)
+      os.execute("$tar --strip-components=1 -xf " .. X.dist)
    )
    
    -- Patch if file exists
@@ -193,7 +175,7 @@ function download(x)
    end
 
    -- Set the mtime 
-   ok.setenv("SOURCE_DATE_EPOCH", get_timestamp(env.dist))
+   ok.setenv("SOURCE_DATE_EPOCH", mtime(X.dist))
    os.execute [[ find . -exec touch -hd "@$SOURCE_DATE_EPOCH" '{}' + ]]
    ok.unsetenv("SOURCE_DATE_EPOCH")
 
@@ -203,7 +185,7 @@ end
 function makepkg(path)
    assert(ok.chdir(path) == 0)
    ok.setenv("pwd", ok.pwd())
-   ok.setenv("SOURCE_DATE_EPOCH", get_timestamp("."))
+   ok.setenv("SOURCE_DATE_EPOCH", mtime("."))
 
    -- Stripping
    io.close(
@@ -222,7 +204,7 @@ function makepkg(path)
       rm -fr usr/share/{info,doc,locale,gtk-doc}
       find . -name \*.pyc -delete
       find . -name \*.la -delete
-      tar --mtime="@$SOURCE_DATE_EPOCH" \
+      $tar --mtime="@$SOURCE_DATE_EPOCH" \
           --sort=name \
           --owner=0 \
           --group=0 \
@@ -233,18 +215,17 @@ function makepkg(path)
       touch -hd "@$SOURCE_DATE_EPOCH" $pwd.tar.lz
    ]]
 
-   -- Cleanup environment
+   -- Cleanup
    ok.chdir("..")
    ok.remove_all(path)
    ok.unsetenv("SOURCE_DATE_EPOCH")
    ok.unsetenv("pwd")
 
-   print(path)
    return path .. ".tar.lz"
 end
 
 function build(x)
-   local X = look(x)
+   local X = _SEEK(x)
    X.flags = X.flags or {}
    X.version = version(X.url)
    X.destdir = string.format("%s/%s-%s-%s", C.outdir, x, X.version, C.cc.cpu)
@@ -255,7 +236,7 @@ function build(x)
 
    -- Setup workdir
    ok.chdir(("%s/%s"):format(C.workdir, x))
-   ok.setenv("SOURCE_DATE_EPOCH", get_timestamp("."))
+   ok.setenv("SOURCE_DATE_EPOCH", mtime("."))
 
    X.prep = 
       X.prep and 
@@ -283,7 +264,7 @@ function build(x)
       not os.execute(X.post) and
       error(string.format("error: build: post: %s", x))
 
-   -- Set the mtime
+   -- Set mtime
    os.execute [[ find $destdir -exec touch -hd "@$SOURCE_DATE_EPOCH" '{}' + ]]
 
    -- Cleanup
@@ -308,21 +289,16 @@ function purge(x)
 end
 
 function install(x)
-   local fp, buf, indexfile
-   print(x)
+   local fp, buf, txt
 
-   -- Extract tarball, save the output buffer
-   fp = io.popen("tar -C / 2>&1 -xvf " .. x)
+   fp = io.popen("$tar -C / -xvf " .. x)
    buf = fp:read('*a')
-   fp:close()
+   io.close(fp)
 
-   indexfile = string.format("%s/%s.txt", C.indexdir, x:match(".*/(.-)-n?%d?"))
-
-   -- Save original file to *.orig, use diff to delete old files
-   os.rename(indexfile, indexfile .. ".orig")
-
-   -- Write output buffer as a file index
-   io.close(io.open(indexfile, 'w'):write(buf))
+   ok.chdir(C.indexdir)
+   txt = ok.basename(x):match("(.-)-n?%d?")
+   os.rename(txt, txt .. ".orig")
+   io.close(io.open(txt, 'w'):write(buf))
 
    os.execute("ldconfig")
 end

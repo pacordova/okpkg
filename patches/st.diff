@@ -109,8 +109,8 @@ index 0000000..2d2b76f
   */
 -static double minlatency = 2;
 -static double maxlatency = 33;
-+static double minlatency = 0;
-+static double maxlatency = 0;
++static double minlatency = 2;
++static double maxlatency = 2;
  
  /*
   * blinking timeout (set to 0 to disable blinking) for the terminal blinking

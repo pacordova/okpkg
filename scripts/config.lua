@@ -33,6 +33,7 @@ local E = {
    ["LC_ALL"]      = "POSIX",
    ["CONFIG_SITE"] = "/etc/config.site",
    ["MAKEFLAGS"]   = "-j5",
+   ["tar"]         = "gtar --xattrs",
    ["curl"]        = "curl -#fLR",
    ["ninja"]       = "samu",
    ["patch"]       = "patch -b -p1",
