@@ -11,14 +11,13 @@ connman = {
    flags = {
       "--enable-{client,datafiles,ethernet,loopback,wifi,wireguard}",
       "--disable-{bluetooth,dundee,gadget,neard,ofono,pacrunner,tools,wispr}",
+      "--disable-{iospm,hh2serial-gps,vpnc,pptp,policykit,openconnect,l2tp}",
+      "--disable-{debug,test}",
       "--with-systemdunitdir=no",
+      "--with-tmpfilesdir=/usr/lib64/tmpfiles.d",
+      "--with-firewall=iptables",
       "LIBS=-lncursesw",
    },
-   post = [[ 
-      install -d $destdir/etc/connman
-      install -m 755 client/connmanctl $destdir/usr/bin
-      install -m 644 src/main.conf     $destdir/etc/connman
-   ]]
 };
 
 curl = {
