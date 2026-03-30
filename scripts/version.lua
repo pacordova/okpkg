@@ -2,12 +2,8 @@
 
 local unpack = unpack or table.unpack
 
-local C = unpack(loadfile("/etc/okpkg.conf")())
-
 local ok = require("okutils")
-
-local chdir, basename = ok.chdir, ok.basename
-
+local C = dofile("/etc/okpkg.conf")
 
 local function curl(path)
    local mir = "https://mirrors.kernel.org"
@@ -20,7 +16,7 @@ end
 
 local function parse_version(path)
    local s, i, j
-   s = basename(path)
+   s = ok.basename(path)
    if s:find("^%d") then
       i = 0
    elseif s:find("[v._-]%d") then
@@ -67,7 +63,7 @@ local buf = curl("archlinux/{core,extra,community}/os/x86_64/")
 
 for w in string.gmatch(buf, 'href="(.-)"') do
    if string.find(w, "%.tar.zst$") then
-      local s = basename(w):
+      local s = ok.basename(w):
          gsub(".pkg.tar.zst", ""):
          gsub("%-x86_64", ""):
          gsub("%-any", ""):
@@ -96,7 +92,7 @@ local buf = curl("slackware/slackware64-current/FILELIST.TXT")
 
 for w in string.gmatch(buf, '%./(.-)\n') do
    if string.find(w, "%.txz$") then
-      local s = basename(w):
+      local s = ok.basename(w):
          gsub("%-x86_64.-.txz", ""):
          gsub("%-noarch%-%d+", ""):
          gsub("glibc%-zoneinfo%-", "tzdata-"):
@@ -118,7 +114,7 @@ end
 okpkg = {}
 local file, buf
 
-chdir(C["pkgdir"])
+ok.chdir(C["pkgdir"])
 file = io.popen("find * -name '*.tar.lz' -exec basename '{}' \\;")
 buf = file:read("*a")
 file:close()
@@ -142,7 +138,7 @@ end
 pkglist = {}
 local file, buf
 
-chdir(C["okdir"])
+ok.chdir(C["okdir"])
 file = io.popen("cat db/*.db")
 buf = '\n' .. file:read("*a")
 file:close()
@@ -159,6 +155,6 @@ for i in buf:gmatch("\n([%w%-%+]-) = {.-;") do
    end
 end
 
-if basename(arg[0]) == "version.lua" then
+if ok.basename(arg[0]) == "version.lua" then
    version(pkglist)
 end

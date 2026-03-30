@@ -125,8 +125,8 @@ local function mtime(x)
    return(tonumber(buf:sub(1, buf:find('\n')-1)))
 end
 
-local function version(x)
-   return x:match(".*/.-[-_%.][a-z]?([%d%.]+[a-z]?[0-9]?)[-_%.]") or "nil"
+local function v(x)
+   return ok.basename(x):match("[-_%.][a-z]?([%d%.]+[a-z]?[0-9]?)[-_%.]")
 end
 
 
@@ -227,7 +227,7 @@ end
 function build(x)
    local X = _SEEK(x)
    X.flags = X.flags or {}
-   X.version = version(X.url)
+   X.version = v(X.url) or "nil"
    X.destdir = string.format("%s/%s-%s-%s", C.outdir, x, X.version, C.cc.cpu)
 
    ok.setenv("destdir", X.destdir)
@@ -296,7 +296,7 @@ function install(x)
    io.close(fp)
 
    ok.chdir(C.indexdir)
-   txt = ok.basename(x):match("(.-)-n?%d?")
+   txt = ok.basename(x):match("(.-)-n?%d?") .. ".txt"
    os.rename(txt, txt .. ".orig")
    io.close(io.open(txt, 'w'):write(buf))
 
