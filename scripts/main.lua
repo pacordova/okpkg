@@ -132,7 +132,7 @@ end
 
 -- TODO: C function to listdir, iterate instead of popen
 -- TODO: Don't hardcode /usr/okpkg
-function _SEEK(x)
+function _XLOOK (x)
    local fp, buf
    x = x:gsub("%-", "%%-")
    fp = io.popen("cat /usr/okpkg/db/*")
@@ -142,7 +142,7 @@ function _SEEK(x)
 end
 
 function download(x)
-   local X = _SEEK(x)
+   local X = _XLOOK (x)
    X.dist = string.format("%s/%s", C.distdir, X.url:match("/([^/]*)$"))
 
    -- change mirrors
@@ -225,7 +225,7 @@ function makepkg(path)
 end
 
 function build(x)
-   local X = _SEEK(x)
+   local X = _XLOOK (x)
    X.flags = X.flags or {}
    X.version = v(X.url) or "nil"
    X.destdir = string.format("%s/%s-%s-%s", C.outdir, x, X.version, C.cc.cpu)

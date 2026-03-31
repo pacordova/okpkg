@@ -31,7 +31,7 @@ B = {
    end,
 }
 
-function _db_lookup(x)
+function _oklook(x)
    local file, buf, i, j
    x = string.format("\n%s = {", x)
    file = io.popen(string.format("cat %s/db/*", C["okdir"]))
@@ -57,7 +57,7 @@ end
 
 function extract(pkgname)
    local t, file, filename
-   t = _xlook(pkgname) or _db_lookup(pkgname)
+   t = _xlook(pkgname) or _oklook(pkgname)
    filename = string.format("%s/%s", C["distdir"], basename(t.url))
 
    -- Setup the source directory for build.
