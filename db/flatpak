@@ -1,3 +1,16 @@
+libxmlb = {
+   url = "https://github.com/hughsie/libxmlb/releases/download/0.3.25/libxmlb-0.3.25.tar.xz",
+   sha3 = "887470f9cca14688dc05801fcd396fbc17b09f22c85d668ce4f0d0569b95cc58",
+   build = "meson",
+   flags = { "-Dintrospection=true", "-D{gtkdoc,tests}=false" },
+};
+
+libfyaml = {
+   url = "https://github.com/pantoniou/libfyaml/releases/download/v0.9.6/libfyaml-0.9.6.tar.gz",
+   sha3 = "24548a6798b52898d1131bf2c642f2f79c16d57d7feea5e1aa6d9959de94fa57",
+   build = "./configure",
+};
+
 xdg-dbus-proxy = {
    url = "https://github.com/flatpak/xdg-dbus-proxy/releases/download/0.1.6/xdg-dbus-proxy-0.1.6.tar.xz",
    sha3 = "57497aa3cb9d71bdbdb937affe1f2f69ec48217205bf8b5fe9d6422c66d33de4",
@@ -46,8 +59,8 @@ appstream = {
 };
 
 bubblewrap = {
-   url = "https://github.com/projectatomic/bubblewrap/releases/download/v0.11.0/bubblewrap-0.11.0.tar.xz",
-   sha3 = "3af7c478f908a1dd601159d8f88f3cd26af066c1f8934c695f3c063ed44e6733",
+   url = "https://github.com/projectatomic/bubblewrap/releases/download/v0.11.1/bubblewrap-0.11.1.tar.xz",
+   sha3 = "671bf7f62ef68bbb2f3b142f5af34ce2b9c9a711f1c2a8f03042e941122e18b5",
    build = "meson",
    flags = { "-Dselinux=disabled" }
 };

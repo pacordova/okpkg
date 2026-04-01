@@ -22,8 +22,8 @@ mksh = {
 };
 
 oksh = {
-   url = "https://github.com/ibara/oksh/releases/download/oksh-7.5/oksh-7.5.tar.gz",
-   sha3 = "786cee634f58a6e2d93bdb5cf439480e11c2c1e1ff287822213424040333746d",
+   url = "https://github.com/ibara/oksh/releases/download/oksh-7.8/oksh-7.8.tar.gz",
+   sha3 = "6fdf399bf1f64033db2901a89e92166fa93857ef51ca4fa2084b9ec5b30eadce",
    build = "./configure",
    flags = { "--cflags=$CFLAGS", "--enable-ksh" },
    post = [[ 

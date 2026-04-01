@@ -1,6 +1,6 @@
 perl = {
-   url = "https://www.cpan.org/src/5.0/perl-5.42.1.tar.xz",
-   sha3 = "cd7aca95421303348f477f54ea8d40297566c7e51e05b820a7ee1022273accc6",
+   url = "https://www.cpan.org/src/5.0/perl-5.42.2.tar.xz",
+   sha3 = "680780c9743fbf551d32f9fd04ee7028751896faffeddf47cf2ac38a74f54dc7",
    build = "./configure.gnu",
    flags= {
       "-Dvendorprefix=/usr",

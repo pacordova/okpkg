@@ -64,8 +64,8 @@ upower = {
 };
 
 vala = {
-   url = "https://download.gnome.org/sources/vala/0.56/vala-0.56.18.tar.xz",
-   sha3 = "19f1b9220be852f67ac7bd42db6ef0eb698570910c3d22f5e91c82d8be9fb02b",
+   url = "https://download.gnome.org/sources/vala/0.56/vala-0.56.19.tar.xz",
+   sha3 = "7710ecafd8dca574ad719d5a0f1fcd3dcc41c623f1b3ce55b5e137a829d8e80e",
    build = "./configure",
    flags = {
       "--enable-{python3=yes,python=no,valadoc=no}",
@@ -246,8 +246,8 @@ libinih = {
 };
 
 libjpeg-turbo = {
-   url = "https://github.com/libjpeg-turbo/libjpeg-turbo/releases/download/3.1.3/libjpeg-turbo-3.1.3.tar.gz",
-   sha3 = "6766f76788820f0d672cd6bd19dd77b7879f80391305327083ba58b55942e493",
+   url = "https://github.com/libjpeg-turbo/libjpeg-turbo/releases/download/3.1.4.1/libjpeg-turbo-3.1.4.1.tar.gz",
+   sha3 = "1139b79e06fa857a57fc81fdf3628711cd7a49394214800e18737859065b802b",
    build = "cmake",
    flags = { "-DENABLE_STATIC=OFF", "-DWITH_{JPEG8=ON,JAVA=OFF}" }
 };
@@ -278,8 +278,8 @@ libpcap = {
 };
 
 libpng = {
-   url = "https://downloads.sourceforge.net/libpng/libpng-1.6.55.tar.xz",
-   sha3 = "961ba2e494ab49add23af966dcffdff83f63387ac7bd7852ec9bbae91e5e328b",
+   url = "https://downloads.sourceforge.net/libpng/libpng-1.6.56.tar.xz",
+   sha3 = "abde88d3e5d82ad540725dbf79407ab696e564c0086ee9ecabf604a8f1770ad9",
    build = "./configure",
 };
 
@@ -378,13 +378,6 @@ libxml2 = {
    }
 };
 
-libxmlb = {
-   url = "https://github.com/hughsie/libxmlb/releases/download/0.3.25/libxmlb-0.3.25.tar.xz",
-   sha3 = "887470f9cca14688dc05801fcd396fbc17b09f22c85d668ce4f0d0569b95cc58",
-   build = "meson",
-   flags = { "-Dintrospection=true", "-D{gtkdoc,tests}=false" },
-};
-
 libxslt = {
    url = "https://download.gnome.org/sources/libxslt/1.1/libxslt-1.1.45.tar.xz",
    sha3 = "ac90e0851246088eab2c71008c0b72246eada110e1f23a109383089c88d846d6",
@@ -398,14 +391,6 @@ libyaml = {
    sha3 = "cd085eedddb0caeaa360db3e037155db95f8998d495047f3a8cbee6ee0430022",
    build = "./configure",
 };
-
-libfyaml = {
-   url = "https://github.com/pantoniou/libfyaml/releases/download/v0.9.6/libfyaml-0.9.6.tar.gz",
-   sha3 = "24548a6798b52898d1131bf2c642f2f79c16d57d7feea5e1aa6d9959de94fa57",
-   build = "./configure",
-};
-
-
 
 lzo = {
    url = "https://oberhumer.com/opensource/lzo/download/lzo-2.10.tar.gz",

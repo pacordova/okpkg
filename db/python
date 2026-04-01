@@ -50,8 +50,8 @@ python-packaging = {
 };
 
 python-build = {
-   url = "https://pypi.org/packages/source/b/build/build-1.4.0.tar.gz",
-   sha3 = "c01cbb39ffded47c9105bb23675565f0a7d27880cd4ad4c698ad82b51265576f",
+   url = "https://pypi.org/packages/source/b/build/build-1.4.2.tar.gz",
+   sha3 = "47161a78dda083c3a47d1e7711e3fe6af0522726d50bbc21d9b87750acddd7ce",
    build = "python-build",
 };
 
@@ -135,8 +135,8 @@ python-hatchling = {
 };
 
 python-pygments = {
-   url = "https://pypi.org/packages/source/p/pygments/pygments-2.19.2.tar.gz",
-   sha3 = "906fca23e13fb6a3ca799c6f1d527d7f197a7a2ff555c34248c8222e67ee81be",
+   url = "https://pypi.org/packages/source/p/pygments/pygments-2.20.0.tar.gz",
+   sha3 = "8e52625ff5ba9699b810f4bcea52224bba7a0ecb46f58ad16627ab87b3a63472",
    build = "python-build",
 };
 

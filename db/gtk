@@ -55,8 +55,8 @@ cairo = {
 };
 
 pango = {
-   url = "https://download.gnome.org/sources/pango/1.57/pango-1.57.0.tar.xz",
-   sha3 = "4aaabd73ffc23ebb182050adf09fd7c6650b919f5e7b5497712bec999084765c",
+   url = "https://download.gnome.org/sources/pango/1.57/pango-1.57.1.tar.xz",
+   sha3 = "8b3f49d0536712f7113f36cbff34fdebdfcaaf035501ae5c5f1ca55620b85d74",
    build = "meson",
    flags = { "-Dintrospection=enabled" },
 };
@@ -90,8 +90,8 @@ librsvg = {
 };
 
 gtk3 = {
-   url = "https://download.gnome.org/sources/gtk/3.24/gtk-3.24.51.tar.xz",
-   sha3 = "cc929ab254421708e2169fee8ecfeb758896f3c3236dfb3be437d980f26ff592",
+   url = "https://download.gnome.org/sources/gtk/3.24/gtk-3.24.52.tar.xz",
+   sha3 = "b255123da1c6e0b48ba96c10b74f0fd60ecc5f70f3dadd5d88288f08b876ad57",
    build = "meson",
    flags = {
       "-Dbroadway_backend=true",

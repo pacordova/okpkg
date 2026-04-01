@@ -5,8 +5,8 @@ babl = {
 };
 
 gegl = {
-   url = "https://download.gimp.org/pub/gegl/0.4/gegl-0.4.68.tar.xz",
-   sha3 = "983839d3a3f17b88d22acdf941e53e89833a25712581b430b717826a8b75e760",
+   url = "https://download.gimp.org/pub/gegl/0.4/gegl-0.4.70.tar.xz",
+   sha3 = "11d8eacd8e017f72799af53fd3519f88f9dc8c2635b537588765b2f91bc3d41b",
    build = "meson",
 };
 

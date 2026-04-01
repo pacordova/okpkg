@@ -24,8 +24,8 @@ rust = {
 };
 
 firefox = {
-   url = "https://download-installer.cdn.mozilla.net/pub/firefox/releases/148.0.2/linux-x86_64/en-US/firefox-148.0.2.tar.xz",
-   sha3 = "c409227043bc4b8b10ac7d3717aa8b39b399addfd02bf4d60e8d55e4519dfbae",
+   url = "https://download-installer.cdn.mozilla.net/pub/firefox/releases/149.0/linux-x86_64/en-US/firefox-149.0.tar.xz",
+   sha3 = "c35cbdc9c8a6eca0f8a4e821d6df51f3889524e0fb034e127888bf2126fe5502",
    build = _,
    post = [[
       install -d $destdir/usr/{bin,lib64}
@@ -85,16 +85,17 @@ nodejs = {
 -- TODO: download error: cannot handle debfile
 -- Consider building from source.
 signal-desktop = {
-   url = "https://updates.signal.org/desktop/apt/pool/s/signal-desktop/signal-desktop_8.3.0_amd64.deb",
-   sha3 = "659f8528c0cd2e801b34fba19c4e0c86acd5bef1a8efb1e8667ff2b131046838",
+   url = "https://updates.signal.org/desktop/apt/pool/s/signal-desktop/signal-desktop_8.4.1_amd64.deb",
+   sha3 = "19405c8ab0c98cbfee3c3ac073e62f582f8003fdd9542b2c5a14f310bef5fcf8",
    build = _,
    post = [[
-      ar x ../../download/signal-desktop_8.2.1_amd64.deb data.tar.xz
+      ar x /var/cache/ok/dist/signal-desktop_8.4.1_amd64.deb data.tar.xz
       tar -xf data.tar.xz
-      sed -i 's:/opt/Signal:/usr/bin:' usr/share/applications/signal-desktop.desktop
-      install -d $destdir/usr/{lib64,bin}
-      cp -rp usr/share  $destdir/usr/share
-      cp -rp opt/Signal $destdir/usr/lib64/signal-desktop
+      mkdir -p $destdir/usr/{lib64,bin}
+      sed -i 's:/opt/Signal:/usr/bin:' ./usr/share/applications/signal-desktop.desktop
+      install -d $destdir/usr/{bin,lib64/signal-desktop,share}
+      cp -fr opt/Signal/* $destdir/usr/lib64/signal-desktop
+      cp -fr usr/share/*  $destdir/usr/share
       ln -sf /usr/lib64/signal-desktop/signal-desktop $destdir/usr/bin/signal-desktop
    ]]
 };

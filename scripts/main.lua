@@ -135,7 +135,7 @@ function _XLOOK (x)
    local fp, buf
    x = x:gsub("%-", "%%-")
    fp = io.popen("cat /usr/okpkg/db/*")
-   buf = fp:read('*a'):match("\n?[^%w]" .. x .. "%s*=%s*({.-})%s*;")
+   buf = fp:read('*a'):match("\n?[^%w_]" .. x .. "%s*=%s*({.-})%s*;")
    fp:close()
    return load("return " .. buf)()
 end

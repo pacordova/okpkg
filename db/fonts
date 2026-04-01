@@ -22,8 +22,8 @@ harfbuzz = {
 };
 
 freetype2 = {
-   url = "https://downloads.sourceforge.net/freetype/freetype-2.14.2.tar.xz",
-   sha3 = "559bb8f89eeb03b58bae8e72a6e9a629c859fa3fbccb92721c0ac17b39db28c6",
+   url = "https://downloads.sourceforge.net/freetype/freetype-2.14.3.tar.xz",
+   sha3 = "6de5a3174bc94e705ca09ecd8f391190706b29211e4e07253039eb2f9fc10242",
    build = "meson",
    flags = { "-Dharfbuzz=enabled" }
 };

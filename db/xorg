@@ -329,8 +329,8 @@ xorg-sessreg = {
 };
 
 xorg-setxkbmap = {
-   url = "https://x.org/pub/individual/app/setxkbmap-1.3.4.tar.xz",
-   sha3 = "ae19f41a673c079f95296331966286c5222759d082b83d4287856788678a2f3c",
+   url = "https://x.org/pub/individual/app/setxkbmap-1.3.5.tar.xz",
+   sha3 = "9af501bbeedc9ed4da111a68a59afd699b74d3f6aabcda844ad016b84b9e03b2",
    build = "./configure",
 };
 

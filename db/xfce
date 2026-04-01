@@ -94,8 +94,8 @@ xfce4-panel = {
 };
 
 thunar = {
-   url = "https://archive.xfce.org/src/xfce/thunar/4.20/thunar-4.20.7.tar.bz2",
-   sha3 = "b11c9e4d5baea4b53d93b15b996d19ae7cadfed5dcb31c4dea7dcc7dc71dd605",
+   url = "https://archive.xfce.org/src/xfce/thunar/4.20/thunar-4.20.8.tar.bz2",
+   sha3 = "905b0efbb0f7adf1ee4465ae4026e719eb235670d7d05cefaf6ea5bbde88c295",
    build = "./configure",
    flags = {
       "--enable-gio-unix",
@@ -158,8 +158,8 @@ xfce4-settings = {
 };
 
 xfdesktop = {
-   url = "https://archive.xfce.org/src/xfce/xfdesktop/4.20/xfdesktop-4.20.1.tar.bz2",
-   sha3 = "1677fd3a659be272057126b7c1d40e11eafebb73e85d0ab0c78e5f9c91279a50",
+   url = "https://archive.xfce.org/src/xfce/xfdesktop/4.20/xfdesktop-4.20.2.tar.bz2",
+   sha3 = "c054c700ce9abbf9b60e0e5de0f339f9d510f1d2487bbb3c6dca783a7627fac6",
    build = "./configure",
    flags = {
       "--enable-thunarx",
