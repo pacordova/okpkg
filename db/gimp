@@ -62,8 +62,8 @@ pygobject = {
 };
 
 gimp = {
-   url = "https://download.gimp.org/gimp/v3.2/gimp-3.2.0.tar.xz",
-   sha3 = "1a713dfd31f4654b5cda54239781681cf7a47c8f6f3e6fec114526afefcbfd60",
+   url = "https://download.gimp.org/gimp/v3.2/gimp-3.2.2.tar.xz",
+   sha3 = "46720a3f211e6668fe4af8b3160bf60fab7bad375070a71197cb82259a4dd476",
    build = "meson",
    flags = { 
       "-Dheadless-tests=disabled",

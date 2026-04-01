@@ -3,8 +3,8 @@
 dofile("/usr/bin/okpkg")
 
 -- Imports 
-local unpack = unpack or table.unpack
-local C = unpack(loadfile("/etc/okpkg.conf")())
+unpack = unpack or table.unpack
+local C = dofile("/etc/okpkg.conf")
 local ok = require("okutils")
 local remove_all = ok.remove_all
 

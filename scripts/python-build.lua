@@ -1,9 +1,8 @@
 #!/usr/bin/env lua
 
 -- Imports
-local unpack = unpack or table.unpack
-local C = unpack(loadfile("/etc/okpkg.conf")())
-dofile("/usr/bin/okpkg")
+unpack = unpack or table.unpack
+local C = dofile("/usr/bin/okpkg")
 
 -- Build db/python
 local fp, buf
