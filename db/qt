@@ -122,7 +122,7 @@ qbittorrent = {
 };
 
 qtpass = {
-   url = "https://github.com/IJHack/QtPass/archive/refs/tags/1.4.0-rc1.tar.gz",
+   url = "https://github.com/IJHack/QtPass/releases/download/v1.5.1/QtPass-1.5.1.tar.gz",
    build = "qmake",
 };
 
