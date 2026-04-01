@@ -141,13 +141,32 @@ fribidi = {
    build = "meson",
 };
 
+fuse2 = {
+   url = "https://github.com/libfuse/libfuse/releases/download/fuse-2.9.9/fuse-2.9.9.tar.gz",
+   sha3 = "03537740d4c58b261bee8a50faad8514e660d2029625cf23a938efa04bde4a93",
+   build = "./configure",
+   flags = { 
+      "--disable-example",
+      "--disable-mtab",
+      "--enable-lib", 
+      "--enable-util", 
+      --"--program-suffix=2",
+   },
+   prep = [[ autoreconf -fi ]],
+};
+
 fuse3 = {
-   url = "https://github.com/libfuse/libfuse/releases/download/fuse-3.18.1/fuse-3.18.1.tar.gz",
-   sha3 = "a712c7c7fefd4c4fe6d4792a9c8a5cb3b3f460db741b39cd8d2803498a3f0c54",
+   url = "https://github.com/libfuse/libfuse/releases/download/fuse-3.18.2/fuse-3.18.2.tar.gz",
+   sha3 = "a4eec275d82ce783934cc8ea6ee80d791a72ececfc8e7eeb8526c5466424f5b6",
    build = "meson",
-   flags = { "-Dexamples=false" },
-   prep = [[ sed -i '/^udev/,$ s/^/#/' util/meson.build ]],
-   post = [[ chmod u+s $destdir/usr/bin/fusermount3 ]]
+   flags = { 
+      "-Ddisable-mtab=true",
+      "-Duseroot=true",
+      "-Denable-io-uring=true",
+      "-Denable-usdt=false", --system-tap
+      "-D{tests,examples}=false",
+      "-D{udevrulesdir,initscriptdir}=",
+   },
 };
 
 graphite = {
