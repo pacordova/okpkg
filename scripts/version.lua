@@ -24,6 +24,7 @@ function v(t, x)
          return ok.basename(t[i]):match("[-_%.:][nrv]?([%d%.]+%l?%d?)[-_%.+]")
       end
    end
+   return ""
 end
 
 ---------------
@@ -32,7 +33,7 @@ end
 archlinux = {}
 archlinux[0] = curl"archlinux/{core,extra,community}/os/x86_64/"
 for w in archlinux[0]:gmatch('>([^%s]-.tar.zst)<') do
-   w = w:
+   local fixed = w:
        gsub("-x86_64", ""):
        gsub("%-%d+$", ""):
        gsub("%d%%%dA", ""):
@@ -45,7 +46,7 @@ for w in archlinux[0]:gmatch('>([^%s]-.tar.zst)<') do
        gsub("ffnvcodec", "nv-codec"):
        gsub("gnupg%-", "gnupg2-"):
        gsub("bash.5.3.9", "bash-5.3.009")
-   table.insert(archlinux, w)
+   table.insert(archlinux, fixed)
 end
 
 -----------------------
@@ -54,14 +55,14 @@ end
 slackware = {}
 slackware[0] = curl"slackware/slackware64-current/slackware64/FILE_LIST"
 for w in slackware[0]:gmatch('%./[^/]-/([^%s]-txz)\n') do
-   w = w:
+   local fixed = w:
       gsub("-x86_64", ""):
       gsub("glibc%-zoneinfo%-", "tzdata-"):
       gsub("bash%-completion%-", ""):
       gsub("lvm2%-", "device-mapper-"):
       gsub("gtk%+3%-", "gtk3-"):
       gsub("gtkmm%-", "gtkmm3-")
-   table.insert(slackware, w)
+   table.insert(slackware, fixed)
 end
 
 -----------
@@ -70,12 +71,12 @@ end
 ok.chdir(C.pkgdir)
 okpkg = {}
 for w in string.gmatch(popen("ls *.tar.lz"), '(.-\n)') do
-   w = w:
+   local fixed = w:
       gsub("-x86_64", ""):
       gsub("-amd64", ""):
       gsub("rust%-bin", "rust"):
       gsub("cmake%-bin", "cmake")
-   table.insert(okpkg, w)
+   table.insert(okpkg, fixed)
 end
 
 --------------
@@ -83,7 +84,7 @@ end
 --------------
 -- Skip version checks on these packages, comma delimiter
 -- TODO: fix dashes not working in list, escape does not fix
-skip = "bc,cmake,librsvg,pavucontrol,python3,vim"
+skip = "bc,cmake,librsvg,pavucontrol,python3,vim,x264"
 
 L = {}
 L[0] = '\n' .. popen("cat /usr/okpkg/db/*")
@@ -104,8 +105,8 @@ for i=1,#L do
       v(slackware, x:gsub("xorg%%%-", "")),
       v(okpkg, x),
    }
-   if ((r[3] and r[2] and r[3] ~= r[2]) or
-       (r[3] and r[1] and r[3] ~= r[1]))
+   if ((#r[3]>0 and #r[2]>0 and r[3] ~= r[2]) or
+       (#r[3]>0 and #r[1]>0 and r[3] ~= r[1]))
    then
       io.write(string.format("%s,%s,%s,%s\n", L[i], unpack(r)))
    end
