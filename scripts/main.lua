@@ -296,7 +296,7 @@ function install(x)
    io.close(fp)
 
    ok.chdir(C.indexdir)
-   txt = ok.basename(x):match("(.-)-n?%d?") .. ".txt"
+   txt = ok.basename(x):match("(.+)-[n%d]") .. ".txt"
    os.rename(txt, txt .. ".orig")
    io.close(io.open(txt, 'w'):write(buf))
 

@@ -373,7 +373,7 @@ linux-lts = {
 };
 
 lm-sensors = {
-   url = "https://github.com/lm-sensors/lm-sensors/archive/V3-6-0/lm-sensors-3-6-0.tar.gz",
+   url = "https://github.com/lm-sensors/lm-sensors/archive/V3-6-0/lm-sensors-3.6.0.tar.gz",
    sha3 = "49e0ccef37d001581142d673a8ec9687cd94590d18e5382a276091b6eeca6fca",
    build = "make",
    flags = { 
