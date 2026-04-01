@@ -126,9 +126,8 @@ local function mtime(x)
 end
 
 local function v(x)
-   return ok.basename(x):match("[-_%.][a-z]?([%d%.]+[a-z]?[0-9]?)[-_%.]")
+   return ok.basename(x):match("[-_%.][nrv]?([%d%.]+%l?%d?)[-_%.]")
 end
-
 
 -- TODO: C function to listdir, iterate instead of popen
 -- TODO: Don't hardcode /usr/okpkg
