@@ -1,56 +1,27 @@
 #!/usr/bin/env lua
 
-local unpack = unpack or table.unpack
+unpack = unpack or table.unpack
 
-local ok = require("okutils")
-local C = dofile("/etc/okpkg.conf")
+ok = require("okutils")
+C = dofile("/etc/okpkg.conf")
 
-local function curl(path)
-   local mir = "https://mirrors.kernel.org"
-   local file, buf
-   file = io.popen(string.format("curl -L %s/%s", mir, path))
-   buf = file:read("*a")
-   file:close()
+
+function popen(command)
+   local fp, buf
+   fp = io.popen(command)
+   buf = fp:read("*a")
+   fp:close()
    return buf
 end
 
-local function parse_version(path)
-   local s, i, j
-   s = ok.basename(path)
-   if s:find("^%d") then
-      i = 0
-   elseif s:find("[v._-]%d") then
-      i = s:find("[v._-]%d")
-   else
-      return ""
-   end
-   j = s:find("%.t") or #s+1
-   return s:sub(i+1, j-1):gsub("-", "_")
+function curl(x)
+   return popen("curl -#L https://mirrors.kernel.org/" .. x)
 end
 
-local function get_version(t, pkg)
+function v(t, x)
    for i=1,#t do
-      if t[i]:match("^" .. pkg .. "%-%d") then
-         return parse_version(t[i])
-      end
-   end
-   return nil
-end
-
-function version(pkglist)
-   io.write("package,archlinux,slackware,okpkg\n")
-   for i=1, #pkglist do
-      local pkgname, row
-      pkgname = pkglist[i]:gsub("%-", "%%-")
-      row = {
-         get_version(archlinux, pkgname),
-         get_version(slackware, pkgname),
-         get_version(okpkg, pkgname)
-      }
-      if ((row[3] and row[2] and row[3] ~= row[2]) or
-          (row[3] and row[1] and row[3] ~= row[1]))
-      then
-         io.write(string.format("%s,%s,%s,%s\n", pkglist[i], unpack(row)))
+      if t[i]:match("^" .. x .. "%-%d") then
+         return ok.basename(t[i]):match("[-_%.:][nrv]?([%d%.]+%l?%d?)[-_%.+]")
       end
    end
 end
@@ -59,102 +30,83 @@ end
 -- archlinux --
 ---------------
 archlinux = {}
-local buf = curl("archlinux/{core,extra,community}/os/x86_64/")
-
-for w in string.gmatch(buf, 'href="(.-)"') do
-   if string.find(w, "%.tar.zst$") then
-      local s = ok.basename(w):
-         gsub(".pkg.tar.zst", ""):
-         gsub("%-x86_64", ""):
-         gsub("%-any", ""):
-         gsub("%-%d+$", ""):
-         gsub("1%%3A", ""):
-         gsub("2%%3A", ""):
-         gsub("%.p", "p"):
-         gsub("python%-3", "python3-3"):
-         gsub("libnl%-", "libnl3-"):
-         gsub("libisl%-", "isl-"):
-         gsub("%%2B.*", ""):
-         gsub("gcr%-4", "gcr4"):
-         gsub("ffnvcodec", "nv-codec"):
-         gsub("gnupg%-", "gnupg2-"):
-         gsub("_a", "a"):
-         gsub("bash.5.3.9", "bash-5.3.009")
-      table.insert(archlinux, s)
-   end
+archlinux[0] = curl"archlinux/{core,extra,community}/os/x86_64/"
+for w in archlinux[0]:gmatch('>([^%s]-.tar.zst)<') do
+   w = w:
+       gsub("-x86_64", ""):
+       gsub("%-%d+$", ""):
+       gsub("%d%%%dA", ""):
+       gsub("%%%dB.*", ""):
+       gsub("_a", "a"):
+       gsub("python%-3", "python3-3"):
+       gsub("libnl%-", "libnl3-"):
+       gsub("libisl%-", "isl-"):
+       gsub("gcr%-4", "gcr4"):
+       gsub("ffnvcodec", "nv-codec"):
+       gsub("gnupg%-", "gnupg2-"):
+       gsub("bash.5.3.9", "bash-5.3.009")
+   table.insert(archlinux, w)
 end
 
 -----------------------
 -- slackware-current --
 -----------------------
 slackware = {}
-local buf = curl("slackware/slackware64-current/FILELIST.TXT")
-
-for w in string.gmatch(buf, '%./(.-)\n') do
-   if string.find(w, "%.txz$") then
-      local s = ok.basename(w):
-         gsub("%-x86_64.-.txz", ""):
-         gsub("%-noarch%-%d+", ""):
-         gsub("glibc%-zoneinfo%-", "tzdata-"):
-         gsub("bash%-completion%-", ""):
-         gsub(".post1", ""):
-         gsub("lvm2%-", "device-mapper-"):
-         gsub("gtk%+3%-", "gtk3-"):
-         gsub("gtkmm%-", "gtkmm3-"):
-         gsub("20201015_cff88dd", "39"):
-         gsub("20191011_e8ce9fe", "18"):
-         gsub("0.18_20240915", "0.18")
-      table.insert(slackware, s)
-   end
+slackware[0] = curl"slackware/slackware64-current/slackware64/FILE_LIST"
+for w in slackware[0]:gmatch('%./[^/]-/([^%s]-txz)\n') do
+   w = w:
+      gsub("-x86_64", ""):
+      gsub("glibc%-zoneinfo%-", "tzdata-"):
+      gsub("bash%-completion%-", ""):
+      gsub("lvm2%-", "device-mapper-"):
+      gsub("gtk%+3%-", "gtk3-"):
+      gsub("gtkmm%-", "gtkmm3-")
+   table.insert(slackware, w)
 end
 
 -----------
 -- okpkg --
 -----------
+ok.chdir(C.pkgdir)
 okpkg = {}
-local file, buf
-
-ok.chdir(C["pkgdir"])
-file = io.popen("find * -name '*.tar.lz' -exec basename '{}' \\;")
-buf = file:read("*a")
-file:close()
-
-for w in string.gmatch(buf, '(.-\n)') do
-   local s =
-      w:gsub("%-x86_64.tar.lz\n", ""):
-      gsub("%-amd64.tar.lz\n", ""):
-      gsub(".orig", ""):
-      gsub("-stable", ""):
-      gsub("_GH0", ""):
+for w in string.gmatch(popen("ls *.tar.lz"), '(.-\n)') do
+   w = w:
+      gsub("-x86_64", ""):
+      gsub("-amd64", ""):
       gsub("rust%-bin", "rust"):
-      gsub("cmake%-bin", "cmake"):
-      gsub("nv%-codec%-headers%-n", "nv-codec-headers-")
-   table.insert(okpkg, s)
+      gsub("cmake%-bin", "cmake")
+   table.insert(okpkg, w)
 end
 
 --------------
 -- main loop -
 --------------
-pkglist = {}
-local file, buf
-
-ok.chdir(C["okdir"])
-file = io.popen("cat db/*.db")
-buf = '\n' .. file:read("*a")
-file:close()
-
 -- Skip version checks on these packages, comma delimiter
 -- TODO: fix dashes not working in list, escape does not fix
-local skip = "bc,cmake,librsvg,pavucontrol,python3,vim"
+skip = "bc,cmake,librsvg,pavucontrol,python3,vim"
 
-for i in buf:gmatch("\n([%w%-%+]-) = {.-;") do
+L = {}
+L[0] = '\n' .. popen("cat /usr/okpkg/db/*")
+for i in L[0]:gmatch("\n([%w%-%+]-) = {.-;") do
    if not string.format(",%s,", skip):
       match(string.format(",%s,", i)) 
    then
-      table.insert(pkglist, i)
+      table.insert(L, i)
    end
 end
 
-if ok.basename(arg[0]) == "version.lua" then
-   version(pkglist)
+-- Output
+io.write("package,archlinux,slackware,okpkg\n")
+for i=1,#L do
+   local x = L[i]:gsub("%-", "%%-")
+   local r = {
+      v(archlinux, x),
+      v(slackware, x:gsub("xorg%%%-", "")),
+      v(okpkg, x),
+   }
+   if ((r[3] and r[2] and r[3] ~= r[2]) or
+       (r[3] and r[1] and r[3] ~= r[1]))
+   then
+      io.write(string.format("%s,%s,%s,%s\n", L[i], unpack(r)))
+   end
 end
