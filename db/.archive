@@ -1,3 +1,9 @@
+iptables = {
+   url = "https://www.netfilter.org/projects/iptables/files/iptables-1.8.13.tar.xz",
+   sha3 = "9a52272dd55783067c396639825b812854cd318d5a5ec04240b6d962cc570bc1",
+   build = "./configure",
+};
+
 -- from firefox: libnss3.so libnssutil3.so libsmime3.so libnspr4.so libplc4.so libplds4.so
 -- needs libcups.so.2
 discord = {

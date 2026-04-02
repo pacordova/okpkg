@@ -1,7 +1,17 @@
-iptables = {
-   url = "https://www.netfilter.org/projects/iptables/files/iptables-1.8.13.tar.xz",
-   sha3 = "9a52272dd55783067c396639825b812854cd318d5a5ec04240b6d962cc570bc1",
+nftables = {
+   url = "https://www.netfilter.org/pub/nftables/nftables-1.1.6.tar.xz",
+   sha3 = "58c60a26123af16846a014aa1dd1b8939ad4cbce2a7916ff0bb4d20128cdd774",
    build = "./configure",
+   flags = {
+      "--with-unitdir=no",
+      "--enable-distcheck",
+      "--disable-debug",
+      "--enable-man-doc",
+      "--without-mini-gmp",
+      "--without-json",
+      "--with-cli=readline",
+      "--without-xtables",
+   },
 };
 
 connman = {
@@ -13,9 +23,9 @@ connman = {
       "--disable-{bluetooth,dundee,gadget,neard,ofono,pacrunner,tools,wispr}",
       "--disable-{iospm,hh2serial-gps,vpnc,pptp,policykit,openconnect,l2tp}",
       "--disable-{debug,test}",
-      "--with-systemdunitdir=no",
-      "--with-tmpfilesdir=/usr/lib64/tmpfiles.d",
-      "--with-firewall=iptables",
+      --"--with-systemdunitdir=no",
+      --"--with-tmpfilesdir=no",
+      "--with-firewall=nftables",
       "LIBS=-lncursesw",
    },
 };
