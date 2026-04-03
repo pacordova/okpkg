@@ -43,7 +43,7 @@ revdeps(){
 
 # Create/update cache of dependencies
 mkcache(){
-  for f in "$indexdir/"*; do deps < "$f" > "$cachedir/$f"; done
+  for f in "$indexdir/"*; do deps < "$f" > "$cachedir/${f##*/}"; done
 }
 
 # Simple but unsafe way to find broken packages
@@ -53,4 +53,8 @@ unsafe(){
 }
 
 # Traditional but unsafe
-for f in "$indexdir/"*; do unsafe < "$f" | sed "s|^|[$f]: |"; done
+#for f in "$indexdir/"*; do unsafe < "$f" | sed "s|^|[$f]: |"; done
+
+#mkcache
+#revdeps eudev
+#revdeps upower

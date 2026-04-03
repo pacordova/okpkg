@@ -664,9 +664,7 @@ eudev = {
    ]],
    post = [[
       UDEV_HWDB_PATH=$destdir/etc/udev/hwdb.d \
-      $destdir/usr/bin/udevadm hwdb \
-         --output=$destdir/usr/lib64/udev/hwdb.bin \
-         --update
+      $destdir/usr/bin/udevadm hwdb -uo "$destdir/usr/lib64/udev/hwdb.bin"
    ]]
 };
 
