@@ -52,8 +52,8 @@ libgudev = {
 };
 
 upower = {
-   url = "https://gitlab.freedesktop.org/upower/upower/-/archive/v1.91.1/upower-v1.91.1.tar.bz2",
-   sha3 = "7a060d2240e473774de9911ae3685ebb6d77ec385b16de339b957204768997cc",
+   url = "https://gitlab.freedesktop.org/upower/upower/-/archive/v1.91.2/upower-v1.91.2.tar.bz2",
+   sha3 = "0236ce28e33a0b37653059df0a71dbdea9338b7b0400993e652785a5bae59c52",
    build = "meson",
    flags = {
       "-Dsystemdsystemunitdir=no",

@@ -594,8 +594,8 @@ xf86-input-evdev = {
 };
 
 libinput = {
-   url = "https://gitlab.freedesktop.org/libinput/libinput/-/archive/1.31.0/libinput-1.31.0.tar.bz2",
-   sha3 = "5a773bda5b695158ffb8951f836828f51a8dd7db1fdcb3509b209bb8f7f62b97",
+   url = "https://gitlab.freedesktop.org/libinput/libinput/-/archive/1.31.1/libinput-1.31.1.tar.bz2",
+   sha3 = "89c48d2f97b631d61c95b4d6d0192222e529cb0395042a2d1ab28277fa277e35",
    build = "meson",
    flags = {
       "-Dudev-dir=/usr/lib64/udev",
