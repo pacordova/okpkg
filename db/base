@@ -649,9 +649,6 @@ openvi = {
       sed -i 's/termio.h/termios.h/' cl/*.c ex/*.c
       sed -i 's/escapetime=2/escapetime=1/' common/options.c
    ]],
-   post = [[
-      rm -fr "$destdir/usr/libexec"
-   ]]
 };
 
 eudev = {

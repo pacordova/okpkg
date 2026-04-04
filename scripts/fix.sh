@@ -12,14 +12,6 @@ setcap cap_net_raw+p /usr/bin/ping;
 chown root:messagebus /usr/lib64/dbus-daemon-launch-helper;
 chmod 4750 /usr/lib64/dbus-daemon-launch-helper;
 
-# fix /run/user
-#mkdir -m 1777 /run/user
-chmod 1777 /run/user
-chmod 0700 /run/user/*
-
-# fix /tmp
-#rm -rf /tmp/* /tmp/.[!.]* /tmp/..?*
-#mkdir -p -m 1777 /tmp/.ICE-unix /tmp/.X11-unix
-chmod 1777 /tmp /tmp/.ICE-unix /tmp/.X11-unix
-
-
+# fix date
+date +'%y-%m-%d %H:%M:%S' -us"$(nc time.nist.gov 13|awk 'NR>1{print$2" "$3}')"
+hwclock --systohc && hwclock --hctosys
