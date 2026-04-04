@@ -658,13 +658,14 @@ eudev = {
    url = "https://github.com/eudev-project/eudev/releases/download/v3.2.14/eudev-3.2.14.tar.gz",
    sha3 = "334ad42e160b69c29170b4c19585568dda738c4dc516bb1e764bc565d1d4cddb",
    build = "./configure",
+   flags = { "--program-prefix=e" },
    prep = [[
-      sed -i '/udevdir/a udev_dir=${udevdir}' src/udev/udev.pc.in
-      sed -i 's/GROUP="sgx", //' rules/50-udev-default.rules
+      sed -e '/udevdir/a udev_dir=${udevdir}' -i src/udev/udev.pc.in
+      sed -e 's/GROUP="sgx", //'              -i rules/50-udev-default.rules
    ]],
    post = [[
       UDEV_HWDB_PATH=$destdir/etc/udev/hwdb.d \
-      $destdir/usr/bin/udevadm hwdb -uo "$destdir/usr/lib64/udev/hwdb.bin"
+      $destdir/usr/bin/eudevadm hwdb -uo "$destdir/usr/lib64/udev/hwdb.bin"
    ]]
 };
 

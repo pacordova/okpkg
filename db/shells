@@ -27,8 +27,8 @@ oksh = {
    build = "./configure",
    flags = { "--cflags=$CFLAGS", "--enable-ksh" },
    post = [[ 
-      ln -f $destdir/usr/bin/ksh $destdir/usr/bin/sh 
-      install -m 644 sh.1 $destdir/usr/share/man/man1
+      #ln -f $destdir/usr/bin/ksh $destdir/usr/bin/sh 
+      #install -m 644 sh.1 $destdir/usr/share/man/man1
    ]]
 };
 
