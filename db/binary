@@ -38,22 +38,20 @@ firefox = {
 };
 
 libreoffice = {
-   url = "https://download.documentfoundation.org/libreoffice/stable/25.8.2/deb/x86_64/LibreOffice_25.8.2_Linux_x86-64_deb.tar.gz",
-   sha3 = "b9a3cc850018528deca8b498d2bf7950d9aeb43dfaaf1185bcb47cbf3b46b8cc",
-   build = _,
-   post = [[
-      find DEBS -name '*.deb' -exec ar x '{}' data.tar.xz \; -exec tar -xf data.tar.xz \;
-      pkgver=`basename opt/*`
-      install -d $destdir/usr/{bin,lib64}
-      cp -rp  opt/* $destdir/usr/lib64
-      cp -rp  usr/share $destdir/usr/share
-      ln -sfr $destdir/usr/lib64/$pkgver/program/soffice $destdir/usr/bin/$pkgver
-      ln -sf  $pkgver $destdir/usr/bin/libreoffice
-      ln -sf  $destdir/usr/lib64/$pkgver/program/soffice $destdir/usr/bin/soffice
-      for x in base calc draw impress math startcenter writer xsltfilter; do
-          ln -sf /usr/lib64/$pkgver/share/xdg/$x.desktop $destdir/usr/share/applications/$pkgver-$x.desktop
-          sed -i "s|Icon=$pkgver|Icon=libreoffice|" $destdir/usr/lib64/$pkgver/share/xdg/$x.desktop
+   url = "https://download.documentfoundation.org/libreoffice/stable/26.2.2/deb/x86_64/LibreOffice_26.2.2_Linux_x86-64_deb.tar.gz",
+   sha3 = "b98e11657e0af8fa715b564f2cb28c707bdeea22d2dc9e31a36cd62de4ec3a3d",
+   prep = [[
+      mkdir -p "$destdir"
+      rm -f DEBS/*{firebird,kde-integration,python-script-provider}*
+      for f in DEBS/*; do 
+        ar x "$f" data.tar.xz 
+        gtar -C "$destdir" -xf data.tar.xz \
+          --xform='s|usr/lib|usr/lib64|;s|opt|usr/lib64|;s|usr/local|usr|'
+        rm -f data.tar.xz
       done
+      sed -e 's/^Icon=libreoffice.*-/Icon=libreoffice-/' \
+          -i "$destdir/usr/lib64/libreoffice"*/share/xdg/*.desktop
+      ln -sf `basename "$destdir/usr/bin/"*` "$destdir/usr/bin/libreoffice"
    ]]
 };
 
