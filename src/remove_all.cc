@@ -7,9 +7,9 @@ int ok_remove_all(lua_State *L);
 }
 
 int
-ok_remove_all(lua_State *L) 
+ok_remove_all(lua_State *L)
 {
-    const fs::path p = luaL_checkstring(L, 1);
-    lua_pushinteger(L, fs::remove_all(p));
-    return 1;
+  const fs::path p = luaL_checkstring(L, 1);
+  lua_pushinteger(L, fs::remove_all(p));
+  return 1;
 }
