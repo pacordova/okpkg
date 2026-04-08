@@ -25,6 +25,18 @@ perl = {
    ]]
 };
 
+perl-file-sharedir = {
+   url = "https://cpan.metacpan.org/authors/id/R/RE/REHSACK/File-ShareDir-1.118.tar.gz",
+   sha3 = "496bc9d2bff118c807600b0a0196fc294487ca0a6264085347dfe2b435ec11c8",
+   build = "perl",
+};
+
+perl-file-sharedir-install = {
+   url = "https://cpan.metacpan.org/authors/id/E/ET/ETHER/File-ShareDir-Install-0.14.tar.gz",
+   sha3 = "effd6acc672cce952df47f54c8ebf21cedf315369a02c09ead0c474ba5f2e3e2",
+   build = "perl",
+};
+
 perl-xml-parser = {
    url = "https://cpan.metacpan.org/authors/id/T/TO/TODDR/XML-Parser-2.56.tar.gz",
    sha3 = "1a7bdc9239488e0288622feb8ed1b9be57cdc3a6b93bef3f63a788b0b7e0a4f4",
