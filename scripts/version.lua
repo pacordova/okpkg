@@ -84,7 +84,7 @@ end
 --------------
 -- Skip version checks on these packages, comma delimiter
 -- TODO: fix dashes not working in list, escape does not fix
-skip = "bc,cmake,librsvg,pavucontrol,python3,vim,x264"
+skip = "bc,cmake,librsvg,pavucontrol,python3,vim,x264,harfbuzz"
 
 L = {}
 L[0] = '\n' .. popen("cat /usr/okpkg/db/*")

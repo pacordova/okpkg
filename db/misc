@@ -466,7 +466,11 @@ sqlite = {
    url = "https://www.sqlite.org/2026/sqlite-autoconf-3510300.tar.gz",
    sha3 = "581215771b32ea4c4062e6fb9842c4aa43d0a7fb2b6670ff6fa4ebb807781204",
    build = "./configure",
-   flags = { "--enable-fts5", "CPPFLAGS=-DSQLITE_ENABLE_COLUMN_METADATA=1" },
+   flags = { 
+      "--libdir=/usr/lib64",
+      "--enable-fts5", 
+      "CPPFLAGS=-DSQLITE_ENABLE_COLUMN_METADATA=1" 
+    },
 };
 
 sxiv = {

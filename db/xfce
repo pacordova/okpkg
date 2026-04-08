@@ -64,6 +64,7 @@ hwdata = {
    url = "https://github.com/vcrhonek/hwdata/archive/v0.406/hwdata-0.406.tar.gz",
    sha3 = "66ed0bcc1488be1ac88bbec42097327e0234fce97b19f47e5d94f2a4c7b26be4",
    build = "./configure",
+   flags = { "--libdir=/usr/lib64" },
 };
 
 libdisplay-info = {
