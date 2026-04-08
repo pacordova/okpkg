@@ -105,8 +105,8 @@ opendoas = {
 };
 
 samurai = {
-   url = "https://github.com/michaelforney/samurai/releases/download/1.2/samurai-1.2.tar.gz",
-   sha3 = "127ea48499f38f1a1c476957453ccca9419c8a4a938925e1361818102307375d",
+   url = "https://github.com/michaelforney/samurai/archive/1.3/samurai-1.3.tar.gz",
+   sha3 = "9d4932b15b292f48917417322aa75bf0ed2335e029fc7b493329c9697ccd14ca",
    build = "make",
    flags = { "PREFIX=/usr" },
    post = [[ ln -sf samu $destdir/usr/bin/ninja ]]

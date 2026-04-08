@@ -6,8 +6,8 @@ _freetype2 = {
 };
 
 harfbuzz = {
-   url = "https://github.com/harfbuzz/harfbuzz/releases/download/14.0.0/harfbuzz-14.0.0.tar.xz",
-   sha3 = "72e1717f0804805e20e0aa80dd1d9578467d3a5e753d6fb934b757cedb86056c",
+   url = "https://github.com/harfbuzz/harfbuzz/releases/download/12.3.2/harfbuzz-12.3.2.tar.xz",
+   sha3 = "5107c7724e2a94ba7a09800ddb127e4251400954b7eccc476b9011df7375ae32",
    build = "meson",
    flags = { 
       "-Dfreetype=enabled",

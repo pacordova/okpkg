@@ -53,7 +53,7 @@ unsafe(){
 }
 
 # Traditional but unsafe
-#for f in "$indexdir/"*; do unsafe < "$f" | sed "s|^|[$f]: |"; done
+for f in "$indexdir/"*; do unsafe < "$f" | sed "s|^|[$f]: |"; done
 
 #mkcache
 #revdeps eudev

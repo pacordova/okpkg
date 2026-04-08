@@ -224,8 +224,8 @@ catgirl = {
 };
 
 cryptsetup = {
-   url = "https://kernel.org/pub/linux/utils/cryptsetup/v2.8/cryptsetup-2.8.4.tar.xz",
-   sha3 = "147f6db3203e063e44b3f2dea2ccda23c1d43398d6e8195d3f0a8b5cacac19b4",
+   url = "https://kernel.org/pub/linux/utils/cryptsetup/v2.8/cryptsetup-2.8.6.tar.xz",
+   sha3 = "140d70b762c525e7a2b01cacb02ee49fb6ecf3cdd2c5e2270e65dcd1e9c6fa96",
    build = "./configure",
    flags = {
       "--with-crypto_backend=gcrypt",
@@ -406,8 +406,8 @@ nano = {
 };
 
 pciutils = {
-   url = "https://mj.ucw.cz/download/linux/pci/pciutils-3.14.0.tar.gz",
-   sha3 = "87906156f343d07f937bd636951f4e810e818de47cb177835e52c091ebc3a581",
+   url = "https://mj.ucw.cz/download/linux/pci/pciutils-3.15.0.tar.gz",
+   sha3 = "ae5e48d0e6d243faf397a44bf80fa507c0fd5cc76d8a6594d54451a97f5aca6b",
    build = "make",
    flags = {
       "PREFIX=/usr",
@@ -415,7 +415,7 @@ pciutils = {
       "SHAREDIR=/usr/share/hwdata",
       "SHARED=yes"
    },
-   post = [[ chmod 755 $destdir/usr/lib64/libpci.so.3.14.0 ]]
+   post = [[ chmod 755 $destdir/usr/lib64/libpci.so.3.15.0 ]]
 };
 
 -- r packages ragg (tidyverse) require libwebp to build
@@ -463,8 +463,8 @@ sharutils = {
 };
 
 sqlite = {
-   url = "https://www.sqlite.org/2026/sqlite-autoconf-3520000.tar.gz",
-   sha3 = "45a4911475950ab5fd486afb776102eb29d69e7569b48947f21e3c8501b51822",
+   url = "https://www.sqlite.org/2026/sqlite-autoconf-3510300.tar.gz",
+   sha3 = "581215771b32ea4c4062e6fb9842c4aa43d0a7fb2b6670ff6fa4ebb807781204",
    build = "./configure",
    flags = { "--enable-fts5", "CPPFLAGS=-DSQLITE_ENABLE_COLUMN_METADATA=1" },
 };

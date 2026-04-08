@@ -21,6 +21,8 @@ local pkgs = {
    "pygobject", "pycairo", "libtorrent-rasterbar",
 }
 
+--[[
 for _, v in pairs(pkgs) do 
-   purge(v); install(string.format("%s/%s-*.tar.lz", C["pkgdir"], v))
+   purge(v); install(string.format("%s/%s-*.tar.lz", C.pkgdir, v))
 end
+]]

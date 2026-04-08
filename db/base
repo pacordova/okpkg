@@ -275,8 +275,8 @@ gcc14 = {
 };
 
 libcap = {
-   url = "https://kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-2.77.tar.xz",
-   sha3 = "c2f4f8f35cb36d1d0365b860537298fad4ab00ad65fab7337741a5b7c4889c64",
+   url = "https://kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-2.78.tar.xz",
+   sha3 = "079b00f6ef26d409c50a0d3fa9a49ee64345eef7ab9410537e86f56918060a7e",
    build = "make",
    flags = { "prefix=/usr", "lib=lib64", "SBINDIR=/usr/bin" },
    prep = [[ sed -i '/install -m.*STA/d' libcap/Makefile ]]

@@ -32,8 +32,8 @@ python-flit-core = {
 };
 
 python-installer = {
-   url = "https://pypi.org/packages/source/i/installer/installer-0.7.0.tar.gz",
-   sha3 = "03d004eb827338703d8061e1e82c76df015773bae9bbd28cf2fed732b3238597",
+   url = "https://github.com/pypa/installer/archive/1.0.0/installer-1.0.0.tar.gz",
+   sha3 = "d844535d915a9ab53f09ce1366a0d868e1cc6a7fc94395d1045e7f72c5b0061f",
    build = "python-build",
 };
 
@@ -97,9 +97,15 @@ python-editables = {
    build = "python-build",
 };
 
+python-vcs-versioning = {
+   url = "https://pypi.org/packages/source/v/vcs_versioning/vcs_versioning-1.1.1.tar.gz",
+   sha3 = "33db0945508b32da276e89af2947dda32d5cc9a753227c31b08f62d6206c2429",
+   build = "python-build",
+};
+
 python-setuptools-scm = {
-   url = "https://pypi.org/packages/source/s/setuptools-scm/setuptools_scm-9.2.2.tar.gz",
-   sha3 = "ba6936b2efda39792806a9659be44d1f3d738ef3d43789335662f71164ea2da7",
+   url = "https://pypi.org/packages/source/s/setuptools-scm/setuptools_scm-10.0.5.tar.gz",
+   sha3 = "d8026e7e432f8042f4dc3f4cd9865ec0f5ee19cb766f9af2d4de1079856caa1a",
    build = "python-build",
 };
 
