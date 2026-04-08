@@ -26,8 +26,8 @@ perl = {
 };
 
 perl-xml-parser = {
-   url = "https://cpan.metacpan.org/authors/id/T/TO/TODDR/XML-Parser-2.47.tar.gz",
-   sha3 = "daaacd05fb62d1f8811c6f792c87bd4062ea70d57a951d3f15236c2424b24618",
+   url = "https://cpan.metacpan.org/authors/id/T/TO/TODDR/XML-Parser-2.56.tar.gz",
+   sha3 = "1a7bdc9239488e0288622feb8ed1b9be57cdc3a6b93bef3f63a788b0b7e0a4f4",
    build = "perl",
 };
 
