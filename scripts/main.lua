@@ -4,6 +4,7 @@
 unpack = unpack or table.unpack
 local ok = require("okutils")
 local C, M, E = dofile("/etc/okpkg.conf")
+local function concat(x) table.concat(x, " ") end
 
 -- Global variables (callable by cli)
 chroot, sha3sum = ok.chroot, ok.sha3sum
@@ -23,7 +24,7 @@ B = {
          "--no-track",
          ...
       }
-      return os.execute(table.concat({arg[0], unpack(arg)}, ' '))
+      return os.execute(table.concat({arg[0], unpack(arg)}, " "))
    end,
    ["cmake"] = function(...)
       local arg = {
@@ -35,7 +36,7 @@ B = {
          ...
       }
       return (
-         os.execute(table.concat({arg[0], unpack(arg)}, ' ')) and
+         os.execute(table.concat({arg[0], unpack(arg)}, " ")) and
          os.execute("DESTDIR=$destdir $ninja -C build install"))
    end,
    ["configure"] = function(f, ...)
@@ -45,7 +46,7 @@ B = {
          ...
       }
       return (
-         os.execute(table.concat({arg[0], unpack(arg)}, ' ')) and
+         os.execute(table.concat({arg[0], unpack(arg)}, " ")) and
          os.execute("make") and
          os.execute("make install DESTDIR=$destdir"))
    end,
@@ -55,22 +56,22 @@ B = {
          ...
       }
       return (
-         os.execute(table.concat({arg[0][1], unpack(arg)}, ' ')) and
-         os.execute(table.concat({arg[0][2], unpack(arg)}, ' ')))
+         os.execute(table.concat({arg[0][1], unpack(arg)}, " ")) and
+         os.execute(table.concat({arg[0][2], unpack(arg)}, " ")))
    end,
    ["make_noinstall"] = function(...)
       local arg = {
          [0] = "make",
          ...
       }
-      return os.execute(table.concat({arg[0], unpack(arg)}, ' '))
+      return os.execute(table.concat({arg[0], unpack(arg)}, " "))
    end,
    ["make_install"] = function(...)
       local arg = {
          [0] = "make install DESTDIR=$destdir",
          ...
       }
-      return os.execute(table.concat({arg[0], unpack(arg)}, ' '))
+      return os.execute(table.concat({arg[0], unpack(arg)}, " "))
    end,
    ["meson"] = function(...)
       local arg = {
@@ -85,7 +86,7 @@ B = {
          ...
       }
       return (
-         os.execute(table.concat({arg[0], unpack(arg)}, ' ')) and
+         os.execute(table.concat({arg[0], unpack(arg)}, " ")) and
          os.execute("DESTDIR=$destdir $ninja -C build install"))
    end,
    ["perl"] = function()
@@ -120,9 +121,9 @@ B = {
 local function mtime(x)
    local fp, buf
    fp = io.popen("stat -c %Y " .. x)
-   buf = fp:read('*a')
+   buf = fp:read("*a")
    io.close(fp)
-   return(tonumber(buf:sub(1, buf:find('\n')-1)))
+   return(tonumber(buf:sub(1, buf:find("\n")-1)))
 end
 
 local function v(x)
@@ -135,7 +136,7 @@ function _XLOOK (x)
    local fp, buf
    x = x:gsub("%-", "%%-")
    fp = io.popen("cat /usr/okpkg/db/*")
-   buf = fp:read('*a'):match("\n?[^%w_]" .. x .. "%s*=%s*({.-})%s*;")
+   buf = fp:read("*a"):match("\n?[^%w_]" .. x .. "%s*=%s*({.-})%s*;")
    fp:close()
    return load("return " .. buf)()
 end
@@ -167,7 +168,7 @@ function download(x)
    -- Note: symlink for temporary packages, or update patch infrastructure
    local patchfile = io.open(string.format("/usr/okpkg/patches/%s.diff", x))
    if patchfile then
-      io.popen("$patch", 'w'):
+      io.popen("$patch", "w"):
          write(patchfile:read("*a")):
          close()
       patchfile:close()
