@@ -12,8 +12,8 @@ libfyaml = {
 };
 
 xdg-dbus-proxy = {
-   url = "https://github.com/flatpak/xdg-dbus-proxy/releases/download/0.1.6/xdg-dbus-proxy-0.1.6.tar.xz",
-   sha3 = "57497aa3cb9d71bdbdb937affe1f2f69ec48217205bf8b5fe9d6422c66d33de4",
+   url = "https://github.com/flatpak/xdg-dbus-proxy/releases/download/0.1.7/xdg-dbus-proxy-0.1.7.tar.xz",
+   sha3 = "3d4a2196f41500f326c4f4d8704e0eef9679835a20832a7899bcc89f96b8721f",
    build = "meson",
    flags = { "-Dman=disabled" }
 };
