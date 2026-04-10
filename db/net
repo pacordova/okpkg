@@ -149,6 +149,7 @@ wpa_supplicant = {
    prep = [[
       cd wpa_supplicant
       cp defconfig .config
+      printf "CONFIG_DEBUG_SYSLOG=y\n" >> .config
       printf "CONFIG_DEBUG_SYSLOG_FACILITY=LOG_DAEMON\n" >> .config
       printf "CONFIG_IPV6=y\n" >> .config
       printf "CONFIG_READLINE=y\n" >> .config
