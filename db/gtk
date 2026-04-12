@@ -25,7 +25,6 @@ xdg-user-dirs = {
    url = "https://user-dirs.freedesktop.org/releases/xdg-user-dirs-0.20.tar.xz",
    sha3 = "72cc7bff9c605fdd73aadbdab3fc7295ecae3bd23fd0813f7ef1397417c8fae7",
    build = "meson",
-   flags = { "-Ddocs=false" },
    post = [[
       rm -fr "$destdir/usr/lib/systemd"
       rmdir  "$destdir/usr/lib"
