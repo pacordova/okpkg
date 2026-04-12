@@ -1,6 +1,6 @@
 babl = {
-   url = "https://download.gimp.org/pub/babl/0.1/babl-0.1.124.tar.xz",
-   sha3 = "a7ec11ee2ed9237f947d4588dc9d89426985b509d36e87cb4eebdec2441bc387",
+   url = "https://download.gimp.org/pub/babl/0.1/babl-0.1.126.tar.xz",
+   sha3 = "d2d6758c8de8ac004f855c563961de061b7b0995ae831cd34081223b880c7bf8",
    build = "meson",
 };
 

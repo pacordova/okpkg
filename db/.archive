@@ -2186,17 +2186,6 @@ portal = {
    }
 };
 
-inetutils = {
-   url = "https://ftp.gnu.org/gnu/inetutils/inetutils-2.5.tar.xz",
-   sha3 = "72d891ed6dfffb9b93ea83f4388466b6a14ba04bea61c84e387fb373b807a824",
-   build = "./configure",
-   flags = {
-      "--enable-{dnsdomainname,ftp,ftpd,hostname,talk,talkd,telnet,telnetd}",
-      "--disable-{ifconfig,inetd,logger,ping,ping6,rcp,rexec,rexecd,rlogin}",
-      "--disable-{rsh,servers,syslogd,tftp,tftpd,traceroute,uucpd,whois}",
-   }
-};
-
 xmlto = {
    url = "https://pagure.io/xmlto/archive/0.0.29/xmlto-0.0.29.tar.gz",
    sha3 = "812135a4e5dee4e38df4cbad87af438a3d010b5f06df43795f405039402e4fbd",

@@ -1,21 +1,3 @@
-picom = {
-   url = "https://github.com/yshui/picom/archive/v13/picom-13.tar.gz",
-   sha3 = "705bac0be7c10192b523545e98e2244becd41f1e8c048e047fb59a60944e3a22",
-   build = "meson",
-   flags = {
-      "-Ddbus=false",
-      "-Dcompton=false",
-      "-Dregex=true",
-   },
-   post = [[ rm -fr $destdir/usr/share/applications ]]
-};
-
-xfce4-alsa-plugin = {
-   url = "https://github.com/equeim/xfce4-alsa-plugin/archive/0.4.0/xfce4-alsa-plugin-0.4.0.tar.gz",
-   sha3 = "78aff63bf0dc17a581b03d177e494f83423819cea25f10867ece96a526b70665",
-   build = "meson",
-};
-
 7zip = {
    --url = "https://github.com/p7zip-project/p7zip/archive/v17.05/p7zip-17.05.tar.gz",
    --sha3 = "7cce53f689d055b1cdc0a33922965083d50e595e2037e2ca3e8fee3fc87336dd",
@@ -162,6 +144,25 @@ libsndfile = {
    build = "./configure",
 };
 
+lrzip = {
+   url = "https://github.com/ckolivas/lrzip/archive/v0.660/lrzip-0.660.tar.gz",
+   sha3 = "796e5e141fa87cfdcca5832ec7e7743ea964bc22091b1fca587e9aa42770bb56",
+   build = "./configure",
+   prep = [[ autoreconf -if ]]
+};
+
+picom = {
+   url = "https://github.com/yshui/picom/archive/v13/picom-13.tar.gz",
+   sha3 = "705bac0be7c10192b523545e98e2244becd41f1e8c048e047fb59a60944e3a22",
+   build = "meson",
+   flags = {
+      "-Ddbus=false",
+      "-Dcompton=false",
+      "-Dregex=true",
+   },
+   post = [[ rm -fr $destdir/usr/share/applications ]]
+};
+
 pulseaudio = {
    url = "https://www.freedesktop.org/software/pulseaudio/releases/pulseaudio-17.0.tar.xz",
    sha3 = "3b16f66156e36e372a9792379fbb2b4fb56c245d5c066dba8b2d7d23a199d427",
@@ -174,6 +175,12 @@ pulseaudio = {
    post = [[
       rm -f "$destdir/usr/share/dbus-1/system.d/pulseaudio-system.conf"
    ]]
+};
+
+pv = {
+   url = "https://www.ivarch.com/s/pv-1.10.5.tar.gz",
+   sha3 = "a69fc3e9c73139fc39825020784ac9587c1eb0c8306aa72a195797eb52ccb1df",
+   build = "./configure",
 };
 
 libcanberra = {
@@ -266,6 +273,30 @@ imlib2 = {
    flags = { "--enable-amd64" }
 };
 
+inetutils = {
+   url = "https://ftp.gnu.org/gnu/inetutils/inetutils-2.7.tar.gz",
+   sha3 = "05fb188a11db2f713b2f0b90643c82451a3e8e537d2db86c71a27c6c7c8339b1",
+   build = "./configure",
+   flags = {
+      "--enable-{dnsdomainname,hostname}=yes",
+      "--enable-{syslogd,logger}=yes",
+      "--enable-{servers,clients}=no",
+      "--enable-r{cp,exec,execd,login,sh}{,d}=no",
+      "--enable-{,t}ftp{,d}=no",
+      "--enable-ping{,6}=yes",
+      "--enable-tftp{,d}=no",
+      "--enable-ftp{,d}=no",
+      "--enable-talk{,d}=no",
+      "--enable-telnet{,d}=no",
+      "--enable-{ifconfig,inetd}=no",
+      "--enable-traceroute=yes",
+      "--enable-uucpd=no",
+      "--enable-whois=yes",
+      "--enable-libls=yes",
+      "--with-pam=no",
+   }
+};
+
 feh = {
    url = "https://feh.finalrewind.org/feh-3.10.3.tar.bz2",
    sha3 = "98040180056d52e47a2932e0611b1b457c0a6d4e463881c37a55f1b321c5aee0",
@@ -294,8 +325,8 @@ gzip = {
 };
 
 htop = {
-   url = "https://github.com/htop-dev/htop/releases/download/3.4.1/htop-3.4.1.tar.xz",
-   sha3 = "5c4df4c6f6dbc3d3dede923f9cc9fd318a3c4cf83176bc5591a5c62e567afa05",
+   url = "https://github.com/htop-dev/htop/releases/download/3.5.0/htop-3.5.0.tar.xz",
+   sha3 = "d473dd5b140c378c8157d84608667b02e8b0a3e5870231a85f1f70b57d98cad8",
    build = "./configure",
 };
 
@@ -463,8 +494,8 @@ sharutils = {
 };
 
 sqlite = {
-   url = "https://www.sqlite.org/2026/sqlite-autoconf-3510300.tar.gz",
-   sha3 = "581215771b32ea4c4062e6fb9842c4aa43d0a7fb2b6670ff6fa4ebb807781204",
+   url = "https://www.sqlite.org/2026/sqlite-autoconf-3530000.tar.gz",
+   sha3 = "60c4b08c6729761e488d185e0d52411da10b14c72b53ada6936dc5eea225cefe",
    build = "./configure",
    flags = { 
       "--libdir=/usr/lib64",
@@ -531,6 +562,12 @@ vim-classic = {
    prep = [[
       printf '#define SYS_VIMRC_FILE "/etc/vimrc"\n' >> src/feature.h
    ]],
+};
+
+xfce4-alsa-plugin = {
+   url = "https://github.com/equeim/xfce4-alsa-plugin/archive/0.4.0/xfce4-alsa-plugin-0.4.0.tar.gz",
+   sha3 = "78aff63bf0dc17a581b03d177e494f83423819cea25f10867ece96a526b70665",
+   build = "meson",
 };
 
 xorriso = {

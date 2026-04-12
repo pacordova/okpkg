@@ -278,8 +278,8 @@ libpcap = {
 };
 
 libpng = {
-   url = "https://downloads.sourceforge.net/libpng/libpng-1.6.56.tar.xz",
-   sha3 = "abde88d3e5d82ad540725dbf79407ab696e564c0086ee9ecabf604a8f1770ad9",
+   url = "https://downloads.sourceforge.net/libpng/libpng-1.6.57.tar.xz",
+   sha3 = "5b9de629702d6f4fb57cdf1ed1560a0c555743263a1072f6942e9c6c609fb800",
    build = "./configure",
 };
 
@@ -310,8 +310,8 @@ libsass = {
 };
 
 libsodium = {
-   url = "https://download.libsodium.org/libsodium/releases/libsodium-1.0.21.tar.gz",
-   sha3 = "83064332be146d9d810894373dfbad0ca72ab70cc11c524f21a1f9ab40cfc626",
+   url = "https://download.libsodium.org/libsodium/releases/libsodium-1.0.22.tar.gz",
+   sha3 = "6c2474ec13b9dcf27d4f545629f84e403fd16d69dd8c8fbb6d5bde53096ce74d",
    build = "./configure",
 };
 
