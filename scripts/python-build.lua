@@ -17,12 +17,9 @@ purge("meson"); emerge("meson");
 
 -- Reinstall other packages with python libraries
 local pkgs = {
-   "libxml2", "glib2", "gobject-introspection", "xcb-proto", 
+   "meson", "libxml2", "glib2", "gobject-introspection", "xcb-proto", 
    "pygobject", "pycairo", "libtorrent-rasterbar",
 }
 
---[[
-for _, v in pairs(pkgs) do 
-   purge(v); install(string.format("%s/%s-*.tar.lz", C.pkgdir, v))
-end
-]]
+for i=1,#pkgs do purge(pkg[i]); emerge(pkg[i]); end
+install(string.format("%s/libtorrent-rasterbar-2.0.12-amd64.tar.lz", C.pkgdir))
