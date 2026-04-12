@@ -22,10 +22,14 @@ gsettings-desktop-schemas = {
 };
 
 xdg-user-dirs = {
-   url = "https://user-dirs.freedesktop.org/releases/xdg-user-dirs-0.19.tar.xz",
-   sha3 = "6ef28992b957d0eff897cc746c6e9ef8b37a65b6a0e2f3911dc17f42c4508180",
+   url = "https://user-dirs.freedesktop.org/releases/xdg-user-dirs-0.20.tar.xz",
+   sha3 = "72cc7bff9c605fdd73aadbdab3fc7295ecae3bd23fd0813f7ef1397417c8fae7",
    build = "meson",
-   flags = { "-Ddocs=false" }
+   flags = { "-Ddocs=false" },
+   post = [[
+      rm -fr "$destdir/usr/lib/systemd"
+      rmdir  "$destdir/usr/lib"
+   ]]
 };
 
 startup-notification = {
