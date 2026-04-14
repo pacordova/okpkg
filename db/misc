@@ -575,3 +575,37 @@ xorriso = {
    sha3 = "ce81f4c5fc0c4a4144a1c9e68bfc49e632ca73ffc25ce1615f849f081e1510b8",
    build = "./configure",
 };
+
+--------------------------------------------------------------------------------
+
+libgsf = {
+   url = "https://download.gnome.org/sources/libgsf/1.14/libgsf-1.14.56.tar.xz",
+   sha3 = "78ac147a893809c64f926553f04ab6d74cccee7167ed91a4f6ae5067b70ff5bd",
+   build = "./configure",
+};
+
+goffice = {
+   url = "https://download.gnome.org/sources/goffice/0.10/goffice-0.10.60.tar.xz",
+   sha3 = "a12067eca9d832772ad479f397f6d3cd3b69195afb13ef5369af7d47b4e5e4c1",
+   build = "./configure",
+   flags = { "--disable-nls", "--without-lasem", },
+};
+
+gnumeric = {
+   url = "https://download.gnome.org/sources/gnumeric/1.12/gnumeric-1.12.60.tar.xz",
+   sha3 = "8b225a06c36a7dd02ce81161b1f9d6fecf205a826c4cde64a20ba17f6d81c1b3",
+   build = "./configure",
+   flags = { 
+      "--without-perl",
+      "--without-python",
+      "--without-psiconv",
+      --"--disable-maintainer-mode",
+      "--disable-gtk-doc",
+      "--without-gda",
+      "--disable-introspection",
+   },
+   prep = [[ 
+      sed -e '38i #include <stdbool.h>' -i src/sstest.c
+      sed -e '/HELP_LINGUAS/s/de//'     -i doc/Makefile.in
+   ]],
+};

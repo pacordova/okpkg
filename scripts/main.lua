@@ -225,7 +225,7 @@ function makepkg(path)
 end
 
 function build(x)
-   local X = _XLOOK (x)
+   local X = _XLOOK(x)
    X.flags = X.flags or {}
    X.version = v(X.url) or "nil"
    X.destdir = string.format("%s/%s-%s-%s", C.outdir, x, X.version, C.cc.cpu)
@@ -276,29 +276,29 @@ function build(x)
 end
 
 function purge(x)
+   local i, fp
    local file, filename
-   filename = string.format("%s/%s.txt", C.indexdir, x)
-   file = io.open(filename)
-   if file then
-      for path in file:lines() do
-         os.remove(path:sub(2, #path))
+   i = string.format("%s/%s", C.indexdir, x)
+   fp = io.open(i)
+   if fp then
+      for x in fp:lines() do
+         os.remove(x:sub(2, #x))
       end
-      file:close()
-      os.remove(filename)
+      fp:close()
+      os.remove(i)
    end
 end
 
 function install(x)
-   local fp, buf, txt
+   local i, fp, buf
 
    fp = io.popen("$tar -C / -xvf " .. x)
    buf = fp:read('*a')
    io.close(fp)
 
-   ok.chdir(C.indexdir)
-   txt = ok.basename(x):match("(.+)-[n%d]") .. ".txt"
-   os.rename(txt, txt .. ".orig")
-   io.close(io.open(txt, 'w'):write(buf))
+   i = string.format("%s/%s", C.indexdir, ok.basename(x):match("(.+)-[n%d]"))
+   os.rename(i, i .. ".orig")
+   io.close(io.open(i, 'w'):write(buf))
 
    os.execute("ldconfig")
 end
