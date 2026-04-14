@@ -50,8 +50,8 @@ python-packaging = {
 };
 
 python-build = {
-   url = "https://pypi.org/packages/source/b/build/build-1.4.2.tar.gz",
-   sha3 = "47161a78dda083c3a47d1e7711e3fe6af0522726d50bbc21d9b87750acddd7ce",
+   url = "https://pypi.org/packages/source/b/build/build-1.4.3.tar.gz",
+   sha3 = "b17bb1b50451ab72a51d7e43cdfb8a2e736bb39821320c4cab065fd98503952a",
    build = "python-build",
 };
 
@@ -219,7 +219,7 @@ python-pyxdg = {
 };
 
 python-lxml = {
-   url = "https://files.pythonhosted.org/packages/source/l/lxml/lxml-6.0.2.tar.gz",
-   sha3 = "e54243cb38dcbae236ce73b26a8ccf8efb182d00207af8b16440ef4d574ba55a",
+   url = "https://github.com/lxml/lxml/archive/lxml-6.0.4/lxml-6.0.4.tar.gz",
+   sha3 = "98560b8511c619b52b6779958abd36949ce0da685e636994a82883bd51565e57",
    build = "python-build",
 };
