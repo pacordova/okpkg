@@ -290,8 +290,8 @@ libvdpau = {
 };
 
 mesa = {
-   url = "https://mesa.freedesktop.org/archive/mesa-26.0.4.tar.xz",
-   sha3 = "acc73f266b8993a032c428180340562d5eb4b10889b317936b7dfaa690ab3bba",
+   url = "https://mesa.freedesktop.org/archive/mesa-26.0.5.tar.xz",
+   sha3 = "3d76605efa9f9b0f6aaaf4aec8e32c67abbf975fff359b847d4ac10e208cbf08",
    build = "meson",
    flags = {
       "-Dplatforms=x11",
@@ -559,8 +559,8 @@ libepoxy = {
 };
 
 xorg-server = {
-   url = "https://x.org/archive/individual/xserver/xorg-server-21.1.21.tar.xz",
-   sha3 = "c3045dc0770c94fada5ef0e88baa3bef8b01255b507816b9748f4197e1769f47",
+   url = "https://x.org/archive/individual/xserver/xorg-server-21.1.22.tar.xz",
+   sha3 = "0d3c8444d3ac56a15c8bb1416a3abe9882523ffa9111c4fe1c22cf19d97241b8",
    build = "meson",
    flags = {
       "-D{xephyr,xnest,xvfb}=false",

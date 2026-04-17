@@ -69,8 +69,8 @@ openresolv = {
 };
 
 iproute2 = {
-   url = "https://kernel.org/pub/linux/utils/net/iproute2/iproute2-6.19.0.tar.xz",
-   sha3 = "4c7bff5fef9b3a45d2e5a2f25d3fb70a40f1ea6c2e39f36d7a91e35b1668e18e",
+   url = "https://kernel.org/pub/linux/utils/net/iproute2/iproute2-v7.0.0.tar.xz",
+   sha3 = "899b83a711bdb299a2217999f0b249be56345f5449f465648576cc0c5fcc5ddf",
    build = "./configure",
    flags = { "--libdir=/usr/lib64" },
    prep = [[

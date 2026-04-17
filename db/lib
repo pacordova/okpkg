@@ -233,8 +233,8 @@ libevent = {
 };
 
 libexif = {
-   url = "https://github.com/libexif/libexif/releases/download/v0.6.25/libexif-0.6.25.tar.xz",
-   sha3 = "7237c460419244249b8350669b2434960c93f276a809f80e7d9a8a4535762984",
+   url = "https://github.com/libexif/libexif/releases/download/v0.6.26/libexif-0.6.26.tar.xz",
+   sha3 = "2f64976c8fc2e7438cd5d9890c63061c8fff05560b95517fa007b95c1e6c6f43",
    build = "./configure",
    flags = { "--with-doc-dir=/usr/share/doc/libexif" }
 };
@@ -278,8 +278,8 @@ libpcap = {
 };
 
 libpng = {
-   url = "https://downloads.sourceforge.net/libpng/libpng-1.6.57.tar.xz",
-   sha3 = "5b9de629702d6f4fb57cdf1ed1560a0c555743263a1072f6942e9c6c609fb800",
+   url = "https://downloads.sourceforge.net/libpng/libpng-1.6.58.tar.xz",
+   sha3 = "5afbc395178b727c705b27360211539168e4185e518cabc65d94c5f1d7a02759",
    build = "./configure",
 };
 
@@ -366,8 +366,8 @@ libvpx = {
 };
 
 libxml2 = {
-   url = "https://download.gnome.org/sources/libxml2/2.15/libxml2-2.15.2.tar.xz",
-   sha3 = "7b557f2150b5d3b9d29387351adcb52e5f55667fe695dab5c9d8dbf3d75ec037",
+   url = "https://download.gnome.org/sources/libxml2/2.15/libxml2-2.15.3.tar.xz",
+   sha3 = "5911a9517c698ffa1e7ab93aa17627ab5e7fa92684610a4b90e2b14583c7dc94",
    build = "./configure",
    flags = {
       "--with-history",

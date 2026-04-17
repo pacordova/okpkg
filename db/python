@@ -26,55 +26,55 @@ python3 = {
 };
 
 python-flit-core = {
-   url = "https://pypi.org/packages/source/f/flit_core/flit_core-3.12.0.tar.gz",
+   url = "https://pypi.io/packages/source/f/flit_core/flit_core-3.12.0.tar.gz",
    sha3 = "c4aa2456160ee38c785140eae00a24e762b7aaab89fac2e2e4ed28777d9c0be6",
    build = "python-build",
 };
 
 python-installer = {
-   url = "https://github.com/pypa/installer/archive/1.0.0/installer-1.0.0.tar.gz",
-   sha3 = "d844535d915a9ab53f09ce1366a0d868e1cc6a7fc94395d1045e7f72c5b0061f",
+   url = "https://pypi.io/packages/source/i/installer/installer-1.0.0.tar.gz",
+   sha3 = "b76dcc760b39d5f4b9008928cf4aa353b8d7b495add4b96af368192c8a4f7da9",
    build = "python-build",
 };
 
 python-pyproject-hooks = {
-   url = "https://pypi.org/packages/source/p/pyproject_hooks/pyproject_hooks-1.2.0.tar.gz",
+   url = "https://pypi.io/packages/source/p/pyproject_hooks/pyproject_hooks-1.2.0.tar.gz",
    sha3 = "3f369951b1a8aef0e473fc1bb3200714f931b1f08014ede9b3e116a48c0a3b35",
    build = "python-build",
 };
 
 python-packaging = {
-   url = "https://pypi.org/packages/source/p/packaging/packaging-26.0.tar.gz",
-   sha3 = "3a652d86cec2ef64c7585c2e86ea89d35dccd222ca7441478d802818d67a71ad",
+   url = "https://pypi.io/packages/source/p/packaging/packaging-26.1.tar.gz",
+   sha3 = "f1cb5674cd84c635b7e8e55ecba37653befc04fce2f369c00cc8f4325bd7d88b",
    build = "python-build",
 };
 
 python-build = {
-   url = "https://pypi.org/packages/source/b/build/build-1.4.3.tar.gz",
+   url = "https://pypi.io/packages/source/b/build/build-1.4.3.tar.gz",
    sha3 = "b17bb1b50451ab72a51d7e43cdfb8a2e736bb39821320c4cab065fd98503952a",
    build = "python-build",
 };
 
 python-wheel = {
-   url = "https://pypi.org/packages/source/w/wheel/wheel-0.46.3.tar.gz",
+   url = "https://pypi.io/packages/source/w/wheel/wheel-0.46.3.tar.gz",
    sha3 = "d0df66d177d494cb21f5ae3c431144396245a232fa594921f81204f8a04cc52f",
    build = "python-build",
 };
 
 python-setuptools = {
-   url = "https://pypi.org/packages/source/s/setuptools/setuptools-82.0.1.tar.gz",
+   url = "https://pypi.io/packages/source/s/setuptools/setuptools-82.0.1.tar.gz",
    sha3 = "29b5d7b6f4b3f6d62a38526f7200bb6aaf824d8b078f334027f145cea83d55b3",
    build = "python-build",
 };
 
 python-markupsafe = {
-   url = "https://pypi.org/packages/source/m/markupsafe/markupsafe-3.0.3.tar.gz",
+   url = "https://pypi.io/packages/source/m/markupsafe/markupsafe-3.0.3.tar.gz",
    sha3 = "fe90cd0d58ed1a8cef30a8506ab65cece4457bd6fdd4906689765a6d1d837a4b",
    build = "python-build",
 };
 
 python-jinja = {
-   url = "https://pypi.org/packages/source/J/Jinja2/jinja2-3.1.6.tar.gz",
+   url = "https://pypi.io/packages/source/J/Jinja2/jinja2-3.1.6.tar.gz",
    sha3 = "3f1b8239e487d282f75e45fc8f0d28978f2acebdbc031045da812c7aa07c87f5",
    build = "python-build",
 };
@@ -86,62 +86,62 @@ python-docutils = {
 };
 
 python-mako = {
-   url = "https://pypi.org/packages/source/M/Mako/mako-1.3.10.tar.gz",
+   url = "https://pypi.io/packages/source/M/Mako/mako-1.3.10.tar.gz",
    sha3 = "d505b420fe156bd275daff6d0f4d9fb4fbd6570c94cfeab6858c216c6587e448",
    build = "python-build",
 };
 
 python-editables = {
-   url = "https://github.com/pfmoore/editables/archive/0.5/editables-0.5.tar.gz",
-   sha3 = "0a536128b2d0f5b932f59ea7e5b1fb8b523e0cb5801d3d4198fb7c135db41447",
+   url = "https://files.pythonhosted.org/packages/source/e/editables/editables-0.6.tar.gz",
+   sha3 = "55e36569d1e507f42eaa54acc84a266f234350a88d798d707f466b2208b14921",
    build = "python-build",
 };
 
 python-vcs-versioning = {
-   url = "https://pypi.org/packages/source/v/vcs_versioning/vcs_versioning-1.1.1.tar.gz",
+   url = "https://pypi.io/packages/source/v/vcs_versioning/vcs_versioning-1.1.1.tar.gz",
    sha3 = "33db0945508b32da276e89af2947dda32d5cc9a753227c31b08f62d6206c2429",
    build = "python-build",
 };
 
 python-setuptools-scm = {
-   url = "https://pypi.org/packages/source/s/setuptools-scm/setuptools_scm-10.0.5.tar.gz",
+   url = "https://pypi.io/packages/source/s/setuptools-scm/setuptools_scm-10.0.5.tar.gz",
    sha3 = "d8026e7e432f8042f4dc3f4cd9865ec0f5ee19cb766f9af2d4de1079856caa1a",
    build = "python-build",
 };
 
 python-pluggy = {
-   url = "https://pypi.org/packages/source/p/pluggy/pluggy-1.6.0.tar.gz",
+   url = "https://pypi.io/packages/source/p/pluggy/pluggy-1.6.0.tar.gz",
    sha3 = "3fd47e50db8ec4aa8e7c266ece1c8c6fd7a0a37ab52e4f8636bdbc104e65c185",
    build = "python-build",
 };
 
 python-pathspec = {
-   url = "https://pypi.org/packages/source/p/pathspec/pathspec-1.0.4.tar.gz",
+   url = "https://pypi.io/packages/source/p/pathspec/pathspec-1.0.4.tar.gz",
    sha3 = "d00300651c8be99144bfa6bf800130813cd915a4c2c213ec85d08bbec63f75ac",
    build = "python-build",
 };
 
 python-calver = {
-   url = "https://pypi.org/packages/source/c/calver/calver-2025.10.20.tar.gz",
+   url = "https://pypi.io/packages/source/c/calver/calver-2025.10.20.tar.gz",
    sha3 = "54c8c04195cce004a25f369fd12f48d52ec12b0633ba1277c26791a80f20ff25",
    build = "python-build",
    prep = [[ printf "Version: 2025.4.17\n" > PKG-INFO ]]
 };
 
 python-trove-classifiers = {
-   url = "https://pypi.org/packages/source/t/trove-classifiers/trove_classifiers-2026.1.14.14.tar.gz",
+   url = "https://pypi.io/packages/source/t/trove-classifiers/trove_classifiers-2026.1.14.14.tar.gz",
    sha3 = "4840fc23cd9b9b26c60d2c21467f64689d112a73113f18c465da229b94af7e02",
    build = "python-build",
 };
 
 python-hatchling = {
-   url = "https://pypi.org/packages/source/h/hatchling/hatchling-1.29.0.tar.gz",
+   url = "https://pypi.io/packages/source/h/hatchling/hatchling-1.29.0.tar.gz",
    sha3 = "614f6485b0d6d3f579643a8207f5238f6ae4ac87a210f73a7fa5e140248a7501",
    build = "python-build",
 };
 
 python-pygments = {
-   url = "https://pypi.org/packages/source/p/pygments/pygments-2.20.0.tar.gz",
+   url = "https://pypi.io/packages/source/p/pygments/pygments-2.20.0.tar.gz",
    sha3 = "8e52625ff5ba9699b810f4bcea52224bba7a0ecb46f58ad16627ab87b3a63472",
    build = "python-build",
 };
@@ -159,13 +159,13 @@ glad = {
 };
 
 python-pyparsing = {
-   url = "https://pypi.org/packages/source/p/pyparsing/pyparsing-3.3.2.tar.gz",
+   url = "https://pypi.io/packages/source/p/pyparsing/pyparsing-3.3.2.tar.gz",
    sha3 = "075108204990ecd229a8d8d2057b07ecadecf726b421073fc0fd7ad2bae9e7c1",
    build = "python-build",
 };
 
 cython = {
-   url = "https://pypi.org/packages/source/c/cython/cython-3.2.4.tar.gz",
+   url = "https://pypi.io/packages/source/c/cython/cython-3.2.4.tar.gz",
    sha3 = "f565a6fd07a46beb89de75da0e31b257ac8cad2a9c5fc787d180cbfd51dc9dbf",
    build = "python-build",
 };
@@ -189,7 +189,7 @@ python-hatch-vcs = {
 };
 
 python-attrs = {
-   url = "https://pypi.org/packages/source/a/attrs/attrs-26.1.0.tar.gz",
+   url = "https://pypi.io/packages/source/a/attrs/attrs-26.1.0.tar.gz",
    sha3 = "58331884eb9aa3a8cbe37a31556cf591bd504e13b2324fa4e7710c32bdb7a444",
    build = "python-build",
 };
@@ -201,19 +201,19 @@ python-versioneer = {
 };
 
 python-cffi = {
-   url = "https://pypi.org/packages/source/c/cffi/cffi-2.0.0.tar.gz",
+   url = "https://pypi.io/packages/source/c/cffi/cffi-2.0.0.tar.gz",
    sha3 = "a6d9c806e665ab83b512972ead0def02e68d1d7eea85dd9ddc6943aa290452d9",
    build = "python-build",
 };
 
 python-pycparser = {
-   url = "https://pypi.org/packages/source/p/pycparser/pycparser-3.0.tar.gz",
+   url = "https://pypi.io/packages/source/p/pycparser/pycparser-3.0.tar.gz",
    sha3 = "a6192c369c9c3269e288e7390cc75a05b9d03b45431cc61aa4c311c27404d9b3",
    build = "python-build",
 };
 
 python-pyxdg = {
-   url = "https://pypi.org/packages/source/p/pyxdg/pyxdg-0.28.tar.gz",
+   url = "https://pypi.io/packages/source/p/pyxdg/pyxdg-0.28.tar.gz",
    sha3 = "085473373bd84fdbc3d4de35ac7b4a76c538f73de58d691668bf7dc114909fea",
    build = "python-build",
 };

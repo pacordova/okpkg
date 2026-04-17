@@ -1,6 +1,6 @@
 libxmlb = {
-   url = "https://github.com/hughsie/libxmlb/releases/download/0.3.25/libxmlb-0.3.25.tar.xz",
-   sha3 = "887470f9cca14688dc05801fcd396fbc17b09f22c85d668ce4f0d0569b95cc58",
+   url = "https://github.com/hughsie/libxmlb/releases/download/0.3.26/libxmlb-0.3.26.tar.xz",
+   sha3 = "7c22515a1c9939607d3247e1a82edbe8d2c2bc2bd8e5d4f1378f3ab45eb0adf5",
    build = "meson",
    flags = { "-Dintrospection=true", "-D{gtkdoc,tests}=false" },
 };

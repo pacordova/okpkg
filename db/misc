@@ -102,6 +102,12 @@ ghostty = {
    build = "zig",
 };
 
+gifsicle = {
+   url = "https://www.lcdf.org/gifsicle/gifsicle-1.96.tar.gz",
+   sha3 = "b8f63fe13d15a2d80162b643230fe275c0f48c1e09bbad28da80a905cf53e32a",
+   build = "./configure",
+};
+
 jack2 = {
    url = "https://github.com/jackaudio/jack2/archive/v1.9.22/jack2-1.9.22.tar.gz",
    sha3 = "93ef4a5afcdaf348b74c06c0b8206b0cf6f27414185697382dc3ab8ad27a3b27",

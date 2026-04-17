@@ -412,10 +412,9 @@ bash = {
 };
 
 time = {
-   url = "https://ftp.gnu.org/gnu/time/time-1.9.tar.gz",
-   sha3 = "21b27eeec844d70f0b91316d2ac96b6774959275c1df4250a2484c211993d7bc",
+   url = "https://ftp.gnu.org/gnu/time/time-1.10.tar.xz",
+   sha3 = "53f67490c7a7a0791cefeae408731eca4bbc9d7bc83e9a684368eadc1e747bf0",
    build = "./configure",
-   flags = { "CC=c99" },
 };
 
 gdbm = {
