@@ -80,7 +80,7 @@ python-jinja = {
 };
 
 python-docutils = {
-   url = "https://downloads.sourceforge.net/docutils/docutils-0.22.4.tar.gz",
+   url = "https://pypi.io/packages/source/d/docutils/docutils-0.22.4.tar.gz",
    sha3 = "c7b036fd0ec65908aae219334bee76805924feb7b1c5e123a4482d2e2309272e",
    build = "python-build",
 };
@@ -147,7 +147,7 @@ python-pygments = {
 };
 
 python-ply = {
-   url = "http://www.dabeaz.com/ply/ply-3.11.tar.gz",
+   url = "https://pypi.io/packages/source/p/ply/ply-3.11.tar.gz",
    sha3 = "3d49c834da5ef47d9455dae9044f27d2f16cdf0ab58b655588142298d5736484",
    build = "python-build",
 };
