@@ -311,14 +311,14 @@ xbitmaps = {
 };
 
 xorg-iceauth = {
-   url = "https://x.org/pub/individual/app/iceauth-1.0.10.tar.xz",
-   sha3 = "51a8fd12b72fce2f2d309f929a091ed2da640c411b4a59f995d955d64eae4b35",
+   url = "https://x.org/pub/individual/app/iceauth-1.0.11.tar.xz",
+   sha3 = "bc72053ef7dbf9f5d52627c1a411695f5fc01b083924eb13a8be28b1fccc7b9a",
    build = "./configure",
 };
 
 xorg-mkfontscale = {
-   url = "https://x.org/pub/individual/app/mkfontscale-1.2.3.tar.xz",
-   sha3 = "c5772c2f296fc5b118d260fc3a6dbe051a8b55d639bf2fa9d3f4912fb8e99e6b",
+   url = "https://x.org/pub/individual/app/mkfontscale-1.2.4.tar.xz",
+   sha3 = "00526f40f4aa46009839ae3ab0b777e37db96866ec2f50a63aeb7aa64ca39840",
    build = "./configure",
 };
 

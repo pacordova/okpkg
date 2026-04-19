@@ -261,13 +261,12 @@ cups = {
 };
 
 dhcpcd = {
-   url = "https://github.com/NetworkConfiguration/dhcpcd/releases/download/v10.0.10/dhcpcd-10.0.10.tar.xz",
-   sha3 = "f478c10cb398916e5793442a3701f1cedd8c67a78948825637b134466e5381d4",
+   url = "https://github.com/NetworkConfiguration/dhcpcd/releases/download/v10.3.1/dhcpcd-10.3.1.tar.xz",
+   sha3 = "87b1e8328abfd3649fa2c1f6893278e4d1b38f0d8476abcadd56dd11f3554981",
    build = "./configure",
    flags = {
       "--libdir=/usr/lib64",
-      "--runstatedir=/run",
-      "--sysconfdir=/etc",
+      "--libexecdir=/usr/lib64/dhcpcd",
       "--disable-privsep",
    }
 };
