@@ -217,8 +217,8 @@ mpfr = {
 };
 
 libmpc = {
-   url = "https://ftp.gnu.org/gnu/mpc/mpc-1.4.0.tar.xz",
-   sha3 = "706148b32ad3564093d6bfee1d7d8b46107b51adbc59fb2187d3de04a7cbd329",
+   url = "https://ftp.gnu.org/gnu/mpc/mpc-1.4.1.tar.xz",
+   sha3 = "9ccc7efd96c252d928f6f9c3d747dac34bd3bfed438e50e0bdf16489a918e776",
    build = "./configure",
 };
 
