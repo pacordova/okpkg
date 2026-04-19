@@ -98,11 +98,22 @@ gtk3 = {
    sha3 = "b255123da1c6e0b48ba96c10b74f0fd60ecc5f70f3dadd5d88288f08b876ad57",
    build = "meson",
    flags = {
+      "-Dx11_backend=true",
+      "-Dwayland_backend=false",
       "-Dbroadway_backend=true",
+      "-Dwin32_backend=false",
+      "-Dquartz_backend=false",
+      "-Dcloudproviders=false",
+      "-Dtracker3=false",
+      "-Dprint_backends=auto",
+      "-Dcolord=no",
+      "-Dgtk_doc=false",
       "-Dman=false",
       "-Dintrospection=true",
-      "-D{quartz,wayland,win32}_backend=false",
-      "-D{cloudproviders,demos,examples,gtk_doc,tests,tracker3}=false",
+      "-Ddemos=false",
+      "-Dexamples=false",
+      "-Dtests=false",
+      "-Datk_bridge=false",
    }
 };
 
