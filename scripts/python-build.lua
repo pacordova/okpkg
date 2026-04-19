@@ -5,9 +5,14 @@ unpack = unpack or table.unpack
 local C = dofile("/usr/bin/okpkg")
 local ok = require("okutils")
 
-local function findpkg(x)
-   for f in ok.directory_iterator(C.pkgdir) do
-      if ok.basename(f):sub(1, #x) == x then return f end
+local function install_all(X)
+   for i in ok.directory_iterator(C.pkgdir) do 
+      for j=1,#X do
+         if ok.basename(i):sub(1, #X[j]) == X[j] then 
+            purge(X[j])
+            install(i)
+         end
+      end
    end
 end
 
@@ -28,4 +33,12 @@ local X = {
    "libtorrent-rasterbar", "pygobject", "pycairo",
 }
 
-for i=1,#pkgs do install(findpkg(X[i])) end
+install_all {
+   "libxml2", 
+   "glib2", 
+   "gobject-introspection", 
+   "xcb-proto",
+   "pygobject", 
+   "pycairo", 
+   "libtorrent-rasterbar"
+}
