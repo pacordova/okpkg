@@ -85,8 +85,8 @@ libxmu = {
 };
 
 libxpm = {
-   url = "https://x.org/pub/individual/lib/libXpm-3.5.18.tar.xz",
-   sha3 = "1a073a08a9598ea5fa5064ea61b4f5046b10d95a8953d18786dac1e41c837fef",
+   url = "https://x.org/pub/individual/lib/libXpm-3.5.19.tar.xz",
+   sha3 = "1be46238e8cabb9023caa8062076c3151a2e08972c8f950c636e2a33c47c5b27",
    build = "./configure",
    flags = { "--disable-open-zfile" }
 };
