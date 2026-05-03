@@ -1,11 +1,9 @@
 7zip = {
-   --url = "https://github.com/p7zip-project/p7zip/archive/v17.05/p7zip-17.05.tar.gz",
-   --sha3 = "7cce53f689d055b1cdc0a33922965083d50e595e2037e2ca3e8fee3fc87336dd",
-   url = "https://github.com/ip7z/7zip/releases/download/26.00/7z2600-src.tar.xz",
-   sha3 = "3087dfc747e0ae962cfa226f093aa74b4badd7c2288b7210e8bfd52effe9f83d",
+   url = "https://github.com/ip7z/7zip/releases/download/26.01/7z2601-src.tar.xz",
+   sha3 = "9a686e37bf252363880c268ca1c033f2148ae9196f9a8c58d0bcdedce8460786",
    build = _,
    post = [[
-      rm -fr * && tar -xf ../../download/7z2600-src.tar.xz
+      rm -fr * && tar -xf /var/cache/ok/dist/7z2601-src.tar.xz
       for i in Bundles/{Alone,Alone7z,Format7zF,SFXCon} UI/Console; do
          make -C CPP/7zip/$i -f ../../cmpl_gcc.mak
       done
@@ -261,8 +259,8 @@ cups = {
 };
 
 dhcpcd = {
-   url = "https://github.com/NetworkConfiguration/dhcpcd/releases/download/v10.3.1/dhcpcd-10.3.1.tar.xz",
-   sha3 = "87b1e8328abfd3649fa2c1f6893278e4d1b38f0d8476abcadd56dd11f3554981",
+   url = "https://github.com/NetworkConfiguration/dhcpcd/releases/download/v10.3.2/dhcpcd-10.3.2.tar.xz",
+   sha3 = "5e46feb872032be94214e2409e8b13cfb20ae6386e9a975927b42f9996a2126a",
    build = "./configure",
    flags = {
       "--libdir=/usr/lib64",
@@ -389,8 +387,8 @@ libtorrent-rasterbar = {
 };
 
 linux-lts = {
-   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.18.21.tar.xz",
-   sha3 = "a9fd8380ed8ab3fcf5dd8d1181e98a7ae203393d058d45c615377611fa297b20",
+   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.18.26.tar.xz",
+   sha3 = "4625ab10bf7ae057f3d1285fdf03103fde16839d18a4b55372d9916187bf497a",
    build = "make",
    flags = { "bzImage", "modules", "headers" },
    prep = [[
@@ -402,7 +400,7 @@ linux-lts = {
       install -m 644 arch/x86/boot/bzImage $destdir/boot/vmlinuz
       make modules_install \
           INSTALL_MOD_PATH=$destdir \
-          MODLIB=$destdir/usr/lib64/modules/6.18.21
+          MODLIB=$destdir/usr/lib64/modules/6.18.26
       cp -rp usr/include $destdir/usr
       find $destdir/usr/include -type f ! -name '*.h' -delete
    ]]

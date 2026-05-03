@@ -1,3 +1,8 @@
+firewalld = {
+   url = "https://github.com/firewalld/firewalld/releases/download/v2.4.1/firewalld-2.4.1.tar.bz2",
+   sha3 = "",
+};
+
 iptables = {
    url = "https://www.netfilter.org/projects/iptables/files/iptables-1.8.13.tar.xz",
    sha3 = "9a52272dd55783067c396639825b812854cd318d5a5ec04240b6d962cc570bc1",
