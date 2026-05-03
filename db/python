@@ -44,20 +44,20 @@ python-pyproject-hooks = {
 };
 
 python-packaging = {
-   url = "https://pypi.io/packages/source/p/packaging/packaging-26.1.tar.gz",
-   sha3 = "f1cb5674cd84c635b7e8e55ecba37653befc04fce2f369c00cc8f4325bd7d88b",
+   url = "https://pypi.io/packages/source/p/packaging/packaging-26.2.tar.gz",
+   sha3 = "7d53e62fe5ec0a2c58033acdebbe259221b47e8e2c5c9f1c1a983c1567a17e3c",
    build = "python-build",
 };
 
 python-build = {
-   url = "https://pypi.io/packages/source/b/build/build-1.4.3.tar.gz",
-   sha3 = "b17bb1b50451ab72a51d7e43cdfb8a2e736bb39821320c4cab065fd98503952a",
+   url = "https://pypi.io/packages/source/b/build/build-1.5.0.tar.gz",
+   sha3 = "33cfe1694f307250b1a6280bc00cd18af7e574428766d10d1da46438de173a38",
    build = "python-build",
 };
 
 python-wheel = {
-   url = "https://pypi.io/packages/source/w/wheel/wheel-0.46.3.tar.gz",
-   sha3 = "d0df66d177d494cb21f5ae3c431144396245a232fa594921f81204f8a04cc52f",
+   url = "https://pypi.io/packages/source/w/wheel/wheel-0.47.0.tar.gz",
+   sha3 = "bacd9691243a5b9d425612f32c1f7b106c78a638dfe01005c53a80d0c8055a5d",
    build = "python-build",
 };
 
@@ -86,8 +86,8 @@ python-docutils = {
 };
 
 python-mako = {
-   url = "https://pypi.io/packages/source/M/Mako/mako-1.3.10.tar.gz",
-   sha3 = "d505b420fe156bd275daff6d0f4d9fb4fbd6570c94cfeab6858c216c6587e448",
+   url = "https://pypi.io/packages/source/M/Mako/mako-1.3.12.tar.gz",
+   sha3 = "8bf5026d5840c560b458adfae15e1803d60a47494cbac6a3487afe4aa5cdfcea",
    build = "python-build",
 };
 
@@ -116,8 +116,8 @@ python-pluggy = {
 };
 
 python-pathspec = {
-   url = "https://pypi.io/packages/source/p/pathspec/pathspec-1.0.4.tar.gz",
-   sha3 = "d00300651c8be99144bfa6bf800130813cd915a4c2c213ec85d08bbec63f75ac",
+   url = "https://pypi.io/packages/source/p/pathspec/pathspec-1.1.1.tar.gz",
+   sha3 = "88986e4ffe5eddf276bce4437cf51ed73a9d028dcf3e0ee62da3fd2d80371a48",
    build = "python-build",
 };
 
@@ -129,8 +129,8 @@ python-calver = {
 };
 
 python-trove-classifiers = {
-   url = "https://pypi.io/packages/source/t/trove-classifiers/trove_classifiers-2026.1.14.14.tar.gz",
-   sha3 = "4840fc23cd9b9b26c60d2c21467f64689d112a73113f18c465da229b94af7e02",
+   url = "https://pypi.io/packages/source/t/trove-classifiers/trove_classifiers-2026.4.28.13.tar.gz",
+   sha3 = "09d1b383bd9ee822f16eb03b49e183f328c442c25d516d7ed14f1a2245621af1",
    build = "python-build",
 };
 
@@ -219,7 +219,7 @@ python-pyxdg = {
 };
 
 python-lxml = {
-   url = "https://github.com/lxml/lxml/archive/lxml-6.0.4/lxml-6.0.4.tar.gz",
-   sha3 = "98560b8511c619b52b6779958abd36949ce0da685e636994a82883bd51565e57",
+   url = "https://pypi.io/packages/source/l/lxml/lxml-6.1.0.tar.gz",
+   sha3 = "ebaefabca85740a05070b79f8fd1492885a886ab3744d3eea4cf4e7bd963ab12",
    build = "python-build",
 };

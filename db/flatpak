@@ -59,8 +59,8 @@ appstream = {
 };
 
 bubblewrap = {
-   url = "https://github.com/projectatomic/bubblewrap/releases/download/v0.11.1/bubblewrap-0.11.1.tar.xz",
-   sha3 = "671bf7f62ef68bbb2f3b142f5af34ce2b9c9a711f1c2a8f03042e941122e18b5",
+   url = "https://github.com/projectatomic/bubblewrap/releases/download/v0.11.2/bubblewrap-0.11.2.tar.xz",
+   sha3 = "46c807fb25a8fcfe838739fb675b17fa89058d90839736c95409aaa5a5f869e6",
    build = "meson",
    flags = { "-Dselinux=disabled" }
 };

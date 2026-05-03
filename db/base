@@ -363,8 +363,8 @@ readline = {
 };
 
 sed = {
-   url = "https://ftp.gnu.org/gnu/sed/sed-4.9.tar.xz",
-   sha3 = "0aa23acbc6b1670475f44850bd94502aeedf4d0e5def38e4f7590db7d7065050",
+   url = "https://ftp.gnu.org/gnu/sed/sed-4.10.tar.xz",
+   sha3 = "6d5589bd7476f1fbe180fd574e97a3eadf15f81876608d652fa686072d5c1b97",
    build = "./configure",
 };
 
@@ -425,8 +425,8 @@ gdbm = {
 };
 
 expat = {
-   url = "https://downloads.sourceforge.net/expat/expat-2.7.5.tar.lz",
-   sha3 = "d37baab11d9bf40e783881e71d551dadd0e277b3d018bbef3ba79e8e142ac39b",
+   url = "https://downloads.sourceforge.net/expat/expat-2.8.0.tar.lz",
+   sha3 = "6a868a0a553a9c3401b4ef85ef61672dcf79683486b965ebead2a1575002367e",
    build = "./configure",
    flags = { "--without-{docbook,examples,tests,xmlwf}" }
 };
@@ -445,8 +445,8 @@ gawk = {
 };
 
 tzdata = {
-   url = "https://github.com/eggert/tz/archive/2026a/tz-2026a.tar.gz",
-   sha3 = "1132f6337de62bcd8f631437c879b9524df9153d969637c221143b7b74f8d5a4",
+   url = "https://github.com/eggert/tz/archive/2026b/tz-2026b.tar.gz",
+   sha3 = "9d42ecd6815bee15ccf971a5c06d08835b67e7e692d4ed5822ff6ae2c2a556ee",
    build = "make",
    flags = { "LIBDIR=/usr/lib64", "ZICDIR=/usr/bin" },
    post = [[ rm -f $destdir/etc/localtime ]]
@@ -504,8 +504,8 @@ libffi = {
 };
 
 coreutils = {
-   url = "https://ftp.gnu.org/gnu/coreutils/coreutils-9.10.tar.xz",
-   sha3 = "8d4bfd2a2f6074be55b971210e11b2b91f8c778af63c09e427d242c35c5da166",
+   url = "https://ftp.gnu.org/gnu/coreutils/coreutils-9.11.tar.xz",
+   sha3 = "464a4d322a7c3b8972fb3dc579ff57db402ca2d6d3d7270167951b1bce1288d3",
    build = "./configure",
    flags = {
       "--enable-install-program=hostname",

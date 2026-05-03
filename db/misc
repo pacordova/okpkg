@@ -249,8 +249,8 @@ cryptsetup = {
 };
 
 cups = {
-   url = "https://github.com/OpenPrinting/cups/releases/download/v2.4.17/cups-2.4.17-source.tar.gz",
-   sha3 = "10641e59dfca4e5280e778104e26d7bbad02ce56aeb8c51acc86ab380d4a9c3e",
+   url = "https://github.com/OpenPrinting/cups/releases/download/v2.4.19/cups-2.4.19-source.tar.gz",
+   sha3 = "801c1e75de3aeecac9c7840b7fa3b5bd1a8d711b84a5b470d0baef54b0ef4aae",
    build = "./configure",
    flags = {
       "--with-rcdir=/tmp/cupsinit",
@@ -310,8 +310,8 @@ feh = {
 };
 
 git = {
-   url = "https://kernel.org/pub/software/scm/git/git-2.53.0.tar.xz",
-   sha3 = "92a117340af61df278cbc5909b0fd892db7429f538ced2eababb6e7878780621",
+   url = "https://kernel.org/pub/software/scm/git/git-2.54.0.tar.xz",
+   sha3 = "e8571f047bbe4c0c30606654cd83e19a5d9f1d27cf7a6106759cd3aaebb0099e",
    build = "./configure",
    flags = {
       "--with-gitconfig=/etc/gitconfig",
@@ -330,8 +330,8 @@ gzip = {
 };
 
 htop = {
-   url = "https://github.com/htop-dev/htop/releases/download/3.5.0/htop-3.5.0.tar.xz",
-   sha3 = "d473dd5b140c378c8157d84608667b02e8b0a3e5870231a85f1f70b57d98cad8",
+   url = "https://github.com/htop-dev/htop/releases/download/3.5.1/htop-3.5.1.tar.xz",
+   sha3 = "294a85dbb2047f8fafe51aee75b706b5d21cd0045007c922643d204baa9ec219",
    build = "./configure",
 };
 
@@ -466,8 +466,8 @@ libwebp = {
 };
 
 r = {
-   url = "https://cran.r-project.org/src/base/R-4/R-4.5.3.tar.gz",
-   sha3 = "8d51283c9f73b7fe8a375066fc766e8e1cd47c7f265d7180436577440fadb39c",
+   url = "https://cran.r-project.org/src/base/R-4/R-4.6.0.tar.gz",
+   sha3 = "a2081612176af105e42c35187a3445efe28614da63605459c91caffa1381e3dc",
    build = "./configure",
    flags = { "--enable-{R-shlib=yes,java=no}", "--without-x" }
 };

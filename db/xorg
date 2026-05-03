@@ -268,8 +268,8 @@ libglvnd = {
 };
 
 libdrm = {
-   url = "https://dri.freedesktop.org/libdrm/libdrm-2.4.131.tar.xz",
-   sha3 = "bc08bf47affa1777aab2aef5de5b9360f0314f1b968421edb7725c280438fd45",
+   url = "https://dri.freedesktop.org/libdrm/libdrm-2.4.133.tar.xz",
+   sha3 = "9daae5b7cc2e38eaab5f18497a5a79cfdb514ac8b598397d671655dd4a31d284",
    build = "meson",
    flags = {
       "-D{intel=enabled,udev=true,valgrind=disabled}",
@@ -290,8 +290,8 @@ libvdpau = {
 };
 
 mesa = {
-   url = "https://mesa.freedesktop.org/archive/mesa-26.0.5.tar.xz",
-   sha3 = "3d76605efa9f9b0f6aaaf4aec8e32c67abbf975fff359b847d4ac10e208cbf08",
+   url = "https://mesa.freedesktop.org/archive/mesa-26.0.6.tar.xz",
+   sha3 = "62be06b5158794a218876af13ef42799ade29cd00f5a7e649beaed920f5fa46b",
    build = "meson",
    flags = {
       "-Dplatforms=x11",
@@ -305,8 +305,8 @@ mesa = {
 };
 
 xbitmaps = {
-   url = "https://x.org/pub/individual/data/xbitmaps-1.1.3.tar.xz",
-   sha3 = "867ea521b24178cc3570434e81c069ab9b368dd4a5c16dd6987068b716e29c4b",
+   url = "https://x.org/pub/individual/data/xbitmaps-1.1.4.tar.xz",
+   sha3 = "d1519d04787f803d96700bcd8bbeef851fa1e064bf673c2b1ebcb905120389ed",
    build = "./configure",
 };
 
@@ -467,8 +467,8 @@ xorg-xprop = {
 };
 
 xorg-xrandr = {
-   url = "https://x.org/pub/individual/app/xrandr-1.5.3.tar.xz",
-   sha3 = "0a25fce459af6fda7fbb04211abe4991f3bed288c3987bbcfd7dc04f76863863",
+   url = "https://x.org/pub/individual/app/xrandr-1.5.4.tar.xz",
+   sha3 = "1d424fdfb63c5567401f6009e5d9623c6c3f518442905500c0bf86b2f558b5a5",
    build = "./configure",
 };
 
@@ -522,8 +522,8 @@ xorg-xwud = {
 };
 
 xorg-font-util = {
-   url = "https://x.org/pub/individual/font/font-util-1.4.1.tar.xz",
-   sha3 = "4a8d00cdf93f4028e42224b0e07c5decf3b0d957acd2e5e58298ab9d339de5e5",
+   url = "https://x.org/pub/individual/font/font-util-1.4.2.tar.xz",
+   sha3 = "67bf0412d108d1c99ef60b5905af3e368c6c75a92f021b0436a05f7a4a2d1c35",
    build = "./configure",
    flags = {
       "--with-mapdir=/usr/share/fonts/util",
