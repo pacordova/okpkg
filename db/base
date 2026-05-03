@@ -746,8 +746,8 @@ dbus = {
 --------------------------------------------------------------------------------
 
 device-mapper = {
-   url = "https://gitlab.com/lvmteam/lvm2/-/archive/v2_03_39/lvm2-2.03.39.tar.gz",
-   sha3 = "c65fd0d15eb6565843c575b19c0586d46dd3b428cd9e1c861882d0c67469b56f",
+   url = "https://gitlab.com/lvmteam/lvm2/-/archive/v2_03_40/lvm2-2.03.40.tar.gz",
+   sha3 = "ebff2011062b9142c5bac1429238bed11d69c2f42cf540a287aa4aaa7cc75958",
    prep = "./configure",
    build = "make_noinstall",
    flags = {

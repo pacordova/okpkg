@@ -584,8 +584,8 @@ xorriso = {
 --------------------------------------------------------------------------------
 
 libgsf = {
-   url = "https://download.gnome.org/sources/libgsf/1.14/libgsf-1.14.56.tar.xz",
-   sha3 = "78ac147a893809c64f926553f04ab6d74cccee7167ed91a4f6ae5067b70ff5bd",
+   url = "https://download.gnome.org/sources/libgsf/1.14/libgsf-1.14.58.tar.xz",
+   sha3 = "2770942add830ef2c232e45621bd2396d7f166c1b7439a83fcc211611c61b6f3",
    build = "./configure",
 };
 
