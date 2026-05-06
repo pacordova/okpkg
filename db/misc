@@ -497,8 +497,8 @@ sharutils = {
 };
 
 sqlite = {
-   url = "https://www.sqlite.org/2026/sqlite-autoconf-3530000.tar.gz",
-   sha3 = "60c4b08c6729761e488d185e0d52411da10b14c72b53ada6936dc5eea225cefe",
+   url = "https://www.sqlite.org/2026/sqlite-autoconf-3530100.tar.gz",
+   sha3 = "36ca143645cf76997d07b66e9244c636b8ccdec64a1d50558259c4e415e6558b",
    build = "./configure",
    flags = { 
       "--libdir=/usr/lib64",
