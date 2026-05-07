@@ -201,8 +201,8 @@ lame = {
 };
 
 lcms2 = {
-   url = "https://github.com/mm2/Little-CMS/releases/download/lcms2.19/lcms2-2.19.tar.gz",
-   sha3 = "512743097db6c137a171fd024971d0efa15fe5b7197f7a4db834f84b89855563",
+   url = "https://github.com/mm2/Little-CMS/releases/download/lcms2.19.1/lcms2-2.19.1.tar.gz",
+   sha3 = "5b342892bd020f9e4c0b9397f18f4d884fb5b559d3e0155623b0a32444f2ab49",
    build = "./configure",
 };
 
