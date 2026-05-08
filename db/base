@@ -187,6 +187,7 @@ binutils = {
       "--enable-64-bit-bfd",
       "--enable-default-hash-style=gnu",
       "--enable-deterministic-archives",
+      "--enable-default-execstack=no",
       "--enable-{gold=yes,ld=default}",
       "--enable-{lto,plugins}",
       "--enable-new-dtags",
