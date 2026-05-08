@@ -467,7 +467,10 @@ libressl = {
    url = "https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-4.3.1.tar.gz",
    sha3 = "02292bd1fc5a4b91858becdff740b83bec3707cd8e803f12785d9b53941578d9",
    build = "./configure",
-   flags = { "--with-openssldir=/etc/ssl", },
+   flags = { 
+      "--with-openssldir=/etc/ssl", 
+      "LDFLAGS='-Wl,-z,noexecstack'",
+   },
 };
 
 kmod = {
