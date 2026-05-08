@@ -469,7 +469,7 @@ libressl = {
    build = "./configure",
    flags = { 
       "--with-openssldir=/etc/ssl", 
-      "--disable-asm",
+      "LDFLAGS='-Wl,-z,noexecstack'",
    },
 };
 
