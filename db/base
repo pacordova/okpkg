@@ -470,7 +470,6 @@ libressl = {
    build = "./configure",
    flags = { 
       "--with-openssldir=/etc/ssl", 
-      "LDFLAGS='-Wl,-z,noexecstack'",
    },
 };
 
