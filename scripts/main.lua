@@ -292,7 +292,7 @@ end
 function install(x)
    local i, fp, buf
 
-   fp = io.popen("$tar -C / -xvf " .. x)
+   fp = io.popen("$tar -C / -h -xvf " .. x)
    buf = fp:read('*a')
    io.close(fp)
 
