@@ -426,8 +426,8 @@ gdbm = {
 };
 
 expat = {
-   url = "https://downloads.sourceforge.net/expat/expat-2.8.0.tar.lz",
-   sha3 = "6a868a0a553a9c3401b4ef85ef61672dcf79683486b965ebead2a1575002367e",
+   url = "https://downloads.sourceforge.net/expat/expat-2.8.1.tar.lz",
+   sha3 = "a75e4f16308862677fe7a8b2e5ae0fc18e97d35a9337c17c114de5d0407fe1ea",
    build = "./configure",
    flags = { "--without-{docbook,examples,tests,xmlwf}" }
 };
@@ -481,8 +481,8 @@ kmod = {
 };
 
 libelf = {
-   url = "https://sourceware.org/ftp/elfutils/0.194/elfutils-0.194.tar.bz2",
-   sha3 = "e955aa86a2f335726beb4f5d71c0e01fc3cf0e8bb35cf0a8a6233841993f50c0",
+   url = "https://sourceware.org/ftp/elfutils/0.195/elfutils-0.195.tar.bz2",
+   sha3 = "cfa5a5600941fba9406d3fe8fa2e42efe474fa9ab2f90d712649b0e5a0f2b360",
    build = "./configure",
    flags = {
       "--enable-deterministic-archives",
