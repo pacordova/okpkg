@@ -432,6 +432,20 @@ lsof = {
    build = "./configure",
 };
 
+minijail = {
+   url = "https://github.com/google/minijail/archive/linux-v2025.07.02/minijail-20250702.tar.gz",
+   sha3 = "11188d72b5245942b0c8d8eb4ce4435103a9b00f47932f8a47936af17843a7d0",
+   build = "make_noinstall",
+   flags = { "LIBDIR=/usr/lib64" },
+   post = [[
+      mkdir -p $destdir/usr/{bin,lib64} $destdir/usr/share/man/man{1,5}
+      cp -f libminijail{,preload}.so $destdir/usr/lib64
+      cp -f minijail0 $destdir/usr/bin
+      cp -f minijail0.1 $destdir/usr/share/man/man1
+      cp -f minijail0.5 $destdir/usr/share/man/man5
+   ]]
+};
+
 nano = {
    url = "https://ftp.gnu.org/gnu/nano/nano-7.2.tar.xz",
    sha3 = "82186f2a698b087f44e52b8e56ce5566c74f05b48496b584b6bd030898a2d361",
