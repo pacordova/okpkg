@@ -17,9 +17,10 @@ local chdir, mkdir, symlink =
 local file, buf
 
 -- Generate locales
-os.execute("localedef -i POSIX -f UTF-8 C.UTF-8 2> /dev/null || true")
-os.execute("localedef -i en_US -f ISO-8859-1 en_US")
-os.execute("localedef -i en_US -f UTF-8 en_US.UTF-8")
+os.execute("localedef -i POSIX -f ASCII      C           2>/dev/null ||:")
+os.execute("localedef -i POSIX -f UTF-8      C.UTF-8     2>/dev/null ||:")
+os.execute("localedef -i en_US -f ISO-8859-1 en_US       2>/dev/null ||:")
+os.execute("localedef -i en_US -f UTF-8      en_US.UTF-8 2>/dev/null ||:")
 
 -- Bootstrap meson
 download("meson")

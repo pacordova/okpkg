@@ -396,8 +396,9 @@ linux-lts = {
       : > install
    ]],
    post = [[  
-      install -d $destdir/boot
+      mkdir -p $destdir/boot
       install -m 644 arch/x86/boot/bzImage $destdir/boot/vmlinuz
+      install -m 644 .config /boot/config-6.18.29
       make modules_install \
           INSTALL_MOD_PATH=$destdir \
           MODLIB=$destdir/usr/lib64/modules/6.18.29
