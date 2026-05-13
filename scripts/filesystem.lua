@@ -111,15 +111,16 @@ if [ "$runstatedir" = '${localstatedir}/run' ]; then runstatedir=/run; fi
 if [ "$sbindir" = '${exec_prefix}/sbin' ]; then sbindir=/bin; fi
 if [ "$sharedstatedir" = '${prefix}/com' ]; then sharedstatedir=/var/com; fi 
 if [ "$sysconfdir" = '${prefix}/etc' ]; then sysconfdir=/etc; fi
-if [ -z ${with_pic+x} ]; then with_pic=yes; fi
-if [ -z ${enable_pic+x} ]; then enable_pic=yes; fi
+if [ -z ${with_pic+x} ];      then with_pic=yes; fi
+if [ -z ${enable_pic+x} ];    then enable_pic=yes; fi
 if [ -z ${enable_shared+x} ]; then enable_shared=yes; fi
 if [ -z ${enable_static+x} ]; then enable_static=no; fi
-if [ -z ${enable_nls+x} ]; then enable_nls=no; fi
-if [ -z ${enable_rpath+x} ]; then enable_rpath=no; fi
-if [ -z ${enable_tests+x} ]; then enable_tests=no; fi
-if [ -z ${enable_debug+x} ]; then enable_debug=no; fi
+if [ -z ${enable_nls+x} ];    then enable_nls=no; fi
+if [ -z ${enable_rpath+x} ];  then enable_rpath=no; fi
+if [ -z ${enable_tests+x} ];  then enable_tests=no; fi
+if [ -z ${enable_debug+x} ];  then enable_debug=no; fi
 if [ -z ${enable_werror+x} ]; then enable_werror=no; fi
+:
 ]])
 file:close()
 --------------------------------------------------------------------------------

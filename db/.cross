@@ -3,6 +3,7 @@ binutils-pass1 = {
    build = "../configure", 
    flags = {
       "--prefix=/tools",
+      "--enable-default-execstack=no",
       "--enable-default-hash-style=gnu",
       "--enable-deterministic-archives",
       "--enable-gprofng=no",
@@ -415,6 +416,7 @@ binutils-pass2 = {
       "--prefix=/usr",
       "--libdir=/usr/lib64",
       "--enable-64-bit-bfd",
+      "--enable-default-execstack=no",
       "--enable-default-hash-style=gnu",
       "--enable-deterministic-archives",
       "--enable-gprofng=no",
