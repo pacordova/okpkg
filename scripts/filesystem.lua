@@ -102,13 +102,15 @@ file:close()
 --------------------------------------------------------------------------------
 file = io.open("etc/config.site", 'w')
 file:write([[
-if [ "$libdir" = '${exec_prefix}/lib' ]; then libdir=/usr/lib64; fi
+if [ "$bindir" = '${exec_prefix}/bin' ]; then bindir=/bin; fi
+if [ "$libdir" = '${exec_prefix}/lib' ]; then libdir=/lib64; fi
+if [ "$libexecdir" = '${exec_prefix}/libexec' ]; then libexecdir=/usr/libexec; fi
 if [ "$localstatedir" = '${prefix}/var' ]; then localstatedir=/var; fi
+if [ "$mandir" = '${datarootdir}/man' ]; then mandir=/usr/man; fi
 if [ "$runstatedir" = '${localstatedir}/run' ]; then runstatedir=/run; fi
-if [ "$sharedstatedir" = '${prefix}/com' ]; then sharedstatedir=/var/db; fi 
+if [ "$sbindir" = '${exec_prefix}/sbin' ]; then sbindir=/bin; fi
+if [ "$sharedstatedir" = '${prefix}/com' ]; then sharedstatedir=/var/com; fi 
 if [ "$sysconfdir" = '${prefix}/etc' ]; then sysconfdir=/etc; fi
-if [ "$sbindir" = '${exec_prefix}/sbin' ]; then sbindir=/usr/bin; fi
-if [ "$libexecdir" = '${exec_prefix}/libexec' ]; then libexecdir=/usr/lib64; fi
 if [ -z ${with_pic+x} ]; then with_pic=yes; fi
 if [ -z ${enable_pic+x} ]; then enable_pic=yes; fi
 if [ -z ${enable_shared+x} ]; then enable_shared=yes; fi

@@ -32,8 +32,8 @@ python-flit-core = {
 };
 
 python-installer = {
-   url = "https://pypi.io/packages/source/i/installer/installer-1.0.0.tar.gz",
-   sha3 = "b76dcc760b39d5f4b9008928cf4aa353b8d7b495add4b96af368192c8a4f7da9",
+   url = "https://pypi.io/packages/source/i/installer/installer-1.0.1.tar.gz",
+   sha3 = "d01834ecd9d21e6dd8091ea21637ce8e3ca1d012c1829dfa8d48d453cc8010ef",
    build = "python-build",
 };
 
