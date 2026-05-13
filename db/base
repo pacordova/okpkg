@@ -731,7 +731,7 @@ dinit = {
    sha3 = "a84620a64d0b0d4916a0b6d3242b735856efab03401e9ec5f613b5150b14fc92",
    build = "make",
    flags = { "BUILD_SHUTDOWN=yes", "SBINDIR=/usr/bin" },
-   post = [[ ln -sf dinit $destdir/usr/bin/init ]]
+   prep = [[ sed 's|"/lib/dinit.d"|"/lib64/dinit.d"|' -i src/options-processing.cc ]]
 };
 
 dbus = {
