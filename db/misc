@@ -408,6 +408,7 @@ linux-lts = {
    flags = { "bzImage", "modules", "headers" },
    prep = [[
       #pigz -cd /proc/config.gz > .config
+      sed -e '/MAX_NR_CONSOLES/s/63/6/' -i include/uapi/linux/vt.h
       : > install
    ]],
    post = [[  
