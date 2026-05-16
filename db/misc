@@ -442,8 +442,8 @@ logrotate = {
 };
 
 lsof = {
-   url = "https://github.com/lsof-org/lsof/releases/download/4.99.3/lsof-4.99.3.tar.gz",
-   sha3 = "fa87e870dadb9144e4b0b85c020c0d48e150ea70cb0ad2f1069014df9c3f72ad",
+   url = "https://github.com/lsof-org/lsof/releases/download/4.99.6/lsof-4.99.6.tar.gz",
+   sha3 = "bd9c4d47b1433437579fd3e35127bb364c38bd6797d28ec18dd634ed805e721d",
    build = "./configure",
 };
 

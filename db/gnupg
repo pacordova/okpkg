@@ -12,8 +12,8 @@ libgcrypt = {
 };
 
 libksba = {
-   url = "https://gnupg.org/ftp/gcrypt/libksba/libksba-1.6.8.tar.bz2",
-   sha3 = "6237d4e38ae8477af5547be4ae2a9b00b9c9a267a2e23004bbdb114bffb537ad",
+   url = "https://gnupg.org/ftp/gcrypt/libksba/libksba-1.8.0.tar.bz2",
+   sha3 = "472aa558b790cb66f55f47f35c700e86dbdfc541b33ef2e6a5c759dc3d55a64f",
    build = "./configure",
 };
 
@@ -46,8 +46,8 @@ pinentry = {
 };
 
 gnupg2 = {
-   url = "https://gnupg.org/ftp/gcrypt/gnupg/gnupg-2.5.19.tar.bz2",
-   sha3 = "6a0b235ebec49499bfcf836e7cc4b8986771173b74398c4b9442ee0e7bdca5f9",
+   url = "https://gnupg.org/ftp/gcrypt/gnupg/gnupg-2.5.20.tar.bz2",
+   sha3 = "378e0e056fe7732ad614ab2c8a44855bedbc6a187bc046f42771f593ef48d24c",
    build = "./configure",
    flags = { 
       "--libexecdir=/usr/lib64/gpg", 
