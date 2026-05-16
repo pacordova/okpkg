@@ -89,21 +89,6 @@ nasm = {
    build = "./configure",
 };
 
-opendoas = {
-   url = "https://github.com/Duncaen/OpenDoas/archive/v6.8.2/OpenDoas-6.8.2.tar.gz",
-   sha3 = "de7bfb4797e216661db76043963090efc9e0e9e68ff420c352dbf71770c2b66c",
-   build = "./configure",
-   flags = {
-      "--with-{shadow,timestamp}",
-      "--without-pam"
-   },
-   post = [[
-      mkdir -p $destdir/etc
-      printf "permit persist :wheel\n" > $destdir/etc/doas.conf
-      chmod 600 $destdir/etc/doas.conf
-   ]]
-};
-
 samurai = {
    url = "https://github.com/michaelforney/samurai/archive/1.3/samurai-1.3.tar.gz",
    sha3 = "9d4932b15b292f48917417322aa75bf0ed2335e029fc7b493329c9697ccd14ca",

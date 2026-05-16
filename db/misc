@@ -155,6 +155,21 @@ lrzip = {
    prep = [[ autoreconf -if ]]
 };
 
+opendoas = {
+   url = "https://github.com/Duncaen/OpenDoas/archive/v6.8.2/OpenDoas-6.8.2.tar.gz",
+   sha3 = "de7bfb4797e216661db76043963090efc9e0e9e68ff420c352dbf71770c2b66c",
+   build = "./configure",
+   flags = {
+      "--with-{shadow,timestamp}",
+      "--without-pam"
+   },
+   post = [[
+      mkdir -p $destdir/etc
+      printf "permit persist :wheel\n" > $destdir/etc/doas.conf
+      chmod 600 $destdir/etc/doas.conf
+   ]]
+};
+
 picom = {
    url = "https://github.com/yshui/picom/archive/v13/picom-13.tar.gz",
    sha3 = "705bac0be7c10192b523545e98e2244becd41f1e8c048e047fb59a60944e3a22",
@@ -387,8 +402,8 @@ libtorrent-rasterbar = {
 };
 
 linux-lts = {
-   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.18.30.tar.xz",
-   sha3 = "aef15c6b57baedac2b22b27481b80da95dcb2b6ce25f64410559238149ffaf9e",
+   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.18.31.tar.xz",
+   sha3 = "c3fa5f0cf4525405ed11a60c5a110f8154c4dd1dd77f07b24303f6d66096bb2b",
    build = "make",
    flags = { "bzImage", "modules", "headers" },
    prep = [[
@@ -400,7 +415,7 @@ linux-lts = {
       install -m 644 arch/x86/boot/bzImage $destdir/boot/vmlinuz
       make modules_install \
           INSTALL_MOD_PATH=$destdir \
-          MODLIB=$destdir/usr/lib64/modules/6.18.30
+          MODLIB=$destdir/usr/lib64/modules/6.18.31
       cp -rp usr/include $destdir/usr
       find $destdir/usr/include -type f ! -name '*.h' -delete
    ]]
