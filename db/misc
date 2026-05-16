@@ -618,8 +618,8 @@ libgsf = {
 };
 
 goffice = {
-   url = "https://download.gnome.org/sources/goffice/0.10/goffice-0.10.60.tar.xz",
-   sha3 = "a12067eca9d832772ad479f397f6d3cd3b69195afb13ef5369af7d47b4e5e4c1",
+   url = "https://download.gnome.org/sources/goffice/0.10/goffice-0.10.61.tar.xz",
+   sha3 = "ea476ead96165b6449d71628f6e3abf70deb740656921722056240461986aa9d",
    build = "./configure",
    flags = { "--disable-nls", "--without-lasem", },
 };
