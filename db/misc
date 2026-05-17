@@ -412,12 +412,12 @@ linux-lts = {
       : > install
    ]],
    post = [[  
-      mkdir -p $destdir/boot
-      install -m 644 arch/x86/boot/bzImage $destdir/boot/vmlinuz
+      mkdir -p $destdir/{boot,lib64,usr}
+      cp -f arch/x86/boot/bzImage $destdir/boot/vmlinuz
       make modules_install \
           INSTALL_MOD_PATH=$destdir \
-          MODLIB=$destdir/usr/lib64/modules/6.18.31
-      cp -rp usr/include $destdir/usr
+          MODLIB=$destdir/lib64/modules/6.18.31
+      cp -fr usr/include $destdir/usr
       find $destdir/usr/include -type f ! -name '*.h' -delete
    ]]
 };
