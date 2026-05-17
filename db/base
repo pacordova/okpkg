@@ -673,10 +673,10 @@ mandoc = {
    sha3 = "23db13cc9e5ca6f729c4211929b745f5d8a82f87827dbf97d64c6ab8a937152d",
    build = "./configure",
    prep = [[
-      printf "PREFIX=/usr\n" >> configure.local
-      printf "LIBDIR=/usr/lib64\n" >> configure.local
-      printf "MANDIR=/usr/share/man\n" >> configure.local
-      printf "SBINDIR=/usr/bin\n" >> configure.local
+      printf "PREFIX=/\n" >> configure.local
+      printf "LIBDIR=/lib64\n" >> configure.local
+      printf "MANDIR=/usr/man\n" >> configure.local
+      printf "SBINDIR=/bin\n" >> configure.local
    ]]
 };
 
