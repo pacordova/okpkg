@@ -404,21 +404,18 @@ libtorrent-rasterbar = {
 linux-lts = {
    url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.18.32.tar.xz",
    sha3 = "d5963e7f8ce14ed39281bee6da2b9e18dd71a24e1cde75338626f257cc80456b",
-   build = "make",
-   flags = { "bzImage", "modules", "headers" },
+   build = "make_install",
+   flags = {
+      "headers_install",
+      "modules_install",
+      "INSTALL_PATH=$destdir/boot",
+      "INSTALL_HDR_PATH=$destdir/usr",
+      "MODLIB=$destdir/lib64/modules/$(make -s kernelversion)",
+   },
    prep = [[
       #pigz -cd /proc/config.gz > .config
       sed -e '/MAX_NR_CONSOLES/s/63/6/' -i include/uapi/linux/vt.h
-      : > install
-   ]],
-   post = [[  
-      mkdir -p $destdir/{boot,lib64,usr}
-      cp -f arch/x86/boot/bzImage $destdir/boot/vmlinuz
-      make modules_install \
-          INSTALL_MOD_PATH=$destdir \
-          MODLIB=$destdir/lib64/modules/6.18.32
-      cp -fr usr/include $destdir/usr
-      find $destdir/usr/include -type f ! -name '*.h' -delete
+      make -j5 headers bzImage modules
    ]]
 };
 
