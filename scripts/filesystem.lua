@@ -303,7 +303,7 @@ os.execute([[
 mkdir("var/cache/distfiles")
 mkdir("var/cache/packages")
 mkdir("var/tmp/sources")
-symlink("/var/tmp/sources/linux-lts", "usr/src/linux")
+symlink("/usr/src/linux-lts", "usr/src/linux")
 os.execute([[
    git clone /usr/okpkg usr/okpkg
    git -C usr/okpkg repack -adf --depth=1

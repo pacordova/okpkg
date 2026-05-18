@@ -28,6 +28,6 @@ st = {
    url = "https://dl.suckless.org/st/st-0.9.2.tar.gz",
    sha3 = "6478f57dcc1afdc1f7b5b4b101bd0246ea490d852af208d643d474896df2992b",
    build = "make",
-   flags = { "PREFIX=/usr" },
+   flags = { "PREFIX=/" },
    post = [[ tic -sx st.info ]]
 };

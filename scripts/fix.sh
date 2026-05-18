@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# fstrim
+fstrim /
+fstrim /var
+fstrim /boot/efi
+
 # update manpages
 makewhatis /usr/share/man
 
@@ -27,5 +32,5 @@ chown root:messagebus /usr/lib64/dbus-daemon-launch-helper
 chmod 4750 /usr/lib64/dbus-daemon-launch-helper
 
 # clock
-date -u $(nc time.nist.gov 13 | awk -F'[-: ]' 'NR>1{print $3$4$5$6$2"."$7}')
+TZ=UTC0 date $(nc time.nist.gov 13 | awk -F'[-: ]' 'NR>1{print $3$4$5$6$2"."$7}')
 hwclock --systohc && hwclock --hctosys
