@@ -147,8 +147,8 @@ libxft = {
 };
 
 libxi = {
-   url = "https://x.org/pub/individual/lib/libXi-1.8.2.tar.xz",
-   sha3 = "ea36f569e15c066f9df62150cf430551be3d96fb9fe6a37a3abceb0297584a34",
+   url = "https://x.org/pub/individual/lib/libXi-1.8.3.tar.xz",
+   sha3 = "5d95087162b15177e3d82648dceea40150d713ef8f65bed6b453440b189f42c5",
    build = "./configure",
 };
 
