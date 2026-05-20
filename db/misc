@@ -337,9 +337,14 @@ git = {
 };
 
 gzip = {
-   url = "https://ftp.gnu.org/gnu/gzip/gzip-1.13.tar.xz",
-   sha3 = "6b03d763c4a9755955723b70ed0387e077b8f0452997e829e1061519f73a23ec",
+   url = "https://ftp.gnu.org/gnu/gzip/gzip-1.14.tar.xz",
+   sha3 = "4a1687cc3820dbcf966db372a49ef014527cab2f5ce19c5d6886e821b7cb1cba",
    build = "./configure",
+};
+
+zlib-ng = {
+   url = "https://github.com/zlib-ng/zlib-ng/archive/2.3.3/zlib-ng-2.3.3.tar.gz",
+   sha3 = "f8da44bd94927257defce151f942751cd2bddd668edff3ee91208dd3e30896cd",
 };
 
 htop = {
@@ -410,7 +415,7 @@ linux-lts = {
       "modules_install",
       "INSTALL_PATH=$destdir/boot",
       "INSTALL_HDR_PATH=$destdir/usr",
-      "MODLIB=$destdir/lib64/modules/$(make -s kernelversion)",
+      "MODLIB=$destdir/lib64/modules/$(make -s kernelrelease)",
    },
    prep = [[
       #pigz -cd /proc/config.gz > .config

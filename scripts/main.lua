@@ -131,19 +131,21 @@ local function v(x)
    return ok.basename(x):match("[-_%.][nrv]?([%d%.]+%l?%d?)[-_%.]")
 end
 
--- TODO: C function to listdir, iterate instead of popen
--- TODO: Don't hardcode /usr/okpkg
-function _XLOOK (x)
+function query(x)
    local fp, buf
    x = x:gsub("%-", "%%-")
-   fp = io.popen("cat /usr/okpkg/db/*")
-   buf = fp:read("*a"):match("\n?[^%w_]" .. x .. "%s*=%s*({.-})%s*;")
-   fp:close()
+   for i in ok.directory_iterator(string.format("%s/db", C.okdir)) do
+      if not buf and ok.basename(i):sub(1, 1) ~= "." then
+         fp = io.open(i)
+         buf = fp:read("*a"):match("\n?[^%w_]" .. x .. "%s*=%s*({.-})%s*;")
+         fp:close()
+      end
+   end
    return load("return " .. buf)()
 end
 
 function download(x)
-   local X = _XLOOK (x)
+   local X = query(x)
    X.dist = string.format("%s/%s", C.distdir, X.url:match("/([^/]*)$"))
 
    -- change mirrors
@@ -185,6 +187,7 @@ end
 
 function makepkg(path)
    assert(ok.chdir(path) == 0)
+   os.remove(path .. ".tar.lz")
    ok.setenv("pwd", ok.pwd())
    ok.setenv("SOURCE_DATE_EPOCH", mtime("."))
 
@@ -210,7 +213,7 @@ function makepkg(path)
           --owner=0 \
           --group=0 \
           --numeric-owner \
-          --use-compress-program="lzip -f" \
+          --use-compress-program=lzip \
           --file=$pwd.tar.lz \
           --create .
       touch -hd "@$SOURCE_DATE_EPOCH" $pwd.tar.lz
@@ -226,7 +229,7 @@ function makepkg(path)
 end
 
 function build(x)
-   local X = _XLOOK(x)
+   local X = query(x)
    X.flags = X.flags or {}
    X.version = v(X.url) or "nil"
    X.destdir = string.format("%s/%s-%s-%s", C.outdir, x, X.version, C.cc.cpu)

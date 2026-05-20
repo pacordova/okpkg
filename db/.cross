@@ -1,16 +1,16 @@
+
 binutils-pass1 = {
    url = _db_lookup("binutils")["url"],
    build = "../configure", 
    flags = {
       "--prefix=/tools",
-      "--enable-default-execstack=no",
-      "--enable-default-hash-style=gnu",
-      "--enable-deterministic-archives",
-      "--enable-gprofng=no",
-      "--enable-new-dtags",
-      "--disable-{nls,werror}",
       "--with-sysroot=$destdir",
       "--target=x86_64-unknown-linux-gnu",
+      "--enable-deterministic-archives",
+      "--enable-new-dtags",
+      "--enable-{gprofng=no,nls=no,werror=no}",
+      "--enable-default-{execstack=no,hash-style=gnu}",
+      "CONFIG_SITE=",
    }
 };
 
@@ -20,25 +20,25 @@ gcc-pass1 = {
    flags = {
       "--prefix=/tools",
       "--target=x86_64-unknown-linux-gnu",
-      "--with-glibc-version=2.42",
+      "--with-glibc-version=2.43",
       "--with-sysroot=$destdir",
       "--with-newlib",
       "--without-headers",
-      "--enable-languages=c,c++",
-      "--{enable-clocale,with-linker-hash-style}=gnu",
+      "--disable-libstdcxx",
+      "--disable-{shared,threads}",
       "--enable-default-{pie,ssp}",
+      "--disable-{nls,multilib}",
+      "--disable-lib{atomic,gomp,quadmath,sanitizer,ssp,vtv}",
+      "--enable-languages=c,c++",
       "--enable-link-serialization=1",
-      "--enable-initfini-array",
-      "--enable-__cxa_atexit",
-      "--enable-{bootstrap=no,multilib=no,nls=no,threads=no}",
-      "--disable-lib{atomic,gomp,quadmath,sanitizer,ssp,stdcxx,vtv}",
-      "--disable-fixincludes",
-      "--disable-shared",
+      "--enable-{__cxa_atexit,initfini-array}",
+      "--disable-{bootstrap,fixincludes}",
+      "--{enable-clocale,with-linker-hash-style}=gnu",
+      "CONFIG_SITE=",
    },
    post = [[
-      cc=x86_64-unknown-linux-gnu-gcc
-      cat ../gcc/{limitx,glimits,limity}.h > \
-      `dirname $($cc -print-libgcc-file-name)`/include/limits.h
+      cat ../gcc/{limitx,glimits,limity}.h > _
+      mv _ $(x86_64-unknown-linux-gnu-gcc -print-file-name=include)/limits.h
    ]]
 };
 
@@ -47,23 +47,15 @@ glibc = {
    build = "../configure",
    flags = {
       "--prefix=/usr",
-      "--libdir=/usr/lib64",
-      "--libexecdir=/usr/lib64",
-      "--sbindir=/usr/bin",
-      "--enable-kernel=6.12",
       "--disable-nscd",
+      "--enable-kernel=$(uname -r | cut -d . -f 1,2)",
       "--with-headers=$destdir/usr/include",
       "--host=x86_64-unknown-linux-gnu",
       "--build=$(../scripts/config.guess)",
-      "libc_cv_slibdir=/usr/lib64",
-   },
-   prepare = [[
-      mkdir build && cd build
-      printf "slibdir=/usr/lib64\n" >> configparms
-      printf "rtlddir=/usr/lib64\n" >> configparms
-      printf "sbindir=/usr/bin\n" >> configparms
-      printf "rootsbindir=/usr/bin\n" >> configparms
-   ]],
+      "libc_cv_slibdir=/lib64",
+      "libc_cv_rtlddir=/lib64",
+      "libc_cv_rootsbindir=/bin",
+   }
 };
 
 gcc-libstdc++ = {
@@ -71,17 +63,15 @@ gcc-libstdc++ = {
    build = "../libstdc++-v3/configure",
    flags = {
       "--prefix=/usr",
-      "--libdir=/usr/lib64",
-      "--host=x86_64-unknown-linux-gnu",
-      "--build=$(../config.guess)",
-      "--{enable-clocale,with-linker-hash-style}=gnu",
-      "--enable-link-serialization=1",
-      "--enable-initfini-array",
-      "--enable-__cxa_atexit",
       "--disable-multilib",
       "--disable-nls",
       "--disable-libstdcxx-pch",
       "--with-gxx-include-dir=/tools/x86_64-unknown-linux-gnu/include/c++/14.3.0",
+      "--enable-link-serialization=1",
+      "--enable-{__cxa_atexit,initfini-array}",
+      "--{enable-clocale,with-linker-hash-style}=gnu",
+      "--host=x86_64-unknown-linux-gnu",
+      "--build=$(../config.guess)",
    }
 };
 
@@ -90,8 +80,6 @@ libxcrypt = {
    build = "./configure",
    flags = {
       "--prefix=/usr",
-      "--libdir=/usr/lib64",
-      "--disable-static",
       "--disable-failure-tokens",
       "--enable-hashes=strong,glibc",
       "--enable-obsolete-api=no",
@@ -115,33 +103,30 @@ ncurses = {
    build = "./configure",
    flags = {
       "--prefix=/usr",
-      "--libdir=/usr/lib64",
+      "--with-manpage-format=normal",
+      "--with-shared",
       "--enable-widec",
       "--disable-setuid-environ",
       "--disable-stripping",
       "--with-cxx-{binding=no,shared=yes}",
-      "--with-manpage-format=normal",
-      "--with-shared",
-      "--with-termlib=tinfo",
-      "--with-ticlib=tic",
-      "--with-versioned-syms",
-      "--with-xterm-kbs=del",
+      "--with-{termlib=tinfo,xterm-kbs=del}",
       "--without-{ada,debug,normal}",
+      --"--with-versioned-syms",
       "--host=x86_64-unknown-linux-gnu",
       "--build=$(./config.guess)",
-      "ac_cv_path_TIC=$(pwd)/build/progs/tic",
+      "ac_cv_path_TIC=$(realpath ./build/progs/tic)",
    },
-   prepare = [[
-      sed -i s/mawk// configure
+   prep = [[
       mkdir build && cd build
-      ../configure
+      sed -i 's/mawk//' "../configure"
+      sh ../configure
       make -C include
       make -C progs tic
    ]],
    post = [[
-      ln -sf libncursesw.so $destdir/usr/lib64/libncurses.so
-      sed -e 's/^#if.*XOPEN.*$/#if 1/' -i $destdir/usr/include/curses.h
-      rm -f $destdir/usr/lib/terminfo
+      ln -sf libncursesw.so $destdir/lib64/libncurses.so
+      sed -i 's/^#if.*XOPEN.*$/#if 1/' $destdir/usr/include/curses.h
+      #rm -f $destdir/usr/lib/terminfo
    ]]
 };
 
@@ -150,18 +135,10 @@ bash = {
    build = "./configure",
    flags = {
       "--prefix=/usr",
-      "--libdir=/usr/lib64",
-      "--without-bash-malloc",
       "--host=x86_64-unknown-linux-gnu",
       "--build=$(sh support/config.guess)",
-      'CFLAGS_FOR_BUILD="$CFLAGS"',
+      "--without-bash-malloc",
    },
-   prepare = [[ patch -p1 </var/lib/okpkg/patches/bash.diff ]],
-   post = [[
-      ln -s bash $destdir/usr/bin/sh
-      rm -f $destdir/usr/bin/bashbug
-      rm -f $destdir/usr/share/man/man1/bashbug.1
-   ]]
 };
 
 coreutils = {
@@ -169,12 +146,10 @@ coreutils = {
    build = "./configure",
    flags = {
       "--prefix=/usr",
-      "--libexecdir=/usr/lib64",
-      "--enable-install-program=hostname",
-      "--enable-no-install-program=kill,uptime",
-      "--without-openssl",
       "--host=x86_64-unknown-linux-gnu",
       "--build=$(build-aux/config.guess)",
+      "--enable-install-program=hostname",
+      "--without-openssl",
       "FORCE_UNSAFE_CONFIGURE=1"
    }
 };
@@ -195,16 +170,9 @@ findutils = {
    build = "./configure",
    flags = {
       "--prefix=/usr",
-      "--libexecdir=/usr/lib64",
       "--host=x86_64-unknown-linux-gnu",
       "--build=$(build-aux/config.guess)",
    },
-   post = [[
-      rm -f $destdir/usr/bin/{locate,updatedb}
-      rm -f $destdir/usr/share/man/man1/{locate,updatedb}.1
-      rm -f $destdir/share/man/man5/locatedb.5
-      rm -f $destdir/usr/lib64/frcode
-   ]]
 };
 
 gawk = {
@@ -212,12 +180,10 @@ gawk = {
    build = "./configure",
    flags = {
       "--prefix=/usr",
-      "--libdir=/usr/lib64",
-      "--libexecdir=/usr/lib64",
-      "--sysconfdir=/etc",
       "--host=x86_64-unknown-linux-gnu",
       "--build=$(build-aux/config.guess)",
-   }
+   },
+   prep = [[ sed -i 's/extras//' Makefile.in ]]
 };
 
 grep = {
@@ -233,32 +199,29 @@ grep = {
 zlib = {
    url = _db_lookup("zlib")["url"],
    build = "make",
-   prepare = [[
+   prep = [[
+      prefix=/usr \
+      libdir=/lib64 \
+      mandir=/usr/man \
       CC=x86_64-unknown-linux-gnu-gcc \
       AR=x86_64-unknown-linux-gnu-ar \
       RANLIB=x86_64-unknown-linux-gnu-ranlib \
-      ./configure --prefix=/usr --libdir=/usr/lib64
+      /bin/sh ./configure
    ]],
-   post = [[ rm -f $destdir/usr/lib64/libz.a ]]
 };
 
 pigz = {
    url = _db_lookup("pigz")["url"],
-   build = "make",
-   flags = { "CC=x86_64-unknown-linux-gnu-gcc" },
-   prepare = [[ 
-      $patch < ../../patches/pigz.diff 
-      : > install 
-   ]],
+   build = "make_noinstall",
+   flags = { 
+      "CC=x86_64-unknown-linux-gnu-gcc" 
+   },
    post = [[ 
-      install -d $destdir/usr/bin 
-      install -d $destdir/usr/share/man/man1
-      install -m 755 pigz   $destdir/usr/bin
-      install -m 644 pigz.1 $destdir/usr/share/man/man1
-      ln -sf pigz   $destdir/usr/bin/unpigz
-      ln -sf pigz   $destdir/usr/bin/gzip
-      ln -sf pigz.1 $destdir/usr/share/man/man1/unpigz.1
-      ln -sf pigz.1 $destdir/usr/share/man/man1/gzip.1
+      mkdir -p $destdir/bin
+      mkdir -p $destdir/usr/man/man1
+      cp -f  pigz   $destdir/bin/pigz
+      cp -f  unpigz $destdir/bin/unpigz
+      cp -f  pigz.1 $destdir/usr/man/man1/pigz.1
    ]]
 };
 
@@ -267,9 +230,9 @@ make = {
    build = "./configure",
    flags = {
       "--prefix=/usr",
-      "--without-guile",
       "--host=x86_64-unknown-linux-gnu",
       "--build=$(build-aux/config.guess)",
+      "--without-guile",
    },
 };
 
@@ -298,7 +261,6 @@ tar = {
    build = "./configure",
    flags = {
       "--prefix=/usr",
-      "--libexecdir=/usr/bin",
       "--host=x86_64-unknown-linux-gnu",
       "--build=$(build-aux/config.guess)",
       "FORCE_UNSAFE_CONFIGURE=1",
@@ -310,8 +272,6 @@ xz = {
    build = "./configure",
    flags = {
       "--prefix=/usr",
-      "--libdir=/usr/lib64",
-      "--disable-static",
       "--host=x86_64-unknown-linux-gnu",
       "--build=$(build-aux/config.guess)",
    },
@@ -321,28 +281,32 @@ lua = {
    url = _db_lookup("lua")["url"],
    build = "make",
    flags = {
-      'TO_LIB="liblua.so liblua.so.5.4 liblua.so.5.4.8"',
-      "INSTALL_DATA='cp -d'",
-      "MYCFLAGS=-fPIC",
-      "INSTALL_TOP=$destdir/usr",
-      "INSTALL_LIB=$destdir/usr/lib64",
-      "INSTALL_MAN=$destdir/usr/share/man/man1",
-      "INSTALL_CMOD=$destdir/usr/lib64/lua/5.4",
+      "TO_LIB=liblua.so.5.5.0",
+      "MYCFLAGS=-fpic",
+      "INSTALL_TOP=$destdir",
+      "INSTALL_BIN=$destdir/bin",
+      "INSTALL_INC=$destdir/usr/include",
+      "INSTALL_LIB=$destdir/lib64",
+      "INSTALL_MAN=$destdir/usr/man/man1",
+      "INSTALL_LMOD=$destdir/usr/share/lua/5.5",
+      "INSTALL_CMOD=$destdir/lib64/lua/5.5",
       "CC=x86_64-unknown-linux-gnu-gcc",
       "AR='x86_64-unknown-linux-gnu-ar rcu'",
       "RANLIB=x86_64-unknown-linux-gnu-ranlib",
-      "linux"
+      "linux",
    },
-   prepare = [[ $patch < ../../patches/lua.diff ]],
+   prep = [[ $patch < /usr/okpkg/patches/lua.diff ]],
    post = [[
-      mkdir -p $destdir/usr/lib64/pkgconfig &&
-      cd $destdir/usr/lib64/pkgconfig
-      printf "Name: Lua\n" >> lua.pc
-      printf "Description: An Extensible Extension Language\n" >> lua.pc
-      printf "Version: 5.4.8\n" >> lua.pc
-      printf "Requires:\n" >> lua.pc
-      printf "Libs: -L/usr/lib64 -llua -lm\n" >> lua.pc
-      printf "Cflags: -I/usr/include\n" >> lua.pc
+      cd $destdir/lib64
+      ln -sf liblua.so.5.5.0 liblua.so.5.5
+      ln -sf liblua.so.5.5.0 liblua.so
+      mkdir -p pkgconfig && cd pkgconfig
+      >>lua.pc printf "Name: Lua\n"
+      >>lua.pc printf "Description: An Extensible Extension Language\n"
+      >>lua.pc printf "Version: 5.5.0\n"
+      >>lua.pc printf "Requires:\n"
+      >>lua.pc printf "Libs: -L/lib64 -llua -lm\n"
+      >>lua.pc printf "Cflags: -I/usr/include\n"
    ]]
 };
 
@@ -351,9 +315,8 @@ lzlib = {
    build = "./configure",
    flags = {
       "--prefix=/usr",
-      "--libdir=/usr/lib64",
-      "--enable-shared",
-      "--disable-static",
+      "--libdir=/lib64",
+      "--mandir=/usr/man",
       "CC=x86_64-unknown-linux-gnu-gcc",
       "AR=x86_64-unknown-linux-gnu-ar",
    }
@@ -364,9 +327,10 @@ plzip = {
    build = "./configure",
    flags = {
       "--prefix=/usr",
+      "--bindir=/",
+      "--mandir=/usr/man",
       "CXX=x86_64-unknown-linux-gnu-g++",
    },
-   post = [[ ln -sf plzip $destdir/usr/bin/lzip ]]
 };
 
 util-linux = {
@@ -374,14 +338,11 @@ util-linux = {
    build = "./configure",
    flags = {
       "--prefix=/usr",
-      "--libdir=/usr/lib64",
+      "--host=x86_64-unknown-linux-gnu",
+      "--build=$(config/config.guess)",
       "--disable-all-programs",
       "--enable-lib{blkid,fdisk,mount,smartcols,uuid}",
       "--without-{python,systemd}",
-      "--disable-static",
-      "--host=x86_64-unknown-linux-gnu",
-      "--build=$(config/config.guess)",
-      "ADJTIME_PATH=/var/lib/hwclock/adjtime",
    }
 };
 
@@ -390,12 +351,9 @@ libressl = {
    build = "./configure",
    flags = {
       "--prefix=/usr",
-      "--libdir=/usr/lib64",
-      "--disable-static",
-      "--with-openssldir=/etc/ssl",
-      "--program-prefix='libressl-'",
       "--host=x86_64-unknown-linux-gnu",
       "--build=$(./config.guess)",
+      "--with-openssldir=/etc/ssl",
    }
 };
 
@@ -403,10 +361,10 @@ pkgconf = {
    url = _db_lookup("pkgconf")["url"],
    build = "./configure",
    flags = {
+      "--prefix=/usr",
       "--host=x86_64-unknown-linux-gnu",
       "--build=$(./config.guess)",
    },
-   post = [[ ln -sf pkgconf $destdir/usr/bin/pkg-config ]]
 };
 
 binutils-pass2 = {
@@ -414,23 +372,16 @@ binutils-pass2 = {
    build = "../configure",
    flags = {
       "--prefix=/usr",
-      "--libdir=/usr/lib64",
-      "--enable-64-bit-bfd",
-      "--enable-default-execstack=no",
-      "--enable-default-hash-style=gnu",
-      "--enable-deterministic-archives",
-      "--enable-gprofng=no",
-      "--enable-new-dtags",
-      "--enable-shared",
-      "--disable-{nls,werror}",
       "--host=x86_64-unknown-linux-gnu",
       "--build=$(../config.guess)",
+      "--enable-64-bit-bfd",
+      "--enable-shared",
+      "--enable-deterministic-archives",
+      "--enable-new-dtags",
+      "--enable-{gprofng=no,nls=no,werror=no}",
+      "--enable-default-{execstack=no,hash-style=gnu}",
    },
-   prepare = [[ sed '6031s/$add_dir//' -i ltmain.sh ]],
-   post = [[ 
-      rm -f  $destdir/usr/lib64/lib{bfd,ctf,ctf-nobfd,gprofng,opcodes,sframe}.a
-      rm -fr $destdir/usr/lib/ldscripts
-   ]]
+   prep = [[ sed '6031s/$add_dir//' -i ltmain.sh ]],
 };
 
 gcc-pass2 = {
@@ -441,27 +392,19 @@ gcc-pass2 = {
       "--host=x86_64-unknown-linux-gnu",
       "--build=$(../config.guess)",
       "--target=x86_64-unknown-linux-gnu",
-      "--libdir=/usr/lib64",
-      "--libexecdir=/usr/lib64",
       "--with-build-sysroot=$destdir",
       "--enable-languages=c,c++",
-      "--{enable-clocale,with-linker-hash-style}=gnu",
+      "--enable-{__cxa_atexit,initfini-array}",
       "--enable-default-{pie,ssp}",
-      "--enable-initfini-array",
-      "--enable-__cxa_atexit",
       "--enable-link-serialization=1",
-      "--enable-{bootstrap=no,multilib=no,nls=no,threads=posix}",
-      "--disable-lib{atomic,gomp,quadmath,sanitizer,ssp,stdcxx-pch,vtv}",
-      "--disable-fixincludes",
+      "--{enable-clocale,with-linker-hash-style}=gnu",
+      "--disable-{nls,multilib}",
+      "--disable-lib{atomic,gomp,quadmath,sanitizer,ssp,vtv}",
+      "--disable-{bootstrap,fixincludes}",
       "LDFLAGS_FOR_TARGET=-L$PWD/x86_64-unknown-linux-gnu/libgcc",
    },
-   prepare = [[
-      sed '/thread_header =/s/@.*@/gthr-posix.h/' \
-         -i libgcc/Makefile.in libstdc++-v3/include/Makefile.in
-   ]],
-   post = [[
-      find $destdir -name libgtkpeer.a  -exec rm -f '{}' +
-      find $destdir -name libgjsmalsa.a -exec rm -f '{}' +
-      ln -sf gcc $destdir/usr/bin/cc
+   prep = [[
+      sed -i '/thread_header =/s/@.*@/gthr-posix.h/' \
+        {libgcc,libstdc++-v3/include}/Makefile.in
    ]]
 };

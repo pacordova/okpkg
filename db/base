@@ -1,14 +1,14 @@
 
 _file = {
-   url = _db_lookup("file")["url"],
-   sha3 = _db_lookup("file")["sha3"],
+   url = query("file")["url"],
+   sha3 = query("file")["sha3"],
    sha3 = "4a1b431335ee9f08e2554b7ac41998bbdc4ca8588f2f79f85e1a28ea972c9d38",
    build = "./configure",
 };
 
 _python3 = {
-   url = _db_lookup("python3")["url"],
-   sha3 = _db_lookup("python3")["sha3"],
+   url = query("python3")["url"],
+   sha3 = query("python3")["sha3"],
    build = "./configure",
    flags = {
       "--with-platlibdir=lib64",
@@ -30,8 +30,8 @@ bison = {
 };
 
 _perl = {
-   url = _db_lookup("perl")["url"],
-   sha3 = _db_lookup("perl")["sha3"],
+   url = query("perl")["url"],
+   sha3 = query("perl")["sha3"],
    build = "./configure.gnu",
    flags= {
       "-Dvendorprefix=/usr",
@@ -60,19 +60,14 @@ glibc = {
    sha3 = "1cd14849c688673ff9414b0c3a44fe4adc69a5d624c84731fe7fae91f7447227",
    build = "../configure",
    flags = {
-      "--enable-kernel=6.12",
+      "--enable-kernel=$(uname -r | cut -d . -f 1,2)",
       "--enable-stack-protector=strong",
       "--disable-nscd",
       "--with-headers=/usr/include",
-      "libc_cv_slibdir=/lib64"
-   },
-   prep = [[
-      mkdir -p build && cd build
-      printf "slibdir=/usr/lib64\n" >> configparms
-      printf "rtlddir=/usr/lib64\n" >> configparms
-      printf "sbindir=/usr/bin\n" >> configparms
-      printf "rootsbindir=/usr/bin\n" >> configparms
-   ]]
+      "libc_cv_slibdir=/lib64",
+      "libc_cv_rtlddir=/lib64",
+      "libc_cv_rootsbindir=/bin",
+   }
 };
 
 zlib = {
@@ -549,14 +544,12 @@ pigz = {
    flags = { "ZOP=", "CFLAGS='-O3 -DNOZOPFLI'" },
    prep = [[ : > install ]],
    post = [[
-      install -d $destdir/usr/bin
-      install -d $destdir/usr/share/man/man1
-      install -m 755 pigz   $destdir/usr/bin
-      install -m 644 pigz.1 $destdir/usr/share/man/man1
-      ln -sf pigz   $destdir/usr/bin/unpigz
-      ln -sf pigz   $destdir/usr/bin/gzip
-      ln -sf pigz.1 $destdir/usr/share/man/man1/unpigz.1
-      ln -sf pigz.1 $destdir/usr/share/man/man1/gzip.1
+      mkdir -p $destdir/bin
+      mkdir -p $destdir/usr/man/man1
+      cp -f  pigz   $destdir/bin/pigz
+      cp -f  unpigz $destdir/bin/unpigz
+      cp -f  pigz.1 $destdir/usr/man/man1/pigz.1
+      ln -sf pigz   $destdir/bin/gzip
    ]]
 };
 
@@ -621,23 +614,27 @@ lua = {
    sha3 = "5153631a215cc387b652e3bbbf6e3f82b93020a18b2f78520181bd2273c7039f",
    build = "make",
    flags = {
-      'TO_LIB="liblua.so liblua.so.5.5 liblua.so.5.5.0"',
-      "INSTALL_DATA='cp -d'",
-      "MYCFLAGS=-fPIC",
-      "INSTALL_TOP=$destdir/usr",
-      "INSTALL_LIB=$destdir/usr/lib64",
-      "INSTALL_MAN=$destdir/usr/share/man/man1",
-      "INSTALL_CMOD=$destdir/usr/lib64/lua/5.5",
+      "TO_LIB=liblua.so.5.5.0",
+      "MYCFLAGS=-fpic",
+      "INSTALL_TOP=$destdir",
+      "INSTALL_BIN=$destdir/bin",
+      "INSTALL_INC=$destdir/usr/include",
+      "INSTALL_LIB=$destdir/lib64",
+      "INSTALL_MAN=$destdir/usr/man/man1",
+      "INSTALL_LMOD=$destdir/usr/share/lua/5.5",
+      "INSTALL_CMOD=$destdir/lib64/lua/5.5",
       "linux"
    },
    post = [[
-      mkdir -p $destdir/usr/lib64/pkgconfig
-      cd $destdir/usr/lib64/pkgconfig
-       >lua.pc printf "Name: Lua\n"
+      cd $destdir/lib64
+      ln -sf liblua.so.5.5.0 liblua.so.5.5
+      ln -sf liblua.so.5.5.0 liblua.so
+      mkdir -p pkgconfig && cd pkgconfig
+      >>lua.pc printf "Name: Lua\n"
       >>lua.pc printf "Description: An Extensible Extension Language\n"
       >>lua.pc printf "Version: 5.5.0\n"
       >>lua.pc printf "Requires:\n"
-      >>lua.pc printf "Libs: -L/usr/lib64 -llua -lm\n"
+      >>lua.pc printf "Libs: -L/lib64 -llua -lm\n"
       >>lua.pc printf "Cflags: -I/usr/include\n"
    ]]
 };

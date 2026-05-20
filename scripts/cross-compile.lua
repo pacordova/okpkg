@@ -8,9 +8,6 @@
 local unpack = unpack or table.unpack
 local ok = require("okutils")
 local C = unpack(loadfile("/etc/okpkg.conf")())
-local chdir, setenv, mkdir, basename, symlink =
-   ok.chdir, ok.setenv, ok.mkdir, ok.basename, ok.symlink
-
 
 B = {
    ["configure"] = function(f, ...)
@@ -31,98 +28,82 @@ B = {
    end,
 }
 
-function _oklook(x)
-   local file, buf, i, j
-   x = string.format("\n%s = {", x)
-   file = io.popen(string.format("cat %s/db/*", C["okdir"]))
-   buf = '\n' .. file:read('*a')
-   file:close()
-   i = buf:find(x, 1, true) or
-       error(string.format("error: %s not found"))
-   i = buf:find('{', i, true)
-   j = buf:find('};', i, true)
-   return load(string.format("return %s", buf:sub(i, j)))()
+function query(x)
+   local fp, buf
+   x = x:gsub("%-", "%%-")
+   fp = io.open(string.format("%s/db/.cross", C.okdir))
+   buf = fp:read("*a"):match("\n?[^%w_]" .. x .. "%s*=%s*({.-})%s*;")
+   fp:close()
+   return load("return " .. buf)()
 end
 
-function _xlook(x)
-   local file, buf, i, j
-   file = io.open(string.format("%s/db/.cross", C["okdir"]))
-   buf = '\n' .. file:read('*a')
-   file:close()
-   i = buf:find(string.format("\n%s = {", x), 1, true)
-   if i then i = buf:find('{', i, true); j = buf:find('};', i, true)
-      return load(string.format("return %s", buf:sub(i, j)))()
+function extract(x)
+   local X, fp, nm 
+   X = query(x)
+   nm = string.format("%s/%s", C.distdir, ok.basename(X.url))
+
+   -- Setup source directory
+   ok.chdir(C.workdir)
+   ok.remove_all(x)
+   ok.mkdir(x) and ok.chdir(x)
+
+   -- Extract 
+   fp = io.open(nm)
+   if fp then
+      fp:close()
+      os.execute("tar --strip-components=1 -xf " .. nm)
+   else
+      error("error: extract: source tarball does not exist!")
    end
-end
 
-function extract(pkgname)
-   local t, file, filename
-   t = _xlook(pkgname) or _oklook(pkgname)
-   filename = string.format("%s/%s", C["distdir"], basename(t.url))
-
-   -- Setup the source directory for build.
-   chdir(C["workdir"])
-   os.execute(string.format("rm -fr %s", pkgname))
-   mkdir(pkgname)
-
-   -- Ensure tarball exists.
-   file = io.open(filename)
-   if file then file:close() else error("source tarball doesn't exist!") end
-
-   -- Extract the tarball.
-   chdir(pkgname)
-   os.execute(string.format("tar --strip-components=1 -xf %s", filename))
-   chdir("..")
-
-   if pkgname:sub(1,3) == "gcc" then
+   if x:sub(1,3) == "gcc" then
       extract("gmp")
-      os.rename("gmp", string.format("%s/gmp", pkgname))
+      os.rename("gmp", string.format("%s/gmp", x))
       extract("mpfr")
-      os.rename("mpfr", string.format("%s/mpfr", pkgname))
+      os.rename("mpfr", string.format("%s/mpfr", x))
       extract("libmpc")
-      os.rename("libmpc", string.format("%s/mpc", pkgname))
+      os.rename("libmpc", string.format("%s/mpc", x))
       extract("isl")
-      os.rename("isl", string.format("%s/isl", pkgname))
+      os.rename("isl", string.format("%s/isl", x))
    end
 
-   return t
+   return X 
 end
 
-function emerge(pkgname)
-   local t = extract(pkgname)
-   t.flags = t.flags or {}
+function emerge(x)
+   local X = extract(x)
+   X.flags = X.flags or {}
 
-   chdir(C["workdir"]); chdir(pkgname)
+   if X.prep then os.execute(X.prep) end
 
-   if t.prepare then os.execute(t.prepare) end
-
-   if B[t.build] then
-      if not B[t.build](unpack(t.flags)) then
-         error(string.format("error: build: %s: %s", t.build, x))
+   if B[X.build] then
+      if not B[X.build](unpack(X.flags)) then
+         error(string.format("error: build: %s: %s", X.build, x))
       end
-   elseif tostring(t.build):match("config") then
+   elseif tostring(X.build):match("config") then
       -- Check if we are doing an out of tree build.
-      if tostring(t.build):sub(1, 2) == ".." then
-         mkdir("build")
-         chdir("build")
+      if tostring(X.build):sub(1, 2) == ".." then
+         ok.mkdir("build") 
+         ok.chdir("build")
       end
-      if not B["configure"](t.build, unpack(t.flags)) then
-         error(string.format("error: build: %s: %s", t.build, x))
+      if not B["configure"](X.build, unpack(X.flags)) then
+         error(string.format("error: build: %s: %s", X.build, x))
       end
    end
 
-   if t.post then os.execute(t.post) end
-   os.execute"find $destdir -name '*.la' -delete"
+   if X.post then os.execute(X.post) end
+   os.execute("find $destdir -name \*.la -delete")
 end
 
 -- Setup the environment.
-setenv("CFLAGS", "-O2 -fcommon -std=gnu17 -pipe")
-setenv("CXXFLAGS", "-O2 -pipe")
-setenv("PATH", "/mnt/tools/bin:/usr/bin:/usr/sbin")
-setenv("LC_ALL", "POSIX")
-setenv("MAKEFLAGS", "-j5")
-setenv("patch", "patch -b -p1")
-setenv("destdir", "/mnt")
+ok.setenv("CFLAGS", "-O2 -fcommon -std=gnu17 -pipe")
+ok.setenv("CXXFLAGS", "-O2 -pipe")
+ok.setenv("PATH", "/mnt/tools/bin:/bin")
+ok.setenv("LC_ALL", "POSIX")
+ok.setenv("CONFIG_SITE", "/etc/config.site")
+ok.setenv("MAKEFLAGS", "-j5")
+ok.setenv("patch", "patch -b -p1")
+ok.setenv("destdir", "/mnt")
 
 -- Reformat the partition specified at command line.
 io.write("Please enter a partition/device to format: ")
@@ -136,11 +117,15 @@ then
 end
 
 -- Base filesystem
-dofile(string.format("%s/scripts/filesystem.lua", C["okdir"])
+ok.chdir(C.pkgdir)
+dofile(C.okdir .. "/scripts/filesystem.lua")
+os.execute("tar -C $destdir -xf linux-lts-*.tar.lz")
 
--- Build all packages in db/.cross
-local file, buf
-file = io.open(string.format("%s/db/.cross", C["okdir"]))
-buf = '\n' .. file:read('*a')
-file:close()
-for i in buf:gmatch("\n([%w%-%+]-) = {.-;") do emerge(i) end
+-- Build all packages in $okdir/db/.cross
+local fp, buf
+fp = io.open(C.okdir .. "/db/.cross")
+buf = '\n' .. fp:read('*a')
+fp:close()
+for i in buf:gmatch("\n([%w%-%+]-) = {.-;") do 
+   emerge(i) 
+end

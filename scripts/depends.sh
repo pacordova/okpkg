@@ -12,6 +12,12 @@ lself(){
   | awk -F: '(/executable/||/shared object/)&&/ELF/{print $1}'
 }
 
+ldd_all(){
+  find /bin /lib64 -exec file '{}' + \
+  | awk -F: '(/executable/||/shared object/)&&/ELF/{print $1}' \
+  | xargs ldd 2>/dev/null
+}
+
 # objdump all ELF files in stdin
 # usage: dump_all < FILE
 dump_all(){
@@ -53,7 +59,8 @@ unsafe(){
 }
 
 # Traditional but unsafe
-for f in "$indexdir/"*; do unsafe < "$f" | sed "s|^|[$f]: |"; done
+ldd_all
+#for f in "$indexdir/"*; do unsafe < "$f" | sed "s|^|[$f]: |"; done
 
 #mkcache
 #revdeps eudev

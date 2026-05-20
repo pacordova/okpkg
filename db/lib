@@ -13,8 +13,8 @@ usbutils = {
 --------------------------------------------------------------------------------
 
 _glib2 = {
-   url = _db_lookup("glib2")["url"],
-   sha3 = _db_lookup("glib2")["sha3"],
+   url = query("glib2")["url"],
+   sha3 = query("glib2")["sha3"],
    build = "meson",
    flags = { "-Dintrospection=disabled" }
 };

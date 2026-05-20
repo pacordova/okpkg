@@ -65,6 +65,8 @@ mkdir("var/tmp")
 --------------
 -- Symlinks --
 --------------
+symlink("bash", "bin/sh")
+symlink("pigz", "bin/gzip")
 symlink("/proc/self/mounts", "etc/mtab")
 symlink("db", "var/lib")
 symlink("../run/lock", "var/lock")
