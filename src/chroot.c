@@ -16,9 +16,11 @@ ok_chroot(lua_State *L)
         return 1;
     }
     else {
-        mkdir("proc", 0777);
-        mkdir("sys", 0777);
-        mkdir("dev", 0777);
+        mkdir("proc",     0555);
+        mkdir("sys",      0555);
+        mkdir("dev",      0755);
+        mkdir("run",      0775);
+        mkdir("run/lock", 0755);
     }
 
     const char *mountcmd =

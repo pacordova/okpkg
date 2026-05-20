@@ -1,135 +1,124 @@
 #!/usr/bin/env lua
 
-local ok = require("okutils")
+local fp, ok
 
-local chdir, mkdir, symlink = ok.chdir, ok.mkdir, ok.symlink
-
-local file
+ok = require("okutils")
 
 -- Change directory to root of new filesystem
-chdir(os.getenv("destdir"))
+ok.chdir(os.getenv("destdir"))
+
+-- Cleanup
+os.remove("lost+found")
 
 --------------
 -- Skeleton --
 --------------
-mkdir("boot")
-mkdir("boot/efi")
-mkdir("dev")
-mkdir("etc")
-mkdir("etc/default")
-mkdir("etc/skel")
-mkdir("etc/ssl")
-mkdir("etc/ssl/certs")
-mkdir("etc/sysconfig")
-mkdir("mnt")
-mkdir("proc")
-mkdir("root")
-mkdir("run")
-mkdir("run/lock")
-mkdir("run/shm")
-mkdir("sys")
-mkdir("tmp")
-mkdir("usr")
-mkdir("usr/bin")
-mkdir("usr/include")
-mkdir("usr/lib64")
-mkdir("usr/lib64/locale")
-mkdir("usr/lib64/pkgconfig")
-mkdir("usr/share")
-mkdir("usr/share/doc")
-mkdir("usr/share/locale")
-mkdir("usr/share/man")
-mkdir("usr/share/man/man1")
-mkdir("usr/share/man/man2")
-mkdir("usr/share/man/man3")
-mkdir("usr/share/man/man4")
-mkdir("usr/share/man/man5")
-mkdir("usr/share/man/man6")
-mkdir("usr/share/man/man7")
-mkdir("usr/share/man/man8")
-mkdir("usr/share/misc")
-mkdir("usr/share/terminfo")
-mkdir("usr/share/zoneinfo")
-mkdir("usr/src")
-mkdir("var")
-mkdir("var/cache")
-mkdir("var/db")
-mkdir("var/home")
-mkdir("var/local")
-mkdir("var/log")
-mkdir("var/mail")
-mkdir("var/opt")
-mkdir("var/spool")
-mkdir("var/tmp")
+ok.mkdir("./bin")
+ok.mkdir("./boot")
+ok.mkdir("./boot/efi")
+ok.mkdir("./etc")
+ok.mkdir("./etc/default")
+ok.mkdir("./etc/ssl")
+ok.mkdir("./etc/ssl/certs")
+ok.mkdir("./lib64")
+ok.mkdir("./lib64/locale")
+ok.mkdir("./lib64/pkgconfig")
+ok.mkdir("./mnt")
+ok.mkdir("./root")
+ok.mkdir("./run/shm")
+ok.mkdir("./tmp")
+ok.mkdir("./usr")
+ok.mkdir("./usr/include")
+ok.mkdir("./usr/man")
+ok.mkdir("./usr/man/man1")
+ok.mkdir("./usr/man/man2")
+ok.mkdir("./usr/man/man3")
+ok.mkdir("./usr/man/man4")
+ok.mkdir("./usr/man/man5")
+ok.mkdir("./usr/man/man6")
+ok.mkdir("./usr/man/man7")
+ok.mkdir("./usr/man/man8")
+ok.mkdir("./usr/share")
+ok.mkdir("./usr/share/doc")
+ok.mkdir("./usr/share/locale")
+ok.mkdir("./usr/share/misc")
+ok.mkdir("./usr/share/terminfo")
+ok.mkdir("./usr/share/zoneinfo")
+ok.mkdir("./usr/src")
+ok.mkdir("./var")
+ok.mkdir("./var/cache")
+ok.mkdir("./var/com")
+ok.mkdir("./var/home")
+ok.mkdir("./var/log")
+ok.mkdir("./var/mail")
+ok.mkdir("./var/spool")
+ok.mkdir("./proc")
+ok.mkdir("./sys")
+ok.mkdir("./dev")
+ok.mkdir("./run")
+ok.mkdir("./run/lock")
 
 --------------
 -- Symlinks --
 --------------
-symlink("bash", "bin/sh")
-symlink("pigz", "bin/gzip")
-symlink("/proc/self/mounts", "etc/mtab")
-symlink("db", "var/lib")
-symlink("../run/lock", "var/lock")
-symlink("../run", "var/run")
-symlink("usr/bin", "bin")
-symlink("usr/lib64", "lib64")
-symlink("usr/lib", "lib")
-symlink("lib64", "usr/lib")
-symlink("var/home", "home")
+ok.symlink("bash", "bin/sh")
+ok.symlink("pigz", "bin/gzip")
+ok.symlink("/proc/self/mounts", "./etc/mtab")
+ok.symlink("var/home", "./home")
 
 ------------------
 -- System Files --
 ------------------
 --------------------------------------------------------------------------------
-file = io.open("etc/ld.so.conf", 'w')
-file:write("/usr/lib64")
-file:close()
+fp = io.open("./etc/ld.so.conf", "w")
+fp:write("/lib64")
+fp:close()
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
-file = io.open("etc/hostname", 'w')
-file:write("myhost")
-file:close()
+fp = io.open("./etc/hostname", "w")
+fp:write("myhost")
+fp:close()
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
-file = io.open("etc/hosts", 'w')
-file:write([[
+fp = io.open("./etc/hosts", "w")
+fp:write([[
 127.0.0.1  localhost myhost
 ::1        localhost
 ]])
-file:close()
+fp:close()
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
-file = io.open("etc/config.site", 'w')
-file:write([[
-if [ "$bindir" = '${exec_prefix}/bin' ]; then bindir=/bin; fi
-if [ "$libdir" = '${exec_prefix}/lib' ]; then libdir=/lib64; fi
-if [ "$libexecdir" = '${exec_prefix}/libexec' ]; then libexecdir=/usr/libexec; fi
-if [ "$localstatedir" = '${prefix}/var' ]; then localstatedir=/var; fi
-if [ "$mandir" = '${datarootdir}/man' ]; then mandir=/usr/man; fi
-if [ "$runstatedir" = '${localstatedir}/run' ]; then runstatedir=/run; fi
-if [ "$sbindir" = '${exec_prefix}/sbin' ]; then sbindir=/bin; fi
-if [ "$sharedstatedir" = '${prefix}/com' ]; then sharedstatedir=/var/com; fi 
-if [ "$sysconfdir" = '${prefix}/etc' ]; then sysconfdir=/etc; fi
-if [ -z ${with_pic+x} ];      then with_pic=yes; fi
-if [ -z ${enable_pic+x} ];    then enable_pic=yes; fi
-if [ -z ${enable_shared+x} ]; then enable_shared=yes; fi
-if [ -z ${enable_static+x} ]; then enable_static=no; fi
-if [ -z ${enable_nls+x} ];    then enable_nls=no; fi
-if [ -z ${enable_rpath+x} ];  then enable_rpath=no; fi
-if [ -z ${enable_tests+x} ];  then enable_tests=no; fi
-if [ -z ${enable_debug+x} ];  then enable_debug=no; fi
-if [ -z ${enable_werror+x} ]; then enable_werror=no; fi
+fp = io.open("./etc/config.site", "w")
+fp:write([[
+[ "$bindir"         = '${exec_prefix}/bin' ]     && bindir=/bin
+[ "$libdir"         = '${exec_prefix}/lib' ]     && libdir=/lib64
+[ "$libexecdir"     = '${exec_prefix}/libexec' ] && libexecdir=/usr/libexec
+[ "$localstatedir"  = '${prefix}/var' ]          && localstatedir=/var
+[ "$mandir"         = '${datarootdir}/man' ]     && mandir=/usr/man
+[ "$runstatedir"    = '${localstatedir}/run' ]   && runstatedir=/run
+[ "$sbindir"        = '${exec_prefix}/sbin' ]    && sbindir=/bin
+[ "$sharedstatedir" = '${prefix}/com' ]          && sharedstatedir=/var/com
+[ "$sysconfdir"     = '${prefix}/etc' ]          && sysconfdir=/etc
+[ -z ${enable_debug+x} ]                         && enable_debug=no
+[ -z ${enable_nls+x} ]                           && enable_nls=no
+[ -z ${enable_pic+x} ]                           && enable_pic=yes
+[ -z ${enable_rpath+x} ]                         && enable_rpath=no
+[ -z ${enable_shared+x} ]                        && enable_shared=yes
+[ -z ${enable_static+x} ]                        && enable_static=no
+[ -z ${enable_tests+x} ]                         && enable_tests=no
+[ -z ${enable_werror+x} ]                        && enable_werror=no
+[ -z ${with_pic+x} ]                             && with_pic=yes
 :
 ]])
-file:close()
+fp:close()
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
-file = io.open("etc/nsswitch.conf", 'w')
-file:write([[
+fp = io.open("./etc/nsswitch.conf", "w")
+fp:write([[
 passwd:     files
 group:      files
 shadow:     files
@@ -140,28 +129,27 @@ services:   files
 ethers:     files
 rpc:        files
 ]])
-file:close()
+fp:close()
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
-file = io.open("etc/default/useradd", 'w')
-file:write([[
+fp = io.open("./etc/default/useradd", "w")
+fp:write([[
 GROUP=999
 GROUPS=audio,video,input
 HOME=/var/home
 INACTIVE=-1
 EXPIRE=
 SHELL=/bin/bash
-SKEL=/etc/skel
 CREATE_MAIL_SPOOL=yes
 LOG_INIT=yes
 ]])
-file:close()
+fp:close()
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
-file = io.open("etc/passwd", 'w')
-file:write([[
+fp = io.open("./etc/passwd", "w")
+fp:write([[
 root::0:0:root:/root:/bin/bash
 bin:x:1:1:bin:/dev/null:/usr/bin/false
 daemon:x:6:6:Daemon User:/dev/null:/usr/bin/false
@@ -171,12 +159,12 @@ uuidd:x:80:80:UUID Generation Daemon User:/dev/null:/usr/bin/false
 ntp:x:87:87:Network Time Protocol:/var/empty:/usr/bin/false
 nobody:x:99:99:Unprivileged User:/dev/null:/usr/bin/false
 ]])
-file:close()
+fp:close()
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
-file = io.open("etc/group", 'w')
-file:write([[
+fp = io.open("./etc/group", "w")
+fp:write([[
 root:x:0:
 bin:x:1:daemon
 sys:x:2:
@@ -205,22 +193,22 @@ wheel:x:97:
 nogroup:x:99:
 users:x:999:
 ]])
-file:close()
+fp:close()
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
-file = io.open("etc/profile", 'w')
-file:write([[
+fp = io.open("./etc/profile", "w")
+fp:write([[
 export LANG=en_US
-export PATH=/usr/bin
+export PATH=/bin
 export PS1='\h \W \$ '
 ]])
-file:close()
+fp:close()
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
-file = io.open("etc/inputrc", 'w')
-file:write([[
+fp = io.open("./etc/inputrc", "w")
+fp:write([[
 set horizontal-scroll-mode Off
 set meta-flag On
 set input-meta On
@@ -239,77 +227,69 @@ set enable-keypad on
 "\eOH": beginning-of-line
 "\eOF": end-of-line
 ]])
-file:close()
+fp:close()
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
-file = io.open("etc/resolv.conf", 'w')
-file:write("nameserver 8.8.8.8")
-file:close()
+fp = io.open("./etc/resolv.conf", "w")
+fp:write("nameserver 8.8.8.8")
+fp:close()
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
-file = io.open("etc/shells", 'w')
-file:write([[
+fp = io.open("./etc/shells", "w")
+fp:write([[
 /bin/sh
 /bin/bash
 ]])
-file:close()
+fp:close()
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
-file = io.open("etc/syslog.conf", 'w')
-file:write([[
-auth,authpriv.*                  /var/log/auth.log
-*.*;auth,authpriv.none          -/var/log/syslog
-kern.*                          -/var/log/kern.log
-mail.*                          -/var/log/mail.log
-mail.err                         /var/log/mail.err
-*.=emerg *
-
+fp = io.open("./etc/syslog.conf", "w")
+fp:write([[
+auth,authpriv.*                  /var/log/auth.log   ;RFC5424
+*.*;auth,authpriv.none          -/var/log/syslog     ;RFC5424
+kern.*                          -/var/log/kern.log   ;RFC5424
+*.=emerg                         *                   ;RFC5424
 *.=info;*.=notice;*.=warn;\
         auth,authpriv.none;\
         cron,daemon.none;\
-        mail,news.none          -/var/log/messages
+        mail,news.none          -/var/log/messages   ;RFC5424
 ]])
-file:close()
+fp:close()
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
-file = io.open("usr/bin/c99", 'w')
-file:write([[
+fp = io.open("./usr/bin/c99", "w")
+fp:write([[
 #!/bin/sh
-exec /usr/bin/gcc -std=c99 "$@"
+exec /bin/gcc -std=c99 "$@"
 ]])
-file:close()
-os.execute("chmod 755 usr/bin/c99")
+fp:close()
 --------------------------------------------------------------------------------
-
--------------------
--- Miscellaneous --
--------------------
-os.remove("lost+found")
 
 os.execute([[
-   mknod -m 600 dev/console c 5 1
-   mknod -m 666 dev/null c 1 3
-   chattr +i etc/resolv.conf
-   cp -fp  /etc/{protocols,services} etc
-   cp -fp  {/,}etc/ssl/certs/ca-certificates.crt
-   cp -frp {/,}etc/dinit.d
+   chmod 0755 ./bin/c99
+   mknod -m 600 ./dev/console c 5 1
+   mknod -m 666 ./dev/null c 1 3
+   chattr +i ./etc/resolv.conf
+   cp -f  /etc/{protocols,services} ./etc
+   cp -fp {/,./}etc/ssl/certs/ca-certificates.crt
+   cp -fr {/,./}lib64/dinit.d
 ]])
 
 -----------
 -- okpkg --
 -----------
-mkdir("var/cache/distfiles")
-mkdir("var/cache/packages")
-mkdir("var/tmp/sources")
-symlink("/usr/src/linux-lts", "usr/src/linux")
+ok.mkdir("./usr/okpkg")
+ok.mkdir("./var/cache/ok")
+ok.mkdir("./var/cache/ok/out")
+ok.mkdir("./var/cache/ok/pkg")
 os.execute([[
-   git clone /usr/okpkg usr/okpkg
-   git -C usr/okpkg repack -adf --depth=1
-   cp -fp /var/cache/distfiles/* var/cache/distfiles
-   tar -xhf /var/cache/packages/a/linux-lts-*.tar.lz
-   cp -fp /var/cache/packages/a/linux-lts-*.tar.lz var/cache/packages
+   git clone /usr/okpkg $destdir/usr/okpkg
+   git -C $destdir/usr/okpkg repack -adf --depth=1
+   tar -C $destdir -xf /var/cache/ok/pkg/linux-lts-*.tar.lz
+   cp -fp /var/cache/ok/pkg/linux-lts-*.tar.lz $destdir/var/cache/ok/pkg
+   cp -rp /var/cache/ok/dist $destdir/var/cache/ok/dist
 ]])

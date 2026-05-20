@@ -1,34 +1,42 @@
 #include <lauxlib.h>
 #include <openssl/evp.h>
 
-#define BUFSIZE 4096
-#define MDSIZE 256 / 8
+#define BUFFER_SIZE 4096
+#define DIGEST_SIZE 256/8
+
+const char*
+sha3sum(FILE *fp)
+{
+    static char out[2*DIGEST_SIZE];
+    unsigned char buf[BUFFER_SIZE];
+    unsigned char md[DIGEST_SIZE];
+    EVP_MD_CTX *ctx = EVP_MD_CTX_new();
+    EVP_DigestInit_ex(ctx, EVP_sha3_256(), NULL);
+    size_t cnt;
+    do {
+        cnt = fread(buf, 1, BUFFER_SIZE, fp);
+        EVP_DigestUpdate(ctx, buf, cnt);
+    } while (cnt > 0);
+    EVP_DigestFinal_ex(ctx, md, NULL);
+    EVP_MD_CTX_free(ctx);
+    fclose(fp);
+    for (int i = 0; i < DIGEST_SIZE; ++i) 
+        sprintf(out + 2 * i, "%.2x", md[i]);
+    return (const char*) out;
+}
 
 int
 ok_sha3sum(lua_State *L)
 {
-    const char *path = luaL_checkstring(L, 1);
-    FILE *fp = fopen(path, "rb");
+    const char *nm = luaL_checkstring(L, 1);
+    FILE *fp = fopen(nm, "rb");
     if (!fp) {
-        fprintf(stderr, "error: sha3sum: fopen: %s\n", path);
+        fprintf(stderr, "error: sha3sum: fopen\n");
         lua_pushinteger(L, -1);
         return 1;
     }
-    static char output[MDSIZE * 2];
-    unsigned char buf[BUFSIZE], md[MDSIZE];
-    EVP_MD_CTX *mdctx = EVP_MD_CTX_new();
-    EVP_DigestInit_ex(mdctx, EVP_sha3_256(), NULL);
-    size_t cnt;
-    do {
-        cnt = fread(buf, 1, BUFSIZE, fp);
-        EVP_DigestUpdate(mdctx, buf, cnt);
-    } while (cnt > 0);
-    EVP_DigestFinal_ex(mdctx, md, NULL);
-    EVP_MD_CTX_free(mdctx);
-    fclose(fp);
-    for (int i = 0; i < MDSIZE; ++i)
-        sprintf(output + 2 * i, "%.2x", md[i]);
-    printf("%s %s\n", output, path);
-    lua_pushstring(L, (const char *)output);
+    const char* sha3 = sha3sum(fp);
+    printf("%s %s\n", sha3, nm);
+    lua_pushstring(L, sha3);
     return 1;
 }

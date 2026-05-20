@@ -117,9 +117,7 @@ then
 end
 
 -- Base filesystem
-ok.chdir(C.pkgdir)
 dofile(C.okdir .. "/scripts/filesystem.lua")
-os.execute("tar -C $destdir -xf linux-lts-*.tar.lz")
 
 -- Build all packages in $okdir/db/.cross
 local fp, buf
