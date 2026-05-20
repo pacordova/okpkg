@@ -10,38 +10,31 @@ binutils-pass1 = {
       "--enable-new-dtags",
       "--enable-{gprofng=no,nls=no,werror=no}",
       "--enable-default-{execstack=no,hash-style=gnu}",
-      "CONFIG_SITE=",
    }
 };
 
 gcc-pass1 = {
-   path = "/var/cache/ok/dist/gcc-14.3.0.tar.xz",
+   path = "/var/cache/ok/dist/gcc-16.1.0.tar.xz",
    build = "../configure",
    flags = {
       "--prefix=/tools",
       "--target=x86_64-unknown-linux-gnu",
-      "--with-glibc-version=2.43",
-      "--with-sysroot=$destdir",
-      "--with-newlib",
-      "--without-headers",
-      "--disable-libstdcxx",
-      "--disable-{shared,threads}",
+      "--with-{glibc-version=2.43,headers=no,newlib=yes,sysroot=$destdir}",
+      "--disable-{libstdcxx,shared,threads}",
+      "--enable-languages=c,c++",
+      "--enable-{__cxa_atexit,initfini-array}",
       "--enable-default-{pie,ssp}",
+      "--enable-link-serialization=1",
+      "--{enable-clocale,with-linker-hash-style}=gnu",
       "--disable-{nls,multilib}",
       "--disable-lib{atomic,gomp,quadmath,sanitizer,ssp,vtv}",
-      "--enable-languages=c,c++",
-      "--enable-link-serialization=1",
-      "--enable-{__cxa_atexit,initfini-array}",
-      "--disable-{bootstrap,fixincludes}",
-      "--{enable-clocale,with-linker-hash-style}=gnu",
-      "CONFIG_SITE=",
+      "--disable-bootstrap",
    },
    prep = [[
-      mkdir gmp mpfr mpc isl
+      mkdir gmp mpfr mpc
       tar -C gmp  --strip-components=1 -xf /var/cache/ok/dist/gmp-6.3.0.tar.xz
       tar -C mpfr --strip-components=1 -xf /var/cache/ok/dist/mpfr-4.2.2.tar.xz
       tar -C mpc  --strip-components=1 -xf /var/cache/ok/dist/mpc-1.4.1.tar.xz
-      tar -C isl  --strip-components=1 -xf /var/cache/ok/dist/isl-0.27.tar.xz
    ]],
    post = [[
       cat ../gcc/{limitx,glimits,limity}.h > _
@@ -66,14 +59,14 @@ glibc = {
 };
 
 gcc-libstdc++ = {
-   path = "/var/cache/ok/dist/gcc-14.3.0.tar.xz",
+   path = "/var/cache/ok/dist/gcc-16.1.0.tar.xz",
    build = "../libstdc++-v3/configure",
    flags = {
       "--prefix=/usr",
       "--disable-multilib",
       "--disable-nls",
       "--disable-libstdcxx-pch",
-      "--with-gxx-include-dir=/tools/x86_64-unknown-linux-gnu/include/c++/14.3.0",
+      "--with-gxx-include-dir=/tools/x86_64-unknown-linux-gnu/include/c++/16.1.0",
       "--enable-link-serialization=1",
       "--enable-{__cxa_atexit,initfini-array}",
       "--{enable-clocale,with-linker-hash-style}=gnu",
@@ -392,7 +385,7 @@ binutils-pass2 = {
 };
 
 gcc-pass2 = {
-   path = "/var/cache/ok/dist/gcc-14.3.0.tar.xz",
+   path = "/var/cache/ok/dist/gcc-16.1.0.tar.xz",
    build = "../configure",
    flags = {
       "--prefix=/usr",

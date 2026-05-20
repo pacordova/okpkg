@@ -50,9 +50,9 @@ dmidecode = {
    }
 };
 
-gcc15 = {
-   url = "https://ftp.gnu.org/gnu/gcc/gcc-15.2.0/gcc-15.2.0.tar.xz",
-   sha3 = "222cf84645a1ef23af10aac34106a9bb574c49f6c51c96c46c292b0d62043ec6",
+gcc16 = {
+   url = "https://ftp.gnu.org/gnu/gcc/gcc-16.1.0/gcc-16.1.0.tar.xz",
+   sha3 = "c658835f1cda7ae34e2dabe3b49123d38281cc76ba49b2df66c57a02dc8c9d86",
    build = "../configure",
    flags = {
       "--enable-languages=c,c++,fortran",
