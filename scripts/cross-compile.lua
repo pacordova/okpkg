@@ -7,7 +7,7 @@
 -- Imports
 local unpack = unpack or table.unpack
 local ok = require("okutils")
-local C = unpack(loadfile("/etc/okpkg.conf")())
+local C, M, E = dofile("/etc/okpkg.conf")
 
 B = {
    ["configure"] = function(f, ...)
@@ -40,31 +40,20 @@ end
 function extract(x)
    local X, fp, nm 
    X = query(x)
-   nm = string.format("%s/%s", C.distdir, ok.basename(X.url))
 
    -- Setup source directory
    ok.chdir(C.workdir)
    ok.remove_all(x)
-   ok.mkdir(x) and ok.chdir(x)
+   ok.mkdir(x)
+   ok.chdir(x)
 
    -- Extract 
-   fp = io.open(nm)
+   fp = io.open(X.path)
    if fp then
       fp:close()
-      os.execute("tar --strip-components=1 -xf " .. nm)
+      os.execute("tar --strip-components=1 -xf " .. X.path)
    else
       error("error: extract: source tarball does not exist!")
-   end
-
-   if x:sub(1,3) == "gcc" then
-      extract("gmp")
-      os.rename("gmp", string.format("%s/gmp", x))
-      extract("mpfr")
-      os.rename("mpfr", string.format("%s/mpfr", x))
-      extract("libmpc")
-      os.rename("libmpc", string.format("%s/mpc", x))
-      extract("isl")
-      os.rename("isl", string.format("%s/isl", x))
    end
 
    return X 
@@ -92,7 +81,9 @@ function emerge(x)
    end
 
    if X.post then os.execute(X.post) end
-   os.execute("find $destdir -name \*.la -delete")
+   os.execute([[ 
+      find $destdir -name \*.la -delete 
+   ]])
 end
 
 -- Setup the environment.

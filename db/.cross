@@ -1,6 +1,6 @@
 
 binutils-pass1 = {
-   url = _db_lookup("binutils")["url"],
+   path = "/var/cache/ok/dist/binutils-2.46.0.tar.lz",
    build = "../configure", 
    flags = {
       "--prefix=/tools",
@@ -15,7 +15,7 @@ binutils-pass1 = {
 };
 
 gcc-pass1 = {
-   url = _db_lookup("gcc14")["url"],
+   path = "/var/cache/ok/dist/gcc-14.3.0.tar.xz",
    build = "../configure",
    flags = {
       "--prefix=/tools",
@@ -36,6 +36,13 @@ gcc-pass1 = {
       "--{enable-clocale,with-linker-hash-style}=gnu",
       "CONFIG_SITE=",
    },
+   prep = [[
+      mkdir gmp mpfr mpc isl
+      tar -C gmp  --strip-components=1 -xf /var/cache/ok/dist/gmp-6.3.0.tar.xz
+      tar -C mpfr --strip-components=1 -xf /var/cache/ok/dist/mpfr-4.2.2.tar.xz
+      tar -C mpc  --strip-components=1 -xf /var/cache/ok/dist/mpc-1.4.1.tar.xz
+      tar -C isl  --strip-components=1 -xf /var/cache/ok/dist/isl-0.27.tar.xz
+   ]],
    post = [[
       cat ../gcc/{limitx,glimits,limity}.h > _
       mv _ $(x86_64-unknown-linux-gnu-gcc -print-file-name=include)/limits.h
@@ -43,7 +50,7 @@ gcc-pass1 = {
 };
 
 glibc = {
-   url = _db_lookup("glibc")["url"],
+   path = "/var/cache/ok/dist/glibc-2.43.tar.xz",
    build = "../configure",
    flags = {
       "--prefix=/usr",
@@ -59,7 +66,7 @@ glibc = {
 };
 
 gcc-libstdc++ = {
-   url = _db_lookup("gcc14")["url"],
+   path = "/var/cache/ok/dist/gcc-14.3.0.tar.xz",
    build = "../libstdc++-v3/configure",
    flags = {
       "--prefix=/usr",
@@ -76,7 +83,7 @@ gcc-libstdc++ = {
 };
 
 libxcrypt = {
-   url = _db_lookup("libxcrypt")["url"],
+   path = "/var/cache/ok/dist/libxcrypt-4.5.2.tar.xz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -89,7 +96,7 @@ libxcrypt = {
 };
 
 m4 = {
-   url = _db_lookup("m4")["url"],
+   path = "/var/cache/ok/dist/m4-1.4.21.tar.xz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -99,7 +106,7 @@ m4 = {
 };
 
 ncurses = {
-   url = _db_lookup("ncurses")["url"],
+   path = "/var/cache/ok/dist/ncurses-6.6.tar.gz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -131,7 +138,7 @@ ncurses = {
 };
 
 bash = {
-   url = _db_lookup("bash")["url"],
+   path = "/var/cache/ok/dist/bash-5.3.tar.gz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -142,7 +149,7 @@ bash = {
 };
 
 coreutils = {
-   url = _db_lookup("coreutils")["url"],
+   path = "/var/cache/ok/dist/coreutils-9.11.tar.xz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -155,7 +162,7 @@ coreutils = {
 };
 
 diffutils = {
-   url = _db_lookup("diffutils")["url"],
+   path = "/var/cache/ok/dist/diffutils-3.12.tar.xz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -166,7 +173,7 @@ diffutils = {
 };
 
 findutils = {
-   url = _db_lookup("findutils")["url"],
+   path = "/var/cache/ok/dist/findutils-4.10.0.tar.xz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -176,7 +183,7 @@ findutils = {
 };
 
 gawk = {
-   url = _db_lookup("gawk")["url"],
+   path = "/var/cache/ok/dist/gawk-5.4.0.tar.lz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -187,7 +194,7 @@ gawk = {
 };
 
 grep = {
-   url = _db_lookup("grep")["url"],
+   path = "/var/cache/ok/dist/grep-3.12.tar.xz",
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -197,7 +204,7 @@ grep = {
 };
 
 zlib = {
-   url = _db_lookup("zlib")["url"],
+   path = "/var/cache/ok/dist/zlib-1.3.2.tar.xz", 
    build = "make",
    prep = [[
       prefix=/usr \
@@ -211,7 +218,7 @@ zlib = {
 };
 
 pigz = {
-   url = _db_lookup("pigz")["url"],
+   path = "/var/cache/ok/dist/pigz-2.8.tar.gz", 
    build = "make_noinstall",
    flags = { 
       "CC=x86_64-unknown-linux-gnu-gcc" 
@@ -226,7 +233,7 @@ pigz = {
 };
 
 make = {
-   url = _db_lookup("make")["url"],
+   path = "/var/cache/ok/dist/make-4.4.1.tar.gz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -237,7 +244,7 @@ make = {
 };
 
 patch = {
-   url = _db_lookup("patch")["url"],
+   path = "/var/cache/ok/dist/patch-2.8.tar.xz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -247,7 +254,7 @@ patch = {
 };
 
 sed = {
-   url = _db_lookup("sed")["url"],
+   path = "/var/cache/ok/dist/sed-4.10.tar.xz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -257,7 +264,7 @@ sed = {
 };
 
 tar = {
-   url = _db_lookup("tar")["url"],
+   path = "/var/cache/ok/dist/tar-1.35.tar.xz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -268,7 +275,7 @@ tar = {
 };
 
 xz = {
-   url = _db_lookup("xz")["url"],
+   path = "/var/cache/ok/dist/xz-5.8.3.tar.xz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -278,7 +285,7 @@ xz = {
 };
 
 lua = {
-   url = _db_lookup("lua")["url"],
+   path = "/var/cache/ok/dist/lua-5.5.0.tar.gz",
    build = "make",
    flags = {
       "TO_LIB=liblua.so.5.5.0",
@@ -311,7 +318,7 @@ lua = {
 };
 
 lzlib = {
-   url = _db_lookup("lzlib")["url"],
+   path = "/var/cache/ok/dist/lzlib-1.16.tar.lz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -323,7 +330,7 @@ lzlib = {
 };
 
 plzip = {
-   url = _db_lookup("plzip")["url"],
+   path = "/var/cache/ok/dist/plzip-1.13.tar.lz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -334,7 +341,7 @@ plzip = {
 };
 
 util-linux = {
-   url = _db_lookup("util-linux")["url"],
+   path = "/var/cache/ok/dist/util-linux-2.42.tar.xz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -347,7 +354,7 @@ util-linux = {
 };
 
 libressl = {
-   url = _db_lookup("libressl")["url"],
+   path = "/var/cache/ok/dist/libressl-4.3.1.tar.gz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -358,7 +365,7 @@ libressl = {
 };
 
 pkgconf = {
-   url = _db_lookup("pkgconf")["url"],
+   path = "/var/cache/ok/dist/pkgconf-2.5.1.tar.xz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -368,7 +375,7 @@ pkgconf = {
 };
 
 binutils-pass2 = {
-   url = _db_lookup("binutils")["url"],
+   path = "/var/cache/ok/dist/binutils-2.46.0.tar.lz",
    build = "../configure",
    flags = {
       "--prefix=/usr",
@@ -385,7 +392,7 @@ binutils-pass2 = {
 };
 
 gcc-pass2 = {
-   url = _db_lookup("gcc14")["url"],
+   path = "/var/cache/ok/dist/gcc-14.3.0.tar.xz",
    build = "../configure",
    flags = {
       "--prefix=/usr",
@@ -404,6 +411,11 @@ gcc-pass2 = {
       "LDFLAGS_FOR_TARGET=-L$PWD/x86_64-unknown-linux-gnu/libgcc",
    },
    prep = [[
+      mkdir gmp mpfr mpc isl
+      tar -C gmp  -xf /var/cache/ok/dist/gmp-6.3.0.tar.xz
+      tar -C mpfr -xf /var/cache/ok/dist/mpfr-4.2.2.tar.xz
+      tar -C mpc  -xf /var/cache/ok/dist/mpc-1.4.1.tar.xz
+      tar -C isl  -xf /var/cache/ok/dist/isl-0.27.tar.xz
       sed -i '/thread_header =/s/@.*@/gthr-posix.h/' \
         {libgcc,libstdc++-v3/include}/Makefile.in
    ]]

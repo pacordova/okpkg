@@ -752,7 +752,7 @@ dbus = {
 --------------------------------------------------------------------------------
 
 device-mapper = {
-   url = "https://gitlab.com/lvmteam/lvm2/-/archive/v2_03_41/lvm2-2.03.41.tar.gz",
+   url = "https://gitlab.com/lvmteam/lvm2/-/archive/v2_03_41/lvm2-2.03.40.tar.gz",
    sha3 = "ebff2011062b9142c5bac1429238bed11d69c2f42cf540a287aa4aaa7cc75958",
    prep = "./configure",
    build = "make_noinstall",

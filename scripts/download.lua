@@ -3,8 +3,8 @@
 dofile("/usr/bin/okpkg")
 
 local unpack = unpack or table.unpack
-local C = unpack(loadfile("/etc/okpkg.conf")())
 local ok = require("okutils")
+local C, M, E = dofile("/etc/okpkg.conf")
 local chdir, mkdir, remove_all = 
    ok.chdir, ok.mkdir, ok.remove_all
 
@@ -24,14 +24,14 @@ remove_all(C["workdir"])
 mkdir(C["workdir"])
 
 download_all("base")
-download_all("python")
-download_all("perl")
-download_all("devel")
-download_all("lib")
-download_all("net")
-download_all("fonts")
-download_all("xorg")
-download_all("gtk")
-download_all("xfce")
-download_all("video")
-download_all("flatpak")
+--download_all("python")
+--download_all("perl")
+--download_all("devel")
+--download_all("lib")
+--download_all("net")
+--download_all("fonts")
+--download_all("xorg")
+--download_all("gtk")
+--download_all("xfce")
+--download_all("video")
+--download_all("flatpak")
