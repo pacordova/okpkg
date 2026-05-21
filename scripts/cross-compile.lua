@@ -1,4 +1,4 @@
-#!/usr/bin/env lua
+#!/bin/lua
 
 -- This script is cross compilation of GNU and other tools.
 -- It follows LFS closely, but not exactly.
@@ -48,10 +48,10 @@ function extract(x)
    ok.chdir(x)
 
    -- Extract 
-   fp = io.open(X.path)
+   fp = io.open(X.fs)
    if fp then
       fp:close()
-      os.execute("tar --strip-components=1 -xf " .. X.path)
+      os.execute("tar --strip-components=1 -xf " .. X.fs)
    else
       error("error: extract: source tarball does not exist!")
    end
@@ -65,8 +65,14 @@ function emerge(x)
 
    -- Environment
    if x:match("pass1") then
+      ok.setenv("CC",  "/bin/gcc")
+      ok.setenv("CXX", "/bin/g++")
       ok.unsetenv("CONFIG_SITE")
    else
+      ok.setenv("CC",          "/mnt/tools/bin/x86_64-unknown-linux-gnu-gcc")
+      ok.setenv("CXX",         "/mnt/tools/bin/x86_64-unknown-linux-gnu-g++")
+      ok.setenv("AR",          "/mnt/tools/bin/x86_64-unknown-linux-gnu-ar")
+      ok.setenv("RANLIB",      "/mnt/tools/bin/x86_64-unknown-linux-gnu-ranlib")
       ok.setenv("CONFIG_SITE", "/etc/config.site")
    end
 
@@ -97,7 +103,7 @@ end
 ok.setenv("CFLAGS", "-O2 -fcommon -std=gnu17 -pipe")
 ok.setenv("CXXFLAGS", "-O2 -pipe")
 ok.setenv("PATH", "/mnt/tools/bin:/bin")
-ok.setenv("LC_ALL", "POSIX")
+ok.setenv("LC_ALL", "C")
 ok.setenv("MAKEFLAGS", "-j5")
 ok.setenv("patch", "patch -b -p1")
 ok.setenv("destdir", "/mnt")
@@ -124,3 +130,10 @@ fp:close()
 for i in buf:gmatch("\n([%w%-%+]-) = {.-;") do 
    emerge(i) 
 end
+
+-- Cleanup
+ok.chdir(os.getenv("destdir"))
+ok.remove_all("./usr/lib")
+ok.remove_all("./usr/lib64")
+os.remove("./lib")
+os.remove("./sbin")

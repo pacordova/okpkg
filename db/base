@@ -1,4 +1,3 @@
-
 _file = {
    url = query("file")["url"],
    sha3 = query("file")["sha3"],
@@ -179,19 +178,18 @@ binutils = {
    sha3 = "0e1556b41b4f842ca525e2bc33e248314559ca8836992ad054dd3c4317d1034b",
    build = "./configure",
    flags = {
-      "--enable-64-bit-bfd",
-      "--enable-default-hash-style=gnu",
-      "--enable-deterministic-archives",
-      "--enable-default-execstack=no",
-      "--enable-{gold=yes,ld=default}",
-      "--enable-{lto,plugins}",
-      "--enable-new-dtags",
-      "--with-system-zlib",
+      "--enable-{64-bit-bfd=yes,gprofng=yes}",
+      "--enable-{deterministic-archives,new-dtags}",
+      "--enable-default-{execstack=no,hash-style=gnu}",
+      "--enable-ld=default",
+      "--enable-{gold,lto,plugins}",
+      "--disable-{nls,werror}",
+      "--with-system-zlib=yes",
    },
    prep = [[ sed -i 's/tooldir=.*/tooldir=\/usr/g' configure ]],
    post = [[
-      rm -f  $destdir/usr/lib64/lib{bfd,ctf,ctf-nobfd,gprofng,opcodes,sframe}.a
-      rm -fr $destdir/usr/lib/ldscripts
+      rm -f  $destdir/lib64/lib{bfd,ctf,ctf-nobfd,gprofng,opcodes,sframe}.a
+      rm -fr $destdir/lib/ldscripts
    ]]
 };
 
@@ -241,18 +239,25 @@ gcc14 = {
    sha3 = "b3744b6fbf810205c604c0d24ffd94f0edeca87b16d5c366e12fa264a0a9d7d1",
    build = "../configure",
    flags = {
-      "--enable-languages=c,c++,fortran",
-      "--{enable-clocale,with-linker-hash-style}=gnu",
+      "--prefix=/usr",
+      "--enable-{bootstrap=yes,checking=yes,lto=yes,shared=yes,threads=posix}",
+      "--enable-languages=c,c++",
+      "--enable-{__cxa_atexit,initfini-array}",
       "--enable-default-{pie,ssp}",
-      "--enable-initfini-array",
-      "--enable-__cxa_atexit",
-      "--enable-link-serialization=1",
-      "--enable-checking=release",
-      "--enable-{bootstrap=yes,lto=yes,multilib=no,nls=no,threads=posix}",
+      "--{enable-clocale,with-linker-hash-style}=gnu",
+      "--disable-{nls,multilib}",
       "--disable-lib{sanitizer,ssp,stdcxx-pch}",
-      "--disable-fixincludes",
-      "--with-system-zlib",
+      "--with-system-zlib=yes",
       "LD=ld",
+
+      "--enable-{bootstrap=yes,checking=release,lto=yes,shared=yes,threads=posix}",
+      "--enable-languages=c,c++",
+      "--enable-{__cxa_atexit,initfini-array}",
+      "--enable-default-{pie,ssp}",
+      "--enable-link-serialization=1",
+      "--{enable-clocale,with-linker-hash-style}=gnu",
+      "--disable-{nls,multilib}",
+      "--disable-lib{sanitizer,ssp,stdcxx-pch}",
    },
    post = [[
       cc=$destdir/usr/bin/gcc

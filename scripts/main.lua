@@ -43,6 +43,7 @@ B = {
       local arg = {
          [0] = f,
          "--prefix=/usr",
+         "--exec-prefix=/",
          ...
       }
       return (
@@ -103,7 +104,7 @@ B = {
    end,
    ["waf"] = function()
       os.execute [[
-         ./waf configure --prefix=/usr --libdir=/usr/lib64
+         ./waf configure --prefix=/usr --exec-prefix=/ --libdir=/lib64
          ./waf build
          ./waf install --destdir=$destdir
       ]]

@@ -64,7 +64,9 @@ ok.mkdir("./run/lock")
 ok.symlink("bash", "bin/sh")
 ok.symlink("pigz", "bin/gzip")
 ok.symlink("/proc/self/mounts", "./etc/mtab")
-ok.symlink("var/home", "./home")
+ok.symlink("./var/home", "./home")
+ok.symlink("./lib64", "lib")
+ok.symlink("./bin", "sbin")
 
 ------------------
 -- System Files --

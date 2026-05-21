@@ -1,108 +1,131 @@
 
 binutils-pass1 = {
-   path = "/var/cache/ok/dist/binutils-2.46.0.tar.lz",
+   fs = "/var/cache/ok/dist/binutils-2.46.0.tar.lz",
    build = "../configure", 
    flags = {
       "--prefix=/tools",
-      "--with-sysroot=$destdir",
       "--target=x86_64-unknown-linux-gnu",
-      "--enable-deterministic-archives",
-      "--enable-new-dtags",
-      "--enable-{gprofng=no,nls=no,werror=no}",
+      "--enable-{64-bit-bfd=no,gprofng=no}",
+      "--enable-{deterministic-archives,new-dtags}",
       "--enable-default-{execstack=no,hash-style=gnu}",
+      "--enable-ld=default",
+      "--disable-{gold,lto,plugins}",
+      "--disable-{nls,werror}",
+      "--with-system-zlib=no",
+      "--with-sysroot=$destdir",
    }
 };
 
 gcc-pass1 = {
-   path = "/var/cache/ok/dist/gcc-16.1.0.tar.xz",
+   fs = "/var/cache/ok/dist/gcc-16.1.0.tar.xz",
    build = "../configure",
    flags = {
       "--prefix=/tools",
       "--target=x86_64-unknown-linux-gnu",
-      "--with-{glibc-version=2.43,headers=no,newlib=yes,sysroot=$destdir}",
-      "--disable-{libstdcxx,shared,threads}",
       "--enable-languages=c,c++",
-      "--enable-{__cxa_atexit,initfini-array}",
+      "--enable-checking=release",
+      "--enable-clocale=gnu",
+      "--enable-__cxa_atexit",
+      "--enable-initfini-array",
       "--enable-default-{pie,ssp}",
-      "--enable-link-serialization=1",
-      "--{enable-clocale,with-linker-hash-style}=gnu",
-      "--disable-{nls,multilib}",
-      "--disable-lib{atomic,gomp,quadmath,sanitizer,ssp,vtv}",
-      "--disable-bootstrap",
+      "--enable-threads=no",
+      "--enable-shared=no",
+      "--enable-bootstrap=no",
+      "--enable-lto=no",
+      "--enable-multilib=no",
+      "--disable-nls",
+      "--disable-fixincludes",
+      "--disable-gnu-indirect-function",
+      "--disable-lib{atomic,gomp,quadmath,sanitizer,ssp,stdcxx,vtv}",
+      "--with-{glibc-version=2.43,headers=no,newlib=yes}",
+      "--with-linker-hash-style=gnu",
+      "--with-system-zlib=no",
+      "--with-sysroot=$destdir",
+      "libat_cv_have_ifunc=no",
    },
    prep = [[
-      mkdir gmp mpfr mpc
+      mkdir gmp mpfr mpc isl
       tar -C gmp  --strip-components=1 -xf /var/cache/ok/dist/gmp-6.3.0.tar.xz
       tar -C mpfr --strip-components=1 -xf /var/cache/ok/dist/mpfr-4.2.2.tar.xz
       tar -C mpc  --strip-components=1 -xf /var/cache/ok/dist/mpc-1.4.1.tar.xz
+      tar -C isl  --strip-components=1 -xf /var/cache/ok/dist/isl-0.27.tar.xz
    ]],
    post = [[
       cat ../gcc/{limitx,glimits,limity}.h > _
-      mv _ $(x86_64-unknown-linux-gnu-gcc -print-file-name=include)/limits.h
+      mv _ $(x86_64-unknown-linux-gnu-gcc -print-file-name=include/limits.h)
    ]]
 };
 
 glibc = {
-   path = "/var/cache/ok/dist/glibc-2.43.tar.xz",
+   fs = "/var/cache/ok/dist/glibc-2.43.tar.xz",
    build = "../configure",
    flags = {
       "--prefix=/usr",
-      "--disable-nscd",
-      "--enable-kernel=$(uname -r | cut -d . -f 1,2)",
-      "--with-headers=$destdir/usr/include",
+      "--exec-prefix=/",
       "--host=x86_64-unknown-linux-gnu",
       "--build=$(../scripts/config.guess)",
+      "--enable-kernel=$(uname -r | cut -d . -f 1,2)",
+      "--disable-nscd",
+      "--with-headers=$destdir/usr/include",
       "libc_cv_slibdir=/lib64",
       "libc_cv_rtlddir=/lib64",
       "libc_cv_rootsbindir=/bin",
    }
 };
 
-gcc-libstdc++ = {
-   path = "/var/cache/ok/dist/gcc-16.1.0.tar.xz",
+libstdcxx = {
+   fs = "/var/cache/ok/dist/gcc-16.1.0.tar.xz",
    build = "../libstdc++-v3/configure",
    flags = {
       "--prefix=/usr",
-      "--disable-multilib",
-      "--disable-nls",
-      "--disable-libstdcxx-pch",
-      "--with-gxx-include-dir=/tools/x86_64-unknown-linux-gnu/include/c++/16.1.0",
-      "--enable-link-serialization=1",
-      "--enable-{__cxa_atexit,initfini-array}",
-      "--{enable-clocale,with-linker-hash-style}=gnu",
+      "--exec-prefix=/",
       "--host=x86_64-unknown-linux-gnu",
       "--build=$(../config.guess)",
-   }
+      "--with-gxx-include-dir=/tools/x86_64-unknown-linux-gnu/include/c++/16.1.0",
+      "--enable-clocale=gnu",
+      "--disable-{nls,multilib}",
+      "--disable-libstdcxx-pch",
+   },
+   prep = [[
+      mkdir gmp mpfr mpc isl
+      tar -C gmp  --strip-components=1 -xf /var/cache/ok/dist/gmp-6.3.0.tar.xz
+      tar -C mpfr --strip-components=1 -xf /var/cache/ok/dist/mpfr-4.2.2.tar.xz
+      tar -C mpc  --strip-components=1 -xf /var/cache/ok/dist/mpc-1.4.1.tar.xz
+      tar -C isl  --strip-components=1 -xf /var/cache/ok/dist/isl-0.27.tar.xz
+   ]],
 };
 
 libxcrypt = {
-   path = "/var/cache/ok/dist/libxcrypt-4.5.2.tar.xz", 
+   fs = "/var/cache/ok/dist/libxcrypt-4.5.2.tar.xz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
-      "--disable-failure-tokens",
-      "--enable-hashes=strong,glibc",
-      "--enable-obsolete-api=no",
+      "--exec-prefix=/",
       "--host=x86_64-unknown-linux-gnu",
       "--build=$(build-aux/m4-autogen/config.guess)",
+      "--enable-hashes=strong,glibc",
+      "--enable-obsolete-api=no",
+      "--disable-failure-tokens",
    }
 };
 
 m4 = {
-   path = "/var/cache/ok/dist/m4-1.4.21.tar.xz", 
+   fs = "/var/cache/ok/dist/m4-1.4.21.tar.xz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
+      "--exec-prefix=/",
       "--host=x86_64-unknown-linux-gnu",
       "--build=$(build-aux/config.guess)",
    }
 };
 
 ncurses = {
-   path = "/var/cache/ok/dist/ncurses-6.6.tar.gz", 
+   fs = "/var/cache/ok/dist/ncurses-6.6.tar.gz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
+      "--exec-prefix=/",
       "--with-manpage-format=normal",
       "--with-shared",
       "--enable-widec",
@@ -131,10 +154,11 @@ ncurses = {
 };
 
 bash = {
-   path = "/var/cache/ok/dist/bash-5.3.tar.gz", 
+   fs = "/var/cache/ok/dist/bash-5.3.tar.gz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
+      "--exec-prefix=/",
       "--host=x86_64-unknown-linux-gnu",
       "--build=$(sh support/config.guess)",
       "--without-bash-malloc",
@@ -142,10 +166,11 @@ bash = {
 };
 
 coreutils = {
-   path = "/var/cache/ok/dist/coreutils-9.11.tar.xz", 
+   fs = "/var/cache/ok/dist/coreutils-9.11.tar.xz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
+      "--exec-prefix=/",
       "--host=x86_64-unknown-linux-gnu",
       "--build=$(build-aux/config.guess)",
       "--enable-install-program=hostname",
@@ -154,11 +179,23 @@ coreutils = {
    }
 };
 
-diffutils = {
-   path = "/var/cache/ok/dist/diffutils-3.12.tar.xz", 
+file = {
+   fs = "/var/cache/ok/dist/file-5.47.tar.gz",
    build = "./configure",
    flags = {
       "--prefix=/usr",
+      "--exec-prefix=/",
+      "--host=x86_64-unknown-linux-gnu",
+      "--build=$(./config.guess)",
+   }
+};
+
+diffutils = {
+   fs = "/var/cache/ok/dist/diffutils-3.12.tar.xz", 
+   build = "./configure",
+   flags = {
+      "--prefix=/usr",
+      "--exec-prefix=/",
       "--host=x86_64-unknown-linux-gnu",
       "--build=$(build-aux/config.guess)",
       "gl_cv_func_strcasecmp_works=y"
@@ -166,20 +203,22 @@ diffutils = {
 };
 
 findutils = {
-   path = "/var/cache/ok/dist/findutils-4.10.0.tar.xz", 
+   fs = "/var/cache/ok/dist/findutils-4.10.0.tar.xz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
+      "--exec-prefix=/",
       "--host=x86_64-unknown-linux-gnu",
       "--build=$(build-aux/config.guess)",
    },
 };
 
 gawk = {
-   path = "/var/cache/ok/dist/gawk-5.4.0.tar.lz", 
+   fs = "/var/cache/ok/dist/gawk-5.4.0.tar.lz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
+      "--exec-prefix=/",
       "--host=x86_64-unknown-linux-gnu",
       "--build=$(build-aux/config.guess)",
    },
@@ -187,20 +226,22 @@ gawk = {
 };
 
 grep = {
-   path = "/var/cache/ok/dist/grep-3.12.tar.xz",
+   fs = "/var/cache/ok/dist/grep-3.12.tar.xz",
    build = "./configure",
    flags = {
       "--prefix=/usr",
+      "--exec-prefix=/",
       "--host=x86_64-unknown-linux-gnu",
       "--build=$(build-aux/config.guess)",
    }
 };
 
 zlib = {
-   path = "/var/cache/ok/dist/zlib-1.3.2.tar.xz", 
+   fs = "/var/cache/ok/dist/zlib-1.3.2.tar.xz", 
    build = "make",
    prep = [[
       prefix=/usr \
+      exec_prefix=/ \
       libdir=/lib64 \
       mandir=/usr/man \
       CC=x86_64-unknown-linux-gnu-gcc \
@@ -211,7 +252,7 @@ zlib = {
 };
 
 pigz = {
-   path = "/var/cache/ok/dist/pigz-2.8.tar.gz", 
+   fs = "/var/cache/ok/dist/pigz-2.8.tar.gz", 
    build = "make_noinstall",
    flags = { 
       "CC=x86_64-unknown-linux-gnu-gcc" 
@@ -226,10 +267,11 @@ pigz = {
 };
 
 make = {
-   path = "/var/cache/ok/dist/make-4.4.1.tar.gz", 
+   fs = "/var/cache/ok/dist/make-4.4.1.tar.gz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
+      "--exec-prefix=/",
       "--host=x86_64-unknown-linux-gnu",
       "--build=$(build-aux/config.guess)",
       "--without-guile",
@@ -237,30 +279,33 @@ make = {
 };
 
 patch = {
-   path = "/var/cache/ok/dist/patch-2.8.tar.xz", 
+   fs = "/var/cache/ok/dist/patch-2.8.tar.xz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
+      "--exec-prefix=/",
       "--host=x86_64-unknown-linux-gnu",
       "--build=$(build-aux/config.guess)"
    }
 };
 
 sed = {
-   path = "/var/cache/ok/dist/sed-4.10.tar.xz", 
+   fs = "/var/cache/ok/dist/sed-4.10.tar.xz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
+      "--exec-prefix=/",
       "--host=x86_64-unknown-linux-gnu",
       "--build=$(build-aux/config.guess)",
    }
 };
 
 tar = {
-   path = "/var/cache/ok/dist/tar-1.35.tar.xz", 
+   fs = "/var/cache/ok/dist/tar-1.35.tar.xz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
+      "--exec-prefix=/",
       "--host=x86_64-unknown-linux-gnu",
       "--build=$(build-aux/config.guess)",
       "FORCE_UNSAFE_CONFIGURE=1",
@@ -268,17 +313,18 @@ tar = {
 };
 
 xz = {
-   path = "/var/cache/ok/dist/xz-5.8.3.tar.xz", 
+   fs = "/var/cache/ok/dist/xz-5.8.3.tar.xz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
+      "--exec-prefix=/",
       "--host=x86_64-unknown-linux-gnu",
       "--build=$(build-aux/config.guess)",
    },
 };
 
 lua = {
-   path = "/var/cache/ok/dist/lua-5.5.0.tar.gz",
+   fs = "/var/cache/ok/dist/lua-5.5.0.tar.gz",
    build = "make",
    flags = {
       "TO_LIB=liblua.so.5.5.0",
@@ -311,10 +357,11 @@ lua = {
 };
 
 lzlib = {
-   path = "/var/cache/ok/dist/lzlib-1.16.tar.lz", 
+   fs = "/var/cache/ok/dist/lzlib-1.16.tar.lz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
+      "--exec-prefix=/",
       "--libdir=/lib64",
       "--mandir=/usr/man",
       "CC=x86_64-unknown-linux-gnu-gcc",
@@ -323,21 +370,23 @@ lzlib = {
 };
 
 plzip = {
-   path = "/var/cache/ok/dist/plzip-1.13.tar.lz", 
+   fs = "/var/cache/ok/dist/plzip-1.13.tar.lz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
-      "--bindir=/",
+      "--exec-prefix=/",
       "--mandir=/usr/man",
       "CXX=x86_64-unknown-linux-gnu-g++",
    },
 };
 
 util-linux = {
-   path = "/var/cache/ok/dist/util-linux-2.42.tar.xz", 
+   fs = "/var/cache/ok/dist/util-linux-2.42.tar.xz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
+      "--exec-prefix=/",
+      "--libdir=/lib64",
       "--host=x86_64-unknown-linux-gnu",
       "--build=$(config/config.guess)",
       "--disable-all-programs",
@@ -347,10 +396,11 @@ util-linux = {
 };
 
 libressl = {
-   path = "/var/cache/ok/dist/libressl-4.3.1.tar.gz", 
+   fs = "/var/cache/ok/dist/libressl-4.3.1.tar.gz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
+      "--exec-prefix=/",
       "--host=x86_64-unknown-linux-gnu",
       "--build=$(./config.guess)",
       "--with-openssldir=/etc/ssl",
@@ -358,57 +408,73 @@ libressl = {
 };
 
 pkgconf = {
-   path = "/var/cache/ok/dist/pkgconf-2.5.1.tar.xz", 
+   fs = "/var/cache/ok/dist/pkgconf-2.5.1.tar.xz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
+      "--exec-prefix=/",
       "--host=x86_64-unknown-linux-gnu",
       "--build=$(./config.guess)",
    },
 };
 
 binutils-pass2 = {
-   path = "/var/cache/ok/dist/binutils-2.46.0.tar.lz",
+   fs = "/var/cache/ok/dist/binutils-2.46.0.tar.lz",
    build = "../configure",
    flags = {
       "--prefix=/usr",
+      "--exec-prefix=/",
       "--host=x86_64-unknown-linux-gnu",
       "--build=$(../config.guess)",
-      "--enable-64-bit-bfd",
-      "--enable-shared",
-      "--enable-deterministic-archives",
-      "--enable-new-dtags",
-      "--enable-{gprofng=no,nls=no,werror=no}",
+      "--enable-{64-bit-bfd=yes,gprofng=no}",
+      "--enable-{deterministic-archives,new-dtags}",
       "--enable-default-{execstack=no,hash-style=gnu}",
+      "--enable-ld=default",
+      "--disable-{gold,lto,plugins}",
+      "--disable-{nls,werror}",
+      "--with-system-zlib=no",
    },
    prep = [[ sed '6031s/$add_dir//' -i ltmain.sh ]],
 };
 
 gcc-pass2 = {
-   path = "/var/cache/ok/dist/gcc-16.1.0.tar.xz",
+   fs = "/var/cache/ok/dist/gcc-16.1.0.tar.xz",
    build = "../configure",
    flags = {
       "--prefix=/usr",
+      "--exec-prefix=/",
+      "--libexecdir=/usr/libexec",
       "--host=x86_64-unknown-linux-gnu",
       "--build=$(../config.guess)",
       "--target=x86_64-unknown-linux-gnu",
-      "--with-build-sysroot=$destdir",
       "--enable-languages=c,c++",
-      "--enable-{__cxa_atexit,initfini-array}",
+      "--enable-checking=release",
+      "--enable-clocale=gnu",
+      "--enable-__cxa_atexit",
+      "--enable-initfini-array",
       "--enable-default-{pie,ssp}",
-      "--enable-link-serialization=1",
-      "--{enable-clocale,with-linker-hash-style}=gnu",
-      "--disable-{nls,multilib}",
-      "--disable-lib{atomic,gomp,quadmath,sanitizer,ssp,vtv}",
-      "--disable-{bootstrap,fixincludes}",
-      "LDFLAGS_FOR_TARGET=-L$PWD/x86_64-unknown-linux-gnu/libgcc",
+      "--enable-threads=posix",
+      "--enable-shared=yes",
+      "--enable-bootstrap=no",
+      "--enable-lto=no",
+      "--enable-multilib=no",
+      "--disable-nls",
+      "--disable-fixincludes",
+      "--disable-gnu-indirect-function",
+      "--disable-lib{atomic,gomp,quadmath,sanitizer,ssp,stdcxx,vtv}",
+      "--with-build-sysroot=$destdir",
+      "--with-linker-hash-style=gnu",
+      "--with-system-zlib=no",
+      "libat_cv_have_ifunc=no",
+      "LDFLAGS_FOR_TARGET=-L$(realpath x86_64-unknown-linux-gnu/libgcc)",
    },
    prep = [[
       mkdir gmp mpfr mpc isl
-      tar -C gmp  -xf /var/cache/ok/dist/gmp-6.3.0.tar.xz
-      tar -C mpfr -xf /var/cache/ok/dist/mpfr-4.2.2.tar.xz
-      tar -C mpc  -xf /var/cache/ok/dist/mpc-1.4.1.tar.xz
-      tar -C isl  -xf /var/cache/ok/dist/isl-0.27.tar.xz
+      tar -C gmp  --strip-components=1 -xf /var/cache/ok/dist/gmp-6.3.0.tar.xz
+      tar -C mpfr --strip-components=1 -xf /var/cache/ok/dist/mpfr-4.2.2.tar.xz
+      tar -C mpc  --strip-components=1 -xf /var/cache/ok/dist/mpc-1.4.1.tar.xz
+      tar -C isl  --strip-components=1 -xf /var/cache/ok/dist/isl-0.27.tar.xz
+      sed -i '330i #include <stdbool.h>' gcc/config/i386/i386.h
       sed -i '/thread_header =/s/@.*@/gthr-posix.h/' \
         {libgcc,libstdc++-v3/include}/Makefile.in
    ]]
