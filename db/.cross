@@ -41,7 +41,6 @@ gcc-pass1 = {
       "--with-linker-hash-style=gnu",
       "--with-system-zlib=no",
       "--with-sysroot=$destdir",
-      "libat_cv_have_ifunc=no",
    },
    prep = [[
       mkdir gmp mpfr mpc isl
@@ -465,7 +464,6 @@ gcc-pass2 = {
       "--with-build-sysroot=$destdir",
       "--with-linker-hash-style=gnu",
       "--with-system-zlib=no",
-      "libat_cv_have_ifunc=no",
       "LDFLAGS_FOR_TARGET=-L$(realpath x86_64-unknown-linux-gnu/libgcc)",
    },
    prep = [[
