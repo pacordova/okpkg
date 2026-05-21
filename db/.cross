@@ -381,7 +381,7 @@ plzip = {
 };
 
 util-linux = {
-   fs = "/var/cache/ok/dist/util-linux-2.42.tar.xz", 
+   fs = "/var/cache/ok/dist/util-linux-2.42.1.tar.xz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",

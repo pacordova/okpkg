@@ -700,8 +700,8 @@ procps-ng = {
 };
 
 util-linux = {
-   url = "https://kernel.org/pub/linux/utils/util-linux/v2.42/util-linux-2.42.tar.xz",
-   sha3 = "daa018dd9019125b695573e1939989a69cf015b5d4bfbe5a71d0add114188067",
+   url = "https://kernel.org/pub/linux/utils/util-linux/v2.42/util-linux-2.42.1.tar.xz",
+   sha3 = "113d8c05a6bf3ba0126fb23b409855332a7523409bb56a4f36caa98b85bb7b31",
    build = "./configure",
    flags = {
       "--disable-{chfn-chsh,login,nologin,su,setpriv,runuser,pylibmount}",
@@ -710,7 +710,7 @@ util-linux = {
       "ADJTIME_PATH=/etc/adjtime",
    },
    prep = [[ sed -i 's:/sbin:/usr/bin:' disk-utils/fsck.c ]],
-   post = [[ cd $destdir && mv bin/* usr/sbin/* usr/bin && rmdir bin usr/sbin ]]
+   post = [[ cd $destdir && mv -f sbin/* bin && rmdir sbin ]]
 };
 
 e2fsprogs = {
@@ -757,8 +757,8 @@ dbus = {
 --------------------------------------------------------------------------------
 
 device-mapper = {
-   url = "https://gitlab.com/lvmteam/lvm2/-/archive/v2_03_41/lvm2-2.03.40.tar.gz",
-   sha3 = "ebff2011062b9142c5bac1429238bed11d69c2f42cf540a287aa4aaa7cc75958",
+   url = "https://gitlab.com/lvmteam/lvm2/-/archive/v2_03_41/lvm2-2.03.41.tar.gz",
+   sha3 = "0527df7ad9ef2d6f9ed381ad430099c5208820c342fc50b5e4c1c8579a268f4c",
    prep = "./configure",
    build = "make_noinstall",
    flags = {

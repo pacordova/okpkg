@@ -167,8 +167,8 @@ poppler-data = {
 };
 
 evince = {
-   url = "https://download.gnome.org/sources/evince/48/evince-48.1.tar.xz",
-   sha3 = "13196ca9118f60d0ff401f179377a301ee086c5e36bd5351fffc36698dcce0ed",
+   url = "https://download.gnome.org/sources/evince/48/evince-48.4.tar.xz",
+   sha3 = "8ac00ddc9cdf40c50df2c62f02cfb76981c84547d2b9aedd0844916fc662fdc1",
    build = "meson",
    flags = {
       "-D{gspell,keyring}=disabled",

@@ -20,8 +20,9 @@ _cksum_gh(){
 _cksum_gl(){
   git clone --depth 1 --branch "$2" "$1"
   git -C ${1##*/} verify-tag "$2" || exit 1
-  git -C ${1##*/} archive --format=tar --prefix=${1##*/}-${2}/ "$2" \
+  git -C ${1##*/} archive --format=tar --prefix=${1##*/}-${2}-$(git -C ${1##*/} rev-parse HEAD)/ "$2" \
   | gzip -n > ${1##*/}-${2}.tar.gz
+  cp -f ${1##*/}-${2}.tar.gz /tmp
 }
 
 _cksum_signal(){
@@ -38,8 +39,8 @@ _cksum_signal(){
 
 cd "$tempdir"
 
-_cksum_signal 8.10.0
-#_cksum_gl https://gitlab.com/lvmteam/lvm2 v2_03_40
+#_cksum_signal 8.10.0
+_cksum_gl https://gitlab.com/lvmteam/lvm2 v2_03_41
 #_cksum_gh https://github.com/vim/vim v9.1.1980
 #_cksum_gh https://github.com/vcrhonek/hwdata v0.407
 #_cksum_gh https://github.com/yshui/picom v13

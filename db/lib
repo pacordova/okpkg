@@ -1,6 +1,7 @@
+
 libusb = {
-   url = "https://github.com/libusb/libusb/releases/download/v1.0.29/libusb-1.0.29.tar.bz2",
-   sha3 = "e4e8974707ce3055e30ac1a540cd23937939cb856bbe02270404065d4b7c650c",
+   url = "https://github.com/libusb/libusb/releases/download/v1.0.30/libusb-1.0.30.tar.bz2",
+   sha3 = "0d6436173c4ddd3c977ae2c429e31eccaf5a092e70d7ac7018fe6a4eae3282c8",
    build = "./configure",
 };
 

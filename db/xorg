@@ -290,8 +290,8 @@ libvdpau = {
 };
 
 mesa = {
-   url = "https://mesa.freedesktop.org/archive/mesa-26.1.0.tar.xz",
-   sha3 = "b55c408a2c1b50022e13d86e7acb449fb64ef7b88da0c357dfd6589bf3b9989c",
+   url = "https://mesa.freedesktop.org/archive/mesa-26.1.1.tar.xz",
+   sha3 = "466567df35f773d95bbee9835fd0d37e604cc2ad9a26872e6df0cfeb16e73300",
    build = "meson",
    flags = {
       "-Dplatforms=x11",
@@ -383,8 +383,8 @@ xorg-xdriinfo = {
 };
 
 xorg-xev = {
-   url = "https://x.org/pub/individual/app/xev-1.2.6.tar.xz",
-   sha3 = "83b20fc2d3ad6c13d9611361d27e0cb8544cddbb2cc4dccaf9a919d67aa4325b",
+   url = "https://x.org/pub/individual/app/xev-1.2.7.tar.xz",
+   sha3 = "afca1ef2c614f650f28f3e83d866f73ef00473869cfc1bffcd52b673bc277dad",
    build = "./configure",
 };
 
