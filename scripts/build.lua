@@ -1,4 +1,4 @@
-#!/bin/env lua
+#!/bin/lua
 
 local okpath = "/usr/okpkg"
 local pkgdir = "/var/cache/packages"
@@ -7,7 +7,7 @@ local pkgdir = "/var/cache/packages"
 os.execute(string.format("cd %s && make && make install", okpath))
 
 -- Imports
-dofile("/usr/bin/okpkg")
+dofile("/bin/okpkg")
 
 local ok = require("okutils")
 
@@ -24,7 +24,7 @@ os.execute("localedef -i en_US -f UTF-8      en_US.UTF-8 2>/dev/null ||:")
 
 -- Bootstrap meson
 download("meson")
-symlink(string.format("%s/sources/meson/meson.py", okpath), "/usr/bin/meson")
+symlink(string.format("%s/sources/meson/meson.py", okpath), "/bin/meson")
 emerge("samurai")
 
 -- Build core system
@@ -48,7 +48,7 @@ purge("_perl")
 purge("_python3")
 purge("samurai")
 os.remove("samurai-1.2-amd64.tar.lz")
-os.remove("/usr/bin/meson")
+os.remove("/bin/meson")
 os.rename("bash-5.3-amd64.tar.lz", "bash-5.3.009-amd64.tar.lz")
 os.rename("readline-8.3-amd64.tar.lz", "readline-8.3.003-amd64.tar.lz")
 mkdir("a")

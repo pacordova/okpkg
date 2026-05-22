@@ -8,7 +8,7 @@
 
 oldpwd=`pwd`
 tempdir=`mktemp -d`
-curl='/usr/bin/curl --silent --remote-name-all'
+curl='/bin/curl --silent --remote-name-all'
 
 _cksum_gh(){
   git clone --depth 1 --branch "$2" "$1"

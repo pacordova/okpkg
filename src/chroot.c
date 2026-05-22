@@ -37,7 +37,7 @@ ok_chroot(lua_State *L)
     else {
         /* env */
         clearenv();
-        setenv("PATH", "/usr/bin:/usr/sbin", 1);
+        setenv("PATH", "/bin", 1);
         setenv("HOME", "/root", 1);
         setenv("USER", "root", 1);
         setenv("LC_ALL", "C", 1);

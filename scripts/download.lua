@@ -1,6 +1,6 @@
-#!/bin/env lua
+#!/bin/lua
 
-dofile("/usr/bin/okpkg")
+dofile("/bin/okpkg")
 
 local unpack = unpack or table.unpack
 local ok = require("okutils")

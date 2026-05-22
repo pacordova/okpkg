@@ -1,4 +1,4 @@
-#!/bin/env lua
+#!/bin/lua
 
 -- Imports
 local unpack = unpack or table.unpack
@@ -19,7 +19,7 @@ local function install(x) local fp
    os.execute(string.format("tar -C $destdir -xhf %s", fp:read("*a")))
    fp:close()
    if x == "iputils" then
-      os.execute("setcap cap_net_raw+p $destdir/usr/bin/ping")
+      os.execute("setcap cap_net_raw+p $destdir/bin/ping")
    end
 end
 
@@ -100,19 +100,17 @@ while #arg > 0 do
    for i=1,#_G[arg[1]] do install(_G[arg[1]][i]) end
    if arg[1] == "minimal" then 
       os.execute [[
-         cp -p /var/lib/okpkg/okutils.so $destdir/var/lib/okpkg
-         cp -p /usr/bin/okpkg $destdir/usr/bin
-         rm -fr $destdir/var/lib/okpkg/{download,packages}
-         rm -fr $destdir/usr/share/{i18n,man,pkgconfig}
-         rm -fr $destdir/usr/lib64/{*.a,*.o,pkgconfig,gconv}
+         cp -f /bin/okpkg $destdir/bin
+         rm -fr $destdir/usr/share/{i18n,pkgconfig}
+         rm -fr $destdir/lib64/{pkgconfig,gconv}
          rm -fr $destdir/usr/include
-         rm -f $destdir/etc/dinit.d/boot.d/*
-         rm -f $destdir/usr/bin/localedef
-         rm -f $destdir/usr/bin/{pcre2-config,pcre2grep,pcre2test}
-         rm -f $destdir/usr/share/man/man1/{pcre2-config,pcre2grep,pcre2test}.1
-         rm -f $destdir/usr/bin/{openssl,ocspcheck}
-         rm -f $destdir/usr/share/man/man1/openssl.1
-         rm -f $destdir/usr/share/man/man8/ocspcheck.8
+         rm -f  $destdir/lib64/*.[ao]
+         rm -f  $destdir/bin/{localedef,ocspcheck,openssl}
+         rm -f  $destdir/usr/man/*1/openssl.1
+         rm -f  $destdir/usr/man/*8/ocspcheck.8
+         rm -f  $destdir/bin/pcre2{grep,test,-config}
+         rm -f  $destdir/usr/man/*1/pcre2{grep,test,-config}.1
+         rm -fr $destdir/usr/man
       ]]
    end
    table.remove(arg, 1)

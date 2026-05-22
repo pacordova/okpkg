@@ -1,4 +1,4 @@
-#!/bin/env lua
+#!/bin/lua
 
 -- Imports
 unpack = unpack or table.unpack

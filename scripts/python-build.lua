@@ -1,8 +1,8 @@
-#!/bin/env lua
+#!/bin/lua
 
 -- Imports
 unpack = unpack or table.unpack
-local C = dofile("/usr/bin/okpkg")
+local C = dofile("/bin/okpkg")
 local ok = require("okutils")
 
 local function install_all(X)

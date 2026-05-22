@@ -1,4 +1,4 @@
-#!/bin/env lua
+#!/bin/lua
 
 local x
 

@@ -1,4 +1,4 @@
-#!/bin/env lua
+#!/bin/lua
 
 -- Bootstrap
 os.execute(("make -C %s install"):format(arg[0]:match("(.*)/.-/.-") or ".."))
@@ -7,7 +7,7 @@ unpack = unpack or table.unpack
 
 -- Imports
 local ok = require("okutils")
-local C = dofile("/usr/bin/okpkg")
+local C = dofile("/bin/okpkg")
 
 -- Config
 local sysconfdir = "/etc"
@@ -75,26 +75,26 @@ os.execute("fc-cache")
 os.execute("update-desktop-database")
 os.execute("update-mime-database /usr/share/mime")
 os.execute("gdk-pixbuf-query-loaders --update-cache")
-os.execute("setcap cap_net_raw+p /usr/bin/ping")
-os.execute("chown root:messagebus /usr/lib64/dbus-daemon-launch-helper")
+os.execute("setcap cap_net_raw+p /bin/ping")
+os.execute("chown root:messagebus /lib64/dbus-daemon-launch-helper")
 
 -- Set XFCE default terminal
-local fp = io.open("/usr/bin/xfce4-terminal", 'w')
+local fp = io.open("/bin/xfce4-terminal", 'w')
 fp:write [[
 #!/bin/sh
-/usr/bin/st -e tmux new-session -A
+/bin/st -e tmux new-session -A
 ]]
 fp:close()
-os.execute("chmod 755 /usr/bin/xfce4-terminal")
+os.execute("chmod 755 /bin/xfce4-terminal")
 
 -- apulse firefox
-local fp = io.open("/usr/bin/firefox", 'w')
+local fp = io.open("/bin/firefox", 'w')
 fp:write [[
 #!/bin/sh
-/usr/bin/apulse /usr/lib64/firefox/firefox
+/bin/apulse /lib64/firefox/firefox
 ]]
 fp:close()
-os.execute("chmod 755 /usr/bin/firefox")
+os.execute("chmod 755 /bin/firefox")
 
 -- tz
 ok.symlink(("%s/%s"):format(tzpath, tz), ("%s/timezone"):format(sysconfdir))

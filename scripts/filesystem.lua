@@ -1,4 +1,4 @@
-#!/bin/env lua
+#!/bin/lua
 
 local fp, ok
 
@@ -20,7 +20,6 @@ ok.mkdir("./etc")
 ok.mkdir("./etc/default")
 ok.mkdir("./etc/ssl")
 ok.mkdir("./etc/ssl/certs")
-ok.mkdir("./lib")
 ok.mkdir("./lib64")
 ok.mkdir("./lib64/locale")
 ok.mkdir("./lib64/pkgconfig")
@@ -66,8 +65,9 @@ ok.symlink("bash", "bin/sh")
 ok.symlink("pigz", "bin/gzip")
 ok.symlink("/proc/self/mounts", "./etc/mtab")
 ok.symlink("./var/home", "./home")
-ok.symlink("./lib64", "lib")
-ok.symlink("./bin", "sbin")
+--ok.symlink("./lib64", "lib")
+--ok.symlink("./bin", "sbin")
+ok.mkdir("./lib")
 
 ------------------
 -- System Files --
@@ -96,24 +96,26 @@ fp:close()
 --------------------------------------------------------------------------------
 fp = io.open("./etc/config.site", "w")
 fp:write([[
-[ "$bindir"         = '${exec_prefix}/bin' ]     && bindir=/bin
-[ "$libdir"         = '${exec_prefix}/lib' ]     && libdir=/lib64
-[ "$libexecdir"     = '${exec_prefix}/libexec' ] && libexecdir=/usr/libexec
-[ "$localstatedir"  = '${prefix}/var' ]          && localstatedir=/var
-[ "$mandir"         = '${datarootdir}/man' ]     && mandir=/usr/man
-[ "$runstatedir"    = '${localstatedir}/run' ]   && runstatedir=/run
-[ "$sbindir"        = '${exec_prefix}/sbin' ]    && sbindir=/bin
-[ "$sharedstatedir" = '${prefix}/com' ]          && sharedstatedir=/var/com
-[ "$sysconfdir"     = '${prefix}/etc' ]          && sysconfdir=/etc
-[ -z ${enable_debug+x} ]                         && enable_debug=no
-[ -z ${enable_nls+x} ]                           && enable_nls=no
-[ -z ${enable_pic+x} ]                           && enable_pic=yes
-[ -z ${enable_rpath+x} ]                         && enable_rpath=no
-[ -z ${enable_shared+x} ]                        && enable_shared=yes
-[ -z ${enable_static+x} ]                        && enable_static=no
-[ -z ${enable_tests+x} ]                         && enable_tests=no
-[ -z ${enable_werror+x} ]                        && enable_werror=no
-[ -z ${with_pic+x} ]                             && with_pic=yes
+[ -z ${with_pic+x}                             ] && with_pic=yes
+[ -z ${enable_werror+x}                        ] && enable_werror=no
+[ -z ${enable_tests+x}                         ] && enable_tests=no
+[ -z ${enable_static+x}                        ] && enable_static=no
+[ -z ${enable_shared+x}                        ] && enable_shared=yes
+[ -z ${enable_rpath+x}                         ] && enable_rpath=no
+[ -z ${enable_pic+x}                           ] && enable_pic=yes
+[ -z ${enable_nls+x}                           ] && enable_nls=no
+[ -z ${enable_debug+x}                         ] && enable_debug=no
+[ '${prefix}/var'          = "$localstatedir"  ] && localstatedir=/var
+[ '${prefix}/include'      = "$includedir"     ] && includedir=/usr/include
+[ '${prefix}/etc'          = "$sysconfdir"     ] && sysconfdir=/etc
+[ '${prefix}/com'          = "$sharedstatedir" ] && sharedstatedir=/var/com
+[ '${localstatedir}/run'   = "$runstatedir"    ] && runstatedir=/run
+[ '${exec_prefix}/sbin'    = "$sbindir"        ] && sbindir=/bin
+[ '${exec_prefix}/libexec' = "$libexecdir"     ] && libexecdir=/usr/libexec
+[ '${exec_prefix}/lib'     = "$libdir"         ] && libdir=/lib64
+[ '${exec_prefix}/bin'     = "$bindir"         ] && bindir=/bin
+[ '${datarootdir}/man'     = "$mandir"         ] && mandir=/usr/man
+[ '${datarootdir}/info'    = "$infodir"        ] && infodir=/usr/info
 :
 ]])
 fp:close()
@@ -154,13 +156,13 @@ fp:close()
 fp = io.open("./etc/passwd", "w")
 fp:write([[
 root::0:0:root:/root:/bin/bash
-bin:x:1:1:bin:/dev/null:/usr/bin/false
-daemon:x:6:6:Daemon User:/dev/null:/usr/bin/false
-atd:x:17:17:atd daemon:/dev/null:/usr/bin/false
-messagebus:x:18:18:D-Bus Message Daemon User:/run/dbus:/usr/bin/false
-uuidd:x:80:80:UUID Generation Daemon User:/dev/null:/usr/bin/false
-ntp:x:87:87:Network Time Protocol:/var/empty:/usr/bin/false
-nobody:x:99:99:Unprivileged User:/dev/null:/usr/bin/false
+bin:x:1:1:bin:/dev/null:/bin/false
+daemon:x:6:6:Daemon User:/dev/null:/bin/false
+atd:x:17:17:atd daemon:/dev/null:/bin/false
+messagebus:x:18:18:D-Bus Message Daemon User:/run/dbus:/bin/false
+uuidd:x:80:80:UUID Generation Daemon User:/dev/null:/bin/false
+ntp:x:87:87:Network Time Protocol:/var/empty:/bin/false
+nobody:x:99:99:Unprivileged User:/dev/null:/bin/false
 ]])
 fp:close()
 --------------------------------------------------------------------------------

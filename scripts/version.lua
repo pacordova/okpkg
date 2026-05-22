@@ -1,4 +1,4 @@
-#!/bin/env lua
+#!/bin/lua
 
 unpack = unpack or table.unpack
 

@@ -1,20 +1,21 @@
-prefix     = /usr
+bindir     = /bin
 sysconfdir = /etc
-bindir     = $(prefix)/bin
 
-CC = /usr/bin/gcc -std=gnu99
-CXX = /usr/bin/g++
-CFLAGS = -O2
+CC  = gcc -std=gnu99
+CXX = g++
+
+CFLAGS   = -O2
+CXXFLAGS = -O2
+
 LDFLAGS = -lcrypto
-LUA_PATH != lua -e "print(package.path:match('(.-)/%?.lua;'))"
-LUA_CPATH != lua -e "print(package.cpath:match('(.-)/%?.so;'))"
 
+LUA_PATH  != lua -e "print(package.path:match('(.-)/%?.lua;'))"
+LUA_CPATH != lua -e "print(package.cpath:match('(.-)/%?.so;'))"
 
 objs = src/basename.o src/chdir.o src/chroot.o src/mkdir.o src/okutils.o \
        src/pwd.o src/setenv.o src/sha3sum.o src/symlink.o src/remove_all.o \
        src/exists.o src/directory_iterator.o
        
-
 src/okutils.so: $(objs)
 	$(CXX) $(CFLAGS) -shared -o $@ src/*.o $(LDFLAGS)
 
@@ -24,7 +25,7 @@ src/okutils.so: $(objs)
 
 .SUFFIXES: .cc .o
 .cc.o:
-	$(CXX) $(CFLAGS) -fpic -o $@ -c $<
+	$(CXX) $(CXXFLAGS) -fpic -o $@ -c $<
 
 install: install-strip
 install-strip: src/okutils.so
@@ -35,8 +36,8 @@ install-strip: src/okutils.so
 	cp -f scripts/config.lua $(DESTDIR)$(sysconfdir)/okpkg.conf
 
 uninstall: clean
-	rm -f $(DESTDIR)$(prefix)/bin/okpkg
-	rm -f $(DESTDIR)$(prefix)$(LUA_CPATH)/okutils.so
+	rm -f $(DESTDIR)$(bindir)/bin/okpkg
+	rm -f $(DESTDIR)$(LUA_CPATH)/okutils.so
 
 clean:
 	find . -name \*~   -delete

@@ -42,7 +42,7 @@ file with the name of the package, and patches it.
 
 Below is a non-exhaustive list for why okpkg patches certain packages:
    * The patch is recommended by LFS/BLFS
-   * Set the libdir to be /usr/lib64
+   * Set the libdir to be /lib64
    * Ensure gcc-ada is reproducible by respecting SOURCE_DATE_EPOCH
    * Python needs to be patched to use libressl instead of openssl
    * Make shared library for lua

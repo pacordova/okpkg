@@ -1,6 +1,6 @@
-#!/bin/env lua
+#!/bin/lua
 
-dofile("/usr/bin/okpkg")
+dofile("/bin/okpkg")
 
 -- Imports 
 unpack = unpack or table.unpack
@@ -9,10 +9,10 @@ local ok = require("okutils")
 local remove_all = ok.remove_all
 
 -- Cleanup
-remove_all("/usr/lib64/python3.14")
-os.remove("/usr/bin/pyproject-build")
-os.remove("/usr/bin/wheel")
-os.remove("/usr/bin/meson")
+remove_all("/lib64/python3.14")
+os.remove("/bin/pyproject-build")
+os.remove("/bin/wheel")
+os.remove("/bin/meson")
 os.remove("/usr/share/man/man1/meson.1")
 os.remove("/usr/share/polkit-1/actions/com.mesonbuild.install.policy")
 

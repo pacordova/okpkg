@@ -9,7 +9,7 @@ if [ ! -d /opt/gnat ]; then
 fi
 
 # build gcc11 with ada and d support
-export PATH=/opt/gnat/bin:/usr/bin:/usr/sbin
+export PATH=/opt/gnat/bin:/bin
 okpkg download gcc11
 okpkg build gcc11
 okpkg purge gcc
@@ -21,7 +21,7 @@ sed -e 's/c,c++/ada,c,c++,d,fortran,go,lto,m2,objc,obj-c++/' \
     -i "$DBPATH/base.db"
 
 # bootstrap gcc14
-export PATH=/usr/bin:/usr/sbin
+export PATH=/bin
 okpkg download gcc14
 okpkg build gcc14
 ./split-gcc.sh
