@@ -133,8 +133,9 @@ for i in buf:gmatch("\n([%w%-%+]-) = {.-;") do
 end
 
 -- Cleanup
-ok.chdir(os.getenv("destdir"))
-ok.remove_all("./usr/lib")
-ok.remove_all("./usr/lib64")
-os.remove("./lib")
-os.remove("./sbin")
+--ok.chdir(os.getenv("destdir"))
+--ok.remove_all("./usr/lib")
+--ok.remove_all("./usr/lib64")
+--ok.remove_all("./x86_64-unknown-linux-gnu")
+--os.remove("./lib")
+--os.remove("./sbin")
