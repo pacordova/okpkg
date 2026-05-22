@@ -108,7 +108,7 @@ fp:write([[
 [ '${prefix}/var'          = "$localstatedir"  ] && localstatedir=/var
 [ '${prefix}/include'      = "$includedir"     ] && includedir=/usr/include
 [ '${prefix}/etc'          = "$sysconfdir"     ] && sysconfdir=/etc
-[ '${prefix}/com'          = "$sharedstatedir" ] && sharedstatedir=/var/com
+[ '${prefix}/com'          = "$sharedstatedir" ] && sharedstatedir=/var/lib64
 [ '${localstatedir}/run'   = "$runstatedir"    ] && runstatedir=/run
 [ '${exec_prefix}/sbin'    = "$sbindir"        ] && sbindir=/bin
 [ '${exec_prefix}/libexec' = "$libexecdir"     ] && libexecdir=/usr/libexec
