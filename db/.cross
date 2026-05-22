@@ -19,7 +19,7 @@ binutils-pass1 = {
 };
 
 gcc-pass1 = {
-   fs = "/var/cache/ok/dist/gcc-16.1.0.tar.xz",
+   fs = "/var/cache/ok/dist/gcc-14.3.0.tar.xz",
    build = "../configure",
    flags = {
       "--target=x86_64-unknown-linux-gnu",
@@ -86,7 +86,7 @@ glibc = {
 };
 
 libstdcxx = {
-   fs = "/var/cache/ok/dist/gcc-16.1.0.tar.xz",
+   fs = "/var/cache/ok/dist/gcc-14.3.0.tar.xz",
    build = "../libstdc++-v3/configure",
    flags = {
       "--prefix=/usr",
@@ -453,7 +453,7 @@ binutils-pass2 = {
 };
 
 gcc-pass2 = {
-   fs = "/var/cache/ok/dist/gcc-16.1.0.tar.xz",
+   fs = "/var/cache/ok/dist/gcc-14.3.0.tar.xz",
    build = "../configure",
    flags = {
       "--build=$(../config.guess)",
