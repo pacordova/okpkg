@@ -493,7 +493,7 @@ gcc-pass2 = {
       tar -C mpfr --strip-components=1 -xf /var/cache/ok/dist/mpfr-4.2.2.tar.xz
       tar -C mpc  --strip-components=1 -xf /var/cache/ok/dist/mpc-1.4.1.tar.xz
       tar -C isl  --strip-components=1 -xf /var/cache/ok/dist/isl-0.27.tar.xz
-      #sed -i '330i #include <stdbool.h>' gcc/config/i386/i386.h
+      sed -i '330i #include <stdbool.h>' gcc/config/i386/i386.h
       sed -i '/thread_header =/s/@.*@/gthr-posix.h/' \
         {libgcc,libstdc++-v3/include}/Makefile.in
    ]]
