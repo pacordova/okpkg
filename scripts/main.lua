@@ -138,8 +138,9 @@ function query(x)
    for i in ok.directory_iterator(string.format("%s/db", C.okdir)) do
       if not buf and ok.basename(i):sub(1, 1) ~= "." then
          fp = io.open(i)
-         buf = fp:read("*a"):match("\n?[^%w_]" .. x .. "%s*=%s*({.-})%s*;")
+         buf = "\n" .. fp:read("*a")
          fp:close()
+         buf = buf:match("\n?[^%w_]" .. x .. "%s*=%s*({.-})%s*;")
       end
    end
    return load("return " .. buf)()

@@ -29,7 +29,7 @@ emerge("samurai")
 
 -- Build core system
 file = io.open(string.format("%s/db/base", okpath))
-buf = '\n' .. file:read("*a")
+buf = "\n" .. file:read("*a")
 file:close()
 for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do
    emerge(i)

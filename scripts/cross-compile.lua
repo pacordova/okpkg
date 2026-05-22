@@ -32,8 +32,9 @@ function query(x)
    local fp, buf
    x = x:gsub("%-", "%%-")
    fp = io.open(string.format("%s/db/.cross", C.okdir))
-   buf = fp:read("*a"):match("\n?[^%w_]" .. x .. "%s*=%s*({.-})%s*;")
+   buf = "\n" .. fp:read("*a")
    fp:close()
+   buf = buf:match("\n?[^%w_]" .. x .. "%s*=%s*({.-})%s*;")
    return load("return " .. buf)()
 end
 
@@ -125,7 +126,7 @@ dofile(C.okdir .. "/scripts/filesystem.lua")
 -- Build all packages in $okdir/db/.cross
 local fp, buf
 fp = io.open(C.okdir .. "/db/.cross")
-buf = '\n' .. fp:read('*a')
+buf = "\n" .. fp:read('*a')
 fp:close()
 for i in buf:gmatch("\n([%w%-%+]-) = {.-;") do 
    emerge(i) 

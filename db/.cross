@@ -1,4 +1,3 @@
-
 binutils-pass1 = {
    fs = "/var/cache/ok/dist/binutils-2.46.0.tar.lz",
    build = "../configure", 
