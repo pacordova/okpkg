@@ -19,7 +19,7 @@ binutils-pass1 = {
 };
 
 gcc-pass1 = {
-   fs = "/var/cache/ok/dist/gcc-14.3.0.tar.xz",
+   fs = "/var/cache/ok/dist/gcc-16.1.0.tar.xz",
    build = "../configure",
    flags = {
       "--target=x86_64-unknown-linux-gnu",
@@ -85,14 +85,14 @@ glibc = {
 };
 
 libstdcxx = {
-   fs = "/var/cache/ok/dist/gcc-14.3.0.tar.xz",
+   fs = "/var/cache/ok/dist/gcc-16.1.0.tar.xz",
    build = "../libstdc++-v3/configure",
    flags = {
       "--prefix=/usr",
       "--exec-prefix=/",
       "--host=x86_64-unknown-linux-gnu",
       "--build=$(../config.guess)",
-      "--with-gxx-include-dir=/tools/x86_64-unknown-linux-gnu/include/c++/14.3.0",
+      "--with-gxx-include-dir=/tools/x86_64-unknown-linux-gnu/include/c++/16.1.0",
       "--disable-libstdcxx-pch",
       "--disable-multilib",
       "--enable-clocale=gnu",
@@ -393,7 +393,7 @@ plzip = {
 };
 
 util-linux = {
-   fs = "/var/cache/ok/dist/util-linux-2.42.1.tar.xz", 
+   fs = "/var/cache/ok/dist/util-linux-2.42.1.tar.xz",
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -453,7 +453,7 @@ binutils-pass2 = {
 };
 
 gcc-pass2 = {
-   fs = "/var/cache/ok/dist/gcc-14.3.0.tar.xz",
+   fs = "/var/cache/ok/dist/gcc-16.1.0.tar.xz",
    build = "../configure",
    flags = {
       "--build=$(../config.guess)",
