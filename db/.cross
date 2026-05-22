@@ -28,6 +28,7 @@ gcc-pass1 = {
       "--with-newlib=yes",
       "--without-headers",
       "--with-sysroot=$destdir",
+      "--disable-fixincludes",
       "--disable-gnu-indirect-function",
       "--disable-libatomic",
       "--disable-libgomp",
@@ -36,9 +37,10 @@ gcc-pass1 = {
       "--disable-libssp",
       "--disable-libstdcxx",
       "--disable-libvtv",
-      "--disable-multilib",
       "--disable-nls",
+      "--disable-shared",
       "--disable-werror",
+      "--disable-multilib",
       "--disable-bootstrap",
       "--enable-checking=release",
       "--enable-clocale=gnu",
@@ -47,13 +49,10 @@ gcc-pass1 = {
       "--enable-default-ssp",
       "--enable-initfini-array",
       "--enable-languages=c,c++",
-      "--disable-shared",
-      "--disable-threads",
+      "--enable-threads=single",
       "--enable-tls",
       "--with-linker-hash-style=gnu",
       "--without-included-gettext",
-      "--without-system-zlib",
-      "--without-zstd",
    },
    prep = [[
       mkdir gmp mpfr mpc isl
@@ -93,10 +92,11 @@ libstdcxx = {
       "--exec-prefix=/",
       "--host=x86_64-unknown-linux-gnu",
       "--build=$(../config.guess)",
-      "--with-gxx-include-dir=/tools/x86_64-unknown-linux-gnu/include/c++/16.1.0",
-      "--enable-clocale=gnu",
-      "--disable-{nls,multilib}",
+      "--with-gxx-include-dir=/tools/x86_64-unknown-linux-gnu/include/c++/14.3.0",
       "--disable-libstdcxx-pch",
+      "--disable-multilib",
+      "--enable-clocale=gnu",
+      "--enable-tls",
    },
    prep = [[
       mkdir gmp mpfr mpc isl
@@ -463,6 +463,7 @@ gcc-pass2 = {
       "--exec-prefix=/",
       "--libexecdir=/usr/libexec",
       "--with-build-sysroot=$destdir",
+      "--disable-fixincludes",
       "--disable-gnu-indirect-function",
       "--disable-libatomic",
       "--disable-libgomp",
@@ -472,8 +473,6 @@ gcc-pass2 = {
       "--disable-libstdcxx-pch",
       "--disable-libvtv",
       "--disable-multilib",
-      "--disable-nls",
-      "--disable-werror",
       "--disable-bootstrap",
       "--enable-checking=release",
       "--enable-clocale=gnu",
@@ -482,13 +481,10 @@ gcc-pass2 = {
       "--enable-default-ssp",
       "--enable-initfini-array",
       "--enable-languages=c,c++",
-      "--enable-shared",
       "--enable-threads=posix",
       "--enable-tls",
       "--with-linker-hash-style=gnu",
       "--without-included-gettext",
-      "--without-system-zlib",
-      "--without-zstd",
       "LDFLAGS_FOR_TARGET=-L$(realpath x86_64-unknown-linux-gnu/libgcc)",
    },
    prep = [[
@@ -497,7 +493,7 @@ gcc-pass2 = {
       tar -C mpfr --strip-components=1 -xf /var/cache/ok/dist/mpfr-4.2.2.tar.xz
       tar -C mpc  --strip-components=1 -xf /var/cache/ok/dist/mpc-1.4.1.tar.xz
       tar -C isl  --strip-components=1 -xf /var/cache/ok/dist/isl-0.27.tar.xz
-      sed -i '330i #include <stdbool.h>' gcc/config/i386/i386.h
+      #sed -i '330i #include <stdbool.h>' gcc/config/i386/i386.h
       sed -i '/thread_header =/s/@.*@/gthr-posix.h/' \
         {libgcc,libstdc++-v3/include}/Makefile.in
    ]]
