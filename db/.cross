@@ -485,7 +485,7 @@ gcc-pass2 = {
       "--enable-tls",
       "--with-linker-hash-style=gnu",
       "--without-included-gettext",
-      "LDFLAGS_FOR_TARGET=-L$PWD/x86_64-unknown-linux-gnu/libgcc)",
+      "LDFLAGS_FOR_TARGET=-L$PWD/x86_64-unknown-linux-gnu/libgcc",
    },
    prep = [[
       mkdir gmp mpfr mpc isl
