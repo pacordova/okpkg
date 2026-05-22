@@ -160,7 +160,6 @@ ncurses = {
    post = [[
       ln -sf libncursesw.so $destdir/lib64/libncurses.so
       sed -i 's/^#if.*XOPEN.*$/#if 1/' $destdir/usr/include/curses.h
-      #rm -f $destdir/usr/lib/terminfo
    ]]
 };
 
