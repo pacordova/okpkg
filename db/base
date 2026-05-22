@@ -178,8 +178,6 @@ binutils = {
    sha3 = "0e1556b41b4f842ca525e2bc33e248314559ca8836992ad054dd3c4317d1034b",
    build = "./configure",
    flags = {
-      "--disable-nls",
-      "--disable-werror",
       "--enable-64-bit-bfd",
       "--enable-default-execstack=no",
       "--enable-default-hash-style=gnu",
