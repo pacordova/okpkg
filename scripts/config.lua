@@ -47,7 +47,6 @@ local cflags = {
    "-fstack-protector-strong",
    "-fstack-clash-protection",
    "-ftrivial-auto-var-init=zero",
-   "-Wl,-z,relro,-z,now",
    "-pipe",
 }
 
