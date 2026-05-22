@@ -1,4 +1,4 @@
-#!/usr/bin/env lua
+#!/bin/env lua
 
 local okpath = "/usr/okpkg"
 local pkgdir = "/var/cache/packages"

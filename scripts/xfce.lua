@@ -1,4 +1,4 @@
-#!/usr/bin/env lua
+#!/bin/env lua
 
 -- Bootstrap
 os.execute(("make -C %s install"):format(arg[0]:match("(.*)/.-/.-") or ".."))

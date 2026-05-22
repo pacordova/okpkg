@@ -1,4 +1,4 @@
-#!/bin/lua
+#!/bin/env lua
 
 -- This script is cross compilation of GNU and other tools.
 -- It follows LFS closely, but not exactly.
