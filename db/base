@@ -60,6 +60,7 @@ glibc = {
    build = "../configure",
    flags = {
       "--enable-kernel=$(uname -r | cut -d . -f 1,2)",
+      "--enable-bind-now",
       "--enable-stack-protector=strong",
       "--disable-nscd",
       "--with-headers=/usr/include",
