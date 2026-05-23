@@ -76,6 +76,7 @@ glibc = {
       "--host=x86_64-unknown-linux-gnu",
       "--build=$(../scripts/config.guess)",
       "--enable-kernel=$(uname -r | cut -d . -f 1,2)",
+      "--enable-stack-protector=strong",
       "--disable-nscd",
       "--with-headers=$destdir/usr/include",
       "libc_cv_slibdir=/lib64",
