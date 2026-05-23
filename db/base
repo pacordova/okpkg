@@ -246,7 +246,7 @@ gcc14 = {
       "--disable-libstdcxx-pch",
       "--disable-multilib",
       "--enable-bootstrap",
-      "--enable-checking=release",
+      "--enable-checking=assert",
       "--enable-clocale=gnu",
       "--enable-__cxa_atexit",
       "--enable-default-pie",
