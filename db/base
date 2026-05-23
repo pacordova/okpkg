@@ -751,11 +751,15 @@ sysklogd = {
 };
 
 dinit = {
-   url = "https://github.com/davmac314/dinit/releases/download/v0.20.0/dinit-0.20.0.tar.xz",
-   sha3 = "a84620a64d0b0d4916a0b6d3242b735856efab03401e9ec5f613b5150b14fc92",
-   build = "make",
-   flags = { "BUILD_SHUTDOWN=yes", "SBINDIR=/usr/bin" },
-   prep = [[ sed 's|"/lib/dinit.d"|"/lib64/dinit.d"|' -i src/options-processing.cc ]]
+   url = "https://github.com/davmac314/dinit/archive/v0.22.0/dinit-0.22.0.tar.gz",
+   sha3 = "841ecfbf840be66caf6bfb8deb55775282c787dc26ae753c4485762c94fabe2c",
+   build = "./configure",
+   flags = { 
+      "--bindir=/bin",
+      "--mandir=/usr/man",
+      "--sbindir=/bin",
+      "--enable-shutdown"
+   },
 };
 
 dbus = {

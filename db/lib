@@ -80,6 +80,9 @@ alsa-lib = {
    url = "https://alsa-project.org/files/pub/lib/alsa-lib-1.2.15.3.tar.bz2",
    sha3 = "fee6cd0697b00550565d862076226f78bf221875bd9f3b236aade909b8858979",
    build = "./configure",
+   flags = {
+      "--without-debug",
+   }
 };
 
 alsa-utils = {
@@ -87,9 +90,13 @@ alsa-utils = {
    sha3 = "85de88073a5784ccad41f66235d66da42cdad25a7a6fffd4c7f18610975c5cf4",
    build = "./configure",
    flags = {
-      "--with-udev-rules-dir=/usr/lib64/udev/rules.d",
-      "--disable-{alsaconf,bat,xmlto}",
+      "--disable-alsaconf",
+      "--disable-bat",
+      "--disable-xmlto",
+      "--with-alsactl-lock-dir=/run/lock",
+      "--with-asound-state-dir=/var/state",
       "--with-curses=ncursesw",
+      "--with-udev-rules-dir=/lib64/udev/rules.d",
    }
 };
 
