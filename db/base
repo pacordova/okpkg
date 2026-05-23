@@ -1,24 +1,21 @@
-_file = {
-   url = query("file")["url"],
-   sha3 = query("file")["sha3"],
-   sha3 = "4a1b431335ee9f08e2554b7ac41998bbdc4ca8588f2f79f85e1a28ea972c9d38",
-   build = "./configure",
-};
-
 _python3 = {
-   url = query("python3")["url"],
-   sha3 = query("python3")["sha3"],
+   url = "https://www.python.org/ftp/python/3.14.0/Python-3.14.0.tar.xz",
+   sha3 = "e11818475734b8b1f6ddd6999629498440b44de4f983a9db44fc318e62de2834",
    build = "./configure",
    flags = {
+      "--prefix=/var",
+      "--libdir=/var/lib64",
       "--with-platlibdir=lib64",
       "--without-{doc-strings,ensurepip,system-expat}",
+      "CFLAGS_NODIST=-fno-semantic-interposition",
+      "LDFLAGS_NODIST=-fno-semantic-interposition",
    },
    post = [[
-      cd "$destdir/usr/lib64/python"*
+      cd "$destdir/var/lib64/python"*
       rm -fr test ./*/test ./*/tests
-      rm -fr pydoc* idlelib turtle* config-*
-      cd "$destdir/usr/bin"
-      rm -f pydoc* idle*
+      rm -fr config-* idlelib turtle* pydoc*
+      cd "$destdir/bin"
+      rm -f idle* pydoc*
    ]]
 };
 
@@ -29,18 +26,18 @@ bison = {
 };
 
 _perl = {
-   url = query("perl")["url"],
-   sha3 = query("perl")["sha3"],
+   url = "https://www.cpan.org/src/5.0/perl-5.42.2.tar.xz",
+   sha3 = "680780c9743fbf551d32f9fd04ee7028751896faffeddf47cf2ac38a74f54dc7",
    build = "./configure.gnu",
    flags= {
-      "-Dvendorprefix=/usr",
+      "-Dprefix=/",
       "-Duseshrplib",
-      "-D{privlib,archlib}=/usr/lib64/perl5/core_perl",
-      "-D{sitelib,sitearch}=/usr/lib64/perl5/site_perl",
-      "-D{vendorlib,vendorarch}=/usr/lib64/perl/vendor_perl",
-      "-Dscriptdir=/usr/bin",
-      "-Dman1dir=/usr/share/man/man1",
-      "-Dman3dir=/usr/share/man/man3",
+      "-D{privlib,archlib}=/var/lib64/perl5/core_perl",
+      "-D{sitelib,sitearch}=/var/lib64/perl5/site_perl",
+      "-D{vendorlib,vendorarch}=/var/lib64/perl/vendor_perl",
+      "-Dscriptdir=/bin",
+      "-Dman1dir=/usr/man/man1",
+      "-Dman3dir=/usr/man/man3",
    },
    post = [[
       find $destdir -name \*.pod       -exec rm -f {} +
@@ -50,7 +47,7 @@ _perl = {
       find $destdir -name Change\*     -exec rm -f {} +
       find $destdir -name \*.bs        -exec rm -f {} +
       find $destdir -name \*.0 -type f -exec rm -f {} +
-      find $destdir/usr/lib64  -type f -exec chmod 644 {} +
+      find $destdir/var/lib64  -type f -exec chmod 644 {} +
    ]]
 };
 
@@ -74,32 +71,36 @@ zlib = {
    url = "https://zlib.net/zlib-1.3.2.tar.xz",
    sha3 = "d60ffcfad05908d1efb932177340d2c80c9db123cf9eadff5657945f214a2214",
    build = "./configure",
-   flags = { "--libdir=/usr/lib64" },
-   post = [[ rm -f $destdir/usr/lib64/libz.a ]]
+   flags = { 
+      "--eprefix=/", 
+      "--libdir=/lib64", 
+      "--mandir=/usr/man",
+      "--prefix=/usr", 
+   },
 };
 
 bzip2 = {
    url = "https://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz",
    sha3 = "34400e535a9018e93fc04f509811df340e8f9b48b06467b9c025400ac0a4898d",
    build = "make",
-   flags = { "PREFIX=$destdir/usr" },
+   flags = { "PREFIX=$destdir" },
    prep = [[
       sed -e 's:\(ln -s -f \)$(PREFIX)/bin/:\1:' \
-          -e 's:(PREFIX)/man:(PREFIX)/share/man:g' \
+          -e 's:(PREFIX)/man:(PREFIX)/usr/man:g' \
           -e 's:(PREFIX)/lib:(PREFIX)/lib64:g' \
           -i Makefile
       make -f Makefile-libbz2_so
       make clean
    ]],
    post = [[
-      cp -f  libbz2.so.*  $destdir/usr/lib64
-      cp -f  bzip2-shared $destdir/usr/bin/bzip2
-      ln -sf libbz2.so.1.0.8 $destdir/usr/lib64/libbz2.so
-      ln -sf libbz2.so.1.0.8 $destdir/usr/lib64/libbz2.so.1
-      ln -sf libbz2.so.1.0.8 $destdir/usr/lib64/libbz2.so.1.0
-      ln -sf bzip2 $destdir/usr/bin/bunzip2
-      ln -sf bzip2 $destdir/usr/bin/bzcat
-      rm -f  $destdir/usr/lib64/libbz2.a
+      cp -f  libbz2.so.*  $destdir/lib64
+      cp -f  bzip2-shared $destdir/bin/bzip2
+      ln -sf libbz2.so.1.0.8 $destdir/lib64/libbz2.so
+      ln -sf libbz2.so.1.0.8 $destdir/lib64/libbz2.so.1
+      ln -sf libbz2.so.1.0.8 $destdir/lib64/libbz2.so.1.0
+      ln -sf bzip2 $destdir/bin/bunzip2
+      ln -sf bzip2 $destdir/bin/bzcat
+      rm -f  $destdir/lib64/libbz2.a
    ]]
 };
 
@@ -108,7 +109,10 @@ lzlib = {
    sha3 = "439e7235e1fe227167c76f9f951ab922cc16af54e333808fa7b7271cf31e5808",
    build = "./configure",
    flags = {
-      "--libdir=/usr/lib64",
+      "--prefix=/usr",
+      "--exec-prefix=/",
+      "--libdir=/lib64",
+      "--mandir=/usr/man",
       "--enable-shared",
       "--disable-static",
    }
@@ -124,15 +128,24 @@ lz4 = {
    url = "https://github.com/lz4/lz4/releases/download/v1.10.0/lz4-1.10.0.tar.gz",
    sha3 = "334597ee49a286bb22065133a000792cb7191203eaed826b8f4681f48cad2512",
    build = "make",
-   flags = { "prefix=/usr", "libdir=/usr/lib64" }
+   flags = { 
+      "bindir=/bin",
+      "includedir=/usr/include",
+      "libdir=/lib64", 
+      "mandir=/usr/man",
+   }
 };
 
 zstd = {
    url = "https://github.com/facebook/zstd/releases/download/v1.5.7/zstd-1.5.7.tar.gz",
    sha3 = "8eaf8a9c9ed5c5ef7a3f1bc68f6e1ab254d8b5947ea9d55455f0a403fa006e6c",
    build = "make",
-   flags = { "prefix=/usr", "LIBDIR=/usr/lib64" },
-   post = [[ rm -f $destdir/usr/lib64/libzstd.a ]]
+   flags = { 
+      "bindir=/bin",
+      "includedir=/usr/include",
+      "libdir=/lib64", 
+      "mandir=/usr/man",
+   },
 };
 
 gperf = {
@@ -151,7 +164,9 @@ file = {
    url = "https://astron.com/pub/file/file-5.47.tar.gz",
    sha3 = "67b80afde4da7123463ed3758d0f9340852551da8dc507f61e515642ae793e57",
    build = "./configure",
-   flags = { "--enable-libseccomp" },
+   flags = { 
+      "--enable-libseccomp",
+   }
 };
 
 m4 = {
@@ -164,14 +179,12 @@ flex = {
    url = "https://github.com/westes/flex/releases/download/v2.6.4/flex-2.6.4.tar.gz",
    sha3 = "cde654d28148d09eca97574c4201307cf1a6a90e887b304bcd2006b5cd46b220",
    build = "./configure",
-   post = [[ ln -sf flex $destdir/usr/bin/lex ]]
 };
 
 pkgconf = {
    url = "https://distfiles.ariadne.space/pkgconf/pkgconf-2.5.1.tar.xz",
    sha3 = "ad9ac35e816135c83ee74e49cb68e51f8509fd31702a6bb168142ece1b030ef7",
    build = "./configure",
-   post = [[ ln -sf pkgconf $destdir/usr/bin/pkg-config ]]
 };
 
 binutils = {
@@ -200,7 +213,6 @@ gmp = {
    build = "./configure",
    flags = {
       "--enable-cxx",
-      "CC=c99",
    },
 };
 
@@ -208,7 +220,9 @@ mpfr = {
    url = "https://ftp.gnu.org/gnu/mpfr/mpfr-4.2.2.tar.xz",
    sha3 = "f900bec0f89f35bf5fa792079aaeea5705be2f5b965e014f7bc9663309d09e02",
    build = "./configure",
-   flags = { "--enable-thread-safe" }
+   flags = { 
+      "--enable-thread-safe",
+   }
 };
 
 libmpc = {
