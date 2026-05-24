@@ -147,7 +147,9 @@ function query(x)
 end
 
 function download(x)
-   local X = query(x)
+   local X, fp
+
+   X = query(x)
    X.dist = string.format("%s/%s", C.distdir, X.url:match("/([^/]*)$"))
 
    -- change mirrors
@@ -171,12 +173,10 @@ function download(x)
    
    -- Patch if file exists
    -- Note: symlink for temporary packages, or update patch infrastructure
-   local patchfile = io.open(string.format("/usr/okpkg/patches/%s.diff", x))
-   if patchfile then
-      io.popen("$patch", "w"):
-         write(patchfile:read("*a")):
-         close()
-      patchfile:close()
+   fp = io.open(string.format("/usr/okpkg/patches/%s.diff", x))
+   if fp then
+      io.popen("$patch", "w"):write(fp:read("*a")):close()
+      fp:close()
    end
 
    -- Set the mtime 
