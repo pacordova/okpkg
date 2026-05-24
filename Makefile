@@ -17,7 +17,7 @@ objs = src/basename.o src/chdir.o src/chroot.o src/mkdir.o src/okutils.o \
        src/exists.o src/directory_iterator.o
        
 src/okutils.so: $(objs)
-	$(CXX) $(CFLAGS) -shared -o $@ src/*.o $(LDFLAGS)
+	$(CXX) $(CXXFLAGS) -shared -o $@ src/*.o $(LDFLAGS)
 
 .SUFFIXES: .c .o
 .c.o:
