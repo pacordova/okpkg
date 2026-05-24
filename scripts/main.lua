@@ -300,11 +300,12 @@ function install(x)
 
    fp = io.popen("$tar -C / -h -xvf " .. x)
    buf = fp:read('*a')
-   io.close(fp)
+   fp:close()
 
    i = string.format("%s/%s", C.indexdir, ok.basename(x):match("(.+)-[n%d]"))
-   os.rename(i, i .. ".orig")
-   io.close(io.open(i, 'w'):write(buf))
+   fp = io.open(i)
+   if fp then fp:close(); os.rename(i, i .. ".orig") end
+   io.close(io.open(i, "w"):write(buf))
 
    os.execute("ldconfig")
 end
