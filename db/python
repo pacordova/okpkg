@@ -1,14 +1,14 @@
-python3 = {
+python = {
    url = "https://www.python.org/ftp/python/3.13.13/Python-3.13.13.tar.xz",
    sha3 = "0851d206c00df77a46d9e4fa2b90a880c537eaaf25087af9d510e0658db599ad",
    build = "./configure",
    flags = {
       "--prefix=/opt/python",
       "--enable-loadable-sqlite-extensions",
+      "--enable-shared",
       "--without-doc-strings",
       "--without-ensurepip",
       "--with-dbmliborder=gdbm:ndbm",
-      "--with-platlibdir=lib64",
       "--with-system-expat",
       "--with-tzpath=/usr/share/zoneinfo",
       "CONFIG_SITE=/dev/null",

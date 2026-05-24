@@ -6,19 +6,22 @@ dofile("/bin/okpkg")
 unpack = unpack or table.unpack
 local C = dofile("/etc/okpkg.conf")
 local ok = require("okutils")
-local remove_all = ok.remove_all
 
 -- Cleanup
-remove_all("/lib64/python3.14")
+ok.remove_all("/usr/lib64/python3.14")
+ok.remove_all("/opt/python")
 os.remove("/bin/pyproject-build")
 os.remove("/bin/wheel")
 os.remove("/bin/meson")
 os.remove("/usr/share/man/man1/meson.1")
 os.remove("/usr/share/polkit-1/actions/com.mesonbuild.install.policy")
 
+
 -- Bootstrap
-purge("python3")
-install(string.format("%s/python3-3.14.0-amd64.tar.lz", C["pkgdir"]))
+purge("python")
+install(C.pkgdir .. "/python-3.13.13-skylake.tar.lz")
+ok.symlink("/opt/python/bin/python3.13", "/bin/python3")
+ok.symlink("/opt/python/lib/libpython3.13.so.1.0", "/lib64/libpython3.13.so.1.0")
 
 purge("python-flit-core")
 download("python-flit-core")
@@ -59,3 +62,4 @@ purge("meson")
 download("meson")
 os.execute("python3 -m build -nx")
 os.execute("python3 -m installer dist/*whl")
+ok.symlink("/opt/python/bin/meson", "/bin/meson")

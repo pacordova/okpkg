@@ -186,10 +186,9 @@ function download(x)
    return x
 end
 
-function makepkg(path)
-   assert(ok.chdir(path) == 0)
-   os.remove(path .. ".tar.lz")
-   ok.setenv("pwd", ok.pwd())
+function makepkg(x)
+   assert(ok.chdir(x) == 0)
+   os.remove(x .. ".tar.lz")
    ok.setenv("SOURCE_DATE_EPOCH", mtime("."))
 
    -- Stripping
@@ -209,24 +208,24 @@ function makepkg(path)
       rm -fr usr/share/{info,doc,locale,gtk-doc}
       find . -name \*.pyc -delete
       find . -name \*.la -delete
-      $tar --mtime="@$SOURCE_DATE_EPOCH" \
-          --sort=name \
-          --owner=0 \
-          --group=0 \
-          --numeric-owner \
-          --use-compress-program=lzip \
-          --file=$pwd.tar.lz \
-          --create .
-      touch -hd "@$SOURCE_DATE_EPOCH" $pwd.tar.lz
+      $tar \
+         --mtime="@$SOURCE_DATE_EPOCH" \
+         --sort=name \
+         --owner=0 \
+         --group=0 \
+         --numeric-owner \
+         --use-compress-program=$lzip \
+         --file=$PWD.tar.lz \
+         --create .
+      touch -hd "@$SOURCE_DATE_EPOCH" $PWD.tar.lz
    ]]
 
    -- Cleanup
    ok.chdir("..")
-   ok.remove_all(path)
+   ok.remove_all(x)
    ok.unsetenv("SOURCE_DATE_EPOCH")
-   ok.unsetenv("pwd")
 
-   return path .. ".tar.lz"
+   return x .. ".tar.lz"
 end
 
 function build(x)

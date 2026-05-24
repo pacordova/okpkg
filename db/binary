@@ -45,7 +45,7 @@ libreoffice = {
       rm -f DEBS/*{firebird,kde-integration,python-script-provider}*
       for f in DEBS/*; do 
         ar x "$f" data.tar.xz 
-        gtar -C "$destdir" -xf data.tar.xz \
+        $tar -C "$destdir" -xf data.tar.xz \
           --xform='s|usr/lib|usr/lib64|;s|opt|usr/lib64|;s|usr/local|usr|'
         rm -f data.tar.xz
       done
