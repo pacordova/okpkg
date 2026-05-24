@@ -11,7 +11,7 @@ local pwd = pwd()
 local dirs = {
    ["indexdir"] = "index",
    ["pkgdir"]   = "packages",
-   ["workdir"]  = "sources",
+   ["srcdir"]  = "sources",
    ["distdir"]  = "distfiles"
 }
 

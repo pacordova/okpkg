@@ -43,7 +43,7 @@ function extract(x)
    X = query(x)
 
    -- Setup source directory
-   ok.chdir(C.workdir)
+   ok.chdir(C.srcdir)
    ok.remove_all(x)
    ok.mkdir(x)
    ok.chdir(x)

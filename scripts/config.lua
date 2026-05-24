@@ -2,12 +2,12 @@
 
 -- Main Configuration
 local C = {
-   ["okdir"]       = "/usr/okpkg",
    ["distdir"]     = "/var/cache/ok/dist",
-   ["workdir"]     = "/var/cache/ok/src",
+   ["indexdir"]    = "/usr/okpkg/index",
+   ["okdir"]       = "/usr/okpkg",
    ["outdir"]      = "/var/cache/ok/out",
    ["pkgdir"]      = "/var/cache/ok/pkg",
-   ["indexdir"]    = "/usr/okpkg/index",
+   ["srcdir"]      = "/usr/src",
    cc = {
       ["cpu"]      = "skylake",
       ["optimize"] =  2,

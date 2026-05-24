@@ -33,8 +33,8 @@ local function build_all(x)
          os.execute("gdk-pixbuf-query-loaders --update-cache")
       end
    end
-   ok.remove_all(C["workdir"])
-   ok.mkdir(C["workdir"])
+   ok.remove_all(C.srcdir)
+   ok.mkdir(C.srcdir)
 end
 
 -- Generate locales

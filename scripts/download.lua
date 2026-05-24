@@ -15,13 +15,13 @@ local function download_all(x)
    fp:close()
    for i in buf:gmatch("\n([%w%-%+]-) = {.-;") do
       download(i)
-      chdir(C["workdir"])
+      chdir(C.srcdir)
       remove_all(i)
    end
 end
 
-remove_all(C["workdir"])
-mkdir(C["workdir"])
+remove_all(C.srcdir)
+mkdir(C.srcdir)
 
 download_all("base")
 --download_all("python")

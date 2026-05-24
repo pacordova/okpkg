@@ -93,7 +93,7 @@ if not status then error("error during reformat!") end
 
 -- do-install
 chdir(os.getenv("destdir"))
-dofile("/var/lib/okpkg/scripts/filesystem.lua")
+dofile("/usr/okpkg/scripts/filesystem.lua")
 
 -- main loop
 while #arg > 0 do

@@ -164,9 +164,9 @@ function download(x)
    
    -- Setup source directory
    assert(
-      ok.chdir(C["workdir"]) and 
-      ok.remove_all(x) and 
-      ok.mkdir(x) and 
+      ok.chdir(C.srcdir) and
+      ok.remove_all(x) and
+      ok.mkdir(x) and
       ok.chdir(x) and
       os.execute("$tar --strip-components=1 -xf " .. X.dist)
    )
@@ -240,8 +240,8 @@ function build(x)
    ok.remove_all(X.destdir)
    ok.mkdir(X.destdir)
 
-   -- Setup workdir
-   ok.chdir(("%s/%s"):format(C.workdir, x))
+   -- Setup srcdir
+   ok.chdir(("%s/%s"):format(C.srcdir, x))
    ok.setenv("SOURCE_DATE_EPOCH", mtime("."))
 
    X.prep = 
