@@ -1,4 +1,4 @@
---- a/Modules/_hashopenssl.c
+--- a/Modules/_hashopenssl.c.orig
 +++ b/Modules/_hashopenssl.c
 @@ -44,7 +44,9 @@
  
@@ -10,7 +10,7 @@
  #if defined(NID_sha3_224) && defined(NID_sha3_256) && defined(NID_sha3_384) && defined(NID_sha3_512)
  #define PY_OPENSSL_HAS_SHA3 1
  #endif
-@@ -963,11 +965,15 @@ _hashlib_HASH(PyObject *module, const char *digestname, PyObject *data_obj,
+@@ -922,11 +924,15 @@ py_evp_fromname(PyObject *module, const char *digestname, PyObject *data_obj,
          goto exit;
      }
  
@@ -26,37 +26,3 @@
  
      self = newEVPobject(type);
      if (self == NULL) {
---- a/Modules/_ssl.c
-+++ b/Modules/_ssl.c
-@@ -907,7 +907,7 @@ newPySSLSocket(PySSLContext *sslctx, PySocketSockObject *sock,
-     }
- 
-     /* bpo43522 and OpenSSL < 1.1.1l: copy hostflags manually */
--#if OPENSSL_VERSION < 0x101010cf
-+#if OPENSSL_VERSION_NUMBER < 0x101010cf
-     X509_VERIFY_PARAM *ssl_verification_params = SSL_get0_param(self->ssl);
-     X509_VERIFY_PARAM *ssl_ctx_verification_params = SSL_CTX_get0_param(ctx);
- 
-@@ -3859,7 +3859,11 @@ _ssl__SSLContext__host_flags_get_impl(PySSLContext *self)
-     unsigned int host_flags;
- 
-     ssl_verification_params = SSL_CTX_get0_param(self->ctx);
-+#ifdef LIBRESSL_VERSION_NUMBER
-+    host_flags = 0;
-+#else
-     host_flags = X509_VERIFY_PARAM_get_hostflags(ssl_verification_params);
-+#endif
-     return PyLong_FromUnsignedLong(host_flags);
- }
- 
---- a/Lib/sysconfig/__init__.py
-+++ b/Lib/sysconfig/__init__.py
-@@ -29,7 +29,7 @@
-     'posix_prefix': {
-         'stdlib': '{installed_base}/{platlibdir}/{implementation_lower}{py_version_short}{abi_thread}',
-         'platstdlib': '{platbase}/{platlibdir}/{implementation_lower}{py_version_short}{abi_thread}',
--        'purelib': '{base}/lib/{implementation_lower}{py_version_short}{abi_thread}/site-packages',
-+        'purelib': '{base}/{platlibdir}/{implementation_lower}{py_version_short}{abi_thread}/site-packages',
-         'platlib': '{platbase}/{platlibdir}/{implementation_lower}{py_version_short}{abi_thread}/site-packages',
-         'include':
-             '{installed_base}/include/{implementation_lower}{py_version_short}{abiflags}',

@@ -3,15 +3,16 @@ _python3 = {
    sha3 = "e11818475734b8b1f6ddd6999629498440b44de4f983a9db44fc318e62de2834",
    build = "./configure",
    flags = {
-      "--prefix=/var",
-      "--libdir=/var/lib64",
+      "--prefix=/usr",
+      "--libdir=/usr/lib64",
+      "--includedir=/usr/include",
       "--with-platlibdir=lib64",
       "--without-{doc-strings,ensurepip,system-expat}",
       "CFLAGS_NODIST=-fno-semantic-interposition",
       "LDFLAGS_NODIST=-fno-semantic-interposition",
    },
    post = [[
-      cd "$destdir/var/lib64/python"*
+      cd "$destdir/usr/lib64/python"*
       rm -fr test ./*/test ./*/tests
       rm -fr config-* idlelib turtle* pydoc*
       cd "$destdir/bin"
@@ -32,9 +33,9 @@ _perl = {
    flags= {
       "-Dprefix=/",
       "-Duseshrplib",
-      "-D{privlib,archlib}=/var/lib64/perl5/core_perl",
-      "-D{sitelib,sitearch}=/var/lib64/perl5/site_perl",
-      "-D{vendorlib,vendorarch}=/var/lib64/perl/vendor_perl",
+      "-D{privlib,archlib}=/usr/lib64/perl5/core_perl",
+      "-D{sitelib,sitearch}=/usr/lib64/perl5/site_perl",
+      "-D{vendorlib,vendorarch}=/usr/lib64/perl/vendor_perl",
       "-Dscriptdir=/bin",
       "-Dman1dir=/usr/man/man1",
       "-Dman3dir=/usr/man/man3",
@@ -47,7 +48,7 @@ _perl = {
       find $destdir -name Change\*     -exec rm -f      {} +
       find $destdir -name \*.bs        -exec rm -f      {} +
       find $destdir -name \*.0 -type f -exec rm -f      {} +
-      find $destdir/var/lib64  -type f -exec chmod 0644 {} +
+      find $destdir/usr/lib64  -type f -exec chmod 0644 {} +
    ]]
 };
 
@@ -106,7 +107,6 @@ lzlib = {
    build = "./configure",
    flags = {
       "--prefix=/usr",
-      "--exec-prefix=/",
       "--libdir=/lib64",
       "--mandir=/usr/man",
       "--enable-shared",

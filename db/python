@@ -1,25 +1,26 @@
 python3 = {
-   url = "https://www.python.org/ftp/python/3.14.0/Python-3.14.0.tar.xz",
-   sha3 = "e11818475734b8b1f6ddd6999629498440b44de4f983a9db44fc318e62de2834",
+   url = "https://www.python.org/ftp/python/3.13.13/Python-3.13.13.tar.xz",
+   sha3 = "0851d206c00df77a46d9e4fa2b90a880c537eaaf25087af9d510e0658db599ad",
    build = "./configure",
    flags = {
-      "--prefix=/var",
-      "--libdir=/var/lib64",
+      "--prefix=/opt/python",
       "--enable-loadable-sqlite-extensions",
+      "--without-doc-strings",
+      "--without-ensurepip",
       "--with-dbmliborder=gdbm:ndbm",
       "--with-platlibdir=lib64",
       "--with-system-expat",
       "--with-tzpath=/usr/share/zoneinfo",
-      "--without-{doc-strings,ensurepip}",
+      "CONFIG_SITE=/dev/null",
       "CFLAGS_NODIST=-fno-semantic-interposition",
       "LDFLAGS_NODIST=-fno-semantic-interposition",
    },
    post = [[
-      cd "$destdir/var/lib64/python"*
-      rm -fr test ./*/test ./*/tests
-      rm -fr config-* idlelib turtle* pydoc*
-      cd "$destdir/bin"
-      rm -f idle* pydoc*
+      #cd "$destdir/var/lib64/python"*
+      #rm -fr test ./*/test ./*/tests
+      #rm -fr config-* idlelib turtle* pydoc*
+      #cd "$destdir/bin"
+      #rm -f idle* pydoc*
    ]]
 };
 
