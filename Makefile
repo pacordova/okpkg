@@ -3,9 +3,10 @@ sysconfdir ?= /etc
 
 CC       = /bin/gcc
 CXX      = /bin/g++
-CC_V    != $(CXX) -dumpversion
+CXXV    != $(CXX) -dumpversion
+CXXM    != $(CXX) -dumpmachine
 CFLAGS   = -O2 -std=gnu99
-CXXFLAGS = -O2 -I/usr/include/c++/$(CC_V)
+CXXFLAGS = -O2 -I/usr/include/c++/$(CXXV) -I/usr/include/c++/$(CXXV)/$(CXXM)
 LDFLAGS  = -lcrypto
 
 LUA_PATH  != lua -e "print(package.path:match('(.-)/%?.lua;'))"
