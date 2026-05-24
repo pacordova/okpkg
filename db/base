@@ -775,7 +775,6 @@ device-mapper = {
       "install_device-mapper",
       "usrlibdir=$destdir/usr/lib64",
       "DESTDIR=$destdir",
-      "MAKEFLAGS=",
    },
 };
 

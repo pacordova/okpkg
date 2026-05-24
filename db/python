@@ -3,9 +3,8 @@ python = {
    sha3 = "0851d206c00df77a46d9e4fa2b90a880c537eaaf25087af9d510e0658db599ad",
    build = "./configure",
    flags = {
-      "--prefix=/opt/python",
+      "--prefix=/opt/python3.13",
       "--enable-loadable-sqlite-extensions",
-      "--enable-shared",
       "--without-doc-strings",
       "--without-ensurepip",
       "--with-dbmliborder=gdbm:ndbm",

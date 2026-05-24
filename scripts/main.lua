@@ -47,12 +47,12 @@ B = {
       }
       return (
          os.execute(table.concat({arg[0], unpack(arg)}, " ")) and
-         os.execute("make") and
-         os.execute("make install DESTDIR=$destdir"))
+         os.execute("$make") and
+         os.execute("$make install DESTDIR=$destdir"))
    end,
    ["make"] = function(...)
       local arg = {
-         [0] = { "make", "make install DESTDIR=$destdir" },
+         [0] = { "$make", "$make install DESTDIR=$destdir" },
          ...
       }
       return (
@@ -61,14 +61,14 @@ B = {
    end,
    ["make_noinstall"] = function(...)
       local arg = {
-         [0] = "make",
+         [0] = "$make",
          ...
       }
       return os.execute(table.concat({arg[0], unpack(arg)}, " "))
    end,
    ["make_install"] = function(...)
       local arg = {
-         [0] = "make install DESTDIR=$destdir",
+         [0] = "$make install DESTDIR=$destdir",
          ...
       }
       return os.execute(table.concat({arg[0], unpack(arg)}, " "))
@@ -93,13 +93,13 @@ B = {
    ["perl"] = function()
       return (
          os.execute("perl Makefile.PL") and
-         os.execute("make") and
-         os.execute("make pure_install doc_install DESTDIR=$destdir"))
+         os.execute("$make") and
+         os.execute("$make pure_install doc_install DESTDIR=$destdir"))
    end,
    ["python-build"] = function()
       return (
-          os.execute("python3 -m build -nx")  and
-          os.execute("python3 -m installer -d $destdir dist/*whl"))
+          os.execute("$python -m build -nx")  and
+          os.execute("$python -m installer -d $destdir dist/*whl"))
    end,
    ["waf"] = function()
       os.execute [[

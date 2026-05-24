@@ -22,16 +22,15 @@ fp = io.open(string.format("%s/db/python", C.okdir))
 buf = '\n' .. fp:read('*a')
 fp:close()
 for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do 
-   if i ~= "python3" then purge(i); emerge(i); end
+   if i ~= "python" then purge(i); emerge(i); end
 end
 
-purge"meson"; emerge"meson"
+purge("meson")
+emerge("meson")
 
 -- Reinstall other packages with python libraries
-local X = {
-   "libxml2", "glib2", "gobject-introspection", "xcb-proto", 
-   "libtorrent-rasterbar", "pygobject", "pycairo",
-}
+-- "libxml2", "glib2", "gobject-introspection", "xcb-proto", 
+-- "libtorrent-rasterbar", "pygobject", "pycairo",
 
 install_all {
    "libxml2", 

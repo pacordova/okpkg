@@ -32,12 +32,14 @@ local M = {
 local E = {
    ["LC_ALL"]      = "POSIX",
    ["CONFIG_SITE"] = "/etc/config.site",
-   ["MAKEFLAGS"]   = "-j5",
+   ["curl"]        = "/bin/curl -fsSLR",
+   ["lzip"]        = "/bin/plzip",
+   ["make"]        = "/bin/make -j5",
+   ["meson"]       = "/opt/python3.13/bin/meson",
+   ["ninja"]       = "/bin/samu",
+   ["patch"]       = "/bin/patch -bp1",
+   ["python"]      = "/opt/python3.13/bin/python3.13",
    ["tar"]         = "/bin/tar",
-   ["curl"]        = "/bin/curl -s -f -L -R",
-   ["ninja"]       = "samu",
-   ["patch"]       = "patch -b -p1",
-   ["meson"]       = "meson",
 }
 
 -- temporary
