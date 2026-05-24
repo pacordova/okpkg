@@ -1,3 +1,28 @@
+bzip2 = {
+   url = "https://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz",
+   sha3 = "34400e535a9018e93fc04f509811df340e8f9b48b06467b9c025400ac0a4898d",
+   build = "make",
+   flags = { "PREFIX=$destdir" },
+   prep = [[
+      sed -e 's:\(ln -s -f \)$(PREFIX)/bin/:\1:' \
+          -e 's:(PREFIX)/man:(PREFIX)/usr/man:g' \
+          -e 's:(PREFIX)/lib:(PREFIX)/lib64:g' \
+          -i Makefile
+      make -f Makefile-libbz2_so
+      make clean
+   ]],
+   post = [[
+      cp -f  libbz2.so.*  $destdir/lib64
+      cp -f  bzip2-shared $destdir/bin/bzip2
+      ln -sf libbz2.so.1.0.8 $destdir/lib64/libbz2.so
+      ln -sf libbz2.so.1.0.8 $destdir/lib64/libbz2.so.1
+      ln -sf libbz2.so.1.0.8 $destdir/lib64/libbz2.so.1.0
+      ln -sf bzip2 $destdir/bin/bunzip2
+      ln -sf bzip2 $destdir/bin/bzcat
+      rm -f  $destdir/lib64/libbz2.a
+   ]]
+};
+
 firewalld = {
    url = "https://github.com/firewalld/firewalld/releases/download/v2.4.1/firewalld-2.4.1.tar.bz2",
    sha3 = "",
