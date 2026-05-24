@@ -40,14 +40,14 @@ _perl = {
       "-Dman3dir=/usr/man/man3",
    },
    post = [[
-      find $destdir -name \*.pod       -exec rm -f {} +
-      find $destdir -name .packlist    -exec rm -f {} +
-      find $destdir -name README\*     -exec rm -f {} +
-      find $destdir -name TODO\*       -exec rm -f {} +
-      find $destdir -name Change\*     -exec rm -f {} +
-      find $destdir -name \*.bs        -exec rm -f {} +
-      find $destdir -name \*.0 -type f -exec rm -f {} +
-      find $destdir/var/lib64  -type f -exec chmod 644 {} +
+      find $destdir -name \*.pod       -exec rm -f      {} +
+      find $destdir -name .packlist    -exec rm -f      {} +
+      find $destdir -name README\*     -exec rm -f      {} +
+      find $destdir -name TODO\*       -exec rm -f      {} +
+      find $destdir -name Change\*     -exec rm -f      {} +
+      find $destdir -name \*.bs        -exec rm -f      {} +
+      find $destdir -name \*.0 -type f -exec rm -f      {} +
+      find $destdir/var/lib64  -type f -exec chmod 0644 {} +
    ]]
 };
 
@@ -245,9 +245,9 @@ acl = {
    build = "./configure",
 };
 
-gcc14 = {
-   url = "https://ftp.gnu.org/gnu/gcc/gcc-14.3.0/gcc-14.3.0.tar.xz",
-   sha3 = "b3744b6fbf810205c604c0d24ffd94f0edeca87b16d5c366e12fa264a0a9d7d1",
+gcc16 = {
+   url = "https://ftp.gnu.org/gnu/gcc/gcc-16.1.0/gcc-16.1.0.tar.xz",
+   sha3 = "c658835f1cda7ae34e2dabe3b49123d38281cc76ba49b2df66c57a02dc8c9d86",
    build = "../configure",
    flags = {
       "--disable-fixincludes",
@@ -272,18 +272,12 @@ gcc14 = {
       "LD=ld",
    },
    post = [[
-      cc=$destdir/usr/bin/gcc
       find $destdir -name libgtkpeer.a  -exec rm -f '{}' +
       find $destdir -name libgjsmalsa.a -exec rm -f '{}' +
-      install -d $destdir/usr/lib64/bfd-plugins
-      ln -sf ../gcc/`$cc -dumpmachine`/`$cc -dumpversion`/liblto_plugin.so \
-          $destdir/usr/lib64/bfd-plugins/liblto_plugin.so
-      install -d $destdir/usr/share/gdb/auto-load/usr/lib64
-      mv $destdir/usr/lib64/*gdb.py $destdir/usr/share/gdb/auto-load/usr/lib64
-      printf '#!/bin/sh\n' >>$destdir/usr/bin/c99
-      printf 'exec gcc -std=c99 "$@"' >>$destdir/usr/bin/c99
-      chmod +x $destdir/usr/bin/c99
-      ln -sf gcc $destdir/usr/bin/cc
+      ln -sf gcc $destdir/bin/cc
+      >>$destdir/bin/c99 printf '#!/bin/sh\n'
+      >>$destdir/bin/c99 printf 'exec /bin/gcc -std=c99 "$@"\n'
+      chmod 0755 $destdir/bin/c99
    ]]
 };
 
