@@ -1,13 +1,12 @@
-bindir     = /bin
-sysconfdir = /etc
+bindir     ?= /bin
+sysconfdir ?= /etc
 
-CC  = gcc -std=gnu99
-CXX = g++
-
-CFLAGS   = -O2
-CXXFLAGS = -O2
-
-LDFLAGS = -lcrypto
+CC       = /bin/gcc
+CXX      = /bin/g++
+CC_V    != $(CXX) -dumpversion
+CFLAGS   = -O2 -std=gnu99
+CXXFLAGS = -O2 -I/usr/include/c++/$(CC_V)
+LDFLAGS  = -lcrypto
 
 LUA_PATH  != lua -e "print(package.path:match('(.-)/%?.lua;'))"
 LUA_CPATH != lua -e "print(package.cpath:match('(.-)/%?.so;'))"
