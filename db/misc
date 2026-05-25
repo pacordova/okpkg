@@ -514,7 +514,7 @@ r = {
    sha3 = "a2081612176af105e42c35187a3445efe28614da63605459c91caffa1381e3dc",
    build = "./configure",
    flags = {
-      "--prefix=/opt/R",
+      "--prefix=/opt/R/4.6.0",
       "--enable-R-shlib",
       "--disable-java",
       "--without-x",
