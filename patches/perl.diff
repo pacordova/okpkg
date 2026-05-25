@@ -8,7 +8,7 @@
 +	cf_time="`LC_ALL=C LANGUAGE=C $date -u -d@$SOURCE_DATE_EPOCH`"
 +	cf_by="root"
 +	myhostname="myhost"
-+	myuname="Linux myhost 6.6 #1 SMP $cf_time x86_64 GNU/Linux"
++	myuname="Linux myhost 6.18 #1 SMP $cf_time x86_64 GNU/Linux"
 +fi
 +
  : verify guess
