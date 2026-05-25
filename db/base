@@ -6,7 +6,7 @@ _python = {
       "--prefix=/opt/python3.13",
       "--without-doc-strings",
       "--without-ensurepip",
-      "--with-system-expat",
+      "--without-system-expat",
       "CONFIG_SITE=/dev/null",
       "CFLAGS_NODIST=-fno-semantic-interposition",
       "LDFLAGS_NODIST=-fno-semantic-interposition",
