@@ -127,8 +127,8 @@ local function mtime(x)
    return(tonumber(buf:sub(1, buf:find("\n")-1)))
 end
 
-local function v(x)
-   return ok.basename(x):match("[-_%.][nrv]?([%d%.]+%l?%d?)[-_%.]")
+function vmatch(s)
+   return string.match(s, "[-_%.][nrv]?([%d%.]+%l?%d?)[-_%.]")
 end
 
 function query(x)
@@ -231,8 +231,8 @@ end
 function build(x)
    local X = query(x)
    X.flags = X.flags or {}
-   X.version = v(X.url) or "nil"
-   X.destdir = string.format("%s/%s-%s-%s", C.outdir, x, X.version, "skylake")
+   X.V = vmatch(ok.basename(X.url))
+   X.destdir = string.format("%s/%s-%s-%s", C.outdir, x, X.V, "skylake")
 
    ok.setenv("destdir", X.destdir)
    ok.remove_all(X.destdir)
