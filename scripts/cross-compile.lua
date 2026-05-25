@@ -14,12 +14,12 @@ B = {
       local arg = { [0]=f, ... }
       return (
          os.execute(table.concat({arg[0], unpack(arg)}, ' ')) and
-         os.execute("make") and
-         os.execute("make install DESTDIR=$destdir"))
+         os.execute("$make") and
+         os.execute("$make install DESTDIR=$destdir"))
    end,
    ["make"] = function(...)
       local arg = {
-         [0]={"make", "make install DESTDIR=$destdir"},
+         [0]={"$make", "$make install DESTDIR=$destdir"},
          ...
       }
       return (
@@ -100,14 +100,14 @@ function emerge(x)
    ]])
 end
 
--- Setup the environment.
-ok.setenv("CFLAGS", "-O2 -fcommon -std=gnu17 -pipe")
+-- Environment
+ok.setenv("CFLAGS", "-O2 -pipe")
 ok.setenv("CXXFLAGS", "-O2 -pipe")
 ok.setenv("PATH", "/mnt/tools/bin:/bin")
 ok.setenv("LC_ALL", "C")
-ok.setenv("MAKEFLAGS", "-j5")
-ok.setenv("patch", "patch -b -p1")
 ok.setenv("destdir", "/mnt")
+ok.setenv("make", "/bin/make -j4")
+ok.setenv("patch", "/bin/patch -bp1")
 
 -- Reformat the partition specified at command line.
 io.write("Please enter a partition/device to format: ")
