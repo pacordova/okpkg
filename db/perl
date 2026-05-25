@@ -3,15 +3,9 @@ perl = {
    sha3 = "680780c9743fbf551d32f9fd04ee7028751896faffeddf47cf2ac38a74f54dc7",
    build = "./configure.gnu",
    flags= {
-      "-Dprefix=/",
+      "-Dprefix=/opt/perl5.42",
       "-Duseshrplib",
       "-Dusethreads",
-      "-D{privlib,archlib}=/var/lib64/perl5/core_perl",
-      "-D{sitelib,sitearch}=/var/lib64/perl5/site_perl",
-      "-D{vendorlib,vendorarch}=/var/lib64/perl/vendor_perl",
-      "-Dscriptdir=/bin",
-      "-Dman1dir=/usr/man/man1",
-      "-Dman3dir=/usr/man/man3",
    },
    post = [[
       find $destdir -name \*.pod       -exec rm -f {} +
@@ -21,7 +15,7 @@ perl = {
       find $destdir -name Change\*     -exec rm -f {} +
       find $destdir -name \*.bs        -exec rm -f {} +
       find $destdir -name \*.0 -type f -exec rm -f {} +
-      find $destdir/var/lib64  -type f -exec chmod 644 {} +
+      find $destdir/opt/perl5*/lib  -type f -exec chmod 644 {} +
    ]]
 };
 
