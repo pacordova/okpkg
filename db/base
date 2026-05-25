@@ -320,40 +320,35 @@ ncurses = {
    sha3 = "b755b6abf8bdb9fafa048a0c55973212ee491051a0aaff08dfa4533934dc53cc",
    build = "./configure",
    flags = {
+      "--disable-root-access",
+      "--disable-root-environ",
+      "--disable-rpath-hack",
+      "--disable-setuid-environ",
+      "--enable-hard-tabs",
       "--enable-pc-files",
       "--enable-widec",
-      "--disable-setuid-environ",
-      "--disable-root-environ",
-      "--disable-root-access",
-      "--with-cxx-{binding=yes,shared=yes}",
+      "--with-cxx-shared",
       "--with-manpage-format=normal",
-      "--with-pkg-config-libdir=/usr/lib64/pkgconfig",
+      "--with-ospeed=unsigned",
+      "--without-ada",
+      "--without-debug",
+      "--without-normal",
+      "--without-tests",
+      "--with-pkg-config-libdir=/lib64/pkgconfig",
       "--with-shared",
       "--with-termlib=tinfo",
-      "--with-ticlib=tic",
-      "--with-versioned-syms",
       "--with-xterm-kbs=del",
-      "--without-{ada,debug,normal}",
    },
    post = [[
-      cd $destdir/usr/lib64
-      rm -f lib{form,panel,menu,*curses*}.so
-      printf "INPUT(-lformw)\n" > libform.so
-      printf "INPUT(-lpanelw)\n" > libpanel.so
-      printf "INPUT(-lmenuw)\n" > libmenu.so
-      printf "INPUT(-lncurses)\n"  > libcurses.so
-      printf "INPUT(-lncursesw)\n" > libcursesw.so
-      printf "INPUT(-lncursesw -ltinfo)\n" > libncurses.so
-      printf "INPUT(libncursesw.so.6 -ltinfo)\n" > libncursesw.so
-      printf "INPUT(-lncurses++w)\n" > libncurses++.so
-      printf "INPUT(-ltinfo)\n" > libtermcap.so
-      ln -sf formw.pc pkgconfig/form.pc
-      ln -sf panelw.pc pkgconfig/panel.pc
-      ln -sf menuw.pc pkgconfig/menu.pc
-      ln -sf ncurses.pc pkgconfig/curses.pc
-      ln -sf ncursesw.pc pkgconfig/cursesw.pc
-      ln -sf ncursesw.pc pkgconfig/ncurses.pc
-      ln -sf ncurses++w.pc pkgconfig/ncurses++.pc
+      ln -sf libformw.so    $destdir/lib64/libform.so
+      ln -sf libmenuw.so    $destdir/lib64/libmenu.so
+      ln -sf libncursesw.so $destdir/lib64/libncurses.so
+      ln -sf libpanelw.so   $destdir/lib64/libpanel.so
+      ln -sf formw.pc       $destdir/lib64/pkgconfig/form.pc
+      ln -sf menuw.pc       $destdir/lib64/pkgconfig/menu.pc
+      ln -sf ncursesw.pc    $destdir/lib64/pkgconfig/ncurses.pc
+      ln -sf panelw.pc      $destdir/lib64/pkgconfig/panel.pc
+      printf "INPUT(libncursesw.so.6 -ltinfo)\n" > $destdir/lib64/libncursesw.so
    ]]
 };
 
