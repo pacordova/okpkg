@@ -35,7 +35,7 @@ local cc = {
    ["optimize"]       =  2,
    ["ssp"]            = "strong",
    ["cet"]            = "none",
-   ["init_stack"] =   = "zero",
+   ["init_stack"]     = "zero",
    ["scp"]            =  true,
    ["pie"]            =  true,
    ["common"]         =  false,

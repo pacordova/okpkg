@@ -79,6 +79,7 @@ glibc = {
       "--enable-stack-protector=strong",
       "--disable-nscd",
       "--with-headers=$destdir/usr/include",
+      "PYTHON_PROG=/opt/python3.13/bin/python3.13",
       "libc_cv_slibdir=/lib64",
       "libc_cv_rtlddir=/lib64",
       "libc_cv_rootsbindir=/bin",
@@ -119,6 +120,7 @@ libxcrypt = {
       "--enable-hashes=strong,glibc",
       "--enable-obsolete-api=no",
       "--disable-failure-tokens",
+      "PERL=/opt/perl/bin/perl",
    }
 };
 

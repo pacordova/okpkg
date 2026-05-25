@@ -214,7 +214,7 @@ function makepkg(x)
          --owner=0 \
          --group=0 \
          --numeric-owner \
-         --use-compress-program=$lzip \
+         --use-compress-program="$lzip" \
          --file=$PWD.tar.lz \
          --create .
       touch -hd "@$SOURCE_DATE_EPOCH" $PWD.tar.lz
@@ -232,7 +232,7 @@ function build(x)
    local X = query(x)
    X.flags = X.flags or {}
    X.version = v(X.url) or "nil"
-   X.destdir = string.format("%s/%s-%s-%s", C.outdir, x, X.version, C.cc.cpu)
+   X.destdir = string.format("%s/%s-%s-%s", C.outdir, x, X.version, "skylake")
 
    ok.setenv("destdir", X.destdir)
    ok.remove_all(X.destdir)
