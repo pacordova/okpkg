@@ -513,7 +513,13 @@ r = {
    url = "https://cran.r-project.org/src/base/R-4/R-4.6.0.tar.gz",
    sha3 = "a2081612176af105e42c35187a3445efe28614da63605459c91caffa1381e3dc",
    build = "./configure",
-   flags = { "--enable-{R-shlib=yes,java=no}", "--without-x" }
+   flags = {
+      "--prefix=/opt/R",
+      "--enable-R-shlib",
+      "--disable-java",
+      "--without-x",
+      "CONFIG_SITE=/dev/null",
+   }
 };
 
 ripgrep = {

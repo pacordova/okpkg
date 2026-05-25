@@ -1,22 +1,22 @@
-_python3 = {
-   url = "https://www.python.org/ftp/python/3.14.0/Python-3.14.0.tar.xz",
-   sha3 = "e11818475734b8b1f6ddd6999629498440b44de4f983a9db44fc318e62de2834",
+_python = {
+   url = "https://www.python.org/ftp/python/3.13.13/Python-3.13.13.tar.xz",
+   sha3 = "0851d206c00df77a46d9e4fa2b90a880c537eaaf25087af9d510e0658db599ad",
    build = "./configure",
    flags = {
-      "--prefix=/usr",
-      "--libdir=/usr/lib64",
-      "--includedir=/usr/include",
-      "--with-platlibdir=lib64",
-      "--without-{doc-strings,ensurepip,system-expat}",
+      "--prefix=/opt/python3.13",
+      "--without-doc-strings",
+      "--without-ensurepip",
+      "--with-system-expat",
+      "CONFIG_SITE=/dev/null",
       "CFLAGS_NODIST=-fno-semantic-interposition",
       "LDFLAGS_NODIST=-fno-semantic-interposition",
    },
    post = [[
-      cd "$destdir/usr/lib64/python"*
-      rm -fr test ./*/test ./*/tests
-      rm -fr config-* idlelib turtle* pydoc*
-      cd "$destdir/bin"
-      rm -f idle* pydoc*
+      #cd "$destdir/var/lib64/python"*
+      #rm -fr test ./*/test ./*/tests
+      #rm -fr config-* idlelib turtle* pydoc*
+      #cd "$destdir/bin"
+      #rm -f idle* pydoc*
    ]]
 };
 
@@ -31,24 +31,21 @@ _perl = {
    sha3 = "680780c9743fbf551d32f9fd04ee7028751896faffeddf47cf2ac38a74f54dc7",
    build = "./configure.gnu",
    flags= {
-      "-Dprefix=/",
+      "-Dprefix=/opt/perl5.42",
       "-Duseshrplib",
-      "-D{privlib,archlib}=/usr/lib64/perl5/core_perl",
-      "-D{sitelib,sitearch}=/usr/lib64/perl5/site_perl",
-      "-D{vendorlib,vendorarch}=/usr/lib64/perl/vendor_perl",
-      "-Dscriptdir=/bin",
-      "-Dman1dir=/usr/man/man1",
-      "-Dman3dir=/usr/man/man3",
+      "-Dusethreads",
+      "-Dman1dir=/opt/perl5.42/man/man1",
+      "-Dman3dir=/opt/perl5.42/man/man3",
    },
    post = [[
-      find $destdir -name \*.pod       -exec rm -f      {} +
-      find $destdir -name .packlist    -exec rm -f      {} +
-      find $destdir -name README\*     -exec rm -f      {} +
-      find $destdir -name TODO\*       -exec rm -f      {} +
-      find $destdir -name Change\*     -exec rm -f      {} +
-      find $destdir -name \*.bs        -exec rm -f      {} +
-      find $destdir -name \*.0 -type f -exec rm -f      {} +
-      find $destdir/usr/lib64  -type f -exec chmod 0644 {} +
+      find $destdir -name \*.pod       -exec rm -f {} +
+      find $destdir -name .packlist    -exec rm -f {} +
+      find $destdir -name README\*     -exec rm -f {} +
+      find $destdir -name TODO\*       -exec rm -f {} +
+      find $destdir -name Change\*     -exec rm -f {} +
+      find $destdir -name \*.bs        -exec rm -f {} +
+      find $destdir -name \*.0 -type f -exec rm -f {} +
+      find $destdir/opt/perl5*/lib  -type f -exec chmod 644 {} +
    ]]
 };
 
