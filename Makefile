@@ -30,14 +30,14 @@ src/okutils.so: $(objs)
 install: install-strip
 install-strip: src/okutils.so
 	strip --strip-unneeded $<
-	mkdir -p $(DESTDIR)$(bindir) $(DESTDIR)$(LUA_CPATH)
-	mv -f $< $(DESTDIR)$(LUA_CPATH)
-	cp -f scripts/main.lua $(DESTDIR)$(bindir)/okpkg
-	cp -f scripts/config.lua $(DESTDIR)$(sysconfdir)/okpkg.conf
+	mkdir -p index $(bindir) $(LUA_CPATH)
+	mv -f $< $(LUA_CPATH)
+	cp -f scripts/main.lua $(bindir)/okpkg
+	cp -f scripts/config.lua $(sysconfdir)/okpkg.conf
 
 uninstall: clean
-	rm -f $(DESTDIR)$(bindir)/bin/okpkg
-	rm -f $(DESTDIR)$(LUA_CPATH)/okutils.so
+	rm -f $(bindir)/bin/okpkg
+	rm -f $(LUA_CPATH)/okutils.so
 
 clean:
 	find . -name \*~   -delete
