@@ -14,9 +14,6 @@ binutils-pass1 = {
       "--enable-new-dtags",
       "--enable-relro",
       "--without-system-zlib",
-      "CC=/bin/gcc",
-      "CXX=/bin/g++",
-      "CONFIG_SITE=/dev/null",
    }
 };
 
@@ -55,7 +52,6 @@ gcc-pass1 = {
       "--with-linker-hash-style=gnu",
       "--without-system-zlib",
       "--without-included-gettext",
-      "CONFIG_SITE=/dev/null",
    },
    prep = [[
       mkdir gmp mpfr mpc isl

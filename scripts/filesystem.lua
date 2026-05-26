@@ -65,10 +65,10 @@ ok.symlink("bash",    "./bin/sh")
 ok.symlink("flex",    "./bin/lex")
 ok.symlink("gcc",     "./bin/cc")
 ok.symlink("lbzip2",  "./bin/bzip2")
+ok.symlink("lib64",   "./lib")
 ok.symlink("pigz",    "./bin/gzip")
 ok.symlink("pkgconf", "./bin/pkg-config")
 ok.symlink("plzip",   "./bin/lzip")
-ok.mkdir("./lib")
 
 ------------------
 -- System Files --

@@ -133,10 +133,10 @@ for i in buf:gmatch("\n([%w%-%+]-) = {.-;") do
 end
 
 -- Cleanup
-ok.chdir(os.getenv("destdir"))
-os.execute("mv ./sbin/* ./bin")
-os.execute("mv ./usr/lib64/* ./lib64")
-ok.remove_all("./x86_64-unknown-linux-gnu")
-ok.remove_all("./tools")
-os.remove_all("./sbin")
-ok.remove_all("./usr/lib64")
+--ok.chdir(os.getenv("destdir"))
+--os.execute("mv ./sbin/* ./bin")
+--os.remove_all("./sbin")
+--os.execute("mv ./usr/lib64/* ./lib64")
+--ok.remove_all("./usr/lib64")
+--ok.remove_all("./x86_64-unknown-linux-gnu")
+--ok.remove_all("./tools")
