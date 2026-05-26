@@ -268,6 +268,7 @@ gcc16 = {
       "--with-linker-hash-style=gnu",
       "--without-included-gettext",
       "--with-system-zlib",
+      "CFLAGS=${CFLAGS#* }",
       "LD=ld",
    },
    post = [[

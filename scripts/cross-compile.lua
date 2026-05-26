@@ -71,19 +71,6 @@ function emerge(x)
    local X = extract(x)
    X.flags = X.flags or {}
 
-   -- Environment
-   if x:match("pass1") then
-      ok.setenv("CC",  "/bin/gcc")
-      ok.setenv("CXX", "/bin/g++")
-      ok.unsetenv("CONFIG_SITE")
-   else
-      ok.setenv("CC",          "/mnt/tools/bin/x86_64-unknown-linux-gnu-gcc")
-      ok.setenv("CXX",         "/mnt/tools/bin/x86_64-unknown-linux-gnu-g++")
-      ok.setenv("AR",          "/mnt/tools/bin/x86_64-unknown-linux-gnu-ar")
-      ok.setenv("RANLIB",      "/mnt/tools/bin/x86_64-unknown-linux-gnu-ranlib")
-      ok.setenv("CONFIG_SITE", "/etc/config.site")
-   end
-
    if X.prep then os.execute(X.prep) end
 
    if B[X.build] then
@@ -110,6 +97,7 @@ end
 -- Environment
 ok.setenv("CFLAGS", "-O2 -pipe")
 ok.setenv("CXXFLAGS", "-O2 -pipe")
+ok.setenv("CONFIG_SITE", "/etc/config.site")
 ok.setenv("PATH", "/mnt/tools/bin:/bin")
 ok.setenv("LC_ALL", "C")
 ok.setenv("destdir", "/mnt")
@@ -140,9 +128,11 @@ for i in buf:gmatch("\n([%w%-%+]-) = {.-;") do
 end
 
 -- Cleanup
---ok.chdir(os.getenv("destdir"))
---ok.remove_all("./usr/lib")
+ok.chdir(os.getenv("destdir"))
+os.execute("mv ./sbin/* ./bin")
+os.execute("mv ./usr/lib64/* ./lib64")
+ok.remove_all("./tools")
+ok.remove_all("./usr/lib")
 --ok.remove_all("./usr/lib64")
---ok.remove_all("./x86_64-unknown-linux-gnu")
---os.remove("./lib")
---os.remove("./sbin")
+ok.remove_all("./x86_64-unknown-linux-gnu")
+os.remove("./sbin")

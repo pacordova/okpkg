@@ -37,8 +37,8 @@ local cc = {
    ["cet"]            = "none",
    ["init_stack"]     = "zero",
    ["scp"]            =  true,
-   ["pie"]            =  true,
-   ["common"]         =  false,
+ --["pie"]            =  true,
+ --["common"]         =  false,
 }
 
 local cflags = {
