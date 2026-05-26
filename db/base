@@ -247,6 +247,7 @@ gcc16 = {
    sha3 = "c658835f1cda7ae34e2dabe3b49123d38281cc76ba49b2df66c57a02dc8c9d86",
    build = "../configure",
    flags = {
+      "--libdir=/usr/libexec",
       "--disable-fixincludes",
       "--disable-gnu-indirect-function",
       "--disable-libsanitizer",
