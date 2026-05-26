@@ -95,8 +95,8 @@ function emerge(x)
 end
 
 -- Environment
-ok.setenv("CFLAGS", "-O2 -pipe")
-ok.setenv("CXXFLAGS", "-O2 -pipe")
+ok.setenv("CFLAGS", "-O2 -fstack-protector-strong -fstack-clash-protection -ftrivial-auto-var-init=zero -pipe")
+ok.setenv("CXXFLAGS", os.getenv("CFLAGS"))
 ok.setenv("CONFIG_SITE", "/etc/config.site")
 ok.setenv("PATH", "/mnt/tools/bin:/bin")
 ok.setenv("LC_ALL", "C")
@@ -128,11 +128,11 @@ for i in buf:gmatch("\n([%w%-%+]-) = {.-;") do
 end
 
 -- Cleanup
-ok.chdir(os.getenv("destdir"))
-os.execute("mv ./sbin/* ./bin")
-os.execute("mv ./usr/lib64/* ./lib64")
-ok.remove_all("./tools")
-ok.remove_all("./usr/lib")
+--ok.chdir(os.getenv("destdir"))
+--os.execute("mv ./sbin/* ./bin")
+--os.remove("./sbin")
+--os.execute("mv ./usr/lib64/* ./lib64")
+--ok.remove_all("./tools")
+--ok.remove_all("./usr/lib")
 --ok.remove_all("./usr/lib64")
-ok.remove_all("./x86_64-unknown-linux-gnu")
-os.remove("./sbin")
+--ok.remove_all("./x86_64-unknown-linux-gnu")
