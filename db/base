@@ -106,7 +106,6 @@ lzlib = {
    sha3 = "439e7235e1fe227167c76f9f951ab922cc16af54e333808fa7b7271cf31e5808",
    build = "./configure",
    flags = {
-      "--prefix=/usr",
       "--libdir=/lib64",
       "--mandir=/usr/man",
       "--enable-shared",
@@ -567,7 +566,10 @@ plzip = {
    url = "https://download.savannah.gnu.org/releases/lzip/plzip/plzip-1.13.tar.lz",
    sha3 = "d175ff72930a3d68ccee7ec09d82b86fe3d7b60af12c345718399058a4e94b37",
    build = "./configure",
-   post = [[ ln -sf plzip $destdir/usr/bin/lzip ]]
+   flags = {
+      "--bindir=/bin",
+      "--mandir=/usr/man",
+   }
 };
 
 kbd = {
