@@ -277,6 +277,7 @@ gcc16 = {
       >>$destdir/bin/c99 printf '#!/bin/sh\n'
       >>$destdir/bin/c99 printf 'exec /bin/gcc -std=c99 "$@"\n'
       chmod 0755 $destdir/bin/c99
+      mv $destdir{/usr,}/lib64
    ]]
 };
 
