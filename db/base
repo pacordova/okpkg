@@ -286,7 +286,7 @@ libcap = {
    url = "https://kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-2.78.tar.xz",
    sha3 = "079b00f6ef26d409c50a0d3fa9a49ee64345eef7ab9410537e86f56918060a7e",
    build = "make",
-   flags = { "prefix=/usr", "lib=lib64", "SBINDIR=/usr/bin" },
+   flags = { "prefix=/usr", "lib=/lib64", "sbin=/bin" },
    prep = [[ sed -i '/install -m.*STA/d' libcap/Makefile ]]
 };
 
@@ -452,8 +452,10 @@ tzdata = {
    url = "https://github.com/eggert/tz/archive/2026b/tz-2026b.tar.gz",
    sha3 = "9d42ecd6815bee15ccf971a5c06d08835b67e7e692d4ed5822ff6ae2c2a556ee",
    build = "make",
-   flags = { "LIBDIR=/usr/lib64", "ZICDIR=/usr/bin" },
-   post = [[ rm -f $destdir/etc/localtime ]]
+   flags = { 
+      "LIBDIR=/lib64", 
+      "ZICDIR=/bin",
+   }
 };
 
 libxcrypt = {
@@ -502,10 +504,10 @@ libelf = {
    },
    post = [[
       rm -fr $destdir
-      install -d $destdir/usr/lib64/pkgconfig
-      install -m 644 config/libelf.pc $destdir/usr/lib64/pkgconfig
       make -C libelf install DESTDIR=$destdir
-      rm -fr $destdir/usr/lib64/*.a
+      mkdir -p $destdir/lib64/pkgconfig
+      cp -f config/libelf.pc $destdir/lib64/pkgconfig
+      rm -f $destdir/lib64/*.a
    ]]
 };
 
@@ -513,7 +515,10 @@ libffi = {
    url = "https://github.com/libffi/libffi/releases/download/v3.5.2/libffi-3.5.2.tar.gz",
    sha3 = "e4a5bbcde6c10f24034dc61b66bb95525539f8dc71221764b658df126fe4d409",
    build = "./configure",
-   flags = { "--with-gcc-arch=x86-64-v2", "--disable-exec-static-tramp" }
+   flags = { 
+      "--with-gcc-arch=syklake", 
+      "--disable-exec-static-tramp",
+   }
 };
 
 coreutils = {
