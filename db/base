@@ -31,11 +31,11 @@ _perl = {
    sha3 = "680780c9743fbf551d32f9fd04ee7028751896faffeddf47cf2ac38a74f54dc7",
    build = "./configure.gnu",
    flags= {
-      "-Dprefix=/opt/perl5.42",
+      "-Dprefix=/opt/perl",
       "-Duseshrplib",
       "-Dusethreads",
-      "-Dman1dir=/opt/perl5.42/man/man1",
-      "-Dman3dir=/opt/perl5.42/man/man3",
+      "-Dman1dir=/opt/perl/man/1",
+      "-Dman3dir=/opt/perl/man/3",
    },
    post = [[
       find $destdir -name \*.pod       -exec rm -f {} +
@@ -45,7 +45,7 @@ _perl = {
       find $destdir -name Change\*     -exec rm -f {} +
       find $destdir -name \*.bs        -exec rm -f {} +
       find $destdir -name \*.0 -type f -exec rm -f {} +
-      find $destdir/opt/perl5*/lib  -type f -exec chmod 644 {} +
+      find $destdir/opt/perl/lib  -type f -exec chmod 644 {} +
    ]]
 };
 
@@ -268,7 +268,7 @@ gcc16 = {
       "--with-linker-hash-style=gnu",
       "--without-included-gettext",
       "--with-system-zlib",
-      "CFLAGS=${CFLAGS#* }",
+      'CFLAGS="${CFLAGS#* }"',
       "LD=ld",
    },
    post = [[

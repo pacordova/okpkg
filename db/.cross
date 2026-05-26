@@ -465,8 +465,6 @@ gcc-pass2 = {
       "--build=$(../config.guess)",
       "--host=x86_64-unknown-linux-gnu",
       "--target=x86_64-unknown-linux-gnu",
-      "--prefix=/usr",
-      "--exec-prefix=/",
       "--libdir=/usr/libexec",
       "--with-build-sysroot=$destdir",
       "--disable-fixincludes",
