@@ -50,7 +50,7 @@ dmidecode = {
    }
 };
 
-gcc16 = {
+_gcc = {
    url = "https://ftp.gnu.org/gnu/gcc/gcc-16.1.0/gcc-16.1.0.tar.xz",
    sha3 = "c658835f1cda7ae34e2dabe3b49123d38281cc76ba49b2df66c57a02dc8c9d86",
    build = "../configure",

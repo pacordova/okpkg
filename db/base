@@ -274,7 +274,6 @@ gcc16 = {
    post = [[
       find $destdir -name libgtkpeer.a  -exec rm -f '{}' +
       find $destdir -name libgjsmalsa.a -exec rm -f '{}' +
-      ln -sf gcc $destdir/bin/cc
       >>$destdir/bin/c99 printf '#!/bin/sh\n'
       >>$destdir/bin/c99 printf 'exec /bin/gcc -std=c99 "$@"\n'
       chmod 0755 $destdir/bin/c99
