@@ -286,8 +286,13 @@ libcap = {
    url = "https://kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-2.78.tar.xz",
    sha3 = "079b00f6ef26d409c50a0d3fa9a49ee64345eef7ab9410537e86f56918060a7e",
    build = "make",
-   flags = { "prefix=/usr", "lib=/lib64", "sbin=/bin" },
-   prep = [[ sed -i '/install -m.*STA/d' libcap/Makefile ]]
+   flags = { 
+      "prefix=/usr", 
+      "exec_prefix=/",
+      "man_prefix=/usr",
+      "lib=lib64", 
+      "sbin=bin"
+   }
 };
 
 shadow = {
