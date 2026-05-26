@@ -35,11 +35,11 @@ end
 --for i=1,#rebuilds do emerge(rebuilds[i]) end
 
 -- Fix versions and cleanup
+os.execute("makewhatis /usr/man")
 ok.chdir(C.pkgdir)
-purge("_perl")
-purge("_python3")
-purge("samurai")
-os.execute("makewhatis /usr/share/man")
+--purge("_perl")
+--purge("_python3")
+--purge("samurai")
 --os.remove("samurai-1.2-amd64.tar.lz")
 --os.remove("/bin/meson")
 --os.rename("bash-5.3-amd64.tar.lz", "bash-5.3.009-amd64.tar.lz")
