@@ -84,8 +84,10 @@ bzip2 = {
    build = "make_noinstall",
    flags = { "--makefile=Makefile-libbz2_so" },
    post = [[
-      mkdir -p $destdir/lib64
+      mkdir -p $destdir{/usr/include,/lib64}
+      cp -f bzlib.h $destdir/usr/include
       cp -f libbz2.so.* $destdir/lib64
+      chmod a+r $destdir/usr/include/bzlib.h
       ln -sf libbz2.so.1.0.8 $destdir/lib64/libbz2.so
       ln -sf libbz2.so.1.0.8 $destdir/lib64/libbz2.so.1
       ln -sf libbz2.so.1.0.8 $destdir/lib64/libbz2.so.1.0
@@ -340,6 +342,8 @@ ncurses = {
       "--with-xterm-kbs=del",
    },
    post = [[
+      rm -f  $destdir/lib64/libncursesw.so
+      printf "INPUT(libncursesw.so.6 -ltinfo)\n" > $destdir/lib64/libncursesw.so
       ln -sf libformw.so    $destdir/lib64/libform.so
       ln -sf libmenuw.so    $destdir/lib64/libmenu.so
       ln -sf libncursesw.so $destdir/lib64/libncurses.so
@@ -348,7 +352,6 @@ ncurses = {
       ln -sf menuw.pc       $destdir/lib64/pkgconfig/menu.pc
       ln -sf ncursesw.pc    $destdir/lib64/pkgconfig/ncurses.pc
       ln -sf panelw.pc      $destdir/lib64/pkgconfig/panel.pc
-      printf "INPUT(libncursesw.so.6 -ltinfo)\n" > $destdir/lib64/libncursesw.so
    ]]
 };
 
@@ -462,6 +465,7 @@ libxcrypt = {
       "--enable-hashes=strong,glibc",
       "--enable-obsolete-api=no",
       "--disable-failure-tokens",
+      "PERL=/opt/perl/bin/perl",
    }
 };
 
