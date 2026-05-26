@@ -307,7 +307,7 @@ shadow = {
       "--disable-logind",
    },
    prep = [[
-       : > /usr/bin/passwd
+       : > /bin/passwd
        find man -name Makefile.in -exec sed -i 's/groups\.1 / /' {} \;
        sed -e 's/groups$(EXEEXT) //' \
            -e 's:/sbin:/bin:' \
@@ -459,6 +459,8 @@ tzdata = {
    build = "make",
    flags = { 
       "LIBDIR=/lib64", 
+      "BINDIR=/bin",
+      "MANDIR=/usr/man",
       "ZICDIR=/bin",
    }
 };
@@ -605,6 +607,10 @@ ed = {
    url = "https://ftp.gnu.org/gnu/ed/ed-1.22.5.tar.lz",
    sha3 = "4ea0864fb95c1cf81bdb5f91c008e23ea12590acc5cfc8df9bd298e08c68b105",
    build = "./configure",
+   flags = {
+      "--bindir=/bin",
+      "--mandir=/usr/man",
+   }
 };
 
 patch = {
