@@ -94,7 +94,6 @@ samurai = {
    sha3 = "9d4932b15b292f48917417322aa75bf0ed2335e029fc7b493329c9697ccd14ca",
    build = "make",
    flags = { "BINDIR=/bin", "MANDIR=/usr/man" },
-   post = [[ ln -sf samu $destdir/bin/ninja ]]
 };
 
 texinfo = {

@@ -69,6 +69,7 @@ ok.symlink("lib64",   "./lib")
 ok.symlink("pigz",    "./bin/gzip")
 ok.symlink("pkgconf", "./bin/pkg-config")
 ok.symlink("plzip",   "./bin/lzip")
+ok.symlink("samu",    "./bin/ninja")
 
 ------------------
 -- System Files --
