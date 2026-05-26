@@ -483,6 +483,7 @@ gcc-pass2 = {
       "--enable-default-ssp",
       "--enable-initfini-array",
       "--enable-languages=c,c++",
+      "--enable-static",
       "--enable-threads=posix",
       "--enable-tls",
       "--with-linker-hash-style=gnu",

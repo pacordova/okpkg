@@ -59,6 +59,7 @@ glibc = {
       "--enable-stack-protector=strong",
       "--disable-nscd",
       "--with-headers=/usr/include",
+      "PYTHON_PROG=/opt/python3.13/bin/python3.13",
       "libc_cv_slibdir=/lib64",
       "libc_cv_rtlddir=/lib64",
       "libc_cv_rootsbindir=/bin",
@@ -204,9 +205,8 @@ gmp = {
    url = "https://ftp.gnu.org/gnu/gmp/gmp-6.3.0.tar.xz",
    sha3 = "025f4fc3c5f68a0faae40cb8579dc7979eded558edfbc58ac030a072a6b5a6e7",
    build = "./configure",
-   flags = {
-      "--enable-cxx",
-   },
+   flags = { "--enable-cxx" },
+   prep = [[ sed -i '/long long t1;/,+1s/()/(...)/' configure ]]
 };
 
 mpfr = {
@@ -253,7 +253,7 @@ gcc16 = {
       "--disable-libssp",
       "--disable-libstdcxx-pch",
       "--disable-multilib",
-      "--enable-bootstrap",
+      "--disable-bootstrap",
       "--enable-checking=assert",
       "--enable-clocale=gnu",
       "--enable-__cxa_atexit",
@@ -261,6 +261,7 @@ gcc16 = {
       "--enable-default-ssp",
       "--enable-initfini-array",
       "--enable-languages=c,c++,fortran",
+      "--enable-static",
       "--enable-threads=posix",
       "--enable-tls",
       "--with-linker-hash-style=gnu",

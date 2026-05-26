@@ -6,7 +6,7 @@ CXX      = /bin/g++
 CXXV    != $(CXX) -dumpversion
 CXXM    != $(CXX) -dumpmachine
 CFLAGS   = -O2 -std=gnu99
-CXXFLAGS = -O2 -I/usr/include/c++/$(CXXV) -I/usr/include/c++/$(CXXV)/$(CXXM)
+CXXFLAGS = -O2
 LDFLAGS  = -lcrypto
 
 LUA_PATH  != lua -e "print(package.path:match('(.-)/%?.lua;'))"

@@ -29,6 +29,7 @@ ok.mkdir("./run/shm")
 ok.mkdir("./tmp")
 ok.mkdir("./usr")
 ok.mkdir("./usr/include")
+ok.mkdir("./usr/libexec")
 ok.mkdir("./usr/man")
 ok.mkdir("./usr/man/man1")
 ok.mkdir("./usr/man/man2")
@@ -61,14 +62,13 @@ ok.mkdir("./run/lock")
 --------------
 -- Symlinks --
 --------------
-ok.symlink("bash", "./bin/sh")
-ok.symlink("pigz", "./bin/gzip")
-ok.symlink("flex", "./bin/lex")
+ok.symlink("bash",    "./bin/sh")
+ok.symlink("flex",    "./bin/lex")
+ok.symlink("gcc",     "./bin/cc")
+ok.symlink("lbzip2",  "./bin/bzip2")
+ok.symlink("pigz",    "./bin/gzip")
 ok.symlink("pkgconf", "./bin/pkg-config")
-ok.symlink("/proc/self/mounts", "./etc/mtab")
-ok.symlink("./var/home", "./home")
---ok.symlink("./lib64", "lib")
---ok.symlink("./bin", "sbin")
+ok.symlink("plzip",   "./bin/lzip")
 ok.mkdir("./lib")
 
 ------------------
