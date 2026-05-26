@@ -71,6 +71,12 @@ function emerge(x)
    local X = extract(x)
    X.flags = X.flags or {}
 
+   if x:match("pass1") then
+      ok.unsetenv("CONFIG_SITE")
+   else
+      ok.setenv("CONFIG_SITE", "/etc/config.site")
+   end
+
    if X.prep then os.execute(X.prep) end
 
    if B[X.build] then
@@ -97,7 +103,6 @@ end
 -- Environment
 ok.setenv("CFLAGS", "-O2 -fstack-protector-strong -fstack-clash-protection -ftrivial-auto-var-init=zero -pipe")
 ok.setenv("CXXFLAGS", os.getenv("CFLAGS"))
-ok.setenv("CONFIG_SITE", "/etc/config.site")
 ok.setenv("PATH", "/mnt/tools/bin:/bin")
 ok.setenv("LC_ALL", "C")
 ok.setenv("destdir", "/mnt")

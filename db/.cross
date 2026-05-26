@@ -14,6 +14,8 @@ binutils-pass1 = {
       "--enable-new-dtags",
       "--enable-relro",
       "--without-system-zlib",
+      "CC=/bin/gcc",
+      "CXX=/bin/g++",
       "CONFIG_SITE=/dev/null",
    }
 };

@@ -283,7 +283,7 @@ os.execute([[
    chattr +i ./etc/resolv.conf
    cp -f  /etc/{protocols,services} ./etc
    cp -fp {/,./}etc/ssl/certs/ca-certificates.crt
-   cp -fr {/,./}lib64/dinit.d
+   cp -fr {/,./}etc/dinit.d
 ]])
 
 -----------

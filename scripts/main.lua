@@ -214,7 +214,7 @@ function makepkg(x)
          --owner=0 \
          --group=0 \
          --numeric-owner \
-         --use-compress-program=$lzip \
+         --lzip \
          --file=$PWD.tar.lz \
          --create .
       touch -hd "@$SOURCE_DATE_EPOCH" $PWD.tar.lz
