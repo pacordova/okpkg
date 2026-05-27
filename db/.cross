@@ -76,6 +76,7 @@ glibc = {
       "--enable-kernel=$(uname -r | cut -d . -f 1,2)",
       "--enable-bind-now",
       "--enable-stack-protector=strong",
+      "--exec-prefix=/",
       "--disable-nscd",
       "--with-headers=$destdir/usr/include",
       "PYTHON_PROG=/opt/python3.13/bin/python3.13",
@@ -387,6 +388,7 @@ util-linux = {
       "--build=$(config/config.guess)",
       "--disable-all-programs",
       "--enable-lib{blkid,fdisk,mount,smartcols,uuid}",
+      "--exec-prefix=/",
       "--without-{python,systemd}",
    }
 };

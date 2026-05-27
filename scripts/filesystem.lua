@@ -48,6 +48,9 @@ ok.mkdir("./usr/share/zoneinfo")
 ok.mkdir("./usr/src")
 ok.mkdir("./var")
 ok.mkdir("./var/cache")
+ok.mkdir("./var/cache/ok")
+ok.mkdir("./var/cache/ok/out")
+ok.mkdir("./var/cache/ok/pkg")
 ok.mkdir("./var/home")
 ok.mkdir("./var/log")
 ok.mkdir("./var/mail")
@@ -276,27 +279,17 @@ exec /bin/gcc -std=c99 "$@"
 fp:close()
 --------------------------------------------------------------------------------
 
+-- Misc
 os.execute([[
-   chmod 0755 ./bin/c99
    mknod -m 600 ./dev/console c 5 1
    mknod -m 666 ./dev/null c 1 3
    chattr +i ./etc/resolv.conf
+   chmod 0755 ./bin/c99
+   git clone --depth=1 {file:///,./}usr/okpkg
+   tar -xf /var/cache/ok/pkg/linux-lts-*.tar.lz
+   cp -a /var/cache/ok/pkg/linux-lts-*.tar.lz ./var/cache/ok/pkg
+   cp -a {/,./}etc/dinit.d
+   cp -a {/,./}var/cache/ok/dist
    cp -f  /etc/{protocols,services} ./etc
-   cp -fp {/,./}etc/ssl/certs/ca-certificates.crt
-   cp -fr {/,./}etc/dinit.d
-]])
-
------------
--- okpkg --
------------
-ok.mkdir("./usr/okpkg")
-ok.mkdir("./var/cache/ok")
-ok.mkdir("./var/cache/ok/out")
-ok.mkdir("./var/cache/ok/pkg")
-os.execute([[
-   git clone /usr/okpkg $destdir/usr/okpkg
-   git -C $destdir/usr/okpkg repack -adf --depth=1
-   tar -C $destdir -xf /var/cache/ok/pkg/linux-lts-*.tar.lz
-   cp -fp /var/cache/ok/pkg/linux-lts-*.tar.lz $destdir/var/cache/ok/pkg
-   cp -rp /var/cache/ok/dist $destdir/var/cache/ok/dist
+   cp -f {/,./}etc/ssl/certs/ca-certificates.crt
 ]])

@@ -65,7 +65,8 @@ glibc = {
       "libc_cv_slibdir=/lib64",
       "libc_cv_rtlddir=/lib64",
       "libc_cv_rootsbindir=/bin",
-   }
+   },
+   post = [[ mv $destdir{/sbin/*,/bin} ]]
 };
 
 zlib = {
@@ -195,12 +196,12 @@ binutils = {
       "--with-system-zlib",
    },
    post = [[
-      cd "$destdir"
-      mkdir ./usr/libexec 
-      mv ./lib64/bfd-plugins ./usr/libexec
-      ln -sf ../usr/libexec/bfd-plugins ./lib64/bfd-plugins
-      rm -fr ./usr/lib ./usr/x86*
-      rm -f  ./lib64/lib{bfd,ctf,ctf-nobfd,gprofng,opcodes,sframe}.a
+      cd "$destdir/lib64"
+      mkdir ../usr/libexec
+      mv bfd-plugins ../usr/libexec
+      ln -sf ../usr/libexec/bfd-plugins .
+      rm -fr ../usr/lib ../usr/x86*
+      rm -f  lib{bfd,ctf,ctf-nobfd,gprofng,opcodes,sframe}.a
    ]]
 };
 
@@ -278,7 +279,6 @@ gcc16 = {
       cd "$destdir"
       find . -name libgtkpeer.a  -exec rm -f '{}' +
       find . -name libgjsmalsa.a -exec rm -f '{}' +
-      printf '#!/bin/sh\nexec /bin/gcc -std=c99 "$@"\n' >> ./bin/c99
       chmod 0755 ./bin/c99
       mv {usr/,}lib64
    ]]
@@ -321,9 +321,10 @@ shadow = {
            -e 's:PREVENT_NO_AUTH superuser:PREVENT_NO_AUTH no:' \
            -i etc/login.defs
    ]],
-   post = [[ 
+   post = [[
       make -C man install DESTDIR=$destdir 
       mv $destdir{/usr/bin/*,/bin}
+      rmdir $destdir/usr/bin
    ]]
 };
 
@@ -353,7 +354,7 @@ ncurses = {
    },
    post = [[
       cd "$destdir/lib64" 
-      rm -f libncursesw.so ../usr/lib/terminfo
+      rm -fr libncursesw.so ../usr/lib
       printf "INPUT(libncursesw.so.6 -ltinfo)\n" >> libncursesw.so
       ln -sf libform{w,}.so
       ln -sf libmenu{w,}.so
@@ -719,10 +720,11 @@ util-linux = {
    sha3 = "113d8c05a6bf3ba0126fb23b409855332a7523409bb56a4f36caa98b85bb7b31",
    build = "./configure",
    flags = {
-      "--exec-prefix=/",
       "--disable-{chfn-chsh,login,nologin,su,setpriv,runuser,pylibmount,liblastlog2}",
+      "--exec-prefix=/",
       "--without-{python,systemd}",
    },
+   post = [[ mv $destdir{/sbin/*,/bin} ]]
 };
 
 e2fsprogs = {
@@ -829,8 +831,8 @@ efibootmgr = {
    flags = { "EFIDIR=GRUB", "efibootmgr" },
    post = [[
       mkdir -p $destdir{/bin,/usr/man/man8}
-      cp -f src/efibootmgr      $destdir/bin
-      cp -f src/efibootmgr.8.in $destdir/usr/man/man8/efibootmgr.8
+      cp -f ./src/efibootmgr      $destdir/bin
+      cp -f ./src/efibootmgr.8.in $destdir/usr/man/man8/efibootmgr.8
    ]]
 };
 
@@ -848,8 +850,8 @@ grub = {
    },
    post = [[
       cd "$destdir/lib64"
-      rm -f grub/*/*.module
-      rm -f grub/*/kernel.exec
-      rm -f grub/*/gdb_grub
+      rm -f ./grub/*/*.module
+      rm -f ./grub/*/kernel.exec
+      rm -f ./grub/*/gdb_grub
    ]]
 };

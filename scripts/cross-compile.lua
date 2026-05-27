@@ -41,7 +41,7 @@ function query(x)
    fp = io.open(string.format("%s/db/.cross", C.okdir))
    buf = "\n" .. fp:read("*a")
    fp:close()
-   buf = buf:match("\n?[^%w_]" .. x .. "%s*=%s*({.-})%s*;")
+   buf = buf:match("\n" .. x .. "%s*=%s*({.-})%s*;")
    return load("return " .. buf)()
 end
 
@@ -133,10 +133,10 @@ for i in buf:gmatch("\n([%w%-%+]-) = {.-;") do
 end
 
 -- Cleanup
---ok.chdir(os.getenv("destdir"))
---os.execute("mv ./sbin/* ./bin")
---os.remove_all("./sbin")
---os.execute("mv ./usr/lib64/* ./lib64")
---ok.remove_all("./usr/lib64")
---ok.remove_all("./x86_64-unknown-linux-gnu")
---ok.remove_all("./tools")
+ok.chdir(os.getenv("destdir"))
+os.execute("mv sbin/* bin")
+os.remove("sbin")
+os.execute("mv usr/lib64/* lib64")
+os.remove("usr/lib64")
+ok.remove_all("./usr/x86_64-unknown-linux-gnu")
+ok.remove_all("./tools")

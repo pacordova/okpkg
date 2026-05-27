@@ -194,19 +194,19 @@ function makepkg(x)
    -- Stripping
    io.close(
       (io.open(".nostrip") and os.remove(".nostrip")) or
-      io.popen [[
+      io.popen([[
          find . -name \*.a -o -name \*.o -exec strip -g '{}' + 2>/dev/null
          find . -exec file '{}' + \
          | awk -F: '(/executable/||/shared object/)&&/ELF/{print $1}' \
          | xargs strip --strip-unneeded 2>/dev/null
-      ]]
+      ]])
    )
 
    -- Delete unneeded, timestamp, etc.
    os.execute [[
       rm -fr usr/man/{de,fr,pl,pt_BR,ro,sv,uk}
       rm -fr usr/share/{doc,locale,gtk-doc}
-      find . -type d -empty -delete
+      #find . -type d -empty -delete
       find . -name \*.pyc -delete
       find . -name \*.la -delete
       $tar \
