@@ -823,16 +823,23 @@ efivar = {
 efibootmgr = {
    url = "https://github.com/rhboot/efibootmgr/releases/download/18/efibootmgr-18.tar.bz2",
    sha3 = "0ee98e9ee17940e4feb573ff5afb0d9e372fbed6f38449ee90c16e3e515b08ad",
-   build = "make_noinstall",
+   build = "make",
    flags = { 
-      "--directory=efibootmgr",
-      "libdir=/lib64",
-      "bindir=/bin",
-      "sbindir=/bin",
-      "mandir=/usr/man",
-      "includedir=/usr/include",
-      "libexecdir=/usr/libexec",
+      "EFIDIR=GRUB",
+      "EFI_LOADER=grubx64.efi",
+      --"libdir=/lib64",
+      --"bindir=/bin",
+      --"sbindir=/bin",
+      --"mandir=/usr/man",
+      --"includedir=/usr/include",
+      --"libexecdir=/usr/libexec",
    },
+   post = [[
+      #mkdir -p $destdir/bin 
+      #mkdir -p $destdir/usr/man/man8
+      #cp -f src/efibootmgr $destdir/bin
+      #cp -f src/efibootmgr.8.in $destdir/usr/man/man8/efibootmgr.8
+   ]]
 };
 
 grub = {
