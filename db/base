@@ -290,6 +290,7 @@ libcap = {
       "prefix=/usr", 
       "exec_prefix=/",
       "man_prefix=/usr",
+      "inc_prefix=/usr",
       "lib=lib64", 
       "sbin=bin"
    }
