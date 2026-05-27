@@ -838,20 +838,17 @@ grub = {
    build = "./configure",
    flags = {
       "--with-platform=efi",
-      "--target=x86_64",
       "--disable-efiemu",
       "--disable-grub-mkfont",
       "--disable-grub-mount",
       "{C,CPP,CXX,LD}FLAGS=",
    },
-   prep = [[ printf "depends bli part_gpt\n" > grub-core/extra_deps.lst ]],
    post = [[
-      cd $destdir/usr/lib64
-      rm -f grub/*/*.module
-      rm -f grub/*/*.image
-      rm -f grub/*/kernel.exec
-      rm -f grub/*/gdb_grub
-      rm -f grub/*/gmodule.pl
+      rm -f  $destdir/lib64/grub/*/*.module
+      rm -f  $destdir/lib64/grub/*/*.image
+      rm -f  $destdir/lib64/grub/*/kernel.exec
+      rm -f  $destdir/lib64/grub/*/gdb_grub
+      rm -f  $destdir/lib64/grub/*/gmodule.pl
       rm -fr $destdir/etc/bash_completion.d/grub
    ]]
 };
