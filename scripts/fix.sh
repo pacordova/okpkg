@@ -1,12 +1,10 @@
 #!/bin/bash
 
 # fstrim
-fstrim /
-fstrim /var
-fstrim /boot/efi
+/bin/fstrim -a
 
 # udev
-udevadm hwdb --update
+/bin/eudevadm hwdb --update
 
 # update manpages
 makewhatis /usr/share/man
@@ -31,8 +29,8 @@ pwconv && grpconv
 setcap cap_net_raw+p /bin/ping
 
 # dbus permissions
-chown root:messagebus /usr/libexec/dbus-daemon-launch-helper
-chmod 4750 /usr/libexec/dbus-daemon-launch-helper
+chown root:messagebus /usr/lib64/dbus-daemon-launch-helper
+chmod 4750 /usr/lib64/dbus-daemon-launch-helper
 
 # clock
 TZ=UTC0 date $(nc time.nist.gov 13 | awk -F'[-: ]' 'NR>1{print $3$4$5$6$2"."$7}')
