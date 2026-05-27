@@ -811,20 +811,28 @@ parted = {
 efivar = {
    url = "https://github.com/rhboot/efivar/archive/39/efivar-39.tar.gz",
    sha3 = "c1a40eb8583b23d3b31ce547d00e4cb4ac089add38f303e70f9629ea8852600a",
-   build = "make_install",
-   flags = { "libdir=/usr/lib64" }
+   build = "make",
+   flags = { 
+      "ENABLE_DOCS=0",
+      "LIBDIR=/lib64",
+      "BINDIR=/bin",
+      "MANDIR=/usr/man",
+   }
 };
 
 efibootmgr = {
    url = "https://github.com/rhboot/efibootmgr/releases/download/18/efibootmgr-18.tar.bz2",
    sha3 = "0ee98e9ee17940e4feb573ff5afb0d9e372fbed6f38449ee90c16e3e515b08ad",
    build = "make_noinstall",
-   flags = { "efibootmgr" },
-   post = [[
-      mkdir -p $destdir/usr/bin $destdir/usr/share/man/man8
-      cp -f src/efibootmgr $destdir/usr/bin
-      cp -f src/efibootmgr.8.in $destdir/usr/share/man/man8/efibootmgr.8
-   ]]
+   flags = { 
+      "--directory=efibootmgr",
+      "libdir=/lib64",
+      "bindir=/bin",
+      "sbindir=/bin",
+      "mandir=/usr/man",
+      "includedir=/usr/include",
+      "libexecdir=/usr/libexec",
+   },
 };
 
 grub = {
