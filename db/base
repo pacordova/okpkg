@@ -765,7 +765,8 @@ dinit = {
       "--bindir=/bin",
       "--mandir=/usr/man",
       "--sbindir=/bin",
-      "--enable-shutdown"
+      "--enable-shutdown",
+      "CXXFLAGS_EXTRA=-std=c++11",
    },
 };
 
