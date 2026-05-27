@@ -58,6 +58,7 @@ glibc = {
       "--enable-kernel=$(uname -r | cut -d . -f 1,2)",
       "--enable-bind-now",
       "--enable-stack-protector=strong",
+      "--exec-prefix=/",
       "--disable-nscd",
       "--with-headers=/usr/include",
       "PYTHON_PROG=/opt/python3.13/bin/python3.13",
@@ -320,7 +321,10 @@ shadow = {
            -e 's:PREVENT_NO_AUTH superuser:PREVENT_NO_AUTH no:' \
            -i etc/login.defs
    ]],
-   post = [[ make -C man install DESTDIR=$destdir ]]
+   post = [[ 
+      make -C man install DESTDIR=$destdir 
+      mv $destdir{/usr/bin/*,/bin}
+   ]]
 };
 
 ncurses = {
@@ -713,6 +717,7 @@ util-linux = {
    sha3 = "113d8c05a6bf3ba0126fb23b409855332a7523409bb56a4f36caa98b85bb7b31",
    build = "./configure",
    flags = {
+      "--exec-prefix=/",
       "--disable-{chfn-chsh,login,nologin,su,setpriv,runuser,pylibmount,liblastlog2}",
       "--without-{python,systemd}",
    },
