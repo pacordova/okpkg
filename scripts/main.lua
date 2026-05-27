@@ -139,7 +139,7 @@ function query(x)
          fp = io.open(i)
          buf = "\n" .. fp:read("*a")
          fp:close()
-         buf = buf:match("\n?[^%w_]" .. x .. "%s*=%s*({.-})%s*;")
+         buf = buf:match("\n" .. x .. "%s*=%s*({.-})%s*;")
       end
    end
    return load("return " .. buf)()

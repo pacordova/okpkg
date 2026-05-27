@@ -784,7 +784,7 @@ device-mapper = {
       "--disable-app-machineid",
       "--disable-sd-notify",
       "--disable-systemd-journal",
-      "--enable-pkgconfig" 
+      "--enable-pkgconfig",
       "--without-systemd",
    },
    post = [[
