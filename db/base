@@ -791,7 +791,7 @@ device-mapper = {
    build = "make_noinstall",
    flags = {
       "install_device-mapper",
-      "usrlibdir=$destdir/usr/lib64",
+      "usrlibdir=$destdir/lib64",
       "DESTDIR=$destdir",
    },
 };
