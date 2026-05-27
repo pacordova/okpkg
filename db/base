@@ -731,8 +731,8 @@ util-linux = {
       "--without-{python,systemd}",
       "ADJTIME_PATH=/etc/adjtime",
    },
-   prep = [[ sed -i 's:/sbin:/usr/bin:' disk-utils/fsck.c ]],
-   post = [[ cd $destdir && mv -f sbin/* bin && rmdir sbin ]]
+   prep = [[ sed -i 's:/sbin:/bin:' disk-utils/fsck.c ]],
+   --post = [[ cd $destdir && mv -f sbin/* bin && rmdir sbin ]]
 };
 
 e2fsprogs = {
