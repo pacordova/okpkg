@@ -30,7 +30,6 @@ st = {
    build = "make",
    flags = { 
       "PREFIX=/", 
-      "MANPREFIX=/usr/man",
       "APPPREFIX=/usr/share/applications",
    },
    post = [[ tic -sx st.info ]]

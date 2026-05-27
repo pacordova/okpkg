@@ -204,9 +204,8 @@ function makepkg(x)
 
    -- Delete unneeded, timestamp, etc.
    os.execute [[
-      rm -fr usr/man/{de,fr,pl,pt_BR,ro,sv,uk}
+      rm -fr usr/share/man/{de,fr,pl,pt_BR,ro,sv,uk}
       rm -fr usr/share/{doc,locale,gtk-doc}
-      #find . -type d -empty -delete
       find . -name \*.pyc -delete
       find . -name \*.la -delete
       $tar \

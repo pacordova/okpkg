@@ -6,8 +6,8 @@ perl = {
       "-Dprefix=/opt/perl",
       "-Duseshrplib",
       "-Dusethreads",
-      "-Dman1dir=/opt/perl/man/1",
-      "-Dman3dir=/opt/perl/man/3",
+      "-Dman1dir=/opt/perl/man/man1",
+      "-Dman3dir=/opt/perl/man/man3",
    },
    post = [[
       find $destdir -name \*.pod       -exec rm -f {} +

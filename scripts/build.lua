@@ -35,7 +35,7 @@ end
 --for i=1,#rebuilds do emerge(rebuilds[i]) end
 
 -- Fix versions and cleanup
-os.execute("makewhatis /usr/man")
+os.execute("makewhatis /usr/share/man")
 ok.chdir(C.pkgdir)
 --purge("_perl")
 --purge("_python3")

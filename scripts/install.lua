@@ -106,11 +106,10 @@ while #arg > 0 do
          rm -fr $destdir/usr/include
          rm -f  $destdir/lib64/*.[ao]
          rm -f  $destdir/bin/{localedef,ocspcheck,openssl}
-         rm -f  $destdir/usr/man/*1/openssl.1
-         rm -f  $destdir/usr/man/*8/ocspcheck.8
+         rm -f  $destdir/usr/share/man/man1/openssl.1
+         rm -f  $destdir/usr/share/man/man8/ocspcheck.8
          rm -f  $destdir/bin/pcre2{grep,test,-config}
-         rm -f  $destdir/usr/man/*1/pcre2{grep,test,-config}.1
-         rm -fr $destdir/usr/man
+         rm -f  $destdir/usr/share/man/man1/pcre2{grep,test,-config}.1
       ]]
    end
    table.remove(arg, 1)

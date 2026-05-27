@@ -76,7 +76,6 @@ zlib = {
    flags = { 
       "--eprefix=/", 
       "--libdir=/lib64", 
-      "--mandir=/usr/man",
       "--prefix=/usr", 
    },
 };
@@ -108,7 +107,6 @@ lzlib = {
    build = "./configure",
    flags = {
       "--libdir=/lib64",
-      "--mandir=/usr/man",
       "--enable-shared",
       "--disable-static",
    }
@@ -128,7 +126,6 @@ lz4 = {
       "bindir=/bin",
       "includedir=/usr/include",
       "libdir=/lib64", 
-      "mandir=/usr/man",
    }
 };
 
@@ -140,7 +137,6 @@ zstd = {
       "bindir=/bin",
       "includedir=/usr/include",
       "libdir=/lib64", 
-      "mandir=/usr/man",
    },
 };
 
@@ -404,7 +400,7 @@ pcre2 = {
       "--enable-unicode",
       "CFLAGS=-O3",
    },
-   post = [[ rm -fr $destdir{/bin,/usr/man/man1} ]]
+   post = [[ rm -fr $destdir{/bin,/usr/share/man/man1} ]]
 };
 
 grep = {
@@ -425,7 +421,7 @@ bash = {
    post = [[
       cd "$destdir"
       rm -f bin/bashbug
-      rm -f usr/man/man1/bashbug.1
+      rm -f usr/share/man/man1/bashbug.1
    ]]
 };
 
@@ -470,7 +466,6 @@ tzdata = {
    flags = { 
       "LIBDIR=/lib64", 
       "BINDIR=/bin",
-      "MANDIR=/usr/man",
       "ZICDIR=/bin",
    }
 };
@@ -558,8 +553,8 @@ findutils = {
    build = "./configure",
    post = [[
       rm -f $destdir/bin/{locate,updatedb}
-      rm -f $destdir/usr/man/man1/{locate,updatedb}.1
-      rm -f $destdir/usr/man/man5/locatedb.5
+      rm -f $destdir/usr/share/man/man1/{locate,updatedb}.1
+      rm -f $destdir/usr/share/man/man5/locatedb.5
       rm -f $destdir/usr/libexec/frcode
    ]]
 };
@@ -570,9 +565,9 @@ pigz = {
    build = "make_noinstall",
    flags = { "ZOP=", "CFLAGS='-O3 -DNOZOPFLI'" },
    post = [[
-      mkdir -p $destdir{/bin,/usr/man/man1}
+      mkdir -p $destdir{/bin,/usr/share/man/man1}
       cp -f  pigz   $destdir/bin/pigz
-      cp -f  pigz.1 $destdir/usr/man/man1/pigz.1
+      cp -f  pigz.1 $destdir/usr/share/man/man1/pigz.1
    ]]
 };
 
@@ -580,10 +575,7 @@ plzip = {
    url = "https://download.savannah.gnu.org/releases/lzip/plzip/plzip-1.13.tar.lz",
    sha3 = "d175ff72930a3d68ccee7ec09d82b86fe3d7b60af12c345718399058a4e94b37",
    build = "./configure",
-   flags = {
-      "--bindir=/bin",
-      "--mandir=/usr/man",
-   }
+   flags = { "--bindir=/bin" }
 };
 
 kbd = {
@@ -609,10 +601,7 @@ ed = {
    url = "https://ftp.gnu.org/gnu/ed/ed-1.22.5.tar.lz",
    sha3 = "4ea0864fb95c1cf81bdb5f91c008e23ea12590acc5cfc8df9bd298e08c68b105",
    build = "./configure",
-   flags = {
-      "--bindir=/bin",
-      "--mandir=/usr/man",
-   }
+   flags = { "--bindir=/bin" }
 };
 
 patch = {
@@ -649,7 +638,7 @@ lua = {
       "INSTALL_BIN=$destdir/bin",
       "INSTALL_INC=$destdir/usr/include",
       "INSTALL_LIB=$destdir/lib64",
-      "INSTALL_MAN=$destdir/usr/man/man1",
+      "INSTALL_MAN=$destdir/usr/share/man/man1",
       "INSTALL_LMOD=$destdir/usr/share/lua/5.5",
       "INSTALL_CMOD=$destdir/lib64/lua/5.5",
       "linux"
@@ -675,11 +664,11 @@ openvi = {
    flags = {
       "BINPREFIX=",
       "IUSGR=root:root",
-      "PREFIX=/",
+      "PREFIX=/usr",
    },
    prep = [[
       sed -i 's/escapetime=2/escapetime=1/' common/options.c
-      sed -i 's:share/man:usr/man:g;s:libexec:usr/libexec:g' GNUmakefile
+      sed -i 's:$(PREFIX)/bin:/bin:g' GNUmakefile
       sed -i 's/termio.h/termios.h/' cl/*.c ex/*.c
    ]],
 };
@@ -699,8 +688,7 @@ mandoc = {
    sha3 = "23db13cc9e5ca6f729c4211929b745f5d8a82f87827dbf97d64c6ab8a937152d",
    build = "./configure",
    prep = [[ 
-      printf "%s\n" MANDIR=/usr/man {,S}BINDIR=/bin \
-         >> configure.local
+      printf "%s\n" {,S}BINDIR=/bin >> configure.local
    ]]
 };
 
@@ -757,7 +745,6 @@ dinit = {
    build = "./configure",
    flags = { 
       "--bindir=/bin",
-      "--mandir=/usr/man",
       "--sbindir=/bin",
       "--enable-shutdown",
       "CXXFLAGS_EXTRA=-std=c++11",
@@ -820,7 +807,6 @@ efivar = {
       "ENABLE_DOCS=0",
       "LIBDIR=/lib64",
       "BINDIR=/bin",
-      "MANDIR=/usr/man",
    }
 };
 
@@ -830,9 +816,9 @@ efibootmgr = {
    build = "make_noinstall",
    flags = { "EFIDIR=GRUB", "efibootmgr" },
    post = [[
-      mkdir -p $destdir{/bin,/usr/man/man8}
+      mkdir -p $destdir{/bin,/usr/share/man/man8}
       cp -f ./src/efibootmgr      $destdir/bin
-      cp -f ./src/efibootmgr.8.in $destdir/usr/man/man8/efibootmgr.8
+      cp -f ./src/efibootmgr.8.in $destdir/usr/share/man/man8
    ]]
 };
 
