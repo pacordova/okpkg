@@ -5,6 +5,9 @@ fstrim /
 fstrim /var
 fstrim /boot/efi
 
+# udev
+udevadm hwdb --update
+
 # update manpages
 makewhatis /usr/share/man
 

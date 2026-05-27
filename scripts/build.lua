@@ -21,7 +21,7 @@ buf = "\n" .. fp:read("*a")
 fp:close()
 for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do
    emerge(i)
-   if i == "_python3" then
+   if i == "_python" then
       dofile("/usr/okpkg/scripts/python-bootstrap.lua")
       emerge("samurai")
    end

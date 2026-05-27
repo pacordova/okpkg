@@ -61,7 +61,7 @@ B = {
    end,
    ["make_noinstall"] = function(...)
       local arg = {
-         [0] = "/bin/make -j1",
+         [0] = "$make",
          ...
       }
       return os.execute(table.concat({arg[0], unpack(arg)}, " "))

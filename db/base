@@ -34,18 +34,19 @@ _perl = {
       "-Dprefix=/opt/perl",
       "-Duseshrplib",
       "-Dusethreads",
-      "-Dman1dir=/opt/perl/man/1",
-      "-Dman3dir=/opt/perl/man/3",
+      "-Dman1dir=/opt/perl/man/man1",
+      "-Dman3dir=/opt/perl/man/man3",
    },
    post = [[
-      find $destdir -name \*.pod       -exec rm -f {} +
-      find $destdir -name .packlist    -exec rm -f {} +
-      find $destdir -name README\*     -exec rm -f {} +
-      find $destdir -name TODO\*       -exec rm -f {} +
-      find $destdir -name Change\*     -exec rm -f {} +
-      find $destdir -name \*.bs        -exec rm -f {} +
-      find $destdir -name \*.0 -type f -exec rm -f {} +
-      find $destdir/opt/perl/lib  -type f -exec chmod 644 {} +
+      cd "$destdir/opt"
+      find . -name \*.pod       -exec rm -f     {} +
+      find . -name .packlist    -exec rm -f     {} +
+      find . -name README\*     -exec rm -f     {} +
+      find . -name TODO\*       -exec rm -f     {} +
+      find . -name Change\*     -exec rm -f     {} +
+      find . -name \*.bs        -exec rm -f     {} +
+      find . -name \*.0 -type f -exec rm -f     {} +
+      find ./perl/lib   -type f -exec chmod 644 {} +
    ]]
 };
 
@@ -86,11 +87,9 @@ bzip2 = {
    post = [[
       mkdir -p $destdir{/usr/include,/lib64}
       cp -f bzlib.h $destdir/usr/include
-      cp -f libbz2.so.* $destdir/lib64
       chmod a+r $destdir/usr/include/bzlib.h
+      cp -a  libbz2.so.*     $destdir/lib64
       ln -sf libbz2.so.1.0.8 $destdir/lib64/libbz2.so
-      ln -sf libbz2.so.1.0.8 $destdir/lib64/libbz2.so.1
-      ln -sf libbz2.so.1.0.8 $destdir/lib64/libbz2.so.1.0
    ]]
 };
 
@@ -159,9 +158,7 @@ file = {
    url = "https://astron.com/pub/file/file-5.47.tar.gz",
    sha3 = "67b80afde4da7123463ed3758d0f9340852551da8dc507f61e515642ae793e57",
    build = "./configure",
-   flags = { 
-      "--enable-libseccomp",
-   }
+   flags = { "--enable-libseccomp" }
 };
 
 m4 = {
@@ -197,8 +194,12 @@ binutils = {
       "--with-system-zlib",
    },
    post = [[
-      rm -f  $destdir/lib64/lib{bfd,ctf,ctf-nobfd,gprofng,opcodes,sframe}.a
-      rm -fr $destdir/lib/ldscripts
+      cd "$destdir"
+      mkdir ./usr/libexec 
+      mv ./lib64/bfd-plugins ./usr/libexec
+      ln -sf ../usr/libexec/bfd-plugins ./lib64/bfd-plugins
+      rm -fr ./usr/lib ./usr/x86*
+      rm -f  ./lib64/lib{bfd,ctf,ctf-nobfd,gprofng,opcodes,sframe}.a
    ]]
 };
 
@@ -206,17 +207,17 @@ gmp = {
    url = "https://ftp.gnu.org/gnu/gmp/gmp-6.3.0.tar.xz",
    sha3 = "025f4fc3c5f68a0faae40cb8579dc7979eded558edfbc58ac030a072a6b5a6e7",
    build = "./configure",
-   flags = { "--enable-cxx" },
-   prep = [[ sed -i '/long long t1;/,+1s/()/(...)/' configure ]]
+   flags = { 
+      "--enable-cxx",
+      'CFLAGS="$CFLAGS -std=gnu17"'
+   },
 };
 
 mpfr = {
    url = "https://ftp.gnu.org/gnu/mpfr/mpfr-4.2.2.tar.xz",
    sha3 = "f900bec0f89f35bf5fa792079aaeea5705be2f5b965e014f7bc9663309d09e02",
    build = "./configure",
-   flags = { 
-      "--enable-thread-safe",
-   }
+   flags = { "--enable-thread-safe" }
 };
 
 libmpc = {
@@ -273,12 +274,12 @@ gcc16 = {
       "LD=ld",
    },
    post = [[
-      find $destdir -name libgtkpeer.a  -exec rm -f '{}' +
-      find $destdir -name libgjsmalsa.a -exec rm -f '{}' +
-      >>$destdir/bin/c99 printf '#!/bin/sh\n'
-      >>$destdir/bin/c99 printf 'exec /bin/gcc -std=c99 "$@"\n'
-      chmod 0755 $destdir/bin/c99
-      mv $destdir{/usr,}/lib64
+      cd "$destdir"
+      find . -name libgtkpeer.a  -exec rm -f '{}' +
+      find . -name libgjsmalsa.a -exec rm -f '{}' +
+      printf '#!/bin/sh\nexec /bin/gcc -std=c99 "$@"\n' >> ./bin/c99
+      chmod 0755 ./bin/c99
+      mv {usr/,}lib64
    ]]
 };
 
@@ -396,7 +397,7 @@ pcre2 = {
       "--enable-unicode",
       "CFLAGS=-O3",
    },
-   post = [[ rm -fr $destdir/usr/bin $destdir/usr/share/man/man1 ]]
+   post = [[ rm -fr $destdir{/bin,/usr/man/man1} ]]
 };
 
 grep = {
@@ -415,9 +416,9 @@ bash = {
       "--without-bash-malloc",
    },
    post = [[
-      ln -s bash $destdir/usr/bin/sh
-      rm -f $destdir/usr/bin/bashbug
-      rm -f $destdir/usr/share/man/man1/bashbug.1
+      cd "$destdir"
+      rm -f bin/bashbug
+      rm -f usr/man/man1/bashbug.1
    ]]
 };
 
@@ -438,14 +439,15 @@ expat = {
    url = "https://downloads.sourceforge.net/expat/expat-2.8.1.tar.lz",
    sha3 = "a75e4f16308862677fe7a8b2e5ae0fc18e97d35a9337c17c114de5d0407fe1ea",
    build = "./configure",
-   flags = { "--without-{docbook,examples,tests,xmlwf}" }
+   flags = { 
+      "--without-{docbook,examples,tests,xmlwf}",
+   }
 };
 
 less = {
    url = "https://www.greenwoodsoftware.com/less/less-692.tar.gz",
    sha3 = "18bd903bcfd8eaa5f4d7d40bb412a0ed2fc4d693a52763bf463f08de74d5ff46",
    build = "./configure",
-   flags = { "--with-regex=pcre2" }
 };
 
 gawk = {
@@ -482,9 +484,7 @@ libressl = {
    url = "https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-4.3.1.tar.gz",
    sha3 = "02292bd1fc5a4b91858becdff740b83bec3707cd8e803f12785d9b53941578d9",
    build = "./configure",
-   flags = { 
-      "--with-openssldir=/etc/ssl", 
-   },
+   flags = { "--with-openssldir=/etc/ssl" },
 };
 
 kmod = {
@@ -496,7 +496,7 @@ kmod = {
       "-Ddistconfdir=/lib64",
       "-D{bash,fish,zsh}completiondir=no",
       "-D{openssl,xz,zlib,zstd}=disabled",
-      "-Dmanpages=false", --scdoc
+      "-Dmanpages=false", -- requires scdoc
    }
 };
 
@@ -511,11 +511,10 @@ libelf = {
       "--program-prefix='eu-'",
    },
    post = [[
-      rm -fr $destdir
-      make -C libelf install DESTDIR=$destdir
+      rm -fr $destdir 
       mkdir -p $destdir/lib64/pkgconfig
+      make -C libelf install DESTDIR=$destdir
       cp -f config/libelf.pc $destdir/lib64/pkgconfig
-      rm -f $destdir/lib64/*.a
    ]]
 };
 
@@ -524,7 +523,7 @@ libffi = {
    sha3 = "e4a5bbcde6c10f24034dc61b66bb95525539f8dc71221764b658df126fe4d409",
    build = "./configure",
    flags = { 
-      "--with-gcc-arch=syklake", 
+      "--with-gcc-arch=skylake",
       "--disable-exec-static-tramp",
    }
 };
@@ -536,8 +535,7 @@ coreutils = {
    flags = {
       "--enable-install-program=hostname",
       "--enable-no-install-program=kill,uptime",
-      "--without-openssl",
-      "FORCE_UNSAFE_CONFIGURE=1",
+      --"--without-openssl",
    }
 };
 
@@ -552,26 +550,22 @@ findutils = {
    sha3 = "4f3f69efaf206112030eafe1dab9f93e6edc132d1424b0756df091f553a83a54",
    build = "./configure",
    post = [[
-      rm -f $destdir/usr/bin/{locate,updatedb}
-      rm -f $destdir/usr/share/man/man1/{locate,updatedb}.1
-      rm -f $destdir/share/man/man5/locatedb.5
-      rm -f $destdir/usr/lib64/frcode
+      rm -f $destdir/bin/{locate,updatedb}
+      rm -f $destdir/usr/man/man1/{locate,updatedb}.1
+      rm -f $destdir/usr/man/man5/locatedb.5
+      rm -f $destdir/usr/libexec/frcode
    ]]
 };
 
 pigz = {
    url = "https://zlib.net/pigz/pigz-2.8.tar.gz",
    sha3 = "530248da5b27562503cfcfa6b96d2d483e7ae5c7acb088e0b2e3cdb33164a1a8",
-   build = "make",
+   build = "make_noinstall",
    flags = { "ZOP=", "CFLAGS='-O3 -DNOZOPFLI'" },
-   prep = [[ : > install ]],
    post = [[
-      mkdir -p $destdir/bin
-      mkdir -p $destdir/usr/man/man1
+      mkdir -p $destdir{/bin,/usr/man/man1}
       cp -f  pigz   $destdir/bin/pigz
-      cp -f  unpigz $destdir/bin/unpigz
       cp -f  pigz.1 $destdir/usr/man/man1/pigz.1
-      ln -sf pigz   $destdir/bin/gzip
    ]]
 };
 
@@ -632,9 +626,9 @@ cpio = {
    build = "./configure",
    flags = {
       "--enable-mt",
-      "--with-rmt=/usr/bin/rmt",
-      "CC=c99",
-   },
+      "--with-rmt=/usr/libexec/rmt",
+      'CFLAGS="$CFLAGS -std=gnu17"'
+   }
 };
 
 lua = {
@@ -654,7 +648,7 @@ lua = {
       "linux"
    },
    post = [[
-      cd $destdir/lib64
+      cd "$destdir/lib64"
       ln -sf liblua.so.5.5.0 liblua.so.5.5
       ln -sf liblua.so.5.5.0 liblua.so
       mkdir -p pkgconfig && cd pkgconfig
@@ -672,15 +666,14 @@ openvi = {
    sha3 = "c00033f27f786ec5d0878d87b71746072fb06af23766ff4e62df4b1831ba6d4c",
    build = "make",
    flags = {
-      "BINPREFIX=''",
+      "BINPREFIX=",
       "IUSGR=root:root",
-      "CC=gcc",
-      "OPTLEVEL=-O2",
-      "PREFIX=/usr",
+      "PREFIX=/",
    },
    prep = [[
-      sed -i 's/termio.h/termios.h/' cl/*.c ex/*.c
       sed -i 's/escapetime=2/escapetime=1/' common/options.c
+      sed -i 's:share/man:usr/man:g;s:libexec:usr/libexec:g' GNUmakefile
+      sed -i 's/termio.h/termios.h/' cl/*.c ex/*.c
    ]],
 };
 
@@ -688,37 +681,30 @@ eudev = {
    url = "https://github.com/eudev-project/eudev/releases/download/v3.2.14/eudev-3.2.14.tar.gz",
    sha3 = "334ad42e160b69c29170b4c19585568dda738c4dc516bb1e764bc565d1d4cddb",
    build = "./configure",
-   flags = { "--program-prefix=e" },
    prep = [[
-      sed -e '/udevdir/a udev_dir=${udevdir}' -i src/udev/udev.pc.in
-      sed -e 's/GROUP="sgx", //'              -i rules/50-udev-default.rules
+      sed -i '/udevdir/a udev_dir=${udevdir}' src/udev/udev.pc.in
+      sed -i 's/GROUP="sgx", //'              rules/50-udev-default.rules
    ]],
-   post = [[
-      UDEV_HWDB_PATH=$destdir/etc/udev/hwdb.d \
-      $destdir/usr/bin/eudevadm hwdb -uo "$destdir/usr/lib64/udev/hwdb.bin"
-   ]]
 };
 
 mandoc = {
    url = "https://mandoc.bsd.lv/snapshots/mandoc-1.14.6.tar.gz",
    sha3 = "23db13cc9e5ca6f729c4211929b745f5d8a82f87827dbf97d64c6ab8a937152d",
    build = "./configure",
-   prep = [[
-      printf "PREFIX=/\n" >> configure.local
-      printf "LIBDIR=/lib64\n" >> configure.local
-      printf "MANDIR=/usr/man\n" >> configure.local
-      printf "SBINDIR=/bin\n" >> configure.local
+   prep = [[ 
+      printf "%s\n" MANDIR=/usr/man {,S}BINDIR=/bin \
+         >> configure.local
    ]]
 };
 
 procps-ng = {
-   url = "https://prdownloads.sourceforge.net/procps-ng/procps-ng-4.0.6.tar.xz",
+   url = "https://downloads.sourceforge.net/procps-ng/procps-ng-4.0.6.tar.xz",
    sha3 = "db86731acda819e3e585edd97732bdfa1cc08be0c49b4a1bb3805bb0fccf4648",
    build = "./configure",
    flags = {
       "--disable-modern-top",
       "--disable-kill",
-      "--without-systemd",
+      "--enable-watch8bit",
    }
 };
 
@@ -727,20 +713,19 @@ util-linux = {
    sha3 = "113d8c05a6bf3ba0126fb23b409855332a7523409bb56a4f36caa98b85bb7b31",
    build = "./configure",
    flags = {
-      "--disable-{chfn-chsh,login,nologin,su,setpriv,runuser,pylibmount}",
-      "--disable-{liblastlog2,pam-lastlog2}",
+      "--disable-{chfn-chsh,login,nologin,su,setpriv,runuser,pylibmount,liblastlog2}",
       "--without-{python,systemd}",
-      "ADJTIME_PATH=/etc/adjtime",
    },
-   prep = [[ sed -i 's:/sbin:/bin:' disk-utils/fsck.c ]],
-   --post = [[ cd $destdir && mv -f sbin/* bin && rmdir sbin ]]
 };
 
 e2fsprogs = {
    url = "https://downloads.sourceforge.net/e2fsprogs/e2fsprogs-1.47.4.tar.gz",
    sha3 = "3eb6e308727ded8f7a42fad7bd075aaab7e693112e67788caeeefbeafe939e92",
    build = "./configure",
-   flags = { "--enable-elf-shlibs", "--disable-{libblkid,libuuid,uuidd}" },
+   flags = { 
+      "--disable-{fsck,libblkid,libuuid,uuidd}",
+      "--enable-elf-shlibs", 
+   }
 };
 
 dosfstools = {
@@ -784,28 +769,38 @@ dbus = {
 
 --------------------------------------------------------------------------------
 
+libaio = {
+   url = "https://pagure.io/libaio/archive/libaio-0.3.113/libaio-0.3.113.tar.gz",
+   sha3 = "c4f6f1398bb02d365498ab4bd631ab8ae5fd52d0f9404fc4d815f523a885b4ec",
+   build = "make",
+   flags = { "libdir=/lib64" },
+};
+
 device-mapper = {
    url = "https://gitlab.com/lvmteam/lvm2/-/archive/v2_03_41/lvm2-2.03.41.tar.gz",
    sha3 = "0527df7ad9ef2d6f9ed381ad430099c5208820c342fc50b5e4c1c8579a268f4c",
-   prep = "./configure",
-   build = "make_noinstall",
-   flags = {
-      "install_device-mapper",
-      "usrlibdir=$destdir/lib64",
-      "DESTDIR=$destdir",
+   build = "./configure",
+   flags = { 
+      "--disable-app-machineid",
+      "--disable-sd-notify",
+      "--disable-systemd-journal",
+      "--enable-pkgconfig" 
+      "--without-systemd",
    },
+   post = [[
+      rm -fr $destdir
+      make install_device-mapper DESTDIR=$destdir
+   ]]
 };
 
 parted = {
    url = "https://ftp.gnu.org/gnu/parted/parted-3.7.tar.xz",
    sha3 = "09ec25a3377f3c460ee01ebc439619e74c7102f8910ad427234e8f89f5e0b1f3",
    build = "./configure",
-   flags = {
+   flags = { 
       "--enable-device-mapper",
-      "--enable-debug=yes",
       "--with-readline",
-      "CC=c99",
-   },
+   }
 };
 
 efivar = {
@@ -842,13 +837,12 @@ grub = {
       "--disable-grub-mkfont",
       "--disable-grub-mount",
       "{C,CPP,CXX,LD}FLAGS=",
+      "PYTHON=/opt/python3.13/bin/python3.13",
    },
    post = [[
-      rm -f  $destdir/lib64/grub/*/*.module
-      rm -f  $destdir/lib64/grub/*/*.image
-      rm -f  $destdir/lib64/grub/*/kernel.exec
-      rm -f  $destdir/lib64/grub/*/gdb_grub
-      rm -f  $destdir/lib64/grub/*/gmodule.pl
-      rm -fr $destdir/etc/bash_completion.d/grub
+      cd "$destdir/lib64"
+      rm -f grub/*/*.module
+      rm -f grub/*/kernel.exec
+      rm -f grub/*/gdb_grub
    ]]
 };
