@@ -352,16 +352,18 @@ ncurses = {
       "--with-xterm-kbs=del",
    },
    post = [[
-      rm -f  $destdir/lib64/libncursesw.so
-      printf "INPUT(libncursesw.so.6 -ltinfo)\n" > $destdir/lib64/libncursesw.so
-      ln -sf libformw.so    $destdir/lib64/libform.so
-      ln -sf libmenuw.so    $destdir/lib64/libmenu.so
-      ln -sf libncursesw.so $destdir/lib64/libncurses.so
-      ln -sf libpanelw.so   $destdir/lib64/libpanel.so
-      ln -sf formw.pc       $destdir/lib64/pkgconfig/form.pc
-      ln -sf menuw.pc       $destdir/lib64/pkgconfig/menu.pc
-      ln -sf ncursesw.pc    $destdir/lib64/pkgconfig/ncurses.pc
-      ln -sf panelw.pc      $destdir/lib64/pkgconfig/panel.pc
+      cd "$destdir/lib64" 
+      rm -f libncursesw.so ../usr/lib/terminfo
+      printf "INPUT(libncursesw.so.6 -ltinfo)\n" >> libncursesw.so
+      ln -sf libform{w,}.so
+      ln -sf libmenu{w,}.so
+      ln -sf libncurses{w,}.so
+      ln -sf libpanel{w,}.so
+      cd "$destdir/lib64/pkgconfig"
+      ln -sf form{w,}.pc
+      ln -sf menu{w,}.pc
+      ln -sf ncurses{w,}.pc
+      ln -sf panel{w,}.pc
    ]]
 };
 
