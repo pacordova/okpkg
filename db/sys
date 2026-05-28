@@ -827,3 +827,15 @@ grub = {
       rm -f ./grub/*/gdb_grub
    ]]
 };
+
+dbus = {
+   url = "https://dbus.freedesktop.org/releases/dbus/dbus-1.16.2.tar.xz",
+   sha3 = "f28f013111fb8d51e3c9ac335c9357d0b466debd56f94c328569c13140daf652",
+   build = "meson",
+   flags = {
+      "-Ddbus_user=messagebus",
+      "-Dsystem_pid_file=/run/dbus/pid",
+      "-Dsystemd_{system,user}_unitdir=no",
+      "-Dsystem_socket=/run/dbus/system_bus_socket",
+   },
+};
