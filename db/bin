@@ -68,10 +68,10 @@ nodejs = {
 };
 
 signal-desktop = {
-   url = "https://updates.signal.org/desktop/apt/pool/s/signal-desktop/signal-desktop_8.11.0_amd64.deb",
-   sha3 = "3008addb2840022bd0347322dedeb1412794f8f158970b2419d55bc9e4b5e834",
+   url = "https://updates.signal.org/desktop/apt/pool/s/signal-desktop/signal-desktop_8.12.0_amd64.deb",
+   sha3 = "bb7f27504abf1908def25688bdf9e98cb091a59979c59bbe6a740e70b4cf4eab",
    post = [[
-      ar p /var/cache/ok/dist/signal-desktop_8.11.0_amd64.deb data.tar.xz \
+      ar p /var/cache/ok/dist/signal-desktop_8.12.0_amd64.deb data.tar.xz \
       | $tar -C "$destdir" -xJ
    ]]
 };

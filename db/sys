@@ -449,8 +449,8 @@ expat = {
 };
 
 less = {
-   url = "https://www.greenwoodsoftware.com/less/less-692.tar.gz",
-   sha3 = "18bd903bcfd8eaa5f4d7d40bb412a0ed2fc4d693a52763bf463f08de74d5ff46",
+   url = "https://www.greenwoodsoftware.com/less/less-702.tar.gz",
+   sha3 = "ca71fa1424952f19c9b8b74a4c8e2c32c8a29031c7dbbe7b550a75187f2959f9",
    build = "./configure",
 };
 
@@ -484,8 +484,8 @@ libxcrypt = {
 };
 
 libressl = {
-   url = "https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-4.3.1.tar.gz",
-   sha3 = "02292bd1fc5a4b91858becdff740b83bec3707cd8e803f12785d9b53941578d9",
+   url = "https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-4.3.2.tar.gz",
+   sha3 = "7176910fd1e6a3f1f0e3bf97d3cfaed9ce21e862190a8fa24a7bd2e2f38702fc",
    build = "./configure",
    flags = { "--with-openssldir=/etc/ssl" },
 };
@@ -580,8 +580,8 @@ plzip = {
 };
 
 kbd = {
-   url = "https://kernel.org/pub/linux/utils/kbd/kbd-2.9.0.tar.xz",
-   sha3 = "48f9f1ab135088c9d11e8a425982c94e000b6c8ec9c3bfd666b584e8bfcf71a1",
+   url = "https://kernel.org/pub/linux/utils/kbd/kbd-2.10.0.tar.xz",
+   sha3 = "5caf4134a3e4c3e07361f23e285c7103c0e819e675986b071b16d624fbff7f0d",
    build = "./configure",
    flags = { "--disable-vlock" },
    prep = [[

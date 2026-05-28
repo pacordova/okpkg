@@ -74,8 +74,8 @@ libdisplay-info = {
 };
 
 libxfce4windowing = {
-   url = "https://archive.xfce.org/src/xfce/libxfce4windowing/4.20/libxfce4windowing-4.20.5.tar.bz2",
-   sha3 = "814d4b4a66e129009dc98c51ea74ddd83e581bca001d233ba6c26fe1cae52976",
+   url = "https://archive.xfce.org/src/xfce/libxfce4windowing/4.20/libxfce4windowing-4.20.6.tar.bz2",
+   sha3 = "10eaf8c13dc6fe667a70178b7ea020880d77562c4a0872b637c3a8c7c3b28925",
    build = "./configure",
    flags = { 
       "--enable-x11",

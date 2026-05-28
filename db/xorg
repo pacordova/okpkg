@@ -437,8 +437,8 @@ xorg-xlsatoms = {
 };
 
 xorg-xlsclients = {
-   url = "https://x.org/pub/individual/app/xlsclients-1.1.5.tar.xz",
-   sha3 = "c9b522501f360db699ffa7f473e00dc31a587a840dcb7fc3a0c85cb8fb06f69a",
+   url = "https://x.org/pub/individual/app/xlsclients-1.1.6.tar.xz",
+   sha3 = "aa23c1a901d99d95eb32cdf4953c20601e88ff3867dfacc3f19c34ef64580640",
    build = "./configure",
 };
 

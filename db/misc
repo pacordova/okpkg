@@ -111,8 +111,8 @@ _gcc = {
 };
 
 ghostscript = {
-   url = "https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs10070/ghostscript-10.07.0.tar.xz",
-   sha3 = "e1857b92cfccd2ee6ea881128b865123d1973a08be9bd646b241191c7151af8e",
+   url = "https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs10071/ghostscript-10.07.1.tar.xz",
+   sha3 = "58fbdcd8a120a4a65df0f0a1ab1af98700a26d5401e3d7fea8e95a83fd3a7dbf",
    build = "./configure",
    flags = {
       "--disable-{compile-inits,cups}",
@@ -433,8 +433,8 @@ libtorrent-rasterbar = {
 };
 
 linux-lts = {
-   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.18.32.tar.xz",
-   sha3 = "d5963e7f8ce14ed39281bee6da2b9e18dd71a24e1cde75338626f257cc80456b",
+   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.18.33.tar.xz",
+   sha3 = "a3a46c87e849fe9394e6b5c05a5fe2840064cea85a58595ac4777f23e5defea1",
    build = "make_install",
    flags = {
       "headers_install",
@@ -584,8 +584,8 @@ sxiv = {
 };
 
 tmux = {
-   url = "https://github.com/tmux/tmux/releases/download/3.6a/tmux-3.6a.tar.gz",
-   sha3 = "51664510055598779ae7fcd1fc9c703b5960da38f9285f77b876211b0e4996c3",
+   url = "https://github.com/tmux/tmux/releases/download/3.6b/tmux-3.6b.tar.gz",
+   sha3 = "b22efde83eba84fbae9911517254aaa9c6a0b1d5c59c09975ae999a1686b1911",
    build = "./configure",
 };
 

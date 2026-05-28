@@ -29,8 +29,8 @@ freetype2 = {
 };
 
 fontconfig = {
-   url = "https://gitlab.freedesktop.org/api/v4/projects/890/packages/generic/fontconfig/2.17.1/fontconfig-2.17.1.tar.xz",
-   sha3 = "ca8194917090d1c80d8ea644d62f615fbefebdf1e094a71bf19d83ca93298967",
+   url = "https://gitlab.freedesktop.org/api/v4/projects/890/packages/generic/fontconfig/2.18.0/fontconfig-2.18.0.tar.xz",
+   sha3 = "91398cd7a758c88be5f4436cda71ad60c31924281f667d738facaa283dd04dd8",
    build = "./configure",
    flags = { "--disable-docs" }
 };
