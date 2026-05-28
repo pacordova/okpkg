@@ -62,11 +62,13 @@ glibc = {
       "--disable-nscd",
       "--with-headers=/usr/include",
       "PYTHON_PROG=/opt/python3.13/bin/python3.13",
-      "libc_cv_slibdir=/lib64",
-      "libc_cv_rtlddir=/lib64",
-      "libc_cv_rootsbindir=/bin",
    },
-   post = [[ mv $destdir{/sbin/*,/bin} ]]
+   prep = [[
+      printf "%s\n" rootsbindir=/bin >> configparms
+      printf "%s\n" sbindir=/bin     >> configparms
+      printf "%s\n" slibdir=/lib64   >> configparms
+      printf "%s\n" rtlddir=/lib64   >> configparms
+   ]]
 };
 
 zlib = {
