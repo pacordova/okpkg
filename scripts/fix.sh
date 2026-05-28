@@ -4,7 +4,7 @@
 /bin/fstrim -a
 
 # udev
-/bin/udevadm hwdb --update
+#/bin/udevadm hwdb --update
 
 # update manpages
 makewhatis /usr/share/man
