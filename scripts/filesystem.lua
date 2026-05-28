@@ -65,6 +65,7 @@ ok.mkdir("./var/spool")
 --------------
 -- Symlinks --
 --------------
+ok.symlink("/opt/python3.13/bin/python3", "./bin/python3")
 ok.symlink("bash",    "./bin/sh")
 ok.symlink("flex",    "./bin/lex")
 ok.symlink("gcc",     "./bin/cc")
