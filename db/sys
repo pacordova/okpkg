@@ -58,7 +58,6 @@ glibc = {
       "--enable-kernel=$(uname -r | cut -d . -f 1,2)",
       "--enable-bind-now",
       "--enable-stack-protector=strong",
-      "--exec-prefix=/",
       "--disable-nscd",
       "--with-headers=/usr/include",
       "PYTHON_PROG=/opt/python3.13/bin/python3.13",
@@ -68,6 +67,9 @@ glibc = {
       printf "%s\n" sbindir=/bin     >> configparms
       printf "%s\n" slibdir=/lib64   >> configparms
       printf "%s\n" rtlddir=/lib64   >> configparms
+      printf "%s\n" auditdir=/lib64  >> configparms
+      sed -i 's:LD_AUDIT=.*:LD_AUDIT=/lib64/sotruss-lib.so:' \
+         ../elf/sotruss.sh
    ]]
 };
 
