@@ -795,6 +795,7 @@ parted = {
    url = "https://ftp.gnu.org/gnu/parted/parted-3.7.tar.xz",
    sha3 = "09ec25a3377f3c460ee01ebc439619e74c7102f8910ad427234e8f89f5e0b1f3",
    build = "./configure",
+   flags = { "--disable-device-mapper" },
 };
 
 efivar = {
