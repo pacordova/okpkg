@@ -771,6 +771,7 @@ device-mapper = {
       "--disable-sd-notify",
       "--disable-systemd-journal",
       "--enable-pkgconfig",
+      "--with-usrlibdir=/lib64",
       "--without-systemd",
    },
    post = [[
