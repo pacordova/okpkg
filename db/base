@@ -125,7 +125,8 @@ lz4 = {
    flags = { 
       "bindir=/bin",
       "includedir=/usr/include",
-      "libdir=/lib64", 
+      "libdir=/lib64",
+      "prefix=/usr",
    }
 };
 
@@ -133,10 +134,11 @@ zstd = {
    url = "https://github.com/facebook/zstd/releases/download/v1.5.7/zstd-1.5.7.tar.gz",
    sha3 = "8eaf8a9c9ed5c5ef7a3f1bc68f6e1ab254d8b5947ea9d55455f0a403fa006e6c",
    build = "make",
-   flags = { 
+   flags = {
       "bindir=/bin",
       "includedir=/usr/include",
-      "libdir=/lib64", 
+      "libdir=/lib64",
+      "prefix=/usr",
    },
 };
 
@@ -687,7 +689,8 @@ mandoc = {
    sha3 = "23db13cc9e5ca6f729c4211929b745f5d8a82f87827dbf97d64c6ab8a937152d",
    build = "./configure",
    prep = [[ 
-      printf "%s\n" {,S}BINDIR=/bin >> configure.local
+      printf "%s\n" PREFIX=/usr/share {,S}BINDIR=/bin \
+         >> configure.local
    ]]
 };
 
