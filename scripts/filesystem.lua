@@ -33,6 +33,7 @@ ok.mkdir("./run/shm")
 ok.mkdir("./sys")
 ok.mkdir("./tmp")
 ok.mkdir("./usr")
+ok.mkdir("./usr/bin")
 ok.mkdir("./usr/include")
 ok.mkdir("./usr/libexec")
 ok.mkdir("./usr/share")
@@ -65,6 +66,7 @@ ok.mkdir("./var/spool")
 --------------
 -- Symlinks --
 --------------
+ok.symlink("../../bin/env", "./usr/bin/env")
 ok.symlink("/opt/python3.13/bin/python3", "./bin/python3")
 ok.symlink("bash",    "./bin/sh")
 ok.symlink("flex",    "./bin/lex")
