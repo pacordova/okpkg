@@ -23,19 +23,19 @@ local function install(x) local fp
    end
 end
 
--- base package set
-if #arg == 0 then arg = {"base"} end
-base = { "linux-lts" }
+-- sys package set
+if #arg == 0 then arg = {"sys"} end
+sys = { "linux-lts" }
 local fp, buf
-fp = io.open("db/base")
+fp = io.open("db/sys")
 buf = '\n' .. fp:read("*a")
 fp:close()
 for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do
     if i:sub(1, 3) == "gcc" then
-        table.insert(base, "gcc-libs")
-        table.insert(base, "gcc-15.2.0")
+        table.insert(sys, "gcc-libs")
+        table.insert(sys, "gcc-15.2.0")
     elseif i:sub(1, 1) ~= "_" then
-        table.insert(base, i)
+        table.insert(sys, i)
     end
 end
 

@@ -16,9 +16,9 @@ okpkg purge gcc
 tar -C / -xhf "$PKGDIR/gcc11"*tar.lz 2>/dev/null
 rm -fr /opt
 
-# edit base.db
+# edit db/sys
 sed -e 's/c,c++/ada,c,c++,d,fortran,go,lto,m2,objc,obj-c++/' \
-    -i "$DBPATH/base.db"
+    -i "$DBPATH/sys"
 
 # bootstrap gcc14
 export PATH=/bin

@@ -43,7 +43,7 @@ os.execute("localedef -i POSIX -f UTF-8      C.UTF-8     2>/dev/null ||:")
 os.execute("localedef -i en_US -f ISO-8859-1 en_US       2>/dev/null ||:")
 os.execute("localedef -i en_US -f UTF-8      en_US.UTF-8 2>/dev/null ||:")
 
--- Install base packages to track in indexdir
+-- Install sys packages to track in indexdir
 setenv("destdir", "/")
 dofile(string.format("%s/scripts/install.lua", C["okdir"]))
 unsetenv("destdir")

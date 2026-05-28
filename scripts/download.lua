@@ -23,7 +23,7 @@ end
 remove_all(C.srcdir)
 mkdir(C.srcdir)
 
-download_all("base")
+download_all("sys")
 --download_all("python")
 --download_all("perl")
 --download_all("devel")
