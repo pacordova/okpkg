@@ -98,3 +98,126 @@ index f2fc27739..c49bd1d4e 100644
  # The values used here for $SOUND_FORM_FACTOR and $SOUND_CLASS should be kept
  # in sync with those defined for PulseAudio's src/pulse/proplist.h
  # PA_PROP_DEVICE_FORM_FACTOR, PA_PROP_DEVICE_CLASS properties.
+diff --git a/man/udevd.8 b/man/udevd.8
+index e5008d44b..dc5528373 100644
+--- a/man/udevd.8
++++ b/man/udevd.8
+@@ -25,7 +25,7 @@ udevd \- Device event managing daemon
+ .PP
+ udevd
+ .HP \w'\fB/sbin/udevd\fR\ 'u
+-\fB/sbin/udevd\fR [\fB\-\-daemon\fR] [\fB\-\-debug\fR] [\fB\-\-children\-max=\fR] [\fB\-\-exec\-delay=\fR] [\fB\-\-event\-timeout=\fR] [\fB\-\-resolve\-names=early|late|never\fR] [\fB\-\-version\fR] [\fB\-\-help\fR]
++\fB/sbin/udevd\fR [\fB\-\-daemon\fR] [\fB\-\-debug\fR] [\fB\-\-ready\-notify=\fR] [\fB\-\-children\-max=\fR] [\fB\-\-exec\-delay=\fR] [\fB\-\-event\-timeout=\fR] [\fB\-\-resolve\-names=early|late|never\fR] [\fB\-\-version\fR] [\fB\-\-help\fR]
+ .SH "DESCRIPTION"
+ .PP
+ \fBudevd\fR
+@@ -47,6 +47,11 @@ Detach and run in the background\&.
+ Print debug messages to standard error\&.
+ .RE
+ .PP
++\fB\-r\fR, \fB\-\-ready\-notify=\fR
++.RS 4
++Issue (S6/dinit compatible) readiness notification via a file descriptor\&. A short message followed by a newline character will be sent via the specified file descriptor (inherited from the parent process) when initialization is complete\&.
++.RE
++.PP
+ \fB\-c\fR, \fB\-\-children\-max=\fR
+ .RS 4
+ Limit the number of events executed in parallel\&.
+diff --git a/man/udevd.xml b/man/udevd.xml
+index b13f74d70..3de99d2d2 100644
+--- a/man/udevd.xml
++++ b/man/udevd.xml
+@@ -34,6 +34,7 @@
+       <command>/sbin/udevd</command>
+       <arg><option>--daemon</option></arg>
+       <arg><option>--debug</option></arg>
++      <arg><option>--ready-notify=</option></arg>
+       <arg><option>--children-max=</option></arg>
+       <arg><option>--exec-delay=</option></arg>
+       <arg><option>--event-timeout=</option></arg>
+@@ -75,6 +76,16 @@
+         </listitem>
+       </varlistentry>
+ 
++      <varlistentry>
++        <term><option>-r</option>, <option>--ready-notify=</option></term>
++        <listitem>
++          <para>Issue (S6/dinit compatible) readiness notification via a
++          file descriptor. A short message followed by a newline character
++          will be sent via the specified file descriptor (inherited from
++          the parent process) when initialization is complete.</para>
++        </listitem>
++      </varlistentry>
++
+       <varlistentry>
+         <term><option>-c</option>, <option>--children-max=</option></term>
+         <listitem>
+diff --git a/src/udev/udevd.c b/src/udev/udevd.c
+index 2acf629f2..9bc6354b6 100644
+--- a/src/udev/udevd.c
++++ b/src/udev/udevd.c
+@@ -62,6 +62,7 @@ static int worker_watch[2] = { -1, -1 };
+ static int fd_signal = -1;
+ static int fd_ep = -1;
+ static int fd_inotify = -1;
++static int fd_ready = -1;
+ static bool stop_exec_queue;
+ static bool reload;
+ static bool arg_debug = false;
+@@ -76,6 +77,7 @@ static UDEV_LIST(event_list);
+ Hashmap *workers;
+ static struct udev_list properties_list;
+ static bool udev_exit;
++static char udevd_ready_string[] = "udevd ready\n";
+ 
+ enum event_state {
+         EVENT_UNDEF,
+@@ -1036,6 +1038,7 @@ static void help(void) {
+                "  -V --version                Print version of the program\n"
+                "  -d --daemon                 Detach and run in the background\n"
+                "  -D --debug                  Enable debug output\n"
++               "  -r --ready-notify=FD        Notify readiness via file descriptor\n"
+                "  -c --children-max=INT       Set maximum number of workers\n"
+                "  -e --exec-delay=SECONDS     Seconds to wait before executing RUN=\n"
+                "  -t --event-timeout=SECONDS  Seconds to wait before terminating an event\n"
+@@ -1048,6 +1051,7 @@ static int parse_argv(int argc, char *argv[]) {
+         static const struct option options[] = {
+                 { "daemon",             no_argument,            NULL, 'd' },
+                 { "debug",              no_argument,            NULL, 'D' },
++                { "ready-notify",       required_argument,      NULL, 'r' },
+                 { "children-max",       required_argument,      NULL, 'c' },
+                 { "exec-delay",         required_argument,      NULL, 'e' },
+                 { "event-timeout",      required_argument,      NULL, 't' },
+@@ -1104,6 +1108,11 @@ static int parse_argv(int argc, char *argv[]) {
+                                 return 0;
+                         }
+                         break;
++                case 'r':
++                        r = safe_atou(optarg, &fd_ready);
++                        if (r < 0)
++                                log_warning("Invalid --ready-notify ignored: %s", optarg);
++                        break;
+                 case 'h':
+                         help();
+                         return 0;
+@@ -1372,6 +1381,20 @@ int main(int argc, char *argv[]) {
+                 goto exit;
+         }
+ 
++        if (fd_ready != -1) {
++                size_t to_write = sizeof(udevd_ready_string) - 1;
++                char *wptr = udevd_ready_string;
++                do {
++                        int r = write(fd_ready, wptr, to_write);
++                        if (r < 0) {
++                                log_error_errno(errno, "failed to write to readiness fd: %m");
++                                break;
++                        }
++                        to_write -= r;
++                        wptr += r;
++                } while (to_write > 0);
++        }
++
+         for (;;) {
+                 static usec_t last_usec;
+                 struct epoll_event ev[8];
