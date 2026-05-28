@@ -68,8 +68,7 @@ glibc = {
       printf "%s\n" slibdir=/lib64   >> configparms
       printf "%s\n" rtlddir=/lib64   >> configparms
       printf "%s\n" auditdir=/lib64  >> configparms
-      sed -i 's:LD_AUDIT=.*:LD_AUDIT=/lib64/sotruss-lib.so:' \
-         ./elf/sotruss.sh
+      sed -i 's:^lib=.*audit:lib='\''/lib64:' ./elf/sotruss.sh
    ]]
 };
 
