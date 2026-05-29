@@ -1,36 +1,26 @@
-#!/bin/bash
+#!/bin/sh
 
-# fstrim
-/bin/fstrim -a
+libexecdir=/usr/lib64
+mandir=/usr/share/man
 
-# udev
-#/bin/udevadm hwdb --update
+# sys
+[ -x /bin/fstrim     ] && /bin/fstrim -a
+[ -x /bin/udevadm    ] && /bin/udevadm hwdb --update
+[ -x /bin/makewhatis ] && /bin/makewhatis "$mandir"
+[ -x /bin/pwconv     ] && /bin/pwconv
+[ -x /bin/grpconv    ] && /bin/grpconv
 
-# update manpages
-makewhatis /usr/share/man
+# xorg
+[ -x /bin/fc-cache                 ] && /bin/fc-cache
+[ -x /bin/update-desktop-database  ] && /bin/update-desktop-database
+[ -x /bin/update-mime-database     ] && /bin/update-mime-database /usr/share/mime
+[ -x /bin/glib-compile-schemas     ] && /bin/glib-compile-schemas /usr/share/glib-2.0/schemas
+[ -x /bin/gdk-pixbuf-query-loaders ] && /bin/gdk-pixbuf-query-loaders --update-cache
 
-# update font cache
-fc-cache
-
-# desktop and mime databases
-update-desktop-database
-update-mime-database /usr/share/mime
-
-# glib schemas
-glib-compile-schemas /usr/share/glib-2.0/schemas
-
-# pixbuf loaders
-gdk-pixbuf-query-loaders --update-cache
-
-# commit any user changes
-pwconv && grpconv
-
-# ping capabilities
+# cap
 setcap cap_net_raw+p /bin/ping
-
-# dbus permissions
-chown root:messagebus /usr/lib64/dbus-daemon-launch-helper
-chmod 4750 /usr/lib64/dbus-daemon-launch-helper
+chown root:messagebus $libexecdir/dbus-daemon-launch-helper
+chmod 4750 $libexecdir/dbus-daemon-launch-helper
 
 # clock
 TZ=UTC0 date $(nc time.nist.gov 13 | awk -F'[-: ]' 'NR>1{print $3$4$5$6$2"."$7}')
