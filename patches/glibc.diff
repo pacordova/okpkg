@@ -1,0 +1,1401 @@
+Submitted by:            Xi Ruoyao <xry111@xry111.site>
+Date:                    2026-05-09
+Initial Package Version: 2.43
+Upstream Status:         Committed for master (2.44 development branch)
+                         but some of them are not committed for the 2.43
+                         release branch yet.
+Origin:                  Upstream repository (see the "cherry picked
+                         from" notes for revisions)
+Description:             Fix CVE-2026-4437, CVE-2026-4438, CVE-2026-4046,
+                         CVE-2026-5450, and CVE-2026-5928.
+                         Fix FTBFS with Linux API header >= 7.0 and
+                         rseq test failure with host kernel >= 7.0.
+
+From b9fe539d76f1d9bdc216a7d7308187b3fb1bd60f Mon Sep 17 00:00:00 2001
+From: Carlos O'Donell <carlos@redhat.com>
+Date: Fri, 20 Mar 2026 16:43:33 -0400
+Subject: [PATCH 1/8] resolv: Count records correctly (CVE-2026-4437)
+
+The answer section boundary was previously ignored, and the code in
+getanswer_ptr would iterate past the last resource record, but not
+beyond the end of the returned data.  This could lead to subsequent data
+being interpreted as answer records, thus violating the DNS
+specification.  Such resource records could be maliciously crafted and
+hidden from other tooling, but processed by the glibc stub resolver and
+acted upon by the application.  While we trust the data returned by the
+configured recursive resolvers, we should not trust its format and
+should validate it as required.  It is a security issue to incorrectly
+process the DNS protocol.
+
+A regression test is added for response section crossing.
+
+No regressions on x86_64-linux-gnu.
+
+Reviewed-by: Collin Funk <collin.funk1@gmail.com>
+(cherry picked from commit 9f5f18aab40ec6b61fa49a007615e6077e9a979b)
+(cherry picked from commit 5c6fca0c62ce5bd6e68e259f138097756cbafd4d)
+---
+ resolv/Makefile                 |   4 +
+ resolv/nss_dns/dns-host.c       |   2 +-
+ resolv/tst-resolv-dns-section.c | 162 ++++++++++++++++++++++++++++++++
+ 3 files changed, 167 insertions(+), 1 deletion(-)
+ create mode 100644 resolv/tst-resolv-dns-section.c
+
+diff --git a/resolv/Makefile b/resolv/Makefile
+index b74c8f325e..d5ef63cdbc 100644
+--- a/resolv/Makefile
++++ b/resolv/Makefile
+@@ -107,6 +107,7 @@ tests += \
+   tst-resolv-basic \
+   tst-resolv-binary \
+   tst-resolv-byaddr \
++  tst-resolv-dns-section \
+   tst-resolv-edns \
+   tst-resolv-invalid-cname \
+   tst-resolv-network \
+@@ -118,6 +119,7 @@ tests += \
+   tst-resolv-semi-failure \
+   tst-resolv-short-response \
+   tst-resolv-trailing \
++  # tests
+ 
+ # This test calls __res_context_send directly, which is not exported
+ # from libresolv.
+@@ -301,6 +303,8 @@ $(objpfx)tst-resolv-aliases: $(objpfx)libresolv.so $(shared-thread-library)
+ $(objpfx)tst-resolv-basic: $(objpfx)libresolv.so $(shared-thread-library)
+ $(objpfx)tst-resolv-binary: $(objpfx)libresolv.so $(shared-thread-library)
+ $(objpfx)tst-resolv-byaddr: $(objpfx)libresolv.so $(shared-thread-library)
++$(objpfx)tst-resolv-dns-section: $(objpfx)libresolv.so \
++  $(shared-thread-library)
+ $(objpfx)tst-resolv-edns: $(objpfx)libresolv.so $(shared-thread-library)
+ $(objpfx)tst-resolv-network: $(objpfx)libresolv.so $(shared-thread-library)
+ $(objpfx)tst-resolv-res_init: $(objpfx)libresolv.so
+diff --git a/resolv/nss_dns/dns-host.c b/resolv/nss_dns/dns-host.c
+index 6a60c87532..893137027e 100644
+--- a/resolv/nss_dns/dns-host.c
++++ b/resolv/nss_dns/dns-host.c
+@@ -820,7 +820,7 @@ getanswer_ptr (unsigned char *packet, size_t packetlen,
+   /* expected_name may be updated to point into this buffer.  */
+   unsigned char name_buffer[NS_MAXCDNAME];
+ 
+-  while (ancount > 0)
++  for (; ancount > 0; --ancount)
+     {
+       struct ns_rr_wire rr;
+       if (!__ns_rr_cursor_next (&c, &rr))
+diff --git a/resolv/tst-resolv-dns-section.c b/resolv/tst-resolv-dns-section.c
+new file mode 100644
+index 0000000000..1171baef51
+--- /dev/null
++++ b/resolv/tst-resolv-dns-section.c
+@@ -0,0 +1,162 @@
++/* Test handling of invalid section transitions (bug 34014).
++   Copyright (C) 2022-2026 Free Software Foundation, Inc.
++   This file is part of the GNU C Library.
++
++   The GNU C Library is free software; you can redistribute it and/or
++   modify it under the terms of the GNU Lesser General Public
++   License as published by the Free Software Foundation; either
++   version 2.1 of the License, or (at your option) any later version.
++
++   The GNU C Library is distributed in the hope that it will be useful,
++   but WITHOUT ANY WARRANTY; without even the implied warranty of
++   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++   Lesser General Public License for more details.
++
++   You should have received a copy of the GNU Lesser General Public
++   License along with the GNU C Library; if not, see
++   <https://www.gnu.org/licenses/>.  */
++
++#include <array_length.h>
++#include <errno.h>
++#include <netdb.h>
++#include <resolv.h>
++#include <stdlib.h>
++#include <string.h>
++#include <support/check.h>
++#include <support/format_nss.h>
++#include <support/resolv_test.h>
++#include <support/support.h>
++
++/* Name of test, and the second section type.  */
++struct item {
++  const char *test;
++  int ns_section;
++};
++
++static const struct item test_items[] =
++  {
++    { "Test crossing from ns_s_an to ns_s_ar.", ns_s_ar },
++    { "Test crossing from ns_s_an to ns_s_an.", ns_s_ns },
++
++    { NULL, 0 },
++  };
++
++/* The response is designed to contain the following:
++   - An Answer section with one T_PTR record that is skipped.
++   - A second section with a semantically invalid T_PTR record.
++   The original defect is that the response parsing would cross
++   section boundaries and handle the additional section T_PTR
++   as if it were an answer.  A conforming implementation would
++   stop as soon as it reaches the end of the section.  */
++static void
++response (const struct resolv_response_context *ctx,
++          struct resolv_response_builder *b,
++          const char *qname, uint16_t qclass, uint16_t qtype)
++{
++  TEST_COMPARE (qclass, C_IN);
++
++  /* We only test PTR.  */
++  TEST_COMPARE (qtype, T_PTR);
++
++  unsigned int count;
++  char *tail = NULL;
++
++  if (strstr (qname, "in-addr.arpa") != NULL
++      && sscanf (qname, "%u.%ms", &count, &tail) == 2)
++    TEST_COMPARE_STRING (tail, "0.168.192.in-addr.arpa");
++  else if (sscanf (qname, "%x.%ms", &count, &tail) == 2)
++    {
++    TEST_COMPARE_STRING (tail, "\
++0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.8.b.d.0.1.0.0.2.ip6.arpa");
++    }
++  else
++    FAIL_EXIT1 ("invalid QNAME: %s\n", qname);
++  free (tail);
++
++  /* We have a bounded number of possible tests.  */
++  TEST_VERIFY (count >= 0);
++  TEST_VERIFY (count <= 15);
++
++  struct resolv_response_flags flags = {};
++  resolv_response_init (b, flags);
++  resolv_response_add_question (b, qname, qclass, qtype);
++  resolv_response_section (b, ns_s_an);
++
++  /* Actual answer record, but the wrong name (skipped).  */
++  resolv_response_open_record (b, "1.0.0.10.in-addr.arpa", qclass, qtype, 60);
++
++  /* Record the answer.  */
++  resolv_response_add_name (b, "test.ptr.example.net");
++  resolv_response_close_record (b);
++
++  /* Add a second section to test section boundary crossing.  */
++  resolv_response_section (b, test_items[count].ns_section);
++  /* Semantically incorrect, but hide a T_PTR entry.  */
++  resolv_response_open_record (b, qname, qclass, qtype, 60);
++  resolv_response_add_name (b, "wrong.ptr.example.net");
++  resolv_response_close_record (b);
++}
++
++
++/* Perform one check using a reverse lookup.  */
++static void
++check_reverse (int af, int count)
++{
++  TEST_VERIFY (af == AF_INET || af == AF_INET6);
++  TEST_VERIFY (count < array_length (test_items));
++
++  char addr[sizeof (struct in6_addr)] = { 0 };
++  socklen_t addrlen;
++  if (af == AF_INET)
++    {
++      addr[0] = (char) 192;
++      addr[1] = (char) 168;
++      addr[2] = (char) 0;
++      addr[3] = (char) count;
++      addrlen = 4;
++    }
++  else
++    {
++      addr[0] = 0x20;
++      addr[1] = 0x01;
++      addr[2] = 0x0d;
++      addr[3] = 0xb8;
++      addr[4] = addr[5] = addr[6] = addr[7] = 0x0;
++      addr[8] = addr[9] = addr[10] = addr[11] = 0x0;
++      addr[12] = 0x0;
++      addr[13] = 0x0;
++      addr[14] = 0x0;
++      addr[15] = count;
++      addrlen = 16;
++    }
++
++  h_errno = 0;
++  struct hostent *answer = gethostbyaddr (addr, addrlen, af);
++  TEST_VERIFY (answer == NULL);
++  TEST_VERIFY (h_errno == NO_RECOVERY);
++  if (answer != NULL)
++    printf ("error: unexpected success: %s\n",
++	    support_format_hostent (answer));
++}
++
++static int
++do_test (void)
++{
++  struct resolv_test *obj = resolv_test_start
++    ((struct resolv_redirect_config)
++     {
++       .response_callback = response
++     });
++
++  for (int i = 0; test_items[i].test != NULL; i++)
++    {
++      check_reverse (AF_INET, i);
++      check_reverse (AF_INET6, i);
++    }
++
++  resolv_test_end (obj);
++
++  return 0;
++}
++
++#include <support/test-driver.c>
+-- 
+2.54.0
+
+From e9c3bd0abe6efc43aea824fe61d82ae33fbcb050 Mon Sep 17 00:00:00 2001
+From: Carlos O'Donell <carlos@redhat.com>
+Date: Fri, 20 Mar 2026 17:14:33 -0400
+Subject: [PATCH 2/8] resolv: Check hostname for validity (CVE-2026-4438)
+
+The processed hostname in getanswer_ptr should be correctly checked to
+avoid invalid characters from being allowed, including shell
+metacharacters. It is a security issue to fail to check the returned
+hostname for validity.
+
+A regression test is added for invalid metacharacters and other cases
+of invalid or valid characters.
+
+No regressions on x86_64-linux-gnu.
+
+Reviewed-by: Adhemerval Zanella  <adhemerval.zanella@linaro.org>
+(cherry picked from commit e10977481f4db4b2a3ce34fa4c3a1e26651ae312)
+(cherry picked from commit dd9945c0ba40d2dbc9eb7c99291ba6b69bd66718)
+---
+ resolv/Makefile                 |   3 +
+ resolv/nss_dns/dns-host.c       |   2 +-
+ resolv/tst-resolv-invalid-ptr.c | 255 ++++++++++++++++++++++++++++++++
+ 3 files changed, 259 insertions(+), 1 deletion(-)
+ create mode 100644 resolv/tst-resolv-invalid-ptr.c
+
+diff --git a/resolv/Makefile b/resolv/Makefile
+index d5ef63cdbc..79a1b9647f 100644
+--- a/resolv/Makefile
++++ b/resolv/Makefile
+@@ -110,6 +110,7 @@ tests += \
+   tst-resolv-dns-section \
+   tst-resolv-edns \
+   tst-resolv-invalid-cname \
++  tst-resolv-invalid-ptr \
+   tst-resolv-network \
+   tst-resolv-noaaaa \
+   tst-resolv-noaaaa-vc \
+@@ -314,6 +315,8 @@ $(objpfx)tst-resolv-res_init-thread: $(objpfx)libresolv.so \
+   $(shared-thread-library)
+ $(objpfx)tst-resolv-invalid-cname: $(objpfx)libresolv.so \
+   $(shared-thread-library)
++$(objpfx)tst-resolv-invalid-ptr: $(objpfx)libresolv.so \
++  $(shared-thread-library)
+ $(objpfx)tst-resolv-noaaaa: $(objpfx)libresolv.so $(shared-thread-library)
+ $(objpfx)tst-resolv-noaaaa-vc: $(objpfx)libresolv.so $(shared-thread-library)
+ $(objpfx)tst-resolv-nondecimal: $(objpfx)libresolv.so $(shared-thread-library)
+diff --git a/resolv/nss_dns/dns-host.c b/resolv/nss_dns/dns-host.c
+index 893137027e..728dae615d 100644
+--- a/resolv/nss_dns/dns-host.c
++++ b/resolv/nss_dns/dns-host.c
+@@ -866,7 +866,7 @@ getanswer_ptr (unsigned char *packet, size_t packetlen,
+ 	  char hname[MAXHOSTNAMELEN + 1];
+ 	  if (__ns_name_unpack (c.begin, c.end, rr.rdata,
+ 				name_buffer, sizeof (name_buffer)) < 0
+-	      || !__res_binary_hnok (expected_name)
++	      || !__res_binary_hnok (name_buffer)
+ 	      || __ns_name_ntop (name_buffer, hname, sizeof (hname)) < 0)
+ 	    {
+ 	      *h_errnop = NO_RECOVERY;
+diff --git a/resolv/tst-resolv-invalid-ptr.c b/resolv/tst-resolv-invalid-ptr.c
+new file mode 100644
+index 0000000000..0c802ab967
+--- /dev/null
++++ b/resolv/tst-resolv-invalid-ptr.c
+@@ -0,0 +1,255 @@
++/* Test handling of invalid T_PTR results (bug 34015).
++   Copyright (C) 2022-2026 Free Software Foundation, Inc.
++   This file is part of the GNU C Library.
++
++   The GNU C Library is free software; you can redistribute it and/or
++   modify it under the terms of the GNU Lesser General Public
++   License as published by the Free Software Foundation; either
++   version 2.1 of the License, or (at your option) any later version.
++
++   The GNU C Library is distributed in the hope that it will be useful,
++   but WITHOUT ANY WARRANTY; without even the implied warranty of
++   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++   Lesser General Public License for more details.
++
++   You should have received a copy of the GNU Lesser General Public
++   License along with the GNU C Library; if not, see
++   <https://www.gnu.org/licenses/>.  */
++
++#include <array_length.h>
++#include <errno.h>
++#include <netdb.h>
++#include <resolv.h>
++#include <stdlib.h>
++#include <string.h>
++#include <support/check.h>
++#include <support/format_nss.h>
++#include <support/resolv_test.h>
++#include <support/support.h>
++
++/* Name of test, the answer, the expected error return, and if we
++   expect the call to fail.  */
++struct item {
++  const char *test;
++  const char *answer;
++  int expected;
++  bool fail;
++};
++
++static const struct item test_items[] =
++  {
++    /* Test for invalid characters.  */
++    { "Invalid use of \"|\"",
++      "test.|.ptr.example", NO_RECOVERY, true },
++    { "Invalid use of \"&\"",
++      "test.&.ptr.example", NO_RECOVERY, true },
++    { "Invalid use of \";\"",
++      "test.;.ptr.example", NO_RECOVERY, true },
++    { "Invalid use of \"<\"",
++      "test.<.ptr.example", NO_RECOVERY, true },
++    { "Invalid use of \">\"",
++      "test.>.ptr.example", NO_RECOVERY, true },
++    { "Invalid use of \"(\"",
++      "test.(.ptr.example", NO_RECOVERY, true },
++    { "Invalid use of \")\"",
++      "test.).ptr.example", NO_RECOVERY, true },
++    { "Invalid use of \"$\"",
++      "test.$.ptr.example", NO_RECOVERY, true },
++    { "Invalid use of \"`\"",
++      "test.`.ptr.example", NO_RECOVERY, true },
++    { "Invalid use of \"\\\"",
++      "test.\\.ptr.example", NO_RECOVERY, true },
++    { "Invalid use of \"\'\"",
++      "test.'.ptr.example", NO_RECOVERY, true },
++    { "Invalid use of \"\"\"",
++      "test.\".ptr.example", NO_RECOVERY, true },
++    { "Invalid use of \" \"",
++      "test. .ptr.example", NO_RECOVERY, true },
++    { "Invalid use of \"\\t\"",
++      "test.\t.ptr.example", NO_RECOVERY, true },
++    { "Invalid use of \"\\n\"",
++      "test.\n.ptr.example", NO_RECOVERY, true },
++    { "Invalid use of \"\\r\"",
++      "test.\r.ptr.example", NO_RECOVERY, true },
++    { "Invalid use of \"*\"",
++      "test.*.ptr.example", NO_RECOVERY, true },
++    { "Invalid use of \"?\"",
++      "test.?.ptr.example", NO_RECOVERY, true },
++    { "Invalid use of \"[\"",
++      "test.[.ptr.example", NO_RECOVERY, true },
++    { "Invalid use of \"]\"",
++      "test.].ptr.example", NO_RECOVERY, true },
++    { "Invalid use of \",\"",
++      "test.,.ptr.example", NO_RECOVERY, true },
++    { "Invalid use of \"~\"",
++      "test.~.ptr.example", NO_RECOVERY, true },
++    { "Invalid use of \":\"",
++      "test.:.ptr.example", NO_RECOVERY, true },
++    { "Invalid use of \"!\"",
++      "test.!.ptr.example", NO_RECOVERY, true },
++    { "Invalid use of \"@\"",
++      "test.@.ptr.example", NO_RECOVERY, true },
++    { "Invalid use of \"#\"",
++      "test.#.ptr.example", NO_RECOVERY, true },
++    { "Invalid use of \"%\"",
++      "test.%%.ptr.example", NO_RECOVERY, true },
++    { "Invalid use of \"^\"",
++      "test.^.ptr.example", NO_RECOVERY, true },
++
++    /* Test for invalid UTF-8 characters (2-byte, 4-byte, 6-byte).  */
++    { "Invalid use of UTF-8 (2-byte, U+00C0-U+00C2)",
++      "ÁÂÃ.test.ptr.example", NO_RECOVERY, true },
++    { "Invalid use of UTF-8 (4-byte, U+0750-U+0752)",
++      "ݐݑݒ.test.ptr.example", NO_RECOVERY, true },
++     { "Invalid use of UTF-8 (6-byte, U+0904-U+0906)",
++      "ऄअआ.test.ptr.example", NO_RECOVERY, true },
++
++    /* Test for "-" which may be valid depending on position.  */
++    { "Invalid leading \"-\"",
++      "-test.ptr.example", NO_RECOVERY, true },
++    { "Valid trailing \"-\"",
++      "test-.ptr.example", 0, false },
++    { "Valid mid-label use of \"-\"",
++      "te-st.ptr.example", 0, false },
++
++    /* Test for "_" which is always valid in any position.  */
++    { "Valid leading use of \"_\"",
++      "_test.ptr.example", 0, false },
++    { "Valid mid-label use of \"_\"",
++      "te_st.ptr.example", 0, false },
++    { "Valid trailing use of \"_\"",
++      "test_.ptr.example", 0, false },
++
++    /* Sanity test the broader set [A-Za-z0-9_-] of valid characters.  */
++    { "Valid \"[A-Z]\"",
++      "test.ABCDEFGHIJKLMNOPQRSTUVWXYZ.ptr.example", 0, false },
++    { "Valid \"[a-z]\"",
++      "test.abcdefghijklmnopqrstuvwxyz.ptr.example", 0, false },
++    { "Valid \"[0-9]\"",
++      "test.0123456789.ptr.example", 0, false },
++    { "Valid mixed use of \"[A-Za-z0-9_-]\"",
++      "test.012abcABZ_-.ptr.example", 0, false },
++  };
++
++static void
++response (const struct resolv_response_context *ctx,
++          struct resolv_response_builder *b,
++          const char *qname, uint16_t qclass, uint16_t qtype)
++{
++  TEST_COMPARE (qclass, C_IN);
++
++  /* We only test PTR.  */
++  TEST_COMPARE (qtype, T_PTR);
++
++  unsigned int count, count1;
++  char *tail = NULL;
++
++  /* The test implementation can handle up to 255 tests.  */
++  if (strstr (qname, "in-addr.arpa") != NULL
++      && sscanf (qname, "%u.%ms", &count, &tail) == 2)
++    TEST_COMPARE_STRING (tail, "0.168.192.in-addr.arpa");
++  else if (sscanf (qname, "%x.%x.%ms", &count, &count1, &tail) == 3)
++    {
++      TEST_COMPARE_STRING (tail, "\
++0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.8.b.d.0.1.0.0.2.ip6.arpa");
++      count |= count1 << 4;
++    }
++  else
++    FAIL_EXIT1 ("invalid QNAME: %s\n", qname);
++  free (tail);
++
++  /* Cross check. Count has a fixed bound (soft limit).  */
++  TEST_VERIFY (count >= 0 && count <= 255);
++
++  /* We have a fixed number of tests (hard limit).  */
++  TEST_VERIFY_EXIT (count < array_length (test_items));
++
++  struct resolv_response_flags flags = {};
++  resolv_response_init (b, flags);
++  resolv_response_add_question (b, qname, qclass, qtype);
++  resolv_response_section (b, ns_s_an);
++
++  /* Actual answer record.  */
++  resolv_response_open_record (b, qname, qclass, qtype, 60);
++
++  /* Record the answer.  */
++  resolv_response_add_name (b, test_items[count].answer);
++  resolv_response_close_record (b);
++}
++
++/* Perform one check using a reverse lookup.  */
++static void
++check_reverse (int af, int count)
++{
++  TEST_VERIFY (af == AF_INET || af == AF_INET6);
++  TEST_VERIFY_EXIT (count < array_length (test_items));
++
++  /* Generate an address to query for each test.  */
++  char addr[sizeof (struct in6_addr)] = { 0 };
++  socklen_t addrlen;
++  if (af == AF_INET)
++    {
++      addr[0] = (char) 192;
++      addr[1] = (char) 168;
++      addr[2] = (char) 0;
++      addr[3] = (char) count;
++      addrlen = 4;
++    }
++  else
++    {
++      addr[0] = 0x20;
++      addr[1] = 0x01;
++      addr[2] = 0x0d;
++      addr[3] = 0xb8;
++      addr[4] = addr[5] = addr[6] = addr[7] = 0x0;
++      addr[8] = addr[9] = addr[10] = addr[11] = 0x0;
++      addr[12] = 0x0;
++      addr[13] = 0x0;
++      addr[14] = 0x0;
++      addr[15] = (char) count;
++      addrlen = 16;
++    }
++
++  h_errno = 0;
++  struct hostent *answer = gethostbyaddr (addr, addrlen, af);
++
++  /* Verify h_errno is as expected.  */
++  TEST_COMPARE (h_errno, test_items[count].expected);
++  if (h_errno != test_items[count].expected)
++    /* And print more information if it's not.  */
++    printf ("INFO: %s\n", test_items[count].test);
++
++  if (test_items[count].fail)
++    {
++      /* We expected a failure so verify answer is NULL.  */
++      TEST_VERIFY (answer == NULL);
++      /* If it's not NULL we should print out what we received.  */
++      if (answer != NULL)
++        printf ("error: unexpected success: %s\n",
++		support_format_hostent (answer));
++    }
++  else
++    /* We don't expect a failure so answer must be valid.  */
++    TEST_COMPARE_STRING (answer->h_name, test_items[count].answer);
++}
++
++static int
++do_test (void)
++{
++  struct resolv_test *obj = resolv_test_start
++    ((struct resolv_redirect_config)
++     {
++       .response_callback = response
++     });
++
++  for (int i = 0; i < array_length (test_items); i++)
++    {
++      check_reverse (AF_INET, i);
++      check_reverse (AF_INET6, i);
++    }
++  resolv_test_end (obj);
++
++  return 0;
++}
++
++#include <support/test-driver.c>
+-- 
+2.54.0
+
+From 143ba95b7c24d5c20045610d17a1835ca95e71a9 Mon Sep 17 00:00:00 2001
+From: Florian Weimer <fweimer@redhat.com>
+Date: Thu, 16 Apr 2026 19:13:43 +0200
+Subject: [PATCH 3/8] Use pending character state in IBM1390, IBM1399 character
+ sets (CVE-2026-4046)
+
+Follow the example in iso-2022-jp-3.c and use the __count state
+variable to store the pending character.  This avoids restarting
+the conversion if the output buffer ends between two 4-byte UCS-4
+code points, so that the assert reported in the bug can no longer
+happen.
+
+Even though the fix is applied to ibm1364.c, the change is only
+effective for the two HAS_COMBINED codecs for IBM1390, IBM1399.
+
+The test case was mostly auto-generated using
+claude-4.6-opus-high-thinking, and composer-2-fast shows up in the
+log as well.  During review, gpt-5.4-xhigh flagged that the original
+version of the test case was not exercising the new character
+flush logic.
+
+This fixes bug 33980.
+
+Assisted-by: LLM
+Reviewed-by: Carlos O'Donell <carlos@redhat.com>
+(cherry picked from commit d6f08d1cf027f4eb2ba289a6cc66853722d4badc)
+(cherry picked from commit 8362e8ce10b24068bacc19552c128dd10e082fd9)
+---
+ iconvdata/Makefile       |   4 +-
+ iconvdata/ibm1364.c      |  70 ++++++++++++++----
+ iconvdata/tst-bug33980.c | 153 +++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 211 insertions(+), 16 deletions(-)
+ create mode 100644 iconvdata/tst-bug33980.c
+
+diff --git a/iconvdata/Makefile b/iconvdata/Makefile
+index 26e888b443..fbb0067302 100644
+--- a/iconvdata/Makefile
++++ b/iconvdata/Makefile
+@@ -76,7 +76,7 @@ tests = bug-iconv1 bug-iconv2 tst-loading tst-e2big tst-iconv4 bug-iconv4 \
+ 	tst-iconv6 bug-iconv5 bug-iconv6 tst-iconv7 bug-iconv8 bug-iconv9 \
+ 	bug-iconv10 bug-iconv11 bug-iconv12 tst-iconv-big5-hkscs-to-2ucs4 \
+ 	bug-iconv13 bug-iconv14 bug-iconv15 \
+-	tst-iconv-iso-2022-cn-ext
++	tst-iconv-iso-2022-cn-ext tst-bug33980
+ ifeq ($(have-thread-library),yes)
+ tests += bug-iconv3
+ endif
+@@ -333,6 +333,8 @@ $(objpfx)bug-iconv15.out: $(addprefix $(objpfx), $(gconv-modules)) \
+ 			  $(addprefix $(objpfx),$(modules.so))
+ $(objpfx)tst-iconv-iso-2022-cn-ext.out: $(addprefix $(objpfx), $(gconv-modules)) \
+ 					$(addprefix $(objpfx),$(modules.so))
++$(objpfx)tst-bug33980.out: $(addprefix $(objpfx), $(gconv-modules)) \
++			   $(addprefix $(objpfx),$(modules.so))
+ 
+ $(objpfx)iconv-test.out: run-iconv-test.sh \
+ 			 $(addprefix $(objpfx), $(gconv-modules)) \
+diff --git a/iconvdata/ibm1364.c b/iconvdata/ibm1364.c
+index 4f41f22c12..8df66ea048 100644
+--- a/iconvdata/ibm1364.c
++++ b/iconvdata/ibm1364.c
+@@ -67,12 +67,29 @@
+ 
+ /* Since this is a stateful encoding we have to provide code which resets
+    the output state to the initial state.  This has to be done during the
+-   flushing.  */
++   flushing.  For the to-internal direction (FROM_DIRECTION is true),
++   there may be a pending character that needs flushing.  */
+ #define EMIT_SHIFT_TO_INIT \
+   if ((data->__statep->__count & ~7) != sb)				      \
+     {									      \
+       if (FROM_DIRECTION)						      \
+-	data->__statep->__count &= 7;					      \
++	{								      \
++	  uint32_t ch = data->__statep->__count >> 7;			      \
++	  if (__glibc_unlikely (ch != 0))				      \
++	    {								      \
++	      if (__glibc_unlikely (outend - outbuf < 4))		      \
++		status = __GCONV_FULL_OUTPUT;				      \
++	      else							      \
++		{							      \
++		  put32 (outbuf, ch);					      \
++		  outbuf += 4;						      \
++		  /* Clear character and db bit.  */			      \
++		  data->__statep->__count &= 7;				      \
++		}							      \
++	    }								      \
++	  else								      \
++	    data->__statep->__count &= 7;				      \
++	}								      \
+       else								      \
+ 	{								      \
+ 	  /* We are not in the initial state.  To switch back we have	      \
+@@ -99,11 +116,13 @@
+     *curcsp = save_curcs
+ 
+ 
+-/* Current codeset type.  */
++/* Current codeset type.  The bit is stored in the __count variable of
++   the conversion state.  If the db bit is set, bit 7 and above store
++   a pending UCS-4 code point if non-zero.  */
+ enum
+ {
+-  sb = 0,
+-  db = 64
++  sb = 0,			/* Single byte mode.  */
++  db = 64			/* Double byte mode.  */
+ };
+ 
+ 
+@@ -119,21 +138,29 @@ enum
+       }									      \
+     else								      \
+       {									      \
+-	/* This is a combined character.  Make sure we have room.  */	      \
+-	if (__glibc_unlikely (outptr + 8 > outend))			      \
+-	  {								      \
+-	    result = __GCONV_FULL_OUTPUT;				      \
+-	    break;							      \
+-	  }								      \
+-									      \
+ 	const struct divide *cmbp					      \
+ 	  = &DB_TO_UCS4_COMB[ch - __TO_UCS4_COMBINED_MIN];		      \
+ 	assert (cmbp->res1 != 0 && cmbp->res2 != 0);			      \
+ 									      \
+ 	put32 (outptr, cmbp->res1);					      \
+ 	outptr += 4;							      \
+-	put32 (outptr, cmbp->res2);					      \
+-	outptr += 4;							      \
++									      \
++	/* See whether we have room for the second character.  */	      \
++	if (outend - outptr >= 4)					      \
++	  {								      \
++	    put32 (outptr, cmbp->res2);					      \
++	    outptr += 4;						      \
++	  }								      \
++	else								      \
++	  {								      \
++	    /* Otherwise store only the first character now, and	      \
++	       put the second one into the queue.  */			      \
++	    curcs |= cmbp->res2 << 7;					      \
++	    inptr += 2;							      \
++	    /* Tell the caller why we terminate the loop.  */		      \
++	    result = __GCONV_FULL_OUTPUT;				      \
++	    break;							      \
++	  }								      \
+       }									      \
+   }
+ #else
+@@ -153,7 +180,20 @@ enum
+ #define LOOPFCT 		FROM_LOOP
+ #define BODY \
+   {									      \
+-    uint32_t ch = *inptr;						      \
++    uint32_t ch;							      \
++									      \
++    ch = curcs >> 7;							      \
++    if (__glibc_unlikely (ch != 0))					      \
++      {									      \
++	put32 (outptr, ch);						      \
++	outptr += 4;							      \
++	/* Remove the pending character, but preserve state bits.  */	      \
++	curcs &= (1 << 7) - 1;						      \
++	continue;							      \
++      }									      \
++									      \
++    /* Otherwise read the next input byte.  */				      \
++    ch = *inptr;							      \
+ 									      \
+     if (__builtin_expect (ch, 0) == SO)					      \
+       {									      \
+diff --git a/iconvdata/tst-bug33980.c b/iconvdata/tst-bug33980.c
+new file mode 100644
+index 0000000000..c9693e0efe
+--- /dev/null
++++ b/iconvdata/tst-bug33980.c
+@@ -0,0 +1,153 @@
++/* Test for bug 33980: combining characters in IBM1390/IBM1399.
++   Copyright (C) 2026 Free Software Foundation, Inc.
++   This file is part of the GNU C Library.
++
++   The GNU C Library is free software; you can redistribute it and/or
++   modify it under the terms of the GNU Lesser General Public
++   License as published by the Free Software Foundation; either
++   version 2.1 of the License, or (at your option) any later version.
++
++   The GNU C Library is distributed in the hope that it will be useful,
++   but WITHOUT ANY WARRANTY; without even the implied warranty of
++   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++   Lesser General Public License for more details.
++
++   You should have received a copy of the GNU Lesser General Public
++   License along with the GNU C Library; if not, see
++   <https://www.gnu.org/licenses/>.  */
++
++#include <alloc_buffer.h>
++#include <errno.h>
++#include <iconv.h>
++#include <stdbool.h>
++#include <string.h>
++
++#include <support/check.h>
++#include <support/next_to_fault.h>
++#include <support/support.h>
++
++/* Run iconv in a loop with a small output buffer of OUTBUFSIZE bytes
++   starting at OUTBUF.  OUTBUF should be right before an unmapped page
++   so that writing past the end will fault.  Skip SHIFT bytes at the
++   start of the input and output, to exercise different buffer
++   alignment.  TRUNCATE indicates skipped bytes at the end of
++   input (0 and 1 a valid).  */
++static void
++test_one (const char *encoding, unsigned int shift, unsigned int truncate,
++          char *outbuf, size_t outbufsize)
++{
++  /* In IBM1390 and IBM1399, the DBCS code 0xECB5 expands to two
++     Unicode code points when translated.  */
++  static char input[] =
++    {
++      /* 8 letters X.  */
++      0xe7, 0xe7, 0xe7, 0xe7, 0xe7, 0xe7, 0xe7, 0xe7,
++      /* SO, 0xECB5, SI: shift to DBCS, special character, shift back.  */
++      0x0e, 0xec, 0xb5, 0x0f
++    };
++
++  /* Expected output after UTF-8 conversion.  */
++  static char expected[] =
++    {
++      'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X',
++      /* U+304B (HIRAGANA LETTER KA).  */
++      0xe3, 0x81, 0x8b,
++      /* U+309A (COMBINING KATAKANA-HIRAGANA SEMI-VOICED SOUND MARK).  */
++      0xe3, 0x82, 0x9a
++    };
++
++  iconv_t cd = iconv_open ("UTF-8", encoding);
++  TEST_VERIFY_EXIT (cd != (iconv_t) -1);
++
++  char result_storage[64];
++  struct alloc_buffer result_buf
++    = alloc_buffer_create (result_storage, sizeof (result_storage));
++
++  char *inptr = &input[shift];
++  size_t inleft = sizeof (input) - shift - truncate;
++
++  while (inleft > 0)
++    {
++      char *outptr = outbuf;
++      size_t outleft = outbufsize;
++      size_t inleft_before = inleft;
++
++      size_t ret = iconv (cd, &inptr, &inleft, &outptr, &outleft);
++      size_t produced = outptr - outbuf;
++      alloc_buffer_copy_bytes (&result_buf, outbuf, produced);
++
++      if (ret == (size_t) -1 && errno == E2BIG)
++        {
++          if (produced == 0 && inleft == inleft_before)
++            {
++              /* Output buffer too small to make progress.  This is
++                 expected for very small output buffer sizes.  */
++              TEST_VERIFY_EXIT (outbufsize < 3);
++              break;
++            }
++          continue;
++        }
++      if (ret == (size_t) -1)
++        FAIL_EXIT1 ("%s (outbufsize %zu): iconv: %m", encoding, outbufsize);
++      break;
++    }
++
++  /* Flush any pending state (e.g. a buffered combined character).
++     With outbufsize < 3, we could not store the first character, so
++     the second character did not become pending, and there is nothing
++     to flush.  */
++  {
++    char *outptr = outbuf;
++    size_t outleft = outbufsize;
++
++    size_t ret = iconv (cd, NULL, NULL, &outptr, &outleft);
++    TEST_VERIFY_EXIT (ret == 0);
++    size_t produced = outptr - outbuf;
++    alloc_buffer_copy_bytes (&result_buf, outbuf, produced);
++
++    /* Second flush does not provide more data.  */
++    outptr = outbuf;
++    outleft = outbufsize;
++    ret = iconv (cd, NULL, NULL, &outptr, &outleft);
++    TEST_VERIFY_EXIT (ret == 0);
++    TEST_VERIFY (outptr == outbuf);
++  }
++
++  TEST_VERIFY_EXIT (!alloc_buffer_has_failed (&result_buf));
++  size_t result_used
++    = sizeof (result_storage) - alloc_buffer_size (&result_buf);
++
++  if (outbufsize >= 3)
++    {
++      TEST_COMPARE (inleft, 0);
++      TEST_COMPARE (result_used, sizeof (expected) - shift);
++      TEST_COMPARE_BLOB (result_storage, result_used,
++                         &expected[shift], sizeof (expected) - shift);
++    }
++  else
++    /* If the buffer is too small, only the leading X could be converted.  */
++    TEST_COMPARE (result_used, 8 - shift);
++
++  TEST_VERIFY_EXIT (iconv_close (cd) == 0);
++}
++
++static int
++do_test (void)
++{
++  struct support_next_to_fault ntf
++    = support_next_to_fault_allocate (8);
++
++  for (int shift = 0; shift <= 8; ++shift)
++    for (int truncate = 0; truncate < 2; ++truncate)
++      for (size_t outbufsize = 1; outbufsize <= 8; outbufsize++)
++        {
++          char *outbuf = ntf.buffer + ntf.length - outbufsize;
++          test_one ("IBM1390", shift, truncate, outbuf, outbufsize);
++          test_one ("IBM1399", shift, truncate, outbuf, outbufsize);
++        }
++
++  support_next_to_fault_free (&ntf);
++  return 0;
++}
++
++#include <support/test-driver.c>
+-- 
+2.54.0
+
+From d80e9fb777507525930cefbca19d771fa94e4aa2 Mon Sep 17 00:00:00 2001
+From: DJ Delorie <dj@redhat.com>
+Date: Mon, 26 Jan 2026 22:24:42 -0500
+Subject: [PATCH 4/8] include: isolate __O_CLOEXEC flag for sys/mount.h and
+ fcntl.h
+
+Including sys/mount.h should not implicitly include fcntl.h
+as that causes namespace pollution and conflicts with kernel
+headers.  It only needs O_CLOEXEC for OPEN_TREE_CLOEXEC
+(although it shouldn't need that, but it's defined that way)
+so we provide that define (via a private version) separately.
+
+Reviewed-by: Adhemerval Zanella  <adhemerval.zanella@linaro.org>
+Tested-by: Florian Weimer <fweimer@redhat.com>
+(cherry picked from commit 419245719ccbc7dad6a97f24465e7f09c090327a)
+(cherry picked from commit d1d8d27164e9682e467b55a7b56bd6229b7beef2)
+---
+ io/fcntl.c                                   | 4 ++++
+ sysdeps/unix/sysv/linux/Makefile             | 1 +
+ sysdeps/unix/sysv/linux/alpha/bits/cloexec.h | 1 +
+ sysdeps/unix/sysv/linux/bits/cloexec.h       | 1 +
+ sysdeps/unix/sysv/linux/bits/fcntl-linux.h   | 4 +---
+ sysdeps/unix/sysv/linux/hppa/bits/cloexec.h  | 1 +
+ sysdeps/unix/sysv/linux/sparc/bits/cloexec.h | 1 +
+ sysdeps/unix/sysv/linux/sys/mount.h          | 6 +++++-
+ sysdeps/unix/sysv/linux/tst-mount.c          | 1 +
+ 9 files changed, 16 insertions(+), 4 deletions(-)
+ create mode 100644 sysdeps/unix/sysv/linux/alpha/bits/cloexec.h
+ create mode 100644 sysdeps/unix/sysv/linux/bits/cloexec.h
+ create mode 100644 sysdeps/unix/sysv/linux/hppa/bits/cloexec.h
+ create mode 100644 sysdeps/unix/sysv/linux/sparc/bits/cloexec.h
+
+diff --git a/io/fcntl.c b/io/fcntl.c
+index c13546e4fd..4fbc522624 100644
+--- a/io/fcntl.c
++++ b/io/fcntl.c
+@@ -18,6 +18,10 @@
+ #include <errno.h>
+ #include <fcntl.h>
+ 
++#ifndef __O_CLOEXEC
++# error __O_CLOEXEC not defined by fcntl.h/cloexec.h
++#endif
++
+ /* Perform file control operations on FD.  */
+ int
+ __fcntl (int fd, int cmd, ...)
+diff --git a/sysdeps/unix/sysv/linux/Makefile b/sysdeps/unix/sysv/linux/Makefile
+index 955d316362..c6bd97abf1 100644
+--- a/sysdeps/unix/sysv/linux/Makefile
++++ b/sysdeps/unix/sysv/linux/Makefile
+@@ -129,6 +129,7 @@ CFLAGS-test-errno-linux.c += $(no-fortify-source)
+ 
+ sysdep_headers += \
+   bits/a.out.h \
++  bits/cloexec.h \
+   bits/epoll.h \
+   bits/eventfd.h \
+   bits/inotify.h \
+diff --git a/sysdeps/unix/sysv/linux/alpha/bits/cloexec.h b/sysdeps/unix/sysv/linux/alpha/bits/cloexec.h
+new file mode 100644
+index 0000000000..f381f28a53
+--- /dev/null
++++ b/sysdeps/unix/sysv/linux/alpha/bits/cloexec.h
+@@ -0,0 +1 @@
++#define __O_CLOEXEC 010000000
+diff --git a/sysdeps/unix/sysv/linux/bits/cloexec.h b/sysdeps/unix/sysv/linux/bits/cloexec.h
+new file mode 100644
+index 0000000000..3059fb6473
+--- /dev/null
++++ b/sysdeps/unix/sysv/linux/bits/cloexec.h
+@@ -0,0 +1 @@
++#define __O_CLOEXEC 02000000
+diff --git a/sysdeps/unix/sysv/linux/bits/fcntl-linux.h b/sysdeps/unix/sysv/linux/bits/fcntl-linux.h
+index ad7f7c98c6..221a71aa62 100644
+--- a/sysdeps/unix/sysv/linux/bits/fcntl-linux.h
++++ b/sysdeps/unix/sysv/linux/bits/fcntl-linux.h
+@@ -81,9 +81,7 @@
+ #ifndef __O_NOFOLLOW
+ # define __O_NOFOLLOW	0400000
+ #endif
+-#ifndef __O_CLOEXEC
+-# define __O_CLOEXEC   02000000
+-#endif
++#include <bits/cloexec.h>
+ #ifndef __O_DIRECT
+ # define __O_DIRECT	 040000
+ #endif
+diff --git a/sysdeps/unix/sysv/linux/hppa/bits/cloexec.h b/sysdeps/unix/sysv/linux/hppa/bits/cloexec.h
+new file mode 100644
+index 0000000000..f381f28a53
+--- /dev/null
++++ b/sysdeps/unix/sysv/linux/hppa/bits/cloexec.h
+@@ -0,0 +1 @@
++#define __O_CLOEXEC 010000000
+diff --git a/sysdeps/unix/sysv/linux/sparc/bits/cloexec.h b/sysdeps/unix/sysv/linux/sparc/bits/cloexec.h
+new file mode 100644
+index 0000000000..6706eaa7d5
+--- /dev/null
++++ b/sysdeps/unix/sysv/linux/sparc/bits/cloexec.h
+@@ -0,0 +1 @@
++#define __O_CLOEXEC 0x400000
+diff --git a/sysdeps/unix/sysv/linux/sys/mount.h b/sysdeps/unix/sysv/linux/sys/mount.h
+index 457d8dcff2..5e496caf2f 100644
+--- a/sysdeps/unix/sysv/linux/sys/mount.h
++++ b/sysdeps/unix/sysv/linux/sys/mount.h
+@@ -21,7 +21,6 @@
+ #ifndef _SYS_MOUNT_H
+ #define _SYS_MOUNT_H	1
+ 
+-#include <fcntl.h>
+ #include <features.h>
+ #include <stdint.h>
+ #include <stddef.h>
+@@ -266,6 +265,11 @@ enum fsconfig_command
+ 
+ /* open_tree flags.  */
+ #define OPEN_TREE_CLONE    1         /* Clone the target tree and attach the clone */
++#ifndef O_CLOEXEC
++# include <bits/cloexec.h>
++# define O_CLOEXEC __O_CLOEXEC
++#endif
++#undef  OPEN_TREE_CLOEXEC
+ #define OPEN_TREE_CLOEXEC  O_CLOEXEC /* Close the file on execve() */
+ 
+ 
+diff --git a/sysdeps/unix/sysv/linux/tst-mount.c b/sysdeps/unix/sysv/linux/tst-mount.c
+index 8e3ffbd56f..84dcd448d4 100644
+--- a/sysdeps/unix/sysv/linux/tst-mount.c
++++ b/sysdeps/unix/sysv/linux/tst-mount.c
+@@ -20,6 +20,7 @@
+ #include <support/check.h>
+ #include <support/xunistd.h>
+ #include <support/namespace.h>
++#include <fcntl.h> /* For AT_ constants.  */
+ #include <sys/mount.h>
+ 
+ _Static_assert (sizeof (struct mount_attr) == MOUNT_ATTR_SIZE_VER0,
+-- 
+2.54.0
+
+From 3e029c8b262a463d2aca12b3516680982ebe6678 Mon Sep 17 00:00:00 2001
+From: Florian Weimer <fweimer@redhat.com>
+Date: Wed, 4 Mar 2026 18:32:36 +0100
+Subject: [PATCH 5/8] Linux: Only define OPEN_TREE_* macros in <sys/mount.h> if
+ undefined (bug 33921)
+
+There is a conditional inclusion of <linux/mount.h> earlier in the file.
+If that defines the macros, do not redefine them.  This addresses build
+problems as the token sequence used by the UAPI macro definitions
+changes between Linux versions.
+
+Reviewed-by: Adhemerval Zanella  <adhemerval.zanella@linaro.org>
+(cherry picked from commit d12b017cddfeb9fe9920ba054ae3dfcb8e9238b8)
+(cherry picked from commit 1634cc11a5a54efcd542f468cf2efa5cdfc65194)
+---
+ sysdeps/unix/sysv/linux/sys/mount.h | 10 ++++++----
+ 1 file changed, 6 insertions(+), 4 deletions(-)
+
+diff --git a/sysdeps/unix/sysv/linux/sys/mount.h b/sysdeps/unix/sysv/linux/sys/mount.h
+index 5e496caf2f..0c5ebed33a 100644
+--- a/sysdeps/unix/sysv/linux/sys/mount.h
++++ b/sysdeps/unix/sysv/linux/sys/mount.h
+@@ -264,14 +264,16 @@ enum fsconfig_command
+ #define FSOPEN_CLOEXEC          0x00000001
+ 
+ /* open_tree flags.  */
+-#define OPEN_TREE_CLONE    1         /* Clone the target tree and attach the clone */
++#ifndef OPEN_TREE_CLONE
++# define OPEN_TREE_CLONE    1 /* Clone the target tree and attach the clone */
++#endif
+ #ifndef O_CLOEXEC
+ # include <bits/cloexec.h>
+ # define O_CLOEXEC __O_CLOEXEC
+ #endif
+-#undef  OPEN_TREE_CLOEXEC
+-#define OPEN_TREE_CLOEXEC  O_CLOEXEC /* Close the file on execve() */
+-
++#ifndef OPEN_TREE_CLOEXEC
++# define OPEN_TREE_CLOEXEC  O_CLOEXEC /* Close the file on execve() */
++#endif
+ 
+ __BEGIN_DECLS
+ 
+-- 
+2.54.0
+
+From ef4e01da564df1520dfa0d92ef4eb5f473538ef1 Mon Sep 17 00:00:00 2001
+From: Michael Jeanson <mjeanson@efficios.com>
+Date: Fri, 20 Feb 2026 11:01:00 -0500
+Subject: [PATCH 6/8] tests: fix tst-rseq with Linux 7.0
+
+A sub-test of tst-rseq is to validate the return code and errno of the
+rseq syscall when attempting to register the exact same rseq area as was
+done in the dynamic loader.
+
+This involves finding the rseq area address by adding the
+'__rseq_offset' to the thread pointer and calculating the area size from
+the AT_RSEQ_FEATURE_SIZE auxiliary vector. However the test currently
+calculates the size of the rseq area allocation in the TLS block which
+must be a multiple of AT_RSEQ_ALIGN.
+
+Up until now that happened to be the same value since the feature size
+and alignment exposed by the kernel were below the minimum ABI size of
+32. Starting with Linux 7.0 the feature size has reached 33 while the
+alignment is now 64.
+
+This results in the test trying to re-register the rseq area with a
+different size and thus not getting the expected errno value.
+
+Signed-off-by: Michael Jeanson <mjeanson@efficios.com>
+Reviewed-by: Mathieu Desnoyers <mathieu.desnoyers@efficios.com>
+(cherry picked from commit 67f303b47dc584f204e3f2441b9832082415eebc)
+(cherry picked from commit ce1013a197eb4a3b8ff2b07e0672f4d0b976ce7c)
+---
+ sysdeps/unix/sysv/linux/tst-rseq.c | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
+
+diff --git a/sysdeps/unix/sysv/linux/tst-rseq.c b/sysdeps/unix/sysv/linux/tst-rseq.c
+index 11371dc6c5..ba93d390f4 100644
+--- a/sysdeps/unix/sysv/linux/tst-rseq.c
++++ b/sysdeps/unix/sysv/linux/tst-rseq.c
+@@ -48,8 +48,7 @@ do_rseq_main_test (void)
+   size_t rseq_align = MAX (getauxval (AT_RSEQ_ALIGN), RSEQ_MIN_ALIGN);
+   size_t rseq_feature_size = MAX (getauxval (AT_RSEQ_FEATURE_SIZE),
+                                   RSEQ_AREA_SIZE_INITIAL_USED);
+-  size_t rseq_alloc_size = roundup (MAX (rseq_feature_size,
+-                                    RSEQ_AREA_SIZE_INITIAL_USED), rseq_align);
++  size_t rseq_reg_size = MAX (rseq_feature_size, RSEQ_AREA_SIZE_INITIAL);
+   struct rseq *rseq_abi = __thread_pointer () + __rseq_offset;
+ 
+   TEST_VERIFY_EXIT (rseq_thread_registered ());
+@@ -89,8 +88,8 @@ do_rseq_main_test (void)
+   /* Test a rseq registration with the same arguments as the internal
+      registration which should fail with errno == EBUSY.  */
+   TEST_VERIFY (((unsigned long) rseq_abi % rseq_align) == 0);
+-  TEST_VERIFY (__rseq_size <= rseq_alloc_size);
+-  int ret = syscall (__NR_rseq, rseq_abi, rseq_alloc_size, 0, RSEQ_SIG);
++  TEST_VERIFY (__rseq_size <= rseq_reg_size);
++  int ret = syscall (__NR_rseq, rseq_abi, rseq_reg_size, 0, RSEQ_SIG);
+   TEST_VERIFY (ret != 0);
+   TEST_COMPARE (errno, EBUSY);
+ }
+-- 
+2.54.0
+
+From 246f2955daebf68e9e9b40eca200e544784b447e Mon Sep 17 00:00:00 2001
+From: Rocket Ma <marocketbd@gmail.com>
+Date: Fri, 17 Apr 2026 23:48:41 -0700
+Subject: [PATCH 7/8] stdio-common: Fix buffer overflow in scanf %mc [BZ
+ #34008]
+
+* stdio-common/vfscanf-internal.c: When enlarging allocated buffer with
+format %mc or %mC, glibc allocates one byte less, leading to
+user-controlled one byte overflow. This commit fixes BZ #34008, or
+CVE-2026-5450.
+
+Reviewed-by: Carlos O'Donell <carlos@redhat.com>
+Signed-off-by: Rocket Ma <marocketbd@gmail.com>
+Reviewed-by: H.J. Lu <hjl.tools@gmail.com>
+(cherry picked from commit 839898777226a3ed88c0859f25ffe712519b4ead)
+---
+ stdio-common/Makefile              |  4 +++
+ stdio-common/tst-vfscanf-bz34008.c | 48 ++++++++++++++++++++++++++++++
+ stdio-common/vfscanf-internal.c    |  7 ++---
+ 3 files changed, 55 insertions(+), 4 deletions(-)
+ create mode 100644 stdio-common/tst-vfscanf-bz34008.c
+
+diff --git a/stdio-common/Makefile b/stdio-common/Makefile
+index 210944837e..0c0085e607 100644
+--- a/stdio-common/Makefile
++++ b/stdio-common/Makefile
+@@ -349,6 +349,7 @@ tests := \
+   tst-vfprintf-user-type \
+   tst-vfprintf-width-i18n \
+   tst-vfprintf-width-prec-alloc \
++  tst-vfscanf-bz34008 \
+   tst-wc-printf \
+   tstdiomisc \
+   tstgetln \
+@@ -564,6 +565,9 @@ tst-printf-bz18872-ENV = MALLOC_TRACE=$(objpfx)tst-printf-bz18872.mtrace \
+ tst-vfprintf-width-prec-ENV = \
+   MALLOC_TRACE=$(objpfx)tst-vfprintf-width-prec.mtrace \
+   LD_PRELOAD=$(common-objpfx)/malloc/libc_malloc_debug.so
++tst-vfscanf-bz34008-ENV = \
++  MALLOC_CHECK_=3 \
++  LD_PRELOAD=$(common-objpfx)/malloc/libc_malloc_debug.so
+ tst-printf-bz25691-ENV = \
+   MALLOC_TRACE=$(objpfx)tst-printf-bz25691.mtrace \
+   LD_PRELOAD=$(common-objpfx)/malloc/libc_malloc_debug.so
+diff --git a/stdio-common/tst-vfscanf-bz34008.c b/stdio-common/tst-vfscanf-bz34008.c
+new file mode 100644
+index 0000000000..48371c8a3d
+--- /dev/null
++++ b/stdio-common/tst-vfscanf-bz34008.c
+@@ -0,0 +1,48 @@
++/* Regression test for vfscanf %Nmc out-of-bound write (BZ #34008)
++   Copyright (C) 2026 The GNU Toolchain Authors.
++   This file is part of the GNU C Library.
++
++   The GNU C Library is free software; you can redistribute it and/or
++   modify it under the terms of the GNU Lesser General Public
++   License as published by the Free Software Foundation; either
++   version 2.1 of the License, or (at your option) any later version.
++
++   The GNU C Library is distributed in the hope that it will be useful,
++   but WITHOUT ANY WARRANTY; without even the implied warranty of
++   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++   Lesser General Public License for more details.
++
++   You should have received a copy of the GNU Lesser General Public
++   License along with the GNU C Library; if not, see
++   <https://www.gnu.org/licenses/>.  */
++
++#include "malloc/mcheck.h"
++#include <stddef.h>
++#include <stdio.h>
++#include <string.h>
++#include <wchar.h>
++#include <stdlib.h>
++#include <malloc.h>
++#include <support/check.h>
++
++#define WIDTH 0x410
++#define SCANFSTR "%1040mc"
++static int
++do_test (void)
++{
++  mcheck_pedantic (NULL);
++  char *input = malloc (WIDTH + 1);
++  TEST_VERIFY (input != NULL);
++  memset (input, 'A', WIDTH);
++  input[WIDTH] = '\0';
++
++  char *buf = NULL;
++  TEST_VERIFY (sscanf (input, SCANFSTR, &buf) != -1);
++  TEST_VERIFY (buf != NULL);
++
++  free (buf);
++  free (input);
++  return 0;
++}
++
++#include <support/test-driver.c>
+diff --git a/stdio-common/vfscanf-internal.c b/stdio-common/vfscanf-internal.c
+index 63b9246e47..8687150dff 100644
+--- a/stdio-common/vfscanf-internal.c
++++ b/stdio-common/vfscanf-internal.c
+@@ -862,8 +862,7 @@ __vfscanf_internal (FILE *s, const char *format, va_list argptr,
+ 			{
+ 			  /* Enlarge the buffer.  */
+ 			  size_t newsize
+-			    = strsize
+-			      + (strsize >= width ? width - 1 : strsize);
++			    = strsize + (strsize >= width ? width : strsize);
+ 
+ 			  str = (char *) realloc (*strptr, newsize);
+ 			  if (str == NULL)
+@@ -936,7 +935,7 @@ __vfscanf_internal (FILE *s, const char *format, va_list argptr,
+ 		      && wstr == (wchar_t *) *strptr + strsize)
+ 		    {
+ 		      size_t newsize
+-			= strsize + (strsize > width ? width - 1 : strsize);
++			= strsize + (strsize >= width ? width : strsize);
+ 		      /* Enlarge the buffer.  */
+ 		      wstr = (wchar_t *) realloc (*strptr,
+ 						  newsize * sizeof (wchar_t));
+@@ -991,7 +990,7 @@ __vfscanf_internal (FILE *s, const char *format, va_list argptr,
+ 		    && wstr == (wchar_t *) *strptr + strsize)
+ 		  {
+ 		    size_t newsize
+-		      = strsize + (strsize > width ? width - 1 : strsize);
++		      = strsize + (strsize >= width ? width : strsize);
+ 		    /* Enlarge the buffer.  */
+ 		    wstr = (wchar_t *) realloc (*strptr,
+ 						newsize * sizeof (wchar_t));
+-- 
+2.54.0
+
+From 64b33a4daaaf34bb6960af666e1f9565c15718bd Mon Sep 17 00:00:00 2001
+From: Rocket Ma <marocketbd@gmail.com>
+Date: Fri, 1 May 2026 20:39:07 -0700
+Subject: [PATCH 8/8] libio: Fix ungetwc operating on byte stream [BZ #33998]
+
+* libio/wgenops.c: When _IO_wdefault_pbackfail attempts to push back one
+character, it accidently compare the wchar to push back with the last
+char from byte stream, instead of wide stream. Under specific coding,
+attacker may exploit this to leak information. This commit fix bug
+33998, or CVE-2026-5928.
+
+Signed-off-by: Rocket Ma <marocketbd@gmail.com>
+Reviewed-by: Carlos O'Donell <carlos@redhat.com>
+(cherry picked from commit ef3bfb5f910011f3780cb06aa47e730035f53285)
+---
+ libio/Makefile              |  1 +
+ libio/bug-wgenops-bz33998.c | 54 +++++++++++++++++++++++++++++++++++++
+ libio/wgenops.c             |  4 +--
+ 3 files changed, 57 insertions(+), 2 deletions(-)
+ create mode 100644 libio/bug-wgenops-bz33998.c
+
+diff --git a/libio/Makefile b/libio/Makefile
+index 4f4dd9f275..5995adf5dd 100644
+--- a/libio/Makefile
++++ b/libio/Makefile
+@@ -84,6 +84,7 @@ tests = \
+   bug-ungetwc1 \
+   bug-ungetwc2 \
+   bug-wfflush \
++  bug-wgenops-bz33998 \
+   bug-wmemstream1 \
+   bug-wsetpos \
+   test-fmemopen \
+diff --git a/libio/bug-wgenops-bz33998.c b/libio/bug-wgenops-bz33998.c
+new file mode 100644
+index 0000000000..cc4067da99
+--- /dev/null
++++ b/libio/bug-wgenops-bz33998.c
+@@ -0,0 +1,54 @@
++/* Regression test for ungetwc operating on byte stream (BZ #33998)
++   Copyright (C) 2026 The GNU Toolchain Authors.
++   This file is part of the GNU C Library.
++
++   The GNU C Library is free software; you can redistribute it and/or
++   modify it under the terms of the GNU Lesser General Public
++   License as published by the Free Software Foundation; either
++   version 2.1 of the License, or (at your option) any later version.
++
++   The GNU C Library is distributed in the hope that it will be useful,
++   but WITHOUT ANY WARRANTY; without even the implied warranty of
++   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++   Lesser General Public License for more details.
++
++   You should have received a copy of the GNU Lesser General Public
++   License along with the GNU C Library; if not, see
++   <https://www.gnu.org/licenses/>.  */
++
++#include "support/temp_file.h"
++#include "support/xstdio.h"
++#include "support/xunistd.h"
++#include <stdlib.h>
++#include <unistd.h>
++#include <sys/mman.h>
++#include <stdio.h>
++#include <wchar.h>
++#include <support/check.h>
++
++static int
++do_test (void)
++{
++  char *filename;
++  int fd = create_temp_file ("tst-bz33998-", &filename);
++  TEST_VERIFY (fd != -1);
++  xwrite (fd, "A", sizeof ("A")); // write "A\0" by design
++  xclose (fd);
++
++  FILE *fp = xfopen (filename, "r+");
++  TEST_COMPARE (getwc (fp), L'A');
++  /* If the bug is fixed, then ungetwc should not touch byte stream.
++     If the bug is not fixed, ungetwc firstly match last read char, L'A',
++     failed, then the pbackfail branch, matching last read char in byte
++     stream, that is, '\0' (initialized when setup wide stream). */
++  char *old_read_ptr = fp->_IO_read_ptr;
++  TEST_COMPARE (ungetwc (L'\0', fp), L'\0');
++  TEST_VERIFY (fp->_IO_read_ptr == old_read_ptr);
++
++  xfclose (fp);
++  free (filename);
++
++  return 0;
++}
++
++#include <support/test-driver.c>
+diff --git a/libio/wgenops.c b/libio/wgenops.c
+index 7a8466ea44..7c47459828 100644
+--- a/libio/wgenops.c
++++ b/libio/wgenops.c
+@@ -108,8 +108,8 @@ _IO_wdefault_pbackfail (FILE *fp, wint_t c)
+ {
+   if (fp->_wide_data->_IO_read_ptr > fp->_wide_data->_IO_read_base
+       && !_IO_in_backup (fp)
+-      && (wint_t) fp->_IO_read_ptr[-1] == c)
+-    --fp->_IO_read_ptr;
++      && (wint_t) fp->_wide_data->_IO_read_ptr[-1] == c)
++    --fp->_wide_data->_IO_read_ptr;
+   else
+     {
+       /* Need to handle a filebuf in write mode (switch to read mode). FIXME!*/
+-- 
+2.54.0
+
