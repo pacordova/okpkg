@@ -1,3 +1,37 @@
+libxmlb = {
+   url = "https://github.com/hughsie/libxmlb/releases/download/0.3.27/libxmlb-0.3.27.tar.xz",
+   sha3 = "8603ee16405a0dd39cafa703f1d099fcd9dd7d3cbd3836614741a886bb9c965d",
+   build = "meson",
+   flags = { "-Dintrospection=true", "-D{gtkdoc,tests}=false" },
+};
+
+libfyaml = {
+   url = "https://github.com/pantoniou/libfyaml/releases/download/v0.9.6/libfyaml-0.9.6.tar.gz",
+   sha3 = "24548a6798b52898d1131bf2c642f2f79c16d57d7feea5e1aa6d9959de94fa57",
+   build = "./configure",
+};
+
+appstream = {
+   url = "https://www.freedesktop.org/software/appstream/releases/AppStream-1.1.2.tar.xz",
+   sha3 = "d062db84251a89c90903d136d16d3712b27b8fbc9d063b34345bea968d58ff4c",
+   build = "meson",
+   flags = {
+      "-Dsystemd=false",
+      "-Dapidocs=false",
+      "-Dinstall-docs=false",
+      "-Dman=false",
+      "-Dstemming=false",
+      "-Dvapi=false",
+      "-Dcompose=true",
+      "-Dbash-completion=false",
+   },
+   prep = [[
+      mv AppStream*/* . && rm -fr AppStream*
+      sed -i "/subdir('docs\/')/d" meson.build
+      sed -i "s/version: '>= 2.48'/version: '>= 2.40'/" compose/meson.build
+   ]]
+};
+
 babl = {
    url = "https://download.gimp.org/pub/babl/0.1/babl-0.1.126.tar.xz",
    sha3 = "d2d6758c8de8ac004f855c563961de061b7b0995ae831cd34081223b880c7bf8",
