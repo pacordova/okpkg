@@ -91,19 +91,7 @@ iputils = {
 netcat = {
    url = "https://downloads.sourceforge.net/nc110/nc110.20180111.tar.xz",
    sha3 = "98ae44f399eac93e383559e87183dc9bf3080ec928f7d8cb727a5da256272344",
-   build = "make",
-   flags = { "linux" },
-   prep = [[
-      sed -e '/#define HAVE_BIND/s:#define:#undef:' \
-          -e '/#define FD_SETSIZE 16/s:16:1024: #34250' \
-          -i netcat.c
-      : > install
-   ]],
-   post = [[
-      install -d $destdir/usr/{bin,share/man/man1}
-      install -m 755 nc   $destdir/usr/bin/
-      install -m 644 nc.1 $destdir/usr/share/man/man1/
-   ]]
+   build = "make_install",
 };
 
 openssh = {

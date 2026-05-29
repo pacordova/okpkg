@@ -115,3 +115,56 @@ index 992c42b..b4d6fd8 100644
 -- 
 2.35.1
 
+--- a/Makefile.orig
++++ b/Makefile
+@@ -9,7 +9,7 @@
+ # pick gcc if you'd rather , and/or do -g instead of -O if debugging
+ # debugging
+ # DFLAGS = -DTEST -DDEBUG
+-CFLAGS = -O
++CFLAGS ?= -O
+ XFLAGS = 	# xtra cflags, set by systype targets
+ XLIBS =		# xtra libs if necessary?
+ # -Bstatic for sunos,  -static for gcc, etc.  You want this, trust me.
+@@ -22,8 +22,10 @@
+ 
+ ### BOGON-CATCHERS
+ 
+-bogus:
+-	@echo "Usage:  make  <systype>  [options]"
++install: linux
++	install -d $(DESTDIR)/bin $(DESTDIR)/usr/share/man/man1
++	install -m 755 nc   $(DESTDIR)/bin
++	install -m 644 nc.1 $(DESTDIR)/usr/share/man/man1
+ 
+ ### HARD TARGETS
+ 
+@@ -67,7 +69,7 @@
+ 	make -e $(ALL) $(MFLAGS) XFLAGS='-DAIX'
+ 
+ linux:
+-	make -e $(ALL) $(MFLAGS) XFLAGS='-DLINUX' STATIC=-static
++	make -e $(ALL) $(MFLAGS) XFLAGS='-DLINUX -DTELNET -DGAPING_SECURITY_HOLE'
+ 
+ # irix 5.2, dunno 'bout earlier versions.  If STATIC='-non_shared' doesn't
+ # work for you, null it out and yell at SGI for their STUPID default
+--- a/netcat.c
++++ b/netcat.c
+@@ -31,7 +31,7 @@
+ /* conditional includes -- a very messy section which you may have to dink
+    for your own architecture [and please send diffs...]: */
+ /* #undef _POSIX_SOURCE */	/* might need this for something? */
+-#define HAVE_BIND		/* ASSUMPTION -- seems to work everywhere! */
++#undef HAVE_BIND		/* ASSUMPTION -- seems to work everywhere! */
+ #define HAVE_HELP		/* undefine if you dont want the help text */
+ /* #define ANAL */		/* if you want case-sensitive DNS matching */
+ 
+@@ -54,7 +54,7 @@
+ #ifdef FD_SETSIZE		/* should be in types.h, butcha never know. */
+ #undef FD_SETSIZE		/* if we ever need more than 16 active */
+ #endif				/* fd's, something is horribly wrong! */
+-#define FD_SETSIZE 16		/* <-- this'll give us a long anyways, wtf */
++#define FD_SETSIZE 1024		/* <-- this'll give us a long anyways, wtf */
+ #include <sys/types.h>		/* *now* do it.  Sigh, this is broken */
+ 
+ #ifdef HAVE_RANDOM		/* aficionados of ?rand48() should realize */
