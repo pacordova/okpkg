@@ -8,6 +8,7 @@
 local unpack = unpack or table.unpack
 local ok = require("okutils")
 local C, M, E = dofile("/etc/okpkg.conf")
+local destdir = "/mnt"
 
 B = {
    ["configure"] = function(f, ...)
@@ -105,7 +106,7 @@ ok.setenv("CFLAGS", "-O2 -fstack-protector-strong -fstack-clash-protection -ftri
 ok.setenv("CXXFLAGS", os.getenv("CFLAGS"))
 ok.setenv("PATH", "/mnt/tools/bin:/bin")
 ok.setenv("LC_ALL", "C")
-ok.setenv("destdir", "/mnt")
+ok.setenv("destdir", destdir)
 ok.setenv("make", "/bin/make -j4")
 ok.setenv("patch", "/bin/patch -bp1")
 
@@ -133,10 +134,9 @@ for i in buf:gmatch("\n([%w%-%+]-) = {.-;") do
 end
 
 -- Cleanup
-ok.chdir(os.getenv("destdir"))
-os.execute("mv sbin/* bin")
-os.remove("sbin")
-os.execute("mv usr/lib64/* lib64")
-os.remove("usr/lib64")
-ok.remove_all("./usr/x86_64-unknown-linux-gnu")
-ok.remove_all("./tools")
+for i in ok.directory_iterator(destdir .. "/usr/lib64") do
+   os.rename(i, i:gsub("/usr", ""))
+end
+os.remove(destdir .. "/usr/lib64")
+ok.remove_all(destdir .. "/tools")
+ok.remove_all(destdir .. "/usr/x86_64-unknown-linux-gnu")
