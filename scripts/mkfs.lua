@@ -5,15 +5,14 @@ ok = require("okutils")
 -- Reformat
 io.write("Please enter a partition/device to format: ")
 local dev = io.read()
-if not (
-   os.execute("umount -R -f -q /mnt || ! mountpoint -q /mnt") and
+if os.execute("umount -R -f -q /mnt || ! mountpoint -q /mnt") and
    os.execute("mkfs.ext4 " .. dev) and
-   os.execute("mount " .. dev .. " /mnt"))
+   os.execute("mount " .. dev .. " /mnt")
 then
-   error("error: reformat")
-else
    ok.chdir("/mnt") 
    os.remove("lost+found")
+else
+   error("error: reformat")
 end
 
 -- Skeleton
