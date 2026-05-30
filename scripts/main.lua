@@ -181,7 +181,7 @@ function download(x)
    
    -- Patch if file exists
    -- Note: symlink for temporary packages, or update patch infrastructure
-   fp = io.open(string.format("%s/%s.diff", Dirs.patch, x))
+   fp = io.open(string.format("%s/%s.diff", Dirs.patches, x))
    if fp then
       io.popen("$patch", "w"):write(fp:read("*a")):close()
       fp:close()
