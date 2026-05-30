@@ -55,9 +55,7 @@ ok.mkdir("./usr/share/zoneinfo")
 ok.mkdir("./usr/src")
 ok.mkdir("./var")
 ok.mkdir("./var/cache")
-ok.mkdir("./var/cache/ok")
-ok.mkdir("./var/cache/ok/out")
-ok.mkdir("./var/cache/ok/pkg")
+ok.mkdir("./var/cache/packages")
 ok.mkdir("./var/db")
 ok.mkdir("./var/db/repos")
 ok.mkdir("./var/home")
@@ -291,10 +289,10 @@ os.execute([[
    chattr +i ./etc/resolv.conf
    chmod 0755 ./bin/c99
    git clone --depth=1 {file:///,./}var/db/repos/okpkg
-   tar -xf /var/cache/ok/pkg/linux-lts-*.tar.lz
-   cp -a /var/cache/ok/pkg/linux-lts-*.tar.lz ./var/cache/ok/pkg
+   tar -xf /var/cache/packages/linux-lts-*.tar.lz
+   cp -a /var/cache/packages/linux-lts-*.tar.lz ./var/cache/packages
    cp -a {/,./}etc/dinit.d
-   cp -a {/,./}var/cache/ok/dist
+   cp -a {/,./}var/cache/distfiles
    cp -f  /etc/{protocols,services} ./etc
    cp -f {/,./}etc/ssl/certs/ca-certificates.crt
 ]])

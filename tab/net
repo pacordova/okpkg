@@ -122,11 +122,14 @@ rsync = {
    flags = { "--disable-{debug,xxhash}" }
 };
 
-wget = {
-   url = "https://ftp.gnu.org/gnu/wget/wget-1.25.0.tar.lz",
-   sha3 = "ded3b9f3547aa32926e0257e12ce12992db051c45f6b1125bfad3b3ad5074604",
+wget2 = {
+   url = "https://ftp.gnu.org/gnu/wget/wget2-2.2.1.tar.lz",
+   sha3 = "31efa42d8860b31680594cb8759ef264577d247fe596e1f7090b2e2d25864505",
    build = "./configure",
-   flags = { "--with-ssl=openssl" }
+   post = [[ 
+      ln -sf wget2 $destdir/bin/wget
+      rm -f $destdir/bin/wget2_noinstall 
+   ]]
 };
 
 wpa_supplicant = {
