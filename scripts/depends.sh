@@ -1,7 +1,7 @@
 #!/bin/sh
 
-indexdir=$(dirname $0)/../idx
-cachedir=/var/cache/ok/deps
+indexdir=/var/log/packages
+cachedir=/var/db/dependencies
 mkdir -p "$cachedir"
 
 # Lists all binary files in a file list from stdin

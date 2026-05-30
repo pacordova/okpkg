@@ -36,7 +36,7 @@ end
 
 -- Fix versions and cleanup
 os.execute("makewhatis /usr/share/man")
-ok.chdir(Dirs.pkg)
+ok.chdir(Dirs.packages)
 --purge("_perl")
 --purge("_python3")
 --purge("samurai")

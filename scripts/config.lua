@@ -1,22 +1,21 @@
--- /etc/okpkg: okpkg configuration
+#!/bin/lua
 
 local Dirs = {
-   dist  = "/var/cache/ok/dist",
-   idx   = "/var/db/repos/okpkg/idx",
-   out   = "/var/cache/ok/out",
-   patch = "/var/db/repos/okpkg/patches",
-   pkg   = "/var/cache/ok/pkg",
-   src   = "/usr/src",
-   tab   = "/var/db/repos/okpkg/tab",
+   distfiles  = "/var/cache/distfiles",
+   log        = "/var/log/packages",
+   out        = "/var/db/repos/okpkg/out",
+   packages   = "/var/cache/packages",
+   patches    = "/var/db/repos/okpkg/patches",
+   src        = "/usr/src",
+   tab        = "/var/db/repos/okpkg/tab",
 }
 
 -- Note: escape any dashes
 local Mir = {
-   ["https://ftp.gnu.org"] = "http://mirror.fcix.net",
+   ["https://ftp.gnu.org"]         = "http://mirror.fcix.net",
    ["https://cran.r%-project.org"] = "https://archive.linux.duke.edu/cran",
 }
 
--- Environment
 local Env = {
    ["LC_ALL"]      = "POSIX",
    ["CONFIG_SITE"] = "/etc/config.site",

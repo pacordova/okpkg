@@ -9,6 +9,11 @@ local function concat(x) table.concat(x, " ") end
 -- Global variables (callable by cli)
 chroot, sha3sum = ok.chroot, ok.sha3sum
 
+-- Make directories
+for k,v in pairs(Dirs) do
+   local fp = io.open(v); if fp then fp:close() else ok.mkdir(v) end
+end
+
 -- Environment variables
 for k,v in pairs(Env) do ok.setenv(k,v) end
 
@@ -153,7 +158,7 @@ function download(x)
    local X, fp
 
    X = query(x)
-   X.dist = string.format("%s/%s", Dirs.dist, X.url:match("/([^/]*)$"))
+   X.dist = string.format("%s/%s", Dirs.distfiles, ok.basename(X.url))
 
    -- change mirrors
    for k,v in pairs(Mir) do X.url = X.url:gsub(k, v) end 
@@ -237,12 +242,10 @@ function build(x)
    X.flags = X.flags or {}
    X.V = vmatch(ok.basename(X.url))
    X.destdir = string.format("%s/%s-%s-%s", Dirs.out, x, X.V, "skylake")
-
    ok.setenv("destdir", X.destdir)
    ok.remove_all(X.destdir)
    ok.mkdir(X.destdir)
 
-   -- Setup srcdir
    ok.chdir(string.format("%s/%s", Dirs.src, x))
    ok.setenv("SOURCE_DATE_EPOCH", mtime("."))
 
@@ -286,7 +289,7 @@ end
 function purge(x)
    local i, fp
    local file, filename
-   i = string.format("%s/%s", Dirs.idx, x)
+   i = string.format("%s/%s", Dirs.log, x)
    fp = io.open(i)
    if fp then
       for x in fp:lines() do
@@ -304,7 +307,7 @@ function install(x)
    buf = fp:read('*a')
    fp:close()
 
-   i = string.format("%s/%s", Dirs.idx, ok.basename(x):match("(.+)-[n%d]"))
+   i = string.format("%s/%s", Dirs.log, ok.basename(x):match("(.+)-[n%d]"))
    fp = io.open(i)
    if fp then fp:close(); os.rename(i, i .. ".orig") end
    io.close(io.open(i, "w+"):write(buf))

@@ -30,7 +30,7 @@ src/okutils.so: $(objs)
 install: install-strip
 install-strip: src/okutils.so
 	strip --strip-unneeded $<
-	mkdir -p idx $(bindir) $(LUA_CPATH)
+	mkdir -p $(bindir) $(LUA_CPATH)
 	mv -f $< $(LUA_CPATH)
 	cp -f scripts/main.lua $(bindir)/okpkg
 	cp -f scripts/config.lua $(sysconfdir)/okpkg.conf
