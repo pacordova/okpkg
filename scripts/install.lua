@@ -19,6 +19,6 @@ end
 dofile(string.format("%s/%s", ok.dirname(arg[0]), "filesystem.lua"))
 
 -- Install sys
-for i in ok.directory_iterator("/var/cache/ok/sys") do
+for i in ok.directory_iterator("/var/cache/sys") do
    os.execute("tar -C $destdir -xf " .. i)
 end
