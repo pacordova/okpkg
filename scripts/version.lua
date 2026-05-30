@@ -87,7 +87,7 @@ end
 skip = "bc,cmake,librsvg,pavucontrol,python3,vim,x264,harfbuzz,rsync"
 
 L = {}
-L[0] = '\n' .. popen("cat /usr/okpkg/db/*")
+L[0] = '\n' .. popen("cat /usr/okpkg/tab/*")
 for i in L[0]:gmatch("\n([%w%-%+]-) = {.-;") do
    if not string.format(",%s,", skip):
       match(string.format(",%s,", i)) 

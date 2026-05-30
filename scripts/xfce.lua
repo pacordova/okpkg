@@ -19,10 +19,10 @@ local usr = {
 }
 
 
--- Builds and installs all packages in a single db file
+-- Builds and installs all packages in a single tab file
 local function build_all(x)
    local fp, buf
-   fp = io.open(string.format("%s/db/%s", root, x))
+   fp = io.open(string.format("%s/tab/%s", root, x))
    buf = fp:read('*a')
    fp:close()
    for i in buf:gmatch("\n?([%w%-_]*)%s*=%s*{.-}%s*;") do

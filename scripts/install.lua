@@ -20,7 +20,7 @@ end
 -- Base filesystem
 dofile(C.okdir .. "/scripts/filesystem.lua")
 
--- Install db/sys
+-- Install sys
 for i in ok.directory_iterator("/var/cache/ok/sys") do
    os.execute("tar -C $destdir -xf " .. i)
 end

@@ -10,7 +10,7 @@ local chdir, mkdir, remove_all =
 
 local function download_all(x)
    local fp, buf
-   fp = io.open(string.format("%s/db/%s", C["okdir"], x))
+   fp = io.open(string.format("%s/tab/%s", C["okdir"], x))
    buf = '\n'..fp:read("*a")
    fp:close()
    for i in buf:gmatch("\n([%w%-%+]-) = {.-;") do

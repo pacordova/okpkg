@@ -39,7 +39,7 @@ B = {
 function query(x)
    local fp, buf
    x = x:gsub("%-", "%%-")
-   fp = io.open(string.format("%s/db/.cross", C.okdir))
+   fp = io.open(string.format("%s/tab/.cross", C.okdir))
    buf = "\n" .. fp:read("*a")
    fp:close()
    buf = buf:match("\n" .. x .. "%s*=%s*({.-})%s*;")
@@ -124,9 +124,9 @@ end
 -- Base filesystem
 dofile(C.okdir .. "/scripts/filesystem.lua")
 
--- Build all packages in $okdir/db/.cross
+-- Build all packages in $okdir/tab/.cross
 local fp, buf
-fp = io.open(C.okdir .. "/db/.cross")
+fp = io.open(C.okdir .. "/tab/.cross")
 buf = "\n" .. fp:read('*a')
 fp:close()
 for i in buf:gmatch("\n([%w%-%+]-) = {.-;") do 

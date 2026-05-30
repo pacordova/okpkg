@@ -16,9 +16,9 @@ local function install_all(X)
    end
 end
 
--- Build db/python
+-- Build python modules
 local fp, buf
-fp = io.open(string.format("%s/db/python", C.okdir))
+fp = io.open(string.format("%s/tab/python", C.okdir))
 buf = '\n' .. fp:read('*a')
 fp:close()
 for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do 
