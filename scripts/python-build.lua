@@ -6,11 +6,11 @@ local C = dofile("/bin/okpkg")
 local ok = require("okutils")
 
 local function install_all(X)
-   for i in ok.directory_iterator(C.pkgdir) do 
+   for it in ok.directory_iterator(Dirs.packages) do 
       for j=1,#X do
-         if ok.basename(i):sub(1, #X[j]) == X[j] then 
+         if ok.basename(it):sub(1, #X[j]) == X[j] then 
             purge(X[j])
-            install(i)
+            install(it)
          end
       end
    end

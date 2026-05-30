@@ -119,8 +119,8 @@ for i in buf:gmatch("\n([%w%-%+]-) = {.-;") do
 end
 
 -- Cleanup
-for i in ok.directory_iterator("/mnt/usr/lib64") do
-   os.rename(i, i:gsub("/usr", ""))
+for it in ok.directory_iterator("/mnt/usr/lib64") do
+   os.rename(i, it:gsub("/usr", ""))
 end
 os.remove("/mnt/usr/lib64")
 ok.remove_all("/mnt/tools")
