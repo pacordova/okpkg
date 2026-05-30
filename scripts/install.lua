@@ -1,5 +1,7 @@
 #!/bin/lua
 
+ok = require("okutils")
+
 -- Filesystem
 dofile(string.format("%s/%s", ok.dirname(arg[0]), "mkfs.lua"))
 

@@ -8,11 +8,12 @@ local dev = io.read()
 if not (
    os.execute("umount -R -f -q /mnt || ! mountpoint -q /mnt") and
    os.execute("mkfs.ext4 " .. dev) and
-   os.execute("mount " .. dev .. " /mnt") and
-   ok.chdir("/mnt")
-   os.remove("lost+found")
+   os.execute("mount " .. dev .. " /mnt"))
 then
    error("error: reformat")
+else
+   ok.chdir("/mnt") 
+   os.remove("lost+found")
 end
 
 -- Skeleton
