@@ -8,7 +8,6 @@
 local unpack = unpack or table.unpack
 local ok = require("okutils")
 local Dirs = dofile("/etc/okpkg.conf")
-local destdir = "/mnt"
 
 B = {
    ["configure"] = function(f, ...)
@@ -16,11 +15,11 @@ B = {
       return (
          os.execute(table.concat({arg[0], unpack(arg)}, ' ')) and
          os.execute("$make") and
-         os.execute("$make install DESTDIR=$destdir"))
+         os.execute("$make install DESTDIR=/mnt"))
    end,
    ["make"] = function(...)
       local arg = {
-         [0]={"$make", "$make install DESTDIR=$destdir"},
+         [0]={"$make", "$make install DESTDIR=/mnt"},
          ...
       }
       return (
@@ -96,9 +95,7 @@ function emerge(x)
    end
 
    if X.post then os.execute(X.post) end
-   os.execute([[ 
-      find $destdir -name \*.la -delete 
-   ]])
+   os.execute("find /mnt -name \*.la -delete")
 end
 
 -- Environment
@@ -106,23 +103,11 @@ ok.setenv("CFLAGS", "-O2 -fstack-protector-strong -fstack-clash-protection -ftri
 ok.setenv("CXXFLAGS", os.getenv("CFLAGS"))
 ok.setenv("PATH", "/mnt/tools/bin:/bin")
 ok.setenv("LC_ALL", "C")
-ok.setenv("destdir", destdir)
 ok.setenv("make", "/bin/make -j4")
 ok.setenv("patch", "/bin/patch -bp1")
 
--- Reformat the partition specified at command line.
-io.write("Please enter a partition/device to format: ")
-local dev = io.read()
-if not (
-   os.execute("umount -R -f -q $destdir || ! mountpoint -q $destdir") and
-   os.execute("mkfs.ext4 " .. dev) and
-   os.execute(string.format("mount '%s' $destdir", dev)))
-then
-   error("error: reformat")
-end
-
 -- Filesystem
-dofile(string.format("%s/%s", ok.dirname(arg[0]), "filesystem.lua"))
+dofile(string.format("%s/%s", ok.dirname(arg[0]), "mkfs.lua"))
 
 -- Build all packages in .cross
 local fp, buf
@@ -134,9 +119,9 @@ for i in buf:gmatch("\n([%w%-%+]-) = {.-;") do
 end
 
 -- Cleanup
-for i in ok.directory_iterator(destdir .. "/usr/lib64") do
+for i in ok.directory_iterator("/mnt/usr/lib64") do
    os.rename(i, i:gsub("/usr", ""))
 end
-os.remove(destdir .. "/usr/lib64")
-ok.remove_all(destdir .. "/tools")
-ok.remove_all(destdir .. "/usr/x86_64-unknown-linux-gnu")
+os.remove("/mnt/usr/lib64")
+ok.remove_all("/mnt/tools")
+ok.remove_all("/mnt/usr/x86_64-unknown-linux-gnu")

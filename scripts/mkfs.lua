@@ -1,14 +1,19 @@
 #!/bin/lua
 
-local fp, ok
-
 ok = require("okutils")
 
--- Change directory to root of new filesystem
-ok.chdir(os.getenv("destdir"))
-
--- Cleanup
-os.remove("lost+found")
+-- Reformat: device from from prompt, mount to /mnt
+io.write("Please enter a partition/device to format: ")
+local dev = io.read()
+if not (
+   os.execute("umount -R -f -q /mnt || ! mountpoint -q /mnt") and
+   os.execute("mkfs.ext4 " .. dev) and
+   os.execute(string.format("mount '%s' /mnt", dev)))
+   ok.chdir("/mnt")
+   os.remove("lost+found")
+then
+   error("error: reformat")
+end
 
 --------------
 -- Skeleton --
