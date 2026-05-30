@@ -59,8 +59,8 @@ unsafe(){
 }
 
 # Traditional but unsafe
-ldd_all
-#for f in "$indexdir/"*; do unsafe < "$f" | sed "s|^|[$f]: |"; done
+#ldd_all
+for f in "$indexdir/"*; do unsafe < "$f" | sed "s|^|[$f]: |"; done
 
 #mkcache
 #revdeps eudev
