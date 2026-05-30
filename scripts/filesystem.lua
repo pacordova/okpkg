@@ -58,6 +58,8 @@ ok.mkdir("./var/cache")
 ok.mkdir("./var/cache/ok")
 ok.mkdir("./var/cache/ok/out")
 ok.mkdir("./var/cache/ok/pkg")
+ok.mkdir("./var/db")
+ok.mkdir("./var/db/repos")
 ok.mkdir("./var/home")
 ok.mkdir("./var/log")
 ok.mkdir("./var/mail")
@@ -66,8 +68,9 @@ ok.mkdir("./var/spool")
 --------------
 -- Symlinks --
 --------------
-ok.symlink("../../bin/env", "./usr/bin/env")
+ok.link("./bin/env", "./usr/bin/env")
 ok.symlink("/opt/python3.13/bin/python3", "./bin/python3")
+ok.symlink("/opt/perl/bin/perl", "./bin/perl")
 ok.symlink("bash",    "./bin/sh")
 ok.symlink("flex",    "./bin/lex")
 ok.symlink("gcc",     "./bin/cc")
@@ -287,7 +290,7 @@ os.execute([[
    mknod -m 666 ./dev/null c 1 3
    chattr +i ./etc/resolv.conf
    chmod 0755 ./bin/c99
-   git clone --depth=1 {file:///,./}usr/okpkg
+   git clone --depth=1 {file:///,./}var/db/repos/okpkg
    tar -xf /var/cache/ok/pkg/linux-lts-*.tar.lz
    cp -a /var/cache/ok/pkg/linux-lts-*.tar.lz ./var/cache/ok/pkg
    cp -a {/,./}etc/dinit.d

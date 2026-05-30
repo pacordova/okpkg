@@ -3,7 +3,6 @@
 unpack = unpack or table.unpack
 
 ok = require("okutils")
-
 Dirs = dofile("/etc/okpkg.conf")
 
 function popen(command)
@@ -87,12 +86,15 @@ end
 skip = "bc,cmake,librsvg,pavucontrol,python3,vim,x264,harfbuzz,rsync"
 
 L = {}
-L[0] = '\n' .. popen("cat /usr/okpkg/tab/*")
-for i in L[0]:gmatch("\n([%w%-%+]-) = {.-;") do
-   if not string.format(",%s,", skip):
-      match(string.format(",%s,", i)) 
-   then
-      table.insert(L, i)
+for it in ok.directory_iterator(Dirs.tab) do
+   fp = io.open(it)
+   buf = "\n" .. fp:read("*a")
+   for i in buf:gmatch("\n([%w%-%+]-) = {.-;") do
+      if not string.format(",%s,", skip):
+         match(string.format(",%s,", i)) 
+      then
+         table.insert(L, i)
+      end
    end
 end
 

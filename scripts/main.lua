@@ -176,7 +176,7 @@ function download(x)
    
    -- Patch if file exists
    -- Note: symlink for temporary packages, or update patch infrastructure
-   fp = io.open(string.format("/usr/okpkg/patches/%s.diff", x))
+   fp = io.open(string.format("%s/%s.diff", Dirs.patch, x))
    if fp then
       io.popen("$patch", "w"):write(fp:read("*a")):close()
       fp:close()

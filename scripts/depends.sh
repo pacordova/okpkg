@@ -1,6 +1,6 @@
 #!/bin/sh
 
-indexdir=/usr/okpkg/index
+indexdir=$(dirname $0)/../idx
 cachedir=/var/cache/ok/deps
 mkdir -p "$cachedir"
 
@@ -36,7 +36,7 @@ dump_runpath(){
   dump_all | awk '/RUNPATH/{print $2}' | cat - /etc/ld.so.conf | uniq
 }
 
-# Finds NEEDED files in /usr/okpkg/index to list dependencies
+# Finds NEEDED files in idx to list dependencies
 # usage: deps < FILE
 deps(){
   dump_needed | grep -f- -l "$indexdir/"*

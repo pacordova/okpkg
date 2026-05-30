@@ -1,7 +1,7 @@
 #!/bin/lua
 
 -- Bootstrap
-os.execute("cd /usr/okpkg && make && make install")
+os.execute("make -C"..arg[0]:gsub("[^/]-/[^/]-$","").." install")
 
 -- Imports
 dofile("/bin/okpkg")
@@ -22,7 +22,7 @@ fp:close()
 for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do
    emerge(i)
    if i == "_python" then
-      dofile("/usr/okpkg/scripts/python-bootstrap.lua")
+      dofile("%s/%s", ok.dirname(arg[0]), "python-bootstrap.lua")
       emerge("samurai")
    end
    if i:sub(1, 3) == "gcc" then

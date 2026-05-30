@@ -1,12 +1,13 @@
 -- /etc/okpkg: okpkg configuration
 
 local Dirs = {
-   tab  = "/var/db/repos/okpkg/tab",
-   idx  = "/var/db/repos/okpkg/idx",
-   out  = "/var/cache/okpkg/out",
-   pkg  = "/var/cache/okpkg/pkg",
-   dist = "/var/cache/okpkg/dist",
-   src  = "/usr/src",
+   dist  = "/var/cache/okpkg/dist",
+   idx   = "/var/db/repos/okpkg/idx",
+   out   = "/var/cache/okpkg/out",
+   patch = "/var/db/repos/okpkg/patches",
+   pkg   = "/var/cache/okpkg/pkg",
+   src   = "/usr/src",
+   tab   = "/var/db/repos/okpkg/tab",
 }
 
 -- Note: escape any dashes
