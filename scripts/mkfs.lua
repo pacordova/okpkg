@@ -8,7 +8,7 @@ local dev = io.read()
 if not (
    os.execute("umount -R -f -q /mnt || ! mountpoint -q /mnt") and
    os.execute("mkfs.ext4 " .. dev) and
-   os.execute(string.format("mount '%s' /mnt", dev)))
+   os.execute("mount " .. dev .. " /mnt") and
    ok.chdir("/mnt")
    os.remove("lost+found")
 then
