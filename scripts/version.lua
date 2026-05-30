@@ -3,8 +3,8 @@
 unpack = unpack or table.unpack
 
 ok = require("okutils")
-C = dofile("/etc/okpkg.conf")
 
+Dirs = dofile("/etc/okpkg.conf")
 
 function popen(command)
    local fp, buf
@@ -68,7 +68,7 @@ end
 -----------
 -- okpkg --
 -----------
-ok.chdir(C.pkgdir)
+ok.chdir(Dirs.pkg)
 okpkg = {}
 for w in string.gmatch(popen("ls *.tar.lz"), '(.-\n)') do
    local fixed = w:

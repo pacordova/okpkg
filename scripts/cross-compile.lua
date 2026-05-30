@@ -7,7 +7,7 @@
 -- Imports
 local unpack = unpack or table.unpack
 local ok = require("okutils")
-local C, M, E = dofile("/etc/okpkg.conf")
+local Dirs = dofile("/etc/okpkg.conf")
 local destdir = "/mnt"
 
 B = {
@@ -39,7 +39,7 @@ B = {
 function query(x)
    local fp, buf
    x = x:gsub("%-", "%%-")
-   fp = io.open(string.format("%s/tab/.cross", C.okdir))
+   fp = io.open(string.format("%s/%s", Dirs.tab, ".cross"))
    buf = "\n" .. fp:read("*a")
    fp:close()
    buf = buf:match("\n" .. x .. "%s*=%s*({.-})%s*;")
@@ -51,7 +51,7 @@ function extract(x)
    X = query(x)
 
    -- Setup source directory
-   ok.chdir(C.srcdir)
+   ok.chdir(Dirs.src)
    ok.remove_all(x)
    ok.mkdir(x)
    ok.chdir(x)
@@ -121,12 +121,12 @@ then
    error("error: reformat")
 end
 
--- Base filesystem
-dofile(C.okdir .. "/scripts/filesystem.lua")
+-- Filesystem
+dofile(string.format("%s/%s", ok.dirname(arg[0]), "filesystem.lua"))
 
--- Build all packages in $okdir/tab/.cross
+-- Build all packages in .cross
 local fp, buf
-fp = io.open(C.okdir .. "/tab/.cross")
+fp = io.open(string.format("%s/%s", Dirs.tab, ".cross")
 buf = "\n" .. fp:read('*a')
 fp:close()
 for i in buf:gmatch("\n([%w%-%+]-) = {.-;") do 

@@ -1,27 +1,24 @@
 #!/bin/lua
 
-dofile("/bin/okpkg")
-
 local unpack = unpack or table.unpack
 local ok = require("okutils")
-local C, M, E = dofile("/etc/okpkg.conf")
-local chdir, mkdir, remove_all = 
-   ok.chdir, ok.mkdir, ok.remove_all
+
+local Dirs = dofile("/bin/okpkg")
 
 local function download_all(x)
    local fp, buf
-   fp = io.open(string.format("%s/tab/%s", C["okdir"], x))
+   fp = io.open(string.format("%s/%s", Dirs.tab, x))
    buf = '\n'..fp:read("*a")
    fp:close()
    for i in buf:gmatch("\n([%w%-%+]-) = {.-;") do
       download(i)
-      chdir(C.srcdir)
-      remove_all(i)
+      ok.chdir(Dirs.src)
+      ok.remove_all(i)
    end
 end
 
-remove_all(C.srcdir)
-mkdir(C.srcdir)
+ok.remove_all(Dirs.src)
+ok.mkdir(Dirs.src)
 
 download_all("sys")
 --download_all("python")

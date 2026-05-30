@@ -1,9 +1,7 @@
 #!/bin/lua
 
 unpack = unpack or table.unpack
-C = dofile("/etc/okpkg.conf")
 ok = require("okutils")
-
 ok.setenv("destdir", "/mnt")
 
 -- Reformat (partition from prompt)
@@ -17,8 +15,8 @@ then
    error("error: reformat")
 end
 
--- Base filesystem
-dofile(C.okdir .. "/scripts/filesystem.lua")
+-- Filesystem
+dofile(string.format("%s/%s", ok.dirname(arg[0]), "filesystem.lua"))
 
 -- Install sys
 for i in ok.directory_iterator("/var/cache/ok/sys") do

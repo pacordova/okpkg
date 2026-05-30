@@ -3,14 +3,14 @@
 -- Imports
 unpack = unpack or table.unpack
 local ok = require("okutils")
-local C, M, E = dofile("/etc/okpkg.conf")
+local Dirs, Mir, Env = dofile("/etc/okpkg.conf")
 local function concat(x) table.concat(x, " ") end
 
 -- Global variables (callable by cli)
 chroot, sha3sum = ok.chroot, ok.sha3sum
 
 -- Environment variables
-for k,v in pairs(E) do ok.setenv(k,v) end
+for k,v in pairs(Env) do ok.setenv(k,v) end
 
 -- Build routines
 B = {
@@ -133,7 +133,7 @@ end
 
 function query(x)
    local i, fp, buf
-   for it in ok.directory_iterator(string.format("%s/tab", C.okdir)) do
+   for it in ok.directory_iterator(Dirs.tab) do
       if not buf and ok.basename(it):sub(1, 1) ~= "." then
          fp = io.open(it)
          buf = "\n" .. fp:read("*a")
@@ -153,10 +153,10 @@ function download(x)
    local X, fp
 
    X = query(x)
-   X.dist = string.format("%s/%s", C.distdir, X.url:match("/([^/]*)$"))
+   X.dist = string.format("%s/%s", Dirs.dist, X.url:match("/([^/]*)$"))
 
    -- change mirrors
-   for k,v in pairs(M) do X.url = X.url:gsub(k, v) end 
+   for k,v in pairs(Mir) do X.url = X.url:gsub(k, v) end 
    
    -- Download file if not already downloaded
    io.close (
@@ -167,7 +167,7 @@ function download(x)
    
    -- Setup source directory
    assert(
-      ok.chdir(C.srcdir) and
+      ok.chdir(Dirs.src) and
       ok.remove_all(x) and
       ok.mkdir(x) and
       ok.chdir(x) and
@@ -236,14 +236,14 @@ function build(x)
    local X = query(x)
    X.flags = X.flags or {}
    X.V = vmatch(ok.basename(X.url))
-   X.destdir = string.format("%s/%s-%s-%s", C.outdir, x, X.V, "skylake")
+   X.destdir = string.format("%s/%s-%s-%s", Dirs.out, x, X.V, "skylake")
 
    ok.setenv("destdir", X.destdir)
    ok.remove_all(X.destdir)
    ok.mkdir(X.destdir)
 
    -- Setup srcdir
-   ok.chdir(("%s/%s"):format(C.srcdir, x))
+   ok.chdir(string.format("%s/%s", Dirs.src, x))
    ok.setenv("SOURCE_DATE_EPOCH", mtime("."))
 
    X.prep = 
@@ -286,7 +286,7 @@ end
 function purge(x)
    local i, fp
    local file, filename
-   i = string.format("%s/%s", C.indexdir, x)
+   i = string.format("%s/%s", Dirs.idx, x)
    fp = io.open(i)
    if fp then
       for x in fp:lines() do
@@ -304,7 +304,7 @@ function install(x)
    buf = fp:read('*a')
    fp:close()
 
-   i = string.format("%s/%s", C.indexdir, ok.basename(x):match("(.+)-[n%d]"))
+   i = string.format("%s/%s", Dirs.idx, ok.basename(x):match("(.+)-[n%d]"))
    fp = io.open(i)
    if fp then fp:close(); os.rename(i, i .. ".orig") end
    io.close(io.open(i, "w+"):write(buf))
@@ -327,4 +327,4 @@ while #arg > 1 do
 end
 
 -- Return for dofile
-return C, M, E
+return Dirs, Mir, Env

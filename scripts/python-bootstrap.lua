@@ -2,7 +2,6 @@
 
 dofile("/bin/okpkg")
 unpack = unpack or table.unpack
-local C = dofile("/etc/okpkg.conf")
 local ok = require("okutils")
 
 -- Cleanup

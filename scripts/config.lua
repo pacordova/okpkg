@@ -1,23 +1,22 @@
 -- /etc/okpkg: okpkg configuration
 
--- Directories
-local C = {
-   ["distdir"]     = "/var/cache/ok/dist",
-   ["indexdir"]    = "/usr/okpkg/index",
-   ["okdir"]       = "/usr/okpkg",
-   ["outdir"]      = "/var/cache/ok/out",
-   ["pkgdir"]      = "/var/cache/ok/pkg",
-   ["srcdir"]      = "/usr/src",
+local Dirs = {
+   tab  = "/var/db/repos/okpkg/tab",
+   idx  = "/var/db/repos/okpkg/idx",
+   out  = "/var/cache/okpkg/out",
+   pkg  = "/var/cache/okpkg/pkg",
+   dist = "/var/cache/okpkg/dist",
+   src  = "/usr/src",
 }
 
 -- Note: escape any dashes
-local M = {
+local Mir = {
    ["https://ftp.gnu.org"] = "http://mirror.fcix.net",
    ["https://cran.r%-project.org"] = "https://archive.linux.duke.edu/cran",
 }
 
 -- Environment
-local E = {
+local Env = {
    ["LC_ALL"]      = "POSIX",
    ["CONFIG_SITE"] = "/etc/config.site",
    ["curl"]        = "/bin/curl -fLR",
@@ -30,17 +29,6 @@ local E = {
    ["tar"]         = "/bin/tar",
 }
 
-local cc = {
-   ["cpu"]            = "skylake",
-   ["optimize"]       =  2,
-   ["ssp"]            = "strong",
-   ["cet"]            = "none",
-   ["init_stack"]     = "zero",
-   ["scp"]            =  true,
- --["pie"]            =  true,
- --["common"]         =  false,
-}
-
 local cflags = {
    "-march=skylake",
    "-O2",
@@ -50,8 +38,8 @@ local cflags = {
    "-pipe",
 }
 
-E.CFLAGS = table.concat(cflags, ' ')
-E.CXXFLAGS = table.concat(cflags, ' ')
-E.FORCE_UNSAFE_CONFIGURE = 1
+Env.CFLAGS = table.concat(cflags, ' ')
+Env.CXXFLAGS = table.concat(cflags, ' ')
+Env.FORCE_UNSAFE_CONFIGURE = 1
 
-return C, M, E
+return Dirs, Mir, Env
