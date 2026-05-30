@@ -132,14 +132,18 @@ function vmatch(s)
 end
 
 function query(x)
-   local fp, buf
-   x = x:gsub("%-", "%%-")
+   local fp, buf, j, k
    for i in ok.directory_iterator(string.format("%s/db", C.okdir)) do
       if not buf and ok.basename(i):sub(1, 1) ~= "." then
          fp = io.open(i)
          buf = "\n" .. fp:read("*a")
          fp:close()
-         buf = buf:match("\n" .. x .. "%s*=%s*({.-})%s*;")
+         j = buf:find("\n" .. x .. " =", 1, true)
+         if j then
+            buf = buf:sub(buf:find("{", j, true), buf:find("};", j, true))
+         else
+            buf = false
+         end
       end
    end
    return load("return " .. buf)()
