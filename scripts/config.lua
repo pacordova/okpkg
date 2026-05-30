@@ -1,11 +1,11 @@
 -- /etc/okpkg: okpkg configuration
 
 local Dirs = {
-   dist  = "/var/cache/okpkg/dist",
+   dist  = "/var/cache/ok/dist",
    idx   = "/var/db/repos/okpkg/idx",
-   out   = "/var/cache/okpkg/out",
+   out   = "/var/cache/ok/out",
    patch = "/var/db/repos/okpkg/patches",
-   pkg   = "/var/cache/okpkg/pkg",
+   pkg   = "/var/cache/ok/pkg",
    src   = "/usr/src",
    tab   = "/var/db/repos/okpkg/tab",
 }
