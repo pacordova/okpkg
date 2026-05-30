@@ -82,7 +82,7 @@ glibc = {
       "PYTHON_PROG=/opt/python3.13/bin/python3.13",
    },
    prep = [[
-      $patch < /usr/okpkg/patches/glibc.diff
+      $patch < /var/db/repos/okpkg/patches/glibc.diff
       printf "%s\n" rootsbindir=/bin >> configparms
       printf "%s\n" sbindir=/bin     >> configparms
       printf "%s\n" slibdir=/lib64   >> configparms
@@ -342,7 +342,7 @@ lua = {
       "RANLIB=x86_64-unknown-linux-gnu-ranlib",
       "linux",
    },
-   prep = [[ $patch < /usr/okpkg/patches/lua.diff ]],
+   prep = [[ $patch < /var/db/repos/okpkg/patches/lua.diff ]],
    post = [[
       cd $destdir/lib64
       ln -sf liblua.so.5.5.0 liblua.so.5.5
