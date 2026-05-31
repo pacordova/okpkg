@@ -87,13 +87,13 @@ skip = "bc,cmake,librsvg,pavucontrol,python3,vim,x264,harfbuzz,rsync"
 
 L = {}
 for it in ok.directory_iterator(Dirs.tab) do
-   fp = io.open(it)
-   buf = "\n" .. fp:read("*a")
-   for i in buf:gmatch("\n([%w%-%+]-) = {.-;") do
-      if not string.format(",%s,", skip):
-         match(string.format(",%s,", i)) 
-      then
-         table.insert(L, i)
+   if ok.basename(it):sub(1,1) ~= "." then
+      fp = io.open(it)
+      buf = "\n" .. fp:read("*a")
+      for i in buf:gmatch("\n([%w%-]-) = {.-};") do
+         if not string.format(",%s,", skip):match(string.format(",%s,", i)) then
+            table.insert(L, i)
+         end
       end
    end
 end

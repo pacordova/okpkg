@@ -1,34 +1,39 @@
 #!/bin/lua
 
-local unpack = unpack or table.unpack
-local ok = require("okutils")
+unpack = unpack or table.unpack
+ok = require("okutils")
+Dirs, Mir = dofile("/etc/okpkg.conf")
 
-local Dirs = dofile("/bin/okpkg")
+tabs = { "sys", "python", "perl", "devel", "lib", "net" } 
 
-local function download_all(x)
-   local fp, buf
-   fp = io.open(string.format("%s/%s", Dirs.tab, x))
-   buf = '\n'..fp:read("*a")
+urls = {}
+sha3sums = {}
+for i=1,#tabs do
+   local X, fp, buf
+   fp = io.open(Dirs.tab .. "/" .. tabs[i])
+   buf = "\n" .. fp:read("*a")
    fp:close()
-   for i in buf:gmatch("\n([%w%-%+]-) = {.-;") do
-      download(i)
-      ok.chdir(Dirs.src)
-      ok.remove_all(i)
+   for k,v in pairs(Mir) do buf=buf:gsub(k,v) end
+   for m in buf:gmatch("\n[%w%-]-%s*=%s*({.-};)") do 
+      X = load("return " .. m)()
+      table.insert(urls, X.url)
+      table.insert(sha3sums, X.sha3)
    end
 end
 
-ok.remove_all(Dirs.src)
-ok.mkdir(Dirs.src)
+-- download
+ok.remove_all(Dirs.distfiles)
+ok.mkdir(Dirs.distfiles)
+ok.chdir(Dirs.distfiles)
+fd = io.popen("/bin/wget2 -i -", "w")
+for i=1,#urls do fd:write(string.format("%s\n", urls[i])) end
+fd:close()
 
-download_all("sys")
-download_all("python")
-download_all("perl")
-download_all("devel")
-download_all("lib")
-download_all("net")
---download_all("fonts")
---download_all("xorg")
---download_all("gtk")
---download_all("xfce")
---download_all("video")
---download_all("flatpak")
+-- cksum
+assert(#urls == #sha3sums)
+for i=1,#urls do
+   if ok.sha3sum(ok.basename(urls[i])) ~= sha3sums[i] then
+      io.write(string.format("%s: FAILED\n", urls[i]))
+      os.remove(ok.basename(urls[i]))
+   end
+end
