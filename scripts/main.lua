@@ -166,7 +166,7 @@ function download(x)
    -- Download file if not already downloaded
    io.close (
       io.open(X.dist) or 
-      io.popen(string.format("$curl %s >%s", X.url, X.dist))
+      io.popen(string.format("/bin/curl -fLR %s >%s", X.url, X.dist))
    )
    assert(X.sha3 == sha3sum(X.dist) or not os.remove(X.dist))
    

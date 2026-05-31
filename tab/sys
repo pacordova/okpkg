@@ -415,7 +415,7 @@ grep = {
 
 bash = {
    url = "https://ftp.gnu.org/gnu/bash/bash-5.3.tar.gz",
-   sha3 = "b25c69ecf2151cb12627f7f43d25724cb8124352a1581d52da114338b550a1c6",
+   sha3 = "dda35c452800b021b85a5056c29364e7ed1f0e583e80836e967ee514e843c333",
    build = "./configure",
    flags = {
       "--enable-readline",

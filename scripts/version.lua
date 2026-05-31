@@ -14,7 +14,7 @@ function popen(command)
 end
 
 function curl(x)
-   return popen("curl -#L https://mirrors.kernel.org/" .. x)
+   return popen("/bin/curl -fL https://mirrors.kernel.org/" .. x)
 end
 
 function v(t, x)

@@ -19,7 +19,6 @@ local Mir = {
 local Env = {
    ["LC_ALL"]      = "POSIX",
    ["CONFIG_SITE"] = "/etc/config.site",
-   ["curl"]        = "/bin/curl -fLR",
    ["lzip"]        = "/bin/plzip",
    ["make"]        = "/bin/make -j4",
    ["meson"]       = "/opt/python3.13/bin/meson",

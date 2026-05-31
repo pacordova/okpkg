@@ -1,6 +1,6 @@
 #!/bin/sh
 
-curl='/bin/curl --fail --location'
+curl='/bin/curl -fsSL'
 
 _get_url(){
   printf "https://www.iana.org/assignments/%s/%s.xml" "$1" "$1"
