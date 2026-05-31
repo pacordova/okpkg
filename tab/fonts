@@ -1,6 +1,6 @@
 _freetype2 = {
-   url = query("freetype2")["url"],
-   sha3 = query("freetype2")["sha3"]
+   url = "https://downloads.sourceforge.net/freetype/freetype-2.14.3.tar.xz",
+   sha3 = "6de5a3174bc94e705ca09ecd8f391190706b29211e4e07253039eb2f9fc10242",
    build = "meson",
    flags = { "-Dharfbuzz=disabled" }
 };

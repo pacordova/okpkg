@@ -14,8 +14,8 @@ usbutils = {
 --------------------------------------------------------------------------------
 
 _glib2 = {
-   url = query("glib2")["url"],
-   sha3 = query("glib2")["sha3"],
+   url = "https://download.gnome.org/sources/glib/2.88/glib-2.88.1.tar.xz",
+   sha3 = "c31d70193ea92c9e68af62a13ad7164234ff5216274681a9095761e415d432af",
    build = "meson",
    flags = { "-Dintrospection=disabled" }
 };
