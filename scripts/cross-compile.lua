@@ -122,7 +122,7 @@ end
 
 -- Cleanup
 for it in ok.directory_iterator("/mnt/usr/lib64") do
-   os.rename(i, it:gsub("/usr", ""))
+   os.rename(it, it:gsub("/usr", ""))
 end
 os.remove("/mnt/usr/lib64")
 ok.remove_all("/mnt/tools")
