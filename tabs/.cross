@@ -92,6 +92,20 @@ glibc = {
    ]]
 };
 
+libxcrypt = {
+   fs = "/var/cache/ok/dist/libxcrypt-4.5.2.tar.xz", 
+   build = "./configure",
+   flags = {
+      "--prefix=/usr",
+      "--host=x86_64-unknown-linux-gnu",
+      "--build=$(build-aux/m4-autogen/config.guess)",
+      "--enable-hashes=strong,glibc",
+      "--enable-obsolete-api=no",
+      "--disable-failure-tokens",
+      "PERL=/opt/perl/bin/perl",
+   }
+};
+
 libstdcxx = {
    fs = "/var/cache/ok/dist/gcc-16.1.0.tar.xz",
    build = "../libstdc++-v3/configure",
@@ -114,20 +128,6 @@ libstdcxx = {
    ]],
 };
 
-libxcrypt = {
-   fs = "/var/cache/ok/dist/libxcrypt-4.5.2.tar.xz", 
-   build = "./configure",
-   flags = {
-      "--prefix=/usr",
-      "--host=x86_64-unknown-linux-gnu",
-      "--build=$(build-aux/m4-autogen/config.guess)",
-      "--enable-hashes=strong,glibc",
-      "--enable-obsolete-api=no",
-      "--disable-failure-tokens",
-      "PERL=/opt/perl/bin/perl",
-   }
-};
-
 m4 = {
    fs = "/var/cache/ok/dist/m4-1.4.21.tar.xz", 
    build = "./configure",
@@ -143,17 +143,27 @@ ncurses = {
    build = "./configure",
    flags = {
       "--prefix=/usr",
-      "--with-manpage-format=normal",
-      "--with-shared",
-      "--enable-widec",
-      "--disable-setuid-environ",
-      "--disable-stripping",
-      "--with-cxx-{binding=no,shared=yes}",
-      "--with-{termlib=tinfo,xterm-kbs=del}",
-      "--without-{ada,debug,normal}",
-      --"--with-versioned-syms",
       "--host=x86_64-unknown-linux-gnu",
       "--build=$(./config.guess)",
+      "--disable-root-access",
+      "--disable-root-environ",
+      "--disable-rpath-hack",
+      "--disable-setuid-environ",
+      "--disable-stripping",
+      "--enable-hard-tabs",
+      "--enable-pc-files",
+      "--enable-widec",
+      "--with-cxx-shared",
+      "--with-manpage-format=normal",
+      "--with-ospeed=unsigned",
+      "--without-ada",
+      "--without-debug",
+      "--without-normal",
+      "--without-tests",
+      "--with-pkg-config-libdir=/lib64/pkgconfig",
+      "--with-shared",
+      "--with-termlib=tinfo",
+      "--with-xterm-kbs=DEL",
       "ac_cv_path_TIC=$(realpath ./build/progs/tic)",
    },
    prep = [[
@@ -164,8 +174,20 @@ ncurses = {
       make -C progs tic
    ]],
    post = [[
-      ln -sf libncursesw.so $destdir/lib64/libncurses.so
-      sed -i 's/^#if.*XOPEN.*$/#if 1/' $destdir/usr/include/curses.h
+      cd "$destdir/usr/include"
+      sed -i 's/^#if.*XOPEN.*$/#if 1/' curses.h
+      cd "$destdir/lib64"
+      rm -fr libncursesw.so ../usr/lib
+      printf "INPUT(libncursesw.so.6 -ltinfo)\n" >> libncursesw.so
+      ln -sf libform{w,}.so
+      ln -sf libmenu{w,}.so
+      ln -sf libncurses{w,}.so
+      ln -sf libpanel{w,}.so
+      cd "$destdir/lib64/pkgconfig"
+      ln -sf form{w,}.pc
+      ln -sf menu{w,}.pc
+      ln -sf ncurses{w,}.pc
+      ln -sf panel{w,}.pc
    ]]
 };
 
@@ -193,16 +215,6 @@ coreutils = {
    }
 };
 
-file = {
-   fs = "/var/cache/ok/dist/file-5.47.tar.gz",
-   build = "./configure",
-   flags = {
-      "--prefix=/usr",
-      "--host=x86_64-unknown-linux-gnu",
-      "--build=$(./config.guess)",
-   }
-};
-
 diffutils = {
    fs = "/var/cache/ok/dist/diffutils-3.12.tar.xz", 
    build = "./configure",
@@ -211,6 +223,16 @@ diffutils = {
       "--host=x86_64-unknown-linux-gnu",
       "--build=$(build-aux/config.guess)",
       "gl_cv_func_strcasecmp_works=y"
+   }
+};
+
+file = {
+   fs = "/var/cache/ok/dist/file-5.47.tar.gz",
+   build = "./configure",
+   flags = {
+      "--prefix=/usr",
+      "--host=x86_64-unknown-linux-gnu",
+      "--build=$(./config.guess)",
    }
 };
 
@@ -380,17 +402,6 @@ util-linux = {
       "--enable-lib{blkid,fdisk,mount,smartcols,uuid}",
       "--exec-prefix=/",
       "--without-{python,systemd}",
-   }
-};
-
-libressl = {
-   fs = "/var/cache/ok/dist/libressl-4.3.2.tar.gz", 
-   build = "./configure",
-   flags = {
-      "--prefix=/usr",
-      "--host=x86_64-unknown-linux-gnu",
-      "--build=$(./config.guess)",
-      "--with-openssldir=/etc/ssl",
    }
 };
 
