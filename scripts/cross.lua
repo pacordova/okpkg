@@ -47,16 +47,14 @@ end
 
 function extract(x)
    local X, fp
-
+   
    -- lookup fixes
-   if tab == "sys" then
-      if x == "libstdcxx" then 
-         X = query("gcc16", "sys")
-      elseif x:sub(1,1) == "_" then
-         X = query(x:sub(2,#x), "sys")
-      else
-         X = query(x, "sys")
-      end
+   if x == "libstdcxx" then 
+      X = query("gcc16", "sys")
+   elseif x:sub(1,1) == "_" then
+      X = query(x:sub(2,#x), "sys")
+   else
+      X = query(x, "sys")
    end
 
    X.dist = string.format("%s/%s", Dirs.distfiles, ok.basename(X.url))
@@ -120,7 +118,7 @@ local fp, buf
 fp = io.open(string.format("%s/%s", Dirs.tabs, "cross"))
 buf = "\n" .. fp:read('*a')
 fp:close()
-for i in buf:gmatch("\n([%w%-%+]-) = {.-;") do 
+for i in buf:gmatch("\n([%w%-%_]-) = {.-;") do
    build(extract(i))
 end
 
