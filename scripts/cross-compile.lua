@@ -38,7 +38,7 @@ B = {
 function query(x)
    local fp, buf
    x = x:gsub("%-", "%%-")
-   fp = io.open(string.format("%s/%s", Dirs.tabs, ".cross"))
+   fp = io.open(string.format("%s/%s", Dirs.tabs, "cross"))
    buf = "\n" .. fp:read("*a")
    fp:close()
    buf = buf:match("\n" .. x .. "%s*=%s*({.-})%s*;")
@@ -111,9 +111,9 @@ ok.setenv("patch", "/bin/patch -bp1")
 -- Filesystem
 dofile(string.format("%s/%s", ok.dirname(arg[0]), "mkfs.lua"))
 
--- Build all packages in .cross
+-- Build all packages in cross
 local fp, buf
-fp = io.open(string.format("%s/%s", Dirs.tabs, ".cross"))
+fp = io.open(string.format("%s/%s", Dirs.tabs, "cross"))
 buf = "\n" .. fp:read('*a')
 fp:close()
 for i in buf:gmatch("\n([%w%-%+]-) = {.-;") do 
