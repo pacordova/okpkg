@@ -46,8 +46,10 @@ function query(x)
 end
 
 function extract(x)
-   local X, fp, nm 
+   local X, fp, fs 
    X = query(x)
+   fs = Dirs.distfiles .. "/" .. ok.basename(X.fs)
+   fs = string.format("%s/%s", Dirs.distfiles, ok.basename(X.fs))
 
    -- Setup source directory
    ok.chdir(Dirs.src)
@@ -56,12 +58,12 @@ function extract(x)
    ok.chdir(x)
 
    -- Extract 
-   fp = io.open(X.fs)
+   fp = io.open(fs)
    if fp then
       fp:close()
-      os.execute("tar --strip-components=1 -xf " .. X.fs)
+      os.execute("tar --strip-components=1 -xf " .. fs)
    else
-      error("error: extract: source tarball does not exist!")
+      error("error: extract: " .. fs)
    end
 
    return X 

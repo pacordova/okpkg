@@ -1,5 +1,5 @@
 binutils-pass1 = {
-   fs = "/var/cache/ok/dist/binutils-2.46.0.tar.lz",
+   fs = "/var/cache/distfiles/binutils-2.46.0.tar.lz",
    build = "../configure", 
    flags = {
       "--target=x86_64-unknown-linux-gnu",
@@ -18,7 +18,7 @@ binutils-pass1 = {
 };
 
 gcc-pass1 = {
-   fs = "/var/cache/ok/dist/gcc-16.1.0.tar.xz",
+   fs = "/var/cache/distfiles/gcc-16.1.0.tar.xz",
    build = "../configure",
    flags = {
       "--target=x86_64-unknown-linux-gnu",
@@ -55,10 +55,10 @@ gcc-pass1 = {
    },
    prep = [[
       mkdir gmp mpfr mpc isl
-      tar -C gmp  --strip-components=1 -xf /var/cache/ok/dist/gmp-6.3.0.tar.xz
-      tar -C mpfr --strip-components=1 -xf /var/cache/ok/dist/mpfr-4.2.2.tar.xz
-      tar -C mpc  --strip-components=1 -xf /var/cache/ok/dist/mpc-1.4.1.tar.xz
-      tar -C isl  --strip-components=1 -xf /var/cache/ok/dist/isl-0.27.tar.xz
+      tar -C gmp  --strip-components=1 -xf /var/cache/distfiles/gmp-6.3.0.tar.xz
+      tar -C mpfr --strip-components=1 -xf /var/cache/distfiles/mpfr-4.2.2.tar.xz
+      tar -C mpc  --strip-components=1 -xf /var/cache/distfiles/mpc-1.4.1.tar.xz
+      tar -C isl  --strip-components=1 -xf /var/cache/distfiles/isl-0.27.tar.xz
    ]],
    post = [[
       cat ../gcc/{limitx,glimits,limity}.h > _
@@ -67,7 +67,7 @@ gcc-pass1 = {
 };
 
 glibc = {
-   fs = "/var/cache/ok/dist/glibc-2.43.tar.xz",
+   fs = "/var/cache/distfiles/glibc-2.43.tar.xz",
    build = "../configure",
    flags = {
       "--prefix=/usr",
@@ -93,7 +93,7 @@ glibc = {
 };
 
 libxcrypt = {
-   fs = "/var/cache/ok/dist/libxcrypt-4.5.2.tar.xz", 
+   fs = "/var/cache/distfiles/libxcrypt-4.5.2.tar.xz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -107,7 +107,7 @@ libxcrypt = {
 };
 
 libstdcxx = {
-   fs = "/var/cache/ok/dist/gcc-16.1.0.tar.xz",
+   fs = "/var/cache/distfiles/gcc-16.1.0.tar.xz",
    build = "../libstdc++-v3/configure",
    flags = {
       "--prefix=/usr",
@@ -121,15 +121,15 @@ libstdcxx = {
    },
    prep = [[
       mkdir gmp mpfr mpc isl
-      tar -C gmp  --strip-components=1 -xf /var/cache/ok/dist/gmp-6.3.0.tar.xz
-      tar -C mpfr --strip-components=1 -xf /var/cache/ok/dist/mpfr-4.2.2.tar.xz
-      tar -C mpc  --strip-components=1 -xf /var/cache/ok/dist/mpc-1.4.1.tar.xz
-      tar -C isl  --strip-components=1 -xf /var/cache/ok/dist/isl-0.27.tar.xz
+      tar -C gmp  --strip-components=1 -xf /var/cache/distfiles/gmp-6.3.0.tar.xz
+      tar -C mpfr --strip-components=1 -xf /var/cache/distfiles/mpfr-4.2.2.tar.xz
+      tar -C mpc  --strip-components=1 -xf /var/cache/distfiles/mpc-1.4.1.tar.xz
+      tar -C isl  --strip-components=1 -xf /var/cache/distfiles/isl-0.27.tar.xz
    ]],
 };
 
 m4 = {
-   fs = "/var/cache/ok/dist/m4-1.4.21.tar.xz", 
+   fs = "/var/cache/distfiles/m4-1.4.21.tar.xz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -139,7 +139,7 @@ m4 = {
 };
 
 ncurses = {
-   fs = "/var/cache/ok/dist/ncurses-6.6.tar.gz", 
+   fs = "/var/cache/distfiles/ncurses-6.6.tar.gz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -192,7 +192,7 @@ ncurses = {
 };
 
 bash = {
-   fs = "/var/cache/ok/dist/bash-5.3.tar.gz", 
+   fs = "/var/cache/distfiles/bash-5.3.tar.gz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -203,7 +203,7 @@ bash = {
 };
 
 coreutils = {
-   fs = "/var/cache/ok/dist/coreutils-9.11.tar.xz", 
+   fs = "/var/cache/distfiles/coreutils-9.11.tar.xz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -216,7 +216,7 @@ coreutils = {
 };
 
 diffutils = {
-   fs = "/var/cache/ok/dist/diffutils-3.12.tar.xz", 
+   fs = "/var/cache/distfiles/diffutils-3.12.tar.xz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -227,7 +227,7 @@ diffutils = {
 };
 
 file = {
-   fs = "/var/cache/ok/dist/file-5.47.tar.gz",
+   fs = "/var/cache/distfiles/file-5.47.tar.gz",
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -237,7 +237,7 @@ file = {
 };
 
 findutils = {
-   fs = "/var/cache/ok/dist/findutils-4.10.0.tar.xz", 
+   fs = "/var/cache/distfiles/findutils-4.10.0.tar.xz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -247,7 +247,7 @@ findutils = {
 };
 
 gawk = {
-   fs = "/var/cache/ok/dist/gawk-5.4.0.tar.lz", 
+   fs = "/var/cache/distfiles/gawk-5.4.0.tar.lz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -258,7 +258,7 @@ gawk = {
 };
 
 grep = {
-   fs = "/var/cache/ok/dist/grep-3.12.tar.xz",
+   fs = "/var/cache/distfiles/grep-3.12.tar.xz",
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -268,7 +268,7 @@ grep = {
 };
 
 zlib = {
-   fs = "/var/cache/ok/dist/zlib-1.3.2.tar.xz", 
+   fs = "/var/cache/distfiles/zlib-1.3.2.tar.xz", 
    build = "make",
    prep = [[
       CC=x86_64-unknown-linux-gnu-gcc \
@@ -282,7 +282,7 @@ zlib = {
 };
 
 pigz = {
-   fs = "/var/cache/ok/dist/pigz-2.8.tar.gz", 
+   fs = "/var/cache/distfiles/pigz-2.8.tar.gz", 
    build = "make_noinstall",
    flags = { 
       "CC=x86_64-unknown-linux-gnu-gcc" 
@@ -295,7 +295,7 @@ pigz = {
 };
 
 make = {
-   fs = "/var/cache/ok/dist/make-4.4.1.tar.gz", 
+   fs = "/var/cache/distfiles/make-4.4.1.tar.gz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -306,7 +306,7 @@ make = {
 };
 
 patch = {
-   fs = "/var/cache/ok/dist/patch-2.8.tar.xz", 
+   fs = "/var/cache/distfiles/patch-2.8.tar.xz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -316,7 +316,7 @@ patch = {
 };
 
 sed = {
-   fs = "/var/cache/ok/dist/sed-4.10.tar.xz", 
+   fs = "/var/cache/distfiles/sed-4.10.tar.xz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -326,7 +326,7 @@ sed = {
 };
 
 tar = {
-   fs = "/var/cache/ok/dist/tar-1.35.tar.xz", 
+   fs = "/var/cache/distfiles/tar-1.35.tar.xz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -337,7 +337,7 @@ tar = {
 };
 
 xz = {
-   fs = "/var/cache/ok/dist/xz-5.8.3.tar.xz", 
+   fs = "/var/cache/distfiles/xz-5.8.3.tar.xz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -347,7 +347,7 @@ xz = {
 };
 
 lua = {
-   fs = "/var/cache/ok/dist/lua-5.5.0.tar.gz",
+   fs = "/var/cache/distfiles/lua-5.5.0.tar.gz",
    build = "make",
    prep = [[ $patch < /var/db/repos/okpkg/patches/lua.diff ]],
    flags = {
@@ -369,7 +369,7 @@ lua = {
 };
 
 lzlib = {
-   fs = "/var/cache/ok/dist/lzlib-1.16.tar.lz", 
+   fs = "/var/cache/distfiles/lzlib-1.16.tar.lz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -382,7 +382,7 @@ lzlib = {
 };
 
 plzip = {
-   fs = "/var/cache/ok/dist/plzip-1.13.tar.lz", 
+   fs = "/var/cache/distfiles/plzip-1.13.tar.lz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -392,7 +392,7 @@ plzip = {
 };
 
 util-linux = {
-   fs = "/var/cache/ok/dist/util-linux-2.42.1.tar.xz",
+   fs = "/var/cache/distfiles/util-linux-2.42.1.tar.xz",
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -406,7 +406,7 @@ util-linux = {
 };
 
 pkgconf = {
-   fs = "/var/cache/ok/dist/pkgconf-2.5.1.tar.xz", 
+   fs = "/var/cache/distfiles/pkgconf-2.5.1.tar.xz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -416,7 +416,7 @@ pkgconf = {
 };
 
 binutils-pass2 = {
-   fs = "/var/cache/ok/dist/binutils-2.46.0.tar.lz",
+   fs = "/var/cache/distfiles/binutils-2.46.0.tar.lz",
    build = "../configure",
    flags = {
       "--host=x86_64-unknown-linux-gnu",
@@ -435,7 +435,7 @@ binutils-pass2 = {
 };
 
 gcc-pass2 = {
-   fs = "/var/cache/ok/dist/gcc-16.1.0.tar.xz",
+   fs = "/var/cache/distfiles/gcc-16.1.0.tar.xz",
    build = "../configure",
    flags = {
       "--build=$(../config.guess)",
@@ -472,10 +472,10 @@ gcc-pass2 = {
    },
    prep = [[
       mkdir gmp mpfr mpc isl
-      tar -C gmp  --strip-components=1 -xf /var/cache/ok/dist/gmp-6.3.0.tar.xz
-      tar -C mpfr --strip-components=1 -xf /var/cache/ok/dist/mpfr-4.2.2.tar.xz
-      tar -C mpc  --strip-components=1 -xf /var/cache/ok/dist/mpc-1.4.1.tar.xz
-      tar -C isl  --strip-components=1 -xf /var/cache/ok/dist/isl-0.27.tar.xz
+      tar -C gmp  --strip-components=1 -xf /var/cache/distfiles/gmp-6.3.0.tar.xz
+      tar -C mpfr --strip-components=1 -xf /var/cache/distfiles/mpfr-4.2.2.tar.xz
+      tar -C mpc  --strip-components=1 -xf /var/cache/distfiles/mpc-1.4.1.tar.xz
+      tar -C isl  --strip-components=1 -xf /var/cache/distfiles/isl-0.27.tar.xz
       sed -i '330i #include <stdbool.h>' gcc/config/i386/i386.h
       sed -i '/thread_header =/s/@.*@/gthr-posix.h/' \
         {libgcc,libstdc++-v3/include}/Makefile.in
