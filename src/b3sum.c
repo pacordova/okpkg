@@ -215,7 +215,6 @@ int
 ok_b3sum(lua_State *L)
 {
     const char *name = luaL_checkstring(L, 1);
-
     FILE *fp = fopen(name, "rb");
     if (!fp) {
         fprintf(stderr, "error: b3sum: fopen\n");
@@ -223,13 +222,12 @@ ok_b3sum(lua_State *L)
         return 1;
     }
 
-    static char hex[256/4];
-    unsigned char out[256/8];
-
-    sumfile(fp, out, 256/8);
-
+    size_t outlen = 32; // 256 bit
+    unsigned char out[outlen];
+    sumfile(fp, out, outlen);
     fclose(fp);
 
+    char hex[2*outlen];
     for (int i = 0; i < 256/8; ++i) 
         sprintf(hex + 2 * i, "%.2x", out[i]);
 
