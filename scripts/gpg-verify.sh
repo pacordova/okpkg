@@ -50,6 +50,6 @@ _cksum_signal 8.12.0
 #_cksum_gh https://github.com/fribidi/fribidi v1.0.15
 #_cksum_gh https://github.com/systemd/systemd/ v256
 
-for f in *.{tar.gz,deb}; do [ -f $f ] && okpkg sha3sum $f; done
+for f in *.{tar.gz,deb}; do [ -f $f ] && okpkg b3sum $f; done
 
 cd "$oldpwd" && rm -fr "$tempdir"

@@ -7,7 +7,7 @@ local Dirs, Mir, Env = dofile("/etc/okpkg.conf")
 local function concat(x) table.concat(x, " ") end
 
 -- Global variables (callable by cli)
-chroot, sha3sum, b3sum = ok.chroot, ok.sha3sum, ok.b3sum
+chroot, b3sum = ok.chroot, ok.b3sum
 
 -- Make directories
 for k,v in pairs(Dirs) do
@@ -168,7 +168,7 @@ function download(x)
       io.open(X.dist) or 
       io.popen(string.format("/bin/curl -fLR %s >%s", X.url, X.dist))
    )
-   assert(X.sha3 == sha3sum(X.dist) or not os.remove(X.dist))
+   assert(X.b3sum == b3sum(X.dist) or not os.remove(X.dist))
    
    -- Setup source directory
    assert(

@@ -14,17 +14,17 @@ if #arg == 0 then
 end
 
 urls = {}
-sha3sums = {}
-for i=1,#tabs do
+b3sums = {}
+for i=1,#arg do
    local X, fp, buf
-   fp = io.open(Dirs.tabs .. "/" .. tabs[i])
+   fp = io.open(Dirs.tabs .. "/" .. arg[i])
    buf = "\n" .. fp:read("*a")
    fp:close()
    for k,v in pairs(Mir) do buf=buf:gsub(k,v) end
    for m in buf:gmatch("\n[%w%-]-%s*=%s*({.-};)") do 
       X = load("return " .. m)()
       table.insert(urls, X.url)
-      table.insert(sha3sums, X.sha3)
+      table.insert(b3sums, X.b3sum)
    end
 end
 
@@ -38,10 +38,10 @@ function wget()
 end
 
 function cksum()
-   assert(#urls == #sha3sums)
+   assert(#urls == #b3sums)
    ok.chdir(Dirs.distfiles)
    for i=1,#urls do
-      if ok.sha3sum(ok.basename(urls[i])) ~= sha3sums[i] then
+      if ok.b3sum(ok.basename(urls[i])) ~= b3sums[i] then
          io.write(string.format("%s: FAILED\n", urls[i]))
          os.remove(ok.basename(urls[i]))
       end
