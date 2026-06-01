@@ -3,11 +3,8 @@ sysconfdir ?= /etc
 
 CC       = /bin/gcc
 CXX      = /bin/g++
-CXXV    != $(CXX) -dumpversion
-CXXM    != $(CXX) -dumpmachine
-CFLAGS   = -O2 -std=gnu99
-CXXFLAGS = -O2
-LDFLAGS  = -lcrypto
+CFLAGS   = -march=native -O2 -std=gnu99
+CXXFLAGS = -march=native -O2
 
 LUA_PATH  != lua -e "print(package.path:match('(.-)/%?.lua;'))"
 LUA_CPATH != lua -e "print(package.cpath:match('(.-)/%?.so;'))"
@@ -17,7 +14,10 @@ objs = src/basename.o src/chdir.o src/chroot.o src/mkdir.o src/okutils.o \
        src/exists.o src/directory_iterator.o src/b3sum.o
        
 src/okutils.so: $(objs)
-	$(CXX) $(CXXFLAGS) -shared -o $@ src/*.o $(LDFLAGS)
+	$(CXX) $(CXXFLAGS) -shared -o $@ src/*.o
+
+src/b3sum.o: src/b3sum.c
+	$(CC) $(CFLAGS) -O3 -fpic -o $@ -c $<
 
 .SUFFIXES: .c .o
 .c.o:
