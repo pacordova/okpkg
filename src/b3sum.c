@@ -1,4 +1,4 @@
-#include <lauxlib.h>
+/* https://github.com/michaelforney/blake3-tiny */
 
 #include <stdint.h>
 #include <string.h>
@@ -193,6 +193,7 @@ blake3_out(struct blake3 *ctx, unsigned char *restrict out, size_t len)
 
 /******************************************************************************/
 
+#include <lauxlib.h>
 #define DIGEST_SIZE 256
 
 int
