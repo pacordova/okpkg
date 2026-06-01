@@ -7,7 +7,7 @@ local Dirs = {
    packages   = "/var/cache/packages",
    patches    = "/var/db/repos/okpkg/patches",
    src        = "/usr/src",
-   tab        = "/var/db/repos/okpkg/tab",
+   tabs       = "/var/db/repos/okpkg/tabs",
 }
 
 -- Note: escape any dashes

@@ -86,7 +86,7 @@ end
 skip = "bc,cmake,librsvg,pavucontrol,python3,vim,x264,harfbuzz,rsync"
 
 L = {}
-for it in ok.directory_iterator(Dirs.tab) do
+for it in ok.directory_iterator(Dirs.tabs) do
    if ok.basename(it):sub(1,1) ~= "." then
       fp = io.open(it)
       buf = "\n" .. fp:read("*a")

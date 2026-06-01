@@ -1,6 +1,6 @@
 nftables = {
    url = "https://www.netfilter.org/pub/nftables/nftables-1.1.6.tar.xz",
-   sha3 = "58c60a26123af16846a014aa1dd1b8939ad4cbce2a7916ff0bb4d20128cdd774",
+   b3sum = "fe01ac223a3e41331bfa686058a04cb2719c2ced1ed7bb7892df3e5026f9fc82",
    build = "./configure",
    flags = {
       "--with-unitdir=no",
@@ -16,7 +16,7 @@ nftables = {
 
 connman = {
    url = "https://kernel.org/pub/linux/network/connman/connman-2.0.tar.xz",
-   sha3 = "c9aa176037890aa3bfcea7f8eba2738bcb1db017250ac4856c51f2a1ea49f722",
+   b3sum = "d9a955d1f0e4720c452f106a11724f454f68d621e3f2967660a57d426833620e",
    build = "./configure",
    flags = {
       "--enable-{client,datafiles,ethernet,loopback,wifi,wireguard}",
@@ -32,7 +32,7 @@ connman = {
 
 curl = {
    url = "https://curl.se/download/curl-8.20.0.tar.xz",
-   sha3 = "f4b74635374e1b4fa14bf689a7a2e586aabf8fbc16b33e3948168b013e44f230",
+   b3sum = "bc9a073bfc582db61cdf8ccd2f1bfb4f121e5f1d127fa7919991ed32461fe0ce",
    build = "./configure",
    flags = {
       "--enable-{ipv6,threaded-resolver,unix-sockets}",
@@ -44,7 +44,7 @@ curl = {
 
 openntpd = {
    url = "https://ftp.openbsd.org/pub/OpenBSD/OpenNTPD/openntpd-6.8p1.tar.gz",
-   sha3 = "05a6c3e7f6928b0455e13e5167f455c1a7d9162cf394d415e6c48da7c49d8eec",
+   b3sum = "fda20dda184955411dce2edc545a5a616f66c0b35df136ccff541d97a32cc879",
    build = "./configure",
    flags = { "--with-privsep-user=ntp" },
    prep = [[
@@ -58,7 +58,7 @@ openntpd = {
 
 openresolv = {
    url = "https://github.com/NetworkConfiguration/openresolv/releases/download/v3.17.4/openresolv-3.17.4.tar.xz",
-   sha3 = "ffc77483d334ceece7f822915000def6de24bed3853dd160e64a911482f2ed7f",
+   b3sum = "3a6519ae778a8fc2f1ed02a7d2a2211f061cc1b6a0019247d7c977448b63e528",
    build = "./configure",
    flags = { 
       "--libdir=/usr/lib64", 
@@ -70,7 +70,7 @@ openresolv = {
 
 iproute2 = {
    url = "https://kernel.org/pub/linux/utils/net/iproute2/iproute2-7.0.0.tar.xz",
-   sha3 = "67ee8793685d0ff16269b8c5a3e01acc4320438297899f7454a3b698346fb56a",
+   b3sum = "b9aed23c1971c91b7b18e945c8fdef60447dc343fd3427cc6af720e0eda00e88",
    build = "./configure",
    flags = { "--libdir=/usr/lib64" },
    prep = [[
@@ -83,20 +83,20 @@ iproute2 = {
 
 iputils = {
    url = "https://github.com/iputils/iputils/releases/download/20250605/iputils-20250605.tar.xz",
-   sha3 = "31a2a992c9789d91c29d630d02bbf57cffd09b01911405c27c40a208d160b2fa",
+   b3sum = "1ad4da5fafe5cb456ba3bc10e25b41c5e7cb2f1c50f21ca0c9d2404c39531d1d",
    build = "meson",
    post = [[ chmod u+s $destdir/usr/bin/ping ]],
 };
 
 netcat = {
    url = "https://downloads.sourceforge.net/nc110/nc110.20180111.tar.xz",
-   sha3 = "98ae44f399eac93e383559e87183dc9bf3080ec928f7d8cb727a5da256272344",
+   b3sum = "40043c6f7d8409cdb04015604a33c17cc4f27b62653bf13de69023108c99dd1e",
    build = "make_install",
 };
 
 openssh = {
    url = "https://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-10.3p1.tar.gz",
-   sha3 = "c29592d50ab7334f7d89b7c7673b84e664887a76c0dd9c625f960062218e1bee",
+   b3sum = "2193afffd02f8fefcb936270de7111b997e2cec9b29487085c61c145291abba9",
    build = "./configure",
    flags = {
       "--libexecdir=/usr/lib64/ssh",
@@ -117,14 +117,14 @@ openssh = {
 
 rsync = {
    url = "https://samba.org/ftp/rsync/src/rsync-3.4.1.tar.gz",
-   sha3 = "a67ce89d9fcc7cc203ded0b174f01bb24cdd861e44c6c214b44a17435a38e3fa",
+   b3sum = "e1cfdd51a1a89a49e73f8fa730a4321392fe4a29533c0979c2c09c7ce3808b6f",
    build = "./configure",
    flags = { "--disable-{debug,xxhash}" }
 };
 
 wget2 = {
    url = "https://ftp.gnu.org/gnu/wget/wget2-2.2.1.tar.lz",
-   sha3 = "31efa42d8860b31680594cb8759ef264577d247fe596e1f7090b2e2d25864505",
+   b3sum = "651471423e6dc8bb6005564ab366306385d18a63a98aaba746ef6cf34ff191d3",
    build = "./configure",
    post = [[ 
       ln -sf wget2 $destdir/bin/wget
@@ -134,7 +134,7 @@ wget2 = {
 
 wpa_supplicant = {
    url = "https://w1.fi/releases/wpa_supplicant-2.11.tar.gz",
-   sha3 = "14f105ecef1b2c7734fbefa49a3ac7eed505606fcf0fae3d4d14caaaa982d821",
+   b3sum = "14f105ecef1b2c7734fbefa49a3ac7eed505606fcf0fae3d4d14caaaa982d821",
    build = "make",
    flags = { "-C wpa_supplicant", "BINDIR=/usr/bin", "LIBDIR=/usr/lib64" },
    prep = [[

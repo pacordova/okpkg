@@ -1,6 +1,6 @@
 _python = {
    url = "https://www.python.org/ftp/python/3.13.13/Python-3.13.13.tar.xz",
-   sha3 = "0851d206c00df77a46d9e4fa2b90a880c537eaaf25087af9d510e0658db599ad",
+   b3sum = "b5cc2e3933be3e62f80fd17d27fca70ab1423a6d79a5460592afe8421eb05cd8",
    build = "./configure",
    flags = {
       "--prefix=/opt/python3.13",
@@ -22,13 +22,13 @@ _python = {
 
 bison = {
    url = "https://ftp.gnu.org/gnu/bison/bison-3.8.2.tar.xz",
-   sha3 = "f5c25f55138842dbd620adea16d788c502410702137950ce5178e692b85d5286",
+   b3sum = "9dd90be8df4d0474b941e2ca14ac76d11b7ccb46edb26344b60d866178bbcc98",
    build = "./configure",
 };
 
 _perl = {
    url = "https://www.cpan.org/src/5.0/perl-5.42.2.tar.xz",
-   sha3 = "680780c9743fbf551d32f9fd04ee7028751896faffeddf47cf2ac38a74f54dc7",
+   b3sum = "d8a9988b0fd5305204c74ac3cca7a19e47625ca65ad10723dfff129abaa4981a",
    build = "./configure.gnu",
    flags= {
       "-Dprefix=/opt/perl",
@@ -52,7 +52,7 @@ _perl = {
 
 glibc = {
    url = "https://ftp.gnu.org/gnu/glibc/glibc-2.43.tar.xz",
-   sha3 = "1cd14849c688673ff9414b0c3a44fe4adc69a5d624c84731fe7fae91f7447227",
+   b3sum = "da7f2545e87de8b640bf89add7d63e1159cb62baa01ceb94811ab21210f13948",
    build = "../configure",
    flags = {
       "--enable-kernel=$(uname -r | cut -d . -f 1,2)",
@@ -74,7 +74,7 @@ glibc = {
 
 zlib = {
    url = "https://zlib.net/zlib-1.3.2.tar.xz",
-   sha3 = "d60ffcfad05908d1efb932177340d2c80c9db123cf9eadff5657945f214a2214",
+   b3sum = "6cf18eb00f828fadfa5d78933734918538587e6429c25110930b6260cfa9ed62",
    build = "./configure",
    flags = { 
       "--eprefix=/", 
@@ -85,7 +85,7 @@ zlib = {
 
 bzip2 = {
    url = "https://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz",
-   sha3 = "34400e535a9018e93fc04f509811df340e8f9b48b06467b9c025400ac0a4898d",
+   b3sum = "97af3f520629c65fe41292f77e6ca798fe594d7987bfb2aebe7c6fcdc7ab5ed2",
    build = "make_noinstall",
    flags = { "--makefile=Makefile-libbz2_so" },
    post = [[
@@ -99,14 +99,14 @@ bzip2 = {
 
 lbzip2 = {
    url = "https://github.com/kjn/lbzip2/releases/download/v2.5/lbzip2-2.5.tar.gz",
-   sha3 = "cae00080d7250fd7d0420b918578d914a4b59e21d3bf797307d3e83d8dd11898",
+   b3sum = "1d072e4af43699429cf6b4d9f48c06781bc26c8f8a20027b717a66b53954967a",
    build = "./configure",
    prep = [[ sed -i 's/_IO_ftrylockfile/_IO_EOF_SEEN/' lib/fseterr.c ]]
 };
 
 lzlib = {
    url = "https://download.savannah.gnu.org/releases/lzip/lzlib/lzlib-1.16.tar.lz",
-   sha3 = "439e7235e1fe227167c76f9f951ab922cc16af54e333808fa7b7271cf31e5808",
+   b3sum = "9415d81c0adfecca09b487cbdf0ee7f938b959557af252783690a20c904a3dfe",
    build = "./configure",
    flags = {
       "--libdir=/lib64",
@@ -117,13 +117,13 @@ lzlib = {
 
 xz = {
    url = "https://downloads.sourceforge.net/lzmautils/xz-5.8.3.tar.xz",
-   sha3 = "31c9835390f8f0c3178de006e5108948b03667e33c55161f2c2ef098580ce412",
+   b3sum = "efc9adc69f7f8041464ff563cee32a80639d3a2985c448d62e99455464e738ee",
    build = "./configure",
 };
 
 lz4 = {
    url = "https://github.com/lz4/lz4/releases/download/v1.10.0/lz4-1.10.0.tar.gz",
-   sha3 = "334597ee49a286bb22065133a000792cb7191203eaed826b8f4681f48cad2512",
+   b3sum = "3e69fd475e7852e17594985528b5232afeba7d3d56cfebe2e89071768b2ab36a",
    build = "make",
    flags = { 
       "bindir=/bin",
@@ -135,7 +135,7 @@ lz4 = {
 
 zstd = {
    url = "https://github.com/facebook/zstd/releases/download/v1.5.7/zstd-1.5.7.tar.gz",
-   sha3 = "8eaf8a9c9ed5c5ef7a3f1bc68f6e1ab254d8b5947ea9d55455f0a403fa006e6c",
+   b3sum = "730dca31244abd219e995f03a55d95b2cfb4b3e16cda055a79fa6f30a4f0e1db",
    build = "make",
    flags = {
       "bindir=/bin",
@@ -147,44 +147,44 @@ zstd = {
 
 gperf = {
    url = "https://ftp.gnu.org/gnu/gperf/gperf-3.3.tar.gz",
-   sha3 = "4938b555aed7b5fda78cc06d871540ac8025985e0f16843ed933d9135e8edcf9",
+   b3sum = "6ad90515e3b8ac191a8ecef4e75fbb260236f8e78078ac099d5eccc175af0782",
    build = "./configure",
 };
 
 libseccomp = {
    url = "https://github.com/seccomp/libseccomp/releases/download/v2.6.0/libseccomp-2.6.0.tar.gz",
-   sha3 = "1bbae54d95e09cab6ea6b490a2f5e4d4e4ac72ff7c9ab568412533c19b1c4bd0",
+   b3sum = "48ba4e04a00bdace5ad130d88e2a1a51d0b3dfdabace9a405b404a50e1afdd56",
    build = "./configure",
 };
 
 file = {
    url = "https://astron.com/pub/file/file-5.47.tar.gz",
-   sha3 = "67b80afde4da7123463ed3758d0f9340852551da8dc507f61e515642ae793e57",
+   b3sum = "9b25aadbf67f958365f7d55a98afd6f84a0acab2c18f1715f5549782e47563fc",
    build = "./configure",
    flags = { "--enable-libseccomp" }
 };
 
 m4 = {
    url = "https://ftp.gnu.org/gnu/m4/m4-1.4.21.tar.xz",
-   sha3 = "17470ef40b4c09ef424e76e1418ffba4a2eb5b68ad9ca23cbd2659461468afed",
+   b3sum = "a23e9503084fa4087f45bb7bb9c39f0cf8e0f046e0f94e55c40a8da124c1fd68",
    build = "./configure",
 };
 
 flex = {
    url = "https://github.com/westes/flex/releases/download/v2.6.4/flex-2.6.4.tar.gz",
-   sha3 = "cde654d28148d09eca97574c4201307cf1a6a90e887b304bcd2006b5cd46b220",
+   b3sum = "d78b714ac38bd9de7f9b44a078efed82e96ed43e7cf9cd33944a7f379a2d09a4",
    build = "./configure",
 };
 
 pkgconf = {
    url = "https://distfiles.ariadne.space/pkgconf/pkgconf-2.5.1.tar.xz",
-   sha3 = "ad9ac35e816135c83ee74e49cb68e51f8509fd31702a6bb168142ece1b030ef7",
+   b3sum = "c524d73c938e7382d3c12c9cfba16ed32ee092ab21b3e9659a095b5628ea2e88",
    build = "./configure",
 };
 
 binutils = {
    url = "https://ftp.gnu.org/gnu/binutils/binutils-2.46.0.tar.lz",
-   sha3 = "0e1556b41b4f842ca525e2bc33e248314559ca8836992ad054dd3c4317d1034b",
+   b3sum = "d9125081c3fb83a16906f14374f05020abffcb9b3f42fa4e91209a2d0484923d",
    build = "./configure",
    flags = {
       "--enable-64-bit-bfd",
@@ -208,7 +208,7 @@ binutils = {
 
 gmp = {
    url = "https://ftp.gnu.org/gnu/gmp/gmp-6.3.0.tar.xz",
-   sha3 = "025f4fc3c5f68a0faae40cb8579dc7979eded558edfbc58ac030a072a6b5a6e7",
+   b3sum = "fffe4996713928ae19331c8ef39129e46d3bf5b7182820656fd4639435cd83a4",
    build = "./configure",
    flags = { 
       "--enable-cxx",
@@ -218,38 +218,38 @@ gmp = {
 
 mpfr = {
    url = "https://ftp.gnu.org/gnu/mpfr/mpfr-4.2.2.tar.xz",
-   sha3 = "f900bec0f89f35bf5fa792079aaeea5705be2f5b965e014f7bc9663309d09e02",
+   b3sum = "11d59d061ef8db588650bc7dc5172594a6e5aad013994801c6f63011a62b191d",
    build = "./configure",
    flags = { "--enable-thread-safe" }
 };
 
 libmpc = {
    url = "https://ftp.gnu.org/gnu/mpc/mpc-1.4.1.tar.xz",
-   sha3 = "9ccc7efd96c252d928f6f9c3d747dac34bd3bfed438e50e0bdf16489a918e776",
+   b3sum = "994e14084833795dbb36ee1abe46059c74cab1845e7ca17585bc7bc8727444f8",
    build = "./configure",
 };
 
 isl = {
    url = "https://libisl.sourceforge.io/isl-0.27.tar.xz",
-   sha3 = "75a391c4bfea7658b5926c17fd860168f81bae770b0f53378512998da27960b4",
+   b3sum = "a419cf24561a34f81ec46d251b25d5aaccedbbf87ed2b96f3f0fb17a79a8c913",
    build = "./configure",
 };
 
 attr = {
    url = "https://download.savannah.gnu.org/releases/attr/attr-2.5.2.tar.gz",
-   sha3 = "b919ed9280aa8ac0c75602e21d0463d4e0f1946b1c0ff5cacda75ab9762c8048",
+   b3sum = "0f560f1998246fb598672a502dd9212b241325a995fa82539f698a788cfe5a65",
    build = "./configure",
 };
 
 acl = {
    url = "https://download.savannah.gnu.org/releases/acl/acl-2.3.2.tar.xz",
-   sha3 = "921838c2d83672eeaf096492e6e0640aa9b317ed41628e2a13d386f84b50d9f3",
+   b3sum = "585824ee75cf926b98bb79d9431700f122c3173c45ee19d013e2c794ea6669ab",
    build = "./configure",
 };
 
 gcc16 = {
    url = "https://ftp.gnu.org/gnu/gcc/gcc-16.1.0/gcc-16.1.0.tar.xz",
-   sha3 = "c658835f1cda7ae34e2dabe3b49123d38281cc76ba49b2df66c57a02dc8c9d86",
+   b3sum = "5f001609f662143ce9285cd740bd0acfeeaf7f13731b46fd1d9ebe620c5c340d",
    build = "../configure",
    flags = {
       "--libdir=/usr/libexec",
@@ -287,7 +287,7 @@ gcc16 = {
 
 libcap = {
    url = "https://kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-2.78.tar.xz",
-   sha3 = "079b00f6ef26d409c50a0d3fa9a49ee64345eef7ab9410537e86f56918060a7e",
+   b3sum = "8309d1f55e89be484baa938d4a5ec1d661fdf66d639f7a4e99d5c6e4893f9c79",
    build = "make",
    flags = { 
       "prefix=/usr", 
@@ -300,7 +300,7 @@ libcap = {
 
 shadow = {
    url = "https://github.com/shadow-maint/shadow/releases/download/4.19.4/shadow-4.19.4.tar.xz",
-   sha3 = "91dc2861d4377e2fc370797880224f7426f952ec5fe0115d61b7a93c214ab54a",
+   b3sum = "9855e4cd94967773b5ec9b12487a2a22c06760e512375c8763749b6b0ba6d488",
    build = "./configure",
    flags = {
       "--disable-account-tools-setuid",
@@ -330,7 +330,7 @@ shadow = {
 
 ncurses = {
    url = "https://invisible-island.net/archives/ncurses/ncurses-6.6.tar.gz",
-   sha3 = "b755b6abf8bdb9fafa048a0c55973212ee491051a0aaff08dfa4533934dc53cc",
+   b3sum = "fbec55697a01f99b9cc3f25be55e73ae7091f4c53e5d81a1ea15734c4e5b7238",
    build = "./configure",
    flags = {
       "--disable-root-access",
@@ -370,7 +370,7 @@ ncurses = {
 
 readline = {
    url = "https://ftp.gnu.org/gnu/readline/readline-8.3.tar.gz",
-   sha3 = "a26ef627fb77ac6e25daf37622123200ba5c06885e3c913bac23335168f9d57f",
+   b3sum = "7109f094062bda387a0c16b4875375b96e36437bebbbd8d8f91bb27ba01d687f",
    build = "./configure",
    flags = { "--with-curses", "SHLIB_LIBS=-ltinfo" },
    prep = [[
@@ -382,19 +382,19 @@ readline = {
 
 sed = {
    url = "https://ftp.gnu.org/gnu/sed/sed-4.10.tar.xz",
-   sha3 = "6d5589bd7476f1fbe180fd574e97a3eadf15f81876608d652fa686072d5c1b97",
+   b3sum = "b48115aadef05df0018c3081bc5d7d2d55bf455b0679c6bae665e8498df38be2",
    build = "./configure",
 };
 
 psmisc = {
    url = "https://sourceforge.net/projects/psmisc/files/psmisc/psmisc-23.7.tar.xz",
-   sha3 = "c893bea9968d7c06acccfbaacc1b3bbd2a1a69fb7a227d15e3542a649f30153e",
+   b3sum = "4243e75b2310e94400eb51ce8f5b13b4d1ee0eb36a6ae23c0716259f447172af",
    build = "./configure",
 };
 
 pcre2 = {
    url = "https://github.com/PCRE2Project/pcre2/releases/download/pcre2-10.47/pcre2-10.47.tar.bz2",
-   sha3 = "40609a6e1e8e6cc0235f7c1f61d6786597f1d9e262800a01a81e7b0f3363d9cb",
+   b3sum = "abcd7327919f41f77b99c3782ab64bd67d4089246846b6149dd719c27ecf8f17",
    build = "./configure",
    flags = {
       "--enable-jit",
@@ -409,13 +409,13 @@ pcre2 = {
 
 grep = {
    url = "https://ftp.gnu.org/gnu/grep/grep-3.12.tar.xz",
-   sha3 = "8a257960e6ce28a39d3fcecde32b3d1d1f2e4009e80447715109435d8242caa7",
+   b3sum = "e15c2e03ff6e9e7e8fb7c726539e10b6ff17ecfc3d6961f7419e948d31043f4f",
    build = "./configure",
 };
 
 bash = {
    url = "https://ftp.gnu.org/gnu/bash/bash-5.3.tar.gz",
-   sha3 = "dda35c452800b021b85a5056c29364e7ed1f0e583e80836e967ee514e843c333",
+   b3sum = "5bf3ac6c18f3dc3fe3e049a1e10ea5ae5c5b39dac2356cd796730f49b273fd0f",
    build = "./configure",
    flags = {
       "--enable-readline",
@@ -431,20 +431,20 @@ bash = {
 
 time = {
    url = "https://ftp.gnu.org/gnu/time/time-1.10.tar.xz",
-   sha3 = "53f67490c7a7a0791cefeae408731eca4bbc9d7bc83e9a684368eadc1e747bf0",
+   b3sum = "b22bf55ae87740664005d927b18671a9c763da942edabb493739d6a407c01b0c",
    build = "./configure",
 };
 
 gdbm = {
    url = "https://ftp.gnu.org/gnu/gdbm/gdbm-1.26.tar.gz",
-   sha3 = "407302b731b3f025ca97452a956aa10ff13316f060df207bccb34b17f252c2b9",
+   b3sum = "0b0defa948957ca1a0d2ed569615edf5bb7a1e8b8f3fe195ce54056d4fe09bd0",
    build = "./configure",
    flags = { "--enable-libgdbm-compat" }
 };
 
 expat = {
    url = "https://downloads.sourceforge.net/expat/expat-2.8.1.tar.lz",
-   sha3 = "a75e4f16308862677fe7a8b2e5ae0fc18e97d35a9337c17c114de5d0407fe1ea",
+   b3sum = "ab0808e37444aa35f5f77c4f4074cbabd69915d01bc073bbf7b24528062d91b4",
    build = "./configure",
    flags = { 
       "--without-{docbook,examples,tests,xmlwf}",
@@ -453,19 +453,19 @@ expat = {
 
 less = {
    url = "https://www.greenwoodsoftware.com/less/less-702.tar.gz",
-   sha3 = "ca71fa1424952f19c9b8b74a4c8e2c32c8a29031c7dbbe7b550a75187f2959f9",
+   b3sum = "6ffac8c1a44bd716fe53bbb45cc0d1e326829bc8ad6bc919a0102641d81a8bdb",
    build = "./configure",
 };
 
 gawk = {
    url = "https://ftp.gnu.org/gnu/gawk/gawk-5.4.0.tar.lz",
-   sha3 = "d1f5f1b220d545cb3901ec11a9fc620eb841458364a885ae7e3b779a3d422945",
+   b3sum = "c97d040e54e2d5843edb6f0799b9acd6f743f034dfbf02cb926e35185dcfeeae",
    build = "./configure",
 };
 
 tzdata = {
    url = "https://github.com/eggert/tz/archive/2026b/tz-2026b.tar.gz",
-   sha3 = "9d42ecd6815bee15ccf971a5c06d08835b67e7e692d4ed5822ff6ae2c2a556ee",
+   b3sum = "5c2f8216ba9ab189410d391f0b556e564bdf098f00defd8933e97c558be225b3",
    build = "make",
    flags = { 
       "LIBDIR=/lib64", 
@@ -476,7 +476,7 @@ tzdata = {
 
 libxcrypt = {
    url = "https://github.com/besser82/libxcrypt/releases/download/v4.5.2/libxcrypt-4.5.2.tar.xz",
-   sha3 = "5e7594b3bb2d3f7cc8925725cef0d9138e790b9d39513a60db5c6f1069c4d596",
+   b3sum = "8294e7735d240876f4c4c38a1370e1e9e9e2da4856fcfcb81168ea20ab83f33d",
    build = "./configure",
    flags = {
       "--enable-hashes=strong,glibc",
@@ -488,14 +488,14 @@ libxcrypt = {
 
 libressl = {
    url = "https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-4.3.2.tar.gz",
-   sha3 = "7176910fd1e6a3f1f0e3bf97d3cfaed9ce21e862190a8fa24a7bd2e2f38702fc",
+   b3sum = "6364b58f037dd3ed4e0df5548ab28d7b93c11656e6eaa7c430db172dec12b69e",
    build = "./configure",
    flags = { "--with-openssldir=/etc/ssl" },
 };
 
 kmod = {
    url = "https://kernel.org/pub/linux/utils/kernel/kmod/kmod-34.2.tar.xz",
-   sha3 = "7736b1c8aa0a1edfa539b30456a9107be7942f1cda3cb74fd48323a24e99444d",
+   b3sum = "1ed540d5aea74cde8dfccf9d3737dfb0cd5c021bbafda77b6902ba07f5642312",
    build = "meson",
    flags = { 
       "-Dmoduledir=/lib64/modules", 
@@ -508,7 +508,7 @@ kmod = {
 
 libelf = {
    url = "https://sourceware.org/ftp/elfutils/0.195/elfutils-0.195.tar.bz2",
-   sha3 = "cfa5a5600941fba9406d3fe8fa2e42efe474fa9ab2f90d712649b0e5a0f2b360",
+   b3sum = "f397be2a59cbbc375cdbb28f7947a9345a8d126fadc6a2bb40b49c1dbe38787c",
    build = "./configure",
    flags = {
       "--enable-deterministic-archives",
@@ -526,7 +526,7 @@ libelf = {
 
 libffi = {
    url = "https://github.com/libffi/libffi/releases/download/v3.5.2/libffi-3.5.2.tar.gz",
-   sha3 = "e4a5bbcde6c10f24034dc61b66bb95525539f8dc71221764b658df126fe4d409",
+   b3sum = "56207367ae2c1157093ca0c6914e9a15d590042b08c79b5bd8a4d979d3ef4be0",
    build = "./configure",
    flags = { 
       "--with-gcc-arch=skylake",
@@ -536,7 +536,7 @@ libffi = {
 
 coreutils = {
    url = "https://ftp.gnu.org/gnu/coreutils/coreutils-9.11.tar.xz",
-   sha3 = "464a4d322a7c3b8972fb3dc579ff57db402ca2d6d3d7270167951b1bce1288d3",
+   b3sum = "6f3243a4dfc498c2f5ec8c550d4a83a7f94ead7a2c743ca1b314c1b74da8125d",
    build = "./configure",
    flags = {
       "--enable-install-program=hostname",
@@ -547,13 +547,13 @@ coreutils = {
 
 diffutils = {
    url = "https://ftp.gnu.org/gnu/diffutils/diffutils-3.12.tar.xz",
-   sha3 = "f5752ae425dd05b2b6d0227aa18eb915aecfc7a8d003e447d768bdbcabe1f3e1",
+   b3sum = "363fb378c85505b43f91d6e7c7382d571f2f7b47e4d334c18d522baf55599d18",
    build = "./configure",
 };
 
 findutils = {
    url = "https://ftp.gnu.org/gnu/findutils/findutils-4.10.0.tar.xz",
-   sha3 = "4f3f69efaf206112030eafe1dab9f93e6edc132d1424b0756df091f553a83a54",
+   b3sum = "e8cb4d84891ae4d58a877c0834527b7d0e3d1c76c0bd228834856a26d6cbfd5a",
    build = "./configure",
    post = [[
       rm -f $destdir/bin/{locate,updatedb}
@@ -565,7 +565,7 @@ findutils = {
 
 pigz = {
    url = "https://zlib.net/pigz/pigz-2.8.tar.gz",
-   sha3 = "530248da5b27562503cfcfa6b96d2d483e7ae5c7acb088e0b2e3cdb33164a1a8",
+   b3sum = "fa165f414a12851806d9d54920879dd989917b9aa410aec671c602b18773b236",
    build = "make_noinstall",
    flags = { "ZOP=", "CFLAGS='-O3 -DNOZOPFLI'" },
    post = [[
@@ -577,14 +577,14 @@ pigz = {
 
 plzip = {
    url = "https://download.savannah.gnu.org/releases/lzip/plzip/plzip-1.13.tar.lz",
-   sha3 = "d175ff72930a3d68ccee7ec09d82b86fe3d7b60af12c345718399058a4e94b37",
+   b3sum = "f617b9445e0359b5e2bf122447f8204b713827b0ae4969084822636502634769",
    build = "./configure",
    flags = { "--bindir=/bin" }
 };
 
 kbd = {
    url = "https://kernel.org/pub/linux/utils/kbd/kbd-2.10.0.tar.xz",
-   sha3 = "5caf4134a3e4c3e07361f23e285c7103c0e819e675986b071b16d624fbff7f0d",
+   b3sum = "705411aa020c970ef06ca5e84fe04f0caf391670c75d40904412b779c15b7dd9",
    build = "./configure",
    flags = { "--disable-vlock" },
    prep = [[
@@ -596,33 +596,33 @@ kbd = {
 
 make = {
    url = "https://ftp.gnu.org/gnu/make/make-4.4.1.tar.gz",
-   sha3 = "2a454ed568be72675824bfa7b9527b0342e2770d9e478c7600e3fffc0714eb90",
+   b3sum = "a7d8aee97b7e9a525ef561afa84eea0d929f246e3aafa420231c0602151cf9eb",
    build = "./configure",
    flags = { "--without-guile" }
 };
 
 ed = {
    url = "https://ftp.gnu.org/gnu/ed/ed-1.22.5.tar.lz",
-   sha3 = "4ea0864fb95c1cf81bdb5f91c008e23ea12590acc5cfc8df9bd298e08c68b105",
+   b3sum = "71769a57c7a35e18a80125f68b021c980deac2435aceed2ad2b20006be079b05",
    build = "./configure",
    flags = { "--bindir=/bin" }
 };
 
 patch = {
    url = "https://ftp.gnu.org/gnu/patch/patch-2.8.tar.xz",
-   sha3 = "9aeb0c45623a1777cee4bcb8fd1aece7007bd2504e87fb5ba0fc039547fbc23b",
+   b3sum = "d7dadf0ac720de7560f140a9021928bc0f8089182121c0e65c8bec115cf31124",
    build = "./configure",
 };
 
 tar = {
    url = "https://ftp.gnu.org/gnu/tar/tar-1.35.tar.xz",
-   sha3 = "d8f59be9b3c00294ad98ba08b47a18515f178b33129f2ddce3281b56d56448bd",
+   b3sum = "55e3853752c56a607ae5dbc9e9190fe5d3f7599b76bb80abe0edba36d712c36b",
    build = "./configure",
 };
 
 cpio = {
    url = "https://ftp.gnu.org/gnu/cpio/cpio-2.15.tar.bz2",
-   sha3 = "112b5cd46328b32e9bbc463721f2c0ece9adc4671dcbb016a096007181771524",
+   b3sum = "510b18d82d9ee4fd136ce285162a31808c9c87907c188e215cd21a8cc7cde992",
    build = "./configure",
    flags = {
       "--enable-mt",
@@ -633,7 +633,7 @@ cpio = {
 
 lua = {
    url = "https://lua.org/ftp/lua-5.5.0.tar.gz",
-   sha3 = "5153631a215cc387b652e3bbbf6e3f82b93020a18b2f78520181bd2273c7039f",
+   b3sum = "489c82425cda485b0147e56a0fe73559169d12e7da0ac32bdf4593ce1835faf6",
    build = "make",
    flags = {
       "TO_LIB=liblua.so.5.5.0",
@@ -663,7 +663,7 @@ lua = {
 
 openvi = {
    url = "https://github.com/johnsonjh/openvi/archive/7.7.32/openvi-7.7.32.tar.gz",
-   sha3 = "c00033f27f786ec5d0878d87b71746072fb06af23766ff4e62df4b1831ba6d4c",
+   b3sum = "c0efc2262fd48720a94fa4706119865ed2a5e74e25970836d80e37e51dbb2a60",
    build = "make",
    flags = {
       "BINPREFIX=",
@@ -679,13 +679,13 @@ openvi = {
 
 eudev = {
    url = "https://github.com/eudev-project/eudev/releases/download/v3.2.14/eudev-3.2.14.tar.gz",
-   sha3 = "334ad42e160b69c29170b4c19585568dda738c4dc516bb1e764bc565d1d4cddb",
+   b3sum = "093ed8eecbeda7d4af31e05fbbf8b5ef5e6fb2ce06e3fd7948a26c09a1e57c4b",
    build = "./configure",
 };
 
 mandoc = {
    url = "https://mandoc.bsd.lv/snapshots/mandoc-1.14.6.tar.gz",
-   sha3 = "23db13cc9e5ca6f729c4211929b745f5d8a82f87827dbf97d64c6ab8a937152d",
+   b3sum = "0e1e812610cea4d9a254d161599466abccd3688568f19baeff1c2ed0dae586e4",
    build = "./configure",
    prep = [[ 
       printf "%s\n" PREFIX=/usr/share {,S}BINDIR=/bin \
@@ -695,7 +695,7 @@ mandoc = {
 
 procps-ng = {
    url = "https://downloads.sourceforge.net/procps-ng/procps-ng-4.0.6.tar.xz",
-   sha3 = "db86731acda819e3e585edd97732bdfa1cc08be0c49b4a1bb3805bb0fccf4648",
+   b3sum = "dbc079e37d8cf530b188a7946d3ad1f4f438a581350741773cd51a480fe8079b",
    build = "./configure",
    flags = {
       "--disable-modern-top",
@@ -706,7 +706,7 @@ procps-ng = {
 
 util-linux = {
    url = "https://kernel.org/pub/linux/utils/util-linux/v2.42/util-linux-2.42.1.tar.xz",
-   sha3 = "113d8c05a6bf3ba0126fb23b409855332a7523409bb56a4f36caa98b85bb7b31",
+   b3sum = "67b199f162bca632d70f3f737a674e02d17d2069aeeb81b0cb64981269a46c3e",
    build = "./configure",
    flags = {
       "--disable-{chfn-chsh,login,nologin,su,setpriv,runuser,pylibmount,liblastlog2}",
@@ -718,7 +718,7 @@ util-linux = {
 
 e2fsprogs = {
    url = "https://downloads.sourceforge.net/e2fsprogs/e2fsprogs-1.47.4.tar.gz",
-   sha3 = "3eb6e308727ded8f7a42fad7bd075aaab7e693112e67788caeeefbeafe939e92",
+   b3sum = "7739ce8f2a651909f7522a81018895aafd51ec2de4ce4f2862769a7188b7ddb4",
    build = "./configure",
    flags = { 
       "--disable-{fsck,libblkid,libuuid,uuidd}",
@@ -728,21 +728,21 @@ e2fsprogs = {
 
 dosfstools = {
    url = "https://github.com/dosfstools/dosfstools/releases/download/v4.2/dosfstools-4.2.tar.gz",
-   sha3 = "3f41e94fd88aa576f5694d2f36d0ec76c8c2750243063b8f0c7c34612606cf5d",
+   b3sum = "29996284e862ae2a12988fc0cc8f02304f9aaebe583a8c51c8d0a11401001611",
    build = "./configure",
    flags = { "--enable-compat-symlinks" }
 };
 
 sysklogd = {
    url = "https://github.com/troglobit/sysklogd/releases/download/v2.7.2/sysklogd-2.7.2.tar.gz",
-   sha3 = "a0144148f70bb8dc2289c64d0d1607483cbd6e0ccd1e2d7c443dd4aed486920c",
+   b3sum = "f0b420c629bb13042cf93cba8b290a1482c0892c4e2636a20ef7c1dbf376b564",
    build = "./configure",
    flags = { "--without-logger" }
 };
 
 dinit = {
    url = "https://github.com/davmac314/dinit/archive/v0.22.0/dinit-0.22.0.tar.gz",
-   sha3 = "841ecfbf840be66caf6bfb8deb55775282c787dc26ae753c4485762c94fabe2c",
+   b3sum = "f5670fdfa3117c0db70cdde6eae288848e9c90f3edfc4b420e5011d150b10a7b",
    build = "./configure",
    flags = { 
       "--bindir=/bin",
@@ -756,14 +756,14 @@ dinit = {
 
 libaio = {
    url = "https://pagure.io/libaio/archive/libaio-0.3.113/libaio-0.3.113.tar.gz",
-   sha3 = "c4f6f1398bb02d365498ab4bd631ab8ae5fd52d0f9404fc4d815f523a885b4ec",
+   b3sum = "8bd51c85b4d3220852dc8aaa8d8bd1ab4214a0325e0fda715fc917ffa29257c4",
    build = "make",
    flags = { "libdir=/lib64" },
 };
 
 device-mapper = {
    url = "https://gitlab.com/lvmteam/lvm2/-/archive/v2_03_41/lvm2-2.03.41.tar.gz",
-   sha3 = "0527df7ad9ef2d6f9ed381ad430099c5208820c342fc50b5e4c1c8579a268f4c",
+   b3sum = "b7b6ce2f79783b55ede304c1a3ee29bd3399257a7935e9a1544aba107ca9f504",
    build = "./configure",
    flags = { 
       "--disable-app-machineid",
@@ -781,13 +781,13 @@ device-mapper = {
 
 parted = {
    url = "https://ftp.gnu.org/gnu/parted/parted-3.7.tar.xz",
-   sha3 = "09ec25a3377f3c460ee01ebc439619e74c7102f8910ad427234e8f89f5e0b1f3",
+   b3sum = "c3b049775d42ef4d9a7d904ad1628d3f76665d47476a6e2f8106f8cdff380689",
    build = "./configure",
 };
 
 efivar = {
    url = "https://github.com/rhboot/efivar/archive/39/efivar-39.tar.gz",
-   sha3 = "c1a40eb8583b23d3b31ce547d00e4cb4ac089add38f303e70f9629ea8852600a",
+   b3sum = "51adfa6d88e2768313a223d197f9edd88f15f3889fdae985b2222da87792e64a",
    build = "make",
    flags = { 
       "ENABLE_DOCS=0",
@@ -798,7 +798,7 @@ efivar = {
 
 efibootmgr = {
    url = "https://github.com/rhboot/efibootmgr/releases/download/18/efibootmgr-18.tar.bz2",
-   sha3 = "0ee98e9ee17940e4feb573ff5afb0d9e372fbed6f38449ee90c16e3e515b08ad",
+   b3sum = "e68c0aa061a0573ce305c44be3486edbf0ae12416c0916151aaf3e5caa11cc7a",
    build = "make_noinstall",
    flags = { "EFIDIR=GRUB", "efibootmgr" },
    post = [[
@@ -810,7 +810,7 @@ efibootmgr = {
 
 grub = {
    url = "https://ftp.gnu.org/gnu/grub/grub-2.14.tar.xz",
-   sha3 = "6bee163bd289480f4b50c2e93f595c6c69f4d215c35ba7bb97187efd48d7153e",
+   b3sum = "b9283160c154cfd88192930f97ec56beb591037516a61712227c338a18bb78e8",
    build = "./configure",
    flags = {
       "--with-platform=efi",
@@ -830,7 +830,7 @@ grub = {
 
 dbus = {
    url = "https://dbus.freedesktop.org/releases/dbus/dbus-1.16.2.tar.xz",
-   sha3 = "f28f013111fb8d51e3c9ac335c9357d0b466debd56f94c328569c13140daf652",
+   b3sum = "b1d1f22858a8f04665e5dca29d194f892620f00fd3e3f4e89dd208e78868436e",
    build = "meson",
    flags = {
       "-Ddbus_user=messagebus",

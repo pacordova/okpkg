@@ -2,7 +2,7 @@
 
 -- Imports
 unpack = unpack or table.unpack
-local C = dofile("/bin/okpkg")
+local Dirs = dofile("/bin/okpkg")
 local ok = require("okutils")
 
 local function install_all(X)
@@ -18,7 +18,7 @@ end
 
 -- Build python modules
 local fp, buf
-fp = io.open(string.format("%s/tab/python", C.okdir))
+fp = io.open(string.format("%s/%s", Dirs.tabs, "python"))
 buf = '\n' .. fp:read('*a')
 fp:close()
 for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do 

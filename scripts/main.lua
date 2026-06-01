@@ -138,7 +138,7 @@ end
 
 function query(x)
    local i, fp, buf
-   for it in ok.directory_iterator(Dirs.tab) do
+   for it in ok.directory_iterator(Dirs.tabs) do
       if not buf and ok.basename(it):sub(1, 1) ~= "." then
          fp = io.open(it)
          buf = "\n" .. fp:read("*a")

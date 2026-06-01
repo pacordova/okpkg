@@ -1,6 +1,6 @@
 perl = {
    url = "https://www.cpan.org/src/5.0/perl-5.42.2.tar.xz",
-   sha3 = "680780c9743fbf551d32f9fd04ee7028751896faffeddf47cf2ac38a74f54dc7",
+   b3sum = "d8a9988b0fd5305204c74ac3cca7a19e47625ca65ad10723dfff129abaa4981a",
    build = "./configure.gnu",
    flags= {
       "-Dprefix=/opt/perl",
@@ -23,48 +23,48 @@ perl = {
 
 perl-file-sharedir = {
    url = "https://cpan.metacpan.org/authors/id/R/RE/REHSACK/File-ShareDir-1.118.tar.gz",
-   sha3 = "496bc9d2bff118c807600b0a0196fc294487ca0a6264085347dfe2b435ec11c8",
+   b3sum = "803710ee617e407ad64113a3b177b0044802f5c58ce67cf0017175621048b901",
    build = "perl",
 };
 
 perl-file-sharedir-install = {
    url = "https://cpan.metacpan.org/authors/id/E/ET/ETHER/File-ShareDir-Install-0.14.tar.gz",
-   sha3 = "effd6acc672cce952df47f54c8ebf21cedf315369a02c09ead0c474ba5f2e3e2",
+   b3sum = "eaf4b1683774ec3fc42deae0edc9e7391177ab8c9f6a268e05225560696e1f2c",
    build = "perl",
 };
 
 perl-xml-parser = {
    url = "https://cpan.metacpan.org/authors/id/T/TO/TODDR/XML-Parser-2.47.tar.gz",
-   sha3 = "daaacd05fb62d1f8811c6f792c87bd4062ea70d57a951d3f15236c2424b24618",
+   b3sum = "933aa44de3efe104be847a2acb5bdf4ff85241ba866a4edb613fb7ec6d573a16",
    build = "perl",
 };
 
 perl-xml-namespacesupport = {
    url = "https://cpan.metacpan.org/authors/id/P/PE/PERIGRIN/XML-NamespaceSupport-1.12.tar.gz",
-   sha3 = "0c2792a4acad3fac873455f1c1eb63831b7f6dc6d159dc7976288eb805429efa",
+   b3sum = "3338b8cde388e92a5432ca5e49492a5beb445515918dd5b9fa940d21f3c33555",
    build = "perl",
 };
 
 perl-xml-sax = {
    url = "https://cpan.metacpan.org/authors/id/G/GR/GRANTM/XML-SAX-1.02.tar.gz",
-   sha3 = "bc1a3a754ce20c4f7a247430a0446626cc6fa7ca8bd248fe181146b7a516707d",
+   b3sum = "3e02b06e8f713d83605d5dfb129abad9f683dc1d8c88c4ea9a0647b1fffd21ea",
    build = "perl",
 };
 
 perl-xml-sax-base = {
    url = "https://cpan.metacpan.org/authors/id/G/GR/GRANTM/XML-SAX-Base-1.09.tar.gz",
-   sha3 = "684a18fce123d2a032f4ea0db190d028407c1e02b060cc936eb5678d3dbc078c",
+   b3sum = "dd9abac4ebe2b2175c5a8e06e93af44cd3faae282d2c295bf846bfbf835b3eab",
    build = "perl",
 };
 
 perl-xml-sax-expat = {
    url = "https://cpan.metacpan.org/authors/id/B/BJ/BJOERN/XML-SAX-Expat-0.51.tar.gz",
-   sha3 = "4b0a0a2e945361db69108d9d25713e2a419f8a6bf94d9bf024302bea658a72a6",
+   b3sum = "fd3eff13c279c08c29e6d45af87b8b3c6cd92cf9051c9823f39b0e662ebfd22c",
    build = "perl",
 };
 
 perl-xml-simple = {
    url = "https://www.cpan.org/authors/id/G/GR/GRANTM/XML-Simple-2.25.tar.gz",
-   sha3 = "0b0068c5e608fcdb90b7906a6e1741519a122f28871fa7080da66ab0cb5e62b4",
+   b3sum = "34edaad39f7ca3c777dca32a934e154bf14aefaee830ac71afec5ba5e7feae73",
    build = "perl",
 };

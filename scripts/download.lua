@@ -17,7 +17,7 @@ urls = {}
 sha3sums = {}
 for i=1,#tabs do
    local X, fp, buf
-   fp = io.open(Dirs.tab .. "/" .. tabs[i])
+   fp = io.open(Dirs.tabs .. "/" .. tabs[i])
    buf = "\n" .. fp:read("*a")
    fp:close()
    for k,v in pairs(Mir) do buf=buf:gsub(k,v) end
