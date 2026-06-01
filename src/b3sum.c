@@ -1,11 +1,8 @@
 /* https://github.com/michaelforney/blake3-tiny */
 
+#include <lauxlib.h>
 #include <stdint.h>
 #include <string.h>
-#ifndef BLAKE3_H
-#define BLAKE3_H 1
-
-#include <stdint.h>
 
 struct blake3 {
 	unsigned char input[64];      /* current input bytes */
@@ -14,12 +11,6 @@ struct blake3 {
 	uint64_t chunk;               /* chunk index */
 	uint32_t *cv, cv_buf[54 * 8]; /* chain value stack */
 };
-
-void blake3_init(struct blake3 *);
-void blake3_update(struct blake3 *, const void *, size_t);
-void blake3_out(struct blake3 *, unsigned char *restrict, size_t);
-
-#endif
 
 #define CHUNK_START (1u << 0)
 #define CHUNK_END   (1u << 1)
@@ -192,8 +183,6 @@ blake3_out(struct blake3 *ctx, unsigned char *restrict out, size_t len)
 }
 
 /******************************************************************************/
-
-#include <lauxlib.h>
 
 void
 sumfile(FILE *fp, unsigned char *out, size_t outlen)
