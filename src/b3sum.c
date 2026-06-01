@@ -182,8 +182,6 @@ blake3_out(struct blake3 *ctx, unsigned char *restrict out, size_t len)
 	}
 }
 
-/******************************************************************************/
-
 void
 sumfile(FILE *fp, unsigned char *out, size_t outlen)
 {
