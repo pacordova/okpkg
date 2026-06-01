@@ -11,7 +11,7 @@ zig-bin = {
 
 rust = {
    url = "https://static.rust-lang.org/dist/rust-1.89.0-x86_64-unknown-linux-gnu.tar.xz",
-   sha3 = "c17bdd89089587e143461610ae91170e718fbe13aa4ad1a56eca5f807ce81ecd",
+   b2sum = "e81da00d2984f519e667c9aed3b1104ee5dd1ddd3a0d21782172f242158c48f9",
    build = _,
    post = [[ 
       install -d $destdir/usr
@@ -78,7 +78,7 @@ signal-desktop = {
 
 llvm-bin = {
    url = "https://github.com/llvm/llvm-project/releases/download/llvmorg-22.1.1/LLVM-22.1.1-Linux-X64.tar.xz",
-   sha3 = "517181eb8a8c55cfe6d3e07d3895fcea566261b6dedd647b1896ae24ddfbf80f",
+   b2sum = "e7c105d09366683754d7326d38fdb969489a7be921a63787c1c1d60634992672",
    build = _,
    post = [[
      #rm -fr lib/python*

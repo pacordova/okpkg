@@ -1,6 +1,6 @@
 libxfce4util = {
    url = "https://archive.xfce.org/src/xfce/libxfce4util/4.20/libxfce4util-4.20.1.tar.bz2",
-   sha3 = "699c9a6681a5a8acaaf5d7d588042bbfc1c91b26c5992d1593c607925e8b2a1d",
+   b2sum = "d64d8c016e48fb21b4c76914b75e256670c5fe2bff4c3b54f76e56cf1a50cb8a",
    build = "./configure",
    flags = { 
       "--enable-introspection=no",
@@ -10,7 +10,7 @@ libxfce4util = {
 
 xfconf = {
    url = "https://archive.xfce.org/src/xfce/xfconf/4.20/xfconf-4.20.0.tar.bz2",
-   sha3 = "1a968973d0128f1432959e9bedc378be5662685cf8bc1291cfdc81c2483a9239",
+   b2sum = "8abae9f15ee7b8d80fc8f022aa479233d85ba3153865bbc67e03d96b13410abb",
    build = "./configure",
    flags = { 
       "--enable-introspection=no",
@@ -20,7 +20,7 @@ xfconf = {
 
 libxfce4ui = {
    url = "https://archive.xfce.org/src/xfce/libxfce4ui/4.20/libxfce4ui-4.20.2.tar.bz2",
-   sha3 = "d251e7a2aaec98f9111db5d9d22ab16fa24baa97b91c41753411e00bf3366939",
+   b2sum = "cdc11c4a6fa78e26e5c3fb8e2b7baaad76ad1879c5f6039e8eec2d134647c951",
    build = "./configure",
    flags = { 
       "--enable-introspection=no",
@@ -30,13 +30,13 @@ libxfce4ui = {
 
 exo = {
    url = "https://archive.xfce.org/src/xfce/exo/4.20/exo-4.20.0.tar.bz2",
-   sha3 = "01d57a812c4d0c13a4d3e006689f904501dae0506f487acb0ea64529a37271cd",
+   b2sum = "ffe4a1a05c8f8c059c30a956438daa1154e725a33ad080c80b5288fcc21b09f1",
    build = "./configure",
 };
 
 garcon = {
    url = "https://archive.xfce.org/src/xfce/garcon/4.20/garcon-4.20.0.tar.bz2",
-   sha3 = "b919f4b447f544fd5bfe9d4010d1843bc0125b42e6c7147ce396002480dd7a4c",
+   b2sum = "71e5de795881ce3de6f1369a9bb1cab5cb8b5a1b5051352c74edf13a92a9f0ad",
    build = "./configure",
    flags = { 
       "--enable-introspection=no" 
@@ -45,7 +45,7 @@ garcon = {
 
 libwnck3 = {
    url = "https://download.gnome.org/sources/libwnck/43/libwnck-43.3.tar.xz",
-   sha3 = "4b4951bc09bbba2465d9e7fc638739a90386425c6f839e3d733dbef5d9096ee7",
+   b2sum = "711e508f062cc90c660b56f21c5fd237db156ea51fe364fb5e9e766556c2de42",
    build = "meson",
    flags = { 
       "-Dintrospection=disabled",
@@ -56,20 +56,20 @@ libwnck3 = {
 
 xfce4-dev-tools = {
    url = "http://archive.xfce.org/src/xfce/xfce4-dev-tools/4.20/xfce4-dev-tools-4.20.0.tar.bz2",
-   sha3 = "ccfde695b4bb0ab2ac36f267e7e57e59616dcbc78aa184fc94f50288d1e7e400",
+   b2sum = "f07960f392b132e890c7801c4665adcd0b3c0faac95ec13ec569a3d8f8ae6994",
    build = "./configure",
 };
 
 hwdata = {
    url = "https://github.com/vcrhonek/hwdata/archive/v0.407/hwdata-0.407.tar.gz",
-   sha3 = "fed0e44ec2bfb0b2638b43ac1e66aae8ba48e2a250cc94b78f3b8dc1d76ae1a3",
+   b2sum = "b0be534ab8e7247d34fbfb0c15d84df2c4f81c371a701d495c2915a455ad787a",
    build = "./configure",
    flags = { "--libdir=/usr/lib64" },
 };
 
 libdisplay-info = {
    url = "https://gitlab.freedesktop.org/emersion/libdisplay-info/-/archive/0.3.0/libdisplay-info-0.3.0.tar.gz",
-   sha3 = "81273a1db8c9b7784db43ff42f08bbf39e12b8ad3de512a64f5e0d547a1c8d5c",
+   b2sum = "a93a521ca04cfa28682b8c9dc1f7c8fd13783220782f4fc86556fc8b74b68dd2",
    build = "meson",
 };
 
@@ -86,7 +86,7 @@ libxfce4windowing = {
 
 xfce4-panel = {
    url = "https://archive.xfce.org/src/xfce/xfce4-panel/4.20/xfce4-panel-4.20.7.tar.bz2",
-   sha3 = "fb2d13a2027d3c833cda506baba4fbc9c49b563c0c109116f06cfdce41b7931d",
+   b2sum = "a1c1e4ce17dcd8438ea8eb69cabffa61407591ded23bf0ca6440b51a8025cfcb",
    build = "./configure",
    flags = {
       "--enable-gio-unix",
@@ -96,7 +96,7 @@ xfce4-panel = {
 
 thunar = {
    url = "https://archive.xfce.org/src/xfce/thunar/4.20/thunar-4.20.8.tar.bz2",
-   sha3 = "905b0efbb0f7adf1ee4465ae4026e719eb235670d7d05cefaf6ea5bbde88c295",
+   b2sum = "112e9c7a1688eb28703c8a8336ca6a330ee2db5c0a8b07da62c882f84a1741a2",
    build = "./configure",
    flags = {
       "--enable-gio-unix",
@@ -110,13 +110,13 @@ thunar = {
 
 thunar-volman = {
    url = "https://archive.xfce.org/src/xfce/thunar-volman/4.20/thunar-volman-4.20.0.tar.bz2",
-   sha3 = "4b3b430259850cafc80c42d236ce19482b28cdbfbe0cdc9f26b2d6feb6c56a44",
+   b2sum = "0409d340918a10cf2e154ec27f7074440537b89f1999ff85c35caf21381e3c71",
    build = "./configure",
 };
 
 tumbler = {
    url = "https://archive.xfce.org/src/xfce/tumbler/4.20/tumbler-4.20.1.tar.bz2",
-   sha3 = "e88838c251fc583033d2404b8997dbe0cee19ea58e0451b6a9fb3860b622ca2d",
+   b2sum = "42806ab7c2889f4390d434734260d3fc4c9e88a2646b3bc1273653560000ba72",
    build = "./configure",
    flags = {
       "--disable-gstreamer-thumbnailer",
@@ -126,14 +126,14 @@ tumbler = {
 
 xfce4-appfinder = {
    url = "https://archive.xfce.org/src/xfce/xfce4-appfinder/4.20/xfce4-appfinder-4.20.0.tar.bz2",
-   sha3 = "d4472fa2ff8533e0cc1fe14c8a5f0661ef4bbd775315ec166fb530aec2247713",
+   b2sum = "e2265e848e51921e5673f570faf39057b5357557f6daaeaf1fbdcf93c6e1e95a",
    build = "./configure",
    flags = { "--disable-debug" }
 };
 
 xfce4-power-manager = {
    url = "https://archive.xfce.org/src/xfce/xfce4-power-manager/4.20/xfce4-power-manager-4.20.0.tar.bz2",
-   sha3 = "fe373642bf3667ce53c2f0c30c7654ab838ebafef5327bd6863aa4bbf0011d08",
+   b2sum = "3ba6aff4c71c07199c37b8ea54768a4662409dd5187781772529aed61f8fc675",
    build = "./configure",
    flags = {
       "--disable-network-manager",
@@ -144,7 +144,7 @@ xfce4-power-manager = {
 
 xfce4-settings = {
    url = "https://archive.xfce.org/src/xfce/xfce4-settings/4.20/xfce4-settings-4.20.4.tar.bz2",
-   sha3 = "eca512da812ca9ec6bdbc0943014e6ed99d0f944350be6eeb3a5fcb1ba1e5102",
+   b2sum = "12ac318a3ec0172fcad2723c586347f1eda93360debc9d5530d3fbc2d2487ac6",
    build = "./configure",
    flags = {
       "--enable-xrandr",
@@ -160,7 +160,7 @@ xfce4-settings = {
 
 xfdesktop = {
    url = "https://archive.xfce.org/src/xfce/xfdesktop/4.20/xfdesktop-4.20.2.tar.bz2",
-   sha3 = "c054c700ce9abbf9b60e0e5de0f339f9d510f1d2487bbb3c6dca783a7627fac6",
+   b2sum = "b263f84181023186df1a37e2b2b4a2b61eb63d8f27862c4fbbd5fc4c563d7e0e",
    build = "./configure",
    flags = {
       "--enable-thunarx",
@@ -171,7 +171,7 @@ xfdesktop = {
 
 xfwm4 = {
    url = "https://archive.xfce.org/src/xfce/xfwm4/4.20/xfwm4-4.20.0.tar.bz2",
-   sha3 = "d16d69cc7a48900202a3219c3f7779003396464fceed18692a3f6c91295951e7",
+   b2sum = "1c48e0fd80ef674a1d6cd8b3ab2452e87ab1597693f99c3217d271070b5ba8c2",
    build = "./configure",
    flags = {
       "--enable-startup-notification",
@@ -184,7 +184,7 @@ xfwm4 = {
 
 xfce4-screensaver = {
    url = "https://archive.xfce.org/src/apps/xfce4-screensaver/4.20/xfce4-screensaver-4.20.2.tar.xz",
-   sha3 = "a97f13cd527df02701e723e6d2d1ad293b475892df23ca5bc9cfaf10a2e41b9a",
+   b2sum = "55daa816dfbe53a38dd83d6a394e6869faba6adddabe4fc598a6606084cd1560",
    build = "meson",
    flags = {
       "-Dauthentication-scheme=pwent",
@@ -198,7 +198,7 @@ xfce4-screensaver = {
 
 xfce4-session = {
    url = "https://archive.xfce.org/src/xfce/xfce4-session/4.20/xfce4-session-4.20.4.tar.bz2",
-   sha3 = "0a777c000ada5cc460adaa6b837076f9c462bc8e486c85f9ace147721476a8be",
+   b2sum = "1811c6aa128bd40fb0f69bac47376b44d30b3e32a212149f00a8ec7eeb6650da",
    build = "./configure",
    flags = {
       "--disable-legacy-sm",
@@ -208,7 +208,7 @@ xfce4-session = {
 
 xfce4-notifyd = {
    url = "https://archive.xfce.org/src/apps/xfce4-notifyd/0.9/xfce4-notifyd-0.9.7.tar.bz2",
-   sha3 = "a42d58ccc6bc2ede68c8e39533c0c79d24ae04c486e2da674fae26fab9f09a27",
+   b2sum = "9962b4a9ef0f617eecc56723a90817c47e71470821210b155d97723d51a39922",
    build = "./configure",
    flags = {
       "--disable-systemd",
@@ -218,45 +218,45 @@ xfce4-notifyd = {
 
 xfce4-battery-plugin = {
    url = "https://archive.xfce.org/src/panel-plugins/xfce4-battery-plugin/1.2/xfce4-battery-plugin-1.2.0.tar.xz",
-   sha3 = "74e17f5cea60ffb8bf752a71ed822f6aaac962cde134344e9b8e5b11cc50802b",
+   b2sum = "8b8e3160ab7492172365b6ec9a2da93d6c4ba3701e6037c4ff1a96f8dcf8b579",
    build = "meson",
 };
 
 thunar-archive-plugin = {
    url = "https://archive.xfce.org/src/thunar-plugins/thunar-archive-plugin/0.6/thunar-archive-plugin-0.6.0.tar.xz",
-   sha3 = "e7d13ad5ca50d0805d8931142f2e9889a1f83203767940028b7a0b1bf9411e83",
+   b2sum = "074a01a0e8b1bc996c5a8c042d136b4d70b286f3b5e55c14c711ce1c22b7baec",
    build = "meson",
    flags = { "-Dlibexecdir=/usr/lib64/xfce4" }
 };
 
 mousepad = {
    url = "https://archive.xfce.org/src/apps/mousepad/0.7/mousepad-0.7.0.tar.xz",
-   sha3 = "ee8e4d8a9792c3a88dfa49dee527eae7f543589bf5e3356f22c63ff669ee2b10",
+   b2sum = "c521e32a4f2d9fbe3e6e34e4e54fa556e19de5349abaa1c7950f3c485457c92e",
    build = "meson",
 };
 
 ristretto = {
    url = "https://archive.xfce.org/src/apps/ristretto/0.14/ristretto-0.14.0.tar.xz",
-   sha3 = "619b86915fc8136abd78b2a90f125ad1a6c22a155ff0349b9981a807e1f09535",
+   b2sum = "78fa3b9b35be631ad53bae6497de611d829c1df81fbf8ea36d40e3fd602d05ab",
    build = "meson",
 };
 
 xarchiver = {
    url = "https://github.com/ib/xarchiver/archive/0.5.4.26/xarchiver-0.5.4.26.tar.gz",
-   sha3 = "1f651f057f35d4bdba4d7cdf8653a71d74b0f3143bc68dfb6b12f6095e98d0bb",
+   b2sum = "58743f021a088bee3ff8baea4ed50eee2a2d90841b022c2f4f2373e9105ddb54",
    build = "./configure",
    flags = { "--libexecdir=/usr/lib64/xfce4" }
 };
 
 xfce4-taskmanager = {
    url = "https://archive.xfce.org/src/apps/xfce4-taskmanager/1.6/xfce4-taskmanager-1.6.0.tar.xz",
-   sha3 = "042298c1d252eeefed6f2eb8fe64aaa548efd24ab6611f7d29df60601b5275df",
+   b2sum = "94586e56cd5583ec0e4a05046b7e62656449f997ac92ec3598ed344783b42609",
    build = "meson",
 };
 
 xfce4-pulseaudio-plugin = {
    url = "https://archive.xfce.org/src/panel-plugins/xfce4-pulseaudio-plugin/0.5/xfce4-pulseaudio-plugin-0.5.1.tar.xz",
-   sha3 = "7ef658b4c76f81f8dfd0415117623c8faade2c4b6b2ee62ac01b4b46ff2861e3",
+   b2sum = "8fbdab1e771c1b5a7304be7105d6e81bac344cec58fffb3a5f84a3b1398bd0a3",
    build = "meson",
    flags = {
       "-Dkeybinder=disabled",
@@ -270,7 +270,7 @@ xfce4-pulseaudio-plugin = {
 
 xfce4-screenshooter = {
    url = "https://archive.xfce.org/src/apps/xfce4-screenshooter/1.11/xfce4-screenshooter-1.11.3.tar.xz",
-   sha3 = "c22cd2ebcf7dba2d96abafb7310cf715a26827f4e539e2f530d787665f31eb7f",
+   b2sum = "db6c07c5aa28c69e9cdb3a3b0140ea6ad4bdd7799033efa917eecb9c85c31d97",
    build = "meson",
 };
 
@@ -278,7 +278,7 @@ xfce4-screenshooter = {
 
 optipng = {
    url = "https://downloads.sourceforge.net/optipng/optipng-7.9.1.tar.gz",
-   sha3 = "b77f88a534097609d4f7e115f3daa9ab80e96ae612077eb01be83e7c09e6641f",
+   b2sum = "46ccac8a76e42fea57bd0abd1b53bae618dd287ed81725258c12d265245ebd3b",
    build = "./configure",
    flags = {
       "--with-system-libs",
@@ -288,27 +288,27 @@ optipng = {
 
 hicolor-icon-theme = {
    url = "https://icon-theme.freedesktop.org/releases/hicolor-icon-theme-0.18.tar.xz",
-   sha3 = "67a8fb5352c9cd1a9e3897b51adbbac90a32063b4d135f806e07ca45f02c0f13",
+   b2sum = "062e251872a23ecf47a127293ae9abf98a1c912f82f819d0cebccf8d9415deb2",
    build = "meson",
    post = [[ gtk-update-icon-cache $destdir/usr/share/icons/hicolor ]],
 };
 
 adwaita-icon-theme = {
    url = "https://download.gnome.org/sources/adwaita-icon-theme/50/adwaita-icon-theme-50.0.tar.xz",
-   sha3 = "c44aedba40c58512fb86a5a5d9c1b777dd2ee04ab8c0ed900f48e930260bcd1f",
+   b2sum = "754c438f00a5cc331e85b273975866fe986681f8280626ca114b8b44770f92da",
    build = "meson",
    post = [[ gtk-update-icon-cache $destdir/usr/share/icons/Adwaita ]],
 };
 
 greybird = {
    url = "https://github.com/shimmerproject/Greybird/archive/v3.22.14/Greybird-3.22.14.tar.gz",
-   sha3 = "736b7974d0687c58a92306c5c1f47910182cc4f19d64a548453313e10702e059",
+   b2sum = "e1a90223520f6cb52ef99f34aeb56b38b29f37a20bec8c3427d23cbfef58e9fa",
    build = "meson",
 };
 
 elementary-xfce-icon-theme = {
    url = "https://github.com/shimmerproject/elementary-xfce/archive/v0.20/elementary-xfce-0.20.tar.gz",
-   sha3 = "9ea595732bbeca243b28d47527c1dc48eb2858f405eef0950b3b87fb8ad240ce",
+   b2sum = "ce0ceebe877e5edc20e3b99b80230c93c7ed25558084954685c70cc1595d1a04",
    build = "./configure",
    post = [[
       #gtk-update-icon-cache $destdir/usr/share/icons/elementary-xfce

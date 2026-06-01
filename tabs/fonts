@@ -1,13 +1,13 @@
 _freetype2 = {
    url = "https://downloads.sourceforge.net/freetype/freetype-2.14.3.tar.xz",
-   sha3 = "6de5a3174bc94e705ca09ecd8f391190706b29211e4e07253039eb2f9fc10242",
+   b2sum = "0c791e2ea02be6e3cddd6e69ee84d66d869190e5275d8a34e282517769f1192e",
    build = "meson",
    flags = { "-Dharfbuzz=disabled" }
 };
 
 harfbuzz = {
    url = "https://github.com/harfbuzz/harfbuzz/releases/download/12.3.2/harfbuzz-12.3.2.tar.xz",
-   sha3 = "5107c7724e2a94ba7a09800ddb127e4251400954b7eccc476b9011df7375ae32",
+   b2sum = "61732d432cc1a93ef5718d7cdee468be01dc77f3fb2dc27dcbb0541a654cd9c0",
    build = "meson",
    flags = { 
       "-Dfreetype=enabled",
@@ -23,7 +23,7 @@ harfbuzz = {
 
 freetype2 = {
    url = "https://downloads.sourceforge.net/freetype/freetype-2.14.3.tar.xz",
-   sha3 = "6de5a3174bc94e705ca09ecd8f391190706b29211e4e07253039eb2f9fc10242",
+   b2sum = "0c791e2ea02be6e3cddd6e69ee84d66d869190e5275d8a34e282517769f1192e",
    build = "meson",
    flags = { "-Dharfbuzz=enabled" }
 };
@@ -39,7 +39,7 @@ fontconfig = {
 
 ttf-dejavu = {
    url = "https://downloads.sourceforge.net/dejavu/dejavu-fonts-ttf-2.37.tar.bz2",
-   sha3 = "f85a27aefc0fa3a65cf2618a3a4927b20b1a4260cb84424366a70430cbb59b45",
+   b2sum = "b702bac8a0f8e0802758549da3b4d8041c3c83c3894e1e8a960eab53af18cce8",
    build = _,
    post = [[
       install -d $destdir/usr/share/fontconfig/conf.default
@@ -51,7 +51,7 @@ ttf-dejavu = {
 
 ttf-go = {
    url = "https://github.com/golang/image/archive/v0.17.0/image-0.17.0.tar.gz",
-   sha3 = "2d1963d47c32afc435e946d1dc235c010c615d4f6f051335de04e3ff2d0f2360",
+   b2sum = "aaf0de9c51cd8d62ec40dfe714155f744dfe529ae074683dbbbd52480e28fcac",
    build = _,
    post = [[
       install -d $destdir/usr/share/fonts/Go
@@ -61,7 +61,7 @@ ttf-go = {
 
 ttf-liberation = {
    url = "https://github.com/liberationfonts/liberation-fonts/files/7261482/liberation-fonts-ttf-2.1.5.tar.gz",
-   sha3 = "a0f74108c69b667e22cb7444cab60b0c70241621f5862e9b43d70f3139616f63", 
+   b2sum = "5ca2163d2f2ec538005381049fd2f02b531b868903ace9a49cb10b74cf33035d", 
    build = _,
    post = [[
       install -d $destdir/usr/share/fonts/liberation
@@ -71,7 +71,7 @@ ttf-liberation = {
 
 ttf-sazanami = {
    url = "http://osdn.dl.sourceforge.jp/efont/10087/sazanami-20040629.tar.bz2",
-   sha3 = "3a2101a51020efe1002f03fd50b30e35ed2ba62e062c44e706705c7d8cf9aae8",
+   b2sum = "bf1bb0ecd19327399fcaa478fd5385654c74963459a2940c56952144aba16b73",
    post = [[
       install -d $destdir/usr/share/fonts/Sazanami
       install -m 644 *.ttf $destdir/usr/share/fonts/Sazanami

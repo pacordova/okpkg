@@ -26,7 +26,7 @@ slstatus = {
 
 st = {
    url = "https://dl.suckless.org/st/st-0.9.2.tar.gz",
-   sha3 = "6478f57dcc1afdc1f7b5b4b101bd0246ea490d852af208d643d474896df2992b",
+   b2sum = "5f42aca0fbf4d8014cd36075a853c37318b2f75aee3b8bc0992b51bead966315",
    build = "make",
    flags = { 
       "PREFIX=/", 

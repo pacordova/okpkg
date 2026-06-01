@@ -1,6 +1,6 @@
 shared-mime-info = {
    url = "https://gitlab.freedesktop.org/xdg/shared-mime-info/-/archive/2.4/shared-mime-info-2.4.tar.bz2",
-   sha3 = "e5c98a3407bcdc4523da451748e2f1d8cccf7a74a830e3150e3d9543132e3352",
+   b2sum = "d92cde705149ed71e45f4527ca8055ada4eb25fa1db5ce09287008d06b539935",
    build = "meson",
    flags = {
       "-Dupdate-mimedb=false",
@@ -10,20 +10,20 @@ shared-mime-info = {
 
 desktop-file-utils = {
    url = "https://www.freedesktop.org/software/desktop-file-utils/releases/desktop-file-utils-0.28.tar.xz",
-   sha3 = "0ba571ca197bb0d03d32598caff59eb6b7b4520f178dfe651e38ebcc6b6e8adf",
+   b2sum = "09ecf2d0ddcf67e13033676379d1ee5f4fbae52c8dc9fb45c28149dca31c1c2d",
    build = "meson",
 };
 
 gsettings-desktop-schemas = {
    url = "https://download.gnome.org/sources/gsettings-desktop-schemas/50/gsettings-desktop-schemas-50.1.tar.xz",
-   sha3 = "77d4ce9cfe9e4c4b2b3168ba030ab299dfb496c1794b79cc1cf254713cbb0d40",
+   b2sum = "9c966b54eb832a5a0e79f4f947a9d34c7a7ad57b8958d50612d485f047dd9102",
    build = "meson",
    prep = [[ sed -i -r 's:"(/system):"/org/gnome\1:g' schemas/*.in ]]
 };
 
 xdg-user-dirs = {
    url = "https://user-dirs.freedesktop.org/releases/xdg-user-dirs-0.20.tar.xz",
-   sha3 = "72cc7bff9c605fdd73aadbdab3fc7295ecae3bd23fd0813f7ef1397417c8fae7",
+   b2sum = "cb95fa26bc741d1cea6abb3e15042deb89efe9a9ca41a0953da5a725c991f006",
    build = "meson",
    flags = { "-Ddocs=false" },
    post = [[
@@ -34,7 +34,7 @@ xdg-user-dirs = {
 
 startup-notification = {
    url = "https://www.freedesktop.org/software/startup-notification/releases/startup-notification-0.12.tar.gz",
-   sha3 = "f551c61e57c983b0cae7fa57ba727226a67fe33ebd8c5ac6d0452338ccefa31f",
+   b2sum = "134131fdd210d2eaef76eda9826b4a832807aac231dba334f157751ed1d6da36",
    build = "./configure",
 };
 
@@ -54,20 +54,20 @@ at-spi2-core = {
 
 cairo = {
    url = "https://cairographics.org/releases/cairo-1.18.4.tar.xz",
-   sha3 = "8faa093a29e4a795ac0cc781b63aa2d864a13504595c9b3fac63700a6728b568",
+   b2sum = "b9fa14e02f85ec4e72396c62236c98502d04dbbdf8daf01ab9557a1c7aa7106e",
    build = "meson",
 };
 
 pango = {
    url = "https://download.gnome.org/sources/pango/1.57/pango-1.57.1.tar.xz",
-   sha3 = "8b3f49d0536712f7113f36cbff34fdebdfcaaf035501ae5c5f1ca55620b85d74",
+   b2sum = "aeeeb441da003daefd9a704e450f4e5ab449d7d6e7cca1a58474327d65f2e31b",
    build = "meson",
    flags = { "-Dintrospection=enabled" },
 };
 
 gdk-pixbuf2 = {
    url = "https://download.gnome.org/sources/gdk-pixbuf/2.42/gdk-pixbuf-2.42.12.tar.xz",
-   sha3 = "12483dead22787c04dc64abfccf9866b9c7aa3d50afe7c13b80fd6971180f775",
+   b2sum = "edf54b48c7008c0ec52e0224b6a10ea680bbb94c23b71fbe5d19ae8e72706bc6",
    build = "meson",
    flags = {
       "-Dbuiltin_loaders=all",
@@ -79,13 +79,13 @@ gdk-pixbuf2 = {
 
 libcroco = {
    url = "https://download.gnome.org/sources/libcroco/0.6/libcroco-0.6.13.tar.xz",
-   sha3 = "aa1160c118aa23e68bc8e8e6f13c2b8c49dafb1299ba722f716b68ea3293e6f5",
+   b2sum = "061bfd3d4aa7b9fc66d90d201793afc1a978e9d0e5f8b66f679a942094f8edf9",
    build = "./configure",
 };
 
 librsvg = {
    url = "https://download.gnome.org/sources/librsvg/2.40/librsvg-2.40.21.tar.xz",
-   sha3 = "b5620f0b6c164830874fd41595fceb6c60c403c6ab0f7cdd19e426261a9665c2",
+   b2sum = "0ce1906c5136a1d9fe596a4ec0a01afe3700af3c5c917439f00b280b78d738e8",
    build = "./configure",
    flags = { 
       "--enable-{introspection=no,vala=no}", 
@@ -95,7 +95,7 @@ librsvg = {
 
 gtk3 = {
    url = "https://download.gnome.org/sources/gtk/3.24/gtk-3.24.52.tar.xz",
-   sha3 = "b255123da1c6e0b48ba96c10b74f0fd60ecc5f70f3dadd5d88288f08b876ad57",
+   b2sum = "01591a22d532a0f92fd980be43b3964d5430b7e0ccba07b49bc0446fa22f8040",
    build = "meson",
    flags = {
       "-Dx11_backend=true",
@@ -119,34 +119,34 @@ gtk3 = {
 
 gtksourceview4 = {
    url = "https://download.gnome.org/sources/gtksourceview/4.8/gtksourceview-4.8.4.tar.xz",
-   sha3 = "404b0d854e122ba0ed4d76375077e86f088a56e2aec29799afc829a134597fbf",
+   b2sum = "0094836997439286c6b3b5a204b6e51ab7357c7d41bb0cb6d555b1a3bca95c2b",
    build = "meson",
    flags = { "-Dgtk_doc=false" }
 };
 
 libhandy = {
    url = "https://download.gnome.org/sources/libhandy/1.8/libhandy-1.8.3.tar.xz",
-   sha3 = "ba3b355ab5cf271259ddc2697b52cf29d1a1f357d9f6909c076e75af3eb15157",
+   b2sum = "87415aff7851cf8f0212f8e01158179341d99bdbe60e4771ee537a258027cc91",
    build = "meson",
 };
 
 libnotify = {
    url = "https://download.gnome.org/sources/libnotify/0.8/libnotify-0.8.8.tar.xz",
-   sha3 = "7329885ef94fe5235614c1347a60d84feb04828bca8d53ec8363f7139054c317",
+   b2sum = "b31e0395935578910e433d63f9ad82278650a1531ecac85816dba868e9559300",
    build = "meson",
    flags = { "-D{gtk_doc,man,tests}=false" }
 };
 
 libxklavier = {
    url = "https://people.freedesktop.org/~svu/libxklavier-5.4.tar.bz2",
-   sha3 = "9af44b71f74161cfb2e4fabf3d2642730b7608c8d32d5ff84108a043074c582f",
+   b2sum = "0febad2d7b48edefc07883a7ed532370e585c82c95f33dfd962eff0ae796b1ad",
    build = "./configure",
    flags = { "--disable-gtk-doc" }
 };
 
 poppler = {
    url = "https://poppler.freedesktop.org/poppler-26.05.0.tar.xz",
-   sha3 = "5dda27ebeb0fedcc0ccbf0cf50b88dabbac4b40b0422deb61c7ca76e060a444a",
+   b2sum = "486498754f11fb7228ad439dc98b4dd3617b57d54f1ccd7e38490e9edd6a7080",
    build = "cmake",
    flags = {
       "-DENABLE_UNSTABLE_API_ABI_HEADERS=ON",
@@ -161,7 +161,7 @@ poppler = {
 
 poppler-data = {
    url = "https://poppler.freedesktop.org/poppler-data-0.4.12.tar.gz",
-   sha3 = "474793bd050d8e2cc4b2ed3d7690c2fc61a1e42dd31475f712c4d73f73d5879b",
+   b2sum = "99ed0902cb041898089ee666e6ae806e953da6d5672081df942a6dfd54f34e33",
    build = "make",
    flags = { "prefix=/usr" }
 };
@@ -180,14 +180,14 @@ evince = {
 
 gcr4 = {
    url = "https://download.gnome.org/sources/gcr/4.4/gcr-4.4.0.1.tar.xz",
-   sha3 = "1e00b019433c3cb871c377b4a0e7a337bd905b46432e7a58d616d532a6029b20",
+   b2sum = "b0944996c0b6a2d7c22c2e6cbae51104936a0a4286aa0626225176907235fe08",
    build = "meson",
    flags = { "-D{gtk4,gtk_doc,ssh_agent}=false" }
 };
 
 gvfs = {
    url = "https://download.gnome.org/sources/gvfs/1.60/gvfs-1.60.0.tar.xz",
-   sha3 = "e99f66d7034e9efee850df94c6cec1ecc6988b58403b735d26c8b1a7606738d5",
+   b2sum = "d759d64d688f44c4f638c86b8c20aa47fb527fc5dda255052ade69ae1ef7a0fa",
    build = "meson",
    flags = {
       "-D{afc,bluray,dnssd,fuse,goa,google,gphoto2,mtp,nfs,smb}=false",

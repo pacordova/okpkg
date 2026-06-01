@@ -1,12 +1,12 @@
 vulkan-headers = {
    url = "https://github.com/KhronosGroup/Vulkan-Headers/archive/vulkan-sdk-1.4.350.0/Vulkan-Headers-vulkan-sdk-1.4.350.0.tar.gz",
-   sha3 = "272ebd45468e5dcc198ac61504f1f386212b8d20c2b7cbfca3ee2f995d8e65c0",
+   b2sum = "8400ca7d9ab008f8db866fc0cc7dccc8ebe5efb4d7aa7d13dae50ec8af309f65",
    build = "cmake",
 };
 
 vulkan-loader = {
    url = "https://github.com/KhronosGroup/Vulkan-Loader/archive/vulkan-sdk-1.4.304.0/Vulkan-Loader-vulkan-sdk-1.4.304.0.tar.gz",
-   sha3 = "4290273cbf288e9c85c1f95601de56e6fdc19a00b631772aa67c3853a634716d",
+   b2sum = "c917e00511c7aa22eadc369a454ba77694a63ac9ec42db7a6753cf3e0eb00cfb",
    build = "cmake",
    flags = {
       "-DBUILD_TESTS=OFF",
@@ -17,27 +17,27 @@ vulkan-loader = {
 
 nv-codec-headers = {
    url = "https://github.com/FFmpeg/nv-codec-headers/archive/n13.0.19.0/nv-codec-headers-n13.0.19.0.tar.gz",
-   sha3 = "86219e738be1a39192977ae03b17262bffc649068f56fc95b0c210a34104bf9a",
+   b2sum = "43136bdd6c9435a3b3e166753fd425b70383b7806c438c02d0a008e8fc2f79d9",
    build = "make",
    flags = { "PREFIX=/usr", "LIBDIR=lib64" }
 };
 
 nvidia-vaapi-driver = {
    url = "https://github.com/elFarto/nvidia-vaapi-driver/archive/v0.0.12/nvidia-vaapi-driver-0.0.12.tar.gz",
-   sha3 = "c28f79aefa8ea0f260ca6754e417a590a20d2001bdad502e3c0efe8ec157e20e",
+   b2sum = "53f55fbaa21a3d2a193acd20ff56e7dccddddbe1bf68fb8396c13bdc14717d4e",
    build = "meson",
 };
 
 libass = {
    url = "https://github.com/libass/libass/releases/download/0.17.4/libass-0.17.4.tar.xz",
-   sha3 = "f347492db6281a1ea7feaa9cb3be953f32ecd9aad9307b87b925522efd4f209e",
+   b2sum = "003cee539d1284d4104aebf8014d881c0ee01099689ec66e102a7577639e3acb",
    build = "./configure",
    flags = { "--enable-fontconfig" }
 };
 
 ffmpeg = {
    url = "https://ffmpeg.org/releases/ffmpeg-8.1.1.tar.xz",
-   sha3 = "3c2dec5c771c33979b933378e0a7e69f8ec3486385680b912d1448775baea0d0",
+   b2sum = "a0252bed6cd94b779f9bb5d5004ed80a87a1da7f813e68fcb323742d4588a23b",
    build = "./configure",
    flags = {
       "--libdir=/usr/lib64",
@@ -63,7 +63,7 @@ ffmpeg = {
 
 libplacebo = {
    url = "https://code.videolan.org/videolan/libplacebo/-/archive/v7.360.1/libplacebo-v7.360.1.tar.bz2",
-   sha3 = "b4c997f5a845197e654441d05552b796ef2761933be91a65d2e5c362ab1fd617",
+   b2sum = "312a3088b42a25059e4a8d1c02a35e9994548479c8ee67df78f4e6db5d9bd1ea",
    build = "meson",
    flags = { 
       "-Dvulkan=enabled",
@@ -79,14 +79,14 @@ libplacebo = {
 
 uchardet = {
    url = "https://www.freedesktop.org/software/uchardet/releases/uchardet-0.0.8.tar.xz",
-   sha3 = "a6b22fbf93ac19bc33d2f06bba03abdd36d53e58c3b575722de5d6f2d4219597",
+   b2sum = "af7839b912b3828e7a822754099542cbef4a3d922304104d500a7901e444bc96",
    build = "cmake",
    flags = { "-DBUILD_STATIC=OFF" }
 };
 
 mpv = {
    url = "https://github.com/mpv-player/mpv/archive/v0.41.0/mpv-0.41.0.tar.gz",
-   sha3 = "64b566216c94c7b2613a6833ce672d5ca4d1adeafa372cace6961bc6fff29a8d",
+   b2sum = "4548eb519b3c81ca90c4587b0d676ad1eb0f0e1322777e9c2870a919e5ec2a92",
    build = "meson",
    flags = {
       "-Dlua=disabled",

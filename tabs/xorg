@@ -1,268 +1,268 @@
 xorg-util-macros = {
    url = "https://x.org/pub/individual/util/util-macros-1.20.2.tar.xz",
-   sha3 = "3d40e98f621bef38dbb94acff303d838f7ff3e42220b88eb1f6ee0af4bafcacd",
+   b2sum = "ad272a006b269e3925bc700dd1e51c1b8d8fa3a825dfc0aecfeeef3db38a94f0",
    build = "./configure",
 };
 
 xorgproto = {
    url = "https://xorg.freedesktop.org/archive/individual/proto/xorgproto-2025.1.tar.xz",
-   sha3 = "7e0bfb9a8f1bbf49a1f2cec1dd901c46bc6787b58d29e893150591f8df635a6d",
+   b2sum = "80978f0950aab96f2b83750c6428e7ed7ea31fac0464d8cda23c759f457785f1",
    build = "meson",
 };
 
 libxau = {
    url = "https://x.org/pub/individual/lib/libXau-1.0.12.tar.xz",
-   sha3 = "2104425eff3b4432c5b81980cbf3dd8db0d52f8507bb46fb19b652c217cae15c",
+   b2sum = "674bc71a888eec20f0e29989e4669df90309d4baacad058107cdf89d23803bcc",
    build = "./configure",
 };
 
 libxdmcp = {
    url = "https://x.org/pub/individual/lib/libXdmcp-1.1.5.tar.xz",
-   sha3 = "748d643043e4012e77c4d8e057be2626474a8cf6aedf573671948390d7dd6500",
+   b2sum = "d93c5ceb04019228ee6f034c4d10826025a7ae756d7b2f884fc2f768577173ba",
    build = "./configure",
 };
 
 xcb-proto = {
    url = "https://xorg.freedesktop.org/archive/individual/proto/xcb-proto-1.17.0.tar.xz",
-   sha3 = "059abc35a3573885d5274d5f5a9444761fde55232395a6fda22477ac1ba00598",
+   b2sum = "68187400fded667f60b4b020d0fc37fa489ae0de33169fe7b07fcbaf88e7a3f9",
    build = "./configure",
 };
 
 libxcb = {
    url = "https://xorg.freedesktop.org/archive/individual/lib/libxcb-1.17.0.tar.xz",
-   sha3 = "841e43beeeb2f273059e618e8cf0902caf579b52d7c25eb7435ad58879d385ab",
+   b2sum = "3dce3b8adc257177dfec9b6b6cf55eeac13921520dd6c372fd8f9d867600337b",
    build = "./configure",
    flags = { "--without-doxygen" }
 };
 
 xtrans = {
    url = "https://x.org/pub/individual/lib/xtrans-1.6.0.tar.xz",
-   sha3 = "d4ec5691d75e81a5e9f17061a4897401b71ee406f5034db7c4380d5382b657f5",
+   b2sum = "18e5a2478425ec43370d7719bc4ee4f25d01ad7f580fcc3b5d91effa267cbaaa",
    build = "./configure",
 };
 
 libx11 = {
    url = "https://x.org/pub/individual/lib/libX11-1.8.13.tar.xz",
-   sha3 = "ff4ea9bc3cfdc95206ef58cca7718f7bfeeaf894051a27bd3f0a5faf9ec4f756",
+   b2sum = "f8503727da9dbaa5974c9225e4343b5c36cc47027f9aed7369e563adc87ad9e9",
    build = "./configure",
 };
 
 libxext = {
    url = "https://x.org/pub/individual/lib/libXext-1.3.7.tar.xz",
-   sha3 = "19ca8f59ba099411b957742717ec777232334fd188f62c0ec37d0946800edaff",
+   b2sum = "bfadbd2e5b0a027c2f303aa10dca138ba9f9f8cdd845ed8ed71f23998f365500",
    build = "./configure",
 };
 
 libice = {
    url = "https://x.org/pub/individual/lib/libICE-1.1.2.tar.xz",
-   sha3 = "9081dc54a8153971fe2dbe9b2bd745c16b4300dd8ceb00515fcd4a46abd1e118",
+   b2sum = "3d1d41041e0a58799a5e9965fd258a4f6875143102644fbbc71061eb4c652577",
    build = "./configure",
 };
 
 libsm = {
    url = "https://x.org/pub/individual/lib/libSM-1.2.6.tar.xz",
-   sha3 = "e5af47fffb67ceac2dce331b502f7c1cd7b958a23566dc53c14a9c5b236fbc09",
+   b2sum = "fccedc1f9781bab20b0084557464099a7b793cd704d4bb702f200def4c96dcd8",
    build = "./configure",
 };
 
 libxss = {
    url = "https://x.org/pub/individual/lib/libXScrnSaver-1.2.5.tar.xz",
-   sha3 = "3ae029ec3c7b7af223bd1e781a8470502f09e4d27312e1e457377550f064c708",
+   b2sum = "1efbadb14238f8679abb5e56bc99765b96565ee992bbab86cee88248c57f6240",
    build = "./configure",
 };
 
 libxt = {
    url = "https://x.org/pub/individual/lib/libXt-1.3.1.tar.xz",
-   sha3 = "d6eaae3c9159012056451d59d683d7b8f5a74f1c0410853185249fc583bb2ebe",
+   b2sum = "fbf21683ce3e6d104529289254977bb08b355ecf7a36c763e8369acf85f15f24",
    build = "./configure",
    flags = { "--with-appdefaultdir=/etc/X11/app-defaults" }
 };
 
 libxmu = {
    url = "https://x.org/pub/individual/lib/libXmu-1.3.1.tar.xz",
-   sha3 = "d7b727a92d29b48ea3511b9d4f36d944190a4683eece562b05270860dd827aef",
+   b2sum = "14fd6a8c90e83178ad5ed9e347dd697046a4928281f1612a51ce4c44e48494db",
    build = "./configure",
 };
 
 libxpm = {
    url = "https://x.org/pub/individual/lib/libXpm-3.5.19.tar.xz",
-   sha3 = "1be46238e8cabb9023caa8062076c3151a2e08972c8f950c636e2a33c47c5b27",
+   b2sum = "f7e39e80d7abc0e9ad20d9471d19891853127cee924b791aadc959ba7669a427",
    build = "./configure",
    flags = { "--disable-open-zfile" }
 };
 
 libxaw = {
    url = "https://x.org/pub/individual/lib/libXaw-1.0.16.tar.xz",
-   sha3 = "099411cabbb301f049f17a3b0316c976c903bd668efaf059dc8ed29720de560b",
+   b2sum = "f2a3b4955508dc7a576ad473119562b724f7936d312c85c79cb32f614c60f0c5",
    build = "./configure",
 };
 
 libxfixes = {
    url = "https://x.org/pub/individual/lib/libXfixes-6.0.2.tar.xz",
-   sha3 = "48c9aaa9234ae312aa1434075d92efc7a4f03b194d17dfd31e7ef3958fa9ddf8",
+   b2sum = "95fd7674b9a782e7dcc2ea38737262f931dbac8bddefe24066599eabdac6a142",
    build = "./configure",
 };
 
 libxcomposite = {
    url = "https://x.org/pub/individual/lib/libXcomposite-0.4.7.tar.xz",
-   sha3 = "f087c4553cbb25bd5a818baeabd6d253df5c2e4d8c07c486e6c3bd781170a3c8",
+   b2sum = "c0eee712541ef115922708a159c008c2f2cf89027f30270426e53d304b211837",
    build = "./configure",
 };
 
 libxrender = {
    url = "https://x.org/pub/individual/lib/libXrender-0.9.12.tar.xz",
-   sha3 = "803ad06075b13d1b9c331407a2c640b11970c3c9b3a6122ae9121c0e27471ae7",
+   b2sum = "900b431ad77835029a88fd0d874bbd0d748ff150b9e0c3841b3ce7a346cf396a",
    build = "./configure",
 };
 
 libxcursor = {
    url = "https://x.org/pub/individual/lib/libXcursor-1.2.3.tar.xz",
-   sha3 = "ec59d022210d96972b73be9f69f94302c65443bb2ecc65d0be9c5d0316ee64c4",
+   b2sum = "78369818c0dd2fb10374b55458429c3f53409995d01a53a07def1980290af66d",
    build = "./configure",
 };
 
 libxdamage = {
    url = "https://x.org/pub/individual/lib/libXdamage-1.1.7.tar.xz",
-   sha3 = "c63e8bebeecf2740198877f238f393bafb4d153efe01dfea7350a32a367be1b6",
+   b2sum = "72633074b373268a6873b38972184fb1c30ecef4353a71ed1671a82bf991f0e9",
    build = "./configure",
 };
 
 libfontenc = {
    url = "https://x.org/pub/individual/lib/libfontenc-1.1.9.tar.xz",
-   sha3 = "756829c0550931db144a9dee5bcfed2d395dca31c03d3a981b445154873ea718",
+   b2sum = "098188a7afd2804ec548d7cc4ff3190026377c0a5022eb5fe1566f88b516d653",
    build = "./configure",
 };
 
 libxfont2 = {
    url = "https://x.org/pub/individual/lib/libXfont2-2.0.7.tar.xz",
-   sha3 = "8d77c8b33db6d0f8ceb6158da1c31d1f9e4ef96076b211b57debacb9dca6cadd",
+   b2sum = "9b4951683df21108e45fda23dbd25dcb47b67a3a0e224a36374fbc2d0f489cac",
    build = "./configure",
    flags = { "--disable-devel-docs" }
 };
 
 libxft = {
    url = "https://x.org/pub/individual/lib/libXft-2.3.9.tar.xz",
-   sha3 = "668c550537e06bc5ff5ce1acb24e9390547d46b7c1cc862728f6120245013d34",
+   b2sum = "db5b642f7d5f1184d0975db36ae9f9fbd0a0c538a2288930fc034376374e83dc",
    build = "./configure",
 };
 
 libxi = {
    url = "https://x.org/pub/individual/lib/libXi-1.8.3.tar.xz",
-   sha3 = "5d95087162b15177e3d82648dceea40150d713ef8f65bed6b453440b189f42c5",
+   b2sum = "0a6bff2bb3ccc1a12378f1c676e73fc1b541831632dd6e9b1478e3d9c85e4ce9",
    build = "./configure",
 };
 
 libxinerama = {
    url = "https://x.org/pub/individual/lib/libXinerama-1.1.6.tar.xz",
-   sha3 = "4da8a709aafa225a67f15b139155f35fe22b3f095245123bcf09170f4f3b951f",
+   b2sum = "44f2031aff5910df959471b74fa99efa0a11dd0dd5a9ca3b95f10e0be4b1f73e",
    build = "./configure",
 };
 
 libxrandr = {
    url = "https://x.org/pub/individual/lib/libXrandr-1.5.5.tar.xz",
-   sha3 = "253bc7d7e6cd3decdc4407c135dad3a359dcd9629b0ca06d048a91537dc1d04d",
+   b2sum = "a15fa3ec8e49fe4c7a77d046a5563c83f56dde511461b27ee90e2adb164a2964",
    build = "./configure",
 };
 
 libxres = {
    url = "https://x.org/pub/individual/lib/libXres-1.2.3.tar.xz",
-   sha3 = "de13edb6659a1265248a5d4bbd591f9637ac912d97441fdd36bf5a888ffd9817",
+   b2sum = "ed6e65e554fb812ddbec0667d749cb6c0488a964d7b12a7c4c2cadac1287088f",
    build = "./configure",
 };
 
 libxtst = {
    url = "https://x.org/pub/individual/lib/libXtst-1.2.5.tar.xz",
-   sha3 = "13e43df22e307f50b636d200bceae31f53f79d34e45876956ace81643b95b2b3",
+   b2sum = "14daad01275697ffcacba237a3f1cf60cddfd0e5cfb25053c7a43fb282bf604c",
    build = "./configure",
 };
 
 libxv = {
    url = "https://x.org/pub/individual/lib/libXv-1.0.13.tar.xz",
-   sha3 = "c98112882d8b99d62c999536e29c64030c876b0b4a3e678ffafa4c731b33df86",
+   b2sum = "ca8bb3f9a3b6b1b5a56ff77dce5d8f8a8b09c38c5ef05500fefc73d6462ac15f",
    build = "./configure",
 };
 
 libxvmc = {
    url = "https://x.org/pub/individual/lib/libXvMC-1.0.15.tar.xz",
-   sha3 = "8413a9b431349886c8f44411f405d02e26a32836bfbad1026f6033b8c9a622f5",
+   b2sum = "2572799254ad119268ac04cb1e5194926a7a8d3db4198279021228505554520c",
    build = "./configure",
 };
 
 libxxf86vm = {
    url = "https://x.org/pub/individual/lib/libXxf86vm-1.1.7.tar.xz",
-   sha3 = "635f1e912137b7bb3d0aeffd3078d59900a4d1e0ad59825b53e45fb10a81c592",
+   b2sum = "54af9fb042d559b98a47524e3a81638882c9f881c2c4676f25d9486460fbfd24",
    build = "./configure",
 };
 
 libpciaccess = {
    url = "https://x.org/pub/individual/lib/libpciaccess-0.19.tar.xz",
-   sha3 = "f48819dcf8ed084cf35ec368a2a929ebc761850832b4575500a83c952d1ad598",
+   b2sum = "2bd8a8cc35aa4bb34dbb043547496367ba66d27b1e3b84a9cae47f0ee29c9c66",
    build = "meson",
 };
 
 libxkbfile = {
    url = "https://x.org/pub/individual/lib/libxkbfile-1.2.0.tar.xz",
-   sha3 = "e99049bf8b17871e10298d8aa383a279fb9173916a19e6736afd5358130892f7",
+   b2sum = "47719f5b87e2090a1fd093f08fd162985ae4263381eee79785e66ca33e731981",
    build = "meson",
 };
 
 libxshmfence = {
    url = "https://x.org/pub/individual/lib/libxshmfence-1.3.3.tar.xz",
-   sha3 = "108184e5368e3cbe32257559f463b62a4fb6e7c45ec65721c5d941a7775b5ab1",
+   b2sum = "b6f6572eb8b8c44ecf0fadc53d86a030558ab2d210a1c2addd70822bdaacb7f3",
    build = "./configure",
 };
 
 libxpresent = {
    url = "https://x.org/pub/individual/lib/libXpresent-1.0.2.tar.xz",
-   sha3 = "71a3543daae593acb965fc59cbf3a45ea1ae798be8ac7f50045dbb160f4e4c06",
+   b2sum = "da81687857d95e5a5418b8cd2afbd483727a6aa950ccb7bc5c572a976ddb3bac",
    build = "./configure",
 };
 
 libxcvt = {
    url = "https://x.org/pub/individual/lib/libxcvt-0.1.3.tar.xz",
-   sha3 = "3657e78a35a6a7d53b06c8529bbd6b8c05df4897590f89d73c6ff6cb9a5fae7e",
+   b2sum = "a6c8f264a70a742d2634f53d19489b984c28df11cb5653042e8921f7596534bb",
    build = "meson",
 };
 
 xcb-util = {
    url = "https://xcb.freedesktop.org/dist/xcb-util-0.4.1.tar.xz",
-   sha3 = "0016d100defb9fd475f9e6cab3c8b9fc4be383ee99a610f29b3cca127cf26fb3",
+   b2sum = "ebc940220db0ca39a690a47b565ce73ab536c1fbfdebf008fa0edf0ced862aca",
    build = "./configure",
 };
 
 xcb-util-image = {
    url = "https://xcb.freedesktop.org/dist/xcb-util-image-0.4.1.tar.xz",
-   sha3 = "a85965a7165248dd9493f8a54fc6eb1794a59ee825728d13cb892b13f781a3cb",
+   b2sum = "c8a0652f7c215bd312d9f238aed2ba6a122f087b623dafbbac4456f5351df603",
    build = "./configure",
 };
 
 xcb-util-keysyms = {
    url = "https://xcb.freedesktop.org/dist/xcb-util-keysyms-0.4.1.tar.xz",
-   sha3 = "2c95bf04f5599495d486cc7ada65dfa1401236bf8c87f8a5f9b94eb02bd85f3a",
+   b2sum = "c599df56c79a9f9dcf12b083e343f321cad6af654b83e2976b5a26bc890b5774",
    build = "./configure",
 };
 
 xcb-util-renderutil = {
    url = "https://xcb.freedesktop.org/dist/xcb-util-renderutil-0.3.10.tar.xz",
-   sha3 = "3066869039174e765dbfc24abbb73ad67ce1fdacc80f1694f0e48775ca57f792",
+   b2sum = "085c94d08bd8181512d4ce93cf0e5bcd48cd8ed983bbb7a7bcb3a3c2312a08ea",
    build = "./configure",
 };
 
 xcb-util-wm = {
    url = "https://xcb.freedesktop.org/dist/xcb-util-wm-0.4.2.tar.xz",
-   sha3 = "9e8d4465ead0240097363d8b77d1b44f55b2e94b24983c7cbe9ab0dacd117505",
+   b2sum = "4cf6b0e204e12eb6b824c939404fc5ad63d61cb94679e8adf5670207802bc738",
    build = "./configure",
 };
 
 xcb-util-cursor = {
    url = "https://xorg.freedesktop.org/archive/individual/lib/xcb-util-cursor-0.1.6.tar.xz",
-   sha3 = "5d27714654bd3d67d58a8b72e7a890611ed50d5a66d83b13935abe7615cae373",
+   b2sum = "af6e7e99779682450e4cb3aa7225f5724845b1672c0380c65ca03b58dfb2d5d8",
    build = "./configure",
 };
 
 libglvnd = {
    url = "https://gitlab.freedesktop.org/glvnd/libglvnd/-/archive/v1.7.0/libglvnd-v1.7.0.tar.gz",
-   sha3 = "e0a5cc0d7fa70b7c5bf7704aa10d05271dd663ff372f0bbb62a0102fb9a0af33",
+   b2sum = "08459ce54c574683038ce1c9c8e39447d92a8cc78bb13a4c5af0457bf38af2d4",
    build = "meson",
    flags = { "-Dgles1=false" }
 };
@@ -278,14 +278,14 @@ libdrm = {
 
 libva = {
    url = "https://github.com/intel/libva/archive/2.23.0/libva-2.23.0.tar.gz",
-   sha3 = "a713527b16d15c255dba84bb23f7b20227a293d330cea172eac2e860e976c38b",
+   b2sum = "710b7a18e8514c0bd72a1447514269f563c9d6d0670fc14615e45f3a9d8ee73e",
    build = "meson",
    flags = { "-Dwith_{glx=yes,wayland=no,x11=yes}" }
 };
 
 libvdpau = {
    url = "https://gitlab.freedesktop.org/vdpau/libvdpau/-/archive/1.5/libvdpau-1.5.tar.bz2",
-   sha3 = "a7554f381f20f6bd7d46e3b60f31a3416b16587dd148bc9bc59dd65d9fe74f48",
+   b2sum = "6a3811b79ea0ac523dca41c00e7736a1da0279a57e001bde89789830a842df0b",
    build = "meson",
 };
 
@@ -306,79 +306,79 @@ mesa = {
 
 xbitmaps = {
    url = "https://x.org/pub/individual/data/xbitmaps-1.1.4.tar.xz",
-   sha3 = "d1519d04787f803d96700bcd8bbeef851fa1e064bf673c2b1ebcb905120389ed",
+   b2sum = "0639e2a9f5561864dc083a006f0fc5b4908310402bdccf9788a68538af4809f5",
    build = "./configure",
 };
 
 xorg-iceauth = {
    url = "https://x.org/pub/individual/app/iceauth-1.0.11.tar.xz",
-   sha3 = "bc72053ef7dbf9f5d52627c1a411695f5fc01b083924eb13a8be28b1fccc7b9a",
+   b2sum = "d7aee2a37dc6c4105a64c5a1763fd9f7a50f3c3af2a5754a4ffb7ca0870b8d91",
    build = "./configure",
 };
 
 xorg-mkfontscale = {
    url = "https://x.org/pub/individual/app/mkfontscale-1.2.4.tar.xz",
-   sha3 = "00526f40f4aa46009839ae3ab0b777e37db96866ec2f50a63aeb7aa64ca39840",
+   b2sum = "bfdb9715aaaedd77e919c054dcf3f73dcbd0db5a41ed12c3b10fa6f42cffd44d",
    build = "./configure",
 };
 
 xorg-sessreg = {
    url = "https://x.org/pub/individual/app/sessreg-1.1.4.tar.xz",
-   sha3 = "598c8e08a99a40efd50e9a2269f56d5615fcb503105b8d8af73a1ee7665153ef",
+   b2sum = "747ffe9e0818e027024843cf274b34cd291c23dc2a03268bac89f17b99331998",
    build = "./configure",
 };
 
 xorg-setxkbmap = {
    url = "https://x.org/pub/individual/app/setxkbmap-1.3.5.tar.xz",
-   sha3 = "9af501bbeedc9ed4da111a68a59afd699b74d3f6aabcda844ad016b84b9e03b2",
+   b2sum = "1166e22de55f696bb53c9367f6321028a71a3b020237e3f1ca7782d43544b048",
    build = "./configure",
 };
 
 xorg-smproxy = {
    url = "https://x.org/pub/individual/app/smproxy-1.0.8.tar.xz",
-   sha3 = "76f59ea4a9a1b281aa940083a0c0dcc6f4a978580a0d941826518776e8e19ef4",
+   b2sum = "752dd9b7368bcfd32ad4ac2ad235f24b439684b2b86b13d9347b579b6cfe2b68",
    build = "./configure",
 };
 
 xorg-x11perf = {
    url = "https://xorg.freedesktop.org/archive/individual/test/x11perf-1.7.0.tar.xz",
-   sha3 = "4b010eadbd965eaf7cece8256134f5c99c7ff9eb8fbb7408a026e60351e307cb",
+   b2sum = "8ca5617cc9781ee32bdf60f24742b0ed8baaf30d1e8f8962e694dbe6377fc81a",
    build = "./configure",
 };
 
 xorg-xauth = {
    url = "https://x.org/pub/individual/app/xauth-1.1.5.tar.xz",
-   sha3 = "2892ccfe4ddc9d9c1cf1302f8d74f6fcb6ff75b36cc85efb4137932d9c62e683",
+   b2sum = "c3a887e6da4d081e43fa32d4b2912f5142744b8c40deb1b0d2b38899b871db08",
    build = "./configure",
 };
 
 xorg-xbacklight = {
    url = "https://x.org/pub/individual/app/xbacklight-1.2.4.tar.xz",
-   sha3 = "7488cf023d1098ef89a15cbea9833c3fc60223d9de26c90d3fdb1cb51a92ee2b",
+   b2sum = "43191e56e697bd66357c4430cc1c2375253c515af4fafc8074abf51f39d5d7e1",
    build = "./configure",
 };
 
 xorg-xcmsdb = {
    url = "https://x.org/pub/individual/app/xcmsdb-1.0.7.tar.xz",
-   sha3 = "5adbc57d74f953e37e5a4bfc35b4fa508bf45d77f5f308d5fa1f67c24c1be08f",
+   b2sum = "d9ac57345049322fd25178f04feb25811fb741abbb0ed729fa74b1795b1f358a",
    build = "./configure",
 };
 
 xorg-xcursorgen = {
    url = "https://x.org/pub/individual/app/xcursorgen-1.0.9.tar.xz",
-   sha3 = "3fe505668321af5c1e8fcaaf76a7606f9ac3fa511b734083f46f76e4b25e986c",
+   b2sum = "f14043cea58f11b7cec4200446f41bf9f69315f443187558cfe4d2feb01a4ad8",
    build = "./configure",
 };
 
 xorg-xdpyinfo = {
    url = "https://x.org/pub/individual/app/xdpyinfo-1.4.0.tar.xz",
-   sha3 = "a81ca79a7de9017a3e495bdfe9b937abd605decf5e2f991adac6b0d81505eb48",
+   b2sum = "e38f6837b33398cfc7e02df035df74cc40fea111885ac957f429b81901eb8df6",
    build = "./configure",
 };
 
 xorg-xdriinfo = {
    url = "https://x.org/pub/individual/app/xdriinfo-1.0.8.tar.xz",
-   sha3 = "8eb04147e739411608f920e1fafba71b37a4364a7b683976632cb3dda3f45143",
+   b2sum = "25584eab08119b7a10d1f381a54ca20f067de62a8915728cc07e870ba05cd41e",
    build = "./configure",
 };
 
@@ -390,49 +390,49 @@ xorg-xev = {
 
 xorg-xgamma = {
    url = "https://x.org/pub/individual/app/xgamma-1.0.8.tar.xz",
-   sha3 = "ba3963a3080ac7fa3cc24f3bc76400c13a135b47e0fb09a3b32a2378733f8a4e",
+   b2sum = "357e0518e880ca340b0dc97ddec8532c6a5fe8b001006be0a45f077b6a40500f",
    build = "./configure",
 };
 
 xorg-xhost = {
    url = "https://x.org/pub/individual/app/xhost-1.0.10.tar.xz",
-   sha3 = "926ae33a57edd6bbdc216b9db9d56e9da823f4cb62e4d0fb743f5546c7d1cc87",
+   b2sum = "a6ffa3dae67f971d1e32671ad4ea47e3b44dde371d35458f896aca582778c962",
    build = "./configure",
 };
 
 xorg-xinput = {
    url = "https://x.org/pub/individual/app/xinput-1.6.4.tar.xz",
-   sha3 = "2b4203bab586b4d53233dfab6a3e6ea0476f17e98a9c33f22549034bb993944d",
+   b2sum = "365c50c59f62fa73e62539ddac0072849798646d0ca07c40be3ff477e2a87c07",
    build = "./configure",
 };
 
 xorg-xkbcomp = {
    url = "https://x.org/pub/individual/app/xkbcomp-1.5.0.tar.xz",
-   sha3 = "2bdf5ed3bb1f2c1d777d93982e31e2dcbf29179b465f97f8a099837866b7c164",
+   b2sum = "34fc3e00aa670b37cb68a69d35c0a68019e3cf44b77c2ff1035cc88317702a3d",
    build = "./configure",
 };
 
 xorg-xkbevd = {
    url = "https://x.org/pub/individual/app/xkbevd-1.1.6.tar.xz",
-   sha3 = "ddd47d66488ea93fbc4da0a91af8f8293565b8c82f403a8b6e28d11efd97da1d",
+   b2sum = "e30fb2ed680d16725172bc35a3146877b0cc84143df20c7af3a10fe191df8379",
    build = "./configure",
 };
 
 xorg-xkbutils = {
    url = "https://x.org/pub/individual/app/xkbutils-1.0.6.tar.xz",
-   sha3 = "ef0211be3f03da5882ba4d6b44a726cdc7f944def78fa7d8c8d8987fb99075db",
+   b2sum = "f19c157f5eaad7c91ee101952e55b9fd991b060892ecb3e6d9a7b46fa1dbe587",
    build = "./configure",
 };
 
 xorg-xkill = {
    url = "https://x.org/pub/individual/app/xkill-1.0.7.tar.xz",
-   sha3 = "fee0a7cfac9e6b1a2752e6be7f80fb7fa01e06ecae5bc64d9e74e37eb4d2b4da",
+   b2sum = "a573b77381898106499c4c63204000b1178b171eef5955c44a2cf4ce8af6dfff",
    build = "./configure",
 };
 
 xorg-xlsatoms = {
    url = "https://x.org/pub/individual/app/xlsatoms-1.1.4.tar.xz",
-   sha3 = "3bf8a475229079bb406252eb6ec8e016483e6ad8bd449b97e8f6285e842244a9",
+   b2sum = "b757b2bb09b2a743b07de4142893c4024e0f183611831fcd6a09c7cfa9e118f4",
    build = "./configure",
 };
 
@@ -444,86 +444,86 @@ xorg-xlsclients = {
 
 xorg-xmessage = {
    url = "https://x.org/pub/individual/app/xmessage-1.0.7.tar.xz",
-   sha3 = "501361b6b63a8b6daa33a4cd8e18d409d628b06ded8cbd8173b510eaa9843722",
+   b2sum = "e26ed537dfbc5cfb36f6545cd7d0323822b445d503242528c8c4fb561770b008",
    build = "./configure",
 };
 
 xorg-xmodmap = {
    url = "https://x.org/pub/individual/app/xmodmap-1.0.11.tar.xz",
-   sha3 = "2722eef90103d41cb856360f0981d00c2c6b8bf5e5a0705b5a03fa3fd1273259",
+   b2sum = "e15296a8cd125b5b7907d5fd4c200fa476aeee875e16bec68020bf6236bd84ac",
    build = "./configure",
 };
 
 xorg-xpr = {
    url = "https://x.org/pub/individual/app/xpr-1.2.0.tar.xz",
-   sha3 = "b7aeed050ceed728ea9b954ff1affd90f48cc310f1cca6b7842751958f9ea98c",
+   b2sum = "25da4a7ec210a0fae9876be558a34f0ac91b7cd0aa791edc6a9b44aa156884a0",
    build = "./configure",
 };
 
 xorg-xprop = {
    url = "https://x.org/pub/individual/app/xprop-1.2.8.tar.xz",
-   sha3 = "bee11c0e4443a61bd86b5759edb1ee7696c3d485b3a6d034aecec79cda96b548",
+   b2sum = "2fdeec862616d7bcd00f3ab3db40244e2a58d5816a78211f0cc467b174a77191",
    build = "./configure",
 };
 
 xorg-xrandr = {
    url = "https://x.org/pub/individual/app/xrandr-1.5.4.tar.xz",
-   sha3 = "1d424fdfb63c5567401f6009e5d9623c6c3f518442905500c0bf86b2f558b5a5",
+   b2sum = "ec6019c6928189dbd44f51f1bfa3146d5e242ff7873c0b99d85c0f1716583b92",
    build = "./configure",
 };
 
 xorg-xrdb = {
    url = "https://x.org/pub/individual/app/xrdb-1.2.2.tar.xz",
-   sha3 = "526a95246a807f181295a14c6bf644e18641d1acb0da7e50148505201e4fece2",
+   b2sum = "b1be1bdd57d6323d69b129a8421cf92faac198446343a697ac8f1ba7d0f210ca",
    build = "./configure",
 };
 
 xorg-xrefresh = {
    url = "https://x.org/pub/individual/app/xrefresh-1.1.0.tar.xz",
-   sha3 = "007553e76d06434294e58d9c041fce9f1c879e96c9eff0687ef021932114a7a6",
+   b2sum = "e25ed01d99ad339bf823c46cb8427cf3d2cbd99d1df9937e379677636474f1f4",
    build = "./configure",
 };
 
 xorg-xset = {
    url = "https://x.org/pub/individual/app/xset-1.2.5.tar.xz",
-   sha3 = "d1f64676d5b4ed5be41f93a1b81d44c2958b9d2118b12121124d001189d2c893",
+   b2sum = "18f8a870e8c1f0dbdb1d66173da0a6d08bea283fade48d19b2d27abc4d1304d6",
    build = "./configure",
    flags = { "--without-fontcache" }
 };
 
 xorg-xsetroot = {
    url = "https://x.org/pub/individual/app/xsetroot-1.1.3.tar.xz",
-   sha3 = "4f916a5f862074e4c0b2df4026f8e15bcd284015f1070bcc72fec0231af40be3",
+   b2sum = "55e29295c265ad3eaca803e805c8366b1b25b176a832177ed0f94f1a73c2bfd4",
    build = "./configure",
 };
 
 xorg-xvinfo = {
    url = "https://x.org/pub/individual/app/xvinfo-1.1.5.tar.xz",
-   sha3 = "fbc61efa27cc12caa86e89d5f8997cef05d6feb25b8d74a7d5860cdf98207c88",
+   b2sum = "2eabe28d3031b9b22198736150a6ed54281438b6bccd23a801895c206f791950",
    build = "./configure",
 };
 
 xorg-xwd = {
    url = "https://x.org/pub/individual/app/xwd-1.0.9.tar.xz",
-   sha3 = "8f845b1690f01d2b24bf90876737d9ec7381633063de93d43189bdf4f7814494",
+   b2sum = "02f6811e5aa89ccfd702bfcd00450affffe57d8a491a45c17409e70d6060ee76",
    build = "./configure",
 };
 
 xorg-xwininfo = {
    url = "https://x.org/pub/individual/app/xwininfo-1.1.6.tar.xz",
-   sha3 = "5683bb5ea3e1af032a4948bf6f8ce62740c20df3c771509d8765e71ee507dd0b",
+   b2sum = "a122e569267bfea0d2095b7957f294ebb71e71cb5f32fa8924f8ccdf3f5cfe50",
    build = "./configure",
 };
 
 xorg-xwud = {
    url = "https://x.org/pub/individual/app/xwud-1.0.7.tar.xz",
-   sha3 = "d96f9889ad702e63887439794a4c703b44de12871d527c56774f658104827867",
+   b2sum = "839d03bf49323a0ac54398c26828c744a1ae112313abe7e340024e26854af123",
    build = "./configure",
 };
 
 xorg-font-util = {
    url = "https://x.org/pub/individual/font/font-util-1.4.2.tar.xz",
-   sha3 = "67bf0412d108d1c99ef60b5905af3e368c6c75a92f021b0436a05f7a4a2d1c35",
+   b2sum = "a484ff6ec9badc1f9ed79fd8d50768f39032b85af42abaf248089b15c94bec78",
    build = "./configure",
    flags = {
       "--with-mapdir=/usr/share/fonts/util",
@@ -533,7 +533,7 @@ xorg-font-util = {
 
 xkeyboard-config = {
    url = "https://x.org/pub/individual/data/xkeyboard-config/xkeyboard-config-2.47.tar.xz",
-   sha3 = "602ea9e2455e3dde0f0df42d4937df37aa73a6a10eccd1bdb865c9b00adec26e",
+   b2sum = "d7fd87d845828dfc9251d84b6c7690a4dc969ea72e0e8d5bf868706c959d322e",
    build = "meson",
    flags = {
       --"-Dxkb-base=/usr/share/X11/xkb",
@@ -544,7 +544,7 @@ xkeyboard-config = {
 
 libxkbcommon = {
    url = "https://github.com/xkbcommon/libxkbcommon/archive/xkbcommon-1.13.1/xkbcommon-1.13.1.tar.gz",
-   sha3 = "405ebd237ef7682e7b265c47c12601d4443ec379cb30f8e8d2d9a24a29e7fc9a",
+   b2sum = "f0606c6f43aa7f9bae291dafd33a7d0059dc27f1851f22f663e1570a73b62473",
    build = "meson",
    flags = {
       "-Denable-wayland=false",
@@ -554,13 +554,13 @@ libxkbcommon = {
 
 libepoxy = {
    url = "https://github.com/anholt/libepoxy/archive/1.5.10/libepoxy-1.5.10.tar.gz",
-   sha3 = "14d8260c033272610a53f9770faba81d36729b606e520287335329e030b69dd1",
+   b2sum = "df74575d2a4ca65bf98d15ed6357cb066b6369704137e53b5e1d35b6d582657e",
    build = "meson",
 };
 
 xorg-server = {
    url = "https://x.org/archive/individual/xserver/xorg-server-21.1.22.tar.xz",
-   sha3 = "0d3c8444d3ac56a15c8bb1416a3abe9882523ffa9111c4fe1c22cf19d97241b8",
+   b2sum = "0f4113d9728eda339c765a0f14538b1f184d1590674aa1222042cffe65e9cae2",
    build = "meson",
    flags = {
       "-D{xephyr,xnest,xvfb}=false",
@@ -582,20 +582,20 @@ xorg-server = {
 
 libevdev = {
    url = "https://www.freedesktop.org/software/libevdev/libevdev-1.13.6.tar.xz",
-   sha3 = "ac086e0993b8c94bdcd8cf5f6a75bad56e115998d12763ebb8a1237a702361f1",
+   b2sum = "7cc8322f062a0bdacaf73f7fcb6353024764620633c0c434d725ca3a95119fef",
    build = "meson",
    flags = { "-D{documentation,tests,tools}=disabled" }
 };
 
 xf86-input-evdev = {
    url = "https://x.org/pub/individual/driver/xf86-input-evdev-2.11.0.tar.xz",
-   sha3 = "a46b99f27f13ae37176eb62f42833f7092fe07d3b2c767bc74e6a12b6ee49acb",
+   b2sum = "913b3928012993fac64ed83c74cf110cc178018d95377d079e017fc630b97f10",
    build = "./configure",
 };
 
 libinput = {
    url = "https://gitlab.freedesktop.org/libinput/libinput/-/archive/1.31.2/libinput-1.31.2.tar.gz",
-   sha3 = "1542aec5202a0549757e21f27b100a123858a05e9da6708ecb006ca07ef96b75",
+   b2sum = "c003fd1a120e56ce89aa451340dfd99565c36210e6dc8394871d86da6e4429a2",
    build = "meson",
    flags = {
       "-Dudev-dir=/usr/lib64/udev",
@@ -608,7 +608,7 @@ libinput = {
 
 xf86-input-libinput = {
    url = "https://x.org/pub/individual/driver/xf86-input-libinput-1.5.0.tar.xz",
-   sha3 = "7141fe5d065fcb9dc238f956b99b65a45c0dea4e36adbe1afae79a97d080aee4",
+   b2sum = "83443b66b1461152815d0294a63f6db7eaf6222acdc70723ed620ec2e8c22583",
    build = "./configure",
    prep = [[
       sed -e '23 a \        Option "AccelProfile" "flat"' \
@@ -618,13 +618,13 @@ xf86-input-libinput = {
 
 xf86-input-synaptics = {
    url = "https://x.org/pub/individual/driver/xf86-input-synaptics-1.10.0.tar.xz",
-   sha3 = "fadefdffd72c375444c41e5dd951a8c2594c6be1fb7e606e29166cac3c4b2f2d",
+   b2sum = "0b4ae892cda4cdb1d57170a9ee5a63ccec28df7b9bcdedaafd32f997da7bccd4",
    build = "./configure",
 };
 
 xorg-xinit = {
    url = "https://x.org/pub/individual/app/xinit-1.4.4.tar.xz",
-   sha3 = "6e034a194534d749721922117cb3f8a31d83db9a82d696981d095fc4e4fd67cc",
+   b2sum = "fe988bbff7c4a950256540ad8a469fed1cdbe11439ba738b9714ee2de16f2a6c",
    build = "./configure",
    flags = { "--with-xinitdir=/etc/X11/xinit" },
    post = [[

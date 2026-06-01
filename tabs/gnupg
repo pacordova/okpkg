@@ -1,19 +1,19 @@
 libgpg-error = {
    url = "https://gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-1.61.tar.bz2",
-   sha3 = "af56bbee99cef3840b544811b0fc75ab081ab5957280f841e50789a1d806e959",
+   b2sum = "3d8508a18c55a0442e15eab5110c592b0cb518cd9bd1210c8014bbb37277b9a0",
    build = "./configure",
    flags = { "--disable-{doc,languages,tests}" },
 };
 
 libgcrypt = {
    url = "https://gnupg.org/ftp/gcrypt/libgcrypt/libgcrypt-1.12.2.tar.bz2",
-   sha3 = "7817a9aae677fd34f119b4edfd5d130a4dbaef7557c0f22a380d006f75686264",
+   b2sum = "7eab6137f890c1144c280d97ad89ac115d8c54b317e4696f271c172d5133b10f",
    build = "./configure",
 };
 
 libksba = {
    url = "https://gnupg.org/ftp/gcrypt/libksba/libksba-1.8.0.tar.bz2",
-   sha3 = "472aa558b790cb66f55f47f35c700e86dbdfc541b33ef2e6a5c759dc3d55a64f",
+   b2sum = "1ae65c16488b982448f238839466b21d32456f457769480ba27c0619e8804254",
    build = "./configure",
 };
 
@@ -47,7 +47,7 @@ pinentry = {
 
 gnupg2 = {
    url = "https://gnupg.org/ftp/gcrypt/gnupg/gnupg-2.5.20.tar.bz2",
-   sha3 = "378e0e056fe7732ad614ab2c8a44855bedbc6a187bc046f42771f593ef48d24c",
+   b2sum = "119984cd3e747c09afbce191b64d844b71f7f78514d0769843b52cca70190b60",
    build = "./configure",
    flags = { 
       "--libexecdir=/usr/lib64/gpg", 
