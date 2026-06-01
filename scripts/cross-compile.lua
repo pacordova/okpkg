@@ -95,7 +95,7 @@ function emerge(x)
    end
 
    if X.post then os.execute(X.post) end
-   os.execute("find /mnt -name \*.la -delete")
+   os.execute("find /mnt -name '*.la' -delete")
 end
 
 -- Environment
@@ -111,7 +111,7 @@ dofile(string.format("%s/%s", ok.dirname(arg[0]), "mkfs.lua"))
 
 -- Build all packages in .cross
 local fp, buf
-fp = io.open(string.format("%s/%s", Dirs.tabs, ".cross")
+fp = io.open(string.format("%s/%s", Dirs.tabs, ".cross"))
 buf = "\n" .. fp:read('*a')
 fp:close()
 for i in buf:gmatch("\n([%w%-%+]-) = {.-;") do 
