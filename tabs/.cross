@@ -327,9 +327,10 @@ xz = {
 lua = {
    fs = "/var/cache/ok/dist/lua-5.5.0.tar.gz",
    build = "make",
+   prep = [[ $patch < /var/db/repos/okpkg/patches/lua.diff ]],
    flags = {
-      "TO_LIB=liblua.so.5.5.0",
-      "MYCFLAGS=-fpic",
+      "TO_LIB='liblua.so.5.5.0 liblua.so.5.5 liblua.so'",
+      "INSTALL_DATA='/bin/cp -a'",
       "INSTALL_TOP=$destdir",
       "INSTALL_BIN=$destdir/bin",
       "INSTALL_INC=$destdir/usr/include",
@@ -340,21 +341,9 @@ lua = {
       "CC=x86_64-unknown-linux-gnu-gcc",
       "AR='x86_64-unknown-linux-gnu-ar rcu'",
       "RANLIB=x86_64-unknown-linux-gnu-ranlib",
+      "MYCFLAGS=-fpic",
       "linux",
-   },
-   prep = [[ $patch < /var/db/repos/okpkg/patches/lua.diff ]],
-   post = [[
-      cd $destdir/lib64
-      ln -sf liblua.so.5.5.0 liblua.so.5.5
-      ln -sf liblua.so.5.5.0 liblua.so
-      mkdir -p pkgconfig && cd pkgconfig
-      >>lua.pc printf "Name: Lua\n"
-      >>lua.pc printf "Description: An Extensible Extension Language\n"
-      >>lua.pc printf "Version: 5.5.0\n"
-      >>lua.pc printf "Requires:\n"
-      >>lua.pc printf "Libs: -L/lib64 -llua -lm\n"
-      >>lua.pc printf "Cflags: -I/usr/include\n"
-   ]]
+   }
 };
 
 lzlib = {

@@ -253,6 +253,17 @@ exec /bin/gcc -std=c99 "$@"
 ]])
 fp:close()
 --------------------------------------------------------------------------------
+fp = io.open("./lib64/pkgconfig/lua.pc", "w")
+fp:write([[
+Name: Lua
+Description: An Extensible Extension Language
+Version: 5.5.0
+Requires:
+Libs: -L/lib64 -llua -lm
+Cflags: -I/usr/include
+]])
+fp:close()
+--------------------------------------------------------------------------------
 
 -- Misc
 os.execute([[

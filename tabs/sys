@@ -636,8 +636,8 @@ lua = {
    b3sum = "489c82425cda485b0147e56a0fe73559169d12e7da0ac32bdf4593ce1835faf6",
    build = "make",
    flags = {
-      "TO_LIB=liblua.so.5.5.0",
-      "MYCFLAGS=-fpic",
+      "TO_LIB='liblua.so.5.5.0 liblua.so.5.5 liblua.so'",
+      "INSTALL_DATA='/bin/cp -a'",
       "INSTALL_TOP=$destdir",
       "INSTALL_BIN=$destdir/bin",
       "INSTALL_INC=$destdir/usr/include",
@@ -645,20 +645,9 @@ lua = {
       "INSTALL_MAN=$destdir/usr/share/man/man1",
       "INSTALL_LMOD=$destdir/usr/share/lua/5.5",
       "INSTALL_CMOD=$destdir/lib64/lua/5.5",
-      "linux"
-   },
-   post = [[
-      cd "$destdir/lib64"
-      ln -sf liblua.so.5.5.0 liblua.so.5.5
-      ln -sf liblua.so.5.5.0 liblua.so
-      mkdir -p pkgconfig && cd pkgconfig
-      >>lua.pc printf "Name: Lua\n"
-      >>lua.pc printf "Description: An Extensible Extension Language\n"
-      >>lua.pc printf "Version: 5.5.0\n"
-      >>lua.pc printf "Requires:\n"
-      >>lua.pc printf "Libs: -L/lib64 -llua -lm\n"
-      >>lua.pc printf "Cflags: -I/usr/include\n"
-   ]]
+      "MYCFLAGS=-fpic",
+      "linux",
+   }
 };
 
 openvi = {
