@@ -35,45 +35,48 @@ B = {
    end,
 }
 
-function query(x)
-   local fp, buf
-   x = x:gsub("%-", "%%-")
-   fp = io.open(string.format("%s/%s", Dirs.tabs, "cross"))
+function query(x, tab)
+   local i, fp, buf
+   fp = io.open(Dirs.tabs .. "/" .. tab)
    buf = "\n" .. fp:read("*a")
    fp:close()
-   buf = buf:match("\n" .. x .. "%s*=%s*({.-})%s*;")
+   i = buf:find("\n" .. x .. " =", 1, true)
+   buf = buf:sub(buf:find("{", i, true), buf:find("};", i, true))
    return load("return " .. buf)()
 end
 
 function extract(x)
-   local X, fp, fs 
-   X = query(x)
-   fs = Dirs.distfiles .. "/" .. ok.basename(X.fs)
-   fs = string.format("%s/%s", Dirs.distfiles, ok.basename(X.fs))
+   local X, fp
 
-   -- Setup source directory
-   ok.chdir(Dirs.src)
-   ok.remove_all(x)
-   ok.mkdir(x)
-   ok.chdir(x)
-
-   -- Extract 
-   fp = io.open(fs)
-   if fp then
-      fp:close()
-      os.execute("tar --strip-components=1 -xf " .. fs)
-   else
-      error("error: extract: " .. fs)
+   -- lookup fixes
+   if tab == "sys" then
+      if x == "libstdcxx" then 
+         X = query("gcc16", "sys")
+      elseif x:sub(1,1) == "_" then
+         X = query(x:sub(2,#x), "sys")
+      else
+         X = query(x, "sys")
+      end
    end
 
-   return X 
+   X.dist = string.format("%s/%s", Dirs.distfiles, ok.basename(X.url))
+
+   -- Setup source directory
+   assert(
+      ok.chdir(Dirs.src) and
+      ok.remove_all(x) and
+      ok.mkdir(x) and
+      ok.chdir(x) and
+      os.execute("tar --strip-components=1 -xf " .. X.dist))
+   
+   return x
 end
 
-function emerge(x)
-   local X = extract(x)
+function build(x)
+   local X = query(x, "cross")
    X.flags = X.flags or {}
 
-   if x:match("pass1") then
+   if x:sub(1,1) == "_" then
       ok.unsetenv("CONFIG_SITE")
    else
       ok.setenv("CONFIG_SITE", "/etc/config.site")
@@ -100,6 +103,7 @@ function emerge(x)
    os.execute("find /mnt -name '*.la' -delete")
 end
 
+
 -- Environment
 ok.setenv("CFLAGS", "-O2 -fstack-protector-strong -fstack-clash-protection -ftrivial-auto-var-init=zero -pipe")
 ok.setenv("CXXFLAGS", os.getenv("CFLAGS"))
@@ -117,7 +121,7 @@ fp = io.open(string.format("%s/%s", Dirs.tabs, "cross"))
 buf = "\n" .. fp:read('*a')
 fp:close()
 for i in buf:gmatch("\n([%w%-%+]-) = {.-;") do 
-   emerge(i) 
+   build(extract(i))
 end
 
 -- Cleanup

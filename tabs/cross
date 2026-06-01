@@ -1,10 +1,9 @@
-binutils-pass1 = {
-   fs = "/var/cache/distfiles/binutils-2.46.0.tar.lz",
+_binutils = {
    build = "../configure", 
    flags = {
       "--target=x86_64-unknown-linux-gnu",
       "--prefix=/tools",
-      "--with-sysroot=$destdir",
+      "--with-sysroot=/mnt",
       "--disable-nls",
       "--disable-werror",
       "--enable-default-execstack=no",
@@ -17,8 +16,7 @@ binutils-pass1 = {
    }
 };
 
-gcc-pass1 = {
-   fs = "/var/cache/distfiles/gcc-16.1.0.tar.xz",
+_gcc16 = {
    build = "../configure",
    flags = {
       "--target=x86_64-unknown-linux-gnu",
@@ -26,7 +24,7 @@ gcc-pass1 = {
       "--with-glibc-version=2.43",
       "--with-newlib=yes",
       "--without-headers",
-      "--with-sysroot=$destdir",
+      "--with-sysroot=/mnt",
       "--disable-fixincludes",
       "--disable-gnu-indirect-function",
       "--disable-libatomic",
@@ -67,7 +65,6 @@ gcc-pass1 = {
 };
 
 glibc = {
-   fs = "/var/cache/distfiles/glibc-2.43.tar.xz",
    build = "../configure",
    flags = {
       "--prefix=/usr",
@@ -78,7 +75,7 @@ glibc = {
       "--enable-stack-protector=strong",
       "--exec-prefix=/",
       "--disable-nscd",
-      "--with-headers=$destdir/usr/include",
+      "--with-headers=/mnt/usr/include",
       "PYTHON_PROG=/opt/python3.13/bin/python3.13",
    },
    prep = [[
@@ -93,7 +90,6 @@ glibc = {
 };
 
 libxcrypt = {
-   fs = "/var/cache/distfiles/libxcrypt-4.5.2.tar.xz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -107,7 +103,6 @@ libxcrypt = {
 };
 
 libstdcxx = {
-   fs = "/var/cache/distfiles/gcc-16.1.0.tar.xz",
    build = "../libstdc++-v3/configure",
    flags = {
       "--prefix=/usr",
@@ -129,7 +124,6 @@ libstdcxx = {
 };
 
 m4 = {
-   fs = "/var/cache/distfiles/m4-1.4.21.tar.xz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -139,7 +133,6 @@ m4 = {
 };
 
 ncurses = {
-   fs = "/var/cache/distfiles/ncurses-6.6.tar.gz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -174,25 +167,14 @@ ncurses = {
       make -C progs tic
    ]],
    post = [[
-      cd "$destdir/usr/include"
+      cd /mnt/usr/include
       sed -i 's/^#if.*XOPEN.*$/#if 1/' curses.h
-      cd "$destdir/lib64"
-      rm -fr libncursesw.so ../usr/lib
-      printf "INPUT(libncursesw.so.6 -ltinfo)\n" >> libncursesw.so
-      ln -sf libform{w,}.so
-      ln -sf libmenu{w,}.so
+      cd /mnt/lib64
       ln -sf libncurses{w,}.so
-      ln -sf libpanel{w,}.so
-      cd "$destdir/lib64/pkgconfig"
-      ln -sf form{w,}.pc
-      ln -sf menu{w,}.pc
-      ln -sf ncurses{w,}.pc
-      ln -sf panel{w,}.pc
    ]]
 };
 
 bash = {
-   fs = "/var/cache/distfiles/bash-5.3.tar.gz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -203,7 +185,6 @@ bash = {
 };
 
 coreutils = {
-   fs = "/var/cache/distfiles/coreutils-9.11.tar.xz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -216,7 +197,6 @@ coreutils = {
 };
 
 diffutils = {
-   fs = "/var/cache/distfiles/diffutils-3.12.tar.xz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -227,7 +207,6 @@ diffutils = {
 };
 
 file = {
-   fs = "/var/cache/distfiles/file-5.47.tar.gz",
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -237,7 +216,6 @@ file = {
 };
 
 findutils = {
-   fs = "/var/cache/distfiles/findutils-4.10.0.tar.xz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -247,7 +225,6 @@ findutils = {
 };
 
 gawk = {
-   fs = "/var/cache/distfiles/gawk-5.4.0.tar.lz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -258,7 +235,6 @@ gawk = {
 };
 
 grep = {
-   fs = "/var/cache/distfiles/grep-3.12.tar.xz",
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -268,7 +244,6 @@ grep = {
 };
 
 zlib = {
-   fs = "/var/cache/distfiles/zlib-1.3.2.tar.xz", 
    build = "make",
    prep = [[
       CC=x86_64-unknown-linux-gnu-gcc \
@@ -282,20 +257,17 @@ zlib = {
 };
 
 pigz = {
-   fs = "/var/cache/distfiles/pigz-2.8.tar.gz", 
    build = "make_noinstall",
    flags = { 
       "CC=x86_64-unknown-linux-gnu-gcc" 
    },
    post = [[ 
-      mkdir -p $destdir{/bin,/usr/share/man/man1}
-      cp -f  pigz   $destdir/bin/pigz
-      cp -f  pigz.1 $destdir/usr/share/man/man1/pigz.1
+      cp -f  pigz   /mnt/bin/pigz
+      cp -f  pigz.1 /mnt/usr/share/man/man1/pigz.1
    ]]
 };
 
 make = {
-   fs = "/var/cache/distfiles/make-4.4.1.tar.gz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -306,7 +278,6 @@ make = {
 };
 
 patch = {
-   fs = "/var/cache/distfiles/patch-2.8.tar.xz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -316,7 +287,6 @@ patch = {
 };
 
 sed = {
-   fs = "/var/cache/distfiles/sed-4.10.tar.xz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -326,7 +296,6 @@ sed = {
 };
 
 tar = {
-   fs = "/var/cache/distfiles/tar-1.35.tar.xz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -337,7 +306,6 @@ tar = {
 };
 
 xz = {
-   fs = "/var/cache/distfiles/xz-5.8.3.tar.xz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -347,19 +315,18 @@ xz = {
 };
 
 lua = {
-   fs = "/var/cache/distfiles/lua-5.5.0.tar.gz",
    build = "make",
    prep = [[ $patch < /var/db/repos/okpkg/patches/lua.diff ]],
    flags = {
       "TO_LIB='liblua.so.5.5.0 liblua.so.5.5 liblua.so'",
       "INSTALL_DATA='/bin/cp -a'",
-      "INSTALL_TOP=$destdir",
-      "INSTALL_BIN=$destdir/bin",
-      "INSTALL_INC=$destdir/usr/include",
-      "INSTALL_LIB=$destdir/lib64",
-      "INSTALL_MAN=$destdir/usr/share/man/man1",
-      "INSTALL_LMOD=$destdir/usr/share/lua/5.5",
-      "INSTALL_CMOD=$destdir/lib64/lua/5.5",
+      "INSTALL_TOP=/mnt",
+      "INSTALL_BIN=/mnt/bin",
+      "INSTALL_INC=/mnt/usr/include",
+      "INSTALL_LIB=/mnt/lib64",
+      "INSTALL_MAN=/mnt/usr/share/man/man1",
+      "INSTALL_LMOD=/mnt/usr/share/lua/5.5",
+      "INSTALL_CMOD=/mnt/lib64/lua/5.5",
       "CC=x86_64-unknown-linux-gnu-gcc",
       "AR='x86_64-unknown-linux-gnu-ar rcu'",
       "RANLIB=x86_64-unknown-linux-gnu-ranlib",
@@ -369,7 +336,6 @@ lua = {
 };
 
 lzlib = {
-   fs = "/var/cache/distfiles/lzlib-1.16.tar.lz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -382,7 +348,6 @@ lzlib = {
 };
 
 plzip = {
-   fs = "/var/cache/distfiles/plzip-1.13.tar.lz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -392,7 +357,6 @@ plzip = {
 };
 
 util-linux = {
-   fs = "/var/cache/distfiles/util-linux-2.42.1.tar.xz",
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -406,7 +370,6 @@ util-linux = {
 };
 
 pkgconf = {
-   fs = "/var/cache/distfiles/pkgconf-2.5.1.tar.xz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
@@ -416,7 +379,6 @@ pkgconf = {
 };
 
 binutils-pass2 = {
-   fs = "/var/cache/distfiles/binutils-2.46.0.tar.lz",
    build = "../configure",
    flags = {
       "--host=x86_64-unknown-linux-gnu",
@@ -434,8 +396,7 @@ binutils-pass2 = {
    prep = [[ sed '6031s/$add_dir//' -i ltmain.sh ]],
 };
 
-gcc-pass2 = {
-   fs = "/var/cache/distfiles/gcc-16.1.0.tar.xz",
+gcc16 = {
    build = "../configure",
    flags = {
       "--build=$(../config.guess)",
@@ -443,7 +404,7 @@ gcc-pass2 = {
       "--target=x86_64-unknown-linux-gnu",
       "--prefix=/usr",
       "--libdir=/usr/libexec",
-      "--with-build-sysroot=$destdir",
+      "--with-build-sysroot=/mnt",
       "--disable-fixincludes",
       "--disable-gnu-indirect-function",
       "--disable-libatomic",
