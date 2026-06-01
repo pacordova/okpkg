@@ -194,7 +194,22 @@ blake3_out(struct blake3 *ctx, unsigned char *restrict out, size_t len)
 /******************************************************************************/
 
 #include <lauxlib.h>
-#define DIGEST_SIZE 256
+
+void
+sumfile(FILE *fp, unsigned char *out, size_t outlen)
+{
+    char buf[16384];
+    struct blake3 ctx;
+    size_t len;
+
+    blake3_init(&ctx);
+    do {
+        len = fread(buf, 1, sizeof(buf), fp);
+        if (len > 0)
+            blake3_update(&ctx, buf, len);
+    } while (len == sizeof(buf));
+    blake3_out(&ctx, out, outlen);
+}
 
 int
 ok_b3sum(lua_State *L)
@@ -208,26 +223,16 @@ ok_b3sum(lua_State *L)
         return 1;
     }
 
-    static char hex[DIGEST_SIZE/4];
-    unsigned char out[DIGEST_SIZE/8];
+    static char hex[256/4];
+    unsigned char out[256/8];
 
-    char buf[16384];
-    struct blake3 ctx;
-    size_t len;
-
-    blake3_init(&ctx);
-    do {
-        len = fread(buf, 1, sizeof(buf), fp);
-        if (len > 0)
-        blake3_update(&ctx, buf, len);
-    } while (len == sizeof(buf));
-
-    blake3_out(&ctx, out, DIGEST_SIZE/8);
-
-    for (int i = 0; i < DIGEST_SIZE/8; ++i) 
-        sprintf(hex + 2 * i, "%.2x", out[i]);
+    sumfile(fp, out, 256/8);
 
     fclose(fp);
+
+    for (int i = 0; i < 256/8; ++i) 
+        sprintf(hex + 2 * i, "%.2x", out[i]);
+
     printf("%s %s\n", hex, name);
     lua_pushstring(L, hex);
     return 1;
