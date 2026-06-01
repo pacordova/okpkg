@@ -7,7 +7,7 @@ local Dirs, Mir, Env = dofile("/etc/okpkg.conf")
 local function concat(x) table.concat(x, " ") end
 
 -- Global variables (callable by cli)
-chroot, sha3sum = ok.chroot, ok.sha3sum
+chroot, sha3sum, b3sum = ok.chroot, ok.sha3sum, ok.b3sum
 
 -- Make directories
 for k,v in pairs(Dirs) do

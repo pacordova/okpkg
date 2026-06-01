@@ -12,6 +12,7 @@ int ok_link(lua_State *L);
 int ok_mkdir(lua_State *L);
 int ok_chroot(lua_State *L);
 int ok_sha3sum(lua_State *L);
+int ok_b3sum(lua_State *L);
 int ok_remove_all(lua_State *L);
 int ok_directory_iterator(lua_State *L);
 
@@ -28,6 +29,7 @@ static const struct luaL_Reg okutils[] = {
     {"unsetenv", ok_unsetenv},
     {"chroot", ok_chroot},
     {"sha3sum", ok_sha3sum},
+    {"b3sum", ok_b3sum},
     {"remove_all", ok_remove_all},
     {"directory_iterator", ok_directory_iterator},
     {NULL, NULL},
