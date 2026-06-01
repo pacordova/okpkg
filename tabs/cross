@@ -412,7 +412,7 @@ gcc16 = {
       "--enable-threads=posix",
       "--enable-tls",
       "--with-linker-hash-style=gnu",
-      "--with-system-zlib",
+      "--without-system-zlib",
       "--without-included-gettext",
       "LDFLAGS_FOR_TARGET=-L$PWD/x86_64-unknown-linux-gnu/libgcc",
    },
