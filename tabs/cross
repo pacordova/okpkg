@@ -243,28 +243,13 @@ grep = {
    }
 };
 
-zlib = {
-   build = "make",
-   prep = [[
-      CC=x86_64-unknown-linux-gnu-gcc \
-      AR=x86_64-unknown-linux-gnu-ar \
-      RANLIB=x86_64-unknown-linux-gnu-ranlib \
-      ./configure \
-         --eprefix=/ \
-         --libdir=/lib64 \
-         --prefix=/usr
-   ]],
-};
-
-pigz = {
-   build = "make_noinstall",
-   flags = { 
-      "CC=x86_64-unknown-linux-gnu-gcc" 
-   },
-   post = [[ 
-      cp -f  pigz   /mnt/bin/pigz
-      cp -f  pigz.1 /mnt/usr/share/man/man1/pigz.1
-   ]]
+gzip = {
+   build = "./configure",
+   flags = {
+      "--prefix=/usr",
+      "--host=x86_64-unknown-linux-gnu",
+      "--build=$(build-aux/config.guess)",
+   }
 };
 
 make = {
@@ -378,7 +363,7 @@ pkgconf = {
    },
 };
 
-binutils-pass2 = {
+binutils = {
    build = "../configure",
    flags = {
       "--host=x86_64-unknown-linux-gnu",

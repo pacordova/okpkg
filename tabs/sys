@@ -563,16 +563,10 @@ findutils = {
    ]]
 };
 
-pigz = {
-   url = "https://zlib.net/pigz/pigz-2.8.tar.gz",
-   b3sum = "fa165f414a12851806d9d54920879dd989917b9aa410aec671c602b18773b236",
-   build = "make_noinstall",
-   flags = { "ZOP=", "CFLAGS='-O3 -DNOZOPFLI'" },
-   post = [[
-      mkdir -p $destdir{/bin,/usr/share/man/man1}
-      cp -f  pigz   $destdir/bin/pigz
-      cp -f  pigz.1 $destdir/usr/share/man/man1/pigz.1
-   ]]
+gzip = {
+   url = "https://ftp.gnu.org/gnu/gzip/gzip-1.14.tar.xz",
+   b3sum = "4d318e6b8ff830c98b98314bcafb54d540ab940553ef1ad5e0743b21a36a473b",
+   build = "./configure",
 };
 
 plzip = {

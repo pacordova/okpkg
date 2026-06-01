@@ -1,3 +1,15 @@
+pigz = {
+   url = "https://zlib.net/pigz/pigz-2.8.tar.gz",
+   b3sum = "fa165f414a12851806d9d54920879dd989917b9aa410aec671c602b18773b236",
+   build = "make_noinstall",
+   flags = { "ZOP=", "CFLAGS='-O3 -DNOZOPFLI'" },
+   post = [[
+      mkdir -p $destdir{/bin,/usr/share/man/man1}
+      cp -f  pigz   $destdir/bin/pigz
+      cp -f  pigz.1 $destdir/usr/share/man/man1/pigz.1
+   ]]
+};
+
 dbus = {
    url = "https://dbus.freedesktop.org/releases/dbus/dbus-1.16.2.tar.xz",
    b3sum = "b1d1f22858a8f04665e5dca29d194f892620f00fd3e3f4e89dd208e78868436e",
@@ -360,12 +372,6 @@ git = {
       printf "NO_GETTEXT=YesPlease\n" >> config.mak
       printf "NO_PERL=YesPlease\n" >> config.mak
    ]]
-};
-
-gzip = {
-   url = "https://ftp.gnu.org/gnu/gzip/gzip-1.14.tar.xz",
-   b3sum = "4a1687cc3820dbcf966db372a49ef014527cab2f5ce19c5d6886e821b7cb1cba",
-   build = "./configure",
 };
 
 zlib-ng = {
