@@ -14,7 +14,7 @@ function popen(command)
 end
 
 function curl(x)
-   return popen("/bin/curl -fL https://mirrors.kernel.org/" .. x)
+   return popen("/bin/curl -fsSL https://mirrors.kernel.org/" .. x)
 end
 
 function v(t, x)
@@ -30,7 +30,7 @@ end
 -- archlinux --
 ---------------
 archlinux = {}
-archlinux[0] = curl"archlinux/{core,extra,community}/os/x86_64/"
+archlinux[0] = curl("archlinux/{core,extra,community}/os/x86_64/")
 for w in archlinux[0]:gmatch('>([^%s]-.tar.zst)<') do
    local fixed = w:
        gsub("-x86_64", ""):
@@ -52,7 +52,7 @@ end
 -- slackware-current --
 -----------------------
 slackware = {}
-slackware[0] = curl"slackware/slackware64-current/slackware64/FILE_LIST"
+slackware[0] = curl("slackware/slackware64-current/slackware64/FILE_LIST")
 for w in slackware[0]:gmatch('%./[^/]-/([^%s]-txz)\n') do
    local fixed = w:
       gsub("-x86_64", ""):
