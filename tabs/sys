@@ -494,15 +494,14 @@ libressl = {
 };
 
 kmod = {
-   url = "https://kernel.org/pub/linux/utils/kernel/kmod/kmod-34.2.tar.xz",
-   b3sum = "1ed540d5aea74cde8dfccf9d3737dfb0cd5c021bbafda77b6902ba07f5642312",
-   build = "meson",
-   flags = { 
-      "-Dmoduledir=/lib64/modules", 
-      "-Ddistconfdir=/lib64",
-      "-D{bash,fish,zsh}completiondir=no",
-      "-D{openssl,xz,zlib,zstd}=disabled",
-      "-Dmanpages=false", -- requires scdoc
+   url = "https://kernel.org/pub/linux/utils/kernel/kmod/kmod-32.tar.xz",
+   b3sum = "52dc1f61626fe8d845c08f96c15f0090be72ddc4d18d95b0db754fe4106d4a3b",
+   build = "./configure",
+   flags = {
+      "--with-module-directory=/lib64/modules",
+      "--with-distconfdir=/lib64",
+      "--without-{openssl,xz,zlib,zstd}",
+      "--enable-manpages",
    }
 };
 

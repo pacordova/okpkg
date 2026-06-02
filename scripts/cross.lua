@@ -127,6 +127,7 @@ ok.setenv("LC_ALL", "C")
 ok.setenv("make", "/bin/make -j4")
 ok.setenv("patch", "/bin/patch -bp1")
 ok.setenv("cmake", "/opt/cmake/bin/cmake")
+ok.setenv("ninja", "/bin/samu")
 
 -- Filesystem
 dofile(string.format("%s/%s", ok.dirname(arg[0]), "mkfs.lua"))

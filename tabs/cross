@@ -342,7 +342,13 @@ plzip = {
 };
 
 zlib = {
-   build = "cmake"
+   build = "cmake",
+   flags = {
+      "-DZLIB_BUILD_SHARED=ON",
+      "-DZLIB_BUILD_TESTING=OFF",
+      "-DZLIB_BUILD_STATIC=OFF",
+      "-DZLIB_BUILD_MINIZIP=OFF",
+   },
 };
 
 util-linux = {
@@ -359,7 +365,6 @@ util-linux = {
 };
  
 libressl = {
-   fs = "/var/cache/ok/dist/libressl-4.3.2.tar.gz", 
    build = "./configure",
    flags = {
       "--prefix=/usr",
