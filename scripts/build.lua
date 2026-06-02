@@ -20,27 +20,14 @@ buf = "\n" .. fp:read("*a")
 fp:close()
 for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do
    emerge(i)
-   if i == "_python" then
-      dofile(string.gsub(arg[0], "build.lua", "python-bootstrap.lua"))
-      emerge("samurai")
-   end
-   if i:sub(1, 3) == "gcc" then
-      --os.execute("./split-gcc.sh")
-   end
 end
 
--- Rebuilds for reproducibility
---rebuilds = { "binutils", "bison", "glibc", "gperf", "mpfr" }
---for i=1,#rebuilds do emerge(rebuilds[i]) end
+-- devel
+emerge("samurai")
 
 -- Fix versions and cleanup
 os.execute("makewhatis /usr/share/man")
 ok.chdir(Dirs.packages)
---purge("_perl")
---purge("_python3")
---purge("samurai")
---os.remove("samurai-1.2-amd64.tar.lz")
---os.remove("/bin/meson")
 --os.rename("bash-5.3-amd64.tar.lz", "bash-5.3.009-amd64.tar.lz")
 --os.rename("readline-8.3-amd64.tar.lz", "readline-8.3.003-amd64.tar.lz")
 --ok.mkdir("a")
