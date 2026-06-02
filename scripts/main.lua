@@ -34,9 +34,12 @@ B = {
    ["cmake"] = function(...)
       local arg = {
          [0] = "$cmake -B build -G Ninja -Wno-dev",
-         "-DCMAKE_SHARED_LIBS=True",
          "-DCMAKE_BUILD_TYPE=Release",
          "-DCMAKE_INSTALL_PREFIX=/usr",
+         "-DCMAKE_INSTALL_LIBDIR=/lib64",
+         "-DCMAKE_INSTALL_{,S}BINDIR=/bin",
+         "-DCMAKE_INSTALL_RUNSTATEDIR=/run",
+         "-DCMAKE_SHARED_LIBS=True",
          "-DCMAKE_SKIP_RPATH=TRUE",
          ...
       }

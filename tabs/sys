@@ -813,11 +813,8 @@ grub = {
 dbus = {
    url = "https://dbus.freedesktop.org/releases/dbus/dbus-1.16.2.tar.xz",
    b3sum = "b1d1f22858a8f04665e5dca29d194f892620f00fd3e3f4e89dd208e78868436e",
-   build = "meson",
+   build = "cmake",
    flags = {
-      "-Ddbus_user=messagebus",
-      "-Dsystem_pid_file=/run/dbus/pid",
-      "-Dsystemd_{system,user}_unitdir=no",
-      "-Dsystem_socket=/run/dbus/system_bus_socket",
-   },
+      "-DDBUS_SYSTEM_BUS_DEFAULT_ADDRESS=/run/dbus/system_bus_socket",
+   }
 };

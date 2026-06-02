@@ -274,6 +274,7 @@ os.execute([[
    chmod 0755 ./bin/c99
    git clone --depth=1 {file:///,./}var/db/repos/okpkg
    tar -xf /var/cache/packages/linux-lts-*.tar.lz
+   tar -xf /var/cache/packages/cmake-bin-*.tar.lz
    cp -a /var/cache/packages/linux-lts-*.tar.lz ./var/cache/packages
    cp -a {/,./}etc/dinit.d
    cp -a {/,./}var/cache/distfiles
