@@ -79,7 +79,7 @@ glibc = {
       "PYTHON_PROG=/opt/python3.13/bin/python3.13",
    },
    prep = [[
-      $patch < /var/db/repos/okpkg/patches/glibc.diff
+      $patch < /usr/okpkg/patches/glibc.diff
       printf "%s\n" rootsbindir=/bin >> configparms
       printf "%s\n" sbindir=/bin     >> configparms
       printf "%s\n" slibdir=/lib64   >> configparms
@@ -301,7 +301,7 @@ xz = {
 
 lua = {
    build = "make",
-   prep = [[ $patch < /var/db/repos/okpkg/patches/lua.diff ]],
+   prep = [[ $patch < /usr/okpkg/patches/lua.diff ]],
    flags = {
       "TO_LIB='liblua.so.5.5.0 liblua.so.5.5 liblua.so'",
       "INSTALL_DATA='/bin/cp -a'",

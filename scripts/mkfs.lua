@@ -61,7 +61,6 @@ ok.mkdir("./var")
 ok.mkdir("./var/cache")
 ok.mkdir("./var/cache/packages")
 ok.mkdir("./var/db")
-ok.mkdir("./var/db/repos")
 ok.mkdir("./var/home")
 ok.mkdir("./var/log")
 ok.mkdir("./var/mail")
@@ -272,7 +271,7 @@ os.execute([[
    mknod -m 666 ./dev/null c 1 3
    chattr +i ./etc/resolv.conf
    chmod 0755 ./bin/c99
-   git clone --depth=1 {file:///,./}var/db/repos/okpkg
+   git clone --depth=1 {file:///,./}usr/okpkg
    tar -xf /var/cache/packages/linux-lts-*.tar.lz
    tar -xf /var/cache/packages/cmake-bin-*.tar.lz
    cp -a /var/cache/packages/linux-lts-*.tar.lz ./var/cache/packages

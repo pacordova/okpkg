@@ -3,11 +3,11 @@
 local Dirs = {
    distfiles  = "/var/cache/distfiles",
    log        = "/var/log/packages",
-   out        = "/var/db/repos/okpkg/out",
+   out        = "/usr/okpkg/out",
    packages   = "/var/cache/packages",
-   patches    = "/var/db/repos/okpkg/patches",
+   patches    = "/usr/okpkg/patches",
    src        = "/usr/src",
-   tabs       = "/var/db/repos/okpkg/tabs",
+   tabs       = "/usr/okpkg/tabs",
 }
 
 -- Note: escape any dashes
