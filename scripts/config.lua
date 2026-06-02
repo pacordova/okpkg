@@ -1,4 +1,4 @@
-#!/bin/lua
+-- /etc/okpkg.conf
 
 local Dirs = {
    distfiles  = "/var/cache/distfiles",
@@ -19,12 +19,13 @@ local Mir = {
 local Env = {
    ["LC_ALL"]      = "POSIX",
    ["CONFIG_SITE"] = "/etc/config.site",
+   ["cmake"]       = "/opt/cmake/bin/cmake",
    ["lzip"]        = "/bin/plzip",
    ["make"]        = "/bin/make -j4",
+   ["python"]      = "/opt/python3.13/bin/python3.13",
    ["meson"]       = "/opt/python3.13/bin/meson",
    ["ninja"]       = "/bin/samu",
    ["patch"]       = "/bin/patch -bp1",
-   ["python"]      = "/opt/python3.13/bin/python3.13",
    ["tar"]         = "/bin/tar",
 }
 
