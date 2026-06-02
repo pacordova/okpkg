@@ -83,7 +83,7 @@ end
 --------------
 -- Skip version checks on these packages, comma delimiter
 -- TODO: fix dashes not working in list, escape does not fix
-skip = "bc,cmake,librsvg,pavucontrol,python3,vim,x264,harfbuzz,rsync"
+skip = "bc,cmake,librsvg,gexiv2,pavucontrol,python3,vim,x264,harfbuzz,rsync"
 
 L = {}
 for it in ok.directory_iterator(Dirs.tabs) do

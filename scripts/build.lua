@@ -22,7 +22,7 @@ fp:close()
 for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do
    emerge(i)
    if i == "_python" then
-      dofile("%s/%s", ok.dirname(arg[0]), "python-bootstrap.lua")
+      dofile(string.format("%s/%s", ok.dirname(arg[0]), "python-bootstrap.lua"))
       emerge("samurai")
    end
    if i:sub(1, 3) == "gcc" then
