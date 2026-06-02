@@ -1,7 +1,7 @@
 cmake-bin = {
    url = "https://github.com/Kitware/CMake/releases/download/v3.31.12/cmake-3.31.12-linux-x86_64.tar.gz", 
    b3sum = "de7494a5b9c09a7c3a2ba38ca7f16b3ca172f94a8a4bdd6cda25be4a18f65226",
-   post = [[ mkdir -p "$destdir/opt" && cp -a . "$destdir/opt" ]]
+   post = [[ mkdir -p "$destdir/opt/cmake" && cp -a * "$destdir/opt/cmake" ]]
 };
  
 zig-bin = {
