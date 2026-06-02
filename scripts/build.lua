@@ -1,7 +1,7 @@
 #!/bin/lua
 
 -- Bootstrap
-os.execute("make -C"..arg[0]:gsub("[^/]-/[^/]-$","").." install")
+os.execute("make -C"..arg[0]:gsub("[^/]-$","..").." install")
 
 -- Imports
 dofile("/bin/okpkg")
@@ -14,7 +14,6 @@ os.execute("localedef -i POSIX -f UTF-8      C.UTF-8     2>/dev/null ||:")
 os.execute("localedef -i en_US -f ISO-8859-1 en_US       2>/dev/null ||:")
 os.execute("localedef -i en_US -f UTF-8      en_US.UTF-8 2>/dev/null ||:")
 
--- Build core system
 local fp, buf
 fp = io.open(string.format("%s/%s", Dirs.tabs, "sys"))
 buf = "\n" .. fp:read("*a")
@@ -22,7 +21,7 @@ fp:close()
 for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do
    emerge(i)
    if i == "_python" then
-      dofile(string.format("%s/%s", ok.dirname(arg[0]), "python-bootstrap.lua"))
+      dofile(string.gsub(arg[0], "build.lua", "python-bootstrap.lua"))
       emerge("samurai")
    end
    if i:sub(1, 3) == "gcc" then
