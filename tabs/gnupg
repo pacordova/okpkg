@@ -1,19 +1,19 @@
 libgpg-error = {
    url = "https://gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-1.61.tar.bz2",
-   b2sum = "3d8508a18c55a0442e15eab5110c592b0cb518cd9bd1210c8014bbb37277b9a0",
+   b3sum = "3d8508a18c55a0442e15eab5110c592b0cb518cd9bd1210c8014bbb37277b9a0",
    build = "./configure",
    flags = { "--disable-{doc,languages,tests}" },
 };
 
 libgcrypt = {
    url = "https://gnupg.org/ftp/gcrypt/libgcrypt/libgcrypt-1.12.2.tar.bz2",
-   b2sum = "7eab6137f890c1144c280d97ad89ac115d8c54b317e4696f271c172d5133b10f",
+   b3sum = "7eab6137f890c1144c280d97ad89ac115d8c54b317e4696f271c172d5133b10f",
    build = "./configure",
 };
 
 libksba = {
    url = "https://gnupg.org/ftp/gcrypt/libksba/libksba-1.8.0.tar.bz2",
-   b2sum = "1ae65c16488b982448f238839466b21d32456f457769480ba27c0619e8804254",
+   b3sum = "1ae65c16488b982448f238839466b21d32456f457769480ba27c0619e8804254",
    build = "./configure",
 };
 
@@ -47,7 +47,7 @@ pinentry = {
 
 gnupg2 = {
    url = "https://gnupg.org/ftp/gcrypt/gnupg/gnupg-2.5.20.tar.bz2",
-   b2sum = "119984cd3e747c09afbce191b64d844b71f7f78514d0769843b52cca70190b60",
+   b3sum = "119984cd3e747c09afbce191b64d844b71f7f78514d0769843b52cca70190b60",
    build = "./configure",
    flags = { 
       "--libexecdir=/usr/lib64/gpg", 

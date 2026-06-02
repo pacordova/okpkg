@@ -1,3 +1,9 @@
+cmake-bin = {
+   url = "https://github.com/Kitware/CMake/releases/download/v3.31.12/cmake-3.31.12-linux-x86_64.tar.gz", 
+   b3sum = "de7494a5b9c09a7c3a2ba38ca7f16b3ca172f94a8a4bdd6cda25be4a18f65226",
+   post = [[ mkdir -p "$destdir/opt" && cp -a . "$destdir/opt" ]]
+};
+ 
 zig-bin = {
    url = "https://ziglang.org/download/0.13.0/zig-linux-x86_64-0.13.0.tar.xz",
    sha3 = "60947fd18bcdd206b579ee510db6cdfd3f86d7ac6776ebe9045e13502c259e63",
@@ -11,7 +17,7 @@ zig-bin = {
 
 rust = {
    url = "https://static.rust-lang.org/dist/rust-1.89.0-x86_64-unknown-linux-gnu.tar.xz",
-   b2sum = "e81da00d2984f519e667c9aed3b1104ee5dd1ddd3a0d21782172f242158c48f9",
+   b3sum = "e81da00d2984f519e667c9aed3b1104ee5dd1ddd3a0d21782172f242158c48f9",
    build = _,
    post = [[ 
       install -d $destdir/usr
@@ -78,7 +84,7 @@ signal-desktop = {
 
 llvm-bin = {
    url = "https://github.com/llvm/llvm-project/releases/download/llvmorg-22.1.1/LLVM-22.1.1-Linux-X64.tar.xz",
-   b2sum = "e7c105d09366683754d7326d38fdb969489a7be921a63787c1c1d60634992672",
+   b3sum = "e7c105d09366683754d7326d38fdb969489a7be921a63787c1c1d60634992672",
    build = _,
    post = [[
      #rm -fr lib/python*

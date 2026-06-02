@@ -103,8 +103,8 @@ B = {
    end,
    ["python-build"] = function()
       return (
-          os.execute("$python -m build -nx")  and
-          os.execute("$python -m installer -d $destdir dist/*whl"))
+          os.execute("python3 -m build -nx")  and
+          os.execute("python3 -m installer -d $destdir dist/*whl"))
    end,
    ["waf"] = function()
       os.execute [[
