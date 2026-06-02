@@ -10,6 +10,23 @@ local ok = require("okutils")
 local Dirs = dofile("/etc/okpkg.conf")
 
 B = {
+   ["cmake"] = function(...)
+      local arg = {
+         [0] = "$cmake -B build -G Ninja -Wno-dev",
+         "-DCMAKE_TOOLCHAIN_FILE=/etc/cross.cmake",
+         "-DCMAKE_BUILD_TYPE=Release",
+         "-DCMAKE_INSTALL_PREFIX=/usr",
+         "-DCMAKE_INSTALL_LIBDIR=/lib64",
+         "-DCMAKE_INSTALL_{,S}BINDIR=/bin",
+         "-DCMAKE_INSTALL_RUNSTATEDIR=/run",
+         "-DCMAKE_SHARED_LIBS=True",
+         "-DCMAKE_SKIP_RPATH=TRUE",
+         ...
+      }
+      return (
+         os.execute(table.concat({arg[0], unpack(arg)}, " ")) and
+         os.execute("DESTDIR=/mnt $ninja -C build install"))
+   end,
    ["configure"] = function(f, ...)
       local arg = { [0]=f, ... }
       return (
@@ -109,6 +126,7 @@ ok.setenv("PATH", "/mnt/tools/bin:/bin")
 ok.setenv("LC_ALL", "C")
 ok.setenv("make", "/bin/make -j4")
 ok.setenv("patch", "/bin/patch -bp1")
+ok.setenv("cmake", "/opt/cmake/bin/cmake")
 
 -- Filesystem
 dofile(string.format("%s/%s", ok.dirname(arg[0]), "mkfs.lua"))
