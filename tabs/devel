@@ -87,8 +87,8 @@ samurai = {
 };
 
 scdoc = {
-   url = "https://git.sr.ht/~sircmpwn/scdoc/archive/1.11.3.tar.gz",
-   sha3 = "36975ba48b7b0630f052475ca3907e8b907dc4ea4454a31550e732a9113e0c05",
+   url = "/var/cache/distfiles/scdoc-1.11.4.tar.gz",
+   b3sum = "7cea3ff2476ec7082337e6ff77c9aa9e94af57559e5ab3e1993b7d86b5283671",
    build = "make",
    flags = { "PREFIX=/usr" },
 };
