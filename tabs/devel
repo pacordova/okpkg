@@ -90,7 +90,7 @@ scdoc = {
    url = "/var/cache/distfiles/scdoc-1.11.4.tar.gz",
    b3sum = "7cea3ff2476ec7082337e6ff77c9aa9e94af57559e5ab3e1993b7d86b5283671",
    build = "make",
-   flags = { "PREFIX=/usr" },
+   flags = { "PREFIX=/usr", "BINDIR=/bin" },
 };
 
 texinfo = {
