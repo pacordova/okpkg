@@ -375,8 +375,6 @@ libressl = {
 };
 
 samurai = {
-   url = "https://github.com/michaelforney/samurai/archive/1.3/samurai-1.3.tar.gz",
-   b3sum = "4444d206d7c502396cfe446492e48432dbeb8fd2f0939948ffe38213af395f10",
    build = "make",
    flags = { 
       "CC=x86_64-unknown-linux-gnu-gcc",
