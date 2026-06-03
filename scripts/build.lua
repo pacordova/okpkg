@@ -21,9 +21,6 @@ for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do
    emerge(i)
 end
 
--- devel
-emerge("samurai")
-
 -- Fix versions and cleanup
 os.execute("makewhatis /usr/share/man")
 ok.chdir(Dirs.packages)

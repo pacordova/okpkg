@@ -1,3 +1,4 @@
+
 pigz = {
    url = "https://zlib.net/pigz/pigz-2.8.tar.gz",
    b3sum = "fa165f414a12851806d9d54920879dd989917b9aa410aec671c602b18773b236",
@@ -681,4 +682,43 @@ gnumeric = {
       sed -e '38i #include <stdbool.h>' -i src/sstest.c
       sed -e '/HELP_LINGUAS/s/de//'     -i doc/Makefile.in
    ]],
+};
+
+--------------------------------------------------------------------------------
+
+dmenu = {
+   url = "https://dl.suckless.org/tools/dmenu-5.3.tar.gz",
+   sha3 = "d38f271dda46174ccc149c32b41955d6b59a2cf0e3023a09eb9fd844907a9a7d",
+   build = "make",
+};
+
+dwm = {
+   url = "https://dl.suckless.org/dwm/dwm-6.5.tar.gz",
+   sha3 = "10e5acf41123f43282c0bced05dfa64ba70547671e79ced166786a28b55d80b4",
+   build = "make",
+   flags = { "PREFIX=/usr" },
+};
+
+slock = {
+   url = "https://dl.suckless.org/tools/slock-1.5.tar.gz",
+   sha3 = "1c95de48a4cfed1efb161905e66ca8eb5effda04b931455124c5f16e91d2d926",
+   build = "make",
+};
+
+slstatus = {
+   url = "https://dl.suckless.org/tools/slstatus-1.0.tar.gz",
+   sha3 = "df3805bc40d20af08d4c9b8f7f88c0d9ecae035010c28183dc11e020ab936349",
+   build = "make",
+   flags = { "PREFIX=/usr" },
+};
+
+st = {
+   url = "https://dl.suckless.org/st/st-0.9.2.tar.gz",
+   b3sum = "5f42aca0fbf4d8014cd36075a853c37318b2f75aee3b8bc0992b51bead966315",
+   build = "make",
+   flags = { 
+      "PREFIX=/", 
+      "APPPREFIX=/usr/share/applications",
+   },
+   post = [[ tic -sx st.info ]]
 };

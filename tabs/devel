@@ -27,27 +27,17 @@ check = {
    build = "./configure",
 };
 
-cmake = {
-   url = "https://cmake.org/files/v3.31/cmake-3.31.6.tar.gz",
-   b3sum = "5cfb6fc8294396b34a5e52826a67da33ad142159616ba221580964ae23e0bf01",
-   build = "./configure",
-   flags = {
-      "--mandir=/share/man",
-      "--datadir=/share/cmake",
-      "--docdir=/share/doc/cmake",
-      "--parallel=$(getconf _NPROCESSORS_ONLN)",
-   },
-   post = [[
-      rm -fr $destdir/usr/share/cmake*/Help
-      rm -fr $destdir/usr/share/bash-completion
-   ]]
-};
-
 gettext = {
    url = "https://ftp.gnu.org/gnu/gettext/gettext-1.0.tar.lz",
    b3sum = "f66ecddaa7cf0e5551821c27385e4b33260b6f5d13c034b787cd1f3b60a07d62",
    build = "./configure",
    flags = { "--without-git" }
+};
+
+gperf = {
+   url = "https://ftp.gnu.org/gnu/gperf/gperf-3.3.tar.gz",
+   b3sum = "6ad90515e3b8ac191a8ecef4e75fbb260236f8e78078ac099d5eccc175af0782",
+   build = "./configure",
 };
 
 help2man = {
@@ -94,6 +84,13 @@ samurai = {
    b3sum = "4444d206d7c502396cfe446492e48432dbeb8fd2f0939948ffe38213af395f10",
    build = "make",
    flags = { "PREFIX=/usr", "BINDIR=/bin" },
+};
+
+scdoc = {
+   url = "https://git.sr.ht/~sircmpwn/scdoc/archive/1.11.3.tar.gz",
+   sha3 = "36975ba48b7b0630f052475ca3907e8b907dc4ea4454a31550e732a9113e0c05",
+   build = "make",
+   flags = { "PREFIX=/usr" },
 };
 
 texinfo = {

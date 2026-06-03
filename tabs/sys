@@ -1,3 +1,33 @@
+_gperf = {
+   url = "https://ftp.gnu.org/gnu/gperf/gperf-3.3.tar.gz",
+   b3sum = "6ad90515e3b8ac191a8ecef4e75fbb260236f8e78078ac099d5eccc175af0782",
+   build = "./configure",
+};
+
+_perl = {
+   url = "https://www.cpan.org/src/5.0/perl-5.42.2.tar.xz",
+   b3sum = "d8a9988b0fd5305204c74ac3cca7a19e47625ca65ad10723dfff129abaa4981a",
+   build = "./configure.gnu",
+   flags= {
+      "-Dprefix=/opt/perl",
+      "-Duseshrplib",
+      "-Dusethreads",
+      "-Dman1dir=/opt/perl/man/man1",
+      "-Dman3dir=/opt/perl/man/man3",
+   },
+   post = [[
+      cd "$destdir/opt"
+      find . -name \*.pod       -exec rm -f     {} +
+      find . -name .packlist    -exec rm -f     {} +
+      find . -name README\*     -exec rm -f     {} +
+      find . -name TODO\*       -exec rm -f     {} +
+      find . -name Change\*     -exec rm -f     {} +
+      find . -name \*.bs        -exec rm -f     {} +
+      find . -name \*.0 -type f -exec rm -f     {} +
+      find ./perl/lib   -type f -exec chmod 644 {} +
+   ]]
+};
+
 _python = {
    url = "https://www.python.org/ftp/python/3.13.13/Python-3.13.13.tar.xz",
    b3sum = "b5cc2e3933be3e62f80fd17d27fca70ab1423a6d79a5460592afe8421eb05cd8",
@@ -26,30 +56,6 @@ bison = {
    build = "./configure",
 };
 
-_perl = {
-   url = "https://www.cpan.org/src/5.0/perl-5.42.2.tar.xz",
-   b3sum = "d8a9988b0fd5305204c74ac3cca7a19e47625ca65ad10723dfff129abaa4981a",
-   build = "./configure.gnu",
-   flags= {
-      "-Dprefix=/opt/perl",
-      "-Duseshrplib",
-      "-Dusethreads",
-      "-Dman1dir=/opt/perl/man/man1",
-      "-Dman3dir=/opt/perl/man/man3",
-   },
-   post = [[
-      cd "$destdir/opt"
-      find . -name \*.pod       -exec rm -f     {} +
-      find . -name .packlist    -exec rm -f     {} +
-      find . -name README\*     -exec rm -f     {} +
-      find . -name TODO\*       -exec rm -f     {} +
-      find . -name Change\*     -exec rm -f     {} +
-      find . -name \*.bs        -exec rm -f     {} +
-      find . -name \*.0 -type f -exec rm -f     {} +
-      find ./perl/lib   -type f -exec chmod 644 {} +
-   ]]
-};
-
 glibc = {
    url = "https://ftp.gnu.org/gnu/glibc/glibc-2.43.tar.xz",
    b3sum = "da7f2545e87de8b640bf89add7d63e1159cb62baa01ceb94811ab21210f13948",
@@ -75,12 +81,13 @@ glibc = {
 zlib = {
    url = "https://zlib.net/zlib-1.3.2.tar.xz",
    b3sum = "6cf18eb00f828fadfa5d78933734918538587e6429c25110930b6260cfa9ed62",
-   build = "./configure",
-   flags = { 
-      "--eprefix=/", 
-      "--libdir=/lib64", 
-      "--prefix=/usr", 
-   },
+   build = "cmake",
+   flags = {
+      "-DZLIB_BUILD_SHARED=ON",
+      "-DZLIB_BUILD_TESTING=OFF",
+      "-DZLIB_BUILD_STATIC=OFF",
+      "-DZLIB_BUILD_MINIZIP=OFF",
+   }
 };
 
 bzip2 = {
@@ -145,11 +152,6 @@ zstd = {
    },
 };
 
-gperf = {
-   url = "https://ftp.gnu.org/gnu/gperf/gperf-3.3.tar.gz",
-   b3sum = "6ad90515e3b8ac191a8ecef4e75fbb260236f8e78078ac099d5eccc175af0782",
-   build = "./configure",
-};
 
 libseccomp = {
    url = "https://github.com/seccomp/libseccomp/releases/download/v2.6.0/libseccomp-2.6.0.tar.gz",
