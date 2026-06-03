@@ -67,9 +67,9 @@ ok.mkdir("./var/mail")
 ok.mkdir("./var/spool")
 
 -- Symlinks
-ok.link("./bin/env", "./usr/bin/env")
-ok.symlink("/opt/python3.13/bin/python3", "./bin/python3")
-ok.symlink("/opt/perl/bin/perl", "./bin/perl")
+ok.symlink("../../bin/env", "./usr/bin/env")
+ok.symlink("../../opt/python3.13/bin/python3", "./usr/bin/python3")
+ok.symlink("../../opt/perl/bin/perl", "./usr/bin/perl")
 ok.symlink("bash",    "./bin/sh")
 ok.symlink("flex",    "./bin/lex")
 ok.symlink("gcc",     "./bin/cc")
