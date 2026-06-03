@@ -374,15 +374,6 @@ libressl = {
    }
 };
 
-samurai = {
-   build = "make",
-   flags = { 
-      "CC=x86_64-unknown-linux-gnu-gcc",
-      "PREFIX=/usr", 
-      "BINDIR=/bin",
-   }
-};
-
 pkgconf = {
    build = "./configure",
    flags = {
