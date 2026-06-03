@@ -1,3 +1,9 @@
+dmd = {
+   url = "https://downloads.dlang.org/releases/2026/dmd.2.112.0.linux.tar.xz",
+   b3sum = "60423c74d994f8091823976b413c6e8bed2f8d8dd53a87412bd58db84c8971d5",
+   post = [[ mkdir -p "$destdir/opt/dlang/dmd" && cp -a * "$destdir/opt/dlang/dmd" ]]
+};
+ 
 cmake-bin = {
    url = "https://github.com/Kitware/CMake/releases/download/v3.31.12/cmake-3.31.12-linux-x86_64.tar.gz", 
    b3sum = "de7494a5b9c09a7c3a2ba38ca7f16b3ca172f94a8a4bdd6cda25be4a18f65226",
@@ -52,17 +58,6 @@ tinytex = {
    ]] 
 };
 
-nodejs = {
-   url = "https://nodejs.org/dist/v22.6.0/node-v22.6.0-linux-x64.tar.xz",
-   sha3 = "82b4d018232a302d7a00d64e8c7d2e0b0db83958d680930b57d5080fdb1009c4",
-   build = _,
-   post = [[
-      install -d $destdir/usr
-      cp -rp share bin lib include $destdir/usr        
-      mv $destdir/usr/lib $destdir/usr/lib64
-   ]]
-};
-
 signal-desktop = {
    url = "https://updates.signal.org/desktop/apt/pool/s/signal-desktop/signal-desktop_8.12.0_amd64.deb",
    sha3 = "bb7f27504abf1908def25688bdf9e98cb091a59979c59bbe6a740e70b4cf4eab",
@@ -70,42 +65,4 @@ signal-desktop = {
       ar p /var/cache/ok/dist/signal-desktop_8.12.0_amd64.deb data.tar.xz \
       | $tar -C "$destdir" -xJ
    ]]
-};
-
-llvm-bin = {
-   url = "https://github.com/llvm/llvm-project/releases/download/llvmorg-22.1.1/LLVM-22.1.1-Linux-X64.tar.xz",
-   b3sum = "e7c105d09366683754d7326d38fdb969489a7be921a63787c1c1d60634992672",
-   build = _,
-   post = [[
-     #rm -fr lib/python*
-     #mv -f  lib/python{3.11,3.14}
-     #rm -fr lib/objects-RELEASE
-      mv -fr libexec lib/clang
-      mv -f  lib lib64
-      mkdir -p "$destdir"/usr
-      cp -fr * "$destdir/usr"
-   ]]
-};
-
--- TODO: cannot handle zipfile
-brave-bin = {
-   url = "https://github.com/brave/brave-browser/releases/download/v1.61.120/brave-browser-1.61.120-linux-amd64.zip",
-   sha3 = _,
-   build = _,
-   post = [[
-      install -d $destdir/usr/{bin,lib64}
-      cp -rp . $destdir/usr/lib64/brave
-      ln -sf /usr/lib64/brave/brave-browser $destdir/usr/bin/brave
-   ]]
-};
-
-ungoogled-chromium-bin = {
-   url = "https://github.com/ungoogled-software/ungoogled-chromium-portablelinux/releases/download/126.0.6478.182-1/ungoogled-chromium_126.0.6478.182-1_linux.tar.xz",
-   sha3 = "9a5fb02463263f6a7d2a0c57d46602c7a01511fda430b47b072afaf1370b063b",
-   build = _,
-   post = [[
-      install -d $destdir/usr/{bin,lib64}
-      cp -rp . $destdir/usr/lib64/chromium
-      ln -sf /usr/lib64/chromium/chrome $destdir/usr/bin/chromium
-   ]] 
 };

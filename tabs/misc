@@ -608,21 +608,6 @@ unrar = {
    build = "make"
 };
 
-vim = {
-   url = "https://www.vim.org/downloads/vim-9.2.tar.bz2",
-   b3sum = "02a935b3d945e1d3507b4f692e84096e9d2cb80be7f50ab24cc65a8826821773",
-   build = "./configure",
-   flags = {
-      "--enable-{cscope,multibyte}",
-      "--disable-{canberra,gpm,gui,netbeans,xim}",
-      "--disable-{perl,python,ruby}interp",
-      "--with-{features=huge,x=no}",
-   },
-   prep = [[
-      printf '#define SYS_VIMRC_FILE "/etc/vimrc"\n' >> src/feature.h
-   ]],
-};
-
 vim-classic = {
    url = "/var/cache/distfiles/vim-classic-v8.3.0.tar.gz",
    b3sum = "2c3b9ef5563868a7897583936068e4cfee14ec8641de7a1fb23f7653a8bcecf0",
