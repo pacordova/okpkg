@@ -5,26 +5,16 @@ cmake-bin = {
 };
  
 zig-bin = {
-   url = "https://ziglang.org/download/0.13.0/zig-linux-x86_64-0.13.0.tar.xz",
-   sha3 = "60947fd18bcdd206b579ee510db6cdfd3f86d7ac6776ebe9045e13502c259e63",
-   post = [[
-      install -d $destdir/usr/{bin,lib64}
-      install zig $destdir/usr/bin
-      cp -rp lib $destdir/usr/lib64/zig
-      ln -sf lib64 $destdir/usr/lib
-   ]]
+   url = "https://ziglang.org/download/0.16.0/zig-x86_64-linux-0.16.0.tar.xz",
+   b3sum = "9badfa00469949ac17c681ce80a9b872781a6eb272b51435f8903855ccd9a35e",
+   post = [[ mkdir -p "$destdir/opt/zig" && cp -a * "$destdir/opt/zig" ]]
 };
 
-rust = {
-   url = "https://static.rust-lang.org/dist/rust-1.89.0-x86_64-unknown-linux-gnu.tar.xz",
-   b3sum = "e81da00d2984f519e667c9aed3b1104ee5dd1ddd3a0d21782172f242158c48f9",
-   build = _,
+rust-bin = {
+   url = "https://static.rust-lang.org/dist/rust-1.96.0-x86_64-unknown-linux-gnu.tar.xz",
+   b3sum = "ce8b6f179662d1cb231335264f62f7e8622389557691c8d6a2e374a55af39b2b",
    post = [[ 
-      install -d $destdir/usr
-      ./install.sh --destdir=$destdir --prefix=/usr --libdir=$destdir/usr/lib64
-      mv $destdir/usr/libexec/* $destdir/usr/lib64
-      rmdir $destdir/usr/libexec
-      rm -fr $destdir/usr/etc
+      ./install.sh --destdir=$destdir --prefix=/opt/rust
       : > $destdir/.nostrip
    ]]
 };

@@ -204,15 +204,18 @@ function makepkg(x)
    ok.setenv("SOURCE_DATE_EPOCH", mtime("."))
 
    -- Stripping
-   io.close(
-      (io.open(".nostrip") and os.remove(".nostrip")) or
-      io.popen([[
+   local fp = io.open(".nostrip")
+   if fp then
+      fp:close()
+      os.remove(".nostrip")
+   else
+      os.execute([[
          find . -name \*.a -o -name \*.o -exec strip -g '{}' + 2>/dev/null
          find . -exec file '{}' + \
          | awk -F: '(/executable/||/shared object/)&&/ELF/{print $1}' \
          | xargs strip --strip-unneeded 2>/dev/null
       ]])
-   )
+   end
 
    -- Delete unneeded, timestamp, etc.
    os.execute [[
