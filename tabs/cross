@@ -396,7 +396,7 @@ binutils = {
       "--enable-gprofng=no",
       "--enable-new-dtags",
       "--enable-relro",
-      "--without-system-zlib",
+      "--with-system-zlib",
    },
    prep = [[ sed '6031s/$add_dir//' -i ltmain.sh ]],
 };
@@ -432,7 +432,7 @@ gcc16 = {
       "--enable-threads=posix",
       "--enable-tls",
       "--with-linker-hash-style=gnu",
-      "--without-system-zlib",
+      "--with-system-zlib",
       "--without-included-gettext",
       "LDFLAGS_FOR_TARGET=-L$PWD/x86_64-unknown-linux-gnu/libgcc",
    },

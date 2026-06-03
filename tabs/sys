@@ -289,7 +289,6 @@ gcc16 = {
       cd "$destdir"
       find . -name libgtkpeer.a  -exec rm -f '{}' +
       find . -name libgjsmalsa.a -exec rm -f '{}' +
-      chmod 0755 ./bin/c99
       mv {usr/,}lib64
    ]]
 };
