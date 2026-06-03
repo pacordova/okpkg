@@ -1,11 +1,10 @@
 #!/bin/lua
 
 -- Bootstrap
-os.execute("make -C"..arg[0]:gsub("[^/]-$","..").." install")
+os.execute("make -C /usr/okpkg install")
 
 -- Imports
-dofile("/bin/okpkg")
-local Dirs = dofile("/etc/okpkg.conf")
+local Dirs = dofile("/bin/okpkg")
 local ok = require("okutils")
 
 -- Generate locales
