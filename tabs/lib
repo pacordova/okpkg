@@ -77,17 +77,15 @@ vala = {
 --------------------------------------------------------------------------------
 
 alsa-lib = {
-   url = "https://alsa-project.org/files/pub/lib/alsa-lib-1.2.15.3.tar.bz2",
-   b3sum = "5ff23aeab7b00ba7c5113d52b5ff491515566a7fad412f8c467511948707003c",
+   url = "https://alsa-project.org/files/pub/lib/alsa-lib-1.2.16.tar.bz2",
+   b3sum = "7ebe9422f497eb4735a9221462fc26d06b2d3ff171d7026abdbb26f4196b4541",
    build = "./configure",
-   flags = {
-      "--without-debug",
-   }
+   flags = { "--without-debug" },
 };
 
 alsa-utils = {
-   url = "https://alsa-project.org/files/pub/utils/alsa-utils-1.2.15.2.tar.bz2",
-   b3sum = "e3fe92dc5dc4bf189dd98c6d953386dcd1f15fe4e60aa1ac8ca5930804de28ba",
+   url = "https://alsa-project.org/files/pub/utils/alsa-utils-1.2.16.tar.bz2",
+   b3sum = "a92ad5b121b0c78c4ea10a1f34e06361342ef869f257bf8c1a5d6e50e61bef9b",
    build = "./configure",
    flags = {
       "--disable-alsaconf",

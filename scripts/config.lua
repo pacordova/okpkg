@@ -3,7 +3,7 @@
 local Dirs = {
    distfiles  = "/var/cache/distfiles",
    log        = "/var/log/packages",
-   out        = "/usr/okpkg/out",
+   out        = "/var/cache",
    packages   = "/var/cache/packages",
    patches    = "/usr/okpkg/patches",
    src        = "/usr/src",

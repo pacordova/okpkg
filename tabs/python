@@ -84,8 +84,8 @@ python-docutils = {
 };
 
 python-mako = {
-   url = "https://pypi.io/packages/source/M/Mako/mako-1.3.12.tar.gz",
-   b3sum = "2aeed079ee659e83dae96cfa2198507a2a691cf5f5e9586423799ad951580fd2",
+   url = "https://pypi.io/packages/source/M/Mako/mako-1.3.11.tar.gz",
+   b3sum = "cf85d5e5a0b6db2e805bf9654d2c7e0bbfd25baf1756490c1d59fa708d19eb65",
    build = "python-build",
 };
 
@@ -127,14 +127,14 @@ python-calver = {
 };
 
 python-trove-classifiers = {
-   url = "https://pypi.io/packages/source/t/trove-classifiers/trove_classifiers-2026.5.22.10.tar.gz",
-   b3sum = "f15f794ea95fad2889b8271a90b6db5355e323c6be5e376d44852284fa94bb66",
+   url = "https://pypi.io/packages/source/t/trove-classifiers/trove_classifiers-2026.6.1.19.tar.gz",
+   b3sum = "cb743951a339bc471a045a3abd97f2c8bc2495992534856b28f6fdb944b89daf",
    build = "python-build",
 };
 
 python-hatchling = {
-   url = "https://pypi.io/packages/source/h/hatchling/hatchling-1.29.0.tar.gz",
-   b3sum = "12f4e8cc2c3396a175e3f75e38c3711038b16072f0261223356f341faee71a10",
+   url = "https://pypi.io/packages/source/h/hatchling/hatchling-1.30.1.tar.gz",
+   b3sum = "ad379854529ef7f3c4995b5e5501d4373a9d1911b022579924e4a2a76c4fb5c4",
    build = "python-build",
 };
 

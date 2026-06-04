@@ -440,8 +440,8 @@ libtorrent-rasterbar = {
 };
 
 linux-lts = {
-   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.18.33.tar.xz",
-   b3sum = "00d95e1098670a56ee94558692f1e63e0ac3d2113c9e46568e2da9423a37ad88",
+   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.18.34.tar.xz",
+   b3sum = "8f43007629a8672991f06c1e2d35503d1ab579fcbf8e204c891e9448c704650d",
    build = "make_install",
    flags = {
       "headers_install",
@@ -633,40 +633,6 @@ xorriso = {
    url = "http://ftp.gnu.org/gnu/xorriso/xorriso-1.5.6.tar.gz",
    b3sum = "ce81f4c5fc0c4a4144a1c9e68bfc49e632ca73ffc25ce1615f849f081e1510b8",
    build = "./configure",
-};
-
---------------------------------------------------------------------------------
-
-libgsf = {
-   url = "https://download.gnome.org/sources/libgsf/1.14/libgsf-1.14.58.tar.xz",
-   b3sum = "2770942add830ef2c232e45621bd2396d7f166c1b7439a83fcc211611c61b6f3",
-   build = "./configure",
-};
-
-goffice = {
-   url = "https://download.gnome.org/sources/goffice/0.10/goffice-0.10.61.tar.xz",
-   b3sum = "ea476ead96165b6449d71628f6e3abf70deb740656921722056240461986aa9d",
-   build = "./configure",
-   flags = { "--disable-nls", "--without-lasem", },
-};
-
-gnumeric = {
-   url = "https://download.gnome.org/sources/gnumeric/1.12/gnumeric-1.12.60.tar.xz",
-   b3sum = "8b225a06c36a7dd02ce81161b1f9d6fecf205a826c4cde64a20ba17f6d81c1b3",
-   build = "./configure",
-   flags = { 
-      "--without-perl",
-      "--without-python",
-      "--without-psiconv",
-      --"--disable-maintainer-mode",
-      "--disable-gtk-doc",
-      "--without-gda",
-      "--disable-introspection",
-   },
-   prep = [[ 
-      sed -e '38i #include <stdbool.h>' -i src/sstest.c
-      sed -e '/HELP_LINGUAS/s/de//'     -i doc/Makefile.in
-   ]],
 };
 
 --------------------------------------------------------------------------------

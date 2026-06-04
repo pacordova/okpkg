@@ -290,8 +290,8 @@ libvdpau = {
 };
 
 mesa = {
-   url = "https://mesa.freedesktop.org/archive/mesa-26.1.1.tar.xz",
-   sha3 = "466567df35f773d95bbee9835fd0d37e604cc2ad9a26872e6df0cfeb16e73300",
+   url = "https://mesa.freedesktop.org/archive/mesa-26.1.2.tar.xz",
+   b3sum = "96d25e660e7876524ecc8b93e7a2126064dae517c36db0e126eeab9e438f6a5c",
    build = "meson",
    flags = {
       "-Dplatforms=x11",
@@ -543,8 +543,8 @@ xkeyboard-config = {
 };
 
 libxkbcommon = {
-   url = "https://github.com/xkbcommon/libxkbcommon/archive/xkbcommon-1.13.1/xkbcommon-1.13.1.tar.gz",
-   b3sum = "f0606c6f43aa7f9bae291dafd33a7d0059dc27f1851f22f663e1570a73b62473",
+   url = "https://github.com/xkbcommon/libxkbcommon/archive/xkbcommon-1.13.2/xkbcommon-1.13.2.tar.gz",
+   b3sum = "b6b869719334d160764d2fc3f1dd134dd903b3ea1b0605cd05e6e36917311a54",
    build = "meson",
    flags = {
       "-Denable-wayland=false",
@@ -559,8 +559,8 @@ libepoxy = {
 };
 
 xorg-server = {
-   url = "https://x.org/archive/individual/xserver/xorg-server-21.1.22.tar.xz",
-   b3sum = "0f4113d9728eda339c765a0f14538b1f184d1590674aa1222042cffe65e9cae2",
+   url = "https://x.org/archive/individual/xserver/xorg-server-21.1.23.tar.xz",
+   b3sum = "e9982a52418f189dd4a3b118e9a0b1ea5910a2d4a61814adcc7aa554c472ffb5",
    build = "meson",
    flags = {
       "-D{xephyr,xnest,xvfb}=false",

@@ -30,14 +30,13 @@ end
 -- archlinux --
 ---------------
 archlinux = {}
-archlinux[0] = curl("archlinux/{core,extra,community}/os/x86_64/")
+archlinux[0] = curl("archlinux/{core,extra}/os/x86_64/")
 for w in archlinux[0]:gmatch('>([^%s]-.tar.zst)<') do
    local fixed = w:
        gsub("-x86_64", ""):
        gsub("%-%d+$", ""):
        gsub("%d%%%dA", ""):
        gsub("%%%dB.*", ""):
-       gsub("_a", "a"):
        gsub("python%-3", "python3-3"):
        gsub("libnl%-", "libnl3-"):
        gsub("libisl%-", "isl-"):
@@ -87,7 +86,7 @@ skip = "bc,cmake,librsvg,gexiv2,pavucontrol,python3,vim,x264,harfbuzz,rsync"
 
 L = {}
 for it in ok.directory_iterator(Dirs.tabs) do
-   if ok.basename(it):sub(1,1) ~= "." then
+   if ok.basename(it) ~= "cross" then
       fp = io.open(it)
       buf = "\n" .. fp:read("*a")
       for i in buf:gmatch("\n([%w%-]-) = {.-};") do

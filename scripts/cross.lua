@@ -147,4 +147,5 @@ for it in ok.directory_iterator("/mnt/usr/lib64") do
 end
 os.remove("/mnt/usr/lib64")
 ok.remove_all("/mnt/tools")
+ok.remove_all("/mnt/usr/lib")
 ok.remove_all("/mnt/usr/x86_64-unknown-linux-gnu")

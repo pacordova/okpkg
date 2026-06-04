@@ -167,11 +167,13 @@ function download(x)
    for k,v in pairs(Mir) do X.url = X.url:gsub(k, v) end 
    
    -- Download file if not already downloaded
-   io.close (
-      io.open(X.dist) or 
-      io.popen(string.format("/bin/curl -fLR %s >%s", X.url, X.dist))
-   )
-   assert(X.b3sum == b3sum(X.dist) or not os.remove(X.dist))
+   ok.chdir(Dirs.distfiles)
+   io.close(
+      io.open(ok.basename(X.url)) or
+      io.popen("wget2 " .. X.url))
+   assert(
+      X.b3sum == b3sum(ok.basename(X.url)) or 
+      not os.remove(ok.basename(X.url)))
    
    -- Setup source directory
    assert(
@@ -179,7 +181,7 @@ function download(x)
       ok.remove_all(x) and
       ok.mkdir(x) and
       ok.chdir(x) and
-      os.execute("$tar --strip-components=1 -xf " .. X.dist)
+      os.execute("tar --strip-components=1 -xf " .. X.dist)
    )
    
    -- Patch if file exists
