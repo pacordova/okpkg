@@ -83,6 +83,12 @@ alsa-lib = {
    flags = { "--without-debug" },
 };
 
+alsa-ucm-conf = {
+   url = "https://alsa-project.org/files/pub/lib/alsa-ucm-conf-1.2.16.tar.bz2",
+   b3sum = "b6423e082d3e6341dc31fa0c185e8fc566f45a114eebb4b896fd4e031e00a407",
+   post = [[ mkdir -p "$destdir/usr/share/alsa" && cp -a * "$_" ]],
+};
+
 alsa-utils = {
    url = "https://alsa-project.org/files/pub/utils/alsa-utils-1.2.16.tar.bz2",
    b3sum = "a92ad5b121b0c78c4ea10a1f34e06361342ef869f257bf8c1a5d6e50e61bef9b",
