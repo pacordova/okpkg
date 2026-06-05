@@ -24,6 +24,7 @@ ok.mkdir("./etc")
 ok.mkdir("./etc/default")
 ok.mkdir("./etc/ssl")
 ok.mkdir("./etc/ssl/certs")
+ok.mkdir("./home")
 ok.mkdir("./lib64")
 ok.mkdir("./lib64/locale")
 ok.mkdir("./lib64/pkgconfig")
@@ -61,7 +62,6 @@ ok.mkdir("./var")
 ok.mkdir("./var/cache")
 ok.mkdir("./var/cache/packages")
 ok.mkdir("./var/db")
-ok.mkdir("./var/home")
 ok.mkdir("./var/log")
 ok.mkdir("./var/mail")
 ok.mkdir("./var/spool")
@@ -138,7 +138,7 @@ fp = io.open("./etc/default/useradd", "w")
 fp:write([[
 GROUP=999
 GROUPS=audio,video,input
-HOME=/var/home
+HOME=/home
 INACTIVE=-1
 EXPIRE=
 SHELL=/bin/bash
