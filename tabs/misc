@@ -568,8 +568,8 @@ sharutils = {
 };
 
 sqlite = {
-   url = "https://www.sqlite.org/2026/sqlite-autoconf-3530100.tar.gz",
-   b3sum = "36ca143645cf76997d07b66e9244c636b8ccdec64a1d50558259c4e415e6558b",
+   url = "https://www.sqlite.org/2026/sqlite-autoconf-3530200.tar.gz",
+   b3sum = "e1aca64d31a71f726a607d3b754a413d8ab0c917619e06d800c5aa2be8df7b08",
    build = "./configure",
    flags = { 
       "--libdir=/usr/lib64",
