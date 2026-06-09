@@ -167,8 +167,8 @@ libseccomp = {
 };
 
 file = {
-   url = "https://astron.com/pub/file/file-5.47.tar.gz",
-   b3sum = "9b25aadbf67f958365f7d55a98afd6f84a0acab2c18f1715f5549782e47563fc",
+   url = "https://astron.com/pub/file/file-5.48.tar.gz",
+   b3sum = "9b75907db0d23cc8e123acd137c88da627ab98e001ed05960a2fd871a5abe4f2",
    build = "./configure",
    flags = { "--enable-libseccomp" }
 };
