@@ -460,8 +460,8 @@ expat = {
 };
 
 less = {
-   url = "https://www.greenwoodsoftware.com/less/less-702.tar.gz",
-   b3sum = "6ffac8c1a44bd716fe53bbb45cc0d1e326829bc8ad6bc919a0102641d81a8bdb",
+   url = "https://www.greenwoodsoftware.com/less/less-704.tar.gz",
+   b3sum = "97be5e779025e9171c09e1ceb16d3243259a0b22e17fc67035846da44a4f5129",
    build = "./configure",
 };
 
