@@ -450,14 +450,15 @@ libtorrent-rasterbar = {
 };
 
 linux-lts = {
-   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.18.34.tar.xz",
-   b3sum = "8f43007629a8672991f06c1e2d35503d1ab579fcbf8e204c891e9448c704650d",
+   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.18.35.tar.xz",
+   b3sum = "bc6391cd1059437e2256dd744b171342e9191bbd6a6e044b35d0716ff7edf1a3",
    build = "make_install",
    flags = {
       "headers_install",
       "modules_install",
       "INSTALL_PATH=$destdir/boot",
       "INSTALL_HDR_PATH=$destdir/usr",
+      "INSTALL_MOD_PATH=$destdir",
       "MODLIB=$destdir/lib64/modules/$(make -s kernelrelease)",
    },
    prep = [[
