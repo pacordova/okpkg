@@ -68,8 +68,8 @@ ok.mkdir("./var/spool")
 ok.mkdir("./var/spool/mail")
 
 -- Symlinks
-ok.symlink("./bin/env", "./usr/bin/env")
-ok.symlink("./bin/bash",    "./bin/sh")
+ok.symlink("../../bin/env", "./usr/bin/env")
+ok.symlink("bash",    "./bin/sh")
 ok.symlink("flex",    "./bin/lex")
 ok.symlink("gcc",     "./bin/cc")
 ok.symlink("lbzip2",  "./bin/bzip2")
