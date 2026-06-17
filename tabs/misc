@@ -1,0 +1,707 @@
+tree = {
+   url = "https://gitlab.com/OldManProgrammer/unix-tree/-/archive/2.3.2/unix-tree-2.3.2.tar.bz2",
+   b3sum = "83f69770304eb35d065ee8db52aebcb8d149c5ab6b39ac8d9bb76d5d72a598da",
+   build = "make",
+   flags = {
+      "PREFIX=$destdir/usr",
+      "DESTDIR=$destdir/bin",
+      "MANDIR=$destdir/usr/share/man",
+   }
+};
+
+pigz = {
+   url = "https://zlib.net/pigz/pigz-2.8.tar.gz",
+   b3sum = "fa165f414a12851806d9d54920879dd989917b9aa410aec671c602b18773b236",
+   build = "make_noinstall",
+   flags = { "ZOP=", "CFLAGS='-O3 -DNOZOPFLI'" },
+   post = [[
+      mkdir -p $destdir{/bin,/usr/share/man/man1}
+      cp -f  pigz   $destdir/bin/pigz
+      cp -f  pigz.1 $destdir/usr/share/man/man1/pigz.1
+   ]]
+};
+
+_dbus = {
+   url = "https://dbus.freedesktop.org/releases/dbus/dbus-1.16.2.tar.xz",
+   b3sum = "b1d1f22858a8f04665e5dca29d194f892620f00fd3e3f4e89dd208e78868436e",
+   build = "meson",
+   flags = {
+      "-Ddbus_user=messagebus",
+      "-Dsystem_pid_file=/run/dbus/pid",
+      "-Dsystemd_{system,user}_unitdir=no",
+      "-Dsystem_socket=/run/dbus/system_bus_socket",
+   },
+};
+
+7zip = {
+   url = "https://github.com/ip7z/7zip/releases/download/26.01/7z2601-src.tar.xz",
+   b3sum = "9a686e37bf252363880c268ca1c033f2148ae9196f9a8c58d0bcdedce8460786",
+   build = _,
+   post = [[
+      rm -fr * && tar -xf /var/cache/ok/dist/7z2601-src.tar.xz
+      for i in Bundles/{Alone,Alone7z,Format7zF,SFXCon} UI/Console; do
+         make -C CPP/7zip/$i -f ../../cmpl_gcc.mak
+      done
+      install -d $destdir/usr/bin
+      install -d $destdir/usr/lib64/7zip
+      install -t $destdir/usr/lib64/7zip CPP/7zip/Bundles/Alone/b/g/7za
+      install -t $destdir/usr/lib64/7zip CPP/7zip/Bundles/Alone7z/b/g/7zr
+      install -t $destdir/usr/lib64/7zip CPP/7zip/Bundles/Format7zF/b/g/7z.so
+      install -t $destdir/usr/lib64/7zip CPP/7zip/UI/Console/b/g/7z
+      install CPP/7zip/Bundles/SFXCon/b/g/7zCon $destdir/usr/lib64/7zip/7zCon.sfx
+      for i in 7z 7za 7zr; do
+         printf '#!/bin/sh\nexec /usr/lib64/7zip/%s "$@"' $i > _
+         install _ $destdir/usr/bin/$i
+      done
+   ]]
+};
+
+cpu-x = {
+   url = "https://github.com/TheTumultuousUnicornOfDarkness/CPU-X/archive/v5.1.3/CPU-X-5.1.3.tar.gz",
+   b3sum = "148f38d191d6978b4ced4adecb42d2699e3795b284ccba18193d5b6ca2d486cf",
+   build = "cmake",
+};
+
+conky = {
+   url = "https://github.com/brndnmtthws/conky/archive/v1.22.3/conky-1.22.3.tar.gz",
+   b3sum = "17989a01b65edf0d4b12b186da11669eca1260161595580e441e7b8bb82593d9",
+   build = "cmake",
+};
+
+dcron = {
+   url = "http://www.jimpryor.net/linux/releases/dcron-4.5.tar.gz",
+   b3sum = "4190e7664e055d0540c03e38b5ad3e7597ca9b27953b27b53731e66884da2c84",
+   build = "make",
+   flags = { "PREFIX=/usr", "SBINDIR=/usr/bin" }
+};
+
+dmidecode = {
+   url = "https://download.savannah.gnu.org/releases/dmidecode/dmidecode-3.7.tar.xz",
+   b3sum = "16641cd5004dc09677a71eedeec885e18862f6c2c194141479613f218b2b129b",
+   build = "make",
+   flags = {
+      "prefix=/usr",
+      "sbindir=/usr/bin",
+   }
+};
+
+_gcc = {
+   url = "https://ftp.gnu.org/gnu/gcc/gcc-16.1.0/gcc-16.1.0.tar.xz",
+   b3sum = "5f001609f662143ce9285cd740bd0acfeeaf7f13731b46fd1d9ebe620c5c340d",
+   build = "../configure",
+   flags = {
+      "--disable-fixed-point",
+      "--disable-fixincludes",
+      "--disable-gnu-indirect-function",
+      "--disable-libsanitizer",
+      "--disable-libssp",
+      "--disable-libstdcxx-pch",
+      "--disable-lto",
+      "--disable-multilib",
+      "--disable-nls",
+      "--disable-werror",
+      "--enable-bootstrap",
+      "--enable-checking=release",
+      "--enable-clocale=gnu",
+      "--enable-__cxa_atexit",
+      "--enable-default-pie",
+      "--enable-default-ssp",
+      "--enable-initfini-array",
+      "--enable-languages=c,c++,fortran",
+      "--enable-shared",
+      "--enable-threads=posix",
+      "--enable-tls",
+      "--with-linker-hash-style=gnu",
+      "--without-included-gettext",
+      "--with-system-zlib",
+      "--without-zstd",
+      "LD=ld",
+   },
+   post = [[
+      cc=$destdir/usr/bin/gcc
+      find $destdir -name libgtkpeer.a  -exec rm -f '{}' +
+      find $destdir -name libgjsmalsa.a -exec rm -f '{}' +
+      install -d $destdir/usr/lib64/bfd-plugins
+      ln -sf ../gcc/`$cc -dumpmachine`/`$cc -dumpversion`/liblto_plugin.so \
+          $destdir/usr/lib64/bfd-plugins/liblto_plugin.so
+      install -d $destdir/usr/share/gdb/auto-load/usr/lib64
+      mv $destdir/usr/lib64/*gdb.py $destdir/usr/share/gdb/auto-load/usr/lib64
+      printf '#!/bin/sh\n' >>$destdir/usr/bin/c99
+      printf 'exec gcc -std=c99 "$@"' >>$destdir/usr/bin/c99
+      chmod +x $destdir/usr/bin/c99
+      ln -sf gcc $destdir/usr/bin/cc
+   ]]
+};
+
+ghostscript = {
+   url = "https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs10071/ghostscript-10.07.1.tar.xz",
+   b3sum = "58fbdcd8a120a4a65df0f0a1ab1af98700a26d5401e3d7fea8e95a83fd3a7dbf",
+   build = "./configure",
+   flags = {
+      "--disable-{compile-inits,cups}",
+      --"--with-system-libtiff",
+   }
+};
+
+ghostty = {
+   url = "https://github.com/ghostty-org/ghostty/archive/v1.0.0/ghostty-1.0.0.tar.gz",
+   b3sum = "d9b2c6de401278817a084c05c59493dd745afe601f2475238aa3ce731c21b082",
+   build = "zig",
+};
+
+gifsicle = {
+   url = "https://www.lcdf.org/gifsicle/gifsicle-1.96.tar.gz",
+   b3sum = "b8f63fe13d15a2d80162b643230fe275c0f48c1e09bbad28da80a905cf53e32a",
+   build = "./configure",
+};
+
+jack2 = {
+   url = "https://github.com/jackaudio/jack2/archive/v1.9.22/jack2-1.9.22.tar.gz",
+   b3sum = "93ef4a5afcdaf348b74c06c0b8206b0cf6f27414185697382dc3ab8ad27a3b27",
+   build = "waf"
+};
+
+jq = {
+   url = "https://github.com/jqlang/jq/releases/download/jq-1.8.1/jq-1.8.1.tar.gz",
+   b3sum = "38d31be04a186ead25fc414d44332a7943e2661e4ec92cf849063077db7a69e3",
+   build = "./configure",
+   flags = { "--with-oniguruma=builtin" }
+};
+
+krb5 = {
+   url = "https://kerberos.org/dist/krb5/1.21/krb5-1.21.3.tar.gz",
+   b3sum = "033c7a244a9621256c6c8ddd7fc00078b8a04739b2a6ad0080d0de7e7a8855a5",
+   build = "./src/configure",
+   flags = {
+      "--without-system-vertno",
+      "--disable-pkinit",
+   },
+   prep = [[ sed -i -e '/eq 0/{N;s/12 //}' src/plugins/kdb/db2/libdb2/test/run.test ]],
+};
+
+alsa-plugins = {
+   url = "http://www.alsa-project.org/files/pub/plugins/alsa-plugins-1.2.12.tar.bz2",
+   b3sum = "591c84aecbaf4a91957afdefa41fee369afe783172eb57a9290ed71399ed17bb",
+   build = "./configure",
+};
+
+qjackctl = {
+   url = "https://downloads.sourceforge.net/qjackctl/qjackctl-1.0.3.tar.gz",
+   b3sum = "8c8f936374dcbc75ec9f7bad45d7c6079e793bd32f8e9a931c89568a83f61f03",
+   build = "cmake",
+};
+
+lrzip = {
+   url = "https://github.com/ckolivas/lrzip/archive/v0.660/lrzip-0.660.tar.gz",
+   b3sum = "796e5e141fa87cfdcca5832ec7e7743ea964bc22091b1fca587e9aa42770bb56",
+   build = "./configure",
+   prep = [[ autoreconf -if ]]
+};
+
+opendoas = {
+   url = "https://github.com/Duncaen/OpenDoas/archive/v6.8.2/OpenDoas-6.8.2.tar.gz",
+   b3sum = "de7bfb4797e216661db76043963090efc9e0e9e68ff420c352dbf71770c2b66c",
+   build = "./configure",
+   flags = {
+      "--with-{shadow,timestamp}",
+      "--without-pam"
+   },
+   post = [[
+      mkdir -p $destdir/etc
+      printf "permit persist :wheel\n" > $destdir/etc/doas.conf
+      chmod 600 $destdir/etc/doas.conf
+   ]]
+};
+
+picom = {
+   url = "https://github.com/yshui/picom/archive/v13/picom-13.tar.gz",
+   b3sum = "705bac0be7c10192b523545e98e2244becd41f1e8c048e047fb59a60944e3a22",
+   build = "meson",
+   flags = {
+      "-Ddbus=false",
+      "-Dcompton=false",
+      "-Dregex=true",
+   },
+   post = [[ rm -fr $destdir/usr/share/applications ]]
+};
+
+pv = {
+   url = "https://www.ivarch.com/s/pv-1.10.5.tar.gz",
+   b3sum = "a69fc3e9c73139fc39825020784ac9587c1eb0c8306aa72a195797eb52ccb1df",
+   build = "./configure",
+};
+
+libcanberra = {
+   url = "https://0pointer.de/lennart/projects/libcanberra/libcanberra-0.30.tar.xz",
+   b3sum = "494462202a9b91d3da333d6d8d78857cb38ba94eb53306a8b92d008f6f6b6025",
+   build = "./configure",
+   flags= {
+      --"--disable-oss",
+      "--disable-gtk",
+      "--enable-gtk3"
+   }
+};
+
+pipewire = {
+   url = "https://gitlab.freedesktop.org/pipewire/pipewire/-/archive/1.2.6/pipewire-1.2.6.tar.bz2",
+   b3sum = "0d418f43cae9b9103a5e342259c8f120a2a944a2ef037a77c6304a3d7ce7a257",
+   build = "meson",
+   flags = { '-Dsession-managers="[]"' }
+};
+
+wireplumber = {
+   url = "https://gitlab.freedesktop.org/pipewire/wireplumber/-/archive/0.5.6/wireplumber-0.5.6.tar.bz2",
+   b3sum = "993f770165895af37853c3b79aea21754a5dd759a6cd543328bc00a88114d5c7",
+   build = "meson",
+   flags = { "-Dsystem-lua=true" }
+};
+
+--------------------------------------------------------------------------------
+
+apulse = {
+   url = "https://github.com/i-rinat/apulse/archive/v0.1.13/apulse-0.1.13.tar.gz",
+   b3sum = "e6940335c56e088af4b69e8ad47f37d5f9ffc3365ca9f047b799188548cc9eba",
+   build = "cmake",
+   post = [[
+      cd $destdir
+      mv usr/lib usr/lib64
+      ln -sf apulse/libpulse.so.0 usr/lib64
+      sed -i 's:/usr/lib/:/usr/lib64/:' usr/bin/apulse
+   ]]
+};
+
+catgirl = {
+   url = "https://git.causal.agency/catgirl/snapshot/catgirl-2.2a.tar.gz",
+   b3sum = "2d5ad5e26584c403be5d6f1e33e79e2bf1c679d182de0a4b8fe9f436a3bc3206",
+   build = "./configure",
+   flags = { "--mandir=/usr/share/man" },
+   prep = [[ sed -i '/ctags/d' Makefile ]]
+};
+
+cryptsetup = {
+   url = "https://kernel.org/pub/linux/utils/cryptsetup/v2.8/cryptsetup-2.8.6.tar.xz",
+   b3sum = "140d70b762c525e7a2b01cacb02ee49fb6ecf3cdd2c5e2270e65dcd1e9c6fa96",
+   build = "./configure",
+   flags = {
+      "--with-crypto_backend=gcrypt",
+      "--enable-libargon2",
+      "--disable-ssh-token",
+      "--disable-asciidoc",
+   }
+};
+
+cups = {
+   url = "https://github.com/OpenPrinting/cups/releases/download/v2.4.19/cups-2.4.19-source.tar.gz",
+   b3sum = "801c1e75de3aeecac9c7840b7fa3b5bd1a8d711b84a5b470d0baef54b0ef4aae",
+   build = "./configure",
+   flags = {
+      "--with-rcdir=/tmp/cupsinit",
+      "--with-rundir=/run/cups",
+      "--with-system-groups=lpadmin",
+   },
+   post = [[ rm -fr $destdir/tmp/cupsinit ]]
+};
+
+dhcpcd = {
+   url = "https://github.com/NetworkConfiguration/dhcpcd/releases/download/v10.3.2/dhcpcd-10.3.2.tar.xz",
+   b3sum = "5e46feb872032be94214e2409e8b13cfb20ae6386e9a975927b42f9996a2126a",
+   build = "./configure",
+   flags = {
+      "--libdir=/usr/lib64",
+      "--libexecdir=/usr/libexec/dhcpcd",
+      "--disable-privsep",
+   }
+};
+
+imlib2 = {
+   url = "https://downloads.sourceforge.net/enlightenment/imlib2-1.12.6.tar.xz",
+   b3sum = "c4fb518b2fab8eed0c602b98dda912bb8651a203e22a0de996a961c41a8eb577",
+   build = "./configure",
+   flags = { "--enable-amd64" }
+};
+
+inetutils = {
+   url = "https://ftp.gnu.org/gnu/inetutils/inetutils-2.7.tar.gz",
+   b3sum = "05fb188a11db2f713b2f0b90643c82451a3e8e537d2db86c71a27c6c7c8339b1",
+   build = "./configure",
+   flags = {
+      "--enable-{dnsdomainname,hostname}=yes",
+      "--enable-{syslogd,logger}=yes",
+      "--enable-{servers,clients}=no",
+      "--enable-r{cp,exec,execd,login,sh}{,d}=no",
+      "--enable-{,t}ftp{,d}=no",
+      "--enable-ping{,6}=yes",
+      "--enable-tftp{,d}=no",
+      "--enable-ftp{,d}=no",
+      "--enable-talk{,d}=no",
+      "--enable-telnet{,d}=no",
+      "--enable-{ifconfig,inetd}=no",
+      "--enable-traceroute=yes",
+      "--enable-uucpd=no",
+      "--enable-whois=yes",
+      "--enable-libls=yes",
+      "--with-pam=no",
+   }
+};
+
+feh = {
+   url = "https://feh.finalrewind.org/feh-3.10.3.tar.bz2",
+   b3sum = "98040180056d52e47a2932e0611b1b457c0a6d4e463881c37a55f1b321c5aee0",
+   build = "make",
+   flags = { "PREFIX=/usr", "exif=1" }
+};
+
+git = {
+   url = "https://kernel.org/pub/software/scm/git/git-2.54.0.tar.xz",
+   b3sum = "e8571f047bbe4c0c30606654cd83e19a5d9f1d27cf7a6106759cd3aaebb0099e",
+   build = "./configure",
+   flags = {
+      "--with-gitconfig=/etc/gitconfig",
+      "--with-{libpcre2=yes,python=no,tcltlk=no}",
+   },
+   prep = [[
+      printf "NO_GETTEXT=YesPlease\n" >> config.mak
+      printf "NO_PERL=YesPlease\n" >> config.mak
+   ]]
+};
+
+zlib-ng = {
+   url = "https://github.com/zlib-ng/zlib-ng/archive/2.3.3/zlib-ng-2.3.3.tar.gz",
+   b3sum = "f8da44bd94927257defce151f942751cd2bddd668edff3ee91208dd3e30896cd",
+};
+
+htop = {
+   url = "https://github.com/htop-dev/htop/releases/download/3.5.1/htop-3.5.1.tar.xz",
+   b3sum = "294a85dbb2047f8fafe51aee75b706b5d21cd0045007c922643d204baa9ec219",
+   build = "./configure",
+};
+
+iftop = {
+   url = "https://pdw.ex-parrot.com/iftop/download/iftop-1.0pre4.tar.gz",
+   b3sum = "a312fb825ead8dddafd9e1cfff755ef3c4aee2988158515225f39985058391cd",
+   build = "./configure",
+};
+
+irssi = {
+   url = "https://codeberg.org/irssi/irssi/releases/download/1.4.5/irssi-1.4.5.tar.xz",
+   b3sum = "5f3d1b97e66d8d1ab26c5ce9a2fd9b40aedad471b202aaff0c64a3bc79664e19",
+   build = "meson",
+};
+
+kirc = {
+   url = "https://github.com/mcpcpc/kirc/archive/0.3.2/kirc-0.3.2.tar.gz",
+   b3sum = "2e4df46287bb6f07b30e6d6325012ce21701196e3d801adf978bcd6dea7097dc",
+   build = "make",
+   flags = { "PREFIX=/usr" },
+   prep = [[ sed -i 's/all: clean/all:/g' Makefile ]]
+};
+
+-- Remember to edit /etc/site-config.jam when you update Python!
+libtorrent-rasterbar = {
+   url = "https://github.com/arvidn/libtorrent/releases/download/v2.0.12/libtorrent-rasterbar-2.0.12.tar.gz", 
+   b3sum = "40217c0e2be187f4a80b380046ae7612fb3010ab987b3997e449b2f528115be2",
+   build = _,
+   post = [[ 
+      BOOST_ROOT=/var/lib/boost_1_90_0
+      b2="$BOOST_ROOT/tools/build/src/engine/b2"
+      if ! test -x $b2; then cd "$BOOST_ROOT/tools/build" && ./bootstrap.sh; fi
+
+      BOOST_ROOT="$BOOST_ROOT" \
+      $b2 -j5 \
+          variant=release \
+          toolset=gcc \
+          fpic=on \
+          install \
+          --prefix="$destdir/usr" \
+          --libdir="$destdir/usr/lib64"
+
+      PYTHON_SITE=`python3 -c 'from site import *;print(getsitepackages()[0])'`
+      PYTHON_VERSION=`python3 -V | awk -F '[ .]' '{print $2 "." $3}'`
+      cd bindings/python
+      BOOST_ROOT=$BOOST_ROOT \
+      $b2 -j5 \
+          variant=release \
+          python="$PYTHON_VERSION" \
+          fpic=on \
+          stage_module \
+          install_module \
+          python-install-path="$destdir/${PYTHON_SITE#*/}"
+   ]]
+};
+
+linux-lts = {
+   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.18.35.tar.xz",
+   b3sum = "bc6391cd1059437e2256dd744b171342e9191bbd6a6e044b35d0716ff7edf1a3",
+   build = "make_install",
+   flags = {
+      "headers_install",
+      "modules_install",
+      "INSTALL_PATH=$destdir/boot",
+      "INSTALL_HDR_PATH=$destdir/usr",
+      "INSTALL_MOD_PATH=$destdir",
+      "MODLIB=$destdir/lib64/modules/$(make -s kernelrelease)",
+   },
+   prep = [[
+      #pigz -cd /proc/config.gz > .config
+      sed -e '/MAX_NR_CONSOLES/s/63/6/' -i include/uapi/linux/vt.h
+      make -j5 headers bzImage modules
+   ]]
+};
+
+lm-sensors = {
+   url = "https://github.com/lm-sensors/lm-sensors/archive/V3-6-0/lm-sensors-3.6.0.tar.gz",
+   b3sum = "49e0ccef37d001581142d673a8ec9687cd94590d18e5382a276091b6eeca6fca",
+   build = "make",
+   flags = { 
+      "PREFIX=/usr",
+      "BUILD_STATIC_LIB=0",
+      "MANDIR=/usr/share/man", 
+      "EXLDFLAGS=",
+      "LIBDIR=/usr/lib64"
+   }
+};
+
+logrotate = {
+   url = "https://github.com/logrotate/logrotate/releases/download/3.22.0/logrotate-3.22.0.tar.xz",
+   b3sum = "e23bd85e242aadbc110b8acba874947c13f783bbc7c9e65663dc0a757c609291",
+   build = "./configure",
+   flags = { "--with-{compress-command=pigz,uncompress-command=unpigz}" }
+};
+
+lsof = {
+   url = "https://github.com/lsof-org/lsof/releases/download/4.99.6/lsof-4.99.6.tar.gz",
+   b3sum = "295b34b36ae0c6e21356dbe30d21b34a57a92e13dbfc9f495dd433d69814a2e6",
+   build = "./configure",
+};
+
+minijail = {
+   url = "https://github.com/google/minijail/archive/linux-v2025.07.02/minijail-20250702.tar.gz",
+   b3sum = "11188d72b5245942b0c8d8eb4ce4435103a9b00f47932f8a47936af17843a7d0",
+   build = "make_noinstall",
+   flags = { "LIBDIR=/usr/lib64" },
+   post = [[
+      mkdir -p $destdir/usr/{bin,lib64} $destdir/usr/share/man/man{1,5}
+      cp -f libminijail{,preload}.so $destdir/usr/lib64
+      cp -f minijail0 $destdir/usr/bin
+      cp -f minijail0.1 $destdir/usr/share/man/man1
+      cp -f minijail0.5 $destdir/usr/share/man/man5
+   ]]
+};
+
+nano = {
+   url = "https://ftp.gnu.org/gnu/nano/nano-7.2.tar.xz",
+   b3sum = "82186f2a698b087f44e52b8e56ce5566c74f05b48496b584b6bd030898a2d361",
+   build = "./configure",
+   flags = { "--enable-utf8" },
+};
+
+pciutils = {
+   url = "https://mj.ucw.cz/download/linux/pci/pciutils-3.15.0.tar.gz",
+   b3sum = "ae5e48d0e6d243faf397a44bf80fa507c0fd5cc76d8a6594d54451a97f5aca6b",
+   build = "make",
+   flags = {
+      "PREFIX=/usr",
+      "LIBDIR=/usr/lib64",
+      "SHAREDIR=/usr/share/hwdata",
+      "SHARED=yes"
+   },
+   post = [[ chmod 755 $destdir/usr/lib64/libpci.so.3.15.0 ]]
+};
+
+-- r packages ragg (tidyverse) require libwebp to build
+libwebp = {
+   url = "https://storage.googleapis.com/downloads.webmproject.org/releases/webp/libwebp-1.6.0.tar.gz",
+   b3sum = "a1894bccbaa7248664068d56025e55dcf30fd4bd2a48818eb9e51b84d5d80fda",
+   build = "./configure",
+   flags = {
+      "--enable-libwebp{mux,demux,decoder,extras}",
+      "--enable-swap-16bit-csp",
+   }
+};
+
+r = {
+   url = "https://cran.r-project.org/src/base/R-4/R-4.6.0.tar.gz",
+   b3sum = "a2081612176af105e42c35187a3445efe28614da63605459c91caffa1381e3dc",
+   build = "./configure",
+   flags = {
+      "--prefix=/opt/R/4.6.0",
+      "--enable-R-shlib",
+      "--disable-java",
+      "--without-x",
+      "CONFIG_SITE=/dev/null",
+   }
+};
+
+ripgrep = {
+   url = "https://github.com/BurntSushi/ripgrep/archive/15.1.0/ripgrep-15.1.0.tar.gz",
+   b3sum = "e1257918b5a9a565960daa6c1d65ada2b531487a2b3326fef7299c05ad6ea32e",
+   build = "cargo",
+   flags = { "--features=pcre2" }
+};
+
+scrot = {
+   url = "https://github.com/resurrecting-open-source-projects/scrot/releases/download/2.0.0/scrot-2.0.0.tar.gz",
+   b3sum = "b5bdf998fb93ab1a8b927c6e969b71ef00e69604c8708c47b108a5db4bb080fb",
+   build = "./configure",
+};
+
+sharutils = {
+   url = "https://ftp.gnu.org/gnu/sharutils/sharutils-4.15.2.tar.xz",
+   b3sum = "9b06bc145640281df912a2af83849621a25a10fb2deb3bd5b1c8561f9c1b53a1",
+   build = "./configure",
+   flags = { 'CFLAGS="$CFLAGS -Wno-implicit-function-declaration"' },
+   prep = [[
+      sed -i 's/BUFSIZ/rw_base_size/' src/unshar.c
+      sed -i '/program_name/s/^/extern /' src/*opts.h
+      sed -i 's/IO_ftrylockfile/IO_EOF_SEEN/' lib/*.c
+      printf "#define _IO_IN_BACKUP 0x100\n" >> lib/stdio-impl.h
+   ]]
+};
+
+sqlite = {
+   url = "https://www.sqlite.org/2026/sqlite-autoconf-3530200.tar.gz",
+   b3sum = "e1aca64d31a71f726a607d3b754a413d8ab0c917619e06d800c5aa2be8df7b08",
+   build = "./configure",
+   flags = { 
+      "--bindir=/bin",
+      "--libdir=/lib64",
+      "--enable-fts5", 
+      "CPPFLAGS=-DSQLITE_ENABLE_COLUMN_METADATA=1" 
+    },
+};
+
+sxiv = {
+   url = "https://github.com/xyb3rt/sxiv/archive/v26/sxiv-26.tar.gz",
+   b3sum = "9d658d77fd4f9da3bb02247016ba4d4f1c3afcedc18ac790fb67bf91e66aaff7",
+   build = "make",
+   flags = { "PREFIX=/usr", "HAVE_GIFLIB=0" },
+   post = [[ 
+      make -C icon PREFIX=/usr DESTDIR=$destdir install
+      install -d $destdir/usr/share/applications
+      install -m 644 sxiv.desktop $destdir/usr/share/applications
+   ]]
+};
+
+tmux = {
+   url = "https://github.com/tmux/tmux/releases/download/3.6b/tmux-3.6b.tar.gz",
+   b3sum = "b22efde83eba84fbae9911517254aaa9c6a0b1d5c59c09975ae999a1686b1911",
+   build = "./configure",
+};
+
+ugrep = {
+   url = "https://github.com/Genivia/ugrep/archive/v6.5.0/ugrep-6.5.0.tar.gz",
+   b3sum = "22ea3da7d1a3889daf5b55f5120cbacd6a4ae88c1a43aec05bbcd93a0faa746d",
+   build = "./configure",
+};
+
+unrar = {
+   url = "https://www.rarlab.com/rar/unrarsrc-7.2.1.tar.gz",
+   b3sum = "041d1141e346fe3c450674a4c053cef5350c4e054781ebe01252fa61e0502cfd",
+   build = "make"
+};
+
+vim-classic = {
+   url = "/var/cache/distfiles/vim-classic-v8.3.0.tar.gz",
+   b3sum = "2c3b9ef5563868a7897583936068e4cfee14ec8641de7a1fb23f7653a8bcecf0",
+   build = "./configure",
+   flags = {
+      "--enable-{cscope,multibyte}",
+      "--disable-{canberra,gpm,gui,netbeans,xim}",
+      "--disable-{perl,python,ruby}interp",
+      "--with-{features=huge,x=no}",
+   },
+   prep = [[
+      printf '#define SYS_VIMRC_FILE "/etc/vimrc"\n' >> src/feature.h
+   ]],
+};
+
+xfce4-alsa-plugin = {
+   url = "https://github.com/equeim/xfce4-alsa-plugin/archive/0.4.0/xfce4-alsa-plugin-0.4.0.tar.gz",
+   b3sum = "78aff63bf0dc17a581b03d177e494f83423819cea25f10867ece96a526b70665",
+   build = "meson",
+};
+
+xorriso = {
+   url = "http://ftp.gnu.org/gnu/xorriso/xorriso-1.5.6.tar.gz",
+   b3sum = "ce81f4c5fc0c4a4144a1c9e68bfc49e632ca73ffc25ce1615f849f081e1510b8",
+   build = "./configure",
+};
+
+--------------------------------------------------------------------------------
+
+dmenu = {
+   url = "https://dl.suckless.org/tools/dmenu-5.3.tar.gz",
+   sha3 = "d38f271dda46174ccc149c32b41955d6b59a2cf0e3023a09eb9fd844907a9a7d",
+   build = "make",
+};
+
+dwm = {
+   url = "https://dl.suckless.org/dwm/dwm-6.5.tar.gz",
+   sha3 = "10e5acf41123f43282c0bced05dfa64ba70547671e79ced166786a28b55d80b4",
+   build = "make",
+   flags = { "PREFIX=/usr" },
+};
+
+slock = {
+   url = "https://dl.suckless.org/tools/slock-1.5.tar.gz",
+   sha3 = "1c95de48a4cfed1efb161905e66ca8eb5effda04b931455124c5f16e91d2d926",
+   build = "make",
+};
+
+slstatus = {
+   url = "https://dl.suckless.org/tools/slstatus-1.0.tar.gz",
+   sha3 = "df3805bc40d20af08d4c9b8f7f88c0d9ecae035010c28183dc11e020ab936349",
+   build = "make",
+   flags = { "PREFIX=/usr" },
+};
+
+st = {
+   url = "https://dl.suckless.org/st/st-0.9.2.tar.gz",
+   b3sum = "5f42aca0fbf4d8014cd36075a853c37318b2f75aee3b8bc0992b51bead966315",
+   build = "make",
+   flags = { 
+      "PREFIX=/", 
+      "APPPREFIX=/usr/share/applications",
+   },
+   post = [[ tic -sx st.info ]]
+};
+
+--------------------------------------------------------------------------------
+
+libsndfile = {
+   url = "https://github.com/libsndfile/libsndfile/releases/download/1.2.2/libsndfile-1.2.2.tar.xz",
+   b3sum = "fc805e696ee73ee24377329683b7e00af0db78727af553e74840cc813969ba77",
+   build = "./configure",
+   flags = {
+      'CFLAGS="$CFLAGS -std=gnu17"'
+   },
+};
+
+pulseaudio = {
+   url = "https://www.freedesktop.org/software/pulseaudio/releases/pulseaudio-17.0.tar.xz",
+   b3sum = "e56408636f88e3c8b7575795722ebccd7cadb032f7cefda3d055af549b34df4f",
+   build = "meson",
+   flags = {
+      "-Ddatabase=gdbm",
+      "-Ddoxygen=false",
+      "-Dbluez5=disabled",
+      "-Dudevrulesdir=/lib64/udev/rules.d",
+   },
+   post = [[
+      rm -f "$destdir/usr/share/dbus-1/system.d/pulseaudio-system.conf"
+   ]]
+};
+
+xfce4-pulseaudio-plugin = {
+   url = "https://archive.xfce.org/src/panel-plugins/xfce4-pulseaudio-plugin/0.5/xfce4-pulseaudio-plugin-0.5.1.tar.xz",
+   b3sum = "8fbdab1e771c1b5a7304be7105d6e81bac344cec58fffb3a5f84a3b1398bd0a3",
+   build = "meson",
+   flags = {
+      "-Dkeybinder=disabled",
+      "-Dlibnotify=enabled",
+      "-Dlibcanberra=disabled",
+      "-Dlibxfce4windowing=enabled",
+      "-Dmpris2=disabled",
+      "-Dmixer-command=Myxer",
+   }
+};

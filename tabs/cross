@@ -1,0 +1,449 @@
+_binutils = {
+   build = "../configure", 
+   flags = {
+      "--target=x86_64-unknown-linux-gnu",
+      "--prefix=/tools",
+      "--with-sysroot=/mnt",
+      "--disable-nls",
+      "--disable-werror",
+      "--enable-default-execstack=no",
+      "--enable-default-hash-style=gnu",
+      "--enable-deterministic-archives",
+      "--enable-gprofng=no",
+      "--enable-new-dtags",
+      "--enable-relro",
+      "--without-system-zlib",
+   }
+};
+
+_gcc16 = {
+   build = "../configure",
+   flags = {
+      "--target=x86_64-unknown-linux-gnu",
+      "--prefix=/tools",
+      "--with-glibc-version=2.43",
+      "--with-newlib=yes",
+      "--without-headers",
+      "--with-sysroot=/mnt",
+      "--disable-fixincludes",
+      "--disable-gnu-indirect-function",
+      "--disable-libatomic",
+      "--disable-libgomp",
+      "--disable-libquadmath",
+      "--disable-libsanitizer",
+      "--disable-libssp",
+      "--disable-libstdcxx",
+      "--disable-libvtv",
+      "--disable-nls",
+      "--disable-shared",
+      "--disable-werror",
+      "--disable-multilib",
+      "--disable-bootstrap",
+      "--enable-checking=assert",
+      "--enable-clocale=gnu",
+      "--enable-__cxa_atexit",
+      "--enable-default-pie",
+      "--enable-default-ssp",
+      "--enable-initfini-array",
+      "--enable-languages=c,c++",
+      "--enable-threads=single",
+      "--with-linker-hash-style=gnu",
+      "--without-system-zlib",
+      "--without-included-gettext",
+   },
+   prep = [[
+      mkdir gmp mpfr mpc isl
+      tar -C gmp  --strip-components=1 -xf /var/cache/distfiles/gmp-6.3.0.tar.xz
+      tar -C mpfr --strip-components=1 -xf /var/cache/distfiles/mpfr-4.2.2.tar.xz
+      tar -C mpc  --strip-components=1 -xf /var/cache/distfiles/mpc-1.4.1.tar.xz
+      tar -C isl  --strip-components=1 -xf /var/cache/distfiles/isl-0.27.tar.xz
+   ]],
+   post = [[
+      cat ../gcc/{limitx,glimits,limity}.h > _
+      mv _ $(x86_64-unknown-linux-gnu-gcc -print-file-name=include/limits.h)
+   ]]
+};
+
+glibc = {
+   build = "../configure",
+   flags = {
+      "--prefix=/usr",
+      "--host=x86_64-unknown-linux-gnu",
+      "--build=$(../scripts/config.guess)",
+      "--enable-kernel=$(uname -r | cut -d . -f 1,2)",
+      "--enable-bind-now",
+      "--enable-stack-protector=strong",
+      "--exec-prefix=/",
+      "--disable-nscd",
+      "--with-headers=/mnt/usr/include",
+      "PYTHON_PROG=/opt/python3.13/bin/python3.13",
+   },
+   prep = [[
+      $patch < /usr/okpkg/patches/glibc.diff
+      printf "%s\n" rootsbindir=/bin >> configparms
+      printf "%s\n" sbindir=/bin     >> configparms
+      printf "%s\n" slibdir=/lib64   >> configparms
+      printf "%s\n" rtlddir=/lib64   >> configparms
+      printf "%s\n" auditdir=/lib64  >> configparms
+      sed -i 's:^lib=.*audit:lib='\''/lib64:' ./elf/sotruss.sh
+   ]]
+};
+
+libxcrypt = {
+   build = "./configure",
+   flags = {
+      "--prefix=/usr",
+      "--host=x86_64-unknown-linux-gnu",
+      "--build=$(build-aux/m4-autogen/config.guess)",
+      "--enable-hashes=strong,glibc",
+      "--enable-obsolete-api=no",
+      "--disable-failure-tokens",
+      "PERL=/opt/perl/bin/perl",
+   }
+};
+
+libstdcxx = {
+   build = "../libstdc++-v3/configure",
+   flags = {
+      "--prefix=/usr",
+      "--host=x86_64-unknown-linux-gnu",
+      "--build=$(../config.guess)",
+      "--with-gxx-include-dir=/tools/x86_64-unknown-linux-gnu/include/c++/16.1.0",
+      "--disable-libstdcxx-pch",
+      "--disable-multilib",
+      "--enable-clocale=gnu",
+      "--enable-tls",
+   },
+   prep = [[
+      mkdir gmp mpfr mpc isl
+      tar -C gmp  --strip-components=1 -xf /var/cache/distfiles/gmp-6.3.0.tar.xz
+      tar -C mpfr --strip-components=1 -xf /var/cache/distfiles/mpfr-4.2.2.tar.xz
+      tar -C mpc  --strip-components=1 -xf /var/cache/distfiles/mpc-1.4.1.tar.xz
+      tar -C isl  --strip-components=1 -xf /var/cache/distfiles/isl-0.27.tar.xz
+   ]],
+};
+
+m4 = {
+   build = "./configure",
+   flags = {
+      "--prefix=/usr",
+      "--host=x86_64-unknown-linux-gnu",
+      "--build=$(build-aux/config.guess)",
+   }
+};
+
+ncurses = {
+   build = "./configure",
+   flags = {
+      "--prefix=/usr",
+      "--host=x86_64-unknown-linux-gnu",
+      "--build=$(./config.guess)",
+      "--disable-root-access",
+      "--disable-root-environ",
+      "--disable-rpath-hack",
+      "--disable-setuid-environ",
+      "--disable-stripping",
+      "--enable-hard-tabs",
+      "--enable-pc-files",
+      "--enable-widec",
+      "--with-cxx-shared",
+      "--with-manpage-format=normal",
+      "--with-ospeed=unsigned",
+      "--without-ada",
+      "--without-debug",
+      "--without-normal",
+      "--without-tests",
+      "--with-pkg-config-libdir=/lib64/pkgconfig",
+      "--with-shared",
+      "--with-termlib=tinfo",
+      "--with-xterm-kbs=DEL",
+      "ac_cv_path_TIC=$(realpath ./build/progs/tic)",
+   },
+   prep = [[
+      mkdir build && cd build
+      sed -i 's/mawk//' "../configure"
+      sh ../configure
+      make -C include
+      make -C progs tic
+   ]],
+   post = [[
+      cd /mnt/usr/include
+      sed -i 's/^#if.*XOPEN.*$/#if 1/' curses.h
+      cd /mnt/lib64
+      ln -sf libncurses{w,}.so
+   ]]
+};
+
+bash = {
+   build = "./configure",
+   flags = {
+      "--prefix=/usr",
+      "--host=x86_64-unknown-linux-gnu",
+      "--build=$(sh support/config.guess)",
+      "--without-bash-malloc",
+   },
+};
+
+coreutils = {
+   build = "./configure",
+   flags = {
+      "--prefix=/usr",
+      "--host=x86_64-unknown-linux-gnu",
+      "--build=$(build-aux/config.guess)",
+      "--enable-install-program=hostname",
+      "--without-openssl",
+      "FORCE_UNSAFE_CONFIGURE=1"
+   }
+};
+
+diffutils = {
+   build = "./configure",
+   flags = {
+      "--prefix=/usr",
+      "--host=x86_64-unknown-linux-gnu",
+      "--build=$(build-aux/config.guess)",
+      "gl_cv_func_strcasecmp_works=y"
+   }
+};
+
+file = {
+   build = "./configure",
+   flags = {
+      "--prefix=/usr",
+      "--host=x86_64-unknown-linux-gnu",
+      "--build=$(./config.guess)",
+   }
+};
+
+findutils = {
+   build = "./configure",
+   flags = {
+      "--prefix=/usr",
+      "--host=x86_64-unknown-linux-gnu",
+      "--build=$(build-aux/config.guess)",
+   },
+};
+
+gawk = {
+   build = "./configure",
+   flags = {
+      "--prefix=/usr",
+      "--host=x86_64-unknown-linux-gnu",
+      "--build=$(build-aux/config.guess)",
+   },
+   prep = [[ sed -i 's/extras//' Makefile.in ]]
+};
+
+grep = {
+   build = "./configure",
+   flags = {
+      "--prefix=/usr",
+      "--host=x86_64-unknown-linux-gnu",
+      "--build=$(build-aux/config.guess)",
+   }
+};
+
+gzip = {
+   build = "./configure",
+   flags = {
+      "--prefix=/usr",
+      "--host=x86_64-unknown-linux-gnu",
+      "--build=$(build-aux/config.guess)",
+   }
+};
+
+make = {
+   build = "./configure",
+   flags = {
+      "--prefix=/usr",
+      "--host=x86_64-unknown-linux-gnu",
+      "--build=$(build-aux/config.guess)",
+      "--without-guile",
+   },
+};
+
+patch = {
+   build = "./configure",
+   flags = {
+      "--prefix=/usr",
+      "--host=x86_64-unknown-linux-gnu",
+      "--build=$(build-aux/config.guess)"
+   }
+};
+
+sed = {
+   build = "./configure",
+   flags = {
+      "--prefix=/usr",
+      "--host=x86_64-unknown-linux-gnu",
+      "--build=$(build-aux/config.guess)",
+   }
+};
+
+tar = {
+   build = "./configure",
+   flags = {
+      "--prefix=/usr",
+      "--host=x86_64-unknown-linux-gnu",
+      "--build=$(build-aux/config.guess)",
+      "FORCE_UNSAFE_CONFIGURE=1",
+   }
+};
+
+xz = {
+   build = "./configure",
+   flags = {
+      "--prefix=/usr",
+      "--host=x86_64-unknown-linux-gnu",
+      "--build=$(build-aux/config.guess)",
+   },
+};
+
+lua = {
+   build = "make",
+   prep = [[ $patch < /usr/okpkg/patches/lua.diff ]],
+   flags = {
+      "TO_LIB='liblua.so.5.5.0 liblua.so.5.5 liblua.so'",
+      "INSTALL_DATA='/bin/cp -a'",
+      "INSTALL_TOP=/mnt",
+      "INSTALL_BIN=/mnt/bin",
+      "INSTALL_INC=/mnt/usr/include",
+      "INSTALL_LIB=/mnt/lib64",
+      "INSTALL_MAN=/mnt/usr/share/man/man1",
+      "INSTALL_LMOD=/mnt/usr/share/lua/5.5",
+      "INSTALL_CMOD=/mnt/lib64/lua/5.5",
+      "CC=x86_64-unknown-linux-gnu-gcc",
+      "AR='x86_64-unknown-linux-gnu-ar rcu'",
+      "RANLIB=x86_64-unknown-linux-gnu-ranlib",
+      "MYCFLAGS=-fpic",
+      "linux",
+   }
+};
+
+lzlib = {
+   build = "./configure",
+   flags = {
+      "--prefix=/usr",
+      "--libdir=/lib64",
+      "--enable-shared",
+      "--disable-static",
+      "CC=x86_64-unknown-linux-gnu-gcc",
+      "AR=x86_64-unknown-linux-gnu-ar",
+   }
+};
+
+plzip = {
+   build = "./configure",
+   flags = {
+      "--prefix=/usr",
+      "--bindir=/bin",
+      "CXX=x86_64-unknown-linux-gnu-g++",
+   },
+};
+
+zlib = {
+   build = "cmake",
+   flags = {
+      "-DZLIB_BUILD_SHARED=ON",
+      "-DZLIB_BUILD_TESTING=OFF",
+      "-DZLIB_BUILD_STATIC=OFF",
+      "-DZLIB_BUILD_MINIZIP=OFF",
+   },
+};
+
+util-linux = {
+   build = "./configure",
+   flags = {
+      "--prefix=/usr",
+      "--host=x86_64-unknown-linux-gnu",
+      "--build=$(config/config.guess)",
+      "--disable-all-programs",
+      "--enable-lib{blkid,fdisk,mount,smartcols,uuid}",
+      "--exec-prefix=/",
+      "--without-{python,systemd}",
+   }
+};
+ 
+libressl = {
+   build = "./configure",
+   flags = {
+      "--prefix=/usr",
+      "--host=x86_64-unknown-linux-gnu",
+      "--build=$(./config.guess)",
+      "--with-openssldir=/etc/ssl",
+   }
+};
+
+pkgconf = {
+   build = "./configure",
+   flags = {
+      "--prefix=/usr",
+      "--host=x86_64-unknown-linux-gnu",
+      "--build=$(./config.guess)",
+   },
+};
+
+binutils = {
+   build = "../configure",
+   flags = {
+      "--host=x86_64-unknown-linux-gnu",
+      "--build=$(../config.guess)",
+      "--prefix=/usr",
+      "--enable-64-bit-bfd",
+      "--enable-default-execstack=no",
+      "--enable-default-hash-style=gnu",
+      "--enable-deterministic-archives",
+      "--enable-gprofng=no",
+      "--enable-new-dtags",
+      "--enable-relro",
+      "--with-system-zlib",
+   },
+   prep = [[ sed '6031s/$add_dir//' -i ltmain.sh ]],
+};
+
+gcc16 = {
+   build = "../configure",
+   flags = {
+      "--build=$(../config.guess)",
+      "--host=x86_64-unknown-linux-gnu",
+      "--target=x86_64-unknown-linux-gnu",
+      "--prefix=/usr",
+      "--libdir=/usr/libexec",
+      "--with-build-sysroot=/mnt",
+      "--disable-fixincludes",
+      "--disable-gnu-indirect-function",
+      "--disable-libatomic",
+      "--disable-libgomp",
+      "--disable-libquadmath",
+      "--disable-libsanitizer",
+      "--disable-libssp",
+      "--disable-libstdcxx-pch",
+      "--disable-libvtv",
+      "--disable-multilib",
+      "--disable-bootstrap",
+      "--enable-checking=assert",
+      "--enable-clocale=gnu",
+      "--enable-__cxa_atexit",
+      "--enable-default-pie",
+      "--enable-default-ssp",
+      "--enable-initfini-array",
+      "--enable-languages=c,c++",
+      "--enable-static",
+      "--enable-threads=posix",
+      "--enable-tls",
+      "--with-linker-hash-style=gnu",
+      "--with-system-zlib",
+      "--without-included-gettext",
+      "LDFLAGS_FOR_TARGET=-L$PWD/x86_64-unknown-linux-gnu/libgcc",
+   },
+   prep = [[
+      mkdir gmp mpfr mpc isl
+      tar -C gmp  --strip-components=1 -xf /var/cache/distfiles/gmp-6.3.0.tar.xz
+      tar -C mpfr --strip-components=1 -xf /var/cache/distfiles/mpfr-4.2.2.tar.xz
+      tar -C mpc  --strip-components=1 -xf /var/cache/distfiles/mpc-1.4.1.tar.xz
+      tar -C isl  --strip-components=1 -xf /var/cache/distfiles/isl-0.27.tar.xz
+      sed -i '330i #include <stdbool.h>' gcc/config/i386/i386.h
+      sed -i '/thread_header =/s/@.*@/gthr-posix.h/' \
+        {libgcc,libstdc++-v3/include}/Makefile.in
+   ]]
+};

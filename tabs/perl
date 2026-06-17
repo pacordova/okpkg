@@ -1,0 +1,70 @@
+perl = {
+   url = "https://www.cpan.org/src/5.0/perl-5.42.2.tar.xz",
+   b3sum = "d8a9988b0fd5305204c74ac3cca7a19e47625ca65ad10723dfff129abaa4981a",
+   build = "./configure.gnu",
+   flags= {
+      "-Dprefix=/opt/perl",
+      "-Duseshrplib",
+      "-Dusethreads",
+      "-Dman1dir=/opt/perl/man/man1",
+      "-Dman3dir=/opt/perl/man/man3",
+   },
+   post = [[
+      find $destdir -name \*.pod       -exec rm -f {} +
+      find $destdir -name .packlist    -exec rm -f {} +
+      find $destdir -name README\*     -exec rm -f {} +
+      find $destdir -name TODO\*       -exec rm -f {} +
+      find $destdir -name Change\*     -exec rm -f {} +
+      find $destdir -name \*.bs        -exec rm -f {} +
+      find $destdir -name \*.0 -type f -exec rm -f {} +
+      find $destdir/opt/perl/lib  -type f -exec chmod 644 {} +
+   ]]
+};
+
+perl-file-sharedir = {
+   url = "https://cpan.metacpan.org/authors/id/R/RE/REHSACK/File-ShareDir-1.118.tar.gz",
+   b3sum = "803710ee617e407ad64113a3b177b0044802f5c58ce67cf0017175621048b901",
+   build = "perl",
+};
+
+perl-file-sharedir-install = {
+   url = "https://cpan.metacpan.org/authors/id/E/ET/ETHER/File-ShareDir-Install-0.14.tar.gz",
+   b3sum = "eaf4b1683774ec3fc42deae0edc9e7391177ab8c9f6a268e05225560696e1f2c",
+   build = "perl",
+};
+
+perl-xml-parser = {
+   url = "https://cpan.metacpan.org/authors/id/T/TO/TODDR/XML-Parser-2.47.tar.gz",
+   b3sum = "933aa44de3efe104be847a2acb5bdf4ff85241ba866a4edb613fb7ec6d573a16",
+   build = "perl",
+};
+
+perl-xml-namespacesupport = {
+   url = "https://cpan.metacpan.org/authors/id/P/PE/PERIGRIN/XML-NamespaceSupport-1.12.tar.gz",
+   b3sum = "3338b8cde388e92a5432ca5e49492a5beb445515918dd5b9fa940d21f3c33555",
+   build = "perl",
+};
+
+perl-xml-sax = {
+   url = "https://cpan.metacpan.org/authors/id/G/GR/GRANTM/XML-SAX-1.02.tar.gz",
+   b3sum = "3e02b06e8f713d83605d5dfb129abad9f683dc1d8c88c4ea9a0647b1fffd21ea",
+   build = "perl",
+};
+
+perl-xml-sax-base = {
+   url = "https://cpan.metacpan.org/authors/id/G/GR/GRANTM/XML-SAX-Base-1.09.tar.gz",
+   b3sum = "dd9abac4ebe2b2175c5a8e06e93af44cd3faae282d2c295bf846bfbf835b3eab",
+   build = "perl",
+};
+
+perl-xml-sax-expat = {
+   url = "https://cpan.metacpan.org/authors/id/B/BJ/BJOERN/XML-SAX-Expat-0.51.tar.gz",
+   b3sum = "fd3eff13c279c08c29e6d45af87b8b3c6cd92cf9051c9823f39b0e662ebfd22c",
+   build = "perl",
+};
+
+perl-xml-simple = {
+   url = "https://www.cpan.org/authors/id/G/GR/GRANTM/XML-Simple-2.25.tar.gz",
+   b3sum = "34edaad39f7ca3c777dca32a934e154bf14aefaee830ac71afec5ba5e7feae73",
+   build = "perl",
+};

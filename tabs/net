@@ -1,0 +1,230 @@
+nftables = {
+   url = "https://www.netfilter.org/pub/nftables/nftables-1.1.6.tar.xz",
+   b3sum = "fe01ac223a3e41331bfa686058a04cb2719c2ced1ed7bb7892df3e5026f9fc82",
+   build = "./configure",
+   flags = {
+      "--with-unitdir=no",
+      "--enable-distcheck",
+      "--disable-debug",
+      "--enable-man-doc",
+      "--without-mini-gmp",
+      "--without-json",
+      "--with-cli=readline",
+      "--without-xtables",
+   },
+};
+
+connman = {
+   url = "https://kernel.org/pub/linux/network/connman/connman-2.0.tar.xz",
+   b3sum = "d9a955d1f0e4720c452f106a11724f454f68d621e3f2967660a57d426833620e",
+   build = "./configure",
+   flags = {
+      "--enable-{client,datafiles,ethernet,loopback,wifi,wireguard}",
+      "--disable-{bluetooth,dundee,gadget,neard,ofono,pacrunner,tools,wispr}",
+      "--disable-{iospm,hh2serial-gps,vpnc,pptp,policykit,openconnect,l2tp}",
+      "--disable-{debug,test}",
+      --"--with-systemdunitdir=no",
+      --"--with-tmpfilesdir=no",
+      "--with-firewall=nftables",
+      "LIBS=-lncursesw",
+   },
+};
+
+curl = {
+   url = "https://curl.se/download/curl-8.20.0.tar.xz",
+   b3sum = "bc9a073bfc582db61cdf8ccd2f1bfb4f121e5f1d127fa7919991ed32461fe0ce",
+   build = "./configure",
+   flags = {
+      "--enable-{ipv6,threaded-resolver,unix-sockets}",
+      "--disable-{ares,ldap,ldaps,manual}",
+      "--with-{openssl=yes,libidn2=yes,nghttp2=yes,libssh2=no}",
+      "--with-ca-bundle=/etc/ssl/certs/ca-certificates.crt",
+   }
+};
+
+openntpd = {
+   url = "https://ftp.openbsd.org/pub/OpenBSD/OpenNTPD/openntpd-6.8p1.tar.gz",
+   b3sum = "fda20dda184955411dce2edc545a5a616f66c0b35df136ccff541d97a32cc879",
+   build = "./configure",
+   flags = { "--with-privsep-user=ntp" },
+   prep = [[
+      sed -i 's/PRIO_PROCESS, 0, -20/PRIO_PROCESS, 0, 0/' src/ntpd.c
+      sed -i ntpd.conf                               \
+          -e 's/pool.ntp.org/2.gentoo.pool.ntp.org/' \
+          -e '/time.cloudflare.com/d'                \
+          -e 's/^constraint/#constraint/g'
+   ]]
+};
+
+openresolv = {
+   url = "https://github.com/NetworkConfiguration/openresolv/releases/download/v3.17.4/openresolv-3.17.4.tar.xz",
+   b3sum = "3a6519ae778a8fc2f1ed02a7d2a2211f061cc1b6a0019247d7c977448b63e528",
+   build = "./configure",
+   flags = { 
+      "--libdir=/lib64", 
+      "--libexecdir=/usr/libexec",
+      "--sbindir=/bin",
+      "--sysconfdir=/etc",
+   }
+};
+
+iproute2 = {
+   url = "https://kernel.org/pub/linux/utils/net/iproute2/iproute2-7.1.0.tar.xz",
+   b3sum = "84c18089739f5fadd2baf4558905ac367e3b683268c9720aba29769a7784b38e",
+   build = "./configure",
+   flags = { "--libdir=/lib64" },
+   prep = [[
+      rm -f man/man8/arpd.8
+      sed -e '/ARPD/d' \
+          -e 's:/sbin:/bin:' \
+          -i Makefile
+   ]]
+};
+
+iputils = {
+   url = "https://github.com/iputils/iputils/releases/download/20250605/iputils-20250605.tar.xz",
+   b3sum = "1ad4da5fafe5cb456ba3bc10e25b41c5e7cb2f1c50f21ca0c9d2404c39531d1d",
+   build = "meson",
+};
+
+netcat = {
+   url = "https://downloads.sourceforge.net/nc110/nc110.20180111.tar.xz",
+   b3sum = "40043c6f7d8409cdb04015604a33c17cc4f27b62653bf13de69023108c99dd1e",
+   build = "make_install",
+};
+
+openssh = {
+   url = "https://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-10.3p1.tar.gz",
+   b3sum = "2193afffd02f8fefcb936270de7111b997e2cec9b29487085c61c145291abba9",
+   build = "./configure",
+   flags = {
+      "--sysconfdir=/etc/ssh",
+      "--with-default-path=/bin",
+      "--with-pid-dir=/run",
+      "--with-privsep-user=nobody",
+      "--with-ssl-engine",
+      "--with-xauth=/bin/xauth",
+      "--disable-{u,w}tmp",
+   },
+   post = [[
+      install -d $destdir{/bin,/usr/share/man/man1}
+      install -m 755 contrib/ssh-copy-id   $destdir/bin
+      install -m 644 contrib/ssh-copy-id.1 $destdir/usr/share/man/man1
+   ]]
+};
+
+rsync = {
+   url = "https://samba.org/ftp/rsync/src/rsync-3.4.1.tar.gz",
+   b3sum = "e1cfdd51a1a89a49e73f8fa730a4321392fe4a29533c0979c2c09c7ce3808b6f",
+   build = "./configure",
+   flags = { "--disable-{debug,xxhash}" }
+};
+
+wget2 = {
+   url = "https://ftp.gnu.org/gnu/wget/wget2-2.2.1.tar.lz",
+   b3sum = "651471423e6dc8bb6005564ab366306385d18a63a98aaba746ef6cf34ff191d3",
+   build = "./configure",
+   post = [[ 
+      ln -sf wget2 $destdir/bin/wget
+      rm -f $destdir/bin/wget2_noinstall 
+   ]]
+};
+
+wpa_supplicant = {
+   url = "https://w1.fi/releases/wpa_supplicant-2.11.tar.gz",
+   b3sum = "3b61ac45430831f5fdc4ef8d00b5415075a2f236f591213eca22c9c7312707c3",
+   build = "make",
+   flags = { 
+      "--directory=wpa_supplicant", 
+      "BINDIR=/bin",
+      "LIBDIR=/lib64"
+   },
+   prep = [[
+      cd wpa_supplicant
+      cp defconfig .config
+      printf "CONFIG_DEBUG_SYSLOG=y\n" >> .config
+      printf "CONFIG_DEBUG_SYSLOG_FACILITY=LOG_DAEMON\n" >> .config
+      printf "CONFIG_IPV6=y\n" >> .config
+      printf "CONFIG_READLINE=y\n" >> .config
+      printf "CFLAGS += -I/usr/include/libnl3\n" >> .config
+      printf "CFLAGS += -Wno-incompatible-pointer-types\n" >> .config
+   ]],
+   post = [[
+      cd wpa_supplicant
+      install -d $destdir/bin
+      install -d $destdir/usr/share/man/man{5,8}
+      install -d $destdir/usr/share/dbus-1/{system-services,system.d}
+      install -d $destdir/etc/dbus-1/system.d
+      install -m 644 doc/docbook/wpa_supplicant.conf.5 \
+          $destdir/usr/share/man/man5/
+      install -m 644 doc/docbook/wpa_{cli,passphrase,supplicant}.8 \
+          $destdir/usr/share/man/man8/
+      install -m 644 dbus/fi.w1.wpa_supplicant1.service \
+          $destdir/usr/share/dbus-1/system-services/
+      install -m 644 dbus/dbus-wpa_supplicant.conf \
+          $destdir/etc/dbus-1/system.d/
+   ]]
+};
+
+--------------------------------------------------------------------------------
+
+libgpg-error = {
+   url = "https://gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-1.61.tar.bz2",
+   b3sum = "3d8508a18c55a0442e15eab5110c592b0cb518cd9bd1210c8014bbb37277b9a0",
+   build = "./configure",
+   flags = { "--disable-{doc,languages,tests}" },
+};
+
+libgcrypt = {
+   url = "https://gnupg.org/ftp/gcrypt/libgcrypt/libgcrypt-1.12.2.tar.bz2",
+   b3sum = "7eab6137f890c1144c280d97ad89ac115d8c54b317e4696f271c172d5133b10f",
+   build = "./configure",
+};
+
+libksba = {
+   url = "https://gnupg.org/ftp/gcrypt/libksba/libksba-1.8.0.tar.bz2",
+   b3sum = "1ae65c16488b982448f238839466b21d32456f457769480ba27c0619e8804254",
+   build = "./configure",
+};
+
+libassuan = {
+   url = "https://gnupg.org/ftp/gcrypt/libassuan/libassuan-3.0.2.tar.bz2",
+   b3sum = "c96b4e82157b358d889159b335f6f674e3da0ce8d2b37775e306d6a2bb111897",
+   build = "./configure",
+};
+
+ntbtls = {
+   url = "https://gnupg.org/ftp/gcrypt/ntbtls/ntbtls-0.3.2.tar.bz2",
+   b3sum = "a2b839e9c6d43f654d2f1d449ac2dbf58555452a4ebcb55aa1868b4ca01c8012",
+   build = "./configure",
+};
+
+npth = {
+   url = "https://gnupg.org/ftp/gcrypt/npth/npth-1.8.tar.bz2",
+   b3sum = "cac4aa343cb1d426a913b29cb1692b6145dd530c9e1896696cd6e85872b3df03",
+   build = "./configure",
+};
+
+pinentry = {
+   url = "https://gnupg.org/ftp/gcrypt/pinentry/pinentry-1.3.2.tar.bz2",
+   b3sum = "ee79d79f130955d5e96b94d86ba31c2709ccbe7f0218b38f9a736b68ee3ed498",
+   build = "./configure",
+   flags = {
+      "--enable-pinentry-{tty=yes,qt=no,gtk2=no,gnome3=no}",
+      "--disable-libsecret",
+   }
+};
+
+gnupg2 = {
+   url = "https://gnupg.org/ftp/gcrypt/gnupg/gnupg-2.5.20.tar.bz2",
+   b3sum = "119984cd3e747c09afbce191b64d844b71f7f78514d0769843b52cca70190b60",
+   build = "./configure",
+   flags = { "--disable-doc" },
+};
+
+gpgme = {
+   url = "https://gnupg.org/ftp/gcrypt/gpgme/gpgme-2.1.0.tar.bz2",
+   b3sum = "df2b7c62700ed8484e05cca318df24bf088d0b9934245b7a66cab8b43f7c5d43",
+   build = "./configure",
+   flags = { "--disable-gpg-test" }
+};

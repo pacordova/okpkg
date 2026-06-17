@@ -1,0 +1,107 @@
+libxmlb = {
+   url = "https://github.com/hughsie/libxmlb/releases/download/0.3.27/libxmlb-0.3.27.tar.xz",
+   sha3 = "8603ee16405a0dd39cafa703f1d099fcd9dd7d3cbd3836614741a886bb9c965d",
+   build = "meson",
+   flags = { "-Dintrospection=true", "-D{gtkdoc,tests}=false" },
+};
+
+libfyaml = {
+   url = "https://github.com/pantoniou/libfyaml/releases/download/v0.9.6/libfyaml-0.9.6.tar.gz",
+   b3sum = "18c2deb847c782bcccaabd18bed64a6ad7ab9f900794913bd3b0435b2ddf6112",
+   build = "./configure",
+};
+
+appstream = {
+   url = "https://www.freedesktop.org/software/appstream/releases/AppStream-1.1.2.tar.xz",
+   b3sum = "5e4685b2100d861b842665b35f4a84c3f337650cac9c8034b2a7a575ee6ea10a",
+   build = "meson",
+   flags = {
+      "-Dsystemd=false",
+      "-Dapidocs=false",
+      "-Dinstall-docs=false",
+      "-Dman=false",
+      "-Dstemming=false",
+      "-Dvapi=false",
+      "-Dcompose=true",
+      "-Dbash-completion=false",
+   },
+   prep = [[
+      mv AppStream*/* . && rm -fr AppStream*
+      sed -i "/subdir('docs\/')/d" meson.build
+      sed -i "s/version: '>= 2.48'/version: '>= 2.40'/" compose/meson.build
+   ]]
+};
+
+babl = {
+   url = "https://download.gimp.org/pub/babl/0.1/babl-0.1.126.tar.xz",
+   b3sum = "6514b56e10290d2400e094d6114b468eb21cf8e3aca38ee8c629f2840b467656",
+   build = "meson",
+};
+
+gegl = {
+   url = "https://download.gimp.org/pub/gegl/0.4/gegl-0.4.70.tar.xz",
+   b3sum = "dca4e225206d802a1d2c91480278ee37ee4dc0f1e0ea81d8ae442cc48153fc94",
+   build = "meson",
+};
+
+gexiv2 = {
+   url = "https://download.gnome.org/sources/gexiv2/0.14/gexiv2-0.14.6.tar.xz",
+   b3sum = "8ad3ca4a8205dcc6570ec6d1dde16b9f2d023edd11d63ce834aa7b47faa15359",
+   build = "meson",
+   flags = { 
+      "-Dintrospection=true",
+      "-Dpython3=true",
+      "-Dvapi=true",
+   }
+};
+
+libmypaint = {
+   url = "https://github.com/mypaint/libmypaint/releases/download/v1.6.1/libmypaint-1.6.1.tar.xz",
+   sha3 = "2ec991f21543b1c5326f1396a6794608518ca36dcf134a45cf5cfa2b95c5f211",
+   build = "./configure",
+   flags = { 
+      "--libdir=/usr/lib64",
+      "--disable-nls",
+      "--disable-i18n",
+      "--enable-introspection=no",
+   }
+};
+
+mypaint-brushes = {
+   url = "https://github.com/mypaint/mypaint-brushes/releases/download/v2.0.2/mypaint-brushes-2.0.2.tar.xz",
+   b3sum = "99da603da1e946c2a7f14b3a1cdc87c678ea822d87eef83b7868f2b8f39cf3b2",
+   build = "./configure",
+};
+
+appstream-glib = {
+   url = "https://people.freedesktop.org/~hughsient/appstream-glib/releases/appstream-glib-0.8.3.tar.xz",
+   b3sum = "02614b2bc91c263b5d1cb1fef7af3ec0d9dbd6fd331ae7486c86b0a528631731",
+   build = "meson",
+   flags = { 
+      "-Drpm=false", 
+      "-Dman=false", 
+   }
+};
+
+pycairo = {
+   url = "https://pypi.org/packages/source/p/pycairo/pycairo-1.29.0.tar.gz",
+   b3sum = "f8e322620699fbe0469e21edeedb7161291f2cda76c816a1d03b387864b73c9c",
+   build = "meson",
+};
+
+pygobject = {
+   url = "https://download.gnome.org/sources/pygobject/3.52/pygobject-3.52.3.tar.gz",
+   b3sum = "360e0f24d5f9bb35ffeab91e1c749a780a10e68c83144690f5684ede82290bf0",
+   build = "meson",
+};
+
+gimp = {
+   url = "https://download.gimp.org/gimp/v3.2/gimp-3.2.4.tar.xz",
+   b3sum = "0c0a60060673cb3f76ebd5cd05b6d9e83db6e861a5c63e4e66a7af9f338cd1f0",
+   build = "meson",
+   flags = { 
+      "-Dheadless-tests=disabled",
+      "-Dcheck-update=no",
+   },
+   prep = [[ sed -i 's/if not glib_networking_works/if not true/' meson.build ]],
+};

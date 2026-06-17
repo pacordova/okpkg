@@ -1,0 +1,67 @@
+dmd = {
+   url = "https://downloads.dlang.org/releases/2026/dmd.2.112.0.linux.tar.xz",
+   b3sum = "60423c74d994f8091823976b413c6e8bed2f8d8dd53a87412bd58db84c8971d5",
+   post = [[ mkdir -p "$destdir/opt/dlang/dmd" && cp -a * "$destdir/opt/dlang/dmd" ]]
+};
+ 
+cmake-bin = {
+   url = "https://github.com/Kitware/CMake/releases/download/v3.31.12/cmake-3.31.12-linux-x86_64.tar.gz", 
+   b3sum = "de7494a5b9c09a7c3a2ba38ca7f16b3ca172f94a8a4bdd6cda25be4a18f65226",
+   post = [[ mkdir -p "$destdir/opt/cmake" && cp -a * "$destdir/opt/cmake" ]]
+};
+ 
+zig-bin = {
+   url = "https://ziglang.org/download/0.16.0/zig-x86_64-linux-0.16.0.tar.xz",
+   b3sum = "9badfa00469949ac17c681ce80a9b872781a6eb272b51435f8903855ccd9a35e",
+   post = [[ mkdir -p "$destdir/opt/zig" && cp -a * "$destdir/opt/zig" ]]
+};
+
+rust-bin = {
+   url = "https://static.rust-lang.org/dist/rust-1.96.0-x86_64-unknown-linux-gnu.tar.xz",
+   b3sum = "ce8b6f179662d1cb231335264f62f7e8622389557691c8d6a2e374a55af39b2b",
+   post = [[ 
+      ./install.sh --destdir=$destdir --prefix=/opt/rust
+      : > $destdir/.nostrip
+   ]]
+};
+
+firefox = {
+   url = "https://download-installer.cdn.mozilla.net/pub/firefox/releases/152.0/linux-x86_64/en-US/firefox-152.0.tar.xz",
+   b3sum = "00114a60bb3673ed4780d3b3cdcc9e24a647c867116e36ab1eb0974ee6b632f2",
+   post = [[
+      mkdir -p $destdir/{bin,lib64,opt/firefox}
+      cp -fr . $destdir/opt/firefox
+      find $destdir/opt/firefox -name \*.so -exec ln -f {} $destdir/lib64 \;
+   ]]
+};
+
+libreoffice = {
+   url = "https://download.documentfoundation.org/libreoffice/stable/26.2.3/deb/x86_64/LibreOffice_26.2.3_Linux_x86-64_deb.tar.gz",
+   sha3 = "eac260505fcb7f961fd44ca5c371eccbaec958a8476ae1b9f3e2abb497982115",
+   post = [[
+      rm -f  DEBS/*{firebird,kde-integration,python-script-provider}*
+      find DEBS -name \*.deb -exec ar p '{}' data.tar.xz \; \
+      | $tar -C $destdir -xJi --xform='s|usr/lib|lib64|;s|/usr/local||'
+   ]]
+};
+
+-- TOFU
+tinytex = {
+   url = "https://github.com/rstudio/tinytex-releases/releases/download/v2024.07.03/TinyTeX-1-v2024.07.03.tar.gz",
+   sha3 = "b6d573122dc97c5085993f707f439f07e3ac18dee500e6a0c8bb9250997e3385",
+   post = [[
+      install -d $destdir/usr/{bin,lib64}
+      cp -rp . $destdir/usr/lib64/TinyTeX
+      find $destdir/usr/lib64/TinyTeX/bin/* -type f \
+           -exec ln -sfr '{}' $destdir/usr/bin \;
+   ]] 
+};
+
+signal-desktop = {
+   url = "https://updates.signal.org/desktop/apt/pool/s/signal-desktop/signal-desktop_8.14.0_amd64.deb",
+   b3sum = "269a68f6afae4686d1e1f405983596dd4a8961a820d5d77674a71be43c0342d7",
+   post = [[
+      ar p /var/cache/distfiles/signal-desktop_8.14.0_amd64.deb data.tar.xz \
+      | $tar -C "$destdir" -xJ
+   ]]
+};

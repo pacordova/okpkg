@@ -1,0 +1,509 @@
+shared-mime-info = {
+   url = "https://gitlab.freedesktop.org/xdg/shared-mime-info/-/archive/2.4/shared-mime-info-2.4.tar.bz2",
+   b3sum = "d92cde705149ed71e45f4527ca8055ada4eb25fa1db5ce09287008d06b539935",
+   build = "meson",
+   flags = {
+      "-Dupdate-mimedb=false",
+      "-Dbuild-tests=false",
+      "-Dbuild-translations=false",
+   }
+};
+
+desktop-file-utils = {
+   url = "https://www.freedesktop.org/software/desktop-file-utils/releases/desktop-file-utils-0.28.tar.xz",
+   b3sum = "09ecf2d0ddcf67e13033676379d1ee5f4fbae52c8dc9fb45c28149dca31c1c2d",
+   build = "meson",
+   post = [[
+      cd "$destdir"
+      rm -fr usr/bin
+      ln -sf desktop-file-install bin/desktop-file-edit
+   ]]
+};
+
+gsettings-desktop-schemas = {
+   url = "https://download.gnome.org/sources/gsettings-desktop-schemas/50/gsettings-desktop-schemas-50.1.tar.xz",
+   b3sum = "9c966b54eb832a5a0e79f4f947a9d34c7a7ad57b8958d50612d485f047dd9102",
+   build = "meson",
+   prep = [[ sed -i -r 's:"(/system):"/org/gnome\1:g' schemas/*.in ]]
+};
+
+xdg-user-dirs = {
+   url = "https://user-dirs.freedesktop.org/releases/xdg-user-dirs-0.20.tar.xz",
+   b3sum = "cb95fa26bc741d1cea6abb3e15042deb89efe9a9ca41a0953da5a725c991f006",
+   build = "meson",
+   flags = { "-Ddocs=false" },
+   post = [[ rm -fr "$destdir/usr/lib" ]]
+};
+
+startup-notification = {
+   url = "https://www.freedesktop.org/software/startup-notification/releases/startup-notification-0.12.tar.gz",
+   b3sum = "134131fdd210d2eaef76eda9826b4a832807aac231dba334f157751ed1d6da36",
+   build = "./configure",
+};
+
+--------------------------------------------------------------------------------
+
+at-spi2-core = {
+   url = "https://download.gnome.org/sources/at-spi2-core/2.60/at-spi2-core-2.60.4.tar.xz",
+   b3sum = "15d9cfd9bd7c43eea1b2a4f3a1ae74058aee6c492c4122fdb72f2ecab4ffba7d",
+   build = "meson",
+   flags = {
+      "-Dsystemd_user_dir=/tmp",
+      "-Ddefault_bus=dbus-daemon",
+      "-Ddocs=false",
+   },
+   post = [[ mkdir -p $destdir/opt/python3.13 && mv $destdir/usr/lib $_ ]]
+};
+
+cairo = {
+   url = "https://cairographics.org/releases/cairo-1.18.4.tar.xz",
+   b3sum = "b9fa14e02f85ec4e72396c62236c98502d04dbbdf8daf01ab9557a1c7aa7106e",
+   build = "meson",
+};
+
+pango = {
+   url = "https://download.gnome.org/sources/pango/1.57/pango-1.57.1.tar.xz",
+   b3sum = "aeeeb441da003daefd9a704e450f4e5ab449d7d6e7cca1a58474327d65f2e31b",
+   build = "meson",
+   flags = { "-Dintrospection=enabled" },
+};
+
+gdk-pixbuf2 = {
+   url = "https://download.gnome.org/sources/gdk-pixbuf/2.42/gdk-pixbuf-2.42.12.tar.xz",
+   b3sum = "edf54b48c7008c0ec52e0224b6a10ea680bbb94c23b71fbe5d19ae8e72706bc6",
+   build = "meson",
+   flags = {
+      "-Dbuiltin_loaders=all",
+      "-Dgio_sniffing=false",
+      "-Dinstalled_tests=false",
+      "-Dothers=enabled",
+   }
+};
+
+libcroco = {
+   url = "https://download.gnome.org/sources/libcroco/0.6/libcroco-0.6.13.tar.xz",
+   b3sum = "061bfd3d4aa7b9fc66d90d201793afc1a978e9d0e5f8b66f679a942094f8edf9",
+   build = "./configure",
+};
+
+librsvg = {
+   url = "https://download.gnome.org/sources/librsvg/2.40/librsvg-2.40.21.tar.xz",
+   b3sum = "0ce1906c5136a1d9fe596a4ec0a01afe3700af3c5c917439f00b280b78d738e8",
+   build = "./configure",
+   flags = { 'CFLAGS="$CFLAGS -Wno-incompatible-pointer-types"' },
+};
+
+gtk3 = {
+   url = "https://download.gnome.org/sources/gtk/3.24/gtk-3.24.52.tar.xz",
+   b3sum = "01591a22d532a0f92fd980be43b3964d5430b7e0ccba07b49bc0446fa22f8040",
+   build = "meson",
+   flags = {
+      "-Dx11_backend=true",
+      "-Dwayland_backend=false",
+      "-Dbroadway_backend=true",
+      "-Dwin32_backend=false",
+      "-Dquartz_backend=false",
+      "-Dcloudproviders=false",
+      "-Dtracker3=false",
+      "-Dprint_backends=auto",
+      "-Dcolord=no",
+      "-Dgtk_doc=false",
+      "-Dman=false",
+      "-Dintrospection=true",
+      "-Ddemos=false",
+      "-Dexamples=false",
+      "-Dtests=false",
+   }
+};
+
+gtksourceview4 = {
+   url = "https://download.gnome.org/sources/gtksourceview/4.8/gtksourceview-4.8.4.tar.xz",
+   b3sum = "0094836997439286c6b3b5a204b6e51ab7357c7d41bb0cb6d555b1a3bca95c2b",
+   build = "meson",
+   flags = { "-Dgtk_doc=false" }
+};
+
+libhandy = {
+   url = "https://download.gnome.org/sources/libhandy/1.8/libhandy-1.8.3.tar.xz",
+   b3sum = "87415aff7851cf8f0212f8e01158179341d99bdbe60e4771ee537a258027cc91",
+   build = "meson",
+};
+
+libnotify = {
+   url = "https://download.gnome.org/sources/libnotify/0.8/libnotify-0.8.8.tar.xz",
+   b3sum = "b31e0395935578910e433d63f9ad82278650a1531ecac85816dba868e9559300",
+   build = "meson",
+   flags = { 
+      "-Dgtk_doc=false",
+      "-Dman=false",
+      "-Dtests=false",
+   }
+};
+
+libxklavier = {
+   url = "https://people.freedesktop.org/~svu/libxklavier-5.4.tar.bz2",
+   b3sum = "0febad2d7b48edefc07883a7ed532370e585c82c95f33dfd962eff0ae796b1ad",
+   build = "./configure",
+   flags = { "--disable-gtk-doc" }
+};
+
+poppler = {
+   url = "https://poppler.freedesktop.org/poppler-26.06.0.tar.xz",
+   b3sum = "b1575f8813bbadf4edad55a1b5ba90a892a52de9b270de4aba20bb157e3b7066",
+   build = "cmake",
+   flags = {
+      "-DENABLE_UNSTABLE_API_ABI_HEADERS=ON",
+      "-DENABLE_LIBOPENJPEG=none",
+      "-DENABLE_QT{5,6}=OFF",
+      "-DENABLE_BOOST=OFF",
+      "-DENABLE_GPGME=OFF",
+      "-DENABLE_LIBCURL=OFF",
+      "-DENABLE_NSS3=OFF",
+   },
+   post = [[ mv $destdir/usr/bin $destdir/bin ]],
+};
+
+poppler-data = {
+   url = "https://poppler.freedesktop.org/poppler-data-0.4.12.tar.gz",
+   b3sum = "99ed0902cb041898089ee666e6ae806e953da6d5672081df942a6dfd54f34e33",
+   build = "make",
+   flags = { "prefix=/usr" }
+};
+
+evince = {
+   url = "https://download.gnome.org/sources/evince/48/evince-48.4.tar.xz",
+   b3sum = "42a6224890aed4e90a12595b38b7749d93007eb489485474d6029aff08dfa874",
+   build = "meson",
+   flags = {
+      "-D{gspell,keyring}=disabled",
+      "-D{gtk_doc,nautilus,user_doc}=false",
+      "-D{pdf,ps}=enabled",
+      "-Dsystemduserunitdir=no",
+   }
+};
+
+gcr4 = {
+   url = "https://download.gnome.org/sources/gcr/4.4/gcr-4.4.0.1.tar.xz",
+   b3sum = "b0944996c0b6a2d7c22c2e6cbae51104936a0a4286aa0626225176907235fe08",
+   build = "meson",
+   flags = { "-D{gtk4,gtk_doc,ssh_agent}=false" }
+};
+
+gvfs = {
+   url = "https://download.gnome.org/sources/gvfs/1.60/gvfs-1.60.0.tar.xz",
+   b3sum = "d759d64d688f44c4f638c86b8c20aa47fb527fc5dda255052ade69ae1ef7a0fa",
+   build = "meson",
+   flags = {
+      "-D{afc,bluray,dnssd,fuse,goa,google,gphoto2,mtp,nfs,smb}=false",
+      "-D{admin,cdda,http,keyring,logind,udisks2}=false",
+      "-Donedrive=false",
+      "-D{systemduserunit,tmpfiles}dir=no",
+   }
+};
+
+--------------------------------------------------------------------------------
+
+libxfce4util = {
+   url = "https://archive.xfce.org/src/xfce/libxfce4util/4.20/libxfce4util-4.20.1.tar.bz2",
+   b3sum = "d64d8c016e48fb21b4c76914b75e256670c5fe2bff4c3b54f76e56cf1a50cb8a",
+   build = "./configure",
+   flags = { 
+      "--enable-introspection=no",
+      "--enable-vala=no" 
+   }
+};
+
+xfconf = {
+   url = "https://archive.xfce.org/src/xfce/xfconf/4.20/xfconf-4.20.0.tar.bz2",
+   b3sum = "8abae9f15ee7b8d80fc8f022aa479233d85ba3153865bbc67e03d96b13410abb",
+   build = "./configure",
+   flags = { 
+      "--enable-introspection=no",
+      "--enable-vala=no" 
+   }
+};
+
+libxfce4ui = {
+   url = "https://archive.xfce.org/src/xfce/libxfce4ui/4.20/libxfce4ui-4.20.2.tar.bz2",
+   b3sum = "cdc11c4a6fa78e26e5c3fb8e2b7baaad76ad1879c5f6039e8eec2d134647c951",
+   build = "./configure",
+   flags = { 
+      "--enable-introspection=no",
+      "--enable-vala=no" 
+   }
+};
+
+exo = {
+   url = "https://archive.xfce.org/src/xfce/exo/4.20/exo-4.20.0.tar.bz2",
+   b3sum = "ffe4a1a05c8f8c059c30a956438daa1154e725a33ad080c80b5288fcc21b09f1",
+   build = "./configure",
+};
+
+garcon = {
+   url = "https://archive.xfce.org/src/xfce/garcon/4.20/garcon-4.20.0.tar.bz2",
+   b3sum = "71e5de795881ce3de6f1369a9bb1cab5cb8b5a1b5051352c74edf13a92a9f0ad",
+   build = "./configure",
+   flags = { 
+      "--enable-introspection=no" 
+   }
+};
+
+libwnck3 = {
+   url = "https://download.gnome.org/sources/libwnck/43/libwnck-43.3.tar.xz",
+   b3sum = "711e508f062cc90c660b56f21c5fd237db156ea51fe364fb5e9e766556c2de42",
+   build = "meson",
+   flags = { 
+      "-Dintrospection=disabled",
+      "-Dstartup_notification=disabled",
+      "-Dinstall_tools=false",
+   }
+};
+
+xfce4-dev-tools = {
+   url = "http://archive.xfce.org/src/xfce/xfce4-dev-tools/4.20/xfce4-dev-tools-4.20.0.tar.bz2",
+   b3sum = "f07960f392b132e890c7801c4665adcd0b3c0faac95ec13ec569a3d8f8ae6994",
+   build = "./configure",
+};
+
+hwdata = {
+   url = "https://github.com/vcrhonek/hwdata/archive/v0.408/hwdata-0.408.tar.gz",
+   b3sum = "01f798200c73f277d6dbc33e47918197c42847b9bc2f10c82d0c132b34e5ab43",
+   build = "./configure",
+   flags = { "--libdir=/lib64" },
+};
+
+libdisplay-info = {
+   url = "https://gitlab.freedesktop.org/emersion/libdisplay-info/-/archive/0.3.0/libdisplay-info-0.3.0.tar.gz",
+   b3sum = "a93a521ca04cfa28682b8c9dc1f7c8fd13783220782f4fc86556fc8b74b68dd2",
+   build = "meson",
+};
+
+libxfce4windowing = {
+   url = "https://archive.xfce.org/src/xfce/libxfce4windowing/4.20/libxfce4windowing-4.20.6.tar.bz2",
+   b3sum = "7c1827ec845debd279c57e62e07077167c9b8f252ccd96007a47d57d8ec99a5c",
+   build = "./configure",
+   flags = { 
+      "--enable-x11",
+      "--disable-wayland",
+      "--enable-introspection=no",
+   }
+};
+
+xfce4-panel = {
+   url = "https://archive.xfce.org/src/xfce/xfce4-panel/4.20/xfce4-panel-4.20.7.tar.bz2",
+   b3sum = "a1c1e4ce17dcd8438ea8eb69cabffa61407591ded23bf0ca6440b51a8025cfcb",
+   build = "./configure",
+   flags = {
+      "--enable-gio-unix",
+      "--enable-introspection=no",
+   }
+};
+
+thunar = {
+   url = "https://archive.xfce.org/src/xfce/thunar/4.20/thunar-4.20.8.tar.bz2",
+   b3sum = "112e9c7a1688eb28703c8a8336ca6a330ee2db5c0a8b07da62c882f84a1741a2",
+   build = "./configure",
+   flags = {
+      "--enable-gio-unix",
+      "--enable-gudev",
+      "--enable-notifications",
+      "--enable-exif",
+      "--disable-debug",
+   },
+   prep = [[ sed -i 's/\tinstall-systemd_userDATA/\t/' Makefile.in ]]
+};
+
+thunar-volman = {
+   url = "https://archive.xfce.org/src/xfce/thunar-volman/4.20/thunar-volman-4.20.0.tar.bz2",
+   b3sum = "0409d340918a10cf2e154ec27f7074440537b89f1999ff85c35caf21381e3c71",
+   build = "./configure",
+};
+
+tumbler = {
+   url = "https://archive.xfce.org/src/xfce/tumbler/4.20/tumbler-4.20.1.tar.bz2",
+   b3sum = "42806ab7c2889f4390d434734260d3fc4c9e88a2646b3bc1273653560000ba72",
+   build = "./configure",
+   flags = {
+      "--disable-gstreamer-thumbnailer",
+   },
+   post = [[ rm -fr $destdir/usr/lib/systemd ]]
+};
+
+xfce4-appfinder = {
+   url = "https://archive.xfce.org/src/xfce/xfce4-appfinder/4.20/xfce4-appfinder-4.20.0.tar.bz2",
+   b3sum = "e2265e848e51921e5673f570faf39057b5357557f6daaeaf1fbdcf93c6e1e95a",
+   build = "./configure",
+   flags = { "--disable-debug" }
+};
+
+xfce4-power-manager = {
+   url = "https://archive.xfce.org/src/xfce/xfce4-power-manager/4.20/xfce4-power-manager-4.20.0.tar.bz2",
+   b3sum = "3ba6aff4c71c07199c37b8ea54768a4662409dd5187781772529aed61f8fc675",
+   build = "./configure",
+   flags = {
+      "--disable-network-manager",
+      "--disable-polkit",
+      "--disable-debug",
+   }
+};
+
+xfce4-settings = {
+   url = "https://archive.xfce.org/src/xfce/xfce4-settings/4.20/xfce4-settings-4.20.4.tar.bz2",
+   b3sum = "12ac318a3ec0172fcad2723c586347f1eda93360debc9d5530d3fbc2d2487ac6",
+   build = "./configure",
+   flags = {
+      "--enable-xrandr",
+      "--enable-xcursor",
+      "--enable-libnotify",
+      "--enable-libxklavier",
+      "--enable-pluggable-dialogs",
+      "--enable-sound-settings",
+      "--enable-pluggable-dialogs",
+      "--disable-debug",
+   }
+};
+
+xfdesktop = {
+   url = "https://archive.xfce.org/src/xfce/xfdesktop/4.20/xfdesktop-4.20.2.tar.bz2",
+   b3sum = "b263f84181023186df1a37e2b2b4a2b61eb63d8f27862c4fbbd5fc4c563d7e0e",
+   build = "./configure",
+   flags = {
+      "--enable-thunarx",
+      "--enable-notifications",
+      "--disable-debug",
+   }
+};
+
+xfwm4 = {
+   url = "https://archive.xfce.org/src/xfce/xfwm4/4.20/xfwm4-4.20.0.tar.bz2",
+   b3sum = "1c48e0fd80ef674a1d6cd8b3ab2452e87ab1597693f99c3217d271070b5ba8c2",
+   build = "./configure",
+   flags = {
+      "--enable-startup-notification",
+      "--enable-randr",
+      "--enable-compositor",
+      "--enable-xsync",
+      "--disable-debug",
+   }
+};
+
+xfce4-screensaver = {
+   url = "https://archive.xfce.org/src/apps/xfce4-screensaver/4.20/xfce4-screensaver-4.20.2.tar.xz",
+   b3sum = "55daa816dfbe53a38dd83d6a394e6869faba6adddabe4fc598a6606084cd1560",
+   build = "meson",
+   flags = {
+      "-Dauthentication-scheme=pwent",
+      "-Dsession-manager=consolekit",
+      "-Dx11=enabled",
+      "-Dwayland=disabled",
+      "-Ddocs=disabled",
+   },
+   post = [[ rm -fr $destdir/etc/pam.d ]]
+};
+
+xfce4-session = {
+   url = "https://archive.xfce.org/src/xfce/xfce4-session/4.20/xfce4-session-4.20.4.tar.bz2",
+   b3sum = "1811c6aa128bd40fb0f69bac47376b44d30b3e32a212149f00a8ec7eeb6650da",
+   build = "./configure",
+   flags = {
+      "--disable-legacy-sm",
+      "--disable-debug",
+   }
+};
+
+xfce4-notifyd = {
+   url = "https://archive.xfce.org/src/apps/xfce4-notifyd/0.9/xfce4-notifyd-0.9.7.tar.bz2",
+   b3sum = "9962b4a9ef0f617eecc56723a90817c47e71470821210b155d97723d51a39922",
+   build = "./configure",
+   flags = {
+      "--disable-systemd",
+      "--disable-debug",
+   }
+};
+
+xfce4-battery-plugin = {
+   url = "https://archive.xfce.org/src/panel-plugins/xfce4-battery-plugin/1.2/xfce4-battery-plugin-1.2.0.tar.xz",
+   b3sum = "8b8e3160ab7492172365b6ec9a2da93d6c4ba3701e6037c4ff1a96f8dcf8b579",
+   build = "meson",
+};
+
+thunar-archive-plugin = {
+   url = "https://archive.xfce.org/src/thunar-plugins/thunar-archive-plugin/0.6/thunar-archive-plugin-0.6.0.tar.xz",
+   b3sum = "074a01a0e8b1bc996c5a8c042d136b4d70b286f3b5e55c14c711ce1c22b7baec",
+   build = "meson",
+};
+
+mousepad = {
+   url = "https://archive.xfce.org/src/apps/mousepad/0.7/mousepad-0.7.0.tar.xz",
+   b3sum = "c521e32a4f2d9fbe3e6e34e4e54fa556e19de5349abaa1c7950f3c485457c92e",
+   build = "meson",
+};
+
+ristretto = {
+   url = "https://archive.xfce.org/src/apps/ristretto/0.14/ristretto-0.14.0.tar.xz",
+   b3sum = "78fa3b9b35be631ad53bae6497de611d829c1df81fbf8ea36d40e3fd602d05ab",
+   build = "meson",
+};
+
+xarchiver = {
+   url = "https://github.com/ib/xarchiver/archive/0.5.4.26/xarchiver-0.5.4.26.tar.gz",
+   b3sum = "58743f021a088bee3ff8baea4ed50eee2a2d90841b022c2f4f2373e9105ddb54",
+   build = "./configure",
+};
+
+xfce4-taskmanager = {
+   url = "https://archive.xfce.org/src/apps/xfce4-taskmanager/1.6/xfce4-taskmanager-1.6.0.tar.xz",
+   b3sum = "94586e56cd5583ec0e4a05046b7e62656449f997ac92ec3598ed344783b42609",
+   build = "meson",
+};
+
+xfce4-screenshooter = {
+   url = "https://archive.xfce.org/src/apps/xfce4-screenshooter/1.11/xfce4-screenshooter-1.11.3.tar.xz",
+   b3sum = "db6c07c5aa28c69e9cdb3a3b0140ea6ad4bdd7799033efa917eecb9c85c31d97",
+   build = "meson",
+};
+
+--------------------------------------------------------------------------------
+
+optipng = {
+   url = "https://downloads.sourceforge.net/optipng/optipng-7.9.1.tar.gz",
+   b3sum = "46ccac8a76e42fea57bd0abd1b53bae618dd287ed81725258c12d265245ebd3b",
+   build = "./configure",
+   flags = {
+      "--bindir=/bin",
+      "--with-system-libs",
+      "--mandir=/usr/share/man",
+   }
+};
+
+hicolor-icon-theme = {
+   url = "https://icon-theme.freedesktop.org/releases/hicolor-icon-theme-0.18.tar.xz",
+   b3sum = "062e251872a23ecf47a127293ae9abf98a1c912f82f819d0cebccf8d9415deb2",
+   build = "meson",
+   post = [[ gtk-update-icon-cache $destdir/usr/share/icons/hicolor ]],
+};
+
+adwaita-icon-theme = {
+   url = "https://download.gnome.org/sources/adwaita-icon-theme/50/adwaita-icon-theme-50.0.tar.xz",
+   b3sum = "754c438f00a5cc331e85b273975866fe986681f8280626ca114b8b44770f92da",
+   build = "meson",
+   post = [[ gtk-update-icon-cache $destdir/usr/share/icons/Adwaita ]],
+};
+
+greybird = {
+   url = "https://github.com/shimmerproject/Greybird/archive/v3.22.14/Greybird-3.22.14.tar.gz",
+   b3sum = "e1a90223520f6cb52ef99f34aeb56b38b29f37a20bec8c3427d23cbfef58e9fa",
+   build = "meson",
+};
+
+elementary-xfce-icon-theme = {
+   url = "https://github.com/shimmerproject/elementary-xfce/archive/v0.20/elementary-xfce-0.20.tar.gz",
+   b3sum = "ce0ceebe877e5edc20e3b99b80230c93c7ed25558084954685c70cc1595d1a04",
+   build = "./configure",
+   post = [[
+      #gtk-update-icon-cache $destdir/usr/share/icons/elementary-xfce
+      #gtk-update-icon-cache $destdir/usr/share/icons/elementary-xfce-dark
+      #gtk-update-icon-cache $destdir/usr/share/icons/elementary-xfce-darker
+      #gtk-update-icon-cache $destdir/usr/share/icons/elementary-xfce-darkest
+   ]]
+};

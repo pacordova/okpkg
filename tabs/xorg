@@ -1,0 +1,762 @@
+_freetype2 = {
+   url = "https://downloads.sourceforge.net/freetype/freetype-2.14.3.tar.xz",
+   b3sum = "0c791e2ea02be6e3cddd6e69ee84d66d869190e5275d8a34e282517769f1192e",
+   build = "meson",
+   flags = { "-Dharfbuzz=disabled" }
+};
+
+harfbuzz = {
+   url = "https://github.com/harfbuzz/harfbuzz/releases/download/12.3.2/harfbuzz-12.3.2.tar.xz",
+   b3sum = "61732d432cc1a93ef5718d7cdee468be01dc77f3fb2dc27dcbb0541a654cd9c0",
+   build = "meson",
+   flags = { 
+      "-Dfreetype=enabled",
+      "-Dgraphite2=enabled",
+      "-Dcairo=disabled",
+      "-Dglib=enabled",
+      "-Dgobject=enabled",
+      "-Dintrospection=enabled",
+      "-Dtests=disabled",
+      "-Dicu=disabled",
+   }
+};
+
+freetype2 = {
+   url = "https://downloads.sourceforge.net/freetype/freetype-2.14.3.tar.xz",
+   b3sum = "0c791e2ea02be6e3cddd6e69ee84d66d869190e5275d8a34e282517769f1192e",
+   build = "meson",
+   flags = { "-Dharfbuzz=enabled" }
+};
+
+fontconfig = {
+   url = "https://gitlab.freedesktop.org/api/v4/projects/890/packages/generic/fontconfig/2.18.1/fontconfig-2.18.1.tar.xz",
+   b3sum = "c51ab6c627666d3ddfcfb0280fc41df0ea74e629d301ed6368b98a766ad42b79",
+   build = "./configure",
+   flags = { "--disable-docs" }
+};
+
+--------------------------------------------------------------------------------
+
+ttf-dejavu = {
+   url = "https://downloads.sourceforge.net/dejavu/dejavu-fonts-ttf-2.37.tar.bz2",
+   b3sum = "b702bac8a0f8e0802758549da3b4d8041c3c83c3894e1e8a960eab53af18cce8",
+   build = _,
+   post = [[
+      install -d $destdir/usr/share/fontconfig/conf.default
+      install -d $destdir/usr/share/fonts/DejaVu
+      install -m 644 fontconfig/*.conf $destdir/usr/share/fontconfig/conf.default
+      install -m 644 ttf/*.ttf $destdir/usr/share/fonts/DejaVu
+   ]]
+};
+
+ttf-go = {
+   url = "https://github.com/golang/image/archive/v0.17.0/image-0.17.0.tar.gz",
+   b3sum = "aaf0de9c51cd8d62ec40dfe714155f744dfe529ae074683dbbbd52480e28fcac",
+   build = _,
+   post = [[
+      install -d $destdir/usr/share/fonts/Go
+      install -m 644 font/gofont/ttfs/*.ttf $destdir/usr/share/fonts/Go
+   ]]
+};
+
+ttf-liberation = {
+   url = "https://github.com/liberationfonts/liberation-fonts/files/7261482/liberation-fonts-ttf-2.1.5.tar.gz",
+   b3sum = "5ca2163d2f2ec538005381049fd2f02b531b868903ace9a49cb10b74cf33035d", 
+   build = _,
+   post = [[
+      install -d $destdir/usr/share/fonts/liberation
+      install -m 644 *.ttf $destdir/usr/share/fonts/liberation
+   ]]
+};
+
+ttf-sazanami = {
+   url = "http://osdn.dl.sourceforge.jp/efont/10087/sazanami-20040629.tar.bz2",
+   b3sum = "bf1bb0ecd19327399fcaa478fd5385654c74963459a2940c56952144aba16b73",
+   post = [[
+      install -d $destdir/usr/share/fonts/Sazanami
+      install -m 644 *.ttf $destdir/usr/share/fonts/Sazanami
+   ]]
+};
+
+--------------------------------------------------------------------------------
+
+ttf-dejavu = {
+   url = "https://downloads.sourceforge.net/dejavu/dejavu-fonts-ttf-2.37.tar.bz2",
+   b3sum = "b702bac8a0f8e0802758549da3b4d8041c3c83c3894e1e8a960eab53af18cce8",
+   build = _,
+   post = [[
+      install -d $destdir/usr/share/fontconfig/conf.default
+      install -d $destdir/usr/share/fonts/DejaVu
+      install -m 644 fontconfig/*.conf $destdir/usr/share/fontconfig/conf.default
+      install -m 644 ttf/*.ttf $destdir/usr/share/fonts/DejaVu
+   ]]
+};
+
+ttf-go = {
+   url = "https://github.com/golang/image/archive/v0.17.0/image-0.17.0.tar.gz",
+   b3sum = "aaf0de9c51cd8d62ec40dfe714155f744dfe529ae074683dbbbd52480e28fcac",
+   build = _,
+   post = [[
+      install -d $destdir/usr/share/fonts/Go
+      install -m 644 font/gofont/ttfs/*.ttf $destdir/usr/share/fonts/Go
+   ]]
+};
+
+ttf-liberation = {
+   url = "https://github.com/liberationfonts/liberation-fonts/files/7261482/liberation-fonts-ttf-2.1.5.tar.gz",
+   b3sum = "5ca2163d2f2ec538005381049fd2f02b531b868903ace9a49cb10b74cf33035d", 
+   build = _,
+   post = [[
+      install -d $destdir/usr/share/fonts/liberation
+      install -m 644 *.ttf $destdir/usr/share/fonts/liberation
+   ]]
+};
+
+ttf-sazanami = {
+   url = "http://osdn.dl.sourceforge.jp/efont/10087/sazanami-20040629.tar.bz2",
+   b3sum = "bf1bb0ecd19327399fcaa478fd5385654c74963459a2940c56952144aba16b73",
+   post = [[
+      install -d $destdir/usr/share/fonts/Sazanami
+      install -m 644 *.ttf $destdir/usr/share/fonts/Sazanami
+   ]]
+};
+
+--------------------------------------------------------------------------------
+
+xorg-util-macros = {
+   url = "https://x.org/pub/individual/util/util-macros-1.20.2.tar.xz",
+   b3sum = "ad272a006b269e3925bc700dd1e51c1b8d8fa3a825dfc0aecfeeef3db38a94f0",
+   build = "./configure",
+};
+
+xorgproto = {
+   url = "https://xorg.freedesktop.org/archive/individual/proto/xorgproto-2025.1.tar.xz",
+   b3sum = "80978f0950aab96f2b83750c6428e7ed7ea31fac0464d8cda23c759f457785f1",
+   build = "meson",
+};
+
+libxau = {
+   url = "https://x.org/pub/individual/lib/libXau-1.0.12.tar.xz",
+   b3sum = "674bc71a888eec20f0e29989e4669df90309d4baacad058107cdf89d23803bcc",
+   build = "./configure",
+};
+
+libxdmcp = {
+   url = "https://x.org/pub/individual/lib/libXdmcp-1.1.5.tar.xz",
+   b3sum = "d93c5ceb04019228ee6f034c4d10826025a7ae756d7b2f884fc2f768577173ba",
+   build = "./configure",
+};
+
+xcb-proto = {
+   url = "https://xorg.freedesktop.org/archive/individual/proto/xcb-proto-1.17.0.tar.xz",
+   b3sum = "68187400fded667f60b4b020d0fc37fa489ae0de33169fe7b07fcbaf88e7a3f9",
+   build = "./configure",
+   flags = { "--with-python_prefix=/opt/python3.13" },
+};
+
+libxcb = {
+   url = "https://xorg.freedesktop.org/archive/individual/lib/libxcb-1.17.0.tar.xz",
+   b3sum = "3dce3b8adc257177dfec9b6b6cf55eeac13921520dd6c372fd8f9d867600337b",
+   build = "./configure",
+   flags = { "--without-doxygen" }
+};
+
+xtrans = {
+   url = "https://x.org/pub/individual/lib/xtrans-1.6.0.tar.xz",
+   b3sum = "18e5a2478425ec43370d7719bc4ee4f25d01ad7f580fcc3b5d91effa267cbaaa",
+   build = "./configure",
+};
+
+libx11 = {
+   url = "https://x.org/pub/individual/lib/libX11-1.8.13.tar.xz",
+   b3sum = "f8503727da9dbaa5974c9225e4343b5c36cc47027f9aed7369e563adc87ad9e9",
+   build = "./configure",
+};
+
+libxext = {
+   url = "https://x.org/pub/individual/lib/libXext-1.3.7.tar.xz",
+   b3sum = "bfadbd2e5b0a027c2f303aa10dca138ba9f9f8cdd845ed8ed71f23998f365500",
+   build = "./configure",
+};
+
+libice = {
+   url = "https://x.org/pub/individual/lib/libICE-1.1.2.tar.xz",
+   b3sum = "3d1d41041e0a58799a5e9965fd258a4f6875143102644fbbc71061eb4c652577",
+   build = "./configure",
+};
+
+libsm = {
+   url = "https://x.org/pub/individual/lib/libSM-1.2.6.tar.xz",
+   b3sum = "fccedc1f9781bab20b0084557464099a7b793cd704d4bb702f200def4c96dcd8",
+   build = "./configure",
+};
+
+libxss = {
+   url = "https://x.org/pub/individual/lib/libXScrnSaver-1.2.5.tar.xz",
+   b3sum = "1efbadb14238f8679abb5e56bc99765b96565ee992bbab86cee88248c57f6240",
+   build = "./configure",
+};
+
+libxt = {
+   url = "https://x.org/pub/individual/lib/libXt-1.3.1.tar.xz",
+   b3sum = "fbf21683ce3e6d104529289254977bb08b355ecf7a36c763e8369acf85f15f24",
+   build = "./configure",
+   flags = { "--with-appdefaultdir=/etc/X11/app-defaults" }
+};
+
+libxmu = {
+   url = "https://x.org/pub/individual/lib/libXmu-1.3.1.tar.xz",
+   b3sum = "14fd6a8c90e83178ad5ed9e347dd697046a4928281f1612a51ce4c44e48494db",
+   build = "./configure",
+};
+
+libxpm = {
+   url = "https://x.org/pub/individual/lib/libXpm-3.5.19.tar.xz",
+   b3sum = "f7e39e80d7abc0e9ad20d9471d19891853127cee924b791aadc959ba7669a427",
+   build = "./configure",
+   flags = { "--disable-open-zfile" }
+};
+
+libxaw = {
+   url = "https://x.org/pub/individual/lib/libXaw-1.0.16.tar.xz",
+   b3sum = "f2a3b4955508dc7a576ad473119562b724f7936d312c85c79cb32f614c60f0c5",
+   build = "./configure",
+};
+
+libxfixes = {
+   url = "https://x.org/pub/individual/lib/libXfixes-6.0.2.tar.xz",
+   b3sum = "95fd7674b9a782e7dcc2ea38737262f931dbac8bddefe24066599eabdac6a142",
+   build = "./configure",
+};
+
+libxcomposite = {
+   url = "https://x.org/pub/individual/lib/libXcomposite-0.4.7.tar.xz",
+   b3sum = "c0eee712541ef115922708a159c008c2f2cf89027f30270426e53d304b211837",
+   build = "./configure",
+};
+
+libxrender = {
+   url = "https://x.org/pub/individual/lib/libXrender-0.9.12.tar.xz",
+   b3sum = "900b431ad77835029a88fd0d874bbd0d748ff150b9e0c3841b3ce7a346cf396a",
+   build = "./configure",
+};
+
+libxcursor = {
+   url = "https://x.org/pub/individual/lib/libXcursor-1.2.3.tar.xz",
+   b3sum = "78369818c0dd2fb10374b55458429c3f53409995d01a53a07def1980290af66d",
+   build = "./configure",
+};
+
+libxdamage = {
+   url = "https://x.org/pub/individual/lib/libXdamage-1.1.7.tar.xz",
+   b3sum = "72633074b373268a6873b38972184fb1c30ecef4353a71ed1671a82bf991f0e9",
+   build = "./configure",
+};
+
+libfontenc = {
+   url = "https://x.org/pub/individual/lib/libfontenc-1.1.9.tar.xz",
+   b3sum = "098188a7afd2804ec548d7cc4ff3190026377c0a5022eb5fe1566f88b516d653",
+   build = "./configure",
+};
+
+libxfont2 = {
+   url = "https://x.org/pub/individual/lib/libXfont2-2.0.7.tar.xz",
+   b3sum = "9b4951683df21108e45fda23dbd25dcb47b67a3a0e224a36374fbc2d0f489cac",
+   build = "./configure",
+   flags = { "--disable-devel-docs" }
+};
+
+libxft = {
+   url = "https://x.org/pub/individual/lib/libXft-2.3.9.tar.xz",
+   b3sum = "db5b642f7d5f1184d0975db36ae9f9fbd0a0c538a2288930fc034376374e83dc",
+   build = "./configure",
+};
+
+libxi = {
+   url = "https://x.org/pub/individual/lib/libXi-1.8.3.tar.xz",
+   b3sum = "0a6bff2bb3ccc1a12378f1c676e73fc1b541831632dd6e9b1478e3d9c85e4ce9",
+   build = "./configure",
+};
+
+libxinerama = {
+   url = "https://x.org/pub/individual/lib/libXinerama-1.1.6.tar.xz",
+   b3sum = "44f2031aff5910df959471b74fa99efa0a11dd0dd5a9ca3b95f10e0be4b1f73e",
+   build = "./configure",
+};
+
+libxrandr = {
+   url = "https://x.org/pub/individual/lib/libXrandr-1.5.5.tar.xz",
+   b3sum = "a15fa3ec8e49fe4c7a77d046a5563c83f56dde511461b27ee90e2adb164a2964",
+   build = "./configure",
+};
+
+libxres = {
+   url = "https://x.org/pub/individual/lib/libXres-1.2.3.tar.xz",
+   b3sum = "ed6e65e554fb812ddbec0667d749cb6c0488a964d7b12a7c4c2cadac1287088f",
+   build = "./configure",
+};
+
+libxtst = {
+   url = "https://x.org/pub/individual/lib/libXtst-1.2.5.tar.xz",
+   b3sum = "14daad01275697ffcacba237a3f1cf60cddfd0e5cfb25053c7a43fb282bf604c",
+   build = "./configure",
+};
+
+libxv = {
+   url = "https://x.org/pub/individual/lib/libXv-1.0.13.tar.xz",
+   b3sum = "ca8bb3f9a3b6b1b5a56ff77dce5d8f8a8b09c38c5ef05500fefc73d6462ac15f",
+   build = "./configure",
+};
+
+libxvmc = {
+   url = "https://x.org/pub/individual/lib/libXvMC-1.0.15.tar.xz",
+   b3sum = "2572799254ad119268ac04cb1e5194926a7a8d3db4198279021228505554520c",
+   build = "./configure",
+};
+
+libxxf86vm = {
+   url = "https://x.org/pub/individual/lib/libXxf86vm-1.1.7.tar.xz",
+   b3sum = "54af9fb042d559b98a47524e3a81638882c9f881c2c4676f25d9486460fbfd24",
+   build = "./configure",
+};
+
+libpciaccess = {
+   url = "https://x.org/pub/individual/lib/libpciaccess-0.19.tar.xz",
+   b3sum = "2bd8a8cc35aa4bb34dbb043547496367ba66d27b1e3b84a9cae47f0ee29c9c66",
+   build = "meson",
+};
+
+libxkbfile = {
+   url = "https://x.org/pub/individual/lib/libxkbfile-1.2.0.tar.xz",
+   b3sum = "47719f5b87e2090a1fd093f08fd162985ae4263381eee79785e66ca33e731981",
+   build = "meson",
+};
+
+libxshmfence = {
+   url = "https://x.org/pub/individual/lib/libxshmfence-1.3.3.tar.xz",
+   b3sum = "b6f6572eb8b8c44ecf0fadc53d86a030558ab2d210a1c2addd70822bdaacb7f3",
+   build = "./configure",
+};
+
+libxpresent = {
+   url = "https://x.org/pub/individual/lib/libXpresent-1.0.2.tar.xz",
+   b3sum = "da81687857d95e5a5418b8cd2afbd483727a6aa950ccb7bc5c572a976ddb3bac",
+   build = "./configure",
+};
+
+libxcvt = {
+   url = "https://x.org/pub/individual/lib/libxcvt-0.1.3.tar.xz",
+   b3sum = "a6c8f264a70a742d2634f53d19489b984c28df11cb5653042e8921f7596534bb",
+   build = "meson",
+};
+
+xcb-util = {
+   url = "https://xcb.freedesktop.org/dist/xcb-util-0.4.1.tar.xz",
+   b3sum = "ebc940220db0ca39a690a47b565ce73ab536c1fbfdebf008fa0edf0ced862aca",
+   build = "./configure",
+};
+
+xcb-util-image = {
+   url = "https://xcb.freedesktop.org/dist/xcb-util-image-0.4.1.tar.xz",
+   b3sum = "c8a0652f7c215bd312d9f238aed2ba6a122f087b623dafbbac4456f5351df603",
+   build = "./configure",
+};
+
+xcb-util-keysyms = {
+   url = "https://xcb.freedesktop.org/dist/xcb-util-keysyms-0.4.1.tar.xz",
+   b3sum = "c599df56c79a9f9dcf12b083e343f321cad6af654b83e2976b5a26bc890b5774",
+   build = "./configure",
+};
+
+xcb-util-renderutil = {
+   url = "https://xcb.freedesktop.org/dist/xcb-util-renderutil-0.3.10.tar.xz",
+   b3sum = "085c94d08bd8181512d4ce93cf0e5bcd48cd8ed983bbb7a7bcb3a3c2312a08ea",
+   build = "./configure",
+};
+
+xcb-util-wm = {
+   url = "https://xcb.freedesktop.org/dist/xcb-util-wm-0.4.2.tar.xz",
+   b3sum = "4cf6b0e204e12eb6b824c939404fc5ad63d61cb94679e8adf5670207802bc738",
+   build = "./configure",
+};
+
+xcb-util-cursor = {
+   url = "https://xorg.freedesktop.org/archive/individual/lib/xcb-util-cursor-0.1.6.tar.xz",
+   b3sum = "af6e7e99779682450e4cb3aa7225f5724845b1672c0380c65ca03b58dfb2d5d8",
+   build = "./configure",
+};
+
+libglvnd = {
+   url = "https://gitlab.freedesktop.org/glvnd/libglvnd/-/archive/v1.7.0/libglvnd-v1.7.0.tar.gz",
+   b3sum = "08459ce54c574683038ce1c9c8e39447d92a8cc78bb13a4c5af0457bf38af2d4",
+   build = "meson",
+   flags = { "-Dgles1=false" }
+};
+
+libdrm = {
+   url = "https://dri.freedesktop.org/libdrm/libdrm-2.4.134.tar.xz",
+   b3sum = "c1e986d085745dd58e40e8409e4d0edf269742cbe22a1fe6e4ce94a17207eb70",
+   build = "meson",
+   flags = {
+      "-D{intel=enabled,udev=true,valgrind=disabled}",
+   }
+};
+
+libva = {
+   url = "https://github.com/intel/libva/archive/2.23.0/libva-2.23.0.tar.gz",
+   b3sum = "710b7a18e8514c0bd72a1447514269f563c9d6d0670fc14615e45f3a9d8ee73e",
+   build = "meson",
+   flags = { "-Dwith_{glx=yes,wayland=no,x11=yes}" }
+};
+
+libvdpau = {
+   url = "https://gitlab.freedesktop.org/vdpau/libvdpau/-/archive/1.5/libvdpau-1.5.tar.bz2",
+   b3sum = "6a3811b79ea0ac523dca41c00e7736a1da0279a57e001bde89789830a842df0b",
+   build = "meson",
+};
+
+mesa = {
+   url = "https://mesa.freedesktop.org/archive/mesa-26.1.2.tar.xz",
+   b3sum = "96d25e660e7876524ecc8b93e7a2126064dae517c36db0e126eeab9e438f6a5c",
+   build = "meson",
+   flags = {
+      "-Dplatforms=x11",
+      '-Dgallium-drivers=softpipe',
+      '-Dvulkan-drivers=""',
+      "-Dglx=dri",
+      "-Degl=enabled",
+      "-Dglvnd=enabled",
+      "-D{llvm,gles1,valgrind,libunwind}=disabled",
+   }
+};
+
+xbitmaps = {
+   url = "https://x.org/pub/individual/data/xbitmaps-1.1.4.tar.xz",
+   b3sum = "0639e2a9f5561864dc083a006f0fc5b4908310402bdccf9788a68538af4809f5",
+   build = "./configure",
+};
+
+xorg-iceauth = {
+   url = "https://x.org/pub/individual/app/iceauth-1.0.11.tar.xz",
+   b3sum = "d7aee2a37dc6c4105a64c5a1763fd9f7a50f3c3af2a5754a4ffb7ca0870b8d91",
+   build = "./configure",
+};
+
+xorg-mkfontscale = {
+   url = "https://x.org/pub/individual/app/mkfontscale-1.2.4.tar.xz",
+   b3sum = "bfdb9715aaaedd77e919c054dcf3f73dcbd0db5a41ed12c3b10fa6f42cffd44d",
+   build = "./configure",
+};
+
+xorg-sessreg = {
+   url = "https://x.org/pub/individual/app/sessreg-1.1.4.tar.xz",
+   b3sum = "747ffe9e0818e027024843cf274b34cd291c23dc2a03268bac89f17b99331998",
+   build = "./configure",
+};
+
+xorg-setxkbmap = {
+   url = "https://x.org/pub/individual/app/setxkbmap-1.3.5.tar.xz",
+   b3sum = "1166e22de55f696bb53c9367f6321028a71a3b020237e3f1ca7782d43544b048",
+   build = "./configure",
+};
+
+xorg-smproxy = {
+   url = "https://x.org/pub/individual/app/smproxy-1.0.8.tar.xz",
+   b3sum = "752dd9b7368bcfd32ad4ac2ad235f24b439684b2b86b13d9347b579b6cfe2b68",
+   build = "./configure",
+};
+
+xorg-x11perf = {
+   url = "https://xorg.freedesktop.org/archive/individual/test/x11perf-1.7.0.tar.xz",
+   b3sum = "8ca5617cc9781ee32bdf60f24742b0ed8baaf30d1e8f8962e694dbe6377fc81a",
+   build = "./configure",
+};
+
+xorg-xauth = {
+   url = "https://x.org/pub/individual/app/xauth-1.1.5.tar.xz",
+   b3sum = "c3a887e6da4d081e43fa32d4b2912f5142744b8c40deb1b0d2b38899b871db08",
+   build = "./configure",
+};
+
+xorg-xbacklight = {
+   url = "https://x.org/pub/individual/app/xbacklight-1.2.4.tar.xz",
+   b3sum = "43191e56e697bd66357c4430cc1c2375253c515af4fafc8074abf51f39d5d7e1",
+   build = "./configure",
+};
+
+xorg-xcmsdb = {
+   url = "https://x.org/pub/individual/app/xcmsdb-1.0.7.tar.xz",
+   b3sum = "d9ac57345049322fd25178f04feb25811fb741abbb0ed729fa74b1795b1f358a",
+   build = "./configure",
+};
+
+xorg-xcursorgen = {
+   url = "https://x.org/pub/individual/app/xcursorgen-1.0.9.tar.xz",
+   b3sum = "f14043cea58f11b7cec4200446f41bf9f69315f443187558cfe4d2feb01a4ad8",
+   build = "./configure",
+};
+
+xorg-xdpyinfo = {
+   url = "https://x.org/pub/individual/app/xdpyinfo-1.4.0.tar.xz",
+   b3sum = "e38f6837b33398cfc7e02df035df74cc40fea111885ac957f429b81901eb8df6",
+   build = "./configure",
+};
+
+xorg-xdriinfo = {
+   url = "https://x.org/pub/individual/app/xdriinfo-1.0.8.tar.xz",
+   b3sum = "25584eab08119b7a10d1f381a54ca20f067de62a8915728cc07e870ba05cd41e",
+   build = "./configure",
+};
+
+xorg-xev = {
+   url = "https://x.org/pub/individual/app/xev-1.2.7.tar.xz",
+   b3sum = "283c351be26ec3439345860f1b24cc201cdc9186db82c8f95fbbdbe1340a35ca",
+   build = "./configure",
+};
+
+xorg-xgamma = {
+   url = "https://x.org/pub/individual/app/xgamma-1.0.8.tar.xz",
+   b3sum = "357e0518e880ca340b0dc97ddec8532c6a5fe8b001006be0a45f077b6a40500f",
+   build = "./configure",
+};
+
+xorg-xhost = {
+   url = "https://x.org/pub/individual/app/xhost-1.0.10.tar.xz",
+   b3sum = "a6ffa3dae67f971d1e32671ad4ea47e3b44dde371d35458f896aca582778c962",
+   build = "./configure",
+};
+
+xorg-xinput = {
+   url = "https://x.org/pub/individual/app/xinput-1.6.4.tar.xz",
+   b3sum = "365c50c59f62fa73e62539ddac0072849798646d0ca07c40be3ff477e2a87c07",
+   build = "./configure",
+};
+
+xorg-xkbcomp = {
+   url = "https://x.org/pub/individual/app/xkbcomp-1.5.0.tar.xz",
+   b3sum = "34fc3e00aa670b37cb68a69d35c0a68019e3cf44b77c2ff1035cc88317702a3d",
+   build = "./configure",
+};
+
+xorg-xkbevd = {
+   url = "https://x.org/pub/individual/app/xkbevd-1.1.6.tar.xz",
+   b3sum = "e30fb2ed680d16725172bc35a3146877b0cc84143df20c7af3a10fe191df8379",
+   build = "./configure",
+};
+
+xorg-xkbutils = {
+   url = "https://x.org/pub/individual/app/xkbutils-1.0.6.tar.xz",
+   b3sum = "f19c157f5eaad7c91ee101952e55b9fd991b060892ecb3e6d9a7b46fa1dbe587",
+   build = "./configure",
+};
+
+xorg-xkill = {
+   url = "https://x.org/pub/individual/app/xkill-1.0.7.tar.xz",
+   b3sum = "a573b77381898106499c4c63204000b1178b171eef5955c44a2cf4ce8af6dfff",
+   build = "./configure",
+};
+
+xorg-xlsatoms = {
+   url = "https://x.org/pub/individual/app/xlsatoms-1.1.4.tar.xz",
+   b3sum = "b757b2bb09b2a743b07de4142893c4024e0f183611831fcd6a09c7cfa9e118f4",
+   build = "./configure",
+};
+
+xorg-xlsclients = {
+   url = "https://x.org/pub/individual/app/xlsclients-1.1.6.tar.xz",
+   b3sum = "7c28768ab1d296f01d9c2dfac5dbe64c92521b584ca42ea9a8e1b9707e02dd89",
+   build = "./configure",
+};
+
+xorg-xmessage = {
+   url = "https://x.org/pub/individual/app/xmessage-1.0.7.tar.xz",
+   b3sum = "e26ed537dfbc5cfb36f6545cd7d0323822b445d503242528c8c4fb561770b008",
+   build = "./configure",
+};
+
+xorg-xmodmap = {
+   url = "https://x.org/pub/individual/app/xmodmap-1.0.11.tar.xz",
+   b3sum = "e15296a8cd125b5b7907d5fd4c200fa476aeee875e16bec68020bf6236bd84ac",
+   build = "./configure",
+};
+
+xorg-xpr = {
+   url = "https://x.org/pub/individual/app/xpr-1.2.0.tar.xz",
+   b3sum = "25da4a7ec210a0fae9876be558a34f0ac91b7cd0aa791edc6a9b44aa156884a0",
+   build = "./configure",
+};
+
+xorg-xprop = {
+   url = "https://x.org/pub/individual/app/xprop-1.2.8.tar.xz",
+   b3sum = "2fdeec862616d7bcd00f3ab3db40244e2a58d5816a78211f0cc467b174a77191",
+   build = "./configure",
+};
+
+xorg-xrandr = {
+   url = "https://x.org/pub/individual/app/xrandr-1.5.4.tar.xz",
+   b3sum = "ec6019c6928189dbd44f51f1bfa3146d5e242ff7873c0b99d85c0f1716583b92",
+   build = "./configure",
+};
+
+xorg-xrdb = {
+   url = "https://x.org/pub/individual/app/xrdb-1.2.2.tar.xz",
+   b3sum = "b1be1bdd57d6323d69b129a8421cf92faac198446343a697ac8f1ba7d0f210ca",
+   build = "./configure",
+};
+
+xorg-xrefresh = {
+   url = "https://x.org/pub/individual/app/xrefresh-1.1.0.tar.xz",
+   b3sum = "e25ed01d99ad339bf823c46cb8427cf3d2cbd99d1df9937e379677636474f1f4",
+   build = "./configure",
+};
+
+xorg-xset = {
+   url = "https://x.org/pub/individual/app/xset-1.2.5.tar.xz",
+   b3sum = "18f8a870e8c1f0dbdb1d66173da0a6d08bea283fade48d19b2d27abc4d1304d6",
+   build = "./configure",
+   flags = { "--without-fontcache" }
+};
+
+xorg-xsetroot = {
+   url = "https://x.org/pub/individual/app/xsetroot-1.1.3.tar.xz",
+   b3sum = "55e29295c265ad3eaca803e805c8366b1b25b176a832177ed0f94f1a73c2bfd4",
+   build = "./configure",
+};
+
+xorg-xvinfo = {
+   url = "https://x.org/pub/individual/app/xvinfo-1.1.5.tar.xz",
+   b3sum = "2eabe28d3031b9b22198736150a6ed54281438b6bccd23a801895c206f791950",
+   build = "./configure",
+};
+
+xorg-xwd = {
+   url = "https://x.org/pub/individual/app/xwd-1.0.9.tar.xz",
+   b3sum = "02f6811e5aa89ccfd702bfcd00450affffe57d8a491a45c17409e70d6060ee76",
+   build = "./configure",
+};
+
+xorg-xwininfo = {
+   url = "https://x.org/pub/individual/app/xwininfo-1.1.6.tar.xz",
+   b3sum = "a122e569267bfea0d2095b7957f294ebb71e71cb5f32fa8924f8ccdf3f5cfe50",
+   build = "./configure",
+};
+
+xorg-xwud = {
+   url = "https://x.org/pub/individual/app/xwud-1.0.7.tar.xz",
+   b3sum = "839d03bf49323a0ac54398c26828c744a1ae112313abe7e340024e26854af123",
+   build = "./configure",
+};
+
+xorg-font-util = {
+   url = "https://x.org/pub/individual/font/font-util-1.4.2.tar.xz",
+   b3sum = "a484ff6ec9badc1f9ed79fd8d50768f39032b85af42abaf248089b15c94bec78",
+   build = "./configure",
+   flags = {
+      "--with-mapdir=/usr/share/fonts/util",
+      "--with-fontrootdir=/usr/share/fonts",
+   }
+};
+
+xkeyboard-config = {
+   url = "https://x.org/pub/individual/data/xkeyboard-config/xkeyboard-config-2.47.tar.xz",
+   b3sum = "d7fd87d845828dfc9251d84b6c7690a4dc969ea72e0e8d5bf868706c959d322e",
+   build = "meson",
+   flags = {
+      --"-Dxkb-base=/usr/share/X11/xkb",
+      "-Dcompat-rules=true",
+      "-Dxorg-rules-symlinks=true",
+   }
+};
+
+libxkbcommon = {
+   url = "https://github.com/xkbcommon/libxkbcommon/archive/xkbcommon-1.13.2/xkbcommon-1.13.2.tar.gz",
+   b3sum = "b6b869719334d160764d2fc3f1dd134dd903b3ea1b0605cd05e6e36917311a54",
+   build = "meson",
+   flags = {
+      "-Denable-wayland=false",
+      "-Denable-docs=false"
+   }
+};
+
+libepoxy = {
+   url = "https://github.com/anholt/libepoxy/archive/1.5.10/libepoxy-1.5.10.tar.gz",
+   b3sum = "df74575d2a4ca65bf98d15ed6357cb066b6369704137e53b5e1d35b6d582657e",
+   build = "meson",
+};
+
+xorg-server = {
+   url = "https://x.org/archive/individual/xserver/xorg-server-21.1.23.tar.xz",
+   b3sum = "e9982a52418f189dd4a3b118e9a0b1ea5910a2d4a61814adcc7aa554c472ffb5",
+   build = "meson",
+   flags = {
+      "-D{xephyr,xnest,xvfb}=false",
+      "-Dxorg=true",
+      "-Dsha1=libcrypto",
+      "-Dxkb_dir=/usr/share/X11/xkb",
+      "-Dxkb_output_dir=/var/db/xkb",
+      "-Dsystemd_logind=false",
+   },
+   post = [[
+      mkdir -p $destdir/etc/{sysconfig,X11/xorg.conf.d}
+      cd $destdir/etc/sysconfig
+      printf "/tmp/.ICE-unix dir 1777 root root\n" >> createfiles
+      printf "/tmp/.X11-unix dir 1777 root root\n" >> createfiles
+      cd $destdir/etc/X11
+      printf "needs_root_rights = no\n" > Xwrapper.config
+   ]]
+};
+
+libevdev = {
+   url = "https://www.freedesktop.org/software/libevdev/libevdev-1.13.6.tar.xz",
+   b3sum = "7cc8322f062a0bdacaf73f7fcb6353024764620633c0c434d725ca3a95119fef",
+   build = "meson",
+   flags = { "-D{documentation,tests,tools}=disabled" }
+};
+
+xf86-input-evdev = {
+   url = "https://x.org/pub/individual/driver/xf86-input-evdev-2.11.0.tar.xz",
+   b3sum = "913b3928012993fac64ed83c74cf110cc178018d95377d079e017fc630b97f10",
+   build = "./configure",
+};
+
+libinput = {
+   url = "https://gitlab.freedesktop.org/libinput/libinput/-/archive/1.31.3/libinput-1.31.3.tar.bz2",
+   b3sum = "ae74b2c2202357119ec0f6e65951a9b2b38332ae5c8c3f59b05f6d80598ef033",
+   build = "meson",
+   flags = {
+      "-Dudev-dir=/lib64/udev",
+      "-Dlibwacom=false",
+      "-Dmtdev=false",
+      "-Ddebug-gui=false",
+      "-Dtests=false",
+   },
+};
+
+xf86-input-libinput = {
+   url = "https://x.org/pub/individual/driver/xf86-input-libinput-1.5.0.tar.xz",
+   b3sum = "83443b66b1461152815d0294a63f6db7eaf6222acdc70723ed620ec2e8c22583",
+   build = "./configure",
+   prep = [[
+      sed -e '23 a \        Option "AccelProfile" "flat"' \
+          -i ./conf/40-libinput.conf
+   ]]
+};
+
+xf86-input-synaptics = {
+   url = "https://x.org/pub/individual/driver/xf86-input-synaptics-1.10.0.tar.xz",
+   b3sum = "0b4ae892cda4cdb1d57170a9ee5a63ccec28df7b9bcdedaafd32f997da7bccd4",
+   build = "./configure",
+};
+
+xorg-xinit = {
+   url = "https://x.org/pub/individual/app/xinit-1.4.4.tar.xz",
+   b3sum = "fe988bbff7c4a950256540ad8a469fed1cdbe11439ba738b9714ee2de16f2a6c",
+   build = "./configure",
+   flags = { "--with-xinitdir=/etc/X11/xinit" },
+   post = [[
+      cd $destdir/etc/X11/xinit
+      printf "#!/bin/sh\n" >xserverrc
+      printf "exec /usr/bin/Xorg -nolisten tcp "$@" vt1\n" >>xserverrc
+      chmod 755 xserverrc
+   ]]
+};
