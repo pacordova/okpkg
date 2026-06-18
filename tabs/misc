@@ -221,7 +221,7 @@ opendoas = {
 
 picom = {
    url = "https://github.com/yshui/picom/archive/v13/picom-13.tar.gz",
-   b3sum = "705bac0be7c10192b523545e98e2244becd41f1e8c048e047fb59a60944e3a22",
+   b3sum = "359520fd3d5fab8810ea8d7d9c16b783fca2b38f0aa1c284c0285b436ac0319e",
    build = "meson",
    flags = {
       "-Ddbus=false",
@@ -298,7 +298,7 @@ cryptsetup = {
 
 cups = {
    url = "https://github.com/OpenPrinting/cups/releases/download/v2.4.19/cups-2.4.19-source.tar.gz",
-   b3sum = "801c1e75de3aeecac9c7840b7fa3b5bd1a8d711b84a5b470d0baef54b0ef4aae",
+   b3sum = "1059af629115e1efcdcb855ea5b7738e0dc08c891754377d55657758eb3d9bf6",
    build = "./configure",
    flags = {
       "--with-rcdir=/tmp/cupsinit",
@@ -359,7 +359,7 @@ feh = {
 
 git = {
    url = "https://kernel.org/pub/software/scm/git/git-2.54.0.tar.xz",
-   b3sum = "e8571f047bbe4c0c30606654cd83e19a5d9f1d27cf7a6106759cd3aaebb0099e",
+   b3sum = "7c4e27d4387813339904761787e798085686075fbf04e2149a6111ff137e1f3e",
    build = "./configure",
    flags = {
       "--with-gitconfig=/etc/gitconfig",
@@ -378,7 +378,7 @@ zlib-ng = {
 
 htop = {
    url = "https://github.com/htop-dev/htop/releases/download/3.5.1/htop-3.5.1.tar.xz",
-   b3sum = "294a85dbb2047f8fafe51aee75b706b5d21cd0045007c922643d204baa9ec219",
+   b3sum = "f5a60d68daabacbe9e5039112ba2daaf0017bc14d276f82a60cb137c515ef3f4",
    build = "./configure",
 };
 
@@ -590,7 +590,7 @@ sxiv = {
 
 tmux = {
    url = "https://github.com/tmux/tmux/releases/download/3.6b/tmux-3.6b.tar.gz",
-   b3sum = "b22efde83eba84fbae9911517254aaa9c6a0b1d5c59c09975ae999a1686b1911",
+   b3sum = "a343e2b517edaabd7b99145347477f992458fda1a414166e6154eef219525a5c",
    build = "./configure",
 };
 

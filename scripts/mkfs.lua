@@ -270,7 +270,7 @@ os.execute([[
    chattr +i ./etc/resolv.conf
    chmod 0755 ./bin/c99
    chmod 1777 ./tmp
-   git clone --depth=1 {file:///,./}usr/okpkg
+   #git clone --depth=1 {file:///,./}usr/okpkg
    tar -xf /var/cache/sys/cmake-bin-*.tar.lz
    tar -xf /var/cache/sys/linux-lts-*.tar.lz
    cp -a /var/cache/sys/linux-lts-*.tar.lz ./var/cache/packages
