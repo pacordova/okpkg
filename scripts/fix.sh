@@ -21,6 +21,7 @@ mandir=/usr/share/man
 setcap cap_net_raw+p /bin/ping
 chown root:messagebus $libexecdir/dbus-daemon-launch-helper
 chmod 4750 $libexecdir/dbus-daemon-launch-helper
+chmod 1777 /tmp
 
 # clock
 ln -sf /usr/share/zoneinfo/US/Eastern /etc/localtime

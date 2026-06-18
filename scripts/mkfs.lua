@@ -269,6 +269,7 @@ os.execute([[
    mknod -m 666 ./dev/null c 1 3
    chattr +i ./etc/resolv.conf
    chmod 0755 ./bin/c99
+   chmod 1777 ./tmp
    git clone --depth=1 {file:///,./}usr/okpkg
    tar -xf /var/cache/sys/cmake-bin-*.tar.lz
    tar -xf /var/cache/sys/linux-lts-*.tar.lz
