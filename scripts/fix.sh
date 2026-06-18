@@ -1,7 +1,6 @@
 #!/bin/sh
 
-#libexecdir=/usr/libexec
-libexecdir=/usr/lib64
+libexecdir=/usr/libexec
 mandir=/usr/share/man
 
 # sys
