@@ -1,3 +1,9 @@
+exfatprogs = {
+   url = "https://github.com/exfatprogs/exfatprogs/releases/download/1.4.2/exfatprogs-1.4.2.tar.xz",
+   b3sum = "4c738670fedc4ec20435bd11bafbdc9c88a63d2c25b7dad4ad4f04d6aee6dadc",
+   build = "./configure",
+};
+ 
 tree = {
    url = "https://gitlab.com/OldManProgrammer/unix-tree/-/archive/2.3.2/unix-tree-2.3.2.tar.bz2",
    b3sum = "83f69770304eb35d065ee8db52aebcb8d149c5ab6b39ac8d9bb76d5d72a598da",
@@ -280,7 +286,7 @@ catgirl = {
 
 cryptsetup = {
    url = "https://kernel.org/pub/linux/utils/cryptsetup/v2.8/cryptsetup-2.8.6.tar.xz",
-   b3sum = "140d70b762c525e7a2b01cacb02ee49fb6ecf3cdd2c5e2270e65dcd1e9c6fa96",
+   b3sum = "a922e6ef93df6ebc89b0a8a136b54a80995622a28dcd95a7ee68806415be2dd2",
    build = "./configure",
    flags = {
       "--with-crypto_backend=gcrypt",
