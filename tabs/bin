@@ -26,8 +26,8 @@ rust-bin = {
 };
 
 firefox = {
-   url = "https://download-installer.cdn.mozilla.net/pub/firefox/releases/152.0/linux-x86_64/en-US/firefox-152.0.tar.xz",
-   b3sum = "00114a60bb3673ed4780d3b3cdcc9e24a647c867116e36ab1eb0974ee6b632f2",
+   url = "https://download-installer.cdn.mozilla.net/pub/firefox/releases/152.0.1/linux-x86_64/en-US/firefox-152.0.1.tar.xz",
+   b3sum = "cac532f37370f593d3a492a87d0fefa81f910b04d9364c2ce163ec5f4e9b1959",
    post = [[
       mkdir -p $destdir/{bin,lib64,opt/firefox}
       cp -fr . $destdir/opt/firefox
@@ -58,10 +58,10 @@ tinytex = {
 };
 
 signal-desktop = {
-   url = "https://updates.signal.org/desktop/apt/pool/s/signal-desktop/signal-desktop_8.14.0_amd64.deb",
-   b3sum = "269a68f6afae4686d1e1f405983596dd4a8961a820d5d77674a71be43c0342d7",
+   url = "https://updates.signal.org/desktop/apt/pool/s/signal-desktop/signal-desktop_8.15.0_amd64.deb",
+   b3sum = "4ec3d8c8f5ad3b4c5c923a5d17e2acc46833a3eddfcc6d3d882d3a5cf599cd8e",
    post = [[
-      ar p /var/cache/distfiles/signal-desktop_8.14.0_amd64.deb data.tar.xz \
+      ar p /var/cache/distfiles/signal-desktop_8.15.0_amd64.deb data.tar.xz \
       | $tar -C "$destdir" -xJ
    ]]
 };
