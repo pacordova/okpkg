@@ -68,6 +68,7 @@ ok.mkdir("./var/spool")
 ok.mkdir("./var/spool/mail")
 
 -- Symlinks
+ok.symlink("lib64", "./lib")
 ok.symlink("../../bin/env", "./usr/bin/env")
 ok.symlink("bash",    "./bin/sh")
 ok.symlink("flex",    "./bin/lex")
@@ -270,9 +271,9 @@ os.execute([[
    chattr +i ./etc/resolv.conf
    chmod 0755 ./bin/c99
    git clone --depth=1 {file:///,./}usr/okpkg
-   tar -xf /var/cache/packages/linux-lts-*.tar.lz
-   tar -xf /var/cache/packages/cmake-bin-*.tar.lz
-   cp -a /var/cache/packages/linux-lts-*.tar.lz ./var/cache/packages
+   tar -xf /var/cache/sys/cmake-bin-*.tar.lz
+   tar -xf /var/cache/sys/linux-lts-*.tar.lz
+   cp -a /var/cache/sys/linux-lts-*.tar.lz ./var/cache/packages
    cp -a {/,./}etc/dinit.d
    cp -a {/,./}var/cache/distfiles
    cp -f  /etc/{protocols,services} ./etc
