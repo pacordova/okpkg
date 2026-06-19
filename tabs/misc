@@ -447,7 +447,7 @@ libwebp = {
 
 r = {
    url = "https://cran.r-project.org/src/base/R-4/R-4.6.0.tar.gz",
-   b3sum = "a2081612176af105e42c35187a3445efe28614da63605459c91caffa1381e3dc",
+   b3sum = "046dc9771644a1d43acc90ea620012089e4cfff574b97181c38df6eaa078fbf4",
    build = "./configure",
    flags = {
       "--prefix=/opt/R/4.6.0",
