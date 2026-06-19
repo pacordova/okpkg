@@ -12,9 +12,9 @@ conky = {
 
 dcron = {
    url = "http://www.jimpryor.net/linux/releases/dcron-4.5.tar.gz",
-   b3sum = "4190e7664e055d0540c03e38b5ad3e7597ca9b27953b27b53731e66884da2c84",
+   b3sum = "ff8241862e959a6e733fba2dc095abc841b30998e51b458758b27341e23022ca",
    build = "make",
-   flags = { "PREFIX=/usr", "SBINDIR=/usr/bin" }
+   flags = { "PREFIX=/usr", "{,S}BINDIR=/bin" }
 };
 
 dmidecode = {
