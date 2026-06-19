@@ -1,67 +1,3 @@
-exfatprogs = {
-   url = "https://github.com/exfatprogs/exfatprogs/releases/download/1.4.2/exfatprogs-1.4.2.tar.xz",
-   b3sum = "4c738670fedc4ec20435bd11bafbdc9c88a63d2c25b7dad4ad4f04d6aee6dadc",
-   build = "./configure",
-};
- 
-tree = {
-   url = "https://gitlab.com/OldManProgrammer/unix-tree/-/archive/2.3.2/unix-tree-2.3.2.tar.bz2",
-   b3sum = "83f69770304eb35d065ee8db52aebcb8d149c5ab6b39ac8d9bb76d5d72a598da",
-   build = "make",
-   flags = {
-      "PREFIX=$destdir/usr",
-      "DESTDIR=$destdir/bin",
-      "MANDIR=$destdir/usr/share/man",
-   }
-};
-
-pigz = {
-   url = "https://zlib.net/pigz/pigz-2.8.tar.gz",
-   b3sum = "fa165f414a12851806d9d54920879dd989917b9aa410aec671c602b18773b236",
-   build = "make_noinstall",
-   flags = { "ZOP=", "CFLAGS='-O3 -DNOZOPFLI'" },
-   post = [[
-      mkdir -p $destdir{/bin,/usr/share/man/man1}
-      cp -f  pigz   $destdir/bin/pigz
-      cp -f  pigz.1 $destdir/usr/share/man/man1/pigz.1
-   ]]
-};
-
-_dbus = {
-   url = "https://dbus.freedesktop.org/releases/dbus/dbus-1.16.2.tar.xz",
-   b3sum = "b1d1f22858a8f04665e5dca29d194f892620f00fd3e3f4e89dd208e78868436e",
-   build = "meson",
-   flags = {
-      "-Ddbus_user=messagebus",
-      "-Dsystem_pid_file=/run/dbus/pid",
-      "-Dsystemd_{system,user}_unitdir=no",
-      "-Dsystem_socket=/run/dbus/system_bus_socket",
-   },
-};
-
-7zip = {
-   url = "https://github.com/ip7z/7zip/releases/download/26.01/7z2601-src.tar.xz",
-   b3sum = "9a686e37bf252363880c268ca1c033f2148ae9196f9a8c58d0bcdedce8460786",
-   build = _,
-   post = [[
-      rm -fr * && tar -xf /var/cache/ok/dist/7z2601-src.tar.xz
-      for i in Bundles/{Alone,Alone7z,Format7zF,SFXCon} UI/Console; do
-         make -C CPP/7zip/$i -f ../../cmpl_gcc.mak
-      done
-      install -d $destdir/usr/bin
-      install -d $destdir/usr/lib64/7zip
-      install -t $destdir/usr/lib64/7zip CPP/7zip/Bundles/Alone/b/g/7za
-      install -t $destdir/usr/lib64/7zip CPP/7zip/Bundles/Alone7z/b/g/7zr
-      install -t $destdir/usr/lib64/7zip CPP/7zip/Bundles/Format7zF/b/g/7z.so
-      install -t $destdir/usr/lib64/7zip CPP/7zip/UI/Console/b/g/7z
-      install CPP/7zip/Bundles/SFXCon/b/g/7zCon $destdir/usr/lib64/7zip/7zCon.sfx
-      for i in 7z 7za 7zr; do
-         printf '#!/bin/sh\nexec /usr/lib64/7zip/%s "$@"' $i > _
-         install _ $destdir/usr/bin/$i
-      done
-   ]]
-};
-
 cpu-x = {
    url = "https://github.com/TheTumultuousUnicornOfDarkness/CPU-X/archive/v5.1.3/CPU-X-5.1.3.tar.gz",
    b3sum = "148f38d191d6978b4ced4adecb42d2699e3795b284ccba18193d5b6ca2d486cf",
@@ -91,54 +27,12 @@ dmidecode = {
    }
 };
 
-_gcc = {
-   url = "https://ftp.gnu.org/gnu/gcc/gcc-16.1.0/gcc-16.1.0.tar.xz",
-   b3sum = "5f001609f662143ce9285cd740bd0acfeeaf7f13731b46fd1d9ebe620c5c340d",
-   build = "../configure",
-   flags = {
-      "--disable-fixed-point",
-      "--disable-fixincludes",
-      "--disable-gnu-indirect-function",
-      "--disable-libsanitizer",
-      "--disable-libssp",
-      "--disable-libstdcxx-pch",
-      "--disable-lto",
-      "--disable-multilib",
-      "--disable-nls",
-      "--disable-werror",
-      "--enable-bootstrap",
-      "--enable-checking=release",
-      "--enable-clocale=gnu",
-      "--enable-__cxa_atexit",
-      "--enable-default-pie",
-      "--enable-default-ssp",
-      "--enable-initfini-array",
-      "--enable-languages=c,c++,fortran",
-      "--enable-shared",
-      "--enable-threads=posix",
-      "--enable-tls",
-      "--with-linker-hash-style=gnu",
-      "--without-included-gettext",
-      "--with-system-zlib",
-      "--without-zstd",
-      "LD=ld",
-   },
-   post = [[
-      cc=$destdir/usr/bin/gcc
-      find $destdir -name libgtkpeer.a  -exec rm -f '{}' +
-      find $destdir -name libgjsmalsa.a -exec rm -f '{}' +
-      install -d $destdir/usr/lib64/bfd-plugins
-      ln -sf ../gcc/`$cc -dumpmachine`/`$cc -dumpversion`/liblto_plugin.so \
-          $destdir/usr/lib64/bfd-plugins/liblto_plugin.so
-      install -d $destdir/usr/share/gdb/auto-load/usr/lib64
-      mv $destdir/usr/lib64/*gdb.py $destdir/usr/share/gdb/auto-load/usr/lib64
-      printf '#!/bin/sh\n' >>$destdir/usr/bin/c99
-      printf 'exec gcc -std=c99 "$@"' >>$destdir/usr/bin/c99
-      chmod +x $destdir/usr/bin/c99
-      ln -sf gcc $destdir/usr/bin/cc
-   ]]
+exfatprogs = {
+   url = "https://github.com/exfatprogs/exfatprogs/releases/download/1.4.2/exfatprogs-1.4.2.tar.xz",
+   b3sum = "4c738670fedc4ec20435bd11bafbdc9c88a63d2c25b7dad4ad4f04d6aee6dadc",
+   build = "./configure",
 };
-
+ 
 ghostscript = {
    url = "https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs10071/ghostscript-10.07.1.tar.xz",
    b3sum = "58fbdcd8a120a4a65df0f0a1ab1af98700a26d5401e3d7fea8e95a83fd3a7dbf",
@@ -231,6 +125,18 @@ picom = {
    post = [[ rm -fr $destdir/usr/share/applications ]]
 };
 
+pigz = {
+   url = "https://zlib.net/pigz/pigz-2.8.tar.gz",
+   b3sum = "fa165f414a12851806d9d54920879dd989917b9aa410aec671c602b18773b236",
+   build = "make_noinstall",
+   flags = { "ZOP=", "CFLAGS='-O3 -DNOZOPFLI'" },
+   post = [[
+      mkdir -p $destdir{/bin,/usr/share/man/man1}
+      cp -f  pigz   $destdir/bin/pigz
+      cp -f  pigz.1 $destdir/usr/share/man/man1/pigz.1
+   ]]
+};
+
 pv = {
    url = "https://www.ivarch.com/s/pv-1.10.5.tar.gz",
    b3sum = "a69fc3e9c73139fc39825020784ac9587c1eb0c8306aa72a195797eb52ccb1df",
@@ -253,6 +159,17 @@ pipewire = {
    b3sum = "0d418f43cae9b9103a5e342259c8f120a2a944a2ef037a77c6304a3d7ce7a257",
    build = "meson",
    flags = { '-Dsession-managers="[]"' }
+};
+
+tree = {
+   url = "https://gitlab.com/OldManProgrammer/unix-tree/-/archive/2.3.2/unix-tree-2.3.2.tar.bz2",
+   b3sum = "83f69770304eb35d065ee8db52aebcb8d149c5ab6b39ac8d9bb76d5d72a598da",
+   build = "make",
+   flags = {
+      "PREFIX=$destdir/usr",
+      "DESTDIR=$destdir/bin",
+      "MANDIR=$destdir/usr/share/man",
+   }
 };
 
 wireplumber = {
@@ -384,8 +301,11 @@ htop = {
 
 iftop = {
    url = "https://pdw.ex-parrot.com/iftop/download/iftop-1.0pre4.tar.gz",
-   b3sum = "a312fb825ead8dddafd9e1cfff755ef3c4aee2988158515225f39985058391cd",
+   b3sum = "ed575aa75be5fea67e2adec01f828b2b78b0cd70709a2c8e42811c8ec6985242",
    build = "./configure",
+   flags = { 
+      'CFLAGS="$CFLAGS -std=gnu17 -fcommon"',
+   }
 };
 
 irssi = {

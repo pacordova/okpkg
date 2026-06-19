@@ -755,8 +755,8 @@ xorg-xinit = {
    flags = { "--with-xinitdir=/etc/X11/xinit" },
    post = [[
       cd $destdir/etc/X11/xinit
-      printf "#!/bin/sh\n" >xserverrc
-      printf "exec /usr/bin/Xorg -nolisten tcp "$@" vt1\n" >>xserverrc
+      >>xserverrc printf "#!/bin/sh\n"
+      >>xserverrc printf "exec /bin/Xorg -nolisten tcp "$@" vt1\n"
       chmod 755 xserverrc
    ]]
 };
