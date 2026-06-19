@@ -78,8 +78,8 @@ python-jinja = {
 };
 
 python-docutils = {
-   url = "https://pypi.io/packages/source/d/docutils/docutils-0.22.4.tar.gz",
-   b3sum = "015f8d39824c82f590ebaaadb9734dabbfe2c951ee07d0e2c5f7b5beced6cca1",
+   url = "https://pypi.io/packages/source/d/docutils/docutils-0.23.tar.gz",
+   b3sum = "6c4464081c82f0dfb41095c85d4c4d4a4335f0ccd163878f7ccd15585d26073b",
    build = "python-build",
 };
 
