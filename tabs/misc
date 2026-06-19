@@ -63,9 +63,8 @@ jack2 = {
 
 jq = {
    url = "https://github.com/jqlang/jq/releases/download/jq-1.8.1/jq-1.8.1.tar.gz",
-   b3sum = "38d31be04a186ead25fc414d44332a7943e2661e4ec92cf849063077db7a69e3",
+   b3sum = "9cd38d1bbee1edf69145fb22032b12eccc49cda2741d3bc8b6c1eb9d7d10ff1e",
    build = "./configure",
-   flags = { "--with-oniguruma=builtin" }
 };
 
 krb5 = {
