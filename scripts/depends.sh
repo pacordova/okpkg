@@ -5,8 +5,8 @@ cachedir=/var/db/dependencies
 mkdir -p "$cachedir"
 
 # Lists all binary files in a file list from stdin
-# usage: lself < FILE
-lself(){
+# usage: listelf < FILE
+listelf(){
   sed 's|^.||' \
   | xargs file \
   | awk -F: '(/executable/||/shared object/)&&/ELF/{print $1}'
@@ -21,7 +21,7 @@ ldd_all(){
 # objdump all ELF files in stdin
 # usage: dump_all < FILE
 dump_all(){
-  lself | xargs objdump -p 2>/dev/null
+  listelf | xargs objdump -p 2>/dev/null
 }
 
 # Filters for NEEDED in objdump
@@ -55,12 +55,11 @@ mkcache(){
 # Simple but unsafe way to find broken packages
 # usage: unsafe < FILE
 unsafe(){
-  lself | xargs ldd 2>/dev/null | grep "not found"
+  listelf | xargs ldd 2>/dev/null | grep "not found"
 }
 
 # Traditional but unsafe
-#ldd_all
-for f in "$indexdir/"*; do unsafe < "$f" | sed "s|^|[$f]: |"; done
+for f in $indexdir/*; do unsafe < $f | sed "s|^|[$f]: |"; done
 
 #mkcache
 #revdeps eudev
