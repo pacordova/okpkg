@@ -101,11 +101,11 @@ llvm = {
       "-DLLVM_ENABLE_{FFI,RTTI}=ON",
       "-DLLVM_ENABLE_PROJECTS='clang;lld'",
       "-DLLVM_INCLUDE_BENCHMARKS=OFF",
-      "-DLLVM_LIBDIR_SUFFIX=/../../lib64",
       "-DLLVM_TARGETS_TO_BUILD='host;AMDGPU'",
       "-DCLANG_DEFAULT_PIE_ON_LINUX=ON",
       "-DCLANG_LINK_CLANG_DYLIB=ON",
-   }
+   },
+   post = [[ mv $destdir/usr/lib $destdir/lib64 ]],
 };
 
 lrzip = {
@@ -155,8 +155,8 @@ pigz = {
 };
 
 pv = {
-   url = "https://www.ivarch.com/s/pv-1.10.5.tar.gz",
-   b3sum = "a69fc3e9c73139fc39825020784ac9587c1eb0c8306aa72a195797eb52ccb1df",
+   url = "https://www.ivarch.com/s/pv-1.11.0.tar.gz",
+   b3sum = "e7106849d3b08b703e1428100eebbd334631c7aeaf13a497f63d8d9700ebbd44",
    build = "./configure",
 };
 
@@ -373,8 +373,8 @@ libtorrent-rasterbar = {
 };
 
 linux-lts = {
-   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.18.35.tar.xz",
-   b3sum = "bc6391cd1059437e2256dd744b171342e9191bbd6a6e044b35d0716ff7edf1a3",
+   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.18.36.tar.xz",
+   b3sum = "0711a7440999feb5bbab3bfce916e04e4737e27d5693bc87209e14e052bd91e8",
    build = "make_install",
    flags = {
       "headers_install",
