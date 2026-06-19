@@ -91,6 +91,19 @@ qjackctl = {
    build = "cmake",
 };
 
+llvm = {
+   url = "https://github.com/llvm/llvm-project/releases/download/llvmorg-20.1.8/llvm-project-20.1.8.src.tar.xz",
+   b3sum = "e185e44fa06e028d8b621ad44a935e9a171c18d01ae66865fefadf620ef1b05e",
+   build = "cmake",
+   flags = {
+   },
+   prepare = [[ 
+      grep -rl '#!.*python$' | xargs sed -i '1s/python$/python3/'
+      cd llvm
+   ]],
+
+};
+
 lrzip = {
    url = "https://github.com/ckolivas/lrzip/archive/v0.660/lrzip-0.660.tar.gz",
    b3sum = "796e5e141fa87cfdcca5832ec7e7743ea964bc22091b1fca587e9aa42770bb56",
@@ -437,7 +450,7 @@ pciutils = {
 -- r packages ragg (tidyverse) require libwebp to build
 libwebp = {
    url = "https://storage.googleapis.com/downloads.webmproject.org/releases/webp/libwebp-1.6.0.tar.gz",
-   b3sum = "a1894bccbaa7248664068d56025e55dcf30fd4bd2a48818eb9e51b84d5d80fda",
+   b3sum = "561ab69419b391c5dbba6b448f610d9a6bdb6a631d7067518ceba48109e23fc9",
    build = "./configure",
    flags = {
       "--enable-libwebp{mux,demux,decoder,extras}",
