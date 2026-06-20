@@ -189,7 +189,7 @@ graphite = {
    b3sum = "65798622ac815406b746660dfa3b214b79719b47ac7852f1a844577051642c14",
    build = "cmake",
    flags = { "-DCMAKE_INSTALL_PREFIX=/usr", "-DLIB_SUFFIX=64" },
-   post = [[ mv $destdir/usr/{bin,lib64} $destdir ]]
+   post = [[ mv $destdir/usr/{bin,lib64,..} ]],
 };
 
 iso-codes = {

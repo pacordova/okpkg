@@ -37,8 +37,8 @@ B = {
          "-DCMAKE_BUILD_TYPE=Release",
          "-DCMAKE_INSTALL_PREFIX=/",
          "-DCMAKE_INSTALL_LIBDIR=/lib64",
-         "-DCMAKE_INSTALL_RUNSTATEDIR=/run",
          "-DCMAKE_INSTALL_{,S}BINDIR=/bin",
+         "-DCMAKE_INSTALL_RUNSTATEDIR=/run",
          "-DCMAKE_SHARED_LIBS=True",
          "-DCMAKE_SKIP_RPATH=TRUE",
          ...
