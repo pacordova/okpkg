@@ -161,7 +161,7 @@ poppler = {
       "-DENABLE_LIBCURL=OFF",
       "-DENABLE_NSS3=OFF",
    },
-   post = [[ mv $destdir/{bin,..} ]]
+   post = [[ mv $destdir/usr/{bin,..} ]]
 };
 
 poppler-data = {
