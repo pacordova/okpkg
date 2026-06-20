@@ -2,6 +2,7 @@ vulkan-headers = {
    url = "https://github.com/KhronosGroup/Vulkan-Headers/archive/vulkan-sdk-1.4.350.0/Vulkan-Headers-vulkan-sdk-1.4.350.0.tar.gz",
    b3sum = "8400ca7d9ab008f8db866fc0cc7dccc8ebe5efb4d7aa7d13dae50ec8af309f65",
    build = "cmake",
+   flags = { "-DCMAKE_INSTALL_PREFIX=/usr" },
 };
 
 vulkan-loader = {

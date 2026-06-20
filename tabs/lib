@@ -203,8 +203,10 @@ json-c = {
    b3sum = "adc5d92666507b0746962226bd009d33c4db2195cc7aff079e40bd83ec2ffad0",
    build = "cmake",
    flags = {
-      "-DBUILD_{STATIC_LIBS=OFF,TESTING=OFF}",
-      "-DENABLE_{THREADING=ON,RDRAND=OFF}",
+      "-DBUILD_STATIC_LIBS=OFF",
+      "-DBUILD_TESTING=OFF",
+      "-DENABLE_RDRAND=OFF",
+      "-DENABLE_THREADING=ON",
    }
 };
 
@@ -264,7 +266,11 @@ libjpeg-turbo = {
    url = "https://github.com/libjpeg-turbo/libjpeg-turbo/releases/download/3.1.4.1/libjpeg-turbo-3.1.4.1.tar.gz",
    b3sum = "0aa89418430b4133a0c861a9b988b86b93e7269fb38329a723a696f8a0a0752d",
    build = "cmake",
-   flags = { "-DENABLE_STATIC=OFF", "-DWITH_{JPEG8=ON,JAVA=OFF}" }
+   flags = { 
+      "-DENABLE_STATIC=OFF",
+      "-DWITH_JPEG8=ON",
+      "-DWITH_JAVA=OFF",
+   }
 };
 
 libmnl = {
@@ -483,6 +489,7 @@ x265 = {
    build = "cmake",
    flags = {
       "-S source",
+      "-DCMAKE_INSTALL_PREFIX=/usr",
       "-DLIB_INSTALL_DIR=../lib64",
       "-DBIN_INSTALL_DIR=../bin",
       "-DENABLE_SHARED=ON",
