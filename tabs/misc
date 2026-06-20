@@ -45,7 +45,7 @@ ghostscript = {
 
 gifsicle = {
    url = "https://www.lcdf.org/gifsicle/gifsicle-1.96.tar.gz",
-   b3sum = "b8f63fe13d15a2d80162b643230fe275c0f48c1e09bbad28da80a905cf53e32a",
+   b3sum = "003bf573e3987510b00ce0bd3e21ec839be77004b31ddd55019b11af31d8eb09",
    build = "./configure",
 };
 
@@ -169,13 +169,6 @@ libcanberra = {
    }
 };
 
-pipewire = {
-   url = "https://gitlab.freedesktop.org/pipewire/pipewire/-/archive/1.2.6/pipewire-1.2.6.tar.bz2",
-   b3sum = "0d418f43cae9b9103a5e342259c8f120a2a944a2ef037a77c6304a3d7ce7a257",
-   build = "meson",
-   flags = { '-Dsession-managers="[]"' }
-};
-
 tree = {
    url = "https://gitlab.com/OldManProgrammer/unix-tree/-/archive/2.3.2/unix-tree-2.3.2.tar.bz2",
    b3sum = "83f69770304eb35d065ee8db52aebcb8d149c5ab6b39ac8d9bb76d5d72a598da",
@@ -185,13 +178,6 @@ tree = {
       "DESTDIR=$destdir/bin",
       "MANDIR=$destdir/usr/share/man",
    }
-};
-
-wireplumber = {
-   url = "https://gitlab.freedesktop.org/pipewire/wireplumber/-/archive/0.5.6/wireplumber-0.5.6.tar.bz2",
-   b3sum = "993f770165895af37853c3b79aea21754a5dd759a6cd543328bc00a88114d5c7",
-   build = "meson",
-   flags = { "-Dsystem-lua=true" }
 };
 
 --------------------------------------------------------------------------------
@@ -206,14 +192,6 @@ apulse = {
       ln -sf apulse/libpulse.so.0 usr/lib64
       sed -i 's:/usr/lib/:/usr/lib64/:' usr/bin/apulse
    ]]
-};
-
-catgirl = {
-   url = "https://git.causal.agency/catgirl/snapshot/catgirl-2.2a.tar.gz",
-   b3sum = "2d5ad5e26584c403be5d6f1e33e79e2bf1c679d182de0a4b8fe9f436a3bc3206",
-   build = "./configure",
-   flags = { "--mandir=/usr/share/man" },
-   prep = [[ sed -i '/ctags/d' Makefile ]]
 };
 
 cryptsetup = {
@@ -303,11 +281,6 @@ git = {
    ]]
 };
 
-zlib-ng = {
-   url = "https://github.com/zlib-ng/zlib-ng/archive/2.3.3/zlib-ng-2.3.3.tar.gz",
-   b3sum = "f8da44bd94927257defce151f942751cd2bddd668edff3ee91208dd3e30896cd",
-};
-
 htop = {
    url = "https://github.com/htop-dev/htop/releases/download/3.5.1/htop-3.5.1.tar.xz",
    b3sum = "f5a60d68daabacbe9e5039112ba2daaf0017bc14d276f82a60cb137c515ef3f4",
@@ -323,18 +296,11 @@ iftop = {
    }
 };
 
-irssi = {
-   url = "https://codeberg.org/irssi/irssi/releases/download/1.4.5/irssi-1.4.5.tar.xz",
-   b3sum = "5f3d1b97e66d8d1ab26c5ce9a2fd9b40aedad471b202aaff0c64a3bc79664e19",
-   build = "meson",
-};
-
 kirc = {
-   url = "https://github.com/mcpcpc/kirc/archive/0.3.2/kirc-0.3.2.tar.gz",
-   b3sum = "2e4df46287bb6f07b30e6d6325012ce21701196e3d801adf978bcd6dea7097dc",
+   url = "https://github.com/mcpcpc/kirc/archive/1.2.2/kirc-1.2.2.tar.gz",
+   b3sum = "ab4541c21c73cccfeec8e975da32c0fb722176f99f58072dd6f7941748723b7e",
    build = "make",
-   flags = { "PREFIX=/usr" },
-   prep = [[ sed -i 's/all: clean/all:/g' Makefile ]]
+   flags = { "BINDIR=/bin", "MANDIR=/usr/share/man" }
 };
 
 -- Remember to edit /etc/site-config.jam when you update Python!
@@ -402,38 +368,10 @@ lm-sensors = {
    }
 };
 
-logrotate = {
-   url = "https://github.com/logrotate/logrotate/releases/download/3.22.0/logrotate-3.22.0.tar.xz",
-   b3sum = "e23bd85e242aadbc110b8acba874947c13f783bbc7c9e65663dc0a757c609291",
-   build = "./configure",
-   flags = { "--with-{compress-command=pigz,uncompress-command=unpigz}" }
-};
-
 lsof = {
    url = "https://github.com/lsof-org/lsof/releases/download/4.99.6/lsof-4.99.6.tar.gz",
    b3sum = "295b34b36ae0c6e21356dbe30d21b34a57a92e13dbfc9f495dd433d69814a2e6",
    build = "./configure",
-};
-
-minijail = {
-   url = "https://github.com/google/minijail/archive/linux-v2025.07.02/minijail-20250702.tar.gz",
-   b3sum = "11188d72b5245942b0c8d8eb4ce4435103a9b00f47932f8a47936af17843a7d0",
-   build = "make_noinstall",
-   flags = { "LIBDIR=/usr/lib64" },
-   post = [[
-      mkdir -p $destdir/usr/{bin,lib64} $destdir/usr/share/man/man{1,5}
-      cp -f libminijail{,preload}.so $destdir/usr/lib64
-      cp -f minijail0 $destdir/usr/bin
-      cp -f minijail0.1 $destdir/usr/share/man/man1
-      cp -f minijail0.5 $destdir/usr/share/man/man5
-   ]]
-};
-
-nano = {
-   url = "https://ftp.gnu.org/gnu/nano/nano-7.2.tar.xz",
-   b3sum = "82186f2a698b087f44e52b8e56ce5566c74f05b48496b584b6bd030898a2d361",
-   build = "./configure",
-   flags = { "--enable-utf8" },
 };
 
 pciutils = {
@@ -471,13 +409,6 @@ r = {
       "--without-x",
       "CONFIG_SITE=/dev/null",
    }
-};
-
-ripgrep = {
-   url = "https://github.com/BurntSushi/ripgrep/archive/15.1.0/ripgrep-15.1.0.tar.gz",
-   b3sum = "e1257918b5a9a565960daa6c1d65ada2b531487a2b3326fef7299c05ad6ea32e",
-   build = "cargo",
-   flags = { "--features=pcre2" }
 };
 
 scrot = {
