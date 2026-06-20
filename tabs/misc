@@ -19,11 +19,11 @@ dcron = {
 
 dmidecode = {
    url = "https://download.savannah.gnu.org/releases/dmidecode/dmidecode-3.7.tar.xz",
-   b3sum = "16641cd5004dc09677a71eedeec885e18862f6c2c194141479613f218b2b129b",
+   b3sum = "6da97cb364d8e2948361dbf10eab08a541ecec6a110f6b0b02ef922d40ee3606",
    build = "make",
    flags = {
       "prefix=/usr",
-      "sbindir=/usr/bin",
+      "sbindir=/bin",
    }
 };
 
@@ -41,12 +41,6 @@ ghostscript = {
       "--disable-{compile-inits,cups}",
       --"--with-system-libtiff",
    }
-};
-
-ghostty = {
-   url = "https://github.com/ghostty-org/ghostty/archive/v1.0.0/ghostty-1.0.0.tar.gz",
-   b3sum = "d9b2c6de401278817a084c05c59493dd745afe601f2475238aa3ce731c21b082",
-   build = "zig",
 };
 
 gifsicle = {
@@ -90,12 +84,13 @@ qjackctl = {
    build = "cmake",
 };
 
-llvm = {
+llvm20 = {
    url = "https://github.com/llvm/llvm-project/releases/download/llvmorg-20.1.8/llvm-project-20.1.8.src.tar.xz",
    b3sum = "e185e44fa06e028d8b621ad44a935e9a171c18d01ae66865fefadf620ef1b05e",
    build = "cmake",
    flags = {
       "-S llvm",
+      "-DLLVM_LIBDIR_SUFFIX=exec",
       "-DLLVM_BINUTILS_INCDIR=/usr/include",
       "-DLLVM_{BUILD,LINK}_LLVM_DYLIB=ON",
       "-DLLVM_ENABLE_{FFI,RTTI}=ON",
@@ -104,8 +99,8 @@ llvm = {
       "-DLLVM_TARGETS_TO_BUILD='host;AMDGPU'",
       "-DCLANG_DEFAULT_PIE_ON_LINUX=ON",
       "-DCLANG_LINK_CLANG_DYLIB=ON",
+      "-DCLANG_RESOURCE_DIR=../usr/libexec/clang/20",
    },
-   post = [[ mv $destdir/usr/lib $destdir/lib64 ]],
 };
 
 lrzip = {
