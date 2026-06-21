@@ -356,15 +356,16 @@ linux-lts = {
 };
 
 lm-sensors = {
-   url = "https://github.com/lm-sensors/lm-sensors/archive/V3-6-0/lm-sensors-3.6.0.tar.gz",
-   b3sum = "49e0ccef37d001581142d673a8ec9687cd94590d18e5382a276091b6eeca6fca",
+   url = "https://github.com/lm-sensors/lm-sensors/archive/V3-6-2/lm-sensors-3.6.2.tar.gz",
+   b3sum = "e46bdd2e0e327293f14100347817a728bb6dea9f3875444775aae6f3a5bdc26a",
    build = "make",
    flags = { 
       "PREFIX=/usr",
+      "{,S}BINDIR=/bin",
+      "LIBDIR=/lib64",
+      "MANDIR=/usr/share/man",
       "BUILD_STATIC_LIB=0",
-      "MANDIR=/usr/share/man", 
       "EXLDFLAGS=",
-      "LIBDIR=/usr/lib64"
    }
 };
 
@@ -376,15 +377,15 @@ lsof = {
 
 pciutils = {
    url = "https://mj.ucw.cz/download/linux/pci/pciutils-3.15.0.tar.gz",
-   b3sum = "ae5e48d0e6d243faf397a44bf80fa507c0fd5cc76d8a6594d54451a97f5aca6b",
+   b3sum = "5401403f9acc28fb3ef563fb52481df4287b668720c6bf2e6dce72da020536a9",
    build = "make",
    flags = {
-      "PREFIX=/usr",
-      "LIBDIR=/usr/lib64",
+      "{,S}BINDIR=/bin",
+      "LIBDIR=/lib64",
+      "MANDIR=/usr/share/man",
       "SHAREDIR=/usr/share/hwdata",
       "SHARED=yes"
    },
-   post = [[ chmod 755 $destdir/usr/lib64/libpci.so.3.15.0 ]]
 };
 
 -- r packages ragg (tidyverse) require libwebp to build
