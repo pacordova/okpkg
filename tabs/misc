@@ -390,7 +390,7 @@ vim-classic = {
 
 xfce4-alsa-plugin = {
    url = "https://github.com/equeim/xfce4-alsa-plugin/archive/0.4.0/xfce4-alsa-plugin-0.4.0.tar.gz",
-   b3sum = "78aff63bf0dc17a581b03d177e494f83423819cea25f10867ece96a526b70665",
+   b3sum = "4344bd64a365810fd0553778588e09a57ae447f871fa407ce9878770f3060825",
    build = "meson",
 };
 
