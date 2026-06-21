@@ -475,6 +475,6 @@ xfce4-pulseaudio-plugin = {
       "-Dlibcanberra=disabled",
       "-Dlibxfce4windowing=enabled",
       "-Dmpris2=disabled",
-      "-Dmixer-command=Myxer",
+      "-Dmixer-command=/bin/true",
    }
 };
