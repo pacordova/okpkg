@@ -119,8 +119,8 @@ git = {
 };
 
 jq = {
-   url = "https://github.com/jqlang/jq/releases/download/jq-1.8.1/jq-1.8.1.tar.gz",
-   b3sum = "9cd38d1bbee1edf69145fb22032b12eccc49cda2741d3bc8b6c1eb9d7d10ff1e",
+   url = "https://github.com/jqlang/jq/releases/download/jq-1.8.2/jq-1.8.2.tar.gz",
+   b3sum = "80f6569efea15b7445aa50fa4e85c4fecb6d5950be788b466b1cb87940af5903",
    build = "./configure",
 };
 

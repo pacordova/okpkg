@@ -1,13 +1,13 @@
 vulkan-headers = {
-   url = "https://github.com/KhronosGroup/Vulkan-Headers/archive/vulkan-sdk-1.4.350.0/Vulkan-Headers-vulkan-sdk-1.4.350.0.tar.gz",
-   b3sum = "8400ca7d9ab008f8db866fc0cc7dccc8ebe5efb4d7aa7d13dae50ec8af309f65",
+   url = "https://github.com/KhronosGroup/Vulkan-Headers/archive/vulkan-sdk-1.4.350.1/vulkan-headers-1.4.350.1.tar.gz",
+   b3sum = "828a855e5c680d595ab50803c51c3b73b9863c8a7749b19cd9a5face6fd5de61",
    build = "cmake",
    flags = { "-DCMAKE_INSTALL_PREFIX=/usr" },
 };
 
 vulkan-loader = {
-   url = "https://github.com/KhronosGroup/Vulkan-Loader/archive/vulkan-sdk-1.4.304.0/Vulkan-Loader-vulkan-sdk-1.4.304.0.tar.gz",
-   b3sum = "c917e00511c7aa22eadc369a454ba77694a63ac9ec42db7a6753cf3e0eb00cfb",
+   url = "https://github.com/KhronosGroup/Vulkan-Loader/archive/vulkan-sdk-1.4.350.1/vulkan-loader-1.4.350.1.tar.gz",
+   b3sum = "6cc1b4501735b068b6fe2bde57ff96237a329ce30c819c6698be585026c63d0e",
    build = "cmake",
    flags = {
       "-DBUILD_TESTS=OFF",

@@ -658,8 +658,8 @@ xorg-font-util = {
 };
 
 xkeyboard-config = {
-   url = "https://x.org/pub/individual/data/xkeyboard-config/xkeyboard-config-2.47.tar.xz",
-   b3sum = "d7fd87d845828dfc9251d84b6c7690a4dc969ea72e0e8d5bf868706c959d322e",
+   url = "https://x.org/pub/individual/data/xkeyboard-config/xkeyboard-config-2.48.tar.xz",
+   b3sum = "4565e15c4f5807eddb5c87e0b3e3f6db7bb8f20e1348fe428d1d861bcd74288a",
    build = "meson",
    flags = {
       --"-Dxkb-base=/usr/share/X11/xkb",
