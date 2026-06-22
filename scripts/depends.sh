@@ -1,8 +1,8 @@
 #!/bin/sh
 
 indexdir=/var/log/packages
-cachedir=/var/db/dependencies
-mkdir -p "$cachedir"
+cachedir=/var/db/depends
+mkdir -p $cachedir
 
 # Lists all binary files in a file list from stdin
 # usage: listelf < FILE
@@ -59,8 +59,8 @@ unsafe(){
 }
 
 # Traditional but unsafe
-for f in $indexdir/*; do unsafe < $f | sed "s|^|[$f]: |"; done
+#for f in $indexdir/*; do unsafe < $f | sed "s|^|[$f]: |"; done
 
-#mkcache
+mkcache
 #revdeps eudev
 #revdeps upower
