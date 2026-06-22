@@ -1,8 +1,12 @@
 libxmlb = {
    url = "https://github.com/hughsie/libxmlb/releases/download/0.3.27/libxmlb-0.3.27.tar.xz",
-   sha3 = "8603ee16405a0dd39cafa703f1d099fcd9dd7d3cbd3836614741a886bb9c965d",
+   b3sum = "ca5d6f593a9461b12dd48eae906c8c6ff4bde7f4ef183f2a8bda36ac41c07337",
    build = "meson",
-   flags = { "-Dintrospection=true", "-D{gtkdoc,tests}=false" },
+   flags = { 
+      "-Dintrospection=true", 
+      "-Dgtkdoc=false",
+      "-Dtests=false",
+   }
 };
 
 libfyaml = {
@@ -12,18 +16,19 @@ libfyaml = {
 };
 
 appstream = {
-   url = "https://www.freedesktop.org/software/appstream/releases/AppStream-1.1.2.tar.xz",
-   b3sum = "5e4685b2100d861b842665b35f4a84c3f337650cac9c8034b2a7a575ee6ea10a",
+   url = "https://www.freedesktop.org/software/appstream/releases/AppStream-1.1.3.tar.xz",
+   b3sum = "af18b6c6037d3595718ebb98009ccdfe74f026d4a95b71fa5d2a2259d4c3e751",
    build = "meson",
    flags = {
-      "-Dsystemd=false",
       "-Dapidocs=false",
+      "-Dbash-completion=false",
+      "-Dblake3-support=false",
+      "-Dcompose=true",
       "-Dinstall-docs=false",
       "-Dman=false",
       "-Dstemming=false",
+      "-Dsystemd=false",
       "-Dvapi=false",
-      "-Dcompose=true",
-      "-Dbash-completion=false",
    },
    prep = [[
       mv AppStream*/* . && rm -fr AppStream*
@@ -44,6 +49,20 @@ gegl = {
    build = "meson",
 };
 
+pycairo = {
+   url = "https://pypi.org/packages/source/p/pycairo/pycairo-1.29.0.tar.gz",
+   b3sum = "f8e322620699fbe0469e21edeedb7161291f2cda76c816a1d03b387864b73c9c",
+   build = "meson",
+   post = [[ cd $destdir && mkdir -p opt/python3.13 && mv usr/lib $_ ]],
+};
+
+pygobject = {
+   url = "https://download.gnome.org/sources/pygobject/3.56/pygobject-3.56.3.tar.gz",
+   b3sum = "bb2f8baf7738b79b454155a9b65b03ea29b544e9874b3c5ebb97ea62bac9de57",
+   build = "meson",
+   post = [[ cd $destdir && mkdir -p opt/python3.13 && mv usr/lib $_ ]],
+};
+
 gexiv2 = {
    url = "https://download.gnome.org/sources/gexiv2/0.14/gexiv2-0.14.6.tar.xz",
    b3sum = "8ad3ca4a8205dcc6570ec6d1dde16b9f2d023edd11d63ce834aa7b47faa15359",
@@ -57,13 +76,11 @@ gexiv2 = {
 
 libmypaint = {
    url = "https://github.com/mypaint/libmypaint/releases/download/v1.6.1/libmypaint-1.6.1.tar.xz",
-   sha3 = "2ec991f21543b1c5326f1396a6794608518ca36dcf134a45cf5cfa2b95c5f211",
+   b3sum = "ad2204b6017a2f3b5558685f5a682feb5ffeb8151579bdde9d980a5260c666cb",
    build = "./configure",
    flags = { 
-      "--libdir=/usr/lib64",
-      "--disable-nls",
-      "--disable-i18n",
       "--enable-introspection=no",
+      "--enable-i18n=no",
    }
 };
 
@@ -81,18 +98,6 @@ appstream-glib = {
       "-Drpm=false", 
       "-Dman=false", 
    }
-};
-
-pycairo = {
-   url = "https://pypi.org/packages/source/p/pycairo/pycairo-1.29.0.tar.gz",
-   b3sum = "f8e322620699fbe0469e21edeedb7161291f2cda76c816a1d03b387864b73c9c",
-   build = "meson",
-};
-
-pygobject = {
-   url = "https://download.gnome.org/sources/pygobject/3.52/pygobject-3.52.3.tar.gz",
-   b3sum = "360e0f24d5f9bb35ffeab91e1c749a780a10e68c83144690f5684ede82290bf0",
-   build = "meson",
 };
 
 gimp = {
