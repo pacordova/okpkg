@@ -106,6 +106,12 @@ git = {
    ]]
 };
 
+got = {
+   url = "https://gameoftrees.org/releases/portable/got-portable-0.126.tar.gz",
+   b3sum = "fc8c1bb0273f8b5dff619e0815289bb82f028a67f123c598df340da637bbf6b3",
+   build = "./configure",
+};
+
 jq = {
    url = "https://github.com/jqlang/jq/releases/download/jq-1.8.2/jq-1.8.2.tar.gz",
    b3sum = "80f6569efea15b7445aa50fa4e85c4fecb6d5950be788b466b1cb87940af5903",
