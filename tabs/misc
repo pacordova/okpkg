@@ -456,12 +456,16 @@ cups = {
    b3sum = "1059af629115e1efcdcb855ea5b7738e0dc08c891754377d55657758eb3d9bf6",
    build = "./configure",
    flags = {
-      "--with-tls=openssl",
+      "--with-pkgconfpath=/usr/share/pkgconfig",
       "--with-rcdir=/tmp/cupsinit",
       "--with-rundir=/run/cups",
       "--with-system-groups=lpadmin",
+      "--with-tls=openssl",
    },
-   post = [[ rm -fr $destdir/tmp/cupsinit ]]
+   prep = [[
+      sed -i 's:lib/cups:libexec/cups:' configure
+      sed -i 's:install-sysv::'         configure
+   ]]
 };
 
 --------------------------------------------------------------------------------
