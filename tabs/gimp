@@ -71,7 +71,8 @@ gexiv2 = {
       "-Dintrospection=true",
       "-Dpython3=true",
       "-Dvapi=true",
-   }
+   },
+   post = [[ cd $destdir && mkdir -p opt/python3.13 && mv usr/lib $_ ]]
 };
 
 libmypaint = {
