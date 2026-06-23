@@ -271,17 +271,18 @@ mesa = {
 };
 
 opendoas = {
-   url = "https://github.com/Duncaen/OpenDoas/archive/v6.8.2/OpenDoas-6.8.2.tar.gz",
-   b3sum = "de7bfb4797e216661db76043963090efc9e0e9e68ff420c352dbf71770c2b66c",
+   url = "https://github.com/Duncaen/OpenDoas/archive/v6.8.2/opendoas-6.8.2.tar.gz",
+   b3sum = "56a116e8617fc99184f3c919f591493b76d6511c2a79328f6f13a46ef2df0ae0",
    build = "./configure",
    flags = {
-      "--with-{shadow,timestamp}",
+      "--with-shadow",
+      "--with-timestamp",
       "--without-pam"
    },
    post = [[
-      mkdir -p $destdir/etc
-      printf "permit persist :wheel\n" > $destdir/etc/doas.conf
-      chmod 600 $destdir/etc/doas.conf
+      mkdir -p $destdir/etc && cd $_
+      >doas.conf printf "permit persist :wheel\n"
+      chmod 600 doas.conf
    ]]
 };
 
