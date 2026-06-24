@@ -275,6 +275,7 @@ opendoas = {
    b3sum = "56a116e8617fc99184f3c919f591493b76d6511c2a79328f6f13a46ef2df0ae0",
    build = "./configure",
    flags = {
+      "--bindir=/bin",
       "--with-shadow",
       "--with-timestamp",
       "--without-pam"

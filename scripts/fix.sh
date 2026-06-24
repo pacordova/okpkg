@@ -9,6 +9,7 @@ mandir=/usr/share/man
 [ -x /bin/makewhatis ] && /bin/makewhatis "$mandir"
 [ -x /bin/pwconv     ] && /bin/pwconv
 [ -x /bin/grpconv    ] && /bin/grpconv
+[ -f /etc/machine-id ] || /bin/dbus-uuidgen --ensure=/etc/machine-id
 
 # xorg
 [ -x /bin/fc-cache                 ] && /bin/fc-cache
