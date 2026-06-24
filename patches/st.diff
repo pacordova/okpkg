@@ -1,186 +1,17 @@
-From 4b531966e2c630ddf1810ce68eb96656cb9cbfb2 Mon Sep 17 00:00:00 2001
-From: avalonwilliams <avalonwilliams@protonmail.com>
-Date: Tue, 8 Mar 2022 09:51:03 -0500
-Subject: [PATCH] nobadweight patch
+From e8f3c86d93613eef5af187dfd2dba9ae9919a2ee Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Rapha=C3=ABl=20Proust?= <code@bnwr.net>
+Date: Sun, 27 Jan 2019 13:31:28 +0800
+Subject: [PATCH] Show bold not as bright
 
-Fixes issues that certain fonts have due to badweight detection.
-This in particular effects the Go Mono font
 ---
- x.c | 1 -
- 1 file changed, 1 deletion(-)
+ x.c | 4 ----
+ 1 file changed, 4 deletions(-)
 
 diff --git a/x.c b/x.c
-index cd96575..be86e68 100644
+index 0422421..904e1dc 100644
 --- a/x.c
 +++ b/x.c
-@@ -957,7 +957,6 @@ xloadfont(Font *f, FcPattern *pattern)
- 	    XftResultMatch)) {
- 		if ((XftPatternGetInteger(f->match->pattern, "weight", 0,
- 		    &haveattr) != XftResultMatch) || haveattr != wantattr) {
--			f->badweight = 1;
- 			fputs("font weight does not match\n", stderr);
- 		}
- 	}
--- 
-2.35.1
-
-From af28f9df9b0194311c25d60a22d1ecd98bfad2e7 Mon Sep 17 00:00:00 2001
-From: aleks <aleks.stier@icloud.com>
-Date: Tue, 31 May 2022 00:33:38 +0200
-Subject: [PATCH] Create a desktop-entry for st
-
-Enables to find st in a graphical menu and to display it with a nice
-icon.
-
-If some applications still are not displaying an icon for st try the patch
-[netwmicon](../netwmicon/). Programs like tint2 and alttab rely on a hardcoded
-icon which has to be stored by st in the \_NET\_WM\_ICON window-property.
----
- Makefile   |  3 +++
- config.mk  |  1 +
- st.desktop | 12 ++++++++++++
- 3 files changed, 16 insertions(+)
- create mode 100644 st.desktop
-
-diff --git a/Makefile b/Makefile
-index 470ac86..2121877 100644
---- a/Makefile
-+++ b/Makefile
-@@ -49,9 +49,12 @@ install: st
- 	chmod 644 $(DESTDIR)$(MANPREFIX)/man1/st.1
- 	tic -sx st.info
- 	@echo Please see the README file regarding the terminfo entry of st.
-+	mkdir -p $(DESTDIR)$(APPPREFIX)
-+	cp -f st.desktop $(DESTDIR)$(APPPREFIX)
- 
- uninstall:
- 	rm -f $(DESTDIR)$(PREFIX)/bin/st
-+	rm -f $(DESTDIR)$(APPPREFIX)/st.desktop
- 	rm -f $(DESTDIR)$(MANPREFIX)/man1/st.1
- 
- .PHONY: all options clean dist install uninstall
-diff --git a/config.mk b/config.mk
-index 4c4c5d5..b79c517 100644
---- a/config.mk
-+++ b/config.mk
-@@ -5,6 +5,7 @@ VERSION = 0.8.5
- 
- # paths
- PREFIX = /usr/local
-+APPPREFIX = $(PREFIX)/share/applications
- MANPREFIX = $(PREFIX)/share/man
- 
- X11INC = /usr/X11R6/include
-diff --git a/st.desktop b/st.desktop
-new file mode 100644
-index 0000000..2d2b76f
---- /dev/null
-+++ b/st.desktop
-@@ -0,0 +1,12 @@
-+[Desktop Entry]
-+Type=Application
-+Exec=st
-+TryExec=st
-+Icon=utilities-terminal
-+Terminal=false
-+Categories=System;TerminalEmulator;
-+
-+Name=st
-+GenericName=Terminal
-+Comment=st is a simple terminal implementation for X
-+StartupWMClass=st-256color
--- 
-2.36.1
-
---- a/config.def.h.orig
-+++ b/config.def.h
-@@ -5,7 +5,7 @@
-  *
-  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
-  */
--static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
-+static char *font = "Go Mono:size=12:antialias=true:autohint=false";
- static int borderpx = 2;
- 
- /*
-@@ -53,8 +53,8 @@
-  * near minlatency, but it waits longer for slow updates to avoid partial draw.
-  * low minlatency will tear/flicker more, as it can "detect" idle too early.
-  */
--static double minlatency = 2;
--static double maxlatency = 33;
-+static double minlatency = 2;
-+static double maxlatency = 2;
- 
- /*
-  * blinking timeout (set to 0 to disable blinking) for the terminal blinking
-@@ -96,41 +96,41 @@
- /* Terminal colors (16 first used in escape sequence) */
- static const char *colorname[] = {
- 	/* 8 normal colors */
--	"black",
--	"red3",
--	"green3",
--	"yellow3",
--	"blue2",
--	"magenta3",
--	"cyan3",
--	"gray90",
-+	"#000000", /* Black */
-+	"#aa0000", 
-+	"#006600", 
-+	"#99994c", /* Yellowgreen */
-+	"#000099", /* Medblue */
-+	"#8888cc", /* Purpleblue */ 
-+	"#9eeeee", /* Palegreygreen */
-+	"#ffffaa", /* Paleyellow */
- 
- 	/* 8 bright colors */
--	"gray50",
--	"red",
--	"green",
--	"yellow",
--	"#5c5cff",
--	"magenta",
--	"cyan",
--	"white",
-+	"#777777",
-+	"#f2acaa", 
-+	"#88cc88", /* Medgreen */
-+	"#eeee9e", /* Darkyellow */
-+	"#4993dd", /* Palegreyblue */
-+	"#d7afff", 
-+	"#aaffff", /* Palebluegreen */
-+	"#ffffea", 
- 
- 	[255] = 0,
- 
- 	/* more colors can be added after 255 to use with DefaultXX */
--	"#cccccc",
--	"#555555",
--	"gray90", /* default foreground colour */
--	"black", /* default background colour */
-+	"#000000", /* default foreground colour */
-+	"#ffffea", /* default background colour */
- };
- 
- 
-+
-+
- /*
-  * Default colors (colorname index)
-  * foreground, background, cursor, reverse cursor
-  */
--unsigned int defaultfg = 258;
--unsigned int defaultbg = 259;
-+unsigned int defaultfg = 256;
-+unsigned int defaultbg = 257;
- unsigned int defaultcs = 256;
- static unsigned int defaultrcs = 257;
- 
---- a/x.c.orig
-+++ b/x.c
-@@ -1411,10 +1411,6 @@
+@@ -1296,10 +1296,6 @@ xdrawglyphfontspecs(const XftGlyphFontSpec *specs, Glyph base, int len, int x, i
  		bg = &dc.col[base.bg];
  	}
  
@@ -191,6 +22,9 @@ index 0000000..2d2b76f
  	if (IS_SET(MODE_REVERSE)) {
  		if (fg == &dc.col[defaultfg]) {
  			fg = &dc.col[defaultbg];
+-- 
+2.20.1
+
 From ae14b869d7bc0e0cd8ed16157837ad09aaacacc0 Mon Sep 17 00:00:00 2001
 From: David Gricar <coppie@protonmail.com>
 Date: Tue, 17 Mar 2020 13:38:05 +0100
@@ -288,3 +122,182 @@ index 48a6676..fab2ddc 100644
 -- 
 2.25.1
 
+--- a/config.def.h.orig	2020-11-12 20:23:48.867954750 +0100
++++ b/config.def.h	2020-11-12 20:21:15.055922720 +0100
+@@ -276,7 +276,7 @@
+ 	{ XK_KP_Delete,     ControlMask,    "\033[3;5~",    +1,    0},
+ 	{ XK_KP_Delete,     ShiftMask,      "\033[2K",      -1,    0},
+ 	{ XK_KP_Delete,     ShiftMask,      "\033[3;2~",    +1,    0},
+-	{ XK_KP_Delete,     XK_ANY_MOD,     "\033[P",       -1,    0},
++	{ XK_KP_Delete,     XK_ANY_MOD,     "\033[3~",       -1,    0},
+ 	{ XK_KP_Delete,     XK_ANY_MOD,     "\033[3~",      +1,    0},
+ 	{ XK_KP_Multiply,   XK_ANY_MOD,     "\033Oj",       +2,    0},
+ 	{ XK_KP_Add,        XK_ANY_MOD,     "\033Ok",       +2,    0},
+@@ -344,7 +344,7 @@
+ 	{ XK_Delete,        ControlMask,    "\033[3;5~",    +1,    0},
+ 	{ XK_Delete,        ShiftMask,      "\033[2K",      -1,    0},
+ 	{ XK_Delete,        ShiftMask,      "\033[3;2~",    +1,    0},
+-	{ XK_Delete,        XK_ANY_MOD,     "\033[P",       -1,    0},
++	{ XK_Delete,        XK_ANY_MOD,     "\033[3~",       -1,    0},
+ 	{ XK_Delete,        XK_ANY_MOD,     "\033[3~",      +1,    0},
+ 	{ XK_BackSpace,     XK_NO_MOD,      "\177",          0,    0},
+ 	{ XK_BackSpace,     Mod1Mask,       "\033\177",      0,    0},
+From af28f9df9b0194311c25d60a22d1ecd98bfad2e7 Mon Sep 17 00:00:00 2001
+From: aleks <aleks.stier@icloud.com>
+Date: Tue, 31 May 2022 00:33:38 +0200
+Subject: [PATCH] Create a desktop-entry for st
+
+Enables to find st in a graphical menu and to display it with a nice
+icon.
+
+If some applications still are not displaying an icon for st try the patch
+[netwmicon](../netwmicon/). Programs like tint2 and alttab rely on a hardcoded
+icon which has to be stored by st in the \_NET\_WM\_ICON window-property.
+---
+ Makefile   |  3 +++
+ config.mk  |  1 +
+ st.desktop | 12 ++++++++++++
+ 3 files changed, 16 insertions(+)
+ create mode 100644 st.desktop
+
+diff --git a/Makefile b/Makefile
+index 470ac86..2121877 100644
+--- a/Makefile
++++ b/Makefile
+@@ -49,9 +49,12 @@ install: st
+ 	chmod 644 $(DESTDIR)$(MANPREFIX)/man1/st.1
+ 	tic -sx st.info
+ 	@echo Please see the README file regarding the terminfo entry of st.
++	mkdir -p $(DESTDIR)$(APPPREFIX)
++	cp -f st.desktop $(DESTDIR)$(APPPREFIX)
+ 
+ uninstall:
+ 	rm -f $(DESTDIR)$(PREFIX)/bin/st
++	rm -f $(DESTDIR)$(APPPREFIX)/st.desktop
+ 	rm -f $(DESTDIR)$(MANPREFIX)/man1/st.1
+ 
+ .PHONY: all options clean dist install uninstall
+diff --git a/config.mk b/config.mk
+index 4c4c5d5..b79c517 100644
+--- a/config.mk
++++ b/config.mk
+@@ -5,6 +5,7 @@ VERSION = 0.8.5
+ 
+ # paths
+ PREFIX = /usr/local
++APPPREFIX = $(PREFIX)/share/applications
+ MANPREFIX = $(PREFIX)/share/man
+ 
+ X11INC = /usr/X11R6/include
+diff --git a/st.desktop b/st.desktop
+new file mode 100644
+index 0000000..2d2b76f
+--- /dev/null
++++ b/st.desktop
+@@ -0,0 +1,12 @@
++[Desktop Entry]
++Type=Application
++Exec=st
++TryExec=st
++Icon=utilities-terminal
++Terminal=false
++Categories=System;TerminalEmulator;
++
++Name=st
++GenericName=Terminal
++Comment=st is a simple terminal implementation for X
++StartupWMClass=st-256color
+-- 
+2.36.1
+
+From 4b531966e2c630ddf1810ce68eb96656cb9cbfb2 Mon Sep 17 00:00:00 2001
+From: avalonwilliams <avalonwilliams@protonmail.com>
+Date: Tue, 8 Mar 2022 09:51:03 -0500
+Subject: [PATCH] nobadweight patch
+
+Fixes issues that certain fonts have due to badweight detection.
+This in particular effects the Go Mono font
+---
+ x.c | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/x.c b/x.c
+index cd96575..be86e68 100644
+--- a/x.c
++++ b/x.c
+@@ -957,7 +957,6 @@ xloadfont(Font *f, FcPattern *pattern)
+ 	    XftResultMatch)) {
+ 		if ((XftPatternGetInteger(f->match->pattern, "weight", 0,
+ 		    &haveattr) != XftResultMatch) || haveattr != wantattr) {
+-			f->badweight = 1;
+ 			fputs("font weight does not match\n", stderr);
+ 		}
+ 	}
+-- 
+2.35.1
+
+--- a/config.def.h
++++ b/config.h
+@@ -5,7 +5,7 @@
+  *
+  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
+  */
+-static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
++static char *font = "Go Mono:pixelsize=15:antialias=true:autohint=false";
+ static int borderpx = 2;
+ 
+ /*
+@@ -54,7 +54,7 @@
+  * low minlatency will tear/flicker more, as it can "detect" idle too early.
+  */
+ static double minlatency = 2;
+-static double maxlatency = 33;
++static double maxlatency = 3;
+ 
+ /*
+  * blinking timeout (set to 0 to disable blinking) for the terminal blinking
+@@ -95,33 +95,17 @@
+ 
+ /* Terminal colors (16 first used in escape sequence) */
+ static const char *colorname[] = {
+-	/* 8 normal colors */
+-	"black",
+-	"red3",
+-	"green3",
+-	"yellow3",
+-	"blue2",
+-	"magenta3",
+-	"cyan3",
+-	"gray90",
+-
+-	/* 8 bright colors */
+-	"gray50",
+-	"red",
+-	"green",
+-	"yellow",
+-	"#5c5cff",
+-	"magenta",
+-	"cyan",
+-	"white",
+-
+-	[255] = 0,
+-
+-	/* more colors can be added after 255 to use with DefaultXX */
+-	"#cccccc",
+-	"#555555",
+-	"gray90", /* default foreground colour */
+-	"black", /* default background colour */
++        /* 8 normal colors */
++        [0] = "#000000", [1] = "#9c0000", [2] = "#008000", [3] = "#999900",
++        [4] = "#00009c", [5] = "#990099", [6] = "#009999", [7] = "#7f7f7f",
++        /* 8 bright colors */
++        [8] = "#c0c0c0", [9] = "#ff0000", [10] = "#00ff00", [11] = "#ffff00",
++        [12] = "#5c5cff", [13] = "#ff00ff", [14] = "#00ffff", [15] = "#ffffff",
++
++        [255] = 0,
++
++        /* DefaultXX colors */
++        [256] = "#000000", [257] = "#9ecfff", [258] = "#000000", [259] = "#ffffea"
+ };
+ 
+ 
