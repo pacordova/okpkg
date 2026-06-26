@@ -223,8 +223,8 @@ gnupg2 = {
 };
 
 gpgme = {
-   url = "https://gnupg.org/ftp/gcrypt/gpgme/gpgme-2.1.0.tar.bz2",
-   b3sum = "df2b7c62700ed8484e05cca318df24bf088d0b9934245b7a66cab8b43f7c5d43",
+   url = "https://gnupg.org/ftp/gcrypt/gpgme/gpgme-2.1.1.tar.bz2",
+   b3sum = "0eee4eca1d423b2f45929697ddf5248d747a0818c17b70f2e51d9bdb3a10df41",
    build = "./configure",
    flags = { "--disable-gpg-test" }
 };
