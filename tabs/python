@@ -163,8 +163,8 @@ python-pyparsing = {
 };
 
 cython = {
-   url = "https://pypi.io/packages/source/c/cython/cython-3.2.5.tar.gz",
-   b3sum = "6bfd36f7f520673c6397d41f97aade138324905b0ae43cc23653648dbdcc2860",
+   url = "https://pypi.io/packages/source/c/cython/cython-3.2.6.tar.gz",
+   b3sum = "ec0d5cc57e3d42d7755cc9fa76bb257a576fa9555f9937fef5562cb01e70efa1",
    build = "python-build",
 };
 

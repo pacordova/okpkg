@@ -60,8 +60,8 @@ tinytex = {
 };
 
 tixati = {
-   url = "https://download.tixati.com/tixati-3.43-1.x86_64.manualinstall.tar.gz",
-   b3sum = "72f5973f851679992c9281786302e66ea9aa66cd436116d1a690285c6f23b84c",
+   url = "https://download.tixati.com/tixati-3.44-1.x86_64.manualinstall.tar.gz",
+   b3sum = "a237e53eb9ef96c3081e70ebf404bb0fc28e9aa20bef7342a0671261c58d8eba",
    post = [[
       install -d $destdir/bin
       install -d $destdir/usr/share/applications

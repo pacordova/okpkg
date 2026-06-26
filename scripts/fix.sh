@@ -13,9 +13,9 @@ mandir=/usr/share/man
 
 # xorg
 [ -x /bin/fc-cache                 ] && /bin/fc-cache
-[ -x /bin/update-desktop-database  ] && /bin/update-desktop-database
-[ -x /bin/update-mime-database     ] && /bin/update-mime-database /usr/share/mime
-[ -x /bin/glib-compile-schemas     ] && /bin/glib-compile-schemas /usr/share/glib-2.0/schemas
+[ -x /bin/update-desktop-database  ] && /bin/update-desktop-database  /usr/share/applications
+[ -x /bin/update-mime-database     ] && /bin/update-mime-database     /usr/share/mime
+[ -x /bin/glib-compile-schemas     ] && /bin/glib-compile-schemas     /usr/share/glib-2.0/schemas
 [ -x /bin/gdk-pixbuf-query-loaders ] && /bin/gdk-pixbuf-query-loaders --update-cache
 
 # cap

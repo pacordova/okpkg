@@ -318,8 +318,8 @@ libidn2 = {
 };
 
 libpsl = {
-   url = "https://github.com/rockdaboot/libpsl/releases/download/0.21.5/libpsl-0.21.5.tar.gz",
-   b3sum = "75520a5e4ef205ad5fcb236075182c9e7aeb4f3122ebdb32854a14f49dc52676",
+   url = "https://github.com/rockdaboot/libpsl/releases/download/0.22.0/libpsl-0.22.0.tar.lz",
+   b3sum = "86a2209c74c55b9dd06e0a20f69fa94c45390d86886577ed61515b940d747eb7",
    build = "./configure",
 };
 
