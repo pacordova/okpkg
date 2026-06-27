@@ -362,8 +362,8 @@ sxiv = {
 };
 
 tmux = {
-   url = "https://github.com/tmux/tmux/releases/download/3.6b/tmux-3.6b.tar.gz",
-   b3sum = "a343e2b517edaabd7b99145347477f992458fda1a414166e6154eef219525a5c",
+   url = "https://github.com/tmux/tmux/releases/download/3.7/tmux-3.7.tar.gz",
+   b3sum = "3bcd254d42cd0d40a0e6556c655e89c56656d393356978eb9f4bba54ba5ac243",
    build = "./configure",
 };
 
