@@ -191,8 +191,8 @@ gcr4 = {
 };
 
 gvfs = {
-   url = "https://download.gnome.org/sources/gvfs/1.60/gvfs-1.60.0.tar.xz",
-   b3sum = "d759d64d688f44c4f638c86b8c20aa47fb527fc5dda255052ade69ae1ef7a0fa",
+   url = "https://download.gnome.org/sources/gvfs/1.60/gvfs-1.60.1.tar.xz",
+   b3sum = "fdbc284a8dac91cdb6424df62c99228934508a7d0892492be836bf3b6fa29d80",
    build = "meson",
    flags = {
       "-D{afc,bluray,dnssd,fuse,goa,google,gphoto2,mtp,nfs,smb}=false",

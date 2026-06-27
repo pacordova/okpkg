@@ -399,6 +399,13 @@ vim-classic = {
    ]],
 };
 
+wolfssl = {
+   url = "https://github.com/wolfssl/wolfssl/archive/v5.9.2-stable/wolfssl-5.9.2.tar.gz",
+   b3sum = "9756d3ca9f7d45c23f5194fb8f767fc306c08a6c92358608d49d264fc2976268",
+   build = "./configure",
+   prep = [[ ./autogen.sh ]],
+};
+
 xfce4-alsa-plugin = {
    url = "https://github.com/equeim/xfce4-alsa-plugin/archive/0.4.0/xfce4-alsa-plugin-0.4.0.tar.gz",
    b3sum = "4344bd64a365810fd0553778588e09a57ae447f871fa407ce9878770f3060825",
