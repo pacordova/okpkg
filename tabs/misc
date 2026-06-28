@@ -545,8 +545,8 @@ wolfssl = {
 };
 
 nettle = {
-   url = "https://ftp.gnu.org/gnu/nettle/nettle-4.0.tar.gz",
-   b3sum = "8bae375a59b9ba0e923e4123daeda862b6b140dfe7fce0c6d2e2555a721b31c5",
+   url = "https://ftp.gnu.org/gnu/nettle/nettle-3.10.2.tar.gz",
+   b3sum = "c6ff393796e76cdcc49b0d825b7f36357f4efc9dc74f4d718b62f347714b944f",
    build = "./configure",
 };
 

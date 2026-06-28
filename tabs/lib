@@ -228,7 +228,8 @@ libarchive = {
    b3sum = "a7d4dd38d2ace0487c391573834243b7dea241eb7c4ac5ba1083597d888b9024",
    build = "./configure",
    flags = { 
-      "--without-nettle",
+      "--with-nettle",
+      "--without-openssl",
       "--with-xml2",
    }
 };
