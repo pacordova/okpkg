@@ -194,8 +194,8 @@ libwebp = {
 };
 
 linux-lts = {
-   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.18.36.tar.xz",
-   b3sum = "0711a7440999feb5bbab3bfce916e04e4737e27d5693bc87209e14e052bd91e8",
+   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.18.37.tar.xz",
+   b3sum = "f414e44430af58a1f0d019274d87f9e15f57308ca6b8aa3da8058c5ffd536ca5",
    build = "make_install",
    flags = {
       "headers_install",
@@ -206,7 +206,6 @@ linux-lts = {
       "MODLIB=$destdir/lib64/modules/$(make -s kernelrelease)",
    },
    prep = [[
-      #pigz -cd /proc/config.gz > .config
       sed -e '/MAX_NR_CONSOLES/s/63/6/' -i include/uapi/linux/vt.h
       make -j5 headers bzImage modules
    ]]
@@ -337,8 +336,8 @@ scrot = {
 };
 
 sqlite = {
-   url = "https://www.sqlite.org/2026/sqlite-autoconf-3530200.tar.gz",
-   b3sum = "e1aca64d31a71f726a607d3b754a413d8ab0c917619e06d800c5aa2be8df7b08",
+   url = "https://www.sqlite.org/2026/sqlite-autoconf-3530300.tar.gz",
+   b3sum = "72b197ec97baf08e88530a9384c31c331ead23a0fe92360d0ee629b4c793bff2",
    build = "./configure",
    flags = { 
       "--bindir=/bin",
