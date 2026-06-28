@@ -98,6 +98,9 @@ git = {
    build = "./configure",
    flags = {
       "--with-libpcre2",
+      "--without-python",
+      "--without-openssl",
+      "--with-curl",
       "ac_cv_header_libintl_h=no",
    },
 };
