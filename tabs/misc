@@ -97,13 +97,9 @@ git = {
    b3sum = "7c4e27d4387813339904761787e798085686075fbf04e2149a6111ff137e1f3e",
    build = "./configure",
    flags = {
-      "--with-gitconfig=/etc/gitconfig",
-      "--with-{libpcre2=yes,python=no,tcltlk=no}",
+      "--with-libpcre2",
+      "ac_cv_header_libintl_h=no",
    },
-   prep = [[
-      printf "NO_GETTEXT=YesPlease\n" >> config.mak
-      printf "NO_PERL=YesPlease\n" >> config.mak
-   ]]
 };
 
 got = {
