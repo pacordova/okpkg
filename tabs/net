@@ -117,17 +117,22 @@ rsync = {
    url = "https://samba.org/ftp/rsync/src/rsync-3.4.1.tar.gz",
    b3sum = "e1cfdd51a1a89a49e73f8fa730a4321392fe4a29533c0979c2c09c7ce3808b6f",
    build = "./configure",
-   flags = { "--disable-{debug,xxhash}" }
+   flags = { 
+      "--disable-debug",
+      "--enable-openssl",
+      "--enable-xxhash",
+      "--without-included-zlib",
+   }
 };
 
 wget2 = {
    url = "https://ftp.gnu.org/gnu/wget/wget2-2.2.1.tar.lz",
    b3sum = "651471423e6dc8bb6005564ab366306385d18a63a98aaba746ef6cf34ff191d3",
    build = "./configure",
-   post = [[ 
-      ln -sf wget2 $destdir/bin/wget
-      rm -f $destdir/bin/wget2_noinstall 
-   ]]
+   flags = {
+      "--without-openssl",
+      "--with-ssl=gnutls",
+   },
 };
 
 wpa_supplicant = {

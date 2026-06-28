@@ -397,13 +397,6 @@ vim-classic = {
    ]],
 };
 
-wolfssl = {
-   url = "https://github.com/wolfssl/wolfssl/archive/v5.9.2-stable/wolfssl-5.9.2.tar.gz",
-   b3sum = "9756d3ca9f7d45c23f5194fb8f767fc306c08a6c92358608d49d264fc2976268",
-   build = "./configure",
-   prep = [[ ./autogen.sh ]],
-};
-
 xfce4-alsa-plugin = {
    url = "https://github.com/equeim/xfce4-alsa-plugin/archive/0.4.0/xfce4-alsa-plugin-0.4.0.tar.gz",
    b3sum = "4344bd64a365810fd0553778588e09a57ae447f871fa407ce9878770f3060825",
@@ -540,4 +533,29 @@ xfce4-generic-slider = {
    url = "https://archive.xfce.org/src/panel-plugins/xfce4-generic-slider/1.1/xfce4-generic-slider-1.1.0.tar.xz",
    b3sum = "4c29f2edcdf8103ae6797fe566e923aae688882e2fd5f20bc1929b018eb34177",
    build = "meson",
+};
+
+--------------------------------------------------------------------------------
+
+wolfssl = {
+   url = "https://github.com/wolfssl/wolfssl/archive/v5.9.2-stable/wolfssl-5.9.2.tar.gz",
+   b3sum = "9756d3ca9f7d45c23f5194fb8f767fc306c08a6c92358608d49d264fc2976268",
+   build = "./configure",
+   prep = [[ ./autogen.sh ]],
+};
+
+nettle = {
+   url = "https://ftp.gnu.org/gnu/nettle/nettle-4.0.tar.gz",
+   b3sum = "8bae375a59b9ba0e923e4123daeda862b6b140dfe7fce0c6d2e2555a721b31c5",
+   build = "./configure",
+};
+
+gnutls = {
+   url = "https://www.gnupg.org/ftp/gcrypt/gnutls/v3.8/gnutls-3.8.13.tar.xz",
+   b3sum = "817083bbd1af9caab9e30602ea01e4254200252289ca966770beff05fb26b2de",
+   build = "./configure",
+   flags = {
+      "--with-default-trust-store-file=/etc/ssl/certs/ca-certificates.crt",
+      "--without-p11-kit",
+   }
 };
