@@ -35,10 +35,19 @@ curl = {
    b3sum = "38e77a6e73698e5390c0acfa441ce7b6d15e6cb2b07efea8f12087a08543ed5b",
    build = "./configure",
    flags = {
-      "--enable-{ipv6,threaded-resolver,unix-sockets}",
-      "--disable-{ares,ldap,ldaps,manual}",
-      "--with-{openssl=yes,libidn2=yes,nghttp2=yes,libssh2=no}",
+      "--enable-ipv6",
+      "--enable-threaded-resolver",
+      "--enable-unix-sockets",
+      "--disable-ares",
+      "--disable-ldap",
+      "--disable-manual",
       "--with-ca-bundle=/etc/ssl/certs/ca-certificates.crt",
+      "--with-gnutls",
+      "--without-brotli",
+      "--without-libidn2",
+      "--without-libpsl",
+      "--without-openssl",
+      "--without-zstd",
    }
 };
 
