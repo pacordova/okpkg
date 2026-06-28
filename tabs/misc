@@ -481,7 +481,7 @@ cups = {
       "--with-rcdir=/tmp/cupsinit",
       "--with-rundir=/run/cups",
       "--with-system-groups=lpadmin",
-      "--with-tls=openssl",
+      "--with-tls=gnutls",
    },
    prep = [[
       sed -i 's:lib/cups:libexec/cups:' configure
