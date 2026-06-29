@@ -199,8 +199,8 @@ iso-codes = {
 };
 
 json-c = {
-   url = "https://s3.amazonaws.com/json-c_releases/releases/json-c-0.18.tar.gz",
-   b3sum = "adc5d92666507b0746962226bd009d33c4db2195cc7aff079e40bd83ec2ffad0",
+   url = "https://github.com/json-c/json-c/releases/download/json-c-0.19-20260627/json-c-0.19.tar.gz",
+   b3sum = "5893eab1734fbe30ea7bbc31a51fe3e58755c25f42655a9ed375bd867ac641d5",
    build = "cmake",
    flags = {
       "-DBUILD_STATIC_LIBS=OFF",

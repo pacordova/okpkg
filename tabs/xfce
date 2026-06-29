@@ -44,8 +44,8 @@ startup-notification = {
 --------------------------------------------------------------------------------
 
 at-spi2-core = {
-   url = "https://download.gnome.org/sources/at-spi2-core/2.60/at-spi2-core-2.60.4.tar.xz",
-   b3sum = "15d9cfd9bd7c43eea1b2a4f3a1ae74058aee6c492c4122fdb72f2ecab4ffba7d",
+   url = "https://download.gnome.org/sources/at-spi2-core/2.60/at-spi2-core-2.60.5.tar.xz",
+   b3sum = "d83ff2d55a64d96d61f4272c8a6b8e97079e18f1d6f4597c40dae70919e83c3b",
    build = "meson",
    flags = {
       "-Dsystemd_user_dir=/tmp",
@@ -62,8 +62,8 @@ cairo = {
 };
 
 pango = {
-   url = "https://download.gnome.org/sources/pango/1.57/pango-1.57.1.tar.xz",
-   b3sum = "aeeeb441da003daefd9a704e450f4e5ab449d7d6e7cca1a58474327d65f2e31b",
+   url = "https://download.gnome.org/sources/pango/1.58/pango-1.58.0.tar.xz",
+   b3sum = "241add2a71a813a7d8eac9e1beea647ff3216df6be684c8f87e23b2c1bd56027",
    build = "meson",
    flags = { "-Dintrospection=enabled" },
 };
