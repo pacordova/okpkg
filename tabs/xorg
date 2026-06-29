@@ -678,22 +678,29 @@ libepoxy = {
 xorg-server = {
    url = "https://x.org/archive/individual/xserver/xorg-server-21.1.23.tar.xz",
    b3sum = "e9982a52418f189dd4a3b118e9a0b1ea5910a2d4a61814adcc7aa554c472ffb5",
-   build = "meson",
+   build = "./configure",
    flags = {
-      "-D{xephyr,xnest,xvfb}=false",
-      "-Dxorg=true",
-      "-Dsha1=libcrypto",
-      "-Dxkb_dir=/usr/share/X11/xkb",
-      "-Dxkb_output_dir=/var/db/xkb",
-      "-Dsystemd_logind=false",
+      "--disable-config-hal",
+      "--disable-linux-acpi",
+      "--disable-linux-apm",
+      "--disable-systemd-logind",
+      "--disable-xephyr",
+      "--disable-xnest",
+      "--disable-xquartz",
+      "--disable-xvfb",
+      "--disable-xwin",
+      "--disable-dri",
+      "--enable-dri2",
+      "--enable-dri3",
+      "--enable-glamor",
+      "--enable-ipv6",
+      "--enable-xcsecurity",
+      "--enable-xorg",
+      "--with-sha1=libnettle",
    },
    post = [[
-      mkdir -p $destdir/etc/{sysconfig,X11/xorg.conf.d}
-      cd $destdir/etc/sysconfig
-      printf "/tmp/.ICE-unix dir 1777 root root\n" >> createfiles
-      printf "/tmp/.X11-unix dir 1777 root root\n" >> createfiles
-      cd $destdir/etc/X11
-      printf "needs_root_rights = no\n" > Xwrapper.config
+      mkdir -p $destdir/etc/X11 && cd $_
+      printf "needs_root_rights = no\n" >> Xwrapper.config
    ]]
 };
 

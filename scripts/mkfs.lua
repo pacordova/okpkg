@@ -97,7 +97,6 @@ fp:close()
 fp = io.open("./etc/config.site", "w")
 fp:write([[
 [ -z ${with_pic+x}                             ] && with_pic=yes
-[ -z ${enable_werror+x}                        ] && enable_werror=no
 [ -z ${enable_tests+x}                         ] && enable_tests=no
 [ -z ${enable_static+x}                        ] && enable_static=no
 [ -z ${enable_shared+x}                        ] && enable_shared=yes
