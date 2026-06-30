@@ -1,6 +1,6 @@
 libxmlb = {
-   url = "https://github.com/hughsie/libxmlb/releases/download/0.3.27/libxmlb-0.3.27.tar.xz",
-   b3sum = "ca5d6f593a9461b12dd48eae906c8c6ff4bde7f4ef183f2a8bda36ac41c07337",
+   url = "https://github.com/hughsie/libxmlb/releases/download/0.3.25/libxmlb-0.3.25.tar.xz",
+   b3sum = "131261f8d159015f8f60be0b8c7223c09db7f1450b67d92bbd84c358ad1e4af2",
    build = "meson",
    flags = { 
       "-Dintrospection=true", 

@@ -436,8 +436,8 @@ ristretto = {
 };
 
 xarchiver = {
-   url = "https://github.com/ib/xarchiver/archive/0.5.4.26/xarchiver-0.5.4.26.tar.gz",
-   b3sum = "58743f021a088bee3ff8baea4ed50eee2a2d90841b022c2f4f2373e9105ddb54",
+   url = "https://github.com/ib/xarchiver/archive/0.5.4.27/xarchiver-0.5.4.27.tar.gz",
+   b3sum = "cff297b22e9d9f7419f3a61767bed417cd9098ffa7df3286e2dab6b05f439c45",
    build = "./configure",
 };
 

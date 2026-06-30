@@ -245,8 +245,8 @@ isl = {
 };
 
 attr = {
-   url = "https://download.savannah.gnu.org/releases/attr/attr-2.5.2.tar.gz",
-   b3sum = "0f560f1998246fb598672a502dd9212b241325a995fa82539f698a788cfe5a65",
+   url = "https://download.savannah.gnu.org/releases/attr/attr-2.6.0.tar.xz",
+   b3sum = "fbf7891a5f0b83a522c24579c98800732dc44f8695bdd4be4e089d8e03c0ae48",
    build = "./configure",
 };
 
