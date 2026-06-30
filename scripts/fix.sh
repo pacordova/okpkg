@@ -18,6 +18,13 @@ mandir=/usr/share/man
 [ -x /bin/glib-compile-schemas     ] && /bin/glib-compile-schemas     /usr/share/glib-2.0/schemas
 [ -x /bin/gdk-pixbuf-query-loaders ] && /bin/gdk-pixbuf-query-loaders --update-cache
 
+# gtk-update-icon-cache
+if [ -x /bin/gtk-update-icon-cache ]; then
+  for dir in /usr/share/icons/*/; do 
+    /bin/gtk-update-icon-cache -f -t "$dir" 
+  done
+fi
+
 # cap
 setcap cap_net_raw+p /bin/ping
 chown root:messagebus $libexecdir/dbus-daemon-launch-helper

@@ -251,8 +251,8 @@ attr = {
 };
 
 acl = {
-   url = "https://download.savannah.gnu.org/releases/acl/acl-2.3.2.tar.xz",
-   b3sum = "585824ee75cf926b98bb79d9431700f122c3173c45ee19d013e2c794ea6669ab",
+   url = "https://download.savannah.gnu.org/releases/acl/acl-2.4.0.tar.xz",
+   b3sum = "49c50bec26906a493a615fdf3da0e34d29f0c9092ac097799fa76016085ed7d2",
    build = "./configure",
 };
 
