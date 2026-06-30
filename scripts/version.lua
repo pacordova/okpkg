@@ -84,7 +84,7 @@ end
 -- TODO: fix dashes not working in list, escape does not fix
 slop = "cryptsetup,expat,libffi,libxmlb,lsof,upower,harfbuzz,rsync"
 rust = "git,librsvg"
-other = "bc,cmake,kmod,x264"
+other = "bc,cmake,gexiv2,kmod,x264"
 skip = slop .. "," .. rust .. "," .. other
 
 L = {}
