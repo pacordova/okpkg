@@ -96,14 +96,14 @@ python-editables = {
 };
 
 python-vcs-versioning = {
-   url = "https://pypi.io/packages/source/v/vcs_versioning/vcs_versioning-1.1.1.tar.gz",
-   b3sum = "35a6994b4dbb3d6342056ec50ed192d4198136b2618922316f5aa69fb759d280",
+   url = "https://pypi.io/packages/source/v/vcs_versioning/vcs_versioning-2.2.2.tar.gz",
+   b3sum = "c84a16308052002459e64623cdc7aaa51caa4ca71eeebb5353d27bc2cc04f7f8",
    build = "python-build",
 };
 
 python-setuptools-scm = {
-   url = "https://pypi.io/packages/source/s/setuptools-scm/setuptools_scm-10.0.5.tar.gz",
-   b3sum = "6ce278ca2c02fa83bd4dbe2526189d4943b36c618b1c9cec4204a6e7848e77e7",
+   url = "https://pypi.io/packages/source/s/setuptools-scm/setuptools_scm-10.2.0.tar.gz",
+   b3sum = "b596dcf9c812eddf0fdc43f03a4bb30106ace16f9351926aca8e59ad36553ae7",
    build = "python-build",
 };
 
@@ -163,8 +163,8 @@ python-pyparsing = {
 };
 
 cython = {
-   url = "https://pypi.io/packages/source/c/cython/cython-3.2.6.tar.gz",
-   b3sum = "ec0d5cc57e3d42d7755cc9fa76bb257a576fa9555f9937fef5562cb01e70efa1",
+   url = "https://pypi.io/packages/source/c/cython/cython-3.2.8.tar.gz",
+   b3sum = "40ad68e6a27177bb8d7ea63ff5e49f6b913dc9b61fdab0d23c141f777292ef58",
    build = "python-build",
 };
 
@@ -219,5 +219,38 @@ python-pyxdg = {
 python-lxml = {
    url = "https://pypi.io/packages/source/l/lxml/lxml-6.1.1.tar.gz",
    b3sum = "620c47f1087bbe988710c35053e93be5ca49ed2544bea9978baf48edb5dbd51a",
+   build = "python-build",
+};
+
+--------------------------------------------------------------------------------
+
+python-construct = {
+   url = "https://pypi.io/packages/source/c/construct/construct-2.10.70.tar.gz",
+   b3sum = "485465c434ff51fb3a1591115cdac51500329f1333ca383b21ba9305ad8ba734",
+   build = "python-build",
+};
+
+pycryptodome = {
+   url = "https://github.com/Legrandin/pycryptodome/archive/v3.23.0/pycryptodomex-3.23.0.tar.gz",
+   b3sum = "3042c1471808826e35ef6c4560e433b507ebb083eea7ad858c2cd62a0345abdc",
+   build = "python-build",
+   prep = [[ : >> .separate_namespace ]]
+};
+
+python-argon2-cffi = {
+   url = "https://pypi.io/packages/source/a/argon2_cffi/argon2_cffi-25.1.0.tar.gz",
+   b3sum = "0b9957eb3ffc525fe38d3787605dedf9e3b7c8cd8583d79f4bf0fbe8ed483bac",
+   build = "python-build",
+};
+
+python-argon2-cffi-bindings = {
+   url = "https://pypi.io/packages/source/a/argon2_cffi_bindings/argon2_cffi_bindings-25.1.0.tar.gz",
+   b3sum = "ec736b84dd9c5bf8c815312307d44aab226db379b337ae73eedb0fbb9743db24",
+   build = "python-build",
+};
+
+pykeepass = {
+   url = "https://github.com/libkeepass/pykeepass/archive/v4.1.1.post1/pykeepass-4.1.1.post1.tar.gz",
+   b3sum = "7415ea5af3f4849985b200e21c5e5739065cb8f0afbbe0165b564142c9f2c1ed",
    build = "python-build",
 };

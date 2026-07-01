@@ -562,6 +562,22 @@ gnutls = {
 
 --------------------------------------------------------------------------------
 
+libpwquality = {
+   url = "https://github.com/libpwquality/libpwquality/releases/download/libpwquality-1.4.5/libpwquality-1.4.5.tar.bz2",
+   b3sum = "d1bedad83b0ab004cb12d372c9fc6a20c9a08ca1fbb1c94cea18b9c7d90b0aa6",
+   build = "./configure",
+   flags = { "--disable-cracklib-check" },
+   post = [[ mkdir -p $destdir/opt/python3.13 && mv $destdir/usr/lib $_ ]],
+};
+
+passwordsafe = {
+   url = "https://gitlab.gnome.org/World/secrets/-/archive/5.1/secrets-5.1.tar.bz2",
+   b3sum = "36429be38ecad694efe58b62d231d92771b937c51058add9d6b5ede0aeec0184",
+   build = "meson",
+   flags = { "-Dpython.install_env=system" },
+   prep = [[ sed -i '68d;38d' data/meson.build ]],
+};
+
 libsecret = {
    url = "https://download.gnome.org/sources/libsecret/0.21/libsecret-0.21.7.tar.xz",
    b3sum = "80f06e57a120dec306a1de0ce89e663498c2115faa9a19baa89b4e6c11491a1a",
