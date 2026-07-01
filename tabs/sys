@@ -696,6 +696,7 @@ util-linux = {
    build = "./configure",
    flags = {
       "--disable-{chfn-chsh,login,nologin,su,setpriv,runuser,pylibmount,liblastlog2}",
+      "--enable-fs-paths-default=/bin",
       "--exec-prefix=/",
       "--without-{python,systemd}",
    },
