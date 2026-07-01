@@ -234,6 +234,7 @@ function makepkg(x)
 
    -- Delete unneeded, timestamp, etc.
    os.execute [[
+      chmod -f 1777 tmp
       rm -fr usr/share/man/{de,fr,pl,pt_BR,ro,sv,uk}
       rm -fr usr/share/{doc,locale,gtk-doc}
       find . -name \*.pyc -delete
