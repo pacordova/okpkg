@@ -80,22 +80,30 @@ end
 --------------
 -- main loop -
 --------------
--- Skip version checks on these packages, comma delimiter
--- TODO: fix dashes not working in list, escape does not fix
-slop = "cryptsetup,expat,libffi,libxmlb,lsof,upower,harfbuzz,rsync"
-rust = "git,librsvg"
-other = "bc,cmake,gexiv2,kmod,x264"
-skip = slop .. "," .. rust .. "," .. other
-
 L = {}
 for it in ok.directory_iterator(Dirs.tabs) do
    if ok.basename(it) ~= "cross" then
       fp = io.open(it)
       buf = "\n" .. fp:read("*a")
-      for i in buf:gmatch("\n([%w%-]-) = {.-};") do
-         if not string.format(",%s,", skip):match(string.format(",%s,", i)) then
-            table.insert(L, i)
-         end
+      fp:close()
+      for i in buf:gmatch("\n([%w%-]-) = {.-};") do table.insert(L, i) end
+   end
+end
+
+SKIP = {
+   -- Slop
+   "cryptsetup", "expat", "libffi", "libxmlb", 
+   "lsof", "upower", "harfbuzz", "rsync",
+   -- Rust
+   "git", "librsvg", "gdk-pixbuf2",
+   -- Other
+   "bc", "cmake", "kmod", "x264",
+}
+
+for i=#L,1,-1 do 
+   for j=1,#SKIP do
+      if L[i] == SKIP[j] then
+         table.remove(L, i)
       end
    end
 end

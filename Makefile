@@ -1,6 +1,8 @@
 bindir     ?= /bin
 sysconfdir ?= /etc
 
+STRIP	 = /bin/strip --strip-unneeded
+INSTALL  = /bin/install
 CC       = /bin/gcc
 CXX      = /bin/g++
 CFLAGS   = -march=native -O2 -std=gnu99
@@ -27,13 +29,13 @@ src/b3sum.o: src/b3sum.c
 .cc.o:
 	$(CXX) $(CXXFLAGS) -fpic -o $@ -c $<
 
-install: install-strip
-install-strip: src/okutils.so
-	strip --strip-unneeded $<
-	mkdir -p $(bindir) $(LUA_CPATH)
-	mv -f $< $(LUA_CPATH)
-	cp -f scripts/main.lua $(bindir)/okpkg
-	cp -f scripts/config.lua $(sysconfdir)/okpkg.conf
+install: strip
+	$(INSTALL) -m 755 src/okutils.so     $(LUA_CPATH)
+	$(INSTALL) -m 755 scripts/main.lua   $(bindir)/okpkg
+	$(INSTALL) -m 600 scripts/config.lua $(sysconfdir)/okpkg.conf
+
+strip: src/okutils.so
+	$(STRIP) $<
 
 uninstall: clean
 	rm -f $(bindir)/bin/okpkg

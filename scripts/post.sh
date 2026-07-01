@@ -1,5 +1,7 @@
 #!/bin/sh
 
+cd $(dirname $0)
+
 libexecdir=/usr/libexec
 mandir=/usr/share/man
 
@@ -30,6 +32,10 @@ setcap cap_net_raw+p /bin/ping
 chown root:messagebus $libexecdir/dbus-daemon-launch-helper
 chmod 4750 $libexecdir/dbus-daemon-launch-helper
 chmod 1777 /tmp
+
+# other scripts
+sh update-ca-certificates.sh
+sh update-iana-etc.sh
 
 # clock
 ln -sf /usr/share/zoneinfo/US/Eastern /etc/localtime

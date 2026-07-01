@@ -1,6 +1,5 @@
 #!/bin/sh
-curl="/bin/curl -fsSL"
-capath="/etc/ssl/certs"
-mkdir -p `dirname "$capath"` && cd "$capath"
-$curl "https://curl.se/ca/cacert.pem" > _
-mv _ ca-certificates.crt
+curl='/bin/curl -fsSL'
+tmpfile=$(mktemp)
+$curl -o $tmpfile https://curl.se/ca/cacert.pem
+[ -f $tmpfile ] && mv $tmpfile /etc/ssl/certs/ca-certificates.crt
