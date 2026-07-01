@@ -230,7 +230,7 @@ python-construct = {
    build = "python-build",
 };
 
-pycryptodome = {
+pycryptodomex = {
    url = "https://github.com/Legrandin/pycryptodome/archive/v3.23.0/pycryptodomex-3.23.0.tar.gz",
    b3sum = "3042c1471808826e35ef6c4560e433b507ebb083eea7ad858c2cd62a0345abdc",
    build = "python-build",

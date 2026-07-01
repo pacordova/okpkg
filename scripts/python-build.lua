@@ -33,11 +33,15 @@ emerge("meson")
 -- "libtorrent-rasterbar", "pygobject", "pycairo",
 
 install_all {
-   "libxml2", 
+   "at-spi2-core",
+   "gexiv2",
    "glib2", 
    "gobject-introspection", 
-   "xcb-proto",
-   "pygobject", 
+   "libpwquality",
+   "libtorrent-rasterbar",
+   "libxml2", 
+   "passwordsafe",
    "pycairo", 
-   "libtorrent-rasterbar"
+   "pygobject", 
+   "xcb-proto",
 }
