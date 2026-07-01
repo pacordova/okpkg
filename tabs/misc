@@ -585,7 +585,6 @@ passwordsafe = {
    b3sum = "36429be38ecad694efe58b62d231d92771b937c51058add9d6b5ede0aeec0184",
    build = "meson",
    flags = { "-Dpython.install_env=system" },
-   prep = [[ sed -i '68d;38d' data/meson.build ]],
 };
 
 libsecret = {
