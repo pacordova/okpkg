@@ -559,3 +559,25 @@ gnutls = {
       "--without-p11-kit",
    }
 };
+
+--------------------------------------------------------------------------------
+
+libsecret = {
+   url = "https://download.gnome.org/sources/libsecret/0.21/libsecret-0.21.7.tar.xz",
+   b3sum = "80f06e57a120dec306a1de0ce89e663498c2115faa9a19baa89b4e6c11491a1a",
+   build = "meson",
+   flags = {
+      "-Dgtk_doc=false",
+      "-Dintrospection=true",
+      "-Dcrypto=libgcrypt",
+      "-Dvapi=true",
+      "-Dmanpage=false",
+   }
+};
+
+
+keybinder = {
+   url = "https://github.com/kupferlauncher/keybinder/releases/download/keybinder-3.0-v0.3.2/keybinder-3.0-0.3.2.tar.gz",
+   b3sum = "04b010524abf7af8a6bdfdbeff393c0feecf2bdcc1fd642e75113137ccb62aed",
+   build = "./configure",
+};
