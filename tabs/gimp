@@ -53,14 +53,14 @@ pycairo = {
    url = "https://pypi.org/packages/source/p/pycairo/pycairo-1.29.0.tar.gz",
    b3sum = "f8e322620699fbe0469e21edeedb7161291f2cda76c816a1d03b387864b73c9c",
    build = "meson",
-   post = [[ cd $destdir && mkdir -p opt/python3.13 && mv usr/lib $_ ]],
+   flags = { "-Dpython.install_env=system" },
 };
 
 pygobject = {
    url = "https://download.gnome.org/sources/pygobject/3.56/pygobject-3.56.3.tar.gz",
    b3sum = "bb2f8baf7738b79b454155a9b65b03ea29b544e9874b3c5ebb97ea62bac9de57",
    build = "meson",
-   post = [[ cd $destdir && mkdir -p opt/python3.13 && mv usr/lib $_ ]],
+   flags = { "-Dpython.install_env=system" },
 };
 
 gexiv2 = {
@@ -71,8 +71,8 @@ gexiv2 = {
       "-Dintrospection=true",
       "-Dpython3=true",
       "-Dvapi=true",
-   },
-   post = [[ cd $destdir && mkdir -p opt/python3.13 && mv usr/lib $_ ]]
+      "-Dpython.install_env=system",
+   }
 };
 
 libmypaint = {

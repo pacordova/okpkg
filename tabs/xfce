@@ -40,8 +40,8 @@ at-spi2-core = {
       "-Dsystemd_user_dir=/tmp",
       "-Ddefault_bus=dbus-daemon",
       "-Ddocs=false",
-   },
-   post = [[ mkdir -p $destdir/opt/python3.13 && mv $destdir/usr/lib $_ ]]
+      "-Dpython.install_env=system",
+   }
 };
 
 cairo = {

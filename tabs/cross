@@ -76,7 +76,6 @@ glibc = {
       "--exec-prefix=/",
       "--disable-nscd",
       "--with-headers=/mnt/usr/include",
-      "PYTHON_PROG=/opt/python3.13/bin/python3.13",
    },
    prep = [[
       $patch < /usr/okpkg/patches/glibc.diff

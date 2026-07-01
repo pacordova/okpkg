@@ -33,7 +33,7 @@ _python = {
    b3sum = "b5cc2e3933be3e62f80fd17d27fca70ab1423a6d79a5460592afe8421eb05cd8",
    build = "./configure",
    flags = {
-      "--prefix=/opt/python3.13",
+      "--prefix=$PYTHONHOME",
       "--without-doc-strings",
       "--without-ensurepip",
       "--without-system-expat",
@@ -73,7 +73,6 @@ glibc = {
       "--enable-stack-protector=strong",
       "--disable-nscd",
       "--with-headers=/usr/include",
-      "PYTHON_PROG=/opt/python3.13/bin/python3.13",
    },
    prep = [[
       printf "%s\n" rootsbindir=/bin >> configparms
@@ -807,7 +806,6 @@ grub = {
       "--disable-grub-mkfont",
       "--disable-grub-mount",
       "{C,CPP,CXX,LD}FLAGS=",
-      "PYTHON=/opt/python3.13/bin/python3.13",
    },
    post = [[
       cd "$destdir/lib64"

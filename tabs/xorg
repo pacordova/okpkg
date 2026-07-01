@@ -163,7 +163,7 @@ xcb-proto = {
    url = "https://xorg.freedesktop.org/archive/individual/proto/xcb-proto-1.17.0.tar.xz",
    b3sum = "68187400fded667f60b4b020d0fc37fa489ae0de33169fe7b07fcbaf88e7a3f9",
    build = "./configure",
-   flags = { "--with-python_prefix=/opt/python3.13" },
+   flags = { "--with-python_prefix=$PYTHONHOME" },
 };
 
 libxcb = {

@@ -3,7 +3,7 @@ python = {
    b3sum = "b5cc2e3933be3e62f80fd17d27fca70ab1423a6d79a5460592afe8421eb05cd8",
    build = "./configure",
    flags = {
-      "--prefix=/opt/python3.13",
+      "--prefix=$PYTHONHOME",
       "--enable-loadable-sqlite-extensions",
       "--without-doc-strings",
       "--without-ensurepip",
