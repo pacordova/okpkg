@@ -102,9 +102,7 @@ SKIP = {
 
 for i=#L,1,-1 do 
    for j=1,#SKIP do
-      if L[i] == SKIP[j] then
-         table.remove(L, i)
-      end
+      if L[i] == SKIP[j] then table.remove(L, i) end
    end
 end
 
