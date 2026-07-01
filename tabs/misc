@@ -121,16 +121,15 @@ btop = {
    url = "https://github.com/aristocratos/btop/archive/v1.4.7/btop-1.4.7.tar.gz",
    b3sum = "7a9090ce12202d3ac5922dceb1c0f60dcfb0dd40bca903fad5570f916e886040",
    build = "cmake",
-   flags = { "-DBTOP_LTO=OFF" }
+   flags = { "-DBTOP_LTO=OFF" },
+   post = [[ cd $destdir && mv share usr/share ]],
 };
 
 htop = {
    url = "https://github.com/htop-dev/htop/releases/download/3.5.1/htop-3.5.1.tar.xz",
    b3sum = "f5a60d68daabacbe9e5039112ba2daaf0017bc14d276f82a60cb137c515ef3f4",
    build = "./configure",
-   flags = {
-      "--enable-sensors",
-   }
+   flags = { "--enable-sensors" }
 };
 
 iftop = {
@@ -454,6 +453,7 @@ st = {
    flags = { 
       "PREFIX=/", 
       "APPPREFIX=/usr/share/applications",
+      "MANPREFIX=/usr/share/man",
    },
    post = [[ tic -sx st.info ]]
 };
