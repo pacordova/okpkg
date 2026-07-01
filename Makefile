@@ -32,7 +32,7 @@ src/b3sum.o: src/b3sum.c
 install: strip
 	$(INSTALL) -m 755 src/okutils.so     $(LUA_CPATH)
 	$(INSTALL) -m 755 scripts/main.lua   $(bindir)/okpkg
-	$(INSTALL) -m 600 scripts/config.lua $(sysconfdir)/okpkg.conf
+	$(INSTALL) -m 644 scripts/config.lua $(sysconfdir)/okpkg.conf
 
 strip: src/okutils.so
 	$(STRIP) $<
