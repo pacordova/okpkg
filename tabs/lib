@@ -478,8 +478,8 @@ uthash = {
 };
 
 x264 = {
-   url = "https://code.videolan.org/videolan/x264/-/archive/4613ac3c15fd75cebc4b9f65b7fb95e70a3acce1/x264-20240513.tar.bz2",
-   b3sum = "dac7ca51f554e2cdf4a362ffe6e8d5678a0029ff535fc1d9a99b1b68c40c3d02",
+   url = "https://code.videolan.org/videolan/x264/-/archive/0480cb05fa188d37ae87e8f4fd8f1aea3711f7ee/x264-20250909.tar.gz",
+   b3sum = "e82296e0a5d1f8d1aeef49c3cdb761e261ddbb1e003968e0bace250d8b0e93fe",
    build = "./configure",
    flags = {
       "--libdir=/lib64",
