@@ -696,11 +696,13 @@ util-linux = {
    build = "./configure",
    flags = {
       "--disable-{chfn-chsh,login,nologin,su,setpriv,runuser,pylibmount,liblastlog2}",
-      "--enable-fs-paths-default=/bin",
       "--exec-prefix=/",
       "--without-{python,systemd}",
    },
-   post = [[ mv $destdir{/sbin/*,/bin} ]]
+   prep = [[ 
+      sed -i 's:}/sbin:}/bin:' configure
+      sed -i 's:sbin:bin:'     disk-utils/fsck.c
+   ]],
 };
 
 e2fsprogs = {
