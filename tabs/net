@@ -224,8 +224,9 @@ pinentry = {
    b3sum = "ee79d79f130955d5e96b94d86ba31c2709ccbe7f0218b38f9a736b68ee3ed498",
    build = "./configure",
    flags = {
-      "--enable-pinentry-{tty=yes,qt=no,gtk2=no,gnome3=no}",
-      "--disable-libsecret",
+      "--enable-pinentry-tty",
+      "--disable-pinentry-curses",
+      "--disable-pinentry-gnome3",
    }
 };
 
