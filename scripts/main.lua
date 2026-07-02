@@ -105,6 +105,7 @@ B = {
          "-Ddebug=false",
          "-Doptimization=2",
          "-Dwrap_mode=nodownload",
+         "-Dpython.install_env=system",
          ...
       }
       return (

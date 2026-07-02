@@ -40,7 +40,6 @@ at-spi2-core = {
       "-Dsystemd_user_dir=/tmp",
       "-Ddefault_bus=dbus-daemon",
       "-Ddocs=false",
-      "-Dpython.install_env=system",
    }
 };
 

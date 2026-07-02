@@ -584,7 +584,6 @@ passwordsafe = {
    url = "https://gitlab.gnome.org/World/secrets/-/archive/5.1/secrets-5.1.tar.bz2",
    b3sum = "36429be38ecad694efe58b62d231d92771b937c51058add9d6b5ede0aeec0184",
    build = "meson",
-   flags = { "-Dpython.install_env=system" },
 };
 
 libsecret = {
