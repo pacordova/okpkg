@@ -40,10 +40,10 @@ rust-bin = {
 };
 
 signal-desktop = {
-   url = "https://updates.signal.org/desktop/apt/pool/s/signal-desktop/signal-desktop_8.16.0_amd64.deb",
-   b3sum = "26afad1305f7567dec316904401e34eaca173c1ce93ef154ab52fe7392d6a983",
+   url = "https://updates.signal.org/desktop/apt/pool/s/signal-desktop/signal-desktop_8.17.0_amd64.deb",
+   b3sum = "f513e513857000836f4a4f930ce0396b36a8e443f1f90f9be50f6c198f5b2a8b",
    post = [[
-      ar p /var/cache/distfiles/signal-desktop_8.16.0_amd64.deb data.tar.xz \
+      ar p /var/cache/distfiles/signal-desktop_8.17.0_amd64.deb data.tar.xz \
       | $tar -C "$destdir" -xJ
    ]]
 };

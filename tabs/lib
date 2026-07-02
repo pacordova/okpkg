@@ -247,8 +247,8 @@ libev = {
 };
 
 libevent = {
-   url = "https://github.com/libevent/libevent/releases/download/release-2.1.12-stable/libevent-2.1.12-stable.tar.gz",
-   b3sum = "72be05db4f7879f05fe6fd95e485958223c4a0c6d3ffbb50d5ae5ebc82b8cc0c",
+   url = "https://github.com/libevent/libevent/releases/download/release-2.1.13-stable/libevent-2.1.13-stable.tar.gz",
+   b3sum = "a0e189ad0530e9d6eff25ac70a4c65ded31063145fb68d79741d18c0522fb014",
    build = "./configure",
    flags = { "--disable-openssl" },
    prep = [[ sed -i 's/python/&3/' event_rpcgen.py ]],
@@ -268,8 +268,8 @@ libinih = {
 };
 
 libjpeg-turbo = {
-   url = "https://github.com/libjpeg-turbo/libjpeg-turbo/releases/download/3.1.4.1/libjpeg-turbo-3.1.4.1.tar.gz",
-   b3sum = "0aa89418430b4133a0c861a9b988b86b93e7269fb38329a723a696f8a0a0752d",
+   url = "https://github.com/libjpeg-turbo/libjpeg-turbo/releases/download/3.2.0/libjpeg-turbo-3.2.0.tar.gz",
+   b3sum = "cc6c1fb3b6e155d33af2c05ad02d0745b596d16e21722966ba60e4cdefab9c89",
    build = "cmake",
    flags = { 
       "-DENABLE_STATIC=OFF",
