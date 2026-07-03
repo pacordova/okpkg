@@ -458,6 +458,13 @@ st = {
    post = [[ tic -sx st.info ]]
 };
 
+wireguard-tools = {
+   url = "https://git.zx2c4.com/wireguard-tools/snapshot/wireguard-tools-1.0.20260223.tar.xz",
+   b3sum = "56df24ca339e9b5f76ffb548266b609194bb9718a7ef300708dda7b11df3e566",
+   build = "make",
+   flags = { "--directory=src", "BINDIR=/bin", "RUNSTATEDIR=/run" },
+};
+
 --------------------------------------------------------------------------------
 
 libdaemon = {
