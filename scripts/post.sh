@@ -19,6 +19,7 @@ mandir=/usr/share/man
 [ -x /bin/update-mime-database     ] && /bin/update-mime-database     /usr/share/mime
 [ -x /bin/glib-compile-schemas     ] && /bin/glib-compile-schemas     /usr/share/glib-2.0/schemas
 [ -x /bin/gdk-pixbuf-query-loaders ] && /bin/gdk-pixbuf-query-loaders --update-cache
+[ -x /bin/Xorg                     ] && chmod u-s /bin/Xorg
 
 # gtk-update-icon-cache
 if [ -x /bin/gtk-update-icon-cache ]; then
