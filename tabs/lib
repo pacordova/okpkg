@@ -348,8 +348,8 @@ libtasn1 = {
 };
 
 libtiff = {
-   url = "https://download.osgeo.org/libtiff/tiff-4.7.1.tar.xz",
-   b3sum = "c2efc1a4f0c6309c2c89e56b7cd9f96f343cacf0c054a222937537fffc1dc228",
+   url = "https://download.osgeo.org/libtiff/tiff-4.7.2.tar.xz",
+   b3sum = "0d6693223ec93ee264d2eb63840808b2278e00e037f9c9e8ead051a42d1852a0",
    build = "./configure",
 };
 
