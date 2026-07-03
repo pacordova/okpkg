@@ -1,6 +1,6 @@
 python = {
-   url = "https://www.python.org/ftp/python/3.13.13/Python-3.13.13.tar.xz",
-   b3sum = "b5cc2e3933be3e62f80fd17d27fca70ab1423a6d79a5460592afe8421eb05cd8",
+   url = "https://www.python.org/ftp/python/3.13.14/Python-3.13.14.tar.xz",
+   b3sum = "d0622b10d0e850b1000dc4375fc86d7f70fd4d988af590fe7a8ad350604eaade",
    build = "./configure",
    flags = {
       "--prefix=$PYTHONHOME",
