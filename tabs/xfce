@@ -61,10 +61,17 @@ gdk-pixbuf2 = {
    b3sum = "edf54b48c7008c0ec52e0224b6a10ea680bbb94c23b71fbe5d19ae8e72706bc6",
    build = "meson",
    flags = {
-      "-Dbuiltin_loaders=all",
+      "-Dgif=enabled",
+      "-Djpeg=enabled",
+      "-Dpng=enabled",
+      "-Dtiff=disabled",
+      "-Dintrospection=enabled",
+      "-Ddocs=false",
+      "-Dman=false",
+      "-Dgtk_doc=false",
       "-Dgio_sniffing=false",
       "-Dinstalled_tests=false",
-      "-Dothers=enabled",
+      "-Dbuiltin_loaders=all",
    }
 };
 
@@ -148,8 +155,10 @@ poppler = {
       "-DENABLE_GPGME=OFF",
       "-DENABLE_LIBCURL=OFF",
       "-DENABLE_NSS3=OFF",
-   },
-   post = [[ mv $destdir/usr/{bin,..} ]]
+      "-DENABLE_LIBTIFF=OFF",
+      "-DENABLE_LCMS=OFF",
+      "-DENABLE_UTILS=OFF",
+   }
 };
 
 poppler-data = {
@@ -164,7 +173,7 @@ evince = {
    b3sum = "42a6224890aed4e90a12595b38b7749d93007eb489485474d6029aff08dfa874",
    build = "meson",
    flags = {
-      "-D{gspell,keyring}=disabled",
+      "-D{gspell,keyring,tiff}=disabled",
       "-D{gtk_doc,nautilus,user_doc}=false",
       "-D{pdf,ps}=enabled",
       "-Dsystemduserunitdir=no",

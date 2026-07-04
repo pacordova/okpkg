@@ -217,12 +217,6 @@ lame = {
    flags = { "--enable-{nasm=yes,mp3rtp=yes,gtktest=no}" }
 };
 
-lcms2 = {
-   url = "https://github.com/mm2/Little-CMS/releases/download/lcms2.19.1/lcms2-2.19.1.tar.gz",
-   b3sum = "f649f683e5360ca77ff4117b036eadb0299c6ca7ef3c561525daec2908a9e5d2",
-   build = "./configure",
-};
-
 libarchive = {
    url = "https://github.com/libarchive/libarchive/releases/download/v3.8.8/libarchive-3.8.8.tar.xz",
    b3sum = "a7d4dd38d2ace0487c391573834243b7dea241eb7c4ac5ba1083597d888b9024",
@@ -344,12 +338,6 @@ libsodium = {
 libtasn1 = {
    url = "https://ftp.gnu.org/gnu/libtasn1/libtasn1-4.21.0.tar.gz",
    b3sum = "b156973b5629fe15050b4eaee334e50deddfaa6f907645be1c3d58f3ce93bf53",
-   build = "./configure",
-};
-
-libtiff = {
-   url = "https://download.osgeo.org/libtiff/tiff-4.7.2.tar.xz",
-   b3sum = "0d6693223ec93ee264d2eb63840808b2278e00e037f9c9e8ead051a42d1852a0",
    build = "./configure",
 };
 

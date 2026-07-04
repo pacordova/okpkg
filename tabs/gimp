@@ -1,3 +1,15 @@
+libtiff = {
+   url = "https://download.osgeo.org/libtiff/tiff-4.7.2.tar.xz",
+   b3sum = "0d6693223ec93ee264d2eb63840808b2278e00e037f9c9e8ead051a42d1852a0",
+   build = "./configure",
+};
+
+lcms2 = {
+   url = "https://github.com/mm2/Little-CMS/releases/download/lcms2.19.1/lcms2-2.19.1.tar.gz",
+   b3sum = "f649f683e5360ca77ff4117b036eadb0299c6ca7ef3c561525daec2908a9e5d2",
+   build = "./configure",
+};
+
 libxmlb = {
    url = "https://github.com/hughsie/libxmlb/releases/download/0.3.25/libxmlb-0.3.25.tar.xz",
    b3sum = "131261f8d159015f8f60be0b8c7223c09db7f1450b67d92bbd84c358ad1e4af2",
@@ -47,6 +59,10 @@ gegl = {
    url = "https://download.gimp.org/pub/gegl/0.4/gegl-0.4.70.tar.xz",
    b3sum = "dca4e225206d802a1d2c91480278ee37ee4dc0f1e0ea81d8ae442cc48153fc94",
    build = "meson",
+   flags = {
+      "-Dvapigen=enabled",
+      "-Dintrospection=true",
+   }
 };
 
 pycairo = {
@@ -62,8 +78,8 @@ pygobject = {
 };
 
 gexiv2 = {
-   url = "https://download.gnome.org/sources/gexiv2/0.14/gexiv2-0.14.6.tar.xz",
-   b3sum = "8ad3ca4a8205dcc6570ec6d1dde16b9f2d023edd11d63ce834aa7b47faa15359",
+   url = "https://download.gnome.org/sources/gexiv2/0.16/gexiv2-0.16.1.tar.xz",
+   b3sum = "ddfe810d82fe4e7e8df5deccdeb1e6041c2db4e9f654e9516648b3c1be35d356",
    build = "meson",
    flags = { 
       "-Dintrospection=true",

@@ -69,7 +69,7 @@ libplacebo = {
       "-Dopengl=enabled",
       "-Dd3d11=disabled",
       "-Dglslang=disabled",
-      "-Dlcms=enabled",
+      "-Dlcms=disabled",
       "-Dxxhash=enabled",
       "-Ddemos=false",
       "-Dtests=false",
@@ -94,6 +94,7 @@ mpv = {
       "-D{x11,alsa}=enabled",
       "-D{wayland,pipewire,pulse}=disabled",
       "-Dlibarchive=enabled",
+      "-Dlcms2=disabled",
       "-Dcaca=disabled",
       "-Ddrm=enabled",
    }

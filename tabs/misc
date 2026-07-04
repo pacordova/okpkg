@@ -334,6 +334,7 @@ r = {
       "--enable-R-shlib",
       "--disable-java",
       "--without-x",
+      "--without-libtiff",
       "CONFIG_SITE=/dev/null",
    }
 };
