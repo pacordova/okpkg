@@ -97,7 +97,7 @@ SKIP = {
    -- Rust
    "git", "librsvg", "gdk-pixbuf2",
    -- Other
-   "bc", "cmake", "kmod", "x264",
+   "bc", "cmake", "kmod", "x264", "ttf-croscore",
 }
 
 for i=#L,1,-1 do 
