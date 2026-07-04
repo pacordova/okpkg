@@ -11,6 +11,7 @@ mandir=/usr/share/man
 [ -x /bin/makewhatis ] && /bin/makewhatis "$mandir"
 [ -x /bin/pwconv     ] && /bin/pwconv
 [ -x /bin/grpconv    ] && /bin/grpconv
+[ -x /bin/ldconfig   ] && /bin/ldconfig
 [ -f /etc/machine-id ] || /bin/dbus-uuidgen --ensure=/etc/machine-id
 
 # xorg

@@ -93,7 +93,7 @@ end
 SKIP = {
    -- Slop
    "cryptsetup", "expat", "libffi", "libxmlb", 
-   "lsof", "upower", "harfbuzz", "rsync",
+   "lsof", "upower", "harfbuzz", "rsync", "hwdata",
    -- Rust
    "git", "librsvg", "gdk-pixbuf2",
    -- Other
