@@ -66,8 +66,18 @@ ttf-go = {
    b3sum = "aaf0de9c51cd8d62ec40dfe714155f744dfe529ae074683dbbbd52480e28fcac",
    build = _,
    post = [[
-      install -d $destdir/usr/share/fonts/Go
-      install -m 644 font/gofont/ttfs/*.ttf $destdir/usr/share/fonts/Go
+      install -d $destdir/usr/share/fonts/TTF/Go
+      install -m 644 font/gofont/ttfs/*.ttf $_
+   ]]
+};
+
+ttf-croscore = {
+   url = "https://commondatastorage.googleapis.com/chromeos-localmirror/distfiles/croscorefonts-1.31.0.tar.bz2",
+   b3sum = "66cd58e7470bb5fde7e6750e317840a19b7f428cdf9c40a54d4c10edee8c9a3c",
+   build = _,
+   post = [[
+      install -d $destdir/usr/share/fonts/TTF/croscore
+      install -m 644 *.ttf $_
    ]]
 };
 
