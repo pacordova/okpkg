@@ -67,7 +67,7 @@ ttf-go = {
    build = _,
    post = [[
       install -d $destdir/usr/share/fonts/TTF/Go
-      install -m 644 font/gofont/ttfs/*.ttf $_
+      install -m 644 font/gofont/ttfs/*.ttf $destdir/usr/share/fonts/TTF/Go
    ]]
 };
 
@@ -77,7 +77,7 @@ ttf-croscore = {
    build = _,
    post = [[
       install -d $destdir/usr/share/fonts/TTF/croscore
-      install -m 644 *.ttf $_
+      install -m 644 *.ttf $destdir/usr/share/fonts/TTF/croscore
    ]]
 };
 
@@ -95,8 +95,8 @@ ttf-sazanami = {
    url = "http://osdn.dl.sourceforge.jp/efont/10087/sazanami-20040629.tar.bz2",
    b3sum = "bf1bb0ecd19327399fcaa478fd5385654c74963459a2940c56952144aba16b73",
    post = [[
-      install -d $destdir/usr/share/fonts/Sazanami
-      install -m 644 *.ttf $destdir/usr/share/fonts/Sazanami
+      install -d $destdir/usr/share/fonts/TTF/Sazanami
+      install -m 644 *.ttf $destdir/usr/share/fonts/TTF/Sazanami
    ]]
 };
 
