@@ -1,3 +1,32 @@
+exiv2 = {
+   url = "https://github.com/Exiv2/exiv2/archive/v0.28.8/exiv2-0.28.8.tar.gz",
+   b3sum = "f38d61b8edfb1d4380d95054e47d50205e5e9e007beb1c868971452d95ad903c",
+   build = "cmake",
+   flags = {
+      "-DEXIV2_BUILD_EXIV2_COMMAND=OFF",
+      "-DEXIV2_ENABLE_BMFF=ON",
+      "-DEXIV2_ENABLE_BROTLI=OFF",
+      "-DEXIV2_ENABLE_CURL=OFF",
+      "-DEXIV2_ENABLE_INIH=OFF",
+      "-DEXIV2_ENABLE_NLS=OFF",
+      "-DEXIV2_ENABLE_VIDEO=ON",
+      "-DEXIV2_ENABLE_WEBREADY=OFF",
+      "-DEXIV2_ENABLE_XMP=ON",
+   }
+};
+
+gexiv2 = {
+   url = "https://download.gnome.org/sources/gexiv2/0.16/gexiv2-0.16.1.tar.xz",
+   b3sum = "ddfe810d82fe4e7e8df5deccdeb1e6041c2db4e9f654e9516648b3c1be35d356",
+   build = "meson",
+   flags = { 
+      "-Dintrospection=true",
+      "-Dpython3=true",
+      "-Dvapi=true",
+   }
+};
+
+
 libtiff = {
    url = "https://download.osgeo.org/libtiff/tiff-4.7.2.tar.xz",
    b3sum = "0d6693223ec93ee264d2eb63840808b2278e00e037f9c9e8ead051a42d1852a0",
@@ -75,17 +104,6 @@ pygobject = {
    url = "https://download.gnome.org/sources/pygobject/3.56/pygobject-3.56.3.tar.gz",
    b3sum = "bb2f8baf7738b79b454155a9b65b03ea29b544e9874b3c5ebb97ea62bac9de57",
    build = "meson",
-};
-
-gexiv2 = {
-   url = "https://download.gnome.org/sources/gexiv2/0.16/gexiv2-0.16.1.tar.xz",
-   b3sum = "ddfe810d82fe4e7e8df5deccdeb1e6041c2db4e9f654e9516648b3c1be35d356",
-   build = "meson",
-   flags = { 
-      "-Dintrospection=true",
-      "-Dpython3=true",
-      "-Dvapi=true",
-   }
 };
 
 libmypaint = {

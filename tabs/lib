@@ -126,23 +126,6 @@ libogg = {
    build = "./configure",
 };
 
-exiv2 = {
-   url = "https://github.com/Exiv2/exiv2/archive/v0.28.8/exiv2-0.28.8.tar.gz",
-   b3sum = "f38d61b8edfb1d4380d95054e47d50205e5e9e007beb1c868971452d95ad903c",
-   build = "cmake",
-   flags = {
-      "-DEXIV2_BUILD_EXIV2_COMMAND=OFF",
-      "-DEXIV2_ENABLE_BMFF=ON",
-      "-DEXIV2_ENABLE_BROTLI=OFF",
-      "-DEXIV2_ENABLE_CURL=OFF",
-      "-DEXIV2_ENABLE_INIH=OFF",
-      "-DEXIV2_ENABLE_NLS=OFF",
-      "-DEXIV2_ENABLE_VIDEO=ON",
-      "-DEXIV2_ENABLE_WEBREADY=OFF",
-      "-DEXIV2_ENABLE_XMP=ON",
-   }
-};
-
 flac = {
    url = "https://downloads.xiph.org/releases/flac/flac-1.5.0.tar.xz",
    b3sum = "2adca3cd8da4b577ebb9c12e73c91cf6f6a7feb7485b3f003853b82710bada84",
