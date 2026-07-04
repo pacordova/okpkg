@@ -28,6 +28,23 @@ cryptsetup = {
    }
 };
 
+cups = {
+   url = "https://github.com/OpenPrinting/cups/releases/download/v2.4.19/cups-2.4.19-source.tar.gz",
+   b3sum = "1059af629115e1efcdcb855ea5b7738e0dc08c891754377d55657758eb3d9bf6",
+   build = "./configure",
+   flags = {
+      "--with-pkgconfpath=/usr/share/pkgconfig",
+      "--with-rcdir=/tmp/cupsinit",
+      "--with-rundir=/run/cups",
+      "--with-system-groups=lpadmin",
+      "--with-tls=gnutls",
+   },
+   prep = [[
+      sed -i 's:lib/cups:libexec/cups:' configure
+      sed -i 's:install-sysv::'         configure
+   ]]
+};
+
 dcron = {
    url = "http://www.jimpryor.net/linux/releases/dcron-4.5.tar.gz",
    b3sum = "ff8241862e959a6e733fba2dc095abc841b30998e51b458758b27341e23022ca",
@@ -464,47 +481,6 @@ wireguard-tools = {
    b3sum = "56df24ca339e9b5f76ffb548266b609194bb9718a7ef300708dda7b11df3e566",
    build = "make",
    flags = { "--directory=src", "BINDIR=/bin", "RUNSTATEDIR=/run" },
-};
-
---------------------------------------------------------------------------------
-
-libdaemon = {
-   url = "https://0pointer.de/lennart/projects/libdaemon/libdaemon-0.14.tar.gz",
-   b3sum = "7fdfc77f5c726046860932782405175d6be04c599eb6a114202cde7ecb4cedee",
-   build = "./configure",
-};
-
-avahi = {
-   url = "https://github.com/lathiat/avahi/releases/download/v0.8/avahi-0.8.tar.gz",
-   b3sum = "21a042c0a94c8319000d6980e8e59df4c63aa9becd3ba113270e20c8215591bf",
-   build = "./configure",
-   flags = {
-      "--disable-mono",
-      "--disable-monodoc",
-      "--disable-python",
-      "--disable-qt{3,4,5}",
-      "--enable-core-docs",
-      "--with-distro=none",
-      "--with-systemdsystemunitdir=no",
-      "--with-dbus-system-address='unix:path=/run/dbus/system_bus_socket'"
-   }
-};
-
-cups = {
-   url = "https://github.com/OpenPrinting/cups/releases/download/v2.4.19/cups-2.4.19-source.tar.gz",
-   b3sum = "1059af629115e1efcdcb855ea5b7738e0dc08c891754377d55657758eb3d9bf6",
-   build = "./configure",
-   flags = {
-      "--with-pkgconfpath=/usr/share/pkgconfig",
-      "--with-rcdir=/tmp/cupsinit",
-      "--with-rundir=/run/cups",
-      "--with-system-groups=lpadmin",
-      "--with-tls=gnutls",
-   },
-   prep = [[
-      sed -i 's:lib/cups:libexec/cups:' configure
-      sed -i 's:install-sysv::'         configure
-   ]]
 };
 
 --------------------------------------------------------------------------------

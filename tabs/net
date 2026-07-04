@@ -65,18 +65,6 @@ openntpd = {
    ]]
 };
 
-openresolv = {
-   url = "https://github.com/NetworkConfiguration/openresolv/releases/download/v3.17.4/openresolv-3.17.4.tar.xz",
-   b3sum = "3a6519ae778a8fc2f1ed02a7d2a2211f061cc1b6a0019247d7c977448b63e528",
-   build = "./configure",
-   flags = { 
-      "--libdir=/lib64", 
-      "--libexecdir=/usr/libexec",
-      "--sbindir=/bin",
-      "--sysconfdir=/etc",
-   }
-};
-
 iproute2 = {
    url = "https://kernel.org/pub/linux/utils/net/iproute2/iproute2-7.1.0.tar.xz",
    b3sum = "84c18089739f5fadd2baf4558905ac367e3b683268c9720aba29769a7784b38e",

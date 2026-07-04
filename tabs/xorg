@@ -49,18 +49,6 @@ fontconfig = {
 
 --------------------------------------------------------------------------------
 
-ttf-dejavu = {
-   url = "https://downloads.sourceforge.net/dejavu/dejavu-fonts-ttf-2.37.tar.bz2",
-   b3sum = "b702bac8a0f8e0802758549da3b4d8041c3c83c3894e1e8a960eab53af18cce8",
-   build = _,
-   post = [[
-      install -d $destdir/usr/share/fontconfig/conf.default
-      install -d $destdir/usr/share/fonts/DejaVu
-      install -m 644 fontconfig/*.conf $destdir/usr/share/fontconfig/conf.default
-      install -m 644 ttf/*.ttf $destdir/usr/share/fonts/DejaVu
-   ]]
-};
-
 ttf-go = {
    url = "https://github.com/golang/image/archive/v0.17.0/image-0.17.0.tar.gz",
    b3sum = "aaf0de9c51cd8d62ec40dfe714155f744dfe529ae074683dbbbd52480e28fcac",
@@ -78,16 +66,6 @@ ttf-croscore = {
    post = [[
       install -d $destdir/usr/share/fonts/TTF/croscore
       install -m 644 *.ttf $destdir/usr/share/fonts/TTF/croscore
-   ]]
-};
-
-ttf-liberation = {
-   url = "https://github.com/liberationfonts/liberation-fonts/files/7261482/liberation-fonts-ttf-2.1.5.tar.gz",
-   b3sum = "5ca2163d2f2ec538005381049fd2f02b531b868903ace9a49cb10b74cf33035d", 
-   build = _,
-   post = [[
-      install -d $destdir/usr/share/fonts/liberation
-      install -m 644 *.ttf $destdir/usr/share/fonts/liberation
    ]]
 };
 
