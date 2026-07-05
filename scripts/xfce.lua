@@ -11,7 +11,7 @@ Dirs = dofile("/bin/okpkg")
 
 local function build_all(x)
    local fp, buf
-   fp = io.open(Dirs.tabs .. "/" .. x)
+   fp = io.open(Dirs.tab .. "/" .. x)
    buf = fp:read("*a")
    fp:close()
    for i in buf:gmatch("\n?([%w%-_]*)%s*=%s*{.-}%s*;") do

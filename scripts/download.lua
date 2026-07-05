@@ -17,7 +17,7 @@ urls = {}
 b3sums = {}
 for i=1,#arg do
    local X, fp, buf
-   fp = io.open(Dirs.tabs .. "/" .. arg[i])
+   fp = io.open(Dirs.tab .. "/" .. arg[i])
    buf = "\n" .. fp:read("*a")
    fp:close()
    for k,v in pairs(Mir) do buf=buf:gsub(k,v) end

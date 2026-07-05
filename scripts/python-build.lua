@@ -18,7 +18,7 @@ end
 
 -- Build python modules
 local fp, buf
-fp = io.open(string.format("%s/%s", Dirs.tabs, "python"))
+fp = io.open(string.format("%s/%s", Dirs.tab, "python"))
 buf = '\n' .. fp:read('*a')
 fp:close()
 for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do 

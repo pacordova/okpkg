@@ -81,7 +81,7 @@ end
 -- main loop -
 --------------
 L = {}
-for it in ok.directory_iterator(Dirs.tabs) do
+for it in ok.directory_iterator(Dirs.tab) do
    if ok.basename(it) ~= "cross" then
       fp = io.open(it)
       buf = "\n" .. fp:read("*a")

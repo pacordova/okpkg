@@ -54,7 +54,7 @@ B = {
 
 function query(x, tab)
    local i, fp, buf
-   fp = io.open(Dirs.tabs .. "/" .. tab)
+   fp = io.open(Dirs.tab .. "/" .. tab)
    buf = "\n" .. fp:read("*a")
    fp:close()
    i = buf:find("\n" .. x .. " =", 1, true)
@@ -135,7 +135,7 @@ dofile(string.format("%s/%s", ok.dirname(arg[0]), "mkfs.lua"))
 
 -- Build all packages in cross
 local fp, buf
-fp = io.open(string.format("%s/%s", Dirs.tabs, "cross"))
+fp = io.open(string.format("%s/%s", Dirs.tab, "cross"))
 buf = "\n" .. fp:read('*a')
 fp:close()
 for i in buf:gmatch("\n([%w%-%_]-) = {.-;") do
