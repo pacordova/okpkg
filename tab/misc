@@ -220,8 +220,8 @@ libwebp = {
 };
 
 linux-lts = {
-   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.18.37.tar.xz",
-   b3sum = "f414e44430af58a1f0d019274d87f9e15f57308ca6b8aa3da8058c5ffd536ca5",
+   url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.18.38.tar.xz",
+   b3sum = "3d99544d645d2c708e9ae57939e3d25249742eb07e778e81bc3bdd404c45d8fb",
    build = "make_install",
    flags = {
       "headers_install",
