@@ -10,6 +10,12 @@ apulse = {
    ]]
 };
 
+aria2 = {
+   url = "https://github.com/aria2/aria2/releases/download/release-1.37.0/aria2-1.37.0.tar.xz",
+   b3sum = "39f14cfe5cde8159bb9666c49d5bba903983c8c0321b5660c18dd34b3b8c0871",
+   build = "./configure",
+};
+
 conky = {
    url = "https://github.com/brndnmtthws/conky/archive/v1.22.3/conky-1.22.3.tar.gz",
    b3sum = "17989a01b65edf0d4b12b186da11669eca1260161595580e441e7b8bb82593d9",
