@@ -65,6 +65,7 @@ gdk-pixbuf2 = {
       "-Djpeg=enabled",
       "-Dpng=enabled",
       "-Dtiff=disabled",
+      "-Dothers=enabled",
       "-Dintrospection=enabled",
       "-Ddocs=false",
       "-Dman=false",

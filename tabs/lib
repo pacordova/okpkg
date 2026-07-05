@@ -264,12 +264,6 @@ libsass = {
    build = "./configure",
 };
 
-libsodium = {
-   url = "https://download.libsodium.org/libsodium/releases/libsodium-1.0.22.tar.gz",
-   b3sum = "d566e4d78aecda4df577a7050db4cb14b888de4ba697b9432c5f0e11ae467d5a",
-   build = "./configure",
-};
-
 libtasn1 = {
    url = "https://ftp.gnu.org/gnu/libtasn1/libtasn1-4.21.0.tar.gz",
    b3sum = "b156973b5629fe15050b4eaee334e50deddfaa6f907645be1c3d58f3ce93bf53",
@@ -281,12 +275,6 @@ libtirpc = {
    b3sum = "9666e4c026181a5278a395f8a60b95f412e3e2679384071f4e59b26845c5f375",
    build = "./configure",
    flags = { "--disable-gssapi" }
-};
-
-libuv = {
-   url = "https://dist.libuv.org/dist/v1.52.1/libuv-v1.52.1-dist.tar.gz",
-   b3sum = "0cf4f5bc712b2485eb8dfdd81cb2460c440753d392fe69593a0abfd3463b5186",
-   build = "./configure",
 };
 
 libvorbis = {

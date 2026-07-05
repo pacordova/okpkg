@@ -22,9 +22,13 @@ harfbuzz = {
    b3sum = "61732d432cc1a93ef5718d7cdee468be01dc77f3fb2dc27dcbb0541a654cd9c0",
    build = "meson",
    flags = { 
-      "-D{cairo,utilities,icu}=disabled",
       "-D{glib,gobject,introspection}=enabled",
+      "-Dfreetype=enabled",
       "-Dgraphite2=disabled",
+      "-Dcairo=disabled",
+      "-Dicu=disabled",
+      "-Dtests=disabled",
+      "-Dutilities=disabled",
    }
 };
 
