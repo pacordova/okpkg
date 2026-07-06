@@ -130,7 +130,7 @@ flac = {
 fribidi = {
    url = "https://github.com/fribidi/fribidi/releases/download/v1.0.16/fribidi-1.0.16.tar.xz",
    b3sum = "c16ee250f73f149d7d52dc7d285eb73ac755bad7907d237391e23f429b2b71d5",
-   build = "meson",
+   build = "./configure",
 };
 
 iso-codes = {
@@ -347,15 +347,16 @@ nghttp2 = {
 opus = {
    url = "https://downloads.xiph.org/releases/opus/opus-1.6.1.tar.gz",
    b3sum = "874bd7d28e24f10d88105c7d846a2e5bf085284af91a0ee36b05674a8f78e759",
-   build = "meson",
+   build = "./configure",
 };
 
 p11-kit = {
    url = "https://github.com/p11-glue/p11-kit/releases/download/0.26.2/p11-kit-0.26.2.tar.xz",
    b3sum = "93de717427982d3904905b0ea2997345c06dd35456c281ef3aa7bae2fd9242ed",
-   build = "meson",
-   flags = { 
-      "-Dtrust_paths=/etc/ssl/certs/ca-certificates.crt",
+   build = "./configure",
+   flags = {
+      "--with-trust-paths=/etc/ssl/certs/ca-certificates.crt",
+      "--without-systemd",
    }
 };
 
