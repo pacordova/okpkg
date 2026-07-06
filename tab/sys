@@ -238,8 +238,8 @@ libmpc = {
 };
 
 isl = {
-   url = "https://libisl.sourceforge.io/isl-0.27.tar.xz",
-   b3sum = "a419cf24561a34f81ec46d251b25d5aaccedbbf87ed2b96f3f0fb17a79a8c913",
+   url = "https://libisl.sourceforge.io/isl-0.28.tar.xz",
+   b3sum = "8a4c2423d60a79fd6ac3ff6942181d74d4c47a157a3113e880de4707d7ac7567",
    build = "./configure",
 };
 
