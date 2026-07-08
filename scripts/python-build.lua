@@ -38,7 +38,6 @@ install_all {
    "glib2", 
    "gobject-introspection", 
    "libpwquality",
-   "libtorrent-rasterbar",
    "libxml2", 
    "passwordsafe",
    "pycairo", 
