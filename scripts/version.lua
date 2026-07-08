@@ -92,8 +92,9 @@ end
 
 SKIP = {
    -- Slop
-   "cryptsetup", "expat", "libffi", "libxmlb", 
-   "lsof", "upower", "harfbuzz", "rsync", "hwdata",
+   "cryptsetup", "expat", "libffi", "libxmlb", "lsof", "upower", "harfbuzz", 
+   "rsync", "hwdata", 
+   "python-setuptools-scm", "python-setuptools", "python-pygments",
    -- Rust
    "git", "librsvg", "gdk-pixbuf2",
    -- Other

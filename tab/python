@@ -90,20 +90,14 @@ python-mako = {
 };
 
 python-editables = {
-   url = "https://files.pythonhosted.org/packages/source/e/editables/editables-0.6.tar.gz",
+   url = "https://pypi.io/packages/source/e/editables/editables-0.6.tar.gz",
    b3sum = "a833d1befbd216fd78ff97f8d62fd380dd9cb34bfb5fb860483059b6d71846eb",
    build = "python-build",
 };
 
-python-vcs-versioning = {
-   url = "https://pypi.io/packages/source/v/vcs_versioning/vcs_versioning-2.2.2.tar.gz",
-   b3sum = "c84a16308052002459e64623cdc7aaa51caa4ca71eeebb5353d27bc2cc04f7f8",
-   build = "python-build",
-};
-
 python-setuptools-scm = {
-   url = "https://pypi.io/packages/source/s/setuptools-scm/setuptools_scm-10.2.0.tar.gz",
-   b3sum = "b596dcf9c812eddf0fdc43f03a4bb30106ace16f9351926aca8e59ad36553ae7",
+   url = "https://pypi.io/packages/source/s/setuptools-scm/setuptools_scm-9.2.0.tar.gz",
+   b3sum = "67b1342abd8d1d7702f43d0b2996e011edc8a4df89b7c5071778733a431c7130",
    build = "python-build",
 };
 
@@ -123,7 +117,6 @@ python-calver = {
    url = "https://pypi.io/packages/source/c/calver/calver-2025.10.20.tar.gz",
    b3sum = "3ca204cabeb1c7f1f68a133156e6b1916e2740c54303c4b6b26e34db1238747f",
    build = "python-build",
-   prep = [[ printf "Version: 2025.4.17\n" > PKG-INFO ]]
 };
 
 python-trove-classifiers = {
@@ -199,8 +192,8 @@ python-versioneer = {
 };
 
 python-cffi = {
-   url = "https://pypi.io/packages/source/c/cffi/cffi-2.0.0.tar.gz",
-   b3sum = "93fec61c5a420764b070bef969859f7bb393e8644e5cad85eecb471805602931",
+   url = "https://pypi.io/packages/source/c/cffi/cffi-2.1.0.tar.gz",
+   b3sum = "18be90783cdd02bd5e725ab9fb9c750846126808c78491f76c929956494fbcaa",
    build = "python-build",
 };
 
