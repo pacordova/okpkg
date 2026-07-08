@@ -88,8 +88,8 @@ samurai = {
 };
 
 scdoc = {
-   url = "/var/cache/distfiles/scdoc-1.11.4.tar.gz",
-   b3sum = "7cea3ff2476ec7082337e6ff77c9aa9e94af57559e5ab3e1993b7d86b5283671",
+   url = "/var/cache/distfiles/scdoc-1.11.5.tar.gz",
+   b3sum = "3fd37323fc413c43b7962de5f68213a1c244233b22a7020b015c73e710b0f7b4",
    build = "make",
    flags = { "PREFIX=/usr", "BINDIR=/bin" },
 };

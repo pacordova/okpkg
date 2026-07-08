@@ -535,8 +535,8 @@ xorg-xkbevd = {
 };
 
 xorg-xkbutils = {
-   url = "https://x.org/pub/individual/app/xkbutils-1.0.6.tar.xz",
-   b3sum = "f19c157f5eaad7c91ee101952e55b9fd991b060892ecb3e6d9a7b46fa1dbe587",
+   url = "https://x.org/pub/individual/app/xkbutils-1.0.7.tar.xz",
+   b3sum = "554c5dfd9c50e6cb8d1354d4db8511907981a5fa574666d5fda16f6171253de9",
    build = "./configure",
 };
 
@@ -547,8 +547,8 @@ xorg-xkill = {
 };
 
 xorg-xlsatoms = {
-   url = "https://x.org/pub/individual/app/xlsatoms-1.1.4.tar.xz",
-   b3sum = "b757b2bb09b2a743b07de4142893c4024e0f183611831fcd6a09c7cfa9e118f4",
+   url = "https://x.org/pub/individual/app/xlsatoms-1.1.5.tar.xz",
+   b3sum = "8d839b6454150b2b811fc8e9243484c609696baee611abfb4b8f6f708c847e0f",
    build = "./configure",
 };
 

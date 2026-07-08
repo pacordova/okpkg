@@ -91,23 +91,18 @@ netcat = {
 };
 
 openssh = {
-   url = "https://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-10.3p1.tar.gz",
-   b3sum = "2193afffd02f8fefcb936270de7111b997e2cec9b29487085c61c145291abba9",
+   url = "https://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-10.4p1.tar.gz",
+   b3sum = "0534deadf94e03b8ed6f1ab8a4e22600f20e2042bdb40be61d2289eac7d25d73",
    build = "./configure",
    flags = {
       "--sysconfdir=/etc/ssh",
       "--with-default-path=/bin",
+      "--with-superuser-path=/bin",
       "--with-pid-dir=/run",
       "--with-privsep-user=nobody",
-      "--with-ssl-engine",
       "--with-xauth=/bin/xauth",
       "--disable-{u,w}tmp",
-   },
-   post = [[
-      install -d $destdir{/bin,/usr/share/man/man1}
-      install -m 755 contrib/ssh-copy-id   $destdir/bin
-      install -m 644 contrib/ssh-copy-id.1 $destdir/usr/share/man/man1
-   ]]
+   }
 };
 
 rsync = {
