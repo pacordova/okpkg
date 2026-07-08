@@ -1,12 +1,12 @@
 shared-mime-info = {
-   url = "https://gitlab.freedesktop.org/xdg/shared-mime-info/-/archive/2.5.1/shared-mime-info-2.5.1.tar.bz2",
-   b3sum = "bb80368c29e0e8d5dbf1c80615ab50e7c1aedb1e7430c7840920d87caf6cd3f5",
+   url = "https://gitlab.freedesktop.org/xdg/shared-mime-info/-/archive/2.4/shared-mime-info-2.4.tar.bz2",
+   b3sum = "d92cde705149ed71e45f4527ca8055ada4eb25fa1db5ce09287008d06b539935",
    build = "meson",
    flags = {
       "-Dupdate-mimedb=false",
+      "-Dbuild-tools=true",
       "-Dbuild-tests=false",
       "-Dbuild-translations=false",
-      "-Dbuild-spec=false",
    }
 };
 
