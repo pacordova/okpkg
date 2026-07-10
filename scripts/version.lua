@@ -93,12 +93,12 @@ end
 SKIP = {
    -- Slop
    "cryptsetup", "expat", "libffi", "libxmlb", "lsof", "upower", "harfbuzz", 
-   "rsync", "hwdata", 
-   "python-setuptools-scm", "python-setuptools", "python-pygments",
+   "rsync", "hwdata", "fontconfig",
+   "python-setuptools-scm", "python-setuptools", "python-pygments", "python-build",
    -- Rust
    "git", "librsvg", "gdk-pixbuf2",
    -- Other
-   "bc", "cmake", "kmod", "x264", "ttf-croscore",
+   "bc", "cmake", "kmod", "x264", "ttf-croscore", "pango",
 }
 
 for i=#L,1,-1 do 
