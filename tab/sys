@@ -461,14 +461,14 @@ less = {
 };
 
 gawk = {
-   url = "https://ftp.gnu.org/gnu/gawk/gawk-5.4.0.tar.lz",
-   b3sum = "c97d040e54e2d5843edb6f0799b9acd6f743f034dfbf02cb926e35185dcfeeae",
+   url = "https://ftp.gnu.org/gnu/gawk/gawk-5.4.1.tar.lz",
+   b3sum = "2d7c28b303373983d8d42ba354b6da8da22516b0fffaf585fcb6e16b0aebeec7",
    build = "./configure",
 };
 
 tzdata = {
-   url = "https://github.com/eggert/tz/archive/2026b/tz-2026b.tar.gz",
-   b3sum = "5c2f8216ba9ab189410d391f0b556e564bdf098f00defd8933e97c558be225b3",
+   url = "https://github.com/eggert/tz/archive/2026c/tz-2026c.tar.gz",
+   b3sum = "0282e746553509456928ee2206456b8aeefff0b0206097dee0aa545ee8f82722",
    build = "make",
    flags = { 
       "LIBDIR=/lib64", 

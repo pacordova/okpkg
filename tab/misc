@@ -214,17 +214,6 @@ libtorrent-rasterbar = {
    ]]
 };
 
--- tidyverse build depends
-libwebp = {
-   url = "https://storage.googleapis.com/downloads.webmproject.org/releases/webp/libwebp-1.6.0.tar.gz",
-   b3sum = "561ab69419b391c5dbba6b448f610d9a6bdb6a631d7067518ceba48109e23fc9",
-   build = "./configure",
-   flags = {
-      "--enable-libwebp{mux,demux,decoder,extras}",
-      "--enable-swap-16bit-csp",
-   }
-};
-
 linux-lts = {
    url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.18.38.tar.xz",
    b3sum = "3d99544d645d2c708e9ae57939e3d25249742eb07e778e81bc3bdd404c45d8fb",
@@ -346,6 +335,22 @@ pv = {
    url = "https://www.ivarch.com/s/pv-1.11.0.tar.gz",
    b3sum = "e7106849d3b08b703e1428100eebbd334631c7aeaf13a497f63d8d9700ebbd44",
    build = "./configure",
+};
+
+libuv = {
+   url = "https://dist.libuv.org/dist/v1.52.1/libuv-v1.52.1-dist.tar.gz",
+   b3sum = "0cf4f5bc712b2485eb8dfdd81cb2460c440753d392fe69593a0abfd3463b5186",
+   build = "./configure",
+};
+
+libwebp = {
+   url = "https://storage.googleapis.com/downloads.webmproject.org/releases/webp/libwebp-1.6.0.tar.gz",
+   b3sum = "561ab69419b391c5dbba6b448f610d9a6bdb6a631d7067518ceba48109e23fc9",
+   build = "./configure",
+   flags = {
+      "--enable-libwebpdecoder",
+      "--disable-tiff",
+   }
 };
 
 r = {

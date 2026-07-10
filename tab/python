@@ -48,8 +48,8 @@ python-packaging = {
 };
 
 python-build = {
-   url = "https://pypi.io/packages/source/b/build/build-1.5.0.tar.gz",
-   b3sum = "edd7c917c37d5b581622f927a3b5e46eef70f4e76aacca27ebd6c03483d4f50e",
+   url = "https://pypi.io/packages/source/b/build/build-1.4.3.tar.gz",
+   b3sum = "139edc1beb8abd96295bc474b2c65d74028c2de8b711b35fa914563ee199cedd",
    build = "python-build",
 };
 
@@ -126,8 +126,8 @@ python-trove-classifiers = {
 };
 
 python-hatchling = {
-   url = "https://pypi.io/packages/source/h/hatchling/hatchling-1.30.1.tar.gz",
-   b3sum = "ad379854529ef7f3c4995b5e5501d4373a9d1911b022579924e4a2a76c4fb5c4",
+   url = "https://pypi.io/packages/source/h/hatchling/hatchling-1.31.0.tar.gz",
+   b3sum = "16a492e1f2e183ce2913d1c4e8858376d6db82469e30884b0208e9525510308e",
    build = "python-build",
 };
 

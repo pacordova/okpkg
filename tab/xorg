@@ -40,8 +40,8 @@ freetype2 = {
 };
 
 fontconfig = {
-   url = "https://gitlab.freedesktop.org/api/v4/projects/890/packages/generic/fontconfig/2.18.1/fontconfig-2.18.1.tar.xz",
-   b3sum = "c51ab6c627666d3ddfcfb0280fc41df0ea74e629d301ed6368b98a766ad42b79",
+   url = "https://gitlab.freedesktop.org/api/v4/projects/890/packages/generic/fontconfig/2.16.2/fontconfig-2.16.2.tar.xz",
+   b3sum = "0c7713ba72044bdf2f6a6c726989941f93a91850ad748f1424874232c0481fd8",
    build = "./configure",
    flags = { "--disable-docs" }
 };
@@ -402,10 +402,14 @@ libdrm = {
 };
 
 libva = {
-   url = "https://github.com/intel/libva/archive/2.24.0/libva-2.24.0.tar.gz",
-   b3sum = "d5784fd82289fb4c59debac2cbf0c97d3d5528ff8deb374cc0afa404cd27942f",
+   url = "https://github.com/intel/libva/archive/2.24.1/libva-2.24.1.tar.gz",
+   b3sum = "5fd43c884578ae3ad14c48dc3391baf263aeaca2d2d440c0b7d6bfb81a37ac92",
    build = "meson",
-   flags = { "-Dwith_{glx=yes,wayland=no,x11=yes}" }
+   flags = { 
+      "-Dwith_glx=yes",
+      "-Dwith_wayland=no",
+      "-Dwith_x11=yes",
+   }
 };
 
 libvdpau = {
