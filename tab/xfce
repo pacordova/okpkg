@@ -50,8 +50,8 @@ cairo = {
 };
 
 pango = {
-   url = "https://download.gnome.org/sources/pango/1.58/pango-1.58.0.tar.xz",
-   b3sum = "241add2a71a813a7d8eac9e1beea647ff3216df6be684c8f87e23b2c1bd56027",
+   url = "https://download.gnome.org/sources/pango/1.56/pango-1.56.4.tar.xz",
+   b3sum = "8042a82f08101c1dabcb337a96035167e3a300de395c57678ce1a133b2dba346",
    build = "meson",
    flags = { "-Dintrospection=enabled" },
 };
