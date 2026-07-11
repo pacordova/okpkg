@@ -1,10 +1,7 @@
 #include <filesystem>
-namespace fs = std::filesystem;
+#include "okutils.h"
 
-extern "C" {
-#include <lauxlib.h>
-int ok_directory_iterator(lua_State *L);
-}
+namespace fs = std::filesystem;
 
 int
 ok_directory_iterator(lua_State *L)

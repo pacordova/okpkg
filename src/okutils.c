@@ -1,19 +1,4 @@
-#include <lauxlib.h>
-
-int ok_chdir(lua_State *L);
-int ok_exists(lua_State *L);
-int ok_pwd(lua_State *L);
-int ok_setenv(lua_State *L);
-int ok_unsetenv(lua_State *L);
-int ok_basename(lua_State *L);
-int ok_dirname(lua_State *L);
-int ok_symlink(lua_State *L);
-int ok_link(lua_State *L);
-int ok_mkdir(lua_State *L);
-int ok_chroot(lua_State *L);
-int ok_b3sum(lua_State *L);
-int ok_remove_all(lua_State *L);
-int ok_directory_iterator(lua_State *L);
+#include "okutils.h"
 
 static const struct luaL_Reg okutils[] = {
     {"chdir", ok_chdir},

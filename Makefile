@@ -6,20 +6,17 @@ INSTALL  = /bin/install
 CC       = /bin/gcc
 CXX      = /bin/g++
 CFLAGS   = -march=native -O2 -std=gnu99
-CXXFLAGS = -march=native -O2
+CXXFLAGS = -march=native -O2 -std=c++17
 
 LUA_PATH  != lua -e "print(package.path:match('(.-)/%?.lua;'))"
 LUA_CPATH != lua -e "print(package.cpath:match('(.-)/%?.so;'))"
 
 objs = src/basename.o src/chdir.o src/chroot.o src/mkdir.o src/okutils.o \
        src/pwd.o src/setenv.o src/symlink.o src/remove_all.o \
-       src/exists.o src/directory_iterator.o src/b3sum.o
+       src/exists.o src/directory_iterator.o src/b3sum.o src/blake3.o
        
 src/okutils.so: $(objs)
 	$(CXX) $(CXXFLAGS) -shared -o $@ src/*.o
-
-src/b3sum.o: src/b3sum.c
-	$(CC) $(CFLAGS) -O3 -fpic -o $@ -c $<
 
 .SUFFIXES: .c .o
 .c.o:

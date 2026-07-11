@@ -1,5 +1,5 @@
-#include <lauxlib.h>
 #include <unistd.h>
+#include "okutils.h"
 
 int
 ok_exists(lua_State *L)

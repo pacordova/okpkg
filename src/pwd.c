@@ -1,6 +1,6 @@
 #include <linux/limits.h>
-#include <lua.h>
 #include <unistd.h>
+#include "okutils.h"
 
 int
 ok_pwd(lua_State *L)

@@ -1,10 +1,7 @@
 #include <filesystem>
-namespace fs = std::filesystem;
+#include "okutils.h"
 
-extern "C" {
-#include <lauxlib.h>
-int ok_remove_all(lua_State *L);
-}
+namespace fs = std::filesystem;
 
 int
 ok_remove_all(lua_State *L)
