@@ -1,8 +1,4 @@
 #ifdef __cplusplus
-#define restrict __restrict__
-#endif
-
-#ifdef __cplusplus
 extern "C" {
 #endif
 
