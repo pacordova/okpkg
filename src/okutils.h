@@ -4,8 +4,8 @@ extern "C" {
 
 #include <lauxlib.h>
 
-int ok_chroot(lua_State *L);
-
+int ok_directory_iterator(lua_State *L);
+int ok_unlink(lua_State *L);
 int luaopen_okutils(lua_State *L);
 
 #ifndef BLAKE3_H
@@ -41,6 +41,5 @@ int ok_dirname(lua_State *L);
 int ok_symlink(lua_State *L);
 int ok_link(lua_State *L);
 int ok_mkdir(lua_State *L);
-int ok_remove_all(lua_State *L);
-int ok_directory_iterator(lua_State *L);
 int ok_b3sum(lua_State *L);
+int ok_chroot(lua_State *L);

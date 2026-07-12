@@ -79,7 +79,7 @@ function extract(x)
    -- Setup source directory
    assert(
       ok.chdir(Dirs.src) and
-      ok.remove_all(x) and
+      ok.unlink(x) and
       ok.mkdir(x) and
       ok.chdir(x) and
       os.execute("tar --strip-components=1 -xf " .. X.dist))
@@ -147,6 +147,6 @@ for it in ok.directory_iterator("/mnt/usr/lib64") do
    os.rename(it, it:gsub("/usr", ""))
 end
 os.remove("/mnt/usr/lib64")
-ok.remove_all("/mnt/tools")
-ok.remove_all("/mnt/usr/lib")
-ok.remove_all("/mnt/usr/x86_64-unknown-linux-gnu")
+ok.unlink("/mnt/tools")
+ok.unlink("/mnt/usr/lib")
+ok.unlink("/mnt/usr/x86_64-unknown-linux-gnu")

@@ -29,7 +29,7 @@ for i=1,#arg do
 end
 
 function wget()
-   ok.remove_all(Dirs.distfiles)
+   ok.unlink(Dirs.distfiles)
    ok.mkdir(Dirs.distfiles)
    ok.chdir(Dirs.distfiles)
    fd = io.popen("/bin/wget2 -i -", "w")

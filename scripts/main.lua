@@ -192,7 +192,7 @@ function download(x)
    -- Setup source directory
    assert(
       ok.chdir(Dirs.src) and
-      ok.remove_all(x) and
+      ok.unlink(x) and
       ok.mkdir(x) and
       ok.chdir(x) and
       os.execute("tar --strip-components=1 -xf " .. X.dist)
@@ -255,7 +255,7 @@ function makepkg(x)
 
    -- Cleanup
    ok.chdir("..")
-   ok.remove_all(x)
+   ok.unlink(x)
    ok.unsetenv("SOURCE_DATE_EPOCH")
 
    return x .. ".tar.lz"
@@ -267,7 +267,7 @@ function build(x)
    X.V = vmatch(ok.basename(X.url))
    X.destdir = string.format("%s/%s-%s-%s", Dirs.out, x, X.V, "skylake")
    ok.setenv("destdir", X.destdir)
-   ok.remove_all(X.destdir)
+   ok.unlink(X.destdir)
    ok.mkdir(X.destdir)
 
    ok.chdir(string.format("%s/%s", Dirs.src, x))
@@ -285,7 +285,7 @@ function build(x)
    elseif tostring(X.build):match("config") then
       -- Check if we are doing an out of tree build
       if tostring(X.build):sub(1, 2) == ".." then 
-         ok.remove_all("build")
+         ok.unlink("build")
          ok.mkdir("build") 
          ok.chdir("build")
       end
@@ -303,7 +303,7 @@ function build(x)
    os.execute [[ find $destdir -exec touch -hd "@$SOURCE_DATE_EPOCH" '{}' + ]]
 
    -- Cleanup
-   ok.remove_all(X.destdir .. "no")
+   ok.unlink(X.destdir .. "no")
    ok.unsetenv("destdir")
    ok.unsetenv("SOURCE_DATE_EPOCH")
 

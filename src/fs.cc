@@ -26,3 +26,19 @@ ok_directory_iterator(lua_State *L)
 
     return 1;
 }
+
+int
+ok_unlink(lua_State *L)
+{
+    const fs::path p = luaL_checkstring(L, 1);
+    lua_pushinteger(L, fs::remove_all(p));
+    return 1;
+}
+
+int
+ok_mkdir(lua_State *L)
+{
+    const fs::path p = luaL_checkstring(L, 1);
+    lua_pushinteger(L, fs::create_directory(p));
+    return 1;
+}

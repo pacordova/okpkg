@@ -13,7 +13,7 @@ static const struct luaL_Reg okutils[] = {
     {"unsetenv", ok_unsetenv},
     {"chroot", ok_chroot},
     {"b3sum", ok_b3sum},
-    {"remove_all", ok_remove_all},
+    {"unlink", ok_unlink},
     {"directory_iterator", ok_directory_iterator},
     {NULL, NULL},
 };
