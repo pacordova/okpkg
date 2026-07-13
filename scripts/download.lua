@@ -29,9 +29,9 @@ for i=1,#arg do
 end
 
 function wget()
-   ok.unlink(Dirs.distfiles)
-   ok.mkdir(Dirs.distfiles)
-   ok.chdir(Dirs.distfiles)
+   ok.remove_all(Dirs.distfiles)
+   ok.create_directory(Dirs.distfiles)
+   ok.current_path(Dirs.distfiles)
    fd = io.popen("/bin/wget2 -i -", "w")
    for i=1,#urls do fd:write(string.format("%s\n", urls[i])) end
    fd:close()
@@ -39,7 +39,7 @@ end
 
 function cksum()
    assert(#urls == #b3sums)
-   ok.chdir(Dirs.distfiles)
+   ok.current_path(Dirs.distfiles)
    for i=1,#urls do
       if ok.b3sum(ok.basename(urls[i])) ~= b3sums[i] then
          io.write(string.format("%s: FAILED\n", urls[i]))

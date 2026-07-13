@@ -16,10 +16,8 @@ OBJS =\
 	src/b3sum.o\
 	src/blake3.o\
 	src/chroot.o\
-	src/basename.o\
-	src/unix.o\
 	src/fs.o\
-	src/setenv.o\
+	src/env.o\
 
 
 all: src/okutils.so

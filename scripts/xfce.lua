@@ -20,8 +20,8 @@ local function build_all(x)
          os.execute("gdk-pixbuf-query-loaders --update-cache")
       end
    end
-   ok.unlink(Dirs.src)
-   ok.mkdir(Dirs.src)
+   ok.remove_all(Dirs.src)
+   ok.create_directory(Dirs.src)
 end
 
 -- Env

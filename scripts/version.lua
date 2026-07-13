@@ -66,7 +66,7 @@ end
 -----------
 -- okpkg --
 -----------
-ok.chdir(Dirs.packages)
+ok.current_path(Dirs.packages)
 okpkg = {}
 for w in string.gmatch(popen("ls *.tar.lz"), '(.-\n)') do
    local fixed = w:

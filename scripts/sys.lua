@@ -23,7 +23,7 @@ end
 
 -- Fix versions and cleanup
 os.execute("makewhatis /usr/share/man")
-ok.chdir(Dirs.packages)
+ok.current_path(Dirs.packages)
 --os.rename("bash-5.3-amd64.tar.lz", "bash-5.3.009-amd64.tar.lz")
 --os.rename("readline-8.3-amd64.tar.lz", "readline-8.3.003-amd64.tar.lz")
---ok.mkdir("a")
+--ok.create_directory("a")

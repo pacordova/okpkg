@@ -78,10 +78,10 @@ function extract(x)
 
    -- Setup source directory
    assert(
-      ok.chdir(Dirs.src) and
-      ok.unlink(x) and
-      ok.mkdir(x) and
-      ok.chdir(x) and
+      ok.current_path(Dirs.src) and
+      ok.remove_all(x) and
+      ok.create_directory(x) and
+      ok.current_path(x) and
       os.execute("tar --strip-components=1 -xf " .. X.dist))
    
    return x
@@ -107,8 +107,8 @@ function build(x)
    elseif tostring(X.build):match("config") then
       -- Check if we are doing an out of tree build.
       if tostring(X.build):sub(1, 2) == ".." then
-         ok.mkdir("build") 
-         ok.chdir("build")
+         ok.create_directory("build") 
+         ok.current_path("build")
       end
       if not B["configure"](X.build, unpack(X.flags)) then
          error(string.format("error: build: %s: %s", X.build, x))
@@ -147,6 +147,6 @@ for it in ok.directory_iterator("/mnt/usr/lib64") do
    os.rename(it, it:gsub("/usr", ""))
 end
 os.remove("/mnt/usr/lib64")
-ok.unlink("/mnt/tools")
-ok.unlink("/mnt/usr/lib")
-ok.unlink("/mnt/usr/x86_64-unknown-linux-gnu")
+ok.remove_all("/mnt/tools")
+ok.remove_all("/mnt/usr/lib")
+ok.remove_all("/mnt/usr/x86_64-unknown-linux-gnu")

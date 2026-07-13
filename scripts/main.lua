@@ -4,14 +4,21 @@
 unpack = unpack or table.unpack
 local ok = require("okutils")
 local Dirs, Mir, Env = dofile("/etc/okpkg.conf")
-local function concat(x) table.concat(x, " ") end
+
+function basename(s) 
+   return string.sub(s, #s+2-string.find(string.reverse(s), "/", 1, true)) 
+end
+
+function dirname(s) 
+   return string.sub(s, 1, #s-string.find(string.reverse(s), "/", 1, true)) 
+end
 
 -- Global variables (callable by cli)
 chroot, b3sum = ok.chroot, ok.b3sum
 
 -- Make directories
 for k,v in pairs(Dirs) do
-   local fp = io.open(v); if fp then fp:close() else ok.mkdir(v) end
+   local fp = io.open(v); if fp then fp:close() else ok.create_directory(v) end
 end
 
 -- Environment variables
@@ -156,7 +163,7 @@ end
 function query(x)
    local i, fp, buf
    for it in ok.directory_iterator(Dirs.tab) do
-      if not buf and ok.basename(it) ~= "cross" then
+      if not buf and basename(it) ~= "cross" then
          fp = io.open(it)
          buf = "\n" .. fp:read("*a")
          fp:close()
@@ -175,28 +182,26 @@ function download(x)
    local X, fp
 
    X = query(x)
-   X.dist = string.format("%s/%s", Dirs.distfiles, ok.basename(X.url))
+   X.dist = string.format("%s/%s", Dirs.distfiles, basename(X.url))
 
    -- change mirrors
    for k,v in pairs(Mir) do X.url = X.url:gsub(k, v) end 
    
    -- Download file if not already downloaded
-   ok.chdir(Dirs.distfiles)
+   ok.current_path(Dirs.distfiles)
    io.close(
-      io.open(ok.basename(X.url)) or
+      io.open(basename(X.url)) or
       io.popen("wget2 " .. X.url))
    assert(
-      X.b3sum == b3sum(ok.basename(X.url)) or 
-      not os.remove(ok.basename(X.url)))
+      X.b3sum == b3sum(basename(X.url)) or 
+      not os.remove(basename(X.url)))
    
    -- Setup source directory
-   assert(
-      ok.chdir(Dirs.src) and
-      ok.unlink(x) and
-      ok.mkdir(x) and
-      ok.chdir(x) and
-      os.execute("tar --strip-components=1 -xf " .. X.dist)
-   )
+    ok.current_path(Dirs.src)
+    ok.remove_all(x)
+    ok.create_directory(x)
+    ok.current_path(x)
+    os.execute("tar --strip-components=1 -xf " .. X.dist)
    
    -- Patch if file exists
    -- Note: symlink for temporary packages, or update patch infrastructure
@@ -215,7 +220,7 @@ function download(x)
 end
 
 function makepkg(x)
-   assert(ok.chdir(x) == 0)
+   ok.current_path(x)
    os.remove(x .. ".tar.lz")
    ok.setenv("SOURCE_DATE_EPOCH", mtime("."))
 
@@ -254,8 +259,8 @@ function makepkg(x)
    ]]
 
    -- Cleanup
-   ok.chdir("..")
-   ok.unlink(x)
+   ok.current_path("..")
+   ok.remove_all(x)
    ok.unsetenv("SOURCE_DATE_EPOCH")
 
    return x .. ".tar.lz"
@@ -264,13 +269,13 @@ end
 function build(x)
    local X = query(x)
    X.flags = X.flags or {}
-   X.V = vmatch(ok.basename(X.url))
+   X.V = vmatch(basename(X.url))
    X.destdir = string.format("%s/%s-%s-%s", Dirs.out, x, X.V, "skylake")
    ok.setenv("destdir", X.destdir)
-   ok.unlink(X.destdir)
-   ok.mkdir(X.destdir)
+   ok.remove_all(X.destdir)
+   ok.create_directory(X.destdir)
 
-   ok.chdir(string.format("%s/%s", Dirs.src, x))
+   ok.current_path(string.format("%s/%s", Dirs.src, x))
    ok.setenv("SOURCE_DATE_EPOCH", mtime("."))
 
    X.prep = 
@@ -285,9 +290,9 @@ function build(x)
    elseif tostring(X.build):match("config") then
       -- Check if we are doing an out of tree build
       if tostring(X.build):sub(1, 2) == ".." then 
-         ok.unlink("build")
-         ok.mkdir("build") 
-         ok.chdir("build")
+         ok.remove_all("build")
+         ok.create_directory("build") 
+         ok.current_path("build")
       end
       if not B["configure"](X.build, unpack(X.flags)) then
          error(string.format("error: build: %s: %s", X.build, x))
@@ -303,7 +308,7 @@ function build(x)
    os.execute [[ find $destdir -exec touch -hd "@$SOURCE_DATE_EPOCH" '{}' + ]]
 
    -- Cleanup
-   ok.unlink(X.destdir .. "no")
+   ok.remove_all(X.destdir .. "no")
    ok.unsetenv("destdir")
    ok.unsetenv("SOURCE_DATE_EPOCH")
 
@@ -331,7 +336,7 @@ function install(x)
    buf = fp:read('*a')
    fp:close()
 
-   i = string.format("%s/%s", Dirs.log, ok.basename(x):match("(.+)-[n%d]"))
+   i = string.format("%s/%s", Dirs.log, basename(x):match("(.+)-[n%d]"))
    fp = io.open(i)
    if fp then fp:close(); os.rename(i, i .. ".orig") end
    io.close(io.open(i, "w+"):write(buf))
