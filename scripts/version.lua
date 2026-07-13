@@ -5,6 +5,10 @@ unpack = unpack or table.unpack
 ok = require("okutils")
 Dirs = dofile("/etc/okpkg.conf")
 
+function basename(s) 
+   return string.sub(s, #s+2-(string.find(string.reverse(s), "/", 1, true) or #s))
+end
+
 function popen(command)
    local fp, buf
    fp = io.popen(command)
@@ -20,7 +24,7 @@ end
 function v(t, x)
    for i=1,#t do
       if t[i]:match("^" .. x .. "%-%d") then
-         return ok.basename(t[i]):match("[-_%.:][nrv]?([%d%.]+%l?%d?)[-_%.+]")
+         return basename(t[i]):match("[-_%.:][nrv]?([%d%.]+%l?%d?)[-_%.+]")
       end
    end
    return ""
@@ -82,7 +86,7 @@ end
 --------------
 L = {}
 for it in ok.directory_iterator(Dirs.tab) do
-   if ok.basename(it) ~= "cross" then
+   if basename(it) ~= "cross" then
       fp = io.open(it)
       buf = "\n" .. fp:read("*a")
       fp:close()

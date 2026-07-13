@@ -594,7 +594,6 @@ libsecret = {
    }
 };
 
-
 keybinder = {
    url = "https://github.com/kupferlauncher/keybinder/releases/download/keybinder-3.0-v0.3.2/keybinder-3.0-0.3.2.tar.gz",
    b3sum = "04b010524abf7af8a6bdfdbeff393c0feecf2bdcc1fd642e75113137ccb62aed",
