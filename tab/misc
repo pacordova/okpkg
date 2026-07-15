@@ -289,6 +289,17 @@ mesa = {
    }
 };
 
+man-pages = {
+   url = "https://mirrors.edge.kernel.org/pub/linux/docs/man-pages/man-pages-6.18.tar.xz",
+   b3sum = "0a84e6a4d1476da102aed85a2803b7d727445954e6880187c5db67f99fe17e72",
+   build = "make-install",
+   prep = [[ rm man3/crypt* ]],
+   flags = {
+      "--no-builtin-variables",
+      "GIT=FALSE",
+   }
+};
+
 opendoas = {
    url = "https://github.com/Duncaen/OpenDoas/archive/v6.8.2/opendoas-6.8.2.tar.gz",
    b3sum = "56a116e8617fc99184f3c919f591493b76d6511c2a79328f6f13a46ef2df0ae0",

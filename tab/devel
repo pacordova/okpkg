@@ -69,8 +69,8 @@ libtool = {
 };
 
 meson = {
-   url = "https://github.com/mesonbuild/meson/releases/download/1.11.1/meson-1.11.1.tar.gz",
-   b3sum = "e834bf76e93bf81d4cd2b42b77abc03e4607fb77e3920ec6be60929bdb27573d",
+   url = "https://github.com/mesonbuild/meson/releases/download/1.11.2/meson-1.11.2.tar.gz",
+   b3sum = "d4289353953d938c7708db714b5a381c99987369e12bb3f519ecb21c90ea472d",
    build = "python-build",
 };
 

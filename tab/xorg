@@ -612,20 +612,20 @@ xorg-xset = {
 };
 
 xorg-xsetroot = {
-   url = "https://x.org/pub/individual/app/xsetroot-1.1.3.tar.xz",
-   b3sum = "55e29295c265ad3eaca803e805c8366b1b25b176a832177ed0f94f1a73c2bfd4",
+   url = "https://x.org/pub/individual/app/xsetroot-1.1.4.tar.xz",
+   b3sum = "4495f07758c8b66fb29f56de4681008c0667f3c83201a436a095b21a5d41df52",
    build = "./configure",
 };
 
 xorg-xvinfo = {
-   url = "https://x.org/pub/individual/app/xvinfo-1.1.5.tar.xz",
-   b3sum = "2eabe28d3031b9b22198736150a6ed54281438b6bccd23a801895c206f791950",
+   url = "https://x.org/pub/individual/app/xvinfo-1.1.6.tar.xz",
+   b3sum = "f6869e33eb81b1f25cf5cecc557d8c24055f5decb86c1a0f1878d6b50a413891",
    build = "./configure",
 };
 
 xorg-xwd = {
-   url = "https://x.org/pub/individual/app/xwd-1.0.9.tar.xz",
-   b3sum = "02f6811e5aa89ccfd702bfcd00450affffe57d8a491a45c17409e70d6060ee76",
+   url = "https://x.org/pub/individual/app/xwd-1.0.10.tar.xz",
+   b3sum = "e914bc45549df2a9e3d0f19459c263a320f168393c22890046f404009abbedaa",
    build = "./configure",
 };
 
@@ -636,8 +636,8 @@ xorg-xwininfo = {
 };
 
 xorg-xwud = {
-   url = "https://x.org/pub/individual/app/xwud-1.0.7.tar.xz",
-   b3sum = "839d03bf49323a0ac54398c26828c744a1ae112313abe7e340024e26854af123",
+   url = "https://x.org/pub/individual/app/xwud-1.0.8.tar.xz",
+   b3sum = "d6346749152e293880d87a78af893cf1d8e8538194437ac1268b16841763e731",
    build = "./configure",
 };
 
