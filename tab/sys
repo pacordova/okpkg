@@ -185,8 +185,8 @@ flex = {
 };
 
 pkgconf = {
-   url = "https://distfiles.ariadne.space/pkgconf/pkgconf-2.5.1.tar.xz",
-   b3sum = "c524d73c938e7382d3c12c9cfba16ed32ee092ab21b3e9659a095b5628ea2e88",
+   url = "https://distfiles.ariadne.space/pkgconf/pkgconf-3.0.3.tar.xz",
+   b3sum = "bc8e23fe42489c649fc192706acc746b968a9f03f053045c61a758aa3185eb60",
    build = "./configure",
 };
 

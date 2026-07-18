@@ -62,8 +62,8 @@ itstool = {
 };
 
 libtool = {
-   url = "https://ftp.gnu.org/gnu/libtool/libtool-2.5.4.tar.xz",
-   b3sum = "07f5880eca816e6ab76da3a69b32df728e0277e96f8da761f69c06157da36a5a",
+   url = "https://ftp.gnu.org/gnu/libtool/libtool-2.6.2.tar.xz",
+   b3sum = "192e13e53f967411844ff7fc264910cd10b599b4413e4926223b6dd6b68b0936",
    build = "./configure",
    post = [[ rm -f $destdir/usr/lib64/libltdl.a ]]
 };

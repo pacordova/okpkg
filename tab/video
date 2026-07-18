@@ -17,8 +17,8 @@ vulkan-loader = {
 };
 
 nv-codec-headers = {
-   url = "https://github.com/FFmpeg/nv-codec-headers/archive/n13.0.19.0/nv-codec-headers-n13.0.19.0.tar.gz",
-   b3sum = "43136bdd6c9435a3b3e166753fd425b70383b7806c438c02d0a008e8fc2f79d9",
+   url = "https://github.com/FFmpeg/nv-codec-headers/releases/download/n13.1.15.0/nv-codec-headers-13.1.15.0.tar.gz",
+   b3sum = "8a36fc25a4094adc5d3c48f4a420aa6f57554eccd16aa96082ec0c877d637ab7",
    build = "make",
    flags = { "PREFIX=/usr", "LIBDIR=../lib64" }
 };

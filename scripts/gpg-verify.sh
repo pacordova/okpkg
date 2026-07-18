@@ -39,12 +39,12 @@ _cksum_signal(){
 
 cd "$tempdir"
 
-#_cksum_signal 8.17.0
+_cksum_signal 8.19.0
 #_cksum_gl https://gitlab.com/lvmteam/lvm2 v2_03_41
 #_cksum_gh https://github.com/vim/vim v9.1.1980
 #_cksum_gh https://github.com/vcrhonek/hwdata v0.406
 #_cksum_gh https://github.com/yshui/picom v13
-_cksum_gh https://github.com/eggert/tz 2026c
+#_cksum_gh https://github.com/eggert/tz 2026c
 #_cksum_gh https://github.com/pnggroup/libpng v1.6.44
 #_cksum_gh https://github.com/harfbuzz/harfbuzz 9.0.0
 #_cksum_gh https://github.com/fribidi/fribidi v1.0.15
