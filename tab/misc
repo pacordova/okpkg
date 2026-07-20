@@ -149,8 +149,8 @@ btop = {
 };
 
 htop = {
-   url = "https://github.com/htop-dev/htop/releases/download/3.5.1/htop-3.5.1.tar.xz",
-   b3sum = "f5a60d68daabacbe9e5039112ba2daaf0017bc14d276f82a60cb137c515ef3f4",
+   url = "https://github.com/htop-dev/htop/releases/download/3.4.1/htop-3.4.1.tar.xz",
+   b3sum = "e2a02540bd75d1055d77957524a3a3ed89ae61ca10de501becb4f1c87d4fb4fa",
    build = "./configure",
    flags = { "--enable-sensors" }
 };

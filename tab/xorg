@@ -569,8 +569,8 @@ xorg-xmessage = {
 };
 
 xorg-xmodmap = {
-   url = "https://x.org/pub/individual/app/xmodmap-1.0.11.tar.xz",
-   b3sum = "e15296a8cd125b5b7907d5fd4c200fa476aeee875e16bec68020bf6236bd84ac",
+   url = "https://x.org/pub/individual/app/xmodmap-1.0.12.tar.xz",
+   b3sum = "d245246e0adb5149ae71dab70772716c73f6eea22e7759c832884d26c0494494",
    build = "./configure",
 };
 
@@ -630,8 +630,8 @@ xorg-xwd = {
 };
 
 xorg-xwininfo = {
-   url = "https://x.org/pub/individual/app/xwininfo-1.1.6.tar.xz",
-   b3sum = "a122e569267bfea0d2095b7957f294ebb71e71cb5f32fa8924f8ccdf3f5cfe50",
+   url = "https://x.org/pub/individual/app/xwininfo-1.1.7.tar.xz",
+   b3sum = "2ed299d3006a542790ca590a86a1baea9b8f7bacce55721f22b0cae04a49bc56",
    build = "./configure",
 };
 
