@@ -5,10 +5,14 @@ unpack = unpack or table.unpack
 local Dirs = dofile("/bin/okpkg")
 local ok = require("okutils")
 
+function basename(s)
+   return string.sub(s, #s+2-string.find(string.reverse(s), "/", 1, true))
+end
+
 local function install_all(X)
    for it in ok.directory_iterator(Dirs.packages) do 
       for j=1,#X do
-         if ok.basename(it):sub(1, #X[j]) == X[j] then 
+         if basename(it):sub(1, #X[j]) == X[j] then 
             purge(X[j])
             install(it)
          end
