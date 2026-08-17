@@ -1,0 +1,144 @@
+exiv2 = {
+   url = "https://github.com/Exiv2/exiv2/archive/v0.28.8/exiv2-0.28.8.tar.gz",
+   b3sum = "f38d61b8edfb1d4380d95054e47d50205e5e9e007beb1c868971452d95ad903c",
+   build = "cmake",
+   flags = {
+      "-DEXIV2_BUILD_EXIV2_COMMAND=OFF",
+      "-DEXIV2_ENABLE_BMFF=ON",
+      "-DEXIV2_ENABLE_BROTLI=OFF",
+      "-DEXIV2_ENABLE_CURL=OFF",
+      "-DEXIV2_ENABLE_INIH=OFF",
+      "-DEXIV2_ENABLE_NLS=OFF",
+      "-DEXIV2_ENABLE_VIDEO=ON",
+      "-DEXIV2_ENABLE_WEBREADY=OFF",
+      "-DEXIV2_ENABLE_XMP=ON",
+   }
+};
+
+gexiv2 = {
+   url = "https://download.gnome.org/sources/gexiv2/0.16/gexiv2-0.16.2.tar.xz",
+   b3sum = "dd1b530f40ed493dedc3f632cd6be9226bdf26b2c26a0e55a99ef835901d0899",
+   build = "meson",
+   flags = { 
+      "-Dintrospection=true",
+      "-Dpython3=true",
+      "-Dvapi=true",
+   }
+};
+
+
+libtiff = {
+   url = "https://download.osgeo.org/libtiff/tiff-4.7.2.tar.xz",
+   b3sum = "0d6693223ec93ee264d2eb63840808b2278e00e037f9c9e8ead051a42d1852a0",
+   build = "./configure",
+};
+
+lcms2 = {
+   url = "https://github.com/mm2/Little-CMS/releases/download/lcms2.19.1/lcms2-2.19.1.tar.gz",
+   b3sum = "f649f683e5360ca77ff4117b036eadb0299c6ca7ef3c561525daec2908a9e5d2",
+   build = "./configure",
+};
+
+libxmlb = {
+   url = "https://github.com/hughsie/libxmlb/releases/download/0.3.25/libxmlb-0.3.25.tar.xz",
+   b3sum = "131261f8d159015f8f60be0b8c7223c09db7f1450b67d92bbd84c358ad1e4af2",
+   build = "meson",
+   flags = { 
+      "-Dintrospection=true", 
+      "-Dgtkdoc=false",
+      "-Dtests=false",
+   }
+};
+
+libfyaml = {
+   url = "https://github.com/pantoniou/libfyaml/releases/download/v0.9.6/libfyaml-0.9.6.tar.gz",
+   b3sum = "18c2deb847c782bcccaabd18bed64a6ad7ab9f900794913bd3b0435b2ddf6112",
+   build = "./configure",
+};
+
+appstream = {
+   url = "https://www.freedesktop.org/software/appstream/releases/AppStream-1.1.3.tar.xz",
+   b3sum = "af18b6c6037d3595718ebb98009ccdfe74f026d4a95b71fa5d2a2259d4c3e751",
+   build = "meson",
+   flags = {
+      "-Dapidocs=false",
+      "-Dbash-completion=false",
+      "-Dblake3-support=false",
+      "-Dcompose=true",
+      "-Dinstall-docs=false",
+      "-Dman=false",
+      "-Dstemming=false",
+      "-Dsystemd=false",
+      "-Dvapi=false",
+   },
+   prep = [[
+      mv AppStream*/* . && rm -fr AppStream*
+      sed -i "/subdir('docs\/')/d" meson.build
+      sed -i "s/version: '>= 2.48'/version: '>= 2.40'/" compose/meson.build
+   ]]
+};
+
+babl = {
+   url = "https://download.gimp.org/pub/babl/0.1/babl-0.1.128.tar.xz",
+   b3sum = "4a383854e06c10753e7d8a28993cecb12a0bede6107cd8bd241bfafe9fefdcaf",
+   build = "meson",
+};
+
+gegl = {
+   url = "https://download.gimp.org/pub/gegl/0.4/gegl-0.4.70.tar.xz",
+   b3sum = "dca4e225206d802a1d2c91480278ee37ee4dc0f1e0ea81d8ae442cc48153fc94",
+   build = "meson",
+   flags = {
+      "-Dvapigen=enabled",
+      "-Dintrospection=true",
+   }
+};
+
+pycairo = {
+   url = "https://pypi.org/packages/source/p/pycairo/pycairo-1.29.1.tar.gz",
+   b3sum = "80ef10ddcf1e5f7e133a959080090887cea46db7a403f3eb0b945f418b679dc1",
+   build = "meson",
+};
+
+pygobject = {
+   url = "https://download.gnome.org/sources/pygobject/3.56/pygobject-3.56.3.tar.gz",
+   b3sum = "bb2f8baf7738b79b454155a9b65b03ea29b544e9874b3c5ebb97ea62bac9de57",
+   build = "meson",
+};
+
+libmypaint = {
+   url = "https://github.com/mypaint/libmypaint/releases/download/v1.6.1/libmypaint-1.6.1.tar.xz",
+   b3sum = "ad2204b6017a2f3b5558685f5a682feb5ffeb8151579bdde9d980a5260c666cb",
+   build = "./configure",
+   flags = { 
+      "--enable-introspection=no",
+      "--enable-i18n=no",
+   }
+};
+
+mypaint-brushes = {
+   url = "https://github.com/mypaint/mypaint-brushes/releases/download/v2.0.2/mypaint-brushes-2.0.2.tar.xz",
+   b3sum = "99da603da1e946c2a7f14b3a1cdc87c678ea822d87eef83b7868f2b8f39cf3b2",
+   build = "./configure",
+};
+
+appstream-glib = {
+   url = "https://people.freedesktop.org/~hughsient/appstream-glib/releases/appstream-glib-0.8.3.tar.xz",
+   b3sum = "02614b2bc91c263b5d1cb1fef7af3ec0d9dbd6fd331ae7486c86b0a528631731",
+   build = "meson",
+   flags = { 
+      "-Drpm=false", 
+      "-Dman=false", 
+   }
+};
+
+gimp = {
+   url = "https://download.gimp.org/gimp/v3.2/gimp-3.2.4.tar.xz",
+   b3sum = "0c0a60060673cb3f76ebd5cd05b6d9e83db6e861a5c63e4e66a7af9f338cd1f0",
+   build = "meson",
+   flags = { 
+      "-Dheadless-tests=disabled",
+      "-Dcheck-update=no",
+   },
+   prep = [[ sed -i 's/if not glib_networking_works/if not true/' meson.build ]],
+};

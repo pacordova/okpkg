@@ -1,0 +1,170 @@
+https://bugs.gentoo.org/944910
+--- a/netcat.c
++++ b/netcat.c
+@@ -257,7 +257,7 @@ void bail (str, p1, p2, p3, p4, p5, p6)
+ 
+ /* catch :
+    no-brainer interrupt handler */
+-void catch ()
++void catch (__attribute__ ((unused)) int unused)
+ {
+   errno = 0;
+   if (o_verbose > 1)		/* normally we don't care */
+@@ -267,14 +267,14 @@ void catch ()
+ 
+ /* quit :
+    handler for a "-q" timeout (exit 0 instead of 1) */
+-void quit ()
++void quit (__attribute__ ((unused)) int unused)
+ {
+   close (netfd);
+   exit (0);
+ }
+ 
+ /* timeout and other signal handling cruft */
+-void tmtravel ()
++void tmtravel (__attribute__ ((unused)) int unused)
+ {
+   signal (SIGALRM, SIG_IGN);
+   alarm (0);
+Subject: [PATCH] Convert holler and bail to variadic function
+
+Both functions usually consume different types than char * which is
+problematic for some compliers like clang-16 where -Werror=implicit-int
+is enabled by default.
+
+The fix is done in such a way that original holler function is converted
+to vholer which uses va_list from stdarg.h and holler and bail are
+converted to variadic functions that utilize vholler for printing.
+
+Bug: https://bugs.gentoo.org/871003
+
+diff --git a/netcat.c b/netcat.c
+index 992c42b..b4d6fd8 100644
+--- a/netcat.c
++++ b/netcat.c
+@@ -80,6 +80,7 @@
+ #include <signal.h>
+ #include <fcntl.h>		/* O_WRONLY et al */
+ #include <unistd.h>
++#include <stdarg.h>
+ 
+ /* handy stuff: */
+ #define SA struct sockaddr	/* socket overgeneralization braindeath */
+@@ -215,23 +216,18 @@ int o_quit = -1; /* 0 == quit-now; >0 == quit after o_quit seconds */
+ /* support routines -- the bulk of this thing.  Placed in such an order that
+    we don't have to forward-declare anything: */
+ 
+-/* holler :
+-   fake varargs -- need to do this way because we wind up calling through
+-   more levels of indirection than vanilla varargs can handle, and not all
+-   machines have vfprintf/vsyslog/whatever!  6 params oughta be enough. */
+-void holler (str, p1, p2, p3, p4, p5, p6)
+-  char * str;
+-  char * p1, * p2, * p3, * p4, * p5, * p6;
++/* vholler : */
++void vholler(const char * str, va_list ap)
+ {
+   FILE *o_holler_out = (o_holler_stderr ? stderr : stdout);
+   if (o_verbose) {
+-    fprintf (o_holler_out, str, p1, p2, p3, p4, p5, p6);
++    vfprintf (o_holler_out, str, ap);
+ #ifdef HAVE_BIND
+     if (h_errno) {		/* if host-lookup variety of error ... */
+       if (h_errno > 4)		/* oh no you don't, either */
+ 	fprintf (o_holler_out, "preposterous h_errno: %d", h_errno);
+       else
+-	fprintf (o_holler_out, h_errs[h_errno]);	/* handle it here */
++	fputs (h_errs[h_errno], o_holler_out);	/* handle it here */
+       h_errno = 0;				/* and reset for next call */
+     }
+ #endif
+@@ -241,16 +237,27 @@ void holler (str, p1, p2, p3, p4, p5, p6)
+       fprintf (o_holler_out, "\n");
+     fflush (o_holler_out);
+   }
+-} /* holler */
++} /* vholler */
++
++void holler(const char * fmt, ...)
++{
++  va_list ap;
++  va_start(ap, fmt);
++  vholler(fmt, ap);
++  va_end(ap);
++}
+ 
+ /* bail :
+    error-exit handler, callable from anywhere */
+-void bail (str, p1, p2, p3, p4, p5, p6)
+-  char * str;
+-  char * p1, * p2, * p3, * p4, * p5, * p6;
++void bail (const char * fmt, ...)
+ {
+   o_verbose = 1;
+-  holler (str, p1, p2, p3, p4, p5, p6);
++  va_list ap;
++
++  va_start(ap, fmt);
++  vholler(fmt, ap);
++  va_end(ap);
++
+   close (netfd);
+   exit (1);
+ } /* bail */
+-- 
+2.35.1
+
+--- a/Makefile.orig
++++ b/Makefile
+@@ -9,7 +9,7 @@
+ # pick gcc if you'd rather , and/or do -g instead of -O if debugging
+ # debugging
+ # DFLAGS = -DTEST -DDEBUG
+-CFLAGS = -O
++CFLAGS ?= -O
+ XFLAGS = 	# xtra cflags, set by systype targets
+ XLIBS =		# xtra libs if necessary?
+ # -Bstatic for sunos,  -static for gcc, etc.  You want this, trust me.
+@@ -22,8 +22,10 @@
+ 
+ ### BOGON-CATCHERS
+ 
+-bogus:
+-	@echo "Usage:  make  <systype>  [options]"
++install: linux
++	install -d $(DESTDIR)/bin $(DESTDIR)/usr/share/man/man1
++	install -m 755 nc   $(DESTDIR)/bin
++	install -m 644 nc.1 $(DESTDIR)/usr/share/man/man1
+ 
+ ### HARD TARGETS
+ 
+@@ -67,7 +69,7 @@
+ 	make -e $(ALL) $(MFLAGS) XFLAGS='-DAIX'
+ 
+ linux:
+-	make -e $(ALL) $(MFLAGS) XFLAGS='-DLINUX' STATIC=-static
++	make -e $(ALL) $(MFLAGS) XFLAGS='-DLINUX -DTELNET -DGAPING_SECURITY_HOLE'
+ 
+ # irix 5.2, dunno 'bout earlier versions.  If STATIC='-non_shared' doesn't
+ # work for you, null it out and yell at SGI for their STUPID default
+--- a/netcat.c
++++ b/netcat.c
+@@ -31,7 +31,7 @@
+ /* conditional includes -- a very messy section which you may have to dink
+    for your own architecture [and please send diffs...]: */
+ /* #undef _POSIX_SOURCE */	/* might need this for something? */
+-#define HAVE_BIND		/* ASSUMPTION -- seems to work everywhere! */
++#undef HAVE_BIND		/* ASSUMPTION -- seems to work everywhere! */
+ #define HAVE_HELP		/* undefine if you dont want the help text */
+ /* #define ANAL */		/* if you want case-sensitive DNS matching */
+ 
+@@ -54,7 +54,7 @@
+ #ifdef FD_SETSIZE		/* should be in types.h, butcha never know. */
+ #undef FD_SETSIZE		/* if we ever need more than 16 active */
+ #endif				/* fd's, something is horribly wrong! */
+-#define FD_SETSIZE 16		/* <-- this'll give us a long anyways, wtf */
++#define FD_SETSIZE 1024		/* <-- this'll give us a long anyways, wtf */
+ #include <sys/types.h>		/* *now* do it.  Sigh, this is broken */
+ 
+ #ifdef HAVE_RANDOM		/* aficionados of ?rand48() should realize */

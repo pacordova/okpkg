@@ -1,0 +1,12 @@
+Index: buckets/ssl_buckets.c
+--- a/buckets/ssl_buckets.c.orig
++++ b/buckets/ssl_buckets.c
+@@ -1186,7 +1186,7 @@ static void init_ssl_libraries(void)
+         }
+ #endif
+ 
+-#ifdef USE_OPENSSL_1_1_API
++#if defined(USE_OPENSSL_1_1_API) && !defined(LIBRESSL_VERSION_NUMBER)
+         OPENSSL_malloc_init();
+ #else
+         CRYPTO_malloc_init();

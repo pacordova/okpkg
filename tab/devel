@@ -1,0 +1,107 @@
+autoconf = {
+   url = "https://ftp.gnu.org/gnu/autoconf/autoconf-2.72.tar.xz",
+   b3sum = "a0f8672491f12c2dc9bf5ddfdb9fe241f6583b2df5247a6940f70f16e4832972",
+   build = "./configure",
+};
+
+automake = {
+   url = "https://ftp.gnu.org/gnu/automake/automake-1.18.1.tar.xz",
+   b3sum = "5f0bd223f42060fad07ad387f6b2b37866c350dc7414edec00dbc216f9c4b0be",
+   build = "./configure",
+};
+
+bc = {
+   url = "https://github.com/gavinhoward/bc/releases/download/7.0.3/bc-7.0.3.tar.xz",
+   b3sum = "c3688ded9507c3809e58e41c6ab37b9bc1641c8e70a5dfddd4cc7bd576359798",
+   build = "./configure",
+   flags = {
+      "--bindir=/bin",
+      "--predefined-build-type=GNU",
+      "--enable-readline",
+      "--disable-{generated,problematic}-tests",
+   },
+};
+
+check = {
+   url = "https://github.com/libcheck/check/releases/download/0.15.2/check-0.15.2.tar.gz",
+   b3sum = "350f25d7918a9f694287b6e576f2358f872e23138fad9ddbf6f66bf20de2ae8e",
+   build = "./configure",
+};
+
+gettext = {
+   url = "https://ftp.gnu.org/gnu/gettext/gettext-1.0.tar.lz",
+   b3sum = "f66ecddaa7cf0e5551821c27385e4b33260b6f5d13c034b787cd1f3b60a07d62",
+   build = "./configure",
+   flags = { "--without-git" }
+};
+
+gperf = {
+   url = "https://ftp.gnu.org/gnu/gperf/gperf-3.3.tar.gz",
+   b3sum = "6ad90515e3b8ac191a8ecef4e75fbb260236f8e78078ac099d5eccc175af0782",
+   build = "./configure",
+};
+
+help2man = {
+   url = "https://ftp.gnu.org/gnu/help2man/help2man-1.49.3.tar.xz",
+   b3sum = "87baa88c4506a1a06c6b489ebe7702fe2ef032e9878f6f290c976d2c0d328c99",
+   build = "./configure",
+};
+
+intltool = {
+   url = "https://launchpad.net/intltool/trunk/0.51.0/+download/intltool-0.51.0.tar.gz",
+   b3sum = "d02ddc3dcdfc519173e51c16d3fe09da7669e547efd58951855bee887c0cdce0",
+   build = "./configure",
+   prep = [[ sed -i 's:\\\${:\\\$\\{:' intltool-update.in ]]
+};
+
+itstool = {
+   url = "https://github.com/itstool/itstool/archive/2.0.7/itstool-2.0.7.tar.gz",
+   b3sum = "c64afc9edcf7a4d58a328cf7fc9aea5c7ffbae9bc8ddbab15998dc43aac9d82e",
+   build = "./configure",
+   prep = [[ autoreconf -fi ]],
+};
+
+libtool = {
+   url = "https://ftp.gnu.org/gnu/libtool/libtool-2.6.2.tar.xz",
+   b3sum = "192e13e53f967411844ff7fc264910cd10b599b4413e4926223b6dd6b68b0936",
+   build = "./configure",
+   post = [[ rm -f $destdir/usr/lib64/libltdl.a ]]
+};
+
+meson = {
+   url = "https://github.com/mesonbuild/meson/releases/download/1.11.2/meson-1.11.2.tar.gz",
+   b3sum = "d4289353953d938c7708db714b5a381c99987369e12bb3f519ecb21c90ea472d",
+   build = "python-build",
+};
+
+nasm = {
+   url = "https://www.nasm.us/pub/nasm/releasebuilds/3.02/nasm-3.02.tar.xz",
+   b3sum = "2606cdb7b0655e448a37a6ac475def713a9625e04a30e554bcd37414af667961",
+   build = "./configure",
+};
+
+samurai = {
+   url = "https://github.com/michaelforney/samurai/archive/1.3/samurai-1.3.tar.gz",
+   b3sum = "4444d206d7c502396cfe446492e48432dbeb8fd2f0939948ffe38213af395f10",
+   build = "make",
+   flags = { "PREFIX=/usr", "BINDIR=/bin" },
+};
+
+scdoc = {
+   url = "/var/cache/distfiles/scdoc-1.11.5.tar.gz",
+   b3sum = "3fd37323fc413c43b7962de5f68213a1c244233b22a7020b015c73e710b0f7b4",
+   build = "make",
+   flags = { "PREFIX=/usr", "BINDIR=/bin" },
+};
+
+texinfo = {
+   url = "https://ftp.gnu.org/gnu/texinfo/texinfo-7.2.tar.xz",
+   b3sum = "fd4bc4f91eda243ade9361193f686e79f7897bfd3f9ede4991cdaa79caf88494",
+   build = "./configure",
+};
+
+which = {
+   url = "https://ftp.gnu.org/gnu/which/which-2.25.tar.gz",
+   b3sum = "cae23da880d98238f465c1f99968cd5ff0b0a18e25458272873117da34295208",
+   build = "./configure",
+};
