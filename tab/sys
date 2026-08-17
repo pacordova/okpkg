@@ -213,8 +213,8 @@ binutils = {
 };
 
 gmp = {
-   url = "https://ftp.gnu.org/gnu/gmp/gmp-6.3.0.tar.xz",
-   b3sum = "fffe4996713928ae19331c8ef39129e46d3bf5b7182820656fd4639435cd83a4",
+   url = "https://ftp.gnu.org/gnu/gmp/gmp-6.2.1.tar.lz",
+   b3sum = "e95b7f8d8a976bd8bada6c9091ad6dfab8744b2d076268422f935bef060a2842",
    build = "./configure",
    flags = { 
       "--enable-cxx",
@@ -223,21 +223,21 @@ gmp = {
 };
 
 mpfr = {
-   url = "https://ftp.gnu.org/gnu/mpfr/mpfr-4.2.2.tar.xz",
-   b3sum = "11d59d061ef8db588650bc7dc5172594a6e5aad013994801c6f63011a62b191d",
+   url = "https://ftp.gnu.org/gnu/mpfr/mpfr-4.1.0.tar.xz",
+   b3sum = "956f9b16d0377b777e21b07d27962ec1153236ef2e94039ec1ad375859c01fc9",
    build = "./configure",
    flags = { "--enable-thread-safe" }
 };
 
 libmpc = {
-   url = "https://ftp.gnu.org/gnu/mpc/mpc-1.4.1.tar.xz",
-   b3sum = "994e14084833795dbb36ee1abe46059c74cab1845e7ca17585bc7bc8727444f8",
+   url = "https://ftp.gnu.org/gnu/mpc/mpc-1.2.1.tar.gz",
+   b3sum = "f967a250c85296a88bf6a2471b74558d89a59fe548e119f6d74fccb7cb73b13e",
    build = "./configure",
 };
 
 isl = {
-   url = "https://libisl.sourceforge.io/isl-0.28.tar.xz",
-   b3sum = "8a4c2423d60a79fd6ac3ff6942181d74d4c47a157a3113e880de4707d7ac7567",
+   url = "https://libisl.sourceforge.io/isl-0.24.tar.xz",
+   b3sum = "a0887628393221c41df22dd2b3dc284c7dbcb9d6d44b1905ad20b13641fadcec",
    build = "./configure",
 };
 
@@ -253,9 +253,9 @@ acl = {
    build = "./configure",
 };
 
-gcc16 = {
-   url = "https://ftp.gnu.org/gnu/gcc/gcc-16.1.0/gcc-16.1.0.tar.xz",
-   b3sum = "5f001609f662143ce9285cd740bd0acfeeaf7f13731b46fd1d9ebe620c5c340d",
+gcc15 = {
+   url = "https://ftp.gnu.org/gnu/gcc/gcc-15.3.0/gcc-15.3.0.tar.xz",
+   b3sum = "871e76567f6c81f2492c6eeb4cd98eface13e592d5058d10a720f3fcc1a2ae5b",
    build = "../configure",
    flags = {
       "--libdir=/usr/libexec",

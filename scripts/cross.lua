@@ -67,7 +67,7 @@ function extract(x)
    
    -- lookup fixes
    if x == "libstdcxx" then 
-      X = query("gcc16", "sys")
+      X = query("gcc15", "sys")
    elseif x:sub(1,1) == "_" then
       X = query(x:sub(2,#x), "sys")
    else

@@ -16,7 +16,7 @@ _binutils = {
    }
 };
 
-_gcc16 = {
+_gcc15 = {
    build = "../configure",
    flags = {
       "--target=x86_64-unknown-linux-gnu",
@@ -53,10 +53,10 @@ _gcc16 = {
    },
    prep = [[
       mkdir gmp mpfr mpc isl
-      tar -C gmp  --strip-components=1 -xf /var/cache/distfiles/gmp-6.3.0.tar.xz
-      tar -C mpfr --strip-components=1 -xf /var/cache/distfiles/mpfr-4.2.2.tar.xz
-      tar -C mpc  --strip-components=1 -xf /var/cache/distfiles/mpc-1.4.1.tar.xz
-      tar -C isl  --strip-components=1 -xf /var/cache/distfiles/isl-0.27.tar.xz
+      tar -C gmp  --strip-components=1 -xf /var/cache/distfiles/gmp-6.2.1.tar.lz
+      tar -C mpfr --strip-components=1 -xf /var/cache/distfiles/mpfr-4.1.0.tar.xz
+      tar -C mpc  --strip-components=1 -xf /var/cache/distfiles/mpc-1.2.1.tar.gz
+      tar -C isl  --strip-components=1 -xf /var/cache/distfiles/isl-0.24.tar.xz
    ]],
    post = [[
       cat ../gcc/{limitx,glimits,limity}.h > _
@@ -78,7 +78,6 @@ glibc = {
       "--with-headers=/mnt/usr/include",
    },
    prep = [[
-      $patch < /usr/okpkg/patches/glibc.diff
       printf "%s\n" rootsbindir=/bin >> configparms
       printf "%s\n" sbindir=/bin     >> configparms
       printf "%s\n" slibdir=/lib64   >> configparms
@@ -115,10 +114,10 @@ libstdcxx = {
    },
    prep = [[
       mkdir gmp mpfr mpc isl
-      tar -C gmp  --strip-components=1 -xf /var/cache/distfiles/gmp-6.3.0.tar.xz
-      tar -C mpfr --strip-components=1 -xf /var/cache/distfiles/mpfr-4.2.2.tar.xz
-      tar -C mpc  --strip-components=1 -xf /var/cache/distfiles/mpc-1.4.1.tar.xz
-      tar -C isl  --strip-components=1 -xf /var/cache/distfiles/isl-0.27.tar.xz
+      tar -C gmp  --strip-components=1 -xf /var/cache/distfiles/gmp-6.2.1.tar.lz
+      tar -C mpfr --strip-components=1 -xf /var/cache/distfiles/mpfr-4.1.0.tar.xz
+      tar -C mpc  --strip-components=1 -xf /var/cache/distfiles/mpc-1.2.1.tar.gz
+      tar -C isl  --strip-components=1 -xf /var/cache/distfiles/isl-0.24.tar.xz
    ]],
 };
 
@@ -400,7 +399,7 @@ binutils = {
    prep = [[ sed '6031s/$add_dir//' -i ltmain.sh ]],
 };
 
-gcc16 = {
+gcc15 = {
    build = "../configure",
    flags = {
       "--build=$(../config.guess)",
@@ -437,10 +436,10 @@ gcc16 = {
    },
    prep = [[
       mkdir gmp mpfr mpc isl
-      tar -C gmp  --strip-components=1 -xf /var/cache/distfiles/gmp-6.3.0.tar.xz
-      tar -C mpfr --strip-components=1 -xf /var/cache/distfiles/mpfr-4.2.2.tar.xz
-      tar -C mpc  --strip-components=1 -xf /var/cache/distfiles/mpc-1.4.1.tar.xz
-      tar -C isl  --strip-components=1 -xf /var/cache/distfiles/isl-0.27.tar.xz
+      tar -C gmp  --strip-components=1 -xf /var/cache/distfiles/gmp-6.2.1.tar.lz
+      tar -C mpfr --strip-components=1 -xf /var/cache/distfiles/mpfr-4.1.0.tar.xz
+      tar -C mpc  --strip-components=1 -xf /var/cache/distfiles/mpc-1.2.1.tar.gz
+      tar -C isl  --strip-components=1 -xf /var/cache/distfiles/isl-0.24.tar.xz
       sed -i '330i #include <stdbool.h>' gcc/config/i386/i386.h
       sed -i '/thread_header =/s/@.*@/gthr-posix.h/' \
         {libgcc,libstdc++-v3/include}/Makefile.in
