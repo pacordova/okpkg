@@ -86,7 +86,10 @@ librsvg = {
    url = "https://download.gnome.org/sources/librsvg/2.40/librsvg-2.40.21.tar.xz",
    b3sum = "0ce1906c5136a1d9fe596a4ec0a01afe3700af3c5c917439f00b280b78d738e8",
    build = "./configure",
-   flags = { 'CFLAGS="$CFLAGS -Wno-incompatible-pointer-types"' },
+   prep = [[
+      sed -i 's/rsvg_xml_noerror;/(xmlStructuredErrorFunc)&/' rsvg-css.c
+      sed -i 's/SAX\.h/SAX2.h/' rsvg-private.h
+   ]]
 };
 
 gtk3 = {

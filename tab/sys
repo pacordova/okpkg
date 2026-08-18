@@ -100,8 +100,8 @@ bzip2 = {
    url = "https://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz",
    b3sum = "97af3f520629c65fe41292f77e6ca798fe594d7987bfb2aebe7c6fcdc7ab5ed2",
    post = [[
-      make CC="gcc $CFLAGS -fPIC" -f Makefile-libbz2_so
-      make CC="gcc $CFLAGS -fPIC" bzip2
+      make CC="cc $CFLAGS -fPIC" -f Makefile-libbz2_so
+      make CC="cc $CFLAGS -fPIC" bzip2
       install -d $destdir{/lib64,/bin,/usr/include,/usr/share/man/man1}
       install libbz2.so.1.0.8 libbz2.a $destdir/lib64
       install -m 755 bzip2 bzdiff bzgrep bzmore $destdir/bin
@@ -216,10 +216,8 @@ gmp = {
    url = "https://ftp.gnu.org/gnu/gmp/gmp-6.2.1.tar.lz",
    b3sum = "e95b7f8d8a976bd8bada6c9091ad6dfab8744b2d076268422f935bef060a2842",
    build = "./configure",
-   flags = { 
-      "--enable-cxx",
-      'CFLAGS="$CFLAGS -std=gnu17"'
-   },
+   flags = { "--enable-cxx" },
+   prep = [[ sed -i '/long long t1;/,+1s/()/(...)/' configure ]]
 };
 
 mpfr = {
@@ -403,9 +401,7 @@ pcre2 = {
       "--enable-pcre2grep-{libz,libbz2}",
       "--enable-pcre2test-libreadline",
       "--enable-unicode",
-      "CFLAGS=-O3",
-   },
-   post = [[ rm -fr $destdir{/bin,/usr/share/man/man1} ]]
+   }
 };
 
 grep = {
@@ -618,11 +614,7 @@ cpio = {
    url = "https://ftp.gnu.org/gnu/cpio/cpio-2.15.tar.bz2",
    b3sum = "510b18d82d9ee4fd136ce285162a31808c9c87907c188e215cd21a8cc7cde992",
    build = "./configure",
-   flags = {
-      "--enable-mt",
-      "--with-rmt=/usr/libexec/rmt",
-      'CFLAGS="$CFLAGS -std=gnu17"'
-   }
+   flags = { "--enable-mt", "--with-rmt=/usr/libexec/rmt" },
 };
 
 lua = {

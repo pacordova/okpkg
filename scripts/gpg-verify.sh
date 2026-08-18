@@ -37,8 +37,16 @@ _cksum_signal(){
   | sha512sum -c || exit 1
 }
 
+_cksum_kernel(){
+  $curl https://cdn.kernel.org/pub/linux/kernel/v${1%%.*}.x/linux-$1.tar.{xz,sign}
+  xz -d linux-$1.tar.xz
+  gpg --verify linux-$1.tar.sign linux-$1.tar || exit 1
+  xz --lzma2=preset=9e,dict=8MiB linux-$1.tar
+}
+
 cd "$tempdir"
 
+_cksum_kernel 6.12.103
 #_cksum_signal 8.23.0
 #_cksum_gl https://gitlab.com/lvmteam/lvm2 v2_03_41
 #_cksum_gh https://github.com/vim/vim v9.1.1980
@@ -50,6 +58,6 @@ cd "$tempdir"
 #_cksum_gh https://github.com/fribidi/fribidi v1.0.15
 #_cksum_gh https://github.com/systemd/systemd/ v256
 
-for f in *.{tar.gz,deb}; do [ -f $f ] && okpkg b3sum $f; done
+for f in *.{tar.xz,tar.gz,deb}; do [ -f $f ] && okpkg b3sum $f; done
 
 cd "$oldpwd" && rm -fr "$tempdir"

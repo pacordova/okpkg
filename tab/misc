@@ -161,9 +161,6 @@ iftop = {
    url = "https://pdw.ex-parrot.com/iftop/download/iftop-1.0pre4.tar.gz",
    b3sum = "ed575aa75be5fea67e2adec01f828b2b78b0cd70709a2c8e42811c8ec6985242",
    build = "./configure",
-   flags = { 
-      'CFLAGS="$CFLAGS -std=gnu17 -fcommon"',
-   }
 };
 
 kirc = {
@@ -566,9 +563,6 @@ libsndfile = {
    url = "https://github.com/libsndfile/libsndfile/releases/download/1.2.2/libsndfile-1.2.2.tar.xz",
    b3sum = "fc805e696ee73ee24377329683b7e00af0db78727af553e74840cc813969ba77",
    build = "./configure",
-   flags = {
-      'CFLAGS="$CFLAGS -std=gnu17"'
-   },
 };
 
 pulseaudio = {
@@ -581,9 +575,7 @@ pulseaudio = {
       "-Dbluez5=disabled",
       "-Dudevrulesdir=/lib64/udev/rules.d",
    },
-   post = [[
-      rm -f "$destdir/usr/share/dbus-1/system.d/pulseaudio-system.conf"
-   ]]
+   post = [[ rm -f $destdir/usr/share/dbus-1/system.d/pulseaudio-system.conf ]]
 };
 
 xfce4-pulseaudio-plugin = {
