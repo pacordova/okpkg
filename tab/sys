@@ -503,8 +503,8 @@ kmod = {
 };
 
 libelf = {
-   url = "https://sourceware.org/ftp/elfutils/0.195/elfutils-0.195.tar.bz2",
-   b3sum = "f397be2a59cbbc375cdbb28f7947a9345a8d126fadc6a2bb40b49c1dbe38787c",
+   url = "https://sourceware.org/ftp/elfutils/0.196/elfutils-0.196.tar.bz2",
+   b3sum = "8bccdf3c2f6bfecc942b6b76b72922620d58d3ba508fdd4013872bbdf56b23bc",
    build = "./configure",
    flags = {
       "--enable-deterministic-archives",

@@ -708,8 +708,8 @@ xorg-server = {
 };
 
 libevdev = {
-   url = "https://www.freedesktop.org/software/libevdev/libevdev-1.13.6.tar.xz",
-   b3sum = "7cc8322f062a0bdacaf73f7fcb6353024764620633c0c434d725ca3a95119fef",
+   url = "https://www.freedesktop.org/software/libevdev/libevdev-1.13.7.tar.xz",
+   b3sum = "100960196339aeb55078db26182f59f60810dd8bab4b7dd2b794acf1a92a1f80",
    build = "meson",
    flags = { "-D{documentation,tests,tools}=disabled" }
 };
