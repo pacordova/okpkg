@@ -1,3 +1,4 @@
+#include <lauxlib.h>
 #include "okutils.h"
 
 static const struct luaL_Reg okutils[] = {
