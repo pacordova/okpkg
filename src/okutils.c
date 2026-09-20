@@ -1,5 +1,5 @@
-#include <lauxlib.h>
 #include "okutils.h"
+#include <lauxlib.h>
 
 static const struct luaL_Reg okutils[] = {
     {"b3sum", ok_b3sum},
