@@ -82,8 +82,8 @@ end
 --------------
 L = {}
 for de in dir(Dirs.tab) do
-   if ok.basename(de) ~= "cross" then
-      fp = io.open(de)
+   if de ~= "cross" then
+      fp = io.open(string.format("%s/%s", Dirs.tab, de))
       buf = "\n" .. fp:read("*a")
       fp:close()
       for i in buf:gmatch("\n([%w%-]-) = {.-};") do table.insert(L, i) end
