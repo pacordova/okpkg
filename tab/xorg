@@ -401,23 +401,6 @@ libdrm = {
    }
 };
 
-libva = {
-   url = "https://github.com/intel/libva/archive/2.24.1/libva-2.24.1.tar.gz",
-   b3sum = "5fd43c884578ae3ad14c48dc3391baf263aeaca2d2d440c0b7d6bfb81a37ac92",
-   build = "meson",
-   flags = { 
-      "-Dwith_glx=yes",
-      "-Dwith_wayland=no",
-      "-Dwith_x11=yes",
-   }
-};
-
-libvdpau = {
-   url = "https://gitlab.freedesktop.org/vdpau/libvdpau/-/archive/1.5/libvdpau-1.5.tar.bz2",
-   b3sum = "6a3811b79ea0ac523dca41c00e7736a1da0279a57e001bde89789830a842df0b",
-   build = "meson",
-};
-
 libgbm = {
    url = "https://github.com/glfs-book/libgbm/archive/1.0.7/libgbm-1.0.7.tar.gz",
    b3sum = "a69a6137e95982dff7a07b2b4c9a6b4180e9aa8d6b6f6e121d1e2d5546b3308e",

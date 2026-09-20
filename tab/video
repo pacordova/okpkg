@@ -1,3 +1,20 @@
+libvdpau = {
+   url = "https://gitlab.freedesktop.org/vdpau/libvdpau/-/archive/1.5/libvdpau-1.5.tar.bz2",
+   b3sum = "6a3811b79ea0ac523dca41c00e7736a1da0279a57e001bde89789830a842df0b",
+   build = "meson",
+};
+
+libva = {
+   url = "https://github.com/intel/libva/archive/2.24.1/libva-2.24.1.tar.gz",
+   b3sum = "5fd43c884578ae3ad14c48dc3391baf263aeaca2d2d440c0b7d6bfb81a37ac92",
+   build = "meson",
+   flags = { 
+      "-Dwith_glx=yes",
+      "-Dwith_wayland=no",
+      "-Dwith_x11=yes",
+   }
+};
+
 vulkan-headers = {
    url = "https://github.com/KhronosGroup/Vulkan-Headers/archive/vulkan-sdk-1.4.357.0/vulkan-headers-1.4.357.0.tar.gz",
    b3sum = "5b348fe4aa456beefed0be6e5a3111d6b5ec4bc29766877bde2a2a137acb2a84",
@@ -37,8 +54,8 @@ libass = {
 };
 
 ffmpeg = {
-   url = "https://ffmpeg.org/releases/ffmpeg-8.1.2.tar.xz",
-   b3sum = "c2243e51fafad0731baa55e9e23728c4fbd072125855b054c89d073ccc15aa5a",
+   url = "https://ffmpeg.org/releases/ffmpeg-4.4.6.tar.xz",
+   b3sum = "4f6ae153c447eaf8a1f894666f472f2b3749399529e49dc460dbb1073acbfe50",
    build = "./configure",
    flags = {
       "--libdir=/lib64",
@@ -84,18 +101,18 @@ uchardet = {
 };
 
 mpv = {
-   url = "https://github.com/mpv-player/mpv/archive/v0.41.0/mpv-0.41.0.tar.gz",
-   b3sum = "4548eb519b3c81ca90c4587b0d676ad1eb0f0e1322777e9c2870a919e5ec2a92",
+   url = "https://github.com/mpv-player/mpv/archive/v0.36.0/mpv-0.36.0.tar.gz",
+   b3sum = "12c395ac044fbe9d032fa45a0607877e2c8dbf63728fb2bef59b1d3a52ff8474",
    build = "meson",
    flags = {
-      "-Dlua=disabled",
-      "-Dlibmpv=true",
       "-Dbuild-date=false",
-      "-D{x11,alsa}=enabled",
-      "-D{wayland,pipewire,pulse}=disabled",
-      "-Dlibarchive=enabled",
-      "-Dlcms2=disabled",
+      "-Duchardet=disabled",
+      "-Dx11=enabled",
+      "-Dalsa=enabled",
+      "-Djack=disabled",
+      "-Dpulse=disabled",
+      "-Dpipewire=disabled",
+      "-Dwayland=disabled",
       "-Dcaca=disabled",
-      "-Ddrm=enabled",
    }
 };
