@@ -105,6 +105,7 @@ mpv = {
    b3sum = "41182bebc20c21bdfa1a4b9189427e1dd840cf3684876b2c521c4d03e36674cd",
    build = "meson",
    flags = {
+      "-Dlua=luajit",
       "-Dbuild-date=false",
       "-Duchardet=disabled",
       "-Dx11=enabled",
@@ -114,5 +115,6 @@ mpv = {
       "-Dpipewire=disabled",
       "-Dwayland=disabled",
       "-Dcaca=disabled",
-   }
+   },
+   post = [[ mv $destdir/etc/mpv $destdir/usr/share ]]
 };

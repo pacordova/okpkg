@@ -668,3 +668,15 @@ keybinder = {
    b3sum = "04b010524abf7af8a6bdfdbeff393c0feecf2bdcc1fd642e75113137ccb62aed",
    build = "./configure",
 };
+
+-- git clone https://luajit.org/git/luajit.git /usr/src/luajit
+luajit = {
+   build = "make",
+   flags = {
+      "PREFIX=/usr",
+      "MULTILIB=lib64",
+      "INSTALL_BIN=$destdir/bin",
+      "INSTALL_LIB=$destdir/lib64",
+   }
+};
+

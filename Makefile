@@ -31,7 +31,7 @@ install: install-strip
 install-strip: all
 	$(STRIP) src/okutils.so
 	$(INSTALL) -m 755 src/okutils.so       $(lua_cdir)
-	$(INSTALL) -m 755 scripts/okpkg.lua    $(bindir)/okpkg
+	$(INSTALL) -m 755 scripts/main.lua     $(bindir)/okpkg
 	$(INSTALL) -m 644 scripts/config.lua   $(sysconfdir)/okpkg.conf
 
 uninstall:
