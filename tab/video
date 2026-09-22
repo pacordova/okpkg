@@ -115,6 +115,5 @@ mpv = {
       "-Dpipewire=disabled",
       "-Dwayland=disabled",
       "-Dcaca=disabled",
-   },
-   post = [[ mv $destdir/etc/mpv $destdir/usr/share ]]
+   }
 };

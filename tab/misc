@@ -669,14 +669,12 @@ keybinder = {
    build = "./configure",
 };
 
--- git clone https://luajit.org/git/luajit.git /usr/src/luajit
 luajit = {
+   url = "https://luajit.org/git/luajit.git",
    build = "make",
    flags = {
       "PREFIX=/usr",
-      "MULTILIB=lib64",
+      "MULTILIB=../lib64",
       "INSTALL_BIN=$destdir/bin",
-      "INSTALL_LIB=$destdir/lib64",
    }
 };
-
