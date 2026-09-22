@@ -101,8 +101,8 @@ uchardet = {
 };
 
 mpv = {
-   url = "https://github.com/mpv-player/mpv/archive/v0.36.0/mpv-0.36.0.tar.gz",
-   b3sum = "12c395ac044fbe9d032fa45a0607877e2c8dbf63728fb2bef59b1d3a52ff8474",
+   url = "https://github.com/mpv-player/mpv/archive/v0.35.1/mpv-0.35.1.tar.gz",
+   b3sum = "41182bebc20c21bdfa1a4b9189427e1dd840cf3684876b2c521c4d03e36674cd",
    build = "meson",
    flags = {
       "-Dbuild-date=false",
