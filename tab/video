@@ -43,13 +43,6 @@ mpv = {
    flags = {
       "-Dlua=luajit",
       "-Dbuild-date=false",
-      "-Duchardet=disabled",
-      "-Dx11=enabled",
-      "-Dalsa=enabled",
-      "-Djack=disabled",
       "-Dpulse=disabled",
-      "-Dpipewire=disabled",
-      "-Dwayland=disabled",
-      "-Dcaca=disabled",
    }
 };
