@@ -2,8 +2,8 @@
 
 unpack = unpack or table.unpack
 
-local ok = require("okutils")
-Dirs = dofile("/etc/okpkg.conf")
+ok = require("okutils")
+DIR = dofile("/etc/okpkg.conf")
 
 function popen(command)
    local fp, buf
@@ -66,7 +66,7 @@ end
 -----------
 -- okpkg --
 -----------
-ok.chdir(Dirs.packages)
+ok.chdir(DIR["PKGDIR"]))
 okpkg = {}
 for w in string.gmatch(popen("ls *.tar.lz"), '(.-\n)') do
    local fixed = w:
@@ -81,9 +81,9 @@ end
 -- main loop -
 --------------
 L = {}
-for de in dir(Dirs.tab) do
-   if de ~= "cross" then
-      fp = io.open(string.format("%s/%s", Dirs.tab, de))
+for de in dir(DIR["DATADIR"]) do
+   if de ~= "cross.db" then
+      fp = io.open(string.format("%s/%s", DIR["DATADIR"], de))
       buf = "\n" .. fp:read("*a")
       fp:close()
       for i in buf:gmatch("\n([%w%-]-) = {.-};") do table.insert(L, i) end

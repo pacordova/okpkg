@@ -1,22 +1,25 @@
 -- /etc/okpkg.conf
 
-local Dirs = {
-   distfiles  = "/var/cache/distfiles",
-   log        = "/var/log/packages",
-   out        = "/var/cache",
-   packages   = "/var/cache/packages",
-   patches    = "/usr/okpkg/patches",
-   src        = "/usr/src",
-   tab        = "/usr/okpkg/tab",
+local DIR = {
+   ["OKPKG"]    = "/usr/okpkg",
+   ["DATADIR"]  = "/usr/okpkg/data",
+   ["TMPDIR"]   = "/usr/src",
+   ["DISTDIR"]  = "/var/cache/distfiles",
+   ["PKGDIR"]   = "/var/cache/packages",
+   ["LOG"]      = "/var/log/packages",
 }
 
 -- Note: escape any dashes
-local Mir = {
+local M = {
    ["https://ftp.gnu.org"]         = "http://mirror.fcix.net",
-   ["https://cran.r%-project.org"] = "https://archive.linux.duke.edu/cran",
+   ["cran.r%-project.org"]         = "cloud.r-project.org",
 }
 
-local Env = {
+local E = {
+   ["CFLAGS"]      = "-march=skylake -O2 -pipe -ftrivial-auto-var-init=zero " ..
+                     "-fstack-protector-strong -fstack-clash-protection"
+   ["CXXFLAGS"]    = "-march=skylake -O2 -pipe -ftrivial-auto-var-init=zero " ..
+                     "-fstack-protector-strong -fstack-clash-protection"
    ["LC_ALL"]      = "POSIX",
    ["CONFIG_SITE"] = "/etc/config.site",
    ["PYTHONHOME"]  = "/opt/python3.13",
@@ -29,17 +32,5 @@ local Env = {
    ["tar"]         = "/bin/tar",
 }
 
-local cflags = {
-   "-march=skylake",
-   "-O2",
-   "-fstack-protector-strong",
-   "-fstack-clash-protection",
-   "-ftrivial-auto-var-init=zero",
-   "-pipe",
-}
 
-Env.CFLAGS = table.concat(cflags, ' ')
-Env.CXXFLAGS = table.concat(cflags, ' ')
-Env.FORCE_UNSAFE_CONFIGURE = 1
-
-return Dirs, Mir, Env
+return DIR, M, E

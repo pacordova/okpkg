@@ -7,11 +7,11 @@ unpack = unpack or table.unpack
 
 -- Imports
 ok = require("okutils")
-Dirs = dofile("/bin/okpkg")
+DIR = dofile("/bin/okpkg")
 
 local function build_all(x)
    local fp, buf
-   fp = io.open(Dirs.tab .. "/" .. x)
+   fp = io.open(string.format("%s/%s", DIR["DATADIR"], x))
    buf = fp:read("*a")
    fp:close()
    for i in buf:gmatch("\n?([%w%-_]*)%s*=%s*{.-}%s*;") do
@@ -20,8 +20,8 @@ local function build_all(x)
          os.execute("gdk-pixbuf-query-loaders --update-cache")
       end
    end
-   ok.remove_all(Dirs.src)
-   ok.mkdir(Dirs.src)
+   ok.remove_all(DIR["TMPDIR"])
+   ok.mkdir(DIR["TMPDIR"])
 end
 
 -- Env

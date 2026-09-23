@@ -4,8 +4,8 @@
 os.execute("make -C /usr/okpkg install")
 
 -- Imports
-local Dirs = dofile("/bin/okpkg")
-local ok = require("okutils")
+ok = require("okutils")
+DIR = dofile("/bin/okpkg")
 
 -- Generate locales
 os.execute("localedef -i POSIX -f ASCII      C           2>/dev/null ||:")
@@ -14,7 +14,7 @@ os.execute("localedef -i en_US -f ISO-8859-1 en_US       2>/dev/null ||:")
 os.execute("localedef -i en_US -f UTF-8      en_US.UTF-8 2>/dev/null ||:")
 
 local fp, buf
-fp = io.open(string.format("%s/%s", Dirs.tab, "sys"))
+fp = io.open(string.format("%s/%s", DIR["DATADIR"], "sys.db"))
 buf = "\n" .. fp:read("*a")
 fp:close()
 for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do
@@ -23,7 +23,7 @@ end
 
 -- Fix versions and cleanup
 os.execute("makewhatis /usr/share/man")
-ok.chdir(Dirs.packages)
+ok.chdir(DIR["PKGDIR"])
 --os.rename("bash-5.3-amd64.tar.lz", "bash-5.3.009-amd64.tar.lz")
 --os.rename("readline-8.3-amd64.tar.lz", "readline-8.3.003-amd64.tar.lz")
 --ok.mkdir("a")

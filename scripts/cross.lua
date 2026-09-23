@@ -9,7 +9,7 @@ local unpack = unpack or table.unpack
 
 local ok = require("okutils")
 
-local Dirs = dofile("/etc/okpkg.conf")
+local DIR = dofile("/etc/okpkg.conf")
 
 B = {
    ["cmake"] = function(...)
@@ -54,9 +54,9 @@ B = {
    end,
 }
 
-function query(x, tab)
+function query(x, db)
    local i, fp, buf
-   fp = io.open(Dirs.tab .. "/" .. tab)
+   fp = io.open(string.format("%s/%s", DIR["DATADIR"], db))
    buf = "\n" .. fp:read("*a")
    fp:close()
    i = buf:find("\n" .. x .. " =", 1, true)
@@ -69,19 +69,19 @@ function extract(x)
    
    -- lookup fixes
    if x == "libstdcxx" then 
-      X = query("gcc15", "sys")
+      X = query("gcc15", "sys.db")
    elseif x == "samurai" then
-      X = query(x, "devel")
+      X = query(x, "devel.db")
    elseif x:sub(1,1) == "_" then
-      X = query(x:sub(2,#x), "sys")
+      X = query(x:sub(2,#x), "sys.db")
    else
-      X = query(x, "sys")
+      X = query(x, "sys.db")
    end
 
-   X.dist = string.format("%s/%s", Dirs.distfiles, ok.basename(X.url))
+   X.dist = string.format("%s/%s", DIR["DISTDIR"], ok.basename(X.url))
 
    -- Setup source directory
-   ok.chdir(Dirs.src)
+   ok.chdir(DIR["TMPDIR"])
    ok.remove_all(x)
    ok.mkdir(x) 
    ok.chdir(x)
@@ -91,7 +91,7 @@ function extract(x)
 end
 
 function build(x)
-   local X = query(x, "cross")
+   local X = query(x, "cross.db")
    X.flags = X.flags or {}
 
    if x:sub(1,1) == "_" then
@@ -138,7 +138,7 @@ dofile(string.format("%s/%s", ok.dirname(arg[0]), "mkfs.lua"))
 
 -- Build all packages in cross
 local fp, buf
-fp = io.open(string.format("%s/%s", Dirs.tab, "cross"))
+fp = io.open(string.format("%s/%s", DIR["DATADIR"], "cross.db"))
 buf = "\n" .. fp:read('*a')
 fp:close()
 for i in buf:gmatch("\n([%w%-%_]-) = {.-;") do

@@ -3,18 +3,18 @@
 -- Imports
 unpack = unpack or table.unpack
 local ok = require("okutils")
-local Dirs, Mir, Env = dofile("/etc/okpkg.conf")
+local DIR, M, E = dofile("/etc/okpkg.conf")
 
 -- Global variables (callable by cli)
 chroot, b3sum = ok.chroot, ok.b3sum
 
 -- Make directories
-for k,v in pairs(Dirs) do
+for k,v in pairs(DIR) do
    local fp = io.open(v); if fp then fp:close() else ok.mkdir(v) end
 end
 
 -- Environment variables
-for k,v in pairs(Env) do ok.setenv(k,v) end
+for k,v in pairs(E) do ok.setenv(k,v) end
 
 -- Build routines
 B = {
@@ -162,9 +162,9 @@ end
 
 function query(x)
    local i, fp, buf
-   for de in dir(Dirs.tab) do
-      if not buf and de ~= "cross" then
-         fp = io.open(string.format("%s/%s", Dirs.tab, de))
+   for de in dir(DIR["DATADIR"]) do
+      if not buf and de ~= "cross.db" then
+         fp = io.open(string.format("%s/%s", DIR["DATADIR"], de))
          buf = "\n" .. fp:read("*a")
          fp:close()
          i = buf:find("\n" .. x .. " =", 1, true)
@@ -182,13 +182,13 @@ function download(x)
    local X, fp
 
    X = query(x)
-   X.dist = string.format("%s/%s", Dirs.distfiles, ok.basename(X.url))
+   X.dist = string.format("%s/%s", DIR["DISTDIR"], ok.basename(X.url))
 
    -- change mirrors
-   for k,v in pairs(Mir) do X.url = X.url:gsub(k, v) end 
+   for k,v in pairs(M) do X.url = X.url:gsub(k, v) end 
    
    -- Download file if not already downloaded
-   ok.chdir(Dirs.distfiles)
+   ok.chdir(DIR["DISTDIR"])
    io.close(
       io.open(ok.basename(X.url)) or
       io.popen("wget2 " .. X.url))
@@ -197,7 +197,7 @@ function download(x)
       not os.remove(ok.basename(X.url)))
    
    -- Setup source directory
-    ok.chdir(Dirs.src)
+    ok.chdir(DIR["TMPDIR"])
     ok.remove_all(x)
     ok.mkdir(x)
     ok.chdir(x)
@@ -205,7 +205,7 @@ function download(x)
    
    -- Patch if file exists
    -- Note: symlink for temporary packages, or update patch infrastructure
-   fp = io.open(string.format("%s/%s.diff", Dirs.patches, x))
+   fp = io.open(string.format("%s/patches/%s.diff", DIR["OKPKG"], x))
    if fp then
       io.popen("$patch", "w"):write(fp:read("*a")):close()
       fp:close()
@@ -269,12 +269,12 @@ function build(x)
    local X = query(x)
    X.flags = X.flags or {}
    X.V = vmatch(ok.basename(X.url))
-   X.destdir = string.format("%s/%s-%s-%s", Dirs.out, x, X.V, "skylake")
+   X.destdir = string.format("%s/%s-%s-%s", DIR["PKGDIR"], x, X.V, "skylake")
    ok.setenv("destdir", X.destdir)
    ok.remove_all(X.destdir)
    ok.mkdir(X.destdir)
 
-   ok.chdir(string.format("%s/%s", Dirs.src, x))
+   ok.chdir(string.format("%s/%s", DIR["TMPDIR"], x))
    ok.setenv("SOURCE_DATE_EPOCH", mtime("."))
 
    X.prep = 
@@ -317,7 +317,7 @@ end
 function purge(x)
    local i, fp
    local file, filename
-   i = string.format("%s/%s", Dirs.log, x)
+   i = string.format("%s/%s", DIR["LOG"], x)
    fp = io.open(i)
    if fp then
       for x in fp:lines() do
@@ -335,7 +335,7 @@ function install(x)
    buf = fp:read('*a')
    fp:close()
 
-   i = string.format("%s/%s", Dirs.log, ok.basename(x):match("(.+)-[n%d]"))
+   i = string.format("%s/%s", DIR["LOG"], ok.basename(x):match("(.+)-[n%d]"))
    fp = io.open(i)
    if fp then fp:close(); os.rename(i, i .. ".orig") end
    io.close(io.open(i, "w+"):write(buf))
@@ -359,4 +359,4 @@ while #arg > 1 do
 end
 
 -- Return for dofile
-return Dirs, Mir, Env
+return DIR, M, E
