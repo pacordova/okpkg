@@ -16,23 +16,24 @@ ffmpeg = {
    b3sum = "4f6ae153c447eaf8a1f894666f472f2b3749399529e49dc460dbb1073acbfe50",
    build = "./configure",
    flags = {
-      "--libdir=/lib64",
       "--bindir=/bin",
-      "--disable-static",
+      "--libdir=/lib64",
       "--disable-debug",
+      "--disable-static",
+      "--enable-gnutls",
       "--enable-gpl",
       "--enable-libass",
+      "--enable-libdrm",
       "--enable-libmp3lame",
       "--enable-libopus",
-      "--enable-gnutls",
       "--enable-libvorbis",
       "--enable-libvpx",
+      "--enable-libwebp",
       "--enable-libx264",
       "--enable-libx265",
       "--enable-shared",
-      "--x86asmexe=nasm",
-   },
-   post = [[ rm -fr $destdir/usr/share/ffmpeg/examples ]]
+      "--enable-version3",
+   }
 };
 
 mpv = {
