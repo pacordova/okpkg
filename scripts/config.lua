@@ -17,9 +17,9 @@ local M = {
 
 local E = {
    ["CFLAGS"]      = "-march=skylake -O2 -pipe -ftrivial-auto-var-init=zero " ..
-                     "-fstack-protector-strong -fstack-clash-protection"
+                     "-fstack-protector-strong -fstack-clash-protection",
    ["CXXFLAGS"]    = "-march=skylake -O2 -pipe -ftrivial-auto-var-init=zero " ..
-                     "-fstack-protector-strong -fstack-clash-protection"
+                     "-fstack-protector-strong -fstack-clash-protection",
    ["LC_ALL"]      = "POSIX",
    ["CONFIG_SITE"] = "/etc/config.site",
    ["PYTHONHOME"]  = "/opt/python3.13",
