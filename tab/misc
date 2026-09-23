@@ -676,5 +676,6 @@ luajit = {
       "PREFIX=/usr",
       "MULTILIB=../lib64",
       "INSTALL_BIN=$destdir/bin",
+      "amalg",
    }
 };
