@@ -1,8 +1,8 @@
 #!/bin/lua
 
 unpack = unpack or table.unpack
-cfg    = require("okconfig")
 ok     = require("okutils")
+cfg    = require("okconfig")
 
 chroot, b3sum = ok.chroot, ok.b3sum
 
@@ -18,7 +18,7 @@ function cfg.cflags.format(self)
       self.cpu, self.opt_level, self.auto_var_init, t[self.ssp])
 end
 
-mk = {
+rc = {
    ["cargo"] = function(...)
       local arg = {
          [0] = "cargo install",
@@ -202,10 +202,10 @@ function makepkg(x)
    ok.setenv("SOURCE_DATE_EPOCH", ok.mtime("."))
 
    -- Stripping
-   local fp = io.open(".nostrip")
+   local fp = io.open("nostrip")
    if fp then
       fp:close()
-      os.remove(".nostrip")
+      os.remove("nostrip")
    else
       os.execute([[
          find . -name \*.a -o -name \*.o -exec strip -g '{}' + 2>/dev/null
@@ -255,8 +255,8 @@ function build(x)
       X.prep and 
       not os.execute(X.prep) and
       error(string.format("error: build: prep: %s", x))
-   if mk[X.build] then
-      if not mk[X.build](unpack(X.flags)) then
+   if rc[X.build] then
+      if not rc[X.build](unpack(X.flags)) then
          error(string.format("error: build: %s: %s", X.build, x))
       end
    elseif tostring(X.build):match("config") then
@@ -266,7 +266,7 @@ function build(x)
          ok.mkdir("build") 
          ok.chdir("build")
       end
-      if not mk["configure"](X.build, unpack(X.flags)) then
+      if not rc["configure"](X.build, unpack(X.flags)) then
          error(string.format("error: build: %s: %s", X.build, x))
       end
    end
