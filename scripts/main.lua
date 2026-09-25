@@ -48,21 +48,6 @@ B = {
          os.execute(table.concat({arg[0], unpack(arg)}, " ")) and
          os.execute("DESTDIR=$destdir samu -C build install"))
    end,
-   ["cmake@opt"] = function(...)
-      local arg = {
-         [0] = "$cmake -B build -G Ninja -Wno-dev",
-         "-DCMAKE_BUILD_TYPE=Release",
-         "-DCMAKE_INSTALL_LOCALSTATEDIR=/var",
-         "-DCMAKE_INSTALL_RUNSTATEDIR=/run",
-         "-DCMAKE_INSTALL_{,S}BINDIR=bin",
-         "-DCMAKE_INSTALL_SYSCONFDIR=/etc",
-         "-DCMAKE_SKIP_RPATH=TRUE",
-         ...
-      }
-      return (
-         os.execute(table.concat({arg[0], unpack(arg)}, " ")) and
-         os.execute("DESTDIR=$destdir samu -C build install"))
-   end,
    ["configure"] = function(f, ...)
       local arg = {
          [0] = f,
