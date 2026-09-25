@@ -19,7 +19,7 @@ function cfg.cflags.format(self)
       self.cpu, self.opt_level, self.auto_var_init, _SSP[self.ssp])
 end
 
-B = {
+mk = {
    ["cargo"] = function(...)
       local arg = {
          [0] = "cargo install",
@@ -256,8 +256,8 @@ function build(x)
       X.prep and 
       not os.execute(X.prep) and
       error(string.format("error: build: prep: %s", x))
-   if B[X.build] then
-      if not B[X.build](unpack(X.flags)) then
+   if mk[X.build] then
+      if not mk[X.build](unpack(X.flags)) then
          error(string.format("error: build: %s: %s", X.build, x))
       end
    elseif tostring(X.build):match("config") then
@@ -267,7 +267,7 @@ function build(x)
          ok.mkdir("build") 
          ok.chdir("build")
       end
-      if not B["configure"](X.build, unpack(X.flags)) then
+      if not mk["configure"](X.build, unpack(X.flags)) then
          error(string.format("error: build: %s: %s", X.build, x))
       end
    end
