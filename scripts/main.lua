@@ -209,7 +209,6 @@ function download(x)
    ok.setenv("SOURCE_DATE_EPOCH", ok.mtime(X.dist))
    os.execute [[ find . -exec touch -hd "@$SOURCE_DATE_EPOCH" '{}' + ]]
    ok.unsetenv("SOURCE_DATE_EPOCH")
-
    return x
 end
 
@@ -255,7 +254,6 @@ function makepkg(x)
    ok.chdir("..")
    ok.remove_all(x)
    ok.unsetenv("SOURCE_DATE_EPOCH")
-
    return x .. ".tar.lz"
 end
 
@@ -267,15 +265,12 @@ function build(x)
    ok.setenv("destdir", X.destdir)
    ok.remove_all(X.destdir)
    ok.mkdir(X.destdir)
-
    ok.chdir(string.format("%s/%s", cfg.wrkobjdir, x))
    ok.setenv("SOURCE_DATE_EPOCH", ok.mtime("."))
-
    X.prep = 
       X.prep and 
       not os.execute(X.prep) and
       error(string.format("error: build: prep: %s", x))
-
    if B[X.build] then
       if not B[X.build](unpack(X.flags)) then
          error(string.format("error: build: %s: %s", X.build, x))
@@ -291,7 +286,6 @@ function build(x)
          error(string.format("error: build: %s: %s", X.build, x))
       end
    end
-
    X.post = 
       X.post and
       not os.execute(X.post) and
@@ -304,7 +298,6 @@ function build(x)
    ok.remove_all(X.destdir .. "no")
    ok.unsetenv("destdir")
    ok.unsetenv("SOURCE_DATE_EPOCH")
-
    return makepkg(X.destdir)
 end
 
@@ -324,16 +317,13 @@ end
 
 function install(x)
    local i, fp, buf
-
    fp = io.popen("tar -C / -h -xvf " .. x)
    buf = fp:read('*a')
    fp:close()
-
    i = string.format("%s/%s", cfg.state, ok.basename(x):match("(.+)-[n%d]"))
    fp = io.open(i)
    if fp then fp:close(); os.rename(i, i .. ".orig") end
    io.close(io.open(i, "w+"):write(buf))
-
    os.execute("ldconfig")
    os.execute("chmod 1777 /tmp")
 end
