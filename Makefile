@@ -1,6 +1,7 @@
 bindir     ?= /bin
 sysconfdir ?= /etc
 lua_cdir   != lua -e 'print(package.cpath:match("(.-)/%?.so;"))'
+lua_ldir   != lua -e 'print(package.path:match("(.-)/%?.lua;"))'
 
 STRIP   = strip --strip-unneeded
 INSTALL = install
@@ -30,9 +31,11 @@ src/okutils.so: $(OBJS)
 install: install-strip
 install-strip: all
 	$(STRIP) src/okutils.so
+	$(INSTALL) -d $(lua_cdir) $(lua_ldir)
 	$(INSTALL) -m 755 src/okutils.so       $(lua_cdir)
+	$(INSTALL) -m 644 scripts/config.lua   $(lua_ldir)/okconfig.lua
 	$(INSTALL) -m 755 scripts/main.lua     $(bindir)/okpkg
-	$(INSTALL) -m 644 scripts/config.lua   $(sysconfdir)/okpkg.conf
+	ln -f $(lua_ldir)/okconfig.lua $(sysconfdir)/okpkg.conf
 
 uninstall:
 	rm -f $(lua_cdir)/okutils.so 
