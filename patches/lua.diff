@@ -28,7 +28,7 @@
 -#define LUA_CDIR	LUA_ROOT "lib/lua/" LUA_VDIR "/"
 +#define LUA_ROOT	"/"
 +#define LUA_LDIR	"/usr/share/lua/" LUA_VDIR "/"
-+#define LUA_CDIR	"/lib64/"
++#define LUA_CDIR	"/usr/libexec/lua/" LUA_VDIR "/"
  
  #if !defined(LUA_PATH_DEFAULT)
  #define LUA_PATH_DEFAULT  \

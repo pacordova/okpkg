@@ -1,22 +1,24 @@
 #!/bin/lua
 
--- Imports
 unpack = unpack or table.unpack
-local ok = require("okutils")
-local DIR, M, E = dofile("/etc/okpkg.conf")
+cfg    = require("okconfig")
+ok     = require("okutils")
 
--- Global variables (callable by cli)
 chroot, b3sum = ok.chroot, ok.b3sum
 
--- Make directories
-for k,v in pairs(DIR) do
-   local fp = io.open(v); if fp then fp:close() else ok.mkdir(v) end
+local _SSP = {
+   ["no"]       = "-fno-stack-protector",
+   ["yes"]      = "-fstack-protector",
+   ["all"]      = "-fstack-protector-all",
+   ["strong"]   = "-fstack-protector-strong",
+   ["explicit"] = "-fstack-protector-explicit",
+}
+
+function cfg.cflags.format(self)
+   return string.format("-march=%s -O%s -ftrivial-auto-var-init=%s %s",
+      self.cpu, self.opt_level, self.auto_var_init, _SSP[self.ssp])
 end
 
--- Environment variables
-for k,v in pairs(E) do ok.setenv(k,v) end
-
--- Build routines
 B = {
    ["cargo"] = function(...)
       local arg = {
@@ -44,7 +46,7 @@ B = {
       }
       return (
          os.execute(table.concat({arg[0], unpack(arg)}, " ")) and
-         os.execute("DESTDIR=$destdir $ninja -C build install"))
+         os.execute("DESTDIR=$destdir samu -C build install"))
    end,
    ["cmake@opt"] = function(...)
       local arg = {
@@ -59,7 +61,7 @@ B = {
       }
       return (
          os.execute(table.concat({arg[0], unpack(arg)}, " ")) and
-         os.execute("DESTDIR=$destdir $ninja -C build install"))
+         os.execute("DESTDIR=$destdir samu -C build install"))
    end,
    ["configure"] = function(f, ...)
       local arg = {
@@ -69,12 +71,12 @@ B = {
       }
       return (
          os.execute(table.concat({arg[0], unpack(arg)}, " ")) and
-         os.execute("$make")                                  and
-         os.execute("$make install DESTDIR=$destdir"))
+         os.execute("make")                                  and
+         os.execute("make install DESTDIR=$destdir"))
    end,
    ["make"] = function(...)
       local arg = {
-         [0] = { "$make", "$make install DESTDIR=$destdir" },
+         [0] = { "make", "make install DESTDIR=$destdir" },
          ...
       }
       return (
@@ -83,14 +85,14 @@ B = {
    end,
    ["make_noinstall"] = function(...)
       local arg = {
-         [0] = "$make",
+         [0] = "make",
          ...
       }
       return os.execute(table.concat({arg[0], unpack(arg)}, " "))
    end,
    ["make_install"] = function(...)
       local arg = {
-         [0] = "$make install DESTDIR=$destdir",
+         [0] = "make install DESTDIR=$destdir",
          ...
       }
       return os.execute(table.concat({arg[0], unpack(arg)}, " "))
@@ -109,7 +111,7 @@ B = {
       }
       return (
          os.execute(table.concat({arg[0], unpack(arg)}, " ")) and
-         os.execute("DESTDIR=$destdir $ninja -C build install"))
+         os.execute("DESTDIR=$destdir samu -C build install"))
    end,
    ["scons"] = function(...)
       local arg = {
@@ -122,8 +124,8 @@ B = {
    ["perl"] = function()
       return (
          os.execute("perl Makefile.PL") and
-         os.execute("$make")            and
-         os.execute("$make pure_install doc_install DESTDIR=$destdir"))
+         os.execute("make")            and
+         os.execute("make {pure,doc}_install DESTDIR=$destdir"))
    end,
    ["python-build"] = function()
       return (
@@ -148,23 +150,15 @@ B = {
    end,
 }
 
-local function mtime(x)
-   local fp, buf
-   fp = io.popen("stat -c %Y " .. x)
-   buf = fp:read("*a")
-   io.close(fp)
-   return(tonumber(buf:sub(1, buf:find("\n")-1)))
-end
-
 function vmatch(s)
    return string.match(s, "[-_%.][nrv]?([%d%.]+%l?%d?)[-_%.]")
 end
 
 function query(x)
    local i, fp, buf
-   for de in dir(DIR["DATADIR"]) do
+   for de in dir(cfg.datadir) do
       if not buf and de ~= "cross.db" then
-         fp = io.open(string.format("%s/%s", DIR["DATADIR"], de))
+         fp = io.open(string.format("%s/%s", cfg.datadir, de))
          buf = "\n" .. fp:read("*a")
          fp:close()
          i = buf:find("\n" .. x .. " =", 1, true)
@@ -182,13 +176,13 @@ function download(x)
    local X, fp
 
    X = query(x)
-   X.dist = string.format("%s/%s", DIR["DISTDIR"], ok.basename(X.url))
+   X.dist = string.format("%s/%s", cfg.distdir, ok.basename(X.url))
 
    -- change mirrors
-   for k,v in pairs(M) do X.url = X.url:gsub(k, v) end 
+   --for k,v in pairs(M) do X.url = X.url:gsub(k, v) end 
    
    -- Download file if not already downloaded
-   ok.chdir(DIR["DISTDIR"])
+   ok.chdir(cfg.distdir)
    io.close(
       io.open(ok.basename(X.url)) or
       io.popen("wget2 " .. X.url))
@@ -197,7 +191,7 @@ function download(x)
       not os.remove(ok.basename(X.url)))
    
    -- Setup source directory
-    ok.chdir(DIR["TMPDIR"])
+    ok.chdir(cfg.wrkobjdir)
     ok.remove_all(x)
     ok.mkdir(x)
     ok.chdir(x)
@@ -205,14 +199,14 @@ function download(x)
    
    -- Patch if file exists
    -- Note: symlink for temporary packages, or update patch infrastructure
-   fp = io.open(string.format("%s/patches/%s.diff", DIR["OKPKG"], x))
+   fp = io.open(string.format("%s/patches/%s.diff", cfg.basedir, x))
    if fp then
-      io.popen("$patch", "w"):write(fp:read("*a")):close()
+      io.popen("patch -p 1", "w"):write(fp:read("*a")):close()
       fp:close()
    end
 
    -- Set the mtime 
-   ok.setenv("SOURCE_DATE_EPOCH", mtime(X.dist))
+   ok.setenv("SOURCE_DATE_EPOCH", ok.mtime(X.dist))
    os.execute [[ find . -exec touch -hd "@$SOURCE_DATE_EPOCH" '{}' + ]]
    ok.unsetenv("SOURCE_DATE_EPOCH")
 
@@ -222,7 +216,7 @@ end
 function makepkg(x)
    ok.chdir(x)
    os.remove(x .. ".tar.lz")
-   ok.setenv("SOURCE_DATE_EPOCH", mtime("."))
+   ok.setenv("SOURCE_DATE_EPOCH", ok.mtime("."))
 
    -- Stripping
    local fp = io.open(".nostrip")
@@ -245,7 +239,7 @@ function makepkg(x)
       rm -fr usr/share/{doc,locale,gtk-doc}
       find . -name \*.pyc -delete
       find . -name \*.la -delete
-      $tar \
+      tar \
          --mtime="@$SOURCE_DATE_EPOCH" \
          --sort=name \
          --owner=0 \
@@ -269,13 +263,13 @@ function build(x)
    local X = query(x)
    X.flags = X.flags or {}
    X.V = vmatch(ok.basename(X.url))
-   X.destdir = string.format("%s/%s-%s-%s", DIR["PKGDIR"], x, X.V, "skylake")
+   X.destdir = string.format("%s/%s-%s-%s", cfg.pkgdir, x, X.V, "skylake")
    ok.setenv("destdir", X.destdir)
    ok.remove_all(X.destdir)
    ok.mkdir(X.destdir)
 
-   ok.chdir(string.format("%s/%s", DIR["TMPDIR"], x))
-   ok.setenv("SOURCE_DATE_EPOCH", mtime("."))
+   ok.chdir(string.format("%s/%s", cfg.wrkobjdir, x))
+   ok.setenv("SOURCE_DATE_EPOCH", ok.mtime("."))
 
    X.prep = 
       X.prep and 
@@ -303,7 +297,7 @@ function build(x)
       not os.execute(X.post) and
       error(string.format("error: build: post: %s", x))
 
-   -- Set mtime
+   -- Set the mtime
    os.execute [[ find $destdir -exec touch -hd "@$SOURCE_DATE_EPOCH" '{}' + ]]
 
    -- Cleanup
@@ -317,7 +311,7 @@ end
 function purge(x)
    local i, fp
    local file, filename
-   i = string.format("%s/%s", DIR["LOG"], x)
+   i = string.format("%s/%s", cfg.state, x)
    fp = io.open(i)
    if fp then
       for x in fp:lines() do
@@ -331,11 +325,11 @@ end
 function install(x)
    local i, fp, buf
 
-   fp = io.popen("$tar -C / -h -xvf " .. x)
+   fp = io.popen("tar -C / -h -xvf " .. x)
    buf = fp:read('*a')
    fp:close()
 
-   i = string.format("%s/%s", DIR["LOG"], ok.basename(x):match("(.+)-[n%d]"))
+   i = string.format("%s/%s", cfg.state, ok.basename(x):match("(.+)-[n%d]"))
    fp = io.open(i)
    if fp then fp:close(); os.rename(i, i .. ".orig") end
    io.close(io.open(i, "w+"):write(buf))
@@ -348,7 +342,14 @@ function emerge(x)
    install(build(download(x)))
 end
 
--- Main loop over arglist
+--------------------------------------------------------------------------------
+
+ok.setenv("LC_ALL", "C")
+ok.setenv("CONFIG_SITE", cfg.site)
+ok.setenv("CFLAGS",   cfg.cflags:format())
+ok.setenv("CXXFLAGS", cfg.cflags:format())
+ok.setenv("MAKEFLAGS", string.format("--jobs=%s", cfg.jobs))
+
 while #arg > 1 do
    if arg[2]:sub(1,2) == "--" then
       load(arg[2]:sub(3,#arg[2]))()
@@ -357,6 +358,3 @@ while #arg > 1 do
    end
    table.remove(arg, 2)
 end
-
--- Return for dofile
-return DIR, M, E

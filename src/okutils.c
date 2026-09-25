@@ -11,6 +11,7 @@ static const struct luaL_Reg okutils[] = {
     {"getcwd", ok_getcwd},
     {"symlink", ok_symlink},
     {"mkdir", ok_mkdir},
+    {"mtime", ok_mtime},
     {"remove_all", ok_remove_all},
     {"setenv", ok_setenv},
     {"unsetenv", ok_unsetenv},

@@ -24,8 +24,14 @@ remove_all(const char *path)
     while (de = readdir(db)) {
         if (dotdot(de->d_name)) {
             snprintf(buf, PATH_MAX, "%s/%s", path, de->d_name);
-            lstat(buf, &sb);
-            (sb.st_mode & S_IFMT) == S_IFDIR ? remove_all(buf) : remove(buf);
+            if (lstat(buf, &sb) == 0) {
+                if ((sb.st_mode & S_IFMT) == S_IFDIR) { 
+                    remove_all(buf);
+                } 
+                else {
+                    remove(buf);
+                }
+            }
         }
     }
     closedir(db);
@@ -67,4 +73,16 @@ ok_mkdir(lua_State *L)
     const char *path = lua_tostring(L, 1);
     lua_pushinteger(L, mkdir(path, 0755));
     return 1;
+}
+
+int
+ok_mtime(lua_State *L)
+{
+    const char *path = lua_tostring(L, 1);
+    struct stat sb;
+    if (lstat(path, &sb) == 0) {
+        lua_pushinteger(L, sb.st_mtime);
+        return 1;
+    } 
+    return 0;
 }

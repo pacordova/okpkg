@@ -34,5 +34,6 @@ int ok_symlink(lua_State *L);
 int ok_remove_all(lua_State *L);
 int ok_dir(lua_State *L);
 int ok_mkdir(lua_State *L);
+int ok_mtime(lua_State *L);
 int ok_setenv(lua_State *L);
 int ok_unsetenv(lua_State *L);
