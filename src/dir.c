@@ -25,7 +25,7 @@ remove_all(const char *path)
         if (dotdot(de->d_name)) {
             snprintf(buf, PATH_MAX, "%s/%s", path, de->d_name);
             if (lstat(buf, &sb) == 0) {
-                if ((sb.st_mode & S_IFMT) == S_IFDIR) { 
+                if ((sb.st_mode & S_IFMT) == S_IFDIR) {
                     remove_all(buf);
                 } 
                 else {

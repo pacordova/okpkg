@@ -6,17 +6,16 @@ ok     = require("okutils")
 
 chroot, b3sum = ok.chroot, ok.b3sum
 
-local _SSP = {
-   ["no"]       = "-fno-stack-protector",
-   ["yes"]      = "-fstack-protector",
-   ["all"]      = "-fstack-protector-all",
-   ["strong"]   = "-fstack-protector-strong",
-   ["explicit"] = "-fstack-protector-explicit",
-}
-
 function cfg.cflags.format(self)
+   local t = {
+      ["no"]       = "-fno-stack-protector",
+      ["yes"]      = "-fstack-protector",
+      ["all"]      = "-fstack-protector-all",
+      ["strong"]   = "-fstack-protector-strong",
+      ["explicit"] = "-fstack-protector-explicit",
+   }
    return string.format("-march=%s -O%s -ftrivial-auto-var-init=%s %s",
-      self.cpu, self.opt_level, self.auto_var_init, _SSP[self.ssp])
+      self.cpu, self.opt_level, self.auto_var_init, t[self.ssp])
 end
 
 mk = {
