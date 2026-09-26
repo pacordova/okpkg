@@ -1,48 +1,49 @@
-libvdpau = {
-   url = "https://gitlab.freedesktop.org/vdpau/libvdpau/-/archive/1.5/libvdpau-1.5.tar.bz2",
-   b3sum = "6a3811b79ea0ac523dca41c00e7736a1da0279a57e001bde89789830a842df0b",
-   build = "meson",
-};
-
-libass = {
-   url = "https://github.com/libass/libass/releases/download/0.17.5/libass-0.17.5.tar.xz",
-   b3sum = "39e3ffb3884b6e58789a6ae271369eadaac9e0277efc85919535400671631543",
-   build = "./configure",
-   flags = { "--enable-fontconfig" }
-};
-
-ffmpeg = {
-   url = "https://ffmpeg.org/releases/ffmpeg-4.4.6.tar.xz",
-   b3sum = "4f6ae153c447eaf8a1f894666f472f2b3749399529e49dc460dbb1073acbfe50",
-   build = "./configure",
-   flags = {
-      "--bindir=/bin",
-      "--libdir=/lib64",
-      "--disable-debug",
-      "--disable-static",
-      "--enable-gnutls",
-      "--enable-gpl",
-      "--enable-libass",
-      "--enable-libdrm",
-      "--enable-libmp3lame",
-      "--enable-libopus",
-      "--enable-libvorbis",
-      "--enable-libvpx",
-      "--enable-libwebp",
-      "--enable-libx264",
-      "--enable-libx265",
-      "--enable-shared",
-      "--enable-version3",
-   }
-};
-
-mpv = {
-   url = "https://github.com/mpv-player/mpv/archive/v0.35.1/mpv-0.35.1.tar.gz",
-   b3sum = "41182bebc20c21bdfa1a4b9189427e1dd840cf3684876b2c521c4d03e36674cd",
-   build = "meson",
-   flags = {
-      "-Dlua=luajit",
-      "-Dbuild-date=false",
-      "-Dpulse=disabled",
-   }
-};
+{
+   ["libvdpau"] = {
+      ["url"] = "https://gitlab.freedesktop.org/vdpau/libvdpau/-/archive/1.5/libvdpau-1.5.tar.bz2",
+      ["b3sum"] = "6a3811b79ea0ac523dca41c00e7736a1da0279a57e001bde89789830a842df0b",
+      ["build"] = "meson",
+   },
+   ["libass"] = {
+      ["url"] = "https://github.com/libass/libass/releases/download/0.17.5/libass-0.17.5.tar.xz",
+      ["b3sum"] = "39e3ffb3884b6e58789a6ae271369eadaac9e0277efc85919535400671631543",
+      ["build"] = "./configure",
+      ["flags"] = {
+         "--enable-fontconfig",
+      },
+   },
+   ["ffmpeg"] = {
+      ["url"] = "https://ffmpeg.org/releases/ffmpeg-4.4.6.tar.xz",
+      ["b3sum"] = "4f6ae153c447eaf8a1f894666f472f2b3749399529e49dc460dbb1073acbfe50",
+      ["build"] = "./configure",
+      ["flags"] = {
+         "--bindir=/bin",
+         "--libdir=/lib64",
+         "--disable-debug",
+         "--disable-static",
+         "--enable-gnutls",
+         "--enable-gpl",
+         "--enable-libass",
+         "--enable-libdrm",
+         "--enable-libmp3lame",
+         "--enable-libopus",
+         "--enable-libvorbis",
+         "--enable-libvpx",
+         "--enable-libwebp",
+         "--enable-libx264",
+         "--enable-libx265",
+         "--enable-shared",
+         "--enable-version3",
+      },
+   },
+   ["mpv"] = {
+      ["url"] = "https://github.com/mpv-player/mpv/archive/v0.35.1/mpv-0.35.1.tar.gz",
+      ["b3sum"] = "41182bebc20c21bdfa1a4b9189427e1dd840cf3684876b2c521c4d03e36674cd",
+      ["build"] = "meson",
+      ["flags"] = {
+         "-Dlua=luajit",
+         "-Dbuild-date=false",
+         "-Dpulse=disabled",
+      },
+   },
+}
