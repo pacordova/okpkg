@@ -145,9 +145,9 @@ function query(x)
          fp = io.open(string.format("%s/%s", cfg.datadir, de))
          buf = "\n" .. fp:read("*a")
          fp:close()
-         i = buf:find("\n" .. x .. " =", 1, true)
+         i = buf:find(string.format("\n   [%q]", x), 1, true)
          if i then
-            buf = buf:sub(buf:find("{", i, true), buf:find("};", i, true))
+            buf = buf:sub(buf:find("{", i, true), 4+buf:find("\n   }", i, true))
          else
             buf = false
          end
