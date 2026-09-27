@@ -146,10 +146,10 @@ function query(key)
          fp = io.open(string.format("%s/%s", cfg.datadir, de))
          buf = fp:read("*a")
          fp:close()
-         i = string.find(buf, key, 1, true)
+         i = buf:find(key, 1, true)
          if i then
-            buf = buf:sub(3+#key+i, 4+buf:find("\n   }", i, true)+4)
-            return load(string.format("return (%s)", buf))()
+            buf = buf:sub(3+#key+i, 4+buf:find("\n   }", i, true))
+            return load(string.format("return %s", buf))()
          end
       end
    end
