@@ -148,7 +148,7 @@ function query(key)
          fp:close()
          i = string.find(buf, key, 1, true)
          if i then
-            buf = buf:sub(3+#key+i, 4+buf:find("\n   }", i, true)+4))
+            buf = buf:sub(3+#key+i, 4+buf:find("\n   }", i, true)+4)
             return load(string.format("(return)(%s)", buf))()
          end
       end
