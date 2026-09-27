@@ -47,25 +47,25 @@ rc = {
          os.execute(table.concat({arg[0], unpack(arg)}, " ")) and
          os.execute("DESTDIR=$destdir samu -C build install"))
    end,
-   ["configure"] = function(f, ...)
-      local arg = {
-         [0] = f,
+   ["configure"] = function(...)
+      local cmd = {
+         (ok.exists("configure") and "./configure") or
+         (ok.exists("../configure") and "../configure") or
+         (ok.exists("configure.gnu") and "./configure.gnu"),
          "--prefix=/usr",
          ...
       }
-      return (
-         os.execute(table.concat({arg[0], unpack(arg)}, " ")) and
-         os.execute("make")                                  and
-         os.execute("make install DESTDIR=$destdir"))
+      return os.execute(table.concat(cmd, ' ')) and rc.gmake()
    end,
-   ["make"] = function(...)
-      local arg = {
-         [0] = { "make", "make install DESTDIR=$destdir" },
-         ...
-      }
-      return (
-         os.execute(table.concat({arg[0][1], unpack(arg)}, " ")) and
-         os.execute(table.concat({arg[0][2], unpack(arg)}, " ")))
+   ["copy"] = function()
+      ok.setenv("prefix", string.format("/opt/%s", ok.basename(ok.getcwd())))
+      mkdir(string.format("%s/opt", os.getenv("destdir")))
+      mkdir(string.format("%s/%s", os.getenv("destdir"), os.getenv(prefix)))
+      return os.execute(string.format("cp -a . $destdir/%s", os.getenv("destdir"), prefix))
+   end,
+   ["gmake"] = function(...)
+      local cmd = { "make", "DESTDIR=$destdir", ... }
+      return os.execute(table.concat(cmd, ' '))
    end,
    ["make_noinstall"] = function(...)
       local arg = {
@@ -138,22 +138,25 @@ function vmatch(s)
    return string.match(s, "[-_%.][nrv]?([%d%.]+%l?%d?)[-_%.]")
 end
 
-function query(x)
-   local i, fp, buf
+function query(key)
+   local fp, buf, i, j
+   key = string.format("[%q]", key)
    for de in dir(cfg.datadir) do
       if not buf and de ~= "cross.db" then
          fp = io.open(string.format("%s/%s", cfg.datadir, de))
-         buf = "\n" .. fp:read("*a")
+         buf = fp:read("*a")
          fp:close()
-         i = buf:find(string.format("\n   [%q]", x), 1, true)
-         if i then
-            buf = buf:sub(buf:find("{", i, true), 4+buf:find("\n   }", i, true))
-         else
+         i = string.find(buf, key, 1, true)
+         if i then 
+            j = string.find(buf, "\n   }", i, true)
+            buf = string.format("return (%s)", string.sub(buf, i+#key+3, j+4))
+            return load(buf)()
+         else 
             buf = false
          end
       end
    end
-   return load("return " .. buf)()
+   return buf()
 end
 
 function download(x)
