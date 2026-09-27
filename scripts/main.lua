@@ -138,17 +138,16 @@ function vmatch(s)
    return string.match(s, "[-_%.][nrv]?([%d%.]+%l?%d?)[-_%.]")
 end
 
-function query(key)
+function query(k)
    local fp, buf, i
-   key = string.format("[%q]", key)
    for de in dir(cfg.datadir) do
       if de ~= "cross.db" then
          fp = io.open(string.format("%s/%s", cfg.datadir, de))
          buf = fp:read("*a")
          fp:close()
-         i = buf:find(key, 1, true)
+         i = buf:find(string.format("[%q]", k), 1, true)
          if i then
-            buf = buf:sub(3+#key+i, 4+buf:find("\n   }", i, true))
+            buf = buf:sub(7+#k+i, 4+buf:find("\n   }", i, true))
             return load(string.format("return %s", buf))()
          end
       end
