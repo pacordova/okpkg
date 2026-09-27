@@ -139,20 +139,17 @@ function vmatch(s)
 end
 
 function query(key)
-   local fp, buf, i, j
+   local fp, buf, i
    key = string.format("[%q]", key)
    for de in dir(cfg.datadir) do
-      if not buf and de ~= "cross.db" then
+      if de ~= "cross.db" then
          fp = io.open(string.format("%s/%s", cfg.datadir, de))
          buf = fp:read("*a")
          fp:close()
          i = string.find(buf, key, 1, true)
-         if i then 
-            j = string.find(buf, "\n   }", i, true)
-            buf = string.format("return (%s)", string.sub(buf, i+#key+3, j+4))
-            return load(buf)()
-         else 
-            buf = false
+         if i then
+            buf = buf:sub(3+#key+i, 4+buf:find("\n   }", i, true)+4))
+            return load(string.format("(return)(%s)", buf))()
          end
       end
    end
