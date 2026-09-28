@@ -15,7 +15,7 @@
          "--enable-relro",
          "--without-system-zlib",
       },
-   },
+   };
    ["-gcc15"] = {
       ["build"] = "../configure",
       ["flags"] = {
@@ -61,7 +61,7 @@
          cat ../gcc/{limitx,glimits,limity}.h > _
          mv _ $(x86_64-unknown-linux-gnu-gcc -print-file-name=include/limits.h)
       ]],
-   },
+   };
    ["glibc"] = {
       ["build"] = "../configure",
       ["flags"] = {
@@ -83,7 +83,7 @@
          printf "%s\n" auditdir=/lib64  >> configparms
          sed -i 's:^lib=.*audit:lib='\''/lib64:' ./elf/sotruss.sh
       ]],
-   },
+   };
    ["libxcrypt"] = {
       ["build"] = "./configure",
       ["flags"] = {
@@ -97,7 +97,7 @@
       },
       ["prep"] = [[
     $patch < /usr/okpkg/patches/libxcrypt.diff ]],
-   },
+   };
    ["libstdcxx"] = {
       ["build"] = "../libstdc++-v3/configure",
       ["flags"] = {
@@ -117,7 +117,7 @@
          tar -C mpc  --strip-components=1 -xf /var/cache/distfiles/mpc-1.2.1.tar.gz
          tar -C isl  --strip-components=1 -xf /var/cache/distfiles/isl-0.24.tar.xz
       ]],
-   },
+   };
    ["m4"] = {
       ["build"] = "./configure",
       ["flags"] = {
@@ -125,7 +125,7 @@
          "--host=x86_64-unknown-linux-gnu",
          "--build=$(build-aux/config.guess)",
       },
-   },
+   };
    ["ncurses"] = {
       ["build"] = "./configure",
       ["flags"] = {
@@ -166,7 +166,7 @@
          cd /mnt/lib64
          ln -sf libncurses{w,}.so
       ]],
-   },
+   };
    ["bash"] = {
       ["build"] = "./configure",
       ["flags"] = {
@@ -175,7 +175,7 @@
          "--build=$(sh support/config.guess)",
          "--without-bash-malloc",
       },
-   },
+   };
    ["coreutils"] = {
       ["build"] = "./configure",
       ["flags"] = {
@@ -186,7 +186,7 @@
          "--without-openssl",
          "FORCE_UNSAFE_CONFIGURE=1",
       },
-   },
+   };
    ["diffutils"] = {
       ["build"] = "./configure",
       ["flags"] = {
@@ -195,7 +195,7 @@
          "--build=$(build-aux/config.guess)",
          "gl_cv_func_strcasecmp_works=y",
       },
-   },
+   };
    ["file"] = {
       ["build"] = "./configure",
       ["flags"] = {
@@ -203,7 +203,7 @@
          "--host=x86_64-unknown-linux-gnu",
          "--build=$(./config.guess)",
       },
-   },
+   };
    ["findutils"] = {
       ["build"] = "./configure",
       ["flags"] = {
@@ -211,7 +211,7 @@
          "--host=x86_64-unknown-linux-gnu",
          "--build=$(build-aux/config.guess)",
       },
-   },
+   };
    ["gawk"] = {
       ["build"] = "./configure",
       ["flags"] = {
@@ -221,7 +221,7 @@
       },
       ["prep"] = [[
     sed -i 's/extras//' Makefile.in ]],
-   },
+   };
    ["grep"] = {
       ["build"] = "./configure",
       ["flags"] = {
@@ -229,7 +229,7 @@
          "--host=x86_64-unknown-linux-gnu",
          "--build=$(build-aux/config.guess)",
       },
-   },
+   };
    ["gzip"] = {
       ["build"] = "./configure",
       ["flags"] = {
@@ -237,7 +237,7 @@
          "--host=x86_64-unknown-linux-gnu",
          "--build=$(build-aux/config.guess)",
       },
-   },
+   };
    ["make"] = {
       ["build"] = "./configure",
       ["flags"] = {
@@ -246,7 +246,7 @@
          "--build=$(build-aux/config.guess)",
          "--without-guile",
       },
-   },
+   };
    ["patch"] = {
       ["build"] = "./configure",
       ["flags"] = {
@@ -254,7 +254,7 @@
          "--host=x86_64-unknown-linux-gnu",
          "--build=$(build-aux/config.guess)",
       },
-   },
+   };
    ["sed"] = {
       ["build"] = "./configure",
       ["flags"] = {
@@ -262,7 +262,7 @@
          "--host=x86_64-unknown-linux-gnu",
          "--build=$(build-aux/config.guess)",
       },
-   },
+   };
    ["tar"] = {
       ["build"] = "./configure",
       ["flags"] = {
@@ -271,7 +271,7 @@
          "--build=$(build-aux/config.guess)",
          "FORCE_UNSAFE_CONFIGURE=1",
       },
-   },
+   };
    ["xz"] = {
       ["build"] = "./configure",
       ["flags"] = {
@@ -279,7 +279,7 @@
          "--host=x86_64-unknown-linux-gnu",
          "--build=$(build-aux/config.guess)",
       },
-   },
+   };
    ["lua"] = {
       ["build"] = "make",
       ["flags"] = {
@@ -292,7 +292,7 @@
       },
       ["prep"] = [[
     $patch < /usr/okpkg/patches/lua.diff ]],
-   },
+   };
    ["lzlib"] = {
       ["build"] = "./configure",
       ["flags"] = {
@@ -303,7 +303,7 @@
          "CC=x86_64-unknown-linux-gnu-gcc",
          "AR=x86_64-unknown-linux-gnu-ar",
       },
-   },
+   };
    ["plzip"] = {
       ["build"] = "./configure",
       ["flags"] = {
@@ -311,7 +311,7 @@
          "--bindir=/bin",
          "CXX=x86_64-unknown-linux-gnu-g++",
       },
-   },
+   };
    ["zlib"] = {
       ["build"] = "cmake",
       ["flags"] = {
@@ -320,7 +320,7 @@
          "-DZLIB_BUILD_STATIC=OFF",
          "-DZLIB_BUILD_MINIZIP=OFF",
       },
-   },
+   };
    ["util-linux"] = {
       ["build"] = "./configure",
       ["flags"] = {
@@ -332,7 +332,7 @@
          "--exec-prefix=/",
          "--without-{python,systemd}",
       },
-   },
+   };
    ["libressl"] = {
       ["build"] = "./configure",
       ["flags"] = {
@@ -341,7 +341,7 @@
          "--build=$(./config.guess)",
          "--with-openssldir=/etc/ssl",
       },
-   },
+   };
    ["pkgconf"] = {
       ["build"] = "./configure",
       ["flags"] = {
@@ -349,7 +349,7 @@
          "--host=x86_64-unknown-linux-gnu",
          "--build=$(./config.guess)",
       },
-   },
+   };
    ["binutils"] = {
       ["build"] = "../configure",
       ["flags"] = {
@@ -367,7 +367,7 @@
       },
       ["prep"] = [[
     sed '6031s/$add_dir//' -i ltmain.sh ]],
-   },
+   };
    ["gcc15"] = {
       ["build"] = "../configure",
       ["flags"] = {
@@ -412,5 +412,5 @@
          sed -i '/thread_header =/s/@.*@/gthr-posix.h/' \
            {libgcc,libstdc++-v3/include}/Makefile.in
       ]],
-   },
+   };
 }
