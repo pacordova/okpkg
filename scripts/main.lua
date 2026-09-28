@@ -1,15 +1,15 @@
 #!/bin/lua
 
-unpack = unpack or table.unpack
-ok     = require("okutils")
-cfg    = require("okconfig")
+ok  = require("okutils")
+cfg = require("okconfig")
 
+unpack = unpack or table.unpack
 chroot, b3sum = ok.chroot, ok.b3sum
 
 function cfg.cflags.format(self)
    local t = {
-      ["no"]       = "-fno-stack-protector",
       ["yes"]      = "-fstack-protector",
+      ["no"]       = "-fno-stack-protector",
       ["all"]      = "-fstack-protector-all",
       ["strong"]   = "-fstack-protector-strong",
       ["explicit"] = "-fstack-protector-explicit",
@@ -55,7 +55,9 @@ rc = {
          "--prefix=/usr",
          ...
       }
-      return os.execute(table.concat(cmd, ' ')) and rc.gmake()
+      return (
+         os.execute(table.concat(cmd, ' ')) and 
+         rc.gmake())
    end,
    ["copy"] = function()
       ok.setenv("prefix", string.format("/opt/%s", ok.basename(ok.getcwd())))
@@ -64,11 +66,11 @@ rc = {
       return os.execute(string.format("cp -a . $destdir/%s", os.getenv("destdir"), prefix))
    end,
    ["gmake"] = function(...)
-      return 
-         (os.execute(table.concat({ "make", ... }, ' ')) and
-         (ok.setenv("DESTDIR", os.getenv("destdir")) and
-            os.execute(table.concat({ "make", "install", ... }) and
-            ok.unsetenv("DESTDIR"))
+      return (
+         os.execute(table.concat({ "make", ... }, ' ')) and
+         ok.setenv("DESTDIR", os.getenv("destdir")) and
+         os.execute(table.concat({ "make", "install", ... })) and
+         ok.unsetenv("DESTDIR"))
    end,
    ["make_noinstall"] = function(...)
       local arg = {
@@ -142,20 +144,21 @@ function vmatch(s)
 end
 
 function query(k)
-   local fp, buf, i
+   local fp, fn, i, len
    for de in dir(cfg.datadir) do
       if de ~= "cross.db" then
          fp = io.open(string.format("%s/%s", cfg.datadir, de))
-         buf = fp:read("*a")
-         fp:close()
-         i = buf:find(string.format("[%q]", k), 1, true)
-         if i then
-            buf = buf:sub(7+#k+i, 4+buf:find("\n   }", i, true))
-            return load(string.format("return %s", buf))()
+         i = string.find(fp:read("*a"), string.format("[%q]", k), 1, true)
+         if fp:seek("set", i) > 0 then
+            i = fp:seek("set", i+string.find(fp:read("*a"), "{", 1, true)-1)
+            len = string.find(fp:read("*a"), "};", 1, true)
+            fp:seek("set", i)
+            fn = load("return " .. fp:read(len))
          end
+         fp:close()
+         if fn then return fn() end
       end
    end
-   return buf()
 end
 
 function download(x)
