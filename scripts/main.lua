@@ -64,8 +64,11 @@ rc = {
       return os.execute(string.format("cp -a . $destdir/%s", os.getenv("destdir"), prefix))
    end,
    ["gmake"] = function(...)
-      local cmd = { "make", "DESTDIR=$destdir", ... }
-      return os.execute(table.concat(cmd, ' '))
+      return 
+         (os.execute(table.concat({ "make", ... }, ' ')) and
+         (ok.setenv("DESTDIR", os.getenv("destdir")) and
+            os.execute(table.concat({ "make", "install", ... }) and
+            ok.unsetenv("DESTDIR"))
    end,
    ["make_noinstall"] = function(...)
       local arg = {

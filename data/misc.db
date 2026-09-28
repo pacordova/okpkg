@@ -50,7 +50,7 @@
    ["dcron"] = {
       ["url"] = "http://www.jimpryor.net/linux/releases/dcron-4.5.tar.gz",
       ["b3sum"] = "ff8241862e959a6e733fba2dc095abc841b30998e51b458758b27341e23022ca",
-      ["build"] = "make",
+      ["build"] = rc.gmake,
       ["flags"] = {
          "PREFIX=/usr",
          "{,S}BINDIR=/bin",
@@ -69,7 +69,7 @@
    ["dmidecode"] = {
       ["url"] = "https://download.savannah.gnu.org/releases/dmidecode/dmidecode-3.7.tar.xz",
       ["b3sum"] = "6da97cb364d8e2948361dbf10eab08a541ecec6a110f6b0b02ef922d40ee3606",
-      ["build"] = "make",
+      ["build"] = rc.gmake,
       ["flags"] = {
          "prefix=/usr",
          "sbindir=/bin",
@@ -91,7 +91,7 @@
    ["feh"] = {
       ["url"] = "https://feh.finalrewind.org/feh-3.10.3.tar.bz2",
       ["b3sum"] = "98040180056d52e47a2932e0611b1b457c0a6d4e463881c37a55f1b321c5aee0",
-      ["build"] = "make",
+      ["build"] = rc.gmake,
       ["flags"] = {
          "PREFIX=/usr",
          "exif=1",
@@ -161,7 +161,7 @@
    ["kirc"] = {
       ["url"] = "https://github.com/mcpcpc/kirc/archive/1.2.2/kirc-1.2.2.tar.gz",
       ["b3sum"] = "ab4541c21c73cccfeec8e975da32c0fb722176f99f58072dd6f7941748723b7e",
-      ["build"] = "make",
+      ["build"] = rc.gmake,
       ["flags"] = {
          "BINDIR=/bin",
          "MANDIR=/usr/share/man",
@@ -248,7 +248,7 @@
    ["lm-sensors"] = {
       ["url"] = "https://github.com/lm-sensors/lm-sensors/archive/V3-6-2/lm-sensors-3.6.2.tar.gz",
       ["b3sum"] = "e46bdd2e0e327293f14100347817a728bb6dea9f3875444775aae6f3a5bdc26a",
-      ["build"] = "make",
+      ["build"] = rc.gmake,
       ["flags"] = {
          "PREFIX=/usr",
          "{,S}BINDIR=/bin",
@@ -317,7 +317,7 @@
    ["pciutils"] = {
       ["url"] = "https://mj.ucw.cz/download/linux/pci/pciutils-3.15.0.tar.gz",
       ["b3sum"] = "5401403f9acc28fb3ef563fb52481df4287b668720c6bf2e6dce72da020536a9",
-      ["build"] = "make",
+      ["build"] = rc.gmake,
       ["flags"] = {
          "{,S}BINDIR=/bin",
          "LIBDIR=/lib64",
@@ -389,7 +389,7 @@
    ["sxiv"] = {
       ["url"] = "https://github.com/xyb3rt/sxiv/archive/v26/sxiv-26.tar.gz",
       ["b3sum"] = "9d658d77fd4f9da3bb02247016ba4d4f1c3afcedc18ac790fb67bf91e66aaff7",
-      ["build"] = "make",
+      ["build"] = rc.gmake,
       ["flags"] = {
          "PREFIX=/usr",
          "HAVE_GIFLIB=0",
@@ -409,7 +409,7 @@
    ["tree"] = {
       ["url"] = "https://gitlab.com/OldManProgrammer/unix-tree/-/archive/2.3.2/unix-tree-2.3.2.tar.bz2",
       ["b3sum"] = "83f69770304eb35d065ee8db52aebcb8d149c5ab6b39ac8d9bb76d5d72a598da",
-      ["build"] = "make",
+      ["build"] = rc.gmake,
       ["flags"] = {
          "PREFIX=$destdir/usr",
          "DESTDIR=$destdir/bin",
@@ -419,7 +419,7 @@
    ["unrar"] = {
       ["url"] = "https://www.rarlab.com/rar/unrarsrc-7.2.1.tar.gz",
       ["b3sum"] = "041d1141e346fe3c450674a4c053cef5350c4e054781ebe01252fa61e0502cfd",
-      ["build"] = "make",
+      ["build"] = rc.gmake,
    },
    ["vim-classic"] = {
       ["url"] = "/var/cache/distfiles/vim-classic-v8.3.0.tar.gz",
@@ -447,22 +447,22 @@
    },
    ["dmenu"] = {
       ["url"] = "https://dl.suckless.org/tools/dmenu-5.3.tar.gz",
-      ["build"] = "make",
+      ["build"] = rc.gmake,
    },
    ["dwm"] = {
       ["url"] = "https://dl.suckless.org/dwm/dwm-6.5.tar.gz",
-      ["build"] = "make",
+      ["build"] = rc.gmake,
       ["flags"] = {
          "PREFIX=/usr",
       },
    },
    ["slock"] = {
       ["url"] = "https://dl.suckless.org/tools/slock-1.5.tar.gz",
-      ["build"] = "make",
+      ["build"] = rc.gmake,
    },
    ["slstatus"] = {
       ["url"] = "https://dl.suckless.org/tools/slstatus-1.0.tar.gz",
-      ["build"] = "make",
+      ["build"] = rc.gmake,
       ["flags"] = {
          "PREFIX=/usr",
       },
@@ -470,7 +470,7 @@
    ["st"] = {
       ["url"] = "https://dl.suckless.org/st/st-0.9.3.tar.gz",
       ["b3sum"] = "ee31a5679f2949b82fc634c101b464d52fc01be09e38fd03750d7891269e1bb6",
-      ["build"] = "make",
+      ["build"] = rc.gmake,
       ["flags"] = {
          "PREFIX=/",
          "APPPREFIX=/usr/share/applications",
@@ -482,7 +482,7 @@
    ["wireguard-tools"] = {
       ["url"] = "https://git.zx2c4.com/wireguard-tools/snapshot/wireguard-tools-1.0.20260223.tar.xz",
       ["b3sum"] = "56df24ca339e9b5f76ffb548266b609194bb9718a7ef300708dda7b11df3e566",
-      ["build"] = "make",
+      ["build"] = rc.gmake,
       ["flags"] = {
          "--directory=src",
          "BINDIR=/bin",
@@ -626,7 +626,7 @@
    },
    ["luajit"] = {
       ["url"] = "https://luajit.org/git/luajit.git",
-      ["build"] = "make",
+      ["build"] = rc.gmake,
       ["flags"] = {
          "PREFIX=/usr",
          "MULTILIB=../lib64",

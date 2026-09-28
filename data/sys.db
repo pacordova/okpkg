@@ -600,7 +600,6 @@
          "MYCFLAGS=\"$CFLAGS -fpic\"",
          "INSTALL_TOP=$destdir",
          "linux",
-         "install",
       },
    },
    ["openvi"] = {
