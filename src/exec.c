@@ -3,16 +3,14 @@
 #include "okutils.h"
 
 int
-ok_execlp(lua_State *L)
+ok_exec(lua_State *L)
 {
     int i, pid, wstatus;
     int argc = lua_gettop(L);
     char *argv[argc+1];
-
     for (i = 0; i < argc; ++i)
         argv[i] = (char *) lua_tostring(L, i+1);
     argv[argc+1] = (char *) NULL;
-
     switch(pid = fork()) {
     case -1:
         return -1;
@@ -26,6 +24,5 @@ ok_execlp(lua_State *L)
             return 1;
         }
     }
-
     return 0;
 }
