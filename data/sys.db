@@ -596,11 +596,6 @@
       ["url"] = "https://lua.org/ftp/lua-5.5.1.tar.gz",
       ["b3sum"] = "634db1ca64e6ee891a248a837d42b18f236fe8915a8ee2475b3469a9e86805ef",
       ["build"] = rc.gmake,
-      ["flags"] = {
-         'MYCFLAGS="$CFLAGS -fpic"',
-         "INSTALL_TOP=$destdir",
-         "linux",
-      },
    };
    ["openvi"] = {
       ["url"] = "https://github.com/johnsonjh/openvi/archive/7.7.32/openvi-7.7.32.tar.gz",

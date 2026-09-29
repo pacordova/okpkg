@@ -2,7 +2,8 @@
 +++ ./Makefile
 @@ -12,11 +12,11 @@
  # LUA_ROOT, LUA_LDIR, and LUA_CDIR in luaconf.h.
- INSTALL_TOP= /usr/local
+-INSTALL_TOP= /usr/local
++INSTALL_TOP= $(DESTDIR)
  INSTALL_BIN= $(INSTALL_TOP)/bin
 -INSTALL_INC= $(INSTALL_TOP)/include
 -INSTALL_LIB= $(INSTALL_TOP)/lib
@@ -32,3 +33,13 @@
  
  #if !defined(LUA_PATH_DEFAULT)
  #define LUA_PATH_DEFAULT  \
+--- ./src/Makefile
++++ ./src/Makefile
+@@ -7,7 +7,7 @@
+ PLAT= guess
+ 
+ CC= gcc -std=gnu99
+-CFLAGS= -O2 -Wall -Wextra $(SYSCFLAGS) $(MYCFLAGS)
++CFLAGS:= $(CFLAGS) -Wall -Wextra -fpic
+ LDFLAGS= $(SYSLDFLAGS) $(MYLDFLAGS)
+ LIBS= -lm $(SYSLIBS) $(MYLIBS)
