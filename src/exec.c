@@ -27,5 +27,6 @@ ok_exec(lua_State *L)
             lua_pushinteger(L, WEXITSTATUS(wstatus));
             return 1;
         }
+        return 0;
     }
 }
