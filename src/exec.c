@@ -7,10 +7,14 @@ ok_exec(lua_State *L)
 {
     int i, pid, wstatus;
     int argc = lua_gettop(L);
-    char *argv[argc+1];
-    for (i = 0; i < argc; ++i)
-        argv[i] = (char *) lua_tostring(L, i+1);
+
+    char *argv[argc+3];
+    argv[0] = "sh";
+    argv[1] = "-c";
+    for (i = 1; i <= argc; ++i)
+        argv[i+1] = (char *) lua_tostring(L, i);
     argv[argc+1] = (char *) NULL;
+
     switch(pid = fork()) {
     case -1:
         return -1;
@@ -24,5 +28,4 @@ ok_exec(lua_State *L)
             return 1;
         }
     }
-    return 0;
 }

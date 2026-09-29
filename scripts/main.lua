@@ -48,21 +48,13 @@ rc = {
          os.execute("DESTDIR=$destdir samu -C build install"))
    end,
    ["configure"] = function(...)
-      local function fcn(x, ...) 
-         if ok.exists(x) then 
-            return os.execute(table.concat({ "sh", x, ... }, " ") 
-         end
-      end
-      return os.exists("configure") and
-         os.execute(table.concat({"sh", "configure", "--prefix=/usr", ...}, " ")
-         fcn("configure") or fcn("../configure") or fcn("configure.gnu")
+      return (
          ok.exists("configure") and 
-         os.execute(table.concat({ "sh", "configure", ... }, " "))) or (
-         os.exists("../configure") and
-         
-         (ok.exists("../configure") and "../configure") or
-         (ok.exists("configure.gnu") and "./configure.gnu"),
-         os.execute(table.concat(cmd, ' ')) and 
+         ok.exec("sh", "configure", "--prefix=/usr", ...) or
+         ok.exists("../configure") and
+         ok.exec("sh", "../configure", "--prefix=/usr", ...) or
+         ok.exists("configure.gnu") and
+         ok.exec("sh", "configure.gnu", "--prefix=/usr", ...) and
          rc.gmake())
    end,
    ["copy"] = function()
@@ -73,9 +65,9 @@ rc = {
    end,
    ["gmake"] = function(...)
          return (
-            os.execute(table.concat({ "make", ... }, " ")) and
+            ok.exec("make", ...) and
             ok.setenv("DESTDIR", os.getenv("destdir")) and
-            os.execute(table.concat({ "make", "install", ... }, " ")) and
+            ok.exec("make", "install", ...) and
             ok.unsetenv("DESTDIR"))
    end,
    ["make_noinstall"] = function(...)
@@ -322,7 +314,8 @@ ok.setenv("LC_ALL", "C")
 ok.setenv("CONFIG_SITE", cfg.site)
 ok.setenv("CFLAGS",   cfg.cflags:format())
 ok.setenv("CXXFLAGS", cfg.cflags:format())
-ok.setenv("MAKEFLAGS", string.format("--jobs=%s", cfg.jobs))
+ok.setenv("MAKEFLAGS", string.format("-j%s", cfg.jobs))
+
 
 while #arg > 1 do
    if arg[2]:sub(1,2) == "--" then
