@@ -597,7 +597,7 @@
       ["b3sum"] = "634db1ca64e6ee891a248a837d42b18f236fe8915a8ee2475b3469a9e86805ef",
       ["build"] = rc.gmake,
       ["flags"] = {
-         "MYCFLAGS=\"$CFLAGS -fpic\"",
+         'MYCFLAGS="$CFLAGS -fpic"',
          "INSTALL_TOP=$destdir",
          "linux",
       },

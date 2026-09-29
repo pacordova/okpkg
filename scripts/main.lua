@@ -48,14 +48,20 @@ rc = {
          os.execute("DESTDIR=$destdir samu -C build install"))
    end,
    ["configure"] = function(...)
-      local cmd = {
-         (ok.exists("configure") and "./configure") or
+      local function fcn(x, ...) 
+         if ok.exists(x) then 
+            return os.execute(table.concat({ "sh", x, ... }, " ") 
+         end
+      end
+      return os.exists("configure") and
+         os.execute(table.concat({"sh", "configure", "--prefix=/usr", ...}, " ")
+         fcn("configure") or fcn("../configure") or fcn("configure.gnu")
+         ok.exists("configure") and 
+         os.execute(table.concat({ "sh", "configure", ... }, " "))) or (
+         os.exists("../configure") and
+         
          (ok.exists("../configure") and "../configure") or
          (ok.exists("configure.gnu") and "./configure.gnu"),
-         "--prefix=/usr",
-         ...
-      }
-      return (
          os.execute(table.concat(cmd, ' ')) and 
          rc.gmake())
    end,
@@ -66,11 +72,11 @@ rc = {
       return os.execute(string.format("cp -a . $destdir/%s", os.getenv("destdir"), prefix))
    end,
    ["gmake"] = function(...)
-      return (
-         os.execute(table.concat({ "make", ... }, ' ')) and
-         ok.setenv("DESTDIR", os.getenv("destdir")) and
-         os.execute(table.concat({ "make", "install", ... })) and
-         ok.unsetenv("DESTDIR"))
+         return (
+            os.execute(table.concat({ "make", ... }, " ")) and
+            ok.setenv("DESTDIR", os.getenv("destdir")) and
+            os.execute(table.concat({ "make", "install", ... }, " ")) and
+            ok.unsetenv("DESTDIR"))
    end,
    ["make_noinstall"] = function(...)
       local arg = {
@@ -144,7 +150,7 @@ function vmatch(s)
 end
 
 function query(k)
-   local fp, fn, i, len
+   local fp, i, len, fcn
    for de in dir(cfg.datadir) do
       if de ~= "cross.db" then
          fp = io.open(string.format("%s/%s", cfg.datadir, de))
@@ -153,10 +159,10 @@ function query(k)
             i = fp:seek("set", i+string.find(fp:read("*a"), "{", 1, true)-1)
             len = string.find(fp:read("*a"), "};", 1, true)
             fp:seek("set", i)
-            fn = load("return " .. fp:read(len))
+            fcn = load("return " .. fp:read(len))
          end
          fp:close()
-         if fn then return fn() end
+         if fcn then return fcn() end
       end
    end
 end
@@ -246,48 +252,37 @@ function makepkg(x)
    return x .. ".tar.lz"
 end
 
-function build(x)
-   local X = query(x)
-   X.flags = X.flags or {}
-   X.V = vmatch(ok.basename(X.url))
-   X.destdir = string.format("%s/%s-%s-%s", cfg.pkgdir, x, X.V, "skylake")
-   ok.setenv("destdir", X.destdir)
-   ok.remove_all(X.destdir)
-   ok.mkdir(X.destdir)
-   ok.chdir(string.format("%s/%s", cfg.wrkobjdir, x))
+function build(k)
+   local t = query(k)
+   t.flags = t.flags or {}
+   t.version = vmatch(ok.basename(t.url))
+   t.destdir = string.format("%s/%s-%s-%s", cfg.pkgdir, k, t.version, "skylake")
+   ok.setenv("destdir", t.destdir)
+   ok.remove_all(t.destdir)
+   ok.mkdir(t.destdir)
+   ok.chdir(string.format("%s/%s", cfg.wrkobjdir, k))
    ok.setenv("SOURCE_DATE_EPOCH", ok.mtime("."))
-   X.prep = 
-      X.prep and 
-      not os.execute(X.prep) and
-      error(string.format("error: build: prep: %s", x))
-   if rc[X.build] then
-      if not rc[X.build](unpack(X.flags)) then
-         error(string.format("error: build: %s: %s", X.build, x))
-      end
-   elseif tostring(X.build):match("config") then
-      -- Check if we are doing an out of tree build
-      if tostring(X.build):sub(1, 2) == ".." then 
-         ok.remove_all("build")
-         ok.mkdir("build") 
-         ok.chdir("build")
-      end
-      if not rc["configure"](X.build, unpack(X.flags)) then
-         error(string.format("error: build: %s: %s", X.build, x))
-      end
+
+   if t.prep and not os.execute(t.prep) then
+      error(string.format("error: build: prep: %s", k))
    end
-   X.post = 
-      X.post and
-      not os.execute(X.post) and
-      error(string.format("error: build: post: %s", x))
+
+   if not t.build(unpack(t.flags)) then
+      error(string.format("error: build: %s: %s", t.build, k))
+   end
+
+   if t.post and not os.execute(t.post) then
+      error(string.format("error: build: post: %s", k))
+   end
 
    -- Set the mtime
    os.execute [[ find $destdir -exec touch -hd "@$SOURCE_DATE_EPOCH" '{}' + ]]
 
    -- Cleanup
-   ok.remove_all(X.destdir .. "no")
+   ok.remove_all(t.destdir .. "no")
    ok.unsetenv("destdir")
    ok.unsetenv("SOURCE_DATE_EPOCH")
-   return makepkg(X.destdir)
+   return makepkg(t.destdir)
 end
 
 function purge(x)

@@ -15,6 +15,7 @@ static const struct luaL_Reg okutils[] = {
     {"remove_all", ok_remove_all},
     {"setenv", ok_setenv},
     {"unsetenv", ok_unsetenv},
+    {"execlp", ok_execlp},
     {NULL, NULL},
 };
 
