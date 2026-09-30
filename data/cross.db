@@ -51,11 +51,9 @@
          "--without-included-gettext",
       },
       ["prep"] = [[
-         mkdir gmp mpfr mpc isl
-         tar -C gmp  --strip-components=1 -xf /var/cache/distfiles/gmp-6.2.1.tar.lz
-         tar -C mpfr --strip-components=1 -xf /var/cache/distfiles/mpfr-4.1.0.tar.xz
-         tar -C mpc  --strip-components=1 -xf /var/cache/distfiles/mpc-1.2.1.tar.gz
-         tar -C isl  --strip-components=1 -xf /var/cache/distfiles/isl-0.24.tar.xz
+         for x in gmp mpfr mpc isl; do 
+            mkdir $x && tar -C $x -xf /var/cache/distfiles/$x* --strip=1;
+         done
       ]],
       ["post"] = [[
          cat ../gcc/{limitx,glimits,limity}.h > _
@@ -110,11 +108,9 @@
          "--enable-tls",
       },
       ["prep"] = [[
-         mkdir gmp mpfr mpc isl
-         tar -C gmp  --strip-components=1 -xf /var/cache/distfiles/gmp-6.2.1.tar.lz
-         tar -C mpfr --strip-components=1 -xf /var/cache/distfiles/mpfr-4.1.0.tar.xz
-         tar -C mpc  --strip-components=1 -xf /var/cache/distfiles/mpc-1.2.1.tar.gz
-         tar -C isl  --strip-components=1 -xf /var/cache/distfiles/isl-0.24.tar.xz
+         for x in gmp mpfr mpc isl; do 
+            mkdir $x && tar -C $x -xf /var/cache/distfiles/$x* --strip=1;
+         done
       ]],
    };
    ["m4"] = {
@@ -150,14 +146,15 @@
          "--with-shared",
          "--with-termlib=tinfo",
          "--with-xterm-kbs=DEL",
-         "ac_cv_path_TIC=$(realpath ./build/progs/tic)",
-         "AWK=/bin/gawk",
+         "ac_cv_path_TIC=/mnt/tools/bin/tic",
+         "AWK=gawk",
       },
       ["prep"] = [[
          mkdir build && cd build
          sh ../configure AWK=/bin/gawk
          make -C include
          make -C progs tic
+         install procs/tic /mnt/tools/bin
       ]],
       ["post"] = [[
          cd /mnt/usr/include
@@ -360,8 +357,7 @@
          "--enable-relro",
          "--with-system-zlib",
       },
-      ["prep"] = [[
-    sed '6031s/$add_dir//' -i ltmain.sh ]],
+      ["prep"] = [[ sed '6031s/$add_dir//' -i ltmain.sh ]],
    };
    ["gcc15"] = {
       ["build"] = "../configure",
@@ -395,17 +391,15 @@
          "--with-linker-hash-style=gnu",
          "--with-system-zlib",
          "--without-included-gettext",
-         "LDFLAGS_FOR_TARGET=-L$PWD/x86_64-unknown-linux-gnu/libgcc",
+         "LDFLAGS_FOR_TARGET=-L${PWD}/x86_64-unknown-linux-gnu/libgcc",
       },
       ["prep"] = [[
-         mkdir gmp mpfr mpc isl
-         tar -C gmp  --strip-components=1 -xf /var/cache/distfiles/gmp-6.2.1.tar.lz
-         tar -C mpfr --strip-components=1 -xf /var/cache/distfiles/mpfr-4.1.0.tar.xz
-         tar -C mpc  --strip-components=1 -xf /var/cache/distfiles/mpc-1.2.1.tar.gz
-         tar -C isl  --strip-components=1 -xf /var/cache/distfiles/isl-0.24.tar.xz
          sed -i '330i #include <stdbool.h>' gcc/config/i386/i386.h
          sed -i '/thread_header =/s/@.*@/gthr-posix.h/' \
            {libgcc,libstdc++-v3/include}/Makefile.in
+         for x in gmp mpfr mpc isl; do 
+            mkdir $x && tar -C $x -xf /var/cache/distfiles/$x* --strip=1;
+         done
       ]],
    };
 }
