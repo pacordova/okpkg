@@ -1,5 +1,5 @@
 {
-   ["-binutils"] = {
+   ["_binutils"] = {
       ["build"] = "../configure",
       ["flags"] = {
          "--target=x86_64-unknown-linux-gnu",
@@ -16,7 +16,7 @@
          "--without-system-zlib",
       },
    };
-   ["-gcc15"] = {
+   ["_gcc15"] = {
       ["build"] = "../configure",
       ["flags"] = {
          "--target=x86_64-unknown-linux-gnu",
@@ -67,7 +67,7 @@
       ["flags"] = {
          "--prefix=/usr",
          "--host=x86_64-unknown-linux-gnu",
-         "--build=$(../scripts/config.guess)",
+         "--build=x86_64-pc-linux-gnu",
          "--enable-kernel=6.12",
          "--enable-bind-now",
          "--enable-stack-protector=strong",
@@ -89,21 +89,20 @@
       ["flags"] = {
          "--prefix=/usr",
          "--host=x86_64-unknown-linux-gnu",
-         "--build=$(build-aux/m4-autogen/config.guess)",
+         "--build=x86_64-pc-linux-gnu",
          "--enable-hashes=strong,glibc",
          "--enable-obsolete-api=no",
          "--disable-failure-tokens",
          "PERL=/opt/perl/bin/perl",
       },
-      ["prep"] = [[
-    $patch < /usr/okpkg/patches/libxcrypt.diff ]],
+      ["prep"] = [[ $patch < /usr/okpkg/patches/libxcrypt.diff ]],
    };
    ["libstdcxx"] = {
       ["build"] = "../libstdc++-v3/configure",
       ["flags"] = {
          "--prefix=/usr",
          "--host=x86_64-unknown-linux-gnu",
-         "--build=$(../config.guess)",
+         "--build=x86_64-pc-linux-gnu",
          "--with-gxx-include-dir=/tools/x86_64-unknown-linux-gnu/include/c++/15.3.0",
          "--disable-libstdcxx-pch",
          "--disable-multilib",
@@ -123,7 +122,7 @@
       ["flags"] = {
          "--prefix=/usr",
          "--host=x86_64-unknown-linux-gnu",
-         "--build=$(build-aux/config.guess)",
+         "--build=x86_64-pc-linux-gnu",
       },
    };
    ["ncurses"] = {
@@ -131,7 +130,7 @@
       ["flags"] = {
          "--prefix=/usr",
          "--host=x86_64-unknown-linux-gnu",
-         "--build=$(./config.guess)",
+         "--build=x86_64-pc-linux-gnu",
          "--disable-root-access",
          "--disable-root-environ",
          "--disable-rpath-hack",
@@ -172,7 +171,7 @@
       ["flags"] = {
          "--prefix=/usr",
          "--host=x86_64-unknown-linux-gnu",
-         "--build=$(sh support/config.guess)",
+         "--build=x86_64-pc-linux-gnu",
          "--without-bash-malloc",
       },
    };
@@ -181,7 +180,7 @@
       ["flags"] = {
          "--prefix=/usr",
          "--host=x86_64-unknown-linux-gnu",
-         "--build=$(build-aux/config.guess)",
+         "--build=x86_64-pc-linux-gnu",
          "--enable-install-program=hostname",
          "--without-openssl",
          "FORCE_UNSAFE_CONFIGURE=1",
@@ -192,7 +191,7 @@
       ["flags"] = {
          "--prefix=/usr",
          "--host=x86_64-unknown-linux-gnu",
-         "--build=$(build-aux/config.guess)",
+         "--build=x86_64-pc-linux-gnu",
          "gl_cv_func_strcasecmp_works=y",
       },
    };
@@ -201,7 +200,7 @@
       ["flags"] = {
          "--prefix=/usr",
          "--host=x86_64-unknown-linux-gnu",
-         "--build=$(./config.guess)",
+         "--build=x86_64-pc-linux-gnu",
       },
    };
    ["findutils"] = {
@@ -209,7 +208,7 @@
       ["flags"] = {
          "--prefix=/usr",
          "--host=x86_64-unknown-linux-gnu",
-         "--build=$(build-aux/config.guess)",
+         "--build=x86_64-pc-linux-gnu",
       },
    };
    ["gawk"] = {
@@ -217,7 +216,7 @@
       ["flags"] = {
          "--prefix=/usr",
          "--host=x86_64-unknown-linux-gnu",
-         "--build=$(build-aux/config.guess)",
+         "--build=x86_64-pc-linux-gnu",
       },
       ["prep"] = [[
     sed -i 's/extras//' Makefile.in ]],
@@ -227,7 +226,7 @@
       ["flags"] = {
          "--prefix=/usr",
          "--host=x86_64-unknown-linux-gnu",
-         "--build=$(build-aux/config.guess)",
+         "--build=x86_64-pc-linux-gnu",
       },
    };
    ["gzip"] = {
@@ -235,7 +234,7 @@
       ["flags"] = {
          "--prefix=/usr",
          "--host=x86_64-unknown-linux-gnu",
-         "--build=$(build-aux/config.guess)",
+         "--build=x86_64-pc-linux-gnu",
       },
    };
    ["make"] = {
@@ -243,7 +242,7 @@
       ["flags"] = {
          "--prefix=/usr",
          "--host=x86_64-unknown-linux-gnu",
-         "--build=$(build-aux/config.guess)",
+         "--build=x86_64-pc-linux-gnu",
          "--without-guile",
       },
    };
@@ -252,7 +251,7 @@
       ["flags"] = {
          "--prefix=/usr",
          "--host=x86_64-unknown-linux-gnu",
-         "--build=$(build-aux/config.guess)",
+         "--build=x86_64-pc-linux-gnu",
       },
    };
    ["sed"] = {
@@ -260,7 +259,7 @@
       ["flags"] = {
          "--prefix=/usr",
          "--host=x86_64-unknown-linux-gnu",
-         "--build=$(build-aux/config.guess)",
+         "--build=x86_64-pc-linux-gnu",
       },
    };
    ["tar"] = {
@@ -268,7 +267,7 @@
       ["flags"] = {
          "--prefix=/usr",
          "--host=x86_64-unknown-linux-gnu",
-         "--build=$(build-aux/config.guess)",
+         "--build=x86_64-pc-linux-gnu",
          "FORCE_UNSAFE_CONFIGURE=1",
       },
    };
@@ -277,21 +276,17 @@
       ["flags"] = {
          "--prefix=/usr",
          "--host=x86_64-unknown-linux-gnu",
-         "--build=$(build-aux/config.guess)",
+         "--build=x86_64-pc-linux-gnu",
       },
    };
    ["lua"] = {
-      ["build"] = "make",
+      ["build"] = rc.gmake,
+      ["prep"] = [[ $patch < /usr/okpkg/patches/lua.diff ]],
       ["flags"] = {
          "CC=x86_64-unknown-linux-gnu-gcc",
          "RANLIB=x86_64-unknown-linux-gnu-ranlib",
-         "AR=\"x86_64-unknown-linux-gnu-ar rcu\"",
-         "MYCFLAGS=\"$CFLAGS -fpic\"",
-         "INSTALL_TOP=/mnt",
-         "linux",
+         'AR="x86_64-unknown-linux-gnu-ar rcu"',
       },
-      ["prep"] = [[
-    $patch < /usr/okpkg/patches/lua.diff ]],
    };
    ["lzlib"] = {
       ["build"] = "./configure",
@@ -326,7 +321,7 @@
       ["flags"] = {
          "--prefix=/usr",
          "--host=x86_64-unknown-linux-gnu",
-         "--build=$(config/config.guess)",
+         "--build=x86_64-pc-linux-gnu",
          "--disable-all-programs",
          "--enable-lib{blkid,fdisk,mount,smartcols,uuid}",
          "--exec-prefix=/",
@@ -338,7 +333,7 @@
       ["flags"] = {
          "--prefix=/usr",
          "--host=x86_64-unknown-linux-gnu",
-         "--build=$(./config.guess)",
+         "--build=x86_64-pc-linux-gnu",
          "--with-openssldir=/etc/ssl",
       },
    };
@@ -347,14 +342,14 @@
       ["flags"] = {
          "--prefix=/usr",
          "--host=x86_64-unknown-linux-gnu",
-         "--build=$(./config.guess)",
+         "--build=x86_64-pc-linux-gnu",
       },
    };
    ["binutils"] = {
       ["build"] = "../configure",
       ["flags"] = {
          "--host=x86_64-unknown-linux-gnu",
-         "--build=$(../config.guess)",
+         "--build=x86_64-pc-linux-gnu",
          "--prefix=/usr",
          "--enable-64-bit-bfd",
          "--enable-default-execstack=no",
@@ -371,7 +366,7 @@
    ["gcc15"] = {
       ["build"] = "../configure",
       ["flags"] = {
-         "--build=$(../config.guess)",
+         "--build=x86_64-pc-linux-gnu",
          "--host=x86_64-unknown-linux-gnu",
          "--target=x86_64-unknown-linux-gnu",
          "--prefix=/usr",

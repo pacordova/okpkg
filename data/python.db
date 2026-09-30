@@ -4,7 +4,7 @@
       ["b3sum"] = "69e6f0d7f165b57ccfea2e932be77e60847883877b53b9afbddc13c334c97e2d",
       ["build"] = "./configure",
       ["flags"] = {
-         "--prefix=$PYTHONHOME",
+         "--prefix=/opt/python3.13",
          "--enable-loadable-sqlite-extensions",
          "--without-doc-strings",
          "--without-ensurepip",
