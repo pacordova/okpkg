@@ -54,8 +54,8 @@ rc = {
          ok.exists("../configure") and
          ok.exec("sh", "../configure", "--prefix=/usr", ...) or
          ok.exists("configure.gnu") and
-         ok.exec("sh", "configure.gnu", "--prefix=/usr", ...) and
-         rc.gmake())
+         ok.exec("sh", "configure.gnu", "--prefix=/usr", ...)) and
+         rc.gmake()
    end,
    ["copy"] = function()
       ok.setenv("prefix", string.format("/opt/%s", ok.basename(ok.getcwd())))
