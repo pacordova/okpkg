@@ -43,26 +43,28 @@
       ["b3sum"] = "87baa88c4506a1a06c6b489ebe7702fe2ef032e9878f6f290c976d2c0d328c99",
       ["build"] = "./configure",
    };
+   ["perl-xml-parser"] = {
+      ["url"] = "https://cpan.metacpan.org/authors/id/T/TO/TODDR/XML-Parser-2.47.tar.gz",
+      ["b3sum"] = "933aa44de3efe104be847a2acb5bdf4ff85241ba866a4edb613fb7ec6d573a16",
+      ["build"] = "perl",
+   };
    ["intltool"] = {
       ["url"] = "https://launchpad.net/intltool/trunk/0.51.0/+download/intltool-0.51.0.tar.gz",
       ["b3sum"] = "d02ddc3dcdfc519173e51c16d3fe09da7669e547efd58951855bee887c0cdce0",
       ["build"] = "./configure",
-      ["prep"] = [[
-    sed -i 's:\\\${:\\\$\\{:' intltool-update.in ]],
+      ["prep"] = [[ sed -i 's:\\\${:\\\$\\{:' intltool-update.in ]],
    };
    ["itstool"] = {
       ["url"] = "https://github.com/itstool/itstool/archive/2.0.7/itstool-2.0.7.tar.gz",
       ["b3sum"] = "c64afc9edcf7a4d58a328cf7fc9aea5c7ffbae9bc8ddbab15998dc43aac9d82e",
       ["build"] = "./configure",
-      ["prep"] = [[
-    autoreconf -fi ]],
+      ["prep"] = [[ autoreconf -fi ]],
    };
    ["libtool"] = {
       ["url"] = "https://ftp.gnu.org/gnu/libtool/libtool-2.6.2.tar.xz",
       ["b3sum"] = "192e13e53f967411844ff7fc264910cd10b599b4413e4926223b6dd6b68b0936",
       ["build"] = "./configure",
-      ["post"] = [[
-    rm -f $destdir/usr/lib64/libltdl.a ]],
+      ["post"] = [[ rm -f $destdir/usr/lib64/libltdl.a ]],
    };
    ["meson"] = {
       ["url"] = "https://github.com/mesonbuild/meson/releases/download/1.8.3/meson-1.8.3.tar.gz",

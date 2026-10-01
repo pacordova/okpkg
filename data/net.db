@@ -198,7 +198,7 @@
          "--disable-pinentry-gnome3",
       },
    };
-   ["gnupg2"] = {
+   ["gnupg"] = {
       ["url"] = "https://gnupg.org/ftp/gcrypt/gnupg/gnupg-2.5.21.tar.bz2",
       ["b3sum"] = "dc03c1bec123ceeae6da3cf2f758a3070f3bddbb3c326826103c657d9293b312",
       ["build"] = "./configure",

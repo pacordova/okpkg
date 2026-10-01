@@ -47,9 +47,7 @@
       ["url"] = "https://download.tixati.com/tixati-3.44-1.x86_64.manualinstall.tar.gz",
       ["b3sum"] = "a237e53eb9ef96c3081e70ebf404bb0fc28e9aa20bef7342a0671261c58d8eba",
       ["post"] = [[
-         install -d $destdir/bin
-         install -d $destdir/usr/share/applications
-         install -d $destdir/usr/share/icons
+         install -d $destdir/bin $destdir/usr/share/{applications,icons}
          install -m 755 tixati         $destdir/bin
          install -m 644 tixati.desktop $destdir/usr/share/applications
          install -m 644 tixati.png     $destdir/usr/share/icons

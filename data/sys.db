@@ -4,10 +4,10 @@
       ["b3sum"] = "6ad90515e3b8ac191a8ecef4e75fbb260236f8e78078ac099d5eccc175af0782",
       ["build"] = rc.configure,
    };
-   ["_perl"] = {
+   ["perl"] = {
       ["url"] = "https://www.cpan.org/src/5.0/perl-5.44.0.tar.xz",
       ["b3sum"] = "2b1be108d901a7b5832e17292631b975f98d04d7c615dcde9d7f61c32c79063c",
-      ["build"] = "./configure.gnu",
+      ["build"] = rc.configure,
       ["flags"] = {
          "-Dprefix=/opt/perl",
          "-Duseshrplib",

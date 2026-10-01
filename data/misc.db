@@ -105,7 +105,7 @@
          "--disable-compile-inits",
          "--disable-cups",
          "--without-system-libtiff",
-         "CFLAGS=\"${CFLAGS:--g -O3} -fpic\"",
+         'CFLAGS="${CFLAGS:--g -O3} -fpic"',
       },
    };
    ["gifsicle"] = {
@@ -142,8 +142,7 @@
       ["flags"] = {
          "-DBTOP_LTO=OFF",
       },
-      ["post"] = [[
-    cd $destdir && mv share usr/share ]],
+      ["post"] = [[ cd $destdir && mv share usr/share ]],
    };
    ["htop"] = {
       ["url"] = "https://github.com/htop-dev/htop/releases/download/3.4.1/htop-3.4.1.tar.xz",
@@ -175,37 +174,6 @@
          "--disable-gtk",
          "--enable-gtk3",
       },
-   };
-   ["libtorrent-rasterbar"] = {
-      ["url"] = "https://github.com/arvidn/libtorrent/releases/download/v2.0.12/libtorrent-rasterbar-2.0.12.tar.gz",
-      ["b3sum"] = "40217c0e2be187f4a80b380046ae7612fb3010ab987b3997e449b2f528115be2",
-      ["post"] = [[
-    
-         BOOST_ROOT=/var/lib/boost_1_90_0
-         b2="$BOOST_ROOT/tools/build/src/engine/b2"
-         if ! test -x $b2; then cd "$BOOST_ROOT/tools/build" && ./bootstrap.sh; fi
-   
-         BOOST_ROOT="$BOOST_ROOT" \
-         $b2 -j5 \
-             variant=release \
-             toolset=gcc \
-             fpic=on \
-             install \
-             --prefix="$destdir/usr" \
-             --libdir="$destdir/usr/lib64"
-   
-         PYTHON_SITE=`python3 -c 'from site import *;print(getsitepackages()[0])'`
-         PYTHON_VERSION=`python3 -V | awk -F '[ .]' '{print $2 "." $3}'`
-         cd bindings/python
-         BOOST_ROOT=$BOOST_ROOT \
-         $b2 -j5 \
-             variant=release \
-             python="$PYTHON_VERSION" \
-             fpic=on \
-             stage_module \
-             install_module \
-             python-install-path="$destdir/${PYTHON_SITE#*/}"
-      ]],
    };
    ["linux"] = {
       ["url"] = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.12.73.tar.xz",
@@ -281,7 +249,6 @@
       ["url"] = "https://www.kernel.org/pub/linux/docs/man-pages/man-pages-6.12.tar.xz",
       ["b3sum"] = "f8a1e019739b264b177a7f82fbde4f380ebd6fa31f819fdc0ce8fd73b0317279",
       ["post"] = [[
-    
          make -R GIT=false prefix=$destdir/usr install
          rm -f "$destdir/usr/share/man/man3/crypt"*
          rm -f "$destdir/usr/share/man/man5/tzfile.5"
@@ -335,8 +302,7 @@
          "-Dcompton=false",
          "-Dregex=true",
       },
-      ["post"] = [[
-    rm -fr $destdir/usr/share/applications ]],
+      ["post"] = [[ rm -fr $destdir/usr/share/applications ]],
    };
    ["pv"] = {
       ["url"] = "https://www.ivarch.com/s/pv-1.11.0.tar.gz",
@@ -395,7 +361,6 @@
          "HAVE_GIFLIB=0",
       },
       ["post"] = [[
-    
          make -C icon PREFIX=/usr DESTDIR=$destdir install
          install -d $destdir/usr/share/applications
          install -m 644 sxiv.desktop $destdir/usr/share/applications
@@ -476,8 +441,7 @@
          "APPPREFIX=/usr/share/applications",
          "MANPREFIX=/usr/share/man",
       },
-      ["post"] = [[
-    tic -sx st.info ]],
+      ["post"] = [[ tic -sx st.info ]],
    };
    ["wireguard-tools"] = {
       ["url"] = "https://git.zx2c4.com/wireguard-tools/snapshot/wireguard-tools-1.0.20260223.tar.xz",
@@ -550,8 +514,7 @@
          "-Dbluez5=disabled",
          "-Dudevrulesdir=/lib64/udev/rules.d",
       },
-      ["post"] = [[
-    rm -f $destdir/usr/share/dbus-1/system.d/pulseaudio-system.conf ]],
+      ["post"] = [[ rm -f $destdir/usr/share/dbus-1/system.d/pulseaudio-system.conf ]],
    };
    ["xfce4-pulseaudio-plugin"] = {
       ["url"] = "https://archive.xfce.org/src/panel-plugins/xfce4-pulseaudio-plugin/0.5/xfce4-pulseaudio-plugin-0.5.1.tar.xz",
@@ -599,8 +562,7 @@
       ["flags"] = {
          "--disable-cracklib-check",
       },
-      ["post"] = [[
-    mkdir -p $destdir/opt/python3.13 && mv $destdir/usr/lib $_ ]],
+      ["post"] = [[ mkdir -p $destdir/opt/python3.13 && mv $destdir/usr/lib $_ ]],
    };
    ["passwordsafe"] = {
       ["url"] = "https://gitlab.gnome.org/World/secrets/-/archive/5.1/secrets-5.1.tar.bz2",
