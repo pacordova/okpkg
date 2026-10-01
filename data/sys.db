@@ -206,9 +206,7 @@
       ["flags"] = {
          "--enable-cxx",
       },
-      ["prep"] = [[
-         sed -i '/long long t1;/,+1s/()/(...)/' configure 
-      ]],
+      ["prep"] = [[ sed -i '/long long t1;/,+1s/()/(...)/' configure ]],
    };
    ["mpfr"] = {
       ["url"] = "https://ftp.gnu.org/gnu/mpfr/mpfr-4.1.0.tar.xz",
@@ -379,8 +377,10 @@
       ["build"] = rc.configure,
       ["flags"] = {
          "--enable-jit",
-         "--enable-pcre2-{16,32}",
-         "--enable-pcre2grep-{libz,libbz2}",
+         "--enable-pcre2-16",
+         "--enable-pcre2-32",
+         "--enable-pcre2grep-libz",
+         "--enable-pcre2grep-libbz2",
          "--enable-pcre2test-libreadline",
          "--enable-unicode",
       },
@@ -475,10 +475,13 @@
       ["b3sum"] = "52dc1f61626fe8d845c08f96c15f0090be72ddc4d18d95b0db754fe4106d4a3b",
       ["build"] = rc.configure,
       ["flags"] = {
+         "--enable-manpages",
          "--with-module-directory=/lib64/modules",
          "--with-distconfdir=/lib64",
-         "--without-{openssl,xz,zlib,zstd}",
-         "--enable-manpages",
+         "--without-openssl",
+         "--without-xz",
+         "--without-zlib",
+         "--without-zstd",
       },
    };
    ["libelf"] = {
@@ -488,8 +491,9 @@
       ["flags"] = {
          "--enable-deterministic-archives",
          "--enable-symbol-versioning",
-         "--disable-{,lib}debuginfod",
-         "--program-prefix='eu-'",
+         "--disable-debuginfod",
+         "--disable-libdebuginfod",
+         "--program-prefix=eu-",
       },
       ["post"] = [[
          rm -fr $destdir && mkdir $destdir
@@ -596,6 +600,9 @@
       ["url"] = "https://lua.org/ftp/lua-5.5.1.tar.gz",
       ["b3sum"] = "634db1ca64e6ee891a248a837d42b18f236fe8915a8ee2475b3469a9e86805ef",
       ["build"] = rc.gmake,
+      ["flags"] = {
+         "MYCFLAGS= ${CFLAGS} -fpic",
+      },
    };
    ["openvi"] = {
       ["url"] = "https://github.com/johnsonjh/openvi/archive/7.7.32/openvi-7.7.32.tar.gz",
@@ -639,9 +646,17 @@
       ["b3sum"] = "3d24d2f45130c76da3d0e68c1beb641568780f555b150d99daccf09bb6b1c06c",
       ["build"] = rc.configure,
       ["flags"] = {
-         "--disable-{chfn-chsh,login,nologin,su,setpriv,runuser,pylibmount,liblastlog2}",
          "--exec-prefix=/",
-         "--without-{python,systemd}",
+         "--disable-chfn-chsh",
+         "--disable-login",
+         "--disable-nologin",
+         "--disable-su",
+         "--disable-setpriv",
+         "--disable-runuser",
+         "--disable-pylibmount",
+         "--disable-liblastlog2",
+         "--without-python",
+         "--without-systemd",
       },
       ["prep"] = [[
          sed -i 's:}/sbin:}/bin:' configure
@@ -653,7 +668,10 @@
       ["b3sum"] = "7739ce8f2a651909f7522a81018895aafd51ec2de4ce4f2862769a7188b7ddb4",
       ["build"] = rc.configure,
       ["flags"] = {
-         "--disable-{fsck,libblkid,libuuid,uuidd}",
+         "--disable-fsck",
+         "--disable-libblkid",
+         "--disable-libuuid",
+         "--disable-uuidd",
          "--enable-elf-shlibs",
       },
    };
@@ -747,13 +765,10 @@
          "--disable-efiemu",
          "--disable-grub-mkfont",
          "--disable-grub-mount",
-         "{C,CPP,CXX,LD}FLAGS=",
+         "CFLAGS=-O2",
       },
       ["post"] = [[
-         cd $destdir/lib64
-         rm -f ./grub/*/*.module
-         rm -f ./grub/*/kernel.exec
-         rm -f ./grub/*/gdb_grub
+         rm -f $destdir/lib64/grub/*/{*.module,kernel.exec,gdb_grub}
       ]],
    };
    ["dbus"] = {

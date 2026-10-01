@@ -108,12 +108,6 @@ rc = {
       }
       return os.execute(table.concat({arg[0], unpack(arg)}, " "))
    end,
-   ["perl"] = function()
-      return (
-         os.execute("perl Makefile.PL") and
-         os.execute("make")            and
-         os.execute("make {pure,doc}_install DESTDIR=$destdir"))
-   end,
    ["python-build"] = function()
       return (
           os.execute("python3 -m build -nx")  and
