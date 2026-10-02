@@ -85,20 +85,23 @@ rc = {
       return os.execute(table.concat({arg[0], unpack(arg)}, " "))
    end,
    ["meson"] = function(...)
-      local arg = {
-         [0] = "$meson setup build",
+      return ok.exec(
+         "meson",
+         "setup",
+         "build",
          "-Dprefix=/usr",
          "-Dlibdir=../lib64",
-         "-D{,s}bindir=../bin",
+         "-Dbindir=../bin",
+         "-Dsbindir=../bin",
          "-Ddebug=false",
          "-Doptimization=2",
          "-Dwrap_mode=nodownload",
          "-Dpython.install_env=system",
          ...
-      }
-      return (
-         os.execute(table.concat({arg[0], unpack(arg)}, " ")) and
-         os.execute("DESTDIR=$destdir samu -C build install"))
+      ) and
+      ok.setenv("DESTDIR", os.getenv("destdir")) and
+      ok.exec("ninja", "-C", "build", "install") and
+      ok.unsetenv("DESTDIR")
    end,
    ["scons"] = function(...)
       local arg = {

@@ -74,11 +74,8 @@
          "--with-headers=/mnt/usr/include",
       },
       ["prep"] = [[
-         printf "%s\n" rootsbindir=/bin >> configparms
-         printf "%s\n" sbindir=/bin     >> configparms
-         printf "%s\n" slibdir=/lib64   >> configparms
-         printf "%s\n" rtlddir=/lib64   >> configparms
-         printf "%s\n" auditdir=/lib64  >> configparms
+         >>configparms printf "%s=/bin\n"   {,root}sbindir
+         >>configparms printf "%s=/lib64\n" {slib,rtld,audit}dir
          sed -i 's:^lib=.*audit:lib='\''/lib64:' ./elf/sotruss.sh
       ]],
    };
@@ -154,7 +151,7 @@
          sh ../configure AWK=/bin/gawk
          make -C include
          make -C progs tic
-         install procs/tic /mnt/tools/bin
+         install progs/tic /mnt/tools/bin
       ]],
       ["post"] = [[
          cd /mnt/usr/include
@@ -215,8 +212,7 @@
          "--host=x86_64-unknown-linux-gnu",
          "--build=x86_64-pc-linux-gnu",
       },
-      ["prep"] = [[
-    sed -i 's/extras//' Makefile.in ]],
+      ["prep"] = [[ sed -i 's/extras//' Makefile.in ]],
    };
    ["grep"] = {
       ["build"] = rc.configure,
@@ -280,9 +276,9 @@
       ["build"] = rc.gmake,
       ["prep"] = [[ $patch < /usr/okpkg/patches/lua.diff ]],
       ["flags"] = {
-         "CC=x86_64-unknown-linux-gnu-gcc",
-         "RANLIB=x86_64-unknown-linux-gnu-ranlib",
-         'AR="x86_64-unknown-linux-gnu-ar rcu"',
+         "CC=x86_64-unknown-linux-gnu-gcc -std=gnu99",
+         "AR=x86_64-unknown-linux-gnu-ar rcu",
+         "RANLIB= x86_64-unknown-linux-gnu-ranlib",
       },
    };
    ["lzlib"] = {
@@ -320,9 +316,14 @@
          "--host=x86_64-unknown-linux-gnu",
          "--build=x86_64-pc-linux-gnu",
          "--disable-all-programs",
-         "--enable-lib{blkid,fdisk,mount,smartcols,uuid}",
+         "--enable-libblkid",
+         "--enable-libfdisk",
+         "--enable-libmount",
+         "--enable-libsmartcols,uuid",
+         "--enable-libuuid",
          "--exec-prefix=/",
-         "--without-{python,systemd}",
+         "--without-systemd",
+         "--without-python",
       },
    };
    ["libressl"] = {

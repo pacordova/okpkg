@@ -127,6 +127,7 @@
          "-Dcheck-update=no",
       },
       ["prep"] = [[
-    sed -i 's/if not glib_networking_works/if not true/' meson.build ]],
+         sed -i 's/if not glib_networking_works/if not true/' meson.build 
+     ]],
    };
 }

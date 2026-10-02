@@ -9,26 +9,27 @@
       ["b3sum"] = "dc257fd60b7fcf3d64a6eda7be0042af063ea501da2c98c4c2c0813288d3752e",
       ["build"] = "meson",
    };
-   ["-glib2"] = {
-      ["url"] = "https://download.gnome.org/sources/glib/2.88/glib-2.88.3.tar.xz",
-      ["b3sum"] = "3fddb0a182e5ebe4324c5ee13ba0b827809c5c98374e39cecace753401327680",
-      ["build"] = "meson",
-      ["flags"] = {
-         "-Dintrospection=disabled",
-      },
-   };
    ["gobject-introspection"] = {
       ["url"] = "https://download.gnome.org/sources/gobject-introspection/1.86/gobject-introspection-1.86.0.tar.xz",
       ["b3sum"] = "338cdf460c879b70440227e6d8d2e7390e6f80332a6e0728afd8906e2a355d98",
       ["build"] = "meson",
    };
-   ["glib2"] = {
+   ["glib"] = {
       ["url"] = "https://download.gnome.org/sources/glib/2.88/glib-2.88.3.tar.xz",
       ["b3sum"] = "3fddb0a182e5ebe4324c5ee13ba0b827809c5c98374e39cecace753401327680",
-      ["build"] = "meson",
+      ["build"] = rc.meson,
       ["flags"] = {
-         "-Dintrospection=enabled",
-      },
+         "-Dglib_assert=false",
+         "-Dglib_checks=false",
+         "-Dglib_debug=disabled",
+         "-Dintrospection=auto",
+         "-Dlibelf=disabled",
+         "-Dlibmount=disabled",
+         "-Dman-pages=disabled",
+         "-Dman=true",
+         "-Dnls=disabled",
+         "-Dtests=false",
+      }
    };
    ["dbus-glib"] = {
       ["url"] = "https://dbus.freedesktop.org/releases/dbus-glib/dbus-glib-0.114.tar.gz",
@@ -57,8 +58,7 @@
          "-Dudevrulesdir=/lib64/udev/rules.d",
          "-D{gtk-doc,man}=false",
       },
-      ["prep"] = [[
-    sed '/parse_version/d' -i src/linux/integration-test.py ]],
+      ["prep"] = [[ sed '/parse_version/d' -i src/linux/integration-test.py ]],
    };
    ["vala"] = {
       ["url"] = "https://download.gnome.org/sources/vala/0.56/vala-0.56.19.tar.xz",
@@ -67,8 +67,7 @@
       ["flags"] = {
          "--enable-{python3=yes,python=no,valadoc=no}",
       },
-      ["prep"] = [[
-    sed -i '/gvc.h/a#define TRUE 1' libvaladoc/gvc-compat.c ]],
+      ["prep"] = [[ sed -i '/gvc.h/a#define TRUE 1' libvaladoc/gvc-compat.c ]],
    };
    ["alsa-lib"] = {
       ["url"] = "https://alsa-project.org/files/pub/lib/alsa-lib-1.2.16.1.tar.bz2",
@@ -81,8 +80,10 @@
    ["alsa-ucm-conf"] = {
       ["url"] = "https://alsa-project.org/files/pub/lib/alsa-ucm-conf-1.2.16.1.tar.bz2",
       ["b3sum"] = "c10e06767aa92c0294d0612d5d44a227546d16dc3db19feb97a38dc91137e941",
-      ["post"] = [[
-    mkdir -p "$destdir/usr/share/alsa" && cp -a * "$_" ]],
+      ["post"] = [[ 
+         install -d $destdir/usr/share/alsa
+         cp -a . $destdir/usr/share/alsa
+      ]],
    };
    ["alsa-utils"] = {
       ["url"] = "https://alsa-project.org/files/pub/utils/alsa-utils-1.2.16.tar.bz2",
@@ -179,8 +180,7 @@
       ["flags"] = {
          "--disable-openssl",
       },
-      ["prep"] = [[
-    sed -i 's/python/&3/' event_rpcgen.py ]],
+      ["prep"] = [[ sed -i 's/python/&3/' event_rpcgen.py ]],
    };
    ["libexif"] = {
       ["url"] = "https://github.com/libexif/libexif/releases/download/v0.6.26/libexif-0.6.26.tar.xz",
@@ -237,8 +237,7 @@
       ["url"] = "https://ftp.gnu.org/gnu/libidn/libidn2-2.3.8.tar.gz",
       ["b3sum"] = "2f509b025f5c13200468bb843bd3f38ae148d33939051b27a4fb4565646cafce",
       ["build"] = rc.configure,
-      ["post"] = [[
-    rm -fr $destdir/bin $destdir/usr/share/man/man1 ]],
+      ["post"] = [[ rm -fr $destdir/bin $destdir/usr/share/man/man1 ]],
    };
    ["libpsl"] = {
       ["url"] = "https://github.com/rockdaboot/libpsl/releases/download/0.23.3/libpsl-0.23.3.tar.lz",
@@ -249,8 +248,7 @@
       ["url"] = "https://github.com/sass/libsass/archive/3.6.6/libsass-3.6.6.tar.gz",
       ["b3sum"] = "b1c7daf51f7ca3a44e3504695f4b4e2f57efda6acd376aa1041a3231592531cd",
       ["build"] = rc.configure,
-      ["prep"] = [[
-    autoreconf -fi ]],
+      ["prep"] = [[ autoreconf -fi ]],
    };
    ["libtasn1"] = {
       ["url"] = "https://ftp.gnu.org/gnu/libtasn1/libtasn1-4.21.0.tar.gz",
@@ -355,8 +353,7 @@
       ["url"] = "https://github.com/sass/sassc/archive/3.6.2/sassc-3.6.2.tar.gz",
       ["b3sum"] = "b335ce7f38763cbd5a3733dcb9032fb7f2a15fe7f70199612ca1748639c72d47",
       ["build"] = rc.configure,
-      ["prep"] = [[
-    autoreconf -fi ]],
+      ["prep"] = [[ autoreconf -fi ]],
    };
    ["uthash"] = {
       ["url"] = "https://github.com/troydhanson/uthash/archive/v2.3.0/uthash-2.3.0.tar.gz",

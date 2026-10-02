@@ -20,7 +20,7 @@ ok_exec(lua_State *L)
     default:
         wait(&wstatus);
         if (WIFEXITED(wstatus)) {
-            lua_pushinteger(L, WEXITSTATUS(wstatus));
+            lua_pushboolean(L, WEXITSTATUS(wstatus) == 0);
             return 1;
         }
         return 0;

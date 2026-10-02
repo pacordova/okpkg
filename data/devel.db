@@ -17,7 +17,8 @@
          "--bindir=/bin",
          "--predefined-build-type=GNU",
          "--enable-readline",
-         "--disable-{generated,problematic}-tests",
+         "--disable-generated-tests",
+         "--disable-problematic-tests",
       },
    };
    ["check"] = {

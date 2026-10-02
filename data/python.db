@@ -5,7 +5,6 @@
       ["build"] = rc.configure,
       ["flags"] = {
          "--prefix=/opt/python3.13",
-         "--enable-loadable-sqlite-extensions",
          "--without-doc-strings",
          "--without-ensurepip",
          "--with-dbmliborder=gdbm:ndbm",
@@ -16,11 +15,11 @@
          "LDFLAGS_NODIST=-fno-semantic-interposition",
       },
       ["post"] = [[
-         #cd "$destdir/var/lib64/python"*
-         #rm -fr test ./*/test ./*/tests
-         #rm -fr config-* idlelib turtle* pydoc*
-         #cd "$destdir/bin"
-         #rm -f idle* pydoc*
+         cd $destdir/opt/python3.13/lib/python3.13
+         rm -fr test ./*/test ./*/tests
+         rm -fr config-* idlelib turtle* pydoc*
+         cd $destdir/opt/python3.13/bin
+         rm -f idle* pydoc*
       ]],
    };
    ["python-flit-core"] = {

@@ -53,7 +53,8 @@
       ["build"] = rc.gmake,
       ["flags"] = {
          "PREFIX=/usr",
-         "{,S}BINDIR=/bin",
+         "BINDIR=/bin",
+         "SBINDIR=/bin",
       },
    };
    ["dhcpcd"] = {
@@ -105,7 +106,6 @@
          "--disable-compile-inits",
          "--disable-cups",
          "--without-system-libtiff",
-         'CFLAGS="${CFLAGS:--g -O3} -fpic"',
       },
    };
    ["gifsicle"] = {
@@ -122,34 +122,13 @@
          "--without-python",
          "--without-openssl",
          "--with-curl",
-         "--with-perl=/opt/perl/bin/perl",
          "ac_cv_header_libintl_h=no",
       },
-      ["post"] = [[ 
-         GITPERLLIB=/opt/perl/lib/site_perl/5.44.0/x86_64-linux-thread-multi
-         install -d $destdir$GITPERLLIB
-         mv $destdir/usr/share/perl5/* $destdir$GITPERLLIB
-         rmdir $destdir/usr/share/perl5
-      ]]
-   };
-   ["got"] = {
-      ["url"] = "https://gameoftrees.org/releases/portable/got-portable-0.126.tar.gz",
-      ["b3sum"] = "fc8c1bb0273f8b5dff619e0815289bb82f028a67f123c598df340da637bbf6b3",
-      ["build"] = rc.configure,
    };
    ["jq"] = {
       ["url"] = "https://github.com/jqlang/jq/releases/download/jq-1.8.1/jq-1.8.1.tar.gz",
       ["b3sum"] = "9cd38d1bbee1edf69145fb22032b12eccc49cda2741d3bc8b6c1eb9d7d10ff1e",
       ["build"] = rc.configure,
-   };
-   ["btop"] = {
-      ["url"] = "https://github.com/aristocratos/btop/archive/v1.4.7/btop-1.4.7.tar.gz",
-      ["b3sum"] = "7a9090ce12202d3ac5922dceb1c0f60dcfb0dd40bca903fad5570f916e886040",
-      ["build"] = "cmake",
-      ["flags"] = {
-         "-DBTOP_LTO=OFF",
-      },
-      ["post"] = [[ cd $destdir && mv share usr/share ]],
    };
    ["htop"] = {
       ["url"] = "https://github.com/htop-dev/htop/releases/download/3.4.1/htop-3.4.1.tar.xz",
@@ -211,8 +190,11 @@
          "-DCLANG_LINK_CLANG_DYLIB=ON",
          "-DCLANG_RESOURCE_DIR=../usr/libexec/clang/20",
          "-DLLVM_BINUTILS_INCDIR=/usr/include",
-         "-DLLVM_{BUILD,LINK}_LLVM_DYLIB=ON",
-         "-DLLVM_ENABLE_{BINDINGS=OFF,FFI=ON,RTTI=ON}",
+         "-DLLVM_BUILD_LLVM_DYLIB=ON",
+         "-DLLVM_LINK_LLVM_DYLIB=ON",
+         "-DLLVM_ENABLE_BINDINGS=OFF",
+         "-DLLVM_ENABLE_FFI=ON",
+         "-DLLVM_ENABLE_RTTI=ON",
          "-DLLVM_ENABLE_PROJECTS='clang;lld'",
          "-DLLVM_INCLUDE_BENCHMARKS=OFF",
          "-DLLVM_INSTALL_PACKAGE_DIR=usr/share/cmake/llvm",
@@ -226,7 +208,8 @@
       ["build"] = rc.gmake,
       ["flags"] = {
          "PREFIX=/usr",
-         "{,S}BINDIR=/bin",
+         "BINDIR=/bin",
+         "SBINDIR=/bin",
          "LIBDIR=/lib64",
          "MANDIR=/usr/share/man",
          "BUILD_STATIC_LIB=0",
@@ -238,28 +221,14 @@
       ["b3sum"] = "295b34b36ae0c6e21356dbe30d21b34a57a92e13dbfc9f495dd433d69814a2e6",
       ["build"] = rc.configure,
    };
-   ["mesa"] = {
-      ["url"] = "https://mesa.freedesktop.org/archive/mesa-26.1.3.tar.xz",
-      ["b3sum"] = "c91db943c5b9a72302199fbc8ad8014e2fac7896fa0ec35cb71f9f4b338c3975",
-      ["build"] = "meson",
-      ["flags"] = {
-         "-Dplatforms=x11",
-         "-Dgallium-drivers=softpipe",
-         "-Dvulkan-drivers=\"\"",
-         "-Dglx=dri",
-         "-Degl=enabled",
-         "-Dglvnd=enabled",
-         "-D{llvm,gles1,valgrind,libunwind}=disabled",
-      },
-   };
    ["man-pages"] = {
       ["url"] = "https://www.kernel.org/pub/linux/docs/man-pages/man-pages-6.12.tar.xz",
       ["b3sum"] = "f8a1e019739b264b177a7f82fbde4f380ebd6fa31f819fdc0ce8fd73b0317279",
       ["post"] = [[
          make -R GIT=false prefix=$destdir/usr install
-         rm -f "$destdir/usr/share/man/man3/crypt"*
-         rm -f "$destdir/usr/share/man/man5/tzfile.5"
-         rm -f "$destdir/usr/share/man/man7/man.7"
+         rm -f $destdir/usr/share/man/man3/crypt*
+         rm -f $destdir/usr/share/man/man5/tzfile.5
+         rm -f $destdir/usr/share/man/man7/man.7
       ]],
    };
    ["git-manpages"] = {
@@ -283,9 +252,9 @@
          "--without-pam",
       },
       ["post"] = [[
-         mkdir -p $destdir/etc && cd $_
-         >doas.conf printf "permit persist :wheel\n"
-         chmod 600 doas.conf
+         install -d $destdir/etc
+         printf "permit persist :wheel\n" >> $destdir/etc/doas.conf
+         chmod 600 $destdir/etc/doas.conf
       ]],
    };
    ["pciutils"] = {
@@ -293,7 +262,8 @@
       ["b3sum"] = "5401403f9acc28fb3ef563fb52481df4287b668720c6bf2e6dce72da020536a9",
       ["build"] = rc.gmake,
       ["flags"] = {
-         "{,S}BINDIR=/bin",
+         "BINDIR=/bin",
+         "SBINDIR=/bin",
          "LIBDIR=/lib64",
          "MANDIR=/usr/share/man",
          "SHAREDIR=/usr/share/hwdata",
@@ -348,17 +318,6 @@
       ["b3sum"] = "b5bdf998fb93ab1a8b927c6e969b71ef00e69604c8708c47b108a5db4bb080fb",
       ["build"] = rc.configure,
    };
-   ["sqlite"] = {
-      ["url"] = "https://www.sqlite.org/2026/sqlite-autoconf-3530400.tar.gz",
-      ["b3sum"] = "e74b1d27f5053bd29ee7e930ad71d99126b59e4f1a45493440c72d2228e32412",
-      ["build"] = rc.configure,
-      ["flags"] = {
-         "--bindir=/bin",
-         "--libdir=/lib64",
-         "--enable-fts5",
-         "CPPFLAGS=-DSQLITE_ENABLE_COLUMN_METADATA=1",
-      },
-   };
    ["sxiv"] = {
       ["url"] = "https://github.com/xyb3rt/sxiv/archive/v26/sxiv-26.tar.gz",
       ["b3sum"] = "9d658d77fd4f9da3bb02247016ba4d4f1c3afcedc18ac790fb67bf91e66aaff7",
@@ -398,10 +357,18 @@
       ["b3sum"] = "2c3b9ef5563868a7897583936068e4cfee14ec8641de7a1fb23f7653a8bcecf0",
       ["build"] = rc.configure,
       ["flags"] = {
-         "--enable-{cscope,multibyte}",
-         "--disable-{canberra,gpm,gui,netbeans,xim}",
-         "--disable-{perl,python,ruby}interp",
-         "--with-{features=huge,x=no}",
+         "--enable-cscope",
+         "--enable-multibyte",
+         "--disable-gpm",
+         "--disable-canberra",
+         "--disable-gui",
+         "--disable-netbeans",
+         "--disable-xim",
+         "--disable-perlinterp",
+         "--disable-pythoninterp",
+         "--disable-rubyinterp",
+         "--with-features=huge",
+         "--without-x",
       },
       ["prep"] = [[
          printf '#define SYS_VIMRC_FILE "/etc/vimrc"\n' >> src/feature.h
@@ -486,11 +453,6 @@
          "--with-crypto",
       },
    };
-   ["libutf8proc"] = {
-      ["url"] = "https://github.com/JuliaStrings/utf8proc/releases/download/v2.11.3/utf8proc-2.11.3.tar.gz",
-      ["b3sum"] = "9cb58d97810383472b7248ac26b4084b500cf9321952f1d07434f9d3a1af0cea",
-      ["build"] = "cmake",
-   };
    ["serf"] = {
       ["url"] = "https://archive.apache.org/dist/serf/serf-1.3.10.tar.bz2",
       ["b3sum"] = "4febf4f860355e6b3cb50d6b963a2c27a351f39b8da2ac6c4993a7cbfabd2120",
@@ -498,7 +460,8 @@
       ["flags"] = {
          "PREFIX=/usr",
          "LIBDIR=/lib64",
-         "AP{R,U}=/",
+         "APR=/",
+         "APU=/",
       },
    };
    ["subversion"] = {
@@ -508,36 +471,6 @@
       ["flags"] = {
          "--with-swig-perl=/opt/perl/bin/perl",
          "--with-utf8proc=internal",
-      },
-   };
-   ["libsndfile"] = {
-      ["url"] = "https://github.com/libsndfile/libsndfile/releases/download/1.2.2/libsndfile-1.2.2.tar.xz",
-      ["b3sum"] = "fc805e696ee73ee24377329683b7e00af0db78727af553e74840cc813969ba77",
-      ["build"] = rc.configure,
-   };
-   ["pulseaudio"] = {
-      ["url"] = "https://www.freedesktop.org/software/pulseaudio/releases/pulseaudio-17.0.tar.xz",
-      ["b3sum"] = "e56408636f88e3c8b7575795722ebccd7cadb032f7cefda3d055af549b34df4f",
-      ["build"] = "meson",
-      ["flags"] = {
-         "-Ddatabase=gdbm",
-         "-Ddoxygen=false",
-         "-Dbluez5=disabled",
-         "-Dudevrulesdir=/lib64/udev/rules.d",
-      },
-      ["post"] = [[ rm -f $destdir/usr/share/dbus-1/system.d/pulseaudio-system.conf ]],
-   };
-   ["xfce4-pulseaudio-plugin"] = {
-      ["url"] = "https://archive.xfce.org/src/panel-plugins/xfce4-pulseaudio-plugin/0.5/xfce4-pulseaudio-plugin-0.5.1.tar.xz",
-      ["b3sum"] = "8fbdab1e771c1b5a7304be7105d6e81bac344cec58fffb3a5f84a3b1398bd0a3",
-      ["build"] = "meson",
-      ["flags"] = {
-         "-Dkeybinder=disabled",
-         "-Dlibnotify=enabled",
-         "-Dlibcanberra=disabled",
-         "-Dlibxfce4windowing=enabled",
-         "-Dmpris2=disabled",
-         "-Dmixer-command=/bin/true",
       },
    };
    ["xfce4-generic-slider"] = {
@@ -573,7 +506,10 @@
       ["flags"] = {
          "--disable-cracklib-check",
       },
-      ["post"] = [[ mkdir -p $destdir/opt/python3.13 && mv $destdir/usr/lib $_ ]],
+      ["post"] = [[ 
+         install -d $destdir/opt/python3.13
+         mv $destdir/usr/lib $destdir/opt/python3.13 
+      ]],
    };
    ["passwordsafe"] = {
       ["url"] = "https://gitlab.gnome.org/World/secrets/-/archive/5.1/secrets-5.1.tar.bz2",
