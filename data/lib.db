@@ -20,7 +20,7 @@
       ["build"] = rc.meson,
       ["flags"] = {
          "-Dglib_assert=false",
-         "-Dglib_checks=false",
+         --"-Dglib_checks=false",
          "-Dglib_debug=disabled",
          "-Dintrospection=auto",
          "-Dlibelf=disabled",
