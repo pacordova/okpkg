@@ -310,7 +310,6 @@ ok.setenv("CFLAGS",   cfg.cflags:format())
 ok.setenv("CXXFLAGS", cfg.cflags:format())
 ok.setenv("MAKEFLAGS", string.format("-j%s", cfg.jobs))
 
-
 while #arg > 1 do
    if arg[2]:sub(1,2) == "--" then
       load(arg[2]:sub(3,#arg[2]))()

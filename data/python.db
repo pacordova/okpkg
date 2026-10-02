@@ -2,7 +2,7 @@
    ["python"] = {
       ["url"] = "https://www.python.org/ftp/python/3.13.5/Python-3.13.5.tar.xz",
       ["b3sum"] = "69e6f0d7f165b57ccfea2e932be77e60847883877b53b9afbddc13c334c97e2d",
-      ["build"] = "./configure",
+      ["build"] = rc.configure,
       ["flags"] = {
          "--prefix=/opt/python3.13",
          "--enable-loadable-sqlite-extensions",

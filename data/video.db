@@ -7,12 +7,12 @@
    ["libass"] = {
       ["url"] = "https://github.com/libass/libass/releases/download/0.17.5/libass-0.17.5.tar.xz",
       ["b3sum"] = "39e3ffb3884b6e58789a6ae271369eadaac9e0277efc85919535400671631543",
-      ["build"] = "./configure",
+      ["build"] = rc.configure,
    };
    ["ffmpeg"] = {
       ["url"] = "https://ffmpeg.org/releases/ffmpeg-4.4.6.tar.xz",
       ["b3sum"] = "4f6ae153c447eaf8a1f894666f472f2b3749399529e49dc460dbb1073acbfe50",
-      ["build"] = "./configure",
+      ["build"] = rc.configure,
       ["flags"] = {
          "--bindir=/bin",
          "--libdir=/lib64",

@@ -4,29 +4,6 @@
       ["b3sum"] = "6ad90515e3b8ac191a8ecef4e75fbb260236f8e78078ac099d5eccc175af0782",
       ["build"] = rc.configure,
    };
-   ["perl"] = {
-      ["url"] = "https://www.cpan.org/src/5.0/perl-5.44.0.tar.xz",
-      ["b3sum"] = "2b1be108d901a7b5832e17292631b975f98d04d7c615dcde9d7f61c32c79063c",
-      ["build"] = rc.configure,
-      ["flags"] = {
-         "-Dprefix=/opt/perl",
-         "-Duseshrplib",
-         "-Dusethreads",
-         "-Dman1dir=/opt/perl/man/man1",
-         "-Dman3dir=/opt/perl/man/man3",
-      },
-      ["post"] = [[
-         cd $destdir/opt
-         find . -name \*.pod       -exec rm -f     {} +
-         find . -name .packlist    -exec rm -f     {} +
-         find . -name README\*     -exec rm -f     {} +
-         find . -name TODO\*       -exec rm -f     {} +
-         find . -name Change\*     -exec rm -f     {} +
-         find . -name \*.bs        -exec rm -f     {} +
-         find . -name \*.0 -type f -exec rm -f     {} +
-         find ./perl/lib   -type f -exec chmod 644 {} +
-      ]],
-   };
    ["_python"] = {
       ["url"] = "https://www.python.org/ftp/python/3.13.5/Python-3.13.5.tar.xz",
       ["b3sum"] = "69e6f0d7f165b57ccfea2e932be77e60847883877b53b9afbddc13c334c97e2d",
@@ -56,6 +33,29 @@
          "PREFIX=/usr",
          "BINDIR=/bin",
       },
+   };
+   ["perl"] = {
+      ["url"] = "https://www.cpan.org/src/5.0/perl-5.44.0.tar.xz",
+      ["b3sum"] = "2b1be108d901a7b5832e17292631b975f98d04d7c615dcde9d7f61c32c79063c",
+      ["build"] = rc.configure,
+      ["flags"] = {
+         "-Dprefix=/opt/perl",
+         "-Duseshrplib",
+         "-Dusethreads",
+         "-Dman1dir=/opt/perl/man/man1",
+         "-Dman3dir=/opt/perl/man/man3",
+      },
+      ["post"] = [[
+         cd $destdir/opt
+         find . -name \*.pod       -exec rm -f     {} +
+         find . -name .packlist    -exec rm -f     {} +
+         find . -name README\*     -exec rm -f     {} +
+         find . -name TODO\*       -exec rm -f     {} +
+         find . -name Change\*     -exec rm -f     {} +
+         find . -name \*.bs        -exec rm -f     {} +
+         find . -name \*.0 -type f -exec rm -f     {} +
+         find ./perl/lib   -type f -exec chmod 644 {} +
+      ]],
    };
    ["bison"] = {
       ["url"] = "https://ftp.gnu.org/gnu/bison/bison-3.8.2.tar.lz",

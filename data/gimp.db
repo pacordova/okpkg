@@ -28,12 +28,12 @@
    ["libtiff"] = {
       ["url"] = "https://download.osgeo.org/libtiff/tiff-4.7.2.tar.xz",
       ["b3sum"] = "0d6693223ec93ee264d2eb63840808b2278e00e037f9c9e8ead051a42d1852a0",
-      ["build"] = "./configure",
+      ["build"] = rc.configure,
    };
    ["lcms2"] = {
       ["url"] = "https://github.com/mm2/Little-CMS/releases/download/lcms2.19.1/lcms2-2.19.1.tar.gz",
       ["b3sum"] = "f649f683e5360ca77ff4117b036eadb0299c6ca7ef3c561525daec2908a9e5d2",
-      ["build"] = "./configure",
+      ["build"] = rc.configure,
    };
    ["libxmlb"] = {
       ["url"] = "https://github.com/hughsie/libxmlb/releases/download/0.3.25/libxmlb-0.3.25.tar.xz",
@@ -48,7 +48,7 @@
    ["libfyaml"] = {
       ["url"] = "https://github.com/pantoniou/libfyaml/releases/download/v0.9.6/libfyaml-0.9.6.tar.gz",
       ["b3sum"] = "18c2deb847c782bcccaabd18bed64a6ad7ab9f900794913bd3b0435b2ddf6112",
-      ["build"] = "./configure",
+      ["build"] = rc.configure,
    };
    ["appstream"] = {
       ["url"] = "https://www.freedesktop.org/software/appstream/releases/AppStream-1.1.3.tar.xz",
@@ -98,7 +98,7 @@
    ["libmypaint"] = {
       ["url"] = "https://github.com/mypaint/libmypaint/releases/download/v1.6.1/libmypaint-1.6.1.tar.xz",
       ["b3sum"] = "ad2204b6017a2f3b5558685f5a682feb5ffeb8151579bdde9d980a5260c666cb",
-      ["build"] = "./configure",
+      ["build"] = rc.configure,
       ["flags"] = {
          "--enable-introspection=no",
          "--enable-i18n=no",
@@ -107,7 +107,7 @@
    ["mypaint-brushes"] = {
       ["url"] = "https://github.com/mypaint/mypaint-brushes/releases/download/v2.0.2/mypaint-brushes-2.0.2.tar.xz",
       ["b3sum"] = "99da603da1e946c2a7f14b3a1cdc87c678ea822d87eef83b7868f2b8f39cf3b2",
-      ["build"] = "./configure",
+      ["build"] = rc.configure,
    };
    ["appstream-glib"] = {
       ["url"] = "https://people.freedesktop.org/~hughsient/appstream-glib/releases/appstream-glib-0.8.3.tar.xz",
