@@ -76,7 +76,7 @@
    ["meson"] = {
       ["url"] = "https://github.com/mesonbuild/meson/releases/download/1.8.3/meson-1.8.3.tar.gz",
       ["b3sum"] = "a68f3209fcdaf2f1125eebf90c28d4ed6fc9f6b0dfe13049e23aaee6391a31b5",
-      ["build"] = "python-build",
+      ["build"] = rc.python,
    };
    ["nasm"] = {
       ["url"] = "https://www.nasm.us/pub/nasm/releasebuilds/3.02/nasm-3.02.tar.xz",
