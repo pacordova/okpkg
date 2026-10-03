@@ -10,22 +10,12 @@
          "-Dbuild-translations=false",
       },
    };
-   ["-freetype2"] = {
-      ["url"] = "https://downloads.sourceforge.net/freetype/freetype-2.14.3.tar.xz",
-      ["b3sum"] = "0c791e2ea02be6e3cddd6e69ee84d66d869190e5275d8a34e282517769f1192e",
-      ["build"] = rc.meson,
-      ["flags"] = {
-         "-Dharfbuzz=disabled",
-      },
-   };
    ["harfbuzz"] = {
       ["url"] = "https://github.com/harfbuzz/harfbuzz/releases/download/12.3.2/harfbuzz-12.3.2.tar.xz",
       ["b3sum"] = "61732d432cc1a93ef5718d7cdee468be01dc77f3fb2dc27dcbb0541a654cd9c0",
       ["build"] = rc.meson,
       ["flags"] = {
-         "-D{glib,gobject,introspection}=enabled",
          "-Dfreetype=enabled",
-         "-Dgraphite2=disabled",
          "-Dcairo=disabled",
          "-Dicu=disabled",
          "-Dtests=disabled",
@@ -36,9 +26,6 @@
       ["url"] = "https://downloads.sourceforge.net/freetype/freetype-2.14.3.tar.xz",
       ["b3sum"] = "0c791e2ea02be6e3cddd6e69ee84d66d869190e5275d8a34e282517769f1192e",
       ["build"] = rc.meson,
-      ["flags"] = {
-         "-Dharfbuzz=enabled",
-      },
    };
    ["fontconfig"] = {
       ["url"] = "https://gitlab.freedesktop.org/api/v4/projects/890/packages/generic/fontconfig/2.17.1/fontconfig-2.17.1.tar.xz",
@@ -82,28 +69,12 @@
          install -m 644 ttf/*.ttf $destdir/usr/share/fonts/DejaVu
       ]],
    };
-   ["ttf-go"] = {
-      ["url"] = "https://github.com/golang/image/archive/v0.17.0/image-0.17.0.tar.gz",
-      ["b3sum"] = "aaf0de9c51cd8d62ec40dfe714155f744dfe529ae074683dbbbd52480e28fcac",
-      ["post"] = [[
-         install -d $destdir/usr/share/fonts/Go
-         install -m 644 font/gofont/ttfs/*.ttf $destdir/usr/share/fonts/Go
-      ]],
-   };
    ["ttf-liberation"] = {
       ["url"] = "https://github.com/liberationfonts/liberation-fonts/files/7261482/liberation-fonts-ttf-2.1.5.tar.gz",
       ["b3sum"] = "5ca2163d2f2ec538005381049fd2f02b531b868903ace9a49cb10b74cf33035d",
       ["post"] = [[
          install -d $destdir/usr/share/fonts/liberation
          install -m 644 *.ttf $destdir/usr/share/fonts/liberation
-      ]],
-   };
-   ["ttf-sazanami"] = {
-      ["url"] = "http://osdn.dl.sourceforge.jp/efont/10087/sazanami-20040629.tar.bz2",
-      ["b3sum"] = "bf1bb0ecd19327399fcaa478fd5385654c74963459a2940c56952144aba16b73",
-      ["post"] = [[
-         install -d $destdir/usr/share/fonts/Sazanami
-         install -m 644 *.ttf $destdir/usr/share/fonts/Sazanami
       ]],
    };
    ["xorg-util-macros"] = {
