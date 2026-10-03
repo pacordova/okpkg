@@ -2,7 +2,7 @@
    ["shared-mime-info"] = {
       ["url"] = "https://gitlab.freedesktop.org/xdg/shared-mime-info/-/archive/2.4/shared-mime-info-2.4.tar.bz2",
       ["b3sum"] = "d92cde705149ed71e45f4527ca8055ada4eb25fa1db5ce09287008d06b539935",
-      ["build"] = "meson",
+      ["build"] = rc.meson,
       ["flags"] = {
          "-Dupdate-mimedb=false",
          "-Dbuild-tools=true",
@@ -13,7 +13,7 @@
    ["-freetype2"] = {
       ["url"] = "https://downloads.sourceforge.net/freetype/freetype-2.14.3.tar.xz",
       ["b3sum"] = "0c791e2ea02be6e3cddd6e69ee84d66d869190e5275d8a34e282517769f1192e",
-      ["build"] = "meson",
+      ["build"] = rc.meson,
       ["flags"] = {
          "-Dharfbuzz=disabled",
       },
@@ -21,7 +21,7 @@
    ["harfbuzz"] = {
       ["url"] = "https://github.com/harfbuzz/harfbuzz/releases/download/12.3.2/harfbuzz-12.3.2.tar.xz",
       ["b3sum"] = "61732d432cc1a93ef5718d7cdee468be01dc77f3fb2dc27dcbb0541a654cd9c0",
-      ["build"] = "meson",
+      ["build"] = rc.meson,
       ["flags"] = {
          "-D{glib,gobject,introspection}=enabled",
          "-Dfreetype=enabled",
@@ -35,7 +35,7 @@
    ["freetype2"] = {
       ["url"] = "https://downloads.sourceforge.net/freetype/freetype-2.14.3.tar.xz",
       ["b3sum"] = "0c791e2ea02be6e3cddd6e69ee84d66d869190e5275d8a34e282517769f1192e",
-      ["build"] = "meson",
+      ["build"] = rc.meson,
       ["flags"] = {
          "-Dharfbuzz=enabled",
       },
@@ -114,7 +114,7 @@
    ["xorgproto"] = {
       ["url"] = "https://xorg.freedesktop.org/archive/individual/proto/xorgproto-2025.1.tar.xz",
       ["b3sum"] = "80978f0950aab96f2b83750c6428e7ed7ea31fac0464d8cda23c759f457785f1",
-      ["build"] = "meson",
+      ["build"] = rc.meson,
    };
    ["libxau"] = {
       ["url"] = "https://x.org/pub/individual/lib/libXau-1.0.12.tar.xz",
@@ -284,12 +284,12 @@
    ["libpciaccess"] = {
       ["url"] = "https://x.org/pub/individual/lib/libpciaccess-0.19.tar.xz",
       ["b3sum"] = "2bd8a8cc35aa4bb34dbb043547496367ba66d27b1e3b84a9cae47f0ee29c9c66",
-      ["build"] = "meson",
+      ["build"] = rc.meson,
    };
    ["libxkbfile"] = {
       ["url"] = "https://x.org/pub/individual/lib/libxkbfile-1.2.0.tar.xz",
       ["b3sum"] = "47719f5b87e2090a1fd093f08fd162985ae4263381eee79785e66ca33e731981",
-      ["build"] = "meson",
+      ["build"] = rc.meson,
    };
    ["libxshmfence"] = {
       ["url"] = "https://x.org/pub/individual/lib/libxshmfence-1.3.3.tar.xz",
@@ -304,7 +304,7 @@
    ["libxcvt"] = {
       ["url"] = "https://x.org/pub/individual/lib/libxcvt-0.1.3.tar.xz",
       ["b3sum"] = "a6c8f264a70a742d2634f53d19489b984c28df11cb5653042e8921f7596534bb",
-      ["build"] = "meson",
+      ["build"] = rc.meson,
    };
    ["xcb-util"] = {
       ["url"] = "https://xcb.freedesktop.org/dist/xcb-util-0.4.1.tar.xz",
@@ -339,7 +339,7 @@
    ["libglvnd"] = {
       ["url"] = "https://gitlab.freedesktop.org/glvnd/libglvnd/-/archive/v1.7.0/libglvnd-v1.7.0.tar.gz",
       ["b3sum"] = "08459ce54c574683038ce1c9c8e39447d92a8cc78bb13a4c5af0457bf38af2d4",
-      ["build"] = "meson",
+      ["build"] = rc.meson,
       ["flags"] = {
          "-Dgles1=false",
       },
@@ -347,7 +347,7 @@
    ["libdrm"] = {
       ["url"] = "https://dri.freedesktop.org/libdrm/libdrm-2.4.134.tar.xz",
       ["b3sum"] = "c1e986d085745dd58e40e8409e4d0edf269742cbe22a1fe6e4ce94a17207eb70",
-      ["build"] = "meson",
+      ["build"] = rc.meson,
       ["flags"] = {
          "-D{intel=enabled,udev=true,valgrind=disabled}",
       },
@@ -355,7 +355,7 @@
    ["libgbm"] = {
       ["url"] = "https://github.com/glfs-book/libgbm/archive/1.0.7/libgbm-1.0.7.tar.gz",
       ["b3sum"] = "a69a6137e95982dff7a07b2b4c9a6b4180e9aa8d6b6f6e121d1e2d5546b3308e",
-      ["build"] = "meson",
+      ["build"] = rc.meson,
    };
    ["xbitmaps"] = {
       ["url"] = "https://x.org/pub/individual/data/xbitmaps-1.1.4.tar.xz",
@@ -552,7 +552,7 @@
    ["xkeyboard-config"] = {
       ["url"] = "https://x.org/pub/individual/data/xkeyboard-config/xkeyboard-config-2.48.tar.xz",
       ["b3sum"] = "4565e15c4f5807eddb5c87e0b3e3f6db7bb8f20e1348fe428d1d861bcd74288a",
-      ["build"] = "meson",
+      ["build"] = rc.meson,
       ["flags"] = {
          "-Dcompat-rules=true",
          "-Dxorg-rules-symlinks=true",
@@ -561,7 +561,7 @@
    ["libxkbcommon"] = {
       ["url"] = "https://github.com/xkbcommon/libxkbcommon/archive/xkbcommon-1.13.2/xkbcommon-1.13.2.tar.gz",
       ["b3sum"] = "b6b869719334d160764d2fc3f1dd134dd903b3ea1b0605cd05e6e36917311a54",
-      ["build"] = "meson",
+      ["build"] = rc.meson,
       ["flags"] = {
          "-Denable-wayland=false",
          "-Denable-docs=false",
@@ -570,7 +570,7 @@
    ["libepoxy"] = {
       ["url"] = "https://github.com/anholt/libepoxy/archive/1.5.10/libepoxy-1.5.10.tar.gz",
       ["b3sum"] = "df74575d2a4ca65bf98d15ed6357cb066b6369704137e53b5e1d35b6d582657e",
-      ["build"] = "meson",
+      ["build"] = rc.meson,
    };
    ["xorg-server"] = {
       ["url"] = "https://x.org/archive/individual/xserver/xorg-server-21.1.24.tar.xz",
@@ -603,7 +603,7 @@
    ["libevdev"] = {
       ["url"] = "https://www.freedesktop.org/software/libevdev/libevdev-1.13.7.tar.xz",
       ["b3sum"] = "100960196339aeb55078db26182f59f60810dd8bab4b7dd2b794acf1a92a1f80",
-      ["build"] = "meson",
+      ["build"] = rc.meson,
       ["flags"] = {
          "-D{documentation,tests,tools}=disabled",
       },
@@ -616,7 +616,7 @@
    ["libinput"] = {
       ["url"] = "https://gitlab.freedesktop.org/libinput/libinput/-/archive/1.31.3/libinput-1.31.3.tar.bz2",
       ["b3sum"] = "ae74b2c2202357119ec0f6e65951a9b2b38332ae5c8c3f59b05f6d80598ef033",
-      ["build"] = "meson",
+      ["build"] = rc.meson,
       ["flags"] = {
          "-Dudev-dir=/lib64/udev",
          "-Dlibwacom=false",

@@ -7,12 +7,12 @@
    ["usbutils"] = {
       ["url"] = "https://mirrors.kernel.org/pub/linux/utils/usb/usbutils/usbutils-019.tar.xz",
       ["b3sum"] = "dc257fd60b7fcf3d64a6eda7be0042af063ea501da2c98c4c2c0813288d3752e",
-      ["build"] = "meson",
+      ["build"] = rc.meson,
    };
    ["gobject-introspection"] = {
       ["url"] = "https://download.gnome.org/sources/gobject-introspection/1.86/gobject-introspection-1.86.0.tar.xz",
       ["b3sum"] = "338cdf460c879b70440227e6d8d2e7390e6f80332a6e0728afd8906e2a355d98",
-      ["build"] = "meson",
+      ["build"] = rc.meson,
    };
    ["glib"] = {
       ["url"] = "https://download.gnome.org/sources/glib/2.88/glib-2.88.3.tar.xz",
@@ -36,7 +36,7 @@
    ["json-glib"] = {
       ["url"] = "https://download.gnome.org/sources/json-glib/1.10/json-glib-1.10.8.tar.xz",
       ["b3sum"] = "5de3c263fda3e3874874c2700c20565f2a41ba4edeff4d348730652609d791a9",
-      ["build"] = "meson",
+      ["build"] = rc.meson,
       ["flags"] = {
          "-D{gtk_doc=disabled,nls=disabled,tests=false}",
       },
@@ -44,12 +44,12 @@
    ["libgudev"] = {
       ["url"] = "https://download.gnome.org/sources/libgudev/238/libgudev-238.tar.xz",
       ["b3sum"] = "25071fd0b6d72fed2e6739497d9ef0d8694e840d7eb24a15f4acf6fad5e5cd12",
-      ["build"] = "meson",
+      ["build"] = rc.meson,
    };
    ["upower"] = {
       ["url"] = "https://gitlab.freedesktop.org/upower/upower/-/archive/v1.90.9/upower-v1.90.9.tar.bz2",
       ["b3sum"] = "e4912d7ed183ffdc32991a13db8a0931822863f4b9b64dc1e25494edbfc33d17",
-      ["build"] = "meson",
+      ["build"] = rc.meson,
       ["flags"] = {
          "-Dsystemdsystemunitdir=no",
          "-Dudevrulesdir=/lib64/udev/rules.d",
@@ -127,7 +127,7 @@
    ["iso-codes"] = {
       ["url"] = "https://salsa.debian.org/iso-codes-team/iso-codes/-/archive/v4.20.1/iso-codes-v4.20.1.tar.gz",
       ["b3sum"] = "eae7f54d0a736f5088f74660f0e65027b6f0838a64f4e74fe2e165f1ee46964d",
-      ["build"] = "meson",
+      ["build"] = rc.meson,
    };
    ["json-c"] = {
       ["url"] = "https://github.com/json-c/json-c/releases/download/json-c-0.19-20260627/json-c-0.19.tar.gz",
@@ -339,7 +339,7 @@
    ["pixman"] = {
       ["url"] = "https://xorg.freedesktop.org/releases/individual/lib/pixman-0.46.4.tar.xz",
       ["b3sum"] = "da5c9b8ced71dce29fb5a1e393564cf32b8882368997d6705442f8e72524bf28",
-      ["build"] = "meson",
+      ["build"] = rc.meson,
    };
    ["popt"] = {
       ["url"] = "http://ftp.rpm.org/popt/releases/popt-1.x/popt-1.19.tar.gz",

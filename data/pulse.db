@@ -7,7 +7,7 @@
    ["pulseaudio"] = {
       ["url"] = "https://www.freedesktop.org/software/pulseaudio/releases/pulseaudio-17.0.tar.xz",
       ["b3sum"] = "e56408636f88e3c8b7575795722ebccd7cadb032f7cefda3d055af549b34df4f",
-      ["build"] = "meson",
+      ["build"] = rc.meson,
       ["flags"] = {
          "-Ddatabase=gdbm",
          "-Ddoxygen=false",
@@ -19,7 +19,7 @@
    ["xfce4-pulseaudio-plugin"] = {
       ["url"] = "https://archive.xfce.org/src/panel-plugins/xfce4-pulseaudio-plugin/0.5/xfce4-pulseaudio-plugin-0.5.1.tar.xz",
       ["b3sum"] = "8fbdab1e771c1b5a7304be7105d6e81bac344cec58fffb3a5f84a3b1398bd0a3",
-      ["build"] = "meson",
+      ["build"] = rc.meson,
       ["flags"] = {
          "-Dkeybinder=disabled",
          "-Dlibnotify=enabled",

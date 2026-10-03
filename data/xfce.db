@@ -2,7 +2,7 @@
    ["desktop-file-utils"] = {
       ["url"] = "https://www.freedesktop.org/software/desktop-file-utils/releases/desktop-file-utils-0.28.tar.xz",
       ["b3sum"] = "09ecf2d0ddcf67e13033676379d1ee5f4fbae52c8dc9fb45c28149dca31c1c2d",
-      ["build"] = "meson",
+      ["build"] = rc.meson,
       ["post"] = [[
          cd "$destdir"
          rm -fr usr/bin
@@ -12,14 +12,14 @@
    ["gsettings-desktop-schemas"] = {
       ["url"] = "https://download.gnome.org/sources/gsettings-desktop-schemas/50/gsettings-desktop-schemas-50.1.tar.xz",
       ["b3sum"] = "9c966b54eb832a5a0e79f4f947a9d34c7a7ad57b8958d50612d485f047dd9102",
-      ["build"] = "meson",
+      ["build"] = rc.meson,
       ["prep"] = [[
     sed -i -r 's:"(/system):"/org/gnome\1:g' schemas/*.in ]],
    };
    ["xdg-user-dirs"] = {
       ["url"] = "https://user-dirs.freedesktop.org/releases/xdg-user-dirs-0.20.tar.xz",
       ["b3sum"] = "cb95fa26bc741d1cea6abb3e15042deb89efe9a9ca41a0953da5a725c991f006",
-      ["build"] = "meson",
+      ["build"] = rc.meson,
       ["flags"] = {
          "-Ddocs=false",
       },
@@ -34,7 +34,7 @@
    ["at-spi2-core"] = {
       ["url"] = "https://download.gnome.org/sources/at-spi2-core/2.60/at-spi2-core-2.60.6.tar.xz",
       ["b3sum"] = "83e4fa806672e8c639869dc9fd508f33294bb744366bd06c426d731c0280077a",
-      ["build"] = "meson",
+      ["build"] = rc.meson,
       ["flags"] = {
          "-Dsystemd_user_dir=/tmp",
          "-Ddefault_bus=dbus-daemon",
@@ -44,12 +44,12 @@
    ["cairo"] = {
       ["url"] = "https://cairographics.org/releases/cairo-1.18.4.tar.xz",
       ["b3sum"] = "b9fa14e02f85ec4e72396c62236c98502d04dbbdf8daf01ab9557a1c7aa7106e",
-      ["build"] = "meson",
+      ["build"] = rc.meson,
    };
    ["pango"] = {
       ["url"] = "https://download.gnome.org/sources/pango/1.58/pango-1.58.2.tar.xz",
       ["b3sum"] = "5188d64063c712d0afd4bc51cc8b05e53a5bbaafa8f6e696d65904a0243b6447",
-      ["build"] = "meson",
+      ["build"] = rc.meson,
       ["flags"] = {
          "-Dintrospection=enabled",
       },
@@ -57,7 +57,7 @@
    ["gdk-pixbuf2"] = {
       ["url"] = "https://download.gnome.org/sources/gdk-pixbuf/2.42/gdk-pixbuf-2.42.12.tar.xz",
       ["b3sum"] = "edf54b48c7008c0ec52e0224b6a10ea680bbb94c23b71fbe5d19ae8e72706bc6",
-      ["build"] = "meson",
+      ["build"] = rc.meson,
       ["flags"] = {
          "-Dgif=enabled",
          "-Djpeg=enabled",
@@ -90,7 +90,7 @@
    ["gtk3"] = {
       ["url"] = "https://download.gnome.org/sources/gtk/3.24/gtk-3.24.52.tar.xz",
       ["b3sum"] = "01591a22d532a0f92fd980be43b3964d5430b7e0ccba07b49bc0446fa22f8040",
-      ["build"] = "meson",
+      ["build"] = rc.meson,
       ["flags"] = {
          "-Dx11_backend=true",
          "-Dwayland_backend=false",
@@ -112,7 +112,7 @@
    ["gtksourceview4"] = {
       ["url"] = "https://download.gnome.org/sources/gtksourceview/4.8/gtksourceview-4.8.4.tar.xz",
       ["b3sum"] = "0094836997439286c6b3b5a204b6e51ab7357c7d41bb0cb6d555b1a3bca95c2b",
-      ["build"] = "meson",
+      ["build"] = rc.meson,
       ["flags"] = {
          "-Dgtk_doc=false",
       },
@@ -120,12 +120,12 @@
    ["libhandy"] = {
       ["url"] = "https://download.gnome.org/sources/libhandy/1.8/libhandy-1.8.3.tar.xz",
       ["b3sum"] = "87415aff7851cf8f0212f8e01158179341d99bdbe60e4771ee537a258027cc91",
-      ["build"] = "meson",
+      ["build"] = rc.meson,
    };
    ["libnotify"] = {
       ["url"] = "https://download.gnome.org/sources/libnotify/0.8/libnotify-0.8.8.tar.xz",
       ["b3sum"] = "b31e0395935578910e433d63f9ad82278650a1531ecac85816dba868e9559300",
-      ["build"] = "meson",
+      ["build"] = rc.meson,
       ["flags"] = {
          "-Dgtk_doc=false",
          "-Dman=false",
@@ -169,7 +169,7 @@
    ["evince"] = {
       ["url"] = "https://download.gnome.org/sources/evince/48/evince-48.4.tar.xz",
       ["b3sum"] = "42a6224890aed4e90a12595b38b7749d93007eb489485474d6029aff08dfa874",
-      ["build"] = "meson",
+      ["build"] = rc.meson,
       ["flags"] = {
          "-D{gspell,keyring,tiff}=disabled",
          "-D{gtk_doc,nautilus,user_doc}=false",
@@ -180,7 +180,7 @@
    ["gcr4"] = {
       ["url"] = "https://download.gnome.org/sources/gcr/4.4/gcr-4.4.0.1.tar.xz",
       ["b3sum"] = "b0944996c0b6a2d7c22c2e6cbae51104936a0a4286aa0626225176907235fe08",
-      ["build"] = "meson",
+      ["build"] = rc.meson,
       ["flags"] = {
          "-D{gtk4,gtk_doc,ssh_agent}=false",
       },
@@ -188,7 +188,7 @@
    ["gvfs"] = {
       ["url"] = "https://download.gnome.org/sources/gvfs/1.60/gvfs-1.60.1.tar.xz",
       ["b3sum"] = "fdbc284a8dac91cdb6424df62c99228934508a7d0892492be836bf3b6fa29d80",
-      ["build"] = "meson",
+      ["build"] = rc.meson,
       ["flags"] = {
          "-D{afc,bluray,dnssd,fuse,goa,google,gphoto2,mtp,nfs,smb}=false",
          "-D{admin,cdda,http,keyring,logind,udisks2}=false",
@@ -239,7 +239,7 @@
    ["libwnck3"] = {
       ["url"] = "https://download.gnome.org/sources/libwnck/43/libwnck-43.3.tar.xz",
       ["b3sum"] = "711e508f062cc90c660b56f21c5fd237db156ea51fe364fb5e9e766556c2de42",
-      ["build"] = "meson",
+      ["build"] = rc.meson,
       ["flags"] = {
          "-Dintrospection=disabled",
          "-Dstartup_notification=disabled",
@@ -262,7 +262,7 @@
    ["libdisplay-info"] = {
       ["url"] = "https://gitlab.freedesktop.org/emersion/libdisplay-info/-/releases/0.4.0/downloads/libdisplay-info-0.4.0.tar.xz",
       ["b3sum"] = "e1199b840de32f45f18192f7fbea295a80105bbfc6907000a48677128b082dc6",
-      ["build"] = "meson",
+      ["build"] = rc.meson,
    };
    ["libxfce4windowing"] = {
       ["url"] = "https://archive.xfce.org/src/xfce/libxfce4windowing/4.20/libxfce4windowing-4.20.7.tar.bz2",
@@ -370,7 +370,7 @@
    ["xfce4-screensaver"] = {
       ["url"] = "https://archive.xfce.org/src/apps/xfce4-screensaver/4.20/xfce4-screensaver-4.20.2.tar.xz",
       ["b3sum"] = "55daa816dfbe53a38dd83d6a394e6869faba6adddabe4fc598a6606084cd1560",
-      ["build"] = "meson",
+      ["build"] = rc.meson,
       ["flags"] = {
          "-Dauthentication-scheme=pwent",
          "-Dsession-manager=consolekit",
@@ -402,22 +402,22 @@
    ["xfce4-battery-plugin"] = {
       ["url"] = "https://archive.xfce.org/src/panel-plugins/xfce4-battery-plugin/1.2/xfce4-battery-plugin-1.2.0.tar.xz",
       ["b3sum"] = "8b8e3160ab7492172365b6ec9a2da93d6c4ba3701e6037c4ff1a96f8dcf8b579",
-      ["build"] = "meson",
+      ["build"] = rc.meson,
    };
    ["thunar-archive-plugin"] = {
       ["url"] = "https://archive.xfce.org/src/thunar-plugins/thunar-archive-plugin/0.6/thunar-archive-plugin-0.6.0.tar.xz",
       ["b3sum"] = "074a01a0e8b1bc996c5a8c042d136b4d70b286f3b5e55c14c711ce1c22b7baec",
-      ["build"] = "meson",
+      ["build"] = rc.meson,
    };
    ["mousepad"] = {
       ["url"] = "https://archive.xfce.org/src/apps/mousepad/0.7/mousepad-0.7.0.tar.xz",
       ["b3sum"] = "c521e32a4f2d9fbe3e6e34e4e54fa556e19de5349abaa1c7950f3c485457c92e",
-      ["build"] = "meson",
+      ["build"] = rc.meson,
    };
    ["ristretto"] = {
       ["url"] = "https://archive.xfce.org/src/apps/ristretto/0.14/ristretto-0.14.0.tar.xz",
       ["b3sum"] = "78fa3b9b35be631ad53bae6497de611d829c1df81fbf8ea36d40e3fd602d05ab",
-      ["build"] = "meson",
+      ["build"] = rc.meson,
    };
    ["xarchiver"] = {
       ["url"] = "https://github.com/ib/xarchiver/archive/0.5.4.27/xarchiver-0.5.4.27.tar.gz",
@@ -427,12 +427,12 @@
    ["xfce4-taskmanager"] = {
       ["url"] = "https://archive.xfce.org/src/apps/xfce4-taskmanager/1.6/xfce4-taskmanager-1.6.0.tar.xz",
       ["b3sum"] = "94586e56cd5583ec0e4a05046b7e62656449f997ac92ec3598ed344783b42609",
-      ["build"] = "meson",
+      ["build"] = rc.meson,
    };
    ["xfce4-screenshooter"] = {
       ["url"] = "https://archive.xfce.org/src/apps/xfce4-screenshooter/1.11/xfce4-screenshooter-1.11.3.tar.xz",
       ["b3sum"] = "db6c07c5aa28c69e9cdb3a3b0140ea6ad4bdd7799033efa917eecb9c85c31d97",
-      ["build"] = "meson",
+      ["build"] = rc.meson,
    };
    ["optipng"] = {
       ["url"] = "https://downloads.sourceforge.net/optipng/optipng-7.9.1.tar.gz",
@@ -447,21 +447,21 @@
    ["hicolor-icon-theme"] = {
       ["url"] = "https://icon-theme.freedesktop.org/releases/hicolor-icon-theme-0.18.tar.xz",
       ["b3sum"] = "062e251872a23ecf47a127293ae9abf98a1c912f82f819d0cebccf8d9415deb2",
-      ["build"] = "meson",
+      ["build"] = rc.meson,
       ["post"] = [[
     gtk-update-icon-cache $destdir/usr/share/icons/hicolor ]],
    };
    ["adwaita-icon-theme"] = {
       ["url"] = "https://download.gnome.org/sources/adwaita-icon-theme/50/adwaita-icon-theme-50.0.tar.xz",
       ["b3sum"] = "754c438f00a5cc331e85b273975866fe986681f8280626ca114b8b44770f92da",
-      ["build"] = "meson",
+      ["build"] = rc.meson,
       ["post"] = [[
     gtk-update-icon-cache $destdir/usr/share/icons/Adwaita ]],
    };
    ["greybird"] = {
       ["url"] = "https://github.com/shimmerproject/Greybird/archive/v3.22.14/Greybird-3.22.14.tar.gz",
       ["b3sum"] = "e1a90223520f6cb52ef99f34aeb56b38b29f37a20bec8c3427d23cbfef58e9fa",
-      ["build"] = "meson",
+      ["build"] = rc.meson,
    };
    ["elementary-xfce-icon-theme"] = {
       ["url"] = "https://github.com/shimmerproject/elementary-xfce/archive/v0.20/elementary-xfce-0.20.tar.gz",

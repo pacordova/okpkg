@@ -2,7 +2,7 @@
    ["libvdpau"] = {
       ["url"] = "https://gitlab.freedesktop.org/vdpau/libvdpau/-/archive/1.5/libvdpau-1.5.tar.bz2",
       ["b3sum"] = "6a3811b79ea0ac523dca41c00e7736a1da0279a57e001bde89789830a842df0b",
-      ["build"] = "meson",
+      ["build"] = rc.meson,
    };
    ["libass"] = {
       ["url"] = "https://github.com/libass/libass/releases/download/0.17.5/libass-0.17.5.tar.xz",
@@ -36,7 +36,7 @@
    ["mpv"] = {
       ["url"] = "https://github.com/mpv-player/mpv/archive/v0.35.1/mpv-0.35.1.tar.gz",
       ["b3sum"] = "41182bebc20c21bdfa1a4b9189427e1dd840cf3684876b2c521c4d03e36674cd",
-      ["build"] = "meson",
+      ["build"] = rc.meson,
       ["flags"] = {
          "-Dlua=luajit",
          "-Dbuild-date=false",

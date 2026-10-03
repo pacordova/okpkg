@@ -79,7 +79,7 @@
    ["iputils"] = {
       ["url"] = "https://github.com/iputils/iputils/releases/download/20250605/iputils-20250605.tar.xz",
       ["b3sum"] = "1ad4da5fafe5cb456ba3bc10e25b41c5e7cb2f1c50f21ca0c9d2404c39531d1d",
-      ["build"] = "meson",
+      ["build"] = rc.meson,
    };
    ["netcat"] = {
       ["url"] = "https://downloads.sourceforge.net/nc110/nc110.20180111.tar.xz",
