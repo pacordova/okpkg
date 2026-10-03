@@ -123,7 +123,7 @@
    ["wpa-supplicant"] = {
       ["url"] = "https://w1.fi/releases/wpa_supplicant-2.11.tar.gz",
       ["b3sum"] = "3b61ac45430831f5fdc4ef8d00b5415075a2f236f591213eca22c9c7312707c3",
-      ["build"] = "make",
+      ["build"] = rc.gmake,
       ["flags"] = {
          "--directory=wpa_supplicant",
          "BINDIR=/bin",

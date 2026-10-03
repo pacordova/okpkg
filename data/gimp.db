@@ -2,7 +2,7 @@
    ["exiv2"] = {
       ["url"] = "https://github.com/Exiv2/exiv2/archive/v0.28.8/exiv2-0.28.8.tar.gz",
       ["b3sum"] = "f38d61b8edfb1d4380d95054e47d50205e5e9e007beb1c868971452d95ad903c",
-      ["build"] = "cmake",
+      ["build"] = rc.cmake,
       ["flags"] = {
          "-DEXIV2_BUILD_EXIV2_COMMAND=OFF",
          "-DEXIV2_ENABLE_BMFF=ON",

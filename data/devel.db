@@ -86,7 +86,7 @@
    ["samurai"] = {
       ["url"] = "https://github.com/michaelforney/samurai/archive/1.3/samurai-1.3.tar.gz",
       ["b3sum"] = "4444d206d7c502396cfe446492e48432dbeb8fd2f0939948ffe38213af395f10",
-      ["build"] = "make",
+      ["build"] = rc.gmake,
       ["flags"] = {
          "PREFIX=/usr",
          "BINDIR=/bin",
@@ -95,7 +95,7 @@
    ["scdoc"] = {
       ["url"] = "/var/cache/distfiles/scdoc-1.11.5.tar.gz",
       ["b3sum"] = "3fd37323fc413c43b7962de5f68213a1c244233b22a7020b015c73e710b0f7b4",
-      ["build"] = "make",
+      ["build"] = rc.gmake,
       ["flags"] = {
          "PREFIX=/usr",
          "BINDIR=/bin",

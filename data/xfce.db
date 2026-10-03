@@ -143,7 +143,7 @@
    ["poppler"] = {
       ["url"] = "https://poppler.freedesktop.org/poppler-26.08.0.tar.xz",
       ["b3sum"] = "8fe960ea0a05165aaaf30e116fe252f368a65ddfb703f8725898eb6732f18169",
-      ["build"] = "cmake",
+      ["build"] = rc.cmake,
       ["flags"] = {
          "-DCMAKE_INSTALL_PREFIX=/usr",
          "-DENABLE_UNSTABLE_API_ABI_HEADERS=ON",
@@ -161,7 +161,7 @@
    ["poppler-data"] = {
       ["url"] = "https://poppler.freedesktop.org/poppler-data-0.4.12.tar.gz",
       ["b3sum"] = "99ed0902cb041898089ee666e6ae806e953da6d5672081df942a6dfd54f34e33",
-      ["build"] = "make",
+      ["build"] = rc.gmake,
       ["flags"] = {
          "prefix=/usr",
       },

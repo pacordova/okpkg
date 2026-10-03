@@ -2,7 +2,7 @@
    ["apulse"] = {
       ["url"] = "https://github.com/i-rinat/apulse/archive/v0.1.13/apulse-0.1.13.tar.gz",
       ["b3sum"] = "e6940335c56e088af4b69e8ad47f37d5f9ffc3365ca9f047b799188548cc9eba",
-      ["build"] = "cmake",
+      ["build"] = rc.cmake,
       ["post"] = [[
          cd $destdir
          mv usr/lib usr/lib64
@@ -18,7 +18,7 @@
    ["conky"] = {
       ["url"] = "https://github.com/brndnmtthws/conky/archive/v1.22.3/conky-1.22.3.tar.gz",
       ["b3sum"] = "17989a01b65edf0d4b12b186da11669eca1260161595580e441e7b8bb82593d9",
-      ["build"] = "cmake",
+      ["build"] = rc.cmake,
    };
    ["cryptsetup"] = {
       ["url"] = "https://kernel.org/pub/linux/utils/cryptsetup/v2.8/cryptsetup-2.8.4.tar.xz",
@@ -181,7 +181,7 @@
    ["llvm20"] = {
       ["url"] = "https://github.com/llvm/llvm-project/releases/download/llvmorg-20.1.8/llvm-project-20.1.8.src.tar.xz",
       ["b3sum"] = "e185e44fa06e028d8b621ad44a935e9a171c18d01ae66865fefadf620ef1b05e",
-      ["build"] = "cmake",
+      ["build"] = rc.cmake,
       ["flags"] = {
          "-S llvm",
          "-DCLANG_CONFIG_FILE_SYSTEM_DIR=/etc/clang",

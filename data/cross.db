@@ -301,7 +301,7 @@
       },
    };
    ["zlib"] = {
-      ["build"] = "cmake",
+      ["build"] = rc.cmake,
       ["flags"] = {
          "-DZLIB_BUILD_SHARED=ON",
          "-DZLIB_BUILD_TESTING=OFF",

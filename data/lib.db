@@ -99,7 +99,7 @@
    ["argon2"] = {
       ["url"] = "https://github.com/P-H-C/phc-winner-argon2/archive/20190702/phc-winner-argon2-20190702.tar.gz",
       ["b3sum"] = "19acf613160b1f9a2b7782f14b8a6f1df670695b78b79f77a50a3af5086994b7",
-      ["build"] = "make",
+      ["build"] = rc.gmake,
       ["flags"] = {
          "PREFIX=/usr",
          "LIBRARY_REL=../lib64",
@@ -132,7 +132,7 @@
    ["json-c"] = {
       ["url"] = "https://github.com/json-c/json-c/releases/download/json-c-0.19-20260627/json-c-0.19.tar.gz",
       ["b3sum"] = "5893eab1734fbe30ea7bbc31a51fe3e58755c25f42655a9ed375bd867ac641d5",
-      ["build"] = "cmake",
+      ["build"] = rc.cmake,
       ["flags"] = {
          "-DBUILD_STATIC_LIBS=OFF",
          "-DBUILD_TESTING=OFF",
@@ -163,7 +163,7 @@
    ["libconfig"] = {
       ["url"] = "https://github.com/hyperrealm/libconfig/archive/v1.8.2/libconfig-1.8.2.tar.gz",
       ["b3sum"] = "4be8cd912fc3e7e60c9d908ddc03cf8ac60a0eba239d0dbc4651e67ffc8ae2dc",
-      ["build"] = "cmake",
+      ["build"] = rc.cmake,
    };
    ["libev"] = {
       ["url"] = "http://dist.schmorp.de/libev/libev-4.33.tar.gz",
@@ -190,7 +190,7 @@
    ["libjpeg-turbo"] = {
       ["url"] = "https://github.com/libjpeg-turbo/libjpeg-turbo/releases/download/3.2.0/libjpeg-turbo-3.2.0.tar.gz",
       ["b3sum"] = "cc6c1fb3b6e155d33af2c05ad02d0745b596d16e21722966ba60e4cdefab9c89",
-      ["build"] = "cmake",
+      ["build"] = rc.cmake,
       ["flags"] = {
          "-DENABLE_STATIC=OFF",
          "-DWITH_JPEG8=ON",
@@ -373,7 +373,7 @@
    ["x265"] = {
       ["url"] = "http://ftp.videolan.org/pub/videolan/x265/x265_4.1.tar.gz",
       ["b3sum"] = "8ef365243847f9af566a3537e1a1d952df2c3d055669d4518542b411edc19c15",
-      ["build"] = "cmake",
+      ["build"] = rc.cmake,
       ["flags"] = {
          "-S source",
          "-DCMAKE_INSTALL_PREFIX=/usr",
@@ -385,7 +385,7 @@
    ["xxhash"] = {
       ["url"] = "https://github.com/Cyan4973/xxHash/archive/v0.8.3/xxhash-0.8.3.tar.gz",
       ["b3sum"] = "64073932284e6076cec589aefbff9df671f8a18042f9ba6474d295179bc5eed2",
-      ["build"] = "make",
+      ["build"] = rc.gmake,
       ["flags"] = {
          "prefix=/usr",
          "bindir=/usr/../bin",
