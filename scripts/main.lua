@@ -19,18 +19,6 @@ function cfg.cflags.format(self)
 end
 
 rc = {
-   ["cargo"] = function(...)
-      local arg = {
-         [0] = "cargo install",
-         "--path=.",
-         "--root=$destdir/usr",
-         "--profile=release",
-         "--locked",
-         "--no-track",
-         ...
-      }
-      return os.execute(table.concat({arg[0], unpack(arg)}, " "))
-   end,
    ["cmake"] = function(...)
       return ok.system(
          "cmake",
@@ -45,20 +33,17 @@ rc = {
          "-GNinja",
          "-Wno-dev",
          ...
-      ) and
-      ok.setenv("DESTDIR", os.getenv("destdir")) and
-      ok.system("ninja", "-C", "build", "install") and
-      ok.unsetenv("DESTDIR")
+      ) and rc.ninja()
    end,
    ["configure"] = function(...)
-      return (
-         ok.exists("configure") and 
-         ok.system("sh", "configure", "--prefix=/usr", ...) or
-         ok.exists("../configure") and
-         ok.system("sh", "../configure", "--prefix=/usr", ...) or
-         ok.exists("configure.gnu") and
-         ok.system("sh", "configure.gnu", "--prefix=/usr", ...)) and
-         rc.gmake()
+      return ok.system(
+         "sh", 
+         ok.exists("configure") or 
+         ok.exists("../configure") or 
+         ok.exists("configure.gnu"),
+         "--prefix=/usr",
+         ...
+      ) and rc.gmake()
    end,
    ["copy"] = function()
       ok.setenv("prefix", string.format("/opt/%s", ok.basename(ok.getcwd())))
@@ -67,25 +52,16 @@ rc = {
       return os.execute(string.format("cp -a . $destdir/%s", os.getenv("destdir"), prefix))
    end,
    ["gmake"] = function(...)
-         return (
-            ok.system("make", ...) and
-            ok.setenv("DESTDIR", os.getenv("destdir")) and
-            ok.system("make", "install", ...) and
-            ok.unsetenv("DESTDIR"))
+      return rc.gmake_all(...) and rc.gmake_install(...)
    end,
-   ["make_noinstall"] = function(...)
-      local arg = {
-         [0] = "make",
-         ...
-      }
-      return os.execute(table.concat({arg[0], unpack(arg)}, " "))
+   ["gmake_all"] = function(...)
+      return ok.system("make", ...)
    end,
-   ["make_install"] = function(...)
-      local arg = {
-         [0] = "make install DESTDIR=$destdir",
-         ...
-      }
-      return os.execute(table.concat({arg[0], unpack(arg)}, " "))
+   ["gmake_install"] = function(...)
+      return (
+         ok.setenv("DESTDIR", os.getenv("destdir")) and
+         ok.system("make", "install", ...) and
+         ok.unsetenv("DESTDIR"))
    end,
    ["meson"] = function(...)
       return ok.system(
@@ -101,39 +77,18 @@ rc = {
          "-Dpython.install_env=system",
          "-Dwrap_mode=nodownload",
          ...
-      ) and
-      ok.setenv("DESTDIR", os.getenv("destdir")) and
-      ok.system("ninja", "-C", "build", "install") and
-      ok.unsetenv("DESTDIR")
+      ) and rc.ninja()
    end,
-   ["scons"] = function(...)
-      local arg = {
-         [0] = "scons install",
-         "--install-sandbox=$destdir",
-         ...
-      }
-      return os.execute(table.concat({arg[0], unpack(arg)}, " "))
-   end,
-   ["python-build"] = function()
+   ["ninja"] = function()
+      return (
+         ok.setenv("DESTDIR", os.getenv("destdir")) and
+         ok.system("ninja", "-C", "build", "install") and
+         ok.unsetenv("DESTDIR"))
+   end
+   ["python_build"] = function()
       return (
           os.execute("python3 -m build -nx")  and
           os.execute("python3 -m installer -d $destdir dist/*whl"))
-   end,
-   ["waf"] = function()
-      os.execute [[
-         ./waf configure --prefix=/usr --libdir=/lib64
-         ./waf build
-         ./waf install --destdir=$destdir
-      ]]
-      return true
-   end,
-   ["zig"] = function()
-      os.execute [[
-         DESTDIR=$destdir zig build \
-	     --prefix "/usr" \
-	     -Doptimize=ReleaseFast \
-      ]]
-      return true
    end,
 }
 
