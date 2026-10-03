@@ -103,6 +103,15 @@ function build(x)
 
    if X.prep then os.execute(X.prep) end
 
+   if k:sub(1, 3) == "gcc" or
+      k:sub(2, 4) == "gcc" or
+      k == "glibc" or k == "_glibc" or
+      k == "binutils" or k == "_binutils"
+   then
+      ok.mkdir("build")
+      ok.chdir("build")
+   end
+
    if B[X.build] then
       if not B[X.build](unpack(X.flags)) then
          error(string.format("error: build: %s: %s", X.build, x))

@@ -201,14 +201,14 @@ function makepkg(x)
 end
 
 function build(k)
+   ok.chdir(string.format("%s/%s", cfg.wrkobjdir, k))
    local t = query(k)
    t.flags = t.flags or {}
    t.version = vmatch(ok.basename(t.url))
-   t.destdir = string.format("%s/%s-%s-%s", cfg.pkgdir, k, t.version, "skylake")
+   t.destdir = string.format("%s/%s-%s-%s", cfg.pkgdir, k, t.version, cfg.cflags.cpu)
    ok.setenv("destdir", t.destdir)
    ok.remove_all(t.destdir)
    ok.mkdir(t.destdir)
-   ok.chdir(string.format("%s/%s", cfg.wrkobjdir, k))
    ok.setenv("SOURCE_DATE_EPOCH", ok.mtime("."))
 
    if t.prep and not os.execute(t.prep) then
