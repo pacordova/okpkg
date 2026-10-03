@@ -25,7 +25,7 @@
          rm -f idle* pydoc*
       ]],
    };
-   ["_samurai"] = {
+   ["samurai"] = {
       ["url"] = "https://github.com/michaelforney/samurai/archive/1.3/samurai-1.3.tar.gz",
       ["b3sum"] = "4444d206d7c502396cfe446492e48432dbeb8fd2f0939948ffe38213af395f10",
       ["build"] = rc.gmake,
@@ -46,7 +46,7 @@
          "-Dman3dir=/opt/perl/man/man3",
       },
       ["post"] = [[
-         cd $destdir/opt
+         cd $destdir/opt/perl
          find . -name \*.pod       -exec rm -f     {} +
          find . -name .packlist    -exec rm -f     {} +
          find . -name README\*     -exec rm -f     {} +
@@ -74,11 +74,8 @@
          "--with-headers=/usr/include",
       },
       ["prep"] = [[
-         printf "%s\n" rootsbindir=/bin >> configparms
-         printf "%s\n" sbindir=/bin     >> configparms
-         printf "%s\n" slibdir=/lib64   >> configparms
-         printf "%s\n" rtlddir=/lib64   >> configparms
-         printf "%s\n" auditdir=/lib64  >> configparms
+         >>configparms printf "%s=/bin\n"   {,root}sbindir
+         >>configparms printf "%s=/lib64\n" {slib,rtld,audit}dir
          sed -i 's:^lib=.*audit:lib='\''/lib64:' ./elf/sotruss.sh
       ]],
    };
@@ -776,6 +773,7 @@
       ["b3sum"] = "b1d1f22858a8f04665e5dca29d194f892620f00fd3e3f4e89dd208e78868436e",
       ["build"] = rc.cmake,
       ["flags"] = {
+         "-DDBUS_RUNSTATEDIR=/run",
          "-DDBUS_SYSTEM_BUS_DEFAULT_ADDRESS=unix:path=/run/dbus/system_bus_socket",
       },
    };

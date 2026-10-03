@@ -27,7 +27,8 @@ rc = {
          "-DCMAKE_INSTALL_LIBDIR=/lib64",
          "-DCMAKE_INSTALL_PREFIX=/",
          "-DCMAKE_INSTALL_RUNSTATEDIR=/run",
-         "-DCMAKE_INSTALL_{,S}BINDIR=/bin",
+         "-DCMAKE_INSTALL_BINDIR=/bin",
+         "-DCMAKE_INSTALL_SBINDIR=/bin",
          "-DCMAKE_SHARED_LIBS=True",
          "-DCMAKE_SKIP_RPATH=TRUE",
          "-GNinja",
@@ -212,6 +213,14 @@ function build(k)
 
    if t.prep and not os.execute(t.prep) then
       error(string.format("error: build: prep: %s", k))
+   end
+
+   if k:sub(1, 3) == "gcc" or
+      k == "glibc" or
+      k == "binutils"
+   then
+      ok.mkdir("build")
+      ok.chdir("build")
    end
 
    if not t.build(unpack(t.flags)) then
