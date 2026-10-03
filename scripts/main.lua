@@ -50,11 +50,11 @@ rc = {
    ["configure"] = function(...)
       return (
          ok.exists("configure") and 
-         ok.exec("sh", "configure", "--prefix=/usr", ...) or
+         system("sh", "configure", "--prefix=/usr", ...) or
          ok.exists("../configure") and
-         ok.exec("sh", "../configure", "--prefix=/usr", ...) or
+         system("sh", "../configure", "--prefix=/usr", ...) or
          ok.exists("configure.gnu") and
-         ok.exec("sh", "configure.gnu", "--prefix=/usr", ...)) and
+         system("sh", "configure.gnu", "--prefix=/usr", ...)) and
          rc.gmake()
    end,
    ["copy"] = function()
@@ -65,9 +65,9 @@ rc = {
    end,
    ["gmake"] = function(...)
          return (
-            ok.exec("make", ...) and
+            system("make", ...) and
             ok.setenv("DESTDIR", os.getenv("destdir")) and
-            ok.exec("make", "install", ...) and
+            system("make", "install", ...) and
             ok.unsetenv("DESTDIR"))
    end,
    ["make_noinstall"] = function(...)
@@ -85,7 +85,7 @@ rc = {
       return os.execute(table.concat({arg[0], unpack(arg)}, " "))
    end,
    ["meson"] = function(...)
-      return ok.exec(
+      return system(
          "meson",
          "setup",
          "build",
@@ -100,7 +100,7 @@ rc = {
          ...
       ) and
       ok.setenv("DESTDIR", os.getenv("destdir")) and
-      ok.exec("ninja", "-C", "build", "install") and
+      system("ninja", "-C", "build", "install") and
       ok.unsetenv("DESTDIR")
    end,
    ["scons"] = function(...)

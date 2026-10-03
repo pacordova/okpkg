@@ -3,7 +3,7 @@
 #include "okutils.h"
 
 int
-ok_exec(lua_State *L)
+ok_system(lua_State *L)
 {
     int i, pid, wstatus;
     int argc = lua_gettop(L) + 1;
