@@ -84,7 +84,7 @@ rc = {
          ok.setenv("DESTDIR", os.getenv("destdir")) and
          ok.system("ninja", "-C", "build", "install") and
          ok.unsetenv("DESTDIR"))
-   end
+   end,
    ["python"] = function()
       return (
           os.execute("python3 -m build -nx")  and

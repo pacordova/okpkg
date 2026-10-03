@@ -17,7 +17,7 @@ OBJS =\
 	src/env.o\
 	src/okutils.o\
 	src/unix.o\
-	src/exec.o\
+	src/system.o\
 
 all: src/okutils.so
 
