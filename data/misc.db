@@ -164,14 +164,14 @@
    ["linux"] = {
       ["url"] = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.12.73.tar.xz",
       ["b3sum"] = "cdf9e32d76cdbf84d01ad9f38db640fb8a0fa8d6f44645b3669e0c6ee9d5bca7",
-      ["build"] = "make_install",
+      ["build"] = "gmake_install",
       ["flags"] = {
          "headers_install",
          "modules_install",
-         "INSTALL_PATH=$destdir/boot",
-         "INSTALL_HDR_PATH=$destdir/usr",
-         "INSTALL_MOD_PATH=$destdir",
-         "MODLIB=$destdir/lib64/modules/$(make -s kernelrelease)",
+         "INSTALL_PATH=${DESTDIR}/boot",
+         "INSTALL_HDR_PATH=${DESTDIR}/usr",
+         "INSTALL_MOD_PATH=${DESTDIR}",
+         "MODLIB=${DESTDIR}/lib64/modules/6.12.73",
       },
       ["prep"] = [[
          sed -e '/MAX_NR_CONSOLES/s/63/6/' -i include/uapi/linux/vt.h
@@ -342,9 +342,8 @@
       ["b3sum"] = "83f69770304eb35d065ee8db52aebcb8d149c5ab6b39ac8d9bb76d5d72a598da",
       ["build"] = rc.gmake,
       ["flags"] = {
-         "PREFIX=$destdir/usr",
-         "DESTDIR=$destdir/bin",
-         "MANDIR=$destdir/usr/share/man",
+         "PREFIX=/usr",
+         "MANDIR=/usr/share/man",
       },
    };
    ["unrar"] = {

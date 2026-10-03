@@ -47,12 +47,12 @@
    ["perl-xml-parser"] = {
       ["url"] = "https://cpan.metacpan.org/authors/id/T/TO/TODDR/XML-Parser-2.47.tar.gz",
       ["b3sum"] = "933aa44de3efe104be847a2acb5bdf4ff85241ba866a4edb613fb7ec6d573a16",
-      ["build"] = rc.gmake,
+      ["build"] = rc.gmake_install,
       ["prep"] = [[ perl Makefile.PL ]],
       ["flags"] = {
          "pure_install",
          "doc_install",
-         "DESTDIR=${destdir}",
+         "DESTDIR:=${DESTDIR}",
       },
    };
    ["intltool"] = {

@@ -297,7 +297,7 @@
       },
       ["post"] = [[
          make -C man install DESTDIR=$destdir
-         cd "$destdir"
+         cd $destdir
          mv usr/{,s}bin/* bin
          rmdir usr/{s,}bin
          sed -i \
@@ -332,14 +332,14 @@
          "--with-xterm-kbs=del",
       },
       ["post"] = [[
-         cd "$destdir/lib64" 
+         cd $destdir/lib64
          rm -fr libncursesw.so ../usr/lib
          printf "INPUT(libncursesw.so.6 -ltinfo)\n" >> libncursesw.so
          ln -sf libform{w,}.so
          ln -sf libmenu{w,}.so
          ln -sf libncurses{w,}.so
          ln -sf libpanel{w,}.so
-         cd "$destdir/lib64/pkgconfig"
+         cd $destdir/lib64/pkgconfig
          ln -sf form{w,}.pc
          ln -sf menu{w,}.pc
          ln -sf ncurses{w,}.pc

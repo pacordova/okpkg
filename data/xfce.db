@@ -4,17 +4,15 @@
       ["b3sum"] = "09ecf2d0ddcf67e13033676379d1ee5f4fbae52c8dc9fb45c28149dca31c1c2d",
       ["build"] = rc.meson,
       ["post"] = [[
-         cd "$destdir"
-         rm -fr usr/bin
-         ln -sf desktop-file-install bin/desktop-file-edit
+         rm -fr $destdir/usr/bin
+         ln -sf desktop-file-install $destdir/bin/desktop-file-edit
       ]],
    };
    ["gsettings-desktop-schemas"] = {
       ["url"] = "https://download.gnome.org/sources/gsettings-desktop-schemas/50/gsettings-desktop-schemas-50.1.tar.xz",
       ["b3sum"] = "9c966b54eb832a5a0e79f4f947a9d34c7a7ad57b8958d50612d485f047dd9102",
       ["build"] = rc.meson,
-      ["prep"] = [[
-    sed -i -r 's:"(/system):"/org/gnome\1:g' schemas/*.in ]],
+      ["prep"] = [[ sed -i -r 's:"(/system):"/org/gnome\1:g' schemas/*.in ]],
    };
    ["xdg-user-dirs"] = {
       ["url"] = "https://user-dirs.freedesktop.org/releases/xdg-user-dirs-0.20.tar.xz",
@@ -23,8 +21,7 @@
       ["flags"] = {
          "-Ddocs=false",
       },
-      ["post"] = [[
-    rm -fr "$destdir/usr/lib" ]],
+      ["post"] = [[ rm -fr $destdir/usr/lib ]],
    };
    ["startup-notification"] = {
       ["url"] = "https://www.freedesktop.org/software/startup-notification/releases/startup-notification-0.12.tar.gz",
@@ -309,8 +306,7 @@
       ["flags"] = {
          "--disable-gstreamer-thumbnailer",
       },
-      ["post"] = [[
-    rm -fr $destdir/usr/lib/systemd ]],
+      ["post"] = [[ rm -fr $destdir/usr/lib/systemd ]],
    };
    ["xfce4-appfinder"] = {
       ["url"] = "https://archive.xfce.org/src/xfce/xfce4-appfinder/4.20/xfce4-appfinder-4.20.0.tar.bz2",
@@ -378,8 +374,7 @@
          "-Dwayland=disabled",
          "-Ddocs=disabled",
       },
-      ["post"] = [[
-    rm -fr $destdir/etc/pam.d ]],
+      ["post"] = [[ rm -fr $destdir/etc/pam.d ]],
    };
    ["xfce4-session"] = {
       ["url"] = "https://archive.xfce.org/src/xfce/xfce4-session/4.20/xfce4-session-4.20.4.tar.bz2",
@@ -448,15 +443,13 @@
       ["url"] = "https://icon-theme.freedesktop.org/releases/hicolor-icon-theme-0.18.tar.xz",
       ["b3sum"] = "062e251872a23ecf47a127293ae9abf98a1c912f82f819d0cebccf8d9415deb2",
       ["build"] = rc.meson,
-      ["post"] = [[
-    gtk-update-icon-cache $destdir/usr/share/icons/hicolor ]],
+      ["post"] = [[ gtk-update-icon-cache $destdir/usr/share/icons/hicolor ]],
    };
    ["adwaita-icon-theme"] = {
       ["url"] = "https://download.gnome.org/sources/adwaita-icon-theme/50/adwaita-icon-theme-50.0.tar.xz",
       ["b3sum"] = "754c438f00a5cc331e85b273975866fe986681f8280626ca114b8b44770f92da",
       ["build"] = rc.meson,
-      ["post"] = [[
-    gtk-update-icon-cache $destdir/usr/share/icons/Adwaita ]],
+      ["post"] = [[ gtk-update-icon-cache $destdir/usr/share/icons/Adwaita ]],
    };
    ["greybird"] = {
       ["url"] = "https://github.com/shimmerproject/Greybird/archive/v3.22.14/Greybird-3.22.14.tar.gz",
@@ -467,11 +460,5 @@
       ["url"] = "https://github.com/shimmerproject/elementary-xfce/archive/v0.20/elementary-xfce-0.20.tar.gz",
       ["b3sum"] = "ce0ceebe877e5edc20e3b99b80230c93c7ed25558084954685c70cc1595d1a04",
       ["build"] = rc.configure,
-      ["post"] = [[
-         #gtk-update-icon-cache $destdir/usr/share/icons/elementary-xfce
-         #gtk-update-icon-cache $destdir/usr/share/icons/elementary-xfce-dark
-         #gtk-update-icon-cache $destdir/usr/share/icons/elementary-xfce-darker
-         #gtk-update-icon-cache $destdir/usr/share/icons/elementary-xfce-darkest
-      ]],
    };
 }
