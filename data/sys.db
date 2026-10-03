@@ -65,7 +65,7 @@
    ["glibc"] = {
       ["url"] = "https://ftp.gnu.org/gnu/glibc/glibc-2.43.tar.xz",
       ["b3sum"] = "da7f2545e87de8b640bf89add7d63e1159cb62baa01ceb94811ab21210f13948",
-      ["build"] = "../configure",
+      ["build"] = ok.mkdir("build") and ok.chdir("build") and rc.configure,
       ["flags"] = {
          "--enable-kernel=6.12",
          "--enable-bind-now",
@@ -236,7 +236,7 @@
    ["gcc15"] = {
       ["url"] = "https://ftp.gnu.org/gnu/gcc/gcc-15.3.0/gcc-15.3.0.tar.xz",
       ["b3sum"] = "871e76567f6c81f2492c6eeb4cd98eface13e592d5058d10a720f3fcc1a2ae5b",
-      ["build"] = "../configure",
+      ["build"] = ok.mkdir("build") and ok.chdir("build") and rc.configure,
       ["flags"] = {
          "--libdir=/usr/libexec",
          "--disable-fixincludes",

@@ -215,14 +215,6 @@ function build(k)
       error(string.format("error: build: prep: %s", k))
    end
 
-   if k:sub(1, 3) == "gcc" or
-      k == "glibc" or
-      k == "binutils"
-   then
-      ok.mkdir("build")
-      ok.chdir("build")
-   end
-
    if not t.build(unpack(t.flags)) then
       error(string.format("error: build: %s: %s", t.build, k))
    end
