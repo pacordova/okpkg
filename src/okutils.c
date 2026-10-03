@@ -15,12 +15,12 @@ static const struct luaL_Reg okutils[] = {
     {"remove_all", ok_remove_all},
     {"setenv", ok_setenv},
     {"unsetenv", ok_unsetenv},
+    {"system", ok_system},
     {NULL, NULL},
 };
 
 static const struct luaL_Reg globals[] = {
     {"dir", ok_dir},
-    {"system", ok_system},
     {NULL, NULL},
 };
 

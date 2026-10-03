@@ -32,29 +32,32 @@ rc = {
       return os.execute(table.concat({arg[0], unpack(arg)}, " "))
    end,
    ["cmake"] = function(...)
-      local arg = {
-         [0] = "$cmake -B build -G Ninja -Wno-dev",
+      return ok.system(
+         "cmake",
+         "-Bbuild",
          "-DCMAKE_BUILD_TYPE=Release",
-         "-DCMAKE_INSTALL_PREFIX=/",
          "-DCMAKE_INSTALL_LIBDIR=/lib64",
-         "-DCMAKE_INSTALL_{,S}BINDIR=/bin",
+         "-DCMAKE_INSTALL_PREFIX=/",
          "-DCMAKE_INSTALL_RUNSTATEDIR=/run",
+         "-DCMAKE_INSTALL_{,S}BINDIR=/bin",
          "-DCMAKE_SHARED_LIBS=True",
          "-DCMAKE_SKIP_RPATH=TRUE",
+         "-GNinja",
+         "-Wno-dev",
          ...
-      }
-      return (
-         os.execute(table.concat({arg[0], unpack(arg)}, " ")) and
-         os.execute("DESTDIR=$destdir samu -C build install"))
+      ) and
+      ok.setenv("DESTDIR", os.getenv("destdir")) and
+      ok.system("ninja", "-C", "build", "install") and
+      ok.unsetenv("DESTDIR")
    end,
    ["configure"] = function(...)
       return (
          ok.exists("configure") and 
-         system("sh", "configure", "--prefix=/usr", ...) or
+         ok.system("sh", "configure", "--prefix=/usr", ...) or
          ok.exists("../configure") and
-         system("sh", "../configure", "--prefix=/usr", ...) or
+         ok.system("sh", "../configure", "--prefix=/usr", ...) or
          ok.exists("configure.gnu") and
-         system("sh", "configure.gnu", "--prefix=/usr", ...)) and
+         ok.system("sh", "configure.gnu", "--prefix=/usr", ...)) and
          rc.gmake()
    end,
    ["copy"] = function()
@@ -65,9 +68,9 @@ rc = {
    end,
    ["gmake"] = function(...)
          return (
-            system("make", ...) and
+            ok.system("make", ...) and
             ok.setenv("DESTDIR", os.getenv("destdir")) and
-            system("make", "install", ...) and
+            ok.system("make", "install", ...) and
             ok.unsetenv("DESTDIR"))
    end,
    ["make_noinstall"] = function(...)
@@ -85,22 +88,22 @@ rc = {
       return os.execute(table.concat({arg[0], unpack(arg)}, " "))
    end,
    ["meson"] = function(...)
-      return system(
+      return ok.system(
          "meson",
          "setup",
          "build",
          "-Dprefix=/usr",
-         "-Dlibdir=../lib64",
          "-Dbindir=../bin",
+         "-Dlibdir=../lib64",
          "-Dsbindir=../bin",
          "-Ddebug=false",
          "-Doptimization=2",
-         "-Dwrap_mode=nodownload",
          "-Dpython.install_env=system",
+         "-Dwrap_mode=nodownload",
          ...
       ) and
       ok.setenv("DESTDIR", os.getenv("destdir")) and
-      system("ninja", "-C", "build", "install") and
+      ok.system("ninja", "-C", "build", "install") and
       ok.unsetenv("DESTDIR")
    end,
    ["scons"] = function(...)
