@@ -5,7 +5,7 @@ int
 ok_chdir(lua_State *L)
 {
     const char *path = lua_tostring(L, 1);
-    lua_pushinteger(L, chdir(path));
+    lua_pushboolean(L, chdir(path) == 0);
     return 1;
 }
 

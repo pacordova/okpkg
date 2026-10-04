@@ -1,6 +1,6 @@
 {
    ["_binutils"] = {
-      ["build"] = "../configure",
+      ["build"] = rc.configure,
       ["flags"] = {
          "--target=x86_64-unknown-linux-gnu",
          "--prefix=/tools",
@@ -17,7 +17,7 @@
       },
    };
    ["_gcc15"] = {
-      ["build"] = "../configure",
+      ["build"] = rc.configure,
       ["flags"] = {
          "--target=x86_64-unknown-linux-gnu",
          "--prefix=/tools",
@@ -61,7 +61,7 @@
       ]],
    };
    ["glibc"] = {
-      ["build"] = "../configure",
+      ["build"] = ok.mkdir("build") and ok.chdir("build") and rc.configure,
       ["flags"] = {
          "--prefix=/usr",
          "--host=x86_64-unknown-linux-gnu",
@@ -90,10 +90,9 @@
          "--disable-failure-tokens",
          "PERL=/opt/perl/bin/perl",
       },
-      ["prep"] = [[ $patch < /usr/okpkg/patches/libxcrypt.diff ]],
    };
    ["libstdcxx"] = {
-      ["build"] = "../libstdc++-v3/configure",
+      ["build"] = ok.chdir("libstdc++-v3") and rc.configure,
       ["flags"] = {
          "--prefix=/usr",
          "--host=x86_64-unknown-linux-gnu",
@@ -274,7 +273,6 @@
    };
    ["lua"] = {
       ["build"] = rc.gmake,
-      ["prep"] = [[ $patch < /usr/okpkg/patches/lua.diff ]],
       ["flags"] = {
          "CC=x86_64-unknown-linux-gnu-gcc -std=gnu99",
          "AR=x86_64-unknown-linux-gnu-ar rcu",
@@ -344,7 +342,7 @@
       },
    };
    ["binutils"] = {
-      ["build"] = "../configure",
+      ["build"] = rc.configure,
       ["flags"] = {
          "--host=x86_64-unknown-linux-gnu",
          "--build=x86_64-pc-linux-gnu",
@@ -361,7 +359,7 @@
       ["prep"] = [[ sed '6031s/$add_dir//' -i ltmain.sh ]],
    };
    ["gcc15"] = {
-      ["build"] = "../configure",
+      ["build"] = rc.configure,
       ["flags"] = {
          "--build=x86_64-pc-linux-gnu",
          "--host=x86_64-unknown-linux-gnu",

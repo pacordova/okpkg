@@ -5,58 +5,62 @@
 -- https://www.linuxfromscratch.org/lfs/view/stable/index.html
 
 -- Imports
-local unpack = unpack or table.unpack
+ok  = require("okutils")
+cfg = require("okconfig")
 
-local ok = require("okutils")
+unpack = unpack or table.unpack
 
-local DIR = dofile("/etc/okpkg.conf")
-
-B = {
+rc = {
    ["cmake"] = function(...)
-      local arg = {
-         [0] = "$cmake -B build -G Ninja -Wno-dev",
-         "-DCMAKE_TOOLCHAIN_FILE=/etc/cross.cmake",
+      return ok.system(
+         "cmake",
+         "-Bbuild",
          "-DCMAKE_BUILD_TYPE=Release",
-         "-DCMAKE_INSTALL_PREFIX=/usr",
-         "-DCMAKE_INSTALL_LIBDIR=../lib64",
-         "-DCMAKE_INSTALL_{,S}BINDIR=../bin",
+         "-DCMAKE_INSTALL_BINDIR=/bin",
+         "-DCMAKE_INSTALL_LIBDIR=/lib64",
+         "-DCMAKE_INSTALL_PREFIX=/",
          "-DCMAKE_INSTALL_RUNSTATEDIR=/run",
+         "-DCMAKE_INSTALL_RUNSTATEDIR=/run",
+         "-DCMAKE_INSTALL_SBINDIR=../bin",
+         "-DCMAKE_INSTALL_SBINDIR=/bin",
          "-DCMAKE_SHARED_LIBS=True",
          "-DCMAKE_SKIP_RPATH=TRUE",
+         "-GNinja",
+         "-Wno-dev",
          ...
-      }
-      return (
-         os.execute(table.concat({arg[0], unpack(arg)}, " ")) and
-         os.execute("DESTDIR=/mnt $ninja -C build install"))
+      ) and rc.ninja()
    end,
-   ["configure"] = function(f, ...)
-      local arg = { [0]=f, ... }
-      return (
-         os.execute(table.concat({arg[0], unpack(arg)}, ' ')) and
-         os.execute("$make") and
-         os.execute("$make install DESTDIR=/mnt"))
-   end,
-   ["make"] = function(...)
-      local arg = {
-         [0]={"$make", "$make install DESTDIR=/mnt"},
+   ["configure"] = function(...)
+      return ok.system(
+         "sh",
+         ok.exists("configure") or
+         ok.exists("../configure"),
          ...
-      }
-      return (
-         os.execute(table.concat({arg[0][1], unpack(arg)}, ' ')) and
-         os.execute(table.concat({arg[0][2], unpack(arg)}, ' ')))
+      ) and rc.gmake()
    end,
-   ["make_noinstall"] = function(...)
-      local arg = {
-         [0] = "$make",
-         ...
-      }
-      return os.execute(table.concat({arg[0], unpack(arg)}, " "))
+   ["gmake"] = function(...)
+      return rc.gmake_all(...) and rc.gmake_install(...)
+   end,
+   ["gmake_all"] = function(...)
+      return ok.system("make", ...)
+   end,
+   ["gmake_install"] = function(...)
+      return (
+         ok.setenv("DESTDIR", "/mnt") and
+         ok.system("make", "install", ...) and
+         ok.unsetenv("DESTDIR"))
+   end,
+   ["ninja"] = function()
+      return (
+         ok.setenv("DESTDIR", "/mnt") and
+         ok.system("ninja", "-C", "build", "install") and
+         ok.unsetenv("DESTDIR"))
    end,
 }
 
 function query(x, db)
    local i, fp, buf
-   fp = io.open(string.format("%s/%s", DIR["DATADIR"], db))
+   fp = io.open(string.format("%s/%s", cfg.datadir, db))
    buf = "\n" .. fp:read("*a")
    fp:close()
    i = buf:find("\n" .. x .. " =", 1, true)
@@ -64,35 +68,40 @@ function query(x, db)
    return load("return " .. buf)()
 end
 
-function extract(x)
-   local X, fp
+function snarf(x)
+   local t, fp
    
    -- lookup fixes
    if x == "libstdcxx" then 
-      X = query("gcc15", "sys.db")
-   elseif x == "samurai" then
-      X = query(x, "devel.db")
+      t = query("gcc15", "sys.db")
    elseif x:sub(1,1) == "_" then
-      X = query(x:sub(2,#x), "sys.db")
+      t = query(x:sub(2,#x), "sys.db")
    else
-      X = query(x, "sys.db")
+      t = query(x, "sys.db")
    end
 
-   X.dist = string.format("%s/%s", DIR["DISTDIR"], ok.basename(X.url))
+   t.dist = string.format("%s/%s", cfg.distdir, ok.basename(t.url))
 
    -- Setup source directory
-   ok.chdir(DIR["TMPDIR"])
+   ok.chdir(cfg.wrkobjdir)
    ok.remove_all(x)
    ok.mkdir(x) 
    ok.chdir(x)
-   os.execute("tar --strip-components=1 -xf " .. X.dist)
-   
+   os.execute("tar --strip=1 -xf " .. t.dist)
+
+   -- Patch if file exists
+   fp = io.open(string.format("%s/patches/%s.diff", cfg.basedir, x))
+   if fp then
+      io.popen("patch -p 1", "w"):write(fp:read("*a")):close()
+      fp:close()
+   end
+
    return x
 end
 
 function build(x)
-   local X = query(x, "cross.db")
-   X.flags = X.flags or {}
+   local t = query(x, "cross.db")
+   t.flags = t.flags or {}
 
    if x:sub(1,1) == "_" then
       ok.unsetenv("CONFIG_SITE")
@@ -101,33 +110,18 @@ function build(x)
       ok.setenv("LIBRARY_PATH", "/mnt/lib64")
    end
 
-   if X.prep then os.execute(X.prep) end
-
-   if k:sub(1, 3) == "gcc" or
-      k:sub(2, 4) == "gcc" or
-      k == "glibc" or k == "_glibc" or
-      k == "binutils" or k == "_binutils"
-   then
-      ok.mkdir("build")
-      ok.chdir("build")
+   if t.prep and not os.execute(t.prep) then
+      error(string.format("error: build: prep: %s", x))
    end
 
-   if B[X.build] then
-      if not B[X.build](unpack(X.flags)) then
-         error(string.format("error: build: %s: %s", X.build, x))
-      end
-   elseif tostring(X.build):match("config") then
-      -- Check if we are doing an out of tree build.
-      if tostring(X.build):sub(1, 2) == ".." then
-         ok.mkdir("build") 
-         ok.chdir("build")
-      end
-      if not B["configure"](X.build, unpack(X.flags)) then
-         error(string.format("error: build: %s: %s", X.build, x))
-      end
+   if not t.build(unpack(t.flags)) then
+      error(string.format("error: build: %s: %s", t.build, x))
    end
 
-   if X.post then os.execute(X.post) end
+   if t.post and not os.execute(t.post) then
+      error(string.format("error: build: post: %s", x))
+   end
+
    os.execute("find /mnt -name '*.la' -delete")
 end
 
@@ -138,20 +132,32 @@ ok.setenv("CXXFLAGS", os.getenv("CFLAGS"))
 ok.setenv("PATH", "/mnt/tools/bin:/bin")
 ok.setenv("LC_ALL", "C")
 ok.setenv("make", "/bin/make -j4")
-ok.setenv("patch", "/bin/patch -bp1")
-ok.setenv("cmake", "/opt/cmake/bin/cmake")
-ok.setenv("ninja", "/bin/samu")
+ok.setenv("patch", "/bin/patch -p1")
 
 -- Filesystem
 dofile(string.format("%s/%s", ok.dirname(arg[0]), "mkfs.lua"))
 
--- Build all packages in cross
+-- CMAKE_TOOLCHAIN_FILE
+ok.setenv("CMAKE_TOOLCHAIN_FILE", os.tmpname())
+fp = io.open(os.getenv("CMAKE_TOOLCHAIN_FILE"), "w")
+fp:write([[
+set(CMAKE_SYSTEM_NAME Linux)
+set(CMAKE_C_COMPILER   x86_64-unknown-linux-gnu-gcc)
+set(CMAKE_CXX_COMPILER x86_64-unknown-linux-gnu-g++)
+set(CMAKE_FIND_ROOT_PATH /mnt)
+set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
+set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
+set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
+]])
+fp:close()
+
+-- Build all packages in cross.db
 local fp, buf
-fp = io.open(string.format("%s/%s", DIR["DATADIR"], "cross.db"))
+fp = io.open(string.format("%s/%s", cfg.datadir, "cross.db"))
 buf = "\n" .. fp:read('*a')
 fp:close()
 for i in buf:gmatch("\n([%w%-%_]-) = {.-;") do
-   build(extract(i))
+   build(snarf(i))
 end
 
 -- Cleanup

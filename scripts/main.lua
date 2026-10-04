@@ -24,10 +24,10 @@ rc = {
          "cmake",
          "-Bbuild",
          "-DCMAKE_BUILD_TYPE=Release",
+         "-DCMAKE_INSTALL_BINDIR=/bin",
          "-DCMAKE_INSTALL_LIBDIR=/lib64",
          "-DCMAKE_INSTALL_PREFIX=/",
          "-DCMAKE_INSTALL_RUNSTATEDIR=/run",
-         "-DCMAKE_INSTALL_BINDIR=/bin",
          "-DCMAKE_INSTALL_SBINDIR=/bin",
          "-DCMAKE_SHARED_LIBS=True",
          "-DCMAKE_SKIP_RPATH=TRUE",
@@ -116,32 +116,31 @@ function query(k)
 end
 
 function download(x)
-   local X, fp
+   local t, fp
 
-   X = query(x)
-   X.dist = string.format("%s/%s", cfg.distdir, ok.basename(X.url))
+   t = query(x)
+   t.dist = string.format("%s/%s", cfg.distdir, ok.basename(t.url))
 
    -- change mirrors
-   --for k,v in pairs(M) do X.url = X.url:gsub(k, v) end 
+   --for k,v in pairs(M) do t.url = t.url:gsub(k, v) end 
    
    -- Download file if not already downloaded
    ok.chdir(cfg.distdir)
    io.close(
-      io.open(ok.basename(X.url)) or
-      io.popen("wget2 " .. X.url))
+      io.open(ok.basename(t.url)) or
+      io.popen("wget2 " .. t.url))
    assert(
-      X.b3sum == b3sum(ok.basename(X.url)) or 
-      not os.remove(ok.basename(X.url)))
+      t.b3sum == b3sum(ok.basename(t.url)) or 
+      not os.remove(ok.basename(t.url)))
    
    -- Setup source directory
     ok.chdir(cfg.wrkobjdir)
     ok.remove_all(x)
     ok.mkdir(x)
     ok.chdir(x)
-    os.execute("tar --strip-components=1 -xf " .. X.dist)
+    os.execute("tar --strip-components=1 -xf " .. t.dist)
    
    -- Patch if file exists
-   -- Note: symlink for temporary packages, or update patch infrastructure
    fp = io.open(string.format("%s/patches/%s.diff", cfg.basedir, x))
    if fp then
       io.popen("patch -p 1", "w"):write(fp:read("*a")):close()
@@ -149,7 +148,7 @@ function download(x)
    end
 
    -- Set the mtime 
-   ok.setenv("SOURCE_DATE_EPOCH", ok.mtime(X.dist))
+   ok.setenv("SOURCE_DATE_EPOCH", ok.mtime(t.dist))
    os.execute [[ find . -exec touch -hd "@$SOURCE_DATE_EPOCH" '{}' + ]]
    ok.unsetenv("SOURCE_DATE_EPOCH")
    return x
@@ -200,34 +199,34 @@ function makepkg(x)
    return x .. ".tar.lz"
 end
 
-function build(k)
+function build(x)
    ok.chdir(string.format("%s/%s", cfg.wrkobjdir, k))
-   local t = query(k)
+   local t = query(x)
    t.flags = t.flags or {}
    t.version = vmatch(ok.basename(t.url))
-   t.destdir = string.format("%s/%s-%s-%s", cfg.pkgdir, k, t.version, cfg.cflags.cpu)
+   t.destdir = string.format("%s/%s-%s-%s", cfg.pkgdir, x, t.version, cfg.cflags.cpu)
    ok.setenv("destdir", t.destdir)
    ok.remove_all(t.destdir)
    ok.mkdir(t.destdir)
    ok.setenv("SOURCE_DATE_EPOCH", ok.mtime("."))
 
    if t.prep and not os.execute(t.prep) then
-      error(string.format("error: build: prep: %s", k))
+      error(string.format("error: build: prep: %s", x))
    end
 
    if not t.build(unpack(t.flags)) then
-      error(string.format("error: build: %s: %s", t.build, k))
+      error(string.format("error: build: %s: %s", t.build, x))
    end
 
    if t.post and not os.execute(t.post) then
-      error(string.format("error: build: post: %s", k))
+      error(string.format("error: build: post: %s", x))
    end
 
    -- Set the mtime
    os.execute [[ find $destdir -exec touch -hd "@$SOURCE_DATE_EPOCH" '{}' + ]]
 
    -- Cleanup
-   ok.remove_all(t.destdir .. "no")
+   os.remove(t.destdir .. "no")
    ok.unsetenv("destdir")
    ok.unsetenv("SOURCE_DATE_EPOCH")
    return makepkg(t.destdir)
