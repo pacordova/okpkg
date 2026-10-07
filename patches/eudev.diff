@@ -1,0 +1,255 @@
+diff -rNaud eudev-3.1.old/rules/60-cdrom_id.rules eudev-3.1/rules/60-cdrom_id.rules
+--- eudev-3.1.old/rules/60-cdrom_id.rules	2015-03-19 22:57:28.000000000 +0100
++++ eudev-3.1/rules/60-cdrom_id.rules	2015-10-24 12:36:13.350966101 +0200
+@@ -20,6 +20,25 @@
+ # stale mounts after ejecting
+ ENV{DISK_MEDIA_CHANGE}=="?*", ENV{ID_CDROM_MEDIA}!="?*", ENV{SYSTEMD_READY}="0"
+ 
+-KERNEL=="sr0", SYMLINK+="cdrom", OPTIONS+="link_priority=-100"
++# create default links to the first detected device
++KERNEL=="sr0", ENV{ID_CDROM}=="1",        SYMLINK+="cdrom", OPTIONS+="link_priority=-100"
++KERNEL=="sr0", ENV{ID_CDROM_CD_R}=="1",   SYMLINK+="cdr",   OPTIONS+="link_priority=-100"
++KERNEL=="sr0", ENV{ID_CDROM_CD_R}=="1",   SYMLINK+="cdwriter",   OPTIONS+="link_priority=-100"
++KERNEL=="sr0", ENV{ID_CDROM_CD_RW}=="1",  SYMLINK+="cdrw",  OPTIONS+="link_priority=-100"
++KERNEL=="sr0", ENV{ID_CDROM_DVD}=="1",    SYMLINK+="dvd",   OPTIONS+="link_priority=-100"
++KERNEL=="sr0", ENV{ID_CDROM_DVD_R}=="1",  SYMLINK+="dvdr",  OPTIONS+="link_priority=-100"
++KERNEL=="sr0", ENV{ID_CDROM_DVD_R}=="1",  SYMLINK+="dvdwriter", OPTIONS+="link_priority=-100"
++KERNEL=="sr0", ENV{ID_CDROM_DVD_RW}=="1", SYMLINK+="dvdrw", OPTIONS+="link_priority=-100"
++
++# create all other device links
++KERNEL=="sr[0-9]*", ENV{ID_CDROM}=="1",        SYMLINK+="cdrom%n", OPTIONS+="link_priority=-100"
++KERNEL=="sr[0-9]*", ENV{ID_CDROM_CD_R}=="1",   SYMLINK+="cdr%n",   OPTIONS+="link_priority=-100"
++KERNEL=="sr[0-9]*", ENV{ID_CDROM_CD_R}=="1",   SYMLINK+="cdwriter%n",   OPTIONS+="link_priority=-100"
++KERNEL=="sr[0-9]*", ENV{ID_CDROM_CD_RW}=="1",  SYMLINK+="cdrw%n",  OPTIONS+="link_priority=-100"
++KERNEL=="sr[0-9]*", ENV{ID_CDROM_DVD}=="1",    SYMLINK+="dvd%n",   OPTIONS+="link_priority=-100"
++KERNEL=="sr[0-9]*", ENV{ID_CDROM_DVD_R}=="1",  SYMLINK+="dvdr%n",  OPTIONS+="link_priority=-100"
++KERNEL=="sr[0-9]*", ENV{ID_CDROM_DVD_R}=="1",  SYMLINK+="dvdwriter%n", OPTIONS+="link_priority=-100"
++KERNEL=="sr[0-9]*", ENV{ID_CDROM_DVD_RW}=="1", SYMLINK+="dvdrw%n", OPTIONS+="link_priority=-100"
++ 
+ 
+ LABEL="cdrom_end"
+--- eudev-3.2.1/rules/80-drivers.rules.orig	2017-01-24 11:00:53.174192908 +0200
++++ eudev-3.2.1/rules/80-drivers.rules	2017-01-24 11:04:01.886714118 +0200
+@@ -8,6 +8,7 @@
+ SUBSYSTEM=="memstick", RUN{builtin}+="kmod load ms_block mspro_block"
+ SUBSYSTEM=="i2o", RUN{builtin}+="kmod load i2o_block"
+ SUBSYSTEM=="module", KERNEL=="parport_pc", RUN{builtin}+="kmod load ppdev"
++SUBSYSTEM=="graphics", RUN{builtin}+="kmod load fbcon"
+ KERNEL=="mtd*ro", ENV{MTD_FTL}=="smartmedia", RUN{builtin}+="kmod load sm_ftl"
+ 
+ LABEL="drivers_end"
+diff --git a/src/udev/udev-event.c b/src/udev/udev-event.c
+index d0befba29..790498c97 100644
+--- a/src/udev/udev-event.c
++++ b/src/udev/udev-event.c
+@@ -855,6 +855,11 @@ void udev_event_execute_rules(struct udev_event *event,
+         if (udev_device_get_subsystem(dev) == NULL)
+                 return;
+ 
++        if (streq(udev_device_get_action(dev), "bind") || streq(udev_device_get_action(dev), "unbind")) {
++            // Ignore bind/unbind events
++            return;
++        }
++
+         if (streq(udev_device_get_action(dev), "remove")) {
+                 udev_device_read_db(dev);
+                 udev_device_tag_index(dev, NULL, false);
+
+--- ./rules/50-udev-default.rules.orig	2023-05-16 10:08:56.000000000 -0500
++++ ./rules/50-udev-default.rules	2023-05-17 12:45:42.392847645 -0500
+@@ -39,8 +39,9 @@
+ SUBSYSTEM=="drm", KERNEL=="renderD*", GROUP="video", MODE="0666"
+ SUBSYSTEM=="kfd", GROUP="video", MODE="0666"
+ 
+-SUBSYSTEM=="misc", KERNEL=="sgx_enclave", GROUP="sgx", MODE="0660"
+-SUBSYSTEM=="misc", KERNEL=="sgx_vepc", GROUP="sgx", MODE="0660"
++# This is obsolete. No sense starting to support it now.
++#SUBSYSTEM=="misc", KERNEL=="sgx_enclave", GROUP="sgx", MODE="0660"
++#SUBSYSTEM=="misc", KERNEL=="sgx_vepc", GROUP="sgx", MODE="0660"
+ 
+ # When using static_node= with non-default permissions, also update
+ # tmpfiles.d/static-nodes-permissions.conf.in to keep permissions synchronized.
+From 917ae648f61681257000c3a1f0aca3fbd646563a Mon Sep 17 00:00:00 2001
+From: Johannes Nixdorf <mixi@shadowice.org>
+Date: Fri, 22 Dec 2023 10:27:08 +0100
+Subject: [PATCH] 78-sound-card.rules: Import ID_PATH early
+
+Pipewire requires ID_PATH to use the same device names as with systemd's
+udev. Some rules, such as the ones in asahi-audio [1] use those names, and
+fail if they don't match [2].
+
+On systemd's udev this is instead imported in 71-seat.rules, which we don't
+have.
+
+[1]: https://github.com/AsahiLinux/asahi-audio
+[2]: https://github.com/AsahiLinux/asahi-audio/issues/16
+
+Signed-off-by: Johannes Nixdorf <mixi@shadowice.org>
+---
+ rules/78-sound-card.rules | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/rules/78-sound-card.rules b/rules/78-sound-card.rules
+index f2fc27739..c49bd1d4e 100644
+--- a/rules/78-sound-card.rules
++++ b/rules/78-sound-card.rules
+@@ -38,6 +38,8 @@ KERNEL!="card*", GOTO="sound_end"
+ ENV{SOUND_INITIALIZED}="1"
+ 
+ IMPORT{builtin}="hwdb"
++IMPORT{builtin}="path_id"
++
+ SUBSYSTEMS=="usb", IMPORT{builtin}="usb_id"
+ SUBSYSTEMS=="usb", GOTO="skip_pci"
+ 
+@@ -62,8 +64,6 @@ LABEL="skip_pci"
+ ENV{ID_SERIAL}=="?*", ENV{ID_USB_INTERFACE_NUM}=="?*", ENV{ID_ID}="$env{ID_BUS}-$env{ID_SERIAL}-$env{ID_USB_INTERFACE_NUM}"
+ ENV{ID_SERIAL}=="?*", ENV{ID_USB_INTERFACE_NUM}=="", ENV{ID_ID}="$env{ID_BUS}-$env{ID_SERIAL}"
+ 
+-IMPORT{builtin}="path_id"
+-
+ # The values used here for $SOUND_FORM_FACTOR and $SOUND_CLASS should be kept
+ # in sync with those defined for PulseAudio's src/pulse/proplist.h
+ # PA_PROP_DEVICE_FORM_FACTOR, PA_PROP_DEVICE_CLASS properties.
+diff --git a/man/udevd.8 b/man/udevd.8
+index e5008d44b..dc5528373 100644
+--- a/man/udevd.8
++++ b/man/udevd.8
+@@ -25,7 +25,7 @@ udevd \- Device event managing daemon
+ .PP
+ udevd
+ .HP \w'\fB/sbin/udevd\fR\ 'u
+-\fB/sbin/udevd\fR [\fB\-\-daemon\fR] [\fB\-\-debug\fR] [\fB\-\-children\-max=\fR] [\fB\-\-exec\-delay=\fR] [\fB\-\-event\-timeout=\fR] [\fB\-\-resolve\-names=early|late|never\fR] [\fB\-\-version\fR] [\fB\-\-help\fR]
++\fB/sbin/udevd\fR [\fB\-\-daemon\fR] [\fB\-\-debug\fR] [\fB\-\-ready\-notify=\fR] [\fB\-\-children\-max=\fR] [\fB\-\-exec\-delay=\fR] [\fB\-\-event\-timeout=\fR] [\fB\-\-resolve\-names=early|late|never\fR] [\fB\-\-version\fR] [\fB\-\-help\fR]
+ .SH "DESCRIPTION"
+ .PP
+ \fBudevd\fR
+@@ -47,6 +47,11 @@ Detach and run in the background\&.
+ Print debug messages to standard error\&.
+ .RE
+ .PP
++\fB\-r\fR, \fB\-\-ready\-notify=\fR
++.RS 4
++Issue (S6/dinit compatible) readiness notification via a file descriptor\&. A short message followed by a newline character will be sent via the specified file descriptor (inherited from the parent process) when initialization is complete\&.
++.RE
++.PP
+ \fB\-c\fR, \fB\-\-children\-max=\fR
+ .RS 4
+ Limit the number of events executed in parallel\&.
+diff --git a/man/udevd.xml b/man/udevd.xml
+index b13f74d70..3de99d2d2 100644
+--- a/man/udevd.xml
++++ b/man/udevd.xml
+@@ -34,6 +34,7 @@
+       <command>/sbin/udevd</command>
+       <arg><option>--daemon</option></arg>
+       <arg><option>--debug</option></arg>
++      <arg><option>--ready-notify=</option></arg>
+       <arg><option>--children-max=</option></arg>
+       <arg><option>--exec-delay=</option></arg>
+       <arg><option>--event-timeout=</option></arg>
+@@ -75,6 +76,16 @@
+         </listitem>
+       </varlistentry>
+ 
++      <varlistentry>
++        <term><option>-r</option>, <option>--ready-notify=</option></term>
++        <listitem>
++          <para>Issue (S6/dinit compatible) readiness notification via a
++          file descriptor. A short message followed by a newline character
++          will be sent via the specified file descriptor (inherited from
++          the parent process) when initialization is complete.</para>
++        </listitem>
++      </varlistentry>
++
+       <varlistentry>
+         <term><option>-c</option>, <option>--children-max=</option></term>
+         <listitem>
+diff --git a/src/udev/udevd.c b/src/udev/udevd.c
+index 2acf629f2..9bc6354b6 100644
+--- a/src/udev/udevd.c
++++ b/src/udev/udevd.c
+@@ -62,6 +62,7 @@ static int worker_watch[2] = { -1, -1 };
+ static int fd_signal = -1;
+ static int fd_ep = -1;
+ static int fd_inotify = -1;
++static int fd_ready = -1;
+ static bool stop_exec_queue;
+ static bool reload;
+ static bool arg_debug = false;
+@@ -76,6 +77,7 @@ static UDEV_LIST(event_list);
+ Hashmap *workers;
+ static struct udev_list properties_list;
+ static bool udev_exit;
++static char udevd_ready_string[] = "udevd ready\n";
+ 
+ enum event_state {
+         EVENT_UNDEF,
+@@ -1036,6 +1038,7 @@ static void help(void) {
+                "  -V --version                Print version of the program\n"
+                "  -d --daemon                 Detach and run in the background\n"
+                "  -D --debug                  Enable debug output\n"
++               "  -r --ready-notify=FD        Notify readiness via file descriptor\n"
+                "  -c --children-max=INT       Set maximum number of workers\n"
+                "  -e --exec-delay=SECONDS     Seconds to wait before executing RUN=\n"
+                "  -t --event-timeout=SECONDS  Seconds to wait before terminating an event\n"
+@@ -1048,6 +1051,7 @@ static int parse_argv(int argc, char *argv[]) {
+         static const struct option options[] = {
+                 { "daemon",             no_argument,            NULL, 'd' },
+                 { "debug",              no_argument,            NULL, 'D' },
++                { "ready-notify",       required_argument,      NULL, 'r' },
+                 { "children-max",       required_argument,      NULL, 'c' },
+                 { "exec-delay",         required_argument,      NULL, 'e' },
+                 { "event-timeout",      required_argument,      NULL, 't' },
+@@ -1104,6 +1108,11 @@ static int parse_argv(int argc, char *argv[]) {
+                                 return 0;
+                         }
+                         break;
++                case 'r':
++                        r = safe_atou(optarg, &fd_ready);
++                        if (r < 0)
++                                log_warning("Invalid --ready-notify ignored: %s", optarg);
++                        break;
+                 case 'h':
+                         help();
+                         return 0;
+@@ -1372,6 +1381,20 @@ int main(int argc, char *argv[]) {
+                 goto exit;
+         }
+ 
++        if (fd_ready != -1) {
++                size_t to_write = sizeof(udevd_ready_string) - 1;
++                char *wptr = udevd_ready_string;
++                do {
++                        int r = write(fd_ready, wptr, to_write);
++                        if (r < 0) {
++                                log_error_errno(errno, "failed to write to readiness fd: %m");
++                                break;
++                        }
++                        to_write -= r;
++                        wptr += r;
++                } while (to_write > 0);
++        }
++
+         for (;;) {
+                 static usec_t last_usec;
+                 struct epoll_event ev[8];
+--- ./rules/50-udev-default.rules.orig	2023-10-05 12:20:45.000000000 -0500
++++ ./rules/50-udev-default.rules	2026-03-18 16:57:15.394003901 -0500
+@@ -90,14 +90,14 @@
+ KERNEL=="fuse", MODE="0666", OPTIONS+="static_node=fuse"
+ 
+ # The static_node is required on s390x and ppc (they are using MODULE_ALIAS)
+-KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"
++KERNEL=="kvm", GROUP="kvm", MODE="0660", OPTIONS+="static_node=kvm"
+ 
+ KERNEL=="vfio", MODE="0666", OPTIONS+="static_node=vfio/vfio"
+ 
+ KERNEL=="vsock", MODE="0666"
+ KERNEL=="vhost-vsock", GROUP="kvm", MODE="0666", OPTIONS+="static_node=vhost-vsock"
+ 
+-KERNEL=="vhost-net", GROUP="kvm", MODE="0666", OPTIONS+="static_node=vhost-net"
++KERNEL=="vhost-net", GROUP="kvm", MODE="0660", OPTIONS+="static_node=vhost-net"
+ 
+ KERNEL=="udmabuf", GROUP="kvm"
+ 

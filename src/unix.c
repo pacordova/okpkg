@@ -1,0 +1,38 @@
+#include <unistd.h>
+#include "okutils.h"
+
+int
+ok_chdir(lua_State *L)
+{
+    const char *path = lua_tostring(L, 1);
+    lua_pushboolean(L, chdir(path) == 0);
+    return 1;
+}
+
+int
+ok_exists(lua_State *L)
+{
+    const char *path = lua_tostring(L, 1);
+    if (access(path, F_OK) == 0) {
+        lua_pushstring(L, path);
+        return 1;
+    }
+    return 0;
+}
+
+int
+ok_getcwd(lua_State *L)
+{
+    char buf[PATH_MAX];
+    lua_pushstring(L, getcwd(buf, PATH_MAX));
+    return 1;
+};
+
+int
+ok_symlink(lua_State *L)
+{
+    const char *target = lua_tostring(L, 1);
+    const char *link = lua_tostring(L, 2);
+    lua_pushinteger(L, symlink(target, link));
+    return 1;
+}
