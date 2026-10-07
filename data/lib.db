@@ -156,7 +156,7 @@
       },
    };
    ["libarchive"] = {
-      ["url"] = "https://github.com/libarchive/libarchive/releases/download/v3.8.7/libarchive-3.8.7.tar.xz",
+      ["url"] = "https://libarchive.org/downloads/libarchive-3.8.7.tar.xz",
       ["b3sum"] = "6b7f744132368a53ecf98a4586af09c255f81cebf37687edd857528a1bfd3bd3",
       ["build"] = rc.configure,
       ["flags"] = {
