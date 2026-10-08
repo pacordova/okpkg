@@ -3,9 +3,6 @@
 unpack = unpack or table.unpack
 
 ok  = require("okutils")
-cfg = require("okconfig")
-
-cfg.pkgdir = "/var/cache/packages"
 
 function curl(x)
    local fp, buf
@@ -69,7 +66,7 @@ end
 -- okpkg --
 -----------
 okpkg = {}
-for de in dir(cfg.pkgdir) do
+for de in dir("/var/cache/packages") do
    local fixed = de:
       gsub("-x86_64", ""):
       gsub("-amd64", ""):
@@ -82,12 +79,12 @@ end
 -- main loop -
 --------------
 L = {}
-for de in dir(cfg.datadir) do
+for de in dir("/usr/okpkg/data") do
    if de ~= "cross.db" then
-      fp = io.open(string.format("%s/%s", cfg.datadir, de))
-      buf = "\n" .. fp:read("*a")
+      fp = io.open(string.format("%s/%s", "/usr/okpkg/data", de))
+      buf = fp:read("*a")
       fp:close()
-      for i in buf:gmatch("\n([%w%-]-) = {.-};") do table.insert(L, i) end
+      for i in buf:gmatch("%[\"([%w%-]-)\"%] = {.-};") do table.insert(L, i) end
    end
 end
 
