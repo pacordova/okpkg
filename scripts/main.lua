@@ -180,18 +180,17 @@ function makepkg(x)
 
    strip(".")
 
-   if ok.chdir("usr/share") then
-      for de in dir("man") do
+   if ok.isdir("./usr/share/man") then
+      for de in dir("./usr/share/man") do
          if not string.match(de, "[1-9]") then 
-            ok.remove_all(string.format("%s/%s", "man", de))
+            ok.remove_all(string.format("%s/%s", "./usr/share/man", de))
          end
       end
-      ok.remove_all("info")
-      ok.remove_all("doc")
-      ok.remove_all("gtk-doc")
-      ok.remove_all("locale")
-      ok.chdir("../..")
    end
+   ok.remove_all("./usr/share/info")
+   ok.remove_all("./usr/share/doc")
+   ok.remove_all("./usr/share/gtk-doc")
+   ok.remove_all("./usr/share/locale")
    os.execute [[ find . -name \*.pyc -o -name \*.la -delete ]]
    ok.exec(
       "/bin/tar",
