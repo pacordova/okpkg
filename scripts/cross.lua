@@ -10,25 +10,39 @@ cfg = require("okconfig")
 
 unpack = unpack or table.unpack
 
+local __rc = {
+   __concat = function(x, y)
+      for i=1,#y do table.insert(x, y[i]) end
+      return x
+   end,
+   __tostring = function(tbl)
+      return table.concat(tbl, ' ')
+   end,
+   __call = function(self, ...)
+      return os.execute(tostring(self .. {...})
+   end,
+}
+
 rc = {
    ["cmake"] = function(...)
-      return ok.exec(
-         "cmake",
-         "-Bbuild",
-         "-DCMAKE_BUILD_TYPE=Release",
-         "-DCMAKE_INSTALL_BINDIR=/bin",
-         "-DCMAKE_INSTALL_LIBDIR=/lib64",
-         "-DCMAKE_INSTALL_PREFIX=/",
-         "-DCMAKE_INSTALL_RUNSTATEDIR=/run",
-         "-DCMAKE_INSTALL_RUNSTATEDIR=/run",
-         "-DCMAKE_INSTALL_SBINDIR=../bin",
-         "-DCMAKE_INSTALL_SBINDIR=/bin",
-         "-DCMAKE_SHARED_LIBS=True",
-         "-DCMAKE_SKIP_RPATH=TRUE",
-         "-GNinja",
-         "-Wno-dev",
-         ...
-      ) and rc.ninja()
+      local arg = setmetatable({}, __rc)
+      table.insert(tbl, "cmake")
+      table.insert(tbl, "-Bbuild")
+      table.insert(tbl, "cmake")
+      table.insert(tbl, "-Bbuild")
+      table.insert(tbl, "-DCMAKE_BUILD_TYPE=Release")
+      table.insert(tbl, "-DCMAKE_INSTALL_BINDIR=/bin")
+      table.insert(tbl, "-DCMAKE_INSTALL_LIBDIR=/lib64")
+      table.insert(tbl, "-DCMAKE_INSTALL_PREFIX=/")
+      table.insert(tbl, "-DCMAKE_INSTALL_RUNSTATEDIR=/run")
+      table.insert(tbl, "-DCMAKE_INSTALL_RUNSTATEDIR=/run")
+      table.insert(tbl, "-DCMAKE_INSTALL_SBINDIR=../bin")
+      table.insert(tbl, "-DCMAKE_INSTALL_SBINDIR=/bin")
+      table.insert(tbl, "-DCMAKE_SHARED_LIBS=True")
+      table.insert(tbl, "-DCMAKE_SKIP_RPATH=TRUE")
+      table.insert(tbl, "-GNinja")
+      table.insert(tbl, "-Wno-dev")
+      return tbl(...) and rc.ninja()
    end,
    ["configure"] = function(...)
       return ok.exec(

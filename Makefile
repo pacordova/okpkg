@@ -15,7 +15,6 @@ OBJS =\
 	src/chroot.o\
 	src/dir.o\
 	src/env.o\
-	src/exec.o\
 	src/okutils.o\
 	src/unix.o\
 

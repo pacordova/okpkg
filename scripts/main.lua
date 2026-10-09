@@ -6,21 +6,11 @@ cfg = require("okconfig")
 unpack = unpack or table.unpack
 chroot, b3sum = ok.chroot, ok.b3sum
 
-function cfg.cflags.format(self)
-   local tbl = {
-      ["yes"]      = "-fstack-protector",
-      ["no"]       = "-fno-stack-protector",
-      ["all"]      = "-fstack-protector-all",
-      ["strong"]   = "-fstack-protector-strong",
-      ["explicit"] = "-fstack-protector-explicit",
-   }
-   return string.format("-march=%s -O%s -ftrivial-auto-var-init=%s %s",
-      self.cpu, self.opt_level, self.auto_var_init, tbl[self.ssp])
-end
+meta = {__tostring = function(x) return table.concat(x, ' ') end}
 
 rc = {
    ["cmake"] = function(...)
-      return ok.exec(
+      local arg = {
          "cmake",
          "-Bbuild",
          "-DCMAKE_BUILD_TYPE=Release",
@@ -34,32 +24,38 @@ rc = {
          "-GNinja",
          "-Wno-dev",
          ...
-      ) and rc.ninja()
+      }
+      setmetatable(arg, meta)
+      return os.execute(tostring(arg)) and rc.ninja()
    end,
    ["configure"] = function(...)
-      return ok.exec(
+      local arg = {
          "sh", 
-         ok.exists("configure") or 
+         ok.exists("configure") or
          ok.exists("../configure") or 
          ok.exists("configure.gnu"),
          "--prefix=/usr",
          ...
-      ) and rc.make()
+      }
+      setmetatable(arg, meta)
+      return os.execute(tostring(arg)) and rc.make()
    end,
    ["make"] = function(...)
       return rc.make_all(...) and rc.make_install(...)
    end,
    ["make_all"] = function(...)
-      return ok.exec("make", ...)
+      local arg = setmetatable({"make", ...}, meta)
+      return os.execute(tostring(arg))
    end,
    ["make_install"] = function(...)
+      local arg = setmetatable({"make", "install", ...}, meta)
       return (
          ok.setenv("DESTDIR", destdir) and
-         ok.exec("make", "install", ...) and
+         os.execute(tostring(arg)) and
          ok.unsetenv("DESTDIR"))
    end,
    ["meson"] = function(...)
-      return ok.exec(
+      local arg = {
          "meson",
          "setup",
          "build",
@@ -72,7 +68,9 @@ rc = {
          "-Dpython.install_env=system",
          "-Dwrap_mode=nodownload",
          ...
-      ) and rc.ninja()
+      }
+      setmetatable(arg, meta)
+      return os.execute(tostring(arg)) and rc.ninja()
    end,
    ["ninja"] = function()
       return (
@@ -191,21 +189,14 @@ function makepkg(x)
    ok.remove_all("./usr/share/doc")
    ok.remove_all("./usr/share/gtk-doc")
    ok.remove_all("./usr/share/locale")
-   os.execute [[ find . -name \*.pyc -o -name \*.la -delete ]]
-   ok.exec(
-      "/bin/tar",
-      "--lzip",
-      "--mtime=@" .. os.getenv("SOURCE_DATE_EPOCH"),
-      "--sort=name",
-      "--owner=0",
-      "--group=0",
-      "--numeric-owner",
-      "--create",
-      "--file",
-      ok.getcwd() .. ".tar.lz",
-      "."
-   )
-   os.execute [[ touch -hd "@$SOURCE_DATE_EPOCH" $PWD.tar.lz ]]
+   os.execute [[ 
+      find . -name \*.pyc -o -name \*.la -delete
+      tar --lzip --sort=name \
+          --mtime="@${SOURCE_DATE_EPOCH}" \
+          --owner=0 --group=0 --numeric-owner \
+          -cf ${PWD}.tar.lz .
+      touch -hd "@${SOURCE_DATE_EPOCH}" ${PWD}.tar.lz 
+   ]]
 
    -- ::cleanup::
    ok.chdir("..")
@@ -222,7 +213,7 @@ function build(x)
       cfg.pkgdir,
       x,
       vmatch(ok.basename(tbl.url)),
-      string.gsub(cfg.cflags.cpu, "-", "_")
+      string.gsub(cfg.cpu, "-", "_")
    )
    ok.setenv("destdir", destdir)
    ok.setenv("SOURCE_DATE_EPOCH", ok.mtime("."))
@@ -285,11 +276,13 @@ end
 
 --------------------------------------------------------------------------------
 
-ok.setenv("LC_ALL", "C")
+setmetatable(cfg.cflags, meta)
+table.insert(cfg.cflags, "-march=" .. cfg.cpu)
+ok.setenv("CFLAGS",   tostring(cfg.cflags))
+ok.setenv("CXXFLAGS", tostring(cfg.cflags))
 ok.setenv("CONFIG_SITE", cfg.site)
-ok.setenv("CFLAGS",   cfg.cflags:format())
-ok.setenv("CXXFLAGS", cfg.cflags:format())
-ok.setenv("MAKEFLAGS", string.format("-j%s", cfg.jobs))
+ok.setenv("MAKEFLAGS", "-j" .. cfg.jobs)
+ok.setenv("LC_ALL", "C")
 
 while #arg > 1 do
    if arg[2]:sub(1,2) == "--" then

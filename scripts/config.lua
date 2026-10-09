@@ -9,13 +9,14 @@ cfg = {
    ["state"]       = "/var/log/packages",
    ["site"]        = "/etc/config.site",
    ["jobs"]        = "5",
+   ["cpu"]         = "skylake",
 }
 
 cfg.cflags = {
-   ["cpu"]           = "skylake",
-   ["opt_level"]     = "2",
-   ["auto_var_init"] = "zero",
-   ["ssp"]           = "strong",
+   "-O2",
+   "-ftrivial-auto-var-init=zero",
+   "-fstack-protector-strong",
+   "-fstack-clash-protection",
 }
 
 return cfg

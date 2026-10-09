@@ -4,7 +4,6 @@
 static const struct luaL_Reg okutils[] = {
     {"b3sum", ok_b3sum},
     {"chroot", ok_chroot},
-    {"exec", ok_exec},
     {"basename", ok_basename},
     {"dirname", ok_dirname},
     {"chdir", ok_chdir},

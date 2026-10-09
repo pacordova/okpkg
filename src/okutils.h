@@ -25,7 +25,6 @@ void blake3_out(struct blake3 *, unsigned char *restrict, size_t);
 int luaopen_okutils(lua_State *L);
 int ok_b3sum(lua_State *L);
 int ok_chroot(lua_State *L);
-int ok_exec(lua_State *L);
 int ok_basename(lua_State *L);
 int ok_dirname(lua_State *L);
 int ok_chdir(lua_State *L);
