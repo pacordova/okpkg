@@ -6,7 +6,6 @@ cfg = require("okconfig")
 unpack = unpack or table.unpack
 chroot, b3sum = ok.chroot, ok.b3sum
 
-
 rc = {}
 rc.meta = {__tostring = function(x) return table.concat(x, ' ') end}
 rc.make = function(...) return rc.make_all(...) and rc.make_install(...) end

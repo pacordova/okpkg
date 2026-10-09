@@ -23,54 +23,59 @@ local __rc = {
    end,
 }
 
-rc = {
-   ["cmake"] = function(...)
-      local arg = setmetatable({}, __rc)
-      table.insert(tbl, "cmake")
-      table.insert(tbl, "-Bbuild")
-      table.insert(tbl, "cmake")
-      table.insert(tbl, "-Bbuild")
-      table.insert(tbl, "-DCMAKE_BUILD_TYPE=Release")
-      table.insert(tbl, "-DCMAKE_INSTALL_BINDIR=/bin")
-      table.insert(tbl, "-DCMAKE_INSTALL_LIBDIR=/lib64")
-      table.insert(tbl, "-DCMAKE_INSTALL_PREFIX=/")
-      table.insert(tbl, "-DCMAKE_INSTALL_RUNSTATEDIR=/run")
-      table.insert(tbl, "-DCMAKE_INSTALL_RUNSTATEDIR=/run")
-      table.insert(tbl, "-DCMAKE_INSTALL_SBINDIR=../bin")
-      table.insert(tbl, "-DCMAKE_INSTALL_SBINDIR=/bin")
-      table.insert(tbl, "-DCMAKE_SHARED_LIBS=True")
-      table.insert(tbl, "-DCMAKE_SKIP_RPATH=TRUE")
-      table.insert(tbl, "-GNinja")
-      table.insert(tbl, "-Wno-dev")
-      return tbl(...) and rc.ninja()
-   end,
-   ["configure"] = function(...)
-      return ok.exec(
-         "sh",
-         ok.exists("configure") or
-         ok.exists("../configure"),
-         ...
-      ) and rc.make()
-   end,
-   ["make"] = function(...)
-      return rc.make_all(...) and rc.make_install(...)
-   end,
-   ["make_all"] = function(...)
-      return ok.exec("make", ...)
-   end,
-   ["make_install"] = function(...)
-      return (
-         ok.setenv("DESTDIR", "/mnt") and
-         ok.exec("make", "install", ...) and
-         ok.unsetenv("DESTDIR"))
-   end,
-   ["ninja"] = function()
-      return (
-         ok.setenv("DESTDIR", "/mnt") and
-         os.execute("ninja -C build install") and
-         ok.unsetenv("DESTDIR"))
-   end,
-}
+rc = {}
+rc.meta = {__tostring = function(x) return table.concat(x, ' ') end}
+rc.make = function(...) return rc.make_all(...) and rc.make_install(...) end
+rc.cmake = function(...)
+   local arg = {
+      "cmake",
+      "-Bbuild",
+      "-DCMAKE_BUILD_TYPE=Release",
+      "-DCMAKE_INSTALL_BINDIR=/bin",
+      "-DCMAKE_INSTALL_LIBDIR=/lib64",
+      "-DCMAKE_INSTALL_PREFIX=/",
+      "-DCMAKE_INSTALL_RUNSTATEDIR=/run",
+      "-DCMAKE_INSTALL_SBINDIR=/bin",
+      "-DCMAKE_SHARED_LIBS=True",
+      "-DCMAKE_SKIP_RPATH=TRUE",
+      "-GNinja",
+      "-Wno-dev",
+      ...
+   }
+   setmetatable(arg, meta)
+   return os.execute(tostring(arg)) and rc.ninja()
+end
+
+rc.configure = function(...)
+   arg = {
+      "sh",
+      ok.exists("configure") or ok.exists("../configure")
+      "--prefix=/usr",
+      ...
+   }
+   setmetatable(arg, rc.meta)
+   return os.execute(tostring(arg)) and rc.make()
+end
+
+rc.make_all = function(...)
+   local arg = setmetatable({"make", ...}, rc.meta)
+   return os.execute(tostring(arg))
+end
+
+rc.make_install = function(...)
+   local arg = setmetatable({"make", "install", ...}, rc.meta)
+   return (
+      ok.setenv("DESTDIR", "/mnt") and
+      os.execute(tostring(arg)) and
+      ok.unsetenv("DESTDIR"))
+end
+
+rc.ninja = function()
+   return (
+      ok.setenv("DESTDIR", "/mnt") and
+      os.execute("ninja -C build install") and
+      ok.unsetenv("DESTDIR"))
+end
 
 function query(x, db)
    local i, fp, buf
