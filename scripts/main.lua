@@ -6,86 +6,89 @@ cfg = require("okconfig")
 unpack = unpack or table.unpack
 chroot, b3sum = ok.chroot, ok.b3sum
 
-meta = {__tostring = function(x) return table.concat(x, ' ') end}
 
-rc = {
-   ["cmake"] = function(...)
-      local arg = {
-         "cmake",
-         "-Bbuild",
-         "-DCMAKE_BUILD_TYPE=Release",
-         "-DCMAKE_INSTALL_BINDIR=/bin",
-         "-DCMAKE_INSTALL_LIBDIR=/lib64",
-         "-DCMAKE_INSTALL_PREFIX=/",
-         "-DCMAKE_INSTALL_RUNSTATEDIR=/run",
-         "-DCMAKE_INSTALL_SBINDIR=/bin",
-         "-DCMAKE_SHARED_LIBS=True",
-         "-DCMAKE_SKIP_RPATH=TRUE",
-         "-GNinja",
-         "-Wno-dev",
-         ...
-      }
-      setmetatable(arg, meta)
-      return os.execute(tostring(arg)) and rc.ninja()
-   end,
-   ["configure"] = function(...)
-      local arg = {
-         "sh", 
-         ok.exists("configure") or
-         ok.exists("../configure") or 
-         ok.exists("configure.gnu"),
-         "--prefix=/usr",
-         ...
-      }
-      setmetatable(arg, meta)
-      return os.execute(tostring(arg)) and rc.make()
-   end,
-   ["make"] = function(...)
-      return rc.make_all(...) and rc.make_install(...)
-   end,
-   ["make_all"] = function(...)
-      local arg = setmetatable({"make", ...}, meta)
-      return os.execute(tostring(arg))
-   end,
-   ["make_install"] = function(...)
-      local arg = setmetatable({"make", "install", ...}, meta)
-      return (
-         ok.setenv("DESTDIR", destdir) and
-         os.execute(tostring(arg)) and
-         ok.unsetenv("DESTDIR"))
-   end,
-   ["meson"] = function(...)
-      local arg = {
-         "meson",
-         "setup",
-         "build",
-         "-Dprefix=/usr",
-         "-Dbindir=../bin",
-         "-Dlibdir=../lib64",
-         "-Dsbindir=../bin",
-         "-Ddebug=false",
-         "-Doptimization=2",
-         "-Dpython.install_env=system",
-         "-Dwrap_mode=nodownload",
-         ...
-      }
-      setmetatable(arg, meta)
-      return os.execute(tostring(arg)) and rc.ninja()
-   end,
-   ["ninja"] = function()
-      return (
-         ok.setenv("DESTDIR", destdir) and
-         os.execute("ninja -C build install") and
-         ok.unsetenv("DESTDIR"))
-   end,
-   ["python"] = function()
-      return (
-          os.execute("python3 -m build -nx")  and
-          ok.setenv("DESTDIR", destdir) and
-          os.execute("python3 -m installer -d $DESTDIR dist/*whl") and
-          ok.unsetenv("DESTDIR"))
-   end,
-}
+rc = {}
+rc.meta = {__tostring = function(x) return table.concat(x, ' ') end}
+rc.make = function(...) return rc.make_all(...) and rc.make_install(...) end
+rc.cmake = function(...)
+   local arg = {
+      "cmake",
+      "-Bbuild",
+      "-DCMAKE_BUILD_TYPE=Release",
+      "-DCMAKE_INSTALL_BINDIR=/bin",
+      "-DCMAKE_INSTALL_LIBDIR=/lib64",
+      "-DCMAKE_INSTALL_PREFIX=/",
+      "-DCMAKE_INSTALL_RUNSTATEDIR=/run",
+      "-DCMAKE_INSTALL_SBINDIR=/bin",
+      "-DCMAKE_SHARED_LIBS=True",
+      "-DCMAKE_SKIP_RPATH=TRUE",
+      "-GNinja",
+      "-Wno-dev",
+      ...
+   }
+   setmetatable(arg, meta)
+   return os.execute(tostring(arg)) and rc.ninja()
+end
+
+rc.configure = function(...)
+   arg = {
+      "sh", 
+      ok.exists("configure") or
+      ok.exists("../configure") or 
+      ok.exists("configure.gnu"),
+      "--prefix=/usr",
+      ...
+   }
+   setmetatable(arg, rc.meta)
+   return os.execute(tostring(arg)) and rc.make()
+end
+
+rc.make_all = function(...)
+   local arg = setmetatable({"make", ...}, rc.meta)
+   return os.execute(tostring(arg))
+end
+
+rc.make_install = function(...)
+   local arg = setmetatable({"make", "install", ...}, rc.meta)
+   return (
+      ok.setenv("DESTDIR", destdir) and
+      os.execute(tostring(arg)) and
+      ok.unsetenv("DESTDIR"))
+end
+
+rc.meson = function(...)
+   local arg = {
+      "meson",
+      "setup",
+      "build",
+      "-Dprefix=/usr",
+      "-Dbindir=../bin",
+      "-Dlibdir=../lib64",
+      "-Dsbindir=../bin",
+      "-Ddebug=false",
+      "-Doptimization=2",
+      "-Dpython.install_env=system",
+      "-Dwrap_mode=nodownload",
+      ...
+   }
+   setmetatable(arg, rc.meta)
+   return os.execute(tostring(arg)) and rc.ninja()
+end
+
+rc.ninja = function()
+   return (
+      ok.setenv("DESTDIR", destdir) and
+      os.execute("ninja -C build install") and
+      ok.unsetenv("DESTDIR"))
+end
+
+rc.python = function()
+   return (
+      os.execute("python3 -m build -nx")  and
+      ok.setenv("DESTDIR", destdir) and
+      os.execute("python3 -m installer -d $DESTDIR dist/*whl") and
+      ok.unsetenv("DESTDIR"))
+end
 
 function vmatch(s)
    return string.match(s, "[-_%.][nrv]?([%d%.]+%l?%d?)[-_%.]")
@@ -276,7 +279,7 @@ end
 
 --------------------------------------------------------------------------------
 
-setmetatable(cfg.cflags, meta)
+setmetatable(cfg.cflags, rc.meta)
 table.insert(cfg.cflags, "-march=" .. cfg.cpu)
 ok.setenv("CFLAGS",   tostring(cfg.cflags))
 ok.setenv("CXXFLAGS", tostring(cfg.cflags))
