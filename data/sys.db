@@ -35,8 +35,8 @@
       },
    };
    ["perl"] = {
-      ["url"] = "https://www.cpan.org/src/5.0/perl-5.44.0.tar.xz",
-      ["b3sum"] = "2b1be108d901a7b5832e17292631b975f98d04d7c615dcde9d7f61c32c79063c",
+      ["url"] = "https://www.cpan.org/src/5.0/perl-5.45.2.tar.xz",
+      ["b3sum"] = "73a437e9ca3e5b65acc3ec41b983a7882d91b5f84b65b89c9b83239c205a9f53",
       ["build"] = rc.configure,
       ["flags"] = {
          "-Dprefix=/opt/perl",
@@ -44,6 +44,7 @@
          "-Dusethreads",
          "-Dman1dir=/opt/perl/man/man1",
          "-Dman3dir=/opt/perl/man/man3",
+         "-Dusedevel",
       },
       ["post"] = [[
          cd $destdir/opt/perl
