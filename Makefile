@@ -2,12 +2,10 @@ bindir     ?= /bin
 sysconfdir ?= /etc
 lua_cdir   != lua -e 'print(package.cpath:match("(.-)/%?.so;"))'
 lua_ldir   != lua -e 'print(package.path:match("(.-)/%?.lua;"))'
-
 STRIP   = strip --strip-unneeded
 INSTALL = install
 CC      = gcc -std=gnu99
 CFLAGS  = -O2 -ftrivial-auto-var-init=zero
-
 OBJS =\
 	src/b3sum.o\
 	src/basename.o\

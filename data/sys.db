@@ -39,15 +39,16 @@
       ["b3sum"] = "73a437e9ca3e5b65acc3ec41b983a7882d91b5f84b65b89c9b83239c205a9f53",
       ["build"] = rc.configure,
       ["flags"] = {
-         "-Dprefix=/opt/perl",
+         "-Dprefix=/opt/perl5",
          "-Duseshrplib",
          "-Dusethreads",
-         "-Dman1dir=/opt/perl/man/man1",
-         "-Dman3dir=/opt/perl/man/man3",
+         "-Dman1dir=/opt/perl5/man/man1",
+         "-Dman3dir=/opt/perl5/man/man3",
          "-Dusedevel",
+         "-Uversiononly",
       },
       ["post"] = [[
-         cd $DESTDIR/opt/perl
+         cd $DESTDIR/opt/perl5
          find . -name \*.pod       -exec rm -f     {} +
          find . -name .packlist    -exec rm -f     {} +
          find . -name README\*     -exec rm -f     {} +
@@ -454,7 +455,6 @@
          "--enable-hashes=strong,glibc",
          "--enable-obsolete-api=no",
          "--disable-failure-tokens",
-         "PERL=/opt/perl/bin/perl",
       },
       ["prep"] = [[
          sed -i '/strchr/s/const//' lib/crypt-{sm3,gost}-yescrypt.c

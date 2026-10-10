@@ -286,11 +286,4 @@ ok.setenv("CONFIG_SITE", cfg.site)
 ok.setenv("MAKEFLAGS", "-j" .. cfg.jobs)
 ok.setenv("LC_ALL", "C")
 
-while #arg > 1 do
-   if arg[2]:sub(1,2) == "--" then
-      load(arg[2]:sub(3,#arg[2]))()
-   else
-      _G[arg[1]](arg[2])
-   end
-   table.remove(arg, 2)
-end
+for i=2,#arg do _G[arg[1]](arg[i]) end
