@@ -42,7 +42,7 @@
       ["b3sum"] = "120f874b7ce3da45a0b8552dfb6428dedd88e923867e270b0c4bf8fe34e7b010",
       ["build"] = rc.python,
    };
-   [rc.python] = {
+   ["python-build"] = {
       ["url"] = "https://pypi.io/packages/source/b/build/build-1.4.0.tar.gz",
       ["b3sum"] = "3de64a7254fe062cba35c7a39fe5323085aade7aa31e0b3c2d5ff01b2952432f",
       ["build"] = rc.python,
