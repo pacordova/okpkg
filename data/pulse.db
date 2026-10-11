@@ -1,0 +1,32 @@
+{
+   ["libsndfile"] = {
+      ["url"] = "https://github.com/libsndfile/libsndfile/releases/download/1.2.2/libsndfile-1.2.2.tar.xz",
+      ["b3sum"] = "fc805e696ee73ee24377329683b7e00af0db78727af553e74840cc813969ba77",
+      ["build"] = rc.configure,
+   };
+   ["pulseaudio"] = {
+      ["url"] = "https://www.freedesktop.org/software/pulseaudio/releases/pulseaudio-17.0.tar.xz",
+      ["b3sum"] = "e56408636f88e3c8b7575795722ebccd7cadb032f7cefda3d055af549b34df4f",
+      ["build"] = rc.meson,
+      ["flags"] = {
+         "-Ddatabase=gdbm",
+         "-Ddoxygen=false",
+         "-Dbluez5=disabled",
+         "-Dudevrulesdir=/lib64/udev/rules.d",
+      },
+      ["post"] = [[ rm -f $destdir/usr/share/dbus-1/system.d/pulseaudio-system.conf ]],
+   };
+   ["xfce4-pulseaudio-plugin"] = {
+      ["url"] = "https://archive.xfce.org/src/panel-plugins/xfce4-pulseaudio-plugin/0.5/xfce4-pulseaudio-plugin-0.5.1.tar.xz",
+      ["b3sum"] = "8fbdab1e771c1b5a7304be7105d6e81bac344cec58fffb3a5f84a3b1398bd0a3",
+      ["build"] = rc.meson,
+      ["flags"] = {
+         "-Dkeybinder=disabled",
+         "-Dlibnotify=enabled",
+         "-Dlibcanberra=disabled",
+         "-Dlibxfce4windowing=enabled",
+         "-Dmpris2=disabled",
+         "-Dmixer-command=/bin/true",
+      },
+   };
+}
