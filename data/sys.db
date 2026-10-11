@@ -121,8 +121,8 @@
       },
    };
    ["xz"] = {
-      ["url"] = "https://downloads.sourceforge.net/lzmautils/xz-5.8.3.tar.xz",
-      ["b3sum"] = "efc9adc69f7f8041464ff563cee32a80639d3a2985c448d62e99455464e738ee",
+      ["url"] = "https://downloads.sourceforge.net/lzmautils/xz-5.8.4.tar.xz",
+      ["b3sum"] = "4776832814549b37914485ee14979b68282d4ddf1c0b679c6f4e055a57666b96",
       ["build"] = rc.configure,
    };
    ["lz4"] = {
@@ -428,8 +428,8 @@
       },
    };
    ["less"] = {
-      ["url"] = "https://www.greenwoodsoftware.com/less/less-704.tar.gz",
-      ["b3sum"] = "97be5e779025e9171c09e1ceb16d3243259a0b22e17fc67035846da44a4f5129",
+      ["url"] = "https://www.greenwoodsoftware.com/less/less-710.tar.gz",
+      ["b3sum"] = "b29820f1db911454aa875da74f8eb8cacdc93b2bddb12647c5ecae86e0ef6449",
       ["build"] = rc.configure,
    };
    ["gawk"] = {
@@ -617,8 +617,8 @@
       ]],
    };
    ["eudev"] = {
-      ["url"] = "https://github.com/eudev-project/eudev/releases/download/v3.2.14/eudev-3.2.14.tar.gz",
-      ["b3sum"] = "093ed8eecbeda7d4af31e05fbbf8b5ef5e6fb2ce06e3fd7948a26c09a1e57c4b",
+      ["url"] = "https://github.com/eudev-project/eudev/releases/download/v3.2.15/eudev-3.2.15.tar.gz",
+      ["b3sum"] = "9bb66d690a38b5dd14d6cbdab2e589f2522563e15aec906f94f7797e92839b49",
       ["build"] = rc.configure,
    };
    ["mandoc"] = {
@@ -690,8 +690,8 @@
       },
    };
    ["dinit"] = {
-      ["url"] = "https://github.com/davmac314/dinit/archive/v0.22.0/dinit-0.22.0.tar.gz",
-      ["b3sum"] = "f5670fdfa3117c0db70cdde6eae288848e9c90f3edfc4b420e5011d150b10a7b",
+      ["url"] = "https://github.com/davmac314/dinit/archive/v0.22.1/dinit-0.22.1.tar.gz",
+      ["b3sum"] = "2d5232a163edb038308bb1b9b22c3a23d7b46d478c1e09794fbf79d94243f1d3",
       ["build"] = rc.configure,
       ["flags"] = {
          "--bindir=/bin",

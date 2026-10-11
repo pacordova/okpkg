@@ -119,8 +119,8 @@
       },
    };
    ["gimp"] = {
-      ["url"] = "https://download.gimp.org/gimp/v3.2/gimp-3.2.4.tar.xz",
-      ["b3sum"] = "0c0a60060673cb3f76ebd5cd05b6d9e83db6e861a5c63e4e66a7af9f338cd1f0",
+      ["url"] = "https://download.gimp.org/gimp/v3.2/gimp-3.2.6.tar.xz",
+      ["b3sum"] = "648de72396e182a44e6d983bc0a012905a559fc7100bcdd818398b397505662e",
       ["build"] = rc.meson,
       ["flags"] = {
          "-Dheadless-tests=disabled",
