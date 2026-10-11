@@ -2,7 +2,7 @@
 
 dofile("/bin/okpkg")
 unpack = unpack or table.unpack
-local ok = require("okutils")
+ok = require("okutils")
 
 purge("python-flit-core")
 download("python-flit-core")

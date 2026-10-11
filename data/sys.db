@@ -438,8 +438,8 @@
       ["build"] = rc.configure,
    };
    ["tzdata"] = {
-      ["url"] = "https://github.com/eggert/tz/archive/2026c/tz-2026c.tar.gz",
-      ["b3sum"] = "0282e746553509456928ee2206456b8aeefff0b0206097dee0aa545ee8f82722",
+      ["url"] = "https://github.com/eggert/tz/archive/2026e/tz-2026e.tar.gz",
+      ["b3sum"] = "4eba0b7dcded54e8ebb15d295307f804c71430d67f2002b471eac9c4d518727d",
       ["build"] = rc.make,
       ["flags"] = {
          "LIBDIR=/lib64",
@@ -534,8 +534,8 @@
       ]],
    };
    ["gzip"] = {
-      ["url"] = "https://ftp.gnu.org/gnu/gzip/gzip-1.14.tar.xz",
-      ["b3sum"] = "4d318e6b8ff830c98b98314bcafb54d540ab940553ef1ad5e0743b21a36a473b",
+      ["url"] = "https://ftp.gnu.org/gnu/gzip/gzip-1.15.tar.xz",
+      ["b3sum"] = "ed2b2743048530c90a8b93b32bac1f9e06b6fc0988c36ca39d94e10ffb5379d1",
       ["build"] = rc.configure,
    };
    ["plzip"] = {

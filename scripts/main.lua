@@ -86,6 +86,7 @@ rc.python = function()
       os.execute("python3 -m build -nx")  and
       ok.setenv("DESTDIR", destdir) and
       os.execute("python3 -m installer -d $DESTDIR dist/*whl") and
+      os.execute("touch $DESTDIR/nostrip") and
       ok.unsetenv("DESTDIR"))
 end
 

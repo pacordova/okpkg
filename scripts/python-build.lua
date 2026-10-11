@@ -2,34 +2,28 @@
 
 -- Imports
 unpack = unpack or table.unpack
-local D = dofile("/bin/okpkg")
-local ok = require("okutils")
+local cfg = require("okconfig")
+local ok  = require("okutils")
 
-local function install_all(X)
-   for de in dir(D["PKGDIR"]) do 
-      for j=1,#X do
-         if ok.basename(de):sub(1, #X[j]) == X[j] then 
-            purge(X[j])
-            install(de)
-         end
-      end
-   end
-end
+dofile("/bin/okpkg")
 
 -- Build python modules
 local fp, buf
-fp = io.open(string.format("%s/%s", D["DATADIR"], "python.db"))
+fp = io.open(string.format("%s/%s", cfg.datadir, "python.db"))
 buf = '\n' .. fp:read('*a')
 fp:close()
-for i in buf:gmatch("\n([%_%w%-%+]-) = {.-;") do 
-   if i ~= "python" then purge(i); emerge(i); end
+for i in buf:gmatch("\n   %[\"(.-)\"%]") do
+   if i ~= "python" then 
+      purge(i)
+      emerge(i)
+   end
 end
 
 purge("meson")
 emerge("meson")
 
 -- Reinstall other packages with python modules
-install_all {
+tbl = {
    "at-spi2-core",
    "gexiv2",
    "glib2", 
@@ -41,3 +35,13 @@ install_all {
    "pygobject", 
    "xcb-proto",
 }
+
+ok.chdir(cfg.pkgdir)
+for de in dir(".") do
+   for i=1,#tbl do
+      if string.sub(de, 1, #tbl[i]) == tbl[i] then
+         purge(tbl[i])
+         install(de)
+      end
+   end
+end
