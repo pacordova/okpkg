@@ -33,6 +33,13 @@ chmod 4750 /usr/libexec/dbus-daemon-launch-helper
 chmod 0644 /etc/ssl/certs/ca-certificates.crt
 chmod 1777 /tmp
 
+# hwdata
+mkdir -p /usr/share/hwdata
+curl -fsSL https://uefi.org/uefi-pnp-export \
+| gawk -k 'NR>1{ print $2 "\t" $1 }' \
+| sort -u \
+> /usr/share/hwdata/pnp.ids
+
 # Clock
 ln -sf /usr/share/zoneinfo/US/Eastern /etc/localtime
 TZ=UTC0 date $(nc time.nist.gov 13 | awk -F'[-: ]' 'NR>1{print $3$4$5$6$2"."$7}')

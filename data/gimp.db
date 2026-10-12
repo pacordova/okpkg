@@ -109,15 +109,6 @@
       ["b3sum"] = "99da603da1e946c2a7f14b3a1cdc87c678ea822d87eef83b7868f2b8f39cf3b2",
       ["build"] = rc.configure,
    };
-   ["appstream-glib"] = {
-      ["url"] = "https://people.freedesktop.org/~hughsient/appstream-glib/releases/appstream-glib-0.8.3.tar.xz",
-      ["b3sum"] = "02614b2bc91c263b5d1cb1fef7af3ec0d9dbd6fd331ae7486c86b0a528631731",
-      ["build"] = rc.meson,
-      ["flags"] = {
-         "-Drpm=false",
-         "-Dman=false",
-      },
-   };
    ["gimp"] = {
       ["url"] = "https://download.gimp.org/gimp/v3.2/gimp-3.2.6.tar.xz",
       ["b3sum"] = "648de72396e182a44e6d983bc0a012905a559fc7100bcdd818398b397505662e",
