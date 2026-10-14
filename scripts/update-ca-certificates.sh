@@ -1,2 +1,2 @@
 #!/bin/sh
-curl -fs https://curl.se/ca/cacert.pem -o /etc/ssl/certs/ca-certificates.crt
+curl -fso/etc/ssl/certs/ca-certificates.crt https://curl.se/ca/cacert.pem

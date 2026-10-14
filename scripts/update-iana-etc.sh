@@ -1,13 +1,15 @@
 #!/bin/sh
+
 curl -fs https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xml \
-| gawk > /etc/protocols -F"[<>]" '
+|> /etc/protocols gawk -F"[<>]" '
 (/<record/) { v=n="" }
 (/<value/) { v=$3 }
 (/<name/ && $3!~/ /) { n=$3 }
 (/<\/record/ && n && v!="") { printf "%-12s %3i %s\n", tolower(n),v,n }
 '
+
 curl -fs https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xml \
-| gawk > /etc/services -F"[<>]" '
+|> /etc/services gawk -F"[<>]" '
 (/<record/) { n=u=p=c="" }
 (/<name/ && !/\(/) { n=$3 }
 (/<number/) { u=$3 }
