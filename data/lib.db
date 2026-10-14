@@ -348,7 +348,7 @@
       ["b3sum"] = "93de717427982d3904905b0ea2997345c06dd35456c281ef3aa7bae2fd9242ed",
       ["build"] = rc.configure,
       ["flags"] = {
-         "--with-trust-paths=/etc/ssl/certs/ca-certificates.crt",
+         "--with-trust-paths=/etc/ssl/cert.pem",
          "--without-systemd",
       },
    };

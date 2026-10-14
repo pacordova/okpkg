@@ -464,9 +464,6 @@
       ["url"] = "https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-4.3.2.tar.gz",
       ["b3sum"] = "6364b58f037dd3ed4e0df5548ab28d7b93c11656e6eaa7c430db172dec12b69e",
       ["build"] = rc.configure,
-      ["flags"] = {
-         "--with-openssldir=/etc/ssl",
-      },
    };
    ["kmod"] = {
       ["url"] = "https://kernel.org/pub/linux/utils/kernel/kmod/kmod-32.tar.xz",

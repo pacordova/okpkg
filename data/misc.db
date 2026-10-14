@@ -494,7 +494,7 @@
       ["b3sum"] = "817083bbd1af9caab9e30602ea01e4254200252289ca966770beff05fb26b2de",
       ["build"] = rc.configure,
       ["flags"] = {
-         "--with-default-trust-store-file=/etc/ssl/certs/ca-certificates.crt",
+         "--with-default-trust-store-file=/etc/ssl/cert.pem",
          "--without-p11-kit",
       },
    };

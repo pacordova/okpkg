@@ -23,7 +23,6 @@ ok.mkdir("./dev")
 ok.mkdir("./etc")
 ok.mkdir("./etc/default")
 ok.mkdir("./etc/ssl")
-ok.mkdir("./etc/ssl/certs")
 ok.mkdir("./home")
 ok.mkdir("./lib")
 ok.mkdir("./lib64")
@@ -275,7 +274,7 @@ os.execute([[
    cp -a {/,}var/cache/packages/linux-*.tar.lz
    cp -a {/,}etc/dinit.d
    cp -a {/,}var/cache/distfiles
-   cp -f {/,}etc/ssl/certs/ca-certificates.crt
+   cp -f {/,}etc/ssl/cert.pem
    cp -f /etc/{protocols,services} etc
    cp -f /etc/rc.local /etc/syslog.conf /etc/fstab etc
 ]])

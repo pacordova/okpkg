@@ -21,9 +21,9 @@
 [ -x /bin/ping ] && setcap cap_net_raw+p /bin/ping
 [ -f /usr/libexec/dbus-daemon-launch-helper ] && 
 chown root:messagebus /usr/libexec/dbus-daemon-launch-helper &&
+chmod 0644 /etc/protocols /etc/services /etc/ssl/certs.pem
 chmod 4750 /usr/libexec/dbus-daemon-launch-helper
 chmod 1777 /tmp
-chmod 0644 /etc/ssl/certs/ca-certificates.crt /etc/protocols /etc/services
 
 # icon-cache
 if [ -x /bin/gtk-update-icon-cache ]; then

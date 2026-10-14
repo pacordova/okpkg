@@ -57,7 +57,7 @@
          "--disable-ares",
          "--disable-ldap",
          "--disable-manual",
-         "--with-ca-bundle=/etc/ssl/certs/ca-certificates.crt",
+         "--with-ca-bundle=/etc/ssl/cert.pem",
          "--with-gnutls",
          "--without-brotli",
          "--without-libidn2",

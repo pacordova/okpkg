@@ -330,7 +330,6 @@
          "--prefix=/usr",
          "--host=x86_64-unknown-linux-gnu",
          "--build=x86_64-pc-linux-gnu",
-         "--with-openssldir=/etc/ssl",
       },
    };
    ["pkgconf"] = {
