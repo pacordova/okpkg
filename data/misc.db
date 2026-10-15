@@ -278,7 +278,6 @@
          "-Ddbus=false",
          "-Dwith_docs=false",
          "-Dcompton=false",
-         "-Dregex=true",
       },
    };
    ["pv"] = {
