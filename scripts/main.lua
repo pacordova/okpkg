@@ -30,7 +30,7 @@ rc.cmake = function(...)
 end
 
 rc.configure = function(...)
-   arg = {
+   local arg = {
       "sh", 
       ok.exists("configure") or
       ok.exists("../configure") or 
