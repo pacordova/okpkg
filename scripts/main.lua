@@ -227,7 +227,7 @@ function build(x)
       error("okpkg: build: prep script failed for " .. x)
    end
 
-   if not tbl.build(unpack(tbl.flags or {})) then
+   if tbl.build and not tbl.build(unpack(tbl.flags or {})) then
       error("okpkg: build: " .. x)
    end
 
