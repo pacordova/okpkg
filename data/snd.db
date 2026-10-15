@@ -1,0 +1,103 @@
+{
+   ["alsa-lib"] = {
+      ["url"] = "https://alsa-project.org/files/pub/lib/alsa-lib-1.2.15.3.tar.bz2",
+      ["b3sum"] = "5ff23aeab7b00ba7c5113d52b5ff491515566a7fad412f8c467511948707003c",
+      ["build"] = rc.configure,
+      ["flags"] = {
+         "--without-debug",
+      },
+   };
+   ["alsa-ucm-conf"] = {
+      ["url"] = "https://alsa-project.org/files/pub/lib/alsa-ucm-conf-1.2.15.3.tar.bz2",
+      ["b3sum"] = "8da640f758e2d7238824c82d66390de3a590cee28ab21bb67c6502cd3e3a0baa",
+      ["post"] = [[ 
+         install -d $DESTDIR/usr/share/alsa
+         cp -a . $DESTDIR/usr/share/alsa
+      ]],
+   };
+   ["alsa-utils"] = {
+      ["url"] = "https://alsa-project.org/files/pub/utils/alsa-utils-1.2.15.2.tar.bz2",
+      ["b3sum"] = "e3fe92dc5dc4bf189dd98c6d953386dcd1f15fe4e60aa1ac8ca5930804de28ba",
+      ["build"] = rc.configure,
+      ["flags"] = {
+         "--disable-alsaconf",
+         "--disable-bat",
+         "--disable-xmlto",
+         "--with-alsactl-lock-dir=/run/lock",
+         "--with-asound-state-dir=/var/state",
+         "--with-curses=ncursesw",
+         "--with-udev-rules-dir=/lib64/udev/rules.d",
+      },
+   };
+   ["libsndfile"] = {
+      ["url"] = "https://github.com/libsndfile/libsndfile/releases/download/1.2.2/libsndfile-1.2.2.tar.xz",
+      ["b3sum"] = "fc805e696ee73ee24377329683b7e00af0db78727af553e74840cc813969ba77",
+      ["build"] = rc.configure,
+   };
+   ["pulseaudio"] = {
+      ["url"] = "https://www.freedesktop.org/software/pulseaudio/releases/pulseaudio-17.0.tar.xz",
+      ["b3sum"] = "e56408636f88e3c8b7575795722ebccd7cadb032f7cefda3d055af549b34df4f",
+      ["build"] = rc.meson,
+      ["flags"] = {
+         "-Ddatabase=gdbm",
+         "-Ddoxygen=false",
+         "-Dbluez5=disabled",
+         "-Dudevrulesdir=/lib64/udev/rules.d",
+      },
+      ["post"] = [[ rm -f $destdir/usr/share/dbus-1/system.d/pulseaudio-system.conf ]],
+   };
+   ["mm-common"] = {
+      ["url"] = "https://download.gnome.org/sources/mm-common/1.0/mm-common-1.0.8.tar.xz",
+      ["b3sum"] = "153ff0310bd6fb7afff6dd6e3910c83c2570f00146a5428cbea72924ba9a1c3a",
+      ["build"] = rc.meson,
+   };
+   ["libsigc++"] = {
+      ["url"] = "https://download.gnome.org/sources/libsigc++/2.12/libsigc++-2.12.1.tar.xz",
+      ["b3sum"] = "f7244cf1eb6b8dc8cd3228e5cd5d6141e216a3d51c8d113817d13def79de0c51",
+      ["build"] = rc.meson,
+   };
+   ["glibmm"] = {
+      ["url"] = "https://download.gnome.org/sources/glibmm/2.66/glibmm-2.66.8.tar.xz",
+      ["b3sum"] = "db0f7f557b1f0311e99d79c449d6b60a4a0e9bdfa22f5290bf6fd9df9888dec2",
+      ["build"] = rc.meson,
+   };
+   ["atkmm"] = {
+      ["url"] = "https://download.gnome.org/sources/atkmm/2.28/atkmm-2.28.4.tar.xz",
+      ["b3sum"] = "679869b51f4c15f693c09ed130ac650eb94067c72cfb0ee32500fd5faae2bf7e",
+      ["build"] = rc.meson, 
+   };
+   ["cairomm"] = {
+      ["url"] = "https://www.cairographics.org/releases/cairomm-1.14.5.tar.xz",
+      ["b3sum"] = "6ff1a0ded1e0efdc2f0dbb25d0ce7c0502ae81e4bb74b9aa561487dd9ca3f1f0",
+      ["build"] = rc.meson,
+   };
+   ["pangomm"] = {
+      ["url"] = "https://download.gnome.org/sources/pangomm/2.46/pangomm-2.46.4.tar.xz",
+      ["b3sum"] = "bfc91260c28aa137396ebfb37ef239393bfb3d9a075d3d3aa623557f536430d8",
+      ["build"] = rc.meson,
+   };
+   ["gtkmm"] = {
+      ["url"] = "https://download.gnome.org/sources/gtkmm/3.24/gtkmm-3.24.11.tar.xz",
+      ["b3sum"] = "437019b92fa367fbbf832e0aa37d0d8ec394e2caa326329e6f240466b1df97af",
+      ["build"] = rc.meson,
+   };
+   ["pavucontrol"] = {
+      ["url"] = "https://freedesktop.org/software/pulseaudio/pavucontrol/pavucontrol-5.0.tar.xz",
+      ["b3sum"] = "c9356535a6651c182d8044fd561902c0570653e1bd0020f6d4844b1383cf1e2a",
+      ["build"] = rc.configure,
+      ["prep"] = [[ autoreconf -fi ]]
+   };
+   ["xfce4-pulseaudio-plugin"] = {
+      ["url"] = "https://archive.xfce.org/src/panel-plugins/xfce4-pulseaudio-plugin/0.5/xfce4-pulseaudio-plugin-0.5.1.tar.xz",
+      ["b3sum"] = "8fbdab1e771c1b5a7304be7105d6e81bac344cec58fffb3a5f84a3b1398bd0a3",
+      ["build"] = rc.meson,
+      ["flags"] = {
+         "-Dkeybinder=disabled",
+         "-Dlibnotify=enabled",
+         "-Dlibcanberra=disabled",
+         "-Dlibxfce4windowing=enabled",
+         "-Dmpris2=disabled",
+         "-Dmixer-command=/bin/true",
+      },
+   };
+}

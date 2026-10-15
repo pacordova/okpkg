@@ -154,11 +154,10 @@
    };
    ["libcanberra"] = {
       ["url"] = "https://0pointer.de/lennart/projects/libcanberra/libcanberra-0.30.tar.xz",
-      ["b3sum"] = "494462202a9b91d3da333d6d8d78857cb38ba94eb53306a8b92d008f6f6b6025",
+      ["b3sum"] = "ea02f4b5a00bfffce1d29ce73e1cf5351027208cbeb58bf9954e84ad120e6daa",
       ["build"] = rc.configure,
       ["flags"] = {
-         "--disable-gtk",
-         "--enable-gtk3",
+         "--disable-oss",
       },
    };
    ["linux"] = {
