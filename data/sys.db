@@ -461,8 +461,8 @@
       ]],
    };
    ["libressl"] = {
-      ["url"] = "https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-4.3.2.tar.gz",
-      ["b3sum"] = "6364b58f037dd3ed4e0df5548ab28d7b93c11656e6eaa7c430db172dec12b69e",
+      ["url"] = "https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-4.2.1.tar.gz",
+      ["b3sum"] = "73bd7c056226fc2e1dba9154af48d91edce5269512980c0225e35e76b950ede1",
       ["build"] = rc.configure,
    };
    ["kmod"] = {
