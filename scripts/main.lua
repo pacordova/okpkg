@@ -25,7 +25,7 @@ rc.cmake = function(...)
       "-Wno-dev",
       ...
    }
-   setmetatable(arg, meta)
+   setmetatable(arg, rc.meta)
    return os.execute(tostring(arg)) and rc.ninja()
 end
 

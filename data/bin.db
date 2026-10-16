@@ -27,11 +27,12 @@
       ]],
    };
    ["signal-desktop"] = {
-      ["url"] = "https://updates.signal.org/desktop/apt/pool/s/signal-desktop/signal-desktop_8.23.0_amd64.deb",
-      ["b3sum"] = "d7caf8778c84ab9c8667fbed77b4c9476eec972ee812c3e643e5b4a190fe7f88",
+      ["url"] = "https://updates.signal.org/desktop/apt/pool/s/signal-desktop/signal-desktop_8.31.0_amd64.deb",
+      ["b3sum"] = "d8d1aac00ef7d693008a267995fd496fdf25bbe2b5630cb02c2458e1721bc5dc",
       ["post"] = [[
-         ar p /var/cache/distfiles/signal-desktop_8.23.0_amd64.deb data.tar.xz \
-         | tar -C $destdir -xJ
+         : > $DESTDIR/nostrip
+         ar p /var/cache/distfiles/signal-desktop_8.31.0_amd64.deb data.tar.xz \
+         | tar -C $DESTDIR -xJ
       ]],
    };
    ["tinytex"] = {
