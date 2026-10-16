@@ -29,6 +29,14 @@
          "--with-udev-rules-dir=/lib64/udev/rules.d",
       },
    };
+   ["apulse"] = {
+      ["url"] = "https://github.com/i-rinat/apulse/archive/v0.1.14/apulse-0.1.14.tar.gz",
+      ["b3sum"] = "a439a1560f1fc0aeb5c8f4cd219049e55ef70cb5cc4e8d619e48701e9d426a37",
+      ["build"] = rc.cmake,
+      ["flags"] = {
+         "-DAPULSEPATH=/lib64/apulse",
+      }
+   };
    ["libsndfile"] = {
       ["url"] = "https://github.com/libsndfile/libsndfile/releases/download/1.2.2/libsndfile-1.2.2.tar.xz",
       ["b3sum"] = "fc805e696ee73ee24377329683b7e00af0db78727af553e74840cc813969ba77",
