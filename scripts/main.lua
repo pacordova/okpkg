@@ -125,7 +125,7 @@ function download(x)
    ok.chdir(cfg.distdir)
    io.close(
       io.open(ok.basename(tbl.url)) or
-      io.popen("wget2 " .. tbl.url))
+      io.popen("curl -ROfL " .. tbl.url))
    assert(
       tbl.b3sum == b3sum(ok.basename(tbl.url)) or 
       not os.remove(ok.basename(tbl.url)))
