@@ -26,11 +26,11 @@ emerge("meson")
 tbl = {
    "at-spi2-core",
    "gexiv2",
-   "glib2", 
+   "glib",
    "gobject-introspection", 
    "libpwquality",
    "libxml2", 
-   "passwordsafe",
+-- "passwordsafe",
    "pycairo", 
    "pygobject", 
    "xcb-proto",

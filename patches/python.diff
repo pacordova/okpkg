@@ -1,5 +1,5 @@
---- a/Modules/_hashopenssl.c.orig
-+++ b/Modules/_hashopenssl.c
+--- ./Modules/_hashopenssl.c
++++ ./Modules/_hashopenssl.c
 @@ -44,7 +44,9 @@
  
  #define MUNCH_SIZE INT_MAX
@@ -26,3 +26,14 @@
  
      self = newEVPobject(type);
      if (self == NULL) {
+--- ./Modules/_ssl.c
++++ ./Modules/_ssl.c
+@@ -4776,7 +4776,7 @@
+     return 0;
+ }
+ 
+-#if OPENSSL_VERSION_NUMBER < 0x30300000L
++#if OPENSSL_VERSION_NUMBER < 0x30300000L && !defined(LIBRESSL_VERSION_NUMBER)
+ static X509_OBJECT *x509_object_dup(const X509_OBJECT *obj)
+ {
+     int ok;

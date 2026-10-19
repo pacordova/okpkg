@@ -46,8 +46,8 @@ _cksum_kernel(){
 
 cd "$tempdir"
 
-#_cksum_kernel 6.12.73
-_cksum_signal 8.31.0
+_cksum_kernel 6.16.7
+#_cksum_signal 8.31.0
 #_cksum_gl https://gitlab.com/lvmteam/lvm2 v2_03_41
 #_cksum_gh https://github.com/vim/vim v9.1.1980
 #_cksum_gh https://github.com/vcrhonek/hwdata v0.406

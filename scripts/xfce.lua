@@ -25,7 +25,7 @@ local function build_all(x)
 end
 
 -- Env
-ok.setenv("PATH", "/opt/cmake/bin:/opt/python3.13/bin:/opt/perl/bin:/bin")
+ok.setenv("PATH", "/opt/cmake/bin:/opt/python3.14/bin:/opt/perl/bin:/bin")
 
 -- Locale
 os.execute("localedef -i POSIX -f ASCII      C           2>/dev/null ||:")

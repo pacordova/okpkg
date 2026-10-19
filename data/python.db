@@ -1,10 +1,10 @@
 {
    ["python"] = {
-      ["url"] = "https://www.python.org/ftp/python/3.13.5/Python-3.13.5.tar.xz",
-      ["b3sum"] = "69e6f0d7f165b57ccfea2e932be77e60847883877b53b9afbddc13c334c97e2d",
+      ["url"] = "https://www.python.org/ftp/python/3.14.0/Python-3.14.0a4.tar.xz",
+      ["b3sum"] = "ca362c1ff044eb73cf140f1ab2ba1637cc9a7362e3123e5b30b04986b6659958",
       ["build"] = rc.configure,
       ["flags"] = {
-         "--prefix=/opt/python3.13",
+         "--prefix=/opt/python3.14",
          "--without-doc-strings",
          "--without-ensurepip",
          "--with-dbmliborder=gdbm:ndbm",
@@ -15,10 +15,10 @@
          "LDFLAGS_NODIST=-fno-semantic-interposition",
       },
       ["post"] = [[
-         cd $destdir/opt/python3.13/lib/python3.13
+         cd $DESTDIR/opt/python3.14/lib/python3.14
          rm -fr test ./*/test ./*/tests
          rm -fr config-* idlelib turtle* pydoc*
-         cd $destdir/opt/python3.13/bin
+         cd $DESTDIR/opt/python3.14/bin
          rm -f idle* pydoc*
       ]],
    };
@@ -130,16 +130,6 @@
    ["python-pyparsing"] = {
       ["url"] = "https://pypi.io/packages/source/p/pyparsing/pyparsing-3.3.2.tar.gz",
       ["b3sum"] = "aea0d7b161353c3bd7a4ca7e2a31fc0ef9fa776ea5969daff5098b5030154cfe",
-      ["build"] = rc.python,
-   };
-   ["cython"] = {
-      ["url"] = "https://pypi.io/packages/source/c/cython/cython-3.2.8.tar.gz",
-      ["b3sum"] = "40ad68e6a27177bb8d7ea63ff5e49f6b913dc9b61fdab0d23c141f777292ef58",
-      ["build"] = rc.python,
-   };
-   ["python-yaml"] = {
-      ["url"] = "https://github.com/yaml/pyyaml/archive/6.0.3/pyyaml-6.0.3.tar.gz",
-      ["b3sum"] = "2880a30e32bef45e69e74173468bd2171ce3f73ba449112b8d5c31c1362bbc11",
       ["build"] = rc.python,
    };
    ["python-hatch-fancy-pypi-readme"] = {

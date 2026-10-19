@@ -213,20 +213,20 @@
       ["url"] = "https://www.kernel.org/pub/linux/docs/man-pages/man-pages-6.12.tar.xz",
       ["b3sum"] = "f8a1e019739b264b177a7f82fbde4f380ebd6fa31f819fdc0ce8fd73b0317279",
       ["post"] = [[
-         make -R GIT=false prefix=$destdir/usr install
-         rm -f $destdir/usr/share/man/man3/crypt*
-         rm -f $destdir/usr/share/man/man5/tzfile.5
-         rm -f $destdir/usr/share/man/man7/man.7
+         make -R GIT=false prefix=$DESTDIR/usr install
+         rm -f $DESTDIR/usr/share/man/man3/crypt*
+         rm -f $DESTDIR/usr/share/man/man5/tzfile.5
+         rm -f $DESTDIR/usr/share/man/man7/man.7
       ]],
    };
    ["git-manpages"] = {
       ["url"] = "https://www.kernel.org/pub/software/scm/git/git-manpages-2.52.0.tar.xz",
       ["b3sum"] = "05132fbadabd102d8fbb82dd379cc78de677b4e22ce2514a98bb66b0bb2b4087",
       ["post"] = [[
-         install -d $destdir/usr/share/man/man{1,5,7}
-         install -m 444 man1/*.1 $destdir/usr/share/man/man1
-         install -m 444 man5/*.5 $destdir/usr/share/man/man5
-         install -m 444 man7/*.7 $destdir/usr/share/man/man7
+         install -d $DESTDIR/usr/share/man/man{1,5,7}
+         install -m 444 man1/*.1 $DESTDIR/usr/share/man/man1
+         install -m 444 man5/*.5 $DESTDIR/usr/share/man/man5
+         install -m 444 man7/*.7 $DESTDIR/usr/share/man/man7
       ]],
    };
    ["opendoas"] = {
@@ -240,9 +240,9 @@
          "--without-pam",
       },
       ["post"] = [[
-         install -d $destdir/etc
-         printf "permit persist :wheel\n" >> $destdir/etc/doas.conf
-         chmod 600 $destdir/etc/doas.conf
+         install -d $DESTDIR/etc
+         printf "permit persist :wheel\n" >> $DESTDIR/etc/doas.conf
+         chmod 600 $DESTDIR/etc/doas.conf
       ]],
    };
    ["pciutils"] = {
@@ -314,9 +314,9 @@
          "HAVE_GIFLIB=0",
       },
       ["post"] = [[
-         make -C icon PREFIX=/usr DESTDIR=$destdir install
-         install -d $destdir/usr/share/applications
-         install -m 644 sxiv.desktop $destdir/usr/share/applications
+         make -C icon PREFIX=/usr DESTDIR=$DESTDIR install
+         install -d $DESTDIR/usr/share/applications
+         install -m 644 sxiv.desktop $DESTDIR/usr/share/applications
       ]],
    };
    ["tmux"] = {
@@ -493,8 +493,8 @@
          "--disable-cracklib-check",
       },
       ["post"] = [[ 
-         install -d $destdir/opt/python3.13
-         mv $destdir/usr/lib $destdir/opt/python3.13 
+         install -d $DESTDIR/opt/python3.14
+         mv $DESTDIR/usr/lib $DESTDIR/opt/python3.14
       ]],
    };
    ["passwordsafe"] = {
@@ -525,7 +525,7 @@
       ["flags"] = {
          "PREFIX=/usr",
          "MULTILIB=../lib64",
-         "INSTALL_BIN=$destdir/bin",
+         "INSTALL_BIN=$DESTDIR/bin",
          "amalg",
       },
    };
