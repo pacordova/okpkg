@@ -305,6 +305,17 @@
       ["b3sum"] = "b5bdf998fb93ab1a8b927c6e969b71ef00e69604c8708c47b108a5db4bb080fb",
       ["build"] = rc.configure,
    };
+   ["sqlite"] = {
+      ["url"] = "https://www.sqlite.org/2026/sqlite-autoconf-3510200.tar.gz",
+      ["b3sum"] = "7ba8d2c972fb11430e8ce3ca2b2b0c3d583be6da5c8faf7cba50a12eb699601e",
+      ["build"] = rc.configure,
+      ["flags"] = {
+         "--bindir=/bin",
+         "--libdir=/lib64",
+         "--enable-fts5",
+         "CPPFLAGS=-DSQLITE_ENABLE_COLUMN_METADATA=1",
+      },
+   };
    ["sxiv"] = {
       ["url"] = "https://github.com/xyb3rt/sxiv/archive/v26/sxiv-26.tar.gz",
       ["b3sum"] = "9d658d77fd4f9da3bb02247016ba4d4f1c3afcedc18ac790fb67bf91e66aaff7",
