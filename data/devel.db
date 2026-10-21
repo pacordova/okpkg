@@ -106,5 +106,10 @@
       ["url"] = "https://www.crufty.net/ftp/pub/sjg/bmake-20260912.tar.gz",
       ["b3sum"] = "fe42844f99459d12b0f46028c47dd2c40d852c7585e9d54f2f44845626bf5c5f",
       ["build"] = rc.configure,
+      ["post"] = [[
+         mkdir $DESTDIR/bin
+         mv $DESTDIR/usr/bin/* $DESTDIR/bin
+         rmdir $DESTDIR/usr/bin
+      ]]
    };
 }
