@@ -89,6 +89,7 @@ rc.oconfigure = function(...)
       "BINDIR=/bin", 
       "SBINDIR=/bin", 
       "LIBDIR=/lib64", 
+      "MANDIR=/usr/share/man",
       ...
    }
    setmetatable(arg, rc.meta)
