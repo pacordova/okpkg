@@ -102,4 +102,10 @@
       ["b3sum"] = "cae23da880d98238f465c1f99968cd5ff0b0a18e25458272873117da34295208",
       ["build"] = rc.configure,
    };
+   ["bmake"] = {
+      ["url"] = "https://www.crufty.net/ftp/pub/sjg/bmake-20260912.tar.gz",
+      ["b3sum"] = "fe42844f99459d12b0f46028c47dd2c40d852c7585e9d54f2f44845626bf5c5f",
+      ["build"] = rc.configure,
+      ["prep"] = [[ sed -i 's|U\${prefix}/bin|/bin|' Makefile ]],
+   };
 }
