@@ -81,6 +81,24 @@ rc.ninja = function()
       ok.unsetenv("DESTDIR"))
 end
 
+rc.oconfigure = function(...)
+   local arg = {
+      "sh", 
+      "configure", 
+      "PREFIX=/usr", 
+      "BINDIR=/bin", 
+      "SBINDIR=/bin", 
+      "LIBDIR=/lib64", 
+      ...
+   }
+   setmetatable(arg, rc.meta)
+   return (
+      os.execute(tostring(arg)) and
+      ok.setenv("DESTDIR", destdir) and
+      os.execute("bmake install") and
+      ok.unsetenv("DESTDIR"))
+end
+
 rc.python = function()
    return (
       os.execute("python3 -m build -nx")  and

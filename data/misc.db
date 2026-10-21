@@ -558,4 +558,9 @@
          "--with-ssl",
       },
    };
+   ["openrsync"] = {
+      ["url"] = "https://github.com/kristapsdz/openrsync/archive/1878c030a784de38903afe422119ac0a84e0c4f1/openrsync-20260706.tar.gz",
+      ["b3sum"] = "4d9daf7194f78452a2533117022b78f1b85f6396f443a940bd2d6bd13acccd6b",
+      ["build"] = rc.oconfigure,
+   };
 }
