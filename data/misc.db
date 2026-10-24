@@ -269,8 +269,8 @@
       },
    };
    ["pv"] = {
-      ["url"] = "https://www.ivarch.com/s/pv-1.11.0.tar.gz",
-      ["b3sum"] = "e7106849d3b08b703e1428100eebbd334631c7aeaf13a497f63d8d9700ebbd44",
+      ["url"] = "https://www.ivarch.com/s/pv-1.12.0.tar.gz",
+      ["b3sum"] = "6c7b6998effdab419c45e3c3c314598081939ac494ba3fc036d6bbef16cbf81c",
       ["build"] = rc.configure,
    };
    ["libuv"] = {

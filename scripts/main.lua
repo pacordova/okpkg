@@ -10,7 +10,7 @@ rc = {}
 rc.meta = {__tostring = function(x) return table.concat(x, ' ') end}
 rc.make = function(...) return rc.make_all(...) and rc.make_install(...) end
 rc.cmake = function(...)
-   local arg = {
+   local cmd = {
       "cmake",
       "-Bbuild",
       "-DCMAKE_BUILD_TYPE=Release",
@@ -25,12 +25,12 @@ rc.cmake = function(...)
       "-Wno-dev",
       ...
    }
-   setmetatable(arg, rc.meta)
-   return os.execute(tostring(arg)) and rc.ninja()
+   setmetatable(cmd, rc.meta)
+   return os.execute(tostring(cmd)) and rc.ninja()
 end
 
 rc.configure = function(...)
-   local arg = {
+   local cmd = {
       "sh", 
       ok.exists("configure") or
       ok.exists("../configure") or 
@@ -38,25 +38,28 @@ rc.configure = function(...)
       "--prefix=/usr",
       ...
    }
-   setmetatable(arg, rc.meta)
-   return os.execute(tostring(arg)) and rc.make()
+   setmetatable(cmd, rc.meta)
+   return os.execute(tostring(cmd)) and rc.make()
 end
 
 rc.make_all = function(...)
-   local arg = setmetatable({"make", ...}, rc.meta)
-   return os.execute(tostring(arg))
+   local cmd = setmetatable({"make", ...}, rc.meta)
+   return os.execute(tostring(cmd))
 end
 
 rc.make_install = function(...)
-   local arg = setmetatable({"make", "install", ...}, rc.meta)
-   return (
-      ok.setenv("DESTDIR", destdir) and
-      os.execute(tostring(arg)) and
-      ok.unsetenv("DESTDIR"))
+   local cmd = {
+      "make",
+      "install",
+      "DESTDIR=" .. destdir,
+      ...
+   }
+   setmetatable(cmd, rc.meta)
+   return os.execute(tostring(cmd))
 end
 
 rc.meson = function(...)
-   local arg = {
+   local cmd = {
       "meson",
       "setup",
       "build",
@@ -70,8 +73,8 @@ rc.meson = function(...)
       "-Dwrap_mode=nodownload",
       ...
    }
-   setmetatable(arg, rc.meta)
-   return os.execute(tostring(arg)) and rc.ninja()
+   setmetatable(cmd, rc.meta)
+   return os.execute(tostring(cmd)) and rc.ninja()
 end
 
 rc.ninja = function()
@@ -82,7 +85,7 @@ rc.ninja = function()
 end
 
 rc.oconfigure = function(...)
-   local arg = {
+   local cmd = {
       "sh", 
       "configure", 
       "PREFIX=/usr", 
@@ -92,9 +95,9 @@ rc.oconfigure = function(...)
       "MANDIR=/usr/share/man",
       ...
    }
-   setmetatable(arg, rc.meta)
+   setmetatable(cmd, rc.meta)
    return (
-      os.execute(tostring(arg)) and
+      os.execute(tostring(cmd)) and
       ok.setenv("DESTDIR", destdir) and
       os.execute("bmake install") and
       ok.unsetenv("DESTDIR"))
