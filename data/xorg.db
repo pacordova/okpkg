@@ -588,32 +588,6 @@
       ["b3sum"] = "913b3928012993fac64ed83c74cf110cc178018d95377d079e017fc630b97f10",
       ["build"] = rc.configure,
    };
-   ["libinput"] = {
-      ["url"] = "https://gitlab.freedesktop.org/libinput/libinput/-/archive/1.31.3/libinput-1.31.3.tar.bz2",
-      ["b3sum"] = "ae74b2c2202357119ec0f6e65951a9b2b38332ae5c8c3f59b05f6d80598ef033",
-      ["build"] = rc.meson,
-      ["flags"] = {
-         "-Dudev-dir=/lib64/udev",
-         "-Dlibwacom=false",
-         "-Dmtdev=false",
-         "-Ddebug-gui=false",
-         "-Dtests=false",
-      },
-   };
-   ["xf86-input-libinput"] = {
-      ["url"] = "https://x.org/pub/individual/driver/xf86-input-libinput-1.5.0.tar.xz",
-      ["b3sum"] = "83443b66b1461152815d0294a63f6db7eaf6222acdc70723ed620ec2e8c22583",
-      ["build"] = rc.configure,
-      ["prep"] = [[
-         sed -e '23 a \        Option "AccelProfile" "flat"' \
-             -i ./conf/40-libinput.conf
-      ]],
-   };
-   ["xf86-input-synaptics"] = {
-      ["url"] = "https://x.org/pub/individual/driver/xf86-input-synaptics-1.10.0.tar.xz",
-      ["b3sum"] = "0b4ae892cda4cdb1d57170a9ee5a63ccec28df7b9bcdedaafd32f997da7bccd4",
-      ["build"] = rc.configure,
-   };
    ["xorg-xinit"] = {
       ["url"] = "https://x.org/pub/individual/app/xinit-1.4.4.tar.xz",
       ["b3sum"] = "fe988bbff7c4a950256540ad8a469fed1cdbe11439ba738b9714ee2de16f2a6c",
