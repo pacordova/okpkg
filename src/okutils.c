@@ -3,10 +3,10 @@
 
 static const struct luaL_Reg okutils[] = {
     {"b3sum", ok_b3sum},
-    {"chroot", ok_chroot},
     {"basename", ok_basename},
     {"dirname", ok_dirname},
     {"chdir", ok_chdir},
+    {"chroot", ok_chroot},
     {"exists", ok_exists},
     {"getcwd", ok_getcwd},
     {"symlink", ok_symlink},
@@ -16,6 +16,7 @@ static const struct luaL_Reg okutils[] = {
     {"mtime", ok_mtime},
     {"setenv", ok_setenv},
     {"unsetenv", ok_unsetenv},
+    {"mount", ok_mount},
     {NULL, NULL},
 };
 

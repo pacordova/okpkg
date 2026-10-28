@@ -10,9 +10,9 @@ OBJS =\
 	src/b3sum.o\
 	src/basename.o\
 	src/blake3.o\
-	src/chroot.o\
 	src/dir.o\
 	src/env.o\
+	src/mount.o\
 	src/okutils.o\
 	src/unix.o\
 

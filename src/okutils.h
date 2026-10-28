@@ -24,10 +24,10 @@ void blake3_out(struct blake3 *, unsigned char *restrict, size_t);
 
 int luaopen_okutils(lua_State *L);
 int ok_b3sum(lua_State *L);
-int ok_chroot(lua_State *L);
 int ok_basename(lua_State *L);
 int ok_dirname(lua_State *L);
 int ok_chdir(lua_State *L);
+int ok_chroot(lua_State *L);
 int ok_exists(lua_State *L);
 int ok_getcwd(lua_State *L);
 int ok_mkdir(lua_State *L);
@@ -38,3 +38,4 @@ int ok_isdir(lua_State *L);
 int ok_mtime(lua_State *L);
 int ok_setenv(lua_State *L);
 int ok_unsetenv(lua_State *L);
+int ok_mount(lua_State *L);
