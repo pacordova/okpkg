@@ -39,3 +39,4 @@ int ok_mtime(lua_State *L);
 int ok_setenv(lua_State *L);
 int ok_unsetenv(lua_State *L);
 int ok_mount(lua_State *L);
+int ok_unmount(lua_State *L);

@@ -1,6 +1,7 @@
 #!/bin/lua
 ok = require"okutils"
-ok.chdir(arg[1])
+unpack = table.unpack or unpack
+ok.chdir(unpack(arg))
 ok.mount(".", ".", nil, 4096, nil)
 ok.mount("/proc", "proc", "proc", 544783, "hidepid=1")
 ok.mount("/sys", "sys", "sysfs", 544783, nil)

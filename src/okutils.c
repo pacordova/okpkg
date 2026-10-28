@@ -17,6 +17,7 @@ static const struct luaL_Reg okutils[] = {
     {"setenv", ok_setenv},
     {"unsetenv", ok_unsetenv},
     {"mount", ok_mount},
+    {"unmount", ok_unmount},
     {NULL, NULL},
 };
 
