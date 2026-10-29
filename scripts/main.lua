@@ -4,7 +4,6 @@ ok  = require("okutils")
 cfg = require("okconfig")
 
 unpack = unpack or table.unpack
-chroot, b3sum = ok.chroot, ok.b3sum
 
 rc = {}
 rc.meta = {__tostring = function(x) return table.concat(x, ' ') end}
@@ -149,7 +148,7 @@ function download(x)
       io.open(ok.basename(tbl.url)) or
       io.popen("curl -ROfL " .. tbl.url))
    assert(
-      tbl.b3sum == b3sum(ok.basename(tbl.url)) or 
+      tbl.b3sum == ok.b3sum(ok.basename(tbl.url)) or 
       not os.remove(ok.basename(tbl.url)))
    
    -- Setup source directory
@@ -297,6 +296,15 @@ end
 
 function emerge(x)
    install(build(download(x)))
+end
+
+function chroot(x)
+   ok.chdir(x)
+   ok.mount(".", ".", nil, 4096, nil)
+   ok.mount("/proc", "proc", "proc", 544783, "hidepid=1")
+   ok.mount("/sys", "sys", "sysfs", 544783, nil)
+   ok.mount("/dev", "dev", "devtmpfs", 544771, nil)
+   ok.chroot(".")
 end
 
 --------------------------------------------------------------------------------
