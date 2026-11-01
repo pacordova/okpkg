@@ -17,3 +17,5 @@ curl -fs https://www.iana.org/assignments/service-names-port-numbers/service-nam
 (/Unassigned/ || /Reserved/ || /historic/) { c=1 }
 (/<\/record/ && n && u && p && !c) { printf "%-15s %5i/%s\n", n,u,p }
 '
+
+chmod 0644 /etc/protocols /etc/services
