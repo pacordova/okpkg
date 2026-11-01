@@ -4,6 +4,7 @@ x(){
     [ -x "$1" ] && "$@"
 }
 
+x /bin/dbus-uuidgen --ensure=/etc/machine-id
 x /bin/fc-cache -f
 x /bin/fstrim -a
 x /bin/gdk-pixbuf-query-loaders --update-cache
@@ -16,10 +17,8 @@ x /bin/udevadm hwdb --update
 x /bin/update-desktop-database /usr/share/applications
 x /bin/update-mime-database /usr/share/mime
 
-[ -f /bin/Xorg ] && chmod u-s /bin/Xorg
-[ -f /bin/ping ] && setcap cap_net_raw+p /bin/ping
-[ -f /etc/machine-id ] || /bin/dbus-uuidgen --ensure=/etc/machine-id
-[ -f /usr/libexec/dbus-daemon-launch-helper ] && 
-chmod 4750 /usr/libexec/dbus-daemon-launch-helper &&
-chown root:messagebus /usr/libexec/dbus-daemon-launch-helper
-chmod 1777 /tmp
+chmod -f 0755 /bin/Xorg
+chmod -f 1777 /tmp
+chmod -f 4750 /usr/libexec/dbus-daemon-launch-helper
+chown -f 0:18 /usr/libexec/dbus-daemon-launch-helper
+setcap cap_net_raw+p /bin/ping
