@@ -39,16 +39,16 @@
       ["b3sum"] = "73a437e9ca3e5b65acc3ec41b983a7882d91b5f84b65b89c9b83239c205a9f53",
       ["build"] = rc.configure,
       ["flags"] = {
-         "-Dprefix=/opt/perl5",
+         "-Dprefix=/opt/perl",
          "-Duseshrplib",
          "-Dusethreads",
-         "-Dman1dir=/opt/perl5/man/man1",
-         "-Dman3dir=/opt/perl5/man/man3",
+         "-Dman1dir=/opt/perl/man/man1",
+         "-Dman3dir=/opt/perl/man/man3",
          "-Dusedevel",
          "-Uversiononly",
       },
       ["post"] = [[
-         cd $DESTDIR/opt/perl5
+         cd $DESTDIR/opt/perl
          find . -name \*.pod       -exec rm -f     {} +
          find . -name .packlist    -exec rm -f     {} +
          find . -name README\*     -exec rm -f     {} +
