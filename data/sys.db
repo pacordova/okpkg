@@ -438,8 +438,8 @@
       ["build"] = rc.configure,
    };
    ["tzdata"] = {
-      ["url"] = "https://github.com/eggert/tz/archive/2026e/tz-2026e.tar.gz",
-      ["b3sum"] = "4eba0b7dcded54e8ebb15d295307f804c71430d67f2002b471eac9c4d518727d",
+      ["url"] = "https://github.com/eggert/tz/archive/2026f/tz-2026f.tar.gz",
+      ["b3sum"] = "f121bbf6197932b457b9dc6bca983d874a8de236be8b1a4a3f3987dfc5123c64",
       ["build"] = rc.make,
       ["flags"] = {
          "LIBDIR=/lib64",
