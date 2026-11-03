@@ -325,6 +325,11 @@
          "SHAREDIR=/usr/share",
       },
    };
+   ["himitsu-keyring"] = {
+      ["url"] = "/var/cache/distfiles/himitsu-keyring-0.2.0.tar.gz",
+      ["b3sum"] = "a4721664ac59b84e1fdadd9b9aa354863081dc0808b5dd57672a743f25e66323",
+      ["build"] = rc.meson,
+   };
    ["r"] = {
       ["url"] = "https://cran.r-project.org/src/base/R-4/R-4.6.1.tar.gz",
       ["b3sum"] = "bdb887d6a1586ce7e43522017340b79e420a89d98bff3fe179748960eed975cf",
