@@ -287,49 +287,6 @@
          "--disable-tiff",
       },
    };
-   ["qbe"] = {
-      ["url"] = "https://c9x.me/compile/release/qbe-1.2.tar.xz",
-      ["b3sum"] = "a95e3ae69d9cb00957fafdd0dd317c066661bf009378a78f26c70a57f788c3da",
-      ["build"] = rc.make,
-      ["flags"] = {
-         "PREFIX=",
-      },
-   };
-   ["harec"] = {
-      ["url"] = "/var/cache/distfiles/harec-0.26.0.tar.gz",
-      ["b3sum"] = "7873166192fb163b3ce732a0e5e29eb3689bfb405d24ae45a1fb4398bc5ea025",
-      ["build"] = rc.make,
-      ["flags"] = {
-         "PREFIX=",
-      },
-      ["prep"] = [[ cp configs/linux.mk config.mk ]],
-   };
-   ["hare"] = {
-      ["url"] = "/var/cache/distfiles/hare-0.26.0.1.tar.gz",
-      ["b3sum"] = "7992d77104d36916f01b2952b0632f64c5a431d44810fb492aacec3248f7181f",
-      ["build"] = rc.make,
-      ["flags"] = {
-         "PREFIX=/usr",
-         "BINDIR=/bin",
-         "SRCDIR=/usr/share",
-      },
-      ["prep"] = [[ cp configs/linux.mk config.mk ]],
-   };
-   ["himitsu"] = {
-      ["url"] = "/var/cache/distfiles/himitsu-0.10.tar.gz",
-      ["b3sum"] = "3dbefc98de71ce9e499976c2d468356daae9fcb62f0dfcd3ef82d265bc1d103a",
-      ["build"] = rc.make,
-      ["flags"] = {
-         "PREFIX=",
-         "SRCDIR=/usr/share",
-         "SHAREDIR=/usr/share",
-      },
-   };
-   ["himitsu-keyring"] = {
-      ["url"] = "/var/cache/distfiles/himitsu-keyring-0.2.0.tar.gz",
-      ["b3sum"] = "a4721664ac59b84e1fdadd9b9aa354863081dc0808b5dd57672a743f25e66323",
-      ["build"] = rc.meson,
-   };
    ["r"] = {
       ["url"] = "https://cran.r-project.org/src/base/R-4/R-4.6.1.tar.gz",
       ["b3sum"] = "bdb887d6a1586ce7e43522017340b79e420a89d98bff3fe179748960eed975cf",
