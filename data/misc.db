@@ -503,8 +503,8 @@
          "--disable-cracklib-check",
       },
       ["post"] = [[ 
-         install -d $DESTDIR/opt/python3.14
-         mv $DESTDIR/usr/lib $DESTDIR/opt/python3.14
+         install -d $DESTDIR/opt/python3.11
+         mv $DESTDIR/usr/lib $DESTDIR/opt/python3.11
       ]],
    };
    ["passwordsafe"] = {

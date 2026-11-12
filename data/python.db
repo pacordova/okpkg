@@ -1,10 +1,10 @@
 {
    ["python"] = {
-      ["url"] = "https://www.python.org/ftp/python/3.14.0/Python-3.14.0a4.tar.xz",
-      ["b3sum"] = "ca362c1ff044eb73cf140f1ab2ba1637cc9a7362e3123e5b30b04986b6659958",
+      ["url"] = "https://www.python.org/ftp/python/3.11.18/Python-3.11.18.tar.xz",
+      ["b3sum"] = "d02b00bc3ff8145123c73fc3e6cfb9cbc6694e18726c19f9033f0a62ab7b725b",
       ["build"] = rc.configure,
       ["flags"] = {
-         "--prefix=/opt/python3.14",
+         "--prefix=/opt/python3.11",
          "--without-doc-strings",
          "--without-ensurepip",
          "--with-dbmliborder=gdbm:ndbm",
@@ -15,10 +15,10 @@
          "LDFLAGS_NODIST=-fno-semantic-interposition",
       },
       ["post"] = [[
-         cd $DESTDIR/opt/python3.14/lib/python3.14
+         cd $DESTDIR/opt/python3.11/lib/python3.11
          rm -fr test ./*/test ./*/tests
          rm -fr config-* idlelib turtle* pydoc*
-         cd $DESTDIR/opt/python3.14/bin
+         cd $DESTDIR/opt/python3.11/bin
          rm -f idle* pydoc*
       ]],
    };
