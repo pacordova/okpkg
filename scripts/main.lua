@@ -103,11 +103,11 @@ rc.oconfigure = function(...)
 end
 
 rc.python = function()
+   nostrip = true
    return (
       os.execute("python3 -m build -nx")  and
       ok.setenv("DESTDIR", destdir) and
       os.execute("python3 -m installer -d $DESTDIR dist/*whl") and
-      os.execute("touch $DESTDIR/nostrip") and
       ok.unsetenv("DESTDIR"))
 end
 
@@ -174,7 +174,7 @@ end
 
 function strip(x)
    local fp, buf
-   if os.remove("nostrip") then return end
+   if nostrip then return end
    if ok.isdir(x) then
       for de in dir(x) do strip(string.format("%s/%s", x, de)) end
    else
@@ -232,6 +232,7 @@ end
 function build(x)
    ok.chdir(string.format("%s/%s", cfg.wrkobjdir, x))
    local tbl = query(x)
+   nostrip = tbl.nostrip
    destdir = string.format(
       "%s/%s-%s-%s",
       cfg.pkgdir,

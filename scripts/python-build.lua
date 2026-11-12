@@ -30,7 +30,7 @@ tbl = {
    "gobject-introspection", 
    "libpwquality",
    "libxml2", 
--- "passwordsafe",
+   "passwordsafe",
    "pycairo", 
    "pygobject", 
    "xcb-proto",

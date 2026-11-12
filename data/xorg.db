@@ -101,10 +101,10 @@
       ["url"] = "https://xorg.freedesktop.org/archive/individual/proto/xcb-proto-1.17.0.tar.xz",
       ["b3sum"] = "68187400fded667f60b4b020d0fc37fa489ae0de33169fe7b07fcbaf88e7a3f9",
       ["build"] = rc.configure,
+      ["nostrip"] = true,
       ["flags"] = {
          "--with-python_prefix=/opt/python3.11",
       },
-      ["post"] = [[ : > $DESTDIR/nostrip ]],
    };
    ["libxcb"] = {
       ["url"] = "https://xorg.freedesktop.org/archive/individual/lib/libxcb-1.17.0.tar.xz",

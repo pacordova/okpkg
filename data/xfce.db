@@ -32,12 +32,12 @@
       ["url"] = "https://download.gnome.org/sources/at-spi2-core/2.60/at-spi2-core-2.60.6.tar.xz",
       ["b3sum"] = "83e4fa806672e8c639869dc9fd508f33294bb744366bd06c426d731c0280077a",
       ["build"] = rc.meson,
+      ["nostrip"] = true,
       ["flags"] = {
          "-Dsystemd_user_dir=/tmp",
          "-Ddefault_bus=dbus-daemon",
          "-Ddocs=false",
       },
-      ["post"] = [[ : > $DESTDIR/nostrip ]],
    };
    ["cairo"] = {
       ["url"] = "https://cairographics.org/releases/cairo-1.18.4.tar.xz",
