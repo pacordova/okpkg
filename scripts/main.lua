@@ -103,7 +103,6 @@ rc.oconfigure = function(...)
 end
 
 rc.python = function()
-   nostrip = true
    return (
       os.execute("python3 -m build -nx")  and
       ok.setenv("DESTDIR", destdir) and
@@ -174,11 +173,11 @@ end
 
 function strip(x)
    local fp, buf
-   if nostrip then return end
+   fp = io.open(x, "rb")
+   if nostrip or not fp then return end
    if ok.isdir(x) then
       for de in dir(x) do strip(string.format("%s/%s", x, de)) end
    else
-      fp = io.open(x, "rb")
       buf = string.pack("b", fp:read(4):byte(1, 4))
       if buf == string.pack("b", 127, 69, 76, 70) and fp:seek("set", 16) then
          buf = fp:read(1):byte()
