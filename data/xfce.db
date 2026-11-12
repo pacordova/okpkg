@@ -37,6 +37,7 @@
          "-Ddefault_bus=dbus-daemon",
          "-Ddocs=false",
       },
+      ["post"] = [[ : > $DESTDIR/nostrip ]],
    };
    ["cairo"] = {
       ["url"] = "https://cairographics.org/releases/cairo-1.18.4.tar.xz",

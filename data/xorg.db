@@ -104,6 +104,7 @@
       ["flags"] = {
          "--with-python_prefix=/opt/python3.11",
       },
+      ["post"] = [[ : > $DESTDIR/nostrip ]],
    };
    ["libxcb"] = {
       ["url"] = "https://xorg.freedesktop.org/archive/individual/lib/libxcb-1.17.0.tar.xz",

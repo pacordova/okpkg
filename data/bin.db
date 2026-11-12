@@ -23,7 +23,7 @@
       ["b3sum"] = "ce8b6f179662d1cb231335264f62f7e8622389557691c8d6a2e374a55af39b2b",
       ["post"] = [[
          ./install.sh --destdir=$destdir --prefix=/opt/rust
-         : > $destdir/nostrip
+         : > $DESTDIR/nostrip
       ]],
    };
    ["signal-desktop"] = {
