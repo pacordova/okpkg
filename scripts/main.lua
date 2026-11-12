@@ -200,7 +200,9 @@ function makepkg(x)
    ok.chdir(x)
    ok.setenv("SOURCE_DATE_EPOCH", ok.mtime("."))
 
-   strip(".")
+   strip("./bin")
+   strip("./lib64")
+   strip("./usr/libexec")
 
    if ok.isdir("./usr/share/man") then
       for de in dir("./usr/share/man") do
