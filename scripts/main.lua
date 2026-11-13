@@ -110,6 +110,22 @@ rc.python = function()
       ok.unsetenv("DESTDIR"))
 end
 
+rc.waf = function(...)
+   local cmd = {
+      "python3",
+      "waf",
+      "configure",
+      ...
+   }
+   setmetatable(cmd, rc.meta)
+   return (
+      os.execute(tostring(cmd)) and
+      os.execute("python3 waf") and
+      ok.setenv("DESTDIR", destdir) and
+      os.execute("python3 waf install") and
+      ok.unsetenv("DESTDIR"))
+end
+
 function vmatch(s)
    return string.match(s, "[-_%.][nrv]?([%d%.]+%l?%d?)[-_%.]")
 end

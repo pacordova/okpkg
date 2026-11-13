@@ -1,31 +1,113 @@
-diff --git a/options/m_config_core.c b/options/m_config_core.c
-index 6a7b0a065f85c..4e488ca01d740 100644
---- a/options/m_config_core.c
-+++ b/options/m_config_core.c
-@@ -105,8 +105,6 @@ struct m_group_data {
-     uint64_t ts;        // timestamp of the data copy
- };
+diff --git a/bootstrap.py b/bootstrap.py
+index 2e304545cc..b1ed37dce6 100755
+--- a/bootstrap.py
++++ b/bootstrap.py
+@@ -5,10 +5,10 @@
+ from __future__ import print_function
+ import os, sys, stat, hashlib, subprocess
  
--static const union m_option_value default_value = {0};
+-WAFRELEASE = "waf-2.0.9"
++WAFRELEASE = "waf-2.0.27"
+ WAFURLS    = ["https://waf.io/" + WAFRELEASE,
+               "http://www.freehackers.org/~tnagy/release/" + WAFRELEASE]
+-SHA256HASH = "2a8e0816f023995e557f79ea8940d322bec18f286917c8f9a6fa2dc3875dfa48"
++SHA256HASH = "fe10e266c05063752d098787a7b934cd0d61092c8b072884f8a679c1c596dd6a"
+ 
+ if os.path.exists("waf"):
+     wafver = subprocess.check_output([sys.executable, './waf', '--version']).decode()
+diff --git a/demux/demux_mf.c b/demux/demux_mf.c
+index c4995a66c5..6d2966319f 100644
+--- a/demux/demux_mf.c
++++ b/demux/demux_mf.c
+@@ -107,7 +107,8 @@ static mf_t *open_mf_pattern(void *talloc_ctx, struct mp_log *log, char *filenam
+         goto exit_mf;
+     }
+ 
+-    char *fname = talloc_size(mf, strlen(filename) + 32);
++    size_t fname_avail = strlen(filename) + 32;
++    char *fname = talloc_size(mf, fname_avail);
+ 
+ #if HAVE_GLOB
+     if (!strchr(filename, '%')) {
+@@ -134,10 +135,44 @@ static mf_t *open_mf_pattern(void *talloc_ctx, struct mp_log *log, char *filenam
+     }
+ #endif
+ 
++    // We're using arbitrary user input as printf format with 1 int argument.
++    // Any format which uses exactly 1 int argument would be valid, but for
++    // simplicity we reject all conversion specifiers except %% and simple
++    // integer specifier: %[.][NUM]d where NUM is 1-3 digits (%.d is valid)
++    const char *f = filename;
++    int MAXDIGS = 3, nspec = 0, bad_spec = 0, c;
++
++    while (nspec < 2 && (c = *f++)) {
++        if (c != '%')
++            continue;
++        if (*f != '%') {
++            nspec++;  // conversion specifier which isn't %%
++            if (*f == '.')
++                f++;
++            for (int ndig = 0; mp_isdigit(*f) && ndig < MAXDIGS; ndig++, f++)
++                /* no-op */;
++            if (*f != 'd') {
++                bad_spec++;  // not int, or beyond our validation capacity
++                break;
++            }
++        }
++        // *f is '%' or 'd'
++        f++;
++    }
++
++    // nspec==0 (zero specifiers) is rejected because fname wouldn't advance.
++    if (bad_spec || nspec != 1) {
++        mp_err(log, "unsupported expr format: '%s'\n", filename);
++        goto exit_mf;
++    }
++
+     mp_info(log, "search expr: %s\n", filename);
+ 
+     while (error_count < 5) {
+-        sprintf(fname, filename, count++);
++        if (snprintf(fname, fname_avail, filename, count++) >= fname_avail) {
++            mp_err(log, "format result too long: '%s'\n", filename);
++            goto exit_mf;
++        }
+         if (!mp_path_exists(fname)) {
+             error_count++;
+             mp_verbose(log, "file not found: '%s'\n", fname);
+diff --git a/options/m_config.c b/options/m_config.c
+index aa0018314d..84b3a5767b 100644
+--- a/options/m_config.c
++++ b/options/m_config.c
+@@ -45,8 +45,6 @@
+ 
+ extern const char mp_help_text[];
+ 
+-static const union m_option_value default_value;
 -
- static void add_sub_group(struct m_config_shadow *shadow, const char *name_prefix,
-                           int parent_group_index, int parent_ptr,
-                           const struct m_sub_options *subopts);
-@@ -241,7 +239,7 @@ const void *m_config_shadow_get_opt_default(struct m_config_shadow *shadow,
-     if (subopt->defaults)
-         return (char *)subopt->defaults + opt->offset;
+ // Profiles allow to predefine some sets of options that can then
+ // be applied later on with the internal -profile option.
+ #define MAX_PROFILE_DEPTH 20
+@@ -472,7 +470,7 @@ static void init_obj_settings_list(struct m_config *config,
+ static void init_opt_inplace(const struct m_option *opt, void *dst,
+                              const void *src)
+ {
+-    union m_option_value temp = {0};
++    union m_option_value temp = m_option_value_default;
+     if (src)
+         memcpy(&temp, src, opt->type->size);
+     memset(dst, 0, opt->type->size);
+@@ -495,7 +493,7 @@ static void m_config_add_option(struct m_config *config,
+         .name = arg->name,
+         .shadow_offset = -1,
+         .group = parent ? parent->group : 0,
+-        .default_data = &default_value,
++        .default_data = &m_option_value_default,
+         .is_hidden = !!arg->deprecation_message,
+     };
  
--    return &default_value;
-+    return &m_option_value_default;
- }
- 
- void *m_config_cache_get_opt_data(struct m_config_cache *cache, int32_t id)
-diff --git a/options/m_config_frontend.c b/options/m_config_frontend.c
-index 44cb9fd834efa..e95b350849789 100644
---- a/options/m_config_frontend.c
-+++ b/options/m_config_frontend.c
-@@ -749,7 +749,7 @@ int m_config_set_option_cli(struct m_config *config, struct bstr name,
-                    BSTR_P(name), BSTR_P(param), flags);
+@@ -913,7 +911,7 @@ int m_config_set_option_cli(struct m_config *config, struct bstr name,
+                BSTR_P(name), BSTR_P(param), flags);
      }
  
 -    union m_option_value val = {0};
@@ -33,7 +115,7 @@ index 44cb9fd834efa..e95b350849789 100644
  
      // Some option types are "impure" and work on the existing data.
      // (Prime examples: --vf-add, --sub-file)
-@@ -783,7 +783,7 @@ int m_config_set_option_node(struct m_config *config, bstr name,
+@@ -947,7 +945,7 @@ int m_config_set_option_node(struct m_config *config, bstr name,
  
      // Do this on an "empty" type to make setting the option strictly overwrite
      // the old value, as opposed to e.g. appending to lists.
@@ -42,22 +124,11 @@ index 44cb9fd834efa..e95b350849789 100644
  
      if (data->format == MPV_FORMAT_STRING) {
          bstr param = bstr0(data->u.string);
-@@ -868,9 +868,8 @@ void m_config_print_option_list(const struct m_config *config, const char *name)
-         }
-         char *def = NULL;
-         const void *defptr = m_config_get_co_default(config, co);
--        const union m_option_value default_value = {0};
-         if (!defptr)
--            defptr = &default_value;
-+            defptr = &m_option_value_default;
-         if (defptr)
-             def = m_option_pretty_print(opt, defptr);
-         if (def) {
 diff --git a/options/m_option.h b/options/m_option.h
-index 3e86485930dc2..e62fa0fc2692d 100644
+index 750f1ac626..ac0af4988e 100644
 --- a/options/m_option.h
 +++ b/options/m_option.h
-@@ -256,6 +256,11 @@ union m_option_value {
+@@ -248,6 +248,11 @@ union m_option_value {
      struct m_channels channels;
  };
  
@@ -70,10 +141,10 @@ index 3e86485930dc2..e62fa0fc2692d 100644
  
  struct m_option_action {
 diff --git a/options/m_property.c b/options/m_property.c
-index 7667dd616183d..1b76f05e7d018 100644
+index 431e16a51a..6da128e4ee 100644
 --- a/options/m_property.c
 +++ b/options/m_property.c
-@@ -38,7 +38,7 @@ static int m_property_multiply(struct mp_log *log,
+@@ -40,7 +40,7 @@ static int m_property_multiply(struct mp_log *log,
                                 const struct m_property *prop_list,
                                 const char *property, double f, void *ctx)
  {
@@ -82,7 +153,7 @@ index 7667dd616183d..1b76f05e7d018 100644
      struct m_option opt = {0};
      int r;
  
-@@ -98,7 +98,7 @@ static int do_action(const struct m_property *prop_list, const char *name,
+@@ -100,7 +100,7 @@ static int do_action(const struct m_property *prop_list, const char *name,
  int m_property_do(struct mp_log *log, const struct m_property *prop_list,
                    const char *name, int action, void *arg, void *ctx)
  {
@@ -91,7 +162,7 @@ index 7667dd616183d..1b76f05e7d018 100644
      int r;
  
      struct m_option opt = {0};
-@@ -562,7 +562,7 @@ int m_property_read_list(int action, void *arg, int count,
+@@ -547,7 +547,7 @@ int m_property_read_list(int action, void *arg, int count,
                  r = get_item(n, M_PROPERTY_GET_TYPE, &opt, ctx);
                  if (r != M_PROPERTY_OK)
                      goto err;
@@ -100,11 +171,24 @@ index 7667dd616183d..1b76f05e7d018 100644
                  r = get_item(n, M_PROPERTY_GET, &val, ctx);
                  if (r != M_PROPERTY_OK)
                      goto err;
+diff --git a/player/audio.c b/player/audio.c
+index 28e7867ca1..1536ac2579 100644
+--- a/player/audio.c
++++ b/player/audio.c
+@@ -807,6 +807,8 @@ void fill_audio_out_buffers(struct MPContext *mpctx)
+         // Probe the initial audio format.
+         mp_pin_out_request_data(ao_c->filter->f->pins[1]);
+         reinit_audio_filters_and_output(mpctx);
++        if (!mpctx->ao_chain)
++            return;
+         if (ao_c->filter->got_output_eof &&
+             mpctx->audio_status != STATUS_EOF)
+         {
 diff --git a/player/client.c b/player/client.c
-index 176d49ef75070..a14d2e99a37c2 100644
+index 2c21dd727c..8beb195a6b 100644
 --- a/player/client.c
 +++ b/player/client.c
-@@ -1402,7 +1402,7 @@ static void getproperty_fn(void *arg)
+@@ -1248,7 +1248,7 @@ static void getproperty_fn(void *arg)
      struct getproperty_request *req = arg;
      const struct m_option *type = get_mp_type_get(req->format);
  
@@ -113,38 +197,20 @@ index 176d49ef75070..a14d2e99a37c2 100644
      void *data = req->data ? req->data : &xdata;
  
      int err = -1;
-@@ -1560,6 +1560,8 @@ int mpv_observe_property(mpv_handle *ctx, uint64_t userdata,
-         .type = type,
-         .change_ts = 1, // force initial event
-         .refcount = 1,
-+        .value = m_option_value_default,
-+        .value_ret = m_option_value_default,
-     };
-     ctx->properties_change_ts += 1;
-     MP_TARRAY_APPEND(ctx, ctx->properties, ctx->num_properties, prop);
-@@ -1682,7 +1684,7 @@ static void send_client_property_changes(struct mpv_handle *ctx)
-         bool changed = false;
-         if (prop->format) {
-             const struct m_option *type = prop->type;
--            union m_option_value val = {0};
-+            union m_option_value val = m_option_value_default;
-             struct getproperty_request req = {
-                 .mpctx = ctx->mpctx,
-                 .name = prop->name,
 diff --git a/player/command.c b/player/command.c
-index bfacc04282c96..fd298dba5b63b 100644
+index 87cd274d57..8b715f329d 100644
 --- a/player/command.c
 +++ b/player/command.c
-@@ -3490,7 +3490,7 @@ static int mp_property_option_info(void *ctx, struct m_property *prop,
+@@ -3729,7 +3729,7 @@ static int mp_property_option_info(void *ctx, struct m_property *prop,
+         if (!co)
              return M_PROPERTY_UNKNOWN;
-         const struct m_option *opt = co->opt;
  
 -        union m_option_value def = {0};
 +        union m_option_value def = m_option_value_default;
-         const void *def_ptr = m_config_get_co_default(mpctx->mconfig, co);
-         if (def_ptr && opt->type->size > 0)
-             memcpy(&def, def_ptr, opt->type->size);
-@@ -4801,7 +4801,7 @@ static void cmd_cycle_values(void *p)
+         if (co->default_data)
+             memcpy(&def, co->default_data, co->opt->type->size);
+ 
+@@ -4783,7 +4783,7 @@ static void cmd_cycle_values(void *p)
          return;
      }
  
@@ -153,8 +219,8 @@ index bfacc04282c96..fd298dba5b63b 100644
      r = mp_property_do(name, M_PROPERTY_GET, &curval, mpctx);
      if (r <= 0) {
          show_property_status(cmd, name, r);
-@@ -4810,7 +4810,7 @@ static void cmd_cycle_values(void *p)
- 
+@@ -4795,7 +4795,7 @@ static void cmd_cycle_values(void *p)
+     // native anyway to "normalize" the value for comparison.
      int current = -1;
      for (int n = first; n < cmd->num_args; n++) {
 -        union m_option_value val = {0};
@@ -162,12 +228,3 @@ index bfacc04282c96..fd298dba5b63b 100644
          if (m_option_parse(mpctx->log, &prop, bstr0(name),
                             bstr0(cmd->args[n].v.s), &val) < 0)
              continue;
-@@ -5214,7 +5214,7 @@ static void cmd_change_list(void *p)
-         return;
-     }
- 
--    union m_option_value val = {0};
-+    union m_option_value val = m_option_value_default;
-     if (mp_property_do(name, M_PROPERTY_GET, &val, mpctx) <= 0) {
-         set_osd_msg(mpctx, osdl, osd_duration, "Could not read: '%s'", name);
-         cmd->success = false;
