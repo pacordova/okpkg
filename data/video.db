@@ -37,7 +37,6 @@
       ["url"] = "https://github.com/mpv-player/mpv/archive/v0.29.1/mpv-0.29.1.tar.gz",
       ["b3sum"] = "70ff1c91405ec5f1ac8e02d5b9478374d07ea93197098f3b700dc96c38394ab9",
       ["build"] = rc.waf,
-      ["prep"] = [[ python3 bootstrap.py ]],
       ["flags"] = {
          "--prefix=/usr",
          "--bindir=/bin",

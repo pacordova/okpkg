@@ -112,4 +112,13 @@
          rmdir $DESTDIR/usr/bin
       ]]
    };
+   ["waf"] = {
+      ["url"] = "https://waf.io/waf-2.0.27.tar.bz2",
+      ["b3sum"] = "f9863529e3b6b9628ae1e2e6375e5ef0afebbaaddbdcbb071b4042d44eaa680a",
+      ["build"] = rc.configure,
+      ["post"] = [[ 
+         install -d $DESTDIR/bin
+         install -m 755 waf $DESTDIR/bin
+      ]],
+   };
 }

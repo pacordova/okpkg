@@ -112,7 +112,6 @@ end
 
 rc.waf = function(...)
    local cmd = {
-      "python3",
       "waf",
       "configure",
       ...
@@ -120,9 +119,9 @@ rc.waf = function(...)
    setmetatable(cmd, rc.meta)
    return (
       os.execute(tostring(cmd)) and
-      os.execute("python3 waf") and
+      os.execute("waf") and
       ok.setenv("DESTDIR", destdir) and
-      os.execute("python3 waf install") and
+      os.execute("waf install") and
       ok.unsetenv("DESTDIR"))
 end
 
