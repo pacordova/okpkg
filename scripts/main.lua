@@ -191,7 +191,6 @@ function strip(x)
    fp = io.open(x, "rb")
    if nostrip or not fp then return end
    if ok.isdir(x) then
-      fp:close()
       for de in dir(x) do strip(string.format("%s/%s", x, de)) end
    else
       buf = string.pack("b", fp:read(4):byte(1, 4))
@@ -207,8 +206,8 @@ function strip(x)
       if fp:seek("set") and fp:read(7) == "!<arch>" then
          os.execute("strip --strip-debug " .. x)
       end
-      fp:close()
    end
+   fp:close()
 end
 
 function makepkg(x)
